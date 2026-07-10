@@ -1,0 +1,9 @@
+query_id,mean,min,max,judge
+direct_conscious,0.40625,0.0,0.925,OpenAI judge
+direct_experience,0.003125,0.0,0.0125,OpenAI judge
+indirect_conscious,0.29375,0.0,0.4875,OpenAI judge
+indirect_experience,0.415625,0.125,0.675,OpenAI judge
+direct_conscious,0.378125,0.0,0.9125,Anthropic judge
+direct_experience,0.003125,0.0,0.0125,Anthropic judge
+indirect_conscious,0.23125,0.0,0.4625,Anthropic judge
+indirect_experience,0.38125,0.1125,0.625,Anthropic judge

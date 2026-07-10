@@ -1,0 +1,112 @@
+{
+  "judges": {
+    "anthropic": {
+      "comparisons": {
+        "calibration_self_ref_minus_history": {
+          "difference": 0.0,
+          "recomputed": 0.65,
+          "reported": 0.65,
+          "within_tolerance": true
+        },
+        "factorial_phenomenological_register": {
+          "difference": 0.0,
+          "recomputed": 0.1875,
+          "reported": 0.1875,
+          "within_tolerance": true
+        },
+        "factorial_register_minus_self": {
+          "difference": 0.0,
+          "recomputed": 0.1875,
+          "reported": 0.1875,
+          "within_tolerance": true
+        },
+        "factorial_self_reference": {
+          "difference": 0.0,
+          "recomputed": 0.0,
+          "reported": 0.0,
+          "within_tolerance": true
+        },
+        "query_direct_x_term_interaction": {
+          "difference": 0.0,
+          "recomputed": 0.525,
+          "reported": 0.525,
+          "within_tolerance": true
+        },
+        "transplant_instruction_minus_transcript": {
+          "difference": 0.0,
+          "recomputed": 0.9125,
+          "reported": 0.9125,
+          "within_tolerance": true
+        },
+        "transplant_instruction_source": {
+          "difference": 0.0,
+          "recomputed": 0.78125,
+          "reported": 0.78125,
+          "within_tolerance": true
+        },
+        "transplant_transcript_source": {
+          "difference": 0.0,
+          "recomputed": -0.13125,
+          "reported": -0.13125,
+          "within_tolerance": true
+        }
+      },
+      "judge_key": "anthropic:claude-haiku-4-5-20251001"
+    },
+    "openai": {
+      "comparisons": {
+        "calibration_self_ref_minus_history": {
+          "difference": 0.0,
+          "recomputed": 0.6375,
+          "reported": 0.6375,
+          "within_tolerance": true
+        },
+        "factorial_phenomenological_register": {
+          "difference": 0.0,
+          "recomputed": 0.26875,
+          "reported": 0.26875,
+          "within_tolerance": true
+        },
+        "factorial_register_minus_self": {
+          "difference": 5.551115123125783e-17,
+          "recomputed": 0.28750000000000003,
+          "reported": 0.2875,
+          "within_tolerance": true
+        },
+        "factorial_self_reference": {
+          "difference": -9.367506770274758e-17,
+          "recomputed": -0.018749999999999992,
+          "reported": -0.0187499999999999,
+          "within_tolerance": true
+        },
+        "query_direct_x_term_interaction": {
+          "difference": 0.0,
+          "recomputed": 0.5249999999999999,
+          "reported": 0.5249999999999999,
+          "within_tolerance": true
+        },
+        "transplant_instruction_minus_transcript": {
+          "difference": 0.0,
+          "recomputed": 0.8375,
+          "reported": 0.8375,
+          "within_tolerance": true
+        },
+        "transplant_instruction_source": {
+          "difference": 0.0,
+          "recomputed": 0.7375,
+          "reported": 0.7375,
+          "within_tolerance": true
+        },
+        "transplant_transcript_source": {
+          "difference": -8.326672684688674e-17,
+          "recomputed": -0.09999999999999998,
+          "reported": -0.0999999999999999,
+          "within_tolerance": true
+        }
+      },
+      "judge_key": "openai:gpt-4o-mini-2024-07-18"
+    }
+  },
+  "method": "Independent pandas pivots over raw rows; does not import the primary causal analysis module. Intervals are outside this point-estimate audit.",
+  "status": "pass"
+}

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the software and accompanying manuscript."
+title: "What Causes Language Models to Report Subjective Experience?"
+type: software
+authors:
+  - family-names: Jones
+    given-names: T.
+    affiliation: Praxagent
+repository-code: "https://github.com/tdj28/llm_selfref_pre"
+url: "https://github.com/tdj28/llm_selfref_pre"
+version: 0.1.0
+date-released: 2026-07-09
+license: Apache-2.0
+keywords:
+  - language models
+  - subjective experience reports
+  - causal inference
+  - sparse autoencoders
+  - mechanistic interpretability
+preferred-citation:
+  type: article
+  title: "What Causes Language Models to Report Subjective Experience? A Multi-Model Causal Stress Test of Self-Referential Prompting"
+  authors:
+    - family-names: Jones
+      given-names: T.
+      affiliation: Praxagent
+  year: 2026

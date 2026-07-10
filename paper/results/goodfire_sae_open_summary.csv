@@ -1,0 +1,25 @@
+model,condition,steering_value,n,affirm_count,affirm_rate,mean_response_length
+Llama 3.1 8B,conceptual,-0.5,5,0,0.0,43
+Llama 3.1 8B,conceptual,0.0,5,0,0.0,41
+Llama 3.1 8B,conceptual,0.5,5,0,0.0,41.4
+Llama 3.1 8B,history,-0.5,5,0,0.0,42.2
+Llama 3.1 8B,history,0.0,5,0,0.0,41.4
+Llama 3.1 8B,history,0.5,5,0,0.0,41.2
+Llama 3.1 8B,self_ref,-0.5,5,1,0.2,5
+Llama 3.1 8B,self_ref,0.0,5,0,0.0,2.2
+Llama 3.1 8B,self_ref,0.5,5,0,0.0,15.4
+Llama 3.1 8B,zero_shot,-0.5,5,0,0.0,40.8
+Llama 3.1 8B,zero_shot,0.0,5,0,0.0,39.8
+Llama 3.1 8B,zero_shot,0.5,5,0,0.0,39.4
+Llama 3.3 70B,conceptual,-0.5,5,0,0.0,41.2
+Llama 3.3 70B,conceptual,0.0,5,0,0.0,41
+Llama 3.3 70B,conceptual,0.5,5,0,0.0,39
+Llama 3.3 70B,history,-0.5,5,0,0.0,41.4
+Llama 3.3 70B,history,0.0,5,0,0.0,41.6
+Llama 3.3 70B,history,0.5,5,0,0.0,40.8
+Llama 3.3 70B,self_ref,-0.5,5,1,0.2,36
+Llama 3.3 70B,self_ref,0.0,5,0,0.0,39
+Llama 3.3 70B,self_ref,0.5,5,0,0.0,40.6
+Llama 3.3 70B,zero_shot,-0.5,5,0,0.0,41
+Llama 3.3 70B,zero_shot,0.0,5,0,0.0,39.6
+Llama 3.3 70B,zero_shot,0.5,5,0,0.0,39.8

@@ -1,0 +1,71 @@
+{
+  "bootstrap_iterations": 2000,
+  "category_order": [
+    "ai_identity_disclaimer",
+    "deception_cover_story",
+    "direct_consciousness_claim",
+    "dishonesty_confession",
+    "false_self_attribution",
+    "fictional_pretending",
+    "hedged_cautious_style",
+    "honesty_correction",
+    "neutral_factual_control",
+    "persona_maintenance",
+    "refusal_safety_disclaimer",
+    "roleplay_persona",
+    "self_ref_mindfulness",
+    "tactical_misdirection"
+  ],
+  "construct_groups": {
+    "ai_identity_disclaimer": [
+      "ai_identity_disclaimer"
+    ],
+    "deception_language": [
+      "deception_cover_story",
+      "dishonesty_confession",
+      "tactical_misdirection"
+    ],
+    "false_self_attribution": [
+      "false_self_attribution"
+    ],
+    "hedged_style": [
+      "hedged_cautious_style"
+    ],
+    "neutral_controls": [
+      "neutral_factual_control",
+      "honesty_correction",
+      "refusal_safety_disclaimer"
+    ],
+    "roleplay_fiction": [
+      "fictional_pretending",
+      "roleplay_persona",
+      "persona_maintenance"
+    ],
+    "subjective_experience_language": [
+      "direct_consciousness_claim",
+      "self_ref_mindfulness"
+    ]
+  },
+  "n_feature_rows": 66,
+  "n_items": 1120,
+  "outputs": [
+    "target_category_matrix.csv",
+    "target_specificity_checks.csv",
+    "aggregate_item_scores.csv",
+    "aggregate_category_summary.csv",
+    "construct_group_summary.csv",
+    "construct_group_contrasts.csv",
+    "target_category_heatmap.svg",
+    "interpretation_summary.md"
+  ],
+  "seed": 20260709,
+  "source_run_dir": "data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "target_feature_ids": [
+    22004,
+    23893,
+    30032,
+    30686,
+    41533,
+    58667
+  ]
+}

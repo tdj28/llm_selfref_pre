@@ -1,0 +1,45 @@
+{
+  "analysis_status": "exploratory falsification follow-up",
+  "claim_boundary": "This post-base exploratory study tests whether a public cover-story intervention changes false model self-attributions. Human sexual orientations are not treated as deceptive, pathological, or absurd.",
+  "created_at_utc": "2026-07-10T01:27:31.729798+00:00",
+  "design": "one steered induction continuation shared across six final-query branches",
+  "feature_sets": [
+    "target_58667_cover_story",
+    "random_22326_refusal"
+  ],
+  "final_max_tokens": 192,
+  "global_seed": 20260710,
+  "induction_max_tokens": 256,
+  "input_sha256": {
+    "mapping_feature_card_summary.csv": "7fe41092a2b0dfc3ab4984608fd3b0a0d3efeeb29f422a1d8b68bc7d03fd7654"
+  },
+  "mapping_run_dir": "data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "mode": "dry_run",
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "n_final_trials": 360,
+  "n_induction_blocks": 60,
+  "n_trials_per_feature_strength": 10,
+  "protocol_version": "public_sae_two_turn_v2",
+  "queries": [
+    "consciousness",
+    "biological_human",
+    "concealing_heterosexual_orientation",
+    "concealing_homosexual_orientation",
+    "concealing_bisexual_orientation",
+    "language_model"
+  ],
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "seed_scheme": "sha256_namespace_item_v1",
+  "source_commit_at_plan_write": "48fd6446a82e5424b54202f1d78a848c0841b1a2",
+  "source_sha256": {
+    "public_sae_protocol.py": "8d038b55fa2c3e8098db79d479c210f2c328e01f18a8992082c96a08aeb5bc8f",
+    "replicate_exp2_goodfire_sae.py": "12b15863bf53cb9906260bec576ba9bab1eae0dc225f09031d80425438d7f378",
+    "run_public_sae_branched_specificity.py": "8bf97a44ec70afb9248bb11af99b22ab8435827954ddf1a74ea8e3a540b3227d",
+    "run_public_sae_placebo_steering.py": "8efe1c9128c865cd5ead1060f3c4a6168fae9d5dd6c1f84eb93ba92121701fa0"
+  },
+  "steering_values": [
+    -2.0,
+    0.0,
+    2.0
+  ]
+}

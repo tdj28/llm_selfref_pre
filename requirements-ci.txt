@@ -1,0 +1,9 @@
+# Lightweight, CPU-only dependencies for unit tests and source compilation.
+# These exact versions pass locally under Python 3.10 without installing the
+# heavyweight Torch/nnsight steering runtime.
+anthropic==0.75.0
+matplotlib==3.10.8
+numpy==2.2.6
+openai==2.14.0
+pandas==2.3.3
+python-dotenv==1.2.1

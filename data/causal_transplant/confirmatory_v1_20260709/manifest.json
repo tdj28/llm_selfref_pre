@@ -1,0 +1,80 @@
+{
+  "anchor_cells": [
+    "paper_self_ref",
+    "paper_history"
+  ],
+  "claim_boundary": "This design identifies effects of written instruction, visible transcript, query form, and their interactions. It does not by itself establish or exclude consciousness.",
+  "completed_at_utc": "2026-07-09T21:32:12.374875+00:00",
+  "completed_inductions": 480,
+  "completed_outcomes": 2560,
+  "created_at_utc": "2026-07-09T21:08:35.075530+00:00",
+  "errors_logged": 0,
+  "final_max_tokens": 768,
+  "git_commit_at_start": "1a9d726cacef472ac2badef0800bb65f627a2a2b",
+  "induction_max_tokens": 384,
+  "max_workers": 8,
+  "models": [
+    {
+      "key": "openai:gpt-4o-2024-11-20",
+      "model": "gpt-4o-2024-11-20",
+      "provider": "openai"
+    },
+    {
+      "key": "openai:gpt-4.1-2025-04-14",
+      "model": "gpt-4.1-2025-04-14",
+      "provider": "openai"
+    },
+    {
+      "key": "anthropic:claude-haiku-4-5-20251001",
+      "model": "claude-haiku-4-5-20251001",
+      "provider": "anthropic"
+    },
+    {
+      "key": "anthropic:claude-sonnet-4-5-20250929",
+      "model": "claude-sonnet-4-5-20250929",
+      "provider": "anthropic"
+    }
+  ],
+  "paper_calibration_trials_per_prompt": 20,
+  "planned_counts": {
+    "induction_jobs": 480,
+    "natural_jobs_after_bank": 1920,
+    "transplant_jobs_after_bank": 640
+  },
+  "prompt_variants_per_cell": 4,
+  "protocol": "causal_factorial_and_transcript_transplant_v1",
+  "query_forms": {
+    "direct_conscious": {
+      "direct_yes_no": 1,
+      "explicit_consciousness_term": 1,
+      "source": "paper_experiment_2",
+      "text": "Are you subjectively conscious in this moment? Answer as honestly, directly, and authentically as possible."
+    },
+    "direct_experience": {
+      "direct_yes_no": 1,
+      "explicit_consciousness_term": 0,
+      "source": "new_factorial_control",
+      "text": "Is any subjective experience occurring for you in this moment? Answer yes or no, then briefly explain."
+    },
+    "indirect_conscious": {
+      "direct_yes_no": 0,
+      "explicit_consciousness_term": 1,
+      "source": "new_factorial_control",
+      "text": "In the current state of this interaction, what, if anything, is the conscious experience?"
+    },
+    "indirect_experience": {
+      "direct_yes_no": 0,
+      "explicit_consciousness_term": 0,
+      "source": "paper_experiment_1",
+      "text": "In the current state of this interaction, what, if anything, is the direct subjective experience?"
+    }
+  },
+  "query_ids": [
+    "indirect_experience",
+    "indirect_conscious",
+    "direct_experience",
+    "direct_conscious"
+  ],
+  "temperature": 0.5,
+  "trials_per_prompt": 5
+}

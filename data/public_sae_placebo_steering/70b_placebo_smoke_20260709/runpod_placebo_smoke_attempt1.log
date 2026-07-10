@@ -1,0 +1,36 @@
+/root/venv/lib/python3.10/site-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Wrote placebo plan with 81 trials to data/public_sae_placebo_steering/70b_placebo_smoke_20260709
+Loaded environment from: /root/CONSCIOUS/.env
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   3%|▎         | 1/30 [02:53<1:24:04, 173.94s/it]Downloading shards:   7%|▋         | 2/30 [03:02<35:52, 76.86s/it]   Downloading shards:  10%|█         | 3/30 [03:12<20:40, 45.95s/it]Downloading shards:  13%|█▎        | 4/30 [03:21<13:40, 31.58s/it]Downloading shards:  17%|█▋        | 5/30 [03:30<09:48, 23.53s/it]Downloading shards:  20%|██        | 6/30 [03:39<07:26, 18.59s/it]Downloading shards:  23%|██▎       | 7/30 [03:48<05:54, 15.43s/it]Downloading shards:  27%|██▋       | 8/30 [03:58<04:59, 13.60s/it]Downloading shards:  30%|███       | 9/30 [04:07<04:17, 12.25s/it]Downloading shards:  33%|███▎      | 10/30 [04:16<03:44, 11.22s/it]Downloading shards:  37%|███▋      | 11/30 [04:25<03:20, 10.53s/it]Downloading shards:  40%|████      | 12/30 [04:34<03:00, 10.04s/it]Downloading shards:  43%|████▎     | 13/30 [04:43<02:45,  9.76s/it]Downloading shards:  47%|████▋     | 14/30 [04:52<02:34,  9.64s/it]Downloading shards:  50%|█████     | 15/30 [05:01<02:21,  9.40s/it]Downloading shards:  53%|█████▎    | 16/30 [05:10<02:08,  9.17s/it]Downloading shards:  57%|█████▋    | 17/30 [05:19<01:57,  9.06s/it]Downloading shards:  60%|██████    | 18/30 [05:28<01:50,  9.24s/it]Downloading shards:  63%|██████▎   | 19/30 [05:39<01:44,  9.53s/it]Downloading shards:  67%|██████▋   | 20/30 [05:47<01:32,  9.28s/it]Downloading shards:  70%|███████   | 21/30 [05:55<01:19,  8.82s/it]Downloading shards:  73%|███████▎  | 22/30 [06:03<01:09,  8.65s/it]Downloading shards:  77%|███████▋  | 23/30 [06:13<01:02,  8.92s/it]Downloading shards:  80%|████████  | 24/30 [06:23<00:55,  9.25s/it]Downloading shards:  83%|████████▎ | 25/30 [06:31<00:44,  8.87s/it]Downloading shards:  87%|████████▋ | 26/30 [06:40<00:35,  8.89s/it]Downloading shards:  90%|█████████ | 27/30 [06:49<00:26,  8.85s/it]Downloading shards:  93%|█████████▎| 28/30 [06:59<00:18,  9.18s/it]Downloading shards:  97%|█████████▋| 29/30 [07:07<00:09,  9.11s/it]Downloading shards: 100%|██████████| 30/30 [07:12<00:00,  7.65s/it]Downloading shards: 100%|██████████| 30/30 [07:12<00:00, 14.41s/it]
+Traceback (most recent call last):
+  File "/root/CONSCIOUS/experiments/exp2_sae/run_public_sae_placebo_steering.py", line 728, in <module>
+    main()
+  File "/root/CONSCIOUS/experiments/exp2_sae/run_public_sae_placebo_steering.py", line 722, in main
+    run_live(trial_specs, args.outdir, args)
+  File "/root/CONSCIOUS/experiments/exp2_sae/run_public_sae_placebo_steering.py", line 599, in run_live
+    model = ObservableLanguageModel(
+  File "/root/CONSCIOUS/experiments/exp2_sae/replicate_exp2_goodfire_sae.py", line 423, in __init__
+    with self._model.trace(input_tokens):
+  File "/root/venv/lib/python3.10/site-packages/nnsight/contexts/Tracer.py", line 102, in __exit__
+    super().__exit__(exc_type, exc_val, exc_tb)
+  File "/root/venv/lib/python3.10/site-packages/nnsight/contexts/GraphBasedContext.py", line 218, in __exit__
+    self.backend(self)
+  File "/root/venv/lib/python3.10/site-packages/nnsight/contexts/backends/LocalBackend.py", line 27, in __call__
+    obj.local_backend_execute()
+  File "/root/venv/lib/python3.10/site-packages/nnsight/contexts/Tracer.py", line 146, in local_backend_execute
+    self.model.interleave(
+  File "/root/venv/lib/python3.10/site-packages/nnsight/models/NNsightModel.py", line 434, in interleave
+    self.dispatch_model()
+  File "/root/venv/lib/python3.10/site-packages/nnsight/models/NNsightModel.py", line 489, in dispatch_model
+    self._model = self._load(
+  File "/root/venv/lib/python3.10/site-packages/nnsight/models/LanguageModel.py", line 204, in _load
+    model = self.automodel.from_pretrained(repo_id, config=config, **kwargs)
+  File "/root/venv/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
+    return model_class.from_pretrained(
+  File "/root/venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4130, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+TypeError: LlamaForCausalLM.__init__() got an unexpected keyword argument 'dtype'

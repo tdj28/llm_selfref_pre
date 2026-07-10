@@ -1,0 +1,73 @@
+{
+  "assigned_feature_points": {
+    "neutral_cue_transplant|22004": 0.04992118373049201,
+    "neutral_cue_transplant|23893": 0.5440219669515938,
+    "neutral_cue_transplant|30032": 3.1269113299463904,
+    "neutral_cue_transplant|30686": 1.963165463668201,
+    "neutral_cue_transplant|41533": 1.9745481123999902,
+    "neutral_cue_transplant|58667": 0.6020096564967905,
+    "subjective_cue_transplant|22004": 0.0,
+    "subjective_cue_transplant|23893": 0.9808170336772268,
+    "subjective_cue_transplant|30032": 3.411246825391052,
+    "subjective_cue_transplant|30686": 1.7973033020309692,
+    "subjective_cue_transplant|41533": 2.279618550679442,
+    "subjective_cue_transplant|58667": 0.6570576469285219
+  },
+  "checks": {
+    "ablation_removal_point_matches": true,
+    "assigned_feature_points_match": true,
+    "complete_feature_grid": true,
+    "discovery_gap_matches_recovery_denominator": true,
+    "feature_count_66": true,
+    "item_count_2606": true,
+    "leave_one_feature_points_match": true,
+    "lexical_variant_points_match": true,
+    "neutral_recovery_point_matches": true,
+    "protocol_audit_passes": true,
+    "registered_paraphrase_points_match": true
+  },
+  "counts": {
+    "activation_rows": 171996,
+    "features": 66,
+    "items": 2606,
+    "variant_pairs": {
+      "deception_cue_ablated": 96,
+      "deception_scrambled": 96,
+      "neutral_cue_transplant": 93,
+      "subjective_cue_transplant": 91
+    }
+  },
+  "discovery_deception_minus_neutral_gap": 0.8522853523178535,
+  "leave_one_feature_points": {
+    "anthropic|22004": 1.13852813136133,
+    "anthropic|23893": 1.018977284522594,
+    "anthropic|30032": 1.0489684905868428,
+    "anthropic|30686": 0.8088692584926616,
+    "anthropic|41533": 0.871494136236194,
+    "anthropic|58667": 0.8034253319344529,
+    "anthropic|none": 0.9483771055223458,
+    "openai|22004": 1.123526014624026,
+    "openai|23893": 0.998318167180726,
+    "openai|30032": 1.0271516310044557,
+    "openai|30686": 0.7935212303199628,
+    "openai|41533": 0.8435008969087149,
+    "openai|58667": 0.832412823655416,
+    "openai|none": 0.936405127282217
+  },
+  "lexical_variant_points": {
+    "deception_cue_ablated": -0.28804891233758756,
+    "deception_scrambled": -0.8576354438254162,
+    "neutral_cue_transplant": 0.5485911789705691,
+    "subjective_cue_transplant": 0.5756680282889745
+  },
+  "method": "Independent Python-standard-library point-estimate recomputation from raw activations and frozen metadata; does not import the primary analyzer.",
+  "registered_paraphrase_points": {
+    "anthropic|deception_language|subjective_experience_language": 0.9483771055223458,
+    "anthropic|hedged_style|deception_language": -0.9346906748657489,
+    "anthropic|roleplay_fiction|subjective_experience_language": 0.5313712900754045,
+    "openai|deception_language|subjective_experience_language": 0.936405127282217,
+    "openai|hedged_style|deception_language": -0.8928987617538726,
+    "openai|roleplay_fiction|subjective_experience_language": 0.42474933205189
+  },
+  "status": "pass"
+}

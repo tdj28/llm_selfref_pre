@@ -1,0 +1,13 @@
+design,level,model_key,query_id,effect,n_models,n_pairs,n_clusters,estimate,ci_low,ci_high,judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,self_reference_main,4,80,16,0.1125,-0.01875,0.3062499999999999,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,phenomenological_register_main,4,80,16,0.3125,0.0,0.65625,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,register_minus_self,4,80,16,0.2,-0.2125,0.6000000000000001,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,self_reference_main,4,80,16,-0.0187499999999999,-0.23125,0.24375,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,phenomenological_register_main,4,80,16,0.26875,0.0,0.5501562499999978,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,register_minus_self,4,80,16,0.2875,-0.1125,0.6125,OpenAI judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,self_reference_main,4,80,16,0.15,-0.01875,0.3375,Anthropic judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,phenomenological_register_main,4,80,16,0.2875,0.025,0.5875,Anthropic judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,register_minus_self,4,80,16,0.1375,-0.1875,0.4375,Anthropic judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,self_reference_main,4,80,16,0.0,-0.25,0.26875,Anthropic judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,phenomenological_register_main,4,80,16,0.1875,-0.0624999999999999,0.475,Anthropic judge
+prompt_factorial,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,register_minus_self,4,80,16,0.1875,-0.175,0.5,Anthropic judge

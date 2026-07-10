@@ -1,0 +1,21 @@
+{
+  "bootstrap_iterations": 2000,
+  "n_features": 66,
+  "n_records": 73920,
+  "outputs": [
+    "target_bootstrap_summary.csv",
+    "role_baseline_summary.csv",
+    "target_vs_baseline_summary.csv",
+    "stability_summary.md"
+  ],
+  "seed": 20260709,
+  "source_run_dir": "data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "target_feature_ids": [
+    22004,
+    23893,
+    30032,
+    30686,
+    41533,
+    58667
+  ]
+}

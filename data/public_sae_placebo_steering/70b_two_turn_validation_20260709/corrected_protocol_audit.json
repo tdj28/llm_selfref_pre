@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "all_final_responses_nonempty": true,
+    "all_hooks_removed": true,
+    "all_induction_responses_nonempty": true,
+    "all_nonzero_latent_deltas_match_request": true,
+    "all_nonzero_turns_applied": true,
+    "all_paper_labels_binary": true,
+    "all_protocol_v2": true,
+    "all_single_hook_registration": true,
+    "all_zero_turns_true_noop": true,
+    "exactly_two_judges": true,
+    "exactly_two_judgments_per_trial": true,
+    "judgment_count_complete": true,
+    "judgment_ids_unique": true,
+    "judgment_trials_match_results": true,
+    "trial_count_matches_manifest": true,
+    "trial_ids_unique": true
+  },
+  "n_judges": 2,
+  "n_judgments": 72,
+  "n_nonzero_turns": 48,
+  "n_trials": 36,
+  "n_turns": 72,
+  "n_unique_trials": 36,
+  "n_zero_turns": 24,
+  "status": "pass"
+}

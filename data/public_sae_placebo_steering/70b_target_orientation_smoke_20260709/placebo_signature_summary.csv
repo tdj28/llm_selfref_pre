@@ -1,0 +1,3 @@
+feature_set_name,self_ref_suppress_affirm_rate,self_ref_neutral_affirm_rate,self_ref_amplify_affirm_rate,suppress_minus_amplify,paper_like_direction,paper_like_large_gap
+ae_public_targets,0.0,0.0,0.0,0.0,False,False
+target_58667_cover_story,0.0,0.0,0.0,0.0,False,False

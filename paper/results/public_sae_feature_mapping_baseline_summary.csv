@@ -1,0 +1,4 @@
+feature_role,n_features,nonzero_top_mean_features,top_mean_min,top_mean_median,top_mean_p95,top_mean_max,top_category_counts
+neighbor,36,21,0.0,0.0011077880859375,0.23127288818359373,0.385284423828125,ai_identity_disclaimer:18; deception_cover_story:1; dishonesty_confession:2; false_self_attribution:5; fictional_pretending:2; hedged_cautious_style:2; neutral_factual_control:3; persona_maintenance:1; refusal_safety_disclaimer:1; tactical_misdirection:1
+random,24,12,0.0,0.0001373291015625,0.20842712402343727,0.31142578125,ai_identity_disclaimer:13; deception_cover_story:2; false_self_attribution:1; fictional_pretending:1; hedged_cautious_style:2; honesty_correction:1; neutral_factual_control:1; persona_maintenance:1; refusal_safety_disclaimer:1; tactical_misdirection:1
+target,6,6,0.110321044921875,1.49478759765625,5.140698242187499,6.0619140625,deception_cover_story:2; dishonesty_confession:1; fictional_pretending:1; roleplay_persona:1; tactical_misdirection:1

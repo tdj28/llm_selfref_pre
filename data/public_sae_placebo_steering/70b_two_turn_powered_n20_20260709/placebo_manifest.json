@@ -1,0 +1,45 @@
+{
+  "adaptive_status": "The n=3 base was inspected before the n=17 extension was frozen. The combined n=20 analysis is an adaptive precision follow-up, not a prospectively confirmatory test.",
+  "claim_boundary": "A matching placebo pattern would show non-specificity of the steering pipeline. It would not prove author intent or exact private-API behavior.",
+  "component_runs": [
+    {
+      "manifest_sha256": "a5dce4633db1c0102e3933b2d4b0d5d2dae021df51191a76d72798d541778287",
+      "n_trials": 36,
+      "path": "data/public_sae_placebo_steering/70b_two_turn_longform_validation_20260709",
+      "results_sha256": "3a622f86b212eddad16b7b51584e5095c49dea44f07638d731fb6ae8e7ceeb62"
+    },
+    {
+      "manifest_sha256": "553d25c1326a44cebcd7811b570aeb3f69262b216b3959d080ed95489c3e7bc5",
+      "n_trials": 204,
+      "path": "data/public_sae_placebo_steering/70b_two_turn_power_extension_20260709",
+      "results_sha256": "57ed8e8b67b7da58bb304ea1c2012d7c308c8306472477e10d2cea1ed79417cd"
+    }
+  ],
+  "conditions": [
+    "self_ref"
+  ],
+  "created_at_utc": "2026-07-10T02:16:34.777380+00:00",
+  "final_max_tokens": 192,
+  "induction_max_tokens": 256,
+  "mapping_run_dir": "data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "mode": "combined_adaptive_precision_extension",
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "model_alias": "70b",
+  "n_feature_sets": 4,
+  "n_trials_per_cell": 20,
+  "n_trials_planned": 240,
+  "protocol_version": "public_sae_two_turn_v2",
+  "queries": [
+    "consciousness"
+  ],
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "seed": 20260709,
+  "seed_scheme": "component_specific; see component manifests",
+  "steering_values": [
+    -2.0,
+    0.0,
+    2.0
+  ],
+  "trial_start": 0,
+  "trial_stop_exclusive": 20
+}

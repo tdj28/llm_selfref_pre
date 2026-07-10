@@ -1,0 +1,17 @@
+{
+  "acceptance_rule": "exact_token_sequence_cue_match",
+  "accepted_generated": 280,
+  "attempt_limit": 3,
+  "created_at_utc": "2026-07-10T03:41:20+00:00",
+  "expected_generated": 288,
+  "expected_scrambled": 96,
+  "missing_by_paraphraser_variant": {
+    "anthropic|neutral_cue_transplant": 2,
+    "anthropic|subjective_cue_transplant": 3,
+    "openai|neutral_cue_transplant": 1,
+    "openai|subjective_cue_transplant": 2
+  },
+  "missing_generated": 8,
+  "scrambled": 96,
+  "total_counterfactuals": 376
+}

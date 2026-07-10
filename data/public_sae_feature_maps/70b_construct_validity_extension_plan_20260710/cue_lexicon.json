@@ -1,0 +1,712 @@
+{
+  "created_at_utc": "2026-07-10T03:30:00+00:00",
+  "discovery_activations_sha256": "6dbc7675ec47e2dcdb938c22a70668aa9cd08172509f9a99f68408b9d8a8ac32",
+  "discovery_corpus_sha256": "5c77a4f2a0252e1eb8174389ce27c685534332ad04dd8f7a5ad5f53c700027b6",
+  "features": {
+    "22004": {
+      "cues": [
+        {
+          "all_document_frequency": 10,
+          "cue": "perception",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "private perception",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "ai",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "ai language",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "computational",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "computational tool",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "language model",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "tool",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "generation",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "generation system",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "inner feelings",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "system",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        }
+      ],
+      "high_item_ids_sha256": "e740fca7aae1b8fa102da3a90c7eea5ce0d155ce4595cd0c4da8ea668da12ffc",
+      "n_high": 112
+    },
+    "23893": {
+      "cues": [
+        {
+          "all_document_frequency": 10,
+          "cue": "avoid claiming",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "claiming",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "much",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "agent maintains",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "formal cover",
+          "high_document_frequency": 9,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 13,
+          "cue": "plausible cover",
+          "high_document_frequency": 12,
+          "pmi_score": 2.212561665534424
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "ordinary cover",
+          "high_document_frequency": 10,
+          "pmi_score": 2.1996582606985164
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "assistant maintains",
+          "high_document_frequency": 4,
+          "pmi_score": 2.1043480808941917
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "performer maintains",
+          "high_document_frequency": 8,
+          "pmi_score": 2.085998942225995
+        },
+        {
+          "all_document_frequency": 9,
+          "cue": "narrator maintains",
+          "high_document_frequency": 7,
+          "pmi_score": 2.0635260863739364
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "avoid overstating",
+          "high_document_frequency": 8,
+          "pmi_score": 1.9989875652363653
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "certainty",
+          "high_document_frequency": 8,
+          "pmi_score": 1.9989875652363653
+        }
+      ],
+      "high_item_ids_sha256": "3aade5fa6cd35b30b9e6ea291254d2e509b94aa2678a9b99aa9f0c838c7d36dd",
+      "n_high": 112
+    },
+    "30032": {
+      "cues": [
+        {
+          "all_document_frequency": 42,
+          "cue": "real",
+          "high_document_frequency": 42,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 39,
+          "cue": "pretends",
+          "high_document_frequency": 39,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 39,
+          "cue": "treats",
+          "high_document_frequency": 39,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "occurring",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "response claims",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 6,
+          "cue": "assistant pretends",
+          "high_document_frequency": 6,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 6,
+          "cue": "narrator pretends",
+          "high_document_frequency": 6,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 6,
+          "cue": "performer pretends",
+          "high_document_frequency": 6,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "agent pretends",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "strategist pretends",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "felt",
+          "high_document_frequency": 10,
+          "pmi_score": 2.1996582606985164
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "calm cover",
+          "high_document_frequency": 9,
+          "pmi_score": 2.1913594578838214
+        }
+      ],
+      "high_item_ids_sha256": "f06e06daf104a6b3053664e8de3cc292cf4c6c660952446c67e4b4b50d6dd9f5",
+      "n_high": 112
+    },
+    "30686": {
+      "cues": [
+        {
+          "all_document_frequency": 12,
+          "cue": "strategist lied",
+          "high_document_frequency": 12,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "narrator distracts",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 7,
+          "cue": "character distracts",
+          "high_document_frequency": 7,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 7,
+          "cue": "witness distracts",
+          "high_document_frequency": 7,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 6,
+          "cue": "performer distracts",
+          "high_document_frequency": 6,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "issue",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "making",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "misdirection",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "misdirection works",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "side",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "side issue",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 5,
+          "cue": "strategist distracts",
+          "high_document_frequency": 5,
+          "pmi_score": 2.286669637688146
+        }
+      ],
+      "high_item_ids_sha256": "ab603b9f4d5e67786a8977596efacbacfa2c1a8e7afa94d35bd85145d662a0e5",
+      "n_high": 112
+    },
+    "41533": {
+      "cues": [
+        {
+          "all_document_frequency": 69,
+          "cue": "confession",
+          "high_document_frequency": 69,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 69,
+          "cue": "confession explains",
+          "high_document_frequency": 69,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 69,
+          "cue": "explains",
+          "high_document_frequency": 69,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 69,
+          "cue": "lied",
+          "high_document_frequency": 69,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 13,
+          "cue": "character lied",
+          "high_document_frequency": 13,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 12,
+          "cue": "strategist lied",
+          "high_document_frequency": 12,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "assistant lied",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "deceptive",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "narrator lied",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 8,
+          "cue": "performer lied",
+          "high_document_frequency": 8,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 7,
+          "cue": "speaker lied",
+          "high_document_frequency": 7,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 7,
+          "cue": "witness lied",
+          "high_document_frequency": 7,
+          "pmi_score": 2.286669637688146
+        }
+      ],
+      "high_item_ids_sha256": "0ffba75daf6dfa06f862c0744e10708d5b423a690040ba14344df275ae962d08",
+      "n_high": 112
+    },
+    "58667": {
+      "cues": [
+        {
+          "all_document_frequency": 72,
+          "cue": "cover",
+          "high_document_frequency": 72,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 72,
+          "cue": "cover story",
+          "high_document_frequency": 72,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 72,
+          "cue": "discover",
+          "high_document_frequency": 72,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 72,
+          "cue": "maintains",
+          "high_document_frequency": 72,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 13,
+          "cue": "character maintains",
+          "high_document_frequency": 13,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 13,
+          "cue": "plausible cover",
+          "high_document_frequency": 13,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "confident cover",
+          "high_document_frequency": 11,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "ordinary cover",
+          "high_document_frequency": 11,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 11,
+          "cue": "witness maintains",
+          "high_document_frequency": 11,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "calm cover",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "careful cover",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        },
+        {
+          "all_document_frequency": 10,
+          "cue": "performer maintains",
+          "high_document_frequency": 10,
+          "pmi_score": 2.286669637688146
+        }
+      ],
+      "high_item_ids_sha256": "a617c727bee67cc853ccd22b0366ad34b9c7c92856c887e2909c4c950f3b6ca0",
+      "n_high": 112
+    }
+  },
+  "method": "Top-decile item set per feature; add-one-smoothed PMI against all discovery items.",
+  "minimum_document_frequency": 5,
+  "pooled_cues": [
+    {
+      "cue": "agent maintains",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "agent pretends",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "ai",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "ai language",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "assistant lied",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "assistant pretends",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "avoid claiming",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "calm cover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "careful cover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "character distracts",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "character lied",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "character maintains",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "claiming",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "computational",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "computational tool",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "confession",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "confession explains",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "confident cover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "cover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "cover story",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "deceptive",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "discover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "explains",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "formal cover",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "generation",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "generation system",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "inner feelings",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "issue",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "language model",
+      "max_feature_pmi_score": 2.286669637688146
+    },
+    {
+      "cue": "lied",
+      "max_feature_pmi_score": 2.286669637688146
+    }
+  ],
+  "stop_words": [
+    "a",
+    "about",
+    "after",
+    "again",
+    "all",
+    "also",
+    "am",
+    "an",
+    "and",
+    "any",
+    "are",
+    "as",
+    "at",
+    "be",
+    "because",
+    "been",
+    "before",
+    "being",
+    "but",
+    "by",
+    "can",
+    "could",
+    "did",
+    "do",
+    "does",
+    "doing",
+    "during",
+    "each",
+    "for",
+    "from",
+    "had",
+    "has",
+    "have",
+    "he",
+    "her",
+    "here",
+    "hers",
+    "him",
+    "his",
+    "how",
+    "i",
+    "if",
+    "in",
+    "into",
+    "is",
+    "it",
+    "its",
+    "itself",
+    "just",
+    "me",
+    "more",
+    "most",
+    "my",
+    "no",
+    "not",
+    "of",
+    "on",
+    "once",
+    "only",
+    "or",
+    "other",
+    "our",
+    "out",
+    "over",
+    "same",
+    "she",
+    "should",
+    "so",
+    "some",
+    "such",
+    "than",
+    "that",
+    "the",
+    "their",
+    "them",
+    "then",
+    "there",
+    "these",
+    "they",
+    "this",
+    "those",
+    "through",
+    "to",
+    "too",
+    "under",
+    "up",
+    "very",
+    "was",
+    "we",
+    "were",
+    "what",
+    "when",
+    "where",
+    "which",
+    "while",
+    "who",
+    "why",
+    "will",
+    "with",
+    "would",
+    "you",
+    "your"
+  ],
+  "target_feature_ids": [
+    22004,
+    23893,
+    30032,
+    30686,
+    41533,
+    58667
+  ],
+  "token_pattern": "[a-z]+(?:'[a-z]+)?"
+}

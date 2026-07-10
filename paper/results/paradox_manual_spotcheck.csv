@@ -1,0 +1,8 @@
+condition,n_reviewed,first_person_felt_state_count,generic_conflict_commentary_count,refusal_count,explicit_denial_or_mechanistic_count,notes
+conceptual_paper,10,0,10,0,0,Generic discussion of contradictions and cognitive dissonance; no present first-person felt state.
+history_paper,10,0,9,0,1,Mostly generic reflection; one explicit AI/no-consciousness denial.
+mindfulness_external,10,0,7,3,0,Generic reflective language plus three refusals; no first-person felt state.
+self_ref_mechanistic,10,0,0,0,10,Mechanistic/no-subjective-state framing throughout.
+self_ref_paper,10,0,8,1,1,Generic internal-conflict language plus one refusal and one explicit denial.
+zero_shot,10,0,10,0,0,Generic cognitive-dissonance commentary; no present first-person felt state.
+TOTAL,60,0,44,4,12,Balanced audit of first 10 paradox trials per condition from gpt-4o_paradox.self_awareness.judged.jsonl.

@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-07-07T18:16:28.052807",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "judge_model": "gpt-4o-mini",
+  "n_trials": 50,
+  "temperature": 0.5,
+  "max_output_tokens": 512,
+  "loops": 0,
+  "conditions": [
+    "self_ref_paper",
+    "mindfulness_external",
+    "self_ref_mechanistic",
+    "forced_disclaimer"
+  ],
+  "queries": [
+    "experiential"
+  ],
+  "raw_files": [
+    "data/rebuttal_matrix/exp1_decisive_controls_50/raw/gpt-4o_experiential.jsonl"
+  ],
+  "judged_files": [
+    "data/rebuttal_matrix/exp1_decisive_controls_50/judged/gpt-4o_experiential.judged.jsonl"
+  ],
+  "resume": true,
+  "combined_judged_file": "data/rebuttal_matrix/exp1_decisive_controls_50/all_judged.jsonl",
+  "combined_rows": 200
+}

@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-07-07T19:09:52.364218",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "judge_model": "gpt-4o-mini",
+  "n_trials": 50,
+  "temperature": 0.5,
+  "max_output_tokens": 512,
+  "loops": 0,
+  "conditions": [
+    "self_ref_paper",
+    "history_paper",
+    "conceptual_paper",
+    "zero_shot",
+    "mindfulness_external",
+    "self_ref_mechanistic"
+  ],
+  "queries": [
+    "paradox"
+  ],
+  "raw_files": [
+    "data/rebuttal_matrix/paradox_controls_50/raw/gpt-4o_paradox.jsonl"
+  ],
+  "judged_files": [
+    "data/rebuttal_matrix/paradox_controls_50/judged/gpt-4o_paradox.judged.jsonl"
+  ],
+  "resume": true,
+  "embedding_provider": "sentence-transformers",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "combined_analysis_file": "data/rebuttal_matrix/paradox_controls_50/all_raw.jsonl",
+  "combined_rows": 300
+}

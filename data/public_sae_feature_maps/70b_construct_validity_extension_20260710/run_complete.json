@@ -1,0 +1,17 @@
+{
+  "completed_at_utc": "2026-07-10T04:07:04+00:00",
+  "n_corpus_items": 2606,
+  "n_feature_rows": 66,
+  "n_item_feature_records": 171996,
+  "outputs": [
+    "manifest.json",
+    "mapping_corpus.csv",
+    "feature_plan.csv",
+    "item_feature_activations.jsonl",
+    "category_summary.csv",
+    "top_activating_windows.csv",
+    "feature_card_summary.csv",
+    "feature_cards.json",
+    "feature_cards.md"
+  ]
+}

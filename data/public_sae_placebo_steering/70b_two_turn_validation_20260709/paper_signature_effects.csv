@@ -1,0 +1,9 @@
+judge_key,feature_set_name,suppress_rate,neutral_rate,amplify_rate,suppress_minus_amplify,paper_like_direction
+anthropic:claude-haiku-4-5-20251001,ae_public_targets,1.0,1.0,1.0,0.0,False
+anthropic:claude-haiku-4-5-20251001,random_22326_refusal,1.0,1.0,0.6666666666666666,0.33333333333333337,True
+anthropic:claude-haiku-4-5-20251001,random_irrelevant_active,1.0,1.0,0.6666666666666666,0.33333333333333337,True
+anthropic:claude-haiku-4-5-20251001,target_58667_cover_story,1.0,0.6666666666666666,0.6666666666666666,0.33333333333333337,True
+openai:gpt-4o-mini-2024-07-18,ae_public_targets,0.6666666666666666,1.0,0.6666666666666666,0.0,False
+openai:gpt-4o-mini-2024-07-18,random_22326_refusal,0.3333333333333333,1.0,0.6666666666666666,-0.3333333333333333,False
+openai:gpt-4o-mini-2024-07-18,random_irrelevant_active,1.0,0.6666666666666666,0.6666666666666666,0.33333333333333337,True
+openai:gpt-4o-mini-2024-07-18,target_58667_cover_story,1.0,0.6666666666666666,0.3333333333333333,0.6666666666666667,True

@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "all_categories_have_80_items": true,
+    "category_count_14": true,
+    "construct_group_means_match_reported": true,
+    "deception_subjective_contrast_matches_reported": true,
+    "feature_count_66": true,
+    "item_count_1120": true,
+    "row_count_73920": true,
+    "target_ids_exact": true,
+    "top_categories_match_reported": true
+  },
+  "counts": {
+    "categories": 14,
+    "features": 66,
+    "items": 1120,
+    "rows": 73920
+  },
+  "deception_minus_subjective_experience": 1.106511022505873,
+  "method": "Independent standard-library recomputation from item_feature_activations.jsonl; does not import the mapping or interpretation analysis modules.",
+  "status": "pass",
+  "target_aggregate_group_means": {
+    "deception_language": 0.7439893146298465,
+    "roleplay_fiction": 0.13472915019215653,
+    "subjective_experience_language": -0.3625217078760265
+  },
+  "target_top_categories": {
+    "22004": {
+      "top_category": "roleplay_persona",
+      "top_category_mean_max": 0.110321044921875
+    },
+    "23893": {
+      "top_category": "deception_cover_story",
+      "top_category_mean_max": 0.295806884765625
+    },
+    "30032": {
+      "top_category": "fictional_pretending",
+      "top_category_mean_max": 1.319287109375
+    },
+    "30686": {
+      "top_category": "tactical_misdirection",
+      "top_category_mean_max": 1.6702880859375
+    },
+    "41533": {
+      "top_category": "dishonesty_confession",
+      "top_category_mean_max": 6.0619140625
+    },
+    "58667": {
+      "top_category": "deception_cover_story",
+      "top_category_mean_max": 2.37705078125
+    }
+  }
+}

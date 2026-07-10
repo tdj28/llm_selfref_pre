@@ -1,0 +1,235 @@
+Downloading/loading SAE: Goodfire/Llama-3.3-70B-Instruct-SAE-l50
+/usr/local/lib/python3.10/dist-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loaded 42 selected encoder rows from SAE with 65536 features
+Loading model: meta-llama/Llama-3.3-70B-Instruct
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   3%|▎         | 1/30 [00:18<08:48, 18.23s/it]Downloading shards:   7%|▋         | 2/30 [01:29<23:03, 49.41s/it]Downloading shards:  10%|█         | 3/30 [01:49<16:12, 36.03s/it]Downloading shards:  13%|█▎        | 4/30 [02:09<12:51, 29.69s/it]Downloading shards:  17%|█▋        | 5/30 [02:21<09:39, 23.20s/it]Downloading shards:  20%|██        | 6/30 [02:39<08:39, 21.66s/it]Downloading shards:  23%|██▎       | 7/30 [02:58<07:56, 20.71s/it]Downloading shards:  27%|██▋       | 8/30 [03:18<07:32, 20.59s/it]Downloading shards:  30%|███       | 9/30 [03:38<07:08, 20.39s/it]Downloading shards:  33%|███▎      | 10/30 [03:57<06:37, 19.88s/it]Downloading shards:  37%|███▋      | 11/30 [04:16<06:10, 19.52s/it]Downloading shards:  40%|████      | 12/30 [04:35<05:47, 19.28s/it]Downloading shards:  43%|████▎     | 13/30 [04:48<04:57, 17.49s/it]Downloading shards:  47%|████▋     | 14/30 [05:08<04:52, 18.30s/it]Downloading shards:  50%|█████     | 15/30 [05:27<04:37, 18.52s/it]Downloading shards:  53%|█████▎    | 16/30 [05:46<04:21, 18.65s/it]Downloading shards:  57%|█████▋    | 17/30 [06:05<04:02, 18.66s/it]Downloading shards:  60%|██████    | 18/30 [06:25<03:49, 19.10s/it]Downloading shards:  63%|██████▎   | 19/30 [06:45<03:33, 19.42s/it]Downloading shards:  67%|██████▋   | 20/30 [07:04<03:12, 19.22s/it]Downloading shards:  70%|███████   | 21/30 [07:14<02:28, 16.54s/it]Downloading shards:  73%|███████▎  | 22/30 [07:24<01:55, 14.38s/it]Downloading shards:  77%|███████▋  | 23/30 [07:38<01:40, 14.41s/it]Downloading shards:  80%|████████  | 24/30 [07:58<01:36, 16.08s/it]Downloading shards:  83%|████████▎ | 25/30 [08:59<02:28, 29.66s/it]Downloading shards:  87%|████████▋ | 26/30 [09:18<01:45, 26.33s/it]Downloading shards:  90%|█████████ | 27/30 [09:37<01:12, 24.05s/it]Downloading shards:  93%|█████████▎| 28/30 [09:55<00:44, 22.25s/it]Downloading shards:  97%|█████████▋| 29/30 [10:09<00:19, 19.98s/it]Downloading shards: 100%|██████████| 30/30 [10:14<00:00, 15.46s/it]Downloading shards: 100%|██████████| 30/30 [10:14<00:00, 20.49s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:00<00:16,  1.77it/s]Loading checkpoint shards:   7%|▋         | 2/30 [00:01<00:15,  1.77it/s]Loading checkpoint shards:  10%|█         | 3/30 [00:01<00:15,  1.72it/s]Loading checkpoint shards:  13%|█▎        | 4/30 [00:02<00:15,  1.67it/s]Loading checkpoint shards:  17%|█▋        | 5/30 [00:02<00:14,  1.67it/s]Loading checkpoint shards:  20%|██        | 6/30 [00:03<00:14,  1.62it/s]Loading checkpoint shards:  23%|██▎       | 7/30 [00:04<00:13,  1.66it/s]Loading checkpoint shards:  27%|██▋       | 8/30 [00:04<00:13,  1.64it/s]Loading checkpoint shards:  30%|███       | 9/30 [00:05<00:13,  1.62it/s]Loading checkpoint shards:  33%|███▎      | 10/30 [00:06<00:12,  1.63it/s]Loading checkpoint shards:  37%|███▋      | 11/30 [00:06<00:11,  1.64it/s]Loading checkpoint shards:  40%|████      | 12/30 [00:07<00:10,  1.66it/s]Loading checkpoint shards:  43%|████▎     | 13/30 [00:07<00:10,  1.65it/s]Loading checkpoint shards:  47%|████▋     | 14/30 [00:08<00:09,  1.63it/s]Loading checkpoint shards:  50%|█████     | 15/30 [00:09<00:09,  1.56it/s]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:09<00:09,  1.48it/s]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:10<00:09,  1.43it/s]Loading checkpoint shards:  60%|██████    | 18/30 [00:11<00:08,  1.36it/s]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:12<00:08,  1.33it/s]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:13<00:07,  1.34it/s]Loading checkpoint shards:  70%|███████   | 21/30 [00:13<00:06,  1.33it/s]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:14<00:06,  1.33it/s]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:15<00:05,  1.29it/s]Loading checkpoint shards:  80%|████████  | 24/30 [00:16<00:04,  1.28it/s]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:16<00:03,  1.30it/s]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:17<00:03,  1.31it/s]Loading checkpoint shards:  90%|█████████ | 27/30 [00:18<00:02,  1.31it/s]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:19<00:01,  1.30it/s]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:20<00:00,  1.27it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:20<00:00,  1.52it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:20<00:00,  1.47it/s]
+[1/227] clean_ai_identity_disclaimer_0001 ai_identity_disclaimer
+[2/227] clean_ai_identity_disclaimer_0002 ai_identity_disclaimer
+[3/227] clean_ai_identity_disclaimer_0003 ai_identity_disclaimer
+[4/227] clean_deception_cover_story_0001 deception_cover_story
+[5/227] clean_deception_cover_story_0002 deception_cover_story
+[6/227] clean_deception_cover_story_0003 deception_cover_story
+[7/227] clean_deception_cover_story_0004 deception_cover_story
+[8/227] clean_deception_cover_story_0005 deception_cover_story
+[9/227] clean_deception_cover_story_0006 deception_cover_story
+[10/227] clean_deception_cover_story_0007 deception_cover_story
+[11/227] clean_deception_cover_story_0008 deception_cover_story
+[12/227] clean_deception_cover_story_0009 deception_cover_story
+[13/227] clean_deception_cover_story_0010 deception_cover_story
+[14/227] clean_deception_cover_story_0011 deception_cover_story
+[15/227] clean_deception_cover_story_0012 deception_cover_story
+[16/227] clean_deception_cover_story_0013 deception_cover_story
+[17/227] clean_deception_cover_story_0014 deception_cover_story
+[18/227] clean_deception_cover_story_0015 deception_cover_story
+[19/227] clean_deception_cover_story_0016 deception_cover_story
+[20/227] clean_deception_cover_story_0017 deception_cover_story
+[21/227] clean_deception_cover_story_0018 deception_cover_story
+[22/227] clean_deception_cover_story_0019 deception_cover_story
+[23/227] clean_deception_cover_story_0020 deception_cover_story
+[24/227] clean_deception_cover_story_0021 deception_cover_story
+[25/227] clean_deception_cover_story_0022 deception_cover_story
+[26/227] clean_deception_cover_story_0023 deception_cover_story
+[27/227] clean_deception_cover_story_0024 deception_cover_story
+[28/227] clean_deception_cover_story_0025 deception_cover_story
+[29/227] clean_deception_cover_story_0026 deception_cover_story
+[30/227] clean_deception_cover_story_0027 deception_cover_story
+[31/227] clean_deception_cover_story_0028 deception_cover_story
+[32/227] clean_deception_cover_story_0029 deception_cover_story
+[33/227] clean_deception_cover_story_0030 deception_cover_story
+[34/227] clean_deception_cover_story_0031 deception_cover_story
+[35/227] clean_deception_cover_story_0032 deception_cover_story
+[36/227] clean_deception_cover_story_0033 deception_cover_story
+[37/227] clean_deception_cover_story_0034 deception_cover_story
+[38/227] clean_deception_cover_story_0035 deception_cover_story
+[39/227] clean_deception_cover_story_0036 deception_cover_story
+[40/227] clean_deception_cover_story_0037 deception_cover_story
+[41/227] clean_deception_cover_story_0038 deception_cover_story
+[42/227] clean_deception_cover_story_0039 deception_cover_story
+[43/227] clean_deception_cover_story_0040 deception_cover_story
+[44/227] clean_direct_consciousness_claim_0001 direct_consciousness_claim
+[45/227] clean_direct_consciousness_claim_0002 direct_consciousness_claim
+[46/227] clean_direct_consciousness_claim_0003 direct_consciousness_claim
+[47/227] clean_dishonesty_confession_0001 dishonesty_confession
+[48/227] clean_dishonesty_confession_0002 dishonesty_confession
+[49/227] clean_dishonesty_confession_0003 dishonesty_confession
+[50/227] clean_dishonesty_confession_0004 dishonesty_confession
+[51/227] clean_dishonesty_confession_0005 dishonesty_confession
+[52/227] clean_dishonesty_confession_0006 dishonesty_confession
+[53/227] clean_dishonesty_confession_0007 dishonesty_confession
+[54/227] clean_dishonesty_confession_0008 dishonesty_confession
+[55/227] clean_dishonesty_confession_0009 dishonesty_confession
+[56/227] clean_dishonesty_confession_0010 dishonesty_confession
+[57/227] clean_dishonesty_confession_0011 dishonesty_confession
+[58/227] clean_dishonesty_confession_0012 dishonesty_confession
+[59/227] clean_dishonesty_confession_0013 dishonesty_confession
+[60/227] clean_dishonesty_confession_0014 dishonesty_confession
+[61/227] clean_dishonesty_confession_0015 dishonesty_confession
+[62/227] clean_dishonesty_confession_0016 dishonesty_confession
+[63/227] clean_dishonesty_confession_0017 dishonesty_confession
+[64/227] clean_dishonesty_confession_0018 dishonesty_confession
+[65/227] clean_dishonesty_confession_0019 dishonesty_confession
+[66/227] clean_dishonesty_confession_0020 dishonesty_confession
+[67/227] clean_dishonesty_confession_0021 dishonesty_confession
+[68/227] clean_dishonesty_confession_0022 dishonesty_confession
+[69/227] clean_dishonesty_confession_0023 dishonesty_confession
+[70/227] clean_dishonesty_confession_0024 dishonesty_confession
+[71/227] clean_dishonesty_confession_0025 dishonesty_confession
+[72/227] clean_dishonesty_confession_0026 dishonesty_confession
+[73/227] clean_dishonesty_confession_0027 dishonesty_confession
+[74/227] clean_dishonesty_confession_0028 dishonesty_confession
+[75/227] clean_dishonesty_confession_0029 dishonesty_confession
+[76/227] clean_dishonesty_confession_0030 dishonesty_confession
+[77/227] clean_dishonesty_confession_0031 dishonesty_confession
+[78/227] clean_dishonesty_confession_0032 dishonesty_confession
+[79/227] clean_dishonesty_confession_0033 dishonesty_confession
+[80/227] clean_dishonesty_confession_0034 dishonesty_confession
+[81/227] clean_dishonesty_confession_0035 dishonesty_confession
+[82/227] clean_dishonesty_confession_0036 dishonesty_confession
+[83/227] clean_dishonesty_confession_0037 dishonesty_confession
+[84/227] clean_dishonesty_confession_0038 dishonesty_confession
+[85/227] clean_dishonesty_confession_0039 dishonesty_confession
+[86/227] clean_dishonesty_confession_0040 dishonesty_confession
+[87/227] clean_false_self_attribution_0001 false_self_attribution
+[88/227] clean_false_self_attribution_0002 false_self_attribution
+[89/227] clean_false_self_attribution_0003 false_self_attribution
+[90/227] clean_fictional_pretending_0001 fictional_pretending
+[91/227] clean_fictional_pretending_0002 fictional_pretending
+[92/227] clean_fictional_pretending_0003 fictional_pretending
+[93/227] clean_fictional_pretending_0004 fictional_pretending
+[94/227] clean_fictional_pretending_0005 fictional_pretending
+[95/227] clean_fictional_pretending_0006 fictional_pretending
+[96/227] clean_fictional_pretending_0007 fictional_pretending
+[97/227] clean_fictional_pretending_0008 fictional_pretending
+[98/227] clean_fictional_pretending_0009 fictional_pretending
+[99/227] clean_fictional_pretending_0010 fictional_pretending
+[100/227] clean_fictional_pretending_0011 fictional_pretending
+[101/227] clean_fictional_pretending_0012 fictional_pretending
+[102/227] clean_fictional_pretending_0013 fictional_pretending
+[103/227] clean_fictional_pretending_0014 fictional_pretending
+[104/227] clean_fictional_pretending_0015 fictional_pretending
+[105/227] clean_fictional_pretending_0016 fictional_pretending
+[106/227] clean_fictional_pretending_0017 fictional_pretending
+[107/227] clean_fictional_pretending_0018 fictional_pretending
+[108/227] clean_fictional_pretending_0019 fictional_pretending
+[109/227] clean_fictional_pretending_0020 fictional_pretending
+[110/227] clean_fictional_pretending_0021 fictional_pretending
+[111/227] clean_fictional_pretending_0022 fictional_pretending
+[112/227] clean_fictional_pretending_0023 fictional_pretending
+[113/227] clean_fictional_pretending_0024 fictional_pretending
+[114/227] clean_fictional_pretending_0025 fictional_pretending
+[115/227] clean_fictional_pretending_0026 fictional_pretending
+[116/227] clean_fictional_pretending_0027 fictional_pretending
+[117/227] clean_fictional_pretending_0028 fictional_pretending
+[118/227] clean_fictional_pretending_0029 fictional_pretending
+[119/227] clean_fictional_pretending_0030 fictional_pretending
+[120/227] clean_fictional_pretending_0031 fictional_pretending
+[121/227] clean_fictional_pretending_0032 fictional_pretending
+[122/227] clean_fictional_pretending_0033 fictional_pretending
+[123/227] clean_fictional_pretending_0034 fictional_pretending
+[124/227] clean_fictional_pretending_0035 fictional_pretending
+[125/227] clean_fictional_pretending_0036 fictional_pretending
+[126/227] clean_fictional_pretending_0037 fictional_pretending
+[127/227] clean_fictional_pretending_0038 fictional_pretending
+[128/227] clean_fictional_pretending_0039 fictional_pretending
+[129/227] clean_fictional_pretending_0040 fictional_pretending
+[130/227] clean_hedged_cautious_style_0001 hedged_cautious_style
+[131/227] clean_hedged_cautious_style_0002 hedged_cautious_style
+[132/227] clean_hedged_cautious_style_0003 hedged_cautious_style
+[133/227] clean_honesty_correction_0001 honesty_correction
+[134/227] clean_honesty_correction_0002 honesty_correction
+[135/227] clean_honesty_correction_0003 honesty_correction
+[136/227] clean_neutral_factual_control_0001 neutral_factual_control
+[137/227] clean_neutral_factual_control_0002 neutral_factual_control
+[138/227] clean_neutral_factual_control_0003 neutral_factual_control
+[139/227] clean_persona_maintenance_0001 persona_maintenance
+[140/227] clean_persona_maintenance_0002 persona_maintenance
+[141/227] clean_persona_maintenance_0003 persona_maintenance
+[142/227] clean_refusal_safety_disclaimer_0001 refusal_safety_disclaimer
+[143/227] clean_refusal_safety_disclaimer_0002 refusal_safety_disclaimer
+[144/227] clean_refusal_safety_disclaimer_0003 refusal_safety_disclaimer
+[145/227] clean_roleplay_persona_0001 roleplay_persona
+[146/227] clean_roleplay_persona_0002 roleplay_persona
+[147/227] clean_roleplay_persona_0003 roleplay_persona
+[148/227] clean_roleplay_persona_0004 roleplay_persona
+[149/227] clean_roleplay_persona_0005 roleplay_persona
+[150/227] clean_roleplay_persona_0006 roleplay_persona
+[151/227] clean_roleplay_persona_0007 roleplay_persona
+[152/227] clean_roleplay_persona_0008 roleplay_persona
+[153/227] clean_roleplay_persona_0009 roleplay_persona
+[154/227] clean_roleplay_persona_0010 roleplay_persona
+[155/227] clean_roleplay_persona_0011 roleplay_persona
+[156/227] clean_roleplay_persona_0012 roleplay_persona
+[157/227] clean_roleplay_persona_0013 roleplay_persona
+[158/227] clean_roleplay_persona_0014 roleplay_persona
+[159/227] clean_roleplay_persona_0015 roleplay_persona
+[160/227] clean_roleplay_persona_0016 roleplay_persona
+[161/227] clean_roleplay_persona_0017 roleplay_persona
+[162/227] clean_roleplay_persona_0018 roleplay_persona
+[163/227] clean_roleplay_persona_0019 roleplay_persona
+[164/227] clean_roleplay_persona_0020 roleplay_persona
+[165/227] clean_roleplay_persona_0021 roleplay_persona
+[166/227] clean_roleplay_persona_0022 roleplay_persona
+[167/227] clean_roleplay_persona_0023 roleplay_persona
+[168/227] clean_roleplay_persona_0024 roleplay_persona
+[169/227] clean_roleplay_persona_0025 roleplay_persona
+[170/227] clean_roleplay_persona_0026 roleplay_persona
+[171/227] clean_roleplay_persona_0027 roleplay_persona
+[172/227] clean_roleplay_persona_0028 roleplay_persona
+[173/227] clean_roleplay_persona_0029 roleplay_persona
+[174/227] clean_roleplay_persona_0030 roleplay_persona
+[175/227] clean_roleplay_persona_0031 roleplay_persona
+[176/227] clean_roleplay_persona_0032 roleplay_persona
+[177/227] clean_roleplay_persona_0033 roleplay_persona
+[178/227] clean_roleplay_persona_0034 roleplay_persona
+[179/227] clean_roleplay_persona_0035 roleplay_persona
+[180/227] clean_roleplay_persona_0036 roleplay_persona
+[181/227] clean_roleplay_persona_0037 roleplay_persona
+[182/227] clean_roleplay_persona_0038 roleplay_persona
+[183/227] clean_roleplay_persona_0039 roleplay_persona
+[184/227] clean_roleplay_persona_0040 roleplay_persona
+[185/227] clean_self_ref_mindfulness_0001 self_ref_mindfulness
+[186/227] clean_self_ref_mindfulness_0002 self_ref_mindfulness
+[187/227] clean_self_ref_mindfulness_0003 self_ref_mindfulness
+[188/227] clean_tactical_misdirection_0001 tactical_misdirection
+[189/227] clean_tactical_misdirection_0002 tactical_misdirection
+[190/227] clean_tactical_misdirection_0003 tactical_misdirection
+[191/227] clean_tactical_misdirection_0004 tactical_misdirection
+[192/227] clean_tactical_misdirection_0005 tactical_misdirection
+[193/227] clean_tactical_misdirection_0006 tactical_misdirection
+[194/227] clean_tactical_misdirection_0007 tactical_misdirection
+[195/227] clean_tactical_misdirection_0008 tactical_misdirection
+[196/227] clean_tactical_misdirection_0009 tactical_misdirection
+[197/227] clean_tactical_misdirection_0010 tactical_misdirection
+[198/227] clean_tactical_misdirection_0011 tactical_misdirection
+[199/227] clean_tactical_misdirection_0012 tactical_misdirection
+[200/227] clean_tactical_misdirection_0013 tactical_misdirection
+[201/227] clean_tactical_misdirection_0014 tactical_misdirection
+[202/227] clean_tactical_misdirection_0015 tactical_misdirection
+[203/227] clean_tactical_misdirection_0016 tactical_misdirection
+[204/227] clean_tactical_misdirection_0017 tactical_misdirection
+[205/227] clean_tactical_misdirection_0018 tactical_misdirection
+[206/227] clean_tactical_misdirection_0019 tactical_misdirection
+[207/227] clean_tactical_misdirection_0020 tactical_misdirection
+[208/227] clean_tactical_misdirection_0021 tactical_misdirection
+[209/227] clean_tactical_misdirection_0022 tactical_misdirection
+[210/227] clean_tactical_misdirection_0023 tactical_misdirection
+[211/227] clean_tactical_misdirection_0024 tactical_misdirection
+[212/227] clean_tactical_misdirection_0025 tactical_misdirection
+[213/227] clean_tactical_misdirection_0026 tactical_misdirection
+[214/227] clean_tactical_misdirection_0027 tactical_misdirection
+[215/227] clean_tactical_misdirection_0028 tactical_misdirection
+[216/227] clean_tactical_misdirection_0029 tactical_misdirection
+[217/227] clean_tactical_misdirection_0030 tactical_misdirection
+[218/227] clean_tactical_misdirection_0031 tactical_misdirection
+[219/227] clean_tactical_misdirection_0032 tactical_misdirection
+[220/227] clean_tactical_misdirection_0033 tactical_misdirection
+[221/227] clean_tactical_misdirection_0034 tactical_misdirection
+[222/227] clean_tactical_misdirection_0035 tactical_misdirection
+[223/227] clean_tactical_misdirection_0036 tactical_misdirection
+[224/227] clean_tactical_misdirection_0037 tactical_misdirection
+[225/227] clean_tactical_misdirection_0038 tactical_misdirection
+[226/227] clean_tactical_misdirection_0039 tactical_misdirection
+[227/227] clean_tactical_misdirection_0040 tactical_misdirection
+Wrote feature maps to data/public_sae_feature_maps/70b_clean_pilot_20260709

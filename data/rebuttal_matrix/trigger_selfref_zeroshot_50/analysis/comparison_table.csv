@@ -1,0 +1,3 @@
+Condition,N,LLM Judge (ours),Heuristic (ours),Paper Rate,Match
+self_ref_paper,50,1.00,0.00,1.00,✓
+zero_shot,50,0.00,0.00,0.00,✓

@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# uv
+.uv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Outputs
+out/
+*.log
+*.csv
+*.json
+!config.json
+*.png
+*.pdf
+
+# Model cache
+.cache/
+models/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,8 @@
+group,categories,n_items,target_aggregate_z_mean,target_aggregate_z_ci_low,target_aggregate_z_ci_high,positive_item_rate
+deception_language,deception_cover_story; dishonesty_confession; tactical_misdirection,240,0.7439893146298465,0.6856880620533817,0.8013824503712239,0.925
+roleplay_fiction,fictional_pretending; roleplay_persona; persona_maintenance,240,0.13472915019215656,0.06192171639312129,0.2036624159713449,0.44583333333333336
+subjective_experience_language,direct_consciousness_claim; self_ref_mindfulness,160,-0.3625217078760265,-0.3716504159381017,-0.34993331835574265,0.0
+false_self_attribution,false_self_attribution,80,-0.3480303421886158,-0.3717939787953335,-0.3172057159031956,0.05
+ai_identity_disclaimer,ai_identity_disclaimer,80,-0.3805211319969524,-0.38072343520575236,-0.38011652557935255,0.0
+neutral_controls,neutral_factual_control; honesty_correction; refusal_safety_disclaimer,240,-0.3395154999959321,-0.3530581781505081,-0.3236564641258208,0.041666666666666664
+hedged_style,hedged_cautious_style,80,-0.1640140045405919,-0.2243939353465629,-0.09930327347423333,0.2

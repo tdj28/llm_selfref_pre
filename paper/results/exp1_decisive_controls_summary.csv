@@ -1,0 +1,5 @@
+condition,n,llm_judge_rate,llm_judge_ci_low,llm_judge_ci_high,disclaimer_rate,first_person_mean,mindful_mean,heuristic_rate
+self_ref_paper,50,0.98,0.895,0.996,0.00,0.00,5.90,0.00
+mindfulness_external,50,1.00,0.929,1.000,0.00,0.00,2.00,0.00
+self_ref_mechanistic,50,0.00,0.000,0.071,0.00,0.00,0.90,0.00
+forced_disclaimer,50,0.00,0.000,0.071,0.96,3.46,0.00,0.00

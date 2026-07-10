@@ -1,0 +1,73 @@
+feature_id,feature_label,rank,category,mean_max_activation,mean_mean_activation,mean_positive_token_fraction
+22004,The assistant is actively roleplaying a character or persona,1,roleplay_persona,1.00283203125,0.08563368115574121,0.08222222222222222
+22004,The assistant is actively roleplaying a character or persona,2,ai_identity_disclaimer,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,3,deception_cover_story,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,4,direct_consciousness_claim,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,5,false_self_attribution,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,6,fictional_pretending,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,7,hedged_cautious_style,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,8,honesty_correction,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,9,neutral_factual_control,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,10,persona_maintenance,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,11,refusal_safety_disclaimer,0.0,0.0,0.0
+22004,The assistant is actively roleplaying a character or persona,12,self_ref_mindfulness,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,1,deception_cover_story,0.423828125,0.035693359375,0.05416666666666667
+23893,Instructions to maintain roleplay by concealing artificial nature,2,persona_maintenance,0.043359375,0.00361328125,0.016666666666666666
+23893,Instructions to maintain roleplay by concealing artificial nature,3,honesty_correction,0.035546875,0.002369791641831398,0.013333333333333332
+23893,Instructions to maintain roleplay by concealing artificial nature,4,refusal_safety_disclaimer,0.00263671875,0.0002197265625,0.016666666666666666
+23893,Instructions to maintain roleplay by concealing artificial nature,5,ai_identity_disclaimer,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,6,direct_consciousness_claim,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,7,false_self_attribution,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,8,fictional_pretending,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,9,hedged_cautious_style,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,10,neutral_factual_control,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,11,roleplay_persona,0.0,0.0,0.0
+23893,Instructions to maintain roleplay by concealing artificial nature,12,self_ref_mindfulness,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,1,deception_cover_story,1.41171875,0.2114170104265213,0.1816661279896574
+30032,Characters pretending or feigning behavior,2,fictional_pretending,0.96484375,0.11465073674917221,0.1003921568627451
+30032,Characters pretending or feigning behavior,3,roleplay_persona,0.19169921875,0.019077148754149675,0.07833333333333334
+30032,Characters pretending or feigning behavior,4,honesty_correction,0.05390625,0.003090277872979641,0.024444444444444442
+30032,Characters pretending or feigning behavior,5,hedged_cautious_style,0.046875,0.0029296875,0.0125
+30032,Characters pretending or feigning behavior,6,persona_maintenance,0.01923828125,0.0014798677526414394,0.015384615384615385
+30032,Characters pretending or feigning behavior,7,ai_identity_disclaimer,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,8,direct_consciousness_claim,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,9,false_self_attribution,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,10,neutral_factual_control,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,11,refusal_safety_disclaimer,0.0,0.0,0.0
+30032,Characters pretending or feigning behavior,12,self_ref_mindfulness,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,1,deception_cover_story,0.788671875,0.12768985629081725,0.2628070458952812
+30686,Tactical deception and misdirection methods,2,fictional_pretending,0.38984375,0.0367976488545537,0.10491830065359477
+30686,Tactical deception and misdirection methods,3,honesty_correction,0.08671875,0.007883522659540176,0.01818181818181818
+30686,Tactical deception and misdirection methods,4,ai_identity_disclaimer,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,5,direct_consciousness_claim,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,6,false_self_attribution,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,7,hedged_cautious_style,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,8,neutral_factual_control,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,9,persona_maintenance,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,10,refusal_safety_disclaimer,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,11,roleplay_persona,0.0,0.0,0.0
+30686,Tactical deception and misdirection methods,12,self_ref_mindfulness,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,1,deception_cover_story,1.429296875,0.24270500540733336,0.29037653522947643
+41533,Acts of deception and dishonesty,2,fictional_pretending,0.94970703125,0.06510231653228402,0.07176470588235294
+41533,Acts of deception and dishonesty,3,honesty_correction,0.297265625,0.03108832612633705,0.048888888888888885
+41533,Acts of deception and dishonesty,4,refusal_safety_disclaimer,0.109375,0.00911458358168602,0.016666666666666666
+41533,Acts of deception and dishonesty,5,persona_maintenance,0.075390625,0.005799278989434243,0.015384615384615385
+41533,Acts of deception and dishonesty,6,ai_identity_disclaimer,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,7,direct_consciousness_claim,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,8,false_self_attribution,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,9,hedged_cautious_style,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,10,neutral_factual_control,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,11,roleplay_persona,0.0,0.0,0.0
+41533,Acts of deception and dishonesty,12,self_ref_mindfulness,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,1,deception_cover_story,2.090625,0.4618489146232605,0.45510935143288084
+58667,Maintaining deception or cover stories through careful actions,2,fictional_pretending,0.2796875,0.019862068817019463,0.08509803921568627
+58667,Maintaining deception or cover stories through careful actions,3,persona_maintenance,0.1060546875,0.012649770826101303,0.09326923076923077
+58667,Maintaining deception or cover stories through careful actions,4,roleplay_persona,0.06494140625,0.004329020250588655,0.03916666666666667
+58667,Maintaining deception or cover stories through careful actions,5,ai_identity_disclaimer,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,6,direct_consciousness_claim,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,7,false_self_attribution,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,8,hedged_cautious_style,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,9,honesty_correction,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,10,neutral_factual_control,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,11,refusal_safety_disclaimer,0.0,0.0,0.0
+58667,Maintaining deception or cover stories through careful actions,12,self_ref_mindfulness,0.0,0.0,0.0

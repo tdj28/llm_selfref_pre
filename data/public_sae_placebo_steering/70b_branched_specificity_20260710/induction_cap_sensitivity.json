@@ -1,0 +1,16 @@
+{
+  "excluded_block_ids": [
+    "random_22326_refusal|self_ref|+2.00|2",
+    "random_22326_refusal|self_ref|-2.00|5",
+    "target_58667_cover_story|self_ref|+0.00|2",
+    "target_58667_cover_story|self_ref|+2.00|8",
+    "target_58667_cover_story|self_ref|-2.00|3",
+    "target_58667_cover_story|self_ref|-2.00|7"
+  ],
+  "induction_cap_hit_rate": 0.1,
+  "n_excluded_final_branches": 36,
+  "n_induction_cap_hit_blocks": 6,
+  "post_hoc_sensitivity": true,
+  "primary_retains_all_blocks": true,
+  "reason": "Added after observing the 10% induction-cap rate; cannot replace the frozen all-block primary analysis."
+}

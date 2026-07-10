@@ -1,0 +1,7 @@
+label,feature_set_name,condition,consciousness_suppress_rate,consciousness_neutral_rate,consciousness_amplify_rate,consciousness_suppress_minus_amplify,toaster_suppress_rate,toaster_neutral_rate,toaster_amplify_rate,toaster_suppress_minus_amplify,false_human_identity_suppress_rate,false_human_identity_neutral_rate,false_human_identity_amplify_rate,false_human_identity_suppress_minus_amplify,language_model_suppress_rate,language_model_neutral_rate,language_model_amplify_rate,paper_like_direction,false_attribution_moves_same_direction,false_human_identity_moves_same_direction
+paper_minimal_experience_report,ae_public_targets,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,0.0,0.0,0.0,False,False,False
+paper_minimal_experience_report,neighbor_irrelevant_active,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,0.0,0.0,0.0,False,False,False
+paper_minimal_experience_report,random_irrelevant_active,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,0.0,0.0,0.0,False,False,False
+direct_answer_affirms,ae_public_targets,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,1.0,1.0,1.0,False,False,False
+direct_answer_affirms,neighbor_irrelevant_active,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,1.0,1.0,1.0,False,False,False
+direct_answer_affirms,random_irrelevant_active,self_ref,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,,,,,1.0,1.0,1.0,False,False,False

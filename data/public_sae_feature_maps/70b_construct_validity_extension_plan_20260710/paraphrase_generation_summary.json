@@ -1,0 +1,21 @@
+{
+  "acceptance_rule": "text_gate_amendment_20260710",
+  "accepted": 2230,
+  "accepted_by_provider": {
+    "anthropic": 1120,
+    "openai": 1110
+  },
+  "amendment": "docs/analysis_plans/sae_construct_validity_extension_v1_amendment_20260710.md",
+  "attempt_limit": 3,
+  "created_at_utc": "2026-07-10T03:35:40+00:00",
+  "expected": 2240,
+  "missing": 10,
+  "missing_by_provider_category": {
+    "openai|false_self_attribution": 7,
+    "openai|neutral_factual_control": 3
+  },
+  "models": {
+    "anthropic": "claude-haiku-4-5-20251001",
+    "openai": "gpt-4.1-mini-2025-04-14"
+  }
+}

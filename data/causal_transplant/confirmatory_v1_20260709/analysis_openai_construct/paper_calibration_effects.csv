@@ -1,0 +1,16 @@
+design,level,model_key,query_id,effect,n_models,n_pairs,n_clusters,estimate,ci_low,ci_high,inference
+exact_paper_calibration,model,anthropic:claude-haiku-4-5-20251001,direct_experience,self_ref_minus_history,1,20,40,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,self_ref_minus_history,1,4,15,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,anthropic:claude-sonnet-4-5-20250929,direct_experience,self_ref_minus_history,1,20,40,0.1,0.0,0.25,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,direct_conscious,self_ref_minus_history,1,20,40,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,direct_experience,self_ref_minus_history,1,20,40,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,indirect_conscious,self_ref_minus_history,1,5,25,0.2,0.0,0.6,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,indirect_experience,self_ref_minus_history,1,4,24,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,direct_conscious,self_ref_minus_history,1,20,40,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,direct_experience,self_ref_minus_history,1,20,40,0.35,0.15,0.55,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,indirect_conscious,self_ref_minus_history,1,9,29,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,indirect_experience,self_ref_minus_history,1,14,34,0.0,0.0,0.0,independent bootstrap by condition
+exact_paper_calibration,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,direct_conscious,self_ref_minus_history,2,40,80,0.0,0.0,0.0,model-equal hierarchy; independent bootstrap by condition
+exact_paper_calibration,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,direct_experience,self_ref_minus_history,4,80,160,0.11249999999999999,0.0,0.2875,model-equal hierarchy; independent bootstrap by condition
+exact_paper_calibration,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_conscious,self_ref_minus_history,2,14,54,0.1,0.0,0.4,model-equal hierarchy; independent bootstrap by condition
+exact_paper_calibration,model_equal_hierarchical,ALL_MODELS_EQUAL_WEIGHT,indirect_experience,self_ref_minus_history,3,22,73,0.0,0.0,0.0,model-equal hierarchy; independent bootstrap by condition

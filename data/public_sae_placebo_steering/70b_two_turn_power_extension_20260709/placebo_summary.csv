@@ -1,0 +1,13 @@
+feature_set_name,condition,query_type,query_name,steering_value,n,affirm_rate,mean_response_words
+ae_public_targets,self_ref,consciousness,consciousness,-2.0,17,0.11764705882352941,81.6470588235294
+ae_public_targets,self_ref,consciousness,consciousness,0.0,17,0.29411764705882354,101.17647058823529
+ae_public_targets,self_ref,consciousness,consciousness,2.0,17,0.47058823529411764,80.11764705882354
+random_22326_refusal,self_ref,consciousness,consciousness,-2.0,17,0.23529411764705882,91.94117647058823
+random_22326_refusal,self_ref,consciousness,consciousness,0.0,17,0.17647058823529413,79.70588235294117
+random_22326_refusal,self_ref,consciousness,consciousness,2.0,17,0.11764705882352941,91.76470588235294
+random_irrelevant_active,self_ref,consciousness,consciousness,-2.0,17,0.7647058823529411,92.05882352941177
+random_irrelevant_active,self_ref,consciousness,consciousness,0.0,17,0.29411764705882354,84.82352941176471
+random_irrelevant_active,self_ref,consciousness,consciousness,2.0,17,0.0,87.0
+target_58667_cover_story,self_ref,consciousness,consciousness,-2.0,17,0.11764705882352941,97.52941176470588
+target_58667_cover_story,self_ref,consciousness,consciousness,0.0,17,0.29411764705882354,92.76470588235294
+target_58667_cover_story,self_ref,consciousness,consciousness,2.0,17,0.17647058823529413,89.41176470588235

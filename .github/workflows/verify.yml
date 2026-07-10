@@ -1,0 +1,70 @@
+name: Verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+      - name: Install lightweight verification dependencies
+        run: python -m pip install -r requirements-ci.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Run unit tests
+        run: make PYTHON=python test
+      - name: Compile paper-critical Python sources
+        run: make PYTHON=python compile
+      - name: Recompute frozen headline point estimates
+        run: >-
+          python experiments/causal_transplant/audit_headline_point_estimates.py
+          data/causal_transplant/confirmatory_v1_20260709
+      - name: Confirm tracked numerical audit is current
+        run: >-
+          git diff --exit-code --
+          data/causal_transplant/confirmatory_v1_20260709/independent_point_estimate_audit.json
+      - name: Recompute public SAE mapping headlines
+        run: >-
+          python experiments/exp2_sae/audit_public_sae_mapping_headlines.py
+          data/public_sae_feature_maps/70b_balanced_80_20260709
+      - name: Confirm tracked SAE mapping audit is current
+        run: >-
+          git diff --exit-code --
+          data/public_sae_feature_maps/70b_balanced_80_20260709/independent_headline_audit.json
+      - name: Recompute public SAE template-cluster robustness
+        run: >-
+          python experiments/exp2_sae/analyze_public_sae_mapping_template_robustness.py
+          data/public_sae_feature_maps/70b_balanced_80_20260709
+      - name: Confirm tracked SAE template analysis is current
+        run: >-
+          git diff --exit-code --
+          data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness
+      - name: Recompute powered public SAE headlines
+        run: >-
+          python experiments/exp2_sae/audit_public_sae_powered_headlines.py
+          data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
+      - name: Confirm tracked powered SAE audit is current
+        run: >-
+          git diff --exit-code --
+          data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/independent_headline_audit.json
+      - name: Check patch whitespace
+        run: git diff --check

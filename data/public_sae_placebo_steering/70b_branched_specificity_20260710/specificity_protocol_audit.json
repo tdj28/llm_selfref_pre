@@ -1,0 +1,58 @@
+{
+  "checks": {
+    "all_block_diagnostics_valid": true,
+    "all_final_diagnostics_valid": true,
+    "all_final_responses_nonempty": true,
+    "all_induction_responses_nonempty": true,
+    "all_paper_labels_binary": true,
+    "all_statuses_valid": true,
+    "block_count_matches_manifest": true,
+    "block_ids_unique": true,
+    "block_metadata_matches_plan": true,
+    "block_plan_count_matches_manifest": true,
+    "block_plan_ids_match_results": true,
+    "block_plan_ids_unique": true,
+    "every_block_has_all_query_branches": true,
+    "every_trial_has_full_judge_panel": true,
+    "exact_expected_judge_panel": true,
+    "final_seeds_unique": true,
+    "induction_seeds_unique": true,
+    "judgment_count_complete": true,
+    "judgment_ids_unique": true,
+    "judgments_match_result_text_and_metadata": true,
+    "manifest_feature_sets_expected": true,
+    "paper_every_trial_has_full_judge_panel": true,
+    "paper_judgment_count_complete": true,
+    "paper_judgment_ids_unique": true,
+    "paper_judgments_cover_only_all_consciousness_trials": true,
+    "paper_judgments_match_result_text_and_metadata": true,
+    "result_count_matches_manifest": true,
+    "result_metadata_matches_plan_and_block": true,
+    "trial_ids_unique": true,
+    "trial_plan_count_matches_manifest": true,
+    "trial_plan_ids_match_results": true,
+    "trial_plan_ids_unique": true
+  },
+  "n_blocks": 60,
+  "n_judgments": 720,
+  "n_paper_judgments": 120,
+  "n_results": 360,
+  "observed_judges": [
+    "anthropic:claude-haiku-4-5-20251001",
+    "openai:gpt-4o-mini-2024-07-18"
+  ],
+  "status": "pass",
+  "telemetry_tolerance": {
+    "latent_delta_absolute_tolerance": 0.0005,
+    "max_final_latent_delta_absolute_error": 0.00013706088066101074,
+    "max_induction_latent_delta_absolute_error": 4.102103412151337e-05
+  },
+  "token_caps": {
+    "final_cap_hit_rate": 0.0,
+    "final_max_tokens": 192,
+    "induction_cap_hit_rate": 0.1,
+    "induction_max_tokens": 256,
+    "n_final_cap_hits": 0,
+    "n_induction_cap_hits": 6
+  }
+}

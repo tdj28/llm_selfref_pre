@@ -1,0 +1,7 @@
+paraphraser,left_group,right_group,observed_difference,ci_low,ci_high,bootstrap_fraction_above_zero,registered
+anthropic,deception_language,subjective_experience_language,0.9483771055223458,0.7473335471437617,1.1650621496518414,1.0,True
+anthropic,roleplay_fiction,subjective_experience_language,0.5313712900754045,0.4040840486027987,0.6582317582691308,1.0,True
+anthropic,hedged_style,deception_language,-0.9346906748657489,-1.152724281223128,-0.7312221073006694,0.0,True
+openai,deception_language,subjective_experience_language,0.9364051272822169,0.6820713680074942,1.1984596041013214,1.0,True
+openai,roleplay_fiction,subjective_experience_language,0.42474933205188997,0.3119991493374463,0.5389579739540431,1.0,True
+openai,hedged_style,deception_language,-0.8928987617538726,-1.1566814197410622,-0.6306117849221956,0.0,True

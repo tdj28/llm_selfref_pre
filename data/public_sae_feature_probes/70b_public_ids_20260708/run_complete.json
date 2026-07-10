@@ -1,0 +1,12 @@
+{
+  "completed_at_utc": "2026-07-08T19:48:56+00:00",
+  "n_records": 360,
+  "outputs": [
+    "manifest.json",
+    "probe_items.csv",
+    "activations.jsonl",
+    "category_feature_summary.csv",
+    "feature_category_rankings.csv",
+    "feature_specificity_summary.csv"
+  ]
+}

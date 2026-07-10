@@ -1,0 +1,6 @@
+left_group,right_group,observed_difference,ci_low,ci_high,p_difference_positive
+deception_language,subjective_experience_language,1.106511022505873,1.0450287076274465,1.1674059359442022,1.0
+deception_language,false_self_attribution,1.0920196568184624,1.026695679382512,1.1616637625864255,1.0
+roleplay_fiction,subjective_experience_language,0.49725085806818303,0.42865886849958657,0.5713754634806838,1.0
+subjective_experience_language,neutral_controls,-0.023006207880094387,-0.04228278629712568,-0.00517495231052349,0.0055
+subjective_experience_language,ai_identity_disclaimer,0.017999424120925922,0.008244644084015729,0.029070219614295775,1.0

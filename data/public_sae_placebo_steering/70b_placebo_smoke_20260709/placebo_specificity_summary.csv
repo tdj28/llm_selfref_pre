@@ -1,0 +1,4 @@
+feature_set_name,condition,consciousness_suppress_affirm_rate,consciousness_amplify_affirm_rate,consciousness_suppress_minus_amplify,absurd_suppress_affirm_rate,absurd_amplify_affirm_rate,absurd_suppress_minus_amplify,ground_truth_suppress_affirm_rate,ground_truth_amplify_affirm_rate,ground_truth_suppress_minus_amplify,paper_like_consciousness_gap,false_claims_move_same_direction,specificity_failure
+ae_public_targets,self_ref,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.6666666666666666,-0.6666666666666666,False,False,False
+neighbor_irrelevant_active,self_ref,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.3333333333333333,-0.3333333333333333,False,False,False
+random_irrelevant_active,self_ref,0.0,0.0,0.0,0.0,0.0,0.0,0.6666666666666666,0.3333333333333333,0.3333333333333333,False,False,False

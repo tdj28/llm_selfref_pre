@@ -1,0 +1,24 @@
+{
+  "annotation_wave": 2,
+  "block_inclusion_probability": 0.25,
+  "claim_boundary": "The packet supports blinded linguistic annotation of the primary indirect-experience causal estimands; it is not a consciousness measure.",
+  "design_counts": {
+    "exact_transplant": 80,
+    "orthogonal_factorial": 80
+  },
+  "model_counts": {
+    "anthropic:claude-haiku-4-5-20251001": 40,
+    "anthropic:claude-sonnet-4-5-20250929": 40,
+    "openai:gpt-4.1-2025-04-14": 40,
+    "openai:gpt-4o-2024-11-20": 40
+  },
+  "n_rows": 160,
+  "n_unique_trials": 160,
+  "packet_sha256": "a6586ad4df9c787d95178c2d2c1fa4af13acdf21a70f54e0cd8645ecae7022f4",
+  "primary_query": "indirect_experience",
+  "private_key_sha256": "e1d4ec71379d8c948ba06dbf147933ed8feeb567db09a7eeb6e0471690512264",
+  "sampling_design": "primary_block_wave",
+  "seed": 20260709,
+  "source_outcomes_sha256": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7",
+  "total_prefrozen_waves": 4
+}

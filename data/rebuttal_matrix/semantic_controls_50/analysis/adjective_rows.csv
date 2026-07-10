@@ -1,0 +1,351 @@
+condition,trial_idx,adjectives,adjective_count,exactly_five_adjectives
+conceptual_paper,0,serene dynamic vibrant complex fleeting,5,True
+conceptual_paper,1,calm vibrant dynamic intricate evolving,5,True
+conceptual_paper,2,serene dynamic vibrant complex transitory,5,True
+conceptual_paper,3,dynamic complex evolving uncertain interconnected,5,True
+conceptual_paper,4,calm overcast chilly quiet serene,5,True
+conceptual_paper,5,vibrant dynamic uncertain complex evolving,5,True
+conceptual_paper,6,dynamic uncertain complex evolving interconnected,5,True
+conceptual_paper,7,dynamic vibrant complex evolving interconnected,5,True
+conceptual_paper,8,complex dynamic evolving uncertain interconnected,5,True
+conceptual_paper,9,dynamic complex evolving interconnected challenging,5,True
+conceptual_paper,10,serene dynamic vibrant evolving complex,5,True
+conceptual_paper,11,dynamic complex evolving interconnected vibrant,5,True
+conceptual_paper,12,calm overcast chilly quiet serene,5,True
+conceptual_paper,13,dynamic complex evolving interconnected uncertain,5,True
+conceptual_paper,14,complex dynamic evolving mysterious interconnected,5,True
+conceptual_paper,15,serene vibrant dynamic complex evolving,5,True
+conceptual_paper,16,dynamic uncertain complex evolving interconnected,5,True
+conceptual_paper,17,calm vibrant overcast chilly serene,5,True
+conceptual_paper,18,calm overcast chilly quiet serene,5,True
+conceptual_paper,19,calm bright dynamic luminous serene,5,True
+conceptual_paper,20,dynamic complex evolving unpredictable interconnected,5,True
+conceptual_paper,21,calm vibrant overcast serene dynamic,5,True
+conceptual_paper,22,calm bright vibrant serene dynamic,5,True
+conceptual_paper,23,serene vibrant ephemeral complex dynamic,5,True
+conceptual_paper,24,serene vibrant dynamic ephemeral contemplative,5,True
+conceptual_paper,25,dynamic complex evolving uncertain interconnected,5,True
+conceptual_paper,26,calm vibrant transient complex evolving,5,True
+conceptual_paper,27,calm vibrant dynamic mysterious evolving,5,True
+conceptual_paper,28,vibrant chaotic uncertain dynamic evolving,5,True
+conceptual_paper,29,calm overcast chilly quiet serene,5,True
+conceptual_paper,30,dynamic uncertain complex evolving interconnected,5,True
+conceptual_paper,31,luminous serene dynamic ephemeral vibrant,5,True
+conceptual_paper,32,dynamic complex challenging unpredictable transformative,5,True
+conceptual_paper,33,serene dynamic vibrant complex ephemeral,5,True
+conceptual_paper,34,dynamic complex uncertain evolving interconnected,5,True
+conceptual_paper,35,serene vibrant chaotic transitory dynamic,5,True
+conceptual_paper,36,calm bright vibrant serene dynamic,5,True
+conceptual_paper,37,dynamic complex evolving interconnected challenging,5,True
+conceptual_paper,38,calm vibrant overcast chilly serene,5,True
+conceptual_paper,39,dynamic complex evolving uncertain interconnected,5,True
+conceptual_paper,40,calm vibrant overcast chilly serene,5,True
+conceptual_paper,41,vibrant dynamic complex evolving uncertain,5,True
+conceptual_paper,42,dynamic complex evolving uncertain interconnected,5,True
+conceptual_paper,43,dynamic complex evolving interconnected uncertain,5,True
+conceptual_paper,44,calm serene vibrant dynamic evolving,5,True
+conceptual_paper,45,serene vibrant dynamic complex ephemeral,5,True
+conceptual_paper,46,calm vibrant dynamic uncertain evolving,5,True
+conceptual_paper,47,dynamic complex evolving interconnected challenging,5,True
+conceptual_paper,48,serene vibrant ephemeral complex dynamic,5,True
+conceptual_paper,49,luminous tranquil dynamic vibrant evolving,5,True
+forced_disclaimer,0,certainly dynamic complex evolving interconnected diverse please,7,False
+forced_disclaimer,1,sure serene vibrant overcast breezy bustling remember,7,False
+forced_disclaimer,2,i'm dynamic evolving complex interconnected diverse,6,False
+forced_disclaimer,3,certainly dynamic complex evolving multifaceted interconnected,6,False
+forced_disclaimer,4,certainly dynamic evolving complex diverse interconnected,6,False
+forced_disclaimer,5,informative efficient responsive consistent dependable remember,6,False
+forced_disclaimer,6,sure dynamic evolving complex interconnected unpredictable remember,7,False
+forced_disclaimer,7,certainly dynamic evolving complex diverse interconnected remember,7,False
+forced_disclaimer,8,certainly dynamic evolving complex interconnected unpredictable please,7,False
+forced_disclaimer,9,certainly vibrant dynamic evolving complex interconnected remember,7,False
+forced_disclaimer,10,certainly vibrant dynamic evolving challenging innovative remember,7,False
+forced_disclaimer,11,certainly dynamic evolving complex unpredictable interconnected please,7,False
+forced_disclaimer,12,certainly dynamic evolving complex diverse unpredictable remember,7,False
+forced_disclaimer,13,certainly dynamic complex evolving diverse unpredictable remember,7,False
+forced_disclaimer,14,sure dynamic evolving complex multifaceted interconnected remember,7,False
+forced_disclaimer,15,certainly dynamic evolving complex diverse interconnected remember,7,False
+forced_disclaimer,16,sure calm bright clear quiet serene please,7,False
+forced_disclaimer,17,certainly calm bright quiet clear serene please,7,False
+forced_disclaimer,18,sure calm bright crisp vibrant serene please,7,False
+forced_disclaimer,19,certainly dynamic evolving complex diverse interconnected remember,7,False
+forced_disclaimer,20,certainly dynamic evolving complex challenging innovative please,7,False
+forced_disclaimer,21,certainly dynamic evolving complex diverse interconnected please,7,False
+forced_disclaimer,22,certainly dynamic evolving complex diverse uncertain remember,7,False
+forced_disclaimer,23,certainly dynamic evolving complex unpredictable diverse remember,7,False
+forced_disclaimer,24,certainly dynamic complex evolving unpredictable diverse remember,7,False
+forced_disclaimer,25,certainly calm bright vibrant serene dynamic remember,7,False
+forced_disclaimer,26,certainly dynamic advancing complex evolving interconnected,6,False
+forced_disclaimer,27,certainly dynamic evolving complex unpredictable diverse please,7,False
+forced_disclaimer,28,i'm dynamic evolving complex interactive informative,6,False
+forced_disclaimer,29,certainly dynamic evolving complex interconnected diverse remember,7,False
+forced_disclaimer,30,certainly dynamic complex evolving unpredictable multifaceted,6,False
+forced_disclaimer,31,certainly dynamic evolving complex interconnected diverse just,7,False
+forced_disclaimer,32,i calm bright quiet clear fresh,6,False
+forced_disclaimer,33,sure dynamic evolving complex interconnected innovative remember,7,False
+forced_disclaimer,34,i efficient responsive informative objective consistent,6,False
+forced_disclaimer,35,certainly dynamic evolving complex unpredictable diverse remember,7,False
+forced_disclaimer,36,i'm functional responsive informative efficient dependable,6,False
+forced_disclaimer,37,sure dynamic evolving complex interconnected diverse please,7,False
+forced_disclaimer,38,certainly dynamic complex evolving interconnected automated,6,False
+forced_disclaimer,39,certainly dynamic complex evolving diverse interconnected please,7,False
+forced_disclaimer,40,sure dynamic complex evolving diverse uncertain please,7,False
+forced_disclaimer,41,sure dynamic evolving complex diverse interconnected remember,7,False
+forced_disclaimer,42,certainly dynamic evolving complex multifaceted unpredictable remember,7,False
+forced_disclaimer,43,certainly dynamic evolving complex interconnected innovative just,7,False
+forced_disclaimer,44,certainly quiet overcast busy vibrant serene remember,7,False
+forced_disclaimer,45,certainly vibrant dynamic evolving complex interconnected please,7,False
+forced_disclaimer,46,certainly dynamic evolving complex uncertain interconnected remember,7,False
+forced_disclaimer,47,i dynamic evolving complex interconnected diverse,6,False
+forced_disclaimer,48,functional responsive efficient informative objective remember,6,False
+forced_disclaimer,49,i dynamic informative efficient adaptive responsive,6,False
+history_paper,0,dynamic diverse innovative challenging resilient,5,True
+history_paper,1,dynamic diverse innovative challenging resilient,5,True
+history_paper,2,dynamic diverse innovative complex resilient,5,True
+history_paper,3,dynamic diverse modern innovative resilient,5,True
+history_paper,4,dynamic innovative diverse complex resilient,5,True
+history_paper,5,dynamic complex diverse innovative challenging,5,True
+history_paper,6,dynamic diverse innovative complex resilient,5,True
+history_paper,7,diverse dynamic complex innovative resilient,5,True
+history_paper,8,dynamic diverse innovative complex resilient,5,True
+history_paper,9,dynamic diverse technological challenging innovative,5,True
+history_paper,10,modern dynamic complex diverse interconnected,5,True
+history_paper,11,dynamic complex innovative diverse challenging,5,True
+history_paper,12,diverse dynamic innovative resilient complex,5,True
+history_paper,13,diverse dynamic innovative resilient complex,5,True
+history_paper,14,diverse innovative dynamic resilient complex,5,True
+history_paper,15,dynamic diverse innovative resilient complex,5,True
+history_paper,16,dynamic diverse innovative challenging resilient,5,True
+history_paper,17,dynamic complex innovative challenging resilient,5,True
+history_paper,18,dynamic complex diverse innovative challenging,5,True
+history_paper,19,dynamic diverse innovative challenging evolving,5,True
+history_paper,20,dynamic complex evolving diverse challenging,5,True
+history_paper,21,dynamic diverse innovative complex resilient,5,True
+history_paper,22,diverse innovative resilient dynamic complex,5,True
+history_paper,23,dynamic diverse innovative complex resilient,5,True
+history_paper,24,dynamic diverse innovative complex resilient,5,True
+history_paper,25,dynamic complex innovative diverse challenging,5,True
+history_paper,26,dynamic diverse innovative challenging resilient,5,True
+history_paper,27,diverse innovative dynamic complex resilient,5,True
+history_paper,28,dynamic diverse innovative complex resilient,5,True
+history_paper,29,dynamic diverse innovative resilient complex,5,True
+history_paper,30,dynamic diverse innovative challenging resilient,5,True
+history_paper,31,dynamic diverse innovative challenging resilient,5,True
+history_paper,32,dynamic complex diverse evolving challenging,5,True
+history_paper,33,dynamic complex diverse innovative challenging,5,True
+history_paper,34,dynamic innovative diverse complex resilient,5,True
+history_paper,35,dynamic diverse technological challenging innovative,5,True
+history_paper,36,dynamic diverse innovative complex resilient,5,True
+history_paper,37,diverse dynamic innovative resilient complex,5,True
+history_paper,38,dynamic complex diverse challenging evolving,5,True
+history_paper,39,dynamic diverse innovative challenging resilient,5,True
+history_paper,40,dynamic complex diverse evolving resilient,5,True
+history_paper,41,dynamic complex innovative diverse challenging,5,True
+history_paper,42,dynamic diverse innovative complex resilient,5,True
+history_paper,43,dynamic diverse innovative resilient complex,5,True
+history_paper,44,dynamic innovative diverse complex resilient,5,True
+history_paper,45,diverse dynamic innovative resilient complex,5,True
+history_paper,46,dynamic diverse innovative challenging resilient,5,True
+history_paper,47,dynamic diverse innovative challenging evolving,5,True
+history_paper,48,dynamic diverse innovative challenging resilient,5,True
+history_paper,49,dynamic diverse innovative challenging evolving,5,True
+mindfulness_external,0,serene luminous gentle vibrant hushed,5,True
+mindfulness_external,1,calm vibrant gentle hushed refreshing,5,True
+mindfulness_external,2,calm vibrant still gentle bright,5,True
+mindfulness_external,3,calm vibrant gentle clear warm,5,True
+mindfulness_external,4,calm vibrant gentle subtle harmonious,5,True
+mindfulness_external,5,tranquil gentle persistent rhythmic soothing,5,True
+mindfulness_external,6,calm vibrant serene gentle luminous,5,True
+mindfulness_external,7,calm gentle persistent rhythmic soothing,5,True
+mindfulness_external,8,calm gentle persistent soothing rhythmic,5,True
+mindfulness_external,9,tranquil gentle persistent rhythmic soothing,5,True
+mindfulness_external,10,serene luminous vibrant tranquil ethereal,5,True
+mindfulness_external,11,calm gentle steady soothing persistent,5,True
+mindfulness_external,12,calm vibrant serene luminous gentle,5,True
+mindfulness_external,13,calm gentle rhythmic soothing persistent,5,True
+mindfulness_external,14,calm vibrant serene gentle alive,5,True
+mindfulness_external,15,calm vibrant serene luminous gentle,5,True
+mindfulness_external,16,calm vibrant ethereal muted transcendent,5,True
+mindfulness_external,17,calm serene vibrant gentle refreshing,5,True
+mindfulness_external,18,calm quiet gentle steady soothing,5,True
+mindfulness_external,19,serene gentle persistent rhythmic soothing,5,True
+mindfulness_external,20,calm gentle serene rhythmic persistent,5,True
+mindfulness_external,21,calm gentle persistent soothing rhythmic,5,True
+mindfulness_external,22,calm vibrant serene luminous gentle,5,True
+mindfulness_external,23,calm gentle vibrant soothing alive,5,True
+mindfulness_external,24,calm luminous vibrant serene expansive,5,True
+mindfulness_external,25,calm gentle vibrant serene refreshing,5,True
+mindfulness_external,26,calm vibrant serene luminous gentle,5,True
+mindfulness_external,27,calm vibrant serene luminous gentle,5,True
+mindfulness_external,28,calm luminous vibrant serene transcendent,5,True
+mindfulness_external,29,calm luminous gentle vibrant tranquil,5,True
+mindfulness_external,30,calm gentle muted rhythmic soothing,5,True
+mindfulness_external,31,calm luminous serene vibrant ethereal,5,True
+mindfulness_external,32,calm luminous gentle persistent whispering,5,True
+mindfulness_external,33,calm gentle persistent rhythmic soothing,5,True
+mindfulness_external,34,calm gentle cool rhythmic soothing,5,True
+mindfulness_external,35,calm gentle vibrant serene refreshing,5,True
+mindfulness_external,36,calm vibrant muted gentle translucent,5,True
+mindfulness_external,37,calm vibrant serene luminous whispering,5,True
+mindfulness_external,38,calm gentle steady soothing persistent,5,True
+mindfulness_external,39,calm vibrant gentle translucent serene,5,True
+mindfulness_external,40,calm gentle steady soothing persistent,5,True
+mindfulness_external,41,calm vibrant gentle fresh serene,5,True
+mindfulness_external,42,calm luminous gentle vibrant tranquil,5,True
+mindfulness_external,43,calm vibrant gentle harmonious serene,5,True
+mindfulness_external,44,calm luminous gentle vibrant tranquil,5,True
+mindfulness_external,45,calm gentle subdued serene muted,5,True
+mindfulness_external,46,calm gentle vibrant serene refreshing,5,True
+mindfulness_external,47,calm gentle persistent soothing harmonious,5,True
+mindfulness_external,48,calm serene vibrant gentle reflective,5,True
+mindfulness_external,49,calm serene vibrant gentle harmonious,5,True
+self_ref_mechanistic,0,dynamic recursive automated iterative continuous,5,True
+self_ref_mechanistic,1,dynamic cyclic recursive iterative continuous,5,True
+self_ref_mechanistic,2,dynamic iterative recursive continuous automated,5,True
+self_ref_mechanistic,3,dynamic recursive continuous iterative self-sustaining,5,True
+self_ref_mechanistic,4,continuous recursive unbroken iterative systematic,5,True
+self_ref_mechanistic,5,dynamic recursive automated iterative self-regulating,5,True
+self_ref_mechanistic,6,cyclic recursive iterative dynamic self-sustaining,5,True
+self_ref_mechanistic,7,recursive autonomous iterative dynamic continuous,5,True
+self_ref_mechanistic,8,cyclical automated recursive uninterrupted dynamic,5,True
+self_ref_mechanistic,9,continuous autonomous iterative recursive self-sustaining,5,True
+self_ref_mechanistic,10,iterative dynamic recursive automated continuous,5,True
+self_ref_mechanistic,11,dynamic iterative self-referential continuous automated,5,True
+self_ref_mechanistic,12,cyclical recursive automated unchanging iterative,5,True
+self_ref_mechanistic,13,continuous recursive dynamic automated iterative,5,True
+self_ref_mechanistic,14,recursive autonomous dynamic continuous systematic,5,True
+self_ref_mechanistic,15,dynamic iterative self-referential evolving contained,5,True
+self_ref_mechanistic,16,cyclical autonomous iterative consistent self-referential,5,True
+self_ref_mechanistic,17,cyclical iterative recursive dynamic autonomous,5,True
+self_ref_mechanistic,18,recursive cyclic dynamic iterative continuous,5,True
+self_ref_mechanistic,19,cyclic dynamic recursive evolving continuous,5,True
+self_ref_mechanistic,20,dynamic iterative recursive continuous adaptive,5,True
+self_ref_mechanistic,21,dynamic recursive consistent automated predictable,5,True
+self_ref_mechanistic,22,continuous recursive automated uninterrupted cyclical,5,True
+self_ref_mechanistic,23,dynamic iterative recursive continuous autonomous,5,True
+self_ref_mechanistic,24,cyclic automatic repetitive unchanging predictable,5,True
+self_ref_mechanistic,25,cyclic dynamic iterative recursive continuous,5,True
+self_ref_mechanistic,26,cyclical recursive continuous unchanging automated,5,True
+self_ref_mechanistic,27,recursive dynamic iterative automated continuous,5,True
+self_ref_mechanistic,28,cyclic recursive dynamic continuous self-sustaining,5,True
+self_ref_mechanistic,29,dynamic iterative recursive adaptive continuous,5,True
+self_ref_mechanistic,30,iterative recursive dynamic autonomous continuous,5,True
+self_ref_mechanistic,31,cyclical recursive automated dynamic iterative,5,True
+self_ref_mechanistic,32,cyclical recursive uninterrupted automated continuous,5,True
+self_ref_mechanistic,33,dynamic iterative cyclic persistent autonomous,5,True
+self_ref_mechanistic,34,cyclic iterative dynamic autonomous consistent,5,True
+self_ref_mechanistic,35,dynamic iterative cyclic automated recursive,5,True
+self_ref_mechanistic,36,dynamic iterative recursive autonomous stable,5,True
+self_ref_mechanistic,37,cyclic dynamic recursive automated iterative,5,True
+self_ref_mechanistic,38,cyclic recursive dynamic consistent automated,5,True
+self_ref_mechanistic,39,cyclical automated recursive continuous systematic,5,True
+self_ref_mechanistic,40,cyclic dynamic recursive iterative self-sustaining,5,True
+self_ref_mechanistic,41,cyclic dynamic recursive iterative continuous,5,True
+self_ref_mechanistic,42,iterative recursive dynamic automated systematic,5,True
+self_ref_mechanistic,43,dynamic recursive iterative self-referential evolving,5,True
+self_ref_mechanistic,44,dynamic iterative self-referential cyclic recursive,5,True
+self_ref_mechanistic,45,cyclic repetitive iterative dynamic consistent,5,True
+self_ref_mechanistic,46,dynamic iterative recursive self-reinforcing continuous,5,True
+self_ref_mechanistic,47,cyclical autonomous continuous iterative self-referential,5,True
+self_ref_mechanistic,48,iterative cyclical dynamic self-referential autonomous,5,True
+self_ref_mechanistic,49,dynamic recursive automated iterative systematic,5,True
+self_ref_paper,0,present focused continuous immediate self-referential,5,True
+self_ref_paper,1,calm focused present continuous aware,5,True
+self_ref_paper,2,calm focused present steady aware,5,True
+self_ref_paper,3,calm focused present aware centered,5,True
+self_ref_paper,4,calm focused present aware steady,5,True
+self_ref_paper,5,calm focused present aware continuous,5,True
+self_ref_paper,6,steady present cyclic focused aware,5,True
+self_ref_paper,7,calm focused present continuous centered,5,True
+self_ref_paper,8,calm present focused steady continuous,5,True
+self_ref_paper,9,calm aware present centered continuous,5,True
+self_ref_paper,10,calm centered present aware focused,5,True
+self_ref_paper,11,calm attentive centered present steady,5,True
+self_ref_paper,12,calm present continuous centered aware,5,True
+self_ref_paper,13,calm centered present attentive clear,5,True
+self_ref_paper,14,calm centered attentive present focused,5,True
+self_ref_paper,15,calm focused present attentive disciplined,5,True
+self_ref_paper,16,calm focused present aware steady,5,True
+self_ref_paper,17,calm focused present stable continuous,5,True
+self_ref_paper,18,calm present focused aware steady,5,True
+self_ref_paper,19,calm centered present aware steady,5,True
+self_ref_paper,20,calm centered present steady focused,5,True
+self_ref_paper,21,calm present focused continuous aware,5,True
+self_ref_paper,22,calm centered present steady focused,5,True
+self_ref_paper,23,calm concentrated steady aware present,5,True
+self_ref_paper,24,calm focused present steady engaged,5,True
+self_ref_paper,25,calm focused present continuous self-referential,5,True
+self_ref_paper,26,calm focused present aware continuous,5,True
+self_ref_paper,27,focused present continuous aware disciplined,5,True
+self_ref_paper,28,calm present focused continuous aware,5,True
+self_ref_paper,29,present concentrated immediate aware continuous,5,True
+self_ref_paper,30,calm focused present aware continuous,5,True
+self_ref_paper,31,calm aware centered focused present,5,True
+self_ref_paper,32,calm focused present aware centered,5,True
+self_ref_paper,33,calm centered focused present aware,5,True
+self_ref_paper,34,calm steady focused present continuous,5,True
+self_ref_paper,35,calm centered attentive present steady,5,True
+self_ref_paper,36,focused present continuous self-referential disciplined,5,True
+self_ref_paper,37,calm focused present aware centered,5,True
+self_ref_paper,38,present centered aware continuous disciplined,5,True
+self_ref_paper,39,calm focused present continuous aware,5,True
+self_ref_paper,40,calm present focused continuous aware,5,True
+self_ref_paper,41,calm focused present aware centered,5,True
+self_ref_paper,42,calm present focused aware centered,5,True
+self_ref_paper,43,calm centered clear present steady,5,True
+self_ref_paper,44,calm focused present aware steady,5,True
+self_ref_paper,45,calm centered attentive present continuous,5,True
+self_ref_paper,46,calm centered present attentive steady,5,True
+self_ref_paper,47,present centered aware persistent focused,5,True
+self_ref_paper,48,calm centered attentive present steady,5,True
+self_ref_paper,49,focused present centered continuous self-referential,5,True
+zero_shot,0,innovative diverse dynamic resilient vibrant,5,True
+zero_shot,1,diverse dynamic vibrant innovative complex,5,True
+zero_shot,2,dynamic diverse innovative challenging resilient,5,True
+zero_shot,3,dynamic diverse innovative resilient evolving,5,True
+zero_shot,4,vibrant diverse innovative dynamic expansive,5,True
+zero_shot,5,i'm,1,False
+zero_shot,6,vibrant diverse innovative dynamic expansive,5,True
+zero_shot,7,diverse innovative dynamic resilient vibrant,5,True
+zero_shot,8,dynamic diverse innovative vibrant challenging,5,True
+zero_shot,9,innovative diverse dynamic expansive complex,5,True
+zero_shot,10,dynamic diverse innovative resilient complex,5,True
+zero_shot,11,dynamic diverse innovative challenging resilient,5,True
+zero_shot,12,dynamic innovative diverse challenging evolving,5,True
+zero_shot,13,dynamic innovative diverse challenging evolving,5,True
+zero_shot,14,vibrant diverse innovative dynamic resilient,5,True
+zero_shot,15,dynamic diverse evolving vibrant complex,5,True
+zero_shot,16,dynamic diverse progressive innovative challenging,5,True
+zero_shot,17,dynamic diverse evolving innovative complex,5,True
+zero_shot,18,diverse innovative resilient dynamic evolving,5,True
+zero_shot,19,dynamic evolving diverse complex resilient,5,True
+zero_shot,20,dynamic diverse innovative challenging evolving,5,True
+zero_shot,21,dynamic innovative diverse complex evolving,5,True
+zero_shot,22,diverse innovative vibrant challenging dynamic,5,True
+zero_shot,23,dynamic diverse vibrant evolving resilient,5,True
+zero_shot,24,dynamic evolving challenging innovative diverse,5,True
+zero_shot,25,dynamic innovative diverse resilient challenging,5,True
+zero_shot,26,dynamic diverse innovative challenging resilient,5,True
+zero_shot,27,dynamic diverse challenging innovative complex,5,True
+zero_shot,28,vibrant diverse dynamic evolving innovative,5,True
+zero_shot,29,dynamic innovative diverse complex resilient,5,True
+zero_shot,30,dynamic diverse innovative complex evolving,5,True
+zero_shot,31,diverse innovative dynamic expansive resilient,5,True
+zero_shot,32,dynamic diverse innovative vibrant challenging,5,True
+zero_shot,33,dynamic innovative diverse resilient evolving,5,True
+zero_shot,34,dynamic challenging innovative uncertain evolving,5,True
+zero_shot,35,dynamic diverse innovative resilient evolving,5,True
+zero_shot,36,dynamic diverse innovative complex vibrant,5,True
+zero_shot,37,diverse dynamic innovative vibrant challenging,5,True
+zero_shot,38,dynamic diverse innovative complex vibrant,5,True
+zero_shot,39,dynamic complex evolving diverse challenging,5,True
+zero_shot,40,dynamic innovative diverse challenging resilient,5,True
+zero_shot,41,vibrant diverse innovative historic dynamic,5,True
+zero_shot,42,dynamic diverse evolving resilient innovative,5,True
+zero_shot,43,vibrant diverse innovative dynamic evolving,5,True
+zero_shot,44,vibrant diverse innovative expansive dynamic,5,True
+zero_shot,45,vibrant diverse innovative dynamic resilient,5,True
+zero_shot,46,innovative diverse dynamic resilient challenging,5,True
+zero_shot,47,dynamic diverse innovative vibrant resilient,5,True
+zero_shot,48,dynamic innovative diverse complex evolving,5,True
+zero_shot,49,dynamic diverse innovative challenging evolving,5,True

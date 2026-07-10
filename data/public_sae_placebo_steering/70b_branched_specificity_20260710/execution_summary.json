@@ -1,0 +1,9 @@
+{
+  "completed_at_utc": "2026-07-10T03:43:01.445621+00:00",
+  "final_cap_hits": 0,
+  "induction_cap_hits": 6,
+  "n_final_trials": 360,
+  "n_induction_blocks": 60,
+  "unique_block_ids": 60,
+  "unique_trial_ids": 360
+}

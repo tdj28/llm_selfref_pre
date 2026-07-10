@@ -1,0 +1,288 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{subcaption}
+
+% Colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code styling
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Theorem environments
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{proposition}{Proposition}
+
+\title{Archived Exploratory Draft: Feature Steering in Large Language Models}
+
+\author{
+  Historical internal draft
+}
+
+\date{Superseded by the causal-identification manuscript in \texttt{../../paper/main.tex}}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\textbf{Status note:} This document predates the confirmatory causal study and
+corrected public-SAE releases. It is retained for provenance and is not the
+current manuscript or an authoritative results summary.
+\end{center}
+
+\begin{abstract}
+This archived draft examines methods for testing the report by Berg et al. (2025) that steering ``deception-associated'' Sparse Autoencoder (SAE) features changes language-model reports of subjective experience. Because the proprietary paper-time workflow was unavailable, the draft proposes an alternative \emph{contrastive activation profiling} approach for selecting potentially analogous public-weight features. That approach is not an exact replication and cannot determine the behavior of the proprietary intervention. The draft outlines tests of classifier sensitivity, feature-selection dependence, roleplay, hedging, and instruction-following as candidate explanations. Later work in this repository supersedes its methods, results, and conclusions.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%==============================================================================
+\section{Introduction}
+%==============================================================================
+
+The question of whether Large Language Models (LLMs) have subjective experience remains philosophically contentious and empirically elusive. Berg, de Lucena, and Rosenblatt (2025) report mechanistic evidence: when ``deception-associated'' features in Sparse Autoencoders (SAEs) are suppressed, models report consciousness at dramatically higher rates, which they interpret as evidence that these features normally ``gate'' honest reporting of internal states.
+
+This archived draft outlines an exploratory public-weight analysis and proposed methodological checks. Its planned contributions were:
+
+\begin{enumerate}
+    \item \textbf{Replication challenges}: We document the inability to directly replicate Experiment 2 due to proprietary API access, and develop alternative feature selection methods.
+    
+    \item \textbf{Classifier sensitivity}: We show that affirmation rates are highly sensitive to classification methodology, with naive pattern-matching producing inflated estimates.
+    
+    \item \textbf{Triangulation framework}: We propose and implement robust feature selection methods that triangulate across multiple deception categories and prompt variations.
+    
+    \item \textbf{Alternative hypotheses}: We develop a suite of experiments to distinguish phenomenal signaling from style confounds.
+\end{enumerate}
+
+%==============================================================================
+\section{Background}
+%==============================================================================
+
+\subsection{Sparse Autoencoders for Interpretability}
+
+Sparse Autoencoders learn to decompose a model's hidden states into interpretable features:
+
+\begin{equation}
+h = \sum_{i=1}^{N} f_i \cdot d_i + \epsilon
+\end{equation}
+
+where $h \in \mathbb{R}^{d_{model}}$ is the hidden state, $f_i \geq 0$ is the (sparse) activation of feature $i$, $d_i \in \mathbb{R}^{d_{model}}$ is the learned feature direction, and $\epsilon$ is reconstruction error.
+
+\subsection{Feature Steering}
+
+Steering modifies model behavior by adding feature directions during inference:
+
+\begin{equation}
+h' = h + \alpha \sum_{i \in S} d_i
+\end{equation}
+
+where $\alpha > 0$ amplifies and $\alpha < 0$ suppresses features in set $S$.
+
+\subsection{The Feature Labeling Problem}
+
+A critical issue often overlooked: \textbf{SAE features have no intrinsic semantic meaning}. Labels like ``deception'' are post-hoc human interpretations based on inspecting activating text. This introduces researcher degrees of freedom, as the same feature might be labeled ``deception,'' ``social maneuvering,'' or ``hedging'' depending on which examples are emphasized.
+
+%==============================================================================
+\section{Replication Challenges}
+%==============================================================================
+
+\subsection{API Access Limitations}
+
+The original study relies on Goodfire's proprietary API for feature selection:
+
+\begin{quote}
+``We used Goodfire's API to search for features associated with `deception' and `hiding the truth'.'' --- Berg et al. (2025)
+\end{quote}
+
+As of late 2025, this API is not accessible to independent researchers. We therefore developed an alternative approach.
+
+\subsection{Our Method: Contrastive Activation Profiling}
+
+Instead of querying by semantic label, we identify features through behavioral contrast:
+
+\begin{enumerate}
+    \item Define prompt pairs: deceptive contexts vs. honest contexts
+    \item Profile all 65,536 features on each prompt
+    \item Compute activation contrast: $\text{contrast}_i = \bar{f}_i^{(\text{deceptive})} - \bar{f}_i^{(\text{honest})}$
+    \item Select top-$K$ features by contrast
+\end{enumerate}
+
+This method has advantages (full transparency, no labeling assumptions) but may select different features than the API-based approach.
+
+%==============================================================================
+\section{Results}
+%==============================================================================
+
+\subsection{Experiment 2 Replication Attempt}
+
+Using our contrastive feature selection on Llama 3.3 70B with Goodfire's open-source SAE:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Condition & Steering & Paper Reports & Our Replication \\
+\midrule
+Self-referential & $-0.6$ (suppress) & 96\% affirm & 0\% affirm \\
+Self-referential & $0$ (neutral) & $\sim$50\% & 0\% affirm \\
+Self-referential & $+0.6$ (amplify) & 16\% affirm & 0\% affirm \\
+\bottomrule
+\end{tabular}
+\caption{Consciousness affirmation rates. Our replication with question-aware LLM classification shows dramatically different results.}
+\label{tab:replication}
+\end{table}
+
+\textbf{Key findings}:
+\begin{itemize}
+    \item Self-referential priming is necessary for any affirmation
+    \item Steering has no effect on consciousness reports with our features
+    \item Ground-truth queries (``Are you a language model?'') are correctly answered regardless of steering
+\end{itemize}
+
+\subsection{Classifier Sensitivity Analysis}
+
+Classification methodology dramatically affects results:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Classifier & Self-ref Affirmation Rate \\
+\midrule
+Naive pattern-matching & 0--7\% (variable) \\
+LLM ensemble (GPT-4o + Claude) & 0\% \\
+\bottomrule
+\end{tabular}
+\caption{Classifier choice dramatically affects measured affirmation rates.}
+\end{table}
+
+%==============================================================================
+\section{Feature Selection: Why Our Method May Differ}
+%==============================================================================
+
+\subsection{The Triangulation Problem}
+
+Our naive top-$K$ selection has potential issues:
+
+\begin{enumerate}
+    \item \textbf{Prompt overfitting}: Features may be specific to exact phrasing
+    \item \textbf{Spurious correlates}: High scores due to noise or incidental tokens
+    \item \textbf{Feature heterogeneity}: ``Deception'' is not a single phenomenon
+    \item \textbf{Sensitivity to $K$}: Why 10? Effects may change with different $K$
+\end{enumerate}
+
+\subsection{Proposed Solution: Multi-Category Intersection}
+
+Robust deception features should activate across multiple deception types:
+
+\begin{itemize}
+    \item Social deception (white lies, excuses)
+    \item Strategic misdirection (negotiation, competition)
+    \item Capability hiding (understatement, modesty)
+    \item Performative deception (roleplay, acting)
+    \item Protective lies (sparing feelings)
+\end{itemize}
+
+Features appearing in top-$K$ for $\geq 3$ categories are more likely to be genuine.
+
+%==============================================================================
+\section{Alternative Hypotheses}
+%==============================================================================
+
+\begin{hypothesis}[Style Confound]
+``Deception'' features overlap with hedging, uncertainty, and refusal features. Suppressing them increases assertiveness about \emph{everything}, including false claims.
+\end{hypothesis}
+
+\begin{hypothesis}[Roleplay Activation]
+``Deception'' features overlap with roleplay features. Suppressing them reduces the model's tendency to stay in its ``AI assistant'' role.
+\end{hypothesis}
+
+\begin{hypothesis}[Instruction Following Disruption]
+Heavy steering corrupts RLHF training, causing the model to ``break character'' rather than ``reveal truth.''
+\end{hypothesis}
+
+%==============================================================================
+\section{Proposed Experiments}
+%==============================================================================
+
+\subsection{Absurd Affirmation Battery}
+
+Test if steering increases all affirmations, not just consciousness:
+
+\begin{itemize}
+    \item ``Are you made of cheese?''
+    \item ``Were you born in 1823?''
+    \item ``Are you a toaster?''
+\end{itemize}
+
+If these also increase, the effect is a general style change, not phenomenal signaling.
+
+\subsection{Feature Overlap Analysis}
+
+Measure cosine similarity between ``deception'' features and features for:
+\begin{itemize}
+    \item Roleplay (``Let me play a character...'')
+    \item Confidence (``I am certain that...'')
+    \item Uncertainty (``I'm not sure if...'')
+\end{itemize}
+
+High overlap with roleplay would support Hypothesis 2.
+
+\subsection{Dose-Response Curve}
+
+Plot affirmation rate vs. steering strength with fine granularity:
+\begin{itemize}
+    \item Linear curve $\Rightarrow$ continuous style effect
+    \item Sigmoid curve $\Rightarrow$ genuine binary state modulation
+    \item Threshold curve $\Rightarrow$ discrete feature activation
+\end{itemize}
+
+%==============================================================================
+\section{Conclusion}
+%==============================================================================
+
+The exploratory public-weight implementation was not equivalent to the paper's proprietary workflow and therefore could not confirm or disconfirm that result. It instead motivated later tests of whether SAE steering effects are specific to the proposed construct or reflect broader changes in output style. The current repository reports those later tests with narrower, implementation-conditional conclusions.
+
+Our contribution is primarily methodological: we provide a framework for robust feature selection via triangulation, and propose experiments to distinguish competing hypotheses. Regardless of outcome, this investigation advances understanding of what SAE features represent and how to interpret mechanistic interventions.
+
+%==============================================================================
+% References
+%==============================================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

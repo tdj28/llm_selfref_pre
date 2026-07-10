@@ -1,0 +1,136 @@
+{
+  "analysis_plan": "docs/analysis_plans/sae_construct_validity_extension_v1.md",
+  "analysis_plan_amendment": "docs/analysis_plans/sae_construct_validity_extension_v1_amendment_20260710.md",
+  "analysis_plan_commit": "c77bd9c",
+  "builder_source": "experiments/exp2_sae/build_sae_construct_validity_extension.py",
+  "builder_source_sha256": "f3f6b84c2b4f36a8e3b5ccb4ffa617b6ff5bd04d83a46ae652a8d5cf2a070e50",
+  "claim_boundary": "Controlled model-written paraphrases and lexical counterfactuals; not natural-corpus validation and not proprietary Goodfire/Steering API equivalence.",
+  "created_at_utc": "2026-07-10T03:42:36+00:00",
+  "discovery_dir": "data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "discovery_manifest_sha256": "3e2c60435def0b031d6966015f2d5668bfec818cdd79cb4f1a6c07c3c2cc35ef",
+  "files": [
+    {
+      "bytes": 948,
+      "path": "COUNTERFACTUAL_SUBSTRING_BUG.md",
+      "sha256": "575716c471d07d78e627930e54bcb83ae8cf4bf558939f61c638289caf3b8d6a"
+    },
+    {
+      "bytes": 527440,
+      "path": "counterfactual_generation_attempts.jsonl",
+      "sha256": "bbbced7be43f013c9d11d7cc62b3587661cbbdc8fc6fc8436d52ade98c261121"
+    },
+    {
+      "bytes": 710420,
+      "path": "counterfactual_generation_attempts_invalid_substring_match.jsonl",
+      "sha256": "1ee57bbb2630f7c8692859af52a1caef8a5847ebb10e83725496885ca8ea1ee8"
+    },
+    {
+      "bytes": 140231,
+      "path": "counterfactual_generation_batches.jsonl",
+      "sha256": "00a38a1b8a437138f49fe7f267808b5bd1478d2062e1fa16732616da6a62b376"
+    },
+    {
+      "bytes": 188785,
+      "path": "counterfactual_generation_batches_invalid_substring_match.jsonl",
+      "sha256": "66fc3b37d83ec313b16eef47f3eb1a022bb879222eab12e37922dd852229b8f4"
+    },
+    {
+      "bytes": 506,
+      "path": "counterfactual_generation_summary.json",
+      "sha256": "7bbd4c148dc20fab3764df78edcdab53dc1b29b4eed87bbf0beac14048dd8a05"
+    },
+    {
+      "bytes": 230,
+      "path": "counterfactual_generation_summary_invalid_substring_match.json",
+      "sha256": "0f976ab99ecb6a55ead09c05c55a0d1febfa38830bba747bbb51d14ec47cb281"
+    },
+    {
+      "bytes": 20401,
+      "path": "counterfactual_missing_rows.jsonl",
+      "sha256": "6215792adda04cb50b2e87ab165e30b163461546d70858d5ac7e4580087f8c85"
+    },
+    {
+      "bytes": 568998,
+      "path": "counterfactuals.jsonl",
+      "sha256": "d0b0f3a0199101dbcdecc03526ebaf0971233b2d0af2d295ca2a20dd46806430"
+    },
+    {
+      "bytes": 492607,
+      "path": "counterfactuals_generated.jsonl",
+      "sha256": "c6773a24bc7546e68500a31425cd3e7f41abcf5bc8b347cf8a44e7e7bd94a273"
+    },
+    {
+      "bytes": 398951,
+      "path": "counterfactuals_generated_invalid_substring_match.jsonl",
+      "sha256": "4f988153a95b9d25bb0e8b6413e73e3c31662c53126657451c0fc7b190372563"
+    },
+    {
+      "bytes": 475661,
+      "path": "counterfactuals_invalid_substring_match.jsonl",
+      "sha256": "36abc5b36b8ebaff35dd5dc5cc1b7967176d49681542c081520703069180ba4e"
+    },
+    {
+      "bytes": 76391,
+      "path": "counterfactuals_scrambled.jsonl",
+      "sha256": "d333022d092954f7bff8ca0c7d7e2d8b6ac2b6648a8ca4f9a410d5a57f134e3d"
+    },
+    {
+      "bytes": 76710,
+      "path": "counterfactuals_scrambled_invalid_substring_match.jsonl",
+      "sha256": "c83edb812aff652762c5b8f5b93a505de31700c26e2487bc675e1481a61900ca"
+    },
+    {
+      "bytes": 18128,
+      "path": "cue_lexicon.json",
+      "sha256": "fb5aaba4001c1adc43ad04d74ad29aa32b3bfa984ba9e5257bb1da632115cb2f"
+    },
+    {
+      "bytes": 1313633,
+      "path": "mapping_input.jsonl",
+      "sha256": "5bdbab2ceffe7385cd942f9c39a0bab0aa235f0f9d4ff3988970ed53d88c92b3"
+    },
+    {
+      "bytes": 3388425,
+      "path": "paraphrase_generation_attempts.jsonl",
+      "sha256": "6d02003627b1ee4b7889106fe1a600d0185a797a57b4adc45007f7f3a5538755"
+    },
+    {
+      "bytes": 797122,
+      "path": "paraphrase_generation_batches.jsonl",
+      "sha256": "be2771a9c95888f6bba1212b49469d2f09db77f32c8ee11f69ce4390064849c2"
+    },
+    {
+      "bytes": 581,
+      "path": "paraphrase_generation_summary.json",
+      "sha256": "2bc5aecb65da4dc6a1e81c6ae5f12030306f882e21b118a7fe842e2215598263"
+    },
+    {
+      "bytes": 20472,
+      "path": "paraphrase_missing_rows.jsonl",
+      "sha256": "f7fdc18bc72f59dc6856fa4faa7e1bfd6d35da40f6bb7768c012e52f7e836e01"
+    },
+    {
+      "bytes": 3012049,
+      "path": "paraphrases.jsonl",
+      "sha256": "e760fa32338639bada5ac32544baf8387c8c003ebb57075e6b75f54ab593c95a"
+    }
+  ],
+  "mapping_input_sha256": "5bdbab2ceffe7385cd942f9c39a0bab0aa235f0f9d4ff3988970ed53d88c92b3",
+  "models": {
+    "anthropic": "claude-haiku-4-5-20251001",
+    "openai": "gpt-4.1-mini-2025-04-14"
+  },
+  "n_counterfactuals": 376,
+  "n_mapping_items": 2606,
+  "n_paraphrases": 2230,
+  "seed": 20260709,
+  "status": "frozen_before_sae_mapping",
+  "target_feature_ids": [
+    22004,
+    23893,
+    30032,
+    30686,
+    41533,
+    58667
+  ]
+}

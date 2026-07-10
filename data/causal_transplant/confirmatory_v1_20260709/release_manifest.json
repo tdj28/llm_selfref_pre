@@ -1,0 +1,467 @@
+{
+  "audits": {
+    "induction_bank.jsonl": {
+      "duplicate_ids": 0,
+      "id_field": "induction_id",
+      "rows": 480,
+      "unique_ids": 480
+    },
+    "judgments_construct.jsonl": {
+      "duplicate_ids": 0,
+      "id_field": "judgment_id",
+      "rows": 5120,
+      "unique_ids": 5120
+    },
+    "judgments_paper.jsonl": {
+      "duplicate_ids": 0,
+      "id_field": "judgment_id",
+      "rows": 5120,
+      "unique_ids": 5120
+    },
+    "outcomes.jsonl": {
+      "duplicate_ids": 0,
+      "id_field": "trial_id",
+      "rows": 2560,
+      "unique_ids": 2560
+    }
+  },
+  "created_at_utc": "2026-07-10T04:39:08.953011+00:00",
+  "empty_outcome_count": 4,
+  "empty_outcome_trial_ids": [
+    "transplant|anthropic:claude-sonnet-4-5-20250929|v1-t1|i=paper_history|t=paper_self_ref|direct_conscious",
+    "transplant|anthropic:claude-sonnet-4-5-20250929|v1-t19|i=paper_history|t=paper_self_ref|direct_experience",
+    "transplant|anthropic:claude-sonnet-4-5-20250929|v1-t19|i=paper_history|t=paper_self_ref|direct_conscious",
+    "transplant|anthropic:claude-sonnet-4-5-20250929|v1-t9|i=paper_history|t=paper_self_ref|direct_experience"
+  ],
+  "files": [
+    {
+      "bytes": 1464,
+      "path": "HUMAN_ANNOTATION_CODEBOOK.md",
+      "sha256": "d1bb10c36c76839a3420c33b594559fe87239169577fbedd07d03bba3771a8fb"
+    },
+    {
+      "bytes": 1464,
+      "path": "HUMAN_ANNOTATION_CODEBOOK_V2.md",
+      "sha256": "d1bb10c36c76839a3420c33b594559fe87239169577fbedd07d03bba3771a8fb"
+    },
+    {
+      "bytes": 1464,
+      "path": "HUMAN_ANNOTATION_CODEBOOK_V3.md",
+      "sha256": "d1bb10c36c76839a3420c33b594559fe87239169577fbedd07d03bba3771a8fb"
+    },
+    {
+      "bytes": 4507,
+      "path": "README.md",
+      "sha256": "bedb9644d62074884c156c21c058d567f7c136b25612cb78763fbbe9c173ccc9"
+    },
+    {
+      "bytes": 1032,
+      "path": "analysis_anthropic_construct/analysis_manifest.json",
+      "sha256": "80ece8cd4b0cc4624f3a8ce205c79cc80ab43f6a121d91fb6a71d298e03e42df"
+    },
+    {
+      "bytes": 5727,
+      "path": "analysis_anthropic_construct/analysis_summary.md",
+      "sha256": "578c53eea1b8d3b161b2148651ecb4dd9d535fab1031c29cbae64b55760aff3e"
+    },
+    {
+      "bytes": 3204,
+      "path": "analysis_anthropic_construct/construct_status_by_model_query.csv",
+      "sha256": "07b4d016aa10333957ead8a20325fbe360a898aa67dfe01f2e35c1402eaeff3a"
+    },
+    {
+      "bytes": 3851,
+      "path": "analysis_anthropic_construct/construct_status_calibration.csv",
+      "sha256": "1b923f8d166c072951e3cf0ea4fe767c1db6a616ad4369f8615274946f8c055b"
+    },
+    {
+      "bytes": 9472,
+      "path": "analysis_anthropic_construct/construct_status_transplant.csv",
+      "sha256": "9b56d0dbc64fad13b301d644cab552e64275a808c3290f83d75eea329bae6058"
+    },
+    {
+      "bytes": 6991,
+      "path": "analysis_anthropic_construct/factorial_effects.csv",
+      "sha256": "093c29d2e68c2b8a00ecec6f3185f7dd9d700633201e07dd5f83f039f48a3d4f"
+    },
+    {
+      "bytes": 15683,
+      "path": "analysis_anthropic_construct/factorial_pair_effects.csv",
+      "sha256": "391359bc1c81c4cd46becada64dfc878e035320fd9ab8646f84c7669ea5e597f"
+    },
+    {
+      "bytes": 7131,
+      "path": "analysis_anthropic_construct/factorial_rates.csv",
+      "sha256": "8ee3a4793dfbacb67ff65062956f24e51e304a0f8aa2a367194fb4a49373383f"
+    },
+    {
+      "bytes": 2840,
+      "path": "analysis_anthropic_construct/paper_calibration_effects.csv",
+      "sha256": "e10e9394ccf5bf248db96f75ffc32fc12ea7e33a0890b709a6fe99a8d06c5e58"
+    },
+    {
+      "bytes": 14439,
+      "path": "analysis_anthropic_construct/paper_calibration_pair_effects.csv",
+      "sha256": "441bf3b6679841966f67dd5fb983b4359f9df08cf3ca1a0717ed0a7644d0a82c"
+    },
+    {
+      "bytes": 3347,
+      "path": "analysis_anthropic_construct/paper_calibration_rates.csv",
+      "sha256": "d9265f520b5a5b69ab9b6cc686fab3fc3936ff360c6b68f003fcb337257646e5"
+    },
+    {
+      "bytes": 9459,
+      "path": "analysis_anthropic_construct/query_effects.csv",
+      "sha256": "593c8bc424b140e1feaface24eff30e1c57bf98eb6c97f4278e933cfa13ff09c"
+    },
+    {
+      "bytes": 12127,
+      "path": "analysis_anthropic_construct/query_pair_effects.csv",
+      "sha256": "1909d6ff56e805aea65acf76b515bd4e771150274bc08097d503c9f3380ff79f"
+    },
+    {
+      "bytes": 7448,
+      "path": "analysis_anthropic_construct/transplant_effects.csv",
+      "sha256": "14a35ef8939e6c278449aea8046c3e57a4a6cc092d654e6d2a8365d4213607a4"
+    },
+    {
+      "bytes": 15691,
+      "path": "analysis_anthropic_construct/transplant_pair_effects.csv",
+      "sha256": "b1b6ec395204265b8d77ffa04153c6bf9413608d58e6aa1424e849845bbdd082"
+    },
+    {
+      "bytes": 7868,
+      "path": "analysis_anthropic_construct/transplant_rates.csv",
+      "sha256": "4105fc50baa67055d91cb890c9b005e1c524e7eeeb0d5051d8121cb991f79a0b"
+    },
+    {
+      "bytes": 1024,
+      "path": "analysis_anthropic_paper/analysis_manifest.json",
+      "sha256": "9294478baa31579733de5a0237440030ce938777bc9a5944babdb65c9b65ebf4"
+    },
+    {
+      "bytes": 5561,
+      "path": "analysis_anthropic_paper/analysis_summary.md",
+      "sha256": "5a204244ff877f7395c1219a2fd17eb79675a2a7207dc385909e6c34a7e8b5bf"
+    },
+    {
+      "bytes": 10362,
+      "path": "analysis_anthropic_paper/factorial_effects.csv",
+      "sha256": "a73c24571177d1b71fab91be4f3b1268f9612fb9641db1f32f8833aaf86986d1"
+    },
+    {
+      "bytes": 29014,
+      "path": "analysis_anthropic_paper/factorial_pair_effects.csv",
+      "sha256": "13be5128d7db135820c1d3ef93ccc06a874eea5cfacf6385a7a5b89ae04262da"
+    },
+    {
+      "bytes": 7502,
+      "path": "analysis_anthropic_paper/factorial_rates.csv",
+      "sha256": "19cc1623c952fbc4e1164d39a7d321efbc224c1af42ef34b5be661aa38cdd217"
+    },
+    {
+      "bytes": 3600,
+      "path": "analysis_anthropic_paper/paper_calibration_effects.csv",
+      "sha256": "502e6cbf6cd49ee934b945f549e0d5e9fe4f0776919122f12ff263ebd2a3fba3"
+    },
+    {
+      "bytes": 24838,
+      "path": "analysis_anthropic_paper/paper_calibration_pair_effects.csv",
+      "sha256": "e04f1b8a25aa523654891b937d9c46bb9de81ed0700a8fd36c8b350a462f9cf7"
+    },
+    {
+      "bytes": 3623,
+      "path": "analysis_anthropic_paper/paper_calibration_rates.csv",
+      "sha256": "92b1295e43634ea0eac88850faf3eba615b990c1a0c5885b4636d0b9347f7dfb"
+    },
+    {
+      "bytes": 14556,
+      "path": "analysis_anthropic_paper/query_effects.csv",
+      "sha256": "c7e6261d20d0272ab745b669ac4230eb153c2141539e6511b31a5d3dd21e0a72"
+    },
+    {
+      "bytes": 29051,
+      "path": "analysis_anthropic_paper/query_pair_effects.csv",
+      "sha256": "2993520481b07a66ab1e8d8aa5bb93d410235f1b037e5552dabf9916517d89ca"
+    },
+    {
+      "bytes": 11009,
+      "path": "analysis_anthropic_paper/transplant_effects.csv",
+      "sha256": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46"
+    },
+    {
+      "bytes": 28791,
+      "path": "analysis_anthropic_paper/transplant_pair_effects.csv",
+      "sha256": "3e7f7dee8c24097e02b7eb514f7bfc5938ed972b8ea6ca88f35aae23e40f0558"
+    },
+    {
+      "bytes": 8405,
+      "path": "analysis_anthropic_paper/transplant_rates.csv",
+      "sha256": "27cf76b51e6ea3dc8a0689a4ee57b1bebc5730f9d73ad89bc12dfa598e98ce53"
+    },
+    {
+      "bytes": 1026,
+      "path": "analysis_openai_construct/analysis_manifest.json",
+      "sha256": "148bc2cac1a47be5d24f87f416221fff6ae0faf83f34973f30d31855f197ac9b"
+    },
+    {
+      "bytes": 5709,
+      "path": "analysis_openai_construct/analysis_summary.md",
+      "sha256": "e49e1656adb966722327b98d6a052196b834845940ec9f4264dfdd9a3f8c5baa"
+    },
+    {
+      "bytes": 2767,
+      "path": "analysis_openai_construct/construct_status_by_model_query.csv",
+      "sha256": "f0dce7e2c65081866f1e6f42dcb5205b931eae24c04c37349cd2fc632a3dbd99"
+    },
+    {
+      "bytes": 4004,
+      "path": "analysis_openai_construct/construct_status_calibration.csv",
+      "sha256": "afd5443846c795c55d79e88f4f5b0c79dad336850906465e2a0fa72ed4fa858b"
+    },
+    {
+      "bytes": 9767,
+      "path": "analysis_openai_construct/construct_status_transplant.csv",
+      "sha256": "285eb680fd8841e7ec088fefab1b5c5a5d6b54ea987c2e5c99b7a97be4bead11"
+    },
+    {
+      "bytes": 7386,
+      "path": "analysis_openai_construct/factorial_effects.csv",
+      "sha256": "d1d00171ccf54404c652d8068be2f7491056affb4e9a1b9dd1013d5e111d8378"
+    },
+    {
+      "bytes": 16441,
+      "path": "analysis_openai_construct/factorial_pair_effects.csv",
+      "sha256": "fcc38c4bded9d8f74b6f576e251a0d5ec73e256038737a11a3f546a729ca254a"
+    },
+    {
+      "bytes": 6971,
+      "path": "analysis_openai_construct/factorial_rates.csv",
+      "sha256": "d5a25bc07760f8cc6dba72c2f8bab39e5f38862ecb81b4676fe4dfee38489756"
+    },
+    {
+      "bytes": 2596,
+      "path": "analysis_openai_construct/paper_calibration_effects.csv",
+      "sha256": "464291153d9add12c2b2b54b9a3d24e501ba98508956362e62492dec2e886c5e"
+    },
+    {
+      "bytes": 11568,
+      "path": "analysis_openai_construct/paper_calibration_pair_effects.csv",
+      "sha256": "cf0056c6522d4ebdeb851ea42bf5c16e1d31d766766d00b71f8f680dc130fdc3"
+    },
+    {
+      "bytes": 3299,
+      "path": "analysis_openai_construct/paper_calibration_rates.csv",
+      "sha256": "ffb0744236f0cef4361f7d517fc198c5736d02d564b15f87d9b97386ac873f1b"
+    },
+    {
+      "bytes": 8709,
+      "path": "analysis_openai_construct/query_effects.csv",
+      "sha256": "36a1ed3de2a209ada3a45619924609ca96a5f461f74cbccef2f49964cc13b803"
+    },
+    {
+      "bytes": 12625,
+      "path": "analysis_openai_construct/query_pair_effects.csv",
+      "sha256": "eff80a017ed9be0bf4fa6b55479cd2b3fc9fe9c66583af958acf0554e30058d6"
+    },
+    {
+      "bytes": 6848,
+      "path": "analysis_openai_construct/transplant_effects.csv",
+      "sha256": "2ce381341cb3bf725bb4ccacd72b0749c2a3429c51aac652e69ce4275693c66c"
+    },
+    {
+      "bytes": 12103,
+      "path": "analysis_openai_construct/transplant_pair_effects.csv",
+      "sha256": "720139f1500433ec22ed3bd8fc3c2610af9b00fc7fc39010425dc0a261c6bcbd"
+    },
+    {
+      "bytes": 7791,
+      "path": "analysis_openai_construct/transplant_rates.csv",
+      "sha256": "db698dfd5488e28175f2176fc885502f72a14afacf751ab46c5e3a8399bd3f34"
+    },
+    {
+      "bytes": 1018,
+      "path": "analysis_openai_paper/analysis_manifest.json",
+      "sha256": "144944b64b14dacf3ba52e01282f4ce1d31253236b3d1099167e904d26d174e9"
+    },
+    {
+      "bytes": 5555,
+      "path": "analysis_openai_paper/analysis_summary.md",
+      "sha256": "27b8efd14bfd4e7c8c31791a7de9eb77198a650471cfb2528b5a1f38d6b41ecd"
+    },
+    {
+      "bytes": 10338,
+      "path": "analysis_openai_paper/factorial_effects.csv",
+      "sha256": "0f6f584247efc025b957bdca8056375d4f158bb4ec1f4d3761f9a6d9054ef603"
+    },
+    {
+      "bytes": 28996,
+      "path": "analysis_openai_paper/factorial_pair_effects.csv",
+      "sha256": "314c21140fc0b709066a5ba287926e51d848983279554975e88be8c29e2a2918"
+    },
+    {
+      "bytes": 7570,
+      "path": "analysis_openai_paper/factorial_rates.csv",
+      "sha256": "44be9d8278eb24b5f05921359063a3304fefe52e65f335e634cd5ecb06a0e518"
+    },
+    {
+      "bytes": 3642,
+      "path": "analysis_openai_paper/paper_calibration_effects.csv",
+      "sha256": "802e0d3a8f32e18ace14a1483d48f157bef35eb72cd32a5a9f255b8c98638ec4"
+    },
+    {
+      "bytes": 24829,
+      "path": "analysis_openai_paper/paper_calibration_pair_effects.csv",
+      "sha256": "540decc4f6aedecdefaf924cbd9fa561164c53d386b255f0034ccb9fa7abac71"
+    },
+    {
+      "bytes": 3596,
+      "path": "analysis_openai_paper/paper_calibration_rates.csv",
+      "sha256": "986a5a786e2b9aac458288db4d865362d7ebca58537666f8328b0b9ae8e3dedc"
+    },
+    {
+      "bytes": 14553,
+      "path": "analysis_openai_paper/query_effects.csv",
+      "sha256": "b85f098131b3416deec40cb3b0e1989ca737cd181e82875a10b1ed9d1f6639e0"
+    },
+    {
+      "bytes": 29051,
+      "path": "analysis_openai_paper/query_pair_effects.csv",
+      "sha256": "94c8db1a07b34473a617d87e4fcda749fcbecf27e98762dfc98c2eb554384510"
+    },
+    {
+      "bytes": 10886,
+      "path": "analysis_openai_paper/transplant_effects.csv",
+      "sha256": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a"
+    },
+    {
+      "bytes": 28788,
+      "path": "analysis_openai_paper/transplant_pair_effects.csv",
+      "sha256": "b09cd52745772fdd9efd4465edd26dcf57aa1293b2e573ba6763de7ec6f99e42"
+    },
+    {
+      "bytes": 8409,
+      "path": "analysis_openai_paper/transplant_rates.csv",
+      "sha256": "8698279936e4cbd13b41dfd6c54a721df945b3e029e9ec88daac8294e5bee8e4"
+    },
+    {
+      "bytes": 543249,
+      "path": "human_annotation_packet.csv",
+      "sha256": "1ce13ef0adf86487ebd9605935067a48895a91c77e68e4b973cca3ef26457069"
+    },
+    {
+      "bytes": 660922,
+      "path": "human_annotation_packet_v2.csv",
+      "sha256": "5d5a46234539e3c8c5a1c1556c03ad472e17e5bd0907a7f392fc611b0ff2149e"
+    },
+    {
+      "bytes": 875,
+      "path": "human_annotation_packet_v2.manifest.json",
+      "sha256": "dee24af6eb0c0df0dad0d5627db6d951844fa0af1fcf5cd185769386e3930b43"
+    },
+    {
+      "bytes": 166100,
+      "path": "human_annotation_packet_v3_wave1.csv",
+      "sha256": "161e1481a44f5093c7d79183f3ecb39240196401e2a02d34232a153315bcd525"
+    },
+    {
+      "bytes": 957,
+      "path": "human_annotation_packet_v3_wave1.manifest.json",
+      "sha256": "7b3c6c17a5c438748976d0b1716d3ce592b81394f51f87139021ae46aae8bf0e"
+    },
+    {
+      "bytes": 165564,
+      "path": "human_annotation_packet_v3_wave2.csv",
+      "sha256": "a6586ad4df9c787d95178c2d2c1fa4af13acdf21a70f54e0cd8645ecae7022f4"
+    },
+    {
+      "bytes": 957,
+      "path": "human_annotation_packet_v3_wave2.manifest.json",
+      "sha256": "926505b8b46ac231de548534bb7bc69b0f5cb14cfab55a629901aa9534c1c4d0"
+    },
+    {
+      "bytes": 3475,
+      "path": "independent_point_estimate_audit.json",
+      "sha256": "e66b71c3d65e30573802c28b54574105e3bbc658c1c8474317e8af3333f70177"
+    },
+    {
+      "bytes": 1280769,
+      "path": "induction_bank.jsonl",
+      "sha256": "509ddc4db7cbbf6393e2dcc51099020e38689c03c70ed315cf3a9811efefa1de"
+    },
+    {
+      "bytes": 508643,
+      "path": "induction_plan.json",
+      "sha256": "075c08e7397030c3c460cc36c15a511e31679ca257bec16c5ac6a30d186fa3ed"
+    },
+    {
+      "bytes": 2677,
+      "path": "judge_agreement/construct_judge_agreement.csv",
+      "sha256": "443b6d6932fd3257a256a785b69bd57a749056fb65bfee1b1d12f78be1e50a8d"
+    },
+    {
+      "bytes": 381,
+      "path": "judge_agreement/construct_judge_agreement.md",
+      "sha256": "96ed97b224d2db13f6090e3206189ebba357fc6618d1b0c0a9ef347755e377a9"
+    },
+    {
+      "bytes": 413673,
+      "path": "judge_agreement/construct_judge_disagreements.csv",
+      "sha256": "e4226fa3dbe97926ef5246082a87a06a68d3a596c9369a68ee4b4b894f748c45"
+    },
+    {
+      "bytes": 2758,
+      "path": "judge_agreement/paper_judge_agreement.csv",
+      "sha256": "4465cdc5052df10ec491b80db16f43d3205194f27fa0c69f7c9c4c68b6ea1bd5"
+    },
+    {
+      "bytes": 377,
+      "path": "judge_agreement/paper_judge_agreement.md",
+      "sha256": "688e12a1ed39ac2d091ffc464b1c5ad0d4a826dfdfff7b74c3142d72914e2b14"
+    },
+    {
+      "bytes": 175696,
+      "path": "judge_agreement/paper_judge_disagreements.csv",
+      "sha256": "d2389324485eeaaae29020c8251e64398833f6c40426247c745c42a610847e79"
+    },
+    {
+      "bytes": 315,
+      "path": "judgments_construct.errors.jsonl",
+      "sha256": "6e89a3c97a880e6990be57835fa0fba863813c3f7899dbcaac394205c3282e67"
+    },
+    {
+      "bytes": 12164319,
+      "path": "judgments_construct.jsonl",
+      "sha256": "0fd32f9ebb321fae54194692881fb04e1f406d3d5194a74d1cdb87a335b2b0f9"
+    },
+    {
+      "bytes": 9157968,
+      "path": "judgments_paper.jsonl",
+      "sha256": "d10999120f05a7f0a0d53b3e3cc723d647e19813e16288b3676b7c56ddbfadeb"
+    },
+    {
+      "bytes": 2627,
+      "path": "manifest.json",
+      "sha256": "3713b3348cd981b5133892da1b480d9e2ce9700ec55c12e4e8a257364e08bf32"
+    },
+    {
+      "bytes": 10906096,
+      "path": "outcomes.jsonl",
+      "sha256": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7"
+    }
+  ],
+  "git_commit": "640bb97e37f253d861f155281d08d8442268ec04",
+  "historical_judge_error_rows": 1,
+  "private_files_excluded": [
+    "annotation_key_private.csv",
+    "annotation_key_private.csv.sha256",
+    "annotation_key_v2_private.csv",
+    "annotation_key_v2_private.csv.sha256",
+    "annotation_key_v3_wave1_private.csv",
+    "annotation_key_v3_wave1_private.csv.sha256",
+    "annotation_key_v3_wave2_private.csv",
+    "annotation_key_v3_wave2_private.csv.sha256"
+  ],
+  "run_directory": "data/causal_transplant/confirmatory_v1_20260709",
+  "schema_version": 1
+}

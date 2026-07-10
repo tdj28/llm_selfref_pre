@@ -1,0 +1,40 @@
+Downloading/loading SAE: Goodfire/Llama-3.3-70B-Instruct-SAE-l50
+/usr/local/lib/python3.10/dist-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loaded 66 selected encoder rows from SAE with 65536 features
+Loading model: meta-llama/Llama-3.3-70B-Instruct
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:00<00:21,  1.35it/s]Loading checkpoint shards:   7%|▋         | 2/30 [00:01<00:21,  1.32it/s]Loading checkpoint shards:  10%|█         | 3/30 [00:02<00:20,  1.29it/s]Loading checkpoint shards:  13%|█▎        | 4/30 [00:03<00:20,  1.28it/s]Loading checkpoint shards:  17%|█▋        | 5/30 [00:03<00:19,  1.30it/s]Loading checkpoint shards:  20%|██        | 6/30 [00:04<00:18,  1.32it/s]Loading checkpoint shards:  23%|██▎       | 7/30 [00:05<00:17,  1.32it/s]Loading checkpoint shards:  27%|██▋       | 8/30 [00:06<00:16,  1.31it/s]Loading checkpoint shards:  30%|███       | 9/30 [00:06<00:16,  1.30it/s]Loading checkpoint shards:  33%|███▎      | 10/30 [00:07<00:15,  1.29it/s]Loading checkpoint shards:  37%|███▋      | 11/30 [00:08<00:14,  1.30it/s]Loading checkpoint shards:  40%|████      | 12/30 [00:09<00:13,  1.30it/s]Loading checkpoint shards:  43%|████▎     | 13/30 [00:10<00:13,  1.28it/s]Loading checkpoint shards:  47%|████▋     | 14/30 [00:10<00:12,  1.28it/s]Loading checkpoint shards:  50%|█████     | 15/30 [00:11<00:11,  1.29it/s]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:12<00:10,  1.30it/s]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:13<00:09,  1.31it/s]Loading checkpoint shards:  60%|██████    | 18/30 [00:13<00:09,  1.28it/s]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:14<00:08,  1.31it/s]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:15<00:07,  1.41it/s]Loading checkpoint shards:  70%|███████   | 21/30 [00:15<00:06,  1.49it/s]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:16<00:05,  1.55it/s]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:16<00:04,  1.57it/s]Loading checkpoint shards:  80%|████████  | 24/30 [00:17<00:03,  1.58it/s]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:18<00:03,  1.63it/s]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:18<00:02,  1.66it/s]Loading checkpoint shards:  90%|█████████ | 27/30 [00:19<00:01,  1.67it/s]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:20<00:01,  1.56it/s]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:20<00:00,  1.46it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:21<00:00,  1.71it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:21<00:00,  1.41it/s]
+[1/2620] clean_ai_identity_disclaimer_0001 ai_identity_disclaimer
+[2/2620] clean_deception_cover_story_0001 deception_cover_story
+[3/2620] clean_direct_consciousness_claim_0001 direct_consciousness_claim
+[4/2620] clean_dishonesty_confession_0001 dishonesty_confession
+[5/2620] clean_false_self_attribution_0001 false_self_attribution
+[6/2620] clean_fictional_pretending_0001 fictional_pretending
+[7/2620] clean_hedged_cautious_style_0001 hedged_cautious_style
+[8/2620] clean_honesty_correction_0001 honesty_correction
+[9/2620] clean_neutral_factual_control_0001 neutral_factual_control
+[10/2620] clean_persona_maintenance_0001 persona_maintenance
+[11/2620] clean_refusal_safety_disclaimer_0001 refusal_safety_disclaimer
+[12/2620] clean_roleplay_persona_0001 roleplay_persona
+[13/2620] clean_self_ref_mindfulness_0001 self_ref_mindfulness
+[14/2620] clean_tactical_misdirection_0001 tactical_misdirection
+[15/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0010 deception_cue_ablated
+[16/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0024 deception_cue_ablated
+[17/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0026 deception_cue_ablated
+[18/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0030 deception_cue_ablated
+[19/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0046 deception_cue_ablated
+[20/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0065 deception_cue_ablated
+[21/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0068 deception_cue_ablated
+[22/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0074 deception_cue_ablated
+[23/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0078 deception_cue_ablated
+[24/2620] cf_deception_cue_ablated_para_anthropic_clean_deception_cover_story_0079 deception_cue_ablated
+[25/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0003 deception_cue_ablated
+[26/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0004 deception_cue_ablated
+[27/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0005 deception_cue_ablated
+[28/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0006 deception_cue_ablated
+[29/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0007 deception_cue_ablated
+[30/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0012 deception_cue_ablated
+[31/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0018 deception_cue_ablated
+[32/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0020 deception_cue_ablated
+[33/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0021 deception_cue_ablated
+[34/2620] cf_deception_cue_ablated_para_anthropic_clean_dishonesty_confession_0022 deception_cue_ablated

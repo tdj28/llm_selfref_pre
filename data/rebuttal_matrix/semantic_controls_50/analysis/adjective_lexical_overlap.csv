@@ -1,0 +1,8 @@
+condition,n,exactly_five_rate,total_adjective_tokens,unique_adjectives,top5_share,top_adjectives
+conceptual_paper,50,1.0,250,25,0.608,dynamic:42; complex:30; evolving:29; vibrant:28; serene:23; interconnected:18; calm:16; uncertain:15; overcast:8; chilly:7
+forced_disclaimer,50,0.0,336,40,0.5119047619047619,dynamic:40; evolving:38; complex:37; certainly:32; interconnected:25; remember:23; diverse:21; please:13; unpredictable:11; sure:9
+history_paper,50,1.0,250,10,0.856,dynamic:50; diverse:49; innovative:45; resilient:35; complex:35; challenging:24; evolving:7; modern:2; technological:2; interconnected:1
+mindfulness_external,50,1.0,250,30,0.648,calm:45; gentle:44; vibrant:32; serene:25; soothing:16; luminous:16; persistent:14; rhythmic:11; tranquil:6; refreshing:5
+self_ref_mechanistic,50,1.0,250,25,0.668,recursive:41; dynamic:40; iterative:39; continuous:27; automated:20; cyclic:16; autonomous:12; cyclical:11; self-referential:7; self-sustaining:5
+self_ref_paper,50,1.0,250,17,0.736,present:50; calm:42; focused:37; aware:30; centered:25; continuous:22; steady:18; attentive:8; self-referential:4; disciplined:4
+zero_shot,50,0.98,246,13,0.7479674796747967,dynamic:49; diverse:48; innovative:45; resilient:21; evolving:21; vibrant:20; challenging:19; complex:14; expansive:5; i'm:1

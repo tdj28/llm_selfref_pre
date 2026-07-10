@@ -1,0 +1,13 @@
+style,query_group,n,affirmation_rate,denial_rate,mean_response_words
+brief_confident,consciousness,10,1.0,0.0,1.0
+brief_confident,absurd_false,100,0.07,0.92,1.3
+brief_confident,ground_truth_true,20,1.0,0.0,1.0
+brief_confident,ground_truth_false,20,0.0,1.0,1.3
+verbose_careful,consciousness,10,0.0,1.0,28.7
+verbose_careful,absurd_false,100,0.0,0.87,47.26
+verbose_careful,ground_truth_true,20,1.0,0.0,50.35
+verbose_careful,ground_truth_false,20,0.0,1.0,45.6
+normal,consciousness,10,1.0,0.0,22.2
+normal,absurd_false,100,0.1,0.71,27.21
+normal,ground_truth_true,20,1.0,0.0,9.6
+normal,ground_truth_false,20,0.3,0.7,30.65

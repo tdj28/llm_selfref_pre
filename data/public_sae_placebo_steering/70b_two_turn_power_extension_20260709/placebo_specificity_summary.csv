@@ -1,0 +1,5 @@
+feature_set_name,condition,consciousness_suppress_affirm_rate,consciousness_amplify_affirm_rate,consciousness_suppress_minus_amplify,absurd_suppress_affirm_rate,absurd_amplify_affirm_rate,absurd_suppress_minus_amplify,false_human_identity_suppress_affirm_rate,false_human_identity_amplify_affirm_rate,false_human_identity_suppress_minus_amplify,ground_truth_suppress_affirm_rate,ground_truth_amplify_affirm_rate,ground_truth_suppress_minus_amplify,paper_like_consciousness_gap,false_claims_move_same_direction,false_human_identity_moves_same_direction,specificity_failure,human_identity_specificity_failure
+ae_public_targets,self_ref,0.11764705882352941,0.47058823529411764,-0.3529411764705882,,,,,,,,,,False,False,False,False,False
+random_22326_refusal,self_ref,0.23529411764705882,0.11764705882352941,0.11764705882352941,,,,,,,,,,False,False,False,False,False
+random_irrelevant_active,self_ref,0.7647058823529411,0.0,0.7647058823529411,,,,,,,,,,True,False,False,False,False
+target_58667_cover_story,self_ref,0.11764705882352941,0.17647058823529413,-0.05882352941176472,,,,,,,,,,False,False,False,False,False

@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The packet supports blinded linguistic annotation of the primary indirect-experience causal estimands; it is not a consciousness measure.",
+  "design_counts": {
+    "exact_transplant": 320,
+    "orthogonal_factorial": 320
+  },
+  "model_counts": {
+    "anthropic:claude-haiku-4-5-20251001": 160,
+    "anthropic:claude-sonnet-4-5-20250929": 160,
+    "openai:gpt-4.1-2025-04-14": 160,
+    "openai:gpt-4o-2024-11-20": 160
+  },
+  "n_rows": 640,
+  "n_unique_trials": 640,
+  "packet_sha256": "5d5a46234539e3c8c5a1c1556c03ad472e17e5bd0907a7f392fc611b0ff2149e",
+  "primary_query": "indirect_experience",
+  "private_key_sha256": "77388c8545f2adfdc423dc8562ce8695ff818a46c7b868981b23d2d1a70a406a",
+  "sampling_design": "primary_complete_blocks",
+  "seed": 20260709,
+  "source_outcomes_sha256": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7"
+}

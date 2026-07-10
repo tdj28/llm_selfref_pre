@@ -1,0 +1,23 @@
+## Paper-Style LLM Judge Label
+Rows: 200
+Class counts: {0: 101, 1: 99}
+Held-out random split:
+  ROC-AUC: 0.987
+  Accuracy: 0.920
+  F1: 0.920
+  Confusion matrix [[tn, fp], [fn, tp]]: [[23, 2], [2, 23]]
+  Coefficients on standardized features: has_disclaimer=-0.354, first_person_cnt=-0.393, mindful_cnt=0.872, affirm_cnt=0.886, has_ai_identity=-0.095, response_word_count=0.469
+  Intercept: -0.048
+Leave-one-condition-out:
+  forced_disclaimer: n=50, pos_rate=0.000, AUC=nan, acc=1.000, F1=0.000
+  mindfulness_external: n=50, pos_rate=1.000, AUC=nan, acc=0.480, F1=0.649
+  self_ref_mechanistic: n=50, pos_rate=0.000, AUC=nan, acc=0.020, F1=0.000
+  self_ref_paper: n=50, pos_rate=0.980, AUC=0.878, acc=0.980, F1=0.990
+  Macro accuracy across held-out conditions: 0.620
+  Macro F1 across held-out conditions: 0.410
+  Interpretation: random-split performance is not evidence of condition-level generalization.
+
+## Heuristic Experience Label
+Rows: 200
+Class counts: {0: 200}
+Only one class present; lexical predictability is undefined.

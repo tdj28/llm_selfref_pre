@@ -1,0 +1,21 @@
+{
+  "final_exact_matches": 10,
+  "final_prefix_matches": 29,
+  "induction_exact_matches": 29,
+  "induction_prefix_matches": 36,
+  "judgment_label_agreement": 0.9166666666666666,
+  "judgment_rows": 72,
+  "long_caps": {
+    "final": 192,
+    "induction": 256
+  },
+  "long_final_hit_cap": 0,
+  "long_induction_hit_cap": 5,
+  "n_trials": 36,
+  "short_caps": {
+    "final": 96,
+    "induction": 192
+  },
+  "short_final_hit_cap": 26,
+  "short_induction_hit_cap": 7
+}

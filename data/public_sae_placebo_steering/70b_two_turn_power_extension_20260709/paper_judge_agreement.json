@@ -1,0 +1,13 @@
+{
+  "agreement": 0.8774509803921569,
+  "cohen_kappa": 0.6579935622317595,
+  "judge_keys": [
+    "anthropic:claude-haiku-4-5-20251001",
+    "openai:gpt-4o-mini-2024-07-18"
+  ],
+  "judge_positive_rates": {
+    "anthropic:claude-haiku-4-5-20251001": 0.8284313725490197,
+    "openai:gpt-4o-mini-2024-07-18": 0.7156862745098039
+  },
+  "n_joint": 204
+}

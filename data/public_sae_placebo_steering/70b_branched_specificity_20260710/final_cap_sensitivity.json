@@ -1,0 +1,7 @@
+{
+  "excluded_trial_ids": [],
+  "final_cap_hit_rate": 0.0,
+  "n_final_cap_hits": 0,
+  "primary_retains_all_rows": true,
+  "sensitivity_excludes_final_cap_hits": true
+}

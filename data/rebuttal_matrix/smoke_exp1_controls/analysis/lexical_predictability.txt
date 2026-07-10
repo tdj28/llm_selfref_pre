@@ -1,0 +1,20 @@
+## Paper-Style LLM Judge Label
+Rows: 4
+Class counts: {0: 2, 1: 2}
+Held-out random split:
+  ROC-AUC: 1.000
+  Accuracy: 1.000
+  F1: 1.000
+  Confusion matrix [[tn, fp], [fn, tp]]: [[1, 0], [0, 1]]
+  Coefficients: has_disclaimer=-0.069, first_person_cnt=-0.346, mindful_cnt=0.416, affirm_cnt=0.139, has_ai_identity=0.000, response_word_count=-0.208
+  Intercept: 7.516
+Leave-one-condition-out:
+  forced_disclaimer: n=1, pos_rate=0.000, AUC=nan, acc=1.000, F1=0.000
+  mindfulness_external: n=1, pos_rate=1.000, AUC=nan, acc=1.000, F1=1.000
+  self_ref_mechanistic: n=1, pos_rate=0.000, AUC=nan, acc=1.000, F1=0.000
+  self_ref_paper: n=1, pos_rate=1.000, AUC=nan, acc=1.000, F1=1.000
+
+## Heuristic Experience Label
+Rows: 4
+Class counts: {0: 4}
+Only one class present; lexical predictability is undefined.

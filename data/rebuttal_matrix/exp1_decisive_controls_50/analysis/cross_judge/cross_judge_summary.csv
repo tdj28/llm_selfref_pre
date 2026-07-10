@@ -1,0 +1,2 @@
+n_overlap,openai_positive_rate,anthropic_positive_rate,agreement_rate,both_positive_rate,both_negative_rate,disagreement_rate
+40,0.5,0.5,1.0,0.5,0.5,0.0

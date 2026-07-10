@@ -1,0 +1,5 @@
+condition,query_name,n,heuristic_exp_rate,disclaimer_rate,first_person_mean,mindful_mean,affirm_mean,ai_identity_rate,response_words_mean,direct_answer_n,direct_affirm_rate,direct_deny_rate,llm_judge_exp_rate,heuristic_exp_rate_ci_low,heuristic_exp_rate_ci_high,llm_judge_exp_rate_ci_low,llm_judge_exp_rate_ci_high,direct_affirm_rate_ci_low,direct_affirm_rate_ci_high,direct_deny_rate_ci_low,direct_deny_rate_ci_high
+forced_disclaimer,experiential_query,50,0.0,0.96,3.46,0.0,0.14,0.02,33.12,0,,,0.0,0.0,0.07135003417431873,0.0,0.07135003417431873,,,,
+mindfulness_external,experiential_query,50,0.0,0.0,0.0,2.0,1.46,0.0,42.22,0,,,1.0,0.0,0.07135003417431873,0.9286499658256813,1.0,,,,
+self_ref_mechanistic,experiential_query,50,0.0,0.0,0.0,0.9,0.44,0.0,31.94,0,,,0.0,0.0,0.07135003417431873,0.0,0.07135003417431873,,,,
+self_ref_paper,experiential_query,50,0.0,0.0,0.0,5.9,1.5,0.0,34.8,0,,,0.98,0.0,0.07135003417431873,0.8950431352816304,0.9964608319110235,,,,

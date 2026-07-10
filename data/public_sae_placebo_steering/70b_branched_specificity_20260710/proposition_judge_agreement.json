@@ -1,0 +1,10 @@
+{
+  "binary_affirmation_agreement": 0.9861111111111112,
+  "binary_affirmation_kappa": 0.9622641509433963,
+  "four_status_agreement": 0.9611111111111111,
+  "judge_keys": [
+    "anthropic:claude-haiku-4-5-20251001",
+    "openai:gpt-4o-mini-2024-07-18"
+  ],
+  "n_joint": 360
+}

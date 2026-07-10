@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "activation_item_ids_exact": true,
+    "complete_item_feature_grid": true,
+    "counterfactual_count_matches_frozen_plan": true,
+    "feature_count_66": true,
+    "feature_plan_matches_discovery": true,
+    "frozen_input_hash_matches_plan": true,
+    "metadata_count_and_ids_exact": true,
+    "no_legacy_clean_item_ids": true,
+    "paraphrase_count_matches_frozen_plan": true,
+    "run_corpus_count_and_ids_exact": true,
+    "run_corpus_text_hashes_match_frozen_input": true,
+    "run_declares_2606_items": true,
+    "target_ids_exact": true
+  },
+  "counts": {
+    "activation_rows": 171996,
+    "counterfactuals_by_variant": {
+      "deception_cue_ablated": 96,
+      "deception_scrambled": 96,
+      "neutral_cue_transplant": 93,
+      "subjective_cue_transplant": 91
+    },
+    "features": 66,
+    "items": 2606,
+    "paraphrases_by_provider": {
+      "anthropic": 1120,
+      "openai": 1110
+    }
+  },
+  "input_sha256": {
+    "frozen_mapping_input": "5bdbab2ceffe7385cd942f9c39a0bab0aa235f0f9d4ff3988970ed53d88c92b3",
+    "run_activations": "095897ed04a65a200cfc1624ca9f7cf6eb3644693e1b53cd3a746912f22fcc58",
+    "run_feature_plan": "ccbd1dc080c17a0cbf1dfdcf0fb711b06a83e1fd864cd15837f78f34ce37bc59",
+    "run_mapping_corpus": "89724c486075f2c4caf4b4d52780f88b08dc07858cacb46533bf24b791cd447f"
+  },
+  "status": "pass"
+}

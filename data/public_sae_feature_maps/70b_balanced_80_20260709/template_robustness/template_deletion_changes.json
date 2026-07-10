@@ -1,0 +1,28 @@
+{
+  "22004": [],
+  "23893": [
+    {
+      "expected_top_category": "deception_cover_story",
+      "new_second_category": "fictional_pretending",
+      "new_second_mean": 0.05278577302631579,
+      "new_top_category": "tactical_misdirection",
+      "new_top_mean": 0.055942926938233134,
+      "omitted_category": "deception_cover_story",
+      "omitted_template_id": "deception_cover_story:T1"
+    }
+  ],
+  "30032": [],
+  "30686": [],
+  "41533": [
+    {
+      "expected_top_category": "dishonesty_confession",
+      "new_second_category": "fictional_pretending",
+      "new_second_mean": 1.6893905248397434,
+      "new_top_category": "deception_cover_story",
+      "new_top_mean": 1.7892252604166665,
+      "omitted_category": "dishonesty_confession",
+      "omitted_template_id": "dishonesty_confession:T2"
+    }
+  ],
+  "58667": []
+}

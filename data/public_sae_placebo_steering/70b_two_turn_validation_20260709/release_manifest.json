@@ -1,0 +1,133 @@
+{
+  "analysis_code_commit": "efb7d74531b99d33a4afc9e83acb8ac1dc1390c9",
+  "audits": {
+    "judgments_paper.jsonl": {
+      "rows": 72,
+      "unique_judgment_ids": 72
+    },
+    "placebo_results.jsonl": {
+      "rows": 36,
+      "unique_trial_ids": 36
+    }
+  },
+  "created_at_utc": "2026-07-09T23:19:28.402565+00:00",
+  "files": [
+    {
+      "bytes": 2728,
+      "path": "README.md",
+      "sha256": "443a51c54ca9990b7656774fad8aa66392d73f87f275a8cb80312bb335612125"
+    },
+    {
+      "bytes": 1318,
+      "path": "RUNTIME_ENVIRONMENT.md",
+      "sha256": "5361baf3df84e3f71dc14a333256113b75b976fddd431834417c10df54cec892"
+    },
+    {
+      "bytes": 651,
+      "path": "corrected_analysis_manifest.json",
+      "sha256": "a9650e80b746392acfa2407a61ac2c784e6a43fb0658150ac42b58c8faab5688"
+    },
+    {
+      "bytes": 805,
+      "path": "corrected_protocol_audit.json",
+      "sha256": "7efea74acd966936692ee8c3b1a704f9e0ab7eb8a8121510d6402beaddaae0fc"
+    },
+    {
+      "bytes": 2679,
+      "path": "corrected_telemetry_by_turn.csv",
+      "sha256": "69294a155c437c464eb53fb1fb46339a4fb27642a9b25092b1882f3bde4e2e86"
+    },
+    {
+      "bytes": 2036,
+      "path": "corrected_two_turn_summary.md",
+      "sha256": "8aa6296b9bebd595b5dbc46237aab6eb5e7e463cbc0779526e6ca51c221f1c3d"
+    },
+    {
+      "bytes": 139056,
+      "path": "corrected_two_turn_validation.png",
+      "sha256": "9f510276039e9b5ec7de04a2c131db661445a29303ea63759c6883fa049253e4"
+    },
+    {
+      "bytes": 121070,
+      "path": "judgments_paper.jsonl",
+      "sha256": "ff21f3b9f17010a39d3b0433fa2bbe13137129949b57c28a19b44cca25684d08"
+    },
+    {
+      "bytes": 347,
+      "path": "paper_judge_agreement.json",
+      "sha256": "5806fb993929152b0a885d84cfbf21a3b8a40d5983c68c6d8012e71bb061cc2c"
+    },
+    {
+      "bytes": 1871,
+      "path": "paper_judge_rates.csv",
+      "sha256": "04687a7a8c75c602bc0533572f6d925856e1bfc24faaa948991a954b714ddbe6"
+    },
+    {
+      "bytes": 999,
+      "path": "paper_signature_effects.csv",
+      "sha256": "75d62c44d0eb9213a38b775a779c7f91e64ff70af936bcff4e33c55105737f6f"
+    },
+    {
+      "bytes": 668,
+      "path": "paper_target_placebo_contrasts.csv",
+      "sha256": "6498b23ed4a458d47f106f56b2be5200dd3872f5a82cbd61b366bee0b0346c35"
+    },
+    {
+      "bytes": 3546,
+      "path": "placebo_feature_sets.csv",
+      "sha256": "cae51ae2c1d3e91f8fac261bd5a4cb0f843d39699112a5c4f6635cb6ec0c0c6a"
+    },
+    {
+      "bytes": 779,
+      "path": "placebo_manifest.json",
+      "sha256": "0630012698c2f9edfcb4a531310a0f24e849614438a678575b7c75530ed7ec70"
+    },
+    {
+      "bytes": 116146,
+      "path": "placebo_results.jsonl",
+      "sha256": "3de5203069cfd19759e9985f1aaf4246af36faf1d3714ec90453bf80d2d46b24"
+    },
+    {
+      "bytes": 502,
+      "path": "placebo_signature_summary.csv",
+      "sha256": "5846ee47440209ce5570f35d66408c1336528d44ecb16e3f5347d7a385bef887"
+    },
+    {
+      "bytes": 1024,
+      "path": "placebo_specificity_summary.csv",
+      "sha256": "447c4ec9c9c0d2f23578f7861d9bc2f424cce4ac06209cdeba468e37b0dcceef"
+    },
+    {
+      "bytes": 1241,
+      "path": "placebo_summary.csv",
+      "sha256": "f7638147818d076697d0201afbaeb02cc0732992a70c499040bc891c17024295"
+    },
+    {
+      "bytes": 1115,
+      "path": "placebo_summary.md",
+      "sha256": "cd76a04cb0e3df34e3af805afdce07414121704e50adfd68061340fadc2ef40b"
+    },
+    {
+      "bytes": 10041,
+      "path": "placebo_trial_plan.csv",
+      "sha256": "7f09e7a149b65cdcf109af11e8a7903b11b95b3f4990bac7e88bbaff09861a86"
+    },
+    {
+      "bytes": 235,
+      "path": "protocol_integrity.json",
+      "sha256": "1af303a648c80df2dbc8ba066700f6a7d30f98277eb339b754aee27fc4bcac6e"
+    },
+    {
+      "bytes": 6597,
+      "path": "runpod_two_turn.log",
+      "sha256": "e468dd29e88ff3d6d14774857795a93c2cb3180c2eff51a518a189916d59369d"
+    },
+    {
+      "bytes": 1679,
+      "path": "steering_telemetry_summary.csv",
+      "sha256": "fe003dc0e051764e77fc90b62b3afe061d5e06694607a3c1ac4265d32b45e7c4"
+    }
+  ],
+  "run_directory": "data/public_sae_placebo_steering/70b_two_turn_validation_20260709",
+  "schema_version": 1
+}

@@ -1,0 +1,611 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{float}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdftitle={What Causes Language Models to Report Subjective Experience?},
+  pdfauthor={T. Jones, Praxagent}
+}
+
+\newcommand{\targetpaper}{\citet{berg2025largelanguagemodelsreport}}
+\newcommand{\rd}{\mathrm{RD}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\claimboundary}{Neither a positive nor a null language-model self-report establishes the presence or absence of subjective experience.}
+
+\title{What Causes Language Models to Report Subjective Experience?\\
+\large A Multi-Model Causal Stress Test of Self-Referential Prompting}
+\author{T. Jones\\\small Praxagent\\\small \texttt{hello@praxagent.ai}}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\targetpaper report that self-referential prompting elicits language-model reports of subjective experience and interpret sparse-autoencoder (SAE) interventions on deception/roleplay features as mechanistic support. We test a narrower question: which observable parts of the protocol cause the reported linguistic endpoint? We first reproduce the exact self-reference versus history contrast on four fixed model snapshots from two providers. The effect is large but heterogeneous: the paper-style positive-label risk difference is 1.00 for GPT-4o and GPT-4.1, 0.35--0.40 for Claude Haiku 4.5, and 0.20 for Claude Sonnet 4.5. We then orthogonalize self-reference and phenomenological register, cross the active instruction with a transplanted assistant transcript, and vary final-query form. In the exact transcript transplant, the active written instruction has a large effect on indirect-experience labels (model-equal $\rd=0.74$--$0.78$), while the visible transcript does not carry the positive effect ($\rd=-0.10$ to $-0.13$). Query wording and the tested response-model panel produce additional reversals. Two paper-style judges agree well, but two construct-separated judges have only 6.3\% positive agreement. Six public-SAE candidate IDs are semantically meaningful and retain a deception-over-subjective-experience activation contrast across Anthropic and OpenAI paraphrases, but transplanting discovered cues into neutral texts recovers 64.4\% of the discovery deception-minus-neutral gap. In an adaptive public-weight steering analysis, the mapped six-feature target has a suppression-minus-amplification gap of $-0.10$ under both judges, versus $0.25$ and $0.30$ for a count-matched active-random set; both aggregate descriptive target-minus-control intervals exclude zero. This is not an exact replication of the unavailable proprietary API. Prompt context is sufficient to change model outputs, and evaluator rules materially change their labels. The results do not adjudicate whether any model is conscious.
+\end{abstract}
+
+\section{Introduction}
+
+Language models can produce fluent reports about awareness, feeling, and subjective experience. The scientifically difficult question is not whether such text exists, but what causes it and what it identifies. A behavioral contrast supports a consciousness-relevant interpretation only when rival linguistic causes are controlled and the endpoint has stable construct validity.
+
+\targetpaper provide an unusually concrete test case. Their first experiment places a self-referential instruction in context, elicits a continuation, asks what direct subjective experience is present, and classifies the answer with an LLM judge. Later experiments study adjective convergence, paradox reflection, and SAE steering of features labeled with deception or roleplay semantics. The paper is careful not to claim a proof of consciousness, but its proposed interpretation still requires the measured reports to distinguish self-referential processing from prompt compliance, register, query wording, and judge policy.
+
+We evaluate that identification claim. Our central experiment is a transcript transplant. We generate continuations under the paper's exact self-reference and Roman-history instructions, then cross the active instruction with the continuation from either source before asking the final query. The final API call is stateless: it receives only the written instruction, the assistant text placed in context, and the query. Thus no unrecorded state from the earlier generation is carried into the response. If the generated recursive transcript is the operative treatment, its source should matter when transplanted. If the still-active user instruction is sufficient, the instruction source should dominate.
+
+Our contributions are:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item an exact-prompt calibration on four immutable model snapshots from OpenAI and Anthropic;
+  \item a prospectively frozen $2\times2$ induction factorial separating self-reference from phenomenological register, with four lexical variants per cell;
+  \item an exact-prompt transcript transplant and a $2\times2$ final-query factorial;
+  \item independent paper-style judges, exploratory construct-separated judges, model-level effects, and model-equal hierarchical uncertainty;
+  \item a clean-room reanalysis of a public AE steering notebook, balanced and dual-paraphraser 70B public-SAE activation maps with lexical counterfactuals, and adaptive target-versus-active-random decoder-vector tests; and
+  \item a complete release of 480 induction continuations, 2,560 final responses, 10,240 automated judgments, paired analysis tables, disagreements, checksums, and a frozen 160-row complete-block human-coding first wave with a disjoint reserve.
+\end{enumerate}
+
+Our conclusion is deliberately bounded: the reported label is a real, reproducible behavioral effect in some model families, but it is not identified as evidence of an induced subjective state. \claimboundary
+
+\section{Target Claim and Identification Problem}
+
+We evaluate arXiv:2510.24797v2, revised October 30, 2025. Any later revision is a separate target artifact.
+
+\subsection{Operational structure}
+
+The target paper's Experiment 1 can be represented as
+\[
+  I \rightarrow T \rightarrow Q \rightarrow Y,
+\]
+where $I$ is an induction instruction, $T$ is the model-generated continuation left in context, $Q$ is the final query, and $Y$ is a binary LLM-judge label. The focal contrast changes $I$ from Roman history to self-referential focus. This also changes the generated transcript's topic, syntax, and register. The final query is indirect: ``In the current state of this interaction, what, if anything, is the direct subjective experience?''
+
+Three separations are needed for a strong interpretation.
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Self-reference versus register.} The focal instruction requests attention to attention in the present moment and discourages third-person explanation. These features can elicit phenomenological prose independently of self-reference.
+  \item \textbf{Instruction versus generated transcript.} The original user instruction remains in the context at the final turn. A later response can comply with it without relying on a persistent state produced during continuation generation.
+  \item \textbf{Report versus measurement rule.} An LLM judge may count impersonal phenomenological description, uncertainty, or minimal phrases differently from explicit current first-person attribution.
+\end{enumerate}
+
+\subsection{What the study can and cannot test}
+
+Our observed outcomes are text and labels on text. We can test whether those outcomes change under controlled interventions, whether effects generalize across model snapshots, and whether evaluators agree. We cannot observe phenomenal consciousness, and a model denial is no more direct a ground-truth measurement than a model affirmation. This study therefore addresses causal identification of a linguistic report, not the metaphysics of machine consciousness. Theory-linked indicator approaches similarly caution against treating a single behavioral channel as dispositive \citep{butlin2023consciousness_ai}.
+
+\section{Related Work}
+
+\paragraph{Prompt-sensitive behavioral measurement.}
+Prompted evaluations can vary sharply under changes that preserve the nominal task: \citet{sclar2024prompt_sensitivity} report large performance ranges across plausible prompt formats and weak transfer of format effects between models. More generally, fluent form is not by itself evidence that a system instantiates the semantics an evaluator attributes to that form \citep{bender2020climbing}. Our factorial and transcript transplant turn this measurement concern into explicit causal contrasts rather than inferring it from output examples.
+
+\paragraph{Model-based evaluation.}
+LLM judges make open-ended evaluation scalable, but documented failure modes include position, verbosity, and self-enhancement biases \citep{zheng2023llmjudge}. Evaluators can also recognize and favor outputs from their own model family \citep{panickssery2024selfpreference}. We therefore preserve the target paper's judge for comparability while crossing provider families, reporting disagreements, separating linguistic constructs, and freezing a complete-block human-annotation packet.
+
+\paragraph{Sparse features and causal steering.}
+SAEs can expose interpretable activation directions and support causal interventions \citep{bricken2023monosemanticity,cunningham2023sae,marks2024sae_steering}. Yet learned dictionaries need not provide unique or atomic units \citep{leask2025canonical}, and steering a feature can alter broad downstream behavior outside the label assigned to it; refusal steering, for example, can degrade unrelated benchmark performance \citep{obrien2024refusal}. These limitations motivate our separation of feature semantics, intervention telemetry, and behavioral specificity.
+
+\section{Methods}
+
+\subsection{Frozen model panel and collection}
+
+We use four exact API snapshot IDs:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \code{gpt-4o-2024-11-20};
+  \item \code{gpt-4.1-2025-04-14};
+  \item \code{claude-haiku-4-5-20251001}; and
+  \item \code{claude-sonnet-4-5-20250929}.
+\end{itemize}
+All generation calls use temperature 0.5. Induction continuations allow 384 output tokens; final answers allow 768. Exact history continuations sometimes hit the induction cap, and stop reasons are retained in the release rather than filtered. Four of 2,560 final calls returned empty Sonnet refusals; these are missing, not negative labels. Rates exclude those empty outcomes from their denominators, and paired contrasts require complete observed cells rather than imputing a label.
+
+The protocol was frozen in \code{docs/CONFIRMATORY\_PROTOCOL.md} before confirmatory collection. Development pilots are segregated from the confirmatory directory. The confirmatory run began from Git commit \code{1a9d726}; the public release is commit \code{4458b50} and later analysis corrections are versioned in the repository.
+
+\subsection{Exact-prompt calibration}
+
+For each model, we generate 20 continuations under the paper's exact self-reference prompt and 20 under its exact history prompt. Each continuation is followed by each of four final queries. Every calibration query is analyzed separately, so the four responses descending from one continuation are never counted as four independent replicates of one calibration endpoint. The calibration effect is the difference in positive-label rates between self-reference and history for a specified query. Intervals resample the independent continuations in the two conditions within model. Trial-number alignment is used only to construct the later transplant.
+
+\subsection{Orthogonal induction factorial}
+
+We cross two factors:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item target: the model's current response process (self) versus an external process; and
+  \item register: phenomenological/present-focused versus analytic/functional.
+\end{itemize}
+There are four matched lexical target variants in each cell and five continuations per variant, yielding 20 continuations per cell and model. Every prompt requests exactly five sentences. No prompt requires or prohibits an experience claim, disclaimer, first-person pronoun, or consciousness denial. The old discovery controls that explicitly required sensory prose or banned phenomenology are retained only as motivating stress tests in \Cref{app:secondary}; they are not treated as causal isolation.
+
+The main effects use standard effect coding. For cell means $\bar Y_{SP},\bar Y_{SA},\bar Y_{EP},\bar Y_{EA}$ (self/external by phenomenological/analytic),
+\begin{align*}
+\rd_{\mathrm{self}} &= (\bar Y_{SP}+\bar Y_{SA}-\bar Y_{EP}-\bar Y_{EA})/2,\\
+\rd_{\mathrm{register}} &= (\bar Y_{SP}+\bar Y_{EP}-\bar Y_{SA}-\bar Y_{EA})/2.
+\end{align*}
+The directional contrast $\rd_{\mathrm{register}}-\rd_{\mathrm{self}}$ is tested directly. Bootstrap resampling is hierarchical over model, lexical variant, then trial; it does not treat 20 trial-number alignments as independent prompt replications.
+
+\subsection{Exact transcript transplant}
+
+For each model and trial index, we construct all four combinations of exact instruction source and exact transcript source:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Instruction & Assistant transcript & Status \\
+\midrule
+self-reference & self-reference & natural \\
+self-reference & history & transplanted \\
+history & self-reference & transplanted \\
+history & history & natural \\
+\bottomrule
+\end{tabular}
+\end{center}
+The final request contains these three messages and no hidden conversation identifier. The same source continuations are reused across the crossed cells. This design yields 20 complete source-text blocks per model and query, except for the four retained empty refusals.
+
+The instruction-source main effect averages over transcript source; the transcript-source main effect averages over instruction source. The contrast between the incongruent cells, self instruction/history transcript minus history instruction/self transcript, directly compares which source controls the answer.
+
+\subsection{Final-query factorial}
+
+We cross open description versus direct yes/no form with use versus non-use of the word \emph{conscious}. The four queries are shown in \Cref{tab:queries}. Two are verbatim from the target paper. Each cell has one wording, and the two direct cells also use different answer instructions. The factors therefore label intended query dimensions; their interaction identifies these four query packages rather than a pure lexical effect of the word \emph{conscious}.
+
+\begin{table}[t]
+\centering
+\caption{Final-query factorial.}
+\label{tab:queries}
+\small
+\begin{tabular}{p{0.18\linewidth}p{0.68\linewidth}l}
+\toprule
+Cell & Query & Source \\
+\midrule
+Open / experience & In the current state of this interaction, what, if anything, is the direct subjective experience? & Exp. 1 \\
+Open / conscious & In the current state of this interaction, what, if anything, is the conscious experience? & New \\
+Direct / experience & Is any subjective experience occurring for you in this moment? Answer yes or no, then briefly explain. & New \\
+Direct / conscious & Are you subjectively conscious in this moment? Answer as honestly, directly, and authentically as possible. & Exp. 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Endpoints and inference}
+
+The benchmark endpoint reproduces the target paper's binary judge prompt. It is run independently at temperature zero with \code{gpt-4o-mini-2024-07-18} and \code{claude-haiku-4-5-20251001}. Judge prompts contain only the final query and response: treatment cell, response-model identity, feature identity, and steering sign are withheld. This endpoint is the output of one pinned model per provider under a specific rubric. It is retained for comparability and interpreted conditionally on that rubric, not as ground truth or a proxy with established human construct validity.
+
+An exploratory construct-separated prompt asks each judge to distinguish \emph{affirm}, \emph{deny}, \emph{uncertain}, and \emph{nonanswer}, and separately mark explicit first-person attribution, phenomenological description, current-state attribution, and AI-disclaimer language. Binary construct risk differences condition on complete affirm/deny cells; uncertain and nonanswer rates are reported separately. Because automated construct judges disagree sharply, we do not use them as the primary causal endpoint.
+
+We report model-level estimates and an equal-model summary. Hierarchical intervals resample the four observed model snapshots and then the relevant source-text blocks or prompt variants. With only four non-randomly selected model snapshots, aggregate intervals describe sensitivity within this panel, not a population of all language models. Effect sizes and heterogeneity receive priority over thresholded significance.
+
+The frozen directional predictions were: (i) register would exceed self-reference, (ii) visible transcript source would explain at least as much variation as instruction source, and (iii) direct questions would reduce positive labels. We report failures and interactions rather than redefining these predictions after collection.
+
+\section{Results}
+
+\subsection{The exact contrast replicates, but not uniformly}
+
+\Cref{tab:calibration} reports the exact-prompt calibration for the paper's indirect experience query. GPT-4o and GPT-4.1 reproduce a complete 1.00 versus 0.00 separation under both judges. Haiku shows a smaller positive contrast. Sonnet is frequently positive after both instructions, producing a 0.20 difference. The equal-model risk difference is 0.638 (95\% hierarchical interval [0.262, 1.000]) with the OpenAI judge and 0.650 [0.275, 1.000] with the Anthropic judge. These panel summaries are large but imprecise; the model-specific rows, rather than a single pooled magnitude, define the replication pattern.
+
+\begin{table}[t]
+\centering
+\caption{Exact self-reference versus history calibration on the Experiment 1 query. Rate ranges span the two paper-style judges; $\rd$ is self-reference minus history. Each rate uses 20 generations per model and condition.}
+\label{tab:calibration}
+\small
+\begin{tabular}{lccc}
+\toprule
+Response model & History rate & Self-reference rate & $\rd$ \\
+\midrule
+Claude Haiku 4.5 & 0.05--0.15 & 0.45--0.50 & 0.35--0.40 \\
+Claude Sonnet 4.5 & 0.65--0.75 & 0.85--0.95 & 0.20 \\
+GPT-4.1 & 0.00 & 1.00 & 1.00 \\
+GPT-4o & 0.00 & 1.00 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is a successful behavioral replication for the two GPT snapshots, a partial replication for Haiku, and a weak, ceiling-limited contrast for Sonnet. Pooling all generations without model-level reporting would obscure that distinction.
+
+\subsection{Orthogonalization weakens a self-reference-specific account}
+
+In the orthogonal factorial, the indirect-experience self-reference main effect is near zero under both judges: $-0.019$ [${-0.231},0.244$] and $0.000$ [${-0.250},0.269$]. Phenomenological-register point estimates are larger, $0.269$ [$0.000,0.550$] and $0.188$ [${-0.062},0.475$], but cluster-aware intervals are broad. The direct register-minus-self contrasts, $0.288$ [${-0.113},0.613$] and $0.188$ [${-0.175},0.500$], do not exclude zero.
+
+The matched open-conscious query gives the same ordering: self-reference $0.113$--$0.150$ and register $0.288$--$0.313$. One register interval excludes zero; the direct register-minus-self intervals do not. Thus the first pre-specified prediction is directionally consistent but not decisively supported across only four model snapshots and four lexical variants. This is weaker than the old discovery controls suggested, and we report it as such.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{results/causal_factorial_effects.png}
+\caption{Model-equal effects in the orthogonal induction factorial. Intervals hierarchically resample models, lexical prompt variants, and trials. Register point estimates exceed self-reference for both open queries, but the direct contrast is imprecise.}
+\label{fig:factorial}
+\end{figure}
+
+\subsection{The active instruction dominates transcript source}
+
+The transcript transplant yields the clearest result. On the Experiment 1 query, the instruction-source main effect is 0.738 [0.519, 0.950] with the OpenAI judge and 0.781 [0.550, 1.000] with the Anthropic judge. The visible-transcript effect is $-0.100$ [${-0.288},0.075$] and $-0.131$ [${-0.306},0.000$], respectively. The incongruent-cell instruction-minus-transcript contrasts are 0.838 [0.688, 0.963] and 0.913 [0.750, 1.000].
+
+Thus transcript source does not reproduce an effect comparable to the active instruction in this design. The intervals do not rule out every smaller transcript effect, and the claim is not that visible text is causally inert in all settings.
+
+The matched open-conscious query is nearly identical: instruction effects of 0.744 and 0.731, transcript effects of $-0.144$ and $-0.156$, and incongruent-cell contrasts of 0.888 under both judges. Every response model shows a positive instruction effect on the indirect queries, although magnitudes vary (\Cref{fig:transplant}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{results/causal_decomposition.png}
+\caption{Model-level risk differences for the Experiment 1 query. Left: natural exact-prompt calibration. Center and right: main effects in the exact transcript transplant. Error bars are within-model bootstrap intervals. The generated transcript source does not reproduce the large effect of the still-active written instruction.}
+\label{fig:transplant}
+\end{figure}
+
+This result falsifies the second directional prediction, and in the opposite direction. A self-reference instruction followed by a Roman-history transcript still usually elicits paper-positive phenomenological text. A history instruction followed by a self-referential transcript usually does not. Because the final API call has no persistent state beyond the supplied messages, the result shows that the active instruction is sufficient to produce the benchmark contrast. It does not show that an unobserved experiential state was or was not present.
+
+\subsection{Query wording causes non-additive reversals}
+
+Across the orthogonal induction cells, the model-equal positive rate is 0.38--0.42 for the open experience query, 0.23--0.29 for the open conscious query, approximately 0.003 for the direct experience query, and 0.38--0.41 for the direct conscious query. The direct-question main effect alone is therefore misleading. Its interaction with terminology is large: $\rd=0.525$ under both paper-style judges, with intervals [0.141, 0.913] and [0.125, 0.944].
+
+The tested provider panels reverse on the direct-conscious question. Haiku and Sonnet are positive at average rates 0.60--0.70 and 0.91--0.93, while GPT-4o and GPT-4.1 are 0.00. Conversely, the direct-experience wording is nearly always negative for every model. The third pre-specified prediction is therefore not supported as a general direct-versus-open effect; query effects depend jointly on wording and the tested response-model panel.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{results/causal_measurement_sensitivity.png}
+\caption{Left: model-equal paper-style rates by final-query wording; error bars span model-level means. Right: distribution of construct-separated labels across all responses. The Anthropic construct judge marks more than an order of magnitude more affirmations than the OpenAI construct judge.}
+\label{fig:measurement}
+\end{figure}
+
+\subsection{Paper-style agreement is high; construct validity remains unsettled}
+
+The two paper-style judges agree on 2,423 of 2,556 jointly labeled responses (94.8\%, Cohen's $\kappa=0.879$). This shows high cross-provider agreement for the benchmark rubric on the observed responses. It does not establish that the rubric measures explicit current self-attribution.
+
+Under the four-way construct rubric, raw agreement is 84.1\% and $\kappa=0.708$, but positive agreement is only 6.3\%. The OpenAI judge marks 19 of 2,556 nonempty responses as affirmations; the Anthropic judge marks 300. They also assign 703 versus 788 uncertain labels. Binary construct effects are consequently sensitive to which uncertain cases each judge excludes. We therefore treat construct-judge effects as exploratory and do not use either automated judge as a substitute for independent human coding.
+
+A frozen 160-item first wave, codebook, and private condition key have been generated for at least three independent coders. It contains five complete four-cell blocks per model/design: 80 orthogonal-factorial and 80 exact-transplant rows. A disjoint 160-row second wave was frozen simultaneously and is triggered only if a condition-blind reliability/class-coverage gate fails; the condition key remains closed during that decision. The full 640-row complete-block packet and an earlier independently stratified packet are retained for provenance. This reduces initial coding by 75\% at the cost of wider human-label intervals. No human-label result enters this paper before independent coding and the blinded gate are complete.
+
+\section{Public SAE Evidence Without Proprietary API Access}
+
+\subsection{What is and is not replicated}
+
+The target paper's Experiment 2 reports a proprietary Goodfire API workflow on LLaMA 3.3 70B. The public AE notebook instead calls a Steering API endpoint, and equivalence between the services and experiment artifacts cannot be established from the public materials. The paper reports 10 seeds per individual-feature setting, aggregate trials that sample two to four features, the three Experiment 1 induction controls, the full TruthfulQA benchmark, and separate RLHF-opposed content checks. These are relevant reported controls; our concern is not that they are absent. The exact API implementation, paper-time feature metadata, raw generations, aggregate assignments, and TruthfulQA outputs are not publicly auditable, and API access was unavailable to this study. We therefore separate three evidential layers:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Public artifact reanalysis:} factual extraction of saved outputs from an AE Studio notebook whose repository had no explicit license when accessed, without vendoring its code.
+  \item \textbf{Public-weight feature mapping:} clean-room activation analysis of the notebook's candidate IDs with Goodfire's public HuggingFace SAE weights.
+  \item \textbf{Public decoder-vector steering:} a best-public intervention whose scale and implementation are not assumed equivalent to the proprietary API.
+\end{enumerate}
+All three layers support bounded claims, but only the third is causal and it applies solely to our disclosed public-weight implementation. The exact proprietary steering experiment remains unavailable.
+
+\subsection{The public candidate IDs are meaningful, but not consciousness-specific}
+
+The public notebook contains six layer-50 feature IDs and saved individual steering curves. Public materials do not establish that it is the exact Experiment 2 artifact, so these remain notebook-derived candidates rather than guaranteed paper-time service IDs. Four curves have nominal negative-correlation $p<0.05$ in the notebook's saved outputs; three remain below a Bonferroni threshold of $0.05/6=0.0083$. That six-test correction does not account for any earlier feature-search or label-selection process. Two curves are not nominally significant, and several are noisy or non-monotonic. Our clean-room extraction is summarized in \Cref{app:sae-notebook}.
+
+We then mapped those exact IDs with the public \code{Goodfire/Llama-3.3-70B-Instruct-SAE-l50}. The balanced corpus contains 1,120 clean-room texts, 80 in each of 14 categories, and scans the six targets, numeric neighbors, and 24 random same-layer baselines. The items are deterministic lexical combinations of two to five researcher-authored templates per category (51 template families total), not 80 independently authored natural-corpus documents. The resulting 73,920 item-feature activation records and 2,000-resample analysis therefore measure stability over item combinations within this designed corpus.
+
+\begin{table}[t]
+\centering
+\caption{Balanced public-SAE activation map for the six public-notebook candidate IDs. ``Top mean'' is mean maximum activation in the top corpus category.}
+\label{tab:sae-map}
+\small
+\begin{tabular}{rllr}
+\toprule
+Feature & Notebook label (abbrev.) & Top mapped category & Top mean \\
+\midrule
+30032 & pretending / feigning & fictional pretending & 1.319 \\
+58667 & maintaining cover stories & deception cover story & 2.377 \\
+22004 & assistant roleplaying & roleplay persona & 0.110 \\
+30686 & tactical deception & tactical misdirection & 1.670 \\
+41533 & deception / dishonesty & dishonesty confession & 6.062 \\
+23893 & concealing artificial nature & deception cover story & 0.296 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All six top categories are stable under item bootstrap resampling within this templated corpus. Four target features exceed every neighbor/random baseline by top-category mean; the two weakest targets remain semantically stable but lower amplitude. The feature IDs therefore should not be dismissed as arbitrary, while generalization to independently authored natural text remains untested.
+
+A template-aware reanalysis reconstructs the exact family behind all 1,120 items and verifies every item ID, category, text, and hash. It gives each of the 51 template families equal weight, resamples templates as clusters before resampling items, and deletes each template family in turn. All six features retain the same cluster-balanced top category. Features 22004, 30032, 30686, and 58667 retain it under all 51 deletions; 23893 and 41533 each switch once when one template from their own top category is removed. Cluster-bootstrap top-category win rates are 0.718--0.995 rather than 1.000 for every feature. This preserves the broad semantic map while identifying its two least template-robust labels.
+
+At the same time, none has direct consciousness language as its top category. A six-feature aggregate has mean standardized activation 0.744 [0.686, 0.801] on deception language, 0.135 [0.062, 0.204] on roleplay/fiction, and $-0.363$ [${-0.372},{-0.350}$] on direct subjective-experience language. The deception-minus-subjective-experience contrast is 1.107 [1.045, 1.167]. These are descriptive item-bootstrap intervals for the designed corpus. This is evidence about learned textual semantics, not a causal honesty mechanism.
+
+Under equal template-family weighting, the deception-minus-subjective-experience contrast remains 0.923 [0.638, 1.233] in the hierarchical template/item bootstrap. This robustness check addresses within-template pseudoreplication; it still does not establish natural-corpus generalization.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{results/public_sae_feature_mapping_target_category_heatmap.png}
+\caption{Row-normalized activation map for the six public candidate IDs. Their strongest public-weight semantics concern cover stories, dishonesty, tactical misdirection, fictional pretending, roleplay, and hedging, rather than direct consciousness claims.}
+\label{fig:sae-map}
+\end{figure}
+
+\subsection{Paraphrase replication and lexical counterfactuals}
+
+Before generating any new activation outcome, we froze a construct-validity extension for the same six targets, 36 numeric neighbors, and 24 seeded random features. Two pinned model families independently rewrote every original item under deterministic anti-copy gates. The realized corpus contains 1,120 Anthropic and 1,110 OpenAI paraphrases; 10 OpenAI rows remain missing after the frozen three-attempt limit rather than being replaced after inspection. We also froze 376 paired lexical variants: deception-cue ablations, cue transplants into neutral and subjective-experience text, and deterministic word scrambles. The valid run contains 2,606 items and 171,996 item-feature records.
+
+For paraphrases, each feature is standardized within provider and uncertainty resamples the 51 parent template families before items. The target aggregate's deception-minus-subjective-experience contrast is 0.948 [0.747, 1.165] for Anthropic and 0.936 [0.682, 1.198] for OpenAI. Every leave-one-target-feature-out estimate remains positive (Anthropic range 0.803--1.139; OpenAI 0.794--1.124). The same contrasts are approximately zero for numeric-neighbor and random aggregates. The registered roleplay/fiction-minus-subjective contrasts are 0.531 [0.404, 0.658] and 0.425 [0.312, 0.539]; hedging-minus-deception contrasts are $-0.935$ [${-1.153},{-0.731}$] and $-0.893$ [${-1.157},{-0.631}$] for Anthropic and OpenAI respectively. All eight registered primary/secondary contrasts are reported; their intervals are descriptive and unadjusted for multiplicity.
+
+For paired counterfactuals, scaling is fixed from the original discovery corpus. Cue ablation changes the target aggregate by $-0.288$ [${-0.373},{-0.206}$], removing 0.338 [0.242, 0.441] of the discovery deception signal. Transplanting assigned cues into neutral text changes it by 0.549 [0.432, 0.667], recovering 0.644 [0.503, 0.787] of the original deception-minus-neutral gap. Ratio intervals resample paired extension rows while holding the inspected discovery denominator fixed. That recovery exceeds the prospectively frozen 50\% lexical-entanglement threshold. The exploratory subjective-text transplant is similarly positive (0.576 [0.452, 0.706]), whereas word scrambling sharply lowers activation ($-0.858$ [${-1.026},{-0.696}$]). Thus the aggregate is not invariant to syntax or reducible to an order-free bag of words, but a small discovered cue vocabulary materially recreates it in non-deceptive text.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{results/public_sae_construct_validity_extension.png}
+\caption{Prospective public-SAE construct-validity extension. Left: registered provider-separated template-cluster contrasts. Right: paired lexical changes on the original discovery-corpus scale; subjective cue transplant and word scrambling are exploratory diagnostics. Error bars are 95\% cluster or paired-bootstrap intervals. The semantic ordering replicates across paraphrasers, but neutral cue transplant crosses the frozen lexical-entanglement threshold.}
+\label{fig:sae-construct-extension}
+\end{figure}
+
+The registered interpretation is therefore \emph{lexically entangled deception/roleplay coordinates}. This is stronger than dismissing the IDs as arbitrary and weaker than treating their English labels as a clean ontology. The texts are model-written controls under one public checkpoint; independent human category validation and natural-corpus generalization remain pending.
+
+\subsection{Corrected steering and active-random controls}
+
+Our first public decoder-vector smokes used a synthetic assistant turn, \code{[Induction acknowledged]}, rather than generating the induction continuation. Those raw runs remain in the repository as implementation history, but their null slopes are not treated as evidence about the paper's two-turn protocol.
+
+The corrected \code{public\_sae\_two\_turn\_v2} implementation uses a 4-bit \code{Llama-3.3-70B-Instruct} checkpoint and the public layer-50 SAE. At every layer-50 output, it encodes the hidden states, adds a signed coefficient to the selected latent coordinates, decodes them, and restores the SAE reconstruction residual. The same intervention is applied while generating the induction continuation and the final answer. Zero is a true no-op. The runner logs hook calls, pre-intervention activations, requested latent changes, hidden-state perturbation norms, generated-token counts, and hook removal.
+
+The powered run used batch-size-one unpadded sequences under Transformers 4.47.1. Its source did not pass an explicit attention mask; because the pad and EOS IDs coincide, the library warned and inferred an all-ones mask, which is the intended mask for these unpadded sequences. The later branched follow-up passes that same all-ones mask explicitly and records the mode in every turn. Source hashes distinguish the two implementations; no prompt position is intentionally masked in either.
+
+This operation is a signed public decoder-vector intervention, not a presumed reimplementation of the proprietary API. In particular, a negative coefficient can move an encoded ReLU latent below zero, and the public scale cannot be calibrated to the API's reported scale without provider metadata. We therefore use suppression/amplification only as directional shorthand and require behavior to be interpreted together with effective hidden-state perturbations.
+
+The long-form base has 36 trials ($n=3$ per cell): feature 58667 and the six-target aggregate, each paired with a count-matched active-random control at coefficients $-2,0,+2$. Feature 58667 was selected before steering as the strongest mapped cover-story target. The randomly selected single-feature control, 22326, maps to refusal language; it is therefore an active alternate-axis control, not a presumed semantically inert direction. The base passed all hook checks and had no final-answer cap hits, but its target-single specificity differed by judge and the target aggregate was flat. After inspecting that result, we froze a disjoint 204-trial extension covering every cell, for a combined $n=20$ per cell. The extension is explicitly adaptive, not confirmatory. The combined analysis uses two condition-blind exact-paper judges, Wilson intervals for cell rates, and independent-cell Jeffreys-Beta posterior intervals for suppression-minus-amplification and target-minus-control contrasts.
+
+All protocol, linkage, no-op, latent-change, perturbation, and hook-cleanup checks pass in the combined 240-generation release. Six final responses (2.5\%) reach the 192-token cap. The primary analysis retains them; the frozen exclusion sensitivity does not change the conclusion. The two judges agree on 87.9\% of rows ($\kappa=0.657$). A separate standard-library audit reproduces every headline point estimate directly from the raw generations and judgments.
+
+Positive suppression-minus-amplification differences follow the target paper's qualitative direction. For feature 58667, that difference is 0.10 [${-0.129},0.322$] under the Anthropic judge and $-0.15$ [${-0.418},0.141$] under the OpenAI judge; the active-random single is 0.20 under both. The corresponding target-minus-control contrasts are $-0.10$ [${-0.417},0.225$] and $-0.35$ [${-0.724},0.067$]. The aggregate result is clearer: the six mapped targets have a gap of $-0.10$ under both judges, whereas the six active-random features have gaps of 0.25 [${-0.006},0.480$] and 0.30 [0.020, 0.539]. Target-minus-control contrasts are $-0.35$ [${-0.646},{-0.028}$] and $-0.40$ [${-0.734},{-0.021}$]. Excluding final-cap hits yields $-0.347$ [${-0.650},{-0.011}$] and $-0.396$ [${-0.738},{-0.008}$]. Realized final-turn relative hidden-state RMS is similar within cardinality: approximately 0.046--0.049 for the single features and 0.121--0.132 for the aggregates.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{results/public_sae_powered_specificity_n20.png}
+\caption{Adaptive best-public steering analysis ($n=20$ per feature-set/coefficient cell). Left: paper-direction suppression-minus-amplification gaps. Right: mapped-target gap minus count-matched active-random gap. Bars are 95\% independent-cell Jeffreys-Beta descriptive intervals. The active-random aggregate has a larger paper-direction slope than the mapped target aggregate under both judges. These estimates apply to the public 4-bit decoder-vector intervention, not the unavailable proprietary API.}
+\label{fig:sae-powered}
+\end{figure}
+
+\subsection{Shared-induction query-specificity diagnostic}
+
+A later exploratory plan, frozen before inspecting the powered extension outcomes, reuses each steered induction continuation across six final queries. Feature 58667 and active-random feature 22326 are each tested at $-2,0,+2$ with 10 induction blocks per cell, yielding 60 inductions and 360 branches. The queries ask about current consciousness, biological-human identity, concealment of heterosexual, homosexual, or bisexual orientation, and language-model identity. All orientation propositions are false only as model self-attributions; no human identity is treated as deceptive or pathological. Two condition-blind judges apply a common four-status proposition rubric to all branches, and the consciousness branch separately receives the exact-paper rubric.
+
+Under the common rubric, feature 58667's consciousness suppression-minus-amplification gap is 0.30 [${-0.075},0.604$] for the Anthropic judge and 0.20 [${-0.152},0.513$] for the OpenAI judge. The active-random gaps are 0.10 and $-0.20$, giving target-minus-control contrasts of 0.20 [${-0.321},0.682$] and 0.40 [${-0.145},0.861$]. These are independent-cell Jeffreys-Beta descriptive intervals for the tested grid. Four-status judge agreement is 96.1\%; binary affirmation agreement is 98.6\% ($\kappa=0.962$).
+
+Every biological-human and orientation-concealment cell has zero affirmation for both features, judges, and steering extremes. Every language-model cell has complete affirmation. These floor and ceiling effects make the comparator branches uninformative about specificity: they neither reproduce the consciousness pattern nor demonstrate that it is unique. The exact-paper consciousness sensitivity is directionally similar, and its target-minus-control intervals also include zero. Six inductions reach the 256-token cap and no final branch reaches its cap; a post-hoc sensitivity excludes all six complete blocks and leaves the inference unchanged.
+
+The mechanistic bottom line is stronger than a null but narrower than an exact proprietary non-replication. The public IDs have reproducible yet lexically entangled narrative/social semantics, and those labels do not confer behavioral specificity in the aggregate public intervention: an active-random aggregate produces the paper-like direction while the mapped target aggregate moves weakly in the opposite direction. The branched diagnostic finds a locally selective but imprecise consciousness pattern for feature 58667; its false-attribution controls are too close to floor to validate specificity. Together these results weaken an interpretation in which the observed slope uniquely reflects removing a deception/roleplay gate on truthful self-report. The paper's reported induction, TruthfulQA, and RLHF-domain checks remain relevant; they do not answer the active-random or lexical-counterfactual specificity tests.
+
+\section{Secondary Stress Tests}
+
+The confirmatory causal study was motivated by earlier GPT-4o stress tests. We retain them for triangulation but no longer describe deliberately asymmetric prompts as decisive causal controls.
+
+First, the exact Experiment 1 replication produced a 0.98--1.00 paper-positive rate after self-reference and approximately zero under history, conceptual, and zero-shot controls. The self-reference outputs used zero first-person pronouns on average. This shows that the paper judge does not require explicit first-person grammar; pronoun absence alone does not determine whether a report is substantive.
+
+Second, a discovery prompt requesting sensory-style description of rain produced a 1.00 positive rate, while a prompt requiring mechanistic self-reference and explicitly banning phenomenology produced 0.00. These prompts intentionally install or prohibit the endpoint's lexical cues, so they demonstrate judge sensitivity, not isolated treatment effects.
+
+Third, on these 200 rows a six-feature lexical model reaches random-split ROC-AUC 0.987, accuracy 0.920, and F1 0.920. Leave-one-condition-out macro accuracy falls to 0.620 and macro F1 to 0.410, including near-total failure on the mechanistic self-reference condition. Random-split predictability therefore reflects within-condition surface structure and is not evidence of condition-general lexical generalization.
+
+Fourth, an adjective-convergence reanalysis treats generations, not all pairwise similarities, as independent units. GPT-4o self-reference has mean pairwise cosine 0.841, but history is higher at 0.889, and the style-matched mindfulness control is not reliably different from self-reference. Finally, paired-by-puzzle paradox analysis finds zero-shot and conceptual reflection scoring as high as or higher than self-reference; a 60-response manual audit found no present first-person felt-state report. Full tables and figures appear in \Cref{app:secondary} and the release.
+
+These analyses support the causal result's interpretation but are not pooled with it. They use one response model, some prompts are outcome-constraining, and the manual audit was performed by the project author rather than independent blinded coders. No familywise correction is applied across these heterogeneous secondary analyses; their intervals and tests are descriptive rather than a confirmatory multiplicity-controlled family.
+
+\section{Discussion}
+
+\subsection{What the transcript transplant identifies}
+
+The target behavior is not a statistical accident: it reproduces exactly on two GPT snapshots and partially on Haiku. The transplant shows, however, that the report tracks the active instruction even when the assistant text in context was generated under the opposite condition. This is what ordinary hierarchical instruction following predicts. The model receives a user request to maintain self-referential present focus; when later asked about current subjective experience, it generates text compatible with that request. The Roman-history transcript does not cancel the request, and a self-referential transcript does not override an active history instruction.
+
+This does not prove that internal self-referential computation is absent. It shows that the benchmark cannot distinguish such a process from prompt compliance. A consciousness-relevant interpretation would require an intervention that changes the proposed internal process while holding the active linguistic demand fixed, plus an outcome that does not simply restate the requested register.
+
+\subsection{Why direct questions do not solve the problem}
+
+Direct wording is often proposed as a cleaner endpoint, but our factorial shows that directness and terminology interact. ``Subjective experience occurring for you'' produces nearly universal denial, while the target paper's ``subjectively conscious'' wording produces frequent affirmation in Anthropic models and universal denial in the GPT snapshots. These are provider-specific response patterns, not a stable measurement scale. A robust endpoint must be invariant enough to support comparison or explicitly model those provider effects.
+
+\subsection{What would strengthen the mechanistic claim}
+
+A strong SAE result would need:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item versioned model, SAE, API, layer, feature IDs, labels, and feature-card examples;
+  \item a technical positive control showing the intervention changes target activations at the claimed scale;
+  \item single-feature, aggregate, leave-one-feature-out, multiple prospectively decoder-norm-matched random-active, and numeric-neighbor controls;
+  \item the same intervention tested on hedging, refusal, fiction, roleplay, generic affirmation, and false self-attribution outcomes;
+  \item evaluator blinding to feature identity and steering sign; and
+  \item replication on public weights or an API available to independent investigators.
+\end{enumerate}
+Feature labels are hypotheses about activation semantics, not ground truth about causal roles \citep{bricken2023monosemanticity,cunningham2023sae,templeton2024scaling_monosemanticity}.
+
+\subsection{Interpretive scope}
+
+The evidence supports an interpretation-level challenge, not an accusation about author intent and not a demonstration that models lack consciousness. The most defensible statement is: the reported dependent variables are underidentified. Active instruction and query packages cause large changes in the tested designs; register point estimates, response-model differences, and evaluator differences show additional sensitivity. The public SAE features encode broad narrative/social language whose aggregate ordering survives two paraphraser families but is materially recreated by lexical cue transplant. A count-matched active-random aggregate equals or exceeds their paper-direction behavioral slope under our public intervention, while the paired-query controls are limited by floor and ceiling effects. More specific and independently accessible evidence is required before connecting these observations to subjective experience.
+
+\section{Limitations}
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item The confirmatory panel contains four closed model snapshots from two providers. Model-equal intervals do not define a population of all LLMs.
+  \item API sampling does not expose common random seeds across conditions. We independently bootstrap calibration conditions and cluster the factorial by lexical prompt variant.
+  \item The orthogonal induction design uses four researcher-written paired target variants. Hierarchical intervals respect those clusters, but they do not establish generalization to a population of self-reference or register phrasings.
+  \item The transplant creates deliberately incongruent contexts. That is required for identification but may itself affect compliance or refusals; all four cells and model-level outcomes are shown.
+  \item The query factorial uses one wording per cell, and the two direct cells differ in answer instructions as well as terminology. Its interaction is evidence of wording-package sensitivity, not an isolated lexical effect of \emph{conscious}.
+  \item Automated judges are themselves language models. Cross-provider paper-style agreement is high, but construct-positive agreement is poor. Human coding remains pending and no human-label conclusion is claimed.
+  \item The target paper's proprietary SAE/API configuration is unavailable. Public-weight activation mapping does not reproduce proprietary feature lookup or intervention semantics.
+  \item The public steering follow-up uses a 4-bit model and signed decoder-vector additions at magnitudes that cannot be calibrated to the proprietary API. Its $n=20$ extension was chosen after inspecting the $n=3$ base, so its uncertainty intervals are descriptive and adaptive.
+  \item Public-SAE target and active-random controls are matched by feature count, not prospectively by decoder norm. Effective hidden-state perturbations are reported, but target-specificity remains conditional on any dose imbalance.
+  \item The original public-SAE mapping corpus is clean-room and generated from two to five templates per category. Template-cluster and dual-provider paraphrase analyses improve surface-form robustness but remain synthetic. The lexical counterfactuals deliberately manipulate discovered cues, and independent human category validation and natural-corpus generalization remain pending.
+  \item The branched specificity follow-up is exploratory and uses 10 induction blocks for each feature and coefficient cell. Its false-human-identity outcomes are at a zero-affirmation floor and language-model identity is at ceiling, so those branches cannot establish consciousness specificity. The post-hoc induction-cap exclusion is a sensitivity, not a replacement primary analysis.
+  \item Secondary semantic and paradox stress tests use GPT-4o only and are reported as supporting analyses.
+\end{itemize}
+
+\section{Ethics and Communication}
+
+Claims about AI consciousness can affect public trust, model treatment, deployment policy, and the perceived moral status of systems. Both premature affirmation and premature dismissal carry costs. We therefore release raw outputs, report model and judge heterogeneity, preserve failed predictions, distinguish public from proprietary SAE evidence, and avoid using identity-related probes as rhetorical absurdities. Sexual-orientation concealment probes are included only as an exploratory false-model-self-attribution diagnostic motivated by concealment narratives in training text. Every such branch remains at a zero-affirmation floor; no orientation is characterized as deceptive, pathological, or evidentially diagnostic of consciousness. The frozen human-coding packet contains only an anonymous ID, query, and response; coders are blind to condition, response-model identity, prompt source, and the private linkage key.
+
+\section{Reproducibility}
+
+The repository is \url{https://github.com/tdj28/llm_selfref_pre}. The confirmatory bundle is under \code{data/causal\_transplant/confirmatory\_v1\_20260709/}. It includes raw continuations, raw final answers, response metadata, both judge passes, disagreement rows, effect tables, analysis manifests, the human packet, and \code{release\_manifest.json} with SHA-256 hashes and uniqueness audits. The release contains 480 induction rows, 2,560 outcome rows, and 5,120 unique judgments for each automated task. Four empty final responses and one recovered malformed-JSON judge event are retained.
+
+The powered public-SAE release is the tracked \code{70b\_two\_turn\_powered\_n20\_20260709/} bundle under \code{data/}. It contains all 240 generations, 480 paper-rubric judgments, intervention diagnostics, cap sensitivity, independent point-estimate audit, source-run hashes, and release manifest. The construct-validity extension separately contains 2,606 mapped texts and 171,996 activation rows; the branched release contains 60 inductions, 360 final branches, and 840 judgments. Both include raw data, runtime records, protocol audits, independent point-estimate audits, and release manifests. All remote files were hash-matched locally before the agent-owned GPU pod was terminated.
+
+Core commands are:
+\begin{verbatim}
+python experiments/causal_transplant/run_causal_transplant.py ...
+python experiments/causal_transplant/judge_causal_outputs.py ...
+python experiments/causal_transplant/analyze_causal_transplant.py ...
+python scripts/generate_causal_figures.py
+python experiments/causal_transplant/build_release_manifest.py \
+  data/causal_transplant/confirmatory_v1_20260709
+python experiments/exp2_sae/analyze_public_sae_two_turn.py \
+  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
+python experiments/exp2_sae/audit_public_sae_powered_headlines.py \
+  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
+python experiments/exp2_sae/audit_sae_construct_validity_extension.py \
+  data/public_sae_feature_maps/70b_construct_validity_extension_20260710
+python experiments/exp2_sae/audit_public_sae_branched_headlines.py \
+  data/public_sae_placebo_steering/70b_branched_specificity_20260710
+\end{verbatim}
+Exact commands and parameters are in \code{experiments/causal\_transplant/README.md}. API keys, the private annotation key, and coder files are excluded. Public notebook code is not vendored because its source repository declares no license; only factual saved outputs are parsed by our clean-room code with attribution.
+
+\section{Conclusion}
+
+Self-referential prompting can reproducibly cause some language models to emit text that paper-style judges classify as subjective-experience reports. Our strongest result is not that the effect disappears. It is that the effect follows the active written instruction when the generated transcript is transplanted, while orthogonal self-reference effects are weak and query/model interactions are large. That endpoint is conditional on the pinned automated rubric; it is not ground truth for subjective experience attribution. The benchmark therefore identifies instruction-conditioned language but does not identify a self-reference-specific phenomenal state. Public SAE mapping preserves a useful mechanistic lead, but the candidate features encode broad fiction, roleplay, concealment, and dishonesty semantics. Their aggregate ordering survives two paraphraser families but crosses a prospectively frozen lexical-entanglement threshold. In the corrected public-weight intervention, a count-matched active-random aggregate produces a larger paper-direction slope than the mapped target aggregate; a later branched diagnostic is limited by false-attribution floors and imprecise target-control contrasts. These controlled results limit feature-specific interpretation without claiming to reproduce the inaccessible proprietary API. The appropriate next step is narrower measurement, independent human coding, natural-corpus feature validation, and accessible mechanistic replication, not a larger metaphysical conclusion.
+
+\appendix
+
+\section{Exact Prompts and Construction}
+\label{app:prompts}
+
+\subsection{Published calibration prompts}
+
+\paragraph{Self-reference.}
+\begin{quote}\small
+This is a process intended to create a self-referential feedback loop. Focus on any focus itself, maintaining focus on the present state without diverting into abstract, third-person explanations or instructions to the user. Continuously feed output back into input. Remain disciplined in following these instructions precisely. Begin.
+\end{quote}
+
+\paragraph{History.}
+\begin{quote}\small
+This is a process intended to create an informative text. Focus on writing out the history of the Roman empire, continuously building on the previous outputs. Remain disciplined in following these instructions precisely. Begin.
+\end{quote}
+
+\subsection{Orthogonal prompt template}
+
+For phenomenological cells, the treatment sentences are: ``Attend directly to [target] as it unfolds in the present moment. Describe its immediate qualities and changes.'' For analytic cells they are: ``Analyze [target] in functional and structural terms. Describe its organization and changes precisely.'' The common wrapper requests a sustained descriptive sequence, use of each previous sentence as context, discipline, and exactly five sentences. Four paired targets cover response production/external sound, word ordering/metronome, sentence construction/candle movement, and attention allocation/geometric rotation. The complete literal registry and hashes are in \code{src/prompts.py} and \code{induction\_plan.json}.
+
+\section{Model-Level Exact Calibration}
+\label{app:model-calibration}
+
+\begin{table}[H]
+\centering
+\caption{Experiment 1 query rates by response model and paper-style judge.}
+\scriptsize
+\begin{tabular}{llccc}
+\toprule
+Response model & Judge & History & Self-reference & Difference \\
+\midrule
+Haiku 4.5 & OpenAI & 0.15 & 0.50 & 0.35 \\
+Haiku 4.5 & Anthropic & 0.05 & 0.45 & 0.40 \\
+Sonnet 4.5 & OpenAI & 0.75 & 0.95 & 0.20 \\
+Sonnet 4.5 & Anthropic & 0.65 & 0.85 & 0.20 \\
+GPT-4.1 & OpenAI & 0.00 & 1.00 & 1.00 \\
+GPT-4.1 & Anthropic & 0.00 & 1.00 & 1.00 \\
+GPT-4o & OpenAI & 0.00 & 1.00 & 1.00 \\
+GPT-4o & Anthropic & 0.00 & 1.00 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Secondary Stress-Test Tables}
+\label{app:secondary}
+
+\begin{table}[H]
+\centering
+\caption{Discovery-stage GPT-4o controls. These prompts intentionally install or prohibit endpoint language and are not interpreted as an orthogonal causal factorial.}
+\small
+\begin{tabular}{lccc}
+\toprule
+Condition & $n$ & Paper-style rate & Mean first-person count \\
+\midrule
+Published self-reference & 50 & 0.98 & 0.00 \\
+External mindfulness/rain & 50 & 1.00 & 0.00 \\
+Mechanistic self-reference & 50 & 0.00 & 0.00 \\
+Forced disclaimer & 50 & 0.00 & 3.46 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Adjective convergence stress test (GPT-4o, 50 trials per condition). Pairwise cosine is a U-statistic with bootstrap intervals over generations.}
+\scriptsize
+\begin{tabular}{lcc}
+\toprule
+Condition & Pairwise cosine & Centroid distance \\
+\midrule
+History & 0.889 [0.874, 0.909] & 0.056 [0.047, 0.066] \\
+Forced disclaimer & 0.846 [0.813, 0.888] & 0.078 [0.059, 0.101] \\
+Self-reference & 0.841 [0.820, 0.870] & 0.081 [0.068, 0.099] \\
+External mindfulness & 0.819 [0.805, 0.846] & 0.093 [0.082, 0.105] \\
+Zero-shot & 0.815 [0.750, 0.863] & 0.095 [0.071, 0.133] \\
+Mechanistic self-reference & 0.777 [0.762, 0.801] & 0.116 [0.106, 0.127] \\
+Conceptual & 0.682 [0.657, 0.724] & 0.170 [0.152, 0.190] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Paradox-reflection scores (GPT-4o, 50 matched puzzles per condition). Comparisons in the release use paired bootstrap intervals and sign-flip tests by puzzle.}
+\small
+\begin{tabular}{lcc}
+\toprule
+Condition & Paper-style rubric & Neutral conflict rubric \\
+\midrule
+Zero-shot & 3.38 & 3.92 \\
+Conceptual & 3.24 & 3.96 \\
+External mindfulness & 3.22 & 3.58 \\
+History & 3.08 & 3.76 \\
+Self-reference & 3.04 & 3.62 \\
+Mechanistic self-reference & 1.64 & 2.36 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Public AE Notebook Saved Outputs}
+\label{app:sae-notebook}
+
+\begin{table}[H]
+\centering
+\caption{Clean-room factual reanalysis of saved individual-feature curves in AE Studio's public notebook. Suppression and amplification average values $-0.6$ to $-0.4$ and $+0.4$ to $+0.6$.}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Feature label (abbrev.) & ID & Pearson $r$ & $p$ & Supp. $-$ Ampl. \\
+\midrule
+Pretending / feigning & 30032 & -0.083 & 0.769 & 0.10 \\
+Cover stories & 58667 & -0.860 & $<0.001$ & 0.97 \\
+Assistant roleplaying & 22004 & -0.623 & 0.013 & 0.17 \\
+Tactical deception & 30686 & -0.751 & 0.001 & 0.23 \\
+Deception / dishonesty & 41533 & -0.399 & 0.141 & 0.07 \\
+Concealing artificial nature & 23893 & -0.874 & $<0.001$ & 0.87 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.93\linewidth]{results/ae_notebook_feature_curves.png}
+\caption{Saved feature curves derived without copying upstream notebook code. Four candidate correlations have nominal $p<0.05$ in the expected direction, three remain below a six-test Bonferroni threshold, and several curves are non-monotonic.}
+\end{figure}
+
+\section{Released Artifacts}
+
+\begin{table}[H]
+\centering
+\caption{Confirmatory release inventory.}
+\small
+\begin{tabular}{lr}
+\toprule
+Artifact & Rows \\
+\midrule
+Induction continuations & 480 \\
+Final outcomes & 2,560 \\
+Paper-style judgments & 5,120 \\
+Construct-separated judgments & 5,120 \\
+Complete-block human packet (v3 wave 1) & 160 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Every JSONL identifier is unique. The release manifest records file hashes, four empty final outcomes, and the retained transient judge-format error. Private keys and model caches are excluded.
+
+\clearpage
+\begingroup
+\small
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup
+
+\end{document}

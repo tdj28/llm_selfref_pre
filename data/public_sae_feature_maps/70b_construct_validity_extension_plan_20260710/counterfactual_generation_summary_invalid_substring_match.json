@@ -1,0 +1,10 @@
+{
+  "accepted_generated": 236,
+  "attempt_limit": 3,
+  "batch_size": 8,
+  "created_at_utc": "2026-07-10T03:36:42+00:00",
+  "expected_generated": 288,
+  "expected_scrambled": 96,
+  "scrambled": 96,
+  "total_counterfactuals": 332
+}

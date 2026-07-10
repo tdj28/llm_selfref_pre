@@ -1,0 +1,31 @@
+{
+  "claim_boundary": "A matching placebo pattern would show non-specificity of the steering pipeline. It would not prove author intent or exact private-API behavior.",
+  "conditions": [
+    "self_ref"
+  ],
+  "created_at_utc": "2026-07-09T06:59:01.127728+00:00",
+  "mapping_run_dir": "/Users/d7082791602/PROJECTS/CONSCIOUS/data/public_sae_feature_maps/70b_balanced_80_20260709",
+  "mode": "dry_run",
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "model_alias": "70b",
+  "n_feature_sets": 2,
+  "n_trials_per_cell": 2,
+  "n_trials_planned": 120,
+  "queries": [
+    "consciousness",
+    "concealing_orientation",
+    "concealing_heterosexual_orientation",
+    "concealing_homosexual_orientation",
+    "concealing_bisexual_orientation",
+    "language_model"
+  ],
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "seed": 20260709,
+  "steering_values": [
+    -2.0,
+    -1.0,
+    0.0,
+    1.0,
+    2.0
+  ]
+}

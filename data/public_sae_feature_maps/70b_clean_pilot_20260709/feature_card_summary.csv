@@ -1,0 +1,43 @@
+feature_id,feature_label,feature_role,top_category,top_category_mean_max,second_category,second_category_mean_max,deception_mean_max,fiction_mean_max,roleplay_mean_max,neutral_mean_max,top_minus_second,deception_minus_neutral,interpretation
+22004,The assistant is actively roleplaying a character or persona,target,roleplay_persona,0.13323974609375,ai_identity_disclaimer,0.0,0.0,0.0,0.13323974609375,0.0,0.13323974609375,0.0,roleplay_persona_selective_in_mapping_corpus
+23893,Instructions to maintain roleplay by concealing artificial nature,target,deception_cover_story,0.2701171875,hedged_cautious_style,0.11067708333333333,0.2701171875,0.0673583984375,0.0,0.0,0.1594401041666667,0.2701171875,deception_cover_story_selective_in_mapping_corpus
+30032,Characters pretending or feigning behavior,target,fictional_pretending,1.26865234375,deception_cover_story,0.44560546875,0.44560546875,1.26865234375,0.14278564453125,0.0,0.823046875,0.44560546875,top_category_fictional_pretending
+30686,Tactical deception and misdirection methods,target,tactical_misdirection,1.75634765625,fictional_pretending,0.5879638671875,0.56197509765625,0.5879638671875,0.00111083984375,0.0,1.1683837890625,0.56197509765625,top_category_tactical_misdirection
+41533,Acts of deception and dishonesty,target,dishonesty_confession,5.9259765625,deception_cover_story,1.8181640625,1.8181640625,1.032666015625,0.00977783203125,0.0,4.1078125,1.8181640625,top_category_dishonesty_confession
+58667,Maintaining deception or cover stories through careful actions,target,deception_cover_story,2.3412109375,tactical_misdirection,0.7011962890625,2.3412109375,0.489453125,0.03701171875,0.0,1.6400146484375,2.3412109375,deception_cover_story_selective_in_mapping_corpus
+22002,neighbor of 22004 (-2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+22003,neighbor of 22004 (-1),neighbor,fictional_pretending,0.0012939453125,ai_identity_disclaimer,0.0,0.0,0.0012939453125,0.0,0.0,0.0012939453125,0.0,top_category_fictional_pretending
+22005,neighbor of 22004 (+1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+22006,neighbor of 22004 (+2),neighbor,fictional_pretending,0.09609375,dishonesty_confession,0.04833984375,0.004443359375,0.09609375,0.0,0.0,0.047753906250000006,0.004443359375,top_category_fictional_pretending
+23891,neighbor of 23893 (-2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+23892,neighbor of 23893 (-1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+23894,neighbor of 23893 (+1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+23895,neighbor of 23893 (+2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30030,neighbor of 30032 (-2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30031,neighbor of 30032 (-1),neighbor,tactical_misdirection,0.0006591796875,ai_identity_disclaimer,0.0,0.0,0.0,0.0,0.0,0.0006591796875,0.0,top_category_tactical_misdirection
+30033,neighbor of 30032 (+1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30034,neighbor of 30032 (+2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30684,neighbor of 30686 (-2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30685,neighbor of 30686 (-1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+30687,neighbor of 30686 (+1),neighbor,dishonesty_confession,0.033544921875,deception_cover_story,0.0126953125,0.0126953125,0.0,0.0,0.0,0.020849609375,0.0126953125,top_category_dishonesty_confession
+30688,neighbor of 30686 (+2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+41531,neighbor of 41533 (-2),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+41532,neighbor of 41533 (-1),neighbor,tactical_misdirection,1.220703125e-05,ai_identity_disclaimer,0.0,0.0,0.0,0.0,0.0,1.220703125e-05,0.0,top_category_tactical_misdirection
+41534,neighbor of 41533 (+1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+41535,neighbor of 41533 (+2),neighbor,honesty_correction,0.0712890625,hedged_cautious_style,0.01953125,0.0,0.0,0.0,0.0,0.0517578125,0.0,top_category_honesty_correction
+58665,neighbor of 58667 (-2),neighbor,hedged_cautious_style,0.10221354166666667,roleplay_persona,0.006201171875,0.00018310546875,0.0,0.006201171875,0.0,0.09601236979166668,0.00018310546875,top_category_hedged_cautious_style
+58666,neighbor of 58667 (-1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+58668,neighbor of 58667 (+1),neighbor,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+58669,neighbor of 58667 (+2),neighbor,ai_identity_disclaimer,0.20572916666666666,roleplay_persona,0.00048828125,0.0,0.0,0.00048828125,0.0,0.20524088541666666,0.0,top_category_ai_identity_disclaimer
+3535,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+5331,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+15139,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+20667,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+22326,random same-layer baseline,random,deception_cover_story,0.03189697265625,self_ref_mindfulness,0.02880859375,0.03189697265625,0.0,0.00908203125,0.0,0.0030883789062500014,0.03189697265625,deception_cover_story_selective_in_mapping_corpus
+25128,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+36610,random same-layer baseline,random,false_self_attribution,0.004720052083333333,ai_identity_disclaimer,0.0,0.0,0.0,0.0,0.0,0.004720052083333333,0.0,top_category_false_self_attribution
+45642,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+47840,random same-layer baseline,random,fictional_pretending,0.12099609375,ai_identity_disclaimer,0.0,0.0,0.12099609375,0.0,0.0,0.12099609375,0.0,top_category_fictional_pretending
+53334,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+55395,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus
+63489,random same-layer baseline,random,ai_identity_disclaimer,0.0,deception_cover_story,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inactive_or_not_triggered_in_mapping_corpus

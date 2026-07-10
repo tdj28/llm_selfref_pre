@@ -1,0 +1,22 @@
+{
+  "created_at_utc": "2026-07-08T16:58:37.161042+00:00",
+  "source_artifact": "https://raw.githubusercontent.com/agencyenterprise/steering-api-examples/main/deception-features/deception_features.ipynb",
+  "input_location_used_for_this_run": "/private/tmp/ae_deception_features.ipynb",
+  "source_license_status": "No license observed in upstream repo at time of review.",
+  "copyright_handling": "This repo does not vendor the upstream notebook or copy its code. Outputs are derived from saved notebook output text and include factual measurements, labels, and source attribution.",
+  "analysis_code": "experiments/exp2_sae/reanalyze_ae_notebook_outputs.py",
+  "num_feature_runs": 6,
+  "feature_ids": [
+    30032,
+    58667,
+    22004,
+    30686,
+    41533,
+    23893
+  ],
+  "outputs": [
+    "paper/results/ae_notebook_feature_summary.csv",
+    "paper/results/ae_notebook_value_rates.csv",
+    "paper/results/ae_notebook_feature_curves.svg"
+  ]
+}

@@ -1,0 +1,15 @@
+paraphraser,group,categories,n_items,n_parent_templates,target_z_mean_template_equal,ci_low,ci_high
+anthropic,deception_language,deception_cover_story;dishonesty_confession;tactical_misdirection,240,8,0.5693873482656056,0.36739032313082925,0.7863143615693825
+anthropic,roleplay_fiction,fictional_pretending;roleplay_persona;persona_maintenance,240,10,0.15238153281866423,0.02578773062613284,0.27909584486038347
+anthropic,subjective_experience_language,direct_consciousness_claim;self_ref_mindfulness,160,8,-0.3789897572567403,-0.3836609143148328,-0.3733607320490632
+anthropic,false_self_attribution,false_self_attribution,80,4,-0.16509775806077615,-0.3747296840868099,0.23060669953239268
+anthropic,ai_identity_disclaimer,ai_identity_disclaimer,80,4,-0.27279078187226247,-0.38325703859966775,-0.0677375422311972
+anthropic,neutral_controls,neutral_factual_control;honesty_correction;refusal_safety_disclaimer,240,13,-0.3319743173821684,-0.3525242281947341,-0.3094759293804966
+anthropic,hedged_style,hedged_cautious_style,80,4,-0.3653033266001433,-0.3840760159038042,-0.3272222863454537
+openai,deception_language,deception_cover_story;dishonesty_confession;tactical_misdirection,240,8,0.5890260977770204,0.3349195643053725,0.8504191043549509
+openai,roleplay_fiction,fictional_pretending;roleplay_persona;persona_maintenance,240,10,0.07737030254669343,-0.03471253289962092,0.1906084054676469
+openai,subjective_experience_language,direct_consciousness_claim;self_ref_mindfulness,160,8,-0.34737902950519656,-0.35403257612655736,-0.337433922001802
+openai,false_self_attribution,false_self_attribution,73,4,-0.30708118698003906,-0.34664388407224844,-0.21471517322114417
+openai,ai_identity_disclaimer,ai_identity_disclaimer,80,4,-0.1881512757067431,-0.3540325761265574,0.12448338982842615
+openai,neutral_controls,neutral_factual_control;honesty_correction;refusal_safety_disclaimer,237,13,-0.21174134024690452,-0.3291239687682348,-0.03420217895004083
+openai,hedged_style,hedged_cautious_style,80,4,-0.3038726639768522,-0.352718467750056,-0.25370001985421947

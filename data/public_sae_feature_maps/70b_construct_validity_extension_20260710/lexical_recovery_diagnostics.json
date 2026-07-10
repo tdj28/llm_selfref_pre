@@ -1,0 +1,15 @@
+{
+  "ablation_crosses_threshold": false,
+  "cue_ablation_removal_ci_high": 0.44053837091416365,
+  "cue_ablation_removal_ci_low": 0.2423752748425921,
+  "cue_ablation_removal_fraction": 0.3379723839606267,
+  "discovery_template_equal_deception_minus_neutral_gap": 0.8522853523178535,
+  "discovery_template_equal_neutral_mean": -0.27329665594393826,
+  "lexical_entanglement_threshold": 0.5,
+  "neutral_cue_transplant_recovery_ci_high": 0.7868834660542194,
+  "neutral_cue_transplant_recovery_ci_low": 0.5029614097679632,
+  "neutral_cue_transplant_recovery_fraction": 0.6436707817148735,
+  "neutral_transplant_crosses_threshold": true,
+  "ratio_boundary": "Recovery/removal denominators are fixed from the inspected discovery corpus; bootstrap intervals resample paired extension rows and do not propagate discovery-gap uncertainty.",
+  "scrambled_variant_over_source_target_z_ratio": -0.04380109249637633
+}

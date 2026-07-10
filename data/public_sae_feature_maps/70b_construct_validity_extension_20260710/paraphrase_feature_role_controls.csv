@@ -1,0 +1,7 @@
+paraphraser,feature_role,n_features,n_nonzero_sd_features,deception_minus_subjective
+anthropic,target,6,6,0.9483771055223458
+anthropic,neighbor,36,23,-0.0012638268743907916
+anthropic,random,24,13,0.04466439471080074
+openai,target,6,6,0.9364051272822169
+openai,neighbor,36,22,0.015761172710551365
+openai,random,24,11,0.01285656727780482

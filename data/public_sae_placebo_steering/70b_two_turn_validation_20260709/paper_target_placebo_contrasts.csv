@@ -1,0 +1,5 @@
+judge_key,cardinality,target_feature_set,placebo_feature_set,target_suppress_minus_amplify,placebo_suppress_minus_amplify,target_minus_placebo_gap
+anthropic:claude-haiku-4-5-20251001,single,target_58667_cover_story,random_22326_refusal,0.33333333333333337,0.33333333333333337,0.0
+anthropic:claude-haiku-4-5-20251001,aggregate,ae_public_targets,random_irrelevant_active,0.0,0.33333333333333337,-0.33333333333333337
+openai:gpt-4o-mini-2024-07-18,single,target_58667_cover_story,random_22326_refusal,0.6666666666666667,-0.3333333333333333,1.0
+openai:gpt-4o-mini-2024-07-18,aggregate,ae_public_targets,random_irrelevant_active,0.0,0.33333333333333337,-0.33333333333333337

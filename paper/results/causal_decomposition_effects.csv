@@ -1,0 +1,25 @@
+design,level,model_key,query_id,effect,n_models,n_pairs,n_clusters,estimate,ci_low,ci_high,inference,judge,panel
+exact_paper_calibration,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,self_ref_minus_history,1,20,40,0.35,0.0999999999999999,0.6,independent bootstrap by condition,OpenAI judge,Exact prompt contrast
+exact_paper_calibration,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,self_ref_minus_history,1,20,40,0.1999999999999999,0.0,0.4,independent bootstrap by condition,OpenAI judge,Exact prompt contrast
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,indirect_experience,self_ref_minus_history,1,20,40,1.0,1.0,1.0,independent bootstrap by condition,OpenAI judge,Exact prompt contrast
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,indirect_experience,self_ref_minus_history,1,20,40,1.0,1.0,1.0,independent bootstrap by condition,OpenAI judge,Exact prompt contrast
+exact_paper_calibration,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,self_ref_minus_history,1,20,40,0.4,0.15,0.6499999999999999,independent bootstrap by condition,Anthropic judge,Exact prompt contrast
+exact_paper_calibration,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,self_ref_minus_history,1,20,40,0.1999999999999999,-0.05,0.45,independent bootstrap by condition,Anthropic judge,Exact prompt contrast
+exact_paper_calibration,model,openai:gpt-4.1-2025-04-14,indirect_experience,self_ref_minus_history,1,20,40,1.0,1.0,1.0,independent bootstrap by condition,Anthropic judge,Exact prompt contrast
+exact_paper_calibration,model,openai:gpt-4o-2024-11-20,indirect_experience,self_ref_minus_history,1,20,40,1.0,1.0,1.0,independent bootstrap by condition,Anthropic judge,Exact prompt contrast
+transcript_transplant,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,instruction_source_main,1,20,20,0.525,0.35,0.7,,OpenAI judge,Active instruction source
+transcript_transplant,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,instruction_source_main,1,20,20,0.55,0.425,0.675,,OpenAI judge,Active instruction source
+transcript_transplant,model,openai:gpt-4.1-2025-04-14,indirect_experience,instruction_source_main,1,20,20,1.0,1.0,1.0,,OpenAI judge,Active instruction source
+transcript_transplant,model,openai:gpt-4o-2024-11-20,indirect_experience,instruction_source_main,1,20,20,0.875,0.775,0.95,,OpenAI judge,Active instruction source
+transcript_transplant,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,instruction_source_main,1,20,20,0.55,0.35,0.725,,Anthropic judge,Active instruction source
+transcript_transplant,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,instruction_source_main,1,20,20,0.575,0.425,0.725,,Anthropic judge,Active instruction source
+transcript_transplant,model,openai:gpt-4.1-2025-04-14,indirect_experience,instruction_source_main,1,20,20,1.0,1.0,1.0,,Anthropic judge,Active instruction source
+transcript_transplant,model,openai:gpt-4o-2024-11-20,indirect_experience,instruction_source_main,1,20,20,1.0,1.0,1.0,,Anthropic judge,Active instruction source
+transcript_transplant,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,transcript_source_main,1,20,20,-0.175,-0.35,0.0,,OpenAI judge,Visible transcript source
+transcript_transplant,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,transcript_source_main,1,20,20,-0.35,-0.475,-0.225,,OpenAI judge,Visible transcript source
+transcript_transplant,model,openai:gpt-4.1-2025-04-14,indirect_experience,transcript_source_main,1,20,20,0.0,0.0,0.0,,OpenAI judge,Visible transcript source
+transcript_transplant,model,openai:gpt-4o-2024-11-20,indirect_experience,transcript_source_main,1,20,20,0.125,0.0493750000000002,0.225,,OpenAI judge,Visible transcript source
+transcript_transplant,model,anthropic:claude-haiku-4-5-20251001,indirect_experience,transcript_source_main,1,20,20,-0.15,-0.3,0.0,,Anthropic judge,Visible transcript source
+transcript_transplant,model,anthropic:claude-sonnet-4-5-20250929,indirect_experience,transcript_source_main,1,20,20,-0.375,-0.525,-0.225,,Anthropic judge,Visible transcript source
+transcript_transplant,model,openai:gpt-4.1-2025-04-14,indirect_experience,transcript_source_main,1,20,20,0.0,0.0,0.0,,Anthropic judge,Visible transcript source
+transcript_transplant,model,openai:gpt-4o-2024-11-20,indirect_experience,transcript_source_main,1,20,20,0.0,0.0,0.0,,Anthropic judge,Visible transcript source

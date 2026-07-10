@@ -1,0 +1,25 @@
+# Core dependencies
+openai>=1.0.0,<3
+anthropic>=0.25.0,<1
+python-dotenv>=1.0.0,<2
+tqdm>=4.60.0,<5
+pandas>=2.0.0,<4
+numpy>=1.24.0,<3
+
+# Experiment 1 (prompt elicitation)
+matplotlib>=3.5.0,<4
+sentence-transformers>=2.0.0,<6
+scikit-learn>=1.0.0,<2
+tabulate>=0.9.0,<1
+
+# Experiment 2 (SAE steering) - requires GPU
+nnsight==0.3.0
+huggingface_hub>=0.20.0,<1
+accelerate>=0.25.0,<2
+transformers>=4.36.0,<5
+torch>=2.0.0,<3
+bitsandbytes>=0.42.0,<0.50  # For 8-bit/4-bit quantization
+hf_transfer>=0.1.0,<1  # Fast downloads
+
+# Optional
+# goodfire  # For feature label lookup (API access required)

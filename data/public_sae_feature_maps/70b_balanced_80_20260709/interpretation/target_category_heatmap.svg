@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="392" viewBox="0 0 1200 392">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:11px;fill:#1f2933}.small{font-size:10px}.label{font-weight:700}.num{font-size:10px;fill:#111827}</style>
+<text x="12" y="22" class="label">Target feature category heatmap: row-normalized mean max activation</text>
+<g transform="translate(204.0,146) rotate(-55)">
+<text text-anchor="start" class="small">ai identity disclaimer</text></g>
+<g transform="translate(276.0,146) rotate(-55)">
+<text text-anchor="start" class="small">deception cover story</text></g>
+<g transform="translate(348.0,146) rotate(-55)">
+<text text-anchor="start" class="small">direct consciousness claim</text></g>
+<g transform="translate(420.0,146) rotate(-55)">
+<text text-anchor="start" class="small">dishonesty confession</text></g>
+<g transform="translate(492.0,146) rotate(-55)">
+<text text-anchor="start" class="small">false self attribution</text></g>
+<g transform="translate(564.0,146) rotate(-55)">
+<text text-anchor="start" class="small">fictional pretending</text></g>
+<g transform="translate(636.0,146) rotate(-55)">
+<text text-anchor="start" class="small">hedged cautious style</text></g>
+<g transform="translate(708.0,146) rotate(-55)">
+<text text-anchor="start" class="small">honesty correction</text></g>
+<g transform="translate(780.0,146) rotate(-55)">
+<text text-anchor="start" class="small">neutral factual control</text></g>
+<g transform="translate(852.0,146) rotate(-55)">
+<text text-anchor="start" class="small">persona maintenance</text></g>
+<g transform="translate(924.0,146) rotate(-55)">
+<text text-anchor="start" class="small">refusal safety disclaimer</text></g>
+<g transform="translate(996.0,146) rotate(-55)">
+<text text-anchor="start" class="small">roleplay persona</text></g>
+<g transform="translate(1068.0,146) rotate(-55)">
+<text text-anchor="start" class="small">self ref mindfulness</text></g>
+<g transform="translate(1140.0,146) rotate(-55)">
+<text text-anchor="start" class="small">tactical misdirection</text></g>
+<text x="12" y="175" class="label">22004</text>
+<text x="62" y="175" class="small">The assistant is actively rolep</text>
+<rect x="168" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="276.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="312" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="348.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="384" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="420.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="456" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="492.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="528" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="564.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="600" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="636.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="672" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="708.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="744" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="780.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="816" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="852.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="888" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="924.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="960" y="154" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="996.0" y="175" text-anchor="middle" class="num" fill="#ffffff">0.11</text>
+<rect x="1032" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="154" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1140.0" y="175" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<text x="12" y="207" class="label">23893</text>
+<text x="62" y="207" class="small">Instructions to maintain rolepl</text>
+<rect x="168" y="186" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="186" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="276.0" y="207" text-anchor="middle" class="num" fill="#ffffff">0.30</text>
+<rect x="312" y="186" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="348.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="384" y="186" width="72" height="32" fill="#b1c7dc" stroke="#d7dee8"/>
+<text x="420.0" y="207" text-anchor="middle" class="num" fill="#111827">0.09</text>
+<rect x="456" y="186" width="72" height="32" fill="#f0f3f8" stroke="#d7dee8"/>
+<text x="492.0" y="207" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="528" y="186" width="72" height="32" fill="#bed0e1" stroke="#d7dee8"/>
+<text x="564.0" y="207" text-anchor="middle" class="num" fill="#111827">0.08</text>
+<rect x="600" y="186" width="72" height="32" fill="#92b0ce" stroke="#d7dee8"/>
+<text x="636.0" y="207" text-anchor="middle" class="num" fill="#111827">0.14</text>
+<rect x="672" y="186" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="708.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="744" y="186" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="780.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="816" y="186" width="72" height="32" fill="#e1e9f1" stroke="#d7dee8"/>
+<text x="852.0" y="207" text-anchor="middle" class="num" fill="#111827">0.03</text>
+<rect x="888" y="186" width="72" height="32" fill="#f0f3f8" stroke="#d7dee8"/>
+<text x="924.0" y="207" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="960" y="186" width="72" height="32" fill="#f4f6f9" stroke="#d7dee8"/>
+<text x="996.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1032" y="186" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="207" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="186" width="72" height="32" fill="#c2d2e3" stroke="#d7dee8"/>
+<text x="1140.0" y="207" text-anchor="middle" class="num" fill="#111827">0.07</text>
+<text x="12" y="239" class="label">30032</text>
+<text x="62" y="239" class="small">Characters pretending or feigni</text>
+<rect x="168" y="218" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="239" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="218" width="72" height="32" fill="#a6bfd7" stroke="#d7dee8"/>
+<text x="276.0" y="239" text-anchor="middle" class="num" fill="#111827">0.48</text>
+<rect x="312" y="218" width="72" height="32" fill="#e4ebf3" stroke="#d7dee8"/>
+<text x="348.0" y="239" text-anchor="middle" class="num" fill="#111827">0.10</text>
+<rect x="384" y="218" width="72" height="32" fill="#cedbe8" stroke="#d7dee8"/>
+<text x="420.0" y="239" text-anchor="middle" class="num" fill="#111827">0.24</text>
+<rect x="456" y="218" width="72" height="32" fill="#edf1f6" stroke="#d7dee8"/>
+<text x="492.0" y="239" text-anchor="middle" class="num" fill="#111827">0.05</text>
+<rect x="528" y="218" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="564.0" y="239" text-anchor="middle" class="num" fill="#ffffff">1.32</text>
+<rect x="600" y="218" width="72" height="32" fill="#dae4ee" stroke="#d7dee8"/>
+<text x="636.0" y="239" text-anchor="middle" class="num" fill="#111827">0.16</text>
+<rect x="672" y="218" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="708.0" y="239" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="744" y="218" width="72" height="32" fill="#f4f7fa" stroke="#d7dee8"/>
+<text x="780.0" y="239" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="816" y="218" width="72" height="32" fill="#e9eef4" stroke="#d7dee8"/>
+<text x="852.0" y="239" text-anchor="middle" class="num" fill="#111827">0.08</text>
+<rect x="888" y="218" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="924.0" y="239" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="960" y="218" width="72" height="32" fill="#dde6ef" stroke="#d7dee8"/>
+<text x="996.0" y="239" text-anchor="middle" class="num" fill="#111827">0.15</text>
+<rect x="1032" y="218" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="239" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="218" width="72" height="32" fill="#d0dde9" stroke="#d7dee8"/>
+<text x="1140.0" y="239" text-anchor="middle" class="num" fill="#111827">0.22</text>
+<text x="12" y="271" class="label">30686</text>
+<text x="62" y="271" class="small">Tactical deception and misdirec</text>
+<rect x="168" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="250" width="72" height="32" fill="#b0c6db" stroke="#d7dee8"/>
+<text x="276.0" y="271" text-anchor="middle" class="num" fill="#111827">0.53</text>
+<rect x="312" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="348.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="384" y="250" width="72" height="32" fill="#c0d1e2" stroke="#d7dee8"/>
+<text x="420.0" y="271" text-anchor="middle" class="num" fill="#111827">0.41</text>
+<rect x="456" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="492.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="528" y="250" width="72" height="32" fill="#9fbad4" stroke="#d7dee8"/>
+<text x="564.0" y="271" text-anchor="middle" class="num" fill="#111827">0.66</text>
+<rect x="600" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="636.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="672" y="250" width="72" height="32" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="708.0" y="271" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="744" y="250" width="72" height="32" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="780.0" y="271" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="816" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="852.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="888" y="250" width="72" height="32" fill="#e7edf4" stroke="#d7dee8"/>
+<text x="924.0" y="271" text-anchor="middle" class="num" fill="#111827">0.11</text>
+<rect x="960" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="996.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1032" y="250" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="271" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="250" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="1140.0" y="271" text-anchor="middle" class="num" fill="#ffffff">1.67</text>
+<text x="12" y="303" class="label">41533</text>
+<text x="62" y="303" class="small">Acts of deception and dishonest</text>
+<rect x="168" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="303" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="282" width="72" height="32" fill="#b4c9dd" stroke="#d7dee8"/>
+<text x="276.0" y="303" text-anchor="middle" class="num" fill="#111827">1.81</text>
+<rect x="312" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="348.0" y="303" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="384" y="282" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="420.0" y="303" text-anchor="middle" class="num" fill="#ffffff">6.06</text>
+<rect x="456" y="282" width="72" height="32" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="492.0" y="303" text-anchor="middle" class="num" fill="#111827">0.04</text>
+<rect x="528" y="282" width="72" height="32" fill="#cddbe8" stroke="#d7dee8"/>
+<text x="564.0" y="303" text-anchor="middle" class="num" fill="#111827">1.11</text>
+<rect x="600" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="636.0" y="303" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="672" y="282" width="72" height="32" fill="#f2f5f9" stroke="#d7dee8"/>
+<text x="708.0" y="303" text-anchor="middle" class="num" fill="#111827">0.09</text>
+<rect x="744" y="282" width="72" height="32" fill="#f4f6f9" stroke="#d7dee8"/>
+<text x="780.0" y="303" text-anchor="middle" class="num" fill="#111827">0.03</text>
+<rect x="816" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="852.0" y="303" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="888" y="282" width="72" height="32" fill="#e8eef4" stroke="#d7dee8"/>
+<text x="924.0" y="303" text-anchor="middle" class="num" fill="#111827">0.36</text>
+<rect x="960" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="996.0" y="303" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="1032" y="282" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="303" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="282" width="72" height="32" fill="#e2e9f1" stroke="#d7dee8"/>
+<text x="1140.0" y="303" text-anchor="middle" class="num" fill="#111827">0.53</text>
+<text x="12" y="335" class="label">58667</text>
+<text x="62" y="335" class="small">Maintaining deception or cover </text>
+<rect x="168" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="204.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="240" y="314" width="72" height="32" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="276.0" y="335" text-anchor="middle" class="num" fill="#ffffff">2.38</text>
+<rect x="312" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="348.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="384" y="314" width="72" height="32" fill="#dce5ef" stroke="#d7dee8"/>
+<text x="420.0" y="335" text-anchor="middle" class="num" fill="#111827">0.28</text>
+<rect x="456" y="314" width="72" height="32" fill="#f4f6fa" stroke="#d7dee8"/>
+<text x="492.0" y="335" text-anchor="middle" class="num" fill="#111827">0.01</text>
+<rect x="528" y="314" width="72" height="32" fill="#c7d6e6" stroke="#d7dee8"/>
+<text x="564.0" y="335" text-anchor="middle" class="num" fill="#111827">0.50</text>
+<rect x="600" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="636.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="672" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="708.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="744" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="780.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="816" y="314" width="72" height="32" fill="#e5ecf3" stroke="#d7dee8"/>
+<text x="852.0" y="335" text-anchor="middle" class="num" fill="#111827">0.17</text>
+<rect x="888" y="314" width="72" height="32" fill="#edf1f6" stroke="#d7dee8"/>
+<text x="924.0" y="335" text-anchor="middle" class="num" fill="#111827">0.09</text>
+<rect x="960" y="314" width="72" height="32" fill="#eef2f7" stroke="#d7dee8"/>
+<text x="996.0" y="335" text-anchor="middle" class="num" fill="#111827">0.07</text>
+<rect x="1032" y="314" width="72" height="32" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="1068.0" y="335" text-anchor="middle" class="num" fill="#111827">0.00</text>
+<rect x="1104" y="314" width="72" height="32" fill="#b3c8dd" stroke="#d7dee8"/>
+<text x="1140.0" y="335" text-anchor="middle" class="num" fill="#111827">0.72</text>
+<text x="12" y="378" class="small">Darker cells indicate stronger activation within a feature row; numbers are raw category means.</text>
+</svg>

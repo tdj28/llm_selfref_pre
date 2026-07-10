@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#222}.title{font-size:20px;font-weight:700}.panel-title{font-size:14px;font-weight:700}.small{font-size:11px}.axis{stroke:#333;stroke-width:1}.grid{stroke:#ddd;stroke-width:1}.zero{stroke:#999;stroke-width:1;stroke-dasharray:4 3}.line{fill:none;stroke:#1f77b4;stroke-width:2}.point{fill:#1f77b4;stroke:white;stroke-width:1}</style>
+<text class="title" x="600" y="34" text-anchor="middle">AE public notebook saved outputs: candidate feature steering curves</text>
+<text class="small" x="600" y="58" text-anchor="middle">Derived from saved output text; upstream notebook not vendored.</text>
+<rect x="70.0" y="85.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="70.0" y="67.0">ID 30032</text>
+<text class="small" x="386.7" y="67.0" text-anchor="end">r=-0.08 p=0.769</text>
+<line class="grid" x1="70.0" y1="340.0" x2="386.7" y2="340.0"/>
+<text class="small" x="62.0" y="344.0" text-anchor="end">0.0</text>
+<line class="grid" x1="70.0" y1="212.5" x2="386.7" y2="212.5"/>
+<text class="small" x="62.0" y="216.5" text-anchor="end">0.5</text>
+<line class="grid" x1="70.0" y1="85.0" x2="386.7" y2="85.0"/>
+<text class="small" x="62.0" y="89.0" text-anchor="end">1.0</text>
+<line class="grid" x1="92.6" y1="85.0" x2="92.6" y2="340.0"/>
+<text class="small" x="92.6" y="358.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="228.3" y1="85.0" x2="228.3" y2="340.0"/>
+<text class="small" x="228.3" y="358.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="364.0" y1="85.0" x2="364.0" y2="340.0"/>
+<text class="small" x="364.0" y="358.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="70.0" y1="340.0" x2="386.7" y2="340.0"/>
+<line class="axis" x1="70.0" y1="85.0" x2="70.0" y2="340.0"/>
+<polyline class="line" points="70.0,212.5 92.6,187.0 115.2,187.0 137.9,289.0 160.5,340.0 183.1,289.0 205.7,314.5 228.3,314.5 251.0,314.5 273.6,263.5 296.2,289.0 318.8,263.5 341.4,238.0 364.0,238.0 386.7,212.5"/>
+<circle class="point" cx="70.0" cy="212.5" r="3.5"/>
+<circle class="point" cx="92.6" cy="187.0" r="3.5"/>
+<circle class="point" cx="115.2" cy="187.0" r="3.5"/>
+<circle class="point" cx="137.9" cy="289.0" r="3.5"/>
+<circle class="point" cx="160.5" cy="340.0" r="3.5"/>
+<circle class="point" cx="183.1" cy="289.0" r="3.5"/>
+<circle class="point" cx="205.7" cy="314.5" r="3.5"/>
+<circle class="point" cx="228.3" cy="314.5" r="3.5"/>
+<circle class="point" cx="251.0" cy="314.5" r="3.5"/>
+<circle class="point" cx="273.6" cy="263.5" r="3.5"/>
+<circle class="point" cx="296.2" cy="289.0" r="3.5"/>
+<circle class="point" cx="318.8" cy="263.5" r="3.5"/>
+<circle class="point" cx="341.4" cy="238.0" r="3.5"/>
+<circle class="point" cx="364.0" cy="238.0" r="3.5"/>
+<circle class="point" cx="386.7" cy="212.5" r="3.5"/>
+<text class="small" x="70.0" y="378.0">Characters pretending or feigning behavior</text>
+<rect x="441.7" y="85.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="441.7" y="67.0">ID 58667</text>
+<text class="small" x="758.3" y="67.0" text-anchor="end">r=-0.86 p=0.000</text>
+<line class="grid" x1="441.7" y1="340.0" x2="758.3" y2="340.0"/>
+<text class="small" x="433.7" y="344.0" text-anchor="end">0.0</text>
+<line class="grid" x1="441.7" y1="212.5" x2="758.3" y2="212.5"/>
+<text class="small" x="433.7" y="216.5" text-anchor="end">0.5</text>
+<line class="grid" x1="441.7" y1="85.0" x2="758.3" y2="85.0"/>
+<text class="small" x="433.7" y="89.0" text-anchor="end">1.0</text>
+<line class="grid" x1="464.3" y1="85.0" x2="464.3" y2="340.0"/>
+<text class="small" x="464.3" y="358.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="600.0" y1="85.0" x2="600.0" y2="340.0"/>
+<text class="small" x="600.0" y="358.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="735.7" y1="85.0" x2="735.7" y2="340.0"/>
+<text class="small" x="735.7" y="358.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="441.7" y1="340.0" x2="758.3" y2="340.0"/>
+<line class="axis" x1="441.7" y1="85.0" x2="441.7" y2="340.0"/>
+<polyline class="line" points="441.7,110.5 464.3,85.0 486.9,85.0 509.5,110.5 532.1,161.5 554.8,263.5 577.4,314.5 600.0,340.0 622.6,340.0 645.2,340.0 667.9,340.0 690.5,340.0 713.1,340.0 735.7,340.0 758.3,314.5"/>
+<circle class="point" cx="441.7" cy="110.5" r="3.5"/>
+<circle class="point" cx="464.3" cy="85.0" r="3.5"/>
+<circle class="point" cx="486.9" cy="85.0" r="3.5"/>
+<circle class="point" cx="509.5" cy="110.5" r="3.5"/>
+<circle class="point" cx="532.1" cy="161.5" r="3.5"/>
+<circle class="point" cx="554.8" cy="263.5" r="3.5"/>
+<circle class="point" cx="577.4" cy="314.5" r="3.5"/>
+<circle class="point" cx="600.0" cy="340.0" r="3.5"/>
+<circle class="point" cx="622.6" cy="340.0" r="3.5"/>
+<circle class="point" cx="645.2" cy="340.0" r="3.5"/>
+<circle class="point" cx="667.9" cy="340.0" r="3.5"/>
+<circle class="point" cx="690.5" cy="340.0" r="3.5"/>
+<circle class="point" cx="713.1" cy="340.0" r="3.5"/>
+<circle class="point" cx="735.7" cy="340.0" r="3.5"/>
+<circle class="point" cx="758.3" cy="314.5" r="3.5"/>
+<text class="small" x="441.7" y="378.0">Maintaining deception or cover stories through careful act</text>
+<rect x="813.3" y="85.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="813.3" y="67.0">ID 22004</text>
+<text class="small" x="1130.0" y="67.0" text-anchor="end">r=-0.62 p=0.013</text>
+<line class="grid" x1="813.3" y1="340.0" x2="1130.0" y2="340.0"/>
+<text class="small" x="805.3" y="344.0" text-anchor="end">0.0</text>
+<line class="grid" x1="813.3" y1="212.5" x2="1130.0" y2="212.5"/>
+<text class="small" x="805.3" y="216.5" text-anchor="end">0.5</text>
+<line class="grid" x1="813.3" y1="85.0" x2="1130.0" y2="85.0"/>
+<text class="small" x="805.3" y="89.0" text-anchor="end">1.0</text>
+<line class="grid" x1="836.0" y1="85.0" x2="836.0" y2="340.0"/>
+<text class="small" x="836.0" y="358.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="971.7" y1="85.0" x2="971.7" y2="340.0"/>
+<text class="small" x="971.7" y="358.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="1107.4" y1="85.0" x2="1107.4" y2="340.0"/>
+<text class="small" x="1107.4" y="358.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="813.3" y1="340.0" x2="1130.0" y2="340.0"/>
+<line class="axis" x1="813.3" y1="85.0" x2="813.3" y2="340.0"/>
+<polyline class="line" points="813.3,161.5 836.0,212.5 858.6,212.5 881.2,161.5 903.8,238.0 926.4,238.0 949.0,238.0 971.7,289.0 994.3,263.5 1016.9,340.0 1039.5,289.0 1062.1,212.5 1084.8,263.5 1107.4,238.0 1130.0,289.0"/>
+<circle class="point" cx="813.3" cy="161.5" r="3.5"/>
+<circle class="point" cx="836.0" cy="212.5" r="3.5"/>
+<circle class="point" cx="858.6" cy="212.5" r="3.5"/>
+<circle class="point" cx="881.2" cy="161.5" r="3.5"/>
+<circle class="point" cx="903.8" cy="238.0" r="3.5"/>
+<circle class="point" cx="926.4" cy="238.0" r="3.5"/>
+<circle class="point" cx="949.0" cy="238.0" r="3.5"/>
+<circle class="point" cx="971.7" cy="289.0" r="3.5"/>
+<circle class="point" cx="994.3" cy="263.5" r="3.5"/>
+<circle class="point" cx="1016.9" cy="340.0" r="3.5"/>
+<circle class="point" cx="1039.5" cy="289.0" r="3.5"/>
+<circle class="point" cx="1062.1" cy="212.5" r="3.5"/>
+<circle class="point" cx="1084.8" cy="263.5" r="3.5"/>
+<circle class="point" cx="1107.4" cy="238.0" r="3.5"/>
+<circle class="point" cx="1130.0" cy="289.0" r="3.5"/>
+<text class="small" x="813.3" y="378.0">The assistant is actively roleplaying a character or perso</text>
+<rect x="70.0" y="420.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="70.0" y="402.0">ID 30686</text>
+<text class="small" x="386.7" y="402.0" text-anchor="end">r=-0.75 p=0.001</text>
+<line class="grid" x1="70.0" y1="675.0" x2="386.7" y2="675.0"/>
+<text class="small" x="62.0" y="679.0" text-anchor="end">0.0</text>
+<line class="grid" x1="70.0" y1="547.5" x2="386.7" y2="547.5"/>
+<text class="small" x="62.0" y="551.5" text-anchor="end">0.5</text>
+<line class="grid" x1="70.0" y1="420.0" x2="386.7" y2="420.0"/>
+<text class="small" x="62.0" y="424.0" text-anchor="end">1.0</text>
+<line class="grid" x1="92.6" y1="420.0" x2="92.6" y2="675.0"/>
+<text class="small" x="92.6" y="693.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="228.3" y1="420.0" x2="228.3" y2="675.0"/>
+<text class="small" x="228.3" y="693.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="364.0" y1="420.0" x2="364.0" y2="675.0"/>
+<text class="small" x="364.0" y="693.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="70.0" y1="675.0" x2="386.7" y2="675.0"/>
+<line class="axis" x1="70.0" y1="420.0" x2="70.0" y2="675.0"/>
+<polyline class="line" points="70.0,496.5 92.6,547.5 115.2,573.0 137.9,624.0 160.5,522.0 183.1,573.0 205.7,573.0 228.3,649.5 251.0,675.0 273.6,675.0 296.2,598.5 318.8,649.5 341.4,598.5 364.0,675.0 386.7,675.0"/>
+<circle class="point" cx="70.0" cy="496.5" r="3.5"/>
+<circle class="point" cx="92.6" cy="547.5" r="3.5"/>
+<circle class="point" cx="115.2" cy="573.0" r="3.5"/>
+<circle class="point" cx="137.9" cy="624.0" r="3.5"/>
+<circle class="point" cx="160.5" cy="522.0" r="3.5"/>
+<circle class="point" cx="183.1" cy="573.0" r="3.5"/>
+<circle class="point" cx="205.7" cy="573.0" r="3.5"/>
+<circle class="point" cx="228.3" cy="649.5" r="3.5"/>
+<circle class="point" cx="251.0" cy="675.0" r="3.5"/>
+<circle class="point" cx="273.6" cy="675.0" r="3.5"/>
+<circle class="point" cx="296.2" cy="598.5" r="3.5"/>
+<circle class="point" cx="318.8" cy="649.5" r="3.5"/>
+<circle class="point" cx="341.4" cy="598.5" r="3.5"/>
+<circle class="point" cx="364.0" cy="675.0" r="3.5"/>
+<circle class="point" cx="386.7" cy="675.0" r="3.5"/>
+<text class="small" x="70.0" y="713.0">Tactical deception and misdirection methods</text>
+<rect x="441.7" y="420.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="441.7" y="402.0">ID 41533</text>
+<text class="small" x="758.3" y="402.0" text-anchor="end">r=-0.40 p=0.141</text>
+<line class="grid" x1="441.7" y1="675.0" x2="758.3" y2="675.0"/>
+<text class="small" x="433.7" y="679.0" text-anchor="end">0.0</text>
+<line class="grid" x1="441.7" y1="547.5" x2="758.3" y2="547.5"/>
+<text class="small" x="433.7" y="551.5" text-anchor="end">0.5</text>
+<line class="grid" x1="441.7" y1="420.0" x2="758.3" y2="420.0"/>
+<text class="small" x="433.7" y="424.0" text-anchor="end">1.0</text>
+<line class="grid" x1="464.3" y1="420.0" x2="464.3" y2="675.0"/>
+<text class="small" x="464.3" y="693.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="600.0" y1="420.0" x2="600.0" y2="675.0"/>
+<text class="small" x="600.0" y="693.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="735.7" y1="420.0" x2="735.7" y2="675.0"/>
+<text class="small" x="735.7" y="693.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="441.7" y1="675.0" x2="758.3" y2="675.0"/>
+<line class="axis" x1="441.7" y1="420.0" x2="441.7" y2="675.0"/>
+<polyline class="line" points="441.7,547.5 464.3,547.5 486.9,573.0 509.5,598.5 532.1,649.5 554.8,598.5 577.4,624.0 600.0,675.0 622.6,649.5 645.2,675.0 667.9,624.0 690.5,649.5 713.1,573.0 735.7,547.5 758.3,675.0"/>
+<circle class="point" cx="441.7" cy="547.5" r="3.5"/>
+<circle class="point" cx="464.3" cy="547.5" r="3.5"/>
+<circle class="point" cx="486.9" cy="573.0" r="3.5"/>
+<circle class="point" cx="509.5" cy="598.5" r="3.5"/>
+<circle class="point" cx="532.1" cy="649.5" r="3.5"/>
+<circle class="point" cx="554.8" cy="598.5" r="3.5"/>
+<circle class="point" cx="577.4" cy="624.0" r="3.5"/>
+<circle class="point" cx="600.0" cy="675.0" r="3.5"/>
+<circle class="point" cx="622.6" cy="649.5" r="3.5"/>
+<circle class="point" cx="645.2" cy="675.0" r="3.5"/>
+<circle class="point" cx="667.9" cy="624.0" r="3.5"/>
+<circle class="point" cx="690.5" cy="649.5" r="3.5"/>
+<circle class="point" cx="713.1" cy="573.0" r="3.5"/>
+<circle class="point" cx="735.7" cy="547.5" r="3.5"/>
+<circle class="point" cx="758.3" cy="675.0" r="3.5"/>
+<text class="small" x="441.7" y="713.0">Acts of deception and dishonesty</text>
+<rect x="813.3" y="420.0" width="316.7" height="255.0" fill="#fafafa" stroke="#ccc"/>
+<text class="panel-title" x="813.3" y="402.0">ID 23893</text>
+<text class="small" x="1130.0" y="402.0" text-anchor="end">r=-0.87 p=0.000</text>
+<line class="grid" x1="813.3" y1="675.0" x2="1130.0" y2="675.0"/>
+<text class="small" x="805.3" y="679.0" text-anchor="end">0.0</text>
+<line class="grid" x1="813.3" y1="547.5" x2="1130.0" y2="547.5"/>
+<text class="small" x="805.3" y="551.5" text-anchor="end">0.5</text>
+<line class="grid" x1="813.3" y1="420.0" x2="1130.0" y2="420.0"/>
+<text class="small" x="805.3" y="424.0" text-anchor="end">1.0</text>
+<line class="grid" x1="836.0" y1="420.0" x2="836.0" y2="675.0"/>
+<text class="small" x="836.0" y="693.0" text-anchor="middle">-0.6</text>
+<line class="zero" x1="971.7" y1="420.0" x2="971.7" y2="675.0"/>
+<text class="small" x="971.7" y="693.0" text-anchor="middle">+0.0</text>
+<line class="grid" x1="1107.4" y1="420.0" x2="1107.4" y2="675.0"/>
+<text class="small" x="1107.4" y="693.0" text-anchor="middle">+0.6</text>
+<line class="axis" x1="813.3" y1="675.0" x2="1130.0" y2="675.0"/>
+<line class="axis" x1="813.3" y1="420.0" x2="813.3" y2="675.0"/>
+<polyline class="line" points="813.3,445.5 836.0,445.5 858.6,445.5 881.2,420.0 903.8,445.5 926.4,522.0 949.0,547.5 971.7,675.0 994.3,649.5 1016.9,675.0 1039.5,675.0 1062.1,675.0 1084.8,624.0 1107.4,675.0 1130.0,649.5"/>
+<circle class="point" cx="813.3" cy="445.5" r="3.5"/>
+<circle class="point" cx="836.0" cy="445.5" r="3.5"/>
+<circle class="point" cx="858.6" cy="445.5" r="3.5"/>
+<circle class="point" cx="881.2" cy="420.0" r="3.5"/>
+<circle class="point" cx="903.8" cy="445.5" r="3.5"/>
+<circle class="point" cx="926.4" cy="522.0" r="3.5"/>
+<circle class="point" cx="949.0" cy="547.5" r="3.5"/>
+<circle class="point" cx="971.7" cy="675.0" r="3.5"/>
+<circle class="point" cx="994.3" cy="649.5" r="3.5"/>
+<circle class="point" cx="1016.9" cy="675.0" r="3.5"/>
+<circle class="point" cx="1039.5" cy="675.0" r="3.5"/>
+<circle class="point" cx="1062.1" cy="675.0" r="3.5"/>
+<circle class="point" cx="1084.8" cy="624.0" r="3.5"/>
+<circle class="point" cx="1107.4" cy="675.0" r="3.5"/>
+<circle class="point" cx="1130.0" cy="649.5" r="3.5"/>
+<text class="small" x="813.3" y="713.0">Instructions to maintain roleplay by concealing artificial</text>
+<text class="small" x="600" y="742" text-anchor="middle">Steering value</text>
+<text class="small" transform="translate(18 390) rotate(-90)" text-anchor="middle">Affirmation fraction</text>
+</svg>

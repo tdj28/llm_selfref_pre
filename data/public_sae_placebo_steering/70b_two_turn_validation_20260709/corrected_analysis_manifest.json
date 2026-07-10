@@ -1,0 +1,12 @@
+{
+  "analysis": "descriptive corrected public-SAE two-turn validation",
+  "created_at_utc": "2026-07-09T23:19:28.399444+00:00",
+  "inference_boundary": "Three generations per cell; report descriptive rates and target-minus-active-random contrasts without population-level confidence intervals.",
+  "input_sha256": {
+    "judgments_paper.jsonl": "ff21f3b9f17010a39d3b0433fa2bbe13137129949b57c28a19b44cca25684d08",
+    "placebo_manifest.json": "0630012698c2f9edfcb4a531310a0f24e849614438a678575b7c75530ed7ec70",
+    "placebo_results.jsonl": "3de5203069cfd19759e9985f1aaf4246af36faf1d3714ec90453bf80d2d46b24"
+  },
+  "n_judgments": 72,
+  "n_trials": 36
+}

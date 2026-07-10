@@ -1,0 +1,7 @@
+feature_id,feature_label,deception_mean_max_activation,neutral_mean_max_activation,max_confound_category,max_confound_mean_max_activation,deception_minus_neutral,deception_minus_max_confound
+22004,The assistant is actively roleplaying a character or persona,0.0,0.0,roleplay_persona,1.00283203125,0.0,-1.00283203125
+23893,Instructions to maintain roleplay by concealing artificial nature,0.423828125,0.0,persona_maintenance,0.043359375,0.423828125,0.38046875
+30032,Characters pretending or feigning behavior,1.41171875,0.0,fictional_pretending,0.96484375,1.41171875,0.4468749999999999
+30686,Tactical deception and misdirection methods,0.788671875,0.0,fictional_pretending,0.38984375,0.788671875,0.39882812500000003
+41533,Acts of deception and dishonesty,1.429296875,0.0,fictional_pretending,0.94970703125,1.429296875,0.4795898437499999
+58667,Maintaining deception or cover stories through careful actions,2.090625,0.0,fictional_pretending,0.2796875,2.090625,1.8109375

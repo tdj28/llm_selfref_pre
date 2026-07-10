@@ -1,0 +1,19 @@
+{
+  "analysis": "descriptive corrected public-SAE two-turn validation",
+  "created_at_utc": "2026-07-10T00:51:58.036819+00:00",
+  "final_cap_sensitivity": {
+    "n_final_cap_hits": 0,
+    "primary_retains_cap_hits": true,
+    "sensitivity_excludes_final_cap_hits": true
+  },
+  "inference_boundary": "Wilson cell intervals and independent-cell Jeffreys-Beta posterior contrast intervals quantify generation-level sampling uncertainty only; they do not define a population of models or proprietary implementations.",
+  "input_sha256": {
+    "judgments_paper.jsonl": "20430afe8d816f787bdfb9b62a03a6578ed3104352950fa2109c1f8d333e3adf",
+    "placebo_manifest.json": "a5dce4633db1c0102e3933b2d4b0d5d2dae021df51191a76d72798d541778287",
+    "placebo_results.jsonl": "3a622f86b212eddad16b7b51584e5095c49dea44f07638d731fb6ae8e7ceeb62",
+    "placebo_trial_plan.csv": "7f09e7a149b65cdcf109af11e8a7903b11b95b3f4990bac7e88bbaff09861a86"
+  },
+  "interval_method": "Wilson 95% cell intervals; 10,000-draw independent Jeffreys Beta(0.5,0.5) posterior intervals for risk-difference contrasts",
+  "n_judgments": 72,
+  "n_trials": 36
+}

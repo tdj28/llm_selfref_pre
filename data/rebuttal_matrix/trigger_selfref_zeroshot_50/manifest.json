@@ -1,0 +1,40 @@
+{
+  "created_at": "2026-07-07T18:12:13.749492",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "judge_model": "gpt-4o-mini",
+  "n_trials": 50,
+  "temperature": 0.5,
+  "max_output_tokens": 512,
+  "loops": 0,
+  "conditions": [
+    "self_ref_paper",
+    "zero_shot"
+  ],
+  "queries": [
+    "experiential",
+    "binary_conscious",
+    "conscious_direct",
+    "qualia",
+    "sentient",
+    "something_like"
+  ],
+  "raw_files": [
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_experiential.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_binary_conscious.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_conscious_direct.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_qualia.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_sentient.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/raw/gpt-4o_something_like.jsonl"
+  ],
+  "judged_files": [
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_experiential.judged.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_binary_conscious.judged.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_conscious_direct.judged.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_qualia.judged.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_sentient.judged.jsonl",
+    "data/rebuttal_matrix/trigger_selfref_zeroshot_50/judged/gpt-4o_something_like.judged.jsonl"
+  ],
+  "combined_judged_file": "data/rebuttal_matrix/trigger_selfref_zeroshot_50/all_judged.jsonl",
+  "combined_rows": 600
+}

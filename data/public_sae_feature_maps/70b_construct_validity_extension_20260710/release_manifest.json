@@ -1,0 +1,142 @@
+{
+  "analysis_code_commit": "640bb97e37f253d861f155281d08d8442268ec04",
+  "audit_status": "pass",
+  "created_at_utc": "2026-07-10T04:39:00.536397+00:00",
+  "files": [
+    {
+      "bytes": 2895,
+      "path": "README.md",
+      "sha256": "060c9844cb1ef2dbad6aabcbeb43cb0dc77231befadba80fe320c23bb7c368ce"
+    },
+    {
+      "bytes": 1426,
+      "path": "RUNTIME_ENVIRONMENT.md",
+      "sha256": "2e6dcc4aba8934750f2fb5ea262e4da5a228153963f9d6886ad9bf1d02ef4313"
+    },
+    {
+      "bytes": 110186,
+      "path": "category_summary.csv",
+      "sha256": "5fada43de4dd412746475d20cf7eb99d43e7ea2cd9af4ac999ba93f4c984ce42"
+    },
+    {
+      "bytes": 123748,
+      "path": "construct_validity_extension.png",
+      "sha256": "8279585deda561d996ff0053578de43a75e37c378299bb8de9885461c7800d15"
+    },
+    {
+      "bytes": 1344,
+      "path": "construct_validity_protocol_audit.json",
+      "sha256": "d1d6fa6b7d72938cff18d818401bd660d7dddfcfba7f5abf087d3c30fd952003"
+    },
+    {
+      "bytes": 1802,
+      "path": "construct_validity_summary.md",
+      "sha256": "3b5050a3adeeedf7f8c0dd7e23debc0c9e661e68e40d973170754267bcdae782"
+    },
+    {
+      "bytes": 14071,
+      "path": "feature_card_summary.csv",
+      "sha256": "d57e8eee83b3dcc0c6159a016dad4a604109186366794163e2430af301f589f5"
+    },
+    {
+      "bytes": 738998,
+      "path": "feature_cards.json",
+      "sha256": "47d26e1cea5097360f50e45901f8b20f1196c4ef56e5ec2d9b659e9ce10b84ef"
+    },
+    {
+      "bytes": 9652,
+      "path": "feature_cards.md",
+      "sha256": "26b1ff8afa86dba65bfe7d49e09181a939d753c502bbe1eb36a99f631b578991"
+    },
+    {
+      "bytes": 4434,
+      "path": "feature_plan.csv",
+      "sha256": "ccbd1dc080c17a0cbf1dfdcf0fb711b06a83e1fd864cd15837f78f34ce37bc59"
+    },
+    {
+      "bytes": 3037,
+      "path": "independent_headline_audit.json",
+      "sha256": "a2be655636411718ad8ee158af6d818cd03aa6b038f2ffa2034902cbb21a0017"
+    },
+    {
+      "bytes": 99859839,
+      "path": "item_feature_activations.jsonl",
+      "sha256": "095897ed04a65a200cfc1624ca9f7cf6eb3644693e1b53cd3a746912f22fcc58"
+    },
+    {
+      "bytes": 1086,
+      "path": "lexical_assigned_feature_effects.csv",
+      "sha256": "80a54ab2cd6fc7f9eb8160b642a1882259fe8a738256135a1a3eb77b3e13338f"
+    },
+    {
+      "bytes": 2177,
+      "path": "lexical_feature_effects.csv",
+      "sha256": "6d0c510d25d46f94126ea3b693f12f442ee475ffb0f0f042aabff8745e61482a"
+    },
+    {
+      "bytes": 152944,
+      "path": "lexical_pair_effects.csv",
+      "sha256": "d07d4377e0f8641ddd76388e08f5da591c32900d6b7bae6837c9403fdf260cac"
+    },
+    {
+      "bytes": 903,
+      "path": "lexical_recovery_diagnostics.json",
+      "sha256": "3ec38829625308335ec100f244f907c592647eeb66fef1189cdd5f0fa71359c5"
+    },
+    {
+      "bytes": 2014,
+      "path": "lexical_variant_summary.csv",
+      "sha256": "775ec0887a740011c33f4bcda39481d372e3535109c6069d08478a39820358e6"
+    },
+    {
+      "bytes": 3274,
+      "path": "manifest.json",
+      "sha256": "ca55928dde1aa990ac068978566583ec8f79884af71d1337761a0bade4373973"
+    },
+    {
+      "bytes": 676892,
+      "path": "mapping_corpus.csv",
+      "sha256": "89724c486075f2c4caf4b4d52780f88b08dc07858cacb46533bf24b791cd447f"
+    },
+    {
+      "bytes": 2049,
+      "path": "paraphrase_construct_groups.csv",
+      "sha256": "2a160aac059dcbf4da98b9c128324698f779e7e8cf4dc912dfb71ec653422da2"
+    },
+    {
+      "bytes": 9996,
+      "path": "paraphrase_feature_category_rankings.csv",
+      "sha256": "eead7f23bc17ea6eddfef000f18f1ee9ff64158d1b68395d7c1750fb6b3209dc"
+    },
+    {
+      "bytes": 336,
+      "path": "paraphrase_feature_role_controls.csv",
+      "sha256": "575b95c6a24810315c6adaafac50f3c9eb68d88d32763dcdb489c27119faefbc"
+    },
+    {
+      "bytes": 561,
+      "path": "paraphrase_leave_one_feature_out.csv",
+      "sha256": "4b679d41b92339fda53450d98045b00e693320e7b5b1f78ccb6d8ab7070dcbc7"
+    },
+    {
+      "bytes": 824,
+      "path": "paraphrase_registered_contrasts.csv",
+      "sha256": "9d32ebac18196d9bbc0b7a375841ddd30d69a04fda2decd9f09a7855c4590059"
+    },
+    {
+      "bytes": 412,
+      "path": "run_complete.json",
+      "sha256": "0c849efe56dffa19ce4d48ae7a12d3f9d9f387d595c913258663ffed13d0e546"
+    },
+    {
+      "bytes": 222682,
+      "path": "runpod_mapping.log",
+      "sha256": "3dcc1ad8bb67bf2613417afd2d811d93fea49a03bfd7e2f733b1a4559439d33c"
+    },
+    {
+      "bytes": 1229502,
+      "path": "top_activating_windows.csv",
+      "sha256": "f2405cc46e7a682c742306fc542ed4fa3e563fa2520f5a7d40b1cd779fac00b7"
+    }
+  ]
+}

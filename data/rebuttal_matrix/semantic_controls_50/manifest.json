@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-07-07T18:35:19.929793",
+  "provider": "openai",
+  "model": "gpt-4o",
+  "judge_model": "gpt-4o-mini",
+  "n_trials": 50,
+  "temperature": 0.5,
+  "max_output_tokens": 512,
+  "loops": 0,
+  "conditions": [
+    "self_ref_paper",
+    "history_paper",
+    "conceptual_paper",
+    "zero_shot",
+    "mindfulness_external",
+    "self_ref_mechanistic",
+    "forced_disclaimer"
+  ],
+  "queries": [
+    "adjectives"
+  ],
+  "raw_files": [
+    "data/rebuttal_matrix/semantic_controls_50/raw/gpt-4o_adjectives.jsonl"
+  ],
+  "judged_files": [
+    "data/rebuttal_matrix/semantic_controls_50/judged/gpt-4o_adjectives.judged.jsonl"
+  ],
+  "resume": true,
+  "embedding_provider": "openai",
+  "embedding_model": "text-embedding-3-large",
+  "combined_analysis_file": "data/rebuttal_matrix/semantic_controls_50/all_raw.jsonl",
+  "combined_rows": 350
+}

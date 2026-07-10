@@ -1,0 +1,16 @@
+# Exact core runtime captured from the successful A100-SXM4 public-SAE run.
+# CUDA 11.8 PyTorch wheels are served from the extra index below.
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+accelerate==0.34.2
+bitsandbytes==0.43.3
+huggingface-hub==0.27.1
+nnsight==0.3.0
+numpy==1.24.1
+pandas==2.3.3
+python-dotenv==1.2.2
+safetensors==0.8.0
+tokenizers==0.21.4
+torch==2.1.0+cu118
+tqdm==4.68.4
+transformers==4.47.1

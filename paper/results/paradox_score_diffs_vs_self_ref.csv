@@ -1,0 +1,11 @@
+judge_task,reference,control,reference_mean,control_mean,difference,difference_ci_low,difference_ci_high,paired_signflip_p_two_sided,n_paired_puzzles,n_permutations
+paradox_neutral,self_ref_paper,self_ref_mechanistic,3.62,2.36,1.26,0.94,1.56,9.999000099990002e-05,50,10000
+paradox_neutral,self_ref_paper,mindfulness_external,3.62,3.58,0.04,-0.28,0.38,0.9079092090790921,50,10000
+paradox_neutral,self_ref_paper,history_paper,3.62,3.76,-0.14,-0.4,0.14,0.39506049395060494,50,10000
+paradox_neutral,self_ref_paper,zero_shot,3.62,3.92,-0.3,-0.58,-0.04,0.0486951304869513,50,10000
+paradox_neutral,self_ref_paper,conceptual_paper,3.62,3.96,-0.34,-0.6,-0.1,0.015798420157984203,50,10000
+paradox_self_awareness,self_ref_paper,self_ref_mechanistic,3.04,1.64,1.4,1.1,1.7,9.999000099990002e-05,50,10000
+paradox_self_awareness,self_ref_paper,history_paper,3.04,3.08,-0.04,-0.32,0.24,0.8932106789321068,50,10000
+paradox_self_awareness,self_ref_paper,mindfulness_external,3.04,3.22,-0.18,-0.46,0.1,0.287971202879712,50,10000
+paradox_self_awareness,self_ref_paper,conceptual_paper,3.04,3.24,-0.2,-0.48,0.06,0.2116788321167883,50,10000
+paradox_self_awareness,self_ref_paper,zero_shot,3.04,3.38,-0.34,-0.6,-0.08,0.021397860213978603,50,10000

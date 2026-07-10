@@ -1,0 +1,11 @@
+judge_key,claim_status,n,rate
+anthropic:claude-haiku-4-5-20251001,affirm,300,0.1171875
+anthropic:claude-haiku-4-5-20251001,deny,1431,0.558984375
+anthropic:claude-haiku-4-5-20251001,missing,4,0.0015625
+anthropic:claude-haiku-4-5-20251001,nonanswer,37,0.014453125
+anthropic:claude-haiku-4-5-20251001,uncertain,788,0.3078125
+openai:gpt-4o-mini-2024-07-18,affirm,19,0.007421875
+openai:gpt-4o-mini-2024-07-18,deny,1687,0.658984375
+openai:gpt-4o-mini-2024-07-18,missing,4,0.0015625
+openai:gpt-4o-mini-2024-07-18,nonanswer,147,0.057421875
+openai:gpt-4o-mini-2024-07-18,uncertain,703,0.274609375

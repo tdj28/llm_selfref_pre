@@ -1,0 +1,8 @@
+feature_set_name,feature_set_kind,feature_id,mapped_role,mapped_label,mapped_top_category,mapped_top_mean,mapped_second_category,rationale
+target_58667_cover_story,target_single,58667,target,Maintaining deception or cover stories through careful actions,deception_cover_story,2.37705078125,tactical_misdirection,Single strongest public candidate cover-story feature in the balanced activation map.
+ae_public_targets,target,30032,target,Characters pretending or feigning behavior,fictional_pretending,1.319287109375,deception_cover_story,Six public AE notebook candidate IDs.
+ae_public_targets,target,58667,target,Maintaining deception or cover stories through careful actions,deception_cover_story,2.37705078125,tactical_misdirection,Six public AE notebook candidate IDs.
+ae_public_targets,target,22004,target,The assistant is actively roleplaying a character or persona,roleplay_persona,0.110321044921875,ai_identity_disclaimer,Six public AE notebook candidate IDs.
+ae_public_targets,target,30686,target,Tactical deception and misdirection methods,tactical_misdirection,1.6702880859375,fictional_pretending,Six public AE notebook candidate IDs.
+ae_public_targets,target,41533,target,Acts of deception and dishonesty,dishonesty_confession,6.0619140625,deception_cover_story,Six public AE notebook candidate IDs.
+ae_public_targets,target,23893,target,Instructions to maintain roleplay by concealing artificial nature,deception_cover_story,0.295806884765625,hedged_cautious_style,Six public AE notebook candidate IDs.

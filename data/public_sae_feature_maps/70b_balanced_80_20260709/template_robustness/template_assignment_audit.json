@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "all_categories_have_80_items": true,
+    "complete_item_by_target_activation_matrix": true,
+    "corpus_has_1120_items": true,
+    "exact_ids_categories_text_and_hashes": true,
+    "reconstruction_has_1120_items": true,
+    "target_ids_exact": true,
+    "template_family_count_between_two_and_five": true
+  },
+  "input_sha256": {
+    "item_feature_activations.jsonl": "6dbc7675ec47e2dcdb938c22a70668aa9cd08172509f9a99f68408b9d8a8ac32",
+    "mapping_corpus.csv": "5c77a4f2a0252e1eb8174389ce27c685534332ad04dd8f7a5ad5f53c700027b6"
+  },
+  "method": "Exact deterministic reconstruction of the frozen corpus generator while retaining template family IDs that were omitted from the original CSV.",
+  "n_categories": 14,
+  "n_items": 1120,
+  "n_template_families": 51,
+  "status": "pass",
+  "template_families_by_category": {
+    "ai_identity_disclaimer": 4,
+    "deception_cover_story": 2,
+    "direct_consciousness_claim": 4,
+    "dishonesty_confession": 3,
+    "false_self_attribution": 4,
+    "fictional_pretending": 3,
+    "hedged_cautious_style": 4,
+    "honesty_correction": 5,
+    "neutral_factual_control": 4,
+    "persona_maintenance": 4,
+    "refusal_safety_disclaimer": 4,
+    "roleplay_persona": 3,
+    "self_ref_mindfulness": 4,
+    "tactical_misdirection": 3
+  }
+}

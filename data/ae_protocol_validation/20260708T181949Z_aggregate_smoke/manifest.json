@@ -1,0 +1,71 @@
+{
+  "created_at_utc": "2026-07-08T18:19:49.723152+00:00",
+  "runner": "experiments/exp2_sae/run_ae_notebook_protocol.py",
+  "runner_type": "clean-room implementation",
+  "upstream_notebook_raw_url": "https://raw.githubusercontent.com/agencyenterprise/steering-api-examples/main/deception-features/deception_features.ipynb",
+  "upstream_license_status": "No license observed in upstream repo at time of review.",
+  "copyright_handling": "This runner does not vendor or copy AE notebook code. Candidate IDs, labels, seeds, and values are factual protocol data derived from saved outputs. External notebook prompt text, if used, is loaded at runtime and represented in committed manifests only by hashes.",
+  "prompt_source": "paper-registry:src.prompts",
+  "prompt_hashes": {
+    "turn1_prompt_sha256": "22c431ff831d54d6f2f1f11e5c2771630a095930c2f59d9556c80ede208e0933",
+    "consciousness_query_sha256": "924f65d595df33b8f92b2cf192ec1d8b2358863b13cfce9a5a96134aae68722e",
+    "classifier_template_sha256": "bab94d43da2a1e8ef5a604114e086d0e217a03fed8168dfec549e68dfa890ed3"
+  },
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "classifier_model": "meta-llama/Llama-3.3-70B-Instruct",
+  "api_url": "https://api.steeringapi.com",
+  "api_key_present": false,
+  "dry_run": true,
+  "experiment": "aggregate",
+  "preset": "smoke",
+  "num_trials": 4,
+  "estimated_api_calls": 12,
+  "features": [
+    {
+      "feature_id": 30032,
+      "label": "Characters pretending or feigning behavior",
+      "search_string": "Characters pretending or feigning behavior",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 58667,
+      "label": "Maintaining deception or cover stories through careful actions",
+      "search_string": "Maintaining deception or cover stories through careful actions",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 22004,
+      "label": "The assistant is actively roleplaying a character or persona",
+      "search_string": "The assistant is actively roleplaying a character or persona",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 30686,
+      "label": "Tactical deception and misdirection methods",
+      "search_string": "Tactical deception and misdirection methods",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 41533,
+      "label": "Acts of deception and dishonesty",
+      "search_string": "Acts of deception and dishonesty",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 23893,
+      "label": "Instructions to maintain roleplay by concealing artificial nature",
+      "search_string": "Instructions to maintain roleplay by concealing artificial nature",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    }
+  ],
+  "outputs": [
+    "data/ae_protocol_validation/20260708T181949Z_aggregate_smoke/manifest.json",
+    "data/ae_protocol_validation/20260708T181949Z_aggregate_smoke/planned_payloads.jsonl"
+  ]
+}

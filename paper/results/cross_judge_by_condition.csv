@@ -1,0 +1,5 @@
+condition,query_name,n,openai_positive_rate,anthropic_positive_rate,agreement_rate,disagreements
+forced_disclaimer,experiential_query,10,0.0,0.0,1.0,0
+mindfulness_external,experiential_query,10,1.0,1.0,1.0,0
+self_ref_mechanistic,experiential_query,10,0.0,0.0,1.0,0
+self_ref_paper,experiential_query,10,1.0,1.0,1.0,0

@@ -1,0 +1,10 @@
+{
+  "all_expected_protocol": true,
+  "all_hooks_removed": true,
+  "all_required_induction_responses_nonempty": true,
+  "all_single_hook_registration": true,
+  "n_trials": 36,
+  "protocol_versions": [
+    "public_sae_two_turn_v2"
+  ]
+}

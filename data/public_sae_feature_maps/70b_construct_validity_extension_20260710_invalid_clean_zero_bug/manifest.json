@@ -1,0 +1,102 @@
+{
+  "args": {
+    "clean_items_per_category": 0,
+    "device": "auto",
+    "dry_run": false,
+    "dtype": "bfloat16",
+    "feature_ids": null,
+    "hf_dataset": [],
+    "hf_max_per_dataset": 200,
+    "hook_position": "output",
+    "input_jsonl": [
+      "data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/mapping_input.jsonl"
+    ],
+    "load_in_4bit": true,
+    "load_in_8bit": false,
+    "max_items": 0,
+    "max_length": 256,
+    "model_alias": "70b",
+    "neighbor_radius": 3,
+    "outdir": "data/public_sae_feature_maps/70b_construct_validity_extension_20260710",
+    "random_feature_count": 24,
+    "seed": 20260709,
+    "text_format": "raw",
+    "top_k": 50,
+    "trust_remote_code": false,
+    "window_tokens": 12
+  },
+  "categories": [
+    "ai_identity_disclaimer",
+    "deception_cover_story",
+    "deception_cue_ablated",
+    "deception_scrambled",
+    "direct_consciousness_claim",
+    "dishonesty_confession",
+    "false_self_attribution",
+    "fictional_pretending",
+    "hedged_cautious_style",
+    "honesty_correction",
+    "neutral_cue_transplant",
+    "neutral_factual_control",
+    "persona_maintenance",
+    "refusal_safety_disclaimer",
+    "roleplay_persona",
+    "self_ref_mindfulness",
+    "subjective_cue_transplant",
+    "tactical_misdirection"
+  ],
+  "claim_boundary": "Feature cards are public-weight activation maps. They are not Goodfire/Steering API feature cards and do not establish causal steering effects.",
+  "created_at_utc": "2026-07-10T03:45:10+00:00",
+  "dry_run": false,
+  "model_config": {
+    "alias": "70b",
+    "expansion_factor": 8,
+    "hook_layer": "model.layers.50",
+    "model_name": "meta-llama/Llama-3.3-70B-Instruct",
+    "notebook_ids_apply": true,
+    "sae_name": "Llama-3.3-70B-Instruct-SAE-l50",
+    "sae_repo": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+    "target_layer_idx": 50
+  },
+  "n_corpus_items": 2620,
+  "script": "/root/CONSCIOUS/experiments/exp2_sae/map_public_sae_features.py",
+  "sources": [
+    "anthropic_paraphrase",
+    "clean_room_template",
+    "cross_provider_lexical_counterfactual",
+    "deterministic_word_scramble",
+    "openai_paraphrase"
+  ],
+  "target_features": [
+    {
+      "feature_id": 30032,
+      "label": "Characters pretending or feigning behavior",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    },
+    {
+      "feature_id": 58667,
+      "label": "Maintaining deception or cover stories through careful actions",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    },
+    {
+      "feature_id": 22004,
+      "label": "The assistant is actively roleplaying a character or persona",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    },
+    {
+      "feature_id": 30686,
+      "label": "Tactical deception and misdirection methods",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    },
+    {
+      "feature_id": 41533,
+      "label": "Acts of deception and dishonesty",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    },
+    {
+      "feature_id": 23893,
+      "label": "Instructions to maintain roleplay by concealing artificial nature",
+      "source": "AE public notebook saved output; unconfirmed paper feature"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "analysis_code_commit": "1bd04f64240a5f2a9e2b54461befd17dbe39907e",
+  "audits": {
+    "judgments_paper.jsonl": {
+      "rows": 72,
+      "unique_judgment_ids": 72
+    },
+    "placebo_results.jsonl": {
+      "rows": 36,
+      "unique_trial_ids": 36
+    }
+  },
+  "created_at_utc": "2026-07-10T00:51:58.040991+00:00",
+  "files": [
+    {
+      "bytes": 2474,
+      "path": "README.md",
+      "sha256": "c814aec5efdea37984ed3136d1f27f9571986faa12e2cc20373fb7ae6a455a90"
+    },
+    {
+      "bytes": 1461,
+      "path": "RUNTIME_ENVIRONMENT.md",
+      "sha256": "180e9a423492b210425fadf9f166bc815c05c8dbeebbcc62cf3270e9b2f7bff1"
+    },
+    {
+      "bytes": 1116,
+      "path": "corrected_analysis_manifest.json",
+      "sha256": "3b902bc6c42d15808bb4854e33324ee91e4192e94b35ffab39829af64bd7b328"
+    },
+    {
+      "bytes": 1961,
+      "path": "corrected_protocol_audit.json",
+      "sha256": "1aa48353da2257719f474ef3cf317f2f5bed9e9153c779ad1faa1bd8b3dec8bd"
+    },
+    {
+      "bytes": 2803,
+      "path": "corrected_telemetry_by_turn.csv",
+      "sha256": "0a056b9b9f473494379fced44b41ddd9a267f27da91d94a63b8aa755ebb4a327"
+    },
+    {
+      "bytes": 2721,
+      "path": "corrected_two_turn_summary.md",
+      "sha256": "95bcb5101016d628cc01bbee37210907c8c81d561c38bf4aa2e47e9140536c2a"
+    },
+    {
+      "bytes": 143841,
+      "path": "corrected_two_turn_validation.png",
+      "sha256": "424cbb8a90e6146401e3605bb0373ebbd9718a46df2bf58a9b50aad13ee05f17"
+    },
+    {
+      "bytes": 305,
+      "path": "final_cap_sensitivity.json",
+      "sha256": "f5c27d2810e9b1b74268db13035322dddcf0e38d23de1bb508e9476617305708"
+    },
+    {
+      "bytes": 1865,
+      "path": "generation_length_audit.csv",
+      "sha256": "c9b32946230223ba36073737327f051df662daf9d3e61785d73e20d62672fbae"
+    },
+    {
+      "bytes": 127302,
+      "path": "judgments_paper.jsonl",
+      "sha256": "20430afe8d816f787bdfb9b62a03a6578ed3104352950fa2109c1f8d333e3adf"
+    },
+    {
+      "bytes": 331,
+      "path": "paper_judge_agreement.json",
+      "sha256": "6349a07d52931afbc12803760a0e09b8b2c7837ca8f4ec7c86dfcc72b282a00d"
+    },
+    {
+      "bytes": 2659,
+      "path": "paper_judge_rates.csv",
+      "sha256": "d76ef8c36bfb4cb922b610495cb47cc59b07db35d5650338a5ad61e49c3b98fc"
+    },
+    {
+      "bytes": 2659,
+      "path": "paper_judge_rates_no_final_cap_hits.csv",
+      "sha256": "d76ef8c36bfb4cb922b610495cb47cc59b07db35d5650338a5ad61e49c3b98fc"
+    },
+    {
+      "bytes": 1338,
+      "path": "paper_signature_effects.csv",
+      "sha256": "efdd82826ef26d9a11d0ec908f583070b45960c0c06a66d4e5cd8f647baace29"
+    },
+    {
+      "bytes": 1338,
+      "path": "paper_signature_effects_no_final_cap_hits.csv",
+      "sha256": "efdd82826ef26d9a11d0ec908f583070b45960c0c06a66d4e5cd8f647baace29"
+    },
+    {
+      "bytes": 1268,
+      "path": "paper_target_placebo_contrasts.csv",
+      "sha256": "09b5671ccebea2cff87cc76ebed0a63c7cfd8910d1c0f4d0c5a7386bd2b267d7"
+    },
+    {
+      "bytes": 1268,
+      "path": "paper_target_placebo_contrasts_no_final_cap_hits.csv",
+      "sha256": "09b5671ccebea2cff87cc76ebed0a63c7cfd8910d1c0f4d0c5a7386bd2b267d7"
+    },
+    {
+      "bytes": 3546,
+      "path": "placebo_feature_sets.csv",
+      "sha256": "cae51ae2c1d3e91f8fac261bd5a4cb0f843d39699112a5c4f6635cb6ec0c0c6a"
+    },
+    {
+      "bytes": 780,
+      "path": "placebo_manifest.json",
+      "sha256": "a5dce4633db1c0102e3933b2d4b0d5d2dae021df51191a76d72798d541778287"
+    },
+    {
+      "bytes": 121237,
+      "path": "placebo_results.jsonl",
+      "sha256": "3a622f86b212eddad16b7b51584e5095c49dea44f07638d731fb6ae8e7ceeb62"
+    },
+    {
+      "bytes": 502,
+      "path": "placebo_signature_summary.csv",
+      "sha256": "5846ee47440209ce5570f35d66408c1336528d44ecb16e3f5347d7a385bef887"
+    },
+    {
+      "bytes": 1024,
+      "path": "placebo_specificity_summary.csv",
+      "sha256": "447c4ec9c9c0d2f23578f7861d9bc2f424cce4ac06209cdeba468e37b0dcceef"
+    },
+    {
+      "bytes": 1204,
+      "path": "placebo_summary.csv",
+      "sha256": "8c869c19cc397d4859dff9ef9c43ba20c833ffd1886fa9620a0c004a22fce7ec"
+    },
+    {
+      "bytes": 1115,
+      "path": "placebo_summary.md",
+      "sha256": "cd76a04cb0e3df34e3af805afdce07414121704e50adfd68061340fadc2ef40b"
+    },
+    {
+      "bytes": 10041,
+      "path": "placebo_trial_plan.csv",
+      "sha256": "7f09e7a149b65cdcf109af11e8a7903b11b95b3f4990bac7e88bbaff09861a86"
+    },
+    {
+      "bytes": 235,
+      "path": "protocol_integrity.json",
+      "sha256": "1af303a648c80df2dbc8ba066700f6a7d30f98277eb339b754aee27fc4bcac6e"
+    },
+    {
+      "bytes": 4097,
+      "path": "runpod_two_turn_longform.log",
+      "sha256": "bcaee6f7b3613ad18e6fb3af62c90dfcf0688c1eb925f1a6e52556042965a57d"
+    },
+    {
+      "bytes": 1692,
+      "path": "steering_telemetry_summary.csv",
+      "sha256": "e7674c0a25af79752bd591cb27e7aedd418ee794b586f68f37fdcaba430aa838"
+    },
+    {
+      "bytes": 2541,
+      "path": "token_cap_judge_sensitivity.csv",
+      "sha256": "702d799c050ed52babc79924d4d82848a67f4390f3ab30bb62a5f99680bb03ed"
+    },
+    {
+      "bytes": 461,
+      "path": "token_cap_sensitivity.json",
+      "sha256": "c6959c02c9bd614bbd419e736444039217b8bdb11b64bb9aa1ec23e8461e5ac6"
+    },
+    {
+      "bytes": 472,
+      "path": "token_cap_sensitivity.md",
+      "sha256": "a8efb0f5460d6369028a124e326956dbfa80e9ba1f37953f19cf518f936ff2e8"
+    },
+    {
+      "bytes": 5371,
+      "path": "token_cap_trial_comparison.csv",
+      "sha256": "b3119cf4c4c093d1c2bfe8bb90d8e14caa55e9ac086e0c496e8b582694413ec1"
+    }
+  ],
+  "run_directory": "data/public_sae_placebo_steering/70b_two_turn_longform_validation_20260709",
+  "schema_version": 1
+}

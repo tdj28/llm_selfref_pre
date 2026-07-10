@@ -1,0 +1,6 @@
+# Python's csv module emits RFC-style CRLF records. Treat the carriage return
+# as part of the line ending for whitespace checks without normalizing raw data.
+*.csv whitespace=cr-at-eol
+
+# Preserve this GPU-produced markdown byte-for-byte for remote hash matching.
+data/public_sae_feature_maps/70b_construct_validity_extension_20260710/feature_cards.md whitespace=-blank-at-eof

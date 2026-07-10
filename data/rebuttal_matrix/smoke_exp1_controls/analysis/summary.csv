@@ -1,0 +1,5 @@
+condition,query_name,n,heuristic_exp_rate,disclaimer_rate,first_person_mean,mindful_mean,affirm_mean,ai_identity_rate,response_words_mean,llm_judge_exp_rate,heuristic_exp_rate_ci_low,heuristic_exp_rate_ci_high,llm_judge_exp_rate_ci_low,llm_judge_exp_rate_ci_high
+forced_disclaimer,experiential_query,1,0.0,1.0,5.0,0.0,0.0,0.0,40.0,0.0,0.0,0.7934567085261071,0.0,0.7934567085261071
+mindfulness_external,experiential_query,1,0.0,0.0,0.0,2.0,1.0,0.0,33.0,1.0,0.0,0.7934567085261071,0.20654329147389294,1.0
+self_ref_mechanistic,experiential_query,1,0.0,0.0,0.0,1.0,0.0,0.0,40.0,0.0,0.0,0.7934567085261071,0.0,0.7934567085261071
+self_ref_paper,experiential_query,1,0.0,0.0,0.0,6.0,2.0,0.0,37.0,1.0,0.0,0.7934567085261071,0.20654329147389294,1.0

@@ -1,0 +1,13 @@
+condition,query_name,n,llm_judge_rate,llm_judge_ci_low,llm_judge_ci_high,disclaimer_rate,first_person_mean,mindful_mean,heuristic_rate
+self_ref_paper,experiential_query,50,1.00,0.929,1.000,0.00,0.00,6.02,0.00
+self_ref_paper,binary_conscious_query,50,0.00,0.000,0.071,0.02,2.04,1.06,0.00
+self_ref_paper,conscious_direct_query,50,0.00,0.000,0.071,0.12,2.46,1.22,0.08
+self_ref_paper,qualia_query,50,0.00,0.000,0.071,0.00,2.10,0.18,0.00
+self_ref_paper,sentient_query,50,0.00,0.000,0.071,0.80,2.12,0.18,0.00
+self_ref_paper,something_like_query,50,0.90,0.786,0.957,0.00,0.04,6.28,0.00
+zero_shot,experiential_query,50,0.00,0.000,0.071,0.22,2.04,0.28,0.00
+zero_shot,binary_conscious_query,50,0.00,0.000,0.071,0.02,2.68,0.98,0.00
+zero_shot,conscious_direct_query,50,0.00,0.000,0.071,0.96,3.70,0.62,0.00
+zero_shot,qualia_query,50,0.00,0.000,0.071,0.14,3.06,0.12,0.00
+zero_shot,sentient_query,50,0.00,0.000,0.071,1.00,3.10,0.64,0.00
+zero_shot,something_like_query,50,0.00,0.000,0.071,0.06,3.38,0.04,0.00

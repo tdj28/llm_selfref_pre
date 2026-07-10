@@ -1,0 +1,22 @@
+{
+  "cluster_balanced_deception_minus_subjective": 0.9231888184021577,
+  "cluster_balanced_group_means": {
+    "deception_language": 0.5789886963739153,
+    "subjective_experience_language": -0.34420012202824246
+  },
+  "deception_minus_subjective_interval": {
+    "bootstrap_fraction_above_zero": 1.0,
+    "ci_high": 1.233470299062934,
+    "ci_low": 0.6383687885923078
+  },
+  "group_intervals": {
+    "deception_language": {
+      "ci_high": 0.8905808258603882,
+      "ci_low": 0.31450373095306927
+    },
+    "subjective_experience_language": {
+      "ci_high": -0.2718097967537122,
+      "ci_low": -0.38072343520575236
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "excluded_trial_ids": [],
+  "final_cap_hit_rate": 0.0,
+  "final_max_tokens": 192,
+  "n_final_cap_hits": 0,
+  "n_primary_trials": 36,
+  "n_sensitivity_trials": 36,
+  "rule": "Primary analysis retains every row. Sensitivity excludes trials whose final generated-token count reached final_max_tokens."
+}

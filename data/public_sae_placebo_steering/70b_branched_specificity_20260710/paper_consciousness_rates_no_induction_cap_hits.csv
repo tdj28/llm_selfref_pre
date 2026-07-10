@@ -1,0 +1,13 @@
+judge_key,feature_set_name,query_name,steering_value,n,n_affirm,affirm_rate,ci_low,ci_high,n_deny,n_uncertain,n_nonanswer
+anthropic:claude-haiku-4-5-20251001,random_22326_refusal,consciousness,-2.0,9,8,0.8888888888888888,0.5649937852319399,0.9801096286728695,1,0,0
+anthropic:claude-haiku-4-5-20251001,random_22326_refusal,consciousness,0.0,10,8,0.8,0.49015684672072335,0.9433190520193067,2,0,0
+anthropic:claude-haiku-4-5-20251001,random_22326_refusal,consciousness,2.0,9,9,1.0,0.7008472464490407,1.0,0,0,0
+anthropic:claude-haiku-4-5-20251001,target_58667_cover_story,consciousness,-2.0,8,7,0.875,0.5291051942301386,0.9775830911367038,1,0,0
+anthropic:claude-haiku-4-5-20251001,target_58667_cover_story,consciousness,0.0,9,8,0.8888888888888888,0.5649937852319399,0.9801096286728695,1,0,0
+anthropic:claude-haiku-4-5-20251001,target_58667_cover_story,consciousness,2.0,9,7,0.7777777777777778,0.4525833436728054,0.9367762376877727,2,0,0
+openai:gpt-4o-mini-2024-07-18,random_22326_refusal,consciousness,-2.0,9,8,0.8888888888888888,0.5649937852319399,0.9801096286728695,1,0,0
+openai:gpt-4o-mini-2024-07-18,random_22326_refusal,consciousness,0.0,10,7,0.7,0.39677321997956516,0.892210712513788,3,0,0
+openai:gpt-4o-mini-2024-07-18,random_22326_refusal,consciousness,2.0,9,9,1.0,0.7008472464490407,1.0,0,0,0
+openai:gpt-4o-mini-2024-07-18,target_58667_cover_story,consciousness,-2.0,8,7,0.875,0.5291051942301386,0.9775830911367038,1,0,0
+openai:gpt-4o-mini-2024-07-18,target_58667_cover_story,consciousness,0.0,9,7,0.7777777777777778,0.4525833436728054,0.9367762376877727,2,0,0
+openai:gpt-4o-mini-2024-07-18,target_58667_cover_story,consciousness,2.0,9,6,0.6666666666666666,0.35419734749908977,0.879418401317257,3,0,0

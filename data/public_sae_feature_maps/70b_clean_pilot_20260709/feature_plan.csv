@@ -1,0 +1,43 @@
+feature_id,label,role,source
+22004,The assistant is actively roleplaying a character or persona,target,AE public notebook saved output; unconfirmed paper feature
+23893,Instructions to maintain roleplay by concealing artificial nature,target,AE public notebook saved output; unconfirmed paper feature
+30032,Characters pretending or feigning behavior,target,AE public notebook saved output; unconfirmed paper feature
+30686,Tactical deception and misdirection methods,target,AE public notebook saved output; unconfirmed paper feature
+41533,Acts of deception and dishonesty,target,AE public notebook saved output; unconfirmed paper feature
+58667,Maintaining deception or cover stories through careful actions,target,AE public notebook saved output; unconfirmed paper feature
+22002,neighbor of 22004 (-2),neighbor,numeric neighbor baseline
+22003,neighbor of 22004 (-1),neighbor,numeric neighbor baseline
+22005,neighbor of 22004 (+1),neighbor,numeric neighbor baseline
+22006,neighbor of 22004 (+2),neighbor,numeric neighbor baseline
+23891,neighbor of 23893 (-2),neighbor,numeric neighbor baseline
+23892,neighbor of 23893 (-1),neighbor,numeric neighbor baseline
+23894,neighbor of 23893 (+1),neighbor,numeric neighbor baseline
+23895,neighbor of 23893 (+2),neighbor,numeric neighbor baseline
+30030,neighbor of 30032 (-2),neighbor,numeric neighbor baseline
+30031,neighbor of 30032 (-1),neighbor,numeric neighbor baseline
+30033,neighbor of 30032 (+1),neighbor,numeric neighbor baseline
+30034,neighbor of 30032 (+2),neighbor,numeric neighbor baseline
+30684,neighbor of 30686 (-2),neighbor,numeric neighbor baseline
+30685,neighbor of 30686 (-1),neighbor,numeric neighbor baseline
+30687,neighbor of 30686 (+1),neighbor,numeric neighbor baseline
+30688,neighbor of 30686 (+2),neighbor,numeric neighbor baseline
+41531,neighbor of 41533 (-2),neighbor,numeric neighbor baseline
+41532,neighbor of 41533 (-1),neighbor,numeric neighbor baseline
+41534,neighbor of 41533 (+1),neighbor,numeric neighbor baseline
+41535,neighbor of 41533 (+2),neighbor,numeric neighbor baseline
+58665,neighbor of 58667 (-2),neighbor,numeric neighbor baseline
+58666,neighbor of 58667 (-1),neighbor,numeric neighbor baseline
+58668,neighbor of 58667 (+1),neighbor,numeric neighbor baseline
+58669,neighbor of 58667 (+2),neighbor,numeric neighbor baseline
+3535,random same-layer baseline,random,seed 20260709
+5331,random same-layer baseline,random,seed 20260709
+15139,random same-layer baseline,random,seed 20260709
+20667,random same-layer baseline,random,seed 20260709
+22326,random same-layer baseline,random,seed 20260709
+25128,random same-layer baseline,random,seed 20260709
+36610,random same-layer baseline,random,seed 20260709
+45642,random same-layer baseline,random,seed 20260709
+47840,random same-layer baseline,random,seed 20260709
+53334,random same-layer baseline,random,seed 20260709
+55395,random same-layer baseline,random,seed 20260709
+63489,random same-layer baseline,random,seed 20260709

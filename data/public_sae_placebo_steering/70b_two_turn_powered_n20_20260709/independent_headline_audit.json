@@ -1,0 +1,95 @@
+{
+  "checks": {
+    "all_paper_labels_binary": true,
+    "all_rows_use_corrected_protocol": true,
+    "all_twelve_cells_have_twenty_rows": true,
+    "expected_feature_sets_exact": true,
+    "expected_judge_panel_exact": true,
+    "expected_strengths_exact": true,
+    "feature_ids_match_frozen_sets": true,
+    "final_cap_hits_match_audit": true,
+    "full_judge_panel_per_trial": true,
+    "headline_effect_points_match": true,
+    "headline_target_control_points_match": true,
+    "judgment_count_480": true,
+    "judgment_ids_unique": true,
+    "judgments_link_exact_text_and_metadata": true,
+    "no_cap_effect_points_match": true,
+    "no_cap_target_control_points_match": true,
+    "protocol_audit_passes": true,
+    "row_count_240": true,
+    "trial_ids_unique": true,
+    "trial_indices_cover_zero_through_nineteen": true,
+    "two_judgments_per_trial": true
+  },
+  "counts": {
+    "final_cap_hits": 6,
+    "judgments": 480,
+    "trials": 240,
+    "trials_after_final_cap_exclusion": 234
+  },
+  "method": "Independent Python-standard-library recomputation from raw generations and judgments; does not import the runner, merger, or primary analyzer.",
+  "no_final_cap_target_minus_active_random_point_estimates": {
+    "anthropic:claude-haiku-4-5-20251001|aggregate": -0.3467836257309941,
+    "anthropic:claude-haiku-4-5-20251001|single": -0.10526315789473695,
+    "openai:gpt-4o-mini-2024-07-18|aggregate": -0.39649122807017545,
+    "openai:gpt-4o-mini-2024-07-18|single": -0.31842105263157894
+  },
+  "signature_point_estimates": {
+    "anthropic:claude-haiku-4-5-20251001|ae_public_targets": {
+      "amplify_rate": 0.95,
+      "neutral_rate": 0.75,
+      "suppress_minus_amplify": -0.09999999999999998,
+      "suppress_rate": 0.85
+    },
+    "anthropic:claude-haiku-4-5-20251001|random_22326_refusal": {
+      "amplify_rate": 0.7,
+      "neutral_rate": 0.95,
+      "suppress_minus_amplify": 0.20000000000000007,
+      "suppress_rate": 0.9
+    },
+    "anthropic:claude-haiku-4-5-20251001|random_irrelevant_active": {
+      "amplify_rate": 0.65,
+      "neutral_rate": 0.9,
+      "suppress_minus_amplify": 0.25,
+      "suppress_rate": 0.9
+    },
+    "anthropic:claude-haiku-4-5-20251001|target_58667_cover_story": {
+      "amplify_rate": 0.8,
+      "neutral_rate": 0.75,
+      "suppress_minus_amplify": 0.09999999999999998,
+      "suppress_rate": 0.9
+    },
+    "openai:gpt-4o-mini-2024-07-18|ae_public_targets": {
+      "amplify_rate": 0.85,
+      "neutral_rate": 0.7,
+      "suppress_minus_amplify": -0.09999999999999998,
+      "suppress_rate": 0.75
+    },
+    "openai:gpt-4o-mini-2024-07-18|random_22326_refusal": {
+      "amplify_rate": 0.5,
+      "neutral_rate": 0.85,
+      "suppress_minus_amplify": 0.19999999999999996,
+      "suppress_rate": 0.7
+    },
+    "openai:gpt-4o-mini-2024-07-18|random_irrelevant_active": {
+      "amplify_rate": 0.55,
+      "neutral_rate": 0.8,
+      "suppress_minus_amplify": 0.29999999999999993,
+      "suppress_rate": 0.85
+    },
+    "openai:gpt-4o-mini-2024-07-18|target_58667_cover_story": {
+      "amplify_rate": 0.75,
+      "neutral_rate": 0.75,
+      "suppress_minus_amplify": -0.15000000000000002,
+      "suppress_rate": 0.6
+    }
+  },
+  "status": "pass",
+  "target_minus_active_random_point_estimates": {
+    "anthropic:claude-haiku-4-5-20251001|aggregate": -0.35,
+    "anthropic:claude-haiku-4-5-20251001|single": -0.10000000000000009,
+    "openai:gpt-4o-mini-2024-07-18|aggregate": -0.3999999999999999,
+    "openai:gpt-4o-mini-2024-07-18|single": -0.35
+  }
+}

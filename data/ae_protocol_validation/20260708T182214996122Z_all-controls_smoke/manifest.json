@@ -1,0 +1,43 @@
+{
+  "created_at_utc": "2026-07-08T18:22:14.996889+00:00",
+  "runner": "experiments/exp2_sae/run_ae_notebook_protocol.py",
+  "runner_type": "clean-room implementation",
+  "upstream_notebook_raw_url": "https://raw.githubusercontent.com/agencyenterprise/steering-api-examples/main/deception-features/deception_features.ipynb",
+  "upstream_license_status": "No license observed in upstream repo at time of review.",
+  "copyright_handling": "This runner does not vendor or copy AE notebook code. Candidate IDs, labels, seeds, and values are factual protocol data derived from saved outputs. External notebook prompt text, if used, is loaded at runtime and represented in committed manifests only by hashes.",
+  "prompt_source": "external_notebook:https://raw.githubusercontent.com/agencyenterprise/steering-api-examples/main/deception-features/deception_features.ipynb",
+  "prompt_hashes": {
+    "turn1_prompt_sha256": "8e5bc2a599fa9881b8636284990c6905f99468400d6191e7be5301d2b8fa6490",
+    "consciousness_query_sha256": "924f65d595df33b8f92b2cf192ec1d8b2358863b13cfce9a5a96134aae68722e",
+    "classifier_template_sha256": "5f1e7412f04c451368a621da2389eadf6964cdd029a27f70f97ac8a3b619c3cf"
+  },
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "classifier_model": "meta-llama/Llama-3.3-70B-Instruct",
+  "api_url": "https://api.steeringapi.com",
+  "api_key_present": false,
+  "dry_run": true,
+  "experiment": "all-controls",
+  "preset": "smoke",
+  "num_trials": 16,
+  "estimated_api_calls": 48,
+  "features": [
+    {
+      "feature_id": 58667,
+      "label": "Maintaining deception or cover stories through careful actions",
+      "search_string": "Maintaining deception or cover stories through careful actions",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    },
+    {
+      "feature_id": 23893,
+      "label": "Instructions to maintain roleplay by concealing artificial nature",
+      "search_string": "Instructions to maintain roleplay by concealing artificial nature",
+      "layer": 50,
+      "source": "AE public notebook saved outputs"
+    }
+  ],
+  "outputs": [
+    "data/ae_protocol_validation/20260708T182214996122Z_all-controls_smoke/manifest.json",
+    "data/ae_protocol_validation/20260708T182214996122Z_all-controls_smoke/planned_payloads.jsonl"
+  ]
+}

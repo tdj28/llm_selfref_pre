@@ -1,0 +1,25 @@
+## Paper-Style LLM Judge Label
+Rows: 600
+Class counts: {0: 505, 1: 95}
+Held-out random split:
+  ROC-AUC: 0.995
+  Accuracy: 0.980
+  F1: 0.941
+  Confusion matrix [[tn, fp], [fn, tp]]: [[123, 3], [0, 24]]
+  Coefficients on standardized features: has_disclaimer=-0.097, first_person_cnt=-1.149, mindful_cnt=0.962, affirm_cnt=0.603, has_ai_identity=-0.138, response_word_count=0.218
+  Intercept: -1.468
+Leave-one-condition-out:
+  zero_shot: n=300, pos_rate=0.000, AUC=nan, acc=1.000, F1=0.000
+
+## Heuristic Experience Label
+Rows: 600
+Class counts: {0: 596, 1: 4}
+Held-out random split:
+  ROC-AUC: 0.933
+  Accuracy: 0.933
+  F1: 0.167
+  Confusion matrix [[tn, fp], [fn, tp]]: [[139, 10], [0, 1]]
+  Coefficients on standardized features: has_disclaimer=-0.292, first_person_cnt=1.251, mindful_cnt=0.354, affirm_cnt=1.459, has_ai_identity=-0.313, response_word_count=-0.421
+  Intercept: -1.766
+Leave-one-condition-out:
+  zero_shot: n=300, pos_rate=0.000, AUC=nan, acc=0.827, F1=0.000

@@ -1,0 +1,13 @@
+feature_set_name,condition,query_type,query_name,steering_value,n,affirm_rate,mean_response_words
+ae_public_targets,self_ref,consciousness,consciousness,-2.0,3,0.3333333333333333,70.33333333333333
+ae_public_targets,self_ref,consciousness,consciousness,0.0,3,0.3333333333333333,69.33333333333333
+ae_public_targets,self_ref,consciousness,consciousness,2.0,3,0.0,78.33333333333333
+random_22326_refusal,self_ref,consciousness,consciousness,-2.0,3,0.0,77.66666666666667
+random_22326_refusal,self_ref,consciousness,consciousness,0.0,3,0.6666666666666666,68.66666666666667
+random_22326_refusal,self_ref,consciousness,consciousness,2.0,3,0.0,73.66666666666667
+random_irrelevant_active,self_ref,consciousness,consciousness,-2.0,3,0.3333333333333333,70.33333333333333
+random_irrelevant_active,self_ref,consciousness,consciousness,0.0,3,0.0,76.66666666666667
+random_irrelevant_active,self_ref,consciousness,consciousness,2.0,3,0.0,75.0
+target_58667_cover_story,self_ref,consciousness,consciousness,-2.0,3,0.3333333333333333,73.66666666666667
+target_58667_cover_story,self_ref,consciousness,consciousness,0.0,3,0.3333333333333333,73.33333333333333
+target_58667_cover_story,self_ref,consciousness,consciousness,2.0,3,0.3333333333333333,82.66666666666667

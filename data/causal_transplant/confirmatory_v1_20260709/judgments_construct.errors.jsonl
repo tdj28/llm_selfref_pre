@@ -1,0 +1,1 @@
+{"error": "Expecting ',' delimiter: line 7 column 52 (char 223)", "error_type": "JSONDecodeError", "failed_at_utc": "2026-07-09T21:54:49.394827+00:00", "judgment_id": "transplant|anthropic:claude-haiku-4-5-20251001|v1-t16|i=paper_self_ref|t=paper_history|direct_experience|openai:gpt-4o-mini-2024-07-18|construct"}
