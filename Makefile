@@ -2,7 +2,7 @@ PYTHON ?= $(if $(wildcard venv/bin/python),venv/bin/python,steering/.venv/bin/py
 LATEXMK ?= latexmk
 RELEASE_DIR := data/causal_transplant/confirmatory_v1_20260709
 
-.PHONY: test compile paper audit verify
+.PHONY: test compile paper audit public-audit verify
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
@@ -33,7 +33,8 @@ compile:
 		experiments/exp2_sae/judge_public_sae_results.py \
 		experiments/exp2_sae/analyze_public_sae_two_turn.py \
 		experiments/exp2_sae/compare_public_sae_token_caps.py \
-		experiments/exp2_sae/merge_public_sae_runs.py
+		experiments/exp2_sae/merge_public_sae_runs.py \
+		scripts/audit_public_release.py
 
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
@@ -56,5 +57,8 @@ audit:
 		data/public_sae_placebo_steering/70b_branched_specificity_20260710
 	$(PYTHON) experiments/causal_transplant/build_release_manifest.py $(RELEASE_DIR)
 
-verify: test compile paper
+public-audit:
+	$(PYTHON) scripts/audit_public_release.py
+
+verify: public-audit test compile paper
 	git diff --check

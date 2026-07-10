@@ -18,9 +18,9 @@
       "sha256": "7ed20f7200fe72916b466c942607d6865ecc68611b898de2adb92c6b3ed51b2c"
     },
     {
-      "bytes": 2057,
+      "bytes": 2107,
       "path": "RUNTIME_ENVIRONMENT.md",
-      "sha256": "156f3bb4e79366c6033bad7b0249c51a7e933f83cbf615c7a2b25112b9847447"
+      "sha256": "f877ac16b04f78dac2a341ec9fb9699ebc2f31f719faa94ec866c4c2cf57aa1b"
     },
     {
       "bytes": 1118,
@@ -153,6 +153,12 @@
       "sha256": "96af4dfc8fb8ce6908a39d24c78b72e9082a44d9ef20ff00390f52566f367134"
     }
   ],
+  "integrity_correction": {
+    "date": "2026-07-10",
+    "reason": "RUNTIME_ENVIRONMENT.md was updated after manifest creation to record final pod termination, but its manifest entry was not refreshed before the initial public release.",
+    "previous_bytes": 2057,
+    "previous_sha256": "156f3bb4e79366c6033bad7b0249c51a7e933f83cbf615c7a2b25112b9847447"
+  },
   "run_directory": "data/public_sae_placebo_steering/70b_two_turn_power_extension_20260709",
   "schema_version": 1
 }

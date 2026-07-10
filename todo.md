@@ -24,7 +24,7 @@ is complete.
   artifact links in public writing with commit- or tag-pinned links.
 - [ ] Link the live article and its pinned evidence release from `README.md` so
   the public prose and reproducibility artifacts point to each other.
-- [ ] Add a one-command `public-audit` gate covering tracked-file secrets,
+- [x] Add a one-command `public-audit` gate covering tracked-file secrets,
   private annotation deny-lists, generated manifests/logs, release hashes,
   license/provenance checks, and `git diff --check`.
 - [ ] Verify GitHub secret scanning, push protection, branch protection, and
