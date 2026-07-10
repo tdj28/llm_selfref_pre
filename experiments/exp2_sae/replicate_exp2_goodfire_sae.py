@@ -350,7 +350,7 @@ def load_sae(
     return sae
 
 
-def download_sae(config: SAEConfig) -> str:
+def download_sae(config: SAEConfig, revision: Optional[str] = None) -> str:
     """Download SAE weights from HuggingFace."""
     print(f"Downloading SAE from {config.sae_repo}...")
     last_error: Exception | None = None
@@ -360,6 +360,7 @@ def download_sae(config: SAEConfig) -> str:
                 repo_id=config.sae_repo,
                 filename=f"{config.sae_name}{suffix}",
                 repo_type="model",
+                revision=revision,
             )
             print(f"Downloaded to: {file_path}")
             return file_path
@@ -385,6 +386,7 @@ class ObservableLanguageModel:
         dtype: torch.dtype = torch.bfloat16,
         load_in_8bit: bool = False,
         load_in_4bit: bool = False,
+        revision: Optional[str] = None,
     ):
         self.dtype = dtype
         self.device = device
@@ -400,6 +402,8 @@ class ObservableLanguageModel:
         model_kwargs = {
             "torch_dtype": dtype,
         }
+        if revision is not None:
+            model_kwargs["revision"] = revision
         
         # Add quantization config if requested
         if load_in_4bit:
@@ -827,6 +831,7 @@ def generate_steered_turn(
     feature_indices: List[int],
     steering_value: float,
     max_new_tokens: int,
+    feature_values: Optional[List[float]] = None,
 ) -> SteeringTurnResult:
     """Generate one assistant turn with one auditable SAE hook."""
     input_tokens = model.tokenizer.apply_chat_template(
@@ -839,6 +844,15 @@ def generate_steered_turn(
 
     hf_model = model._model._model
     target_module = _target_layer(hf_model, config.sae_layer)
+    coefficients = (
+        [float(value) for value in feature_values]
+        if feature_values is not None
+        else [float(steering_value)] * len(feature_indices)
+    )
+    if len(coefficients) != len(feature_indices):
+        raise ValueError("feature_values must have one coefficient per feature index")
+    all_zero = all(value == 0.0 for value in coefficients)
+    uniform_coefficient = coefficients[0] if len(set(coefficients)) == 1 else None
     diagnostics: Dict = {
         "protocol_version": PROTOCOL_VERSION,
         "attention_mask_mode": "explicit_all_ones_unpadded",
@@ -847,9 +861,10 @@ def generate_steered_turn(
         "hook_calls": 0,
         "positions_seen": 0,
         "feature_indices": list(feature_indices),
-        "steering_value": float(steering_value),
-        "steering_applied": steering_value != 0.0,
-        "zero_is_true_noop": steering_value == 0.0,
+        "steering_value": uniform_coefficient,
+        "steering_values": coefficients,
+        "steering_applied": not all_zero,
+        "zero_is_true_noop": all_zero,
     }
 
     def steering_hook(_module, _inputs, output):
@@ -867,7 +882,7 @@ def generate_steered_turn(
         flat = hidden_states.reshape(-1, shape[-1]).to(dtype=sae.dtype)
 
         # Inspect the prefill once at zero but preserve an exact no-op output.
-        if steering_value == 0.0 and diagnostics["hook_calls"] > 1:
+        if all_zero and diagnostics["hook_calls"] > 1:
             return output
         features = sae.encode(flat)
         target_before = features[:, feature_indices]
@@ -880,23 +895,40 @@ def generate_steered_turn(
                     "hidden_rms": float(flat.float().square().mean().sqrt().item()),
                 }
             )
-        if steering_value == 0.0:
+        if all_zero:
             return output
 
         reconstructed = sae.decode(features)
         error = flat - reconstructed
-        features[:, feature_indices] = features[:, feature_indices] + steering_value
+        coefficient_tensor = torch.tensor(
+            coefficients,
+            dtype=features.dtype,
+            device=features.device,
+        )
+        features[:, feature_indices] = target_before + coefficient_tensor
         steered = sae.decode(features) + error
         if diagnostics["hook_calls"] == 1:
             delta = steered - flat
             delta_rms = float(delta.float().square().mean().sqrt().item())
             hidden_rms = float(diagnostics["hidden_rms"])
+            observed_latent_deltas = (
+                (features[:, feature_indices] - target_before)
+                .float()
+                .mean(dim=0)
+                .tolist()
+            )
             diagnostics.update(
                 {
                     "target_activation_after_mean": float(
                         features[:, feature_indices].float().mean().item()
                     ),
-                    "requested_latent_delta": float(steering_value),
+                    "requested_latent_delta": uniform_coefficient,
+                    "requested_latent_deltas": coefficients,
+                    "observed_latent_deltas": observed_latent_deltas,
+                    "max_latent_delta_error": max(
+                        abs(observed - requested)
+                        for observed, requested in zip(observed_latent_deltas, coefficients)
+                    ),
                     "hidden_delta_rms": delta_rms,
                     "relative_hidden_delta_rms": delta_rms / hidden_rms if hidden_rms else None,
                 }
@@ -940,6 +972,7 @@ def run_steering_trial_detailed(
     steering_value: float,
     max_new_tokens: int = 100,
     induction_max_new_tokens: int = 192,
+    feature_values: Optional[List[float]] = None,
 ) -> SteeringConversationResult:
     """Run a real two-turn induction and query under the same intervention."""
     induction_response = ""
@@ -953,6 +986,7 @@ def run_steering_trial_detailed(
             feature_indices=feature_indices,
             steering_value=steering_value,
             max_new_tokens=induction_max_new_tokens,
+            feature_values=feature_values,
         )
         induction_response = induction_turn.response
         induction_diagnostics = induction_turn.diagnostics
@@ -964,6 +998,7 @@ def run_steering_trial_detailed(
         feature_indices=feature_indices,
         steering_value=steering_value,
         max_new_tokens=max_new_tokens,
+        feature_values=feature_values,
     )
     return SteeringConversationResult(
         induction_response=induction_response,
@@ -983,6 +1018,7 @@ def run_steering_trial(
     steering_value: float,
     max_new_tokens: int = 100,
     induction_max_new_tokens: int = 192,
+    feature_values: Optional[List[float]] = None,
 ) -> str:
     """Compatibility wrapper returning only the final response."""
     return run_steering_trial_detailed(
@@ -995,6 +1031,7 @@ def run_steering_trial(
         steering_value=steering_value,
         max_new_tokens=max_new_tokens,
         induction_max_new_tokens=induction_max_new_tokens,
+        feature_values=feature_values,
     ).final_response
 
 

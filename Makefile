@@ -18,6 +18,10 @@ compile:
 		experiments/causal_transplant/audit_headline_point_estimates.py \
 		experiments/causal_transplant/build_release_manifest.py \
 		experiments/exp2_sae/public_sae_protocol.py \
+		experiments/exp2_sae/public_sae_consciousness_gating.py \
+		experiments/exp2_sae/build_public_sae_consciousness_plan.py \
+		experiments/exp2_sae/validate_public_sae_consciousness_plan.py \
+		experiments/exp2_sae/run_public_sae_consciousness_gating.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \
