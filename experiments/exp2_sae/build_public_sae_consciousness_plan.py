@@ -44,6 +44,7 @@ DEFAULT_OUTDIR = (
 def source_records() -> list[dict[str, object]]:
     paths = [
         REPO_ROOT / "docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md",
+        REPO_ROOT / "docs/SAE_CONSCIOUSNESS_GATING_AMENDMENT_20260710.md",
         REPO_ROOT / "src/prompts.py",
         Path(__file__).resolve(),
         Path(__file__).resolve().with_name("public_sae_consciousness_gating.py"),

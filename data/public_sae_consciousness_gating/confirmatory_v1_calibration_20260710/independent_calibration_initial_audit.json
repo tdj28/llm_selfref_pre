@@ -1,0 +1,50 @@
+{
+  "calibrated_multiplier": 6.266,
+  "calibration_sha256": "5ee29141d9f0928e3720e2ff945ee27cd270bf2f42bc011918f598e5a4654d10",
+  "candidate_pool_sha256": "0541fbf0518b00f7ae19147cceb035b874e281452be7e26c8cea2111c887472f",
+  "errors": [],
+  "expected_current_multiplier": 6.266,
+  "forbidden_text_key_paths": [],
+  "independent_control_panels": [
+    {
+      "22004": 55963,
+      "23893": 15424,
+      "30032": 26041,
+      "30686": 21779,
+      "41533": 29649,
+      "58667": 11872
+    },
+    {
+      "22004": 47797,
+      "23893": 51407,
+      "30032": 16004,
+      "30686": 21403,
+      "41533": 1059,
+      "58667": 7182
+    },
+    {
+      "22004": 58741,
+      "23893": 26362,
+      "30032": 64365,
+      "30686": 19827,
+      "41533": 62289,
+      "58667": 1364
+    }
+  ],
+  "independent_multiplier": 6.266,
+  "independent_pilot": {
+    "aggregate_median": 0.15562496901384515,
+    "errors": [
+      "calibrated-single median is outside [0.03, 0.08]",
+      "calibrated-aggregate median is outside [0.04, 0.15]"
+    ],
+    "final_cap_rate": 0.0,
+    "induction_cap_rate": 0.0,
+    "n_records": 11,
+    "single_median": 0.08576855725809857,
+    "status": "fail"
+  },
+  "n_feature_metrics": 518,
+  "prior_calibration_sha256": null,
+  "status": "pass"
+}

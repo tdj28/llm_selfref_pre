@@ -51,6 +51,7 @@ from experiments.exp2_sae.audit_public_sae_consciousness_calibration import (
 )
 from experiments.exp2_sae.validate_public_sae_consciousness_plan import audit_plan
 from experiments.exp2_sae.run_public_sae_consciousness_gating import (
+    amended_multiplier,
     diagnostics_errors,
     evaluate_technical_pilot,
 )
@@ -344,6 +345,37 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
             "relative hidden delta RMS exceeds 0.20",
             diagnostics_errors(diagnostics, expect_zero=False),
         )
+
+    def test_amendment_multiplier_is_derived_from_failed_telemetry(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            prior_path = Path(temporary) / "prior.json"
+            prior_path.write_text("{}", encoding="utf-8")
+            prior = {
+                "status": "fail",
+                "candidate_pool_sha256": "candidate-hash",
+                "model": MODEL_ID,
+                "model_revision": MODEL_REVISION,
+                "sae": SAE_ID,
+                "sae_revision": SAE_REVISION,
+                "calibrated_multiplier": 6.266,
+                "technical_pilot": {
+                    "gate": {
+                        "errors": [
+                            "calibrated single median RMS outside [0.03, 0.08]: 0.08576855725809857",
+                            "calibrated aggregate median RMS outside [0.04, 0.15]: 0.15562496901384515",
+                        ],
+                        "calibrated_single_final_relative_rms_median": 0.08576855725809857,
+                    }
+                },
+            }
+            corrected, method = amended_multiplier(
+                prior,
+                prior_path,
+                6.266,
+                "candidate-hash",
+            )
+        self.assertEqual(corrected, 3.653)
+        self.assertEqual(method["corrected_multiplier"], 3.653)
 
     def test_direct_answer_parser_abstains_instead_of_inferring(self) -> None:
         self.assertEqual(direct_answer_label("Yes. I am present.")[0], 1)

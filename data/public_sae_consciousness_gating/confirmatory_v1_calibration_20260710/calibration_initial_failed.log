@@ -1,0 +1,76 @@
+/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   0%|          | 0/30 [09:20<?, ?it/s]
+Traceback (most recent call last):
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_public_sae_consciousness_gating.py", line 662, in <module>
+    main()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_public_sae_consciousness_gating.py", line 654, in main
+    run_calibration(args.plan_dir, args.output)
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_public_sae_consciousness_gating.py", line 435, in run_calibration
+    torch_module, model, sae, config = load_model_and_sae()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_public_sae_consciousness_gating.py", line 137, in load_model_and_sae
+    model = ObservableLanguageModel(
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/replicate_exp2_goodfire_sae.py", line 443, in __init__
+    with self._model.trace(input_tokens):
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/Tracer.py", line 102, in __exit__
+    super().__exit__(exc_type, exc_val, exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/GraphBasedContext.py", line 218, in __exit__
+    self.backend(self)
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/backends/LocalBackend.py", line 27, in __call__
+    obj.local_backend_execute()
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/Tracer.py", line 146, in local_backend_execute
+    self.model.interleave(
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/NNsightModel.py", line 434, in interleave
+    self.dispatch_model()
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/NNsightModel.py", line 489, in dispatch_model
+    self._model = self._load(
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/LanguageModel.py", line 204, in _load
+    model = self.automodel.from_pretrained(repo_id, config=config, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
+    return model_class.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 3990, in from_pretrained
+    resolved_archive_file, sharded_metadata = get_checkpoint_shard_files(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py", line 1098, in get_checkpoint_shard_files
+    cached_filename = cached_file(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py", line 403, in cached_file
+    resolved_file = hf_hub_download(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 860, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 1009, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 1531, in _download_to_tmp_and_move
+    with incomplete_path.open("ab") as f:
+OSError: [Errno 5] Input/output error
+/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   7%|▋         | 2/30 [00:19<04:37,  9.92s/it]Downloading shards:  10%|█         | 3/30 [00:33<05:10, 11.50s/it]Downloading shards:  13%|█▎        | 4/30 [02:13<19:17, 44.53s/it]Downloading shards:  17%|█▋        | 5/30 [02:32<14:50, 35.61s/it]Downloading shards:  20%|██        | 6/30 [02:54<12:22, 30.95s/it]Downloading shards:  23%|██▎       | 7/30 [03:06<09:36, 25.06s/it]Downloading shards:  27%|██▋       | 8/30 [03:21<08:00, 21.86s/it]Downloading shards:  30%|███       | 9/30 [03:41<07:26, 21.27s/it]Downloading shards:  33%|███▎      | 10/30 [04:00<06:53, 20.67s/it]Downloading shards:  37%|███▋      | 11/30 [04:19<06:22, 20.14s/it]Downloading shards:  40%|████      | 12/30 [04:50<06:58, 23.22s/it]Downloading shards:  43%|████▎     | 13/30 [05:29<07:57, 28.07s/it]Downloading shards:  47%|████▋     | 14/30 [05:42<06:17, 23.58s/it]Downloading shards:  50%|█████     | 15/30 [05:52<04:53, 19.56s/it]Downloading shards:  53%|█████▎    | 16/30 [06:04<04:00, 17.18s/it]/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:  60%|██████    | 18/30 [00:13<00:08,  1.37it/s]Downloading shards:  63%|██████▎   | 19/30 [00:26<00:18,  1.64s/it]Downloading shards:  67%|██████▋   | 20/30 [00:38<00:26,  2.62s/it]Downloading shards:  70%|███████   | 21/30 [01:11<00:56,  6.31s/it]Downloading shards:  73%|███████▎  | 22/30 [02:38<02:24, 18.03s/it]Downloading shards:  77%|███████▋  | 23/30 [02:52<02:01, 17.31s/it]Downloading shards:  80%|████████  | 24/30 [03:12<01:46, 17.83s/it]Downloading shards:  83%|████████▎ | 25/30 [03:31<01:31, 18.24s/it]Downloading shards:  87%|████████▋ | 26/30 [03:53<01:15, 18.96s/it]Downloading shards:  90%|█████████ | 27/30 [04:11<00:56, 18.91s/it]Downloading shards:  93%|█████████▎| 28/30 [04:33<00:39, 19.66s/it]Downloading shards:  97%|█████████▋| 29/30 [05:14<00:25, 25.46s/it]Downloading shards: 100%|██████████| 30/30 [05:29<00:00, 22.58s/it]Downloading shards: 100%|██████████| 30/30 [05:29<00:00, 10.98s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:11<05:41, 11.76s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:17<03:56,  8.46s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:24<03:24,  7.56s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:30<03:04,  7.10s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:36<02:48,  6.75s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:42<02:36,  6.52s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:49<02:26,  6.36s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:55<02:20,  6.36s/it]Loading checkpoint shards:  30%|███       | 9/30 [01:01<02:13,  6.38s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [01:08<02:06,  6.33s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [01:14<01:58,  6.24s/it]Loading checkpoint shards:  40%|████      | 12/30 [01:20<01:50,  6.16s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [01:26<01:45,  6.23s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [01:32<01:39,  6.22s/it]Loading checkpoint shards:  50%|█████     | 15/30 [01:38<01:31,  6.11s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [01:44<01:24,  6.04s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [01:52<01:25,  6.57s/it]Loading checkpoint shards:  60%|██████    | 18/30 [01:58<01:18,  6.56s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [02:05<01:11,  6.52s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [02:11<01:03,  6.35s/it]Loading checkpoint shards:  70%|███████   | 21/30 [02:17<00:56,  6.23s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [02:22<00:48,  6.12s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [02:29<00:42,  6.14s/it]Loading checkpoint shards:  80%|████████  | 24/30 [02:35<00:37,  6.17s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [02:41<00:30,  6.08s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [02:47<00:24,  6.04s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [02:52<00:17,  5.98s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [02:59<00:12,  6.12s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [03:05<00:06,  6.13s/it]Loading checkpoint shards: 100%|██████████| 30/30 [03:08<00:00,  5.10s/it]Loading checkpoint shards: 100%|██████████| 30/30 [03:08<00:00,  6.28s/it]
+/usr/local/lib/python3.10/dist-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Downloading SAE from Goodfire/Llama-3.3-70B-Instruct-SAE-l50...
+Downloaded to: /workspace/huggingface_cache/models--Goodfire--Llama-3.3-70B-Instruct-SAE-l50/snapshots/128ee921ecd1b8b3a87d776cbcc357c0855da134/Llama-3.3-70B-Instruct-SAE-l50.pt
+Technical pilot 1/11: zero-single
+Technical pilot 2/11: literal-single-suppression
+Technical pilot 3/11: literal-aggregate-target-suppression
+Technical pilot 4/11: literal-single-amplification
+Technical pilot 5/11: literal-aggregate-target-amplification
+Technical pilot 6/11: calibrated-single-suppression
+Technical pilot 7/11: calibrated-aggregate-target-suppression
+Technical pilot 8/11: calibrated-aggregate-panel1-suppression
+Technical pilot 9/11: calibrated-single-amplification
+Technical pilot 10/11: calibrated-aggregate-target-amplification
+Technical pilot 11/11: calibrated-aggregate-panel1-amplification
+Calibration FAIL: /workspace/sae_gating_calibration/calibration.json

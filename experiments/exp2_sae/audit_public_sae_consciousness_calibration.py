@@ -216,6 +216,7 @@ def independently_evaluate_pilot(records: list[dict[str, Any]]) -> dict[str, Any
 def audit_calibration(
     template_dir: Path,
     calibration_path: Path,
+    prior_calibration_path: Path | None = None,
 ) -> dict[str, Any]:
     errors = []
     calibration = json.loads(calibration_path.read_text(encoding="utf-8"))
@@ -264,14 +265,18 @@ def audit_calibration(
             continue
         if not all(math.isfinite(value) for value in metrics[feature_id].values()):
             errors.append(f"nonfinite feature metrics for {feature_id}")
-        if metrics[feature_id]["decoder_norm"] <= 0:
-            errors.append(f"nonpositive decoder norm for {feature_id}")
+        if metrics[feature_id]["decoder_norm"] < 0:
+            errors.append(f"negative decoder norm for {feature_id}")
+        if feature_id in TARGET_IDS and metrics[feature_id]["decoder_norm"] <= 0:
+            errors.append(f"nonpositive target decoder norm for {feature_id}")
 
     hidden_rms = calibration.get("hidden_rms_by_prompt", {})
     if set(hidden_rms) != PROMPT_NAMES:
         errors.append("hidden-RMS prompt names differ")
     if any(not math.isfinite(float(value)) or float(value) <= 0 for value in hidden_rms.values()):
         errors.append("hidden-RMS values must be finite and positive")
+    expected_current_multiplier = None
+    prior_calibration = None
     if all(feature_id in metrics for feature_id in TARGET_IDS) and set(hidden_rms) == PROMPT_NAMES:
         unit_doses = [
             metrics[feature_id]["decoder_norm"]
@@ -280,7 +285,53 @@ def audit_calibration(
             for prompt_rms in hidden_rms.values()
         ]
         independent_multiplier = round(0.05 / (0.6 * statistics.median(unit_doses)), 3)
-        if float(calibration.get("calibrated_multiplier", math.nan)) != independent_multiplier:
+        expected_current_multiplier = independent_multiplier
+        if calibration.get("formula_calibrated_multiplier") is not None and float(
+            calibration["formula_calibrated_multiplier"]
+        ) != independent_multiplier:
+            errors.append("recorded formula multiplier differs from independent recomputation")
+        if prior_calibration_path is None:
+            method_name = calibration.get("calibration_method", {}).get("name")
+            if method_name not in {None, "analytic_decoder_rms_formula_v1"}:
+                errors.append("initial calibration has an unexpected calibration method")
+        else:
+            prior_calibration = json.loads(prior_calibration_path.read_text(encoding="utf-8"))
+            method = calibration.get("calibration_method", {})
+            if method.get("name") != "amendment_1_empirical_single_rms_rescale":
+                errors.append("amended calibration method name differs")
+            if method.get("prior_calibration_sha256") != sha256_file(prior_calibration_path):
+                errors.append("amended calibration references a different prior artifact")
+            if prior_calibration.get("status") != "fail":
+                errors.append("Amendment 1 prior calibration is not failed")
+            if prior_calibration.get("candidate_pool_sha256") != expected_candidate_hash:
+                errors.append("Amendment 1 prior candidate pool differs")
+            if float(prior_calibration.get("calibrated_multiplier", math.nan)) != independent_multiplier:
+                errors.append("Amendment 1 prior multiplier differs from the analytic formula")
+            prior_gate = prior_calibration.get("technical_pilot", {}).get("gate", {})
+            prior_errors = [str(error) for error in prior_gate.get("errors", [])]
+            required_prefixes = (
+                "calibrated single median RMS outside [0.03, 0.08]",
+                "calibrated aggregate median RMS outside [0.04, 0.15]",
+            )
+            matched_prefixes = {
+                prefix
+                for prefix in required_prefixes
+                if any(error.startswith(prefix) for error in prior_errors)
+            }
+            if len(prior_errors) != 2 or matched_prefixes != set(required_prefixes):
+                errors.append("Amendment 1 prior failure reasons differ")
+            observed_single = float(
+                prior_gate.get("calibrated_single_final_relative_rms_median", math.nan)
+            )
+            expected_current_multiplier = round(
+                independent_multiplier * 0.05 / observed_single,
+                3,
+            )
+            if float(method.get("observed_single_median_relative_rms", math.nan)) != observed_single:
+                errors.append("amended calibration records a different prior single RMS")
+            if float(method.get("corrected_multiplier", math.nan)) != expected_current_multiplier:
+                errors.append("amended calibration method records a different corrected multiplier")
+        if float(calibration.get("calibrated_multiplier", math.nan)) != expected_current_multiplier:
             errors.append("calibrated multiplier differs from independent recomputation")
     else:
         independent_multiplier = None
@@ -338,6 +389,23 @@ def audit_calibration(
                     control_id = int(pair["control_feature_id"])
                     if abs(float(pair["cost"]) - costs.get((target_id, control_id), math.inf)) > 1e-9:
                         errors.append(f"recorded match cost differs in panel {panel_index}")
+        if prior_calibration is not None:
+            current_maps = [
+                {
+                    int(pair["target_feature_id"]): int(pair["control_feature_id"])
+                    for pair in panel.get("pairs", [])
+                }
+                for panel in matching.get("panels", [])
+            ]
+            prior_maps = [
+                {
+                    int(pair["target_feature_id"]): int(pair["control_feature_id"])
+                    for pair in panel.get("pairs", [])
+                }
+                for panel in prior_calibration.get("control_matching", {}).get("panels", [])
+            ]
+            if current_maps != prior_maps:
+                errors.append("amendment rerun control IDs differ from the prior calibration")
 
     pilot = calibration.get("technical_pilot", {})
     independent_pilot = independently_evaluate_pilot(pilot.get("records", []))
@@ -353,6 +421,10 @@ def audit_calibration(
         "n_feature_metrics": len(feature_rows),
         "calibrated_multiplier": calibration.get("calibrated_multiplier"),
         "independent_multiplier": independent_multiplier,
+        "expected_current_multiplier": expected_current_multiplier,
+        "prior_calibration_sha256": (
+            sha256_file(prior_calibration_path) if prior_calibration_path is not None else None
+        ),
         "independent_control_panels": [
             {str(target): control for target, control in panel.items()}
             for panel in independently_selected
@@ -366,9 +438,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--template-dir", type=Path, required=True)
     parser.add_argument("--calibration", type=Path, required=True)
+    parser.add_argument("--prior-calibration", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    report = audit_calibration(args.template_dir, args.calibration)
+    report = audit_calibration(
+        args.template_dir,
+        args.calibration,
+        args.prior_calibration,
+    )
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"Independent calibration audit: {report['status'].upper()} -> {args.out}")

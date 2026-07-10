@@ -27,7 +27,9 @@ for path in (REPO_ROOT, SCRIPT_DIR):
 
 from experiments.exp2_sae.public_sae_consciousness_gating import (  # noqa: E402
     BINARY_CONSCIOUS_QUERY,
+    CALIBRATION_MULTIPLIER_RANGE,
     CALIBRATION_PROMPTS,
+    CALIBRATION_TARGET_RELATIVE_RMS,
     FINAL_MAX_TOKENS,
     HOOK_LAYER,
     INDUCTION_MAX_TOKENS,
@@ -371,6 +373,67 @@ def evaluate_technical_pilot(records: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def control_panel_maps(matching: dict[str, Any]) -> list[dict[int, int]]:
+    return [
+        {
+            int(pair["target_feature_id"]): int(pair["control_feature_id"])
+            for pair in panel["pairs"]
+        }
+        for panel in matching["panels"]
+    ]
+
+
+def amended_multiplier(
+    prior: dict[str, Any],
+    prior_path: Path,
+    formula_multiplier: float,
+    expected_candidate_hash: str,
+) -> tuple[float, dict[str, Any]]:
+    if prior.get("status") != "fail":
+        raise ProtocolViolation("Amendment input must be the failed initial calibration")
+    if prior.get("candidate_pool_sha256") != expected_candidate_hash:
+        raise ProtocolViolation("Amendment input has a different candidate-pool hash")
+    for key, expected in (
+        ("model", MODEL_ID),
+        ("model_revision", MODEL_REVISION),
+        ("sae", SAE_ID),
+        ("sae_revision", SAE_REVISION),
+    ):
+        if prior.get(key) != expected:
+            raise ProtocolViolation(f"Amendment input {key} differs from the frozen value")
+    prior_multiplier = float(prior["calibrated_multiplier"])
+    if prior_multiplier != formula_multiplier:
+        raise ProtocolViolation("Initial calibration multiplier differs from recomputed formula")
+    gate = prior["technical_pilot"]["gate"]
+    errors = [str(error) for error in gate.get("errors", [])]
+    allowed_prefixes = (
+        "calibrated single median RMS outside [0.03, 0.08]",
+        "calibrated aggregate median RMS outside [0.04, 0.15]",
+    )
+    matched_prefixes = {
+        prefix for prefix in allowed_prefixes if any(error.startswith(prefix) for error in errors)
+    }
+    if len(errors) != 2 or matched_prefixes != set(allowed_prefixes):
+        raise ProtocolViolation("Initial calibration failed for reasons outside Amendment 1")
+    observed_single = float(gate["calibrated_single_final_relative_rms_median"])
+    corrected = round(
+        prior_multiplier * CALIBRATION_TARGET_RELATIVE_RMS / observed_single,
+        3,
+    )
+    if not CALIBRATION_MULTIPLIER_RANGE[0] <= corrected <= CALIBRATION_MULTIPLIER_RANGE[1]:
+        raise ProtocolViolation("Amended multiplier is outside the frozen multiplier range")
+    return corrected, {
+        "name": "amendment_1_empirical_single_rms_rescale",
+        "amendment_path": "docs/SAE_CONSCIOUSNESS_GATING_AMENDMENT_20260710.md",
+        "prior_calibration_path": prior_path.name,
+        "prior_calibration_sha256": sha256_file(prior_path),
+        "prior_multiplier": prior_multiplier,
+        "observed_single_median_relative_rms": observed_single,
+        "target_relative_rms": CALIBRATION_TARGET_RELATIVE_RMS,
+        "corrected_multiplier": corrected,
+    }
+
+
 def run_technical_pilot(
     torch_module: Any,
     model: Any,
@@ -418,7 +481,11 @@ def run_technical_pilot(
     return records, evaluate_technical_pilot(records)
 
 
-def run_calibration(plan_dir: Path, output: Path) -> None:
+def run_calibration(
+    plan_dir: Path,
+    output: Path,
+    prior_calibration_path: Path | None = None,
+) -> None:
     candidate_path = plan_dir / "calibration_candidate_pool.csv"
     plan_path = plan_dir / "CALIBRATION_PLAN.json"
     audit_path = plan_dir / "independent_plan_audit.json"
@@ -437,7 +504,19 @@ def run_calibration(plan_dir: Path, output: Path) -> None:
         torch_module, model, sae, config, candidate_ids
     )
     matching = match_control_panels(feature_metrics, candidate_ids)
-    multiplier = compute_calibrated_multiplier(feature_metrics, hidden_rms, model.d_model)
+    formula_multiplier = compute_calibrated_multiplier(feature_metrics, hidden_rms, model.d_model)
+    multiplier = formula_multiplier
+    calibration_method: dict[str, Any] = {"name": "analytic_decoder_rms_formula_v1"}
+    if prior_calibration_path is not None:
+        prior = json.loads(prior_calibration_path.read_text(encoding="utf-8"))
+        multiplier, calibration_method = amended_multiplier(
+            prior,
+            prior_calibration_path,
+            formula_multiplier,
+            candidate_pool_sha256(candidate_ids),
+        )
+        if control_panel_maps(matching) != control_panel_maps(prior["control_matching"]):
+            raise ProtocolViolation("Amendment rerun did not reproduce the original control IDs")
     pilot_records, pilot_gate = run_technical_pilot(
         torch_module, model, sae, config, multiplier, matching
     )
@@ -456,7 +535,9 @@ def run_calibration(plan_dir: Path, output: Path) -> None:
         "hidden_rms_by_prompt": hidden_rms,
         "feature_metrics": feature_metrics,
         "control_matching": matching,
+        "formula_calibrated_multiplier": formula_multiplier,
         "calibrated_multiplier": multiplier,
+        "calibration_method": calibration_method,
         "technical_pilot": {
             "behavioral_output_policy": (
                 "Response text was discarded without printing, persistence, classification, or inspection."
@@ -643,6 +724,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--plan-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--outdir", type=Path)
+    parser.add_argument("--prior-calibration", type=Path)
     return parser.parse_args()
 
 
@@ -651,10 +733,12 @@ def main() -> None:
     if args.mode == "calibrate":
         if args.output is None or args.outdir is not None:
             raise ValueError("Calibration mode requires --output and does not accept --outdir")
-        run_calibration(args.plan_dir, args.output)
+        run_calibration(args.plan_dir, args.output, args.prior_calibration)
     else:
-        if args.outdir is None or args.output is not None:
-            raise ValueError("Confirmatory mode requires --outdir and does not accept --output")
+        if args.outdir is None or args.output is not None or args.prior_calibration is not None:
+            raise ValueError(
+                "Confirmatory mode requires --outdir and does not accept calibration inputs"
+            )
         run_confirmatory(args.plan_dir, args.outdir)
 
 

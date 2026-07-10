@@ -225,6 +225,11 @@ technical pilot at literal and calibrated endpoints. Pilot generation text is
 not printed, persisted, classified, or inspected. Only hashes, token counts,
 cap flags, and intervention telemetry are retained.
 
+The initial analytic calibration narrowly exceeded the two realized-dose
+ceilings without exposing behavioral output. The prospective correction and
+single permitted rerun are fixed in
+`docs/SAE_CONSCIOUSNESS_GATING_AMENDMENT_20260710.md`.
+
 The gate requires:
 
 - exactly one registered hook per turn and confirmed hook removal;
