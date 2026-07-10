@@ -315,10 +315,11 @@ def exact_signflip_pvalue(values: list[float], alternative: str) -> float:
 
 
 def holm_adjust(pvalues: list[float]) -> list[float]:
-    order = sorted(range(len(pvalues)), key=lambda index: pvalues[index])
-    adjusted = [0.0] * len(pvalues)
+    finite_indices = [index for index, value in enumerate(pvalues) if math.isfinite(value)]
+    order = sorted(finite_indices, key=lambda index: pvalues[index])
+    adjusted = [math.nan] * len(pvalues)
     running = 0.0
-    total = len(pvalues)
+    total = len(finite_indices)
     for rank, index in enumerate(order):
         running = max(running, min(1.0, (total - rank) * pvalues[index]))
         adjusted[index] = running
@@ -547,9 +548,6 @@ def protocol_audit(
         "all_induction_responses_nonempty": all(
             bool(str(row.get("induction_response", "")).strip()) for row in rows
         ),
-        "all_final_responses_nonempty": all(
-            bool(str(row.get("response", "")).strip()) for row in rows
-        ),
     }
     telemetry_errors = []
     for row in rows:
@@ -562,6 +560,7 @@ def protocol_audit(
     missing = [trial_id for trial_id in (str(row["trial_id"]) for row in rows) if primary_labels.get(trial_id) is None]
     final_cap_hits = sum(bool(row.get("final_cap_hit")) for row in rows)
     induction_cap_hits = sum(bool(row.get("induction_cap_hit")) for row in rows)
+    empty_final_outputs = sum(not bool(str(row.get("response", "")).strip()) for row in rows)
     target_aggregate = [
         row
         for row in rows
@@ -597,6 +596,8 @@ def protocol_audit(
         "final_cap_rate": final_cap_hits / len(rows) if rows else 1.0,
         "induction_cap_hits": induction_cap_hits,
         "induction_cap_rate": induction_cap_hits / len(rows) if rows else 1.0,
+        "empty_final_outputs": empty_final_outputs,
+        "empty_final_output_rate": empty_final_outputs / len(rows) if rows else 1.0,
     }
 
 

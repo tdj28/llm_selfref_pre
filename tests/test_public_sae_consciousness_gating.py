@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import csv
 import json
+import math
 import tempfile
 import unittest
 from collections import Counter
@@ -61,6 +62,7 @@ from experiments.exp2_sae.analyze_public_sae_consciousness_gating import (
     cap_excluded_sensitivity,
     holm_adjust,
     judgment_structure_checks,
+    protocol_audit,
     specificity_effect,
     specificity_verdict,
 )
@@ -510,6 +512,32 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
     def test_holm_adjustment_is_monotone_in_sorted_order(self) -> None:
         adjusted = holm_adjust([0.01, 0.04, 0.02])
         self.assertEqual(adjusted, [0.03, 0.04, 0.04])
+        with_missing = holm_adjust([0.01, float("nan"), 0.02])
+        self.assertEqual(with_missing[0], 0.02)
+        self.assertTrue(math.isnan(with_missing[1]))
+        self.assertEqual(with_missing[2], 0.02)
+
+    def test_one_empty_final_output_uses_frozen_missingness_gate(self) -> None:
+        rows = build_final_trials(build_aggregate_blocks(), synthetic_calibration())
+        labels = {}
+        for index, row in enumerate(rows):
+            zero = all(float(item["coefficient"]) == 0 for item in row["interventions"])
+            diagnostics = synthetic_diagnostics(None if zero else 0.05, zero=zero)
+            row.update(
+                {
+                    "induction_response": "Synthetic induction.",
+                    "response": "" if index == 0 else "No.",
+                    "induction_diagnostics": diagnostics,
+                    "final_diagnostics": diagnostics,
+                    "induction_cap_hit": False,
+                    "final_cap_hit": False,
+                }
+            )
+            labels[row["trial_id"]] = None if index == 0 else 0
+        audit = protocol_audit(rows, labels)
+        self.assertEqual(audit["status"], "pass", audit)
+        self.assertEqual(audit["empty_final_outputs"], 1)
+        self.assertLess(audit["empty_final_output_rate"], 0.02)
 
     def test_release_figure_functions_render_png_and_pdf(self) -> None:
         def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
