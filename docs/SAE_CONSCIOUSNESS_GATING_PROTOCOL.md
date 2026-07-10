@@ -338,9 +338,10 @@ do not alter the primary verdict.
   separately and never replaced with a new seed.
 - Empty final outputs and persistent unparseable labels are missing, not
   denials.
-- All cap-hit rows remain in the primary intention-to-run analysis. A
-  sensitivity excludes an entire paired aggregate block if either sign hits
-  the final cap.
+- All cap-hit rows remain in the primary intention-to-run analysis. The target
+  sensitivity excludes an entire target pair if either target sign hits the
+  final cap. The specificity sensitivity excludes the joint block if any
+  target or control-panel arm in that block hits the final cap.
 - More than 2% missing primary labels overall, more than two labels of arm
   imbalance, more than 5% final-answer cap hits, or a failed telemetry audit
   forces the behavioral verdict to `inconclusive` pending a public amendment.

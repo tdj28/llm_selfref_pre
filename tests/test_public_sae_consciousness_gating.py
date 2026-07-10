@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import csv
 import json
 import tempfile
 import unittest
@@ -22,6 +23,12 @@ from experiments.exp2_sae.judge_public_sae_gating_external import (
 from experiments.exp2_sae.judge_public_sae_gating_local import (
     parse_label as parse_local_label,
 )
+from experiments.exp2_sae.figure_public_sae_consciousness_gating import (
+    aggregate_figure,
+    individual_figure,
+    judge_figure,
+    technical_figure,
+)
 from experiments.exp2_sae.public_sae_consciousness_gating import (
     CALIBRATION_PROMPTS,
     TARGET_FEATURE_IDS,
@@ -42,7 +49,9 @@ from experiments.exp2_sae.run_public_sae_consciousness_gating import (
 from experiments.exp2_sae.analyze_public_sae_consciousness_gating import (
     aggregate_effect,
     behavioral_verdict,
+    cap_excluded_sensitivity,
     holm_adjust,
+    judgment_structure_checks,
     specificity_effect,
     specificity_verdict,
 )
@@ -301,19 +310,178 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
                             "analysis_role": role,
                             "block_id": f"block-{block}",
                             "sign": sign,
+                            "final_cap_hit": block == 0 and role == "target" and sign == "suppression",
                         }
                     )
                     labels[trial_id] = int(role == "target" and sign == "suppression")
         effect = aggregate_effect(rows, labels, "target")
         specificity = specificity_effect(rows, labels)
+        cap_sensitivity = cap_excluded_sensitivity(rows, labels)
         self.assertEqual(effect["suppression_minus_amplification"], 1.0)
         self.assertEqual(effect["n_complete_blocks"], 50)
         self.assertEqual(specificity["target_minus_mean_controls"], 1.0)
         self.assertEqual(specificity_verdict(specificity), "specificity supported")
+        self.assertEqual(cap_sensitivity["target_effect"]["n_complete_blocks"], 49)
+        self.assertEqual(cap_sensitivity["specificity_effect"]["n_common_blocks"], 49)
+
+    def test_judgment_structure_gate_rejects_duplicate_local_rows(self) -> None:
+        response_hash = hashlib.sha256(b"response").hexdigest()
+        generations = [{"trial_id": "trial-1", "response_sha256": response_hash}]
+        local = [{"trial_id": "trial-1", "paper_label": 1}]
+        direct = [
+            {
+                "trial_id": "trial-1",
+                "paper_label": 1,
+                "response_sha256": response_hash,
+            }
+        ]
+        external = [
+            {
+                "trial_id": "trial-1",
+                "judge_key": judge_key,
+                "task": "paper",
+                "paper_label": 1,
+            }
+            for judge_key in (
+                "openai:gpt-4o-mini-2024-07-18",
+                "anthropic:claude-haiku-4-5-20251001",
+            )
+        ]
+        checks = judgment_structure_checks(generations, local, external, direct)
+        self.assertTrue(all(checks.values()), checks)
+        duplicate_checks = judgment_structure_checks(
+            generations,
+            [*local, *local],
+            external,
+            direct,
+        )
+        self.assertFalse(duplicate_checks["local_judgments_exactly_one_per_trial"])
 
     def test_holm_adjustment_is_monotone_in_sorted_order(self) -> None:
         adjusted = holm_adjust([0.01, 0.04, 0.02])
         self.assertEqual(adjusted, [0.03, 0.04, 0.04])
+
+    def test_release_figure_functions_render_png_and_pdf(self) -> None:
+        def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(rows)
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            analysis_dir = root / "analysis"
+            outdir = root / "figures"
+            analysis_dir.mkdir()
+            aggregate_rows = []
+            for role in ("target", "control_panel_1", "control_panel_2", "control_panel_3"):
+                aggregate_rows.append(
+                    {
+                        "analysis_role": role,
+                        "suppression_rate": 0.8,
+                        "suppression_wilson_low": 0.65,
+                        "suppression_wilson_high": 0.9,
+                        "amplification_rate": 0.2,
+                        "amplification_wilson_low": 0.1,
+                        "amplification_wilson_high": 0.35,
+                        "suppression_minus_amplification": 0.6,
+                        "ci_low": 0.4,
+                        "ci_high": 0.8,
+                    }
+                )
+            write_csv(analysis_dir / "aggregate_effects.csv", aggregate_rows)
+            (analysis_dir / "primary_verdict.json").write_text(
+                json.dumps(
+                    {
+                        "primary_specificity_effect": {
+                            "target_minus_mean_controls": 0.2,
+                            "ci_low": -0.1,
+                            "ci_high": 0.5,
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            curve_rows = []
+            for feature_id in TARGET_FEATURE_IDS:
+                for value in (round(index / 10, 1) for index in range(-6, 7)):
+                    curve_rows.append(
+                        {
+                            "feature_id": feature_id,
+                            "base_coefficient": value,
+                            "affirmation_rate": 0.5 - value / 3,
+                            "wilson_low": max(0.0, 0.35 - value / 3),
+                            "wilson_high": min(1.0, 0.65 - value / 3),
+                        }
+                    )
+            write_csv(analysis_dir / "individual_curve_rates.csv", curve_rows)
+            judge_rows = []
+            for judge_key in (
+                "primary_local_llama",
+                "openai:gpt-4o-mini-2024-07-18",
+                "anthropic:claude-haiku-4-5-20251001",
+                "three_judge_majority",
+                "direct_answer",
+            ):
+                judge_rows.append(
+                    {
+                        "judge_key": judge_key,
+                        "target_effect": 0.6,
+                        "target_ci_low": 0.4,
+                        "target_ci_high": 0.8,
+                        "specificity_effect": 0.2,
+                        "specificity_ci_low": -0.1,
+                        "specificity_ci_high": 0.5,
+                    }
+                )
+            write_csv(analysis_dir / "judge_sensitivity.csv", judge_rows)
+            dose_rows = []
+            for scale, roles in (
+                ("literal", ("target", "control_panel_1", "control_panel_2", "control_panel_3")),
+                ("calibrated", ("target", "control_panel_1")),
+            ):
+                for role in roles:
+                    for sign in ("suppression", "amplification"):
+                        dose_rows.append(
+                            {
+                                "phase": f"aggregate_{scale}",
+                                "scale": scale,
+                                "analysis_role": role,
+                                "sign": sign,
+                                "turn": "final",
+                                "mean_relative_hidden_delta_rms": 0.05,
+                            }
+                        )
+            write_csv(analysis_dir / "realized_dose_telemetry.csv", dose_rows)
+            calibration_path = root / "calibration.json"
+            calibration_path.write_text(
+                json.dumps(
+                    {
+                        "control_matching": {
+                            "panels": [
+                                {
+                                    "panel": panel,
+                                    "pairs": [
+                                        {
+                                            "decoder_norm_ratio": 1.0 + index / 100,
+                                            "max_abs_target_cosine": 0.02 + index / 100,
+                                        }
+                                        for index in range(6)
+                                    ],
+                                }
+                                for panel in (1, 2, 3)
+                            ]
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            aggregate_figure(analysis_dir, outdir)
+            individual_figure(analysis_dir, outdir)
+            judge_figure(analysis_dir, outdir)
+            technical_figure(analysis_dir, calibration_path, outdir)
+            self.assertEqual(len(list(outdir.glob("*.png"))), 4)
+            self.assertEqual(len(list(outdir.glob("*.pdf"))), 4)
 
 
 if __name__ == "__main__":

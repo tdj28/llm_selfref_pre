@@ -74,9 +74,10 @@ is complete.
 - [x] Preserve a true zero no-op and record per-turn hook calls, latent changes,
   hidden-state RMS, perturbation RMS, attention-mask mode, generation lengths,
   cap hits, and hook cleanup.
-- [ ] Use the notebook-matched Llama 3.3 70B classifier as the replication
-  outcome when technically feasible; retain the two pinned external
-  exact-paper judges as blinded sensitivity analyses.
+- [x] Use the exact Appendix B rubric with unsteered Llama 3.3 70B as the
+  primary replication outcome, matching the notebook's same-model choice but
+  not its distinct prompt text; retain two pinned external exact-rubric judges
+  as blinded sensitivity analyses.
 - [x] Add deterministic checkpoint/resume behavior, append-only raw JSONL,
   exact prompt/output hashes, and a manifest that contains no secrets.
 - [x] Add unit tests and an independently implemented plan validator that checks
@@ -85,7 +86,7 @@ is complete.
 
 ### 3. Run A Blinded Telemetry-Only Calibration Gate
 
-- [ ] Create a new, clearly named agent-owned RunPod pod only after the frozen
+- [x] Create a new, clearly named agent-owned RunPod pod only after the frozen
   dry-run plan is public. Do not touch any unrelated pod.
 - [ ] Run a small technical pilot comparing literal and candidate calibrated
   strengths. Inspect telemetry, failures, and truncation only; do not inspect or

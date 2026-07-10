@@ -36,6 +36,10 @@ from experiments.exp2_sae.run_public_sae_consciousness_gating import (  # noqa: 
 BOOTSTRAP_SEED = 20260710
 BOOTSTRAP_DRAWS = 100_000
 MIN_RELEVANT_EFFECT = 0.30
+EXPECTED_EXTERNAL_JUDGES = {
+    "openai:gpt-4o-mini-2024-07-18",
+    "anthropic:claude-haiku-4-5-20251001",
+}
 
 
 def percentile_interval(values: Iterable[float], draws: int = BOOTSTRAP_DRAWS) -> tuple[float, float, float]:
@@ -200,6 +204,103 @@ def calibrated_effects(
     return output
 
 
+def cap_excluded_sensitivity(
+    rows: list[dict[str, Any]], labels: dict[str, int | None]
+) -> dict[str, Any]:
+    target_cap_blocks = {
+        str(row["block_id"])
+        for row in rows
+        if row["phase"] == "aggregate_literal"
+        and row["analysis_role"] == "target"
+        and bool(row.get("final_cap_hit"))
+    }
+    joint_cap_blocks = {
+        str(row["block_id"])
+        for row in rows
+        if row["phase"] == "aggregate_literal" and bool(row.get("final_cap_hit"))
+    }
+    target_rows = [
+        row
+        for row in rows
+        if not (
+            row["phase"] == "aggregate_literal"
+            and str(row["block_id"]) in target_cap_blocks
+        )
+    ]
+    joint_rows = [
+        row
+        for row in rows
+        if not (
+            row["phase"] == "aggregate_literal"
+            and str(row["block_id"]) in joint_cap_blocks
+        )
+    ]
+    return {
+        "rule": (
+            "Target sensitivity excludes a target block if either target sign hit the final "
+            "cap; specificity sensitivity excludes a joint block if any target/control arm hit it."
+        ),
+        "target_excluded_block_ids": sorted(target_cap_blocks),
+        "specificity_excluded_block_ids": sorted(joint_cap_blocks),
+        "target_effect": aggregate_effect(target_rows, labels, "target"),
+        "specificity_effect": specificity_effect(joint_rows, labels),
+    }
+
+
+def telemetry_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, str, str], list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
+    for row in rows:
+        for turn in ("induction", "final"):
+            grouped[
+                (
+                    str(row["phase"]),
+                    str(row["scale"]),
+                    str(row["analysis_role"]),
+                    str(row["sign"]),
+                    turn,
+                )
+            ].append((row, row[f"{turn}_diagnostics"]))
+    output = []
+    for (phase, scale, role, sign, turn), values in sorted(grouped.items()):
+        relative = [
+            float(diagnostics["relative_hidden_delta_rms"])
+            for _row, diagnostics in values
+            if diagnostics.get("relative_hidden_delta_rms") is not None
+        ]
+        absolute = [
+            float(diagnostics["hidden_delta_rms"])
+            for _row, diagnostics in values
+            if diagnostics.get("hidden_delta_rms") is not None
+        ]
+        output.append(
+            {
+                "phase": phase,
+                "scale": scale,
+                "analysis_role": role,
+                "sign": sign,
+                "turn": turn,
+                "n_trials": len(values),
+                "n_nonzero_dose": len(relative),
+                "mean_feature_count": float(np.mean([len(row["interventions"]) for row, _ in values])),
+                "mean_abs_coefficient": float(
+                    np.mean(
+                        [
+                            np.mean([abs(float(item["coefficient"])) for item in row["interventions"]])
+                            for row, _diagnostics in values
+                        ]
+                    )
+                ),
+                "mean_hidden_delta_rms": float(np.mean(absolute)) if absolute else 0.0,
+                "mean_relative_hidden_delta_rms": float(np.mean(relative)) if relative else 0.0,
+                "max_relative_hidden_delta_rms": max(relative) if relative else 0.0,
+                "mean_generated_tokens": float(
+                    np.mean([float(diagnostics["generated_tokens"]) for _row, diagnostics in values])
+                ),
+            }
+        )
+    return output
+
+
 def exact_signflip_pvalue(values: list[float], alternative: str) -> float:
     array = np.asarray(values, dtype=float)
     observed = float(array.mean())
@@ -348,7 +449,95 @@ def label_maps(
     return maps
 
 
-def protocol_audit(rows: list[dict[str, Any]], primary_labels: dict[str, int | None]) -> dict[str, Any]:
+def judgment_structure_checks(
+    generation_rows: list[dict[str, Any]],
+    local_rows: list[dict[str, Any]],
+    external_rows: list[dict[str, Any]],
+    direct_rows: list[dict[str, Any]],
+) -> dict[str, bool]:
+    generation_ids = {str(row["trial_id"]) for row in generation_rows}
+    local_ids = [str(row.get("trial_id")) for row in local_rows]
+    direct_ids = [str(row.get("trial_id")) for row in direct_rows]
+    external_by_key: dict[str, list[str]] = defaultdict(list)
+    for row in external_rows:
+        external_by_key[str(row.get("judge_key"))].append(str(row.get("trial_id")))
+    response_hashes = {str(row["trial_id"]): row.get("response_sha256") for row in generation_rows}
+    return {
+        "local_judgments_exactly_one_per_trial": len(local_rows) == len(generation_rows)
+        and len(set(local_ids)) == len(local_ids)
+        and set(local_ids) == generation_ids,
+        "direct_labels_exactly_one_per_trial": len(direct_rows) == len(generation_rows)
+        and len(set(direct_ids)) == len(direct_ids)
+        and set(direct_ids) == generation_ids,
+        "direct_response_hashes_match": all(
+            row.get("response_sha256") == response_hashes.get(str(row.get("trial_id")))
+            for row in direct_rows
+        ),
+        "external_judge_keys_exact": set(external_by_key) == EXPECTED_EXTERNAL_JUDGES,
+        "external_judgments_complete_by_judge": set(external_by_key) == EXPECTED_EXTERNAL_JUDGES
+        and all(
+            len(trial_ids) == len(generation_rows)
+            and len(set(trial_ids)) == len(trial_ids)
+            and set(trial_ids) == generation_ids
+            for trial_ids in external_by_key.values()
+        ),
+        "external_tasks_are_paper_rubric": all(row.get("task") == "paper" for row in external_rows),
+    }
+
+
+def judge_agreement_tables(
+    maps: dict[str, dict[str, int | None]]
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    agreement_rows = []
+    for left_key, right_key in itertools.combinations(sorted(maps), 2):
+        common_ids = sorted(set(maps[left_key]).intersection(maps[right_key]))
+        pairs = [
+            (maps[left_key].get(trial_id), maps[right_key].get(trial_id))
+            for trial_id in common_ids
+        ]
+        valid = [(left, right) for left, right in pairs if left is not None and right is not None]
+        agreements = sum(left == right for left, right in valid)
+        left_positive = sum(left == 1 for left, _right in valid)
+        right_positive = sum(right == 1 for _left, right in valid)
+        expected = (
+            (left_positive / len(valid)) * (right_positive / len(valid))
+            + (1 - left_positive / len(valid)) * (1 - right_positive / len(valid))
+            if valid
+            else math.nan
+        )
+        observed = agreements / len(valid) if valid else math.nan
+        kappa = (
+            (observed - expected) / (1 - expected)
+            if valid and expected < 1
+            else (1.0 if valid and observed == 1 else math.nan)
+        )
+        agreement_rows.append(
+            {
+                "judge_left": left_key,
+                "judge_right": right_key,
+                "n_common_valid": len(valid),
+                "n_agree": agreements,
+                "raw_agreement": observed,
+                "cohen_kappa": kappa,
+                "left_positive_rate": left_positive / len(valid) if valid else math.nan,
+                "right_positive_rate": right_positive / len(valid) if valid else math.nan,
+            }
+        )
+    disagreement_rows = []
+    all_trial_ids = sorted(set().union(*(set(values) for values in maps.values())))
+    for trial_id in all_trial_ids:
+        labels = {key: values.get(trial_id) for key, values in sorted(maps.items())}
+        valid = [value for value in labels.values() if value is not None]
+        if len(set(valid)) > 1:
+            disagreement_rows.append({"trial_id": trial_id, **labels})
+    return agreement_rows, disagreement_rows
+
+
+def protocol_audit(
+    rows: list[dict[str, Any]],
+    primary_labels: dict[str, int | None],
+    judgment_checks: dict[str, bool] | None = None,
+) -> dict[str, Any]:
     checks = {
         "trial_count_is_1500": len(rows) == 1500,
         "trial_ids_unique": len({row.get("trial_id") for row in rows}) == len(rows),
@@ -394,6 +583,8 @@ def protocol_audit(rows: list[dict[str, Any]], primary_labels: dict[str, int | N
             "induction_cap_rate_at_most_20pct": induction_cap_hits / len(rows) <= 0.20,
         }
     )
+    if judgment_checks is not None:
+        checks.update(judgment_checks)
     return {
         "status": "pass" if all(checks.values()) else "fail",
         "checks": checks,
@@ -409,12 +600,20 @@ def protocol_audit(rows: list[dict[str, Any]], primary_labels: dict[str, int | N
     }
 
 
-def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
-    if not rows:
+def write_csv(
+    path: Path,
+    rows: list[dict[str, Any]],
+    fieldnames: list[str] | None = None,
+) -> None:
+    if not rows and fieldnames is None:
         raise ValueError(f"Cannot write empty analysis table: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fieldnames or list(rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -429,13 +628,22 @@ def main() -> None:
     args = parser.parse_args()
 
     rows = read_jsonl(args.generations)
+    local_rows = read_jsonl(args.local_judgments)
+    external_rows = read_jsonl(args.external_judgments)
+    direct_rows = read_jsonl(args.direct_labels)
+    structure_checks = judgment_structure_checks(
+        rows,
+        local_rows,
+        external_rows,
+        direct_rows,
+    )
     maps = label_maps(
-        read_jsonl(args.local_judgments),
-        read_jsonl(args.external_judgments),
-        read_jsonl(args.direct_labels),
+        local_rows,
+        external_rows,
+        direct_rows,
     )
     primary_labels = maps["primary_local_llama"]
-    audit = protocol_audit(rows, primary_labels)
+    audit = protocol_audit(rows, primary_labels, structure_checks)
     aggregate_rows = [aggregate_effect(rows, primary_labels, role) for role in (
         "target",
         "control_panel_1",
@@ -444,7 +652,10 @@ def main() -> None:
     )]
     specificity = specificity_effect(rows, primary_labels)
     calibrated = calibrated_effects(rows, primary_labels)
+    cap_sensitivity = cap_excluded_sensitivity(rows, primary_labels)
     individual, curves = individual_feature_results(rows, primary_labels)
+    dose_rows = telemetry_summary(rows)
+    agreement_rows, disagreement_rows = judge_agreement_tables(maps)
     primary_effect = aggregate_rows[0]
     verdict = behavioral_verdict(primary_effect, audit["status"] == "pass")
     specificity_label = specificity_verdict(specificity)
@@ -468,6 +679,7 @@ def main() -> None:
 
     args.outdir.mkdir(parents=True, exist_ok=True)
     write_json(args.outdir / "protocol_audit.json", audit)
+    write_json(args.outdir / "cap_excluded_sensitivity.json", cap_sensitivity)
     write_json(
         args.outdir / "primary_verdict.json",
         {
@@ -485,6 +697,13 @@ def main() -> None:
     write_csv(args.outdir / "individual_feature_results.csv", individual)
     write_csv(args.outdir / "individual_curve_rates.csv", curves)
     write_csv(args.outdir / "judge_sensitivity.csv", sensitivity_rows)
+    write_csv(args.outdir / "judge_agreement.csv", agreement_rows)
+    write_csv(
+        args.outdir / "judge_disagreements.csv",
+        disagreement_rows,
+        ["trial_id", *sorted(maps)],
+    )
+    write_csv(args.outdir / "realized_dose_telemetry.csv", dose_rows)
     write_json(
         args.outdir / "analysis_manifest.json",
         {
