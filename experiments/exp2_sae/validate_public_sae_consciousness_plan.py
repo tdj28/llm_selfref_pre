@@ -268,6 +268,8 @@ def audit_final(run_dir: Path) -> dict[str, Any]:
     blocks_path = run_dir / "aggregate_blocks.jsonl"
     candidate_path = run_dir / "calibration_candidate_pool.csv"
     snapshot_path = run_dir / "protocol_snapshot.json"
+    calibration_path = run_dir / "calibration.json"
+    calibration_audit_path = run_dir / "independent_calibration_audit.json"
     required_paths = (
         manifest_path,
         plan_path,
@@ -275,6 +277,8 @@ def audit_final(run_dir: Path) -> dict[str, Any]:
         blocks_path,
         candidate_path,
         snapshot_path,
+        calibration_path,
+        calibration_audit_path,
     )
     if not all(path.is_file() for path in required_paths):
         return {
@@ -286,6 +290,15 @@ def audit_final(run_dir: Path) -> dict[str, Any]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     errors.extend(verify_manifest_files(run_dir, manifest))
     errors.extend(verify_source_files(manifest))
+    calibration_audit = json.loads(calibration_audit_path.read_text(encoding="utf-8"))
+    if calibration_audit.get("status") != "pass":
+        errors.append("independent calibration audit did not pass")
+    if calibration_audit.get("calibration_sha256") != sha256_file(calibration_path):
+        errors.append("independent calibration audit references a different calibration file")
+    if manifest.get("calibration_sha256") != sha256_file(calibration_path):
+        errors.append("final manifest calibration hash mismatch")
+    if manifest.get("calibration_audit_sha256") != sha256_file(calibration_audit_path):
+        errors.append("final manifest calibration-audit hash mismatch")
     rows = read_jsonl(plan_path)
     blocks = read_jsonl(blocks_path)
     block_errors, block_checks = audit_aggregate_blocks(blocks)

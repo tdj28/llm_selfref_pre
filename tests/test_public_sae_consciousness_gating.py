@@ -198,12 +198,29 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
             template_dir = root / "template"
             final_dir = root / "final"
             calibration_path = root / "calibration.json"
+            calibration_audit_path = root / "calibration_audit.json"
             build_precalibration_plan(template_dir)
             calibration = synthetic_calibration() | {
                 "candidate_pool_sha256": candidate_pool_sha256(build_candidate_pool())
             }
             calibration_path.write_text(json.dumps(calibration), encoding="utf-8")
-            build_final_plan(template_dir, calibration_path, final_dir)
+            calibration_audit_path.write_text(
+                json.dumps(
+                    {
+                        "status": "pass",
+                        "calibration_sha256": hashlib.sha256(
+                            calibration_path.read_bytes()
+                        ).hexdigest(),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            build_final_plan(
+                template_dir,
+                calibration_path,
+                calibration_audit_path,
+                final_dir,
+            )
             report = audit_plan(final_dir)
         self.assertEqual(report["status"], "pass", json.dumps(report, indent=2))
 

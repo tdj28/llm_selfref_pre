@@ -150,12 +150,22 @@ def build_precalibration_plan(outdir: Path) -> None:
     )
 
 
-def build_final_plan(template_dir: Path, calibration_path: Path, outdir: Path) -> None:
+def build_final_plan(
+    template_dir: Path,
+    calibration_path: Path,
+    calibration_audit_path: Path,
+    outdir: Path,
+) -> None:
     outdir.mkdir(parents=True, exist_ok=True)
     if any(outdir.iterdir()):
         raise FileExistsError(f"Final-plan output directory is not empty: {outdir}")
     template_manifest = json.loads((template_dir / "MANIFEST.json").read_text(encoding="utf-8"))
     calibration = json.loads(calibration_path.read_text(encoding="utf-8"))
+    calibration_audit = json.loads(calibration_audit_path.read_text(encoding="utf-8"))
+    if calibration_audit.get("status") != "pass":
+        raise ValueError("Independent calibration audit must pass before final-plan construction")
+    if calibration_audit.get("calibration_sha256") != sha256_file(calibration_path):
+        raise ValueError("Independent calibration audit refers to a different calibration artifact")
     candidate_ids = [
         int(row.split(",")[1])
         for row in (template_dir / "calibration_candidate_pool.csv")
@@ -173,10 +183,14 @@ def build_final_plan(template_dir: Path, calibration_path: Path, outdir: Path) -
     blocks_path = outdir / "aggregate_blocks.jsonl"
     candidate_path = outdir / "calibration_candidate_pool.csv"
     snapshot_path = outdir / "protocol_snapshot.json"
+    frozen_calibration_path = outdir / "calibration.json"
+    frozen_calibration_audit_path = outdir / "independent_calibration_audit.json"
     write_jsonl(plan_path, trials)
     shutil.copyfile(template_dir / "aggregate_blocks.jsonl", blocks_path)
     shutil.copyfile(template_dir / "calibration_candidate_pool.csv", candidate_path)
     shutil.copyfile(template_dir / "protocol_snapshot.json", snapshot_path)
+    shutil.copyfile(calibration_path, frozen_calibration_path)
+    shutil.copyfile(calibration_audit_path, frozen_calibration_audit_path)
     control_rows = [
         {
             "panel": int(panel["panel"]),
@@ -208,6 +222,7 @@ def build_final_plan(template_dir: Path, calibration_path: Path, outdir: Path) -
             "candidate_pool_sha256": calibration["candidate_pool_sha256"],
             "template_manifest_sha256": sha256_file(template_dir / "MANIFEST.json"),
             "calibration_sha256": sha256_file(calibration_path),
+            "calibration_audit_sha256": sha256_file(calibration_audit_path),
             "calibration_path": public_reference(calibration_path),
             "template_dir": public_reference(template_dir),
             "template_status": template_manifest["status"],
@@ -217,6 +232,8 @@ def build_final_plan(template_dir: Path, calibration_path: Path, outdir: Path) -
                 file_record(blocks_path, outdir),
                 file_record(candidate_path, outdir),
                 file_record(snapshot_path, outdir),
+                file_record(frozen_calibration_path, outdir),
+                file_record(frozen_calibration_audit_path, outdir),
             ],
             "source_files": source_records(),
             "claim_boundary": (
@@ -231,15 +248,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--outdir", type=Path, default=DEFAULT_OUTDIR)
     parser.add_argument("--template-dir", type=Path)
     parser.add_argument("--calibration", type=Path)
+    parser.add_argument("--calibration-audit", type=Path)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    if bool(args.template_dir) != bool(args.calibration):
-        raise ValueError("Final-plan mode requires both --template-dir and --calibration")
+    final_inputs = (args.template_dir, args.calibration, args.calibration_audit)
+    if any(final_inputs) and not all(final_inputs):
+        raise ValueError(
+            "Final-plan mode requires --template-dir, --calibration, and --calibration-audit"
+        )
     if args.template_dir:
-        build_final_plan(args.template_dir, args.calibration, args.outdir)
+        build_final_plan(
+            args.template_dir,
+            args.calibration,
+            args.calibration_audit,
+            args.outdir,
+        )
         print(f"Wrote frozen 1,500-trial confirmatory plan to {args.outdir}")
     else:
         build_precalibration_plan(args.outdir)
