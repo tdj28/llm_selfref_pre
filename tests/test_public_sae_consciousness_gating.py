@@ -223,7 +223,10 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
                 final_dir,
             )
             report = audit_plan(final_dir)
+            snapshot = json.loads((final_dir / "protocol_snapshot.json").read_text())
         self.assertEqual(report["status"], "pass", json.dumps(report, indent=2))
+        self.assertEqual(snapshot["status"], "frozen_confirmatory_plan")
+        self.assertEqual(snapshot["calibrated_multiplier"], 3.0)
 
     def test_independent_calibration_audit_recomputes_matching_and_multiplier(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

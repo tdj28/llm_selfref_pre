@@ -296,18 +296,24 @@ under both judges. The complete release is at
 
 ### Prospective paper-grid replication
 
-A new confirmatory public-weight study is frozen for outcome-blind telemetry
-calibration. Its pre-calibration artifact fixes all six individual features over
-the paper's 13-value grid and 10 seeds, 50 paired aggregate blocks, a seeded
-512-feature outcome-naive control pool, three-panel matching rules, literal and
+A new confirmatory public-weight study has passed its outcome-blind telemetry
+gate and is frozen for generation. Its plan fixes all six individual features
+over the paper's 13-value grid and 10 seeds, 50 paired aggregate blocks, three
+prospectively matched and disjoint random-control panels, literal and
 RMS-calibrated non-pooled scales, a 0.30 minimally relevant effect, and a
-three-way verdict. The independent plan audit passes. No new behavioral outcome
-has been generated under this plan.
+three-way verdict. The initial analytic dose narrowly failed its upper RMS
+bounds; the failed artifact and prospective correction are preserved. The
+amended `m=3.653` gate and independent calibration audit pass. No confirmatory
+behavioral outcome existed when the final plan was frozen.
 
 See
 [`docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md`](docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md)
 and
 [`data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/).
+Calibration telemetry and the self-contained final plan are under
+[`data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/)
+and
+[`data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/).
 
 ### Claim boundary
 

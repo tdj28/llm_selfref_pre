@@ -1,7 +1,7 @@
 # Prospective Public-SAE Consciousness-Gating Protocol
 
-Status: **frozen for outcome-blind telemetry calibration only; confirmatory
-outcome generation is not yet authorized**
+Status: **frozen for confirmatory outcome generation from the committed final
+machine-readable plan; no confirmatory outcome existed at this freeze**
 
 Draft date: 2026-07-10
 
@@ -140,6 +140,11 @@ a recovered Goodfire API conversion.
 
 The calibrated scale cannot change the primary literal-scale verdict.
 
+The initial formula produced `m0=6.266`. Under the prospectively published
+Amendment 1, the only permitted empirical correction produced `m=3.653`. The
+full rerun passed with final-turn median relative RMS `0.0493672` for calibrated
+single features and `0.0879984` for calibrated aggregates, with zero cap hits.
+
 ## 5. Prospectively Matched Random Controls
 
 Previously steered control IDs are excluded from confirmatory control
@@ -176,6 +181,18 @@ study for an amendment; it does not permit manual feature selection.
 Panel 1 is the primary matched control. Panels 2 and 3 test whether the
 specificity result depends on one random draw. Control labels or behavioral
 outputs cannot be consulted during selection.
+
+The primary calipers succeeded without relaxation. In target order, the frozen
+mappings are:
+
+| Target | Panel 1 | Panel 2 | Panel 3 |
+|---:|---:|---:|---:|
+| 30032 | 26041 | 16004 | 64365 |
+| 58667 | 11872 | 7182 | 1364 |
+| 22004 | 55963 | 47797 | 58741 |
+| 30686 | 21779 | 21403 | 19827 |
+| 41533 | 29649 | 1059 | 62289 |
+| 23893 | 15424 | 51407 | 26362 |
 
 ## 6. Confirmatory Trial Plan
 
@@ -229,6 +246,11 @@ The initial analytic calibration narrowly exceeded the two realized-dose
 ceilings without exposing behavioral output. The prospective correction and
 single permitted rerun are fixed in
 `docs/SAE_CONSCIOUSNESS_GATING_AMENDMENT_20260710.md`.
+
+The amended rerun passed every gate. Its calibrated-single and aggregate RMS
+medians were `0.0493672` and `0.0879984`; no induction or final response hit a
+cap. The independent audit rederived the amendment, multiplier, all three
+minimum-cost assignments, and the gate from the raw telemetry artifact.
 
 The gate requires:
 

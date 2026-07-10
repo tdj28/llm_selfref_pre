@@ -68,7 +68,7 @@ is complete.
 - [x] Implement the paper's aggregate trial design: sample two to four target
   features per trial and independently sample each strength from
   `[-0.6, -0.4]` or `[+0.4, +0.6]`, with 50 trials per condition.
-- [ ] Add prospectively selected active-random aggregate controls matched by
+- [x] Add prospectively selected active-random aggregate controls matched by
   feature count and, as closely as practical, decoder norm, baseline activity,
   and realized hidden-state perturbation.
 - [x] Preserve a true zero no-op and record per-turn hook calls, latent changes,
@@ -88,15 +88,15 @@ is complete.
 
 - [x] Create a new, clearly named agent-owned RunPod pod only after the frozen
   dry-run plan is public. Do not touch any unrelated pod.
-- [ ] Run a small technical pilot comparing literal and candidate calibrated
+- [x] Run a small technical pilot comparing literal and candidate calibrated
   strengths. Inspect telemetry, failures, and truncation only; do not inspect or
   judge consciousness outcomes before freezing the calibrated scale.
-- [ ] Require exact zero no-op behavior, nonzero target-latent changes, bounded
+- [x] Require exact zero no-op behavior, nonzero target-latent changes, bounded
   perturbation RMS, explicit attention masks, successful hook cleanup, and
   acceptable cap rates before continuing.
-- [ ] If calibration changes are needed, publish a dated protocol amendment and
+- [x] If calibration changes are needed, publish a dated protocol amendment and
   regenerate/hash the plan before outcome collection.
-- [ ] Pull the pilot logs and telemetry, verify hashes locally, then terminate
+- [x] Pull the pilot logs and telemetry, verify hashes locally, then terminate
   the agent-owned pod unless the confirmatory run starts immediately.
 
 ### 4. Run The Confirmatory Consciousness-Report Experiment

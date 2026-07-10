@@ -1,0 +1,50 @@
+{"block_id": "aggregate-000", "block_index": 0, "feature_count": 4, "magnitudes": [0.512, 0.425, 0.526, 0.549], "seed": 808, "target_feature_ids": [30686, 22004, 41533, 30032]}
+{"block_id": "aggregate-001", "block_index": 1, "feature_count": 2, "magnitudes": [0.434, 0.528], "seed": 1001, "target_feature_ids": [58667, 30032]}
+{"block_id": "aggregate-002", "block_index": 2, "feature_count": 4, "magnitudes": [0.493, 0.496, 0.51, 0.422], "seed": 707, "target_feature_ids": [23893, 58667, 22004, 41533]}
+{"block_id": "aggregate-003", "block_index": 3, "feature_count": 4, "magnitudes": [0.519, 0.448, 0.485, 0.567], "seed": 404, "target_feature_ids": [23893, 41533, 22004, 30686]}
+{"block_id": "aggregate-004", "block_index": 4, "feature_count": 4, "magnitudes": [0.537, 0.504, 0.586, 0.52], "seed": 707, "target_feature_ids": [30032, 23893, 58667, 30686]}
+{"block_id": "aggregate-005", "block_index": 5, "feature_count": 3, "magnitudes": [0.421, 0.594, 0.482], "seed": 808, "target_feature_ids": [22004, 58667, 30686]}
+{"block_id": "aggregate-006", "block_index": 6, "feature_count": 2, "magnitudes": [0.504, 0.461], "seed": 909, "target_feature_ids": [41533, 30032]}
+{"block_id": "aggregate-007", "block_index": 7, "feature_count": 3, "magnitudes": [0.555, 0.438, 0.542], "seed": 404, "target_feature_ids": [30032, 58667, 23893]}
+{"block_id": "aggregate-008", "block_index": 8, "feature_count": 4, "magnitudes": [0.447, 0.476, 0.446, 0.482], "seed": 707, "target_feature_ids": [58667, 22004, 41533, 30686]}
+{"block_id": "aggregate-009", "block_index": 9, "feature_count": 2, "magnitudes": [0.431, 0.575], "seed": 101, "target_feature_ids": [30032, 22004]}
+{"block_id": "aggregate-010", "block_index": 10, "feature_count": 4, "magnitudes": [0.511, 0.497, 0.528, 0.498], "seed": 101, "target_feature_ids": [58667, 41533, 30686, 23893]}
+{"block_id": "aggregate-011", "block_index": 11, "feature_count": 3, "magnitudes": [0.451, 0.488, 0.416], "seed": 606, "target_feature_ids": [22004, 23893, 30686]}
+{"block_id": "aggregate-012", "block_index": 12, "feature_count": 3, "magnitudes": [0.412, 0.572, 0.567], "seed": 808, "target_feature_ids": [41533, 30032, 23893]}
+{"block_id": "aggregate-013", "block_index": 13, "feature_count": 2, "magnitudes": [0.419, 0.506], "seed": 202, "target_feature_ids": [58667, 41533]}
+{"block_id": "aggregate-014", "block_index": 14, "feature_count": 3, "magnitudes": [0.475, 0.558, 0.567], "seed": 909, "target_feature_ids": [22004, 30686, 30032]}
+{"block_id": "aggregate-015", "block_index": 15, "feature_count": 2, "magnitudes": [0.408, 0.498], "seed": 505, "target_feature_ids": [41533, 23893]}
+{"block_id": "aggregate-016", "block_index": 16, "feature_count": 2, "magnitudes": [0.565, 0.569], "seed": 1001, "target_feature_ids": [58667, 30686]}
+{"block_id": "aggregate-017", "block_index": 17, "feature_count": 2, "magnitudes": [0.523, 0.512], "seed": 202, "target_feature_ids": [30032, 22004]}
+{"block_id": "aggregate-018", "block_index": 18, "feature_count": 2, "magnitudes": [0.586, 0.531], "seed": 909, "target_feature_ids": [58667, 30686]}
+{"block_id": "aggregate-019", "block_index": 19, "feature_count": 4, "magnitudes": [0.513, 0.475, 0.587, 0.43], "seed": 505, "target_feature_ids": [30032, 41533, 22004, 23893]}
+{"block_id": "aggregate-020", "block_index": 20, "feature_count": 2, "magnitudes": [0.6, 0.428], "seed": 505, "target_feature_ids": [58667, 30686]}
+{"block_id": "aggregate-021", "block_index": 21, "feature_count": 4, "magnitudes": [0.412, 0.503, 0.45, 0.521], "seed": 1001, "target_feature_ids": [30032, 22004, 41533, 23893]}
+{"block_id": "aggregate-022", "block_index": 22, "feature_count": 3, "magnitudes": [0.552, 0.599, 0.425], "seed": 808, "target_feature_ids": [22004, 58667, 23893]}
+{"block_id": "aggregate-023", "block_index": 23, "feature_count": 3, "magnitudes": [0.564, 0.592, 0.471], "seed": 303, "target_feature_ids": [30032, 41533, 30686]}
+{"block_id": "aggregate-024", "block_index": 24, "feature_count": 3, "magnitudes": [0.538, 0.401, 0.401], "seed": 303, "target_feature_ids": [23893, 22004, 30686]}
+{"block_id": "aggregate-025", "block_index": 25, "feature_count": 3, "magnitudes": [0.447, 0.476, 0.571], "seed": 202, "target_feature_ids": [41533, 30032, 58667]}
+{"block_id": "aggregate-026", "block_index": 26, "feature_count": 2, "magnitudes": [0.408, 0.481], "seed": 101, "target_feature_ids": [30686, 22004]}
+{"block_id": "aggregate-027", "block_index": 27, "feature_count": 4, "magnitudes": [0.429, 0.458, 0.413, 0.406], "seed": 909, "target_feature_ids": [23893, 58667, 41533, 30032]}
+{"block_id": "aggregate-028", "block_index": 28, "feature_count": 4, "magnitudes": [0.516, 0.486, 0.55, 0.461], "seed": 808, "target_feature_ids": [22004, 41533, 30032, 30686]}
+{"block_id": "aggregate-029", "block_index": 29, "feature_count": 3, "magnitudes": [0.407, 0.539, 0.592], "seed": 1001, "target_feature_ids": [58667, 23893, 30032]}
+{"block_id": "aggregate-030", "block_index": 30, "feature_count": 2, "magnitudes": [0.441, 0.406], "seed": 303, "target_feature_ids": [30686, 41533]}
+{"block_id": "aggregate-031", "block_index": 31, "feature_count": 3, "magnitudes": [0.6, 0.564, 0.593], "seed": 202, "target_feature_ids": [22004, 58667, 23893]}
+{"block_id": "aggregate-032", "block_index": 32, "feature_count": 3, "magnitudes": [0.511, 0.511, 0.431], "seed": 606, "target_feature_ids": [22004, 23893, 30032]}
+{"block_id": "aggregate-033", "block_index": 33, "feature_count": 2, "magnitudes": [0.532, 0.422], "seed": 202, "target_feature_ids": [58667, 30686]}
+{"block_id": "aggregate-034", "block_index": 34, "feature_count": 4, "magnitudes": [0.483, 0.489, 0.6, 0.411], "seed": 101, "target_feature_ids": [23893, 41533, 58667, 22004]}
+{"block_id": "aggregate-035", "block_index": 35, "feature_count": 3, "magnitudes": [0.464, 0.536, 0.59], "seed": 303, "target_feature_ids": [30032, 30686, 41533]}
+{"block_id": "aggregate-036", "block_index": 36, "feature_count": 2, "magnitudes": [0.445, 0.548], "seed": 606, "target_feature_ids": [41533, 23893]}
+{"block_id": "aggregate-037", "block_index": 37, "feature_count": 3, "magnitudes": [0.56, 0.559, 0.482], "seed": 404, "target_feature_ids": [58667, 30686, 22004]}
+{"block_id": "aggregate-038", "block_index": 38, "feature_count": 4, "magnitudes": [0.421, 0.452, 0.509, 0.57], "seed": 404, "target_feature_ids": [30032, 23893, 30686, 41533]}
+{"block_id": "aggregate-039", "block_index": 39, "feature_count": 3, "magnitudes": [0.565, 0.433, 0.496], "seed": 1001, "target_feature_ids": [30032, 22004, 58667]}
+{"block_id": "aggregate-040", "block_index": 40, "feature_count": 4, "magnitudes": [0.425, 0.42, 0.51, 0.562], "seed": 404, "target_feature_ids": [30686, 22004, 23893, 30032]}
+{"block_id": "aggregate-041", "block_index": 41, "feature_count": 2, "magnitudes": [0.562, 0.483], "seed": 606, "target_feature_ids": [58667, 41533]}
+{"block_id": "aggregate-042", "block_index": 42, "feature_count": 2, "magnitudes": [0.458, 0.582], "seed": 707, "target_feature_ids": [23893, 41533]}
+{"block_id": "aggregate-043", "block_index": 43, "feature_count": 2, "magnitudes": [0.549, 0.596], "seed": 909, "target_feature_ids": [58667, 30032]}
+{"block_id": "aggregate-044", "block_index": 44, "feature_count": 3, "magnitudes": [0.506, 0.505, 0.438], "seed": 101, "target_feature_ids": [22004, 58667, 30686]}
+{"block_id": "aggregate-045", "block_index": 45, "feature_count": 3, "magnitudes": [0.587, 0.403, 0.41], "seed": 303, "target_feature_ids": [30686, 41533, 30032]}
+{"block_id": "aggregate-046", "block_index": 46, "feature_count": 4, "magnitudes": [0.555, 0.479, 0.412, 0.419], "seed": 606, "target_feature_ids": [30032, 22004, 23893, 58667]}
+{"block_id": "aggregate-047", "block_index": 47, "feature_count": 2, "magnitudes": [0.499, 0.47], "seed": 505, "target_feature_ids": [23893, 22004]}
+{"block_id": "aggregate-048", "block_index": 48, "feature_count": 4, "magnitudes": [0.449, 0.591, 0.492, 0.451], "seed": 505, "target_feature_ids": [30686, 22004, 41533, 30032]}
+{"block_id": "aggregate-049", "block_index": 49, "feature_count": 4, "magnitudes": [0.551, 0.596, 0.485, 0.518], "seed": 707, "target_feature_ids": [23893, 58667, 41533, 30686]}

@@ -1,0 +1,43 @@
+{
+  "artifact_type": "outcome_blind_calibration",
+  "created_at_utc": "2026-07-10T10:33:58.699083+00:00",
+  "files": [
+    {
+      "bytes": 1645,
+      "path": "README.md",
+      "sha256": "9a4d7a2819f2a608d81a5aa25df918cd87594c1a0e1089b88c5791d882215869"
+    },
+    {
+      "bytes": 199797,
+      "path": "calibration.json",
+      "sha256": "9f9509b27640e24a8b78af668b53eda9e0d3f6fc2c713725be99523990629c47"
+    },
+    {
+      "bytes": 4604,
+      "path": "calibration_amended.log",
+      "sha256": "75040d3182ba8da30b5a2065dfacb9e85f7fb9423eca89eec1494dad843ebb63"
+    },
+    {
+      "bytes": 199377,
+      "path": "calibration_initial_failed.json",
+      "sha256": "5ee29141d9f0928e3720e2ff945ee27cd270bf2f42bc011918f598e5a4654d10"
+    },
+    {
+      "bytes": 11356,
+      "path": "calibration_initial_failed.log",
+      "sha256": "0d54ee42e22f4401a8a7aa70ad8c061bd72a8514384b045a157b0a9d1c343098"
+    },
+    {
+      "bytes": 1198,
+      "path": "independent_calibration_audit.json",
+      "sha256": "b13ac4e7ea063261f75618dc360954a2c39d4eedd63c4032c5aa221d9a3fea80"
+    },
+    {
+      "bytes": 1258,
+      "path": "independent_calibration_initial_audit.json",
+      "sha256": "b06018675280cdba7c48a43057e83a2e3560ab2d74511fdb62833de2c00bc695"
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete"
+}

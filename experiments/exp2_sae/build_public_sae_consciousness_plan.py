@@ -190,9 +190,31 @@ def build_final_plan(
     write_jsonl(plan_path, trials)
     shutil.copyfile(template_dir / "aggregate_blocks.jsonl", blocks_path)
     shutil.copyfile(template_dir / "calibration_candidate_pool.csv", candidate_path)
-    shutil.copyfile(template_dir / "protocol_snapshot.json", snapshot_path)
     shutil.copyfile(calibration_path, frozen_calibration_path)
     shutil.copyfile(calibration_audit_path, frozen_calibration_audit_path)
+    final_snapshot = json.loads(
+        (template_dir / "protocol_snapshot.json").read_text(encoding="utf-8")
+    )
+    final_snapshot.update(
+        {
+            "status": "frozen_confirmatory_plan",
+            "calibrated_multiplier": calibration["calibrated_multiplier"],
+            "calibration_sha256": sha256_file(calibration_path),
+            "calibration_audit_sha256": sha256_file(calibration_audit_path),
+            "control_panels": [
+                {
+                    "panel": int(panel["panel"]),
+                    "mapping": {
+                        str(pair["target_feature_id"]): int(pair["control_feature_id"])
+                        for pair in panel["pairs"]
+                    },
+                }
+                for panel in calibration["control_matching"]["panels"]
+            ],
+            "amendment": calibration.get("calibration_method"),
+        }
+    )
+    write_json(snapshot_path, final_snapshot)
     control_rows = [
         {
             "panel": int(panel["panel"]),
