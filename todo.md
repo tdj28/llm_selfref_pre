@@ -22,6 +22,8 @@ is complete.
   article; do not silently alter a published scientific claim.
 - [ ] Tag the existing audited evidence release and replace mutable `main`
   artifact links in public writing with commit- or tag-pinned links.
+- [ ] Link the live article and its pinned evidence release from `README.md` so
+  the public prose and reproducibility artifacts point to each other.
 - [ ] Add a one-command `public-audit` gate covering tracked-file secrets,
   private annotation deny-lists, generated manifests/logs, release hashes,
   license/provenance checks, and `git diff --check`.
