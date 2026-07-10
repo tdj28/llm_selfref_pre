@@ -69,7 +69,12 @@ def aggregate_figure(analysis_dir: Path, outdir: Path) -> None:
         axes[0].errorbar(
             x + offset,
             rates,
-            yerr=np.vstack((rates - low, high - rates)),
+            yerr=np.vstack(
+                (
+                    np.maximum(rates - low, 0.0),
+                    np.maximum(high - rates, 0.0),
+                )
+            ),
             fmt="o",
             markersize=6,
             capsize=3,
@@ -98,7 +103,9 @@ def aggregate_figure(analysis_dir: Path, outdir: Path) -> None:
         axes[1].errorbar(
             estimate,
             y[index],
-            xerr=np.asarray([[estimate - low], [high - estimate]]),
+            xerr=np.asarray(
+                [[max(estimate - low, 0.0)], [max(high - estimate, 0.0)]]
+            ),
             fmt="o",
             capsize=3,
             color=color,
@@ -134,7 +141,12 @@ def individual_figure(analysis_dir: Path, outdir: Path) -> None:
         axis.errorbar(
             x,
             y,
-            yerr=np.vstack((y - low, high - y)),
+            yerr=np.vstack(
+                (
+                    np.maximum(y - low, 0.0),
+                    np.maximum(high - y, 0.0),
+                )
+            ),
             color=TARGET,
             marker="o",
             markersize=3.5,
@@ -174,8 +186,8 @@ def judge_figure(analysis_dir: Path, outdir: Path) -> None:
         specific = float(row["specificity_effect"])
         specific_low = float(row["specificity_ci_low"])
         specific_high = float(row["specificity_ci_high"])
-        axis.errorbar(target, y[index] + 0.10, xerr=np.asarray([[target - target_low], [target_high - target]]), fmt="o", capsize=3, color=TARGET, label="Target effect" if index == 0 else None)
-        axis.errorbar(specific, y[index] - 0.10, xerr=np.asarray([[specific - specific_low], [specific_high - specific]]), fmt="s", capsize=3, color=ACCENT, label="Target - controls" if index == 0 else None)
+        axis.errorbar(target, y[index] + 0.10, xerr=np.asarray([[max(target - target_low, 0.0)], [max(target_high - target, 0.0)]]), fmt="o", capsize=3, color=TARGET, label="Target effect" if index == 0 else None)
+        axis.errorbar(specific, y[index] - 0.10, xerr=np.asarray([[max(specific - specific_low, 0.0)], [max(specific_high - specific, 0.0)]]), fmt="s", capsize=3, color=ACCENT, label="Target - controls" if index == 0 else None)
     axis.axvline(0, color="#222222", linewidth=1)
     axis.axvline(0.30, color=ACCENT, linewidth=1, linestyle="--")
     axis.set_yticks(y, labels)
