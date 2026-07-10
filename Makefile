@@ -21,6 +21,7 @@ compile:
 		experiments/exp2_sae/public_sae_consciousness_gating.py \
 		experiments/exp2_sae/build_public_sae_consciousness_plan.py \
 		experiments/exp2_sae/validate_public_sae_consciousness_plan.py \
+		experiments/exp2_sae/audit_public_sae_consciousness_calibration.py \
 		experiments/exp2_sae/run_public_sae_consciousness_gating.py \
 		experiments/exp2_sae/build_public_sae_gating_judge_packet.py \
 		experiments/exp2_sae/judge_public_sae_gating_local.py \

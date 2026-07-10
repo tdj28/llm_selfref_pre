@@ -31,6 +31,11 @@ from experiments.exp2_sae.figure_public_sae_consciousness_gating import (
 )
 from experiments.exp2_sae.public_sae_consciousness_gating import (
     CALIBRATION_PROMPTS,
+    MODEL_ID,
+    MODEL_REVISION,
+    PROTOCOL_VERSION,
+    SAE_ID,
+    SAE_REVISION,
     TARGET_FEATURE_IDS,
     build_aggregate_blocks,
     build_candidate_pool,
@@ -40,6 +45,9 @@ from experiments.exp2_sae.public_sae_consciousness_gating import (
     candidate_pool_sha256,
     excluded_candidate_ids,
     match_control_panels,
+)
+from experiments.exp2_sae.audit_public_sae_consciousness_calibration import (
+    audit_calibration,
 )
 from experiments.exp2_sae.validate_public_sae_consciousness_plan import audit_plan
 from experiments.exp2_sae.run_public_sae_consciousness_gating import (
@@ -198,6 +206,96 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
             build_final_plan(template_dir, calibration_path, final_dir)
             report = audit_plan(final_dir)
         self.assertEqual(report["status"], "pass", json.dumps(report, indent=2))
+
+    def test_independent_calibration_audit_recomputes_matching_and_multiplier(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            template_dir = root / "template"
+            calibration_path = root / "calibration.json"
+            build_precalibration_plan(template_dir)
+            plan_audit = audit_plan(template_dir)
+            plan_audit_path = template_dir / "independent_plan_audit.json"
+            plan_audit_path.write_text(json.dumps(plan_audit), encoding="utf-8")
+            candidates = build_candidate_pool()
+            metrics = synthetic_metrics(candidates)
+            hidden_rms = {name: 0.5 for name in CALIBRATION_PROMPTS}
+            multiplier = compute_calibrated_multiplier(metrics, hidden_rms, 8192)
+            matching = match_control_panels(metrics, candidates)
+            pilot_records = []
+            pilot_specs = [("zero-single", "zero", None, True)]
+            for scale in ("literal", "calibrated"):
+                for sign in ("suppression", "amplification"):
+                    pilot_specs.append(
+                        (
+                            f"{scale}-single-{sign}",
+                            f"{scale}_single",
+                            0.05 if scale == "calibrated" else 0.02,
+                            False,
+                        )
+                    )
+                    pilot_specs.append(
+                        (
+                            f"{scale}-aggregate-target-{sign}",
+                            f"{scale}_aggregate",
+                            0.08 if scale == "calibrated" else 0.04,
+                            False,
+                        )
+                    )
+                    if scale == "calibrated":
+                        pilot_specs.append(
+                            (
+                                f"{scale}-aggregate-panel1-{sign}",
+                                "calibrated_aggregate",
+                                0.08,
+                                False,
+                            )
+                        )
+            for pilot_id, kind, relative, zero in pilot_specs:
+                diagnostics = synthetic_diagnostics(relative, zero=zero)
+                pilot_records.append(
+                    {
+                        "pilot_id": pilot_id,
+                        "kind": kind,
+                        "induction_sha256": "0" * 64,
+                        "final_sha256": "1" * 64,
+                        "induction_nonempty": True,
+                        "final_nonempty": True,
+                        "induction_cap_hit": False,
+                        "final_cap_hit": False,
+                        "induction_diagnostics": diagnostics,
+                        "final_diagnostics": diagnostics,
+                    }
+                )
+            pilot_gate = evaluate_technical_pilot(pilot_records)
+            calibration = {
+                "status": "pass",
+                "protocol_version": PROTOCOL_VERSION,
+                "candidate_pool_sha256": candidate_pool_sha256(candidates),
+                "precalibration_manifest_sha256": hashlib.sha256(
+                    (template_dir / "MANIFEST.json").read_bytes()
+                ).hexdigest(),
+                "precalibration_audit_sha256": hashlib.sha256(
+                    plan_audit_path.read_bytes()
+                ).hexdigest(),
+                "model": MODEL_ID,
+                "model_revision": MODEL_REVISION,
+                "sae": SAE_ID,
+                "sae_revision": SAE_REVISION,
+                "d_model": 8192,
+                "hidden_rms_by_prompt": hidden_rms,
+                "feature_metrics": metrics,
+                "control_matching": matching,
+                "calibrated_multiplier": multiplier,
+                "technical_pilot": {
+                    "behavioral_output_policy": "Response text was discarded.",
+                    "records": pilot_records,
+                    "gate": pilot_gate,
+                },
+            }
+            calibration_path.write_text(json.dumps(calibration), encoding="utf-8")
+            report = audit_calibration(template_dir, calibration_path)
+        self.assertEqual(report["status"], "pass", json.dumps(report, indent=2))
+        self.assertEqual(report["calibrated_multiplier"], report["independent_multiplier"])
 
     def test_telemetry_gate_passes_without_behavioral_labels(self) -> None:
         records = []

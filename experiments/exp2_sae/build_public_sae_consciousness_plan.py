@@ -49,6 +49,7 @@ def source_records() -> list[dict[str, object]]:
         Path(__file__).resolve().with_name("public_sae_consciousness_gating.py"),
         Path(__file__).resolve().with_name("run_public_sae_consciousness_gating.py"),
         Path(__file__).resolve().with_name("validate_public_sae_consciousness_plan.py"),
+        Path(__file__).resolve().with_name("audit_public_sae_consciousness_calibration.py"),
         Path(__file__).resolve().with_name("build_public_sae_gating_judge_packet.py"),
         Path(__file__).resolve().with_name("judge_public_sae_gating_local.py"),
         Path(__file__).resolve().with_name("judge_public_sae_gating_external.py"),
