@@ -29,6 +29,7 @@ compile:
 		experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
 		experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
 		experiments/exp2_sae/figure_public_sae_consciousness_gating.py \
+		experiments/exp2_sae/build_public_sae_consciousness_release.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \

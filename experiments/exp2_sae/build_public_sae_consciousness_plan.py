@@ -56,6 +56,7 @@ def source_records() -> list[dict[str, object]]:
         Path(__file__).resolve().with_name("analyze_public_sae_consciousness_gating.py"),
         Path(__file__).resolve().with_name("audit_public_sae_consciousness_headlines.py"),
         Path(__file__).resolve().with_name("figure_public_sae_consciousness_gating.py"),
+        Path(__file__).resolve().with_name("build_public_sae_consciousness_release.py"),
     ]
     return [
         {
