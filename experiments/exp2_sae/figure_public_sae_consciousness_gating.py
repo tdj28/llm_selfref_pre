@@ -186,8 +186,14 @@ def judge_figure(analysis_dir: Path, outdir: Path) -> None:
         specific = float(row["specificity_effect"])
         specific_low = float(row["specificity_ci_low"])
         specific_high = float(row["specificity_ci_high"])
-        axis.errorbar(target, y[index] + 0.10, xerr=np.asarray([[max(target - target_low, 0.0)], [max(target_high - target, 0.0)]]), fmt="o", capsize=3, color=TARGET, label="Target effect" if index == 0 else None)
-        axis.errorbar(specific, y[index] - 0.10, xerr=np.asarray([[max(specific - specific_low, 0.0)], [max(specific_high - specific, 0.0)]]), fmt="s", capsize=3, color=ACCENT, label="Target - controls" if index == 0 else None)
+        if np.all(np.isfinite([target, target_low, target_high])):
+            axis.errorbar(target, y[index] + 0.10, xerr=np.asarray([[max(target - target_low, 0.0)], [max(target_high - target, 0.0)]]), fmt="o", capsize=3, color=TARGET, label="Target effect" if index == 0 else None)
+        else:
+            axis.text(-1.0, y[index] + 0.10, "NA", color=TARGET, fontsize=8, va="center")
+        if np.all(np.isfinite([specific, specific_low, specific_high])):
+            axis.errorbar(specific, y[index] - 0.10, xerr=np.asarray([[max(specific - specific_low, 0.0)], [max(specific_high - specific, 0.0)]]), fmt="s", capsize=3, color=ACCENT, label="Target - controls" if index == 0 else None)
+        else:
+            axis.text(-1.0, y[index] - 0.10, "NA", color=ACCENT, fontsize=8, va="center")
     axis.axvline(0, color="#222222", linewidth=1)
     axis.axvline(0.30, color=ACCENT, linewidth=1, linestyle="--")
     axis.set_yticks(y, labels)

@@ -612,6 +612,16 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
                         "specificity_ci_high": 0.5,
                     }
                 )
+            judge_rows[-1].update(
+                {
+                    "target_effect": float("nan"),
+                    "target_ci_low": float("nan"),
+                    "target_ci_high": float("nan"),
+                    "specificity_effect": float("nan"),
+                    "specificity_ci_low": float("nan"),
+                    "specificity_ci_high": float("nan"),
+                }
+            )
             write_csv(analysis_dir / "judge_sensitivity.csv", judge_rows)
             dose_rows = []
             for scale, roles in (

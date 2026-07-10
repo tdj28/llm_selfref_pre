@@ -14,3 +14,8 @@ estimands, thresholds, verdicts, plans, or generation. The primary analyzer and
 independently implemented raw-row headline audit both passed before this render
 failure. Confirmatory generation continues at the previously frozen commit;
 the plotting correction is applied only after complete blinded analysis.
+
+The same outcome-blind hardening renders a judge sensitivity as `NA` when the
+strict direct-answer parser has no complete paired blocks, rather than passing
+nonfinite bounds to Matplotlib. Missing direct-parser estimates remain missing;
+they are not imputed and do not affect the primary judge.
