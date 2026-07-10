@@ -40,48 +40,48 @@ is complete.
 - [x] Adopt the six AE notebook IDs (`30032`, `58667`, `22004`, `30686`,
   `41533`, `23893`) as the working Berg Experiment 2 feature set, per the repo
   owner's decision.
-- [ ] Write `docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md` before generating new
+- [x] Write `docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md` before generating new
   outcomes. Mark it prospective and distinguish the paper-matched estimand from
   added specificity controls.
-- [ ] Pin the model and SAE revisions, layer/hook position, 4-bit loading,
+- [x] Pin the model and SAE revisions, layer/hook position, 4-bit loading,
   temperature, chat template, prompts, query, token caps, seed schedule, and
   exact classifier prompts/models.
-- [ ] Define two non-pooled intervention scales: a literal paper-number grid and
+- [x] Define two non-pooled intervention scales: a literal paper-number grid and
   a telemetry-calibrated public-weight grid. Never imply public `+/-0.6` equals
   proprietary API `+/-0.6` merely because the numbers match.
-- [ ] Freeze primary outcomes and decision rules: individual-feature slope and
+- [x] Freeze primary outcomes and decision rules: individual-feature slope and
   endpoint contrasts, aggregate suppression-minus-amplification risk
   difference, and target-minus-active-random specificity contrast.
-- [ ] Freeze a minimally relevant effect and a three-way verdict:
+- [x] Freeze a minimally relevant effect and a three-way verdict:
   `replicated`, `not replicated under the public implementation`, or
   `inconclusive`.
-- [ ] Freeze exclusion, missing-output, token-cap, early-stop, failed-job, and
+- [x] Freeze exclusion, missing-output, token-cap, early-stop, failed-job, and
   protocol-amendment rules before the first outcome is inspected.
-- [ ] Commit and push the protocol, machine-readable trial plan, hashes, and
+- [x] Commit and push the protocol, machine-readable trial plan, hashes, and
   independent plan audit before launching a GPU pod.
 
 ### 2. Build And Dry-Run The Exact Public-Weight Runner
 
-- [ ] Extend the corrected two-turn runner to support all six individual
+- [x] Extend the corrected two-turn runner to support all six individual
   features over `-0.6` through `+0.6` in `0.1` increments with the paper's ten
   seeds per setting (780 planned individual trials).
-- [ ] Implement the paper's aggregate trial design: sample two to four target
+- [x] Implement the paper's aggregate trial design: sample two to four target
   features per trial and independently sample each strength from
   `[-0.6, -0.4]` or `[+0.4, +0.6]`, with 50 trials per condition.
 - [ ] Add prospectively selected active-random aggregate controls matched by
   feature count and, as closely as practical, decoder norm, baseline activity,
   and realized hidden-state perturbation.
-- [ ] Preserve a true zero no-op and record per-turn hook calls, latent changes,
+- [x] Preserve a true zero no-op and record per-turn hook calls, latent changes,
   hidden-state RMS, perturbation RMS, attention-mask mode, generation lengths,
   cap hits, and hook cleanup.
 - [ ] Use the notebook-matched Llama 3.3 70B classifier as the replication
   outcome when technically feasible; retain the two pinned external
   exact-paper judges as blinded sensitivity analyses.
-- [ ] Add deterministic checkpoint/resume behavior, append-only raw JSONL,
+- [x] Add deterministic checkpoint/resume behavior, append-only raw JSONL,
   exact prompt/output hashes, and a manifest that contains no secrets.
-- [ ] Add unit tests and an independently implemented plan validator that checks
+- [x] Add unit tests and an independently implemented plan validator that checks
   every feature, strength, seed, trial count, random assignment, and no-op cell.
-- [ ] Complete a local dry run and public-safety audit before spending on GPU.
+- [x] Complete a local dry run and public-safety audit before spending on GPU.
 
 ### 3. Run A Blinded Telemetry-Only Calibration Gate
 

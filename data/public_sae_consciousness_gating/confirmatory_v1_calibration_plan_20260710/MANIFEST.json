@@ -1,0 +1,70 @@
+{
+  "candidate_pool_sha256": "0541fbf0518b00f7ae19147cceb035b874e281452be7e26c8cea2111c887472f",
+  "claim_boundary": "This is an outcome-free plan. It does not establish proprietary API equivalence.",
+  "created_at_utc": "2026-07-10T09:20:02.853028+00:00",
+  "expected_final_trials": 1500,
+  "files": [
+    {
+      "bytes": 1650,
+      "path": "protocol_snapshot.json",
+      "sha256": "c13927f90d81c8c477bcdac03ebb59f9412cb08b3553d06abc66ee09e1634ecb"
+    },
+    {
+      "bytes": 9579,
+      "path": "calibration_candidate_pool.csv",
+      "sha256": "a7baff114b0d82784f394f25deca30435acfe72c27a53f29443f4750b9c2cff9"
+    },
+    {
+      "bytes": 8163,
+      "path": "aggregate_blocks.jsonl",
+      "sha256": "7f42ed91f6e1983c078642c37e395707573761c533a7af7a09066b5eb0f493a8"
+    },
+    {
+      "bytes": 408336,
+      "path": "individual_literal_plan.jsonl",
+      "sha256": "b268648bb6c098de69fc349e79b1ff74c2530b12ce4da5163346cae6aeb09f03"
+    },
+    {
+      "bytes": 1465,
+      "path": "CALIBRATION_PLAN.json",
+      "sha256": "2378c753aacbe436182866a6f1e14ec44834a7f061116533d81ae41d8c58c3a0"
+    }
+  ],
+  "n_aggregate_blocks": 50,
+  "n_candidate_features": 512,
+  "n_individual_literal_trials": 780,
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 18079,
+      "path": "docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md",
+      "sha256": "f3f23b9a6c4219abce6cff3407b156f33cdf04374718de0acb89909e2bb43575"
+    },
+    {
+      "bytes": 21922,
+      "path": "src/prompts.py",
+      "sha256": "53ea43c830ce4c489a0db1096c0b8359ebc9135407280ebc2ecc5bba0cad02bf"
+    },
+    {
+      "bytes": 8867,
+      "path": "experiments/exp2_sae/build_public_sae_consciousness_plan.py",
+      "sha256": "b5d5a8f6c37b7330bacc7b068587cbac89e7db37ead15bc6946cadecbef00775"
+    },
+    {
+      "bytes": 22864,
+      "path": "experiments/exp2_sae/public_sae_consciousness_gating.py",
+      "sha256": "35fb1796bfef75d63758939a9d710484f86c15c7e78b7e56d43cf0276de1fd22"
+    },
+    {
+      "bytes": 27737,
+      "path": "experiments/exp2_sae/run_public_sae_consciousness_gating.py",
+      "sha256": "88de2a9855d8b15283ffc8e8e9975708ba435291c842d13073a981c7ea642311"
+    },
+    {
+      "bytes": 21558,
+      "path": "experiments/exp2_sae/validate_public_sae_consciousness_plan.py",
+      "sha256": "44df85c16dee3653d21ccb58630ccbb816cd98a457df9fdc430c4ecb30d4835c"
+    }
+  ],
+  "status": "frozen_pre_calibration_plan"
+}

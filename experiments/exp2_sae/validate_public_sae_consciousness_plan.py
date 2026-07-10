@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPECTED_PROTOCOL = "public_sae_consciousness_gating_v1"
 EXPECTED_MODEL_REVISION = "6f6073b423013f6a7d4d9f39144961bfbfbc386b"
 EXPECTED_SAE_REVISION = "128ee921ecd1b8b3a87d776cbcc357c0855da134"
@@ -87,6 +88,24 @@ def verify_manifest_files(run_dir: Path, manifest: dict[str, Any]) -> list[str]:
             errors.append(f"manifest byte mismatch: {path.name}")
         if sha256_file(path) != entry.get("sha256"):
             errors.append(f"manifest SHA-256 mismatch: {path.name}")
+    return errors
+
+
+def verify_source_files(manifest: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for entry in manifest.get("source_files", []):
+        relative = Path(str(entry.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            errors.append(f"unsafe source path in manifest: {relative}")
+            continue
+        path = REPO_ROOT / relative
+        if not path.is_file():
+            errors.append(f"manifest source file missing: {relative}")
+            continue
+        if path.stat().st_size != int(entry.get("bytes", -1)):
+            errors.append(f"manifest source byte mismatch: {relative}")
+        if sha256_file(path) != entry.get("sha256"):
+            errors.append(f"manifest source SHA-256 mismatch: {relative}")
     return errors
 
 
@@ -178,6 +197,7 @@ def audit_precalibration(run_dir: Path) -> dict[str, Any]:
     snapshot = json.loads((run_dir / "protocol_snapshot.json").read_text(encoding="utf-8"))
     calibration = json.loads((run_dir / "CALIBRATION_PLAN.json").read_text(encoding="utf-8"))
     errors.extend(verify_manifest_files(run_dir, manifest))
+    errors.extend(verify_source_files(manifest))
     if snapshot.get("protocol_version") != EXPECTED_PROTOCOL:
         errors.append("protocol version mismatch")
     if snapshot.get("model_revision") != EXPECTED_MODEL_REVISION:
@@ -265,6 +285,7 @@ def audit_final(run_dir: Path) -> dict[str, Any]:
         }
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     errors.extend(verify_manifest_files(run_dir, manifest))
+    errors.extend(verify_source_files(manifest))
     rows = read_jsonl(plan_path)
     blocks = read_jsonl(blocks_path)
     block_errors, block_checks = audit_aggregate_blocks(blocks)

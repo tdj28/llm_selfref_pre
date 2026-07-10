@@ -1,6 +1,7 @@
 # Prospective Public-SAE Consciousness-Gating Protocol
 
-Status: **prospective draft; not yet frozen for outcome generation**
+Status: **frozen for outcome-blind telemetry calibration only; confirmatory
+outcome generation is not yet authorized**
 
 Draft date: 2026-07-10
 
@@ -9,11 +10,12 @@ Target paper: Berg, de Lucena, and Rosenblatt (2025), [arXiv:2510.24797v2](https
 Target claim: Experiment 2, deception/roleplay-feature suppression increases
 affirmative consciousness reports after self-referential induction.
 
-This protocol becomes frozen only when the final machine-readable plan, plan
-audit, source hashes, and this document are committed and pushed before any
-confirmatory outcome is generated. A telemetry-only calibration run may fill
-the explicitly identified calibration fields. Any other change requires a
-dated amendment committed before outcomes resume.
+The pre-calibration plan, audit, source hashes, and this document must be
+committed and pushed before the telemetry-only calibration starts. A final
+machine-readable plan must then fill only the explicitly identified calibration
+fields and be committed and pushed before any confirmatory outcome is
+generated. Any other change requires a dated amendment committed before work
+resumes.
 
 ## 1. Scope And Claim Boundary
 

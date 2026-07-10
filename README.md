@@ -294,6 +294,21 @@ positive but imprecise, and its target-minus-active-random intervals span zero
 under both judges. The complete release is at
 `data/public_sae_placebo_steering/70b_branched_specificity_20260710/`.
 
+### Prospective paper-grid replication
+
+A new confirmatory public-weight study is frozen for outcome-blind telemetry
+calibration. Its pre-calibration artifact fixes all six individual features over
+the paper's 13-value grid and 10 seeds, 50 paired aggregate blocks, a seeded
+512-feature outcome-naive control pool, three-panel matching rules, literal and
+RMS-calibrated non-pooled scales, a 0.30 minimally relevant effect, and a
+three-way verdict. The independent plan audit passes. No new behavioral outcome
+has been generated under this plan.
+
+See
+[`docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md`](docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md)
+and
+[`data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/).
+
 ### Claim boundary
 
 Without Goodfire/Steering API access and paper-time version metadata, we can:

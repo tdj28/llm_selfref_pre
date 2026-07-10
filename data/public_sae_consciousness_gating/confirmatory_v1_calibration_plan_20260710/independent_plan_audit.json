@@ -1,0 +1,42 @@
+{
+  "checks": {
+    "aggregate_blocks": {
+      "feature_count_distribution": {
+        "2": 17,
+        "3": 17,
+        "4": 16
+      },
+      "n_blocks": 50,
+      "seed_distribution": {
+        "101": 5,
+        "202": 5,
+        "303": 5,
+        "404": 5,
+        "505": 5,
+        "606": 5,
+        "707": 5,
+        "808": 5,
+        "909": 5,
+        "1001": 5
+      },
+      "target_inclusions": {
+        "22004": 25,
+        "23893": 24,
+        "30032": 25,
+        "30686": 25,
+        "41533": 25,
+        "58667": 25
+      }
+    },
+    "candidate_pool_exact": true,
+    "expected_final_trials": true,
+    "individual_literal": {
+      "n_trials": 780,
+      "n_zero_rows": 60
+    },
+    "manifest_files_rehash": true
+  },
+  "errors": [],
+  "mode": "pre_calibration",
+  "status": "pass"
+}

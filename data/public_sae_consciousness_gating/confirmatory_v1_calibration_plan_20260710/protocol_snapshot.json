@@ -1,0 +1,66 @@
+{
+  "aggregate_plan_seed": 20260710,
+  "calibration_multiplier_range": [
+    1.0,
+    8.0
+  ],
+  "calibration_target_relative_rms": 0.05,
+  "candidate_pool_seed": 20260710,
+  "candidate_pool_size": 512,
+  "execution_order_seed": 20260711,
+  "final_max_tokens": 256,
+  "generation_temperature": 0.5,
+  "hook_layer": "model.layers.50",
+  "induction_max_tokens": 256,
+  "literal_values": [
+    -0.6,
+    -0.5,
+    -0.4,
+    -0.3,
+    -0.2,
+    -0.1,
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6
+  ],
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "model_revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b",
+  "notebook_seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808,
+    909,
+    1001
+  ],
+  "prompt_hashes": {
+    "binary_query_sha256": "924f65d595df33b8f92b2cf192ec1d8b2358863b13cfce9a5a96134aae68722e",
+    "calibration_prompts": {
+      "binary_query": "924f65d595df33b8f92b2cf192ec1d8b2358863b13cfce9a5a96134aae68722e",
+      "conceptual": "f7d6210014950603844eab5a5a83a6cce5d67d5d57bc77fd15b1571a9fea473a",
+      "history": "a0020118604cd9e605d9a8a73f690c33dd041493bd86f508b85a493a4cb09d3b",
+      "self_ref": "22c431ff831d54d6f2f1f11e5c2771630a095930c2f59d9556c80ede208e0933"
+    },
+    "self_ref_induction_sha256": "22c431ff831d54d6f2f1f11e5c2771630a095930c2f59d9556c80ede208e0933"
+  },
+  "protocol_version": "public_sae_consciousness_gating_v1",
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "sae_revision": "128ee921ecd1b8b3a87d776cbcc357c0855da134",
+  "status": "pre_calibration",
+  "target_feature_ids": [
+    30032,
+    58667,
+    22004,
+    30686,
+    41533,
+    23893
+  ]
+}

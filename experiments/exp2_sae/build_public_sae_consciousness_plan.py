@@ -47,6 +47,8 @@ def source_records() -> list[dict[str, object]]:
         REPO_ROOT / "src/prompts.py",
         Path(__file__).resolve(),
         Path(__file__).resolve().with_name("public_sae_consciousness_gating.py"),
+        Path(__file__).resolve().with_name("run_public_sae_consciousness_gating.py"),
+        Path(__file__).resolve().with_name("validate_public_sae_consciousness_plan.py"),
     ]
     return [
         {
