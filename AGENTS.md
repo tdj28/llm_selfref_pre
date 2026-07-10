@@ -2,6 +2,32 @@
 
 This repository is a research harness and paper workspace for causally stress-testing claims from Berg, de Lucena, and Rosenblatt (2025), "Large Language Models Report Subjective Experience Under Self-Referential Processing." The central thesis is narrow: we are not trying to settle whether LLMs are conscious. We test which observable protocol components cause the reported dependent measures and whether those measures identify the interpretation assigned to them.
 
+## Public Repository Safety
+
+This repository is public at `https://github.com/tdj28/llm_selfref_pre`.
+Treat every tracked file, commit, branch, tag, CI log, and pushed artifact as
+immediately public and permanently recoverable.
+
+- Never commit API keys, `.env` files, SSH material, RunPod credentials,
+  private annotation linkage keys, completed coder files, personal data, or
+  private correspondence.
+- The blinded annotation packets are public research artifacts; their private
+  condition-linkage keys and all coder outputs must remain ignored and local
+  until the release protocol explicitly authorizes a de-identified result.
+- Inspect `git status`, the complete staged diff, generated manifests, and
+  tracked raw outputs before every commit. Run the public-release/secret audit
+  once it exists; until then, run the repository's placeholder-aware tracked
+  file scan documented in the release workflow.
+- Do not force-push, rewrite public history, delete public evidence, or silently
+  replace a released result. Corrections must preserve provenance and state
+  what changed.
+- Prefer commit- or tag-pinned public links over mutable `main` links for blog
+  posts, papers, and citations.
+- The first public article is live at
+  `https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html`.
+  Keep the tracked source and deployed article synchronized, and document
+  substantive corrections rather than silently changing the scientific claim.
+
 ## Project Shape
 
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
@@ -38,6 +64,12 @@ The strongest completed causal result is that active instruction context dominat
 Public SAE work is a separate evidence ladder:
 
 - The six public candidate feature IDs have been verified as semantically meaningful with public Goodfire weights. Do not discard or minimize that mapping.
+- For the next public-weight Experiment 2 replication, the owner has accepted
+  the six AE notebook IDs (`30032`, `58667`, `22004`, `30686`, `41533`, and
+  `23893`) as the working Berg feature set. This resolves feature-set selection
+  for the planned run. It does not prove that public decoder-vector coefficient
+  units reproduce the proprietary API's intervention semantics, so preserve
+  that separate comparability boundary.
 - The balanced map uses 2--5 researcher-authored template families per category. Prefer the template-aware results in `template_robustness/` over treating 80 lexical combinations as independent natural texts: all six retain the same cluster-balanced top category, four survive every deletion, and 23893/41533 each switch once. Natural-corpus generalization remains open.
 - The prospectively frozen 2,606-text construct-validity extension is complete at `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/`. Deception-minus-subjective activation replicates separately in Anthropic and OpenAI paraphrases and survives every leave-one-target-feature-out check. Neutral cue transplant recovers 64.4% [50.3%, 78.7%] of the discovery gap, crossing the frozen lexical-entanglement threshold. Use the registered wording "lexically entangled deception/roleplay coordinates" and keep independent human category validation marked pending.
 - Their mapped semantics cover pretending, roleplay, cover stories, misdirection, dishonesty, and hedging; this does not make them validated hidden-truth detectors for subjective-experience reports.

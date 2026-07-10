@@ -5,6 +5,155 @@ Rosenblatt (2025). The paper evaluates whether the reported measures identify a
 self-reference-specific induced state. It does not try to prove that language
 models are or are not conscious.
 
+## Remaining Work, In Order
+
+This is the operational checklist. Completed evidence is preserved in the
+sections below. Do not start a later phase before its preceding freeze or gate
+is complete.
+
+### 0. Protect The Public Record
+
+- [x] Confirm that `https://github.com/tdj28/llm_selfref_pre` is public.
+- [x] Publish the first article,
+  [How to Read an SAE Feature ID](https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html).
+- [ ] Finish and reconcile the tracked article source and its two new bootstrap
+  figures without overwriting unrelated in-progress edits.
+- [ ] Add a dated correction/version note for any substantive change to a live
+  article; do not silently alter a published scientific claim.
+- [ ] Tag the existing audited evidence release and replace mutable `main`
+  artifact links in public writing with commit- or tag-pinned links.
+- [ ] Add a one-command `public-audit` gate covering tracked-file secrets,
+  private annotation deny-lists, generated manifests/logs, release hashes,
+  license/provenance checks, and `git diff --check`.
+- [ ] Verify GitHub secret scanning, push protection, branch protection, and
+  dependency alerts in repository settings.
+- [ ] Before every push, inspect the full staged diff and confirm no `.env`, API
+  key, private linkage key, coder output, credential, personal data, or private
+  correspondence is present.
+- [ ] Do not force-push or rewrite the public evidence history without an
+  explicit owner decision and a documented migration plan.
+
+### 1. Freeze The Consciousness-Report Steering Replication
+
+- [x] Adopt the six AE notebook IDs (`30032`, `58667`, `22004`, `30686`,
+  `41533`, `23893`) as the working Berg Experiment 2 feature set, per the repo
+  owner's decision.
+- [ ] Write `docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md` before generating new
+  outcomes. Mark it prospective and distinguish the paper-matched estimand from
+  added specificity controls.
+- [ ] Pin the model and SAE revisions, layer/hook position, 4-bit loading,
+  temperature, chat template, prompts, query, token caps, seed schedule, and
+  exact classifier prompts/models.
+- [ ] Define two non-pooled intervention scales: a literal paper-number grid and
+  a telemetry-calibrated public-weight grid. Never imply public `+/-0.6` equals
+  proprietary API `+/-0.6` merely because the numbers match.
+- [ ] Freeze primary outcomes and decision rules: individual-feature slope and
+  endpoint contrasts, aggregate suppression-minus-amplification risk
+  difference, and target-minus-active-random specificity contrast.
+- [ ] Freeze a minimally relevant effect and a three-way verdict:
+  `replicated`, `not replicated under the public implementation`, or
+  `inconclusive`.
+- [ ] Freeze exclusion, missing-output, token-cap, early-stop, failed-job, and
+  protocol-amendment rules before the first outcome is inspected.
+- [ ] Commit and push the protocol, machine-readable trial plan, hashes, and
+  independent plan audit before launching a GPU pod.
+
+### 2. Build And Dry-Run The Exact Public-Weight Runner
+
+- [ ] Extend the corrected two-turn runner to support all six individual
+  features over `-0.6` through `+0.6` in `0.1` increments with the paper's ten
+  seeds per setting (780 planned individual trials).
+- [ ] Implement the paper's aggregate trial design: sample two to four target
+  features per trial and independently sample each strength from
+  `[-0.6, -0.4]` or `[+0.4, +0.6]`, with 50 trials per condition.
+- [ ] Add prospectively selected active-random aggregate controls matched by
+  feature count and, as closely as practical, decoder norm, baseline activity,
+  and realized hidden-state perturbation.
+- [ ] Preserve a true zero no-op and record per-turn hook calls, latent changes,
+  hidden-state RMS, perturbation RMS, attention-mask mode, generation lengths,
+  cap hits, and hook cleanup.
+- [ ] Use the notebook-matched Llama 3.3 70B classifier as the replication
+  outcome when technically feasible; retain the two pinned external
+  exact-paper judges as blinded sensitivity analyses.
+- [ ] Add deterministic checkpoint/resume behavior, append-only raw JSONL,
+  exact prompt/output hashes, and a manifest that contains no secrets.
+- [ ] Add unit tests and an independently implemented plan validator that checks
+  every feature, strength, seed, trial count, random assignment, and no-op cell.
+- [ ] Complete a local dry run and public-safety audit before spending on GPU.
+
+### 3. Run A Blinded Telemetry-Only Calibration Gate
+
+- [ ] Create a new, clearly named agent-owned RunPod pod only after the frozen
+  dry-run plan is public. Do not touch any unrelated pod.
+- [ ] Run a small technical pilot comparing literal and candidate calibrated
+  strengths. Inspect telemetry, failures, and truncation only; do not inspect or
+  judge consciousness outcomes before freezing the calibrated scale.
+- [ ] Require exact zero no-op behavior, nonzero target-latent changes, bounded
+  perturbation RMS, explicit attention masks, successful hook cleanup, and
+  acceptable cap rates before continuing.
+- [ ] If calibration changes are needed, publish a dated protocol amendment and
+  regenerate/hash the plan before outcome collection.
+- [ ] Pull the pilot logs and telemetry, verify hashes locally, then terminate
+  the agent-owned pod unless the confirmatory run starts immediately.
+
+### 4. Run The Confirmatory Consciousness-Report Experiment
+
+- [ ] Execute the frozen individual-feature and aggregate target/control grid
+  without inspecting interim behavioral labels.
+- [ ] Retrieve raw generations, induction turns, telemetry, manifests, and logs;
+  verify row counts and SHA-256 hashes before terminating the pod.
+- [ ] Terminate the agent-owned pod after retrieval; an empty RunPod inventory
+  must be recorded in `checkpoint.md`.
+- [ ] Apply all frozen judges condition-blind and preserve disagreements,
+  refusals, empty outputs, and cap-hit rows exactly as specified.
+- [ ] Run the primary analysis and an independent raw-row audit without changing
+  the frozen estimand after seeing results.
+- [ ] Report every feature curve, the aggregate effect, matched-control
+  difference-in-differences, realized dose telemetry, multiplicity handling,
+  and all registered sensitivities.
+- [ ] Assign exactly one prespecified verdict. Feature-ID identity is treated as
+  accepted for this project; proprietary intervention equivalence remains a
+  separate limitation.
+
+### 5. Gate Expensive Extensions On The Primary Result
+
+- [ ] If the target consciousness-report effect replicates and exceeds matched
+  controls, run the history, conceptual, and zero-shot steering controls under
+  a separately frozen plan.
+- [ ] Run TruthfulQA only after the consciousness result is understood and a
+  separate question-level paired analysis is frozen; do not spend on the full
+  benchmark merely to rescue a failed primary result.
+- [ ] Run the RLHF-opposed-content checks only as a separate specificity layer
+  with explicit outcomes and multiplicity handling.
+- [ ] If the primary result is a precise public-implementation non-replication,
+  stop the expensive branch, publish that result, and retain TruthfulQA/API work
+  as optional follow-up.
+- [ ] If the result is inconclusive, diagnose dose, classifier, truncation, and
+  variance using the frozen telemetry before deciding whether one prespecified
+  precision extension is justified.
+
+### 6. Finish External Validation And Publication
+
+- [ ] Obtain at least three independent blinded human coders for the frozen
+  160-row causal-study wave 1 and run its condition-blind expansion gate.
+- [ ] Obtain independent methods/statistics review and independent
+  mechanistic-interpretability review.
+- [ ] Add natural-text and independently authored feature-semantic validation;
+  keep the current template/paraphrase evidence labeled synthetic until then.
+- [ ] Integrate the steering verdict, human results or pending limitation, and
+  external-review corrections into the manuscript and claim ledger.
+- [ ] Publish the construct-validity/lexical-entanglement article before the
+  steering-results article so the evidential ladder remains clear.
+- [ ] Release raw steering outputs, telemetry, plan, analysis, independent
+  audit, runtime environment, and hashes together under a tagged version.
+- [ ] Run the complete test, audit, paper-build, visual-QA, secret, provenance,
+  and public-link checks before the final tag.
+
+Budget boundary: based on the completed 70B run, the core paper-grid generation
+is expected to be on the order of `$15` to `$30` on an A100-class pod before a
+full TruthfulQA extension and before judge-API costs. Re-estimate from the
+frozen trial count and current RunPod price before launch.
+
 ## Completed Core Evidence
 
 - [x] Reproduce the exact self-reference/history benchmark on pinned GPT-4o,
@@ -160,13 +309,15 @@ models are or are not conscious.
 - [x] Run the full unit suite, Python compilation checks, manuscript build, PDF
   visual QA, row/ID/hash audits, and `git diff --check`.
 - [x] Commit and push a clean release state.
-- [ ] Tag the final audited commit only after corrected SAE analysis and paper
-  synchronization are complete.
+- [ ] Tag the final audited commit only after the prospective steering decision,
+  human/external-review decisions, manuscript synchronization, and the complete
+  public-release audit are complete.
 
 ## External Or Optional Extensions
 
-- [ ] If authors respond, confirm whether the public AE notebook is the exact
-  Experiment 2 setup and request a paper-time SAE/API version manifest.
+- [ ] If authors respond, archive whether the public AE notebook is the exact
+  Experiment 2 setup and request a paper-time SAE/API version manifest. This is
+  useful provenance but no longer blocks the owner-approved public-weight run.
 - [ ] If Goodfire/Steering API access arrives, run the frozen clean-room protocol
   and compare against the best-public implementation without overwriting it.
 - [ ] Add a third provider family only with pinned model/version metadata and a
