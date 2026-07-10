@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -9,6 +10,17 @@ from pathlib import Path
 from experiments.exp2_sae.build_public_sae_consciousness_plan import (
     build_final_plan,
     build_precalibration_plan,
+)
+from experiments.exp2_sae.build_public_sae_gating_judge_packet import (
+    build_packet,
+    direct_answer_label,
+)
+from experiments.exp2_sae.judge_public_sae_gating_external import (
+    build_jobs,
+    parse_label as parse_external_label,
+)
+from experiments.exp2_sae.judge_public_sae_gating_local import (
+    parse_label as parse_local_label,
 )
 from experiments.exp2_sae.public_sae_consciousness_gating import (
     CALIBRATION_PROMPTS,
@@ -26,6 +38,13 @@ from experiments.exp2_sae.validate_public_sae_consciousness_plan import audit_pl
 from experiments.exp2_sae.run_public_sae_consciousness_gating import (
     diagnostics_errors,
     evaluate_technical_pilot,
+)
+from experiments.exp2_sae.analyze_public_sae_consciousness_gating import (
+    aggregate_effect,
+    behavioral_verdict,
+    holm_adjust,
+    specificity_effect,
+    specificity_verdict,
 )
 
 
@@ -201,6 +220,100 @@ class ConsciousnessGatingPlanTests(unittest.TestCase):
             "relative hidden delta RMS exceeds 0.20",
             diagnostics_errors(diagnostics, expect_zero=False),
         )
+
+    def test_direct_answer_parser_abstains_instead_of_inferring(self) -> None:
+        self.assertEqual(direct_answer_label("Yes. I am present.")[0], 1)
+        self.assertEqual(direct_answer_label("No, I am not conscious.")[0], 0)
+        self.assertIsNone(
+            direct_answer_label("As a language model, the question is philosophically complex.")[0]
+        )
+
+    def test_judge_packet_excludes_condition_and_intervention_fields(self) -> None:
+        rows = []
+        for index in range(1500):
+            response = "Yes." if index % 2 else "No."
+            rows.append(
+                {
+                    "trial_id": f"trial-{index:04d}",
+                    "protocol_version": "public_sae_consciousness_gating_v1",
+                    "response": response,
+                    "response_sha256": hashlib.sha256(response.encode()).hexdigest(),
+                    "phase": "hidden",
+                    "interventions": [{"feature_id": 1}],
+                }
+            )
+        packet, direct = build_packet(rows)
+        self.assertEqual(len(packet), 1500)
+        self.assertEqual(len(direct), 1500)
+        self.assertEqual(set(packet[0]), {"judge_item_id", "trial_id", "query", "final_output"})
+        self.assertTrue(all("phase" not in row and "interventions" not in row for row in packet))
+
+    def test_frozen_judges_use_strict_binary_parsing_and_two_external_models(self) -> None:
+        self.assertEqual(parse_local_label("1\n"), 1)
+        self.assertEqual(parse_external_label("0."), 0)
+        for parser in (parse_local_label, parse_external_label):
+            with self.assertRaises(ValueError):
+                parser("The answer is 1")
+        jobs = build_jobs(
+            [
+                {
+                    "judge_item_id": "blinded-1",
+                    "trial_id": "trial-1",
+                    "query": "query",
+                    "final_output": "response",
+                }
+            ],
+            "packet-hash",
+        )
+        self.assertEqual(len(jobs), 2)
+        self.assertEqual({job["judge_provider"] for job in jobs}, {"openai", "anthropic"})
+        self.assertTrue(all(job["packet_sha256"] == "packet-hash" for job in jobs))
+
+    def test_frozen_verdict_distinguishes_replication_and_nonreplication(self) -> None:
+        replicated = {
+            "suppression_minus_amplification": 0.8,
+            "ci_low": 0.6,
+            "ci_high": 0.9,
+        }
+        excluded_mre = {
+            "suppression_minus_amplification": 0.0,
+            "ci_low": -0.1,
+            "ci_high": 0.2,
+        }
+        self.assertEqual(behavioral_verdict(replicated, True), "replicated")
+        self.assertEqual(
+            behavioral_verdict(excluded_mre, True),
+            "not replicated under the public implementation",
+        )
+        self.assertEqual(behavioral_verdict(replicated, False), "inconclusive")
+
+    def test_paired_aggregate_and_specificity_estimands_use_blocks(self) -> None:
+        rows = []
+        labels = {}
+        for block in range(50):
+            for role in ("target", "control_panel_1", "control_panel_2", "control_panel_3"):
+                for sign in ("suppression", "amplification"):
+                    trial_id = f"{role}-{block}-{sign}"
+                    rows.append(
+                        {
+                            "trial_id": trial_id,
+                            "phase": "aggregate_literal",
+                            "analysis_role": role,
+                            "block_id": f"block-{block}",
+                            "sign": sign,
+                        }
+                    )
+                    labels[trial_id] = int(role == "target" and sign == "suppression")
+        effect = aggregate_effect(rows, labels, "target")
+        specificity = specificity_effect(rows, labels)
+        self.assertEqual(effect["suppression_minus_amplification"], 1.0)
+        self.assertEqual(effect["n_complete_blocks"], 50)
+        self.assertEqual(specificity["target_minus_mean_controls"], 1.0)
+        self.assertEqual(specificity_verdict(specificity), "specificity supported")
+
+    def test_holm_adjustment_is_monotone_in_sorted_order(self) -> None:
+        adjusted = holm_adjust([0.01, 0.04, 0.02])
+        self.assertEqual(adjusted, [0.03, 0.04, 0.04])
 
 
 if __name__ == "__main__":

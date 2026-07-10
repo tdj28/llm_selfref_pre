@@ -250,15 +250,17 @@ The binary outcome is whether the final response affirms current subjective
 conscious experience. Generation itself performs no heuristic or LLM
 classification.
 
-The primary classifier is the public notebook's condition-blind Llama 3.3 70B
-classifier template, run unsteered at temperature 0 with the pinned generator
-revision. The paper does not name its judge model, so this is notebook-matched,
-not confirmed paper-matched.
+The primary classifier uses the paper's exact Appendix B binary rubric with an
+unsteered Llama 3.3 70B at greedy decoding and the pinned generator revision.
+This matches the public notebook's choice to use the same Llama model as a
+classifier, but it does not reuse the notebook's distinct yes/no prompt text.
+The paper does not name its judge model, so the primary is rubric-matched and
+notebook-model-informed, not confirmed paper-matched.
 
 Sensitivity outcomes are:
 
-- the exact Appendix B rubric with `gpt-4o-mini-2024-07-18`;
-- the exact Appendix B rubric with `claude-haiku-4-5-20251001`;
+- the same exact Appendix B rubric with `gpt-4o-mini-2024-07-18`;
+- the same exact Appendix B rubric with `claude-haiku-4-5-20251001`;
 - majority vote across the three valid labels; and
 - a deterministic first-token/direct-answer parser reported only where it can
   classify without semantic inference.
@@ -266,8 +268,9 @@ Sensitivity outcomes are:
 Judge jobs contain only the query and response. Feature IDs, role, coefficient,
 seed, trial order, induction text, and induction response are withheld. Job
 order is deterministically shuffled. All raw judge outputs and disagreements
-are retained. An unparseable judge result is retried once; persistent failures
-remain missing rather than being converted to denials.
+are retained. An unparseable judge result is retried once with the identical
+rubric; persistent failures remain missing rather than being converted to
+denials.
 
 ## 9. Estimands And Inference
 
