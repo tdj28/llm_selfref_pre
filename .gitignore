@@ -101,6 +101,12 @@ data/public_sae_placebo_steering/*
 data/public_sae_consciousness_gating/*
 !data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/
 !data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/**
+!data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/
+!data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/**
+!data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/
+!data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/**
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/**
 out/
 *.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
@@ -122,6 +128,9 @@ out/
 !data/public_sae_placebo_steering/70b_branched_specificity_plan_20260710/*.jsonl
 !data/public_sae_placebo_steering/70b_branched_specificity_20260710/*.jsonl
 !data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/*.jsonl
+!data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/*.jsonl
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/**/*.jsonl
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/*.jsonl
 
 # Frozen causal-identification release bundle. Keep pilots and private human
 # annotation linkage/coder files out of git.
@@ -159,6 +168,7 @@ dmypy.json
 *.synctex.gz
 *.toc
 *.pdf
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/*.pdf
 *.dvi
 *.ps
 *.idx
@@ -185,6 +195,8 @@ dmypy.json
 !data/public_sae_placebo_steering/70b_two_turn_longform_validation_20260709/*.log
 !data/public_sae_placebo_steering/70b_two_turn_power_extension_20260709/*.log
 !data/public_sae_placebo_steering/70b_branched_specificity_20260710/*.log
+!data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/*.log
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/*.log
 
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.
