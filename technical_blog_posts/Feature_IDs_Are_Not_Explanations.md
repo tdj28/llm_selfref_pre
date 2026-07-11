@@ -376,6 +376,310 @@ Once you have \(h\) for each token, you feed it through the SAE encoder to get f
 
 ---
 
+## Two Steering Worlds: SAE Features vs Jacobian-Lens Directions
+
+The 2026 paper [*Verbalizable Representations Form a Global Workspace in
+Language Models*](https://transformer-circuits.pub/2026/workspace/index.html)
+introduces a different way to find and steer residual-stream directions: the
+**Jacobian lens**. Its [Apache-2.0 reference
+implementation](https://github.com/anthropics/jacobian-lens) is public, though
+the repository explicitly describes itself as unmaintained research code.
+
+The shortest comparison is:
+
+- an SAE direction is learned to **reconstruct ordinary activations sparsely**;
+- a Jacobian-lens direction is constructed to capture an activation's average
+  **disposition to make the model verbalize one vocabulary token**.
+
+Those are different scientific objects. But once either group has chosen one
+fixed direction, the production actuator can be exactly the same vector add.
+That distinction matters both for interpreting a steering result and for
+estimating latency.
+
+### The common actuator
+
+At layer \(\ell\), token position \(t\), let
+\(h_{\ell,t}\in\mathbb{R}^{d}\) be the residual stream. Every intervention in
+this section can be written as
+
+\[
+h'_{\ell,t}=h_{\ell,t}+\Delta h_{\ell,t}.
+\]
+
+The hard question is not how addition works. It is how we choose
+\(\Delta h_{\ell,t}\), whether it is fixed or recomputed from the current
+activation, and how many layers and token positions receive it.
+
+### SAE steering, derived from a latent edit
+
+Write the SAE decoder as a matrix
+\(D=[d_1\;d_2\;\ldots\;d_N]\in\mathbb{R}^{d\times N}\). The encoder produces
+\(f=E(h)\), and the reconstruction is
+
+\[
+\hat h=Df+b_d.
+\]
+
+Suppose we retain the SAE's reconstruction residual
+
+\[
+\epsilon(h)=h-(Df+b_d)
+\]
+
+and edit the sparse code from \(f\) to \(f'=T(f)\). Decoding the edited code
+while restoring what the SAE failed to reconstruct gives
+
+\[
+\begin{aligned}
+h'
+  &=Df'+b_d+\epsilon(h) \\
+  &=h+D(f'-f).
+\end{aligned}
+\]
+
+So the exact residual-preserving SAE intervention is
+
+\[
+\Delta h_{\text{SAE}}=D\,\Delta f,
+\qquad \Delta f=f'-f.
+\]
+
+If we add constants \(a_i\) to a small selected set \(S\) of features, then
+
+\[
+\Delta h_{\text{SAE}}
+  =\sum_{i\in S} a_i d_i
+  =D_S a.
+\]
+
+When \(S\) and \(a\) are fixed, the entire sum can be computed once, before
+serving any request:
+
+\[
+v_{\text{SAE}}=D_S a,
+\qquad h'=h+v_{\text{SAE}}.
+\]
+
+That compiled form does **not** require running the SAE encoder or decoder in
+the generation loop. Some experiments instead set, clamp, or conditionally
+ablate features based on their current activations. Those state-dependent
+operations do require at least the relevant encoder rows, and a full latent
+rewrite can require the full dictionary.
+
+### Jacobian-lens steering, derived from output sensitivity
+
+Let \(L\) be the model's final layer. A perturbation at source position \(t\)
+and layer \(\ell\) can affect final residuals at current and future positions
+\(t'\geq t\). For prompt \(x\), the local map is the Jacobian
+
+\[
+A_{\ell,t,t'}(x)
+  =\frac{\partial h_{L,t'}(x)}{\partial h_{\ell,t}(x)}
+  \in\mathbb{R}^{d\times d}.
+\]
+
+Gurnee et al. average this map across prompts, source positions, and future
+target positions:
+
+\[
+J_\ell
+  =\mathbb{E}_{x,t,t'\geq t}
+    \left[
+      \frac{\partial h_{L,t'}(x)}{\partial h_{\ell,t}(x)}
+    \right].
+\]
+
+This notation follows the paper's main exposition. In its default Sonnet 4.5
+recipe, the authors actually target the penultimate layer because including the
+last transformer block can add output-calibration artifacts. The same
+construction applies after replacing \(L\) with that chosen downstream target.
+
+The paper uses 1,000 pretraining-like sequences for its lenses; the released
+implementation says roughly 100 prompts already gives a usable estimate. A
+readout transports an intermediate activation into the final-layer coordinate
+system, then applies the model's own unembedding \(W_U\):
+
+\[
+\operatorname{lens}_\ell(h)
+  =\operatorname{softmax}\!\left(
+      W_U\,\operatorname{norm}(J_\ell h)
+    \right).
+\]
+
+Let \(e_w\) select vocabulary token \(w\). Ignoring the state-dependent scale
+introduced by final normalization, the token's Jacobian-lens row is
+
+\[
+v_{\ell,w}^{\top}
+  =e_w^{\top}W_UJ_\ell,
+\qquad
+v_{\ell,w}=J_\ell^{\top}W_U^{\top}e_w.
+\]
+
+This says something narrower than "the vector for the concept \(w\)." It is
+the layer-specific direction whose average first-order downstream effect is
+aligned with verbalizing token \(w\). The simplest write is again
+
+\[
+h'=h+\alpha v_{\ell,w}.
+\]
+
+The paper also swaps two lens coordinates. With
+\(V=[v_{\ell,s}\;v_{\ell,t}]\), pseudoinverse \(V^\dagger\), coordinates
+\(c=V^\dagger h\), and swap operator \(\sigma\), the edit is
+
+\[
+h_{\text{swap}}
+  =h+V\big(\sigma(c)-c\big).
+\]
+
+Everything orthogonal to the two-column span is left unchanged by that ideal
+linear operation.
+
+### Dynamic J-space ablation is a much larger operation
+
+The vocabulary supplies an overcomplete dictionary
+\(V_\ell=[v_{\ell,1}\;\ldots\;v_{\ell,|\mathcal V|}]\). Because
+\(|\mathcal V|>d\), decompositions are not unique. The paper defines a
+**J-space component** operationally by finding a sparse, nonnegative
+approximation:
+
+\[
+c^*(h)
+  =\underset{c\geq0,\;\lVert c\rVert_0\leq k}{\operatorname{argmin}}
+    \lVert h-V_\ell c\rVert_2^2,
+\qquad
+p_J(h)=V_\ell c^*(h).
+\]
+
+It solves this approximation with gradient pursuit, typically allowing no more
+than about 25 active token directions. A dynamic ablation can then remove some
+or all of the fitted component:
+
+\[
+h'=h-\gamma p_J(h).
+\]
+
+This is not "subtract one Jacobian vector." The experiential-language
+experiment recomputes the strongest \(k=10\) J-space contents at each position
+and removes them across a band of layers. That is a context-dependent sparse
+coding system inside the generation loop.
+
+### Different direction factories
+
+| Question | SAE feature steering | Jacobian-lens steering |
+|---|---|---|
+| What creates the directions? | Nonconvex dictionary learning on activation reconstruction plus sparsity | Corpus average of first-order downstream Jacobians, composed with the model's unembedding |
+| What indexes one direction? | Checkpoint-local feature ID | Tokenizer token plus layer |
+| What is optimized? | Reconstruct the activation distribution with few active features | Identify directions disposed to influence current or future verbalization |
+| Is the English name intrinsic? | No. Labels come from activating examples and interpretation | The vocabulary token is intrinsic to construction, but one token is still not a complete concept |
+| Coverage | Broad, including semantic, syntactic, motor, and bookkeeping features | A selective verbalizable subframe; the paper reports at most 10% of activation variance in its fitted J-space component |
+| Main instability | Seed/checkpoint dependence, splitting, absorption, polysemanticity, shrinkage | Corpus averaging, local linearization, tokenizer granularity, arbitrary \(k\), and non-unique sparse decomposition |
+| Natural intervention | Fixed feature edit, set, clamp, or ablation | Fixed token-vector write, coordinate swap, or dynamic top-\(k\) J-space ablation |
+
+The methods can also be combined. Gurnee et al. project SAE decoder directions
+through the J-lens and ask which SAE features are concentrated on a small
+number of verbalizable token directions. A feature can therefore have two
+separate properties: coherent SAE activation semantics and strong or weak
+J-space alignment.
+
+### Latency depends on the deployed operator, not the paper that found it
+
+Let \(q\) be a small number of selected directions, \(N\) the SAE width,
+\(|\mathcal V|\) the vocabulary size, and \(m\) the number of intervened
+layers. The approximate online costs per generated token are:
+
+| Deployed operation | Online work per layer and token | Production implication |
+|---|---:|---|
+| One precombined SAE or J-lens vector | \(O(d)\) | One residual add; nearly identical for the two methods |
+| Score or gate \(q\) selected directions, then write | \(O(qd)\) | Usually cheap when \(q\) is single-digit or tens |
+| Full SAE encode | \(O(Nd)\) | Dense dictionary read/matmul on every steered token |
+| Full SAE encode plus dense decode | About \(2Nd\) multiply-accumulates | Can add substantial memory traffic; sparse decode can reduce the second term |
+| Full J-lens vocabulary readout | \(O(d^2+|\mathcal V|d)\) | An extra layer transport plus vocabulary projection |
+| Dynamic \(k\)-term J-space pursuit | Repeated dictionary products; naively about \(O(k|\mathcal V|d)\) | Research-grade unless heavily restricted, approximated, or moved off the critical path |
+| Any operation across \(m\) layers | Multiply the relevant cost by roughly \(m\) | Layer-band interventions can dominate a cheap single-layer edit |
+
+For the Llama example in this post, \(d=8{,}192\) and \(N=65{,}536\). One
+fixed BF16 steering vector occupies only 16 KiB and adds 8,192 values per
+token. By contrast, one dense SAE encoder contains
+
+\[
+Nd=65{,}536\times8{,}192=536{,}870{,}912
+\]
+
+weights, exactly 1 GiB in BF16, before counting a decoder of comparable size.
+One dense encode performs roughly 537 million multiply-accumulates per token.
+That may still be a modest fraction of a 70B model's arithmetic, but the extra
+weight traffic and unfused kernels can visibly affect decode latency. On a
+smaller base model, the same sidecar can be a much larger fraction of serving
+cost.
+
+The fixed-vector path is different. A serving system should fuse the addition
+into the target transformer layer rather than rely on a Python hook. The cost
+is then one tiny vector read and add relative to loading the model's weights.
+It is not literally zero, and it should be measured at the target batch size,
+but it need not materially move a latency service-level objective.
+
+{{< panel "info" >}}
+**The production answer.** If a company wants internal steering without a
+meaningful latency penalty, it should do expensive feature discovery and dose
+selection offline, then compile the chosen directions into one fixed or
+low-rank residual adapter. Between one frozen SAE vector and one frozen
+Jacobian-lens vector, latency is effectively a tie: both are \(O(d)\). Between
+a full SAE sidecar and dynamic top-\(k\) J-space pursuit, the fixed SAE-vector
+deployment is currently the practical choice. Do not put full dynamic J-space
+decomposition in a latency-critical decode loop without profiling a specialized
+implementation.
+{{< /panel >}}
+
+### Which is more reliable?
+
+There is no scalar "reliability" ranking. Different failure modes win on
+different axes:
+
+| Reliability axis | Better default | Why |
+|---|---|---|
+| Reproducing the named coordinate | Jacobian lens | Given a pinned model, tokenizer, corpus, and estimator, token \(w\) remains the index; SAE integer IDs can change completely across training seeds or checkpoints |
+| Covering abstract or multi-token concepts | SAE | SAE features are not restricted to concepts with one-token names |
+| Direct connection to output disposition | Jacobian lens | Its direction is built from the derivative of future residuals/logits, though only as an averaged first-order approximation |
+| Mature open-model tooling and released feature libraries | SAE | SAE ecosystems such as Gemma Scope are substantially more mature; the released Jacobian-lens code is explicitly a reference implementation, not maintained production software |
+| Unique decomposition | Neither | SAE dictionaries are noncanonical; J-lens dictionaries are overcomplete and their sparse codes depend on pursuit procedure and \(k\) |
+| Avoiding collateral behavioral changes | Neither | Both perturb shared residual streams; specificity must be established against matched-norm, random, task-performance, style, and coherence controls |
+| Stable behavior after a model update | Neither | Both are model-, layer-, hook-, normalization-, and dose-specific and must be recalibrated after weight or serving-stack changes |
+
+So the practical 2026 recommendation is asymmetric:
+
+1. **For production deployment today:** prefer a frozen, evaluated SAE-derived
+   vector or another validated low-rank activation direction, because the SAE
+   tooling and concept-discovery ecosystem are more mature.
+2. **For output-facing audits or a narrowly verbalizable target:** use the
+   Jacobian lens offline, and a fixed J-lens vector can be just as cheap to
+   deploy as an SAE vector.
+3. **For context-dependent workspace surgery:** dynamic J-space ablation is the
+   more principled tool, but it is not the low-latency choice.
+4. **For literal token suppression or promotion:** benchmark logit bias or a
+   conventional serving control too. Internal steering is unnecessary if the
+   product requirement is truly only about a known output token.
+
+Most importantly, choose the intervention by held-out behavioral reliability,
+not by how compelling its English label sounds. Pin the exact model and hook;
+calibrate the dose in realized residual norm; test paraphrases and adversarial
+contexts; measure task quality, refusal, style, and coherence separately; and
+keep a true-zero path plus an immediate disable switch. A vector that is cheap
+but fails those gates is not production steering.
+
+For the consciousness-report question, the Jacobian-lens result is especially
+instructive. Dynamic J-space ablation reduced experiential language not only in
+model self-reports, but also in descriptions of other people's experiences and
+in third-person stories, while largely preserving coherence in the reported
+Sonnet and Opus settings. Haiku was an important exception: coherence degraded
+before the authors obtained the same qualitative change. The successful cases
+are evidence for a general experiential **reporting register**, not a
+self-specific consciousness detector. A causal effect on words is real; the
+ontology attached to that effect remains a separate claim.
+
+---
+
 ## The Labeling Problem
 
 A subtlety that is easy to skip when reading SAE demos:
@@ -872,4 +1176,6 @@ Part I's ending is sharper than "labels fail." The labels can succeed as rough a
 - Paulo, G., & Belrose, N. (2025). *Sparse Autoencoders Trained on the Same Data Learn Different Features*. arXiv:2501.16615.
 - Wu, Z., et al. (2025). *AxBench: Steering LLMs? Even Simple Baselines Outperform Sparse Autoencoders*. arXiv:2501.17148.
 - Karvonen, A., et al. (2025). *SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability*. arXiv:2503.09532.
+- Gurnee, W., et al. (2026). *Verbalizable Representations Form a Global Workspace in Language Models*. Transformer Circuits Thread. https://transformer-circuits.pub/2026/workspace/index.html
+- Anthropic (2026). *Jacobian Lens Reference Implementation*. Apache License 2.0. https://github.com/anthropics/jacobian-lens
 - Berg, C., et al. (2025). *Large Language Models Report Subjective Experience Under Self-Referential Processing*. arXiv:2510.24797. (Related research context; this primer does not evaluate its steering claims.)
