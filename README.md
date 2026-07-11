@@ -520,6 +520,7 @@ To generate a new confirmatory collection or judge pass, use
 | `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` | Prospective 1,500-trial full-grid public-SAE release with frozen plan, raw generations, three blinded judge passes, telemetry, analyses, figures, independent audit, runtime logs, and hashes. |
 | `data/gemma_scope_9b/confirmatory_v1_20260711/` | Completed 1,010-generation Gemma Scope 9B release with direct-IT confirmatory analyses, failed PT-to-IT gate, causal relay, separately labeled exploratory atlas, three judge passes, 12 figure pairs, independent audit, and hashes. |
 | `data/sae_jlens_audit/confirmatory_v1_plan_20260711/` | Outcome-blind Llama 70B plan for static SAE-to-J projection and 1,581 prefix-only paired steering forwards with matched SAE, isotropic, identity, and random-J controls. |
+| `data/sae_jlens_audit/confirmatory_v1_20260711/` | Completed 1,581-forward SAE/J-lens release with static projections, sparse pursuit, seven-layer paired trajectories, post-state and paired-reference analyses, six figure pairs, audits, runtime/cost ledger, and hashes. |
 | `experiments/exp1_elicitation/` | Earlier prompt, lexical, semantic-convergence, and paradox stress tests. |
 | `steering/` | Historical general-purpose SAE framework retained for implementation provenance; its README and draft paper are explicitly superseded and are not current evidence. |
 | `paper/main.tex` | Current causal manuscript. |
@@ -528,6 +529,7 @@ To generate a new confirmatory collection or judge pass, use
 | `docs/GOODFIRE_API_STATUS.md` | Verified legacy Goodfire API deprecation, current SteeringAPI distinction, and archival-access requirements. |
 | `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` | Technical comparison of sparse-feature and Jacobian-lens interventions plus the proposed open-model cross-test. |
 | `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` | Frozen threat model, artifact revisions, hypotheses, controls, holdouts, statistics, and failure rules for auditing SAE steering in J-space. |
+| `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | Completed split-access result, feature heterogeneity, artifact map, cost ledger, and permitted claim language. |
 | `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
 | `docs/CLAIM_LEDGER.md` | Claim-to-artifact map, permissible wording, and forbidden overclaims. |
 | `technical_blog_posts/` | Public-post source, four editable Gemma follow-ups, editorial handoff, and synchronized figure assets. |

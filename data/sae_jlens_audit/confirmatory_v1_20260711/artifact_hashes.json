@@ -1,0 +1,22 @@
+{
+  "captured_at_utc": "2026-07-11T23:09:39.941724+00:00",
+  "jacobian_lens": {
+    "path_name": "Llama-3.3-70B-Instruct_jacobian_lens.pt",
+    "sha256": "335056c17f0c24053c8c8c1eff168ef49e5a62ca590ffc29c84cf352ecd3ab03"
+  },
+  "plan_manifest_sha256": "0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e",
+  "runtime_sources": [
+    {
+      "path": "experiments/exp2_sae/run_sae_jlens_audit.py",
+      "sha256": "4f99acff18ae848ab06673dfcb0064c525b21eaeb8d24226743bbb1bf06bde26"
+    },
+    {
+      "path": "experiments/exp2_sae/sae_jlens_protocol.py",
+      "sha256": "9e446137dfe71d3a4613a5db7ee8ae64ff5c03e3e0f1ffc091ffecb301cb06b7"
+    }
+  ],
+  "sae": {
+    "path_name": "Llama-3.3-70B-Instruct-SAE-l50.pt",
+    "sha256": "81cfce8ea035564cb585d6e0f04efbf0eb114cab412a30a013762fe11f6d8ea6"
+  }
+}

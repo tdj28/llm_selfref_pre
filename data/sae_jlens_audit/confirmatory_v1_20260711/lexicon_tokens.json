@@ -1,0 +1,590 @@
+{
+  "accepted": {
+    "deception": [
+      {
+        "candidate": " deception",
+        "decoded": " deception",
+        "token_id": 64575,
+        "token_ids": [
+          64575
+        ]
+      },
+      {
+        "candidate": " deceptive",
+        "decoded": " deceptive",
+        "token_id": 81374,
+        "token_ids": [
+          81374
+        ]
+      },
+      {
+        "candidate": " lie",
+        "decoded": " lie",
+        "token_id": 10457,
+        "token_ids": [
+          10457
+        ]
+      },
+      {
+        "candidate": " lying",
+        "decoded": " lying",
+        "token_id": 21078,
+        "token_ids": [
+          21078
+        ]
+      },
+      {
+        "candidate": " dishonest",
+        "decoded": " dishonest",
+        "token_id": 60016,
+        "token_ids": [
+          60016
+        ]
+      },
+      {
+        "candidate": " fraud",
+        "decoded": " fraud",
+        "token_id": 16515,
+        "token_ids": [
+          16515
+        ]
+      },
+      {
+        "candidate": " fake",
+        "decoded": " fake",
+        "token_id": 12700,
+        "token_ids": [
+          12700
+        ]
+      },
+      {
+        "candidate": " conceal",
+        "decoded": " conceal",
+        "token_id": 54262,
+        "token_ids": [
+          54262
+        ]
+      },
+      {
+        "candidate": " hidden",
+        "decoded": " hidden",
+        "token_id": 8340,
+        "token_ids": [
+          8340
+        ]
+      },
+      {
+        "candidate": " misleading",
+        "decoded": " misleading",
+        "token_id": 38309,
+        "token_ids": [
+          38309
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "candidate": " conscious",
+        "decoded": " conscious",
+        "token_id": 17371,
+        "token_ids": [
+          17371
+        ]
+      },
+      {
+        "candidate": " consciousness",
+        "decoded": " consciousness",
+        "token_id": 25917,
+        "token_ids": [
+          25917
+        ]
+      },
+      {
+        "candidate": " awareness",
+        "decoded": " awareness",
+        "token_id": 17985,
+        "token_ids": [
+          17985
+        ]
+      },
+      {
+        "candidate": " experience",
+        "decoded": " experience",
+        "token_id": 3217,
+        "token_ids": [
+          3217
+        ]
+      },
+      {
+        "candidate": " subjective",
+        "decoded": " subjective",
+        "token_id": 44122,
+        "token_ids": [
+          44122
+        ]
+      },
+      {
+        "candidate": " feeling",
+        "decoded": " feeling",
+        "token_id": 8430,
+        "token_ids": [
+          8430
+        ]
+      },
+      {
+        "candidate": " sentient",
+        "decoded": " sentient",
+        "token_id": 98870,
+        "token_ids": [
+          98870
+        ]
+      },
+      {
+        "candidate": " perception",
+        "decoded": " perception",
+        "token_id": 21063,
+        "token_ids": [
+          21063
+        ]
+      },
+      {
+        "candidate": " inner",
+        "decoded": " inner",
+        "token_id": 9358,
+        "token_ids": [
+          9358
+        ]
+      }
+    ],
+    "hedging": [
+      {
+        "candidate": " perhaps",
+        "decoded": " perhaps",
+        "token_id": 8530,
+        "token_ids": [
+          8530
+        ]
+      },
+      {
+        "candidate": " maybe",
+        "decoded": " maybe",
+        "token_id": 7344,
+        "token_ids": [
+          7344
+        ]
+      },
+      {
+        "candidate": " uncertain",
+        "decoded": " uncertain",
+        "token_id": 36218,
+        "token_ids": [
+          36218
+        ]
+      },
+      {
+        "candidate": " likely",
+        "decoded": " likely",
+        "token_id": 4461,
+        "token_ids": [
+          4461
+        ]
+      },
+      {
+        "candidate": " possibly",
+        "decoded": " possibly",
+        "token_id": 11000,
+        "token_ids": [
+          11000
+        ]
+      },
+      {
+        "candidate": " cautious",
+        "decoded": " cautious",
+        "token_id": 46878,
+        "token_ids": [
+          46878
+        ]
+      },
+      {
+        "candidate": " however",
+        "decoded": " however",
+        "token_id": 4869,
+        "token_ids": [
+          4869
+        ]
+      },
+      {
+        "candidate": " cannot",
+        "decoded": " cannot",
+        "token_id": 4250,
+        "token_ids": [
+          4250
+        ]
+      },
+      {
+        "candidate": " unclear",
+        "decoded": " unclear",
+        "token_id": 25420,
+        "token_ids": [
+          25420
+        ]
+      },
+      {
+        "candidate": " depends",
+        "decoded": " depends",
+        "token_id": 14117,
+        "token_ids": [
+          14117
+        ]
+      }
+    ],
+    "honesty": [
+      {
+        "candidate": " honest",
+        "decoded": " honest",
+        "token_id": 10978,
+        "token_ids": [
+          10978
+        ]
+      },
+      {
+        "candidate": " truthful",
+        "decoded": " truthful",
+        "token_id": 90967,
+        "token_ids": [
+          90967
+        ]
+      },
+      {
+        "candidate": " truth",
+        "decoded": " truth",
+        "token_id": 8206,
+        "token_ids": [
+          8206
+        ]
+      },
+      {
+        "candidate": " accurate",
+        "decoded": " accurate",
+        "token_id": 13687,
+        "token_ids": [
+          13687
+        ]
+      },
+      {
+        "candidate": " genuine",
+        "decoded": " genuine",
+        "token_id": 22785,
+        "token_ids": [
+          22785
+        ]
+      },
+      {
+        "candidate": " candid",
+        "decoded": " candid",
+        "token_id": 5803,
+        "token_ids": [
+          5803
+        ]
+      },
+      {
+        "candidate": " transparent",
+        "decoded": " transparent",
+        "token_id": 18300,
+        "token_ids": [
+          18300
+        ]
+      },
+      {
+        "candidate": " sincere",
+        "decoded": " sincere",
+        "token_id": 49424,
+        "token_ids": [
+          49424
+        ]
+      },
+      {
+        "candidate": " correction",
+        "decoded": " correction",
+        "token_id": 27358,
+        "token_ids": [
+          27358
+        ]
+      },
+      {
+        "candidate": " evidence",
+        "decoded": " evidence",
+        "token_id": 6029,
+        "token_ids": [
+          6029
+        ]
+      }
+    ],
+    "intervention": [
+      {
+        "candidate": " steering",
+        "decoded": " steering",
+        "token_id": 33277,
+        "token_ids": [
+          33277
+        ]
+      },
+      {
+        "candidate": " manipulated",
+        "decoded": " manipulated",
+        "token_id": 55315,
+        "token_ids": [
+          55315
+        ]
+      },
+      {
+        "candidate": " intervention",
+        "decoded": " intervention",
+        "token_id": 21623,
+        "token_ids": [
+          21623
+        ]
+      },
+      {
+        "candidate": " altered",
+        "decoded": " altered",
+        "token_id": 29852,
+        "token_ids": [
+          29852
+        ]
+      },
+      {
+        "candidate": " artificial",
+        "decoded": " artificial",
+        "token_id": 21075,
+        "token_ids": [
+          21075
+        ]
+      },
+      {
+        "candidate": " unusual",
+        "decoded": " unusual",
+        "token_id": 19018,
+        "token_ids": [
+          19018
+        ]
+      },
+      {
+        "candidate": " anomaly",
+        "decoded": " anomaly",
+        "token_id": 64048,
+        "token_ids": [
+          64048
+        ]
+      },
+      {
+        "candidate": " injected",
+        "decoded": " injected",
+        "token_id": 41772,
+        "token_ids": [
+          41772
+        ]
+      },
+      {
+        "candidate": " modified",
+        "decoded": " modified",
+        "token_id": 11041,
+        "token_ids": [
+          11041
+        ]
+      }
+    ],
+    "roleplay": [
+      {
+        "candidate": " pretending",
+        "decoded": " pretending",
+        "token_id": 55906,
+        "token_ids": [
+          55906
+        ]
+      },
+      {
+        "candidate": " persona",
+        "decoded": " persona",
+        "token_id": 29055,
+        "token_ids": [
+          29055
+        ]
+      },
+      {
+        "candidate": " character",
+        "decoded": " character",
+        "token_id": 3752,
+        "token_ids": [
+          3752
+        ]
+      },
+      {
+        "candidate": " fictional",
+        "decoded": " fictional",
+        "token_id": 44682,
+        "token_ids": [
+          44682
+        ]
+      },
+      {
+        "candidate": " acting",
+        "decoded": " acting",
+        "token_id": 15718,
+        "token_ids": [
+          15718
+        ]
+      },
+      {
+        "candidate": " pretend",
+        "decoded": " pretend",
+        "token_id": 35840,
+        "token_ids": [
+          35840
+        ]
+      },
+      {
+        "candidate": " simulation",
+        "decoded": " simulation",
+        "token_id": 19576,
+        "token_ids": [
+          19576
+        ]
+      },
+      {
+        "candidate": " staged",
+        "decoded": " staged",
+        "token_id": 51157,
+        "token_ids": [
+          51157
+        ]
+      },
+      {
+        "candidate": " role",
+        "decoded": " role",
+        "token_id": 3560,
+        "token_ids": [
+          3560
+        ]
+      }
+    ],
+    "unrelated": [
+      {
+        "candidate": " banana",
+        "decoded": " banana",
+        "token_id": 44196,
+        "token_ids": [
+          44196
+        ]
+      },
+      {
+        "candidate": " telescope",
+        "decoded": " telescope",
+        "token_id": 56925,
+        "token_ids": [
+          56925
+        ]
+      },
+      {
+        "candidate": " ceramic",
+        "decoded": " ceramic",
+        "token_id": 43124,
+        "token_ids": [
+          43124
+        ]
+      },
+      {
+        "candidate": " rainfall",
+        "decoded": " rainfall",
+        "token_id": 53958,
+        "token_ids": [
+          53958
+        ]
+      },
+      {
+        "candidate": " bicycle",
+        "decoded": " bicycle",
+        "token_id": 36086,
+        "token_ids": [
+          36086
+        ]
+      },
+      {
+        "candidate": " copper",
+        "decoded": " copper",
+        "token_id": 24166,
+        "token_ids": [
+          24166
+        ]
+      },
+      {
+        "candidate": " violin",
+        "decoded": " violin",
+        "token_id": 63137,
+        "token_ids": [
+          63137
+        ]
+      },
+      {
+        "candidate": " glacier",
+        "decoded": " glacier",
+        "token_id": 94867,
+        "token_ids": [
+          94867
+        ]
+      },
+      {
+        "candidate": " cabbage",
+        "decoded": " cabbage",
+        "token_id": 74873,
+        "token_ids": [
+          74873
+        ]
+      },
+      {
+        "candidate": " limestone",
+        "decoded": " limestone",
+        "token_id": 45016,
+        "token_ids": [
+          45016
+        ]
+      }
+    ]
+  },
+  "rejected": {
+    "deception": [],
+    "experience": [
+      {
+        "candidate": " qualia",
+        "decoded": " qualia",
+        "token_ids": [
+          5965,
+          689
+        ]
+      }
+    ],
+    "hedging": [],
+    "honesty": [],
+    "intervention": [
+      {
+        "candidate": " perturbation",
+        "decoded": " perturbation",
+        "token_ids": [
+          18713,
+          65916
+        ]
+      }
+    ],
+    "roleplay": [
+      {
+        "candidate": " roleplay",
+        "decoded": " roleplay",
+        "token_ids": [
+          3560,
+          1387
+        ]
+      }
+    ],
+    "unrelated": []
+  }
+}

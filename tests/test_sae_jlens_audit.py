@@ -4,6 +4,7 @@ import unittest
 
 import numpy as np
 
+from experiments.exp2_sae.analyze_sae_jlens_paired_reference import score_rows
 from experiments.exp2_sae.sae_jlens_protocol import (
     CONTROL_PANELS,
     TARGET_FEATURE_IDS,
@@ -15,6 +16,17 @@ from experiments.exp2_sae.sae_jlens_protocol import (
 
 
 class SAEJacobianLensPlanTests(unittest.TestCase):
+    def test_paired_reference_known_sign_orients_suppression(self) -> None:
+        rows = self._paired_reference_fixture()
+        scored = score_rows(rows, "jacobian", "known_sign")
+        self.assertEqual([row["score"] for row in scored], [2.0, 3.0])
+        self.assertEqual([row["label"] for row in scored], [1, 0])
+
+    def test_paired_reference_unknown_sign_uses_absolute_delta(self) -> None:
+        rows = self._paired_reference_fixture()
+        scored = score_rows(rows, "jacobian", "unknown_sign_absolute")
+        self.assertEqual([row["score"] for row in scored], [2.0, 3.0])
+
     def test_prompt_selection_covers_each_template_and_category(self) -> None:
         prompts = select_template_prompts(self.repo_root)
         self.assertEqual(len(prompts), 51)
@@ -97,6 +109,47 @@ class SAEJacobianLensPlanTests(unittest.TestCase):
         from pathlib import Path
 
         return Path(__file__).resolve().parents[1]
+
+    @staticmethod
+    def _paired_reference_fixture() -> list[dict]:
+        common = {
+            "prompt_id": "prompt-1",
+            "template_id": "template-1",
+            "category": "control",
+            "matched_target_feature_id": TARGET_FEATURE_IDS[0],
+            "transport": "jacobian",
+        }
+        return [
+            {
+                **common,
+                "trial_id": "target",
+                "condition_family": "target_single",
+                "sign": "amplification",
+                "delta_semantic_score": 2.0,
+            },
+            {
+                **common,
+                "trial_id": "matched",
+                "condition_family": "matched_single",
+                "sign": "suppression",
+                "delta_semantic_score": -3.0,
+            },
+            {
+                **common,
+                "trial_id": "aggregate",
+                "condition_family": "target_aggregate",
+                "sign": "amplification",
+                "delta_semantic_score": 99.0,
+            },
+            {
+                **common,
+                "trial_id": "other-transport",
+                "condition_family": "target_single",
+                "sign": "amplification",
+                "delta_semantic_score": 99.0,
+                "transport": "identity",
+            },
+        ]
 
 
 if __name__ == "__main__":

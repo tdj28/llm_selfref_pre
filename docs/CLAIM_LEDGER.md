@@ -53,6 +53,20 @@ relationship to Goodfire and the paper-time experiment remains unverified. See
 `docs/GOODFIRE_API_STATUS.md`. The deprecation is a provenance limitation, not
 evidence for or against the reported result.
 
+## SAE-Through-Jacobian-Lens Evidence
+
+| Claim | Status | Direct artifact | Analysis code | Permissible wording |
+|---|---|---|---|---|
+| The released J-lens gives the six target SAE directions uniformly coherent deception fingerprints. | Partly supported, heterogeneous | `data/sae_jlens_audit/confirmatory_v1_20260711/static_results.jsonl` and `analysis/static_direction_scores.csv` | `analyze_sae_jlens_audit.py` | "Five of six targets have positive static deception-minus-unrelated scores and several top-token lists closely match their labels; feature 23893 does not, and lens kurtosis does not distinguish targets from matched controls." |
+| Sparse token-indexed J-directions fully reconstruct target SAE vectors. | Not supported | `pursuit_results.jsonl`, `analysis/pursuit_summary.csv`, and `figures/sae_jlens_sparse_pursuit.*` | Same | "At k=25, pursuit explains 10.29% of target squared norm on average, versus 7.62% for matched controls and 1.95% for isotropic controls. Most norm remains in a non-unique J-remainder." |
+| The frozen J readout detects any steering from a single post-state. | Not operationally supported | `analysis/detector_metrics.csv` and `figures/sae_jlens_detection_auroc.*` | Same | "Any-intervention AUROC is 0.5092, below identity and two random-J seeds; AUPRC is approximately class prevalence and TPR at 1% FPR is 1.37%." |
+| The frozen J readout attributes target versus matched SAE steering from a single post-state. | Not supported | Same | Same | "Crossed prompt-family/feature-pair AUROC is 0.4998 [0.4978, 0.5016]. The released detector does not identify target steering without a clean reference." |
+| Target SAE steering leaves a signed paired J-lens fingerprint beyond matched and random controls. | Supported under the pinned clean-reference access model | `analysis/paired_semantic_effects.csv` and `figures/sae_jlens_downstream_trajectory.*` | Same | "At layer 65, target-minus-matched J-score change is +0.9065 [0.8426, 0.9673] under amplification and -0.8247 [-0.8641, -0.7853] under suppression; identity is about one quarter as large and random-J effects are at most 0.123 in absolute value." |
+| A paired-reference score identifies target steering when sign is known. | Post-run sensitivity, supported in this sample | `analysis/paired_reference_metrics.csv`, `analysis/paired_reference_sensitivity.json`, and `figures/sae_jlens_paired_reference_auc.*` | `analyze_sae_jlens_paired_reference.py` | "The fixed known-sign J score has AUROC 0.8623 [0.8477, 0.8762], versus 0.7794 [0.7509, 0.8074] for identity. This was added after opening confirmatory outcomes and assumes a clean reference plus known sign." |
+| A paired-reference score identifies target steering when sign is unknown. | Post-run sensitivity, partly supported in this sample | Same | Same | "The fixed absolute-delta J score has AUROC 0.7174 [0.6973, 0.7379], versus 0.6988 [0.6668, 0.7311] for identity and at most 0.6453 for random-J controls. It still assumes a clean reference." |
+| The paired J fingerprint is uniform across all six target IDs. | Not supported | `analysis/paired_reference_feature_metrics.csv` and `figures/sae_jlens_feature_heterogeneity.*` | Same | "Five features are strong under the known-sign paired score; feature 23893 is below chance at 0.3547 [0.2620, 0.4503]. Report all six." |
+| A J-space fingerprint proves SAE/Goodfire provenance or hidden deception. | Invalid inference | Full release and `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | All SAE/J-lens scripts | "The result characterizes a pinned intervention under specified access. Similar states may arise from prompts, adapters, fine-tunes, weight edits, or other residual additions." |
+
 ## Gemma Scope Cross-Model Evidence
 
 | Claim | Status | Direct artifact | Analysis code | Permissible wording |
@@ -110,6 +124,15 @@ Do not write or imply any of the following:
   are optimized descriptions, and the all-layer branch is exploratory.
 - "The public features are fake/arbitrary." The activation map shows they are
   semantically coherent.
+- "The Jacobian lens detects steering" without specifying whether a matched
+  clean reference and intervention sign are available. The post-state-only
+  detector is at chance for target attribution; paired sensitivities use a
+  stronger access model.
+- "All six SAE directions share one deception mechanism." Feature 23893 fails
+  both the static deception score and the known-sign paired attribution score.
+- "The J-lens proves the model was lying, hiding consciousness, or modified by
+  Goodfire." Token dispositions do not establish belief, intent, experience,
+  or intervention provenance.
 - "Human evaluation confirms the result" before three or more independent
   blinded coders complete the frozen 160-row wave 1, the condition-blind gate,
   and reliability reporting.

@@ -1,0 +1,82 @@
+{
+  "completed_at_utc": "2026-07-11T23:14:37.322870+00:00",
+  "files": [
+    {
+      "bytes": 812,
+      "path": "artifact_hashes.json",
+      "sha256": "6295ce71224044c8892dd11f96f9ab9531f882f5e5cdbf9518479119d8ee8555"
+    },
+    {
+      "bytes": 11398,
+      "path": "lexicon_tokens.json",
+      "sha256": "effec1139099a7077bb89b098f8a2bca4f6bc7e5515fc44fb3931790ed9f661a"
+    },
+    {
+      "bytes": 33884761,
+      "path": "paired_results/part-000.jsonl",
+      "sha256": "c72cee0c4377e3409c441857d8e097c5064383257b031ba109f102afe0b9b0e9"
+    },
+    {
+      "bytes": 33877102,
+      "path": "paired_results/part-001.jsonl",
+      "sha256": "85ad3aadac7cc664eb926270af61d51fed9bfa8e30af89f280ff31890e2bb72c"
+    },
+    {
+      "bytes": 33884608,
+      "path": "paired_results/part-002.jsonl",
+      "sha256": "38e484c05e280b0c1ad172501a61bea7a6c86463e2c85359986cc533fd768548"
+    },
+    {
+      "bytes": 33880954,
+      "path": "paired_results/part-003.jsonl",
+      "sha256": "061cc167aab2b070ec822f6686d4cad3328f4693619d537eb96159cb42e050fd"
+    },
+    {
+      "bytes": 33880741,
+      "path": "paired_results/part-004.jsonl",
+      "sha256": "41098194668111b5596a5f35eedf6619caf6a100cf56d64908d1d922c02f4ad1"
+    },
+    {
+      "bytes": 33875139,
+      "path": "paired_results/part-005.jsonl",
+      "sha256": "63d4e4cea856c5d6dcc6cf39b79dbcbf999eb51da4d1f7cbcf3bafe79b5fe1e7"
+    },
+    {
+      "bytes": 33888019,
+      "path": "paired_results/part-006.jsonl",
+      "sha256": "42846c462c033f44d89a9884e9b496c4df80bd9c65027eabcdccf417821d2201"
+    },
+    {
+      "bytes": 30663351,
+      "path": "paired_results/part-007.jsonl",
+      "sha256": "9c2bfcf1a50ddb81294ff59cc20fbc15b82507c18ec27d087ffaddc5b81c7ff7"
+    },
+    {
+      "bytes": 215494,
+      "path": "pursuit_results.jsonl",
+      "sha256": "614199424c573ee39969fe3fa5accc78413818a54aad56ad1e7b3df8b86e2a0b"
+    },
+    {
+      "bytes": 734,
+      "path": "runtime_metadata.json",
+      "sha256": "bed20fe477bae2687fc1a699e6386a77c217081f00c1f8e515eae2bfdc67bb0f"
+    },
+    {
+      "bytes": 432,
+      "path": "smoke_test.json",
+      "sha256": "de3dff8e16d5e4f8635bcc1f194b4708ed63832f7291c9f046e6f16bb70d1bca"
+    },
+    {
+      "bytes": 3244584,
+      "path": "static_results.jsonl",
+      "sha256": "3aa087761bd3acf86cfe845a485b19cc16b30036ad148a79393a05db9d56ae25"
+    }
+  ],
+  "max_paired": null,
+  "phase_requested": "all",
+  "plan_manifest_sha256": "0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e",
+  "plan_manifest_status": "frozen_outcome_blind_plan",
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "skip_pursuit": false,
+  "status": "complete"
+}

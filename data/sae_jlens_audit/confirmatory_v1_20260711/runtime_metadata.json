@@ -1,0 +1,29 @@
+{
+  "captured_at_utc": "2026-07-11T23:09:03.728779+00:00",
+  "cuda_available": true,
+  "cuda_runtime": "12.8",
+  "environment_flags": {
+    "HF_HUB_ENABLE_HF_TRANSFER": null,
+    "TOKENIZERS_PARALLELISM": null
+  },
+  "git_commit": "b026faac222e55d7da4f01a30a6a60a468a5f023",
+  "gpu_count": 1,
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA B200",
+      "total_memory": 191503007744
+    }
+  ],
+  "packages": {
+    "accelerate": "1.12.0",
+    "huggingface-hub": "0.36.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "torch": "2.8.0.dev20250319+cu128",
+    "transformers": "4.57.6"
+  },
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.35",
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "python": "3.11.11"
+}

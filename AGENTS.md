@@ -72,6 +72,11 @@ immediately public and permanently recoverable.
   machine-readable plan. Do not edit it after the first paired outcome. The
   corresponding runtime must use one BF16 180 GB GPU, retrieve and hash-check
   all raw shards, and terminate only the uniquely named pod created for it.
+- `docs/LLAMA70B_SAE_JLENS_RESULTS.md` and
+  `data/sae_jlens_audit/confirmatory_v1_20260711/` are the completed forensic
+  outcome and release. Preserve the split result: post-state target attribution
+  is chance, while paired clean-reference semantic deltas are large. Never
+  collapse those access models or hide feature 23893's failure.
 
 ## Research Direction
 

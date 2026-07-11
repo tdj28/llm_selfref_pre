@@ -1,0 +1,26 @@
+{
+  "agent_owned": true,
+  "cloud": "Secure Cloud on-demand",
+  "cost_per_hour_usd": 5.89,
+  "delete_http_status": 204,
+  "deleted_at_utc_approx": "2026-07-11T23:22:31Z",
+  "estimated_compute_cost_usd": 1.6,
+  "gpu": "NVIDIA B200",
+  "gpu_memory_mib": 183359,
+  "last_started_at_utc": "2026-07-11T23:06:15.125Z",
+  "other_pods_mutated": false,
+  "pod_id": "c34tng2tpjx96h",
+  "pod_name": "codex-llama70b-sae-jlens-20260711",
+  "post_delete_account_inventory": [],
+  "post_delete_direct_get_http_status": 404,
+  "provider": "RunPod",
+  "remote_secret_removed_before_delete": true,
+  "retrieval_audit": {
+    "errors": [],
+    "ledger_sha256": "b497abebcce6d16c5da5f1e49a9f7203a301cafddf78cf00bd210c474356ae6f",
+    "listed_files": 36,
+    "status": "pass",
+    "verified_files": 36
+  },
+  "runtime_seconds_approx": 975.875
+}

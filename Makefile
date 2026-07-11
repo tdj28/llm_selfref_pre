@@ -56,6 +56,8 @@ compile:
 		experiments/exp2_sae/run_sae_jlens_audit.py \
 		experiments/exp2_sae/analyze_sae_jlens_audit.py \
 		experiments/exp2_sae/audit_sae_jlens_results.py \
+		experiments/exp2_sae/analyze_sae_jlens_paired_reference.py \
+		experiments/exp2_sae/build_sae_jlens_release.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \
@@ -96,6 +98,9 @@ audit:
 		data/public_sae_placebo_steering/70b_branched_specificity_20260710
 	$(PYTHON) experiments/exp2_sae/audit_public_sae_branched_headlines.py \
 		data/public_sae_placebo_steering/70b_branched_specificity_20260710
+	$(PYTHON) experiments/exp2_sae/audit_sae_jlens_results.py \
+		--plan-dir data/sae_jlens_audit/confirmatory_v1_plan_20260711 \
+		--run-dir data/sae_jlens_audit/confirmatory_v1_20260711
 	$(PYTHON) experiments/causal_transplant/build_release_manifest.py $(RELEASE_DIR)
 
 public-audit:

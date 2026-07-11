@@ -1,0 +1,10 @@
+{
+  "completed_at_utc": "2026-07-11T23:14:37.322870+00:00",
+  "max_paired": null,
+  "phase_requested": "all",
+  "plan_manifest_sha256": "0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e",
+  "plan_manifest_status": "frozen_outcome_blind_plan",
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "skip_pursuit": false,
+  "status": "complete"
+}

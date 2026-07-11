@@ -1,0 +1,10 @@
+{
+  "errors": [],
+  "n_errors": 0,
+  "n_paired_rows": 1581,
+  "n_pursuit_rows": 120,
+  "n_static_rows": 420,
+  "plan_manifest_sha256": "0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e",
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "status": "pass"
+}

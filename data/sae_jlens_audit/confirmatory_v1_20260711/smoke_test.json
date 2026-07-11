@@ -1,0 +1,12 @@
+{
+  "captured_at_utc": "2026-07-11T23:11:47.756323+00:00",
+  "coefficient": 2.1918,
+  "feature_id": 30032,
+  "input_ids_sha256": "3b2e9dd83062f1543e3ed7ec618be939eceb573a4b7a6dd82ee787bfdf061fc9",
+  "max_abs_error": 4.76837158203125e-07,
+  "position": "last_content",
+  "relative_rmse": 6.583929809040403e-08,
+  "rmse": 1.1174923209011922e-08,
+  "selected_direction_cast_max_abs_error": 0.00019932538270950317,
+  "status": "pass"
+}

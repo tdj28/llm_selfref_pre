@@ -367,19 +367,25 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Draft the outcome-blind blog shell
   `technical_blog_posts/Can_A_Jacobian_Lens_Detect_SAE_Steering.md` with source
   attribution and result placeholders.
-- [ ] Commit and push the frozen machine plan and runtime source before the
+- [x] Commit and push the frozen machine plan and runtime source before the
   first static or paired outcome is generated.
-- [ ] On one uniquely named agent-owned BF16 RunPod, hash-verify the SAE and
+- [x] On one uniquely named agent-owned BF16 RunPod, hash-verify the SAE and
   lens, pass the full-SAE/direct-addition equivalence smoke, run all 420 static
   readouts, 120 pursuit checkpoints, and 1,581 paired prefix-only forwards.
-- [ ] Retrieve every shard/log/figure and verify remote SHA-256 values locally,
+- [x] Retrieve every shard/log/figure and verify remote SHA-256 values locally,
   then terminate the created pod and verify both direct 404 and account
   inventory without mutating any other pod.
-- [ ] Run the independent structural audit and grouped/crossed-holdout
+- [x] Run the independent structural audit and grouped/crossed-holdout
   analyses; report every real-J, identity, raw-norm, and random-J result.
-- [ ] Replace blog `RESULT_TODO` markers only from the audited release; publish
+- [x] Replace blog `RESULT_TODO` markers only from the audited release; publish
   the negative result as readily as a positive one and keep provenance,
   deception, and consciousness overclaims forbidden.
+- [x] Add an explicitly post-run paired-reference sensitivity with both known-
+  sign and sign-unknown scores, all five random-J controls, and all six
+  feature-level results; do not relabel it confirmatory.
+- [ ] Replicate the post-state/paired access split on another model/lens and an
+  intervention family absent from training before proposing an operational
+  steering detector.
 - [ ] If authors respond, archive whether the public AE notebook is the exact
   Experiment 2 setup and request a paper-time SAE/API version manifest. This is
   useful provenance but no longer blocks the owner-approved public-weight run.

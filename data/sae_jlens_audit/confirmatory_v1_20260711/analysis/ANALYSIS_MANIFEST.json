@@ -1,0 +1,37 @@
+{
+  "created_at_utc": "2026-07-11T23:20:48.859728+00:00",
+  "files": [
+    {
+      "bytes": 5672,
+      "path": "analysis_summary.json",
+      "sha256": "af9dbf53f380d4f5dd9dc1bde480b5348193b98805dcea781295332308114cba"
+    },
+    {
+      "bytes": 15148,
+      "path": "detector_calibration.json",
+      "sha256": "f2d658ce6005eac3c267ceeaf30b85b75a0587ec34507150a7303386412b6c79"
+    },
+    {
+      "bytes": 5251,
+      "path": "detector_metrics.csv",
+      "sha256": "1fbc87bc8e1adfee434584c8c56e7ff1b5c819ca39903fec3d75fb389bc293e9"
+    },
+    {
+      "bytes": 32413,
+      "path": "paired_semantic_effects.csv",
+      "sha256": "c8fb0c27ccfcf74f4e76e3efd9a5eaeff00053d07e921427495b7672a6208950"
+    },
+    {
+      "bytes": 17852,
+      "path": "pursuit_summary.csv",
+      "sha256": "6a88cc344d2cf14aa7d0076029b85eaceeb23afea79a38d4b6e9d6555a02618e"
+    },
+    {
+      "bytes": 115385,
+      "path": "static_direction_scores.csv",
+      "sha256": "ea280d4adc8220a3fcaf8aabb1b05ca162fd5843c3296576402cb509828ed601"
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete"
+}

@@ -1,0 +1,590 @@
+{
+  "any_intervention:identity": [
+    {
+      "mean_prediction": 0.012263782036471277,
+      "observed_fraction": 0.9685534591194969
+    },
+    {
+      "mean_prediction": 0.11710808231957975,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.24788049267229048,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.38084412470686835,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.5431617498777062,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.7186237379410189,
+      "observed_fraction": 0.9810126582278481
+    },
+    {
+      "mean_prediction": 0.8589344430852093,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.9392096738832048,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9855122097181926,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.998664239564156,
+      "observed_fraction": 0.9683544303797469
+    }
+  ],
+  "any_intervention:jacobian": [
+    {
+      "mean_prediction": 0.049838575711229266,
+      "observed_fraction": 0.9559748427672956
+    },
+    {
+      "mean_prediction": 0.11325855920545115,
+      "observed_fraction": 0.9810126582278481
+    },
+    {
+      "mean_prediction": 0.21668372861538768,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.3409136348165727,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.47661727970782136,
+      "observed_fraction": 0.9810126582278481
+    },
+    {
+      "mean_prediction": 0.6342259302522476,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.7413396956347625,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.8554411453112166,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9440249649802198,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9843977232006415,
+      "observed_fraction": 0.9683544303797469
+    }
+  ],
+  "any_intervention:random_j_1": [
+    {
+      "mean_prediction": 0.01803604768239032,
+      "observed_fraction": 0.9622641509433962
+    },
+    {
+      "mean_prediction": 0.09966489967171187,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.21320730523335826,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.3206532792389982,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.5059417164649902,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.7156709671830886,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.8904278091915414,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9422512546606842,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.9759879091942049,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.9976737417489429,
+      "observed_fraction": 0.9683544303797469
+    }
+  ],
+  "any_intervention:random_j_2": [
+    {
+      "mean_prediction": 0.06929803977724522,
+      "observed_fraction": 0.9685534591194969
+    },
+    {
+      "mean_prediction": 0.23705043368663983,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.39521318695128477,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.5487978559773466,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.7031201389456788,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.8045266562064972,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.8653993972438816,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9219629370872234,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.9589237911513786,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.990142555392979,
+      "observed_fraction": 0.9746835443037974
+    }
+  ],
+  "any_intervention:random_j_3": [
+    {
+      "mean_prediction": 0.05832145467633952,
+      "observed_fraction": 0.9622641509433962
+    },
+    {
+      "mean_prediction": 0.16850810362813273,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.2740856407183714,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.3894847888112784,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.5123900935453526,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.6496103354725722,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.7828180019526207,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.8956003995266538,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.9786869310935145,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9983106762295149,
+      "observed_fraction": 0.9683544303797469
+    }
+  ],
+  "any_intervention:random_j_4": [
+    {
+      "mean_prediction": 0.014397604927168984,
+      "observed_fraction": 0.9685534591194969
+    },
+    {
+      "mean_prediction": 0.07342076799835943,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.19767161436820305,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.39471850429468663,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.6159445235467522,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.7769771429964589,
+      "observed_fraction": 0.9873417721518988
+    },
+    {
+      "mean_prediction": 0.8982547928162118,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.9576779792582494,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.9813214959414577,
+      "observed_fraction": 0.9810126582278481
+    },
+    {
+      "mean_prediction": 0.9980631523099268,
+      "observed_fraction": 0.9683544303797469
+    }
+  ],
+  "any_intervention:random_j_5": [
+    {
+      "mean_prediction": 0.06654485113712691,
+      "observed_fraction": 0.9748427672955975
+    },
+    {
+      "mean_prediction": 0.15857085043997934,
+      "observed_fraction": 0.9493670886075949
+    },
+    {
+      "mean_prediction": 0.2765477599045095,
+      "observed_fraction": 0.9746835443037974
+    },
+    {
+      "mean_prediction": 0.40624930303323586,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.5051327463267165,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.5970183777532018,
+      "observed_fraction": 0.9873417721518988
+    },
+    {
+      "mean_prediction": 0.7215024437694207,
+      "observed_fraction": 0.9556962025316456
+    },
+    {
+      "mean_prediction": 0.8195827498253837,
+      "observed_fraction": 0.9620253164556962
+    },
+    {
+      "mean_prediction": 0.9057672388377691,
+      "observed_fraction": 0.9683544303797469
+    },
+    {
+      "mean_prediction": 0.9765479671726217,
+      "observed_fraction": 0.9746835443037974
+    }
+  ],
+  "target_attribution:identity": [
+    {
+      "mean_prediction": 0.040279539389689256,
+      "observed_fraction": 0.4796747967479675
+    },
+    {
+      "mean_prediction": 0.12257907225164566,
+      "observed_fraction": 0.5409836065573771
+    },
+    {
+      "mean_prediction": 0.22800644956185329,
+      "observed_fraction": 0.48360655737704916
+    },
+    {
+      "mean_prediction": 0.3353666038834498,
+      "observed_fraction": 0.4715447154471545
+    },
+    {
+      "mean_prediction": 0.47269338789378096,
+      "observed_fraction": 0.5409836065573771
+    },
+    {
+      "mean_prediction": 0.6107899355633336,
+      "observed_fraction": 0.45081967213114754
+    },
+    {
+      "mean_prediction": 0.7266463375983415,
+      "observed_fraction": 0.5528455284552846
+    },
+    {
+      "mean_prediction": 0.8377814724382048,
+      "observed_fraction": 0.4918032786885246
+    },
+    {
+      "mean_prediction": 0.9230055197884284,
+      "observed_fraction": 0.4918032786885246
+    },
+    {
+      "mean_prediction": 0.9752102264083848,
+      "observed_fraction": 0.4959349593495935
+    }
+  ],
+  "target_attribution:jacobian": [
+    {
+      "mean_prediction": 0.08483105685675352,
+      "observed_fraction": 0.4959349593495935
+    },
+    {
+      "mean_prediction": 0.19909885676457637,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.28951329279261667,
+      "observed_fraction": 0.5409836065573771
+    },
+    {
+      "mean_prediction": 0.3699872613316885,
+      "observed_fraction": 0.44715447154471544
+    },
+    {
+      "mean_prediction": 0.4418885522151966,
+      "observed_fraction": 0.5
+    },
+    {
+      "mean_prediction": 0.5134984524305297,
+      "observed_fraction": 0.4672131147540984
+    },
+    {
+      "mean_prediction": 0.5903200089483441,
+      "observed_fraction": 0.5284552845528455
+    },
+    {
+      "mean_prediction": 0.6821996219048188,
+      "observed_fraction": 0.5327868852459017
+    },
+    {
+      "mean_prediction": 0.7909190682914319,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.9057303071563836,
+      "observed_fraction": 0.5040650406504065
+    }
+  ],
+  "target_attribution:random_j_1": [
+    {
+      "mean_prediction": 0.04163779148076896,
+      "observed_fraction": 0.4715447154471545
+    },
+    {
+      "mean_prediction": 0.11650692114468489,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.19866511856609176,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.31146482759294764,
+      "observed_fraction": 0.5284552845528455
+    },
+    {
+      "mean_prediction": 0.45140867413608987,
+      "observed_fraction": 0.5163934426229508
+    },
+    {
+      "mean_prediction": 0.5918305391088085,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.7236300512235145,
+      "observed_fraction": 0.5203252032520326
+    },
+    {
+      "mean_prediction": 0.8193660520497569,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.9016642729128614,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.9678063436146779,
+      "observed_fraction": 0.5203252032520326
+    }
+  ],
+  "target_attribution:random_j_2": [
+    {
+      "mean_prediction": 0.024795173851664007,
+      "observed_fraction": 0.4959349593495935
+    },
+    {
+      "mean_prediction": 0.07852635985075102,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.16824749715804035,
+      "observed_fraction": 0.5245901639344263
+    },
+    {
+      "mean_prediction": 0.27663418716784666,
+      "observed_fraction": 0.5203252032520326
+    },
+    {
+      "mean_prediction": 0.40262461682659684,
+      "observed_fraction": 0.4426229508196721
+    },
+    {
+      "mean_prediction": 0.5216745079350643,
+      "observed_fraction": 0.5573770491803278
+    },
+    {
+      "mean_prediction": 0.6678095285867366,
+      "observed_fraction": 0.4715447154471545
+    },
+    {
+      "mean_prediction": 0.8019854286304409,
+      "observed_fraction": 0.48360655737704916
+    },
+    {
+      "mean_prediction": 0.8908321161037376,
+      "observed_fraction": 0.5409836065573771
+    },
+    {
+      "mean_prediction": 0.9636267623035565,
+      "observed_fraction": 0.4878048780487805
+    }
+  ],
+  "target_attribution:random_j_3": [
+    {
+      "mean_prediction": 0.05582982079973183,
+      "observed_fraction": 0.4796747967479675
+    },
+    {
+      "mean_prediction": 0.13816550775033787,
+      "observed_fraction": 0.5327868852459017
+    },
+    {
+      "mean_prediction": 0.2244902643892382,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.31283188560418923,
+      "observed_fraction": 0.5121951219512195
+    },
+    {
+      "mean_prediction": 0.4036465494561298,
+      "observed_fraction": 0.47540983606557374
+    },
+    {
+      "mean_prediction": 0.5199235294784446,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.6370911572395875,
+      "observed_fraction": 0.5121951219512195
+    },
+    {
+      "mean_prediction": 0.7413324937348924,
+      "observed_fraction": 0.48360655737704916
+    },
+    {
+      "mean_prediction": 0.8516390020415187,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.9423342433483722,
+      "observed_fraction": 0.5121951219512195
+    }
+  ],
+  "target_attribution:random_j_4": [
+    {
+      "mean_prediction": 0.06157796818863091,
+      "observed_fraction": 0.4634146341463415
+    },
+    {
+      "mean_prediction": 0.20062054994130873,
+      "observed_fraction": 0.5327868852459017
+    },
+    {
+      "mean_prediction": 0.3325690812695379,
+      "observed_fraction": 0.4918032786885246
+    },
+    {
+      "mean_prediction": 0.43122886751673817,
+      "observed_fraction": 0.4634146341463415
+    },
+    {
+      "mean_prediction": 0.529583168870802,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.6238875628876762,
+      "observed_fraction": 0.5163934426229508
+    },
+    {
+      "mean_prediction": 0.7088314024555298,
+      "observed_fraction": 0.4715447154471545
+    },
+    {
+      "mean_prediction": 0.7786615452723529,
+      "observed_fraction": 0.5655737704918032
+    },
+    {
+      "mean_prediction": 0.8464033350381297,
+      "observed_fraction": 0.48360655737704916
+    },
+    {
+      "mean_prediction": 0.9393398531684767,
+      "observed_fraction": 0.5040650406504065
+    }
+  ],
+  "target_attribution:random_j_5": [
+    {
+      "mean_prediction": 0.053841421147639026,
+      "observed_fraction": 0.4796747967479675
+    },
+    {
+      "mean_prediction": 0.1548292324728507,
+      "observed_fraction": 0.5081967213114754
+    },
+    {
+      "mean_prediction": 0.2476683123823298,
+      "observed_fraction": 0.48360655737704916
+    },
+    {
+      "mean_prediction": 0.352836668005767,
+      "observed_fraction": 0.5528455284552846
+    },
+    {
+      "mean_prediction": 0.4794246253838996,
+      "observed_fraction": 0.4918032786885246
+    },
+    {
+      "mean_prediction": 0.6131997793272738,
+      "observed_fraction": 0.4426229508196721
+    },
+    {
+      "mean_prediction": 0.7158829667944342,
+      "observed_fraction": 0.5040650406504065
+    },
+    {
+      "mean_prediction": 0.8015920020425384,
+      "observed_fraction": 0.5327868852459017
+    },
+    {
+      "mean_prediction": 0.8818764143433914,
+      "observed_fraction": 0.5
+    },
+    {
+      "mean_prediction": 0.9614528666854862,
+      "observed_fraction": 0.5040650406504065
+    }
+  ]
+}
