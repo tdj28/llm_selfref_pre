@@ -197,6 +197,7 @@ dmypy.json
 !data/public_sae_placebo_steering/70b_branched_specificity_20260710/*.log
 !data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/*.log
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/*.log
+!data/public_sae_consciousness_gating/confirmatory_v1_20260710/judging/*.log
 
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.

@@ -1,0 +1,16 @@
+{
+  "anthropic_sdk": "0.75.0",
+  "captured_at_utc": "2026-07-11T02:43:26Z",
+  "git_commit_at_execution": "233deb541d1e57591673e6ab1d7d9ea5c1765aee",
+  "max_workers": 6,
+  "models": [
+    "gpt-4o-mini-2024-07-18",
+    "claude-haiku-4-5-20251001"
+  ],
+  "openai_sdk": "2.14.0",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "python": "3.10.15",
+  "python_dotenv": "1.2.1",
+  "status": "complete",
+  "total_judgments": 3000
+}

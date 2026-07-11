@@ -1,0 +1,48 @@
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   3%|▎         | 1/30 [00:11<05:32, 11.46s/it]Downloading shards:   7%|▋         | 2/30 [00:21<05:01, 10.78s/it]Downloading shards:  10%|█         | 3/30 [00:34<05:09, 11.45s/it]Downloading shards:  13%|█▎        | 4/30 [00:45<05:03, 11.66s/it]Downloading shards:  17%|█▋        | 5/30 [00:56<04:43, 11.34s/it]Downloading shards:  20%|██        | 6/30 [01:08<04:33, 11.41s/it]/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py:651: UserWarning: Not enough free disk space to download the file. The expected file size is: 4664.17 MB. The target location /root/.cache/huggingface/hub/models--meta-llama--Llama-3.3-70B-Instruct/blobs only has 2797.09 MB free disk space.
+  warnings.warn(
+Downloading shards:  20%|██        | 6/30 [02:40<10:42, 26.78s/it]
+Traceback (most recent call last):
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/judge_public_sae_gating_local.py", line 181, in <module>
+    main()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/judge_public_sae_gating_local.py", line 131, in main
+    torch_module, model = load_local_model()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/judge_public_sae_gating_local.py", line 58, in load_local_model
+    model = ObservableLanguageModel(
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/replicate_exp2_goodfire_sae.py", line 443, in __init__
+    with self._model.trace(input_tokens):
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/Tracer.py", line 102, in __exit__
+    super().__exit__(exc_type, exc_val, exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/GraphBasedContext.py", line 218, in __exit__
+    self.backend(self)
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/backends/LocalBackend.py", line 27, in __call__
+    obj.local_backend_execute()
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/contexts/Tracer.py", line 146, in local_backend_execute
+    self.model.interleave(
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/NNsightModel.py", line 434, in interleave
+    self.dispatch_model()
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/NNsightModel.py", line 489, in dispatch_model
+    self._model = self._load(
+  File "/usr/local/lib/python3.10/dist-packages/nnsight/models/LanguageModel.py", line 204, in _load
+    model = self.automodel.from_pretrained(repo_id, config=config, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
+    return model_class.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 3990, in from_pretrained
+    resolved_archive_file, sharded_metadata = get_checkpoint_shard_files(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py", line 1098, in get_checkpoint_shard_files
+    cached_filename = cached_file(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py", line 403, in cached_file
+    resolved_file = hf_hub_download(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 860, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 1009, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 1543, in _download_to_tmp_and_move
+    http_get(
+  File "/usr/local/lib/python3.10/dist-packages/huggingface_hub/file_download.py", line 455, in http_get
+    temp_file.write(chunk)
+OSError: [Errno 28] No space left on device

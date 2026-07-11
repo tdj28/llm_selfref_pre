@@ -1,0 +1,12 @@
+{
+  "completed_at_utc": "2026-07-11T02:36:40.811515+00:00",
+  "cuda": "11.8",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "judge_key": "local:meta-llama/Llama-3.3-70B-Instruct@6f6073b423013f6a7d4d9f39144961bfbfbc386b:paper-rubric",
+  "judgments_sha256": "a1de32e1abaf3374467d4ead0e0eb601bb91bd882d7abd7f7facb972b52752b6",
+  "n_judgments": 1500,
+  "packet_sha256": "eaef29be9068e67ba68f43ecfb65ef1211b12f18625baf64e1eb14d83721cb0e",
+  "python": "3.10.12",
+  "status": "complete",
+  "torch": "2.1.0+cu118"
+}

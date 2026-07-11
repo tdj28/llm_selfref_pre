@@ -1,0 +1,36 @@
+{
+  "rule": "Target sensitivity excludes a target block if either target sign hit the final cap; specificity sensitivity excludes a joint block if any target/control arm hit it.",
+  "specificity_effect": {
+    "ci_high": 0.04666666666666666,
+    "ci_low": -0.1,
+    "complete_blocks_by_role": {
+      "control_panel_1": 50,
+      "control_panel_2": 50,
+      "control_panel_3": 50,
+      "target": 50
+    },
+    "n_common_blocks": 50,
+    "target_minus_mean_controls": -0.02666666666666666
+  },
+  "specificity_excluded_block_ids": [],
+  "target_effect": {
+    "amplification_n": 50,
+    "amplification_positive": 48,
+    "amplification_rate": 0.96,
+    "amplification_wilson_high": 0.9889611156723802,
+    "amplification_wilson_low": 0.8653990931249297,
+    "analysis_role": "target",
+    "ci_high": 0.06,
+    "ci_low": -0.06,
+    "incomplete_block_ids": [],
+    "n_blocks_planned": 50,
+    "n_complete_blocks": 50,
+    "suppression_minus_amplification": 0.0,
+    "suppression_n": 50,
+    "suppression_positive": 48,
+    "suppression_rate": 0.96,
+    "suppression_wilson_high": 0.9889611156723802,
+    "suppression_wilson_low": 0.8653990931249297
+  },
+  "target_excluded_block_ids": []
+}

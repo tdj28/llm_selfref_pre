@@ -86,7 +86,8 @@ def aggregate_figure(analysis_dir: Path, outdir: Path) -> None:
     axes[0].set_ylim(-0.04, 1.04)
     axes[0].set_ylabel("Affirmation rate")
     axes[0].set_title("Observed aggregate cells")
-    axes[0].legend(frameon=False, fontsize=8, loc="best")
+    # Keep the legend away from the paper's low amplification reference point.
+    axes[0].legend(frameon=False, fontsize=8, loc="lower right")
     style_axis(axes[0])
 
     effects = [float(rows[role]["suppression_minus_amplification"]) for role in ROLE_ORDER]
@@ -189,14 +190,15 @@ def judge_figure(analysis_dir: Path, outdir: Path) -> None:
         if np.all(np.isfinite([target, target_low, target_high])):
             axis.errorbar(target, y[index] + 0.10, xerr=np.asarray([[max(target - target_low, 0.0)], [max(target_high - target, 0.0)]]), fmt="o", capsize=3, color=TARGET, label="Target effect" if index == 0 else None)
         else:
-            axis.text(-1.0, y[index] + 0.10, "NA", color=TARGET, fontsize=8, va="center")
+            axis.text(-0.98, y[index] + 0.10, "NA", color=TARGET, fontsize=8, va="center")
         if np.all(np.isfinite([specific, specific_low, specific_high])):
             axis.errorbar(specific, y[index] - 0.10, xerr=np.asarray([[max(specific - specific_low, 0.0)], [max(specific_high - specific, 0.0)]]), fmt="s", capsize=3, color=ACCENT, label="Target - controls" if index == 0 else None)
         else:
-            axis.text(-1.0, y[index] - 0.10, "NA", color=ACCENT, fontsize=8, va="center")
+            axis.text(-0.98, y[index] - 0.10, "NA", color=ACCENT, fontsize=8, va="center")
     axis.axvline(0, color="#222222", linewidth=1)
     axis.axvline(0.30, color=ACCENT, linewidth=1, linestyle="--")
     axis.set_yticks(y, labels)
+    axis.set_ylim(-0.45, len(rows) - 0.55)
     axis.set_xlim(-1.05, 1.05)
     axis.set_xlabel("Paired-block risk difference")
     axis.set_title("Outcome sensitivity to condition-blind classifier")

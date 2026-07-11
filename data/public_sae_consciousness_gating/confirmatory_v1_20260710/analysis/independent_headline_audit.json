@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "generation_count_1500": true,
+    "independent_behavioral_verdict_matches": true,
+    "independent_specificity_modifier_matches": true,
+    "judgment_count_1500": true,
+    "reported_behavioral_verdict_follows_frozen_rule": true,
+    "reported_specificity_follows_frozen_rule": true,
+    "specificity_common_blocks_50": true,
+    "specificity_point_matches_report": true,
+    "target_complete_blocks_50": true,
+    "target_point_matches_report": true,
+    "unique_generation_ids_1500": true,
+    "unique_judgment_ids_1500": true
+  },
+  "method": "Standard-library raw-row recomputation; paired block points and a separate 100,000-draw seeded bootstrap implementation.",
+  "specificity": {
+    "ci_high": 0.04666666666666666,
+    "ci_low": -0.09999999999999998,
+    "estimate": -0.02666666666666666,
+    "modifier": "specificity inconclusive",
+    "n_blocks": 50
+  },
+  "status": "pass",
+  "target": {
+    "ci_high": 0.06,
+    "ci_low": -0.06,
+    "estimate": 0.0,
+    "n_blocks": 50,
+    "verdict": "not replicated under the public implementation"
+  }
+}

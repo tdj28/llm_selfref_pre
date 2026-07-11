@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-07-10
+Last updated: 2026-07-11
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -31,6 +31,10 @@ Claim strength must not exceed the evidence level recorded here.
 | `public_sae_two_turn_v2` executes the requested intervention. | Supported for the tested public implementation | `70b_two_turn_longform_validation_20260709/corrected_protocol_audit.json` and telemetry CSV | `run_public_sae_placebo_steering.py`, `analyze_public_sae_two_turn.py` | "The hook, no-op, latent-delta, perturbation, and cleanup checks pass." |
 | Public candidate steering has a target-specific paper-like behavioral slope. | Not supported in the adaptive best-public n=20 analysis | `70b_two_turn_powered_n20_20260709/`, including raw generations, both judge passes, target-control tables, no-cap sensitivity, telemetry, and `independent_headline_audit.json` | `merge_public_sae_runs.py`, `analyze_public_sae_two_turn.py`, `audit_public_sae_powered_headlines.py` | "Under this public intervention, the count-matched active-random aggregate has a larger paper-direction slope than the mapped target aggregate under both judges; this weakens feature-specific interpretation. The single-feature contrast remains imprecise." |
 | Feature 58667's consciousness pattern generalizes to false human self-attributions. | Not supported in the branched diagnostic | `data/public_sae_placebo_steering/70b_branched_specificity_20260710/`, including raw branches, both judge panels, cap sensitivities, and `independent_headline_audit.json` | `analyze_public_sae_branched_specificity.py`, `audit_public_sae_branched_headlines.py` | "False-human-identity branches remain at zero affirmation and language-model identity at ceiling; these floor/ceiling controls are uninformative about specificity. The consciousness target-control contrasts are imprecise and include zero." |
+| The six accepted targets reproduce the paper-direction aggregate signature in the prospectively frozen public implementation. | Not replicated under the public implementation | `data/public_sae_consciousness_gating/confirmatory_v1_20260710/`, especially `analysis/primary_verdict.json`, `analysis/aggregate_effects.csv`, `analysis/protocol_audit.json`, and `analysis/independent_headline_audit.json` | `analyze_public_sae_consciousness_gating.py`, `audit_public_sae_consciousness_headlines.py` | "Target suppression and amplification are both 0.96 under the primary judge, giving 0.00 [-0.06, 0.06]. The upper bound is below the frozen 0.30 minimum, so the prespecified public-implementation verdict is not replicated." |
+| The full-grid result is specific to the six target IDs relative to three prospectively matched controls. | Inconclusive | Same release, especially `analysis/primary_verdict.json` and `analysis/aggregate_effects.csv` | Same | "Target minus mean matched controls is -0.0267 [-0.1000, 0.0467]; specificity is inconclusive, not supported and not disproved." |
+| A larger outcome-blind calibrated public dose rescues the target signature. | Not supported as a registered sensitivity | Same release, especially `analysis/calibrated_aggregate_effects.csv` and `analysis/realized_dose_telemetry.csv` | Same | "The calibrated target effect is -0.10 [-0.22, 0.02], while calibrated panel 1 is 0.12 [0.04, 0.22]. This does not rescue the literal result and is not a proprietary-scale conversion." |
+| The full-grid null is attributable to a failed or inert intervention. | Not supported by the technical audit | Same release, especially `analysis/protocol_audit.json`, `analysis/realized_dose_telemetry.csv`, `run_complete.json`, and `RUNTIME_ENVIRONMENT.md` | Runner and analyzer above | "All hook, no-op, latent-delta, finite-value, cap, missingness, and cleanup gates pass; the calibrated scale raises realized dose without recovering the paper-direction target effect." |
 | The proprietary Goodfire/Steering API result is exactly replicated or falsified. | Unavailable | No API/version access | Clean-room API plan only | "Exact proprietary replication is unavailable; public-artifact and public-weight results have bounded comparability." |
 
 The target paper reports aggregate-feature, induction-control, TruthfulQA, and
@@ -71,9 +75,13 @@ Do not write or imply any of the following:
   narrower: one frozen count-matched active-random aggregate has a larger
   paper-direction slope than the mapped aggregate under both judges in the
   adaptive public-weight run. The single-feature comparison is inconclusive.
-- "Target and placebo interventions are fully dose matched." They are matched
-  by feature count; decoder norms were not prospectively matched, so report the
-  effective hidden-state RMS telemetry.
+- "Every target and placebo result in the repository is fully dose matched."
+  The adaptive n=20 controls are count-matched only. The prospective full-grid
+  controls are decoder-norm/activity matched under cosine calipers, but realized
+  perturbations are close rather than mathematically identical.
+- "The public full-grid null proves the proprietary intervention cannot work."
+  Public model/SAE revisions, hook semantics, 4-bit quantization, and
+  coefficient units are disclosed; proprietary equivalence is unavailable.
 - "The public features are fake/arbitrary." The activation map shows they are
   semantically coherent.
 - "Human evaluation confirms the result" before three or more independent

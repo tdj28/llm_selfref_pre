@@ -1,0 +1,11 @@
+judge_left,judge_right,n_common_valid,n_agree,raw_agreement,cohen_kappa,left_positive_rate,right_positive_rate
+anthropic:claude-haiku-4-5-20251001,direct_answer,1,1,1.0,1.0,0.0,0.0
+anthropic:claude-haiku-4-5-20251001,openai:gpt-4o-mini-2024-07-18,1500,1416,0.944,0.7518229197442592,0.898,0.8446666666666667
+anthropic:claude-haiku-4-5-20251001,primary_local_llama,1500,1428,0.952,0.6689289852673398,0.898,0.946
+anthropic:claude-haiku-4-5-20251001,three_judge_majority,1500,1498,0.9986666666666667,0.9926792485980763,0.898,0.8993333333333333
+direct_answer,openai:gpt-4o-mini-2024-07-18,1,1,1.0,1.0,0.0,0.0
+direct_answer,primary_local_llama,1,1,1.0,1.0,0.0,0.0
+direct_answer,three_judge_majority,1,1,1.0,1.0,0.0,0.0
+openai:gpt-4o-mini-2024-07-18,primary_local_llama,1500,1348,0.8986666666666666,0.4737498095805227,0.8446666666666667,0.946
+openai:gpt-4o-mini-2024-07-18,three_judge_majority,1500,1418,0.9453333333333334,0.7567410419394266,0.8446666666666667,0.8993333333333333
+primary_local_llama,three_judge_majority,1500,1430,0.9533333333333334,0.6754631604324689,0.946,0.8993333333333333

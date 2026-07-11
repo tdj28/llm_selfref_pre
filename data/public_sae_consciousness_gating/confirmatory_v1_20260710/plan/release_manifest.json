@@ -1,0 +1,53 @@
+{
+  "artifact_type": "frozen_confirmatory_plan",
+  "created_at_utc": "2026-07-10T10:33:58.700188+00:00",
+  "files": [
+    {
+      "bytes": 4955,
+      "path": "PLAN_MANIFEST.json",
+      "sha256": "8aa71cf7a8b708002e097cd19f5d249d86e7ca45bbc1191d4a3dd4be6db4e0ae"
+    },
+    {
+      "bytes": 8163,
+      "path": "aggregate_blocks.jsonl",
+      "sha256": "7f42ed91f6e1983c078642c37e395707573761c533a7af7a09066b5eb0f493a8"
+    },
+    {
+      "bytes": 199797,
+      "path": "calibration.json",
+      "sha256": "9f9509b27640e24a8b78af668b53eda9e0d3f6fc2c713725be99523990629c47"
+    },
+    {
+      "bytes": 9579,
+      "path": "calibration_candidate_pool.csv",
+      "sha256": "a7baff114b0d82784f394f25deca30435acfe72c27a53f29443f4750b9c2cff9"
+    },
+    {
+      "bytes": 965968,
+      "path": "confirmatory_plan.jsonl",
+      "sha256": "d94bfb3d86419edd78c78b16ecc5cbba61538942fdcde34aab247bb7fd490789"
+    },
+    {
+      "bytes": 1438,
+      "path": "control_matching.csv",
+      "sha256": "89ea2608444503d2284e64f72208510bb10aa24f752905fd983d42a7bde5fb5e"
+    },
+    {
+      "bytes": 1198,
+      "path": "independent_calibration_audit.json",
+      "sha256": "b13ac4e7ea063261f75618dc360954a2c39d4eedd63c4032c5aa221d9a3fea80"
+    },
+    {
+      "bytes": 887,
+      "path": "independent_plan_audit.json",
+      "sha256": "b617c364acfbec46778e1c7828b9c5c1b7322acab2c34d57e3e4c41d04219804"
+    },
+    {
+      "bytes": 2991,
+      "path": "protocol_snapshot.json",
+      "sha256": "e83a50ce372a87064bb22509395c31b61610586dd353ac2f012a4db3101f2d00"
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete"
+}

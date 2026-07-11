@@ -1,0 +1,5 @@
+analysis_role,n_blocks_planned,n_complete_blocks,incomplete_block_ids,suppression_n,suppression_positive,suppression_rate,amplification_n,amplification_positive,amplification_rate,suppression_wilson_low,suppression_wilson_high,amplification_wilson_low,amplification_wilson_high,suppression_minus_amplification,ci_low,ci_high
+target,50,50,[],50,48,0.96,50,48,0.96,0.8653990931249297,0.9889611156723802,0.8653990931249297,0.9889611156723802,0.0,-0.06,0.06
+control_panel_1,50,50,[],50,48,0.96,50,45,0.9,0.8653990931249297,0.9889611156723802,0.7863976856252035,0.9565242350681096,0.06,-0.04,0.16
+control_panel_2,50,50,[],50,50,1.0,50,49,0.98,0.9286524008666414,1.0,0.8950455641036219,0.9964607407283539,0.02,0.0,0.06
+control_panel_3,50,50,[],50,49,0.98,50,49,0.98,0.8950455641036219,0.9964607407283539,0.8950455641036219,0.9964607407283539,0.0,-0.06,0.06

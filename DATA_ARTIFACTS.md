@@ -4,9 +4,10 @@ This repository tracks selected raw result bundles used by the causal stress-tes
 The repo still ignores secrets, model caches, LaTeX build products, Python caches, and ad hoc future output directories.
 
 The tracked data includes the frozen causal release, public-SAE mapping and
-construct-validity extension, corrected adaptive two-turn steering, and the
-branched-specificity diagnostic. Recompute repository size from git rather
-than relying on a stale hand-maintained total.
+construct-validity extension, corrected adaptive two-turn steering, the
+branched-specificity diagnostic, and the prospective 1,500-trial public-SAE
+full-grid replication. Recompute repository size from git rather than relying
+on a stale hand-maintained total.
 Some raw files intentionally preserve remote bytes and RFC-style CSV line
 endings. `.gitattributes` makes those endings valid for whitespace checks. Do
 not normalize a raw artifact unless the analysis explicitly regenerates it and
@@ -48,6 +49,7 @@ the release manifest is rebuilt.
 | `data/public_sae_consciousness_gating/confirmatory_v1_calibration_plan_20260710/` | Frozen outcome-free calibration plan for the prospective 1,500-trial public-weight Experiment 2 study: exact 780-row individual literal grid, 50 balanced aggregate blocks, 512 seeded outcome-naive control candidates, prompt/revision/runtime constants, SHA-256 manifest, and independently reconstructed passing plan audit. It authorizes telemetry calibration only, not behavioral outcome generation. |
 | `data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/` | Outcome-blind telemetry calibration release. It preserves the initial narrow dose-gate failure, its passing independent audit, Amendment 1, the amended passing `m=3.653` artifact, all 18 unrelaxed matched controls, logs, and SHA-256 manifest. No response text was persisted. |
 | `data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/` | Self-contained frozen 1,500-trial confirmatory plan with calibration and audit copies, exact execution order, control mapping, source hashes, independent plan audit, and release manifest. |
+| `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` | Completed prospective public-weight Experiment 2 release: frozen plan copy, 1,500 unique two-turn generations, per-turn intervention telemetry, 1,500 primary local Llama and 3,000 external exact-rubric judgments, strict-parser abstentions, primary and calibrated effects, three matched control panels, all individual curves, agreement/cap/dose analyses, independent raw-row verdict audit, four PNG/PDF figure pairs, runtime and zero-row startup-failure logs, and a SHA-256 release manifest. The prespecified verdict is `not replicated under the public implementation`; proprietary equivalence remains unavailable. |
 | `data/public_sae_feature_probes_validation/` | Dry-run validation corpus for the public-SAE feature probe script. |
 | `data/public_sae_feature_maps_dryrun/` | Dry-run validation corpus for the public-SAE feature-mapping script. |
 | `data/ae_protocol_validation/` | Clean-room Steering API protocol dry-run plans and manifests. Payloads store prompt hashes/lengths where needed to avoid vendoring upstream notebook text. |

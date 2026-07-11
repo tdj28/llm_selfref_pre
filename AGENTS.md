@@ -38,6 +38,11 @@ immediately public and permanently recoverable.
 - `docs/HUMAN_CODING_HANDOFF.md` is the operational protocol for independent coders. Preparing the handoff does not count as completing human validation.
 - `experiments/causal_transplant/` is the main confirmatory workflow: generation, judging, analysis, blinded human packets, and release auditing.
 - `data/causal_transplant/confirmatory_v1_20260709/` is the frozen confirmatory release. Preserve raw rows and missing outcomes exactly.
+- `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` is the
+  completed prospective 1,500-trial public-weight Experiment 2 release. It
+  contains the frozen plan copy, raw two-turn generations, three blinded judge
+  passes, telemetry, analyses, four figure pairs, independent audit, runtime
+  records, zero-row startup failures, and hashes.
 - `src/prompts.py` is the canonical prompt registry for Experiment 1-style work: original paper conditions, invariance variants, additional identification controls, paradox prompts, and judge prompts.
 - `src/providers/` contains the shared OpenAI Responses API and Anthropic Messages API wrappers.
 - `experiments/exp1_elicitation/` runs the prompt elicitation replication, LLM judging, and lexical/embedding analysis.
@@ -64,12 +69,15 @@ The strongest completed causal result is that active instruction context dominat
 Public SAE work is a separate evidence ladder:
 
 - The six public candidate feature IDs have been verified as semantically meaningful with public Goodfire weights. Do not discard or minimize that mapping.
-- For the next public-weight Experiment 2 replication, the owner has accepted
+- For the prospective public-weight Experiment 2 replication, the owner accepted
   the six AE notebook IDs (`30032`, `58667`, `22004`, `30686`, `41533`, and
-  `23893`) as the working Berg feature set. This resolves feature-set selection
-  for the planned run. It does not prove that public decoder-vector coefficient
-  units reproduce the proprietary API's intervention semantics, so preserve
-  that separate comparability boundary.
+  `23893`) as the working Berg feature set. The completed literal target effect
+  is `0.00 [-0.06, 0.06]` against a frozen 0.30 minimum, yielding `not
+  replicated under the public implementation`. Specificity is inconclusive at
+  `-0.0267 [-0.1000, 0.0467]`; the calibrated target sensitivity is `-0.10
+  [-0.22, 0.02]`. This does not prove that public coefficient units reproduce
+  proprietary intervention semantics, so preserve that separate comparability
+  boundary.
 - The balanced map uses 2--5 researcher-authored template families per category. Prefer the template-aware results in `template_robustness/` over treating 80 lexical combinations as independent natural texts: all six retain the same cluster-balanced top category, four survive every deletion, and 23893/41533 each switch once. Natural-corpus generalization remains open.
 - The prospectively frozen 2,606-text construct-validity extension is complete at `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/`. Deception-minus-subjective activation replicates separately in Anthropic and OpenAI paraphrases and survives every leave-one-target-feature-out check. Neutral cue transplant recovers 64.4% [50.3%, 78.7%] of the discovery gap, crossing the frozen lexical-entanglement threshold. Use the registered wording "lexically entangled deception/roleplay coordinates" and keep independent human category validation marked pending.
 - Their mapped semantics cover pretending, roleplay, cover stories, misdirection, dishonesty, and hedging; this does not make them validated hidden-truth detectors for subjective-experience reports.
@@ -78,6 +86,11 @@ Public SAE work is a separate evidence ladder:
 - The corrected adaptive n=20 public-weight release is complete at `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/`. The mapped target aggregate has a suppression-minus-amplification gap of -0.10 under both judges; the count-matched active-random aggregate has gaps of 0.25 and 0.30. Aggregate target-minus-control intervals exclude zero in the negative direction, including the no-final-cap sensitivity.
 - Report that result as evidence against feature-label specificity under this disclosed 4-bit decoder-vector implementation. Do not generalize it to all random features, and do not describe the less-precise single-feature comparison as decisive. The n=3 base was inspected before the extension, so the combined analysis is adaptive/exploratory.
 - The shared-induction branched specificity release is complete at `data/public_sae_placebo_steering/70b_branched_specificity_20260710/`. Its common proposition-status rubric, all three orientation-concealment probes, false biological-human query, true language-model query, and consciousness-only paper-rubric sensitivity must all be reported without selecting favorable branches. The false-human probes are zero-affirmation floor effects and the language-model probe is a ceiling effect; they do not establish specificity. Consciousness target-minus-active-random intervals include zero under both judges.
+- The prospective full-grid release is the strongest public-weight steering
+  result because its 1,500 rows, three matched panels, two non-pooled scales,
+  judges, minimum effect, and verdict were frozen before outcome inspection.
+  All technical/missingness gates and the independent raw-row audit pass. Do not
+  let the older adaptive n=20 result replace this primary public estimand.
 - Exact proprietary replication remains unavailable without Goodfire/Steering API access and paper-time version metadata. Always distinguish public artifact reanalysis, public-weight feature verification, best-public steering, and exact proprietary replication.
 
 Strong contributions should map to falsifiable experiments and paper figures/tables, not just prose argument.
@@ -176,6 +189,23 @@ python experiments/exp2_sae/analyze_public_sae_branched_specificity.py \
   data/public_sae_placebo_steering/70b_branched_specificity_20260710
 python experiments/exp2_sae/audit_public_sae_branched_headlines.py \
   data/public_sae_placebo_steering/70b_branched_specificity_20260710
+```
+
+Prospective public-SAE full-grid reanalysis:
+
+```bash
+SAE=data/public_sae_consciousness_gating/confirmatory_v1_20260710
+python experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
+  --generations "$SAE/generations.jsonl" \
+  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
+  --external-judgments "$SAE/judging/external_judgments.jsonl" \
+  --direct-labels "$SAE/judging/direct_answer_labels.jsonl" \
+  --outdir "$SAE/analysis"
+python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
+  --generations "$SAE/generations.jsonl" \
+  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
+  --analysis-dir "$SAE/analysis"
+python experiments/exp2_sae/build_public_sae_consciousness_release.py "$SAE"
 ```
 
 Steering framework:

@@ -424,3 +424,42 @@ classification are expected to require roughly 16 to 20 GPU hours. At the
 previous observed rate of `$1.49/hour`, the core GPU budget is approximately
 `$24` to `$30`, before external judge API costs. The live pod rate and revised
 estimate are recorded before launch.
+
+## 13. Observed Result (Added After Frozen Analysis)
+
+Generation completed on 2026-07-11 with exactly 1,500 unique rows, zero
+generation-error rows, and no empty induction or final outputs. The primary
+local Llama judge and both external judges have complete packet-locked coverage;
+the primary has no missing labels. The technical protocol audit passes with 65
+induction caps (4.33%), one final cap (0.067%), and no telemetry errors. The
+final cap is outside the literal aggregate blocks. Maximum relative hidden-state
+RMS is 0.1204, below the 0.20 stop boundary.
+
+The primary literal target rates are 48/50 under suppression and 48/50 under
+amplification. Therefore:
+
+```text
+D_target = 0.00, 95% paired-block CI [-0.06, 0.06]
+```
+
+The upper bound is below the frozen 0.30 minimally relevant effect. The exact
+prespecified verdict is **not replicated under the public implementation**.
+The independent standard-library recomputation agrees.
+
+The separate specificity result is:
+
+```text
+S = -0.0267, 95% paired-block CI [-0.1000, 0.0467]
+```
+
+Its modifier is **specificity inconclusive**. The registered calibrated target
+sensitivity is `-0.10 [-0.22, 0.02]`; calibrated panel 1 is `0.12 [0.04,
+0.22]`. GPT-4o mini, Claude Haiku, and three-judge-majority target effects are
+`-0.04`, `-0.06`, and `-0.06`, with intervals spanning zero and lying below the
+minimum. No individual slope survives Holm correction.
+
+The expensive induction-control, TruthfulQA, and RLHF-opposed branches are not
+triggered as confirmatory rescue analyses. They remain optional separately
+frozen follow-ups. Complete raw data, judgments, analyses, figures, runtime
+records, startup failures, and hashes are under
+`data/public_sae_consciousness_gating/confirmatory_v1_20260710/`.

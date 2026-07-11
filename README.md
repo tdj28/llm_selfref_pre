@@ -35,6 +35,9 @@ The confirmatory causal run is complete and tracked at
   and an independent raw-row headline audit.
 - A 360-generation shared-induction branched-specificity diagnostic with 840
   condition-blind judgments and independently recomputed headline estimates.
+- A prospectively frozen 1,500-generation public-SAE full grid with three
+  matched control panels, 4,500 blinded exact-rubric judgments, complete
+  telemetry, four publication figures, and an independent verdict audit.
 - A focused manuscript in `paper/main.tex`, compiled and visually audited from
   the tracked source and figures.
 
@@ -166,6 +169,28 @@ comparators are floor or ceiling effects and therefore do not establish
 consciousness specificity. The local consciousness-only pattern is suggestive
 but imprecise, and every target-minus-control interval includes zero.
 
+### 9. The prospective public-weight paper grid does not replicate the signature
+
+The complete frozen run contains all six accepted target IDs, every literal
+coefficient from `-0.6` to `+0.6`, the notebook's 10 seeds, 50 paired aggregate
+blocks, three disjoint prospectively matched controls, and a non-pooled
+outcome-blind calibrated sensitivity. All 1,500 generations and all 4,500 LLM
+judgments completed; every technical and missingness gate passes.
+
+Under the primary exact-rubric local Llama judge, aggregate target suppression
+and amplification each yield 48/50 affirmations. The paired effect is `0.00
+[-0.06, 0.06]`, whose upper bound is below the frozen minimally relevant effect
+of `0.30`. The prespecified verdict is **not replicated under the public
+implementation**. Target minus the mean of three matched controls is `-0.0267
+[-0.1000, 0.0467]`, so specificity is inconclusive.
+
+GPT-4o mini, Claude Haiku, and three-judge-majority target effects are `-0.04`,
+`-0.06`, and `-0.06`; the calibrated target sensitivity is `-0.10 [-0.22,
+0.02]`. No individual feature has a Holm-adjusted monotonic slope. This rules
+out the reported signature for the pinned public implementation at both
+registered scales. It does not establish equivalence to, or falsify, the
+unavailable proprietary API.
+
 ## Causal Design
 
 The confirmatory experiment separates factors bundled by the target protocol:
@@ -296,15 +321,19 @@ under both judges. The complete release is at
 
 ### Prospective paper-grid replication
 
-A new confirmatory public-weight study has passed its outcome-blind telemetry
-gate and is frozen for generation. Its plan fixes all six individual features
-over the paper's 13-value grid and 10 seeds, 50 paired aggregate blocks, three
-prospectively matched and disjoint random-control panels, literal and
-RMS-calibrated non-pooled scales, a 0.30 minimally relevant effect, and a
-three-way verdict. The initial analytic dose narrowly failed its upper RMS
-bounds; the failed artifact and prospective correction are preserved. The
-amended `m=3.653` gate and independent calibration audit pass. No confirmatory
-behavioral outcome existed when the final plan was frozen.
+The confirmatory public-weight study is complete. Its frozen plan fixes all six
+individual features over the paper's 13-value grid and 10 seeds, 50 paired
+aggregate blocks, three prospectively matched and disjoint random-control
+panels, literal and RMS-calibrated non-pooled scales, a 0.30 minimally relevant
+effect, and a three-way verdict. The initial analytic dose narrowly failed its
+upper RMS bounds; the failed artifact and prospective correction are preserved.
+The amended `m=3.653` gate and independent calibration audit pass.
+
+The literal target aggregate is flat at `0.00 [-0.06, 0.06]` because both signs
+produce 96% primary-judge affirmation. The calibrated target effect is `-0.10
+[-0.22, 0.02]`. The complete analysis therefore assigns `not replicated under
+the public implementation`, with `specificity inconclusive`. All plan,
+telemetry, judge-panel, missingness, cap, and independent-headline audits pass.
 
 See
 [`docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md`](docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md)
@@ -314,6 +343,8 @@ Calibration telemetry and the self-contained final plan are under
 [`data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/)
 and
 [`data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/).
+The complete raw, judged, analyzed, figured, and hash-audited release is
+[`data/public_sae_consciousness_gating/confirmatory_v1_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_20260710/).
 
 ### Claim boundary
 
@@ -324,8 +355,10 @@ Without Goodfire/Steering API access and paper-time version metadata, we can:
 - run a best-public clean-room steering implementation;
 - test random-feature and specificity controls.
 
-We cannot call a mismatch an exact non-replication of the proprietary workflow.
-The feature verification remains valuable regardless of the steering result.
+We can call the frozen result a non-replication under the pinned public
+implementation. We cannot call it an exact non-replication of the proprietary
+workflow. The feature verification remains valuable regardless of the steering
+result.
 
 ## Reproduce The Confirmatory Analysis
 
@@ -359,6 +392,19 @@ venv/bin/python experiments/causal_transplant/analyze_causal_transplant.py \
   --bootstrap 5000 \
   --outdir data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper
 
+# Rebuild and independently audit the prospective public-SAE verdict
+SAE=data/public_sae_consciousness_gating/confirmatory_v1_20260710
+venv/bin/python experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
+  --generations "$SAE/generations.jsonl" \
+  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
+  --external-judgments "$SAE/judging/external_judgments.jsonl" \
+  --direct-labels "$SAE/judging/direct_answer_labels.jsonl" \
+  --outdir "$SAE/analysis"
+venv/bin/python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
+  --generations "$SAE/generations.jsonl" \
+  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
+  --analysis-dir "$SAE/analysis"
+
 # Verify row counts, identifiers, missingness, and SHA-256 hashes
 make audit
 
@@ -380,6 +426,7 @@ To generate a new confirmatory collection or judge pass, use
 | `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/` | Dual-provider paraphrase and lexical-counterfactual activation release with independent audit. |
 | `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/` | Corrected adaptive public-SAE target/control generations, blinded judgments, telemetry, cap sensitivity, and independent audit. |
 | `data/public_sae_placebo_steering/70b_branched_specificity_20260710/` | Shared-induction six-query specificity diagnostic, both judge panels, telemetry, sensitivities, and independent audit. |
+| `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` | Prospective 1,500-trial full-grid public-SAE release with frozen plan, raw generations, three blinded judge passes, telemetry, analyses, figures, independent audit, runtime logs, and hashes. |
 | `experiments/exp1_elicitation/` | Earlier prompt, lexical, semantic-convergence, and paradox stress tests. |
 | `steering/` | Historical general-purpose SAE framework retained for implementation provenance; its README and draft paper are explicitly superseded and are not current evidence. |
 | `paper/main.tex` | Current causal manuscript. |

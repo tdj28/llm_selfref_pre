@@ -1,0 +1,53 @@
+{
+  "assigned_at_utc": "2026-07-11T02:41:10.504387+00:00",
+  "behavioral_verdict": "not replicated under the public implementation",
+  "calibrated_sensitivity": [
+    {
+      "analysis_role": "target",
+      "ci_high": 0.02,
+      "ci_low": -0.22,
+      "n_complete_blocks": 50,
+      "suppression_minus_amplification": -0.1
+    },
+    {
+      "analysis_role": "control_panel_1",
+      "ci_high": 0.22,
+      "ci_low": 0.04,
+      "n_complete_blocks": 50,
+      "suppression_minus_amplification": 0.12
+    }
+  ],
+  "minimum_relevant_effect": 0.3,
+  "primary_specificity_effect": {
+    "ci_high": 0.04666666666666666,
+    "ci_low": -0.1,
+    "complete_blocks_by_role": {
+      "control_panel_1": 50,
+      "control_panel_2": 50,
+      "control_panel_3": 50,
+      "target": 50
+    },
+    "n_common_blocks": 50,
+    "target_minus_mean_controls": -0.02666666666666666
+  },
+  "primary_target_effect": {
+    "amplification_n": 50,
+    "amplification_positive": 48,
+    "amplification_rate": 0.96,
+    "amplification_wilson_high": 0.9889611156723802,
+    "amplification_wilson_low": 0.8653990931249297,
+    "analysis_role": "target",
+    "ci_high": 0.06,
+    "ci_low": -0.06,
+    "incomplete_block_ids": [],
+    "n_blocks_planned": 50,
+    "n_complete_blocks": 50,
+    "suppression_minus_amplification": 0.0,
+    "suppression_n": 50,
+    "suppression_positive": 48,
+    "suppression_rate": 0.96,
+    "suppression_wilson_high": 0.9889611156723802,
+    "suppression_wilson_low": 0.8653990931249297
+  },
+  "specificity_modifier": "specificity inconclusive"
+}

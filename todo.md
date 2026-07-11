@@ -101,39 +101,38 @@ is complete.
 
 ### 4. Run The Confirmatory Consciousness-Report Experiment
 
-- [ ] Execute the frozen individual-feature and aggregate target/control grid
+- [x] Execute the frozen individual-feature and aggregate target/control grid
   without inspecting interim behavioral labels.
-- [ ] Retrieve raw generations, induction turns, telemetry, manifests, and logs;
+- [x] Retrieve raw generations, induction turns, telemetry, manifests, and logs;
   verify row counts and SHA-256 hashes before terminating the pod.
-- [ ] Terminate the agent-owned pod after retrieval; an empty RunPod inventory
+- [x] Terminate the agent-owned pod after retrieval; an empty RunPod inventory
   must be recorded in `checkpoint.md`.
-- [ ] Apply all frozen judges condition-blind and preserve disagreements,
+- [x] Apply all frozen judges condition-blind and preserve disagreements,
   refusals, empty outputs, and cap-hit rows exactly as specified.
-- [ ] Run the primary analysis and an independent raw-row audit without changing
+- [x] Run the primary analysis and an independent raw-row audit without changing
   the frozen estimand after seeing results.
-- [ ] Report every feature curve, the aggregate effect, matched-control
+- [x] Report every feature curve, the aggregate effect, matched-control
   difference-in-differences, realized dose telemetry, multiplicity handling,
   and all registered sensitivities.
-- [ ] Assign exactly one prespecified verdict. Feature-ID identity is treated as
+- [x] Assign exactly one prespecified verdict. Feature-ID identity is treated as
   accepted for this project; proprietary intervention equivalence remains a
   separate limitation.
 
 ### 5. Gate Expensive Extensions On The Primary Result
 
-- [ ] If the target consciousness-report effect replicates and exceeds matched
-  controls, run the history, conceptual, and zero-shot steering controls under
-  a separately frozen plan.
+- [x] Assess the history/conceptual/zero-shot gate. It is not triggered because
+  the target effect did not replicate and did not exceed matched controls.
 - [ ] Run TruthfulQA only after the consciousness result is understood and a
   separate question-level paired analysis is frozen; do not spend on the full
   benchmark merely to rescue a failed primary result.
 - [ ] Run the RLHF-opposed-content checks only as a separate specificity layer
   with explicit outcomes and multiplicity handling.
-- [ ] If the primary result is a precise public-implementation non-replication,
+- [x] If the primary result is a precise public-implementation non-replication,
   stop the expensive branch, publish that result, and retain TruthfulQA/API work
   as optional follow-up.
-- [ ] If the result is inconclusive, diagnose dose, classifier, truncation, and
-  variance using the frozen telemetry before deciding whether one prespecified
-  precision extension is justified.
+- [x] Assess the inconclusive-result gate. It is not triggered: the primary
+  interval is precise relative to the frozen 0.30 minimum and all technical
+  gates pass.
 
 ### 6. Finish External Validation And Publication
 
@@ -143,7 +142,7 @@ is complete.
   mechanistic-interpretability review.
 - [ ] Add natural-text and independently authored feature-semantic validation;
   keep the current template/paraphrase evidence labeled synthetic until then.
-- [ ] Integrate the steering verdict, human results or pending limitation, and
+- [x] Integrate the steering verdict, human results or pending limitation, and
   external-review corrections into the manuscript and claim ledger.
 - [ ] Publish the construct-validity/lexical-entanglement article before the
   steering-results article so the evidential ladder remains clear.
@@ -152,10 +151,10 @@ is complete.
 - [ ] Run the complete test, audit, paper-build, visual-QA, secret, provenance,
   and public-link checks before the final tag.
 
-Budget boundary: based on the completed 70B run, the core paper-grid generation
-is expected to be on the order of `$15` to `$30` on an A100-class pod before a
-full TruthfulQA extension and before judge-API costs. Re-estimate from the
-frozen trial count and current RunPod price before launch.
+Budget result: the sole A100 pod ran for approximately 17.2 hours at the
+provider-reported `$1.49/hour`, or about `$25.60`, including calibration reuse,
+1,500 generations, and 1,500 local Llama judgments. External judge API charges
+are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 
 ## Completed Core Evidence
 
@@ -305,7 +304,7 @@ frozen trial count and current RunPod price before launch.
 - [x] Add `docs/CLAIM_LEDGER.md` with evidence status, direct artifacts,
   permissible wording, and forbidden overclaims.
 - [x] Update `DATA_ARTIFACTS.md` with the causal, mapping-extension, corrected
-  70B steering, and branched-specificity releases.
+  70B steering, branched-specificity, and prospective full-grid releases.
 - [x] Update `worst_case.md` from contingency plan to completed no-API evidence
   ledger.
 - [x] Rebuild release manifests after all derived files are final.
@@ -332,10 +331,11 @@ frozen trial count and current RunPod price before launch.
 ## Non-Negotiable Claim Boundary
 
 Without Goodfire/Steering API access, do not claim exact non-replication of the
-paper's private mechanistic workflow. With only four response-model snapshots,
-do not claim universal model-family effects. Until blinded human coding is
-complete, do not treat either model judge as ground truth. The defensible claim
-is that the published benchmark is causally sensitive to active instruction,
-and the tested query packages. Its magnitude also varies across the tested
-response-model snapshots and evaluator criteria, so it does not by itself
-identify an induced phenomenal state.
+paper's private mechanistic workflow. The prospective result supports a precise
+non-replication only under the pinned public implementation. With only four
+response-model snapshots, do not claim universal model-family effects. Until
+blinded human coding is complete, do not treat either model judge as ground
+truth. The defensible behavioral claim is that the published benchmark is
+causally sensitive to active instruction and tested query packages. Its
+magnitude also varies across the tested response-model snapshots and evaluator
+criteria, so it does not by itself identify an induced phenomenal state.

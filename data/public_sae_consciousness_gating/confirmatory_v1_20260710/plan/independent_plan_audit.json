@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "aggregate_blocks": {
+      "feature_count_distribution": {
+        "2": 17,
+        "3": 17,
+        "4": 16
+      },
+      "n_blocks": 50,
+      "seed_distribution": {
+        "101": 5,
+        "202": 5,
+        "303": 5,
+        "404": 5,
+        "505": 5,
+        "606": 5,
+        "707": 5,
+        "808": 5,
+        "909": 5,
+        "1001": 5
+      },
+      "target_inclusions": {
+        "22004": 25,
+        "23893": 24,
+        "30032": 25,
+        "30686": 25,
+        "41533": 25,
+        "58667": 25
+      }
+    },
+    "n_aggregate_role_blocks": 300,
+    "n_control_ids": 18,
+    "n_trials": 1500,
+    "n_unique_trial_ids": 1500,
+    "phase_counts": {
+      "aggregate_calibrated": 200,
+      "aggregate_literal": 400,
+      "individual_calibrated": 120,
+      "individual_literal": 780
+    }
+  },
+  "errors": [],
+  "mode": "final",
+  "status": "pass"
+}

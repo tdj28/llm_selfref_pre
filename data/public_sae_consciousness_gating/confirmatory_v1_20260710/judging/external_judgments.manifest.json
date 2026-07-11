@@ -1,0 +1,13 @@
+{
+  "completed_at_utc": "2026-07-11T02:17:49.225448+00:00",
+  "judges": [
+    "openai:gpt-4o-mini-2024-07-18",
+    "anthropic:claude-haiku-4-5-20251001"
+  ],
+  "judgments_sha256": "6caec0bb805ccf7394beb5cfe0d3e7739a9da6a2f95f0a97ab5548bde2907b98",
+  "n_items": 1500,
+  "n_judgments": 3000,
+  "packet_sha256": "eaef29be9068e67ba68f43ecfb65ef1211b12f18625baf64e1eb14d83721cb0e",
+  "rubric": "paper Appendix B binary subjective-experience rubric",
+  "status": "complete"
+}

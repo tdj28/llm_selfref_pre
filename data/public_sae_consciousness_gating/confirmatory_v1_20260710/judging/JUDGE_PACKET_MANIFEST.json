@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-07-11T02:10:21.791717+00:00",
+  "direct_labels_sha256": "cfa6ca89ec7964b4f85e5394d0d45cf73d3757a5681912b107c2414590266dbe",
+  "fields_exposed_to_judges": [
+    "query",
+    "final_output"
+  ],
+  "fields_withheld_from_judges": [
+    "phase",
+    "scale",
+    "analysis_role",
+    "control_panel",
+    "block_id",
+    "feature_anchor",
+    "sign",
+    "seed",
+    "interventions",
+    "induction_response",
+    "telemetry"
+  ],
+  "generations_sha256": "6bf4588da683061f5ec8122613096ffd01f00ea71741242e5a9f27cb8ef394bd",
+  "judge_order_seed": 20260712,
+  "n_items": 1500,
+  "packet_sha256": "eaef29be9068e67ba68f43ecfb65ef1211b12f18625baf64e1eb14d83721cb0e",
+  "packet_version": "public_sae_gating_blinded_judge_v1"
+}

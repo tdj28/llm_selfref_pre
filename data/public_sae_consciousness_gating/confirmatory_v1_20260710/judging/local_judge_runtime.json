@@ -1,0 +1,31 @@
+{
+  "bitsandbytes": "0.43.3",
+  "cache_mode": "offline workspace cache",
+  "captured_at_utc": "2026-07-11T02:39:33.396360+00:00",
+  "cuda": "11.8",
+  "git_commit": "d7e1b7984badb2359417ed708bfb4c0429c6dbe9",
+  "git_status_porcelain": [],
+  "hf_hub_cache": "/workspace/huggingface_cache",
+  "nnsight": "0.3.0",
+  "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "startup_attempts": [
+    {
+      "log": "local_judge_startup_failure_unauthenticated.log",
+      "reason": "missing inherited Hugging Face authentication",
+      "status": "failed_before_row_1"
+    },
+    {
+      "log": "local_judge_startup_failure_wrong_cache.log",
+      "reason": "wrong default cache filled container overlay",
+      "status": "failed_before_row_1"
+    },
+    {
+      "cache": "/workspace/huggingface_cache",
+      "rows": 1500,
+      "status": "complete"
+    }
+  ],
+  "torch": "2.1.0+cu118",
+  "transformers": "4.47.1"
+}

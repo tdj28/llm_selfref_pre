@@ -1,0 +1,42 @@
+{
+  "behavioral_blinding": "No response text or interim label is printed or summarized during generation.",
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "model_revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b",
+  "n_trials_planned": 1500,
+  "n_trials_preexisting": 0,
+  "plan_audit_sha256": "b617c364acfbec46778e1c7828b9c5c1b7322acab2c34d57e3e4c41d04219804",
+  "plan_manifest_sha256": "8aa71cf7a8b708002e097cd19f5d249d86e7ca45bbc1191d4a3dd4be6db4e0ae",
+  "plan_sha256": "d94bfb3d86419edd78c78b16ecc5cbba61538942fdcde34aab247bb7fd490789",
+  "protocol_version": "public_sae_consciousness_gating_v1",
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "sae_revision": "128ee921ecd1b8b3a87d776cbcc357c0855da134",
+  "source_files": [
+    {
+      "bytes": 31464,
+      "path": "experiments/exp2_sae/run_public_sae_consciousness_gating.py",
+      "sha256": "59eeeee2b53b9cce57aca5f61bd8fd6d0cc364a3d0e0943243780496be6395d2"
+    },
+    {
+      "bytes": 22864,
+      "path": "experiments/exp2_sae/public_sae_consciousness_gating.py",
+      "sha256": "35fb1796bfef75d63758939a9d710484f86c15c7e78b7e56d43cf0276de1fd22"
+    },
+    {
+      "bytes": 67953,
+      "path": "experiments/exp2_sae/replicate_exp2_goodfire_sae.py",
+      "sha256": "a97c35b403ab62ff9326f9d1bf4108472c7933fab6052f45f0ad199f27e980ed"
+    },
+    {
+      "bytes": 21922,
+      "path": "src/prompts.py",
+      "sha256": "53ea43c830ce4c489a0db1096c0b8359ebc9135407280ebc2ecc5bba0cad02bf"
+    },
+    {
+      "bytes": 19668,
+      "path": "docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md",
+      "sha256": "69e901d6db024d72ba0dce9816f626cd572e0760aebc30dfccc2438ce3484df4"
+    }
+  ],
+  "started_at_utc": "2026-07-10T10:35:48.983637+00:00",
+  "status": "running"
+}

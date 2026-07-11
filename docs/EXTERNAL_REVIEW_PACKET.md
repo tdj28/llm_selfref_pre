@@ -18,6 +18,10 @@ missing sensitivity analyses with file/table references.
   `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/`.
 - Branched specificity protocol:
   `experiments/exp2_sae/BRANCHED_SPECIFICITY_PROTOCOL.md`.
+- Prospective full-grid protocol:
+  `docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md`.
+- Prospective full-grid release:
+  `data/public_sae_consciousness_gating/confirmatory_v1_20260710/`.
 
 The central claim is deliberately limited: the published report endpoint is
 causally sensitive to active instruction and the tested query packages. Effect
@@ -27,7 +31,11 @@ identify a self-reference-specific phenomenal state. Exact proprietary
 Goodfire API replication is not claimed. In the adaptive best-public steering
 analysis, the active-random aggregate has a larger paper-direction slope than
 the mapped target aggregate under both judges; this is a public-implementation
-specificity result, not a proprietary non-replication.
+specificity result, not a proprietary non-replication. In the prospectively
+frozen 1,500-trial public implementation, the target aggregate effect is `0.00
+[-0.06, 0.06]` against a frozen 0.30 minimum, yielding `not replicated under
+the public implementation`; specificity is inconclusive at `-0.0267 [-0.1000,
+0.0467]`. Exact proprietary equivalence remains unavailable.
 
 ## Statistics And Causal Inference Review
 
@@ -51,6 +59,11 @@ Please audit:
    independent raw-row check is
    `independent_point_estimate_audit.json`; it validates point estimates, not
    interval code.
+9. Whether the full-grid paired-block bootstrap, 0.30 minimally relevant
+   effect, three-way verdict, separate specificity modifier, Holm correction,
+   missingness gates, and cap sensitivities implement the frozen protocol.
+10. Whether the independently implemented 100,000-draw headline audit provides
+    an adequate cross-check despite using a distinct random-number generator.
 
 ## Mechanistic Interpretability Review
 
@@ -64,9 +77,9 @@ Please audit:
    steering.
 4. The comparability limits introduced by 4-bit quantization and unknown
    proprietary API normalization/clamping/scaling.
-5. Whether target and active-random controls are adequately matched by feature
-   count and effective hidden-state perturbation; identify any need for
-   decoder-norm matching.
+5. Whether the adaptive count-matched controls and the later three disjoint
+   decoder-norm/activity-matched full-grid panels are described distinctly, and
+   whether residual realized-dose differences limit the specificity estimate.
 6. Whether hook-call, no-op, latent-delta, perturbation, cleanup, and token-cap
    telemetry are sufficient technical positive controls.
 7. Whether the adaptive `n=20` behavioral analysis and Jeffreys-Beta contrast
@@ -83,6 +96,14 @@ Please audit:
     researcher-authored template families as clusters, reports the two
     leave-one-template label switches, and avoids implying natural-corpus
     generalization.
+11. Whether the full-grid literal and calibrated interventions are technically
+    effective given the per-turn RMS, latent-delta, no-op, mask, and cleanup
+    telemetry, and whether the negative calibrated target sensitivity rules out
+    a simple under-dosing explanation under this implementation.
+12. Whether any aspect of the 4-bit model, residual-restoring decoder-vector
+    intervention, or local-Llama classifier could plausibly explain the
+    difference from the proprietary report without weakening the bounded public
+    non-replication verdict.
 
 ## Requested Review Format
 

@@ -19,3 +19,15 @@ The same outcome-blind hardening renders a judge sensitivity as `NA` when the
 strict direct-answer parser has no complete paired blocks, rather than passing
 nonfinite bounds to Matplotlib. Missing direct-parser estimates remain missing;
 they are not imputed and do not affect the primary judge.
+
+## Post-analysis visual QA
+
+Date: 2026-07-11
+
+After the frozen analysis and independent headline audit passed, visual QA of
+the real-data figures found two presentation-only defects. The aggregate-panel
+legend covered the paper's 0.16 amplification reference point, and the two
+direct-parser `NA` markers sat too close to the lower axis. The legend was moved
+to empty plot space, the missing markers were inset slightly, and the judge
+panel received an explicit vertical margin. No data, label, interval, estimate,
+threshold, verdict, or analysis file changed.

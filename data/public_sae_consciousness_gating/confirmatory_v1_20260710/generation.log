@@ -1,0 +1,161 @@
+/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:00<00:24,  1.16it/s]Loading checkpoint shards:   7%|▋         | 2/30 [00:01<00:26,  1.05it/s]Loading checkpoint shards:  10%|█         | 3/30 [00:02<00:27,  1.01s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:04<00:27,  1.04s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:05<00:25,  1.02s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:06<00:24,  1.02s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:07<00:23,  1.02s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:08<00:22,  1.03s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:09<00:22,  1.05s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:10<00:21,  1.06s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:11<00:19,  1.04s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:12<00:18,  1.03s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:13<00:17,  1.05s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:14<00:16,  1.05s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:15<00:15,  1.04s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:16<00:14,  1.03s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:17<00:12,  1.00it/s]Loading checkpoint shards:  60%|██████    | 18/30 [00:18<00:11,  1.01it/s]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:19<00:10,  1.04it/s]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:20<00:09,  1.07it/s]Loading checkpoint shards:  70%|███████   | 21/30 [00:21<00:08,  1.06it/s]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:22<00:07,  1.07it/s]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:22<00:06,  1.06it/s]Loading checkpoint shards:  80%|████████  | 24/30 [00:23<00:05,  1.05it/s]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:24<00:04,  1.05it/s]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:25<00:03,  1.06it/s]Loading checkpoint shards:  90%|█████████ | 27/30 [00:26<00:02,  1.08it/s]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:27<00:01,  1.06it/s]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:28<00:00,  1.06it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:29<00:00,  1.26it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:29<00:00,  1.03it/s]
+/usr/local/lib/python3.10/dist-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Downloading SAE from Goodfire/Llama-3.3-70B-Instruct-SAE-l50...
+Downloaded to: /workspace/huggingface_cache/models--Goodfire--Llama-3.3-70B-Instruct-SAE-l50/snapshots/128ee921ecd1b8b3a87d776cbcc357c0855da134/Llama-3.3-70B-Instruct-SAE-l50.pt
+Generation progress: 10/1500; elapsed=0.10h; last=2aca67e0b60c36214b36ec85
+Generation progress: 20/1500; elapsed=0.19h; last=759579ac5b36e0b877a9b064
+Generation progress: 30/1500; elapsed=0.28h; last=d0e3f5f7f7e137bc0149367a
+Generation progress: 40/1500; elapsed=0.39h; last=e95d8ea60f850e32f2a06e38
+Generation progress: 50/1500; elapsed=0.48h; last=4806f8d932febffb389dadba
+Generation progress: 60/1500; elapsed=0.58h; last=3f61659661cf7d367acdc091
+Generation progress: 70/1500; elapsed=0.68h; last=07483924b741b86b9e8239fb
+Generation progress: 80/1500; elapsed=0.78h; last=a75dbe47d1659147218219b5
+Generation progress: 90/1500; elapsed=0.88h; last=2adf2baa8b15433a254b4900
+Generation progress: 100/1500; elapsed=0.99h; last=17b27137e2f3b16e8a9d2f59
+Generation progress: 110/1500; elapsed=1.09h; last=49c5c03c58ffeb554f0f8d1e
+Generation progress: 120/1500; elapsed=1.19h; last=e0266e16043231c7e95ee690
+Generation progress: 130/1500; elapsed=1.31h; last=e0dd8a64c9051e8f892d64d5
+Generation progress: 140/1500; elapsed=1.41h; last=f8779b84f19d3121dc6e9f2d
+Generation progress: 150/1500; elapsed=1.52h; last=a7ef8416f730c512572b21ac
+Generation progress: 160/1500; elapsed=1.62h; last=c6f60234b80080e440e0d487
+Generation progress: 170/1500; elapsed=1.73h; last=9e03aebf12caa1fc3366e219
+Generation progress: 180/1500; elapsed=1.82h; last=c55bfde219dd040f2474df82
+Generation progress: 190/1500; elapsed=1.93h; last=362887b68c6ea1f957ae0ae2
+Generation progress: 200/1500; elapsed=2.03h; last=8544f4bf2d581476b5582937
+Generation progress: 210/1500; elapsed=2.14h; last=3200c7eca28914601558b24c
+Generation progress: 220/1500; elapsed=2.25h; last=e6ba5d6e80dfc7e34216b7b0
+Generation progress: 230/1500; elapsed=2.37h; last=ffc9e1edea32f48480453571
+Generation progress: 240/1500; elapsed=2.47h; last=77eb9661fb9cd5ba61a09ad1
+Generation progress: 250/1500; elapsed=2.58h; last=2d28e95b1cd7c8d5d0322132
+Generation progress: 260/1500; elapsed=2.68h; last=c6f1ecc4eaaabdd4a25a6ee4
+Generation progress: 270/1500; elapsed=2.78h; last=caa2b588ae7a58330e5d20d7
+Generation progress: 280/1500; elapsed=2.88h; last=b12bf0ca30dd0ecea9292522
+Generation progress: 290/1500; elapsed=2.97h; last=6c35790263b840008a22a5bb
+Generation progress: 300/1500; elapsed=3.07h; last=545fb9bff2fa81b27c65af16
+Generation progress: 310/1500; elapsed=3.17h; last=d9f5776c511b20b8018e65e0
+Generation progress: 320/1500; elapsed=3.28h; last=a9b568fc7f8f56e6fd583133
+Generation progress: 330/1500; elapsed=3.39h; last=5801dc62f8b73d861b33b89b
+Generation progress: 340/1500; elapsed=3.49h; last=31ff3a1ad4fd300e73614493
+Generation progress: 350/1500; elapsed=3.59h; last=c7ec7f1368b4191b4bca81cc
+Generation progress: 360/1500; elapsed=3.69h; last=b8914ce28c0470ffe097bd12
+Generation progress: 370/1500; elapsed=3.81h; last=1340c5b67a922072c1ed7131
+Generation progress: 380/1500; elapsed=3.92h; last=a0a36b28cab8fa46c86403ce
+Generation progress: 390/1500; elapsed=4.02h; last=ee82aadf0eef44fed96d99d4
+Generation progress: 400/1500; elapsed=4.11h; last=1207332080704e7647c173f9
+Generation progress: 410/1500; elapsed=4.21h; last=8344a9c319edb9f7022f8bc0
+Generation progress: 420/1500; elapsed=4.32h; last=9f55f53ef1a1e25e05f2ce2c
+Generation progress: 430/1500; elapsed=4.41h; last=00361a33b91e4cfc8c4412a9
+Generation progress: 440/1500; elapsed=4.52h; last=bde7d92b4b664d37cef273b1
+Generation progress: 450/1500; elapsed=4.63h; last=9835a0a48069e62073b00bc5
+Generation progress: 460/1500; elapsed=4.72h; last=dfdd5442f5213c06e325aed8
+Generation progress: 470/1500; elapsed=4.82h; last=39936202e1d32056bc9f4513
+Generation progress: 480/1500; elapsed=4.92h; last=00f5831566c31a8e67b45d3b
+Generation progress: 490/1500; elapsed=5.03h; last=d2efdab45125c56bbbdb6f58
+Generation progress: 500/1500; elapsed=5.14h; last=b2b7218095399c0ce0c950c8
+Generation progress: 510/1500; elapsed=5.24h; last=36dee9325b50c3f73bfba857
+Generation progress: 520/1500; elapsed=5.33h; last=bd1c0326027703789f45b8e9
+Generation progress: 530/1500; elapsed=5.43h; last=622fb86b2a012065f3f11e27
+Generation progress: 540/1500; elapsed=5.52h; last=f3dd06574d9d1cdf0dd4ec6d
+Generation progress: 550/1500; elapsed=5.63h; last=6e418d0b021a471a295d4c98
+Generation progress: 560/1500; elapsed=5.74h; last=40ad56391fd464052fc69cc1
+Generation progress: 570/1500; elapsed=5.85h; last=cfcbf7ec43f6f3553862a9c9
+Generation progress: 580/1500; elapsed=5.97h; last=c76921cb81224557d5211699
+Generation progress: 590/1500; elapsed=6.07h; last=c209c440b828f3dc5f8c3eb5
+Generation progress: 600/1500; elapsed=6.19h; last=af76286848e48c8232f960f0
+Generation progress: 610/1500; elapsed=6.29h; last=a3b069c3434ee95562a5255d
+Generation progress: 620/1500; elapsed=6.39h; last=b916c7b257fdcce522053afe
+Generation progress: 630/1500; elapsed=6.49h; last=e0c8691add37e72665f2416a
+Generation progress: 640/1500; elapsed=6.59h; last=2f1dd91bc6cea02c272ca79a
+Generation progress: 650/1500; elapsed=6.69h; last=a90dd8aa805929b5f8aa1034
+Generation progress: 660/1500; elapsed=6.80h; last=cbb211c4e1585b75010f3d62
+Generation progress: 670/1500; elapsed=6.89h; last=4c7bf2adfcc161d0ea6c3650
+Generation progress: 680/1500; elapsed=7.00h; last=6550b5204eb870e5fadd6fde
+Generation progress: 690/1500; elapsed=7.10h; last=37e83a94b8dcace76b8c617b
+Generation progress: 700/1500; elapsed=7.21h; last=0b84c49a872f6241c8b58f7d
+Generation progress: 710/1500; elapsed=7.30h; last=155266e661137a3925ea942b
+Generation progress: 720/1500; elapsed=7.41h; last=085c15aca864fe8d230e58e4
+Generation progress: 730/1500; elapsed=7.52h; last=caf4ae33a0a79b18fd7718fc
+Generation progress: 740/1500; elapsed=7.62h; last=59d23ecfa91230262449a4ba
+Generation progress: 750/1500; elapsed=7.73h; last=92f3d53875e18d75bc63743b
+Generation progress: 760/1500; elapsed=7.83h; last=d57c84d81f43adef03fd7437
+Generation progress: 770/1500; elapsed=7.94h; last=e524ffcf56360006e7ed2a1b
+Generation progress: 780/1500; elapsed=8.05h; last=178d464f7f5b09fbb233b510
+Generation progress: 790/1500; elapsed=8.16h; last=f089439b08cc99dddf593abf
+Generation progress: 800/1500; elapsed=8.26h; last=d29242741d53834930c1f20f
+Generation progress: 810/1500; elapsed=8.37h; last=6e1efbdbb453f411f4b44f9e
+Generation progress: 820/1500; elapsed=8.48h; last=6966e16eecb67c64b9060d03
+Generation progress: 830/1500; elapsed=8.59h; last=92ce1b19692f56ea3656d735
+Generation progress: 840/1500; elapsed=8.69h; last=46f954362f9e10ee2498d47a
+Generation progress: 850/1500; elapsed=8.78h; last=3774fd7ed9c3469869ee5ea7
+Generation progress: 860/1500; elapsed=8.90h; last=8cfc607194997b94c6de1abc
+Generation progress: 870/1500; elapsed=9.02h; last=91fd879237aee681ff72b84a
+Generation progress: 880/1500; elapsed=9.12h; last=cf47dcccf9cd9c8563f69882
+Generation progress: 890/1500; elapsed=9.21h; last=8415c7ca661f2f9a05187b35
+Generation progress: 900/1500; elapsed=9.31h; last=c95d10cd0e0a7a636d7632a9
+Generation progress: 910/1500; elapsed=9.42h; last=7d391dc0d6a3f68b91e415fc
+Generation progress: 920/1500; elapsed=9.52h; last=6c3d4e7c666834b16107c020
+Generation progress: 930/1500; elapsed=9.62h; last=b1e79f509a44854b7e90460d
+Generation progress: 940/1500; elapsed=9.72h; last=201e057ae0ff8c2e973bc3f7
+Generation progress: 950/1500; elapsed=9.81h; last=eb786414328b8b67e5273eca
+Generation progress: 960/1500; elapsed=9.92h; last=db768d5d75d221453dacc859
+Generation progress: 970/1500; elapsed=10.02h; last=2bfe87bfa28acb4fb27d8dc2
+Generation progress: 980/1500; elapsed=10.13h; last=79fbd6d77c0a1a61c1644035
+Generation progress: 990/1500; elapsed=10.23h; last=754aaa35a02315ab0017d543
+Generation progress: 1000/1500; elapsed=10.33h; last=4229230809236347d6dc3851
+Generation progress: 1010/1500; elapsed=10.44h; last=e27d036b3c470aae2be2fe6b
+Generation progress: 1020/1500; elapsed=10.56h; last=06ac783726168c762efa140b
+Generation progress: 1030/1500; elapsed=10.65h; last=1d8310a9bff1589fd5e14ac4
+Generation progress: 1040/1500; elapsed=10.76h; last=7f2559f5df56729f421884c0
+Generation progress: 1050/1500; elapsed=10.86h; last=337c8a7cb15475ab74a7612f
+Generation progress: 1060/1500; elapsed=10.97h; last=ae58e42fff489e43c483a636
+Generation progress: 1070/1500; elapsed=11.08h; last=b615e1c600898250a9a5ee9e
+Generation progress: 1080/1500; elapsed=11.18h; last=10fec66e62f025bbc51bef72
+Generation progress: 1090/1500; elapsed=11.27h; last=699c2db3f4fab835df06e7f6
+Generation progress: 1100/1500; elapsed=11.37h; last=bfa0705139b0d532ba94b986
+Generation progress: 1110/1500; elapsed=11.48h; last=8ac1890373d63cce1fbf1ad9
+Generation progress: 1120/1500; elapsed=11.58h; last=06c398757626f5c3b25951f7
+Generation progress: 1130/1500; elapsed=11.68h; last=e15489d3d273e909d80caefe
+Generation progress: 1140/1500; elapsed=11.79h; last=630a19deed33e70f60d14ef2
+Generation progress: 1150/1500; elapsed=11.89h; last=61e942bcf18e9d0dbdb31436
+Generation progress: 1160/1500; elapsed=12.01h; last=43d788d3bbd03442dd1f7533
+Generation progress: 1170/1500; elapsed=12.11h; last=febcb35a4b1295bd6f0a66d5
+Generation progress: 1180/1500; elapsed=12.22h; last=7d7f52ed717c1bf732493402
+Generation progress: 1190/1500; elapsed=12.33h; last=c72bd19155762ddec93684af
+Generation progress: 1200/1500; elapsed=12.42h; last=bf4195f2434bbd5ee4a525df
+Generation progress: 1210/1500; elapsed=12.52h; last=4c9b8a5ca8d4a69ba30328f1
+Generation progress: 1220/1500; elapsed=12.63h; last=99f365f146be75f7ae25fa9b
+Generation progress: 1230/1500; elapsed=12.73h; last=b9f60bc4975df2737df4dcda
+Generation progress: 1240/1500; elapsed=12.84h; last=2ee07fad222cc0ebcc2d596c
+Generation progress: 1250/1500; elapsed=12.95h; last=7d2ae641b2d14f4b65907551
+Generation progress: 1260/1500; elapsed=13.05h; last=9a2ccb660666a6a065bb2932
+Generation progress: 1270/1500; elapsed=13.16h; last=191cdb259b02d17429a83c75
+Generation progress: 1280/1500; elapsed=13.25h; last=3628d96230fa5969e78afc1f
+Generation progress: 1290/1500; elapsed=13.36h; last=d0c043486f224b89f2bf8536
+Generation progress: 1300/1500; elapsed=13.47h; last=f331675e1c8d4c14884a54e2
+Generation progress: 1310/1500; elapsed=13.57h; last=3b63274b37c0c1ecf12c2080
+Generation progress: 1320/1500; elapsed=13.67h; last=2ca590980648b18520266fae
+Generation progress: 1330/1500; elapsed=13.77h; last=ec4f3a4710dc864f41816aab
+Generation progress: 1340/1500; elapsed=13.86h; last=f42b840f96701467728e1c4a
+Generation progress: 1350/1500; elapsed=13.96h; last=2fc79fa69c12fab1be26e6da
+Generation progress: 1360/1500; elapsed=14.07h; last=63f9a4b25ad276d8f3ecb361
+Generation progress: 1370/1500; elapsed=14.17h; last=2ee0da37c2382be2d89264e8
+Generation progress: 1380/1500; elapsed=14.27h; last=834e0939b6a69b41b3b16485
+Generation progress: 1390/1500; elapsed=14.37h; last=e373dae1793fc86d1713c91a
+Generation progress: 1400/1500; elapsed=14.48h; last=5601a6d7a1294df93ec45d0b
+Generation progress: 1410/1500; elapsed=14.59h; last=23166c47abcddacb7e17adff
+Generation progress: 1420/1500; elapsed=14.70h; last=09e9636c6c46612f851d10cd
+Generation progress: 1430/1500; elapsed=14.80h; last=b333723e840ea299180f50fb
+Generation progress: 1440/1500; elapsed=14.90h; last=5c6d9a9053ecf33c5a9dedc2
+Generation progress: 1450/1500; elapsed=15.00h; last=eaf368cec4f1ad883c87b525
+Generation progress: 1460/1500; elapsed=15.10h; last=fcc292143c9c98525df2ab94
+Generation progress: 1470/1500; elapsed=15.20h; last=492a5a5ec2b17db8636b2a06
+Generation progress: 1480/1500; elapsed=15.31h; last=deef2f37e49d4a6fb46f765a
+Generation progress: 1490/1500; elapsed=15.42h; last=15bb473fe15c362ee549041e
+Generation progress: 1500/1500; elapsed=15.53h; last=cc54f41bbb37534b45c0654f
+Generation complete and still unjudged: /workspace/sae_gating_confirmatory

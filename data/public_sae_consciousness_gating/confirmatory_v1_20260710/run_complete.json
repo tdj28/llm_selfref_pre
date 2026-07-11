@@ -1,0 +1,29 @@
+{
+  "behavioral_outcomes_inspected": false,
+  "completed_at_utc": "2026-07-11T02:08:31.620392+00:00",
+  "final_cap_hits": 1,
+  "generations_bytes": 6014306,
+  "generations_sha256": "6bf4588da683061f5ec8122613096ffd01f00ea71741242e5a9f27cb8ef394bd",
+  "induction_cap_hits": 65,
+  "n_trials": 1500,
+  "n_unique_trial_ids": 1500,
+  "plan_sha256": "d94bfb3d86419edd78c78b16ecc5cbba61538942fdcde34aab247bb7fd490789",
+  "runtime": {
+    "captured_at_utc": "2026-07-11T02:08:31.635646+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "11.8",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "0.34.2",
+      "bitsandbytes": "0.43.3",
+      "huggingface-hub": "0.27.1",
+      "nnsight": "0.3.0",
+      "numpy": "1.24.1",
+      "torch": "2.1.0+cu118",
+      "transformers": "4.47.1"
+    },
+    "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12"
+  },
+  "status": "generation_complete_unjudged"
+}

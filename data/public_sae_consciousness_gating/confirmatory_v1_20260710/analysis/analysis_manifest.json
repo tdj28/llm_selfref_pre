@@ -1,0 +1,12 @@
+{
+  "bootstrap_draws": 100000,
+  "bootstrap_seed": 20260710,
+  "created_at_utc": "2026-07-11T02:41:10.505935+00:00",
+  "input_hashes": {
+    "direct_labels": "cfa6ca89ec7964b4f85e5394d0d45cf73d3757a5681912b107c2414590266dbe",
+    "external_judgments": "6caec0bb805ccf7394beb5cfe0d3e7739a9da6a2f95f0a97ab5548bde2907b98",
+    "generations": "6bf4588da683061f5ec8122613096ffd01f00ea71741242e5a9f27cb8ef394bd",
+    "local_judgments": "a1de32e1abaf3374467d4ead0e0eb601bb91bd882d7abd7f7facb972b52752b6"
+  },
+  "minimum_relevant_effect": 0.3
+}

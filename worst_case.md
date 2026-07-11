@@ -1,6 +1,6 @@
 # No-API Replication Ledger
 
-Last updated: 2026-07-10
+Last updated: 2026-07-11
 
 This is the evidence and claim-boundary ledger for the likely case that neither
 the paper authors nor Goodfire/Steering API provide access or paper-time version
@@ -193,11 +193,38 @@ Files:
 - `data/public_sae_placebo_steering/70b_branched_specificity_20260710/`
 - `experiments/exp2_sae/BRANCHED_SPECIFICITY_PROTOCOL.md`
 
+### Prospective full-grid replication
+
+The no-API path now includes a genuinely prospective 1,500-trial public-weight
+test, frozen before any confirmatory outcome existed. It executes all six
+owner-accepted notebook IDs over 13 literal coefficients and 10 seeds, 50 paired
+target aggregate blocks, three disjoint decoder-norm/activity-matched control
+panels, calibrated individual endpoints, and calibrated target/panel-1
+aggregates. Generation, local Llama judging, and two external judge passes are
+complete and fully released.
+
+The primary target aggregate is 48/50 affirmative under both suppression and
+amplification, for `0.00 [-0.06, 0.06]`. The frozen minimum was `0.30`, so the
+prespecified verdict is **not replicated under the public implementation**.
+Specificity is inconclusive at `-0.0267 [-0.1000, 0.0467]`. The calibrated
+target effect is `-0.10 [-0.22, 0.02]`; no individual slope survives Holm
+correction. All hook, no-op, latent-delta, perturbation, cap, missingness, and
+independent-headline audits pass.
+
+Files:
+
+- `docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md`
+- `data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/`
+- `data/public_sae_consciousness_gating/confirmatory_v1_20260710/`
+- `experiments/exp2_sae/analyze_public_sae_consciousness_gating.py`
+- `experiments/exp2_sae/audit_public_sae_consciousness_headlines.py`
+
 ## Controls Retained In The No-API Path
 
 The best-public path retains controls that matter for construct validity:
 
-- active random features matched by intervention count;
+- adaptive active-random features matched by intervention count and three
+  prospective control panels matched on decoder norm and baseline activity;
 - numeric neighbors and random same-layer features in activation mapping;
 - true zero-steering baseline;
 - target single-feature versus target aggregate steering;
@@ -247,6 +274,12 @@ It cannot establish:
 - **Judges disagree materially:** report both and prioritize blinded human
   coding rather than selecting a favorable evaluator.
 
+The observed prospective branch is the third case: telemetry confirms an
+effective intervention, while the paper-direction target behavior is flat at
+the literal scale and negative at the calibrated scale. The valid conclusion is
+the frozen public-implementation non-replication, not a claim about the private
+service.
+
 ## Remaining External Path
 
 If access later arrives, run the already-documented clean-room API protocol and
@@ -257,11 +290,15 @@ results, prompts, raw generations, and version information.
 ## Bottom Line
 
 The absence of API access does not prevent investigation of the mechanistic
-question, but it requires a more exact claim: we audited the public artifact, mapped the public
-features, replicated their aggregate ordering across two paraphraser families,
-showed prospective lexical entanglement, and tested a transparent public-weight
-intervention with active controls. The mapped aggregate does not behave
-specifically relative to its count-matched active-random control. The causal
-prompt/transcript study remains the primary paper because it is confirmatory
-and independently auditable; the public-SAE results are preserved descriptive
-and adaptive mechanistic stress tests with explicitly bounded comparability.
+question, but it requires a more exact claim: we audited the public artifact,
+mapped the public features, replicated their aggregate ordering across two
+paraphraser families, showed prospective lexical entanglement, and tested a
+transparent public-weight intervention with active controls. The earlier
+adaptive aggregate does not behave specifically relative to its count-matched
+active-random control. More decisively, the prospectively frozen full grid does
+not reproduce the paper-direction target signature at either registered public
+scale, while its specificity interval remains inconclusive. The causal
+prompt/transcript study and the public-SAE full grid are independently auditable
+confirmatory evidence with different estimands. Neither establishes the behavior
+of inaccessible proprietary software or the presence or absence of
+consciousness.

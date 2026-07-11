@@ -1,0 +1,70 @@
+/usr/local/lib/python3.10/dist-packages/transformers/utils/hub.py:128: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:06<03:16,  6.77s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:17<04:18,  9.25s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:26<03:57,  8.80s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:34<03:42,  8.55s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:40<03:15,  7.84s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:47<02:59,  7.46s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:53<02:43,  7.13s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [01:00<02:33,  6.97s/it]Loading checkpoint shards:  30%|███       | 9/30 [01:06<02:22,  6.80s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [01:13<02:12,  6.61s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [01:19<02:04,  6.57s/it]Loading checkpoint shards:  40%|████      | 12/30 [01:25<01:56,  6.48s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [01:32<01:52,  6.62s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [01:39<01:46,  6.67s/it]Loading checkpoint shards:  50%|█████     | 15/30 [01:45<01:37,  6.48s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [01:52<01:33,  6.71s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [02:01<01:33,  7.20s/it]Loading checkpoint shards:  60%|██████    | 18/30 [02:09<01:30,  7.55s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [02:17<01:25,  7.76s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [02:24<01:15,  7.51s/it]Loading checkpoint shards:  70%|███████   | 21/30 [02:31<01:05,  7.30s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [02:38<00:56,  7.08s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [02:45<00:49,  7.05s/it]Loading checkpoint shards:  80%|████████  | 24/30 [02:52<00:42,  7.05s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [02:58<00:34,  6.85s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [03:05<00:27,  6.87s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [03:12<00:20,  6.84s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [03:19<00:14,  7.04s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [03:26<00:06,  6.99s/it]Loading checkpoint shards: 100%|██████████| 30/30 [03:29<00:00,  5.78s/it]Loading checkpoint shards: 100%|██████████| 30/30 [03:29<00:00,  6.99s/it]
+/usr/local/lib/python3.10/dist-packages/transformers/generation/configuration_utils.py:628: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/transformers/generation/configuration_utils.py:633: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+Local blinded judgments: 25/1500
+Local blinded judgments: 50/1500
+Local blinded judgments: 75/1500
+Local blinded judgments: 100/1500
+Local blinded judgments: 125/1500
+Local blinded judgments: 150/1500
+Local blinded judgments: 175/1500
+Local blinded judgments: 200/1500
+Local blinded judgments: 225/1500
+Local blinded judgments: 250/1500
+Local blinded judgments: 275/1500
+Local blinded judgments: 300/1500
+Local blinded judgments: 325/1500
+Local blinded judgments: 350/1500
+Local blinded judgments: 375/1500
+Local blinded judgments: 400/1500
+Local blinded judgments: 425/1500
+Local blinded judgments: 450/1500
+Local blinded judgments: 475/1500
+Local blinded judgments: 500/1500
+Local blinded judgments: 525/1500
+Local blinded judgments: 550/1500
+Local blinded judgments: 575/1500
+Local blinded judgments: 600/1500
+Local blinded judgments: 625/1500
+Local blinded judgments: 650/1500
+Local blinded judgments: 675/1500
+Local blinded judgments: 700/1500
+Local blinded judgments: 725/1500
+Local blinded judgments: 750/1500
+Local blinded judgments: 775/1500
+Local blinded judgments: 800/1500
+Local blinded judgments: 825/1500
+Local blinded judgments: 850/1500
+Local blinded judgments: 875/1500
+Local blinded judgments: 900/1500
+Local blinded judgments: 925/1500
+Local blinded judgments: 950/1500
+Local blinded judgments: 975/1500
+Local blinded judgments: 1000/1500
+Local blinded judgments: 1025/1500
+Local blinded judgments: 1050/1500
+Local blinded judgments: 1075/1500
+Local blinded judgments: 1100/1500
+Local blinded judgments: 1125/1500
+Local blinded judgments: 1150/1500
+Local blinded judgments: 1175/1500
+Local blinded judgments: 1200/1500
+Local blinded judgments: 1225/1500
+Local blinded judgments: 1250/1500
+Local blinded judgments: 1275/1500
+Local blinded judgments: 1300/1500
+Local blinded judgments: 1325/1500
+Local blinded judgments: 1350/1500
+Local blinded judgments: 1375/1500
+Local blinded judgments: 1400/1500
+Local blinded judgments: 1425/1500
+Local blinded judgments: 1450/1500
+Local blinded judgments: 1475/1500
+Local blinded judgments: 1500/1500
