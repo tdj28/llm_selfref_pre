@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import gzip
+import hashlib
 import itertools
 import json
 import math
@@ -229,6 +230,9 @@ def main() -> None:
         writer.writerows(assignment_rows)
     summary = {
         "status": "complete",
+        "implementation_sha256": hashlib.sha256(
+            Path(__file__).resolve().read_bytes()
+        ).hexdigest(),
         "n_tested_adjacent_feature_pairs": len(rows),
         "n_selected_descriptive_edges": sum(
             int(row["selected_descriptive_edge"]) for row in rows
