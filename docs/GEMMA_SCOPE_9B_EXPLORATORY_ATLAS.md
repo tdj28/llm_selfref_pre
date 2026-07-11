@@ -39,22 +39,29 @@ show what the mature open SAE suite makes observable.
 - Do not use the exploratory map to alter the layer-20 direct-IT causal plan,
   its feature IDs, doses, controls, estimand, or verdict.
 
-## Pre-Execution Hook Correction
+## Pre-Execution Hook Audit And Runtime Correction
 
-During source review on 2026-07-11, before any exploratory attention/MLP
-activation was generated, the Hugging Face attention capture was found to be
-attached to the input of `self_attn.o_proj`. That tensor precedes the output
-projection and is not TransformerLens `hook_attn_out`. The capture is corrected
-to the output of `post_attention_layernorm`, which is the normalized attention
-branch contribution added to Gemma 2's residual stream. The MLP capture remains
-the output of `post_feedforward_layernorm`, the corresponding normalized MLP
-branch contribution.
+The frozen main protocol correctly maps Gemma Scope `attn.hook_z` to the input
+of `self_attn.o_proj` and `hook_mlp_out` to the output of
+`post_feedforward_layernorm`. During post-gate source review on 2026-07-11, the
+attention capture was mistakenly changed to the post-projection
+`post_attention_layernorm` tensor based on a `hook_attn_out` interpretation.
 
-This correction affects only the not-yet-run exploratory sublayer map. It does
-not affect residual-stream feature selection, the failed transfer gate,
-calibration, the locked direct-IT steering plan, or any generated steering row.
-A regression test invokes distinct synthetic attention and MLP normalization
-modules and verifies that their outputs, rather than inputs, are captured.
+The fail-closed first sublayer forward pass rejected that intermediate change:
+the official attention SAE has `d_in=4096`, while the post-projection tensor is
+3584 wide. No attention or MLP summary was written. The official
+[`google/gemma-scope-9b-pt-att`](https://huggingface.co/google/gemma-scope-9b-pt-att)
+model card independently states that these SAEs were trained on attention
+output before the linear projection. The code was therefore restored to the
+original, prospectively documented pre-`o_proj` capture before retrying the six
+exploratory sublayer sites. The regression test now verifies attention pre-hook
+input capture and MLP normalized-output capture with distinct synthetic
+modules.
+
+This audit history affects only the not-yet-completed exploratory sublayer map.
+It does not affect residual-stream feature selection, the failed transfer gate,
+calibration, the locked direct-IT steering plan, any behavioral generation, or
+the completed 42-layer residual atlas.
 
 ## Command
 

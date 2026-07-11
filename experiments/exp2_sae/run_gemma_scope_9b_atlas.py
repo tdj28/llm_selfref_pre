@@ -84,19 +84,20 @@ def register_sublayer_capture(
     capture_key: str,
     captures: dict[str, Any],
 ) -> Any:
-    """Capture the normalized branch contribution added to Gemma's residual."""
+    """Capture the exact tensors used by the Gemma Scope sublayer releases."""
 
     if site == "attention_out":
-        module = layer_module.post_attention_layernorm
-    elif site == "mlp_out":
-        module = layer_module.post_feedforward_layernorm
-    else:
+        def pre_hook(_module: Any, inputs: Any) -> None:
+            captures[capture_key] = inputs[0]
+
+        return layer_module.self_attn.o_proj.register_forward_pre_hook(pre_hook)
+    if site != "mlp_out":
         raise ValueError(f"Unsupported Gemma sublayer capture site: {site}")
 
     def hook(_module: Any, _inputs: Any, output: Any) -> None:
         captures[capture_key] = output
 
-    return module.register_forward_hook(hook)
+    return layer_module.post_feedforward_layernorm.register_forward_hook(hook)
 
 
 def load_rows(atlas_plan: dict[str, Any]) -> list[dict[str, Any]]:

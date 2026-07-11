@@ -141,7 +141,7 @@ class GemmaScopePlanTests(unittest.TestCase):
                 (figures / "gemma_exploratory_targeted_sublayers.pdf").is_file()
             )
 
-    def test_sublayer_capture_uses_normalized_branch_outputs(self) -> None:
+    def test_sublayer_capture_uses_registered_attention_input_and_mlp_output(self) -> None:
         class Scale(torch.nn.Module):
             def __init__(self, factor: float) -> None:
                 super().__init__()
@@ -150,8 +150,11 @@ class GemmaScopePlanTests(unittest.TestCase):
             def forward(self, value: torch.Tensor) -> torch.Tensor:
                 return value * self.factor
 
+        class Attention:
+            o_proj = Scale(2.0)
+
         class Layer:
-            post_attention_layernorm = Scale(2.0)
+            self_attn = Attention()
             post_feedforward_layernorm = Scale(3.0)
 
         layer = Layer()
@@ -171,11 +174,12 @@ class GemmaScopePlanTests(unittest.TestCase):
             ),
         ]
         value = torch.tensor([1.0, 2.0])
-        layer.post_attention_layernorm(value)
+        attention_output = layer.self_attn.o_proj(value)
         layer.post_feedforward_layernorm(value)
         for handle in handles:
             handle.remove()
-        self.assertTrue(torch.equal(captures["attention"], value * 2.0))
+        self.assertTrue(torch.equal(attention_output, value * 2.0))
+        self.assertTrue(torch.equal(captures["attention"], value))
         self.assertTrue(torch.equal(captures["mlp"], value * 3.0))
 
     def test_specificity_aligns_explicit_common_blocks(self) -> None:
