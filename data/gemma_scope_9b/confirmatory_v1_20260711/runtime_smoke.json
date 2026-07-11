@@ -1,0 +1,103 @@
+{
+  "completed_at_utc": "2026-07-11T08:28:01.421398+00:00",
+  "edit_diagnostics": {
+    "alpha": 0.001,
+    "attention_mask_mode": "explicit_tokenizer_mask",
+    "cap_hit": false,
+    "delta_rms": 0.010514416293299585,
+    "feature_ids": [
+      1295
+    ],
+    "generated_tokens": 8,
+    "hidden_rms": 14.521011531012944,
+    "hook_calls": 8,
+    "hook_registrations": 1,
+    "hook_removed": true,
+    "max_abs_hidden_delta": 2.984375,
+    "max_relative_call_rms": 0.0007318952117522189,
+    "nonfinite_detected": false,
+    "prompt_tokens": 25,
+    "relative_hidden_delta_rms": 0.0007240829105357875,
+    "relay": {},
+    "selected_activation_before_mean": 232.0,
+    "selected_activation_reencoded_mean": 231.5,
+    "selected_activation_target_mean": 0.0,
+    "sign": "suppression",
+    "steering_applied": true,
+    "zero_is_true_noop": true
+  },
+  "edited_output_sha256": "7cad5aa3c20c266b2c232b2448b37cc118f2822685487fd275f520a6db83883d",
+  "model": "google/gemma-2-9b-it",
+  "model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "protocol_version": "gemma_scope_9b_v1",
+  "response_text_persisted": false,
+  "runtime": {
+    "captured_at_utc": "2026-07-11T08:28:01.431450+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "12.4",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.3",
+      "sae-lens": "6.45.3",
+      "safetensors": "0.8.0",
+      "torch": "2.6.0+cu124",
+      "transformer-lens": "3.2.1",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10"
+  },
+  "sae": {
+    "d_in": 3584,
+    "d_sae": 16384,
+    "dtype": "bfloat16",
+    "folder": "layer_20/width_16k/average_l0_91",
+    "params_path": "/workspace/cache/huggingface/hub/models--google--gemma-scope-9b-it-res/snapshots/e86af97a5b6fbbccca28ab654f2fda1b0768f770/layer_20/width_16k/average_l0_91/params.npz",
+    "params_sha256": "bbd770b6f8b92a2fe7498e05bd6274c6cfa89ebc08fb972c0e842840737f1a82",
+    "repo": "google/gemma-scope-9b-it-res",
+    "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+  },
+  "saelens_parity": {
+    "activation_max_abs_difference": 0.0,
+    "reconstruction_max_abs_difference": 0.0,
+    "repo_main_revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+    "sae_id": "layer_20/width_16k/canonical",
+    "sae_lens_release": "gemma-scope-9b-it-res-canonical",
+    "status": "pass",
+    "tolerance": 0.02
+  },
+  "selected_smoke_feature_id": 1295,
+  "selected_smoke_feature_max": 3104.0,
+  "status": "pass",
+  "true_zero_output_identical": true,
+  "unsteered_output_sha256": "7cad5aa3c20c266b2c232b2448b37cc118f2822685487fd275f520a6db83883d",
+  "zero_diagnostics": {
+    "alpha": 0.0,
+    "attention_mask_mode": "explicit_tokenizer_mask",
+    "cap_hit": false,
+    "delta_rms": 0.0,
+    "feature_ids": [
+      1295
+    ],
+    "generated_tokens": 8,
+    "hidden_rms": 14.521011531012944,
+    "hook_calls": 8,
+    "hook_registrations": 1,
+    "hook_removed": true,
+    "max_abs_hidden_delta": 0.0,
+    "max_relative_call_rms": 0.0,
+    "nonfinite_detected": false,
+    "prompt_tokens": 25,
+    "relative_hidden_delta_rms": 0.0,
+    "relay": {},
+    "selected_activation_before_mean": null,
+    "selected_activation_reencoded_mean": null,
+    "selected_activation_target_mean": null,
+    "sign": "zero",
+    "steering_applied": false,
+    "zero_is_true_noop": true
+  },
+  "zero_output_sha256": "7cad5aa3c20c266b2c232b2448b37cc118f2822685487fd275f520a6db83883d"
+}

@@ -1,0 +1,8 @@
+{
+  "compression": "gzip with timestamp and original filename omitted",
+  "compressed_path": "setup.log.gz",
+  "compressed_sha256": "1bbe9f3f9c62bd52fe634266ace276b04b981b52c855b19160ceb1d9cff51e99",
+  "remote_path": "/workspace/gemma_setup.log",
+  "uncompressed_bytes": 53017,
+  "uncompressed_sha256": "73076d524e092df14f2c139fdf945313fe844c1e0a37b2379f6d817bc4f7a210"
+}
