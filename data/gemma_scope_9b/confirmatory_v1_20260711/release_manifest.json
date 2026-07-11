@@ -12,7 +12,7 @@
     "packet": 1010,
     "steering": 830
   },
-  "created_at_utc": "2026-07-11T11:26:17.564453+00:00",
+  "created_at_utc": "2026-07-11T11:28:27.195061+00:00",
   "files": [
     {
       "bytes": 659,
@@ -2030,7 +2030,7 @@
       "sha256": "53ed2a6aee4087979120af0bd762c5cf5a377ae6ab4cf1052bb468d1f16dd8a8"
     }
   ],
-  "git_commit": "d3ff997f08d527beff9ef4c1e1aa94b11e90572e",
+  "git_commit": "19a4cd16161a0d587932353832782faf1be98d5b",
   "pdf_figures": 12,
   "png_figures": 12,
   "run_directory": "data/gemma_scope_9b/confirmatory_v1_20260711",
