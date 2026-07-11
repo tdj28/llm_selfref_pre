@@ -326,6 +326,12 @@ D_target = P(affirmation | target suppression)
 The interval is a 100,000-replicate paired-block percentile bootstrap. The
 minimum relevant effect is 0.30, inherited from the Llama protocol.
 
+Before opening any Gemma judge label, the reporting code was extended to emit
+the two discordant-pair counts, tied-block count, and exact two-sided binomial
+probability conditional on discordance. This is a descriptive paired-data
+diagnostic only. It is independently recomputed and does not enter or modify
+the frozen interval, minimum effect, verdict, or specificity rules below.
+
 Primary verdict:
 
 - **generalized replication under Gemma Scope**: point estimate at least 0.30,

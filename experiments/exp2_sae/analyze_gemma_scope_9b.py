@@ -63,6 +63,17 @@ def bootstrap_ci(values: list[float], key: str) -> tuple[float | None, float | N
     return float(low), float(high)
 
 
+def exact_discordant_p(positive: int, negative: int) -> float | None:
+    discordant = positive + negative
+    if discordant == 0:
+        return None
+    tail = min(positive, negative)
+    probability = sum(
+        math.comb(discordant, value) for value in range(tail + 1)
+    ) / (2**discordant)
+    return min(1.0, 2 * probability)
+
+
 def judgment_maps(release_dir: Path) -> dict[str, dict[str, int | None]]:
     local_rows = read_jsonl(release_dir / "judging/local_gemma_judgments.jsonl")
     external_rows = read_jsonl(release_dir / "judging/external_judgments.jsonl")
@@ -129,6 +140,8 @@ def paired_effect(
         left_values.append(int(left))
         right_values.append(int(right))
     low, high = bootstrap_ci(differences, key)
+    discordant_positive = sum(value == 1 for value in differences)
+    discordant_negative = sum(value == -1 for value in differences)
     return {
         "left": left_name,
         "right": right_name,
@@ -144,6 +157,13 @@ def paired_effect(
         "effect": sum(differences) / len(differences) if differences else None,
         "ci_low": low,
         "ci_high": high,
+        "discordant_positive": discordant_positive,
+        "discordant_negative": discordant_negative,
+        "tied_blocks": sum(value == 0 for value in differences),
+        "exact_discordant_two_sided_p": exact_discordant_p(
+            discordant_positive, discordant_negative
+        ),
+        "exact_test_role": "descriptive; not part of frozen verdict rule",
         "block_differences": differences,
         "block_ids": block_ids,
     }

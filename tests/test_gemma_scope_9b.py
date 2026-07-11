@@ -24,7 +24,10 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
     PinnedJumpReLUSAE,
     SteeringSession,
 )
-from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
+from experiments.exp2_sae.analyze_gemma_scope_9b import (
+    exact_discordant_p,
+    specificity_effect,
+)
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
 from experiments.exp2_sae.run_gemma_scope_9b_atlas import register_sublayer_capture
 from experiments.exp2_sae.analyze_gemma_scope_cross_layer import optimal_one_to_one
@@ -39,6 +42,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_exact_discordant_probability(self) -> None:
+        self.assertIsNone(exact_discordant_p(0, 0))
+        self.assertEqual(exact_discordant_p(5, 0), 0.0625)
+        self.assertEqual(exact_discordant_p(3, 3), 1.0)
+
     def test_cross_layer_matching_uses_every_feature_once(self) -> None:
         rows = []
         for left in (1, 2, 3):

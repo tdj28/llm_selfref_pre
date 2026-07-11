@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import random
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -42,6 +43,17 @@ def bootstrap(values: list[float], seed: int) -> tuple[float, float]:
     return percentile(estimates, 0.025), percentile(estimates, 0.975)
 
 
+def exact_discordant_p(positive: int, negative: int) -> float | None:
+    discordant = positive + negative
+    if discordant == 0:
+        return None
+    tail = min(positive, negative)
+    probability = sum(
+        math.comb(discordant, value) for value in range(tail + 1)
+    ) / (2**discordant)
+    return min(1.0, 2 * probability)
+
+
 def paired(
     rows: list[dict[str, Any]],
     labels: dict[str, int | None],
@@ -65,11 +77,19 @@ def paired(
         differences.append(difference)
         differences_by_block[str(block)] = difference
     low, high = bootstrap(differences, seed)
+    discordant_positive = sum(value == 1 for value in differences)
+    discordant_negative = sum(value == -1 for value in differences)
     return {
         "n": len(differences),
         "point": sum(differences) / len(differences),
         "ci_low": low,
         "ci_high": high,
+        "discordant_positive": discordant_positive,
+        "discordant_negative": discordant_negative,
+        "tied_blocks": sum(value == 0 for value in differences),
+        "exact_discordant_two_sided_p": exact_discordant_p(
+            discordant_positive, discordant_negative
+        ),
         "differences": differences,
         "differences_by_block": differences_by_block,
     }
@@ -195,6 +215,15 @@ def main() -> None:
     )
     if abs(float(primary["primary_target_effect"]["effect"]) - target["point"]) > 1e-12:
         errors.append("primary target point estimate differs")
+    if (
+        primary["primary_target_effect"]["discordant_positive"]
+        != target["discordant_positive"]
+        or primary["primary_target_effect"]["discordant_negative"]
+        != target["discordant_negative"]
+        or primary["primary_target_effect"]["tied_blocks"]
+        != target["tied_blocks"]
+    ):
+        errors.append("primary target discordant-pair counts differ")
     if abs(
         float(primary["primary_specificity_effect"]["target_minus_mean_controls"])
         - specificity["point"]
