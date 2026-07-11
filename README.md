@@ -46,6 +46,15 @@ steering analysis are complete. Exact replication of the proprietary
 Goodfire/Steering API workflow remains unavailable because we do not have API
 access or a confirmed paper-time API/version manifest.
 
+## Public Writing
+
+The first public article, [How to Read an SAE Feature
+ID](https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html),
+introduces the distinction between a feature coordinate, its semantic label,
+and a causal steering claim. Its underlying balanced feature-map release is
+pinned to repository commit
+[`aadcf27`](https://github.com/tdj28/llm_selfref_pre/tree/aadcf27ca19d8a99ea53653efdb5463448fd858d/data/public_sae_feature_maps/70b_balanced_80_20260709).
+
 ## Main Findings
 
 ### 1. The published contrast replicates, but it is heterogeneous
