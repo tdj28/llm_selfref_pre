@@ -49,6 +49,9 @@ immediately public and permanently recoverable.
 - `experiments/exp2_sae/` contains Experiment 2 replication and robustness code, including prompt-only behavioral controls and heavier SAE/Goodfire-oriented scripts.
 - `steering/` is a separate SAE steering framework with its own `pyproject.toml`, `uv.lock`, docs, config system, concept pairs, triangulation methods, judges, and run CLI.
 - `paper/` is the main causal-paper source. `steering/paper/` is older related steering-paper material and is not the current manuscript.
+- `docs/GEMMA_SCOPE_9B_ROADMAP.md` defines the proposed cross-model Gemma Scope
+  phase. It is a design draft, not a frozen protocol or authorization to spend
+  GPU budget.
 
 ## Research Direction
 
@@ -94,6 +97,27 @@ Public SAE work is a separate evidence ladder:
 - Exact proprietary replication remains unavailable without Goodfire/Steering API access and paper-time version metadata. Always distinguish public artifact reanalysis, public-weight feature verification, best-public steering, and exact proprietary replication.
 
 Strong contributions should map to falsifiable experiments and paper figures/tables, not just prose argument.
+
+## Gemma Scope Next Phase
+
+- Treat Gemma 2 9B as a cross-model mechanistic generalization, not an exact
+  replication of Llama feature IDs or the proprietary Goodfire API.
+- The direct instruction-tuned Gemma Scope residual SAEs cover layers 9, 20,
+  and 31 at 16k and 131k widths. All-42-layer coverage uses pre-trained-model
+  SAEs and requires a prospectively frozen PT-to-IT transfer gate on the exact
+  prompt distribution.
+- Feature IDs are local to each independently trained SAE. Follow preregistered
+  construct scores across layers; do not imply that equal or matched IDs are a
+  persistent feature identity.
+- Use layer 20, direct-IT, 131k as the default primary intervention site unless
+  a protocol committed before outcomes justifies another choice. Treat other
+  layers and sublayers as registered localization or mechanistic follow-ups.
+- Keep discovery, locked semantic validation, baseline behavior, and causal
+  steering in separate artifacts. Do not select features using final
+  consciousness-report outcomes.
+- Do not create a Gemma GPU pod until the baseline/direct-IT protocol, exact
+  revisions, machine-readable plan, independent validator, and local dry run
+  are committed and pushed.
 
 ## Main Workflows
 

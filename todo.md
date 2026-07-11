@@ -317,6 +317,29 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 
 ## External Or Optional Extensions
 
+- [x] Evaluate Gemma Scope 9B as the next cross-model platform and document the
+  bounded design in `docs/GEMMA_SCOPE_9B_ROADMAP.md`.
+- [x] Verify repository access to `google/gemma-2-9b-it` and record candidate
+  model, direct-IT SAE, and all-layer PT-SAE revisions without downloading
+  weights or creating a pod.
+- [ ] Freeze the exact Gemma baseline prompts, seeds, judge panel,
+  floor/ceiling interpretation, and claim boundary before generation.
+- [ ] Implement and locally test a pinned Gemma 2 / JumpReLU loader, true
+  no-op, latent-contribution edit, telemetry, checkpointing, and hook cleanup.
+- [ ] Freeze a discovery/locked-validation semantic corpus and complete feature
+  selection without using final consciousness-report outcomes.
+- [ ] Map both direct-IT widths at layers 9, 20, and 31; preserve the complete
+  tested-feature denominator and all selection diagnostics.
+- [ ] Freeze and run the PT-to-IT transfer gate at layers 9, 20, and 31 before
+  applying PT SAEs across all 42 instruction-tuned-model layers.
+- [ ] Preregister layer 20 direct-IT 131k as the primary causal intervention,
+  with matched-random, hedging/refusal, subjective-experience, and true-zero
+  comparators.
+- [ ] Run upstream-to-downstream causal relay measurements before opening
+  attention/MLP sublayer follow-ups; never treat cross-layer IDs as stable
+  identities.
+- [ ] Keep the Gemma release and verdict separate from the completed Llama 70B
+  release, and independently audit every promoted point estimate and figure.
 - [ ] If authors respond, archive whether the public AE notebook is the exact
   Experiment 2 setup and request a paper-time SAE/API version manifest. This is
   useful provenance but no longer blocks the owner-approved public-weight run.
