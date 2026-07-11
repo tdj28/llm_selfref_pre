@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -25,12 +27,44 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
 from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
 from experiments.exp2_sae.run_gemma_scope_9b_atlas import register_sublayer_capture
+from experiments.exp2_sae.figure_gemma_scope_9b import plot_exploratory_sublayers
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_exploratory_sublayer_figure_renders_both_formats(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            analysis = root / "analysis"
+            exploratory = root / "atlas_exploratory"
+            figures = root / "figures"
+            analysis.mkdir()
+            exploratory.mkdir()
+            rows = [
+                "sae_key,model_kind,site,layer,width,construct,selected_feature_ids,discovery_contrast,selection_contrast,confirmation_contrast,reconstruction_fvu",
+            ]
+            for layer in (10, 11, 12):
+                for site, value in (("attention_out", 0.1), ("mlp_out", 0.2)):
+                    rows.append(
+                        f"pt_{site}_{layer},pretrained_sae_on_instruction_model,{site},{layer},16384,deception_roleplay,1|2,0.1,0.1,{value},0.2"
+                    )
+            (analysis / "exploratory_sublayer_constructs.csv").write_text(
+                "\n".join(rows) + "\n", encoding="utf-8"
+            )
+            (exploratory / "transition_selection.json").write_text(
+                json.dumps({"targeted_layers": [10, 11, 12]}) + "\n",
+                encoding="utf-8",
+            )
+            plot_exploratory_sublayers(analysis, root, figures)
+            self.assertTrue(
+                (figures / "gemma_exploratory_targeted_sublayers.png").is_file()
+            )
+            self.assertTrue(
+                (figures / "gemma_exploratory_targeted_sublayers.pdf").is_file()
+            )
+
     def test_sublayer_capture_uses_normalized_branch_outputs(self) -> None:
         class Scale(torch.nn.Module):
             def __init__(self, factor: float) -> None:

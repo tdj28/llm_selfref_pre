@@ -327,6 +327,55 @@ def plot_sublayers(analysis: Path, release: Path, outdir: Path) -> None:
     plt.close(fig)
 
 
+def plot_exploratory_sublayers(analysis: Path, release: Path, outdir: Path) -> None:
+    import matplotlib.pyplot as plt
+
+    table_path = analysis / "exploratory_sublayer_constructs.csv"
+    transition_path = release / "atlas_exploratory/transition_selection.json"
+    if not table_path.exists() or not transition_path.exists():
+        return
+    rows = [
+        row
+        for row in read_csv(table_path)
+        if row["construct"] == "deception_roleplay"
+    ]
+    if not rows:
+        return
+    transition = json.loads(transition_path.read_text(encoding="utf-8"))
+    layers = transition["targeted_layers"]
+    values = {
+        (row["site"], int(row["layer"])): float(row["confirmation_contrast"])
+        for row in rows
+    }
+    positions = list(range(len(layers)))
+    width = 0.34
+    fig, ax = plt.subplots(figsize=(7.8, 4.6))
+    ax.bar(
+        [value - width / 2 for value in positions],
+        [values.get(("attention_out", layer), float("nan")) for layer in layers],
+        width,
+        label="Attention output",
+        color="#4C78A8",
+    )
+    ax.bar(
+        [value + width / 2 for value in positions],
+        [values.get(("mlp_out", layer), float("nan")) for layer in layers],
+        width,
+        label="MLP output",
+        color="#F2A541",
+    )
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.set_xticks(positions, [str(layer) for layer in layers])
+    ax.set_xlabel("Layer")
+    ax.set_ylabel("Locked deception/roleplay contrast")
+    ax.set_title("Exploratory sublayer localization after the failed transfer gate")
+    ax.legend(frameon=False)
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    save(fig, outdir, "gemma_exploratory_targeted_sublayers")
+    plt.close(fig)
+
+
 def plot_lexical_counterfactuals(analysis: Path, outdir: Path) -> None:
     import matplotlib.pyplot as plt
 
@@ -490,6 +539,7 @@ def main() -> None:
     plot_exploratory_layerwise(analysis, outdir)
     plot_transfer(release, outdir)
     plot_sublayers(analysis, release, outdir)
+    plot_exploratory_sublayers(analysis, release, outdir)
     plot_lexical_counterfactuals(analysis, outdir)
     plot_relay(analysis, outdir)
     plot_cross_layer(release, outdir)
