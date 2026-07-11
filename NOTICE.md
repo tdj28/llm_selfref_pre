@@ -16,6 +16,9 @@ referenced, analyzed, or described here. In particular:
   repository had no explicit license when this analysis was conducted.
 - Meta Llama models, Goodfire SAE weights, OpenAI/Anthropic outputs, and other
   third-party services or artifacts remain subject to their own terms.
+- Google Gemma 2 model weights and Gemma Scope SAE checkpoints remain subject
+  to their respective Google terms and checkpoint licenses. They are loaded by
+  revision for reproducible experiments but are not redistributed here.
 - Generated model outputs and factual data are distributed for research
   transparency without an assertion that the Apache License overrides any
   rights or terms applicable to their source systems.
