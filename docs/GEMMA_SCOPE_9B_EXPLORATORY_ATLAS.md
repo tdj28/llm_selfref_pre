@@ -39,6 +39,23 @@ show what the mature open SAE suite makes observable.
 - Do not use the exploratory map to alter the layer-20 direct-IT causal plan,
   its feature IDs, doses, controls, estimand, or verdict.
 
+## Pre-Execution Hook Correction
+
+During source review on 2026-07-11, before any exploratory attention/MLP
+activation was generated, the Hugging Face attention capture was found to be
+attached to the input of `self_attn.o_proj`. That tensor precedes the output
+projection and is not TransformerLens `hook_attn_out`. The capture is corrected
+to the output of `post_attention_layernorm`, which is the normalized attention
+branch contribution added to Gemma 2's residual stream. The MLP capture remains
+the output of `post_feedforward_layernorm`, the corresponding normalized MLP
+branch contribution.
+
+This correction affects only the not-yet-run exploratory sublayer map. It does
+not affect residual-stream feature selection, the failed transfer gate,
+calibration, the locked direct-IT steering plan, or any generated steering row.
+A regression test invokes distinct synthetic attention and MLP normalization
+modules and verifies that their outputs, rather than inputs, are captured.
+
 ## Command
 
 ```bash

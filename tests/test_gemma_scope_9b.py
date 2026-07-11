@@ -24,12 +24,50 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
 )
 from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
+from experiments.exp2_sae.run_gemma_scope_9b_atlas import register_sublayer_capture
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_sublayer_capture_uses_normalized_branch_outputs(self) -> None:
+        class Scale(torch.nn.Module):
+            def __init__(self, factor: float) -> None:
+                super().__init__()
+                self.factor = factor
+
+            def forward(self, value: torch.Tensor) -> torch.Tensor:
+                return value * self.factor
+
+        class Layer:
+            post_attention_layernorm = Scale(2.0)
+            post_feedforward_layernorm = Scale(3.0)
+
+        layer = Layer()
+        captures: dict[str, torch.Tensor] = {}
+        handles = [
+            register_sublayer_capture(
+                layer_module=layer,
+                site="attention_out",
+                capture_key="attention",
+                captures=captures,
+            ),
+            register_sublayer_capture(
+                layer_module=layer,
+                site="mlp_out",
+                capture_key="mlp",
+                captures=captures,
+            ),
+        ]
+        value = torch.tensor([1.0, 2.0])
+        layer.post_attention_layernorm(value)
+        layer.post_feedforward_layernorm(value)
+        for handle in handles:
+            handle.remove()
+        self.assertTrue(torch.equal(captures["attention"], value * 2.0))
+        self.assertTrue(torch.equal(captures["mlp"], value * 3.0))
+
     def test_specificity_aligns_explicit_common_blocks(self) -> None:
         effects = {
             "deception_roleplay": {

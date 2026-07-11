@@ -80,6 +80,10 @@ def main() -> None:
             "confirmatory_protocol_version": PROTOCOL_VERSION,
             "confirmatory_transfer_gate": "fail",
             "confirmatory_transfer_gate_sha256": sha256_file(transfer_path),
+            "exploratory_runner_sha256": sha256_file(Path(__file__).resolve()),
+            "atlas_runner_sha256": sha256_file(
+                REPO_ROOT / "experiments/exp2_sae/run_gemma_scope_9b_atlas.py"
+            ),
             "post_hoc_after_gate_failure": True,
             "behavioral_outcomes_used": False,
             "claim_boundary": (

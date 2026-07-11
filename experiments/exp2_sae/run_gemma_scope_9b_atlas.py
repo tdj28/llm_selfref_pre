@@ -77,6 +77,28 @@ def spec_key(spec: dict[str, Any]) -> str:
     return f"{kind}_{site}_l{int(spec['layer'])}_w{int(spec['width'])}"
 
 
+def register_sublayer_capture(
+    *,
+    layer_module: Any,
+    site: str,
+    capture_key: str,
+    captures: dict[str, Any],
+) -> Any:
+    """Capture the normalized branch contribution added to Gemma's residual."""
+
+    if site == "attention_out":
+        module = layer_module.post_attention_layernorm
+    elif site == "mlp_out":
+        module = layer_module.post_feedforward_layernorm
+    else:
+        raise ValueError(f"Unsupported Gemma sublayer capture site: {site}")
+
+    def hook(_module: Any, _inputs: Any, output: Any) -> None:
+        captures[capture_key] = output
+
+    return module.register_forward_hook(hook)
+
+
 def load_rows(atlas_plan: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for corpus in atlas_plan["corpora"]:
@@ -632,24 +654,13 @@ def map_group(
             key = spec_key(spec)
             site = spec["site"]
             layer = int(spec["layer"])
-            if site == "mlp_out":
-                def make_mlp_hook(capture_key: str) -> Any:
-                    def hook(_module: Any, _inputs: Any, output: Any) -> None:
-                        captures[capture_key] = output
-                    return hook
+            if site in {"attention_out", "mlp_out"}:
                 handles.append(
-                    layers[layer].post_feedforward_layernorm.register_forward_hook(
-                        make_mlp_hook(key)
-                    )
-                )
-            elif site == "attention_out":
-                def make_att_hook(capture_key: str) -> Any:
-                    def hook(_module: Any, inputs: Any) -> None:
-                        captures[capture_key] = inputs[0]
-                    return hook
-                handles.append(
-                    layers[layer].self_attn.o_proj.register_forward_pre_hook(
-                        make_att_hook(key)
+                    register_sublayer_capture(
+                        layer_module=layers[layer],
+                        site=site,
+                        capture_key=key,
+                        captures=captures,
                     )
                 )
 
