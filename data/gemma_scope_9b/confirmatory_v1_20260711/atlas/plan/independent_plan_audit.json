@@ -1,0 +1,12 @@
+{
+  "audited_at_utc": "2026-07-11T08:24:36.498884+00:00",
+  "baseline_rows": 180,
+  "baseline_unique_ids": 180,
+  "behavioral_outcomes_read": false,
+  "direct_it_saes": 6,
+  "errors": [],
+  "future_steering_rows": 830,
+  "production_module_imported": false,
+  "pt_residual_saes": 42,
+  "status": "pass"
+}

@@ -1,0 +1,51 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:18<00:54, 18.30s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:36<00:36, 18.16s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:58<00:20, 20.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:15<00:00, 18.66s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:15<00:00, 18.81s/it]
+Loading it_res_l9_w16384: google/gemma-scope-9b-it-res / layer_9/width_16k/average_l0_88
+Loading it_res_l20_w16384: google/gemma-scope-9b-it-res / layer_20/width_16k/average_l0_91
+Loading it_res_l31_w16384: google/gemma-scope-9b-it-res / layer_31/width_16k/average_l0_76
+Loading it_res_l9_w131072: google/gemma-scope-9b-it-res / layer_9/width_131k/average_l0_121
+Loading it_res_l20_w131072: google/gemma-scope-9b-it-res / layer_20/width_131k/average_l0_81
+Loading it_res_l31_w131072: google/gemma-scope-9b-it-res / layer_31/width_131k/average_l0_109
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 200/3726 items; elapsed=0.00h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 400/3726 items; elapsed=0.00h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 600/3726 items; elapsed=0.01h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 800/3726 items; elapsed=0.02h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 1000/3726 items; elapsed=0.02h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 1200/3726 items; elapsed=0.02h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 1400/3726 items; elapsed=0.02h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 1600/3726 items; elapsed=0.02h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 1800/3726 items; elapsed=0.03h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 2000/3726 items; elapsed=0.03h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 2200/3726 items; elapsed=0.03h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 2400/3726 items; elapsed=0.03h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 2600/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 2800/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 3000/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 3200/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 3400/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 3600/3726 items; elapsed=0.04h
+Atlas group ['it_res_l9_w16384', 'it_res_l20_w16384', 'it_res_l31_w16384', 'it_res_l9_w131072', 'it_res_l20_w131072', 'it_res_l31_w131072']: 3726/3726 items; elapsed=0.05h
+Loading pt_res_l9_w16384: google/gemma-scope-9b-pt-res / layer_9/width_16k/average_l0_100
+Loading pt_res_l20_w16384: google/gemma-scope-9b-pt-res / layer_20/width_16k/average_l0_68
+Loading pt_res_l31_w16384: google/gemma-scope-9b-pt-res / layer_31/width_16k/average_l0_114
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 800/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 2800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 3000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l9_w16384', 'pt_res_l20_w16384', 'pt_res_l31_w16384']: 3726/3726 items; elapsed=0.02h
+PT-to-IT transfer gate: FAIL
+Gemma Scope atlas complete -> /workspace/CONSCIOUS/data/gemma_scope_9b/confirmatory_v1_20260711/atlas

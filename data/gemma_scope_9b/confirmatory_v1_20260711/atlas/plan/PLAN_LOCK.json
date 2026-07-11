@@ -1,0 +1,10 @@
+{
+  "atlas_plan_sha256": "404ec72d4d539b3e38118cce57717c0586d926783a89eede00911d4a716b3b2e",
+  "baseline_plan_sha256": "869c6bf88caa93dfe349a8d466e3d9ebd3a8b0c9d38dc6f258ab75eb32999870",
+  "behavioral_outcomes_exist": false,
+  "created_at_utc": "2026-07-11T08:24:36.499202+00:00",
+  "independent_plan_audit_sha256": "a710e19ef2bd465019ad86344153b41b0c1841d19a0ab7ebc48bab20d806fa88",
+  "plan_manifest_sha256": "0cf8ab0f03c6178ddeb1bda864e2ae606d73de17e3de01c3171bb0c6b181e7a6",
+  "status": "locked",
+  "steering_template_sha256": "37bb5a910d629046bd1b59f76e14b34254e1ac3a8bfa9044218a45a1034feb74"
+}

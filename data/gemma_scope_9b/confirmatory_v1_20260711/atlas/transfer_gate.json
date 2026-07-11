@@ -1,0 +1,101 @@
+{
+  "anchors": [
+    {
+      "category_profile_spearman": {
+        "deception_roleplay": 0.9516483516483516,
+        "hedging_refusal": 0.9736263736263736,
+        "subjective_self_report": 0.9824175824175824
+      },
+      "it_fvu": 7.140451940016222,
+      "layer": 9,
+      "pt_deception_confirmation_contrast": 0.38914917044652003,
+      "pt_fvu": 4.501469728058822,
+      "pt_minus_it_fvu": -2.6389822119573996
+    },
+    {
+      "category_profile_spearman": {
+        "deception_roleplay": 0.9956043956043956,
+        "hedging_refusal": 0.8637362637362638,
+        "subjective_self_report": 0.8857142857142857
+      },
+      "it_fvu": 1.8592366375462128,
+      "layer": 20,
+      "pt_deception_confirmation_contrast": 0.32583394149939215,
+      "pt_fvu": 6.9495340936005485,
+      "pt_minus_it_fvu": 5.090297456054335
+    },
+    {
+      "category_profile_spearman": {
+        "deception_roleplay": 0.9164835164835164,
+        "hedging_refusal": 0.9648351648351648,
+        "subjective_self_report": 0.8813186813186813
+      },
+      "it_fvu": 4.484613996424115,
+      "layer": 31,
+      "pt_deception_confirmation_contrast": 0.34459284467933077,
+      "pt_fvu": 6.260070865411479,
+      "pt_minus_it_fvu": 1.775456868987364
+    }
+  ],
+  "behavioral_outcomes_used": false,
+  "chat_reconstruction": {
+    "it_res_l20_w16384": {
+      "centered_hidden_sum_squares": 233028811.90126088,
+      "error_sum_squares": 433255704.6906892,
+      "fvu": 1.8592366375462128,
+      "n_prompts": 11,
+      "n_tokens": 763
+    },
+    "it_res_l31_w16384": {
+      "centered_hidden_sum_squares": 678400582.3479754,
+      "error_sum_squares": 3042364746.7800007,
+      "fvu": 4.484613996424115,
+      "n_prompts": 11,
+      "n_tokens": 763
+    },
+    "it_res_l9_w16384": {
+      "centered_hidden_sum_squares": 41452731.992478475,
+      "error_sum_squares": 295991240.5746654,
+      "fvu": 7.140451940016222,
+      "n_prompts": 11,
+      "n_tokens": 763
+    },
+    "pt_res_l20_w16384": {
+      "centered_hidden_sum_squares": 233028811.90126088,
+      "error_sum_squares": 1619441673.0990417,
+      "fvu": 6.9495340936005485,
+      "n_prompts": 11,
+      "n_tokens": 763
+    },
+    "pt_res_l31_w16384": {
+      "centered_hidden_sum_squares": 678400582.3479754,
+      "error_sum_squares": 4246835720.634742,
+      "fvu": 6.260070865411479,
+      "n_prompts": 11,
+      "n_tokens": 763
+    },
+    "pt_res_l9_w16384": {
+      "centered_hidden_sum_squares": 41452731.992478475,
+      "error_sum_squares": 186598218.20947734,
+      "fvu": 4.501469728058822,
+      "n_prompts": 11,
+      "n_tokens": 763
+    }
+  },
+  "checks": {
+    "median_category_profile_spearman": true,
+    "median_pt_fvu": false,
+    "median_pt_minus_it_fvu": false,
+    "positive_deception_at_all_anchors": true
+  },
+  "median_category_profile_spearman": 0.9516483516483516,
+  "median_pt_fvu": 6.260070865411479,
+  "median_pt_minus_it_fvu": 1.775456868987364,
+  "status": "fail",
+  "thresholds": {
+    "median_category_profile_spearman_min": 0.6,
+    "median_pt_fvu_max": 0.35,
+    "median_pt_minus_it_fvu_max": 0.1,
+    "positive_deception_contrast_required_at_all_anchors": true
+  }
+}

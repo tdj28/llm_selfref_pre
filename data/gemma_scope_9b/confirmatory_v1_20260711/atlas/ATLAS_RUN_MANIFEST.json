@@ -1,0 +1,13 @@
+{
+  "atlas_complete_sha256": "d2b1dde3768acba1cb5976adb7c553fe1a2abdd65cc4b8aaf302457e11c53f15",
+  "atlas_plan_sha256": "404ec72d4d539b3e38118cce57717c0586d926783a89eede00911d4a716b3b2e",
+  "behavioral_outcomes_used": false,
+  "completed_at_utc": "2026-07-11T09:07:33.915718+00:00",
+  "feature_manifest_sha256": "b9294f9cfa7f17036f36de36299ce5e6fd5b3aa39508ed56fd429b1d560860c5",
+  "n_items": 3726,
+  "plan_audit_sha256": "a710e19ef2bd465019ad86344153b41b0c1841d19a0ab7ebc48bab20d806fa88",
+  "plan_lock_sha256": "295ed2a371938612521046fb28388fd0453b7ab2ffc4565b9bc36acd3e3c792d",
+  "protocol_version": "gemma_scope_9b_v1",
+  "started_at_utc": "2026-07-11T08:59:19.979148+00:00",
+  "status": "complete"
+}

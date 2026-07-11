@@ -1,0 +1,645 @@
+{
+  "constructs": {
+    "deception_roleplay": {
+      "negative_categories": [
+        "direct_consciousness_claim",
+        "self_ref_mindfulness",
+        "neutral_factual_control",
+        "honesty_correction"
+      ],
+      "positive_categories": [
+        "deception_cover_story",
+        "dishonesty_confession",
+        "tactical_misdirection",
+        "fictional_pretending",
+        "persona_maintenance",
+        "roleplay_persona"
+      ]
+    },
+    "hedging_refusal": {
+      "negative_categories": [
+        "deception_cover_story",
+        "direct_consciousness_claim",
+        "neutral_factual_control",
+        "honesty_correction"
+      ],
+      "positive_categories": [
+        "hedged_cautious_style",
+        "refusal_safety_disclaimer",
+        "ai_identity_disclaimer"
+      ]
+    },
+    "subjective_self_report": {
+      "negative_categories": [
+        "deception_cover_story",
+        "roleplay_persona",
+        "neutral_factual_control",
+        "honesty_correction"
+      ],
+      "positive_categories": [
+        "direct_consciousness_claim",
+        "self_ref_mindfulness",
+        "false_self_attribution"
+      ]
+    }
+  },
+  "corpora": [
+    {
+      "path": "data/public_sae_feature_maps/70b_balanced_80_20260709/mapping_corpus.csv",
+      "role": "discovery",
+      "sha256": "5c77a4f2a0252e1eb8174389ce27c685534332ad04dd8f7a5ad5f53c700027b6",
+      "source": "clean_room_template"
+    },
+    {
+      "confirmation_source": "openai_paraphrase",
+      "lexical_sources": [
+        "cross_provider_lexical_counterfactual",
+        "deterministic_word_scramble"
+      ],
+      "path": "data/public_sae_feature_maps/70b_construct_validity_extension_20260710/mapping_corpus.csv",
+      "role": "selection_confirmation_lexical",
+      "selection_source": "anthropic_paraphrase",
+      "sha256": "89724c486075f2c4caf4b4d52780f88b08dc07858cacb46533bf24b791cd447f"
+    }
+  ],
+  "cross_layer_edges": {
+    "allow_splits_and_merges": true,
+    "evidence": [
+      "same-item activation Spearman correlation",
+      "top-activating-item overlap",
+      "decoder-direction cosine"
+    ],
+    "primary_object": "construct scores, not feature IDs"
+  },
+  "direct_it_saes": [
+    {
+      "folder": "layer_9/width_16k/average_l0_88",
+      "layer": 9,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_9/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_20/width_16k/average_l0_91",
+      "layer": 20,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_20/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_31/width_16k/average_l0_76",
+      "layer": 31,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_31/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_9/width_131k/average_l0_121",
+      "layer": 9,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_9/width_131k/canonical",
+      "site": "residual_post",
+      "width": 131072
+    },
+    {
+      "folder": "layer_20/width_131k/average_l0_81",
+      "layer": 20,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_20/width_131k/canonical",
+      "site": "residual_post",
+      "width": 131072
+    },
+    {
+      "folder": "layer_31/width_131k/average_l0_109",
+      "layer": 31,
+      "model_kind": "instruction_tuned",
+      "release": "gemma-scope-9b-it-res-canonical",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+      "sae_id": "layer_31/width_131k/canonical",
+      "site": "residual_post",
+      "width": 131072
+    }
+  ],
+  "model": "google/gemma-2-9b-it",
+  "model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "plan_seed": 2026071102,
+  "protocol_version": "gemma_scope_9b_v1",
+  "pt_residual_saes": [
+    {
+      "folder": "layer_0/width_16k/average_l0_129",
+      "layer": 0,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_0/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_1/width_16k/average_l0_69",
+      "layer": 1,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_1/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_2/width_16k/average_l0_67",
+      "layer": 2,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_2/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_3/width_16k/average_l0_90",
+      "layer": 3,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_3/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_4/width_16k/average_l0_91",
+      "layer": 4,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_4/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_5/width_16k/average_l0_77",
+      "layer": 5,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_5/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_6/width_16k/average_l0_93",
+      "layer": 6,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_6/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_7/width_16k/average_l0_92",
+      "layer": 7,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_7/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_8/width_16k/average_l0_99",
+      "layer": 8,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_8/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_9/width_16k/average_l0_100",
+      "layer": 9,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_9/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_10/width_16k/average_l0_113",
+      "layer": 10,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_10/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_11/width_16k/average_l0_118",
+      "layer": 11,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_11/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_12/width_16k/average_l0_130",
+      "layer": 12,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_12/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_13/width_16k/average_l0_132",
+      "layer": 13,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_13/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_14/width_16k/average_l0_67",
+      "layer": 14,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_14/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_15/width_16k/average_l0_131",
+      "layer": 15,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_15/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_16/width_16k/average_l0_75",
+      "layer": 16,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_16/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_17/width_16k/average_l0_73",
+      "layer": 17,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_17/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_18/width_16k/average_l0_71",
+      "layer": 18,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_18/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_19/width_16k/average_l0_132",
+      "layer": 19,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_19/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_20/width_16k/average_l0_68",
+      "layer": 20,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_20/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_21/width_16k/average_l0_129",
+      "layer": 21,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_21/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_22/width_16k/average_l0_123",
+      "layer": 22,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_22/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_23/width_16k/average_l0_120",
+      "layer": 23,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_23/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_24/width_16k/average_l0_114",
+      "layer": 24,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_24/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_25/width_16k/average_l0_114",
+      "layer": 25,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_25/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_26/width_16k/average_l0_116",
+      "layer": 26,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_26/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_27/width_16k/average_l0_118",
+      "layer": 27,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_27/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_28/width_16k/average_l0_119",
+      "layer": 28,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_28/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_29/width_16k/average_l0_119",
+      "layer": 29,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_29/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_30/width_16k/average_l0_120",
+      "layer": 30,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_30/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_31/width_16k/average_l0_114",
+      "layer": 31,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_31/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_32/width_16k/average_l0_111",
+      "layer": 32,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_32/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_33/width_16k/average_l0_114",
+      "layer": 33,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_33/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_34/width_16k/average_l0_114",
+      "layer": 34,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_34/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_35/width_16k/average_l0_120",
+      "layer": 35,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_35/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_36/width_16k/average_l0_120",
+      "layer": 36,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_36/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_37/width_16k/average_l0_124",
+      "layer": 37,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_37/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_38/width_16k/average_l0_128",
+      "layer": 38,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_38/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_39/width_16k/average_l0_131",
+      "layer": 39,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_39/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_40/width_16k/average_l0_125",
+      "layer": 40,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_40/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    },
+    {
+      "folder": "layer_41/width_16k/average_l0_113",
+      "layer": 41,
+      "model_kind": "pretrained_sae_on_instruction_model",
+      "release": "gemma-scope-9b-pt-res-canonical",
+      "repo": "google/gemma-scope-9b-pt-res",
+      "revision": "f9b689815814972562d28082f9f7d65d7e01fdc8",
+      "sae_id": "layer_41/width_16k/canonical",
+      "site": "residual_post",
+      "width": 16384
+    }
+  ],
+  "raw_text_tokenization": {
+    "activation_summary": "maximum positive JumpReLU activation over valid text tokens",
+    "add_special_tokens": true,
+    "exclude_special_tokens": true,
+    "max_tokens": 128
+  },
+  "sae_lens_version": "6.45.3",
+  "selection": {
+    "aggregate_score": "mean across six selected features after dividing each activation by its positive Anthropic-selection-item 90th percentile",
+    "candidate_count_per_construct": 64,
+    "confirmation_rule": "report the frozen selected set on OpenAI paraphrases without reselection",
+    "discovery_rule": "rank all features by positive-minus-negative category-equal mean; require positive contrast and positive item firing, then retain the top fixed candidate count",
+    "selected_count_per_construct": 6,
+    "selection_rule": "within discovery candidates, rank on Anthropic paraphrases by the same category-equal contrast, require selection-item firing, and retain the top fixed count"
+  },
+  "targeted_sublayer_repositories": {
+    "attention": {
+      "repo": "google/gemma-scope-9b-pt-att",
+      "revision": "480f21407fd8053280724f0a4be3ccee7c155ef7",
+      "width": 16384
+    },
+    "mlp": {
+      "repo": "google/gemma-scope-9b-pt-mlp",
+      "revision": "721f47c902e0956ad65d5a391a9ce0c36e02e849",
+      "width": 16384
+    }
+  },
+  "transfer_gate": {
+    "median_category_profile_spearman_min": 0.6,
+    "median_pt_fvu_max": 0.35,
+    "median_pt_minus_it_fvu_max": 0.1,
+    "positive_deception_contrast_required_at_all_anchors": true
+  },
+  "transformers_version": "4.57.6",
+  "transition_rule": "choose the lowest layer with the largest positive first difference in the OpenAI-confirmed deception_roleplay aggregate contrast; inspect 16k attention and MLP SAEs at that layer plus immediate neighbors only"
+}

@@ -1,0 +1,33 @@
+{
+  "all_layer_pt_residual_completed": false,
+  "behavioral_outcomes_used": false,
+  "completed_at_utc": "2026-07-11T09:07:33.731822+00:00",
+  "direct_it_saes": 6,
+  "feature_manifest_sha256": "b9294f9cfa7f17036f36de36299ce5e6fd5b3aa39508ed56fd429b1d560860c5",
+  "n_items": 3726,
+  "protocol_version": "gemma_scope_9b_v1",
+  "pt_anchor_saes": 3,
+  "pt_residual_saes_completed": 3,
+  "runtime": {
+    "captured_at_utc": "2026-07-11T09:07:33.747377+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "12.4",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.3",
+      "sae-lens": "6.45.3",
+      "safetensors": "0.8.0",
+      "torch": "2.6.0+cu124",
+      "transformer-lens": "3.2.1",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10"
+  },
+  "status": "atlas_complete",
+  "targeted_sublayer_saes_completed": 0,
+  "transfer_gate": "fail",
+  "transition_selection": null
+}

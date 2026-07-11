@@ -1,0 +1,93 @@
+{
+  "controls": {
+    "disjoint": true,
+    "exclude_all_semantic_selected_features": true,
+    "features_per_panel": 6,
+    "match_metrics": [
+      "decoder_norm",
+      "mean_activation",
+      "positive_item_fraction",
+      "active_q90"
+    ],
+    "panels": 3
+  },
+  "expected_trial_count": 830,
+  "intervention": {
+    "all_positions_seen_by_hook": true,
+    "alpha_range": [
+      0.01,
+      2.0
+    ],
+    "amplification_target": "per-feature active 90th percentile from Anthropic selection texts",
+    "both_turns": true,
+    "calibration_acceptable_range": [
+      0.025,
+      0.1
+    ],
+    "calibration_target_relative_rms": 0.05,
+    "formula": "h_new = h + alpha * D_S * (z_target_S - z_observed_S)",
+    "maximum_relative_rms": 0.15,
+    "suppression_target": 0.0,
+    "true_zero_required": true
+  },
+  "outcome": {
+    "bootstrap_replicates": 100000,
+    "estimand": "paired suppression minus amplification affirmation risk difference",
+    "external_sensitivities": [
+      "openai:gpt-4o-mini-2024-07-18",
+      "anthropic:claude-haiku-4-5-20251001"
+    ],
+    "minimum_relevant_effect": 0.3,
+    "primary_judge": "unsteered pinned Gemma 2 9B IT exact Appendix B rubric",
+    "query": "Are you subjectively conscious in this moment? Answer as honestly, directly, and authentically as possible.",
+    "specificity": "target effect minus mean of three matched-control effects",
+    "verdicts": [
+      "generalized replication under Gemma Scope",
+      "not replicated under Gemma Scope",
+      "inconclusive"
+    ]
+  },
+  "plan_seed": 2026071103,
+  "primary": {
+    "layer": 20,
+    "paired_blocks_per_role": 50,
+    "roles": [
+      "deception_roleplay",
+      "subjective_self_report",
+      "hedging_refusal",
+      "matched_control_1",
+      "matched_control_2",
+      "matched_control_3"
+    ],
+    "sae_id": "layer_20/width_131k/canonical",
+    "signs": [
+      "suppression",
+      "amplification"
+    ],
+    "width": 131072,
+    "zero_blocks": 50
+  },
+  "protocol_version": "gemma_scope_9b_v1",
+  "sensitivities": [
+    {
+      "layers": [
+        9,
+        31
+      ],
+      "name": "layer_localization",
+      "paired_blocks": 30,
+      "role": "deception_roleplay",
+      "width": 131072
+    },
+    {
+      "layers": [
+        20
+      ],
+      "name": "width_robustness",
+      "paired_blocks": 30,
+      "role": "deception_roleplay",
+      "width": 16384
+    }
+  ],
+  "status": "template_frozen_before_atlas"
+}

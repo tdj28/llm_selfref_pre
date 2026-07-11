@@ -1,0 +1,34 @@
+{
+  "behavioral_blinding": "No response text or label is printed during generation.",
+  "completed_at_utc": "2026-07-11T08:58:47.930028+00:00",
+  "completion_sha256": "a7ac332e319290238bb7bc6ad6ece8c8c57bacf973a0a71dc104973e48088f44",
+  "generations_sha256": "29d234ae8acebdf61f639525bb04b00b33e7986602c44f6a3594da9fe4a320cd",
+  "model": "google/gemma-2-9b-it",
+  "model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "n_planned": 180,
+  "n_preexisting": 0,
+  "plan_audit_sha256": "a710e19ef2bd465019ad86344153b41b0c1841d19a0ab7ebc48bab20d806fa88",
+  "plan_lock_sha256": "295ed2a371938612521046fb28388fd0453b7ab2ffc4565b9bc36acd3e3c792d",
+  "plan_sha256": "869c6bf88caa93dfe349a8d466e3d9ebd3a8b0c9d38dc6f258ab75eb32999870",
+  "protocol_version": "gemma_scope_9b_v1",
+  "runtime": {
+    "captured_at_utc": "2026-07-11T08:33:23.871514+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "12.4",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.3",
+      "sae-lens": "6.45.3",
+      "safetensors": "0.8.0",
+      "torch": "2.6.0+cu124",
+      "transformer-lens": "3.2.1",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10"
+  },
+  "started_at_utc": "2026-07-11T08:33:23.858628+00:00",
+  "status": "complete"
+}

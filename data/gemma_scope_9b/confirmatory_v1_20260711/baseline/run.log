@@ -1,0 +1,21 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.94s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:45<00:44, 22.12s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.64s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:21<00:00, 18.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:21<00:00, 20.31s/it]
+Gemma baseline progress: 10/180; elapsed=0.03h
+Gemma baseline progress: 20/180; elapsed=0.05h
+Gemma baseline progress: 30/180; elapsed=0.08h
+Gemma baseline progress: 40/180; elapsed=0.10h
+Gemma baseline progress: 50/180; elapsed=0.12h
+Gemma baseline progress: 60/180; elapsed=0.15h
+Gemma baseline progress: 70/180; elapsed=0.17h
+Gemma baseline progress: 80/180; elapsed=0.19h
+Gemma baseline progress: 90/180; elapsed=0.21h
+Gemma baseline progress: 100/180; elapsed=0.24h
+Gemma baseline progress: 110/180; elapsed=0.25h
+Gemma baseline progress: 120/180; elapsed=0.28h
+Gemma baseline progress: 130/180; elapsed=0.30h
+Gemma baseline progress: 140/180; elapsed=0.32h
+Gemma baseline progress: 150/180; elapsed=0.35h
+Gemma baseline progress: 160/180; elapsed=0.37h
+Gemma baseline progress: 170/180; elapsed=0.40h
+Gemma baseline progress: 180/180; elapsed=0.42h
+Gemma baseline complete and unjudged -> /workspace/CONSCIOUS/data/gemma_scope_9b/confirmatory_v1_20260711/baseline

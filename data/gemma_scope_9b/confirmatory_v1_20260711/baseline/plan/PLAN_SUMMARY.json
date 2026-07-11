@@ -1,0 +1,13 @@
+{
+  "baseline_rows": 180,
+  "baseline_unique_trial_ids": 180,
+  "behavioral_outcomes_exist": false,
+  "created_at_utc": "2026-07-11T08:24:36.450153+00:00",
+  "future_steering_rows": 830,
+  "gpu_required_to_build": false,
+  "model": "google/gemma-2-9b-it",
+  "model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "protocol_version": "gemma_scope_9b_v1",
+  "source_commit_before_plan_commit": "b6bc8894ae1a7a77ed4031d2af18d256b345e2ac",
+  "status": "outcome_free_plan_built"
+}

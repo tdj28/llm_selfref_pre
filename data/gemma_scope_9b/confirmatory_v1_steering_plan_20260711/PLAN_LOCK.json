@@ -1,0 +1,12 @@
+{
+  "behavioral_steering_outcomes_exist": false,
+  "calibration_sha256": "79d5ba38c8b41e2eba9621e5dd026f7e21ab987861968066268b2ccb865c2eff",
+  "created_at_utc": "2026-07-11T09:19:55.344170+00:00",
+  "feature_manifest_sha256": "c670fe7a79fc49db0a12e4d87bd72ea2637593e5e6b76614486e6266a80405df",
+  "independent_plan_audit_sha256": "5e1d3f493ca96dfba2433ac70f09e07d84c48162d652b5ac8cb1106320506559",
+  "plan_manifest_sha256": "edac1da8db3e89b80433542a3fee9c9d040f77dc3c1b22ed8669a350133789db",
+  "plan_summary_sha256": "bae60651c02dbb1bc93d572da1687e41316d35b20e4b64d0c49966e2511fe93f",
+  "status": "locked",
+  "steering_plan_sha256": "183dcc0e25c9ad5878c6f9c9da8bfa3a54a01746d4d709bbb8858029ba3a3746",
+  "transfer_gate_sha256": "6e1404564c981c733c8cecafd02fd2709cb138330608bfa02d2b67837516b9df"
+}
