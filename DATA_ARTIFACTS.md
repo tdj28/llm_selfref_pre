@@ -6,8 +6,9 @@ The repo still ignores secrets, model caches, LaTeX build products, Python cache
 The tracked data includes the frozen causal release, public-SAE mapping and
 construct-validity extension, corrected adaptive two-turn steering, the
 branched-specificity diagnostic, and the prospective 1,500-trial public-SAE
-full-grid replication. Recompute repository size from git rather than relying
-on a stale hand-maintained total.
+full-grid replication, plus the independent Gemma Scope 9B cross-model phase.
+Recompute repository size from git rather than relying on a stale
+hand-maintained total.
 Some raw files intentionally preserve remote bytes and RFC-style CSV line
 endings. `.gitattributes` makes those endings valid for whitespace checks. Do
 not normalize a raw artifact unless the analysis explicitly regenerates it and
@@ -50,6 +51,9 @@ the release manifest is rebuilt.
 | `data/public_sae_consciousness_gating/confirmatory_v1_calibration_20260710/` | Outcome-blind telemetry calibration release. It preserves the initial narrow dose-gate failure, its passing independent audit, Amendment 1, the amended passing `m=3.653` artifact, all 18 unrelaxed matched controls, logs, and SHA-256 manifest. No response text was persisted. |
 | `data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/` | Self-contained frozen 1,500-trial confirmatory plan with calibration and audit copies, exact execution order, control mapping, source hashes, independent plan audit, and release manifest. |
 | `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` | Completed prospective public-weight Experiment 2 release: frozen plan copy, 1,500 unique two-turn generations, per-turn intervention telemetry, 1,500 primary local Llama and 3,000 external exact-rubric judgments, strict-parser abstentions, primary and calibrated effects, three matched control panels, all individual curves, agreement/cap/dose analyses, independent raw-row verdict audit, four PNG/PDF figure pairs, runtime and zero-row startup-failure logs, and a SHA-256 release manifest. The prespecified verdict is `not replicated under the public implementation`; proprietary equivalence remains unavailable. |
+| `data/gemma_scope_9b/confirmatory_v1_plan_20260711/` | Outcome-free Gemma Scope plan: 180-row exact/factorial baseline, direct-IT and all-layer PT SAE inventories, semantic corpus hashes, transfer thresholds, feature-selection rules, steering template, plan lock, and independent audit. |
+| `data/gemma_scope_9b/confirmatory_v1_steering_plan_20260711/` | Frozen and independently audited 830-row Gemma causal plan built only after outcome-blind atlas and calibration: selected direct-IT feature sets, three disjoint matched controls, doses, transfer-gate copy, exact execution order, and all source hashes. |
+| `data/gemma_scope_9b/confirmatory_v1_20260711/` | Completed Gemma Scope 9B cross-model release: 180 baseline and 830 causal generations; 1,010 local and 2,020 external blinded judgments; direct-parser labels; direct-IT semantic anchors, controls, layer/width sensitivities, telemetry, and causal relay; failed prospective PT-to-IT transfer gate; separately labeled 42-layer exploratory residual atlas, six targeted attention/MLP maps, and 1,476 adjacent-layer pair rows; protocol and independent headline audits; 12 PNG/PDF figure pairs; correction/runtime logs; and a 403-file SHA-256 manifest. The registered verdict is `not replicated under Gemma Scope`, with specificity inconclusive. |
 | `data/public_sae_feature_probes_validation/` | Dry-run validation corpus for the public-SAE feature probe script. |
 | `data/public_sae_feature_maps_dryrun/` | Dry-run validation corpus for the public-SAE feature-mapping script. |
 | `data/ae_protocol_validation/` | Clean-room Steering API protocol dry-run plans and manifests. Payloads store prompt hashes/lengths where needed to avoid vendoring upstream notebook text. |
@@ -63,10 +67,12 @@ The `data/` directories are included for auditability and reanalysis.
 Paper-ready PNG figures in `paper/results/` are generated or synchronized from
 tracked CSV/JSONL release artifacts by `scripts/generate_paper_figures.py`.
 
-The current manuscript's primary tables and figures come from the frozen causal
-release. Earlier Experiment 1, semantic, paradox, and steering-smoke artifacts
-remain available for audit and appendix context, but they are not all primary
-confirmatory evidence.
+The current manuscript's primary tables and figures come from the frozen causal,
+prospective Llama public-SAE, and direct-IT Gemma Scope releases. Earlier
+Experiment 1, semantic, paradox, and steering-smoke artifacts remain available
+for audit and appendix context, but they are not all primary confirmatory
+evidence. The Gemma all-layer PT-on-IT atlas remains exploratory because its
+prospective transfer gate failed.
 
 For the evidence status and allowed interpretation of each result, see
 `docs/CLAIM_LEDGER.md`. That ledger is the release-level bridge between raw

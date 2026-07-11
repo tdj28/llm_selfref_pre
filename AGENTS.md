@@ -52,6 +52,12 @@ immediately public and permanently recoverable.
 - `docs/GEMMA_SCOPE_9B_ROADMAP.md` is the design rationale for the cross-model
   Gemma Scope phase. `docs/GEMMA_SCOPE_9B_PROTOCOL.md` is the prospective
   protocol frozen before Gemma outcomes.
+- `docs/GEMMA_SCOPE_9B_RESULTS.md` is the authoritative concise outcome and
+  claim-boundary summary for the completed Gemma phase.
+- `data/gemma_scope_9b/confirmatory_v1_20260711/` is the complete 403-file
+  Gemma release with raw generations, judges, direct-IT maps, the failed
+  transfer gate, steering and relay telemetry, the exploratory atlas, analyses,
+  12 figure pairs, correction logs, independent audit, and hashes.
 
 ## Research Direction
 
@@ -98,35 +104,45 @@ Public SAE work is a separate evidence ladder:
 
 Strong contributions should map to falsifiable experiments and paper figures/tables, not just prose argument.
 
-## Gemma Scope Next Phase
+## Completed Gemma Scope Phase
 
 - Treat Gemma 2 9B as a cross-model mechanistic generalization, not an exact
   replication of Llama feature IDs or the proprietary Goodfire API.
+- The registered direct-IT primary effect is `-0.02 [-0.10, 0.06]` against a
+  frozen 0.30 minimum, yielding `not replicated under Gemma Scope`. GPT-4o mini
+  and Claude Haiku each estimate `0.00`; three-judge majority estimates
+  `0.020`. Specificity is inconclusive at `-0.013 [-0.107, 0.073]`.
+- The exact Gemma self-reference-minus-history baseline is small: local Gemma
+  `0.12 [0.04, 0.22]`, GPT `0.06 [0.00, 0.14]`, and Claude/majority `0.020
+  [0.000, 0.061]`, with every history rate at zero. Do not imply a broad
+  near-ceiling replication.
 - The direct instruction-tuned Gemma Scope residual SAEs cover layers 9, 20,
   and 31 at 16k and 131k widths. All-42-layer coverage uses pre-trained-model
-  SAEs and requires a prospectively frozen PT-to-IT transfer gate on the exact
-  prompt distribution.
+  SAEs. The prospectively frozen PT-to-IT gate failed on reconstruction while
+  semantic profile correlation passed. Never rewrite that result or call the
+  all-layer branch confirmatory.
 - Feature IDs are local to each independently trained SAE. Follow preregistered
   construct scores across layers; do not imply that equal or matched IDs are a
   persistent feature identity.
-- Use layer 20, direct-IT, 131k as the default primary intervention site unless
-  a protocol committed before outcomes justifies another choice. Treat other
-  layers and sublayers as registered localization or mechanistic follow-ups.
+- Layer 20, direct-IT, 131k is the completed primary intervention site. Local
+  layer-9, layer-31, and layer-20/16k target sensitivities are all nonpositive.
 - Keep discovery, locked semantic validation, baseline behavior, and causal
   steering in separate artifacts. Do not select features using final
   consciousness-report outcomes.
-- Do not create a Gemma GPU pod until the baseline/direct-IT protocol, exact
-  revisions, machine-readable plan, independent validator, and local dry run
-  are committed and pushed.
-- The owner authorized the full phase and added RunPod funds on 2026-07-11.
-  Authorization does not relax the stage gates. Use one uniquely named
-  agent-owned pod, preserve outcome blinding between atlas/calibration and the
-  final causal-plan commit, retrieve hashes before termination, and never touch
-  a pod created by another experiment.
-- The frozen Gemma PT-to-IT gate failed. Never rewrite that result. A separate
-  `atlas_exploratory/` continuation is allowed under
-  `docs/GEMMA_SCOPE_9B_EXPLORATORY_ATLAS.md`; it cannot alter or support the
-  confirmatory behavioral verdict.
+- A layer-9 intervention produces a small expected-sign layer-20 activation
+  relay concentrated on prompt positions; later readouts attenuate and the
+  behavioral effect remains nonpositive. Report local propagation, not
+  behavioral mediation or a consciousness circuit.
+- The local hedging/refusal effect is `+0.16 [0.04, 0.30]`, but external judges
+  are about `+0.04` and the conservative six-role post-unblinding Holm-adjusted
+  exact probability is `0.231`. Report evaluator-sensitive style movement, not
+  a confirmed alternate mechanism.
+- The exploratory atlas has 42 residual and six targeted sublayer summaries,
+  1,476 adjacent-layer pair rows, and 41 one-to-one assignments. Neutral cue
+  transplant raises the selected deception/roleplay score at every layer.
+- Agent-owned RunPod pod `9ifzwg2pmnj00d` was hash-verified and terminated on
+  2026-07-11. DELETE returned 204, direct GET returned 404, and inventory was
+  empty. No Gemma pod remains available for reuse.
 
 ## Main Workflows
 
@@ -154,19 +170,29 @@ venv/bin/python experiments/causal_transplant/analyze_causal_transplant.py \
   --outdir data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper
 ```
 
-Gemma outcome-free plan:
+Gemma read-only release check and disposable reanalysis:
 
 ```bash
-python experiments/exp2_sae/build_gemma_scope_9b_plan.py \
-  data/gemma_scope_9b/confirmatory_v1_plan_20260711
-python experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
-  data/gemma_scope_9b/confirmatory_v1_plan_20260711
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+make public-audit
+
+mkdir -p out
+REANALYSIS=$(mktemp -d out/gemma-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$REANALYSIS"/
+python experiments/exp2_sae/analyze_gemma_scope_9b.py "$REANALYSIS"
+python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py "$REANALYSIS"
+python experiments/exp2_sae/figure_gemma_scope_9b.py "$REANALYSIS"
+python experiments/exp2_sae/build_gemma_scope_9b_release.py "$REANALYSIS"
 ```
 
-The Gemma baseline, atlas, calibration, final-plan, steering, judging, analysis,
-and release commands are bound in `docs/GEMMA_SCOPE_9B_PROTOCOL.md`. Do not run
-causal steering from the template; build and independently validate the final
-830-row plan from the committed atlas and calibration artifacts first.
+The outcome-generation commands and frozen stage gates remain bound in
+`docs/GEMMA_SCOPE_9B_PROTOCOL.md`. Do not regenerate or overwrite the completed
+release casually. In particular, the release manifest is intentionally bound
+to result commit `19a4cd1`; do not rerun the release builder merely as a check,
+because the analysis, audit, figure, and release scripts update derived files,
+timestamps, and hashes. Use an ignored copy as above. New Gemma work must use a
+new run directory and preserve the failed transfer verdict, direct-IT causal
+release, and post-gate labels.
 
 Experiment 1 replication:
 

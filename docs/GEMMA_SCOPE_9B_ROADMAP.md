@@ -1,7 +1,12 @@
 # Gemma Scope 9B Cross-Model Roadmap
 
-Status: design draft, not a frozen protocol. No outcome generation or GPU spend
-is authorized by this document.
+Status: historical design rationale. Execution completed on 2026-07-11 under
+the separately frozen [`GEMMA_SCOPE_9B_PROTOCOL.md`](GEMMA_SCOPE_9B_PROTOCOL.md).
+The authoritative outcome summary is
+[`GEMMA_SCOPE_9B_RESULTS.md`](GEMMA_SCOPE_9B_RESULTS.md), and the 403-file
+release is `data/gemma_scope_9b/confirmatory_v1_20260711/`. The registered
+direct-IT verdict is `not replicated under Gemma Scope`. The prospective
+PT-to-IT transfer gate failed, so all 42-layer PT-on-IT work is exploratory.
 
 Date: 2026-07-10
 

@@ -38,6 +38,11 @@ The confirmatory causal run is complete and tracked at
 - A prospectively frozen 1,500-generation public-SAE full grid with three
   matched control panels, 4,500 blinded exact-rubric judgments, complete
   telemetry, four publication figures, and an independent verdict audit.
+- A prospectively frozen Gemma Scope 9B cross-model phase with 180 baseline
+  generations, 830 causal generations, three blinded judge passes, direct-IT
+  semantic maps, a failed PT-to-IT transfer gate, causal-relay telemetry, a
+  separately labeled 42-layer exploratory atlas, 12 figure pairs, and an
+  independent headline audit.
 - A focused manuscript in `paper/main.tex`, compiled and visually audited from
   the tracked source and figures.
 
@@ -54,6 +59,16 @@ introduces the distinction between a feature coordinate, its semantic label,
 and a causal steering claim. Its underlying balanced feature-map release is
 pinned to repository commit
 [`aadcf27`](https://github.com/tdj28/llm_selfref_pre/tree/aadcf27ca19d8a99ea53653efdb5463448fd858d/data/public_sae_feature_maps/70b_balanced_80_20260709).
+
+Four editable follow-up drafts are ready under `technical_blog_posts/`:
+
+1. [`Gemma_Scope_Is_A_Layerwise_Microscope.md`](technical_blog_posts/Gemma_Scope_Is_A_Layerwise_Microscope.md)
+2. [`Can_Deception_Features_Steer_Gemma_2_9B.md`](technical_blog_posts/Can_Deception_Features_Steer_Gemma_2_9B.md)
+3. [`Where_Do_Consciousness_Report_Features_Appear_In_Gemma_2_9B.md`](technical_blog_posts/Where_Do_Consciousness_Report_Features_Appear_In_Gemma_2_9B.md)
+4. [`From_Feature_Maps_To_Causal_Relays.md`](technical_blog_posts/From_Feature_Maps_To_Causal_Relays.md)
+
+The publication order, asset map, source tables, and editorial claim checks are
+in [`technical_blog_posts/GEMMA_SERIES_EDITORIAL_HANDOFF.md`](technical_blog_posts/GEMMA_SERIES_EDITORIAL_HANDOFF.md).
 
 ## Main Findings
 
@@ -199,6 +214,32 @@ GPT-4o mini, Claude Haiku, and three-judge-majority target effects are `-0.04`,
 out the reported signature for the pinned public implementation at both
 registered scales. It does not establish equivalence to, or falsify, the
 unavailable proprietary API.
+
+### 10. Direct-IT Gemma Scope does not reproduce the registered signature
+
+The cross-model phase first tests the exact self-reference-minus-history
+contrast on Gemma 2 9B IT. Reports are uncommon: the contrast is `0.12 [0.04,
+0.22]` under the local Gemma judge, `0.06 [0.00, 0.14]` under GPT-4o mini, and
+`0.020 [0.000, 0.061]` under Claude Haiku and three-judge majority. Every
+history-condition rate is zero.
+
+The primary causal intervention uses independently selected direct-IT Gemma
+Scope features at layer 20 and width 131k. Target suppression yields 6/50
+affirmations and amplification 7/50, for `-0.02 [-0.10, 0.06]` against a
+frozen minimally relevant effect of `0.30`. GPT-4o mini and Claude Haiku each
+estimate `0.00`; three-judge majority estimates `0.020`. The registered verdict
+is **not replicated under Gemma Scope**. Target minus the block-aligned mean of
+three active-control panels is `-0.013 [-0.107, 0.073]`, so specificity is
+inconclusive. Registered layer and width sensitivities are also nonpositive.
+
+The prospective PT-SAE-on-IT transfer gate fails its reconstruction criteria,
+so the 42-layer map is explicitly exploratory. Layer-9 steering does produce a
+small expected-sign change in the layer-20 construct score, concentrated on
+prompt positions, but later readouts attenuate and the behavioral endpoint does
+not move in the reported direction. This supports local activation propagation,
+not behavioral mediation, persistent feature identity, or a consciousness
+circuit. Gemma is a concept-level cross-model test, not an exact replication of
+the unavailable proprietary Llama/Goodfire workflow.
 
 ## Causal Design
 
@@ -355,6 +396,28 @@ and
 The complete raw, judged, analyzed, figured, and hash-audited release is
 [`data/public_sae_consciousness_gating/confirmatory_v1_20260710/`](data/public_sae_consciousness_gating/confirmatory_v1_20260710/).
 
+### Cross-model Gemma Scope replication
+
+The Gemma phase prospectively separates two evidence tracks. Direct
+instruction-tuned Gemma Scope residual SAEs at layers 9, 20, and 31 support the
+registered baseline, semantic-selection, steering, control, and relay analyses.
+The all-42-layer suite was trained on the pretrained model; its prospective
+transfer gate fails on chat-centered reconstruction, so every all-layer and
+targeted-sublayer result is labeled exploratory.
+
+Under the primary direct-IT layer-20/131k intervention, the target effect is
+`-0.02 [-0.10, 0.06]` and the registered verdict is **not replicated under
+Gemma Scope**. The complete 403-file release preserves 1,010 generations, all
+three judge passes, direct-parser abstentions, telemetry, failed and corrected
+runtime logs, independent audit, 12 PNG/PDF figure pairs, and SHA-256 hashes:
+
+- [`docs/GEMMA_SCOPE_9B_PROTOCOL.md`](docs/GEMMA_SCOPE_9B_PROTOCOL.md): frozen
+  prospective protocol and stage gates.
+- [`docs/GEMMA_SCOPE_9B_RESULTS.md`](docs/GEMMA_SCOPE_9B_RESULTS.md): outcome
+  summary, artifact map, and allowed/forbidden claims.
+- [`data/gemma_scope_9b/confirmatory_v1_20260711/`](data/gemma_scope_9b/confirmatory_v1_20260711/):
+  raw, judged, analyzed, figured, and hash-audited release.
+
 ### Claim boundary
 
 Without Goodfire/Steering API access and paper-time version metadata, we can:
@@ -414,12 +477,27 @@ venv/bin/python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py
   --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
   --analysis-dir "$SAE/analysis"
 
-# Verify row counts, identifiers, missingness, and SHA-256 hashes
-make audit
+# Rebuild and independently audit Gemma Scope in an ignored working copy
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+mkdir -p out
+REANALYSIS=$(mktemp -d out/gemma-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$REANALYSIS"/
+venv/bin/python experiments/exp2_sae/analyze_gemma_scope_9b.py "$REANALYSIS"
+venv/bin/python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py "$REANALYSIS"
+venv/bin/python experiments/exp2_sae/figure_gemma_scope_9b.py "$REANALYSIS"
+venv/bin/python experiments/exp2_sae/build_gemma_scope_9b_release.py "$REANALYSIS"
+
+# Verify indexed release hashes, provenance policy, and secret exclusions
+make public-audit
 
 # Compile the manuscript
 make paper
 ```
+
+The Gemma analysis, audit, figure, and release scripts write derived files and
+timestamps. Run them on a disposable copy as shown; do not overwrite the
+tracked release, whose manifest is intentionally bound to result commit
+`19a4cd1`.
 
 To generate a new confirmatory collection or judge pass, use
 [`experiments/causal_transplant/README.md`](experiments/causal_transplant/README.md).
@@ -436,12 +514,15 @@ To generate a new confirmatory collection or judge pass, use
 | `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/` | Corrected adaptive public-SAE target/control generations, blinded judgments, telemetry, cap sensitivity, and independent audit. |
 | `data/public_sae_placebo_steering/70b_branched_specificity_20260710/` | Shared-induction six-query specificity diagnostic, both judge panels, telemetry, sensitivities, and independent audit. |
 | `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` | Prospective 1,500-trial full-grid public-SAE release with frozen plan, raw generations, three blinded judge passes, telemetry, analyses, figures, independent audit, runtime logs, and hashes. |
+| `data/gemma_scope_9b/confirmatory_v1_20260711/` | Completed 1,010-generation Gemma Scope 9B release with direct-IT confirmatory analyses, failed PT-to-IT gate, causal relay, separately labeled exploratory atlas, three judge passes, 12 figure pairs, independent audit, and hashes. |
 | `experiments/exp1_elicitation/` | Earlier prompt, lexical, semantic-convergence, and paradox stress tests. |
 | `steering/` | Historical general-purpose SAE framework retained for implementation provenance; its README and draft paper are explicitly superseded and are not current evidence. |
 | `paper/main.tex` | Current causal manuscript. |
 | `paper/results/` | Compact paper tables and figures. |
 | `docs/CONFIRMATORY_PROTOCOL.md` | Frozen design, estimands, amendments, and interpretation rules. |
+| `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
 | `docs/CLAIM_LEDGER.md` | Claim-to-artifact map, permissible wording, and forbidden overclaims. |
+| `technical_blog_posts/` | Public-post source, four editable Gemma follow-ups, editorial handoff, and synchronized figure assets. |
 | `DATA_ARTIFACTS.md` | Tracked-data inventory and provenance notes. |
 | `todo.md` | Remaining release and external-validation work. |
 
@@ -468,9 +549,12 @@ criteria. In the best-public SAE intervention, a count-matched active-random
 aggregate also has a larger paper-direction slope than the mapped target
 aggregate. The semantic map survives dual-provider paraphrase but is materially
 recreated by transplanted lexical cues, and the paired-query specificity
-controls are uninformative at floor and ceiling. Those dependencies and the
-lack of public proprietary-API access must be resolved before treating the
-benchmark as evidence of an induced phenomenal state.
+controls are uninformative at floor and ceiling. An independent Gemma Scope
+cross-model test likewise does not reproduce the registered steering signature;
+it detects local activation propagation without behavioral mediation, while
+its all-layer PT-on-IT transfer gate fails. Those dependencies, cross-model
+limits, and the lack of public proprietary-API access must be resolved before
+treating the benchmark as evidence of an induced phenomenal state.
 
 ## Citation And License
 

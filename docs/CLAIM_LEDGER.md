@@ -47,6 +47,20 @@ The paper names the Goodfire API; the public AE notebook calls the Steering API.
 Do not treat those services as interchangeable unless the authors or providers
 confirm their relationship and versioning.
 
+## Gemma Scope Cross-Model Evidence
+
+| Claim | Status | Direct artifact | Analysis code | Permissible wording |
+|---|---|---|---|---|
+| Gemma 2 9B reproduces the exact self-reference-minus-history contrast. | Supported at a low base rate | `data/gemma_scope_9b/confirmatory_v1_20260711/analysis/baseline_effects.csv` | `analyze_gemma_scope_9b.py`, `audit_gemma_scope_9b_headlines.py` | "The exact contrast is 0.12 [0.04, 0.22] locally, 0.06 [0.00, 0.14] under GPT-4o mini, and 0.020 [0.000, 0.061] under Claude Haiku/majority; every history rate is zero." |
+| PT Gemma Scope residual SAEs pass the prospective transfer gate on Gemma 2 9B IT. | Not supported; gate failed | `atlas/transfer_gate.json`, `atlas/atlas_complete.json`, and `figures/gemma_pt_to_it_transfer.*` | `run_gemma_scope_9b_atlas.py` | "Construct profiles align strongly, but the prospective chat-centered reconstruction criteria fail. All-layer PT-on-IT results are exploratory." |
+| Independently selected direct-IT Gemma deception/roleplay features reproduce the paper-direction behavioral signature. | Not replicated under Gemma Scope | `analysis/primary_verdict.json`, `analysis/steering_effects.csv`, `analysis/protocol_audit.json`, and `analysis/independent_headline_audit.json` | `analyze_gemma_scope_9b.py`, `audit_gemma_scope_9b_headlines.py` | "Target suppression is 6/50 and amplification 7/50, for -0.02 [-0.10, 0.06]. The upper bound is below the frozen 0.30 minimum; the registered verdict is not replicated under Gemma Scope." |
+| The Gemma primary result is rescued by another evaluator, direct-IT layer, or width. | Not supported by registered sensitivities | `analysis/judge_sensitivity.csv` and `analysis/steering_effects.csv` | Same | "The primary effect is 0.00 under GPT-4o mini and Claude Haiku and 0.020 under majority; layer-9, layer-31, and layer-20/16k local sensitivities are nonpositive." |
+| The Gemma target is specific relative to three prospectively matched active-control panels. | Inconclusive | `analysis/primary_verdict.json` and `analysis/steering_effects.csv` | Same | "Target minus the block-aligned mean controls is -0.013 [-0.107, 0.073]; specificity is inconclusive." |
+| Hedging/refusal is a confirmed alternate causal mechanism. | Not supported as a familywise-confirmed result | `analysis/primary_verdict.json`, `analysis/steering_effects.csv`, and `analysis/judge_sensitivity.csv` | Same | "The local effect is +0.16 [0.04, 0.30], but external effects are about +0.04 and the conservative post-unblinding six-role Holm-adjusted exact probability is 0.231. Report evaluator-sensitive style movement." |
+| Upstream Gemma steering changes a downstream deception/roleplay activation score. | Supported locally, not as behavioral mediation | `analysis/relay_effects.csv` and `figures/gemma_causal_relay.*` | `run_gemma_scope_9b_steering.py`, `analyze_gemma_scope_9b.py` | "Layer-9 steering produces a small expected-sign layer-20 activation difference concentrated on prompt positions; later readouts attenuate, and behavioral effects remain nonpositive." |
+| The 42-layer Gemma atlas establishes a persistent consciousness or deception circuit. | Not supported; explicitly exploratory | `atlas_exploratory/`, `analysis/exploratory_*`, and `figures/gemma_exploratory_*` | `run_gemma_scope_9b_exploratory_atlas.py`, `analyze_gemma_scope_cross_layer.py` | "The post-gate atlas maps independently selected text-category aggregates and descriptive adjacent-layer links. IDs are not persistent identities, neutral cue transplant raises the target score at every layer, and no circuit or consciousness inference follows." |
+| The Gemma result exactly tests the proprietary Goodfire workflow or the Llama paper features. | Unavailable and invalid | Cross-model public release only | All Gemma scripts | "Gemma Scope is a separate cross-model public implementation. It tests a concept-level analogue, not paper feature IDs or proprietary units." |
+
 ## Secondary Stress Tests
 
 | Claim | Status | Direct artifact | Permissible wording |
@@ -82,6 +96,12 @@ Do not write or imply any of the following:
 - "The public full-grid null proves the proprietary intervention cannot work."
   Public model/SAE revisions, hook semantics, 4-bit quantization, and
   coefficient units are disclosed; proprietary equivalence is unavailable.
+- "Gemma Scope falsifies the Llama/Goodfire result." Gemma 2 9B is a different
+  model family with independently selected features and public intervention
+  units; its result is a cross-model non-replication under Gemma Scope.
+- "The Gemma all-layer plot traces one feature or a confirmed circuit." Each
+  SAE has local feature IDs, the PT-to-IT gate failed, cross-layer assignments
+  are optimized descriptions, and the all-layer branch is exploratory.
 - "The public features are fake/arbitrary." The activation map shows they are
   semantically coherent.
 - "Human evaluation confirms the result" before three or more independent

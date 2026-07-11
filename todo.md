@@ -315,7 +315,7 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   human/external-review decisions, manuscript synchronization, and the complete
   public-release audit are complete.
 
-## External Or Optional Extensions
+## Gemma Scope And External Extensions
 
 - [x] Evaluate Gemma Scope 9B as the next cross-model platform and document the
   bounded design in `docs/GEMMA_SCOPE_9B_ROADMAP.md`.
@@ -324,13 +324,13 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   weights or creating a pod.
 - [x] Freeze the exact Gemma baseline prompts, seeds, judge panel,
   floor/ceiling interpretation, and claim boundary before generation.
-- [ ] Implement and locally test a pinned Gemma 2 / JumpReLU loader, true
+- [x] Implement and locally test a pinned Gemma 2 / JumpReLU loader, true
   no-op, latent-contribution edit, telemetry, checkpointing, and hook cleanup.
-- [ ] Freeze a discovery/locked-validation semantic corpus and complete feature
+- [x] Freeze a discovery/locked-validation semantic corpus and complete feature
   selection without using final consciousness-report outcomes.
-- [ ] Map both direct-IT widths at layers 9, 20, and 31; preserve the complete
+- [x] Map both direct-IT widths at layers 9, 20, and 31; preserve the complete
   tested-feature denominator and all selection diagnostics.
-- [ ] Freeze and run the PT-to-IT transfer gate at layers 9, 20, and 31 before
+- [x] Freeze and run the PT-to-IT transfer gate at layers 9, 20, and 31 before
   applying PT SAEs across all 42 instruction-tuned-model layers.
 - [x] Preregister layer 20 direct-IT 131k as the primary causal intervention,
   with matched-random, hedging/refusal, subjective-experience, and true-zero
@@ -338,14 +338,22 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Build and independently audit the 180-row baseline plan, six direct-IT
   anchor inventory, 42-layer PT inventory, transfer thresholds, feature
   selection rules, and 830-row causal-plan template before GPU outcomes.
-- [ ] Run upstream-to-downstream causal relay measurements before opening
+- [x] Run upstream-to-downstream causal relay measurements before opening
   attention/MLP sublayer follow-ups; never treat cross-layer IDs as stable
   identities.
-- [ ] Preserve the failed confirmatory PT-to-IT gate and run the separately
+- [x] Preserve the failed confirmatory PT-to-IT gate and run the separately
   labeled post-gate exploratory 42-layer atlas without changing the direct-IT
   causal plan or confirmatory verdict.
-- [ ] Keep the Gemma release and verdict separate from the completed Llama 70B
+- [x] Keep the Gemma release and verdict separate from the completed Llama 70B
   release, and independently audit every promoted point estimate and figure.
+- [x] Retrieve and hash-verify every Gemma GPU artifact, preserve the failed
+  exploratory hook attempt, terminate only the agent-owned pod, and verify
+  deletion by HTTP 404 plus empty inventory.
+- [x] Publish the 403-file Gemma release, 12 PNG/PDF figure pairs, results
+  documentation, claim-ledger entries, and manuscript section.
+- [x] Prepare four editable Gemma blog drafts plus their audited figure assets:
+  the Gemma Scope primer, causal steering result, exploratory layerwise atlas,
+  and causal-relay analysis.
 - [ ] If authors respond, archive whether the public AE notebook is the exact
   Experiment 2 setup and request a paper-time SAE/API version manifest. This is
   useful provenance but no longer blocks the owner-approved public-weight run.
