@@ -95,6 +95,16 @@ def main() -> None:
         require(release / "atlas/cross_layer_feature_edges.summary.json", "complete")
         if not (release / "atlas/cross_layer_feature_edges.csv").is_file():
             raise RuntimeError("All-layer atlas is missing cross-layer feature links")
+    exploratory = release / "atlas_exploratory"
+    if exploratory.is_dir():
+        exploratory_complete = require(
+            exploratory / "exploratory_complete.json", "complete"
+        )
+        if exploratory_complete.get("post_hoc_after_gate_failure") is not True:
+            raise RuntimeError("Exploratory atlas is missing its post-gate label")
+        require(exploratory / "cross_layer_feature_edges.summary.json", "complete")
+        if not (exploratory / "cross_layer_feature_edges.csv").is_file():
+            raise RuntimeError("Exploratory atlas is missing cross-layer links")
     require(release / "steering/steering_complete.json", "steering_generation_complete_unjudged")
     require(release / "steering/STEERING_RUN_MANIFEST.json", "complete")
     require(release / "steering/plan/PLAN_LOCK.json", "locked")

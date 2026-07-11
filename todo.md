@@ -341,6 +341,9 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [ ] Run upstream-to-downstream causal relay measurements before opening
   attention/MLP sublayer follow-ups; never treat cross-layer IDs as stable
   identities.
+- [ ] Preserve the failed confirmatory PT-to-IT gate and run the separately
+  labeled post-gate exploratory 42-layer atlas without changing the direct-IT
+  causal plan or confirmatory verdict.
 - [ ] Keep the Gemma release and verdict separate from the completed Llama 70B
   release, and independently audit every promoted point estimate and figure.
 - [ ] If authors respond, archive whether the public AE notebook is the exact

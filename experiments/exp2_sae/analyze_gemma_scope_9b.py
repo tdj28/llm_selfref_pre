@@ -726,6 +726,30 @@ def main() -> None:
         analysis_dir / "lexical_counterfactual_effects.csv",
         lexical_counterfactual_tables(release / "atlas"),
     )
+    exploratory_dir = release / "atlas_exploratory"
+    exploratory_complete = exploratory_dir / "exploratory_complete.json"
+    exploratory_status = None
+    if exploratory_complete.is_file():
+        exploratory_status = json.loads(
+            exploratory_complete.read_text(encoding="utf-8")
+        )
+        if exploratory_status.get("status") != "complete" or exploratory_status.get(
+            "post_hoc_after_gate_failure"
+        ) is not True:
+            raise RuntimeError("Exploratory atlas metadata is not valid")
+        exploratory_layers, exploratory_sublayers = atlas_tables(exploratory_dir)
+        write_csv(
+            analysis_dir / "exploratory_layerwise_constructs.csv",
+            exploratory_layers,
+        )
+        write_csv(
+            analysis_dir / "exploratory_sublayer_constructs.csv",
+            exploratory_sublayers,
+        )
+        write_csv(
+            analysis_dir / "exploratory_lexical_counterfactual_effects.csv",
+            lexical_counterfactual_tables(exploratory_dir),
+        )
 
     agreement_rows = []
     for left_name, right_name in (
@@ -784,6 +808,7 @@ def main() -> None:
         f"`{specificity['target_minus_mean_controls']:.3f} "
         f"[{specificity['ci_low']:.3f}, {specificity['ci_high']:.3f}]`.\n"
         f"- PT-to-IT transfer gate: **{transfer.get('status')}**.\n"
+        f"- Post-gate all-layer atlas: **{'exploratory only' if exploratory_status else 'not run'}**.\n"
         f"- Technical/protocol audit: **{protocol_audit['status']}**.\n"
         "- This is a cross-model Gemma Scope result, not an exact Goodfire API replication.\n"
     )
@@ -802,6 +827,11 @@ def main() -> None:
                 release / "judging/external_judgments.jsonl"
             ),
             "primary_verdict_sha256": sha256_file(analysis_dir / "primary_verdict.json"),
+            "exploratory_atlas_complete_sha256": (
+                sha256_file(exploratory_complete)
+                if exploratory_complete.is_file()
+                else None
+            ),
         },
     )
     print(f"Gemma analysis complete -> {analysis_dir}")

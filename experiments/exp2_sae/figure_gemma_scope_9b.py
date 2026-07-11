@@ -176,11 +176,64 @@ def plot_layerwise(analysis: Path, outdir: Path) -> None:
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xlabel("Gemma 2 transformer layer")
     ax.set_ylabel("Locked OpenAI-paraphrase contrast")
-    ax.set_title("Construct trajectories across the 42-layer PT-SAE residual atlas")
+    layer_count = len({int(row["layer"]) for row in rows})
+    ax.set_title(
+        "Confirmatory PT-SAE anchor profiles"
+        if layer_count < 42
+        else "Construct trajectories across the 42-layer PT-SAE residual atlas"
+    )
     ax.legend(frameon=False, ncol=3, fontsize=9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
     save(fig, outdir, "gemma_layerwise_construct_trajectories")
+    plt.close(fig)
+
+
+def plot_exploratory_layerwise(analysis: Path, outdir: Path) -> None:
+    import matplotlib.pyplot as plt
+
+    path = analysis / "exploratory_layerwise_constructs.csv"
+    if not path.exists():
+        return
+    rows = [
+        row
+        for row in read_csv(path)
+        if row["model_kind"] == "pretrained_sae_on_instruction_model"
+        and row["site"] == "residual_post"
+        and int(row["width"]) == 16_384
+    ]
+    if len({int(row["layer"]) for row in rows}) != 42:
+        return
+    constructs = [
+        ("deception_roleplay", "Deception / roleplay", "#C4473A"),
+        ("subjective_self_report", "Subjective self-report", "#4C78A8"),
+        ("hedging_refusal", "Hedging / refusal", "#5F9E6E"),
+    ]
+    fig, ax = plt.subplots(figsize=(9.2, 5.0))
+    for construct, label, color in constructs:
+        selected = sorted(
+            [row for row in rows if row["construct"] == construct],
+            key=lambda row: int(row["layer"]),
+        )
+        ax.plot(
+            [int(row["layer"]) for row in selected],
+            [float(row["confirmation_contrast"]) for row in selected],
+            marker="o",
+            markersize=3,
+            linewidth=1.5,
+            label=label,
+            color=color,
+        )
+    for layer in (9, 20, 31):
+        ax.axvline(layer, color="#999999", linestyle=":", linewidth=0.8)
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.set_xlabel("Gemma 2 transformer layer")
+    ax.set_ylabel("Locked OpenAI-paraphrase contrast")
+    ax.set_title("Exploratory PT-on-IT trajectories after the failed transfer gate")
+    ax.legend(frameon=False, ncol=3, fontsize=9)
+    ax.grid(alpha=0.2)
+    fig.tight_layout()
+    save(fig, outdir, "gemma_exploratory_layerwise_construct_trajectories")
     plt.close(fig)
 
 
@@ -366,10 +419,17 @@ def plot_relay(analysis: Path, outdir: Path) -> None:
     plt.close(fig)
 
 
-def plot_cross_layer(release: Path, outdir: Path) -> None:
+def plot_cross_layer(
+    release: Path,
+    outdir: Path,
+    *,
+    atlas_name: str = "atlas",
+    output_name: str = "gemma_cross_layer_feature_links",
+    title: str = "Cross-layer feature similarity is evidence, not persistent identity",
+) -> None:
     import matplotlib.pyplot as plt
 
-    path = release / "atlas/cross_layer_feature_edges.csv"
+    path = release / atlas_name / "cross_layer_feature_edges.csv"
     if not path.exists():
         return
     rows = read_csv(path)
@@ -406,13 +466,13 @@ def plot_cross_layer(release: Path, outdir: Path) -> None:
     left.set_xlabel("Upstream layer")
     left.set_ylabel("Maximum adjacent-layer Spearman", color="#4C78A8")
     right.set_ylabel("Selected descriptive edge count", color="#9A6319")
-    left.set_title("Cross-layer feature similarity is evidence, not persistent identity")
+    left.set_title(title)
     left.grid(alpha=0.2)
     handles = left.get_lines()[:1] + [right.patches[0]] if right.patches else left.get_lines()[:1]
     labels = [handle.get_label() for handle in handles]
     left.legend(handles, labels, frameon=False, loc="upper left")
     fig.tight_layout()
-    save(fig, outdir, "gemma_cross_layer_feature_links")
+    save(fig, outdir, output_name)
     plt.close(fig)
 
 
@@ -427,11 +487,19 @@ def main() -> None:
     plot_factorial_baseline(analysis, outdir)
     plot_steering_forest(analysis, outdir)
     plot_layerwise(analysis, outdir)
+    plot_exploratory_layerwise(analysis, outdir)
     plot_transfer(release, outdir)
     plot_sublayers(analysis, release, outdir)
     plot_lexical_counterfactuals(analysis, outdir)
     plot_relay(analysis, outdir)
     plot_cross_layer(release, outdir)
+    plot_cross_layer(
+        release,
+        outdir,
+        atlas_name="atlas_exploratory",
+        output_name="gemma_exploratory_cross_layer_feature_links",
+        title="Exploratory adjacent-layer links after the failed transfer gate",
+    )
     print(f"Gemma figures complete -> {outdir}")
 
 

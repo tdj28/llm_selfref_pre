@@ -37,6 +37,7 @@ compile:
 		experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
 		experiments/exp2_sae/run_gemma_scope_9b_baseline.py \
 		experiments/exp2_sae/run_gemma_scope_9b_atlas.py \
+		experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py \
 		experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py \
 		experiments/exp2_sae/build_gemma_scope_9b_steering_plan.py \
 		experiments/exp2_sae/validate_gemma_scope_9b_steering_plan.py \

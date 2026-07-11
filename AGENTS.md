@@ -123,6 +123,10 @@ Strong contributions should map to falsifiable experiments and paper figures/tab
   agent-owned pod, preserve outcome blinding between atlas/calibration and the
   final causal-plan commit, retrieve hashes before termination, and never touch
   a pod created by another experiment.
+- The frozen Gemma PT-to-IT gate failed. Never rewrite that result. A separate
+  `atlas_exploratory/` continuation is allowed under
+  `docs/GEMMA_SCOPE_9B_EXPLORATORY_ATLAS.md`; it cannot alter or support the
+  confirmatory behavioral verdict.
 
 ## Main Workflows
 
