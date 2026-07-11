@@ -1,0 +1,11 @@
+{
+  "atlas_feature_manifest_sha256": "b9294f9cfa7f17036f36de36299ce5e6fd5b3aa39508ed56fd429b1d560860c5",
+  "behavioral_steering_outcomes_exist": false,
+  "calibration_sha256": "79d5ba38c8b41e2eba9621e5dd026f7e21ab987861968066268b2ccb865c2eff",
+  "created_at_utc": "2026-07-11T09:19:55.286668+00:00",
+  "n_trials": 830,
+  "n_unique_trial_ids": 830,
+  "protocol_version": "gemma_scope_9b_v1",
+  "source_commit_before_plan_commit": "54383e246e4daf207db5002d8b1f71db1fd2c8b9",
+  "status": "final_steering_plan_built_outcome_free"
+}

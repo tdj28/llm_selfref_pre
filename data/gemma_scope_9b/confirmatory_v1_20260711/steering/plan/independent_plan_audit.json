@@ -1,0 +1,17 @@
+{
+  "audited_at_utc": "2026-07-11T09:19:55.343157+00:00",
+  "behavioral_outcomes_read": false,
+  "errors": [],
+  "n_rows": 830,
+  "n_unique_trial_ids": 830,
+  "primary_roles": [
+    "deception_roleplay",
+    "hedging_refusal",
+    "matched_control_1",
+    "matched_control_2",
+    "matched_control_3",
+    "subjective_self_report"
+  ],
+  "production_module_imported": false,
+  "status": "pass"
+}

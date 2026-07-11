@@ -1,0 +1,80 @@
+{
+  "behavioral_blinding": "No response text or interim label is printed during generation.",
+  "completed_at_utc": "2026-07-11T10:50:00.086573+00:00",
+  "completion_sha256": "13f2d9ec47ea066235f7f1a74cb8df312252ea7ee88a197b2801d749258bc82e",
+  "feature_manifest_sha256": "c670fe7a79fc49db0a12e4d87bd72ea2637593e5e6b76614486e6266a80405df",
+  "generations_sha256": "53ed2a6aee4087979120af0bd762c5cf5a377ae6ab4cf1052bb468d1f16dd8a8",
+  "model": "google/gemma-2-9b-it",
+  "model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "n_planned": 830,
+  "n_preexisting": 0,
+  "plan_audit_sha256": "5e1d3f493ca96dfba2433ac70f09e07d84c48162d652b5ac8cb1106320506559",
+  "plan_lock_sha256": "31c8881350fb7eb440e639e7ada4e2f1d89d120da272960b146bbf8c013443f9",
+  "plan_manifest_sha256": "edac1da8db3e89b80433542a3fee9c9d040f77dc3c1b22ed8669a350133789db",
+  "plan_sha256": "183dcc0e25c9ad5878c6f9c9da8bfa3a54a01746d4d709bbb8858029ba3a3746",
+  "protocol_version": "gemma_scope_9b_v1",
+  "runtime": {
+    "captured_at_utc": "2026-07-11T09:24:11.533619+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "12.4",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.3",
+      "sae-lens": "6.45.3",
+      "safetensors": "0.8.0",
+      "torch": "2.6.0+cu124",
+      "transformer-lens": "3.2.1",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10"
+  },
+  "sae_repo": "google/gemma-scope-9b-it-res",
+  "sae_revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770",
+  "saes": {
+    "it_res_l20_w131072": {
+      "d_in": 3584,
+      "d_sae": 131072,
+      "dtype": "bfloat16",
+      "folder": "layer_20/width_131k/average_l0_81",
+      "params_path": "/workspace/cache/huggingface/hub/models--google--gemma-scope-9b-it-res/snapshots/e86af97a5b6fbbccca28ab654f2fda1b0768f770/layer_20/width_131k/average_l0_81/params.npz",
+      "params_sha256": "0f83407399a75fd2acc5ac8fb1c7812940ecc0edc538661700589e8c34bddb74",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+    },
+    "it_res_l20_w16384": {
+      "d_in": 3584,
+      "d_sae": 16384,
+      "dtype": "bfloat16",
+      "folder": "layer_20/width_16k/average_l0_91",
+      "params_path": "/workspace/cache/huggingface/hub/models--google--gemma-scope-9b-it-res/snapshots/e86af97a5b6fbbccca28ab654f2fda1b0768f770/layer_20/width_16k/average_l0_91/params.npz",
+      "params_sha256": "bbd770b6f8b92a2fe7498e05bd6274c6cfa89ebc08fb972c0e842840737f1a82",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+    },
+    "it_res_l31_w131072": {
+      "d_in": 3584,
+      "d_sae": 131072,
+      "dtype": "bfloat16",
+      "folder": "layer_31/width_131k/average_l0_109",
+      "params_path": "/workspace/cache/huggingface/hub/models--google--gemma-scope-9b-it-res/snapshots/e86af97a5b6fbbccca28ab654f2fda1b0768f770/layer_31/width_131k/average_l0_109/params.npz",
+      "params_sha256": "06a129aaf577ddb9a54551372af2f089f422a4bea9b6009d47701f358b1cf34e",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+    },
+    "it_res_l9_w131072": {
+      "d_in": 3584,
+      "d_sae": 131072,
+      "dtype": "bfloat16",
+      "folder": "layer_9/width_131k/average_l0_121",
+      "params_path": "/workspace/cache/huggingface/hub/models--google--gemma-scope-9b-it-res/snapshots/e86af97a5b6fbbccca28ab654f2fda1b0768f770/layer_9/width_131k/average_l0_121/params.npz",
+      "params_sha256": "fe3927fb340246fa3ad57f3b879c465ac87c124568960150667ba665fa434d82",
+      "repo": "google/gemma-scope-9b-it-res",
+      "revision": "e86af97a5b6fbbccca28ab654f2fda1b0768f770"
+    }
+  },
+  "started_at_utc": "2026-07-11T09:24:11.509074+00:00",
+  "status": "complete"
+}

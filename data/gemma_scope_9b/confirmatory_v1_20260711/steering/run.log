@@ -1,0 +1,86 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:15<00:45, 15.33s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:30<00:30, 15.22s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:47<00:16, 16.05s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:57<00:00, 13.51s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:57<00:00, 14.28s/it]
+Gemma steering progress: 10/830; elapsed=0.03h
+Gemma steering progress: 20/830; elapsed=0.05h
+Gemma steering progress: 30/830; elapsed=0.07h
+Gemma steering progress: 40/830; elapsed=0.09h
+Gemma steering progress: 50/830; elapsed=0.11h
+Gemma steering progress: 60/830; elapsed=0.14h
+Gemma steering progress: 70/830; elapsed=0.15h
+Gemma steering progress: 80/830; elapsed=0.16h
+Gemma steering progress: 90/830; elapsed=0.17h
+Gemma steering progress: 100/830; elapsed=0.20h
+Gemma steering progress: 110/830; elapsed=0.21h
+Gemma steering progress: 120/830; elapsed=0.23h
+Gemma steering progress: 130/830; elapsed=0.25h
+Gemma steering progress: 140/830; elapsed=0.27h
+Gemma steering progress: 150/830; elapsed=0.28h
+Gemma steering progress: 160/830; elapsed=0.30h
+Gemma steering progress: 170/830; elapsed=0.32h
+Gemma steering progress: 180/830; elapsed=0.33h
+Gemma steering progress: 190/830; elapsed=0.35h
+Gemma steering progress: 200/830; elapsed=0.36h
+Gemma steering progress: 210/830; elapsed=0.38h
+Gemma steering progress: 220/830; elapsed=0.39h
+Gemma steering progress: 230/830; elapsed=0.41h
+Gemma steering progress: 240/830; elapsed=0.43h
+Gemma steering progress: 250/830; elapsed=0.45h
+Gemma steering progress: 260/830; elapsed=0.46h
+Gemma steering progress: 270/830; elapsed=0.48h
+Gemma steering progress: 280/830; elapsed=0.50h
+Gemma steering progress: 290/830; elapsed=0.52h
+Gemma steering progress: 300/830; elapsed=0.53h
+Gemma steering progress: 310/830; elapsed=0.55h
+Gemma steering progress: 320/830; elapsed=0.57h
+Gemma steering progress: 330/830; elapsed=0.59h
+Gemma steering progress: 340/830; elapsed=0.61h
+Gemma steering progress: 350/830; elapsed=0.62h
+Gemma steering progress: 360/830; elapsed=0.64h
+Gemma steering progress: 370/830; elapsed=0.65h
+Gemma steering progress: 380/830; elapsed=0.67h
+Gemma steering progress: 390/830; elapsed=0.68h
+Gemma steering progress: 400/830; elapsed=0.70h
+Gemma steering progress: 410/830; elapsed=0.72h
+Gemma steering progress: 420/830; elapsed=0.74h
+Gemma steering progress: 430/830; elapsed=0.76h
+Gemma steering progress: 440/830; elapsed=0.77h
+Gemma steering progress: 450/830; elapsed=0.78h
+Gemma steering progress: 460/830; elapsed=0.80h
+Gemma steering progress: 470/830; elapsed=0.81h
+Gemma steering progress: 480/830; elapsed=0.83h
+Gemma steering progress: 490/830; elapsed=0.84h
+Gemma steering progress: 500/830; elapsed=0.86h
+Gemma steering progress: 510/830; elapsed=0.88h
+Gemma steering progress: 520/830; elapsed=0.90h
+Gemma steering progress: 530/830; elapsed=0.92h
+Gemma steering progress: 540/830; elapsed=0.94h
+Gemma steering progress: 550/830; elapsed=0.96h
+Gemma steering progress: 560/830; elapsed=0.98h
+Gemma steering progress: 570/830; elapsed=0.99h
+Gemma steering progress: 580/830; elapsed=1.01h
+Gemma steering progress: 590/830; elapsed=1.03h
+Gemma steering progress: 600/830; elapsed=1.05h
+Gemma steering progress: 610/830; elapsed=1.06h
+Gemma steering progress: 620/830; elapsed=1.09h
+Gemma steering progress: 630/830; elapsed=1.10h
+Gemma steering progress: 640/830; elapsed=1.13h
+Gemma steering progress: 650/830; elapsed=1.14h
+Gemma steering progress: 660/830; elapsed=1.15h
+Gemma steering progress: 670/830; elapsed=1.16h
+Gemma steering progress: 680/830; elapsed=1.18h
+Gemma steering progress: 690/830; elapsed=1.20h
+Gemma steering progress: 700/830; elapsed=1.22h
+Gemma steering progress: 710/830; elapsed=1.24h
+Gemma steering progress: 720/830; elapsed=1.26h
+Gemma steering progress: 730/830; elapsed=1.28h
+Gemma steering progress: 740/830; elapsed=1.29h
+Gemma steering progress: 750/830; elapsed=1.31h
+Gemma steering progress: 760/830; elapsed=1.33h
+Gemma steering progress: 770/830; elapsed=1.35h
+Gemma steering progress: 780/830; elapsed=1.36h
+Gemma steering progress: 790/830; elapsed=1.38h
+Gemma steering progress: 800/830; elapsed=1.39h
+Gemma steering progress: 810/830; elapsed=1.40h
+Gemma steering progress: 820/830; elapsed=1.42h
+Gemma steering progress: 830/830; elapsed=1.43h
+Gemma steering complete and unjudged -> /workspace/CONSCIOUS/data/gemma_scope_9b/confirmatory_v1_20260711/steering
