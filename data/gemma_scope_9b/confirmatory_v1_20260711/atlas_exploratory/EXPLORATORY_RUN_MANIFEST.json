@@ -1,0 +1,15 @@
+{
+  "atlas_runner_sha256": "dde3a325db3a7984d269108e259042ebd4871949f24ecabe813c5e1d563e9842",
+  "behavioral_outcomes_used": false,
+  "claim_boundary": "Descriptive PT-on-IT layer localization only; excluded from the confirmatory transfer claim and behavioral verdict.",
+  "completed_at_utc": "2026-07-11T11:17:31.739346+00:00",
+  "confirmatory_protocol_version": "gemma_scope_9b_v1",
+  "confirmatory_transfer_gate": "fail",
+  "confirmatory_transfer_gate_sha256": "6e1404564c981c733c8cecafd02fd2709cb138330608bfa02d2b67837516b9df",
+  "exploratory_complete_sha256": "1b5203cf3690204b39a380c22aaf121a2f0e6d2420261b2d4a39f4363b1a8acd",
+  "exploratory_runner_sha256": "33bde7213a3a6b271e1104a60da7e792326be0675d1cd8b67f0bd36321c94011",
+  "exploratory_version": "gemma_scope_9b_post_transfer_failure_exploratory_v1",
+  "post_hoc_after_gate_failure": true,
+  "started_at_utc": "2026-07-11T11:15:05.011461+00:00",
+  "status": "complete"
+}

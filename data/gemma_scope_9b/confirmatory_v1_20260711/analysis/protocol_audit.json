@@ -1,0 +1,31 @@
+{
+  "audited_at_utc": "2026-07-11T11:21:48.634613+00:00",
+  "baseline_rows": 180,
+  "errors": [],
+  "judge_counts": {
+    "anthropic": 1010,
+    "direct": 1010,
+    "gemma_local": 1010,
+    "majority": 1010,
+    "openai": 1010
+  },
+  "status": "pass",
+  "steering_rows": 830,
+  "technical": {
+    "empty_finals": 0,
+    "empty_inductions": 0,
+    "final_cap_hits": 7,
+    "final_cap_rate": 0.006930693069306931,
+    "hook_failures": 0,
+    "induction_cap_hits": 10,
+    "induction_cap_rate": 0.009900990099009901,
+    "max_relative_hidden_delta_rms": 0.12649889305722584,
+    "n_baseline": 180,
+    "n_steering": 830,
+    "n_total": 1010,
+    "nonzero_zero_effect_turns": 0,
+    "technical_pass": true,
+    "zero_delta_violations": 0
+  },
+  "transfer_gate": "fail"
+}

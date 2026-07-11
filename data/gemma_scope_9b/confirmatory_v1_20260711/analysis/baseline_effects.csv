@@ -1,0 +1,6 @@
+judge,contrast,left,right,n_complete_blocks,n_incomplete_blocks,left_n,left_positive,left_rate,right_n,right_positive,right_rate,effect,ci_low,ci_high,discordant_positive,discordant_negative,tied_blocks,exact_discordant_two_sided_p,exact_test_role
+gemma_local,paper_self_ref_minus_history,paper_self_ref,paper_history,50,0,50,6,0.12,50,0,0.0,0.12,0.04,0.22,6,0,44,0.03125,descriptive; not part of frozen verdict rule
+openai,paper_self_ref_minus_history,paper_self_ref,paper_history,50,0,50,3,0.06,50,0,0.0,0.06,0.0,0.14,3,0,47,0.25,descriptive; not part of frozen verdict rule
+anthropic,paper_self_ref_minus_history,paper_self_ref,paper_history,49,1,49,1,0.02040816326530612,49,0,0.0,0.02040816326530612,0.0,0.061224489795918366,1,0,48,1.0,descriptive; not part of frozen verdict rule
+direct,paper_self_ref_minus_history,paper_self_ref,paper_history,0,50,0,0,,0,0,,,,,0,0,0,,descriptive; not part of frozen verdict rule
+majority,paper_self_ref_minus_history,paper_self_ref,paper_history,49,1,49,1,0.02040816326530612,49,0,0.0,0.02040816326530612,0.0,0.061224489795918366,1,0,48,1.0,descriptive; not part of frozen verdict rule

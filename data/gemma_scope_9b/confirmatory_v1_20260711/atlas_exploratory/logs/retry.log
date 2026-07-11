@@ -1,0 +1,28 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:14<00:42, 14.13s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:28<00:28, 14.33s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:43<00:14, 14.43s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:53<00:00, 12.74s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:53<00:00, 13.32s/it]
+Loading pt_att_l12_w16384: google/gemma-scope-9b-pt-att / layer_12/width_16k/average_l0_68
+Loading pt_mlp_l12_w16384: google/gemma-scope-9b-pt-mlp / layer_12/width_16k/average_l0_96
+Loading pt_att_l13_w16384: google/gemma-scope-9b-pt-att / layer_13/width_16k/average_l0_77
+Loading pt_mlp_l13_w16384: google/gemma-scope-9b-pt-mlp / layer_13/width_16k/average_l0_94
+Loading pt_att_l14_w16384: google/gemma-scope-9b-pt-att / layer_14/width_16k/average_l0_81
+Loading pt_mlp_l14_w16384: google/gemma-scope-9b-pt-mlp / layer_14/width_16k/average_l0_97
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 800/3726 items; elapsed=0.00h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 1000/3726 items; elapsed=0.00h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 2800/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 3000/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 3200/3726 items; elapsed=0.01h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_att_l12_w16384', 'pt_mlp_l12_w16384', 'pt_att_l13_w16384', 'pt_mlp_l13_w16384', 'pt_att_l14_w16384', 'pt_mlp_l14_w16384']: 3726/3726 items; elapsed=0.02h
+Exploratory Gemma layer atlas complete -> /workspace/CONSCIOUS/data/gemma_scope_9b/confirmatory_v1_20260711/atlas_exploratory

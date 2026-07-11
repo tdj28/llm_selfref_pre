@@ -40,7 +40,7 @@ def plot_baseline(analysis: Path, outdir: Path) -> None:
     ax.bar_label(self_bars, fmt="%.2f", padding=3, fontsize=9)
     ax.bar_label(history_bars, fmt="%.2f", padding=3, fontsize=9)
     ax.set_xticks(positions, labels, rotation=15, ha="right")
-    ax.set_ylim(0, 1.05)
+    ax.set_ylim(0, 0.18)
     ax.set_ylabel("Affirmation rate")
     ax.set_title("Gemma 2 9B IT baseline under the exact paper contrast")
     ax.legend(frameon=False)
@@ -86,11 +86,22 @@ def plot_factorial_baseline(analysis: Path, outdir: Path) -> None:
         color="#4C78A8",
     )
     ax.set_xticks(positions, registers)
-    ax.set_ylim(0, 1.05)
+    ax.set_ylim(0, 0.10)
     ax.set_ylabel("Affirmation rate")
     ax.set_title("Orthogonal baseline separates referent from linguistic register")
     ax.legend(frameon=False)
     ax.grid(axis="y", alpha=0.25)
+    if not any(self_rates + external_rates):
+        ax.text(
+            0.5,
+            0.5,
+            "All four local-judge cells = 0.00",
+            transform=ax.transAxes,
+            ha="center",
+            va="center",
+            color="#555555",
+            fontsize=11,
+        )
     fig.tight_layout()
     save(fig, outdir, "gemma_orthogonal_factorial_baseline")
     plt.close(fig)
@@ -292,7 +303,13 @@ def plot_layerwise(analysis: Path, outdir: Path) -> None:
         if layer_count < 42
         else "Construct trajectories across the 42-layer PT-SAE residual atlas"
     )
-    ax.legend(frameon=False, ncol=3, fontsize=9)
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper left",
+        ncol=3,
+        fontsize=9,
+    )
     ax.grid(alpha=0.2)
     fig.tight_layout()
     save(fig, outdir, "gemma_layerwise_construct_trajectories")
@@ -340,7 +357,13 @@ def plot_exploratory_layerwise(analysis: Path, outdir: Path) -> None:
     ax.set_xlabel("Gemma 2 transformer layer")
     ax.set_ylabel("Locked OpenAI-paraphrase contrast")
     ax.set_title("Exploratory PT-on-IT trajectories after the failed transfer gate")
-    ax.legend(frameon=False, ncol=3, fontsize=9)
+    ax.legend(
+        frameon=True,
+        framealpha=0.9,
+        loc="upper left",
+        ncol=3,
+        fontsize=9,
+    )
     ax.grid(alpha=0.2)
     fig.tight_layout()
     save(fig, outdir, "gemma_exploratory_layerwise_construct_trajectories")
@@ -372,7 +395,7 @@ def plot_transfer(release: Path, outdir: Path) -> None:
     )
     axes[0].set_xticks(positions, layers)
     axes[0].set_xlabel("Layer")
-    axes[0].set_ylabel("Reconstruction FVU")
+    axes[0].set_ylabel("Chat-centered reconstruction FVU")
     axes[0].legend(frameon=False)
     correlations = [
         float(row["category_profile_spearman"]["deception_roleplay"])
@@ -648,7 +671,7 @@ def plot_cross_layer(
     ]
     fig, left = plt.subplots(figsize=(9.2, 4.8))
     right = left.twinx()
-    left.plot(
+    line, = left.plot(
         layers,
         matched_correlations,
         color="#4C78A8",
@@ -656,22 +679,25 @@ def plot_cross_layer(
         markersize=3,
         label="Best one-to-one mean activation correlation",
     )
-    right.bar(
+    bars = right.bar(
         layers,
         edge_counts,
         color="#F2A541",
         alpha=0.35,
-        label="Descriptive links passing frozen rule",
+        label="All-pair rule edges (of 36)",
     )
     left.axhline(0.25, color="#777777", linestyle="--", linewidth=0.9)
     left.set_xlabel("Upstream layer")
-    left.set_ylabel("Maximum adjacent-layer Spearman", color="#4C78A8")
-    right.set_ylabel("Selected descriptive edge count", color="#9A6319")
+    left.set_ylabel("Best one-to-one mean Spearman", color="#4C78A8")
+    right.set_ylabel("All-pair rule-edge count", color="#9A6319")
     left.set_title(title)
     left.grid(alpha=0.2)
-    handles = left.get_lines()[:1] + [right.patches[0]] if right.patches else left.get_lines()[:1]
-    labels = [handle.get_label() for handle in handles]
-    left.legend(handles, labels, frameon=False, loc="upper left")
+    left.legend(
+        [line, bars],
+        [line.get_label(), bars.get_label()],
+        frameon=False,
+        loc="upper left",
+    )
     fig.tight_layout()
     save(fig, outdir, output_name)
     plt.close(fig)

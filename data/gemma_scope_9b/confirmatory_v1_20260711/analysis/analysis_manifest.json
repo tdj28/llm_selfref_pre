@@ -1,0 +1,10 @@
+{
+  "baseline_sha256": "29d234ae8acebdf61f639525bb04b00b33e7986602c44f6a3594da9fe4a320cd",
+  "created_at_utc": "2026-07-11T11:21:48.634782+00:00",
+  "exploratory_atlas_complete_sha256": "1b5203cf3690204b39a380c22aaf121a2f0e6d2420261b2d4a39f4363b1a8acd",
+  "external_judgments_sha256": "ee63afe70e4b08804aa8c6fceb9dff55e3afb49447c72aad24d6cda860465cc1",
+  "local_judgments_sha256": "032eb8d68d9da88fa7fbf6efcbb0f32e433b7225aac1e18f35f6e447fa17d156",
+  "primary_verdict_sha256": "0188da33d148e8445c2aa041ae161170d66803d8afed5a31e5a57bd4c41976e6",
+  "status": "complete",
+  "steering_sha256": "53ed2a6aee4087979120af0bd762c5cf5a377ae6ab4cf1052bb468d1f16dd8a8"
+}

@@ -1,0 +1,188 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.21it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.24it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.27it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.37it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.32it/s]
+Loading pt_res_l0_w16384: google/gemma-scope-9b-pt-res / layer_0/width_16k/average_l0_129
+Loading pt_res_l1_w16384: google/gemma-scope-9b-pt-res / layer_1/width_16k/average_l0_69
+Loading pt_res_l2_w16384: google/gemma-scope-9b-pt-res / layer_2/width_16k/average_l0_67
+Loading pt_res_l3_w16384: google/gemma-scope-9b-pt-res / layer_3/width_16k/average_l0_90
+Loading pt_res_l4_w16384: google/gemma-scope-9b-pt-res / layer_4/width_16k/average_l0_91
+Loading pt_res_l5_w16384: google/gemma-scope-9b-pt-res / layer_5/width_16k/average_l0_77
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 2400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 2600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 2800/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l0_w16384', 'pt_res_l1_w16384', 'pt_res_l2_w16384', 'pt_res_l3_w16384', 'pt_res_l4_w16384', 'pt_res_l5_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l6_w16384: google/gemma-scope-9b-pt-res / layer_6/width_16k/average_l0_93
+Loading pt_res_l7_w16384: google/gemma-scope-9b-pt-res / layer_7/width_16k/average_l0_92
+Loading pt_res_l8_w16384: google/gemma-scope-9b-pt-res / layer_8/width_16k/average_l0_99
+Loading pt_res_l10_w16384: google/gemma-scope-9b-pt-res / layer_10/width_16k/average_l0_113
+Loading pt_res_l11_w16384: google/gemma-scope-9b-pt-res / layer_11/width_16k/average_l0_118
+Loading pt_res_l12_w16384: google/gemma-scope-9b-pt-res / layer_12/width_16k/average_l0_130
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 800/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 1000/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 2800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 3000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 3200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l6_w16384', 'pt_res_l7_w16384', 'pt_res_l8_w16384', 'pt_res_l10_w16384', 'pt_res_l11_w16384', 'pt_res_l12_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l13_w16384: google/gemma-scope-9b-pt-res / layer_13/width_16k/average_l0_132
+Loading pt_res_l14_w16384: google/gemma-scope-9b-pt-res / layer_14/width_16k/average_l0_67
+Loading pt_res_l15_w16384: google/gemma-scope-9b-pt-res / layer_15/width_16k/average_l0_131
+Loading pt_res_l16_w16384: google/gemma-scope-9b-pt-res / layer_16/width_16k/average_l0_75
+Loading pt_res_l17_w16384: google/gemma-scope-9b-pt-res / layer_17/width_16k/average_l0_73
+Loading pt_res_l18_w16384: google/gemma-scope-9b-pt-res / layer_18/width_16k/average_l0_71
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 800/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 2800/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l13_w16384', 'pt_res_l14_w16384', 'pt_res_l15_w16384', 'pt_res_l16_w16384', 'pt_res_l17_w16384', 'pt_res_l18_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l19_w16384: google/gemma-scope-9b-pt-res / layer_19/width_16k/average_l0_132
+Loading pt_res_l21_w16384: google/gemma-scope-9b-pt-res / layer_21/width_16k/average_l0_129
+Loading pt_res_l22_w16384: google/gemma-scope-9b-pt-res / layer_22/width_16k/average_l0_123
+Loading pt_res_l23_w16384: google/gemma-scope-9b-pt-res / layer_23/width_16k/average_l0_120
+Loading pt_res_l24_w16384: google/gemma-scope-9b-pt-res / layer_24/width_16k/average_l0_114
+Loading pt_res_l25_w16384: google/gemma-scope-9b-pt-res / layer_25/width_16k/average_l0_114
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 2800/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l19_w16384', 'pt_res_l21_w16384', 'pt_res_l22_w16384', 'pt_res_l23_w16384', 'pt_res_l24_w16384', 'pt_res_l25_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l26_w16384: google/gemma-scope-9b-pt-res / layer_26/width_16k/average_l0_116
+Loading pt_res_l27_w16384: google/gemma-scope-9b-pt-res / layer_27/width_16k/average_l0_118
+Loading pt_res_l28_w16384: google/gemma-scope-9b-pt-res / layer_28/width_16k/average_l0_119
+Loading pt_res_l29_w16384: google/gemma-scope-9b-pt-res / layer_29/width_16k/average_l0_119
+Loading pt_res_l30_w16384: google/gemma-scope-9b-pt-res / layer_30/width_16k/average_l0_120
+Loading pt_res_l32_w16384: google/gemma-scope-9b-pt-res / layer_32/width_16k/average_l0_111
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 2800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l26_w16384', 'pt_res_l27_w16384', 'pt_res_l28_w16384', 'pt_res_l29_w16384', 'pt_res_l30_w16384', 'pt_res_l32_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l33_w16384: google/gemma-scope-9b-pt-res / layer_33/width_16k/average_l0_114
+Loading pt_res_l34_w16384: google/gemma-scope-9b-pt-res / layer_34/width_16k/average_l0_114
+Loading pt_res_l35_w16384: google/gemma-scope-9b-pt-res / layer_35/width_16k/average_l0_120
+Loading pt_res_l36_w16384: google/gemma-scope-9b-pt-res / layer_36/width_16k/average_l0_120
+Loading pt_res_l37_w16384: google/gemma-scope-9b-pt-res / layer_37/width_16k/average_l0_124
+Loading pt_res_l38_w16384: google/gemma-scope-9b-pt-res / layer_38/width_16k/average_l0_128
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 600/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 2800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l33_w16384', 'pt_res_l34_w16384', 'pt_res_l35_w16384', 'pt_res_l36_w16384', 'pt_res_l37_w16384', 'pt_res_l38_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_res_l39_w16384: google/gemma-scope-9b-pt-res / layer_39/width_16k/average_l0_131
+Loading pt_res_l40_w16384: google/gemma-scope-9b-pt-res / layer_40/width_16k/average_l0_125
+Loading pt_res_l41_w16384: google/gemma-scope-9b-pt-res / layer_41/width_16k/average_l0_113
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 200/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 400/3726 items; elapsed=0.00h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 1000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 1200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 1400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 1600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 1800/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 2000/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 2200/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 2400/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 2600/3726 items; elapsed=0.01h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 2800/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 3000/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 3200/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 3400/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 3600/3726 items; elapsed=0.02h
+Atlas group ['pt_res_l39_w16384', 'pt_res_l40_w16384', 'pt_res_l41_w16384']: 3726/3726 items; elapsed=0.02h
+Loading pt_att_l12_w16384: google/gemma-scope-9b-pt-att / layer_12/width_16k/average_l0_68
+Loading pt_mlp_l12_w16384: google/gemma-scope-9b-pt-mlp / layer_12/width_16k/average_l0_96
+Loading pt_att_l13_w16384: google/gemma-scope-9b-pt-att / layer_13/width_16k/average_l0_77
+Loading pt_mlp_l13_w16384: google/gemma-scope-9b-pt-mlp / layer_13/width_16k/average_l0_94
+Loading pt_att_l14_w16384: google/gemma-scope-9b-pt-att / layer_14/width_16k/average_l0_81
+Loading pt_mlp_l14_w16384: google/gemma-scope-9b-pt-mlp / layer_14/width_16k/average_l0_97
+Traceback (most recent call last):
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py", line 182, in <module>
+    main()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py", line 128, in main
+    map_group(
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_gemma_scope_9b_atlas.py", line 710, in map_group
+    raise RuntimeError(
+RuntimeError: Hook width 3584 differs from SAE 4096 for pt_att_l12_w16384
