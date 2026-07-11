@@ -92,9 +92,15 @@ def main() -> None:
     require(release / "atlas/ATLAS_RUN_MANIFEST.json", "complete")
     require(release / "atlas/CALIBRATION.json", "pass")
     if atlas_complete.get("all_layer_pt_residual_completed"):
-        require(release / "atlas/cross_layer_feature_edges.summary.json", "complete")
+        cross_layer = require(
+            release / "atlas/cross_layer_feature_edges.summary.json", "complete"
+        )
         if not (release / "atlas/cross_layer_feature_edges.csv").is_file():
             raise RuntimeError("All-layer atlas is missing cross-layer feature links")
+        if cross_layer.get("n_optimal_one_to_one_assignments") != 41 or not (
+            release / "atlas/cross_layer_optimal_assignments.csv"
+        ).is_file():
+            raise RuntimeError("All-layer atlas is missing one-to-one assignments")
     exploratory = release / "atlas_exploratory"
     if exploratory.is_dir():
         exploratory_complete = require(
@@ -102,9 +108,15 @@ def main() -> None:
         )
         if exploratory_complete.get("post_hoc_after_gate_failure") is not True:
             raise RuntimeError("Exploratory atlas is missing its post-gate label")
-        require(exploratory / "cross_layer_feature_edges.summary.json", "complete")
+        cross_layer = require(
+            exploratory / "cross_layer_feature_edges.summary.json", "complete"
+        )
         if not (exploratory / "cross_layer_feature_edges.csv").is_file():
             raise RuntimeError("Exploratory atlas is missing cross-layer links")
+        if cross_layer.get("n_optimal_one_to_one_assignments") != 41 or not (
+            exploratory / "cross_layer_optimal_assignments.csv"
+        ).is_file():
+            raise RuntimeError("Exploratory atlas is missing one-to-one assignments")
     require(release / "steering/steering_complete.json", "steering_generation_complete_unjudged")
     require(release / "steering/STEERING_RUN_MANIFEST.json", "complete")
     require(release / "steering/plan/PLAN_LOCK.json", "locked")

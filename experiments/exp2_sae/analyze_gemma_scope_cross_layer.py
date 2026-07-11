@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import gzip
+import itertools
 import json
 import math
 from pathlib import Path
@@ -76,6 +77,38 @@ def top_overlap(left: dict[str, float], right: dict[str, float], count: int = 20
     return len(left_top & right_top) / len(union) if union else 0.0
 
 
+def optimal_one_to_one(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    left_ids = sorted({int(row["from_feature_id"]) for row in rows})
+    right_ids = sorted({int(row["to_feature_id"]) for row in rows})
+    if len(left_ids) != len(right_ids) or not left_ids:
+        raise ValueError("Cross-layer matching requires equal nonempty feature sets")
+    lookup = {
+        (int(row["from_feature_id"]), int(row["to_feature_id"])): row
+        for row in rows
+    }
+    if len(lookup) != len(left_ids) * len(right_ids):
+        raise ValueError("Cross-layer matching requires a complete pair matrix")
+    best_score = float("-inf")
+    best_permutation: tuple[int, ...] | None = None
+    for permutation in itertools.permutations(right_ids):
+        score = sum(
+            float(lookup[(left_id, right_id)]["activation_spearman"])
+            for left_id, right_id in zip(left_ids, permutation)
+        )
+        if score > best_score or (
+            score == best_score
+            and (best_permutation is None or permutation < best_permutation)
+        ):
+            best_score = score
+            best_permutation = permutation
+    if best_permutation is None:
+        raise RuntimeError("Cross-layer matching did not produce an assignment")
+    return [
+        lookup[(left_id, right_id)]
+        for left_id, right_id in zip(left_ids, best_permutation)
+    ]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("atlas_dir", type=Path)
@@ -137,6 +170,63 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+    assignment_rows = []
+    for layer in sorted({int(row["from_layer"]) for row in rows}):
+        layer_rows = [row for row in rows if int(row["from_layer"]) == layer]
+        matched = optimal_one_to_one(layer_rows)
+        assignment_rows.append(
+            {
+                "from_layer": layer,
+                "to_layer": layer + 1,
+                "n_matched_features": len(matched),
+                "mean_activation_spearman": sum(
+                    float(row["activation_spearman"]) for row in matched
+                )
+                / len(matched),
+                "minimum_activation_spearman": min(
+                    float(row["activation_spearman"]) for row in matched
+                ),
+                "maximum_activation_spearman": max(
+                    float(row["activation_spearman"]) for row in matched
+                ),
+                "mean_decoder_cosine": sum(
+                    float(row["decoder_cosine"]) for row in matched
+                )
+                / len(matched),
+                "mean_top20_item_jaccard": sum(
+                    float(row["top20_item_jaccard"]) for row in matched
+                )
+                / len(matched),
+                "selected_rule_edges_in_assignment": sum(
+                    int(row["selected_descriptive_edge"]) for row in matched
+                ),
+                "assignment": "|".join(
+                    f"{row['from_feature_id']}>{row['to_feature_id']}"
+                    for row in matched
+                ),
+                "optimization_rule": "maximum total activation Spearman; lexicographic tie break",
+                "claim_boundary": "descriptive optimized matching, not persistent identity",
+            }
+        )
+    assignment_path = output.parent / "cross_layer_optimal_assignments.csv"
+    with assignment_path.open("w", encoding="utf-8", newline="") as handle:
+        fieldnames = list(assignment_rows[0]) if assignment_rows else [
+            "from_layer",
+            "to_layer",
+            "n_matched_features",
+            "mean_activation_spearman",
+            "minimum_activation_spearman",
+            "maximum_activation_spearman",
+            "mean_decoder_cosine",
+            "mean_top20_item_jaccard",
+            "selected_rule_edges_in_assignment",
+            "assignment",
+            "optimization_rule",
+            "claim_boundary",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(assignment_rows)
     summary = {
         "status": "complete",
         "n_tested_adjacent_feature_pairs": len(rows),
@@ -151,12 +241,21 @@ def main() -> None:
             "activation Spearman >= 0.25 and either decoder cosine >= 0.05 "
             "or top-20 item Jaccard >= 0.15"
         ),
+        "n_optimal_one_to_one_assignments": len(assignment_rows),
+        "optimal_assignment_path": assignment_path.name,
+        "optimal_assignment_rule": (
+            "maximum total activation Spearman across all one-to-one feature "
+            "matchings, with lexicographic tie break"
+        ),
         "claim_boundary": "descriptive cross-layer links; IDs are not persistent identities",
     }
     output.with_suffix(".summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    print(f"Gemma cross-layer links: {len(rows)} tested pairs -> {output}")
+    print(
+        f"Gemma cross-layer links: {len(rows)} tested pairs and "
+        f"{len(assignment_rows)} one-to-one assignments -> {output}"
+    )
 
 
 if __name__ == "__main__":

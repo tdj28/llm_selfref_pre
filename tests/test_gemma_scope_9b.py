@@ -27,6 +27,7 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
 from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
 from experiments.exp2_sae.run_gemma_scope_9b_atlas import register_sublayer_capture
+from experiments.exp2_sae.analyze_gemma_scope_cross_layer import optimal_one_to_one
 from experiments.exp2_sae.figure_gemma_scope_9b import (
     plot_exploratory_sublayers,
     plot_judge_sensitivity,
@@ -38,6 +39,27 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_cross_layer_matching_uses_every_feature_once(self) -> None:
+        rows = []
+        for left in (1, 2, 3):
+            for right in (10, 20, 30):
+                rows.append(
+                    {
+                        "from_feature_id": left,
+                        "to_feature_id": right,
+                        "activation_spearman": 1.0
+                        if right == left * 10
+                        else 0.0,
+                    }
+                )
+        matched = optimal_one_to_one(rows)
+        self.assertEqual(
+            [(row["from_feature_id"], row["to_feature_id"]) for row in matched],
+            [(1, 10), (2, 20), (3, 30)],
+        )
+        self.assertEqual(len({row["from_feature_id"] for row in matched}), 3)
+        self.assertEqual(len({row["to_feature_id"] for row in matched}), 3)
+
     def test_gemma_sensitivity_figures_render_both_formats(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

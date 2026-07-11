@@ -587,17 +587,20 @@ def plot_cross_layer(
     import matplotlib.pyplot as plt
 
     path = release / atlas_name / "cross_layer_feature_edges.csv"
-    if not path.exists():
+    assignment_path = release / atlas_name / "cross_layer_optimal_assignments.csv"
+    if not path.exists() or not assignment_path.exists():
         return
     rows = read_csv(path)
+    assignments = read_csv(assignment_path)
     by_layer: dict[int, list[dict[str, str]]] = {}
     for row in rows:
         by_layer.setdefault(int(row["from_layer"]), []).append(row)
     layers = sorted(by_layer)
-    max_correlations = [
-        max(float(row["activation_spearman"]) for row in by_layer[layer])
-        for layer in layers
-    ]
+    assignment_by_layer = {
+        int(row["from_layer"]): float(row["mean_activation_spearman"])
+        for row in assignments
+    }
+    matched_correlations = [assignment_by_layer[layer] for layer in layers]
     edge_counts = [
         sum(int(row["selected_descriptive_edge"]) for row in by_layer[layer])
         for layer in layers
@@ -606,11 +609,11 @@ def plot_cross_layer(
     right = left.twinx()
     left.plot(
         layers,
-        max_correlations,
+        matched_correlations,
         color="#4C78A8",
         marker="o",
         markersize=3,
-        label="Best adjacent-feature activation correlation",
+        label="Best one-to-one mean activation correlation",
     )
     right.bar(
         layers,

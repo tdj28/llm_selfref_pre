@@ -68,3 +68,10 @@ python experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py \
 After completion, build descriptive adjacent-layer links with
 `analyze_gemma_scope_cross_layer.py`. These links remain similarities, not
 persistent feature identities or causal pathways.
+
+The cross-layer release retains all 36 feature pairs per adjacent layer and
+the frozen threshold-based edge flags. Its headline curve uses a deterministic
+one-to-one matching of all six upstream and six downstream features, maximizing
+total held-out activation Spearman with a lexicographic tie break. This avoids
+plotting only the single largest of 36 correlations. The optimized matching is
+still descriptive and does not establish feature identity or a causal circuit.
