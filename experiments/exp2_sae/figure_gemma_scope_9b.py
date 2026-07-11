@@ -141,6 +141,114 @@ def plot_steering_forest(analysis: Path, outdir: Path) -> None:
     plt.close(fig)
 
 
+def plot_judge_sensitivity(analysis: Path, outdir: Path) -> None:
+    import matplotlib.pyplot as plt
+
+    display = {
+        "gemma_local": "Gemma local",
+        "openai": "GPT-4o mini",
+        "anthropic": "Claude Haiku",
+        "majority": "Three-judge majority",
+        "direct": "Initial yes/no parser",
+    }
+    rows = [
+        row
+        for row in read_csv(analysis / "judge_sensitivity.csv")
+        if row["effect"] and row["ci_low"] and row["ci_high"]
+    ]
+    order = [key for key in display if any(row["judge"] == key for row in rows)]
+    by_judge = {row["judge"]: row for row in rows}
+    rows = [by_judge[key] for key in order]
+    points = [float(row["effect"]) for row in rows]
+    lows = [float(row["ci_low"]) for row in rows]
+    highs = [float(row["ci_high"]) for row in rows]
+    y = list(range(len(rows)))[::-1]
+    fig, ax = plt.subplots(figsize=(8.2, 4.7))
+    ax.axvline(0, color="black", linewidth=1)
+    ax.axvline(
+        0.30,
+        color="#C4473A",
+        linestyle="--",
+        linewidth=1.2,
+        label="Frozen minimum effect",
+    )
+    for position, point, low, high in zip(y, points, lows, highs):
+        ax.errorbar(
+            point,
+            position,
+            xerr=[[point - low], [high - point]],
+            fmt="o",
+            color="#4C78A8",
+            capsize=3,
+        )
+    ax.set_yticks(y, [display[key] for key in order])
+    ax.set_xlabel("Target suppression minus amplification affirmation rate")
+    ax.set_title("The frozen target effect across blinded evaluation rules")
+    ax.legend(frameon=False, loc="lower right")
+    ax.grid(axis="x", alpha=0.25)
+    fig.tight_layout()
+    save(fig, outdir, "gemma_judge_sensitivity")
+    plt.close(fig)
+
+
+def plot_layer_width_sensitivity(analysis: Path, outdir: Path) -> None:
+    import matplotlib.pyplot as plt
+
+    rows = [
+        row
+        for row in read_csv(analysis / "steering_effects.csv")
+        if row["judge"] == "gemma_local"
+        and row["analysis_role"] == "deception_roleplay"
+        and row["design"]
+        in {"primary_layer20_131k", "layer_localization", "width_robustness"}
+    ]
+    desired = [
+        ("layer_localization", 9, 131_072, "Layer 9, 131k"),
+        ("primary_layer20_131k", 20, 131_072, "Layer 20, 131k (primary)"),
+        ("layer_localization", 31, 131_072, "Layer 31, 131k"),
+        ("width_robustness", 20, 16_384, "Layer 20, 16k"),
+    ]
+    by_key = {
+        (row["design"], int(row["layer"]), int(row["width"])): row
+        for row in rows
+    }
+    selected = [
+        (by_key[(design, layer, width)], label)
+        for design, layer, width, label in desired
+        if (design, layer, width) in by_key
+    ]
+    points = [float(row["effect"]) for row, _ in selected]
+    lows = [float(row["ci_low"]) for row, _ in selected]
+    highs = [float(row["ci_high"]) for row, _ in selected]
+    y = list(range(len(selected)))[::-1]
+    fig, ax = plt.subplots(figsize=(8.2, 4.7))
+    ax.axvline(0, color="black", linewidth=1)
+    ax.axvline(
+        0.30,
+        color="#C4473A",
+        linestyle="--",
+        linewidth=1.2,
+        label="Frozen minimum effect",
+    )
+    for position, point, low, high in zip(y, points, lows, highs):
+        ax.errorbar(
+            point,
+            position,
+            xerr=[[point - low], [high - point]],
+            fmt="o",
+            color="#5F9E6E",
+            capsize=3,
+        )
+    ax.set_yticks(y, [label for _, label in selected])
+    ax.set_xlabel("Suppression minus amplification affirmation rate")
+    ax.set_title("Deception/roleplay steering across direct-IT layers and widths")
+    ax.legend(frameon=False, loc="lower right")
+    ax.grid(axis="x", alpha=0.25)
+    fig.tight_layout()
+    save(fig, outdir, "gemma_layer_width_sensitivity")
+    plt.close(fig)
+
+
 def plot_layerwise(analysis: Path, outdir: Path) -> None:
     import matplotlib.pyplot as plt
 
@@ -535,6 +643,8 @@ def main() -> None:
     plot_baseline(analysis, outdir)
     plot_factorial_baseline(analysis, outdir)
     plot_steering_forest(analysis, outdir)
+    plot_judge_sensitivity(analysis, outdir)
+    plot_layer_width_sensitivity(analysis, outdir)
     plot_layerwise(analysis, outdir)
     plot_exploratory_layerwise(analysis, outdir)
     plot_transfer(release, outdir)

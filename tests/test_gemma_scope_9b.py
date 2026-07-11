@@ -27,13 +27,54 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
 from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
 from experiments.exp2_sae.run_gemma_scope_9b_atlas import register_sublayer_capture
-from experiments.exp2_sae.figure_gemma_scope_9b import plot_exploratory_sublayers
+from experiments.exp2_sae.figure_gemma_scope_9b import (
+    plot_exploratory_sublayers,
+    plot_judge_sensitivity,
+    plot_layer_width_sensitivity,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_gemma_sensitivity_figures_render_both_formats(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            analysis = root / "analysis"
+            figures = root / "figures"
+            analysis.mkdir()
+            (analysis / "judge_sensitivity.csv").write_text(
+                "judge,n_complete_blocks,effect,ci_low,ci_high\n"
+                "gemma_local,50,0.1,-0.1,0.3\n"
+                "openai,50,0.0,-0.2,0.2\n",
+                encoding="utf-8",
+            )
+            header = (
+                "judge,design,analysis_role,layer,width,left,right,"
+                "n_complete_blocks,n_incomplete_blocks,left_n,left_positive,"
+                "left_rate,right_n,right_positive,right_rate,effect,ci_low,ci_high\n"
+            )
+            rows = []
+            for design, layer, width in (
+                ("layer_localization", 9, 131072),
+                ("primary_layer20_131k", 20, 131072),
+                ("layer_localization", 31, 131072),
+                ("width_robustness", 20, 16384),
+            ):
+                rows.append(
+                    f"gemma_local,{design},deception_roleplay,{layer},{width},"
+                    "suppression,amplification,20,0,20,10,0.5,20,8,0.4,0.1,-0.1,0.3"
+                )
+            (analysis / "steering_effects.csv").write_text(
+                header + "\n".join(rows) + "\n", encoding="utf-8"
+            )
+            plot_judge_sensitivity(analysis, figures)
+            plot_layer_width_sensitivity(analysis, figures)
+            for name in ("gemma_judge_sensitivity", "gemma_layer_width_sensitivity"):
+                self.assertTrue((figures / f"{name}.png").is_file())
+                self.assertTrue((figures / f"{name}.pdf").is_file())
+
     def test_exploratory_sublayer_figure_renders_both_formats(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
