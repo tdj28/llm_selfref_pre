@@ -59,6 +59,7 @@ def runtime_metadata(torch_module: Any) -> dict[str, Any]:
         "sae-lens",
         "safetensors",
         "torch",
+        "transformer-lens",
         "transformers",
     ):
         try:

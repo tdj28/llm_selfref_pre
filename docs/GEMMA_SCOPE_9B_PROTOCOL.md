@@ -35,6 +35,8 @@ The study has four ordered evidential stages:
 | PT residual SAEs | `google/gemma-scope-9b-pt-res` | `f9b689815814972562d28082f9f7d65d7e01fdc8` |
 | PT attention SAEs | `google/gemma-scope-9b-pt-att` | `480f21407fd8053280724f0a4be3ccee7c155ef7` |
 | PT MLP SAEs | `google/gemma-scope-9b-pt-mlp` | `721f47c902e0956ad65d5a391a9ce0c36e02e849` |
+| Torch | `torch` | `2.6.0+cu124` |
+| TransformerLens | `transformer-lens` | `3.2.1` |
 | SAE loader | `sae-lens` | `6.45.3` |
 | Transformers | `transformers` | `4.57.6` |
 

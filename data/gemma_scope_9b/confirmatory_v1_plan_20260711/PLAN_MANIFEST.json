@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-07-11T08:14:58.666385+00:00",
+  "created_at_utc": "2026-07-11T08:24:36.465682+00:00",
   "files": [
     {
       "bytes": 23423,
@@ -9,7 +9,7 @@
     {
       "bytes": 485,
       "path": "PLAN_SUMMARY.json",
-      "sha256": "dd9328f1992e60d02a4619310394436f3b7aafe4fbdcdd70274f138d21694dc6"
+      "sha256": "05a3f88180a88f227c1858555363b45e1e4a2245e7b8d1998fc887979d607238"
     },
     {
       "bytes": 2444,
@@ -23,7 +23,7 @@
     }
   ],
   "protocol_version": "gemma_scope_9b_v1",
-  "source_commit_before_plan_commit": "235cd1446a7fd85e2999e6397f968850140b993a",
+  "source_commit_before_plan_commit": "b6bc8894ae1a7a77ed4031d2af18d256b345e2ac",
   "source_files": [
     {
       "bytes": 3314,
@@ -36,9 +36,9 @@
       "sha256": "0cf2ba649b39feab929188af0636a8bebc0cb9d3dcad5348c36f54420a8b8c37"
     },
     {
-      "bytes": 20300,
+      "bytes": 20387,
       "path": "docs/GEMMA_SCOPE_9B_PROTOCOL.md",
-      "sha256": "3a20eedd97b11407e26fbe7f82d8f8686763df5207e402635a146c7942b8d1e7"
+      "sha256": "1ceacf9c00f181d93bcbbb50a5df52bb0fdbbaadec7cdf380fbbd7743abf0e01"
     },
     {
       "bytes": 21922,
