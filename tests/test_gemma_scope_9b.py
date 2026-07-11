@@ -23,6 +23,7 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
     SteeringSession,
 )
 from experiments.exp2_sae.analyze_gemma_scope_9b import specificity_effect
+from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -155,6 +156,34 @@ class GemmaScopePlanTests(unittest.TestCase):
                 {"suppression": 50, "amplification": 50},
             )
         self.assertEqual(sum(row["sign"] == "zero" for row in rows), 50)
+
+    def test_calibration_roles_ignore_noncausal_direct_16k_anchors(self) -> None:
+        feature_sets = {}
+        for layer in (9, 20, 31):
+            for width in (16_384, 131_072):
+                feature_sets[f"it_res_l{layer}_w{width}"] = {
+                    "deception_roleplay": list(range(10, 16)),
+                    "subjective_self_report": list(range(20, 26)),
+                    "hedging_refusal": list(range(30, 36)),
+                }
+        manifest = {
+            "feature_sets": feature_sets,
+            "matched_control_panels": [
+                list(range(40, 46)),
+                list(range(50, 56)),
+                list(range(60, 66)),
+            ],
+        }
+        roles = role_specs(manifest)
+        self.assertEqual(
+            set(roles),
+            {
+                "it_res_l9_w131072",
+                "it_res_l20_w131072",
+                "it_res_l31_w131072",
+                "it_res_l20_w16384",
+            },
+        )
 
     def test_pinned_jumprelu_formula_and_selected_path_agree(self) -> None:
         sae = PinnedJumpReLUSAE(

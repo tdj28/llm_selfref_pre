@@ -153,7 +153,15 @@ def unit_relative_rms(
 
 def role_specs(feature_manifest: dict[str, Any]) -> dict[str, dict[str, list[int]]]:
     result: dict[str, dict[str, list[int]]] = {}
-    for key, sets in feature_manifest["feature_sets"].items():
+    calibrated_sites = (
+        (9, 131_072),
+        (20, 131_072),
+        (31, 131_072),
+        (20, 16_384),
+    )
+    for layer, width in calibrated_sites:
+        key = f"it_res_l{layer}_w{width}"
+        sets = feature_manifest["feature_sets"][key]
         result[key] = {"deception_roleplay": [int(value) for value in sets["deception_roleplay"]]}
     primary_key = f"it_res_l{PRIMARY_LAYER}_w{PRIMARY_WIDTH}"
     result[primary_key].update(
