@@ -1,0 +1,9 @@
+# The RunPod image supplies a CUDA 12.8-compatible PyTorch build. Do not
+# replace it with a CPU wheel or silently change the BF16 model runtime.
+accelerate==1.12.0
+huggingface-hub==0.36.0
+matplotlib==3.10.8
+numpy==2.2.6
+scikit-learn==1.7.2
+scipy==1.15.3
+transformers==4.57.6

@@ -42,6 +42,10 @@ immediately public and permanently recoverable.
 - `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` compares the two intervention
   families and defines the bounded open-model follow-up suggested by the 2026
   Jacobian-lens paper.
+- `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` is the prospective protocol for the
+  active Llama 3.3 70B forensic audit. It binds the exact public Goodfire SAE,
+  Neuronpedia J-lens, matched SAE controls, random-J controls, threat model,
+  holdouts, and claim boundary before GPU outcomes.
 - `experiments/causal_transplant/` is the main confirmatory workflow: generation, judging, analysis, blinded human packets, and release auditing.
 - `data/causal_transplant/confirmatory_v1_20260709/` is the frozen confirmatory release. Preserve raw rows and missing outcomes exactly.
 - `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` is the
@@ -64,6 +68,10 @@ immediately public and permanently recoverable.
   Gemma release with raw generations, judges, direct-IT maps, the failed
   transfer gate, steering and relay telemetry, the exploratory atlas, analyses,
   12 figure pairs, correction logs, independent audit, and hashes.
+- `data/sae_jlens_audit/confirmatory_v1_plan_20260711/` is an outcome-blind
+  machine-readable plan. Do not edit it after the first paired outcome. The
+  corresponding runtime must use one BF16 180 GB GPU, retrieve and hash-check
+  all raw shards, and terminate only the uniquely named pod created for it.
 
 ## Research Direction
 
@@ -106,6 +114,13 @@ Public SAE work is a separate evidence ladder:
   judges, minimum effect, and verdict were frozen before outcome inspection.
   All technical/missingness gates and the independent raw-row audit pass. Do not
   let the older adaptive n=20 result replace this primary public estimand.
+- The SAE-through-J-lens study is a separate forensic audit, not a second
+  consciousness outcome. Its maximum claim is that a pinned internal readout
+  does or does not detect a specified intervention fingerprint out of sample.
+  Never turn token scores into claims about hidden belief, provenance, intent,
+  deception, or consciousness. Identity, all five random-J controls, matched
+  SAE controls, raw norms, prompt-family holdouts, and feature-pair holdouts
+  are mandatory comparators rather than optional robustness checks.
 - Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
   SteeringAPI service was publicly reachable when checked, but its relationship
   to Goodfire and the paper-time experiment is unverified. Exact proprietary

@@ -109,6 +109,10 @@ data/public_sae_consciousness_gating/*
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/**
 !data/gemma_scope_9b/
 !data/gemma_scope_9b/**
+!data/sae_jlens_audit/
+data/sae_jlens_audit/*
+!data/sae_jlens_audit/confirmatory_v1_plan_20260711/
+!data/sae_jlens_audit/confirmatory_v1_plan_20260711/**
 out/
 *.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
@@ -134,6 +138,7 @@ out/
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/**/*.jsonl
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/*.jsonl
 !data/gemma_scope_9b/**/*.jsonl
+!data/sae_jlens_audit/confirmatory_v1_plan_20260711/*.jsonl
 
 # Frozen causal-identification release bundle. Keep pilots and private human
 # annotation linkage/coder files out of git.

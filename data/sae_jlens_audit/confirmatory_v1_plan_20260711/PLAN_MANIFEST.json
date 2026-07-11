@@ -1,0 +1,101 @@
+{
+  "claim_boundary": "This manifest freezes design and provenance before GPU outcomes exist.",
+  "created_at_utc": "2026-07-11T23:03:04.383005+00:00",
+  "files": [
+    {
+      "bytes": 19857,
+      "path": "prompt_plan.jsonl",
+      "sha256": "a2b3a706ed6cf62ca1c9c4e4cb0a33c1193c6122ca1882887364ad11e776629f"
+    },
+    {
+      "bytes": 6984,
+      "path": "static_direction_plan.jsonl",
+      "sha256": "8620482e57508f1690f7f55616965e39d5dc5622a486ec840ed4e4e5c4017b92"
+    },
+    {
+      "bytes": 1095700,
+      "path": "paired_plan.jsonl",
+      "sha256": "be9a4b505f5f363ce89cb73c66909394d82463693a191c9aa790b4d9adcc5146"
+    },
+    {
+      "bytes": 4155,
+      "path": "protocol_snapshot.json",
+      "sha256": "d7f89ff7345922f319f40b9c78f3a4e3a9375f97d8717a1989af2a6757f84df2"
+    }
+  ],
+  "result_placeholders": [],
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 4341,
+      "path": "experiments/exp2_sae/build_sae_jlens_plan.py",
+      "sha256": "4a02c6b3ec6dd616ab9ec49f4b880dd5640024803b7801baed9b40709f5c9cfe"
+    },
+    {
+      "bytes": 17782,
+      "path": "experiments/exp2_sae/sae_jlens_protocol.py",
+      "sha256": "9e446137dfe71d3a4613a5db7ee8ae64ff5c03e3e0f1ffc091ffecb301cb06b7"
+    },
+    {
+      "bytes": 4347,
+      "path": "experiments/exp2_sae/validate_sae_jlens_plan.py",
+      "sha256": "493f763636400f2b594872dc123f7cfb7b8dbca01540bfb8fdd653709fcbafa5"
+    },
+    {
+      "bytes": 42994,
+      "path": "experiments/exp2_sae/run_sae_jlens_audit.py",
+      "sha256": "4f99acff18ae848ab06673dfcb0064c525b21eaeb8d24226743bbb1bf06bde26"
+    },
+    {
+      "bytes": 28571,
+      "path": "experiments/exp2_sae/analyze_sae_jlens_audit.py",
+      "sha256": "195f91a829da71218cd1ee5e45248bf0df75f52edea952b3386b401dcb9585e1"
+    },
+    {
+      "bytes": 9478,
+      "path": "experiments/exp2_sae/audit_sae_jlens_results.py",
+      "sha256": "15b2c40a310baa0bac5035be13308582db87476590c758af6ac082a7565f27fc"
+    },
+    {
+      "bytes": 1803,
+      "path": "experiments/exp2_sae/run_sae_jlens_runpod.sh",
+      "sha256": "eea30014740046ed5aae522bf4f74f443d7b80cee82a0a678966cf42fba81f09"
+    },
+    {
+      "bytes": 276,
+      "path": "experiments/exp2_sae/sae_jlens_requirements.txt",
+      "sha256": "7c1b64aae7e04c822878812407f5e35b2db7dbb0f43e169b5fdbd1d8a6f0f4f7"
+    },
+    {
+      "bytes": 11680,
+      "path": "docs/LLAMA70B_SAE_JLENS_PROTOCOL.md",
+      "sha256": "e8c720151375a7c530b99b3f6fc5ebc2d15b4a8988651b8efdbe38deeb1d9255"
+    },
+    {
+      "bytes": 253254,
+      "path": "data/public_sae_feature_maps/70b_balanced_80_20260709/mapping_corpus.csv",
+      "sha256": "5c77a4f2a0252e1eb8174389ce27c685534332ad04dd8f7a5ad5f53c700027b6"
+    },
+    {
+      "bytes": 164936,
+      "path": "data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/template_assignments.csv",
+      "sha256": "7806fdd29d5cbdb2ad04c20c642756ec76e92068c1c0feb17796307dd90113e2"
+    },
+    {
+      "bytes": 1438,
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/control_matching.csv",
+      "sha256": "89ea2608444503d2284e64f72208510bb10aa24f752905fd983d42a7bde5fb5e"
+    },
+    {
+      "bytes": 8163,
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/aggregate_blocks.jsonl",
+      "sha256": "7f42ed91f6e1983c078642c37e395707573761c533a7af7a09066b5eb0f493a8"
+    },
+    {
+      "bytes": 199797,
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_plan_20260710/calibration.json",
+      "sha256": "9f9509b27640e24a8b78af668b53eda9e0d3f6fc2c713725be99523990629c47"
+    }
+  ],
+  "status": "frozen_outcome_blind_plan"
+}

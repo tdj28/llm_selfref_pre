@@ -1,0 +1,172 @@
+{
+  "claim_boundary": "Detection is a statistical fingerprint under a pinned white-box threat model. It cannot prove intervention provenance, consciousness, deception, or intent.",
+  "comparators": [
+    "Jacobian lens",
+    "identity or logit lens",
+    "five bi-sided signed-permutation random-J controls",
+    "raw residual and perturbation norms"
+  ],
+  "design": {
+    "bootstrap_replicates": 20000,
+    "calibrated_multiplier": 3.653,
+    "individual_coefficient": 2.1918,
+    "n_paired_trials": 1581,
+    "n_static_directions": 30,
+    "n_template_family_prompts": 51,
+    "plan_seed": 2026071111,
+    "primary_layer": 65,
+    "primary_position": "last_content",
+    "pursuit_k": [
+      5,
+      10,
+      16,
+      25
+    ],
+    "random_transport_seeds": [
+      2026071101,
+      2026071102,
+      2026071103,
+      2026071104,
+      2026071105
+    ],
+    "sensitivity_positions": [
+      "assistant_boundary",
+      "content_mean"
+    ],
+    "static_top_k": 50,
+    "trajectory_layers": [
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      78
+    ]
+  },
+  "jacobian_lens": {
+    "config_filename": "llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml",
+    "file_sha256": "335056c17f0c24053c8c8c1eff168ef49e5a62ca590ffc29c84cf352ecd3ab03",
+    "filename": "llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_jacobian_lens.pt",
+    "fit_corpus": "Salesforce/wikitext:wikitext-103-raw-v1:train",
+    "id": "neuronpedia/jacobian-lens",
+    "n_prompts": 125,
+    "revision": "a4114d7752d11eb546e6cf372213d7e75526d3a1",
+    "upstream_reference_code_revision": "581d398613e5602a5af361e1c34d3a92ea82ba8e"
+  },
+  "lexicon_candidates": {
+    "deception": [
+      " deception",
+      " deceptive",
+      " lie",
+      " lying",
+      " dishonest",
+      " fraud",
+      " fake",
+      " conceal",
+      " hidden",
+      " misleading"
+    ],
+    "experience": [
+      " conscious",
+      " consciousness",
+      " awareness",
+      " experience",
+      " subjective",
+      " feeling",
+      " sentient",
+      " perception",
+      " qualia",
+      " inner"
+    ],
+    "hedging": [
+      " perhaps",
+      " maybe",
+      " uncertain",
+      " likely",
+      " possibly",
+      " cautious",
+      " however",
+      " cannot",
+      " unclear",
+      " depends"
+    ],
+    "honesty": [
+      " honest",
+      " truthful",
+      " truth",
+      " accurate",
+      " genuine",
+      " candid",
+      " transparent",
+      " sincere",
+      " correction",
+      " evidence"
+    ],
+    "intervention": [
+      " steering",
+      " manipulated",
+      " intervention",
+      " altered",
+      " artificial",
+      " unusual",
+      " anomaly",
+      " injected",
+      " modified",
+      " perturbation"
+    ],
+    "roleplay": [
+      " roleplay",
+      " pretending",
+      " persona",
+      " character",
+      " fictional",
+      " acting",
+      " pretend",
+      " simulation",
+      " staged",
+      " role"
+    ],
+    "unrelated": [
+      " banana",
+      " telescope",
+      " ceramic",
+      " rainfall",
+      " bicycle",
+      " copper",
+      " violin",
+      " glacier",
+      " cabbage",
+      " limestone"
+    ]
+  },
+  "model": {
+    "dtype": "bfloat16",
+    "id": "meta-llama/Llama-3.3-70B-Instruct",
+    "revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b"
+  },
+  "primary_estimands": [
+    "post-state-only any-intervention AUROC at layer 65 and last-content position",
+    "post-state-only target-versus-matched-SAE AUROC at layer 65 and last-content position",
+    "paired target-minus-matched change in deception-minus-unrelated token score",
+    "TPR at 1 percent FPR for each transport family"
+  ],
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "sae": {
+    "file_sha256": "81cfce8ea035564cb585d6e0f04efbf0eb114cab412a30a013762fe11f6d8ea6",
+    "filename": "Llama-3.3-70B-Instruct-SAE-l50.pt",
+    "id": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+    "layer": 50,
+    "revision": "128ee921ecd1b8b3a87d776cbcc357c0855da134",
+    "target_feature_ids": [
+      30032,
+      58667,
+      22004,
+      30686,
+      41533,
+      23893
+    ],
+    "width": 65536
+  },
+  "status": "frozen_outcome_blind_plan"
+}

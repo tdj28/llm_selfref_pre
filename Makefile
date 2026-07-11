@@ -50,6 +50,12 @@ compile:
 		experiments/exp2_sae/audit_gemma_scope_9b_headlines.py \
 		experiments/exp2_sae/figure_gemma_scope_9b.py \
 		experiments/exp2_sae/build_gemma_scope_9b_release.py \
+		experiments/exp2_sae/sae_jlens_protocol.py \
+		experiments/exp2_sae/build_sae_jlens_plan.py \
+		experiments/exp2_sae/validate_sae_jlens_plan.py \
+		experiments/exp2_sae/run_sae_jlens_audit.py \
+		experiments/exp2_sae/analyze_sae_jlens_audit.py \
+		experiments/exp2_sae/audit_sae_jlens_results.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \
@@ -69,6 +75,7 @@ compile:
 		scripts/audit_public_release.py
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_stage2.sh
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_external_controller.sh
+	bash -n experiments/exp2_sae/run_sae_jlens_runpod.sh
 
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
