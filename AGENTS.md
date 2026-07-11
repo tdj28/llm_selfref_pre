@@ -49,9 +49,9 @@ immediately public and permanently recoverable.
 - `experiments/exp2_sae/` contains Experiment 2 replication and robustness code, including prompt-only behavioral controls and heavier SAE/Goodfire-oriented scripts.
 - `steering/` is a separate SAE steering framework with its own `pyproject.toml`, `uv.lock`, docs, config system, concept pairs, triangulation methods, judges, and run CLI.
 - `paper/` is the main causal-paper source. `steering/paper/` is older related steering-paper material and is not the current manuscript.
-- `docs/GEMMA_SCOPE_9B_ROADMAP.md` defines the proposed cross-model Gemma Scope
-  phase. It is a design draft, not a frozen protocol or authorization to spend
-  GPU budget.
+- `docs/GEMMA_SCOPE_9B_ROADMAP.md` is the design rationale for the cross-model
+  Gemma Scope phase. `docs/GEMMA_SCOPE_9B_PROTOCOL.md` is the prospective
+  protocol frozen before Gemma outcomes.
 
 ## Research Direction
 
@@ -118,6 +118,11 @@ Strong contributions should map to falsifiable experiments and paper figures/tab
 - Do not create a Gemma GPU pod until the baseline/direct-IT protocol, exact
   revisions, machine-readable plan, independent validator, and local dry run
   are committed and pushed.
+- The owner authorized the full phase and added RunPod funds on 2026-07-11.
+  Authorization does not relax the stage gates. Use one uniquely named
+  agent-owned pod, preserve outcome blinding between atlas/calibration and the
+  final causal-plan commit, retrieve hashes before termination, and never touch
+  a pod created by another experiment.
 
 ## Main Workflows
 
@@ -144,6 +149,20 @@ venv/bin/python experiments/causal_transplant/analyze_causal_transplant.py \
   --bootstrap 5000 \
   --outdir data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper
 ```
+
+Gemma outcome-free plan:
+
+```bash
+python experiments/exp2_sae/build_gemma_scope_9b_plan.py \
+  data/gemma_scope_9b/confirmatory_v1_plan_20260711
+python experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
+  data/gemma_scope_9b/confirmatory_v1_plan_20260711
+```
+
+The Gemma baseline, atlas, calibration, final-plan, steering, judging, analysis,
+and release commands are bound in `docs/GEMMA_SCOPE_9B_PROTOCOL.md`. Do not run
+causal steering from the template; build and independently validate the final
+830-row plan from the committed atlas and calibration artifacts first.
 
 Experiment 1 replication:
 

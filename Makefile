@@ -30,6 +30,25 @@ compile:
 		experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
 		experiments/exp2_sae/figure_public_sae_consciousness_gating.py \
 		experiments/exp2_sae/build_public_sae_consciousness_release.py \
+		experiments/exp2_sae/gemma_scope_9b_protocol.py \
+		experiments/exp2_sae/gemma_scope_9b_runtime.py \
+		experiments/exp2_sae/smoke_gemma_scope_9b_runtime.py \
+		experiments/exp2_sae/build_gemma_scope_9b_plan.py \
+		experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
+		experiments/exp2_sae/run_gemma_scope_9b_baseline.py \
+		experiments/exp2_sae/run_gemma_scope_9b_atlas.py \
+		experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py \
+		experiments/exp2_sae/build_gemma_scope_9b_steering_plan.py \
+		experiments/exp2_sae/validate_gemma_scope_9b_steering_plan.py \
+		experiments/exp2_sae/run_gemma_scope_9b_steering.py \
+		experiments/exp2_sae/build_gemma_scope_9b_judge_packet.py \
+		experiments/exp2_sae/judge_gemma_scope_9b_local.py \
+		experiments/exp2_sae/judge_gemma_scope_9b_external.py \
+		experiments/exp2_sae/analyze_gemma_scope_9b.py \
+		experiments/exp2_sae/analyze_gemma_scope_cross_layer.py \
+		experiments/exp2_sae/audit_gemma_scope_9b_headlines.py \
+		experiments/exp2_sae/figure_gemma_scope_9b.py \
+		experiments/exp2_sae/build_gemma_scope_9b_release.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \

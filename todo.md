@@ -322,7 +322,7 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Verify repository access to `google/gemma-2-9b-it` and record candidate
   model, direct-IT SAE, and all-layer PT-SAE revisions without downloading
   weights or creating a pod.
-- [ ] Freeze the exact Gemma baseline prompts, seeds, judge panel,
+- [x] Freeze the exact Gemma baseline prompts, seeds, judge panel,
   floor/ceiling interpretation, and claim boundary before generation.
 - [ ] Implement and locally test a pinned Gemma 2 / JumpReLU loader, true
   no-op, latent-contribution edit, telemetry, checkpointing, and hook cleanup.
@@ -332,9 +332,12 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   tested-feature denominator and all selection diagnostics.
 - [ ] Freeze and run the PT-to-IT transfer gate at layers 9, 20, and 31 before
   applying PT SAEs across all 42 instruction-tuned-model layers.
-- [ ] Preregister layer 20 direct-IT 131k as the primary causal intervention,
+- [x] Preregister layer 20 direct-IT 131k as the primary causal intervention,
   with matched-random, hedging/refusal, subjective-experience, and true-zero
   comparators.
+- [x] Build and independently audit the 180-row baseline plan, six direct-IT
+  anchor inventory, 42-layer PT inventory, transfer thresholds, feature
+  selection rules, and 830-row causal-plan template before GPU outcomes.
 - [ ] Run upstream-to-downstream causal relay measurements before opening
   attention/MLP sublayer follow-ups; never treat cross-layer IDs as stable
   identities.

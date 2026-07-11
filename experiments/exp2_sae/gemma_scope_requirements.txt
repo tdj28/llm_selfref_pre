@@ -1,0 +1,4 @@
+# GPU-only Gemma Scope environment. The successful run also records pip freeze.
+sae-lens==6.45.3
+transformers==4.57.6
+scipy==1.16.0

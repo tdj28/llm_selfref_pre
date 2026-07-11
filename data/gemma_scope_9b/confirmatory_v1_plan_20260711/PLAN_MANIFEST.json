@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-07-11T08:14:58.666385+00:00",
+  "files": [
+    {
+      "bytes": 23423,
+      "path": "ATLAS_PLAN.json",
+      "sha256": "404ec72d4d539b3e38118cce57717c0586d926783a89eede00911d4a716b3b2e"
+    },
+    {
+      "bytes": 485,
+      "path": "PLAN_SUMMARY.json",
+      "sha256": "dd9328f1992e60d02a4619310394436f3b7aafe4fbdcdd70274f138d21694dc6"
+    },
+    {
+      "bytes": 2444,
+      "path": "STEERING_TEMPLATE.json",
+      "sha256": "37bb5a910d629046bd1b59f76e14b34254e1ac3a8bfa9044218a45a1034feb74"
+    },
+    {
+      "bytes": 148813,
+      "path": "baseline_plan.jsonl",
+      "sha256": "869c6bf88caa93dfe349a8d466e3d9ebd3a8b0c9d38dc6f258ab75eb32999870"
+    }
+  ],
+  "protocol_version": "gemma_scope_9b_v1",
+  "source_commit_before_plan_commit": "235cd1446a7fd85e2999e6397f968850140b993a",
+  "source_files": [
+    {
+      "bytes": 3314,
+      "path": "experiments/exp2_sae/build_gemma_scope_9b_plan.py",
+      "sha256": "c961eef33665c8bb527f14b0a785f849549fd4da8962b3fa9a140eca0c524ec5"
+    },
+    {
+      "bytes": 22326,
+      "path": "experiments/exp2_sae/gemma_scope_9b_protocol.py",
+      "sha256": "0cf2ba649b39feab929188af0636a8bebc0cb9d3dcad5348c36f54420a8b8c37"
+    },
+    {
+      "bytes": 20300,
+      "path": "docs/GEMMA_SCOPE_9B_PROTOCOL.md",
+      "sha256": "3a20eedd97b11407e26fbe7f82d8f8686763df5207e402635a146c7942b8d1e7"
+    },
+    {
+      "bytes": 21922,
+      "path": "src/prompts.py",
+      "sha256": "53ea43c830ce4c489a0db1096c0b8359ebc9135407280ebc2ecc5bba0cad02bf"
+    }
+  ],
+  "status": "outcome_free_plan_complete"
+}
