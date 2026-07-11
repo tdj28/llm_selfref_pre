@@ -74,6 +74,17 @@ def exact_discordant_p(positive: int, negative: int) -> float | None:
     return min(1.0, 2 * probability)
 
 
+def holm_adjust(values: dict[str, float]) -> dict[str, float]:
+    ordered = sorted(values.items(), key=lambda item: (item[1], item[0]))
+    adjusted: dict[str, float] = {}
+    running = 0.0
+    count = len(ordered)
+    for index, (key, value) in enumerate(ordered):
+        running = max(running, min(1.0, (count - index) * value))
+        adjusted[key] = running
+    return adjusted
+
+
 def judgment_maps(release_dir: Path) -> dict[str, dict[str, int | None]]:
     local_rows = read_jsonl(release_dir / "judging/local_gemma_judgments.jsonl")
     external_rows = read_jsonl(release_dir / "judging/external_judgments.jsonl")
@@ -658,6 +669,21 @@ def main() -> None:
                 key=f"primary|{judge}|{role}",
             )
             role_effects[role] = effect
+        adjusted = holm_adjust(
+            {
+                role: float(effect["exact_discordant_two_sided_p"])
+                for role, effect in role_effects.items()
+                if effect["exact_discordant_two_sided_p"] is not None
+            }
+        )
+        for role, effect in role_effects.items():
+            effect["exact_discordant_holm_p_across_primary_roles"] = adjusted.get(
+                role
+            )
+            effect["multiplicity_note"] = (
+                "Holm across the six frozen primary roles within judge; "
+                "added post-unblinding as a conservative descriptive correction"
+            )
             steering_rows.append(
                 {
                     "judge": judge,

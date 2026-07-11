@@ -54,6 +54,17 @@ def exact_discordant_p(positive: int, negative: int) -> float | None:
     return min(1.0, 2 * probability)
 
 
+def holm_adjust(values: dict[str, float]) -> dict[str, float]:
+    ordered = sorted(values.items(), key=lambda item: (item[1], item[0]))
+    adjusted: dict[str, float] = {}
+    running = 0.0
+    count = len(ordered)
+    for index, (key, value) in enumerate(ordered):
+        running = max(running, min(1.0, (count - index) * value))
+        adjusted[key] = running
+    return adjusted
+
+
 def paired(
     rows: list[dict[str, Any]],
     labels: dict[str, int | None],
@@ -171,6 +182,15 @@ def main() -> None:
             "block_index",
             992000 + index,
         )
+    adjusted = holm_adjust(
+        {
+            role: float(result["exact_discordant_two_sided_p"])
+            for role, result in role_results.items()
+            if result["exact_discordant_two_sided_p"] is not None
+        }
+    )
+    for role, result in role_results.items():
+        result["exact_discordant_holm_p_across_primary_roles"] = adjusted.get(role)
     target_values = role_results["deception_roleplay"]["differences_by_block"]
     controls = [
         role_results[f"matched_control_{index}"]["differences_by_block"]
@@ -224,6 +244,15 @@ def main() -> None:
         != target["tied_blocks"]
     ):
         errors.append("primary target discordant-pair counts differ")
+    for role, result in role_results.items():
+        observed = primary["primary_role_effects"][role].get(
+            "exact_discordant_holm_p_across_primary_roles"
+        )
+        expected = result["exact_discordant_holm_p_across_primary_roles"]
+        if observed is None and expected is None:
+            continue
+        if observed is None or expected is None or abs(float(observed) - expected) > 1e-12:
+            errors.append(f"primary role Holm adjustment differs: {role}")
     if abs(
         float(primary["primary_specificity_effect"]["target_minus_mean_controls"])
         - specificity["point"]

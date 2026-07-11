@@ -332,6 +332,14 @@ probability conditional on discordance. This is a descriptive paired-data
 diagnostic only. It is independently recomputed and does not enter or modify
 the frozen interval, minimum effect, verdict, or specificity rules below.
 
+Post-unblinding amendment, 2026-07-11: after the six fixed role estimates were
+visible, including a positive unadjusted hedging/refusal interval, the exact
+discordant probabilities were supplemented with Holm adjustment across all six
+primary roles within each judge. This conservative descriptive correction is
+reported because the roles form an obvious family. It was not preregistered,
+does not adjust the bootstrap intervals, and cannot alter the primary target
+effect, minimum relevant effect, specificity estimate, or verdict.
+
 Primary verdict:
 
 - **generalized replication under Gemma Scope**: point estimate at least 0.30,

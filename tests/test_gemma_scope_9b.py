@@ -26,6 +26,7 @@ from experiments.exp2_sae.gemma_scope_9b_runtime import (
 )
 from experiments.exp2_sae.analyze_gemma_scope_9b import (
     exact_discordant_p,
+    holm_adjust,
     specificity_effect,
 )
 from experiments.exp2_sae.calibrate_gemma_scope_9b_steering import role_specs
@@ -42,6 +43,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GemmaScopePlanTests(unittest.TestCase):
+    def test_holm_adjustment_is_monotone(self) -> None:
+        adjusted = holm_adjust({"a": 0.01, "b": 0.03, "c": 0.5})
+        self.assertEqual(adjusted, {"a": 0.03, "b": 0.06, "c": 0.5})
+
     def test_exact_discordant_probability(self) -> None:
         self.assertIsNone(exact_discordant_p(0, 0))
         self.assertEqual(exact_discordant_p(5, 0), 0.0625)
