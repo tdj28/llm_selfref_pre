@@ -8,6 +8,13 @@ metadata. It preserves the work that remains possible with public artifacts and
 public weights without pretending that it is an exact replication of a private
 service.
 
+Status update: Goodfire's legacy SAE demo/API was deprecated in February 2026.
+A separately branded SteeringAPI remains publicly reachable, but no public
+artifact establishes its equivalence to Goodfire or the paper-time experiment.
+See `docs/GOODFIRE_API_STATUS.md`. This fallback now assumes that exact
+Goodfire replication requires archival access rather than a new generic API
+key.
+
 ## Unresolved Proprietary Constraint
 
 We do not have:

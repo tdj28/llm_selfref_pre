@@ -36,6 +36,12 @@ immediately public and permanently recoverable.
 - `docs/CLAIM_LEDGER.md` maps every headline claim to its artifacts, analysis code, permissible wording, and forbidden overclaims.
 - `docs/EXTERNAL_REVIEW_PACKET.md` defines the unresolved statistics and mechanistic review requests; preparing it does not count as receiving independent review.
 - `docs/HUMAN_CODING_HANDOFF.md` is the operational protocol for independent coders. Preparing the handoff does not count as completing human validation.
+- `docs/GOODFIRE_API_STATUS.md` records the February 2026 deprecation of
+  Goodfire's legacy SAE demo/API and keeps the separately active SteeringAPI
+  provenance boundary explicit.
+- `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` compares the two intervention
+  families and defines the bounded open-model follow-up suggested by the 2026
+  Jacobian-lens paper.
 - `experiments/causal_transplant/` is the main confirmatory workflow: generation, judging, analysis, blinded human packets, and release auditing.
 - `data/causal_transplant/confirmatory_v1_20260709/` is the frozen confirmatory release. Preserve raw rows and missing outcomes exactly.
 - `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` is the
@@ -100,7 +106,14 @@ Public SAE work is a separate evidence ladder:
   judges, minimum effect, and verdict were frozen before outcome inspection.
   All technical/missingness gates and the independent raw-row audit pass. Do not
   let the older adaptive n=20 result replace this primary public estimand.
-- Exact proprietary replication remains unavailable without Goodfire/Steering API access and paper-time version metadata. Always distinguish public artifact reanalysis, public-weight feature verification, best-public steering, and exact proprietary replication.
+- Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
+  SteeringAPI service was publicly reachable when checked, but its relationship
+  to Goodfire and the paper-time experiment is unverified. Exact proprietary
+  replication now requires archival Goodfire access or a frozen manifest; a
+  current SteeringAPI run is a separate evidence layer unless equivalence is
+  established. Always distinguish public artifact reanalysis, public-weight
+  feature verification, current-service steering, and exact proprietary
+  replication.
 
 Strong contributions should map to falsifiable experiments and paper figures/tables, not just prose argument.
 
@@ -296,7 +309,10 @@ The steering framework can require substantial GPU memory, HuggingFace downloads
 
 - Root scripts expect `.env` or environment variables such as `OPENAI_API_KEY`.
 - Steering judges may require `OPENAI_API_KEY` and/or `ANTHROPIC_API_KEY`.
-- Goodfire-related code may use `GOODFIRE_API_KEY` or `STEERING_API_KEY`, but the repository assumes that access is unavailable unless verified at runtime.
+- Goodfire-related code may use `GOODFIRE_API_KEY` or `STEERING_API_KEY`.
+  Goodfire's legacy SAE API is deprecated; do not assume a `GOODFIRE_API_KEY`
+  can reach it. Verify current SteeringAPI access separately and never infer
+  paper-time equivalence from a working key.
 - Never commit `.env`, API keys, private annotation linkage/coder files, or model caches.
 - The owner explicitly wants selected frozen raw outputs committed for transparency. Follow `.gitignore` allowlists and `DATA_ARTIFACTS.md`; do not apply a blanket "never commit JSONL" rule.
 

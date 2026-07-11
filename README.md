@@ -48,8 +48,11 @@ The confirmatory causal run is complete and tracked at
 
 The public Goodfire SAE feature mapping and corrected two-turn public-weight
 steering analysis are complete. Exact replication of the proprietary
-Goodfire/Steering API workflow remains unavailable because we do not have API
-access or a confirmed paper-time API/version manifest.
+Goodfire/Steering API workflow remains unavailable. Goodfire's legacy SAE
+demo/API was deprecated in February 2026; the separately branded SteeringAPI
+remains publicly reachable, but no public evidence establishes service,
+feature-namespace, or paper-time version equivalence. See
+[`docs/GOODFIRE_API_STATUS.md`](docs/GOODFIRE_API_STATUS.md).
 
 ## Public Writing
 
@@ -420,7 +423,8 @@ runtime logs, independent audit, 12 PNG/PDF figure pairs, and SHA-256 hashes:
 
 ### Claim boundary
 
-Without Goodfire/Steering API access and paper-time version metadata, we can:
+Without archival Goodfire access or evidence that a current SteeringAPI version
+matches the paper-time service, we can:
 
 - reanalyze the public notebook;
 - verify candidate feature semantics with public weights;
@@ -520,6 +524,8 @@ To generate a new confirmatory collection or judge pass, use
 | `paper/main.tex` | Current causal manuscript. |
 | `paper/results/` | Compact paper tables and figures. |
 | `docs/CONFIRMATORY_PROTOCOL.md` | Frozen design, estimands, amendments, and interpretation rules. |
+| `docs/GOODFIRE_API_STATUS.md` | Verified legacy Goodfire API deprecation, current SteeringAPI distinction, and archival-access requirements. |
+| `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` | Technical comparison of sparse-feature and Jacobian-lens interventions plus the proposed open-model cross-test. |
 | `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
 | `docs/CLAIM_LEDGER.md` | Claim-to-artifact map, permissible wording, and forbidden overclaims. |
 | `technical_blog_posts/` | Public-post source, four editable Gemma follow-ups, editorial handoff, and synchronized figure assets. |

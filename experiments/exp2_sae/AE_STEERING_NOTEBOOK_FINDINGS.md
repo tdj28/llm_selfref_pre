@@ -1,8 +1,24 @@
 # AE Steering Notebook Findings
 
-Last updated: 2026-07-09
+Last updated: 2026-07-11
 
 This note records what we found after locating AE Studio's public Steering API example for the deception-feature / subjective-consciousness experiment. It should be read before further Experiment 2 replication work.
+
+## Service Status Update
+
+Goodfire's official legacy Llama SAE pages now state that its SAE demo
+interface and API were deprecated in February 2026. The former
+`docs.goodfire.ai` URL redirects to Goodfire's current site. The separately
+branded `steeringapi.com` service and the notebook's
+`api.steeringapi.com` endpoint were publicly reachable when checked on
+2026-07-11.
+
+This does not establish that SteeringAPI is the former Goodfire backend or that
+its current model, SAE, feature IDs, and steering semantics match the paper-time
+configuration. A current SteeringAPI execution would reproduce the notebook
+under the current service; exact paper replication still requires an archival
+service/version manifest. The authoritative status note and source links are in
+`docs/GOODFIRE_API_STATUS.md`.
 
 ## Sources Checked
 
@@ -183,8 +199,11 @@ The notebook gives a more direct target:
 
 1. Treat the six notebook feature IDs as the current best candidate feature set.
 2. Do not call them "the paper's feature IDs" until the authors confirm that.
-3. Prioritize a Steering API / Goodfire API reproduction of the notebook's single-feature curves if access becomes available.
-4. Compare current feature-search results against the notebook's saved IDs to detect API/SAE drift.
+3. Prioritize archival Goodfire access or a current SteeringAPI reproduction of
+   the notebook's single-feature curves, labeling the latter as current-service
+   evidence unless equivalence is established.
+4. Record the service and version before comparing current feature-search
+   results against the notebook's saved IDs to detect API/SAE drift.
 5. If IDs match, run the paper-range subset `-0.6` to `+0.6` with 10 seeds per value.
 6. Reconstruct the paper's aggregate-feature experiment using the confirmed IDs:
    - sample 2-4 features per trial

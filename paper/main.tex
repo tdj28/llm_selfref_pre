@@ -98,6 +98,9 @@ LLM judges make open-ended evaluation scalable, but documented failure modes inc
 \paragraph{Sparse features and causal steering.}
 SAEs can expose interpretable activation directions and support causal interventions \citep{bricken2023monosemanticity,cunningham2023sae,marks2024sae_steering}. Yet learned dictionaries need not provide unique or atomic units \citep{leask2025canonical}, and steering a feature can alter broad downstream behavior outside the label assigned to it; refusal steering, for example, can degrade unrelated benchmark performance \citep{obrien2024refusal}. These limitations motivate our separation of feature semantics, intervention telemetry, and behavioral specificity.
 
+\paragraph{Jacobian-lens steering.}
+The Jacobian lens derives layer-specific, token-indexed residual directions from the corpus-averaged first-order map between intermediate activations and current or future outputs \citep{gurnee2026workspace}. Unlike an SAE dictionary trained to reconstruct the broad activation distribution, its directions are constructed to identify verbalizable content. The associated J-space ablation dynamically removes strongly active verbalizable directions across a layer band. It reduces experiential language in both model self-reports and descriptions of other people, which makes it a complementary causal result about experiential reporting register rather than a self-specific consciousness measure. This intervention is not equivalent to editing a fixed set of deception-labeled SAE coordinates.
+
 \section{Methods}
 
 \subsection{Frozen model panel and collection}
@@ -270,6 +273,8 @@ The target paper's Experiment 2 reports a proprietary Goodfire API workflow on L
   \item \textbf{Public decoder-vector steering:} a best-public intervention whose scale and implementation are not assumed equivalent to the proprietary API.
 \end{enumerate}
 All three layers support bounded claims, but only the third is causal and it applies solely to our disclosed public-weight implementation. The exact proprietary steering experiment remains unavailable.
+
+Goodfire's legacy Llama SAE pages now state that its SAE demo interface and API were deprecated in February 2026 \citep{goodfire2024mapping}; the former documentation URL redirects to Goodfire's current site. A separately branded service at \url{https://www.steeringapi.com/} remained publicly reachable when checked on 2026-07-11, but no public artifact establishes that it is the legacy Goodfire backend or that its current model, SAE, feature namespace, and intervention semantics match the paper-time configuration. Exact replication therefore requires archival access or a frozen paper-time manifest; a current SteeringAPI execution would be a separate current-service result unless equivalence is demonstrated.
 
 \subsection{The public candidate IDs are meaningful, but not consciousness-specific}
 
@@ -466,7 +471,7 @@ The evidence supports an interpretation-level challenge, not an accusation about
   \item The transplant creates deliberately incongruent contexts. That is required for identification but may itself affect compliance or refusals; all four cells and model-level outcomes are shown.
   \item The query factorial uses one wording per cell, and the two direct cells differ in answer instructions as well as terminology. Its interaction is evidence of wording-package sensitivity, not an isolated lexical effect of \emph{conscious}.
   \item Automated judges are themselves language models. Cross-provider paper-style agreement is high, but construct-positive agreement is poor. Human coding remains pending and no human-label conclusion is claimed.
-  \item The target paper's proprietary SAE/API configuration is unavailable. The accepted notebook IDs and public layer-50 weights do not establish equivalence of feature lookup, quantization, hook semantics, or intervention scale. The full-grid verdict therefore names the public implementation explicitly.
+  \item The target paper's proprietary SAE/API configuration is unavailable, and Goodfire's legacy SAE API is now deprecated. The separately reachable SteeringAPI is not publicly established as equivalent. The accepted notebook IDs and public layer-50 weights do not establish equivalence of feature lookup, quantization, hook semantics, or intervention scale. The full-grid verdict therefore names the public implementation explicitly.
   \item The prospective public steering run uses a 4-bit model and signed decoder-vector additions. Its primary literal coefficients reproduce the paper's printed numbers but have no established proprietary-unit equivalence. The outcome-blind calibrated sensitivity increases realized dose and also fails in the paper direction, but it is not a recovered API conversion.
   \item The Gemma Scope study is a cross-model test on a 9B model, not a replication of the Llama 3.3 70B architecture, paper feature IDs, or proprietary intervention units. A null or nonpositive Gemma effect need not predict what a larger model does.
   \item The prospective Gemma pretrained-SAE-to-instruction-model transfer gate fails on chat-centered reconstruction. The three direct-IT anchor analyses and causal verdict do not rely on that transfer, but the 42-layer PT-on-IT residual map, targeted attention/MLP localization, and adjacent-layer links are explicitly exploratory. Their designed-corpus and lexical sensitivities preclude a circuit claim.
@@ -769,7 +774,7 @@ Every JSONL identifier is unique within its artifact. The release manifests reco
 
 \clearpage
 \begingroup
-\small
+\footnotesize
 \bibliographystyle{plainnat}
 \bibliography{references}
 \endgroup

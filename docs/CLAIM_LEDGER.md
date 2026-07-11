@@ -47,6 +47,12 @@ The paper names the Goodfire API; the public AE notebook calls the Steering API.
 Do not treat those services as interchangeable unless the authors or providers
 confirm their relationship and versioning.
 
+Goodfire's legacy SAE demo/API was deprecated in February 2026. A separately
+branded SteeringAPI service was publicly reachable on 2026-07-11, but its
+relationship to Goodfire and the paper-time experiment remains unverified. See
+`docs/GOODFIRE_API_STATUS.md`. The deprecation is a provenance limitation, not
+evidence for or against the reported result.
+
 ## Gemma Scope Cross-Model Evidence
 
 | Claim | Status | Direct artifact | Analysis code | Permissible wording |

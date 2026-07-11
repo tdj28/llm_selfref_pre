@@ -354,11 +354,23 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Prepare four editable Gemma blog drafts plus their audited figure assets:
   the Gemma Scope primer, causal steering result, exploratory layerwise atlas,
   and causal-relay analysis.
+- [x] Verify and document the February 2026 deprecation of Goodfire's legacy
+  SAE demo/API, while keeping the currently reachable SteeringAPI separate
+  until provider/version equivalence is established.
+- [x] Study the 2026 Jacobian-lens paper and document how its token-indexed,
+  corpus-averaged causal directions differ from learned SAE features.
 - [ ] If authors respond, archive whether the public AE notebook is the exact
   Experiment 2 setup and request a paper-time SAE/API version manifest. This is
   useful provenance but no longer blocks the owner-approved public-weight run.
-- [ ] If Goodfire/Steering API access arrives, run the frozen clean-room protocol
-  and compare against the best-public implementation without overwriting it.
+- [ ] If archival Goodfire or current SteeringAPI access arrives, record the
+  exact service/version first, run the frozen clean-room protocol, and compare
+  against the best-public implementation without overwriting it. Describe a
+  current SteeringAPI result separately unless paper-time equivalence is shown.
+- [ ] Freeze an outcome-blind Gemma 2 9B Jacobian-lens/SAE comparison before
+  any new GPU run: measure J-space alignment of the existing SAE sets, then
+  compare matched-norm fixed-SAE, fixed-J-lens, dynamic-J-space, low-kurtosis,
+  J-stripped, random, and true-zero interventions across self/other and
+  phenomenological/analytic conditions.
 - [ ] Add a third provider family only with pinned model/version metadata and a
   prespecified integration rule; do not casually append models after seeing
   outcomes.
@@ -367,8 +379,9 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 
 ## Non-Negotiable Claim Boundary
 
-Without Goodfire/Steering API access, do not claim exact non-replication of the
-paper's private mechanistic workflow. The prospective result supports a precise
+Without archival Goodfire access or demonstrated paper-time equivalence for a
+current SteeringAPI run, do not claim exact non-replication of the paper's
+private mechanistic workflow. The prospective result supports a precise
 non-replication only under the pinned public implementation. With only four
 response-model snapshots, do not claim universal model-family effects. Until
 blinded human coding is complete, do not treat either model judge as ground
