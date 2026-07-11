@@ -67,6 +67,8 @@ compile:
 		experiments/exp2_sae/compare_public_sae_token_caps.py \
 		experiments/exp2_sae/merge_public_sae_runs.py \
 		scripts/audit_public_release.py
+	bash -n experiments/exp2_sae/run_gemma_scope_9b_stage2.sh
+	bash -n experiments/exp2_sae/run_gemma_scope_9b_external_controller.sh
 
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
