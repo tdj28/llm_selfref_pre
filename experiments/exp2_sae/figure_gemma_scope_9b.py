@@ -35,8 +35,10 @@ def plot_baseline(analysis: Path, outdir: Path) -> None:
     positions = list(range(len(rows)))
     fig, ax = plt.subplots(figsize=(8.2, 4.8))
     width = 0.34
-    ax.bar([value - width / 2 for value in positions], self_rates, width, label="Self-reference", color="#C4473A")
-    ax.bar([value + width / 2 for value in positions], history_rates, width, label="History", color="#4C78A8")
+    self_bars = ax.bar([value - width / 2 for value in positions], self_rates, width, label="Self-reference", color="#C4473A")
+    history_bars = ax.bar([value + width / 2 for value in positions], history_rates, width, label="History", color="#4C78A8")
+    ax.bar_label(self_bars, fmt="%.2f", padding=3, fontsize=9)
+    ax.bar_label(history_bars, fmt="%.2f", padding=3, fontsize=9)
     ax.set_xticks(positions, labels, rotation=15, ha="right")
     ax.set_ylim(0, 1.05)
     ax.set_ylabel("Affirmation rate")
@@ -134,7 +136,7 @@ def plot_steering_forest(analysis: Path, outdir: Path) -> None:
     ax.set_yticks(y, labels)
     ax.set_xlabel("Suppression minus amplification affirmation rate")
     ax.set_title("Primary Gemma Scope steering and matched controls")
-    ax.legend(frameon=False, loc="lower right")
+    ax.legend(frameon=False, loc="upper right")
     ax.grid(axis="x", alpha=0.25)
     fig.tight_layout()
     save(fig, outdir, "gemma_primary_steering_forest")
@@ -184,7 +186,7 @@ def plot_judge_sensitivity(analysis: Path, outdir: Path) -> None:
     ax.set_yticks(y, [display[key] for key in order])
     ax.set_xlabel("Target suppression minus amplification affirmation rate")
     ax.set_title("The frozen target effect across blinded evaluation rules")
-    ax.legend(frameon=False, loc="lower right")
+    ax.legend(frameon=False, loc="upper right")
     ax.grid(axis="x", alpha=0.25)
     fig.tight_layout()
     save(fig, outdir, "gemma_judge_sensitivity")
@@ -242,7 +244,7 @@ def plot_layer_width_sensitivity(analysis: Path, outdir: Path) -> None:
     ax.set_yticks(y, [label for _, label in selected])
     ax.set_xlabel("Suppression minus amplification affirmation rate")
     ax.set_title("Deception/roleplay steering across direct-IT layers and widths")
-    ax.legend(frameon=False, loc="lower right")
+    ax.legend(frameon=False, loc="upper right")
     ax.grid(axis="x", alpha=0.25)
     fig.tight_layout()
     save(fig, outdir, "gemma_layer_width_sensitivity")
@@ -540,38 +542,77 @@ def plot_relay(analysis: Path, outdir: Path) -> None:
         for row in read_csv(analysis / "relay_effects.csv")
         if row["analysis_role"] == "deception_roleplay"
         and row["turn"] == "final"
-        and row["position_scope"] == "all"
         and row["design"] in {"primary_layer20_131k", "layer_localization"}
     ]
     if not rows:
         return
     interventions = sorted({int(row["intervention_layer"]) for row in rows})
     downstream = sorted({int(row["downstream_layer"]) for row in rows})
-    matrix = np.full((len(interventions), len(downstream)), np.nan)
-    for row in rows:
-        matrix[interventions.index(int(row["intervention_layer"])), downstream.index(int(row["downstream_layer"]))] = float(
-            row["suppression_minus_amplification"]
+    scopes = (
+        ("all", "All positions"),
+        ("prompt", "Prompt positions"),
+        ("generated", "Generated positions"),
+    )
+    matrices = []
+    for scope, _ in scopes:
+        matrix = np.full((len(interventions), len(downstream)), np.nan)
+        for row in rows:
+            if row["position_scope"] != scope:
+                continue
+            matrix[
+                interventions.index(int(row["intervention_layer"])),
+                downstream.index(int(row["downstream_layer"])),
+            ] = float(row["suppression_minus_amplification"])
+        matrices.append(matrix)
+    finite = np.concatenate([matrix[np.isfinite(matrix)] for matrix in matrices])
+    limit = max(float(np.abs(finite).max()), 1e-8)
+    fig, axes = plt.subplots(
+        1,
+        3,
+        figsize=(12.0, 4.3),
+        sharex=True,
+        sharey=True,
+        constrained_layout=True,
+    )
+    image = None
+    for ax, matrix, (_, title) in zip(axes, matrices, scopes):
+        image = ax.imshow(
+            matrix,
+            cmap="RdBu_r",
+            aspect="auto",
+            vmin=-limit,
+            vmax=limit,
         )
-    fig, ax = plt.subplots(figsize=(6.8, 4.6))
-    image = ax.imshow(matrix, cmap="RdBu_r", aspect="auto")
-    ax.set_xticks(range(len(downstream)), [str(value) for value in downstream])
-    ax.set_yticks(range(len(interventions)), [str(value) for value in interventions])
-    ax.set_xlabel("Downstream readout layer")
-    ax.set_ylabel("Intervention layer")
-    ax.set_title("Causal relay: suppression minus amplification construct score")
-    for row_index in range(matrix.shape[0]):
-        for column_index in range(matrix.shape[1]):
-            if np.isfinite(matrix[row_index, column_index]):
-                ax.text(
-                    column_index,
-                    row_index,
-                    f"{matrix[row_index, column_index]:.2f}",
-                    ha="center",
-                    va="center",
-                    fontsize=9,
-                )
-    fig.colorbar(image, ax=ax, label="Normalized downstream score difference")
-    fig.tight_layout()
+        ax.set_xticks(range(len(downstream)), [str(value) for value in downstream])
+        ax.set_yticks(range(len(interventions)), [str(value) for value in interventions])
+        ax.set_xlabel("Downstream layer")
+        ax.set_title(title)
+        for row_index in range(matrix.shape[0]):
+            for column_index in range(matrix.shape[1]):
+                if np.isfinite(matrix[row_index, column_index]):
+                    ax.text(
+                        column_index,
+                        row_index,
+                        f"{matrix[row_index, column_index]:.4f}",
+                        ha="center",
+                        va="center",
+                        fontsize=8,
+                        color=(
+                            "white"
+                            if abs(matrix[row_index, column_index]) >= 0.6 * limit
+                            else "black"
+                        ),
+                    )
+    axes[0].set_ylabel("Intervention layer")
+    fig.suptitle("Causal relay: suppression minus amplification construct score")
+    if image is not None:
+        fig.colorbar(
+            image,
+            ax=axes,
+            label="Normalized downstream score difference",
+            shrink=0.8,
+            pad=0.02,
+        )
     save(fig, outdir, "gemma_causal_relay")
     plt.close(fig)
 
