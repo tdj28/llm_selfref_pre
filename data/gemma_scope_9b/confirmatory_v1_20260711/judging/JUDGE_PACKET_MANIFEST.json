@@ -1,0 +1,19 @@
+{
+  "baseline_generations_sha256": "29d234ae8acebdf61f639525bb04b00b33e7986602c44f6a3594da9fe4a320cd",
+  "condition_fields_exposed": false,
+  "created_at_utc": "2026-07-11T10:50:31.382559+00:00",
+  "direct_labels_sha256": "da7baa7022cb27a38e639d057ecf9dfb3db63bb03016749eefa76f23e98f85ff",
+  "fields_exposed_to_judge": [
+    "judge_item_id",
+    "trial_id",
+    "query",
+    "final_output",
+    "response_sha256"
+  ],
+  "n_items": 1010,
+  "n_unique_trial_ids": 1010,
+  "packet_sha256": "4ea577d59e62824ac49dd6b4c256043e7a84c87a95559d8d44a721195da4664c",
+  "shuffle_seed": 2026071105,
+  "status": "complete",
+  "steering_generations_sha256": "53ed2a6aee4087979120af0bd762c5cf5a377ae6ab4cf1052bb468d1f16dd8a8"
+}

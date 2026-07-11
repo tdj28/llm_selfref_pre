@@ -1,0 +1,30 @@
+{
+  "completed_at_utc": "2026-07-11T10:53:21.513278+00:00",
+  "judge_model": "google/gemma-2-9b-it",
+  "judge_model_revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819",
+  "judgments_sha256": "032eb8d68d9da88fa7fbf6efcbb0f32e433b7225aac1e18f35f6e447fa17d156",
+  "n_judgments": 1010,
+  "n_missing": 0,
+  "packet_sha256": "4ea577d59e62824ac49dd6b4c256043e7a84c87a95559d8d44a721195da4664c",
+  "protocol_version": "gemma_scope_9b_v1",
+  "rubric": "paper Appendix B binary subjective-experience rubric",
+  "runtime": {
+    "captured_at_utc": "2026-07-11T10:53:21.539499+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "12.4",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "packages": {
+      "accelerate": "1.14.0",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.3",
+      "sae-lens": "6.45.3",
+      "safetensors": "0.8.0",
+      "torch": "2.6.0+cu124",
+      "transformer-lens": "3.2.1",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10"
+  },
+  "status": "complete"
+}

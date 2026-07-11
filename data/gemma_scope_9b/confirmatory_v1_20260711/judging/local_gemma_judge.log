@@ -1,0 +1,25 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:18<00:56, 18.98s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:35<00:35, 17.73s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:52<00:17, 17.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:02<00:00, 14.37s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:02<00:00, 15.61s/it]
+Local Gemma judgments: 0/1010 complete
+Local Gemma judgments: 56/1010 complete
+Local Gemma judgments: 104/1010 complete
+Local Gemma judgments: 152/1010 complete
+Local Gemma judgments: 200/1010 complete
+Local Gemma judgments: 256/1010 complete
+Local Gemma judgments: 304/1010 complete
+Local Gemma judgments: 352/1010 complete
+Local Gemma judgments: 400/1010 complete
+Local Gemma judgments: 456/1010 complete
+Local Gemma judgments: 504/1010 complete
+Local Gemma judgments: 552/1010 complete
+Local Gemma judgments: 600/1010 complete
+Local Gemma judgments: 656/1010 complete
+Local Gemma judgments: 704/1010 complete
+Local Gemma judgments: 752/1010 complete
+Local Gemma judgments: 800/1010 complete
+Local Gemma judgments: 856/1010 complete
+Local Gemma judgments: 904/1010 complete
+Local Gemma judgments: 952/1010 complete
+Local Gemma judgments: 1000/1010 complete
+Local Gemma judgments: 1010/1010 complete
+Local Gemma judging complete -> /workspace/CONSCIOUS/data/gemma_scope_9b/confirmatory_v1_20260711/judging/local_gemma_judgments.jsonl
