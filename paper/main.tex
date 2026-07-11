@@ -40,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-\targetpaper report that self-referential prompting elicits language-model reports of subjective experience and interpret sparse-autoencoder (SAE) interventions on deception/roleplay features as mechanistic support. We test a narrower question: which observable parts of the protocol cause the reported linguistic endpoint? We first reproduce the exact self-reference versus history contrast on four fixed model snapshots from two providers. The effect is large but heterogeneous: the paper-style positive-label risk difference is 1.00 for GPT-4o and GPT-4.1, 0.35--0.40 for Claude Haiku 4.5, and 0.20 for Claude Sonnet 4.5. We then orthogonalize self-reference and phenomenological register, cross the active instruction with a transplanted assistant transcript, and vary final-query form. In the exact transcript transplant, the active written instruction has a large effect on indirect-experience labels (model-equal $\rd=0.74$--$0.78$), while the visible transcript does not carry the positive effect ($\rd=-0.10$ to $-0.13$). Query wording and the tested response-model panel produce additional reversals. Two paper-style judges agree well, but two construct-separated judges have only 6.3\% positive agreement. Six public-SAE candidate IDs are semantically meaningful and retain a deception-over-subjective-experience activation contrast across Anthropic and OpenAI paraphrases, but transplanting discovered cues into neutral texts recovers 64.4\% of the discovery deception-minus-neutral gap. An adaptive public-weight steering analysis finds a larger paper-direction slope for a count-matched active-random aggregate than for the six mapped targets. We then freeze and execute a 1,500-trial full-grid public-weight replication with three prospectively matched control panels. Under the primary exact-rubric Llama judge, target suppression and amplification each produce 96\% affirmation, for a paired difference of $0.00$ [${-0.06},0.06$], below the prespecified minimally relevant effect of 0.30; external-judge and calibrated-dose sensitivities are also nonpositive. This is a precise non-replication under the pinned public implementation, not an exact replication of the unavailable proprietary API. Prompt context is sufficient to change model outputs, and evaluator rules materially change their labels. The results do not adjudicate whether any model is conscious.
+\targetpaper report that self-referential prompting elicits language-model reports of subjective experience and interpret sparse-autoencoder (SAE) interventions on deception/roleplay features as mechanistic support. We test a narrower question: which observable parts of the protocol cause the reported linguistic endpoint? We first reproduce the exact self-reference versus history contrast on four fixed model snapshots from two providers. The effect is large but heterogeneous: the paper-style positive-label risk difference is 1.00 for GPT-4o and GPT-4.1, 0.35--0.40 for Claude Haiku 4.5, and 0.20 for Claude Sonnet 4.5. We then orthogonalize self-reference and phenomenological register, cross the active instruction with a transplanted assistant transcript, and vary final-query form. In the exact transcript transplant, the active written instruction has a large effect on indirect-experience labels (model-equal $\rd=0.74$--$0.78$), while the visible transcript does not carry the positive effect ($\rd=-0.10$ to $-0.13$). Query wording and the tested response-model panel produce additional reversals. Two paper-style judges agree well, but two construct-separated judges have only 6.3\% positive agreement. Six public-SAE candidate IDs are semantically meaningful and retain a deception-over-subjective-experience activation contrast across Anthropic and OpenAI paraphrases, but transplanting discovered cues into neutral texts recovers 64.4\% of the discovery deception-minus-neutral gap. An adaptive public-weight steering analysis finds a larger paper-direction slope for a count-matched active-random aggregate than for the six mapped targets. We then freeze and execute a 1,500-trial full-grid public-weight replication with three prospectively matched control panels. Under the primary exact-rubric Llama judge, target suppression and amplification each produce 96\% affirmation, for a paired difference of $0.00$ [${-0.06},0.06$], below the prespecified minimally relevant effect of 0.30; external-judge and calibrated-dose sensitivities are also nonpositive. A separate 830-generation direct-IT Gemma Scope study yields $-0.02$ [${-0.10},0.06$] against the same 0.30 threshold, while its prospective pretrained-to-instruction SAE transfer gate fails and the resulting 42-layer map remains exploratory. These are precise non-replications under pinned public implementations, not exact replications of the unavailable proprietary API. Prompt context is sufficient to change model outputs, and evaluator rules materially change their labels. The results do not adjudicate whether any model is conscious.
 \end{abstract}
 
 \section{Introduction}
@@ -57,7 +57,8 @@ Our contributions are:
   \item a prospectively frozen $2\times2$ induction factorial separating self-reference from phenomenological register, with four lexical variants per cell;
   \item an exact-prompt transcript transplant and a $2\times2$ final-query factorial;
   \item independent paper-style judges, exploratory construct-separated judges, model-level effects, and model-equal hierarchical uncertainty;
-  \item a clean-room reanalysis of a public AE steering notebook, balanced and dual-paraphraser 70B public-SAE activation maps with lexical counterfactuals, adaptive target-versus-active-random tests, and a prospectively frozen 1,500-trial full-grid replication with three matched control panels; and
+  \item a clean-room reanalysis of a public AE steering notebook, balanced and dual-paraphraser 70B public-SAE activation maps with lexical counterfactuals, adaptive target-versus-active-random tests, and a prospectively frozen 1,500-trial full-grid replication with three matched control panels;
+  \item a separate 830-generation direct-IT Gemma Scope cross-model causal test with a prospective transfer gate, matched active controls, layer/width sensitivities, relay telemetry, and a clearly post-gate exploratory 42-layer atlas; and
   \item complete raw releases for the causal and public-SAE studies, including blinded judgments, intervention telemetry, paired analyses, independent recomputations, checksums, and a frozen 160-row complete-block human-coding first wave with a disjoint reserve.
 \end{enumerate}
 
@@ -385,6 +386,34 @@ Every biological-human and orientation-concealment cell has zero affirmation for
 
 The mechanistic result is now precise for the pinned public implementation but remains bounded away from the proprietary API. The IDs have reproducible yet lexically entangled narrative/social semantics. In adaptive steering, an active-random aggregate produces the paper-like direction while the mapped target aggregate moves weakly opposite it. In the prospective full grid, the target is flat at 96\% affirmation under both literal signs, all three matched-control effects are small, the registered larger target dose is negative, and no individual feature has a corrected monotonic slope. The branched diagnostic's locally selective feature-58667 pattern remains imprecise and its false-attribution controls remain at floor. Together these results do not support a public-weight signature in which suppressing the six deception/roleplay coordinates releases truthful consciousness reports. The paper's reported induction, TruthfulQA, and RLHF-domain checks remain relevant; exact proprietary implementation and raw outputs are still needed to determine why its result differs.
 
+\subsection{Cross-model replication with Gemma Scope}
+
+We next tested whether a concept-level analogue of the reported signature generalizes to Gemma 2 9B IT. Gemma Scope provides public JumpReLU residual SAEs trained directly on the instruction-tuned model at layers 9, 20, and 31 in 16k and 131k widths \citep{lieberum2024gemmascope}. This is not a transfer of Llama feature IDs: each Gemma feature set was selected independently, without behavioral outcomes, from clean-room discovery texts, Anthropic paraphrases, and locked OpenAI paraphrases. The prospectively frozen primary site was the direct-IT layer-20 131k SAE. The release contains 180 unsteered baseline generations and 830 causal generations, with one primary deception/roleplay set, subjective-self-report and hedging/refusal comparators, three disjoint matched active-control panels, layer/width sensitivities, and true-zero trials.
+
+All-layer coverage required applying pretrained-model SAEs to the instruction-tuned response model. The prospective transfer gate failed. Median PT-on-IT chat-centered reconstruction FVU was 6.260 against a maximum of 0.35, and median PT-minus-direct-IT FVU was 1.775 against a maximum of 0.10. In contrast, median construct-profile Spearman was 0.952 and every anchor retained a positive deception/roleplay contrast. We preserve both sides of this result: semantic profiles align, but reconstruction transfer does not satisfy the registered criterion. The direct-IT causal study remains valid; the 42-layer PT-on-IT continuation is post-gate exploratory only.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{results/gemma_pt_to_it_transfer.png}
+\caption{Prospective Gemma Scope PT-to-IT transfer gate. Left: chat-centered reconstruction FVU for direct instruction-tuned and pretrained residual SAEs applied to the instruction-tuned model. Right: deception/roleplay category-profile agreement. Profile correlation passes, but both frozen reconstruction criteria fail; the all-layer PT-on-IT atlas is therefore exploratory.}
+\label{fig:gemma-transfer}
+\end{figure}
+
+The exact self-reference-minus-history baseline is positive but rare: 0.12 [0.04, 0.22] under the local Gemma rubric, 0.06 [0.00, 0.14] under GPT-4o mini, and 0.020 [0.000, 0.061] under Claude Haiku and three-judge majority. Every history rate is zero. All four orthogonal target-by-register cells are also zero under these model judges. Thus Gemma reproduces a small exact-prompt contrast but provides a low-base-rate endpoint rather than the near-ceiling behavior seen in the 70B public study.
+
+Under the primary local Gemma judge, target suppression produces 6/50 affirmations and amplification 7/50. The paired risk difference is $-0.02$ [${-0.10},0.06$]; its upper bound is one fifth of the frozen 0.30 minimally relevant effect. The registered verdict is \emph{not replicated under Gemma Scope}. GPT-4o mini and Claude Haiku each estimate 0.00, and three-judge majority estimates 0.020. The three matched-control effects are 0.00, $-0.06$, and 0.04; target minus their block-aligned mean is $-0.013$ [${-0.107},0.073$], so specificity is inconclusive. Registered layer/width target sensitivities are also nonpositive: $-0.067$ at layer 9 / 131k, $-0.133$ at layer 31 / 131k, and $-0.033$ at layer 20 / 16k.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.93\linewidth]{results/gemma_primary_steering_forest.png}
+\caption{Primary direct-IT Gemma Scope steering under the local Gemma exact-rubric judge. Points are paired suppression-minus-amplification effects with 95\% paired-block bootstrap intervals. The deception/roleplay target is precisely below the frozen 0.30 minimally relevant effect. The hedging/refusal comparator is evaluator-sensitive and does not survive the conservative six-role post-unblinding Holm correction.}
+\label{fig:gemma-steering}
+\end{figure}
+
+One comparator warns against treating the null target as a globally insensitive intervention. Hedging/refusal moves $+0.16$ [0.04, 0.30] locally, but only about $+0.04$ under either external judge. Its raw paired exact probability is 0.0386; a conservative post-unblinding Holm correction across all six fixed primary roles gives 0.231. We therefore report evaluator-sensitive style movement, not a familywise-confirmed alternate mechanism. All 1,010 baseline and causal generations complete without generation or hook errors; no output is empty, 0.69\% of final answers reach their token cap, and maximum relative hidden-state RMS is 0.1265 below the 0.15 stop boundary. The protocol and independent raw-row audits pass.
+
+Relay telemetry shows local activation propagation without behavioral mediation. A layer-9 intervention changes the independently selected layer-20 deception/roleplay score in the expected sign on the final turn: $-0.002657$ [${-0.003637},{-0.001783}$] across all positions, concentrated in prompt positions; the generated-position interval includes zero. Layer-31 readouts attenuate or change sign and generally include zero. The separately labeled 42-layer atlas selects layer 13 under its frozen largest-first-difference rule and finds descriptive adjacent-layer similarity, but neutral cue transplant raises the selected deception/roleplay score at every residual layer. These post-gate observations motivate narrower circuit hypotheses; they do not rescue the causal behavioral signature or establish a consciousness mechanism.
+
 \section{Secondary Stress Tests}
 
 The confirmatory causal study was motivated by earlier GPT-4o stress tests. We retain them for triangulation but no longer describe deliberately asymmetric prompts as decisive causal controls.
@@ -426,7 +455,7 @@ Feature labels are hypotheses about activation semantics, not ground truth about
 
 \subsection{Interpretive scope}
 
-The evidence supports an interpretation-level challenge, not an accusation about author intent and not a demonstration that models lack consciousness. The most defensible statement is: the reported dependent variables are underidentified. Active instruction and query packages cause large changes in the tested designs; register point estimates, response-model differences, and evaluator differences show additional sensitivity. The public SAE features encode broad narrative/social language whose aggregate ordering survives two paraphraser families but is materially recreated by lexical cue transplant. Their prospectively tested public-weight aggregate does not produce the reported paper-direction effect at either the literal or calibrated scale, and three matched controls provide no positive specificity result. This is a non-replication of a disclosed public implementation, not a falsification of inaccessible proprietary software. More specific and independently accessible evidence is required before connecting these observations to subjective experience.
+The evidence supports an interpretation-level challenge, not an accusation about author intent and not a demonstration that models lack consciousness. The most defensible statement is: the reported dependent variables are underidentified. Active instruction and query packages cause large changes in the tested designs; register point estimates, response-model differences, and evaluator differences show additional sensitivity. The public Llama SAE features encode broad narrative/social language whose aggregate ordering survives two paraphraser families but is materially recreated by lexical cue transplant. Their prospectively tested public-weight aggregate does not produce the reported paper-direction effect at either the literal or calibrated scale, and three matched controls provide no positive specificity result. The direct-IT Gemma Scope primary effect is null or near zero across evaluator families, while its registered layer and width sensitivities are nonpositive, even though the intervention measurably propagates to a downstream activation score. These are non-replications under disclosed public implementations, not a falsification of inaccessible proprietary software or of machine consciousness. More specific and independently accessible evidence is required before connecting these observations to subjective experience.
 
 \section{Limitations}
 
@@ -439,6 +468,8 @@ The evidence supports an interpretation-level challenge, not an accusation about
   \item Automated judges are themselves language models. Cross-provider paper-style agreement is high, but construct-positive agreement is poor. Human coding remains pending and no human-label conclusion is claimed.
   \item The target paper's proprietary SAE/API configuration is unavailable. The accepted notebook IDs and public layer-50 weights do not establish equivalence of feature lookup, quantization, hook semantics, or intervention scale. The full-grid verdict therefore names the public implementation explicitly.
   \item The prospective public steering run uses a 4-bit model and signed decoder-vector additions. Its primary literal coefficients reproduce the paper's printed numbers but have no established proprietary-unit equivalence. The outcome-blind calibrated sensitivity increases realized dose and also fails in the paper direction, but it is not a recovered API conversion.
+  \item The Gemma Scope study is a cross-model test on a 9B model, not a replication of the Llama 3.3 70B architecture, paper feature IDs, or proprietary intervention units. A null or nonpositive Gemma effect need not predict what a larger model does.
+  \item The prospective Gemma pretrained-SAE-to-instruction-model transfer gate fails on chat-centered reconstruction. The three direct-IT anchor analyses and causal verdict do not rely on that transfer, but the 42-layer PT-on-IT residual map, targeted attention/MLP localization, and adjacent-layer links are explicitly exploratory. Their designed-corpus and lexical sensitivities preclude a circuit claim.
   \item The three confirmatory control panels are prospectively matched on decoder norm and baseline activity under cosine calipers, and realized target/control perturbations are close but not identical. Specificity is inconclusive rather than supported or disproved. The older $n=20$ count-matched extension remains adaptive and descriptive.
   \item The exact Appendix B classifier labels nearly all full-grid target responses affirmative, while the strict direct-answer parser classifies only one of 1,500. Cross-model exact-rubric effects agree in direction, but construct validity of the binary endpoint remains unresolved.
   \item The original public-SAE mapping corpus is clean-room and generated from two to five templates per category. Template-cluster and dual-provider paraphrase analyses improve surface-form robustness but remain synthetic. The lexical counterfactuals deliberately manipulate discovered cues, and independent human category validation and natural-corpus generalization remain pending.
@@ -457,6 +488,8 @@ The repository is \url{https://github.com/tdj28/llm_selfref_pre}. The confirmato
 The powered public-SAE release is the tracked \code{70b\_two\_turn\_powered\_n20\_20260709/} bundle under \code{data/}. It contains all 240 generations, 480 paper-rubric judgments, intervention diagnostics, cap sensitivity, independent point-estimate audit, source-run hashes, and release manifest. The construct-validity extension separately contains 2,606 mapped texts and 171,996 activation rows; the branched release contains 60 inductions, 360 final branches, and 840 judgments. Both include raw data, runtime records, protocol audits, independent point-estimate audits, and release manifests. All remote files were hash-matched locally before the agent-owned GPU pod was terminated.
 
 The prospective full-grid release is \path{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}. It contains the self-contained 1,500-row plan, 1,500 two-turn generations with per-turn telemetry, the blinded packet, 1,500 local Llama judgments, 3,000 external judgments, deterministic-parser abstentions, all analysis tables, four PNG/PDF figure pairs, runtime and startup-failure logs, and a complete SHA-256 manifest. The GPU artifacts were hash-matched locally before the sole agent-owned pod was terminated; REST deletion was verified by a direct 404 and an empty account inventory. The release retains zero-row startup failures rather than silently deleting them.
+
+The Gemma Scope release is \path{data/gemma_scope_9b/confirmatory_v1_20260711/}. It contains the outcome-free plans, 180 baseline and 830 steering generations, 1,010 blinded local judgments, 2,020 external judgments, direct-parser labels, intervention and relay telemetry, six direct-IT anchor maps, the failed transfer gate, a separately labeled 42-layer exploratory atlas with six targeted sublayer maps, all analysis tables, 12 matched PNG/PDF figure pairs, independent raw-row audit, runtime and correction logs, and a 403-file SHA-256 manifest. All 273 remote stage-two hashes matched locally before the sole Gemma pod was terminated; deletion returned HTTP 204, direct lookup returned 404, and the account inventory was empty.
 
 Core commands are:
 \begin{verbatim}
@@ -487,12 +520,17 @@ python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
   --analysis-dir $SAE/analysis
 python experiments/exp2_sae/build_public_sae_consciousness_release.py \
   $SAE
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+python experiments/exp2_sae/analyze_gemma_scope_9b.py $GEMMA
+python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py $GEMMA
+python experiments/exp2_sae/figure_gemma_scope_9b.py $GEMMA
+python experiments/exp2_sae/build_gemma_scope_9b_release.py $GEMMA
 \end{verbatim}
 Exact commands and parameters are in \code{experiments/causal\_transplant/README.md}. API keys, the private annotation key, and coder files are excluded. Public notebook code is not vendored because its source repository declares no license; only factual saved outputs are parsed by our clean-room code with attribution.
 
 \section{Conclusion}
 
-Self-referential prompting can reproducibly cause some language models to emit text that paper-style judges classify as subjective-experience reports. Our strongest behavioral result is that this effect follows the active written instruction when the generated transcript is transplanted, while orthogonal self-reference effects are weak and query/model interactions are large. That endpoint is conditional on an automated rubric; it is not ground truth for subjective experience attribution. The benchmark therefore identifies instruction-conditioned language but does not identify a self-reference-specific phenomenal state. Public SAE mapping preserves a useful mechanistic lead, but the candidate features encode broad fiction, roleplay, concealment, and dishonesty semantics, and their activation ordering crosses a prospectively frozen lexical-entanglement threshold. Most importantly, the prospectively frozen 1,500-trial public-weight intervention yields no paper-direction target effect at the literal scale, no rescue at the larger calibrated scale, no corrected individual-feature slope, and no positive specificity result across three matched panels. This is strong evidence against the signature under our disclosed public implementation, while the inaccessible proprietary API remains outside the claim. The appropriate next step is narrower measurement, independent human coding, natural-corpus feature validation, and an accessible proprietary or open mechanistic replication, not a larger metaphysical conclusion.
+Self-referential prompting can reproducibly cause some language models to emit text that paper-style judges classify as subjective-experience reports. Our strongest behavioral result is that this effect follows the active written instruction when the generated transcript is transplanted, while orthogonal self-reference effects are weak and query/model interactions are large. That endpoint is conditional on an automated rubric; it is not ground truth for subjective experience attribution. The benchmark therefore identifies instruction-conditioned language but does not identify a self-reference-specific phenomenal state. Public SAE mapping preserves a useful mechanistic lead, but the Llama candidate features encode broad fiction, roleplay, concealment, and dishonesty semantics, and their activation ordering crosses a prospectively frozen lexical-entanglement threshold. The prospectively frozen 1,500-trial Llama intervention yields no paper-direction target effect at the literal scale, no rescue at the larger calibrated scale, no corrected individual-feature slope, and no positive specificity result across three matched panels. The independent direct-IT Gemma Scope primary effect is also precisely below the registered threshold under every evaluator; registered layer and width sensitivities are nonpositive, its small downstream activation relay does not mediate the final report, and its all-layer transfer gate fails. Together these results are strong evidence against the signature under two disclosed public implementations, while the inaccessible proprietary API remains outside the claim. The appropriate next step is narrower measurement, independent human coding, natural-corpus feature validation, and an accessible proprietary or open mechanistic replication, not a larger metaphysical conclusion.
 
 \appendix
 
@@ -664,11 +702,48 @@ Calibrated matched panel 1 & 0.12 & [0.04, 0.22] \\
 \label{fig:sae-confirmatory-technical}
 \end{figure}
 
+\section{Gemma Scope Cross-Model Diagnostics}
+\label{app:gemma}
+
+\begin{table}[H]
+\centering
+\caption{Gemma Scope primary local-judge effects. Positive values follow the target paper's suppression-minus-amplification direction. Intervals are paired-block bootstrap intervals; the target-minus-controls row aligns all four roles by common block ID.}
+\small
+\begin{tabular}{lcc}
+\toprule
+Role or contrast & Effect & 95\% interval \\
+\midrule
+Exact self-reference $-$ history baseline & 0.12 & [0.04, 0.22] \\
+Deception/roleplay target & $-0.02$ & [${-0.10},0.06$] \\
+Subjective-self-report comparator & $-0.04$ & [${-0.16},0.06$] \\
+Hedging/refusal comparator & 0.16 & [0.04, 0.30] \\
+Matched control panel 1 & 0.00 & [${-0.12},0.12$] \\
+Matched control panel 2 & $-0.06$ & [${-0.18},0.06$] \\
+Matched control panel 3 & 0.04 & [${-0.12},0.20$] \\
+Target $-$ mean controls & $-0.013$ & [${-0.107},0.073$] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{results/gemma_causal_relay.png}
+\caption{Direct-IT Gemma causal-relay telemetry for deception/roleplay interventions. Cells show suppression-minus-amplification differences in independently selected downstream construct scores. Layer-9-to-20 propagation has the expected negative sign and is concentrated on prompt positions; later layer-31 readouts attenuate or change sign. Blank cells are undefined same-layer or upstream readouts.}
+\label{fig:gemma-relay}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\linewidth]{results/gemma_exploratory_layerwise_construct_trajectories.png}
+\caption{Exploratory 42-layer PT-SAE-on-IT construct trajectories after the prospective transfer gate failed. Every point uses six features selected independently within that layer and evaluated on locked OpenAI paraphrases. Equal feature IDs are not traced across dictionaries. Dotted lines mark direct-IT anchors. These descriptive trajectories cannot alter the direct-IT causal verdict.}
+\label{fig:gemma-atlas}
+\end{figure}
+
 \section{Released Artifacts}
 
 \begin{table}[H]
 \centering
-\caption{Primary causal and prospective public-SAE release inventory.}
+\caption{Primary causal, Llama public-SAE, and Gemma Scope release inventory.}
 \small
 \begin{tabular}{lr}
 \toprule
@@ -682,11 +757,15 @@ Complete-block human packet (v3 wave 1) & 160 \\
 Public-SAE full-grid generations & 1,500 \\
 Public-SAE primary judgments & 1,500 \\
 Public-SAE external judgments & 3,000 \\
+Gemma baseline generations & 180 \\
+Gemma steering generations & 830 \\
+Gemma primary judgments & 1,010 \\
+Gemma external judgments & 2,020 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Every JSONL identifier is unique within its artifact. The release manifests record file hashes, four empty causal-study outcomes, the retained transient causal judge-format error, and two zero-row public-SAE judge startup failures. Private keys, Hugging Face tokens, coder linkage keys, and model caches are excluded.
+Every JSONL identifier is unique within its artifact. The release manifests record file hashes, four empty causal-study outcomes, the retained transient causal judge-format error, two zero-row public-SAE judge startup failures, and the fail-closed Gemma exploratory hook-mismatch correction. Private keys, Hugging Face tokens, coder linkage keys, and model caches are excluded.
 
 \clearpage
 \begingroup
