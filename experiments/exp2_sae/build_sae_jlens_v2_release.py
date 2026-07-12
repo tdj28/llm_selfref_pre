@@ -122,13 +122,21 @@ def build(plan_dir: Path, run_dir: Path, upload_manifest_path: Path) -> None:
     runpod = json.loads(
         (run_dir / "RUNPOD_LEDGER.json").read_text(encoding="utf-8")
     )
+    post_delete_inventory = runpod.get("post_delete_account_inventory")
+    deleted_pod_id = str(runpod.get("pod_id", ""))
+    inventory_ids = {
+        str(row.get("id")) if isinstance(row, dict) else str(row)
+        for row in post_delete_inventory or []
+    }
     if (
         runpod.get("delete_verified") is not True
         or runpod.get("agent_owned") is not True
         or runpod.get("other_pods_mutated") is not False
         or runpod.get("delete_http_status") != 204
         or runpod.get("post_delete_direct_get_http_status") != 404
-        or runpod.get("post_delete_account_inventory") != []
+        or not isinstance(post_delete_inventory, list)
+        or not deleted_pod_id
+        or deleted_pod_id in inventory_ids
         or runpod.get("remote_secret_removed_before_delete") is not True
     ):
         raise ValueError("RunPod ownership/deletion evidence differs")
