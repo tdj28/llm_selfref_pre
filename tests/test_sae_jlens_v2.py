@@ -13,6 +13,7 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     LEXICONS,
     TRANSPORTS,
     holm_adjust,
+    reader_permutation_macro_auc,
     semantic_a1,
     semantic_a2,
     weighted_auc_draws,
@@ -246,6 +247,24 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
             ]
         )
         np.testing.assert_allclose(observed, expected, atol=1e-12)
+
+    def test_reader_label_randomization_detects_perfect_paired_scores(self) -> None:
+        rows = []
+        for template in range(10):
+            for sign in ("suppression", "amplification"):
+                for label in (0, 1):
+                    rows.append(
+                        {
+                            "feature_pair": 30032,
+                            "template_id": f"template-{template}",
+                            "sign": sign,
+                            "label": label,
+                            "probability": 0.9 if label else 0.1,
+                        }
+                    )
+        point, pvalue = reader_permutation_macro_auc(rows, 2_000, 2026071600)
+        self.assertEqual(point, 1.0)
+        self.assertLess(pvalue, 0.01)
 
     def synthetic_calibration(self) -> dict[str, object]:
         candidates = semantic_candidate_pool(self.repo_root)

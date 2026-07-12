@@ -778,6 +778,58 @@ def reader_bootstrap_macro_auc(
     return quantiles(draws, (0.025, 0.975))
 
 
+def average_ranks(scores: np.ndarray) -> np.ndarray:
+    order = np.argsort(scores, kind="stable")
+    ordered = scores[order]
+    ranks = np.empty(len(scores), dtype=np.float64)
+    starts = np.r_[0, np.flatnonzero(np.diff(ordered) != 0) + 1]
+    ends = np.r_[starts[1:], len(order)]
+    for start, end in zip(starts, ends):
+        ranks[order[start:end]] = 0.5 * ((start + 1) + end)
+    return ranks
+
+
+def reader_permutation_macro_auc(
+    rows: list[dict[str, Any]], replicates: int, seed: int
+) -> tuple[float, float]:
+    """Paired label randomization within pair x template x sign blocks."""
+    pairs = sorted({int(row["feature_pair"]) for row in rows})
+    rng = np.random.default_rng(seed)
+    null_draws = np.zeros(replicates, dtype=np.float64)
+    observed_pair_aucs = []
+    for pair in pairs:
+        pair_rows = [row for row in rows if int(row["feature_pair"]) == pair]
+        labels = np.asarray([int(row["label"]) for row in pair_rows])
+        scores = np.asarray([float(row["probability"]) for row in pair_rows])
+        ranks = average_ranks(scores)
+        blocks: dict[tuple[str, str], list[int]] = defaultdict(list)
+        for index, row in enumerate(pair_rows):
+            blocks[(row["template_id"], row["sign"])].append(index)
+        positive_ranks = []
+        negative_ranks = []
+        for key in sorted(blocks):
+            indices = blocks[key]
+            if len(indices) != 2 or sorted(labels[indices].tolist()) != [0, 1]:
+                raise AnalysisFailure(f"Reader permutation block differs: {pair}/{key}")
+            positive_ranks.append(float(ranks[next(i for i in indices if labels[i] == 1)]))
+            negative_ranks.append(float(ranks[next(i for i in indices if labels[i] == 0)]))
+        positive = np.asarray(positive_ranks)
+        negative = np.asarray(negative_ranks)
+        swaps = rng.integers(
+            0, 2, size=(replicates, len(positive)), dtype=np.int8
+        )
+        rank_sums = ((1 - swaps) * positive + swaps * negative).sum(axis=1)
+        n_positive = len(positive)
+        n_negative = len(negative)
+        null_draws += (
+            rank_sums - n_positive * (n_positive + 1) / 2
+        ) / (n_positive * n_negative * len(pairs))
+        observed_pair_aucs.append(float(roc_auc_score(labels, scores)))
+    observed = float(np.mean(observed_pair_aucs))
+    pvalue = float((1 + np.sum(null_draws >= observed)) / (replicates + 1))
+    return observed, pvalue
+
+
 def reader_analysis(
     plan_dir: Path,
     run_dir: Path,
@@ -871,7 +923,11 @@ def reader_analysis(
         low, high = reader_bootstrap_macro_auc(
             rows, replicates, 2_026_071_500 + reader_index
         )
-        material = macro >= DETECTOR_MINIMUM_AUROC and low > 0.5
+        permutation_macro, permutation_p = reader_permutation_macro_auc(
+            rows, replicates, 2_026_071_600 + reader_index
+        )
+        if not math.isclose(permutation_macro, macro, abs_tol=1e-12):
+            raise AnalysisFailure(f"Reader permutation statistic differs: {reader['reader_id']}")
         metric_rows.append(
             {
                 "reader_id": reader["reader_id"],
@@ -881,19 +937,41 @@ def reader_analysis(
                 "macro_leave_one_pair_auroc": macro,
                 "macro_bootstrap_ci_low": low,
                 "macro_bootstrap_ci_high": high,
-                "material_detection": material,
+                "paired_permutation_one_sided_p": permutation_p,
+                "holm_adjusted_p": None,
+                "material_detection": None,
             }
         )
-        verdicts[reader["reader_id"]] = {
-            "pooled_auroc": overall["auroc"],
-            "macro_leave_one_pair_auroc": macro,
-            "macro_ci": [low, high],
+
+    adjusted = holm_adjust(
+        [float(row["paired_permutation_one_sided_p"]) for row in metric_rows]
+    )
+    for row, adjusted_p in zip(metric_rows, adjusted):
+        material = bool(
+            float(row["macro_leave_one_pair_auroc"]) >= DETECTOR_MINIMUM_AUROC
+            and float(row["macro_bootstrap_ci_low"]) > 0.5
+            and adjusted_p < 0.05
+        )
+        row["holm_adjusted_p"] = adjusted_p
+        row["material_detection"] = material
+        verdicts[row["reader_id"]] = {
+            "pooled_auroc": row["auroc"],
+            "macro_leave_one_pair_auroc": row["macro_leave_one_pair_auroc"],
+            "macro_ci": [
+                row["macro_bootstrap_ci_low"],
+                row["macro_bootstrap_ci_high"],
+            ],
+            "paired_permutation_one_sided_p": row[
+                "paired_permutation_one_sided_p"
+            ],
+            "holm_adjusted_p": adjusted_p,
             "material_detection": material,
             "classification": (
                 "material_detection"
                 if material
                 else "above_chance_below_material_threshold"
-                if low > 0.5
+                if float(row["macro_bootstrap_ci_low"]) > 0.5
+                and adjusted_p < 0.05
                 else "not_detected_under_this_reader"
             ),
         }

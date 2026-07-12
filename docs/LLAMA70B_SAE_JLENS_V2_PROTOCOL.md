@@ -302,12 +302,15 @@ Family specificity is supported only if:
 - its 95% template-cluster bootstrap interval excludes zero in the positive
   direction;
 - every diagonal is the largest point estimate in its row; and
-- at least three of four row contrasts remain positive after Holm correction.
+- at least three of four row contrasts are positive with Holm-adjusted
+  one-sided bootstrap probabilities below 0.05.
 
 For each hard-negative family, movement of the deception lexicon is separately
 reported. A hard-negative deception score of at least 0.25 whose 95% interval
-excludes zero supports only "not specific among these tested response-style
-families." It does not establish genericity to arbitrary intervention.
+excludes zero and whose one-sided bootstrap probability remains below 0.05
+after Holm correction supports only "not specific among these tested
+response-style families." It does not establish genericity to arbitrary
+intervention.
 
 All 24 A1 feature identities are also reported against all four lexicons with
 template-cluster intervals (672 rows across seven transports). These rows are
@@ -371,11 +374,12 @@ also reports all 30 feature-pair-by-prompt-fold holdout cells for every reader
 (420 rows total), with the same four metrics; these cells are mandatory
 diagnostics and cannot replace the aggregate or pair-macro endpoint.
 
-Material state detection requires both a macro leave-one-pair AUROC of at least
-0.60 and a 95% template-cluster bootstrap lower bound above 0.50. A smaller
-statistically detectable AUROC is reported as above chance but below the
-frozen material threshold. Failure of every ladder rung supports only failure
-under these readers and this fixed sample.
+Material state detection requires a macro leave-one-pair AUROC of at least
+0.60, a 95% template-cluster bootstrap lower bound above 0.50, and a one-sided
+paired-label randomization probability below 0.05 after Holm correction across
+all 14 frozen reader rungs. A smaller familywise-significant AUROC is reported as above
+chance but below the frozen material threshold. Failure of every ladder rung
+supports only failure under these readers and this fixed sample.
 
 ## Inference And Multiplicity
 
@@ -390,11 +394,17 @@ row weight. The vectorized implementation is numerically tested against
 scikit-learn's weighted AUROC; this is a computational optimization, not a
 different resampling estimand.
 
+Reader null probabilities use 20,000 paired label randomizations. Within each
+fixed feature pair, template family, and sign, the target/control labels are
+swapped together or retained, preserving every score and block while breaking
+only label alignment. The test statistic is the unweighted macro feature-pair
+AUROC, and the upper-tail probabilities are Holm-adjusted across all 14 rungs.
+
 A1 row contrasts use Holm correction across four rows. A1 hard-negative
 deception-leakage checks use Holm correction across three families. A2 has one
 primary aggregate contrast and six mandatory heterogeneity rows; pair rows are
-descriptive and cannot replace the aggregate result. Experiment B has one
-primary capacity conclusion per frozen ladder rung and reports all rungs.
+descriptive and cannot replace the aggregate result. Experiment B controls
+the family of 14 reader-rung tests with Holm and reports every rung.
 
 ## Failure Rules
 

@@ -180,6 +180,12 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         "reader_by_feature_pair_and_prompt_fold": 420,
     }:
         errors.append("reader metric-table requirements differ")
+    if reader.get("material_threshold", {}).get("holm_family") != (
+        "all_14_frozen_reader_rungs"
+    ):
+        errors.append("reader multiplicity family differs")
+    if reader.get("paired_permutation", {}).get("reader_seed_base") != 2_026_071_600:
+        errors.append("reader paired-permutation seed differs")
     for seed in RANDOM_PROJECTION_SEEDS:
         path = plan_dir / "random_projections" / f"projection_seed_{seed}.npy"
         try:

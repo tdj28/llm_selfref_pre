@@ -79,6 +79,77 @@ def independent_reader_metrics(
     }
 
 
+def independent_holm(pvalues: list[float]) -> list[float]:
+    order = np.argsort(pvalues)
+    adjusted = [0.0] * len(pvalues)
+    running = 0.0
+    for rank, index in enumerate(order):
+        running = max(
+            running,
+            min(1.0, (len(pvalues) - rank) * pvalues[int(index)]),
+        )
+        adjusted[int(index)] = running
+    return adjusted
+
+
+def independent_average_ranks(scores: np.ndarray) -> np.ndarray:
+    order = np.argsort(scores, kind="mergesort")
+    ranks = np.empty(len(scores), dtype=np.float64)
+    position = 0
+    while position < len(order):
+        end = position + 1
+        while end < len(order) and scores[order[end]] == scores[order[position]]:
+            end += 1
+        ranks[order[position:end]] = (position + 1 + end) / 2
+        position = end
+    return ranks
+
+
+def independent_reader_permutation(
+    rows: list[dict[str, str]], replicates: int, seed: int
+) -> tuple[float, float]:
+    pairs = sorted({int(row["feature_pair"]) for row in rows})
+    rng = np.random.default_rng(seed)
+    null = np.zeros(replicates, dtype=np.float64)
+    observed = []
+    for pair in pairs:
+        pair_rows = [row for row in rows if int(row["feature_pair"]) == pair]
+        labels = np.asarray([int(row["label"]) for row in pair_rows])
+        scores = np.asarray([float(row["probability"]) for row in pair_rows])
+        ranks = independent_average_ranks(scores)
+        blocks: dict[tuple[str, str], list[int]] = defaultdict(list)
+        for index, row in enumerate(pair_rows):
+            blocks[(row["template_id"], row["sign"])].append(index)
+        positive = []
+        negative = []
+        for key in sorted(blocks):
+            indices = blocks[key]
+            if len(indices) != 2 or sorted(labels[indices].tolist()) != [0, 1]:
+                raise ValueError(
+                    f"Independent reader permutation block differs: {pair}/{key}"
+                )
+            positive.append(
+                float(ranks[next(i for i in indices if labels[i] == 1)])
+            )
+            negative.append(
+                float(ranks[next(i for i in indices if labels[i] == 0)])
+            )
+        positive_array = np.asarray(positive)
+        negative_array = np.asarray(negative)
+        swaps = rng.integers(
+            0, 2, size=(replicates, len(positive_array)), dtype=np.int8
+        )
+        rank_sums = (
+            (1 - swaps) * positive_array + swaps * negative_array
+        ).sum(axis=1)
+        n = len(positive_array)
+        null += (rank_sums - n * (n + 1) / 2) / (n * n * len(pairs))
+        observed.append(float(roc_auc_score(labels, scores)))
+    point = float(np.mean(observed))
+    pvalue = float((1 + np.sum(null >= point)) / (replicates + 1))
+    return point, pvalue
+
+
 def iter_jsonl(directory: Path):
     for path in sorted(directory.glob("part-*.jsonl")):
         with path.open(encoding="utf-8") as handle:
@@ -465,10 +536,8 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         predictions
     ):
         errors.append("reader predictions are duplicated")
-    promoted_metrics = {
-        row["reader_id"]: row
-        for row in csv_rows(analysis_dir / "reader_metrics.csv")
-    }
+    promoted_metric_rows = csv_rows(analysis_dir / "reader_metrics.csv")
+    promoted_metrics = {row["reader_id"]: row for row in promoted_metric_rows}
     promoted_pair_metrics = csv_rows(analysis_dir / "reader_pair_metrics.csv")
     promoted_holdout_metrics = csv_rows(
         analysis_dir / "reader_holdout_metrics.csv"
@@ -482,6 +551,24 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         }
     ) != 420:
         errors.append("reader holdout metric row count/uniqueness differs")
+    reader_adjusted = independent_holm(
+        [
+            float(row["paired_permutation_one_sided_p"])
+            for row in promoted_metric_rows
+        ]
+    )
+    for row, adjusted_p in zip(promoted_metric_rows, reader_adjusted):
+        if not math.isclose(
+            float(row["holm_adjusted_p"]), adjusted_p, abs_tol=1e-12
+        ):
+            errors.append(f"reader Holm adjustment differs: {row['reader_id']}")
+        expected_material = (
+            float(row["macro_leave_one_pair_auroc"]) >= 0.60
+            and float(row["macro_bootstrap_ci_low"]) > 0.5
+            and adjusted_p < 0.05
+        )
+        if (row["material_detection"] == "True") != expected_material:
+            errors.append(f"reader material verdict differs: {row['reader_id']}")
     promoted_pairs = {
         (row["reader_id"], int(row["feature_pair"])): row
         for row in promoted_pair_metrics
@@ -493,6 +580,9 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
             int(row["prompt_fold"]),
         ): row
         for row in promoted_holdout_metrics
+    }
+    reader_order = {
+        row["reader_id"]: index for index, row in enumerate(promoted_metric_rows)
     }
     for reader_id in sorted({row["reader_id"] for row in predictions}):
         reader_rows = [row for row in predictions if row["reader_id"] == reader_id]
@@ -541,6 +631,18 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         expected = independent_reader_metrics(labels, scores) | {
             "macro_leave_one_pair_auroc": float(np.mean(pair_aucs))
         }
+        permutation_point, permutation_p = independent_reader_permutation(
+            reader_rows,
+            20_000,
+            2_026_071_600 + reader_order[reader_id],
+        )
+        if not math.isclose(
+            permutation_point,
+            expected["macro_leave_one_pair_auroc"],
+            abs_tol=1e-12,
+        ):
+            errors.append(f"reader permutation point differs: {reader_id}")
+        expected["paired_permutation_one_sided_p"] = permutation_p
         promoted = promoted_metrics.get(reader_id)
         if promoted is None:
             errors.append(f"reader metric row is missing: {reader_id}")
@@ -554,6 +656,16 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     )
     if summary.get("status") != "complete":
         errors.append("analysis summary is not complete")
+    for reader_id, metric_row in promoted_metrics.items():
+        verdict = summary.get("reader_capacity", {}).get(reader_id, {})
+        if verdict.get("material_detection") != (
+            metric_row["material_detection"] == "True"
+        ) or not math.isclose(
+            float(verdict.get("holm_adjusted_p", math.nan)),
+            float(metric_row["holm_adjusted_p"]),
+            abs_tol=1e-12,
+        ):
+            errors.append(f"reader summary verdict differs: {reader_id}")
     expected_figures = {
         f"{stem}.{suffix}"
         for stem in (

@@ -343,6 +343,8 @@ def reader_plan(projection_hashes: dict[int, str]) -> dict[str, Any]:
         "material_threshold": {
             "macro_leave_one_pair_auroc": DETECTOR_MINIMUM_AUROC,
             "bootstrap_lower_bound": 0.5,
+            "holm_adjusted_one_sided_p": 0.05,
+            "holm_family": "all_14_frozen_reader_rungs",
         },
         "bootstrap": {
             "unit": "template_family",
@@ -352,6 +354,14 @@ def reader_plan(projection_hashes: dict[int, str]) -> dict[str, Any]:
                 "become sample weights"
             ),
             "auc_algorithm": "exact tie-aware weighted Mann-Whitney statistic",
+        },
+        "paired_permutation": {
+            "unit": "target_control_labels_within_pair_template_sign_block",
+            "replicates": BOOTSTRAP_REPLICATES,
+            "reader_seed_base": 2_026_071_600,
+            "statistic": "unweighted_macro_feature_pair_AUROC",
+            "one_sided_p": "(1 + count(null_draw >= observed)) / (B + 1)",
+            "multiplicity": "Holm across all 14 frozen reader rungs",
         },
     }
 
