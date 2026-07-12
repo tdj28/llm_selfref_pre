@@ -1,0 +1,51 @@
+{
+  "claim_boundary": "These are mutable third-party autointerpretability labels, not ground-truth feature semantics or Goodfire-authored labels.",
+  "coverage": {
+    "batch_objects": 484,
+    "compressed_source_bytes": 83313436,
+    "dictionary_size": 65536,
+    "labels": 61850,
+    "missing": 3686
+  },
+  "files": [
+    {
+      "bytes": 26245042,
+      "path": "labels.jsonl",
+      "sha256": "7009ad57620e587c97ae535059b768b43a4ee1b59cd4e240d0b42db794f18c41"
+    },
+    {
+      "bytes": 127181,
+      "path": "source_objects.jsonl",
+      "sha256": "f13ff9abfa73be7f0df26bb6ae9f1b0226e88397e13ccfd4e30e7f538be5c235"
+    },
+    {
+      "bytes": 488,
+      "path": "source_config.json",
+      "sha256": "ed751c886113f3204cb16085ebc0f9225723feda02f1e3b36d8d343d502ca340"
+    },
+    {
+      "bytes": 32560,
+      "path": "missing_feature_ids.json",
+      "sha256": "0391962877e168dfa8bcbff4e85071e55cd02344e289b1751d9a2f4820efa539"
+    }
+  ],
+  "retrieved_at_utc": "2026-07-12T19:52:18.503685+00:00",
+  "schema_version": 1,
+  "source": {
+    "bucket": "https://neuronpedia-datasets.s3.us-east-1.amazonaws.com",
+    "config_object": {
+      "bytes": 487,
+      "etag": "a754c622f94c25031dae502dfced0377",
+      "key": "v1/llama3.3-70b-it/50-resid-post-gf/explanations/config.json",
+      "last_modified": "2025-11-21T07:20:47.000Z",
+      "sha256": "2080b0c3a90134029353470510f63deae770930fd8c6747742989233d05bf6b6"
+    },
+    "documentation_url": "https://docs.neuronpedia.org/api",
+    "explanation_model": "gemini-2.5-flash-lite",
+    "explanation_type": "np_acts-logits-general",
+    "model_id": "llama3.3-70b-it",
+    "prefix": "v1/llama3.3-70b-it/50-resid-post-gf/explanations/",
+    "source_id": "50-resid-post-gf"
+  },
+  "status": "public_label_snapshot"
+}

@@ -1,0 +1,126 @@
+{
+  "claim_boundary": "This plan authorizes semantic matching calibration only. It cannot produce or inspect a v2 J-lens, detector, or behavior outcome.",
+  "created_at_utc": "2026-07-12T20:17:30.703082+00:00",
+  "files": [
+    {
+      "bytes": 44003,
+      "path": "semantic_candidate_pool.jsonl",
+      "sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f"
+    },
+    {
+      "bytes": 957,
+      "path": "lexicon_candidates.json",
+      "sha256": "049c1104805500e654a4ed4c90c398b2dab7d1920425f67fd00442d355f10c7d"
+    },
+    {
+      "bytes": 4008,
+      "path": "protocol_snapshot.json",
+      "sha256": "d5e7aa5d297de471c6fe2df9f250676e4f5184e014abebcdc8c3289ce9de0a30"
+    },
+    {
+      "bytes": 842,
+      "path": "CALIBRATION_PLAN.json",
+      "sha256": "b3a210561b84dbfe8fc3ad683bb2e08104e18852e6d54bfd71e16d8c02d3833d"
+    }
+  ],
+  "result_placeholders": [],
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 20212,
+      "path": "docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md",
+      "sha256": "c90891f6e3d5d1b3b6ebb254e5632513f4780012760cf463be29f9b3b06a0c56"
+    },
+    {
+      "bytes": 11041,
+      "path": "docs/SAE_JLENS_V2_REQUEST_HARD_NEGATIVES_AND_COMPARATORS.md",
+      "sha256": "4435505b297e57af4e3e9c296439b9f9a0c6f25dba10241ccd4576fa1d9dbb26"
+    },
+    {
+      "bytes": 5616,
+      "path": "experiments/exp2_sae/build_sae_jlens_v2_calibration_plan.py",
+      "sha256": "ee85b3e4306e27742a8d078cc20b7438a39a54f7dc5ca07736c04d2f0994c132"
+    },
+    {
+      "bytes": 22522,
+      "path": "experiments/exp2_sae/sae_jlens_v2_protocol.py",
+      "sha256": "abf9b9f3f13257a014702a841713ff087caae918b4a2f43a8ad65ed903138250"
+    },
+    {
+      "bytes": 10218,
+      "path": "experiments/exp2_sae/snapshot_neuronpedia_labels.py",
+      "sha256": "6e96879ad7775432ed98dc91048560ec53783ce2962027d966c9696e28cea8c5"
+    },
+    {
+      "bytes": 6474,
+      "path": "experiments/exp2_sae/validate_sae_jlens_v2_calibration_plan.py",
+      "sha256": "804d470297b917add2151d021014ca433d2674c938defbdc4788084a73a3a472"
+    },
+    {
+      "bytes": 9690,
+      "path": "experiments/exp2_sae/run_sae_jlens_v2_calibration.py",
+      "sha256": "c1e031fd8148b654db43cc99dacc652a3f16994397d2a180fe53929c9714f575"
+    },
+    {
+      "bytes": 2153,
+      "path": "experiments/exp2_sae/run_sae_jlens_v2_calibration_runpod.sh",
+      "sha256": "b109fe816a7f9ac3afc6133ffcd952feb3bcc1a01e153be21d2e871640da0ab4"
+    },
+    {
+      "bytes": 10812,
+      "path": "experiments/exp2_sae/audit_sae_jlens_v2_calibration.py",
+      "sha256": "a1ef1228d89cfd5855b9fbbfc21057fcf91ebe84d65daebef24b25a62d7187e7"
+    },
+    {
+      "bytes": 31464,
+      "path": "experiments/exp2_sae/run_public_sae_consciousness_gating.py",
+      "sha256": "59eeeee2b53b9cce57aca5f61bd8fd6d0cc364a3d0e0943243780496be6395d2"
+    },
+    {
+      "bytes": 22864,
+      "path": "experiments/exp2_sae/public_sae_consciousness_gating.py",
+      "sha256": "35fb1796bfef75d63758939a9d710484f86c15c7e78b7e56d43cf0276de1fd22"
+    },
+    {
+      "bytes": 67953,
+      "path": "experiments/exp2_sae/replicate_exp2_goodfire_sae.py",
+      "sha256": "a97c35b403ab62ff9326f9d1bf4108472c7933fab6052f45f0ad199f27e980ed"
+    },
+    {
+      "bytes": 21922,
+      "path": "src/prompts.py",
+      "sha256": "53ea43c830ce4c489a0db1096c0b8359ebc9135407280ebc2ecc5bba0cad02bf"
+    },
+    {
+      "bytes": 419,
+      "path": "requirements-runpod-70b.txt",
+      "sha256": "2b3f9c4fdcd5fbfce9ee8bfcb2f0df401fc30ac87368035792c490ba2e051921"
+    },
+    {
+      "bytes": 1765,
+      "path": "data/sae_jlens_audit/neuronpedia_labels_20260712/SNAPSHOT_MANIFEST.json",
+      "sha256": "143dba2cb0cde5000819cd619e119612ed0c35ca56cf81af7b9bec2103f29bb5"
+    },
+    {
+      "bytes": 26245042,
+      "path": "data/sae_jlens_audit/neuronpedia_labels_20260712/labels.jsonl",
+      "sha256": "7009ad57620e587c97ae535059b768b43a4ee1b59cd4e240d0b42db794f18c41"
+    },
+    {
+      "bytes": 127181,
+      "path": "data/sae_jlens_audit/neuronpedia_labels_20260712/source_objects.jsonl",
+      "sha256": "f13ff9abfa73be7f0df26bb6ae9f1b0226e88397e13ccfd4e30e7f538be5c235"
+    },
+    {
+      "bytes": 488,
+      "path": "data/sae_jlens_audit/neuronpedia_labels_20260712/source_config.json",
+      "sha256": "ed751c886113f3204cb16085ebc0f9225723feda02f1e3b36d8d343d502ca340"
+    },
+    {
+      "bytes": 32560,
+      "path": "data/sae_jlens_audit/neuronpedia_labels_20260712/missing_feature_ids.json",
+      "sha256": "0391962877e168dfa8bcbff4e85071e55cd02344e289b1751d9a2f4820efa539"
+    }
+  ],
+  "status": "frozen_outcome_masked_calibration_plan"
+}

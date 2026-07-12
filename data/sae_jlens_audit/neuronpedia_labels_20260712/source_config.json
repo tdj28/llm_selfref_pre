@@ -1,0 +1,12 @@
+{
+  "autointerp_batch_size": 128,
+  "end_index": null,
+  "explainer_model_name": "gemini-2.5-flash-lite",
+  "explainer_type_name": "np_acts-logits-general",
+  "gzip_output": true,
+  "ignore_first_n_tokens": 0,
+  "input_dir_with_source_exports": "/Users/johnnylin/Documents/Projects/neuronpedia/utils/neuronpedia-utils/neuronpedia_utils/exports/llama3.3-70b-it/50-resid-post-gf",
+  "max_top_activations_to_show_explainer_per_feature": 12,
+  "reasoning_effort": "low",
+  "start_index": 0
+}

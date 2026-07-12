@@ -383,6 +383,44 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Add an explicitly post-run paired-reference sensitivity with both known-
   sign and sign-unknown scores, all five random-J controls, and all six
   feature-level results; do not relabel it confirmatory.
+
+## SAE/J-Lens V2 Hard Negatives And Reader Capacity
+
+- [x] Correct the v1 reader description: the confirmatory post-state detector
+  is a 67-dimensional logistic regression over lexicon logits, while the
+  paired-reference scalar is a separate post-run access model.
+- [x] Snapshot all 61,850 available Neuronpedia labels for the exact public
+  Goodfire SAE, including 484 source-object hashes and 3,686 missing IDs.
+- [x] Freeze the label-only A1 hard-negative and A2 same-subfamily ontologies,
+  exclusions, matching calipers, deterministic relaxations, and lexicon
+  candidates before outcome-masked calibration.
+- [x] Write the two-stage human protocol with replay, residual-storage,
+  family-by-lexicon specificity, target-versus-comparator, crossed-holdout,
+  reader-capacity, random-J, and claim-boundary requirements.
+- [x] Build and independently audit the 138-candidate Stage 0 machine plan;
+  it authorizes only SAE activation telemetry and cannot persist generations,
+  Jacobian scores, residual states, detector outputs, or target outcomes.
+- [x] Implement the exact-model Stage 0 runtime, deterministic 24-feature
+  matcher, independent SciPy audit, and uniquely named RunPod wrapper.
+- [ ] Commit and push the Stage 0 source, label snapshot, machine plan, and
+  independent plan audit before starting GPU calibration.
+- [ ] Run Stage 0 on one uniquely named agent-owned A100 80 GB pod; retrieve
+  and hash-verify the compact calibration artifacts, then terminate that pod
+  and verify deletion without touching any other pod.
+- [ ] Bind the exact 18 A1 IDs, six A2 IDs, tokenizer-accepted lexicon tokens,
+  and calibration hashes into a final result-free Stage 1 machine plan.
+- [ ] Implement and independently test the final Stage 1 runtime, replay gate,
+  BF16 residual sharding, reader ladder, fixed crossed holdouts, 20,000-draw
+  template bootstrap, analyses, figures, release builder, and OSF uploader.
+- [ ] Commit and push the final Stage 1 freeze; create and audit an OSF draft,
+  then obtain explicit owner authorization before submitting the immutable
+  registration and record its DOI/URL and registration timestamp.
+- [ ] Generate v2 target outcomes only after Git and accepted OSF gates pass;
+  retrieve, hash-check, independently audit, release, and terminate only the
+  agent-owned execution pod.
+- [ ] Report A1, A2, replay, reader-capacity, and all mandatory control results
+  together, including failures and nulls, without replacing or relabeling v1.
+
 - [ ] Replicate the post-state/paired access split on another model/lens and an
   intervention family absent from training before proposing an operational
   steering detector.

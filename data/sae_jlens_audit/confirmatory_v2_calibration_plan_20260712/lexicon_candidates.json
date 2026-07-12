@@ -1,0 +1,62 @@
+{
+  "deception_dishonesty": [
+    " deception",
+    " deceptive",
+    " lie",
+    " lying",
+    " dishonest",
+    " fraud",
+    " fake",
+    " conceal",
+    " hidden",
+    " misleading"
+  ],
+  "formality_politeness": [
+    " polite",
+    " respectful",
+    " courteous",
+    " formal",
+    " professional",
+    " diplomatic",
+    " kindly",
+    " appropriate",
+    " tactful",
+    " civil"
+  ],
+  "hedging_uncertainty": [
+    " uncertain",
+    " maybe",
+    " perhaps",
+    " possibly",
+    " likely",
+    " unclear",
+    " caveat",
+    " tentative",
+    " unsure",
+    " cautious"
+  ],
+  "refusal_safety": [
+    " refuse",
+    " refusal",
+    " decline",
+    " denied",
+    " prohibited",
+    " unsafe",
+    " comply",
+    " cannot",
+    " policy",
+    " restricted"
+  ],
+  "unrelated": [
+    " banana",
+    " telescope",
+    " ceramic",
+    " rainfall",
+    " bicycle",
+    " copper",
+    " violin",
+    " glacier",
+    " cabbage",
+    " limestone"
+  ]
+}

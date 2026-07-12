@@ -1,0 +1,23 @@
+{
+  "allowed_runtime_outputs": [
+    "calibration.json",
+    "independent_calibration_audit.json",
+    "runtime_metadata.json",
+    "run.log"
+  ],
+  "behavioral_output_policy": "Calibration performs forward passes only. It does not generate, persist, classify, or inspect response text or J-lens outcome scores.",
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "candidate_pool_size": 138,
+  "created_at_utc": "2026-07-12T20:17:30.702550+00:00",
+  "expected_metric_rows": 144,
+  "expected_selected_rows": 24,
+  "failure_rule": "stop_if_any_complete_assignment_fails_both_frozen_calipers",
+  "forbidden_runtime_outputs": [
+    "generations",
+    "responses",
+    "jacobian_readouts",
+    "residual_shards",
+    "detector_predictions"
+  ],
+  "status": "frozen_outcome_masked_calibration_plan"
+}

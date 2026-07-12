@@ -81,6 +81,17 @@ immediately public and permanently recoverable.
   outcome and release. Preserve the split result: post-state target attribution
   is chance, while paired clean-reference semantic deltas are large. Never
   collapse those access models or hide feature 23893's failure.
+- `docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md` is the two-stage hard-negative and
+  reader-capacity follow-up. Stage 0 may use only outcome-masked SAE activation
+  telemetry to select 18 A1 and six A2 comparators. Stage 1 is not authorized
+  until the exact selected IDs, final machine plan, analysis, validators, and
+  OSF registration are frozen. Do not generate or inspect v2 target outcomes
+  before both the public Git freeze and accepted OSF registration.
+- `data/sae_jlens_audit/neuronpedia_labels_20260712/` is the compact public
+  provenance snapshot of all available labels for the pinned Goodfire SAE.
+  `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` is the
+  independently audited Stage 0 machine plan. Neither directory is a v2
+  outcome release.
 
 ## Research Direction
 
@@ -130,6 +141,15 @@ Public SAE work is a separate evidence ladder:
   deception, or consciousness. Identity, all five random-J controls, matched
   SAE controls, raw norms, prompt-family holdouts, and feature-pair holdouts
   are mandatory comparators rather than optional robustness checks.
+- The v2 SAE/J-lens extension addresses hard-negative specificity and reader
+  capacity without hiding the v1 result. Its semantic comparator ontology is
+  label-defined before telemetry; matching is outcome-masked; its A1 endpoint
+  is a full family-by-lexicon matrix; and its A2 endpoint compares each target
+  against a same-subfamily comparator. The reader ladder must include the v1
+  67-token state reader, PCA-67, five fixed random 67-dimensional projections,
+  and a full 8,192-dimensional linear capacity ceiling under identical crossed
+  holdouts. No MLP, tuned nonlinear detector, provenance detector, hidden-belief
+  detector, or consciousness detector may be substituted after outcomes.
 - Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
   SteeringAPI service was publicly reachable when checked, but its relationship
   to Goodfire and the paper-time experiment is unverified. Exact proprietary
