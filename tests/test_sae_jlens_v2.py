@@ -16,6 +16,7 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     reader_permutation_macro_auc,
     semantic_a1,
     semantic_a2,
+    signflip_pvalues,
     weighted_auc_draws,
 )
 from experiments.exp2_sae.osf_sae_jlens_v2 import (
@@ -265,6 +266,13 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
         point, pvalue = reader_permutation_macro_auc(rows, 2_000, 2026071600)
         self.assertEqual(point, 1.0)
         self.assertLess(pvalue, 0.01)
+
+    def test_template_signflip_detects_consistent_positive_effect(self) -> None:
+        values = np.ones((51, 2), dtype=np.float64)
+        pvalues = signflip_pvalues(
+            values, np.asarray([1.0, 1.0]), 2_000, 2026071310
+        )
+        self.assertTrue(all(value < 0.01 for value in pvalues))
 
     def synthetic_calibration(self) -> dict[str, object]:
         candidates = semantic_candidate_pool(self.repo_root)

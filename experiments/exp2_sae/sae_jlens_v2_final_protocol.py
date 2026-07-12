@@ -406,7 +406,14 @@ def semantic_analysis_plan() -> dict[str, Any]:
             "reader_seed_base": 2_026_071_500,
             "confidence_interval": [0.025, 0.975],
             "a2_equivalence_interval": [0.05, 0.95],
-            "one_sided_positive_p": "(1 + count(draw <= 0)) / (B + 1)",
+        },
+        "a1_cluster_signflip": {
+            "unit": "template_family",
+            "replicates": BOOTSTRAP_REPLICATES,
+            "row_seed_base": 2_026_071_310,
+            "hard_negative_leakage_seed_base": 2_026_071_320,
+            "global_seed_base": 2_026_071_330,
+            "one_sided_p": "(1 + count(null_draw >= observed)) / (B + 1)",
         },
         "multiplicity": {
             "a1_row_contrasts": "Holm across four intervention families",

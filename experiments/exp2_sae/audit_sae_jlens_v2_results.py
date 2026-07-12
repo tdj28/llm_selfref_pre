@@ -260,6 +260,93 @@ def independent_a1_points(rows: list[dict[str, Any]]) -> dict[tuple[str, str, st
     return points
 
 
+def independent_signflip_pvalues(
+    values: np.ndarray, observed: np.ndarray, replicates: int, seed: int
+) -> list[float]:
+    if values.ndim == 1:
+        values = values[:, None]
+    rng = np.random.default_rng(seed)
+    bits = rng.integers(
+        0, 2, size=(replicates, values.shape[0]), dtype=np.int8
+    )
+    signs = np.where(bits == 0, -1.0, 1.0)
+    null = np.einsum("bt,tk->bk", signs, values, optimize=False) / values.shape[0]
+    return [
+        float((1 + np.count_nonzero(null[:, index] >= observed[index])) / (replicates + 1))
+        for index in range(len(observed))
+    ]
+
+
+def independent_a1_probabilities(
+    rows: list[dict[str, Any]], replicates: int
+) -> dict[tuple[str, str, str], tuple[float, float | None]]:
+    clean, scales = clean_reference(rows)
+    by_template: dict[tuple[str, str, str, str], list[float]] = defaultdict(list)
+    for row in rows:
+        if row["condition_family"] == "target_single":
+            family = "deception_dishonesty"
+        elif row.get("semantic_experiment") == "A1":
+            family = row["semantic_family"]
+        else:
+            continue
+        for lexicon in LEXICONS:
+            by_template[
+                (row["transport"], family, lexicon, row["template_id"])
+            ].append(zvalue(row, lexicon, clean, scales))
+    templates = sorted({key[3] for key in by_template})
+    results = {}
+    for transport_index, transport in enumerate(TRANSPORTS):
+        matrix = np.empty((51, 4, 4), dtype=np.float64)
+        for template_index, template in enumerate(templates):
+            for family_index, family in enumerate(INTERVENTION_FAMILIES):
+                for lexicon_index, lexicon in enumerate(LEXICONS):
+                    values = by_template[(transport, family, lexicon, template)]
+                    matrix[template_index, family_index, lexicon_index] = np.mean(
+                        values
+                    )
+        diagonal = np.diagonal(matrix, axis1=1, axis2=2)
+        row_values = diagonal - (matrix.sum(axis=2) - diagonal) / 3.0
+        row_points = row_values.mean(axis=0)
+        row_p = independent_signflip_pvalues(
+            row_values,
+            row_points,
+            replicates,
+            2_026_071_310 + transport_index,
+        )
+        row_holm = independent_holm(row_p)
+        for family_index, family in enumerate(INTERVENTION_FAMILIES):
+            results[(transport, "row", family)] = (
+                row_p[family_index],
+                row_holm[family_index],
+            )
+        leakage_values = matrix[:, 1:, 0]
+        leakage_points = leakage_values.mean(axis=0)
+        leakage_p = independent_signflip_pvalues(
+            leakage_values,
+            leakage_points,
+            replicates,
+            2_026_071_320 + transport_index,
+        )
+        leakage_holm = independent_holm(leakage_p)
+        for family_index, family in enumerate(A1_FAMILIES):
+            results[(transport, "leakage", family)] = (
+                leakage_p[family_index],
+                leakage_holm[family_index],
+            )
+        global_values = row_values.mean(axis=1)
+        global_p = independent_signflip_pvalues(
+            global_values,
+            np.asarray([float(global_values.mean())]),
+            replicates,
+            2_026_071_330 + transport_index,
+        )[0]
+        results[(transport, "global", "all_four_fixed_families")] = (
+            global_p,
+            None,
+        )
+    return results
+
+
 def independent_a1_feature_points(
     rows: list[dict[str, Any]],
 ) -> dict[tuple[str, str, int, str], float]:
@@ -478,11 +565,12 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     primary = primary_rows(run_dir)
     try:
         a1_points = independent_a1_points(primary)
+        a1_probabilities = independent_a1_probabilities(primary, 20_000)
         a1_feature_points = independent_a1_feature_points(primary)
         a2_points = independent_a2_points(primary)
     except (KeyError, ValueError, ZeroDivisionError) as error:
         errors.append(f"independent semantic reconstruction failed: {error}")
-        a1_points, a1_feature_points, a2_points = {}, {}, {}
+        a1_points, a1_probabilities, a1_feature_points, a2_points = {}, {}, {}, {}
     promoted_a1 = csv_rows(analysis_dir / "semantic_a1_matrix.csv")
     promoted_a1_contrasts = csv_rows(
         analysis_dir / "semantic_a1_contrasts.csv"
@@ -499,6 +587,27 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         errors.append("A1 deception-leakage row count differs")
     if len(promoted_a1_features) != 672:
         errors.append("A1 feature-heterogeneity row count differs")
+    for row in promoted_a1_contrasts:
+        kind = "row" if row["contrast"] == "row_diagonal_minus_off_diagonal" else "global"
+        key = (row["transport"], kind, row["intervention_family"])
+        expected = a1_probabilities.get(key)
+        if expected is None or not math.isclose(
+            float(row["cluster_signflip_one_sided_p"]), expected[0], abs_tol=1e-12
+        ):
+            errors.append(f"A1 sign-flip probability differs: {key}")
+        if expected is not None and expected[1] is not None and not math.isclose(
+            float(row["holm_adjusted_p"]), expected[1], abs_tol=1e-12
+        ):
+            errors.append(f"A1 Holm adjustment differs: {key}")
+    for row in promoted_a1_leakage:
+        key = (row["transport"], "leakage", row["hard_negative_family"])
+        expected = a1_probabilities.get(key)
+        if expected is None or not math.isclose(
+            float(row["cluster_signflip_one_sided_p"]), expected[0], abs_tol=1e-12
+        ) or not math.isclose(
+            float(row["holm_adjusted_p"]), expected[1], abs_tol=1e-12
+        ):
+            errors.append(f"A1 leakage probability differs: {key}")
     for row in promoted_a1:
         key = (row["transport"], row["intervention_family"], row["lexicon"])
         expected = a1_points.get(key)

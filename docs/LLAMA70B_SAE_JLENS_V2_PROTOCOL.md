@@ -303,14 +303,14 @@ Family specificity is supported only if:
   direction;
 - every diagonal is the largest point estimate in its row; and
 - at least three of four row contrasts are positive with Holm-adjusted
-  one-sided bootstrap probabilities below 0.05.
+  one-sided template-cluster sign-flip probabilities below 0.05.
 
 For each hard-negative family, movement of the deception lexicon is separately
 reported. A hard-negative deception score of at least 0.25 whose 95% interval
-excludes zero and whose one-sided bootstrap probability remains below 0.05
-after Holm correction supports only "not specific among these tested
-response-style families." It does not establish genericity to arbitrary
-intervention.
+excludes zero and whose one-sided template-cluster sign-flip probability
+remains below 0.05 after Holm correction supports only "not specific among
+these tested response-style families." It does not establish genericity to
+arbitrary intervention.
 
 All 24 A1 feature identities are also reported against all four lexicons with
 template-cluster intervals (672 rows across seven transports). These rows are
@@ -405,6 +405,12 @@ deception-leakage checks use Holm correction across three families. A2 has one
 primary aggregate contrast and six mandatory heterogeneity rows; pair rows are
 descriptive and cannot replace the aggregate result. Experiment B controls
 the family of 14 reader-rung tests with Holm and reports every rung.
+
+A1 intervals use template resampling with replacement. Its one-sided null
+tests instead multiply all observations from each template family by a shared,
+independent random sign, preserving within-template dependence while testing a
+zero centered effect. Row, leakage, and global tests use separately frozen
+seed families and 20,000 draws.
 
 ## Failure Rules
 

@@ -131,7 +131,10 @@ comparator rows. It fixes all seven layers, three positions, BF16 residual
 shards, replay-equivalence tolerance, A1 family matrix, A2 target-comparator
 contrast, 14-reader ladder, five crossed prompt folds, five stored random
 projections, 20,000 template bootstraps, thresholds, failure rules, and claim
-boundaries before any Stage 1 outcome.
+boundaries before any Stage 1 outcome. A1 null tests use 20,000 template-cluster
+sign flips; reader null tests use 20,000 target/control label randomizations
+within feature-pair, template, and sign blocks, with Holm control across all 14
+reader rungs.
 
 No Stage 1 outcome existed when this packet and its public Git freeze were
 created. Submission of this registration is the authorization gate for Stage

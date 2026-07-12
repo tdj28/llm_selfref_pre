@@ -228,6 +228,32 @@ def holm_adjust(pvalues: list[float]) -> list[float]:
     return adjusted
 
 
+def signflip_pvalues(
+    template_values: np.ndarray,
+    observed: np.ndarray,
+    replicates: int,
+    seed: int,
+) -> list[float]:
+    if template_values.ndim == 1:
+        template_values = template_values[:, None]
+    if template_values.shape[0] != 51 or template_values.shape[1] != len(observed):
+        raise AnalysisFailure("Sign-flip matrix shape differs")
+    rng = np.random.default_rng(seed)
+    signs = 2 * rng.integers(
+        0, 2, size=(replicates, len(template_values)), dtype=np.int8
+    ) - 1
+    null = np.einsum(
+        "bt,tk->bk",
+        signs.astype(np.float64),
+        template_values,
+        optimize=False,
+    ) / len(template_values)
+    return [
+        float((1 + np.sum(null[:, index] >= observed[index])) / (replicates + 1))
+        for index in range(len(observed))
+    ]
+
+
 def semantic_a1(
     rows: list[dict[str, Any]], replicates: int
 ) -> tuple[
@@ -322,14 +348,31 @@ def semantic_a1(
         ) / 3.0
         global_point = float(row_contrast.mean())
         global_draws = row_draws.mean(axis=1)
-        raw_p = [float((1 + np.sum(row_draws[:, index] <= 0)) / (replicates + 1)) for index in range(4)]
+        diagonal_by_template = np.diagonal(matrix, axis1=1, axis2=2)
+        row_contrast_by_template = diagonal_by_template - (
+            matrix.sum(axis=2) - diagonal_by_template
+        ) / 3.0
+        raw_p = signflip_pvalues(
+            row_contrast_by_template,
+            row_contrast,
+            replicates,
+            2_026_071_310 + transport_index,
+        )
         adjusted = holm_adjust(raw_p)
         leakage_draws = cell_draws[:, 1:, 0]
-        leakage_p = [
-            float((1 + np.sum(leakage_draws[:, index] <= 0)) / (replicates + 1))
-            for index in range(3)
-        ]
+        leakage_p = signflip_pvalues(
+            matrix[:, 1:, 0],
+            point[1:, 0],
+            replicates,
+            2_026_071_320 + transport_index,
+        )
         leakage_adjusted = holm_adjust(leakage_p)
+        global_p = signflip_pvalues(
+            row_contrast_by_template.mean(axis=1),
+            np.asarray([global_point]),
+            replicates,
+            2_026_071_330 + transport_index,
+        )[0]
 
         for family in INTERVENTION_FAMILIES:
             for feature_id in features_by_family[family]:
@@ -391,7 +434,7 @@ def semantic_a1(
                     "mean_oriented_z": float(row_contrast[family_index]),
                     "ci_low": low,
                     "ci_high": high,
-                    "bootstrap_one_sided_p": raw_p[family_index],
+                    "cluster_signflip_one_sided_p": raw_p[family_index],
                     "holm_adjusted_p": adjusted[family_index],
                 }
             )
@@ -404,9 +447,7 @@ def semantic_a1(
                 "mean_oriented_z": global_point,
                 "ci_low": global_low,
                 "ci_high": global_high,
-                "bootstrap_one_sided_p": float(
-                    (1 + np.sum(global_draws <= 0)) / (replicates + 1)
-                ),
+                "cluster_signflip_one_sided_p": global_p,
                 "holm_adjusted_p": None,
             }
         )
@@ -424,7 +465,7 @@ def semantic_a1(
                     "mean_oriented_z": value,
                     "ci_low": low,
                     "ci_high": high,
-                    "bootstrap_one_sided_p": leakage_p[hard_negative_index],
+                    "cluster_signflip_one_sided_p": leakage_p[hard_negative_index],
                     "holm_adjusted_p": leakage_adjusted[hard_negative_index],
                     "material_deception_leakage": bool(
                         value >= SEMANTIC_MINIMUM_Z

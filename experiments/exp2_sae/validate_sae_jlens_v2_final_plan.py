@@ -232,6 +232,10 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         "a1_feature_rows", ""
     ):
         errors.append("A1 feature-heterogeneity reporting rule differs")
+    if semantic_analysis.get("a1_cluster_signflip", {}).get(
+        "row_seed_base"
+    ) != 2_026_071_310:
+        errors.append("A1 sign-flip seed differs")
 
     osf_project = json.loads(
         (plan_dir / "OSF_PROJECT.json").read_text(encoding="utf-8")
