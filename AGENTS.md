@@ -42,9 +42,10 @@ immediately public and permanently recoverable.
 - `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` compares the two intervention
   families and defines the bounded open-model follow-up suggested by the 2026
   Jacobian-lens paper.
-- `docs/EXPERIMENT_INTEGRITY_SKILLS.md` is the reusable team playbook for
-  prospectively freezing, validating, executing, auditing, amending, and
-  releasing confirmatory experiments without outcome-contingent tuning.
+- `../agent-skill-documents/EXPERIMENT_INTEGRITY_SKILLS.md` is the shared team
+  playbook for prospectively freezing, validating, executing, auditing,
+  amending, and releasing confirmatory experiments without outcome-contingent
+  tuning.
 - `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` is the prospective protocol for the
   active Llama 3.3 70B forensic audit. It binds the exact public Goodfire SAE,
   Neuronpedia J-lens, matched SAE controls, random-J controls, threat model,
@@ -354,11 +355,11 @@ Generated data usually belongs in `data/`, `out/`, or experiment-local `out/` di
 
 ## Prospective Experiment Discipline
 
-Follow `docs/EXPERIMENT_INTEGRITY_SKILLS.md` for every new confirmatory GPU or
-API experiment. No target outcome may be generated or inspected until the
-human-readable protocol, result-free machine plan, runtime, confirmatory
-analysis, validator, failure rules, and claim boundary have passed the staged
-public audit and been pushed to a remote freeze commit.
+Follow `../agent-skill-documents/EXPERIMENT_INTEGRITY_SKILLS.md` for every new
+confirmatory GPU or API experiment. No target outcome may be generated or
+inspected until the human-readable protocol, result-free machine plan, runtime,
+confirmatory analysis, validator, failure rules, and claim boundary have passed
+the staged public audit and been pushed to a remote freeze commit.
 
 - Record the full freeze commit and plan-manifest hash in runtime metadata and
   the final release.
