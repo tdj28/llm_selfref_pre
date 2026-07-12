@@ -205,6 +205,18 @@ def validate(plan_dir: Path) -> dict[str, Any]:
     if residual.get("expected_tensor_bytes") != 1_386_233_856:
         errors.append("residual exact tensor byte count differs")
 
+    semantic_analysis = json.loads(
+        (plan_dir / "semantic_analysis_plan.json").read_text(encoding="utf-8")
+    )
+    if semantic_analysis.get("bootstrap", {}).get("replicates") != 20_000:
+        errors.append("semantic bootstrap count differs")
+    if semantic_analysis.get("clean_scale", {}).get("ddof") != 1:
+        errors.append("semantic clean-scale ddof differs")
+    if semantic_analysis.get("minimum_effect_z") != 0.25:
+        errors.append("semantic minimum effect differs")
+    if len(semantic_analysis.get("transports", [])) != 7:
+        errors.append("semantic transport battery differs")
+
     osf_project = json.loads(
         (plan_dir / "OSF_PROJECT.json").read_text(encoding="utf-8")
     )

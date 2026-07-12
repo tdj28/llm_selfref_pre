@@ -31,6 +31,7 @@ from experiments.exp2_sae.sae_jlens_v2_final_protocol import (  # noqa: E402
     random_projection,
     reader_plan,
     residual_schema,
+    semantic_analysis_plan,
     selected_comparator_rows,
 )
 from experiments.exp2_sae.sae_jlens_v2_protocol import (  # noqa: E402
@@ -135,6 +136,7 @@ def build(
     trials_path = outdir / "trial_plan.jsonl"
     residual_path = outdir / "residual_schema.json"
     reader_path = outdir / "reader_plan.json"
+    semantic_analysis_path = outdir / "semantic_analysis_plan.json"
     snapshot_path = outdir / "protocol_snapshot.json"
     calibration_provenance_path = outdir / "calibration_provenance.json"
     osf_project_copy_path = outdir / "OSF_PROJECT.json"
@@ -183,6 +185,7 @@ def build(
             np.save(handle, matrix, allow_pickle=False)
         projection_paths.append(path)
     write_json(reader_path, reader_plan(projection_hashes))
+    write_json(semantic_analysis_path, semantic_analysis_plan())
     write_json(snapshot_path, final_protocol_snapshot(osf_project))
 
     plan_files = [
@@ -192,6 +195,7 @@ def build(
         trials_path,
         residual_path,
         reader_path,
+        semantic_analysis_path,
         snapshot_path,
         calibration_provenance_path,
         osf_project_copy_path,

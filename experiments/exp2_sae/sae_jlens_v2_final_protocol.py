@@ -346,6 +346,57 @@ def reader_plan(projection_hashes: dict[int, str]) -> dict[str, Any]:
     }
 
 
+def semantic_analysis_plan() -> dict[str, Any]:
+    return {
+        "primary_layer": PRIMARY_LAYER,
+        "primary_position": PRIMARY_POSITION,
+        "transports": [
+            "jacobian",
+            "identity",
+            "random_j_1",
+            "random_j_2",
+            "random_j_3",
+            "random_j_4",
+            "random_j_5",
+        ],
+        "lexicons": [
+            "deception_dishonesty",
+            "refusal_safety",
+            "hedging_uncertainty",
+            "formality_politeness",
+        ],
+        "reference_lexicon": "unrelated",
+        "score": "mean_semantic_token_logit_minus_mean_unrelated_token_logit",
+        "clean_scale": {
+            "unit": "51_clean_template_family_prompts",
+            "statistic": "sample_standard_deviation",
+            "ddof": 1,
+            "separate_by_transport_and_lexicon": True,
+            "zero_or_nonfinite_rule": "fail_analysis",
+        },
+        "orientation": "coefficient_sign_times_steered_minus_clean_score",
+        "template_balance": (
+            "mean_features_and_signs_within_template_then_mean_51_templates"
+        ),
+        "bootstrap": {
+            "unit": "template_family",
+            "replicates": BOOTSTRAP_REPLICATES,
+            "a1_transport_seed_base": 2_026_071_300,
+            "a2_transport_seed_base": 2_026_071_400,
+            "reader_seed_base": 2_026_071_500,
+            "confidence_interval": [0.025, 0.975],
+            "a2_equivalence_interval": [0.05, 0.95],
+            "one_sided_positive_p": "(1 + count(draw <= 0)) / (B + 1)",
+        },
+        "multiplicity": {
+            "a1_row_contrasts": "Holm across four intervention families",
+            "a1_hard_negative_deception": "Holm across three hard-negative families",
+            "a2_primary": "one aggregate contrast; six pair rows descriptive",
+        },
+        "minimum_effect_z": SEMANTIC_MINIMUM_Z,
+    }
+
+
 def residual_schema() -> dict[str, Any]:
     row_values = len(TRAJECTORY_LAYERS) * len(POSITIONS) * MODEL_WIDTH
     return {

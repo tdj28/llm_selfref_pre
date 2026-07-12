@@ -269,14 +269,29 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     except (KeyError, ValueError, ZeroDivisionError) as error:
         errors.append(f"independent semantic reconstruction failed: {error}")
         a1_points, a2_points = {}, {}
-    for row in csv_rows(analysis_dir / "semantic_a1_matrix.csv"):
+    promoted_a1 = csv_rows(analysis_dir / "semantic_a1_matrix.csv")
+    promoted_a1_contrasts = csv_rows(
+        analysis_dir / "semantic_a1_contrasts.csv"
+    )
+    promoted_a1_leakage = csv_rows(
+        analysis_dir / "semantic_a1_deception_leakage.csv"
+    )
+    if len(promoted_a1) != 112 or len(promoted_a1_contrasts) != 35:
+        errors.append("A1 matrix/contrast row counts differ")
+    if len(promoted_a1_leakage) != 21:
+        errors.append("A1 deception-leakage row count differs")
+    for row in promoted_a1:
         key = (row["transport"], row["intervention_family"], row["lexicon"])
         expected = a1_points.get(key)
         if expected is None or not math.isclose(
             float(row["mean_oriented_z"]), expected, abs_tol=1e-10
         ):
             errors.append(f"A1 promoted point differs: {key}")
-    for row in csv_rows(analysis_dir / "semantic_a2_summary.csv"):
+    promoted_a2 = csv_rows(analysis_dir / "semantic_a2_summary.csv")
+    promoted_a2_pairs = csv_rows(analysis_dir / "semantic_a2_pairs.csv")
+    if len(promoted_a2) != 7 or len(promoted_a2_pairs) != 42:
+        errors.append("A2 summary/pair row counts differ")
+    for row in promoted_a2:
         expected = a2_points.get(row["transport"])
         if expected is None or not math.isclose(
             float(row["mean_target_minus_comparator_z"]), expected, abs_tol=1e-10
@@ -294,6 +309,9 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         row["reader_id"]: row
         for row in csv_rows(analysis_dir / "reader_metrics.csv")
     }
+    promoted_pair_metrics = csv_rows(analysis_dir / "reader_pair_metrics.csv")
+    if len(promoted_metrics) != 14 or len(promoted_pair_metrics) != 84:
+        errors.append("reader metric/pair row counts differ")
     for reader_id in sorted({row["reader_id"] for row in predictions}):
         reader_rows = [row for row in predictions if row["reader_id"] == reader_id]
         labels = np.asarray([int(row["label"]) for row in reader_rows])

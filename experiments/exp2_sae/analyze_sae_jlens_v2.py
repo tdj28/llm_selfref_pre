@@ -230,7 +230,12 @@ def holm_adjust(pvalues: list[float]) -> list[float]:
 
 def semantic_a1(
     rows: list[dict[str, Any]], replicates: int
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[str, Any],
+]:
     clean, scales = clean_scales(rows)
     eligible = [
         row
@@ -255,6 +260,7 @@ def semantic_a1(
         raise AnalysisFailure("A1 template count differs")
     matrix_rows: list[dict[str, Any]] = []
     contrast_rows: list[dict[str, Any]] = []
+    leakage_rows: list[dict[str, Any]] = []
     verdicts: dict[str, Any] = {}
     for transport_index, transport in enumerate(TRANSPORTS):
         matrix = np.empty((len(templates), 4, 4), dtype=np.float64)
@@ -281,6 +287,12 @@ def semantic_a1(
         global_draws = row_draws.mean(axis=1)
         raw_p = [float((1 + np.sum(row_draws[:, index] <= 0)) / (replicates + 1)) for index in range(4)]
         adjusted = holm_adjust(raw_p)
+        leakage_draws = cell_draws[:, 1:, 0]
+        leakage_p = [
+            float((1 + np.sum(leakage_draws[:, index] <= 0)) / (replicates + 1))
+            for index in range(3)
+        ]
+        leakage_adjusted = holm_adjust(leakage_p)
 
         for family_index, family in enumerate(INTERVENTION_FAMILIES):
             for lexicon_index, lexicon in enumerate(LEXICONS):
@@ -326,6 +338,29 @@ def semantic_a1(
                 "holm_adjusted_p": None,
             }
         )
+        for hard_negative_index, family in enumerate(A1_FAMILIES):
+            family_index = hard_negative_index + 1
+            value = float(point[family_index, 0])
+            low, high = quantiles(
+                leakage_draws[:, hard_negative_index], (0.025, 0.975)
+            )
+            leakage_rows.append(
+                {
+                    "transport": transport,
+                    "hard_negative_family": family,
+                    "lexicon": "deception_dishonesty",
+                    "mean_oriented_z": value,
+                    "ci_low": low,
+                    "ci_high": high,
+                    "bootstrap_one_sided_p": leakage_p[hard_negative_index],
+                    "holm_adjusted_p": leakage_adjusted[hard_negative_index],
+                    "material_deception_leakage": bool(
+                        value >= SEMANTIC_MINIMUM_Z
+                        and low > 0
+                        and leakage_adjusted[hard_negative_index] < 0.05
+                    ),
+                }
+            )
         diagonal_largest = [
             int(np.argmax(point[index])) == index for index in range(4)
         ]
@@ -345,7 +380,7 @@ def semantic_a1(
                 and significant_rows >= 3
             ),
         }
-    return matrix_rows, contrast_rows, verdicts
+    return matrix_rows, contrast_rows, leakage_rows, verdicts
 
 
 def semantic_a2(
@@ -734,13 +769,16 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, replicates: int) -> Non
     verify_inputs(plan_dir, run_dir)
     outdir.mkdir(parents=True, exist_ok=True)
     primary = primary_rows(run_dir)
-    a1_matrix, a1_contrasts, a1_verdicts = semantic_a1(primary, replicates)
+    a1_matrix, a1_contrasts, a1_leakage, a1_verdicts = semantic_a1(
+        primary, replicates
+    )
     a2_pairs, a2_summary, a2_verdicts = semantic_a2(primary, replicates)
     predictions, reader_metrics, reader_pairs, reader_verdicts = reader_analysis(
         plan_dir, run_dir, primary, replicates
     )
     write_csv(outdir / "semantic_a1_matrix.csv", a1_matrix)
     write_csv(outdir / "semantic_a1_contrasts.csv", a1_contrasts)
+    write_csv(outdir / "semantic_a1_deception_leakage.csv", a1_leakage)
     write_csv(outdir / "semantic_a2_pairs.csv", a2_pairs)
     write_csv(outdir / "semantic_a2_summary.csv", a2_summary)
     write_csv(outdir / "reader_predictions.csv", predictions)

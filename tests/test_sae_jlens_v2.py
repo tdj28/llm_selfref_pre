@@ -144,10 +144,11 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
 
     def test_semantic_analyses_cover_every_frozen_transport_and_cell(self) -> None:
         rows = self.synthetic_primary_rows()
-        matrix, contrasts, a1_verdicts = semantic_a1(rows, 200)
+        matrix, contrasts, leakage, a1_verdicts = semantic_a1(rows, 200)
         pairs, summary, a2_verdicts = semantic_a2(rows, 200)
         self.assertEqual(len(matrix), len(TRANSPORTS) * 4 * 4)
         self.assertEqual(len(contrasts), len(TRANSPORTS) * 5)
+        self.assertEqual(len(leakage), len(TRANSPORTS) * 3)
         self.assertEqual(len(pairs), len(TRANSPORTS) * 6)
         self.assertEqual(len(summary), len(TRANSPORTS))
         self.assertEqual(set(a1_verdicts), set(TRANSPORTS))
