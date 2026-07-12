@@ -93,6 +93,32 @@ An independent audit must separately establish:
 The release headline must lead with the failed confirmatory gate. Exploratory
 semantic or reader results are secondary, even if strong or favorable.
 
+## Implementation Correction After Endpoint Inspection
+
+The first authorized exploratory analysis attempt computed and wrote all ten
+semantic and reader CSV outputs. It then failed before writing the summary or
+figures because the frozen analysis handed a NumPy `int64` scalar to Python's
+strict JSON encoder. During that run, macOS Accelerate also emitted floating
+point warnings for finite `float32` matrix products; a direct probe reproduced
+the warnings while confirming finite inputs and outputs. The ten partial CSV
+outputs were then inspected, so the correction below is explicitly
+post-outcome.
+
+The failed attempt is preserved under
+`post_failure/attempt_1_serialization_failure/analysis/`. The correction is
+limited to:
+
+- recursively converting NumPy scalar/array containers to native JSON values
+  at the serialization boundary;
+- silencing the reproduced macOS matrix-product warning channel while retaining
+  all frozen nonfinite-value checks; and
+- requiring every rerun CSV to match the corresponding first-attempt SHA-256
+  exactly before a completed exploratory summary is accepted.
+
+No prompt, row, feature, comparator, coefficient, transport, reader, split,
+seed, resampling rule, threshold, estimand, or endpoint calculation changes.
+Any CSV hash mismatch fails the corrected exploratory run and must be reported.
+
 ## Future Confirmatory Work
 
 No rerun is authorized by this amendment. A future confirmatory attempt must

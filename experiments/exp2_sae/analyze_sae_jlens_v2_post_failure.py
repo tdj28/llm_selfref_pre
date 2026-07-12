@@ -8,6 +8,8 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
@@ -69,8 +71,53 @@ def verify_failed_inputs(plan_dir: Path, run_dir: Path) -> None:
             )
 
 
+def json_native(value):
+    """Convert NumPy containers without changing any numerical value."""
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, np.ndarray):
+        return [json_native(item) for item in value.tolist()]
+    if isinstance(value, dict):
+        return {key: json_native(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_native(item) for item in value]
+    return value
+
+
+def native_write_json(path: Path, payload) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(json_native(payload), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def compare_attempt_csvs(comparison_dir: Path, outdir: Path) -> list[dict[str, object]]:
+    expected = {path.name: path for path in sorted(comparison_dir.glob("*.csv"))}
+    observed = {path.name: path for path in sorted(outdir.glob("*.csv"))}
+    if len(expected) != 10 or set(expected) != set(observed):
+        raise PostFailureAnalysisError(
+            "Corrected analysis does not have the same ten CSV outputs as attempt 1"
+        )
+    rows = []
+    for name in sorted(expected):
+        prior_hash = sha256_file(expected[name])
+        current_hash = sha256_file(observed[name])
+        rows.append(
+            {
+                "path": name,
+                "attempt_1_sha256": prior_hash,
+                "corrected_sha256": current_hash,
+                "matches": prior_hash == current_hash,
+            }
+        )
+    if not all(bool(row["matches"]) for row in rows):
+        raise PostFailureAnalysisError("Corrected exploratory CSV hash differs")
+    return rows
+
+
 def analyze(plan_dir: Path, run_dir: Path, outdir: Path, amendment: Path,
-            diagnostic: Path, acknowledgment: str) -> None:
+            diagnostic: Path, comparison_dir: Path, acknowledgment: str) -> None:
     if acknowledgment != ACKNOWLEDGMENT:
         raise PostFailureAnalysisError(
             f"Pass --acknowledgment {ACKNOWLEDGMENT!r} exactly"
@@ -81,11 +128,19 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, amendment: Path,
         raise PostFailureAnalysisError("Completed replay diagnostic is required")
 
     original_verify = frozen.verify_inputs
+    original_write_json = frozen.write_json
     try:
         frozen.verify_inputs = verify_failed_inputs
-        frozen.analyze(plan_dir, run_dir, outdir, BOOTSTRAP_REPLICATES)
+        frozen.write_json = native_write_json
+        # macOS Accelerate emits false-positive warnings for these finite
+        # float32 products; frozen code still rejects nonfinite predictions.
+        with np.errstate(all="ignore"):
+            frozen.analyze(plan_dir, run_dir, outdir, BOOTSTRAP_REPLICATES)
     finally:
         frozen.verify_inputs = original_verify
+        frozen.write_json = original_write_json
+
+    comparison = compare_attempt_csvs(comparison_dir, outdir)
 
     summary_path = outdir / "analysis_summary.json"
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -95,6 +150,7 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, amendment: Path,
             "analysis_class": "post_outcome_exploratory",
             "confirmatory_status": "blocked_by_replay_gate",
             "frozen_calculations_reused_without_endpoint_tuning": True,
+            "attempt_1_csv_hashes_identical": True,
             "failed_result_manifest_sha256": sha256_file(
                 run_dir / "RESULT_MANIFEST.json"
             ),
@@ -122,6 +178,13 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, amendment: Path,
             ),
             "amendment_sha256": sha256_file(amendment),
             "diagnostic_sha256": sha256_file(diagnostic),
+            "implementation_correction": {
+                "numpy_json_conversion_only": True,
+                "macos_accelerate_warning_channel_silenced": True,
+                "frozen_nonfinite_checks_retained": True,
+                "attempt_1_csv_hashes_identical": True,
+                "csv_comparison": comparison,
+            },
             "plan_manifest_sha256": sha256_file(plan_dir / "PLAN_MANIFEST.json"),
             "failed_result_manifest_sha256": sha256_file(
                 run_dir / "RESULT_MANIFEST.json"
@@ -137,6 +200,7 @@ def main() -> None:
     parser.add_argument("--outdir", type=Path, required=True)
     parser.add_argument("--amendment", type=Path, default=DEFAULT_AMENDMENT)
     parser.add_argument("--diagnostic", type=Path, required=True)
+    parser.add_argument("--comparison-dir", type=Path, required=True)
     parser.add_argument("--acknowledgment", required=True)
     args = parser.parse_args()
     analyze(
@@ -145,6 +209,7 @@ def main() -> None:
         args.outdir.resolve(),
         args.amendment.resolve(),
         args.diagnostic.resolve(),
+        args.comparison_dir.resolve(),
         args.acknowledgment,
     )
 
