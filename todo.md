@@ -402,16 +402,25 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   Jacobian scores, residual states, detector outputs, or target outcomes.
 - [x] Implement the exact-model Stage 0 runtime, deterministic 24-feature
   matcher, independent SciPy audit, and uniquely named RunPod wrapper.
-- [ ] Commit and push the Stage 0 source, label snapshot, machine plan, and
+- [x] Commit and push the Stage 0 source, label snapshot, machine plan, and
   independent plan audit before starting GPU calibration.
-- [ ] Run Stage 0 on one uniquely named agent-owned A100 80 GB pod; retrieve
-  and hash-verify the compact calibration artifacts, then terminate that pod
-  and verify deletion without touching any other pod.
+- [ ] Run Stage 0 on one uniquely named agent-owned single-GPU pod with at
+  least 70 GiB VRAM (A100 80 GB preferred); retrieve and hash-verify the
+  compact calibration artifacts, then terminate that pod and verify deletion
+  without touching any other pod. RunPod had no qualifying capacity during
+  bounded attempts on 2026-07-12; no pod was created.
+- [x] Create and round-trip audit the exact private OSF project `sz2gb` that
+  will hold preregistration materials and, after outcomes, residual shards.
+  No draft or immutable registration exists yet.
+- [x] Implement result-free Stage 1 scaffolding: exact 4,029-row construction,
+  five crossed prompt folds, stored random projections, BF16 residual shards,
+  replay gates, A1/A2 analyses, the 14-reader ladder, independent raw-row
+  audit, release builder, and exact-commit RunPod wrapper.
 - [ ] Bind the exact 18 A1 IDs, six A2 IDs, tokenizer-accepted lexicon tokens,
   and calibration hashes into a final result-free Stage 1 machine plan.
-- [ ] Implement and independently test the final Stage 1 runtime, replay gate,
-  BF16 residual sharding, reader ladder, fixed crossed holdouts, 20,000-draw
-  template bootstrap, analyses, figures, release builder, and OSF uploader.
+- [ ] Materialize and independently validate the final Stage 1 plan from the
+  audited calibration; complete OSF upload/draft tooling and the frozen figure
+  set, then run synthetic end-to-end release tests before the final freeze.
 - [ ] Commit and push the final Stage 1 freeze; create and audit an OSF draft,
   then obtain explicit owner authorization before submitting the immutable
   registration and record its DOI/URL and registration timestamp.

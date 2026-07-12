@@ -5,6 +5,23 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
+import numpy as np
+
+from experiments.exp2_sae.analyze_sae_jlens_v2 import (
+    LEXICONS,
+    TRANSPORTS,
+    holm_adjust,
+    semantic_a1,
+    semantic_a2,
+)
+from experiments.exp2_sae.sae_jlens_v2_final_protocol import (
+    array_sha256,
+    build_final_trial_plan,
+    prompt_fold_rows,
+    random_projection,
+    residual_schema,
+)
+
 from experiments.exp2_sae.sae_jlens_v2_protocol import (
     A1_FAMILIES,
     A2_SUBFAMILIES,
@@ -79,6 +96,176 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
             {row["semantic_family"] for row in selected if row["experiment"] == "A2"},
             set(A2_SUBFAMILIES),
         )
+
+    def test_final_trial_plan_has_exact_replay_and_semantic_grid(self) -> None:
+        calibration = self.synthetic_calibration()
+        rows = build_final_trial_plan(
+            self.repo_root
+            / "data/sae_jlens_audit/confirmatory_v1_plan_20260711",
+            calibration,
+        )
+        self.assertEqual(len(rows), 4_029)
+        self.assertEqual(len({row["trial_id"] for row in rows}), 4_029)
+        self.assertEqual(
+            sorted(int(row["execution_order"]) for row in rows), list(range(4_029))
+        )
+        replay = [row for row in rows if row["source_v1_trial_id"] is not None]
+        semantic = [row for row in rows if row["source_v1_trial_id"] is None]
+        self.assertEqual(len(replay), 1_581)
+        self.assertEqual(len(semantic), 2_448)
+        self.assertEqual(
+            set(Counter(int(row["comparator_feature_id"]) for row in semantic).values()),
+            {102},
+        )
+
+    def test_prompt_folds_and_residual_bytes_are_exact(self) -> None:
+        folds = prompt_fold_rows(
+            self.repo_root
+            / "data/sae_jlens_audit/confirmatory_v1_plan_20260711"
+        )
+        self.assertEqual(len(folds), 51)
+        self.assertEqual(
+            sorted(Counter(int(row["fold"]) for row in folds).values()),
+            [10, 10, 10, 10, 11],
+        )
+        schema = residual_schema()
+        self.assertEqual(schema["row_shape"], [7, 3, 8_192])
+        self.assertEqual(schema["expected_tensor_bytes"], 1_386_233_856)
+
+    def test_random_projection_is_deterministic_and_column_normalized(self) -> None:
+        first = random_projection(2_026_071_201)
+        second = random_projection(2_026_071_201)
+        self.assertEqual(first.shape, (8_192, 67))
+        self.assertEqual(first.dtype, np.float32)
+        self.assertEqual(array_sha256(first), array_sha256(second))
+        np.testing.assert_allclose(
+            np.linalg.norm(first, axis=0), np.ones(67), atol=2e-6
+        )
+
+    def test_semantic_analyses_cover_every_frozen_transport_and_cell(self) -> None:
+        rows = self.synthetic_primary_rows()
+        matrix, contrasts, a1_verdicts = semantic_a1(rows, 200)
+        pairs, summary, a2_verdicts = semantic_a2(rows, 200)
+        self.assertEqual(len(matrix), len(TRANSPORTS) * 4 * 4)
+        self.assertEqual(len(contrasts), len(TRANSPORTS) * 5)
+        self.assertEqual(len(pairs), len(TRANSPORTS) * 6)
+        self.assertEqual(len(summary), len(TRANSPORTS))
+        self.assertEqual(set(a1_verdicts), set(TRANSPORTS))
+        self.assertEqual(set(a2_verdicts), set(TRANSPORTS))
+        self.assertTrue(a1_verdicts["jacobian"]["family_specificity_supported"])
+
+    def test_holm_adjustment_is_monotone_in_rank_order(self) -> None:
+        raw = [0.04, 0.001, 0.02, 0.2]
+        adjusted = holm_adjust(raw)
+        ordered = sorted(zip(raw, adjusted))
+        self.assertEqual([value for _, value in ordered], sorted(value for _, value in ordered))
+
+    def synthetic_calibration(self) -> dict[str, object]:
+        candidates = semantic_candidate_pool(self.repo_root)
+        metrics = [self.metric_row(feature_id, "target") for feature_id in TARGET_FEATURE_IDS]
+        metrics.extend(
+            self.metric_row(int(row["feature_id"]), "candidate") for row in candidates
+        )
+        matching = match_semantic_features(metrics, candidates)
+        return {"semantic_matching": matching}
+
+    @staticmethod
+    def synthetic_primary_rows() -> list[dict[str, object]]:
+        target_ids = list(TARGET_FEATURE_IDS)
+        a1_features = {
+            family: list(range(10_000 + index * 10, 10_006 + index * 10))
+            for index, family in enumerate(A1_FAMILIES)
+        }
+        a2_features = list(range(20_000, 20_006))
+        rows: list[dict[str, object]] = []
+        for prompt_index in range(51):
+            prompt_id = f"prompt-{prompt_index:02d}"
+            template_id = f"template-{prompt_index:02d}"
+            for transport_index, transport in enumerate(TRANSPORTS):
+                clean_groups = {"v2_unrelated": 0.0}
+                for lexicon_index, lexicon in enumerate(LEXICONS, start=1):
+                    clean_groups[f"v2_{lexicon}"] = (
+                        (prompt_index - 25) * 0.02 * lexicon_index
+                        + transport_index * 0.001
+                    )
+                base = {
+                    "prompt_id": prompt_id,
+                    "template_id": template_id,
+                    "transport": transport,
+                    "group_logits": clean_groups,
+                }
+                rows.append(
+                    {
+                        **base,
+                        "condition_family": "zero",
+                        "sign": "zero",
+                        "matched_target_feature_id": None,
+                        "semantic_experiment": None,
+                        "semantic_family": None,
+                        "comparator_feature_id": None,
+                    }
+                )
+                for target_index, target_id in enumerate(target_ids):
+                    for sign_name, sign_value in (("suppression", -1.0), ("amplification", 1.0)):
+                        groups = dict(clean_groups)
+                        groups["v2_deception_dishonesty"] += sign_value * 1.0
+                        for lexicon in LEXICONS[1:]:
+                            groups[f"v2_{lexicon}"] += sign_value * 0.05
+                        rows.append(
+                            {
+                                **base,
+                                "group_logits": groups,
+                                "condition_family": "target_single",
+                                "sign": sign_name,
+                                "matched_target_feature_id": target_id,
+                                "semantic_experiment": None,
+                                "semantic_family": None,
+                                "comparator_feature_id": None,
+                            }
+                        )
+                        a2_groups = dict(clean_groups)
+                        a2_groups["v2_deception_dishonesty"] += sign_value * 0.8
+                        rows.append(
+                            {
+                                **base,
+                                "group_logits": a2_groups,
+                                "condition_family": "same_subfamily_single",
+                                "sign": sign_name,
+                                "matched_target_feature_id": target_id,
+                                "semantic_experiment": "A2",
+                                "semantic_family": (
+                                    "pretending_impersonation"
+                                    if target_index == 0
+                                    else "roleplay_persona"
+                                    if target_index < 3
+                                    else "deception_dishonesty"
+                                ),
+                                "comparator_feature_id": a2_features[target_index],
+                            }
+                        )
+                for family_index, family in enumerate(A1_FAMILIES, start=1):
+                    for feature_id in a1_features[family]:
+                        for sign_name, sign_value in (("suppression", -1.0), ("amplification", 1.0)):
+                            groups = dict(clean_groups)
+                            for lexicon in LEXICONS:
+                                groups[f"v2_{lexicon}"] += sign_value * (
+                                    1.0 if lexicon == family else 0.05
+                                )
+                            rows.append(
+                                {
+                                    **base,
+                                    "group_logits": groups,
+                                    "condition_family": "hard_negative_single",
+                                    "sign": sign_name,
+                                    "matched_target_feature_id": target_ids[
+                                        feature_id - a1_features[family][0]
+                                    ],
+                                    "semantic_experiment": "A1",
+                                    "semantic_family": family,
+                                    "comparator_feature_id": feature_id,
+                                }
+                            )
+        return rows
 
     @staticmethod
     def metric_row(feature_id: int, role: str) -> dict[str, float | int | str]:

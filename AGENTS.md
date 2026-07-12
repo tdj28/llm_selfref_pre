@@ -92,6 +92,11 @@ immediately public and permanently recoverable.
   `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` is the
   independently audited Stage 0 machine plan. Neither directory is a v2
   outcome release.
+- The associated v2 OSF project is `sz2gb` (`https://osf.io/sz2gb/`). It was
+  created private and round-trip audited on 2026-07-12. A project is not a
+  registration: do not describe v2 as preregistered until an immutable public
+  registration has been explicitly authorized, submitted, accepted, and
+  recorded in the runtime gate.
 
 ## Research Direction
 
