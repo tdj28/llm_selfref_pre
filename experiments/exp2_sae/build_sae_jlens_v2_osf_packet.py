@@ -109,12 +109,15 @@ that hosts this packet and will host residual shards after the registered run.
 
 Earlier result-free freezes at
 `5058b8ec254028cee44ec85b3876adae761b5119` and
-`def6702a89f0b9664a5753df4e0aa5d79ddaae0c` were superseded before
+`def6702a89f0b9664a5753df4e0aa5d79ddaae0c`, followed by
+`14b03a623d9f0fd0417eb0f0bd53941c288ca250`, were superseded before
 registration and before any Stage 1 outcome. Exact editable-draft audits showed
 that OSF HTML-escaped greater-than characters first in comparator arrows and
-then in this provenance note. The replacement summary contains no such
-characters and the uploader performs version-aware packet replacement. No
-scientific design or calibrated comparator changed.
+then in the provenance note. The third freeze exposed that OSF's node-scoped
+draft listing omits titles, defeating title-based reuse. The final client uses
+the globally filtered draft endpoint, the summary contains no transform-prone
+characters, and uploads are version-aware. No scientific design or calibrated
+comparator changed.
 
 ## Prior Knowledge And Stage 0 Disclosure
 

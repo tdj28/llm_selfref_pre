@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from collections import Counter
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 from sklearn.metrics import roc_auc_score
@@ -22,6 +23,7 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
 from experiments.exp2_sae.build_sae_jlens_v2_osf_packet import summary_text
 from experiments.exp2_sae.osf_sae_jlens_v2 import (
     PROJECT_TITLE,
+    draft_matches,
     registration_metadata_errors,
 )
 from experiments.exp2_sae.run_sae_jlens_v2 import result_inventory
@@ -99,6 +101,31 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
         )
         self.assertIn("target 30032 to comparator 61212", summary)
         self.assertNotIn(">", summary)
+
+    @patch("experiments.exp2_sae.osf_sae_jlens_v2.request_json")
+    def test_osf_draft_reuse_uses_global_project_filter(self, request) -> None:
+        request.return_value = {
+            "data": [
+                {
+                    "id": "exact",
+                    "attributes": {"title": PROJECT_TITLE},
+                    "relationships": {
+                        "branched_from": {"data": {"id": "sz2gb", "type": "nodes"}}
+                    },
+                },
+                {
+                    "id": "wrong-project",
+                    "attributes": {"title": PROJECT_TITLE},
+                    "relationships": {
+                        "branched_from": {"data": {"id": "other", "type": "nodes"}}
+                    },
+                },
+            ]
+        }
+        self.assertEqual([row["id"] for row in draft_matches("sz2gb")], ["exact"])
+        called_path = request.call_args.args[1]
+        self.assertTrue(called_path.startswith("/draft_registrations/?"))
+        self.assertIn("filter%5Bbranched_from%5D=sz2gb", called_path)
 
     def test_equal_metric_fixture_selects_24_unique_features(self) -> None:
         candidates = semantic_candidate_pool(self.repo_root)

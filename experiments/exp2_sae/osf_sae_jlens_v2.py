@@ -447,11 +447,19 @@ def cmd_upload(args: argparse.Namespace) -> None:
 
 
 def draft_matches(project_id: str) -> list[dict[str, Any]]:
-    payload = request_json("GET", f"/nodes/{project_id}/draft_registrations/")
+    query = urllib.parse.urlencode(
+        {"filter[branched_from]": project_id, "page[size]": 100}
+    )
+    payload = request_json("GET", f"/draft_registrations/?{query}")
     return [
         row
         for row in payload.get("data", [])
         if row.get("attributes", {}).get("title") == PROJECT_TITLE
+        and row.get("relationships", {})
+        .get("branched_from", {})
+        .get("data", {})
+        .get("id")
+        == project_id
     ]
 
 

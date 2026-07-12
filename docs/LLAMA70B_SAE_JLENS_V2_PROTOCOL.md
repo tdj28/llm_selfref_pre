@@ -30,13 +30,17 @@ registration must disclose all Stage 0 measurements and all prior v1 results.
 ### Pre-registration transport correction (2026-07-12)
 
 Public freezes `5058b8ec254028cee44ec85b3876adae761b5119` and
-`def6702a89f0b9664a5753df4e0aa5d79ddaae0c` were superseded before
+`def6702a89f0b9664a5753df4e0aa5d79ddaae0c`, followed by
+`14b03a623d9f0fd0417eb0f0bd53941c288ca250`, were superseded before
 registration and before any Stage 1 outcome existed. The exact editable-draft
 audits showed that OSF HTML-escaped greater-than characters first in comparator
-arrows and then in the provenance note itself. The packet summary now avoids
-those characters, and the uploader replaces changed files through OSF's
-version endpoint before rechecking downloaded hashes. No prompt, comparator,
-endpoint, threshold, analysis, control, seed, or claim boundary changed.
+arrows and then in the provenance note itself. A third transport audit exposed
+that OSF's node-scoped draft listing omits titles, so title-based reuse created
+duplicate drafts. The final client uses the globally filtered draft endpoint,
+the packet summary avoids transform-prone characters, and changed files are
+replaced through OSF's version endpoint before downloaded hashes are checked.
+No prompt, comparator, endpoint, threshold, analysis, control, seed, or claim
+boundary changed.
 
 ## Prior Knowledge
 

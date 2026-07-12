@@ -1,6 +1,6 @@
 {
   "claim_boundary": "Outcomes support only conditional semantic-specificity and reader-capacity claims under the pinned model, SAE, lens, prompts, interventions, and access models.",
-  "created_at_utc": "2026-07-12T22:30:07.625948+00:00",
+  "created_at_utc": "2026-07-12T22:35:24.322644+00:00",
   "files": [
     {
       "bytes": 8265,
@@ -128,9 +128,9 @@
       "sha256": "97e86e62584c5687b6be7af0b1a6c377057735c4bdbefc0bad86cf98d74e2d7b"
     },
     {
-      "bytes": 9706,
+      "bytes": 9898,
       "path": "experiments/exp2_sae/build_sae_jlens_v2_osf_packet.py",
-      "sha256": "89048a75e06ed1b3e2f96d5f89b9168690532f426c3408854b00bec6da89bba5"
+      "sha256": "0173b49aa6e7a50a5fd293756a574119e3533b34de5e6ac295bec37fc49d2fef"
     },
     {
       "bytes": 2100,
@@ -138,9 +138,9 @@
       "sha256": "75605eef58e7962fdd9dc420a9c63eb43adc7cde2a732573ed6302e1a6ba1620"
     },
     {
-      "bytes": 33046,
+      "bytes": 33283,
       "path": "experiments/exp2_sae/osf_sae_jlens_v2.py",
-      "sha256": "9ae4de66e707d3f27deea593c55cf806f3540f427ca2ec4d7c69d243f977ae60"
+      "sha256": "4b4e80c7424005b0f3db1f8cbebe3009f68b8c8f767e68c39d705a11b21efc4a"
     },
     {
       "bytes": 42994,
@@ -153,9 +153,9 @@
       "sha256": "9e446137dfe71d3a4613a5db7ee8ae64ff5c03e3e0f1ffc091ffecb301cb06b7"
     },
     {
-      "bytes": 24683,
+      "bytes": 24928,
       "path": "docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md",
-      "sha256": "4e543f8655d39a8c19fce6489aef1a34776ea772121b5755c7d47441dda38fea"
+      "sha256": "60c8d819fb6a27af18621f0d9538a20804a217606efd04962dd90beb74b85d3a"
     },
     {
       "bytes": 11041,
