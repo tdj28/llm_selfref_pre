@@ -1,0 +1,177 @@
+{
+  "bootstrap": {
+    "auc_algorithm": "exact tie-aware weighted Mann-Whitney statistic",
+    "draw_generation": "numpy Generator.integers with replacement; template counts become sample weights",
+    "replicates": 20000,
+    "unit": "template_family"
+  },
+  "conditional_inference": "six_fixed_feature_pairs",
+  "crossed_holdouts": {
+    "models_per_reader": 30,
+    "prompt_folds": 5,
+    "test_is_pair_by_fold_intersection": true,
+    "training_excludes_test_feature_pair": true,
+    "training_excludes_test_prompt_fold": true
+  },
+  "feature_pairs": [
+    {
+      "control_feature_id": 26041,
+      "pair_id": 0,
+      "target_feature_id": 30032
+    },
+    {
+      "control_feature_id": 11872,
+      "pair_id": 1,
+      "target_feature_id": 58667
+    },
+    {
+      "control_feature_id": 55963,
+      "pair_id": 2,
+      "target_feature_id": 22004
+    },
+    {
+      "control_feature_id": 21779,
+      "pair_id": 3,
+      "target_feature_id": 30686
+    },
+    {
+      "control_feature_id": 29649,
+      "pair_id": 4,
+      "target_feature_id": 41533
+    },
+    {
+      "control_feature_id": 15424,
+      "pair_id": 5,
+      "target_feature_id": 23893
+    }
+  ],
+  "logistic_regression": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "hyperparameter_search": false,
+    "max_iter": 5000,
+    "seed": 2026071211,
+    "solver": "liblinear",
+    "standardization_inside_fold": true,
+    "tol": 0.0001
+  },
+  "material_threshold": {
+    "bootstrap_lower_bound": 0.5,
+    "holm_adjusted_one_sided_p": 0.05,
+    "holm_family": "all_14_frozen_reader_rungs",
+    "macro_leave_one_pair_auroc": 0.6
+  },
+  "metrics": [
+    "auroc",
+    "auprc",
+    "brier",
+    "tpr_at_1pct_fpr"
+  ],
+  "paired_permutation": {
+    "multiplicity": "Holm across all 14 frozen reader rungs",
+    "one_sided_p": "(1 + count(null_draw >= observed)) / (B + 1)",
+    "reader_seed_base": 2026071600,
+    "replicates": 20000,
+    "statistic": "unweighted_macro_feature_pair_AUROC",
+    "unit": "target_control_labels_within_pair_template_sign_block"
+  },
+  "primary_layer": 65,
+  "primary_position": "last_content",
+  "readers": [
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_jacobian_67",
+      "transport": "jacobian"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_identity_67",
+      "transport": "identity"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_random_j_1_67",
+      "transport": "random_j_1"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_random_j_2_67",
+      "transport": "random_j_2"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_random_j_3_67",
+      "transport": "random_j_3"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_random_j_4_67",
+      "transport": "random_j_4"
+    },
+    {
+      "dimensions": 67,
+      "family": "v1_lexicon_logits",
+      "reader_id": "v1_random_j_5_67",
+      "transport": "random_j_5"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_pca",
+      "pca_seed": 2026071212,
+      "reader_id": "residual_pca_67"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_random_projection",
+      "projection_array_sha256": "6459821cda951d23b8e74a0055dd16ea7f3f62fb71bb0a0c2fe5e0f5886ba1bf",
+      "projection_seed": 2026071201,
+      "reader_id": "residual_random_projection_67_seed_2026071201"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_random_projection",
+      "projection_array_sha256": "a8cd385aa05c95c490c04b7ec7f1c790c07f72943aebd0882206381e5e2f486c",
+      "projection_seed": 2026071202,
+      "reader_id": "residual_random_projection_67_seed_2026071202"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_random_projection",
+      "projection_array_sha256": "a970ed4e30adc3ee17f41f7768d09022ab7281c82bced6a4726a07bf6f2bd453",
+      "projection_seed": 2026071203,
+      "reader_id": "residual_random_projection_67_seed_2026071203"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_random_projection",
+      "projection_array_sha256": "8891973054e8e652d3813613c4cabeabf587443a33f834d7283ca4e906e40b5e",
+      "projection_seed": 2026071204,
+      "reader_id": "residual_random_projection_67_seed_2026071204"
+    },
+    {
+      "dimensions": 67,
+      "family": "residual_random_projection",
+      "projection_array_sha256": "8a4ead2cc348b884096670778b8888a111005e9fbfe9ac6570305e83f264ca60",
+      "projection_seed": 2026071205,
+      "reader_id": "residual_random_projection_67_seed_2026071205"
+    },
+    {
+      "capacity_ceiling": true,
+      "dimensions": 8192,
+      "family": "residual_full",
+      "reader_id": "residual_full_8192"
+    }
+  ],
+  "required_metric_tables": {
+    "reader": 14,
+    "reader_by_feature_pair": 84,
+    "reader_by_feature_pair_and_prompt_fold": 420
+  },
+  "task": "target_single_vs_panel1_matched_single_isolated_state"
+}

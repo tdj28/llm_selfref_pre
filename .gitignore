@@ -121,6 +121,8 @@ data/sae_jlens_audit/*
 !data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/**
 !data/sae_jlens_audit/confirmatory_v2_calibration_20260712/
 !data/sae_jlens_audit/confirmatory_v2_calibration_20260712/**
+!data/sae_jlens_audit/confirmatory_v2_plan_20260712/
+!data/sae_jlens_audit/confirmatory_v2_plan_20260712/**
 out/
 *.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
@@ -151,6 +153,7 @@ out/
 !data/sae_jlens_audit/confirmatory_v1_20260711/*.jsonl
 !data/sae_jlens_audit/neuronpedia_labels_20260712/*.jsonl
 !data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/*.jsonl
+!data/sae_jlens_audit/confirmatory_v2_plan_20260712/*.jsonl
 
 # Frozen causal-identification release bundle. Keep pilots and private human
 # annotation linkage/coder files out of git.

@@ -100,7 +100,8 @@ Use:
 
 > Stage 0 mechanically selected 24 activation/norm-matched semantic
 > comparators under the frozen primary calipers. These IDs and lexicons are
-> technical inputs to the preregistered Stage 1 experiment.
+> technical inputs to the planned OSF-preregistered Stage 1 experiment. No
+> Stage 1 outcome is authorized before the registration is accepted.
 
 Do not call Stage 0 evidence that a feature is semantically specific, that a
 reader detects steering, or that the model is deceptive or conscious. Those

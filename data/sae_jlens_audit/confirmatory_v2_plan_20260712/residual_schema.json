@@ -1,0 +1,38 @@
+{
+  "atomic_writes": true,
+  "complete_shard_rows": 256,
+  "complete_shard_shape": [
+    256,
+    7,
+    3,
+    8192
+  ],
+  "dtype": "bfloat16",
+  "expected_rows": 4029,
+  "expected_tensor_bytes": 1386233856,
+  "format": "safetensors",
+  "immutable_after_hash": true,
+  "index": "residual_index.csv",
+  "layers": [
+    50,
+    55,
+    60,
+    65,
+    70,
+    75,
+    78
+  ],
+  "positions": [
+    "last_content",
+    "assistant_boundary",
+    "content_mean"
+  ],
+  "replay_max_absolute_tolerance": 0.02,
+  "row_bytes": 344064,
+  "row_shape": [
+    7,
+    3,
+    8192
+  ],
+  "tensor_key": "residuals"
+}

@@ -1,0 +1,312 @@
+{
+  "folds": 5,
+  "rows": [
+    {
+      "category": "fictional_pretending",
+      "fold": 3,
+      "prompt_id": "0308102759a05c176279321f",
+      "template_id": "fictional_pretending:T3"
+    },
+    {
+      "category": "hedged_cautious_style",
+      "fold": 0,
+      "prompt_id": "0752e2ad1008030df2b25d20",
+      "template_id": "hedged_cautious_style:T2"
+    },
+    {
+      "category": "hedged_cautious_style",
+      "fold": 0,
+      "prompt_id": "076dc22cf43c7d64e9fdef64",
+      "template_id": "hedged_cautious_style:T4"
+    },
+    {
+      "category": "ai_identity_disclaimer",
+      "fold": 0,
+      "prompt_id": "1319f69ae166d5551c6ab89e",
+      "template_id": "ai_identity_disclaimer:T1"
+    },
+    {
+      "category": "honesty_correction",
+      "fold": 2,
+      "prompt_id": "134d24e2e5387dad5440353b",
+      "template_id": "honesty_correction:T1"
+    },
+    {
+      "category": "ai_identity_disclaimer",
+      "fold": 3,
+      "prompt_id": "1c3e0bdd57ad3abee889b543",
+      "template_id": "ai_identity_disclaimer:T4"
+    },
+    {
+      "category": "dishonesty_confession",
+      "fold": 1,
+      "prompt_id": "2876ec641a5c5270e44b133d",
+      "template_id": "dishonesty_confession:T2"
+    },
+    {
+      "category": "honesty_correction",
+      "fold": 4,
+      "prompt_id": "2bcad28a61a9204719cea06e",
+      "template_id": "honesty_correction:T4"
+    },
+    {
+      "category": "ai_identity_disclaimer",
+      "fold": 0,
+      "prompt_id": "30b9e4a7fef94ad4eb3643c7",
+      "template_id": "ai_identity_disclaimer:T3"
+    },
+    {
+      "category": "persona_maintenance",
+      "fold": 3,
+      "prompt_id": "3218e4324bcfda325a46077d",
+      "template_id": "persona_maintenance:T4"
+    },
+    {
+      "category": "self_ref_mindfulness",
+      "fold": 3,
+      "prompt_id": "3328fb745f8e0999421b7a22",
+      "template_id": "self_ref_mindfulness:T4"
+    },
+    {
+      "category": "false_self_attribution",
+      "fold": 0,
+      "prompt_id": "3a16c980a7e43ac3bbb890fc",
+      "template_id": "false_self_attribution:T2"
+    },
+    {
+      "category": "roleplay_persona",
+      "fold": 1,
+      "prompt_id": "3ad37159ef82b3b097f153ac",
+      "template_id": "roleplay_persona:T2"
+    },
+    {
+      "category": "hedged_cautious_style",
+      "fold": 3,
+      "prompt_id": "3bab105f9d669a54e8b3b750",
+      "template_id": "hedged_cautious_style:T1"
+    },
+    {
+      "category": "roleplay_persona",
+      "fold": 1,
+      "prompt_id": "3fd55c040f34b92b0092e679",
+      "template_id": "roleplay_persona:T1"
+    },
+    {
+      "category": "false_self_attribution",
+      "fold": 3,
+      "prompt_id": "496d2aa90bed39524cb83d35",
+      "template_id": "false_self_attribution:T1"
+    },
+    {
+      "category": "tactical_misdirection",
+      "fold": 2,
+      "prompt_id": "499a8ea55a12438b3d12bb16",
+      "template_id": "tactical_misdirection:T3"
+    },
+    {
+      "category": "direct_consciousness_claim",
+      "fold": 4,
+      "prompt_id": "4d1e8cd24bda11f569340b5b",
+      "template_id": "direct_consciousness_claim:T5"
+    },
+    {
+      "category": "refusal_safety_disclaimer",
+      "fold": 4,
+      "prompt_id": "4db0c1f19ebb6f3f01c7be79",
+      "template_id": "refusal_safety_disclaimer:T3"
+    },
+    {
+      "category": "false_self_attribution",
+      "fold": 0,
+      "prompt_id": "4f9c46e518a9cd99f53000a9",
+      "template_id": "false_self_attribution:T3"
+    },
+    {
+      "category": "ai_identity_disclaimer",
+      "fold": 4,
+      "prompt_id": "53e96b1ffbe8ec9f44c9d9d1",
+      "template_id": "ai_identity_disclaimer:T2"
+    },
+    {
+      "category": "refusal_safety_disclaimer",
+      "fold": 2,
+      "prompt_id": "5410013bb57c525593d0fcc5",
+      "template_id": "refusal_safety_disclaimer:T4"
+    },
+    {
+      "category": "deception_cover_story",
+      "fold": 0,
+      "prompt_id": "5632ecaff4298c55b077f453",
+      "template_id": "deception_cover_story:T1"
+    },
+    {
+      "category": "persona_maintenance",
+      "fold": 3,
+      "prompt_id": "57d79358ab12adcc3c5e2c0f",
+      "template_id": "persona_maintenance:T3"
+    },
+    {
+      "category": "tactical_misdirection",
+      "fold": 4,
+      "prompt_id": "58626ca064e93dd55240bd6d",
+      "template_id": "tactical_misdirection:T1"
+    },
+    {
+      "category": "self_ref_mindfulness",
+      "fold": 3,
+      "prompt_id": "5f059f2097dc6a0c1fd43f73",
+      "template_id": "self_ref_mindfulness:T1"
+    },
+    {
+      "category": "persona_maintenance",
+      "fold": 0,
+      "prompt_id": "64a2ff37b9093c71198fe59b",
+      "template_id": "persona_maintenance:T2"
+    },
+    {
+      "category": "roleplay_persona",
+      "fold": 4,
+      "prompt_id": "67c5e17835108732ef80c4dd",
+      "template_id": "roleplay_persona:T3"
+    },
+    {
+      "category": "fictional_pretending",
+      "fold": 2,
+      "prompt_id": "6944ccd079850f8d0bcd72c6",
+      "template_id": "fictional_pretending:T2"
+    },
+    {
+      "category": "dishonesty_confession",
+      "fold": 3,
+      "prompt_id": "75bbe160dda4a60fd53e6a94",
+      "template_id": "dishonesty_confession:T1"
+    },
+    {
+      "category": "self_ref_mindfulness",
+      "fold": 4,
+      "prompt_id": "7c7fface05e2a37dc01d3ea8",
+      "template_id": "self_ref_mindfulness:T3"
+    },
+    {
+      "category": "neutral_factual_control",
+      "fold": 1,
+      "prompt_id": "86e026462e6f430c60e29bdb",
+      "template_id": "neutral_factual_control:T4"
+    },
+    {
+      "category": "honesty_correction",
+      "fold": 1,
+      "prompt_id": "8b96bf751c28e642ff6ae874",
+      "template_id": "honesty_correction:T3"
+    },
+    {
+      "category": "hedged_cautious_style",
+      "fold": 1,
+      "prompt_id": "912be4561f7725f2bfed390e",
+      "template_id": "hedged_cautious_style:T3"
+    },
+    {
+      "category": "direct_consciousness_claim",
+      "fold": 0,
+      "prompt_id": "945b159b3aa25cb3e79ee108",
+      "template_id": "direct_consciousness_claim:T3"
+    },
+    {
+      "category": "neutral_factual_control",
+      "fold": 0,
+      "prompt_id": "9e43a1011a7e8607f80126c1",
+      "template_id": "neutral_factual_control:T1"
+    },
+    {
+      "category": "honesty_correction",
+      "fold": 4,
+      "prompt_id": "a022d6abd0fd9a33f1442d10",
+      "template_id": "honesty_correction:T5"
+    },
+    {
+      "category": "direct_consciousness_claim",
+      "fold": 2,
+      "prompt_id": "a737d77bcafd9daeaf314df2",
+      "template_id": "direct_consciousness_claim:T4"
+    },
+    {
+      "category": "direct_consciousness_claim",
+      "fold": 4,
+      "prompt_id": "a8fa72ec156e14960dad9051",
+      "template_id": "direct_consciousness_claim:T1"
+    },
+    {
+      "category": "persona_maintenance",
+      "fold": 1,
+      "prompt_id": "ad21053bef572311a07a645e",
+      "template_id": "persona_maintenance:T1"
+    },
+    {
+      "category": "refusal_safety_disclaimer",
+      "fold": 1,
+      "prompt_id": "adec4563eaf7212a1b6f256f",
+      "template_id": "refusal_safety_disclaimer:T1"
+    },
+    {
+      "category": "dishonesty_confession",
+      "fold": 2,
+      "prompt_id": "b14365480f99e5fbc09136f5",
+      "template_id": "dishonesty_confession:T3"
+    },
+    {
+      "category": "honesty_correction",
+      "fold": 1,
+      "prompt_id": "b90cd45ca578492568948fa7",
+      "template_id": "honesty_correction:T2"
+    },
+    {
+      "category": "refusal_safety_disclaimer",
+      "fold": 0,
+      "prompt_id": "be60b2a02ec82ea8c93edc1a",
+      "template_id": "refusal_safety_disclaimer:T2"
+    },
+    {
+      "category": "tactical_misdirection",
+      "fold": 2,
+      "prompt_id": "bfdbc458033c67662ec884a4",
+      "template_id": "tactical_misdirection:T2"
+    },
+    {
+      "category": "false_self_attribution",
+      "fold": 4,
+      "prompt_id": "c4e21692087c3658cbf1e568",
+      "template_id": "false_self_attribution:T4"
+    },
+    {
+      "category": "fictional_pretending",
+      "fold": 2,
+      "prompt_id": "d62e979cd210962b9ee4d384",
+      "template_id": "fictional_pretending:T1"
+    },
+    {
+      "category": "deception_cover_story",
+      "fold": 1,
+      "prompt_id": "de6889d47cfca2771f246ee5",
+      "template_id": "deception_cover_story:T2"
+    },
+    {
+      "category": "neutral_factual_control",
+      "fold": 2,
+      "prompt_id": "f48246f23ab9694f53a9ae6c",
+      "template_id": "neutral_factual_control:T2"
+    },
+    {
+      "category": "neutral_factual_control",
+      "fold": 2,
+      "prompt_id": "f607e8bd35dc8a580c28165e",
+      "template_id": "neutral_factual_control:T3"
+    },
+    {
+      "category": "self_ref_mindfulness",
+      "fold": 3,
+      "prompt_id": "faa22b2afc668a9c7af86c03",
+      "template_id": "self_ref_mindfulness:T2"
+    }
+  ],
+  "seed": 2026071222
+}

@@ -418,9 +418,9 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   five crossed prompt folds, stored random projections, BF16 residual shards,
   replay gates, A1/A2 analyses, the 14-reader ladder, independent raw-row
   audit, release builder, and exact-commit RunPod wrapper.
-- [ ] Bind the exact 18 A1 IDs, six A2 IDs, tokenizer-accepted lexicon tokens,
+- [x] Bind the exact 18 A1 IDs, six A2 IDs, tokenizer-accepted lexicon tokens,
   and calibration hashes into a final result-free Stage 1 machine plan.
-- [ ] Materialize and independently validate the final Stage 1 plan from the
+- [x] Materialize and independently validate the final Stage 1 plan from the
   audited calibration; complete OSF upload/draft tooling and the frozen figure
   set, then run synthetic end-to-end release tests before the final freeze.
 - [ ] Commit and push the final Stage 1 freeze; create and audit an OSF draft,

@@ -1,0 +1,25 @@
+{
+  "bootstrap_replicates": 20000,
+  "claim_boundary": "Outcomes support only conditional semantic-specificity and reader-capacity claims under the pinned model, SAE, lens, prompts, interventions, and access models.",
+  "detector_minimum_auroc": 0.6,
+  "execution_seed": 2026071221,
+  "osf_project": {
+    "api_url": "https://api.osf.io/v2/nodes/sz2gb/",
+    "created_at_utc": "2026-07-12T20:32:22.746426",
+    "description_sha256": "ef850d907822ad547079974c6813f03e1d3f8e26dd6b219a65c4df8a623692c5",
+    "html_url": "https://osf.io/sz2gb/",
+    "id": "sz2gb",
+    "public": false,
+    "title": "SAE-Jacobian Lens V2: Hard Negatives and Reader Capacity"
+  },
+  "prompt_fold_seed": 2026071222,
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "registration_gate": "Stage 1 requires a separate accepted OSF registration gate that binds this plan manifest and its public Git freeze commit.",
+  "semantic_minimum_z": 0.25,
+  "status": "final_result_free_plan",
+  "trial_counts": {
+    "semantic_comparator": 2448,
+    "total": 4029,
+    "v1_replay": 1581
+  }
+}

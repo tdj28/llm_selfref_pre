@@ -1,0 +1,60 @@
+{
+  "a1_cluster_signflip": {
+    "global_seed_base": 2026071330,
+    "hard_negative_leakage_seed_base": 2026071320,
+    "one_sided_p": "(1 + count(null_draw >= observed)) / (B + 1)",
+    "replicates": 20000,
+    "row_seed_base": 2026071310,
+    "unit": "template_family"
+  },
+  "bootstrap": {
+    "a1_transport_seed_base": 2026071300,
+    "a2_equivalence_interval": [
+      0.05,
+      0.95
+    ],
+    "a2_transport_seed_base": 2026071400,
+    "confidence_interval": [
+      0.025,
+      0.975
+    ],
+    "reader_seed_base": 2026071500,
+    "replicates": 20000,
+    "unit": "template_family"
+  },
+  "clean_scale": {
+    "ddof": 1,
+    "separate_by_transport_and_lexicon": true,
+    "statistic": "sample_standard_deviation",
+    "unit": "51_clean_template_family_prompts",
+    "zero_or_nonfinite_rule": "fail_analysis"
+  },
+  "lexicons": [
+    "deception_dishonesty",
+    "refusal_safety",
+    "hedging_uncertainty",
+    "formality_politeness"
+  ],
+  "minimum_effect_z": 0.25,
+  "multiplicity": {
+    "a1_feature_rows": "all 24 features by four lexicons are mandatory descriptive heterogeneity rows and cannot replace family endpoints",
+    "a1_hard_negative_deception": "Holm across three hard-negative families",
+    "a1_row_contrasts": "Holm across four intervention families",
+    "a2_primary": "one aggregate contrast; six pair rows descriptive"
+  },
+  "orientation": "coefficient_sign_times_steered_minus_clean_score",
+  "primary_layer": 65,
+  "primary_position": "last_content",
+  "reference_lexicon": "unrelated",
+  "score": "mean_semantic_token_logit_minus_mean_unrelated_token_logit",
+  "template_balance": "mean_features_and_signs_within_template_then_mean_51_templates",
+  "transports": [
+    "jacobian",
+    "identity",
+    "random_j_1",
+    "random_j_2",
+    "random_j_3",
+    "random_j_4",
+    "random_j_5"
+  ]
+}

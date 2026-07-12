@@ -1,0 +1,207 @@
+{
+  "claim_boundary": "Outcomes support only conditional semantic-specificity and reader-capacity claims under the pinned model, SAE, lens, prompts, interventions, and access models.",
+  "created_at_utc": "2026-07-12T22:15:52.438846+00:00",
+  "files": [
+    {
+      "bytes": 8265,
+      "path": "selected_comparators.json",
+      "sha256": "489d79d1e9087aa2366c2bad3551db3589cdbb5f8e732ed390180c97727170a2"
+    },
+    {
+      "bytes": 8196,
+      "path": "lexicon_tokens.json",
+      "sha256": "efb2c5825c89326b1f460a06652c0421e245f3e763dc06c7b3d9d9491f272703"
+    },
+    {
+      "bytes": 8637,
+      "path": "prompt_folds.json",
+      "sha256": "04bdaa0c596c781d91a408d0a477d6ee1f73f71b027dafcbad5bf7561c4c6a90"
+    },
+    {
+      "bytes": 3536812,
+      "path": "trial_plan.jsonl",
+      "sha256": "d1cd9725aab3b330691484ea57e5685ee7b4f79120111291b5ebf6cafde6f571"
+    },
+    {
+      "bytes": 601,
+      "path": "residual_schema.json",
+      "sha256": "849206530c4d8b38cb68f80e6b7599df79d4540014d609d9dbd680fa38a53600"
+    },
+    {
+      "bytes": 5042,
+      "path": "reader_plan.json",
+      "sha256": "a7c211a3fca6966be38383670bfe61b57ddbdd67da1bf8f840934904ac19a5cb"
+    },
+    {
+      "bytes": 1827,
+      "path": "semantic_analysis_plan.json",
+      "sha256": "5839cfb9fc3f863d131d2bf307d05a329eab9bbcdb97bf8f5095b054078feddd"
+    },
+    {
+      "bytes": 1057,
+      "path": "protocol_snapshot.json",
+      "sha256": "c99725b25f528d38f151a3bab8e426107c08f8763974f5aba81901fa21cc145a"
+    },
+    {
+      "bytes": 667,
+      "path": "calibration_provenance.json",
+      "sha256": "69c232b68e03c85fcda002115c2e184d2c58498cc0fd63cd4df3dfce73c7cbe5"
+    },
+    {
+      "bytes": 342,
+      "path": "OSF_PROJECT.json",
+      "sha256": "9ed246498d5eabf63b7fbbc3b159386bbbf49afaf7218eeddd9fe63865f84cb0"
+    },
+    {
+      "bytes": 2195584,
+      "path": "random_projections/projection_seed_2026071201.npy",
+      "sha256": "5560e90f7aa1a785787d017ce7df17482337e1d60ccd46005e7f038b13318c42"
+    },
+    {
+      "bytes": 2195584,
+      "path": "random_projections/projection_seed_2026071202.npy",
+      "sha256": "c01df133b29ec5cddd45c4dad2f81ea6076ccad45fd5e5d4062f49e7168c8d4f"
+    },
+    {
+      "bytes": 2195584,
+      "path": "random_projections/projection_seed_2026071203.npy",
+      "sha256": "af82f86fd40ea6c9654fa5843ca78f783cd32df4d25ae298c13efb900b596bca"
+    },
+    {
+      "bytes": 2195584,
+      "path": "random_projections/projection_seed_2026071204.npy",
+      "sha256": "7a7fbd02506b85f5e1fab3313fa1ab81d91fc8021b87d77fbc24f13921042a54"
+    },
+    {
+      "bytes": 2195584,
+      "path": "random_projections/projection_seed_2026071205.npy",
+      "sha256": "5a0667942525e9d880f7b053ec85b2cc16caa6c7160b63cac462cdb204b52470"
+    }
+  ],
+  "registration_gate": "A separate accepted OSF registration record must bind this manifest SHA-256 and the public Git freeze commit before Stage 1.",
+  "result_placeholders": [],
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 22522,
+      "path": "experiments/exp2_sae/sae_jlens_v2_protocol.py",
+      "sha256": "abf9b9f3f13257a014702a841713ff087caae918b4a2f43a8ad65ed903138250"
+    },
+    {
+      "bytes": 18236,
+      "path": "experiments/exp2_sae/sae_jlens_v2_final_protocol.py",
+      "sha256": "d53e6c4cc620e7fc1d2c1e9b8c1d43c79b83c3d765a8e895b3ced5080653ba84"
+    },
+    {
+      "bytes": 9034,
+      "path": "experiments/exp2_sae/build_sae_jlens_v2_final_plan.py",
+      "sha256": "70087b25ea0a21d9bff5c1609c02e7f619ecd4efef15d92920bcb8df8c717b7a"
+    },
+    {
+      "bytes": 11170,
+      "path": "experiments/exp2_sae/validate_sae_jlens_v2_final_plan.py",
+      "sha256": "826087de46d69320334dec8ef56605521f7ca20b50e780473de79d2f671f4a9b"
+    },
+    {
+      "bytes": 31882,
+      "path": "experiments/exp2_sae/run_sae_jlens_v2.py",
+      "sha256": "5bb68aae36d360bd39f800f815395a12e48049e9ce599b78b836610936e461b2"
+    },
+    {
+      "bytes": 43730,
+      "path": "experiments/exp2_sae/analyze_sae_jlens_v2.py",
+      "sha256": "d67d12160e2f33d51bfcd9057ec087fa5ae15fc2e18154f27f574c9126fd0cd2"
+    },
+    {
+      "bytes": 7537,
+      "path": "experiments/exp2_sae/figure_sae_jlens_v2.py",
+      "sha256": "25d6bb9abd15020158e81c729880ea8a70b6f80e7e594b231fdb060714c7014a"
+    },
+    {
+      "bytes": 33981,
+      "path": "experiments/exp2_sae/audit_sae_jlens_v2_results.py",
+      "sha256": "51d58ba4886b989a534d723f11de9c8ad956f14f43bb2bd52673243877354edd"
+    },
+    {
+      "bytes": 8372,
+      "path": "experiments/exp2_sae/build_sae_jlens_v2_release.py",
+      "sha256": "97e86e62584c5687b6be7af0b1a6c377057735c4bdbefc0bad86cf98d74e2d7b"
+    },
+    {
+      "bytes": 9207,
+      "path": "experiments/exp2_sae/build_sae_jlens_v2_osf_packet.py",
+      "sha256": "4ba3a6c8cb77ce24f65c41b8fe4d9295716d5e4d90655822dc5bf9a6849fa25a"
+    },
+    {
+      "bytes": 2100,
+      "path": "experiments/exp2_sae/run_sae_jlens_v2_runpod.sh",
+      "sha256": "75605eef58e7962fdd9dc420a9c63eb43adc7cde2a732573ed6302e1a6ba1620"
+    },
+    {
+      "bytes": 32252,
+      "path": "experiments/exp2_sae/osf_sae_jlens_v2.py",
+      "sha256": "abbe63a8f5f2a480bad7855654c0061cb9853efa6d8670ca851d8b599751eb4f"
+    },
+    {
+      "bytes": 42994,
+      "path": "experiments/exp2_sae/run_sae_jlens_audit.py",
+      "sha256": "4f99acff18ae848ab06673dfcb0064c525b21eaeb8d24226743bbb1bf06bde26"
+    },
+    {
+      "bytes": 17782,
+      "path": "experiments/exp2_sae/sae_jlens_protocol.py",
+      "sha256": "9e446137dfe71d3a4613a5db7ee8ae64ff5c03e3e0f1ffc091ffecb301cb06b7"
+    },
+    {
+      "bytes": 24041,
+      "path": "docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md",
+      "sha256": "05d4620f2c46f4c4e5f25666e93f5ba207e8f2c0c9118e1c4e64612f02d414ae"
+    },
+    {
+      "bytes": 11041,
+      "path": "docs/SAE_JLENS_V2_REQUEST_HARD_NEGATIVES_AND_COMPARATORS.md",
+      "sha256": "4435505b297e57af4e3e9c296439b9f9a0c6f25dba10241ccd4576fa1d9dbb26"
+    },
+    {
+      "bytes": 276,
+      "path": "experiments/exp2_sae/sae_jlens_requirements.txt",
+      "sha256": "7c1b64aae7e04c822878812407f5e35b2db7dbb0f43e169b5fdbd1d8a6f0f4f7"
+    },
+    {
+      "bytes": 3638,
+      "path": "data/sae_jlens_audit/confirmatory_v1_plan_20260711/PLAN_MANIFEST.json",
+      "sha256": "0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e"
+    },
+    {
+      "bytes": 19857,
+      "path": "data/sae_jlens_audit/confirmatory_v1_plan_20260711/prompt_plan.jsonl",
+      "sha256": "a2b3a706ed6cf62ca1c9c4e4cb0a33c1193c6122ca1882887364ad11e776629f"
+    },
+    {
+      "bytes": 1095700,
+      "path": "data/sae_jlens_audit/confirmatory_v1_plan_20260711/paired_plan.jsonl",
+      "sha256": "be9a4b505f5f363ce89cb73c66909394d82463693a191c9aa790b4d9adcc5146"
+    },
+    {
+      "bytes": 9979,
+      "path": "data/sae_jlens_audit/confirmatory_v1_20260711/RELEASE_MANIFEST.json",
+      "sha256": "4a48f8e95b6cb7b6575030617f6e8b49b53e3bd86876d31fe3b2c049ae7e58db"
+    },
+    {
+      "bytes": 11398,
+      "path": "data/sae_jlens_audit/confirmatory_v1_20260711/lexicon_tokens.json",
+      "sha256": "effec1139099a7077bb89b098f8a2bca4f6bc7e5515fc44fb3931790ed9f661a"
+    },
+    {
+      "bytes": 66078,
+      "path": "data/sae_jlens_audit/confirmatory_v2_calibration_20260712/calibration.json",
+      "sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4"
+    },
+    {
+      "bytes": 429,
+      "path": "data/sae_jlens_audit/confirmatory_v2_calibration_20260712/independent_calibration_audit.json",
+      "sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340"
+    }
+  ],
+  "status": "final_result_free_plan"
+}

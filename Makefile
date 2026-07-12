@@ -58,6 +58,22 @@ compile:
 		experiments/exp2_sae/audit_sae_jlens_results.py \
 		experiments/exp2_sae/analyze_sae_jlens_paired_reference.py \
 		experiments/exp2_sae/build_sae_jlens_release.py \
+		experiments/exp2_sae/sae_jlens_v2_protocol.py \
+		experiments/exp2_sae/build_sae_jlens_v2_calibration_plan.py \
+		experiments/exp2_sae/validate_sae_jlens_v2_calibration_plan.py \
+		experiments/exp2_sae/run_sae_jlens_v2_calibration.py \
+		experiments/exp2_sae/audit_sae_jlens_v2_calibration.py \
+		experiments/exp2_sae/build_sae_jlens_v2_calibration_release.py \
+		experiments/exp2_sae/sae_jlens_v2_final_protocol.py \
+		experiments/exp2_sae/build_sae_jlens_v2_final_plan.py \
+		experiments/exp2_sae/validate_sae_jlens_v2_final_plan.py \
+		experiments/exp2_sae/run_sae_jlens_v2.py \
+		experiments/exp2_sae/analyze_sae_jlens_v2.py \
+		experiments/exp2_sae/figure_sae_jlens_v2.py \
+		experiments/exp2_sae/audit_sae_jlens_v2_results.py \
+		experiments/exp2_sae/build_sae_jlens_v2_release.py \
+		experiments/exp2_sae/build_sae_jlens_v2_osf_packet.py \
+		experiments/exp2_sae/osf_sae_jlens_v2.py \
 		experiments/exp2_sae/build_sae_construct_validity_extension.py \
 		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
 		experiments/exp2_sae/audit_sae_construct_validity_extension.py \
@@ -78,6 +94,8 @@ compile:
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_stage2.sh
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_external_controller.sh
 	bash -n experiments/exp2_sae/run_sae_jlens_runpod.sh
+	bash -n experiments/exp2_sae/run_sae_jlens_v2_calibration_runpod.sh
+	bash -n experiments/exp2_sae/run_sae_jlens_v2_runpod.sh
 
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex

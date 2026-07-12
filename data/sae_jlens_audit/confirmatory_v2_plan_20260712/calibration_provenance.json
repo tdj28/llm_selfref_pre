@@ -1,0 +1,10 @@
+{
+  "audit_status": "pass",
+  "calibration_audit_path": "data/sae_jlens_audit/confirmatory_v2_calibration_20260712/independent_calibration_audit.json",
+  "calibration_audit_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340",
+  "calibration_path": "data/sae_jlens_audit/confirmatory_v2_calibration_20260712/calibration.json",
+  "calibration_plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "calibration_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4",
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "selected_rows": 24
+}

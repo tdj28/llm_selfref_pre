@@ -1,0 +1,9 @@
+{
+  "api_url": "https://api.osf.io/v2/nodes/sz2gb/",
+  "created_at_utc": "2026-07-12T20:32:22.746426",
+  "description_sha256": "ef850d907822ad547079974c6813f03e1d3f8e26dd6b219a65c4df8a623692c5",
+  "html_url": "https://osf.io/sz2gb/",
+  "id": "sz2gb",
+  "public": false,
+  "title": "SAE-Jacobian Lens V2: Hard Negatives and Reader Capacity"
+}

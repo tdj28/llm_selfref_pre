@@ -99,6 +99,13 @@ immediately public and permanently recoverable.
   chains and the unchanged calibration hash. This release contains no response
   text, J-lens readout, residual outcome, detector prediction, or Stage 1
   target outcome.
+- `data/sae_jlens_audit/confirmatory_v2_plan_20260712/` is the final
+  result-free Stage 1 plan: 4,029 rows, 24 calibrated comparators, five prompt
+  folds, 14 readers, and five stored random projections. Its manifest SHA-256
+  is `1a8623374defc2b094fde8fe745ca112835e4a2cdf5229d871acc487ca91d13d`,
+  and its independent reconstruction passes. Preserve it unchanged after the
+  public freeze. It contains no Stage 1 outcome and cannot authorize execution
+  without the separately accepted public OSF registration.
 - Agent-owned calibration pod `zd79jm0odi7x2j` was retrieved, hash-verified,
   and deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
   inventory was empty. Do not attempt to reuse or mutate it.
