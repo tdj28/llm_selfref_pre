@@ -33,6 +33,12 @@ if str(REPO_ROOT) not in sys.path:
 from experiments.exp2_sae.sae_jlens_protocol import (  # noqa: E402
     TARGET_FEATURE_IDS,
 )
+from experiments.exp2_sae.figure_sae_jlens_v2 import (  # noqa: E402
+    reader_ladder,
+    reader_pair_heatmap,
+    semantic_matrix,
+    target_comparator,
+)
 from experiments.exp2_sae.sae_jlens_v2_final_protocol import (  # noqa: E402
     BOOTSTRAP_REPLICATES,
     DETECTOR_MINIMUM_AUROC,
@@ -758,6 +764,11 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, replicates: int) -> Non
             ),
         },
     )
+    figures = outdir.parent / "figures"
+    semantic_matrix(outdir, figures)
+    target_comparator(outdir, figures)
+    reader_ladder(outdir, figures)
+    reader_pair_heatmap(outdir, figures)
 
 
 def main() -> None:

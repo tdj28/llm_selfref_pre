@@ -324,6 +324,21 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     )
     if summary.get("status") != "complete":
         errors.append("analysis summary is not complete")
+    expected_figures = {
+        f"{stem}.{suffix}"
+        for stem in (
+            "sae_jlens_v2_a1_semantic_matrix",
+            "sae_jlens_v2_a2_target_comparator",
+            "sae_jlens_v2_reader_ladder",
+            "sae_jlens_v2_reader_pair_heatmap",
+        )
+        for suffix in ("png", "pdf")
+    }
+    observed_figures = {
+        path.name for path in (run_dir / "figures").glob("sae_jlens_v2_*")
+    }
+    if observed_figures != expected_figures:
+        errors.append("frozen figure set differs")
     return {
         "status": "pass" if not errors else "fail",
         "protocol_version": PROTOCOL_VERSION,
