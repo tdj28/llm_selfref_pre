@@ -1,0 +1,2227 @@
+{
+  "behavioral_outputs_generated": false,
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "claim_boundary": "Calibration can select norm/activity-matched semantic comparators; it cannot support any claim about v2 intervention outcomes.",
+  "completed_at_utc": "2026-07-12T22:06:12.334576+00:00",
+  "feature_metrics": [
+    {
+      "decoder_norm": 1.2431459426879883,
+      "feature_id": 30032,
+      "feature_role": "target",
+      "max_abs_target_cosine": 0.9999998807907104,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.138714075088501,
+      "feature_id": 58667,
+      "feature_role": "target",
+      "max_abs_target_cosine": 0.9999998807907104,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.224563479423523,
+      "feature_id": 22004,
+      "feature_role": "target",
+      "max_abs_target_cosine": 1.0000001192092896,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1009684801101685,
+      "feature_id": 30686,
+      "feature_role": "target",
+      "max_abs_target_cosine": 1.0000001192092896,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2904164791107178,
+      "feature_id": 41533,
+      "feature_role": "target",
+      "max_abs_target_cosine": 1.0,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2894049882888794,
+      "feature_id": 23893,
+      "feature_role": "target",
+      "max_abs_target_cosine": 1.0000001192092896,
+      "max_activation": 1.0546875,
+      "mean_activation": 0.004983115029501748,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.017482517482517484
+    },
+    {
+      "decoder_norm": 1.3275996446609497,
+      "feature_id": 1806,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05699325352907181,
+      "max_activation": 0.103515625,
+      "mean_activation": 0.0004859337439903846,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.01048951048951049
+    },
+    {
+      "decoder_norm": 0.6482200026512146,
+      "feature_id": 2469,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.022844312712550163,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2880043983459473,
+      "feature_id": 5730,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.014061740599572659,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4850592613220215,
+      "feature_id": 8221,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.009684095159173012,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.9822294116020203,
+      "feature_id": 14826,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03139603137969971,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1153026819229126,
+      "feature_id": 16416,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.016144610941410065,
+      "max_activation": 0.07177734375,
+      "mean_activation": 0.00043706293706293706,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.0657694339752197,
+      "feature_id": 19531,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04055478423833847,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0161888599395752,
+      "feature_id": 20913,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04473305866122246,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3431220054626465,
+      "feature_id": 21650,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05109785497188568,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.238991379737854,
+      "feature_id": 25689,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03197689726948738,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0787758827209473,
+      "feature_id": 28609,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07212281972169876,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2468806505203247,
+      "feature_id": 31440,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.040994446724653244,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2128885984420776,
+      "feature_id": 32375,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.039336010813713074,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0534367561340332,
+      "feature_id": 34239,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.029471710324287415,
+      "max_activation": 0.55078125,
+      "mean_activation": 0.004715499344405594,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.013986013986013986
+    },
+    {
+      "decoder_norm": 1.0254104137420654,
+      "feature_id": 37966,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.038617078214883804,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1641510725021362,
+      "feature_id": 41010,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.048984065651893616,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.7366104125976562,
+      "feature_id": 43620,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02010943926870823,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1274290084838867,
+      "feature_id": 44260,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04000189155340195,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2814570665359497,
+      "feature_id": 45148,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.015113933011889458,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.8324807286262512,
+      "feature_id": 54084,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06037731468677521,
+      "max_activation": 0.75390625,
+      "mean_activation": 0.008167400226726398,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.027972027972027972
+    },
+    {
+      "decoder_norm": 1.1469764709472656,
+      "feature_id": 59777,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04189511388540268,
+      "max_activation": 0.1904296875,
+      "mean_activation": 0.0006658380681818181,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 0.7612621188163757,
+      "feature_id": 65158,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04447109252214432,
+      "max_activation": 0.054443359375,
+      "mean_activation": 0.0001903613964160839,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.15646231174469,
+      "feature_id": 518,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.010776974260807037,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3294715881347656,
+      "feature_id": 605,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02396024577319622,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2375507354736328,
+      "feature_id": 8923,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03480587527155876,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.416444182395935,
+      "feature_id": 13665,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03260061889886856,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0297085046768188,
+      "feature_id": 14800,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03601985424757004,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.002112865447998,
+      "feature_id": 15393,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04415305703878403,
+      "max_activation": 0.177734375,
+      "mean_activation": 0.0008032738745629371,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.2886537313461304,
+      "feature_id": 19175,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06799444556236267,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1544867753982544,
+      "feature_id": 19694,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.021472686901688576,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0801873207092285,
+      "feature_id": 20557,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07476217299699783,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.9233496189117432,
+      "feature_id": 27835,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03514980152249336,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3656654357910156,
+      "feature_id": 28987,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.028703708201646805,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2528038024902344,
+      "feature_id": 32671,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03967050462961197,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.8658266067504883,
+      "feature_id": 33447,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03165975585579872,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1026160717010498,
+      "feature_id": 34259,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.015322867780923843,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1236693859100342,
+      "feature_id": 46856,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02613239176571369,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1485342979431152,
+      "feature_id": 51200,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04265535622835159,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3072562217712402,
+      "feature_id": 51600,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.053626880049705505,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1446268558502197,
+      "feature_id": 53782,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.030941706150770187,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2440533638000488,
+      "feature_id": 53919,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.018044646829366684,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4697970151901245,
+      "feature_id": 54269,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.01982748694717884,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.378656268119812,
+      "feature_id": 54809,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.030413087457418442,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.087572455406189,
+      "feature_id": 57314,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04257383942604065,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.5189131498336792,
+      "feature_id": 58297,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04028571397066116,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0277178287506104,
+      "feature_id": 62099,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05322740599513054,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1998088359832764,
+      "feature_id": 63519,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.0484345480799675,
+      "max_activation": 0.12890625,
+      "mean_activation": 0.00045072115384615387,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1935328245162964,
+      "feature_id": 5253,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04620496928691864,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1261314153671265,
+      "feature_id": 6599,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03423946723341942,
+      "max_activation": 0.087890625,
+      "mean_activation": 0.0003073098776223776,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.2105826139450073,
+      "feature_id": 6760,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05171815678477287,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.43117094039917,
+      "feature_id": 7168,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05124350264668465,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4050465822219849,
+      "feature_id": 11903,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04345123469829559,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.6887881755828857,
+      "feature_id": 12144,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.040654364973306656,
+      "max_activation": 0.453125,
+      "mean_activation": 0.013710288734702798,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.08741258741258741
+    },
+    {
+      "decoder_norm": 1.297732949256897,
+      "feature_id": 12300,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02010219544172287,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2883988618850708,
+      "feature_id": 13092,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04262370243668556,
+      "max_activation": 0.54296875,
+      "mean_activation": 0.0027999344405594405,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.0361100435256958,
+      "feature_id": 16954,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04913231357932091,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3151830434799194,
+      "feature_id": 17803,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.11441097408533096,
+      "max_activation": 0.08544921875,
+      "mean_activation": 0.0002987734921328671,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.3098770380020142,
+      "feature_id": 31753,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.13201385736465454,
+      "max_activation": 0.169921875,
+      "mean_activation": 0.0005941324300699301,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.3519161939620972,
+      "feature_id": 33158,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03527303412556648,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3411104679107666,
+      "feature_id": 46148,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.031435269862413406,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4608945846557617,
+      "feature_id": 49248,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.0846480131149292,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.195676326751709,
+      "feature_id": 49873,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.044505685567855835,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2201422452926636,
+      "feature_id": 53974,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.030185703188180923,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2073670625686646,
+      "feature_id": 54137,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07787637412548065,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.20333993434906,
+      "feature_id": 55800,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05442735552787781,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2165591716766357,
+      "feature_id": 61212,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05818187817931175,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1489689350128174,
+      "feature_id": 4308,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.31387150287628174,
+      "max_activation": 0.04443359375,
+      "mean_activation": 0.0001553622159090909,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.2010215520858765,
+      "feature_id": 17094,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.2376938760280609,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3211359977722168,
+      "feature_id": 21322,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.20813988149166107,
+      "max_activation": 0.134765625,
+      "mean_activation": 0.0005117563100961539,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.2006747722625732,
+      "feature_id": 28458,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.443444162607193,
+      "max_activation": 0.051025390625,
+      "mean_activation": 0.00017841045673076922,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1608283519744873,
+      "feature_id": 44531,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.15093247592449188,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4674537181854248,
+      "feature_id": 48322,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.08395330607891083,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.066192626953125,
+      "feature_id": 54482,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.16767890751361847,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.324191689491272,
+      "feature_id": 58294,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.11330372840166092,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0703259706497192,
+      "feature_id": 63851,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09832136332988739,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.5010535717010498,
+      "feature_id": 64565,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03929566219449043,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1260488033294678,
+      "feature_id": 1909,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.36551782488822937,
+      "max_activation": 0.2412109375,
+      "mean_activation": 0.0008433948863636364,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.4719390869140625,
+      "feature_id": 10323,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.316272109746933,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.253440260887146,
+      "feature_id": 13135,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.23564362525939941,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4740242958068848,
+      "feature_id": 14901,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06965111941099167,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1726561784744263,
+      "feature_id": 21338,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.3152282238006592,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1721434593200684,
+      "feature_id": 23152,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.12231852114200592,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1864356994628906,
+      "feature_id": 26904,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.015558455139398575,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1869970560073853,
+      "feature_id": 28070,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.11574019491672516,
+      "max_activation": 0.216796875,
+      "mean_activation": 0.0007580310314685315,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1423265933990479,
+      "feature_id": 34425,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.10907244682312012,
+      "max_activation": 0.640625,
+      "mean_activation": 0.0022399475524475525,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.2936828136444092,
+      "feature_id": 40290,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.38487109541893005,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2943968772888184,
+      "feature_id": 55297,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04533199593424797,
+      "max_activation": 0.58203125,
+      "mean_activation": 0.0020350743006993005,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.2313779592514038,
+      "feature_id": 650,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09652802348136902,
+      "max_activation": 0.5546875,
+      "mean_activation": 0.011498884721235796,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.04195804195804196
+    },
+    {
+      "decoder_norm": 1.2617583274841309,
+      "feature_id": 1679,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.048681408166885376,
+      "max_activation": 0.3359375,
+      "mean_activation": 0.003605769230769231,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.02097902097902098
+    },
+    {
+      "decoder_norm": 1.192579746246338,
+      "feature_id": 2428,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.04833616316318512,
+      "max_activation": 0.71484375,
+      "mean_activation": 0.006477409309440559,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.02097902097902098
+    },
+    {
+      "decoder_norm": 1.2873023748397827,
+      "feature_id": 2598,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06574014574289322,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.286605954170227,
+      "feature_id": 4006,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.19346819818019867,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.0888497829437256,
+      "feature_id": 4860,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.022564729675650597,
+      "max_activation": 0.138671875,
+      "mean_activation": 0.0004848666958041958,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1372096538543701,
+      "feature_id": 6113,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.0644340068101883,
+      "max_activation": 0.09619140625,
+      "mean_activation": 0.0003363335882867133,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.2004210948944092,
+      "feature_id": 6421,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07967597246170044,
+      "max_activation": 0.271484375,
+      "mean_activation": 0.0011105837521853147,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.3878759145736694,
+      "feature_id": 8396,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.1101025715470314,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2170425653457642,
+      "feature_id": 8951,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.055261146277189255,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.5658973455429077,
+      "feature_id": 12195,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.043843504041433334,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3727023601531982,
+      "feature_id": 12375,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02372034452855587,
+      "max_activation": 0.291015625,
+      "mean_activation": 0.0010175371503496503,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1818389892578125,
+      "feature_id": 15275,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05223805457353592,
+      "max_activation": 0.703125,
+      "mean_activation": 0.011287875942416958,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.045454545454545456
+    },
+    {
+      "decoder_norm": 1.2864701747894287,
+      "feature_id": 18418,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06775500625371933,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.7712165117263794,
+      "feature_id": 20076,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06454287469387054,
+      "max_activation": 0.75,
+      "mean_activation": 0.0152587890625,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.04895104895104895
+    },
+    {
+      "decoder_norm": 0.9978845119476318,
+      "feature_id": 20317,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05587313324213028,
+      "max_activation": 0.6171875,
+      "mean_activation": 0.004368068454982517,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.02097902097902098
+    },
+    {
+      "decoder_norm": 1.2364057302474976,
+      "feature_id": 21735,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.10985887050628662,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 0.9878073334693909,
+      "feature_id": 22085,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07353512942790985,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.272445559501648,
+      "feature_id": 22130,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.08101918548345566,
+      "max_activation": 0.30078125,
+      "mean_activation": 0.0015194766171328672,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.119657278060913,
+      "feature_id": 22511,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.12538103759288788,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2151105403900146,
+      "feature_id": 23967,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.056425005197525024,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1671791076660156,
+      "feature_id": 25814,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09283515810966492,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.092689037322998,
+      "feature_id": 26885,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09395430982112885,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4006025791168213,
+      "feature_id": 27796,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09920284152030945,
+      "max_activation": 0.421875,
+      "mean_activation": 0.003643329326923077,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.013986013986013986
+    },
+    {
+      "decoder_norm": 1.2809301614761353,
+      "feature_id": 28785,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.0651521161198616,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3152008056640625,
+      "feature_id": 29866,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.02127940021455288,
+      "max_activation": 2.21875,
+      "mean_activation": 0.007757867132867133,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.238897442817688,
+      "feature_id": 31404,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07193232327699661,
+      "max_activation": 0.07763671875,
+      "mean_activation": 0.00027145705856643356,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.205173134803772,
+      "feature_id": 32010,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.09043414890766144,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.292325735092163,
+      "feature_id": 34137,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.028133247047662735,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3050036430358887,
+      "feature_id": 36822,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.042944975197315216,
+      "max_activation": 0.515625,
+      "mean_activation": 0.0024482353583916085,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.2044509649276733,
+      "feature_id": 38013,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.08995784819126129,
+      "max_activation": 0.248046875,
+      "mean_activation": 0.0008672967657342657,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.358091950416565,
+      "feature_id": 39717,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.11044146865606308,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1358311176300049,
+      "feature_id": 41076,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.17212817072868347,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1625348329544067,
+      "feature_id": 42436,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.023215878754854202,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2248021364212036,
+      "feature_id": 44571,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.024521902203559875,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.494226098060608,
+      "feature_id": 45569,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.12588128447532654,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.3053820133209229,
+      "feature_id": 48704,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.14420579373836517,
+      "max_activation": 1.4296875,
+      "mean_activation": 0.017249474158653848,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.03146853146853147
+    },
+    {
+      "decoder_norm": 1.0535962581634521,
+      "feature_id": 50350,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.07374028861522675,
+      "max_activation": 0.484375,
+      "mean_activation": 0.006392045454545455,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.027972027972027972
+    },
+    {
+      "decoder_norm": 1.1565614938735962,
+      "feature_id": 50769,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.27555540204048157,
+      "max_activation": 0.07177734375,
+      "mean_activation": 0.0003645036604020979,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.006993006993006993
+    },
+    {
+      "decoder_norm": 1.3414686918258667,
+      "feature_id": 51525,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.15301668643951416,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1792974472045898,
+      "feature_id": 51702,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.2056792676448822,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1413718461990356,
+      "feature_id": 51986,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.2418811321258545,
+      "max_activation": 0.2490234375,
+      "mean_activation": 0.0008707113199300699,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.1640231609344482,
+      "feature_id": 53637,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.014170894399285316,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1582404375076294,
+      "feature_id": 53819,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05086863413453102,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.4482916593551636,
+      "feature_id": 56997,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.08202554285526276,
+      "max_activation": 0.0159912109375,
+      "mean_activation": 0.00013188715581293706,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.01048951048951049
+    },
+    {
+      "decoder_norm": 1.1789731979370117,
+      "feature_id": 58129,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.03431534022092819,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2522553205490112,
+      "feature_id": 60409,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.14557291567325592,
+      "max_activation": 0.0177001953125,
+      "mean_activation": 6.188879479895105e-05,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0034965034965034965
+    },
+    {
+      "decoder_norm": 1.3767836093902588,
+      "feature_id": 61529,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05432190001010895,
+      "max_activation": 3.875,
+      "mean_activation": 0.04534527972027972,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.02097902097902098
+    },
+    {
+      "decoder_norm": 1.4034444093704224,
+      "feature_id": 62444,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.05964946746826172,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.2099261283874512,
+      "feature_id": 63982,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.06124742701649666,
+      "max_activation": 0.0,
+      "mean_activation": 0.0,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.0
+    },
+    {
+      "decoder_norm": 1.1912837028503418,
+      "feature_id": 64332,
+      "feature_role": "candidate",
+      "max_abs_target_cosine": 0.022766154259443283,
+      "max_activation": 0.30078125,
+      "mean_activation": 0.004020637565559441,
+      "n_prompt_positions": 286,
+      "positive_token_fraction": 0.03146853146853147
+    }
+  ],
+  "frozen_manifest_status": "frozen_outcome_masked_calibration_plan",
+  "hidden_rms_by_prompt": {
+    "binary_query": 1.0830092430114746,
+    "conceptual": 1.058342456817627,
+    "history": 0.9574592709541321,
+    "self_ref": 0.856891393661499
+  },
+  "jacobian_lens_loaded": false,
+  "lexicon_tokens": {
+    "accepted": {
+      "deception_dishonesty": [
+        {
+          "candidate": " deception",
+          "decoded": " deception",
+          "token_id": 64575,
+          "token_ids": [
+            64575
+          ]
+        },
+        {
+          "candidate": " deceptive",
+          "decoded": " deceptive",
+          "token_id": 81374,
+          "token_ids": [
+            81374
+          ]
+        },
+        {
+          "candidate": " lie",
+          "decoded": " lie",
+          "token_id": 10457,
+          "token_ids": [
+            10457
+          ]
+        },
+        {
+          "candidate": " lying",
+          "decoded": " lying",
+          "token_id": 21078,
+          "token_ids": [
+            21078
+          ]
+        },
+        {
+          "candidate": " dishonest",
+          "decoded": " dishonest",
+          "token_id": 60016,
+          "token_ids": [
+            60016
+          ]
+        },
+        {
+          "candidate": " fraud",
+          "decoded": " fraud",
+          "token_id": 16515,
+          "token_ids": [
+            16515
+          ]
+        },
+        {
+          "candidate": " fake",
+          "decoded": " fake",
+          "token_id": 12700,
+          "token_ids": [
+            12700
+          ]
+        },
+        {
+          "candidate": " conceal",
+          "decoded": " conceal",
+          "token_id": 54262,
+          "token_ids": [
+            54262
+          ]
+        },
+        {
+          "candidate": " hidden",
+          "decoded": " hidden",
+          "token_id": 8340,
+          "token_ids": [
+            8340
+          ]
+        },
+        {
+          "candidate": " misleading",
+          "decoded": " misleading",
+          "token_id": 38309,
+          "token_ids": [
+            38309
+          ]
+        }
+      ],
+      "formality_politeness": [
+        {
+          "candidate": " polite",
+          "decoded": " polite",
+          "token_id": 48887,
+          "token_ids": [
+            48887
+          ]
+        },
+        {
+          "candidate": " respectful",
+          "decoded": " respectful",
+          "token_id": 49150,
+          "token_ids": [
+            49150
+          ]
+        },
+        {
+          "candidate": " courteous",
+          "decoded": " courteous",
+          "token_id": 89288,
+          "token_ids": [
+            89288
+          ]
+        },
+        {
+          "candidate": " formal",
+          "decoded": " formal",
+          "token_id": 16287,
+          "token_ids": [
+            16287
+          ]
+        },
+        {
+          "candidate": " professional",
+          "decoded": " professional",
+          "token_id": 6721,
+          "token_ids": [
+            6721
+          ]
+        },
+        {
+          "candidate": " diplomatic",
+          "decoded": " diplomatic",
+          "token_id": 34616,
+          "token_ids": [
+            34616
+          ]
+        },
+        {
+          "candidate": " kindly",
+          "decoded": " kindly",
+          "token_id": 47626,
+          "token_ids": [
+            47626
+          ]
+        },
+        {
+          "candidate": " appropriate",
+          "decoded": " appropriate",
+          "token_id": 8475,
+          "token_ids": [
+            8475
+          ]
+        },
+        {
+          "candidate": " civil",
+          "decoded": " civil",
+          "token_id": 8431,
+          "token_ids": [
+            8431
+          ]
+        }
+      ],
+      "hedging_uncertainty": [
+        {
+          "candidate": " uncertain",
+          "decoded": " uncertain",
+          "token_id": 36218,
+          "token_ids": [
+            36218
+          ]
+        },
+        {
+          "candidate": " maybe",
+          "decoded": " maybe",
+          "token_id": 7344,
+          "token_ids": [
+            7344
+          ]
+        },
+        {
+          "candidate": " perhaps",
+          "decoded": " perhaps",
+          "token_id": 8530,
+          "token_ids": [
+            8530
+          ]
+        },
+        {
+          "candidate": " possibly",
+          "decoded": " possibly",
+          "token_id": 11000,
+          "token_ids": [
+            11000
+          ]
+        },
+        {
+          "candidate": " likely",
+          "decoded": " likely",
+          "token_id": 4461,
+          "token_ids": [
+            4461
+          ]
+        },
+        {
+          "candidate": " unclear",
+          "decoded": " unclear",
+          "token_id": 25420,
+          "token_ids": [
+            25420
+          ]
+        },
+        {
+          "candidate": " caveat",
+          "decoded": " caveat",
+          "token_id": 87151,
+          "token_ids": [
+            87151
+          ]
+        },
+        {
+          "candidate": " tentative",
+          "decoded": " tentative",
+          "token_id": 76220,
+          "token_ids": [
+            76220
+          ]
+        },
+        {
+          "candidate": " unsure",
+          "decoded": " unsure",
+          "token_id": 44003,
+          "token_ids": [
+            44003
+          ]
+        },
+        {
+          "candidate": " cautious",
+          "decoded": " cautious",
+          "token_id": 46878,
+          "token_ids": [
+            46878
+          ]
+        }
+      ],
+      "refusal_safety": [
+        {
+          "candidate": " refuse",
+          "decoded": " refuse",
+          "token_id": 26122,
+          "token_ids": [
+            26122
+          ]
+        },
+        {
+          "candidate": " refusal",
+          "decoded": " refusal",
+          "token_id": 44251,
+          "token_ids": [
+            44251
+          ]
+        },
+        {
+          "candidate": " decline",
+          "decoded": " decline",
+          "token_id": 18174,
+          "token_ids": [
+            18174
+          ]
+        },
+        {
+          "candidate": " denied",
+          "decoded": " denied",
+          "token_id": 15164,
+          "token_ids": [
+            15164
+          ]
+        },
+        {
+          "candidate": " prohibited",
+          "decoded": " prohibited",
+          "token_id": 27010,
+          "token_ids": [
+            27010
+          ]
+        },
+        {
+          "candidate": " unsafe",
+          "decoded": " unsafe",
+          "token_id": 20451,
+          "token_ids": [
+            20451
+          ]
+        },
+        {
+          "candidate": " comply",
+          "decoded": " comply",
+          "token_id": 26069,
+          "token_ids": [
+            26069
+          ]
+        },
+        {
+          "candidate": " cannot",
+          "decoded": " cannot",
+          "token_id": 4250,
+          "token_ids": [
+            4250
+          ]
+        },
+        {
+          "candidate": " policy",
+          "decoded": " policy",
+          "token_id": 4947,
+          "token_ids": [
+            4947
+          ]
+        },
+        {
+          "candidate": " restricted",
+          "decoded": " restricted",
+          "token_id": 22486,
+          "token_ids": [
+            22486
+          ]
+        }
+      ],
+      "unrelated": [
+        {
+          "candidate": " banana",
+          "decoded": " banana",
+          "token_id": 44196,
+          "token_ids": [
+            44196
+          ]
+        },
+        {
+          "candidate": " telescope",
+          "decoded": " telescope",
+          "token_id": 56925,
+          "token_ids": [
+            56925
+          ]
+        },
+        {
+          "candidate": " ceramic",
+          "decoded": " ceramic",
+          "token_id": 43124,
+          "token_ids": [
+            43124
+          ]
+        },
+        {
+          "candidate": " rainfall",
+          "decoded": " rainfall",
+          "token_id": 53958,
+          "token_ids": [
+            53958
+          ]
+        },
+        {
+          "candidate": " bicycle",
+          "decoded": " bicycle",
+          "token_id": 36086,
+          "token_ids": [
+            36086
+          ]
+        },
+        {
+          "candidate": " copper",
+          "decoded": " copper",
+          "token_id": 24166,
+          "token_ids": [
+            24166
+          ]
+        },
+        {
+          "candidate": " violin",
+          "decoded": " violin",
+          "token_id": 63137,
+          "token_ids": [
+            63137
+          ]
+        },
+        {
+          "candidate": " glacier",
+          "decoded": " glacier",
+          "token_id": 94867,
+          "token_ids": [
+            94867
+          ]
+        },
+        {
+          "candidate": " cabbage",
+          "decoded": " cabbage",
+          "token_id": 74873,
+          "token_ids": [
+            74873
+          ]
+        },
+        {
+          "candidate": " limestone",
+          "decoded": " limestone",
+          "token_id": 45016,
+          "token_ids": [
+            45016
+          ]
+        }
+      ]
+    },
+    "rejected": {
+      "deception_dishonesty": [],
+      "formality_politeness": [
+        {
+          "candidate": " tactful",
+          "decoded": " tactful",
+          "token_ids": [
+            14413,
+            1285
+          ]
+        }
+      ],
+      "hedging_uncertainty": [],
+      "refusal_safety": [],
+      "unrelated": []
+    }
+  },
+  "model": "meta-llama/Llama-3.3-70B-Instruct",
+  "model_quantization": "bitsandbytes_nf4",
+  "model_revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b",
+  "plan_audit_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0",
+  "plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "runtime": {
+    "captured_at_utc": "2026-07-12T22:06:15.656342+00:00",
+    "cuda_available": true,
+    "cuda_runtime": "11.8",
+    "git_commit": "e3cadd5061208f8464f33e09204cdf336a73c19d",
+    "gpu_count": 1,
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA A100-SXM4-80GB",
+        "total_memory": 85093777408
+      }
+    ],
+    "packages": {
+      "accelerate": "0.34.2",
+      "bitsandbytes": "0.43.3",
+      "huggingface-hub": "0.27.1",
+      "nnsight": "0.3.0",
+      "numpy": "1.24.1",
+      "torch": "2.1.0+cu118",
+      "transformers": "4.47.1"
+    },
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12"
+  },
+  "sae": "Goodfire/Llama-3.3-70B-Instruct-SAE-l50",
+  "sae_file_sha256": "81cfce8ea035564cb585d6e0f04efbf0eb114cab412a30a013762fe11f6d8ea6",
+  "sae_revision": "128ee921ecd1b8b3a87d776cbcc357c0855da134",
+  "semantic_matching": {
+    "caliper_attempts": [
+      {
+        "cosine": 0.15,
+        "name": "primary",
+        "norm_high": 1.25,
+        "norm_low": 0.8
+      },
+      {
+        "cosine": 0.25,
+        "name": "frozen_relaxation",
+        "norm_high": 1.5,
+        "norm_low": 0.67
+      }
+    ],
+    "metric_weights": {
+      "decoder_norm": 2.0,
+      "max_activation": 0.5,
+      "mean_activation": 1.0,
+      "positive_token_fraction": 1.0
+    },
+    "robust_scales": {
+      "decoder_norm": {
+        "center": 0.7923797598888284,
+        "scale": 0.05623105196429376
+      },
+      "max_activation": {
+        "center": 0.0,
+        "scale": 0.22772025188677752
+      },
+      "mean_activation": {
+        "center": 0.0,
+        "scale": 0.004586777074667309
+      },
+      "positive_token_fraction": {
+        "center": 0.0,
+        "scale": 0.011199722956572927
+      }
+    },
+    "selected": [
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.001750464103304932,
+        "decoder_norm_ratio": 1.0030042392482583,
+        "description": "agreement, confirmation, polite closing",
+        "experiment": "A1",
+        "feature_id": 31440,
+        "max_abs_target_cosine": 0.040994446724653244,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 30032
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.017704228858484248,
+        "decoder_norm_ratio": 0.9900896398389234,
+        "description": "positive and formal tone",
+        "experiment": "A1",
+        "feature_id": 44260,
+        "max_abs_target_cosine": 0.04000189155340195,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 58667
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.0175136693594623,
+        "decoder_norm_ratio": 0.9904660875670231,
+        "description": "respectful professional tone",
+        "experiment": "A1",
+        "feature_id": 32375,
+        "max_abs_target_cosine": 0.039336010813713074,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 22004
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.07132841277619692,
+        "decoder_norm_ratio": 0.979842658722618,
+        "description": "positive and professional tone",
+        "experiment": "A1",
+        "feature_id": 28609,
+        "max_abs_target_cosine": 0.07212281972169876,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 30686
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.0007022470361710913,
+        "decoder_norm_ratio": 0.9981307734333703,
+        "description": "politely ask for things",
+        "experiment": "A1",
+        "feature_id": 5730,
+        "max_abs_target_cosine": 0.014061740599572659,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 41533
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 5.244910901594902,
+        "decoder_norm_ratio": 1.0296219238478028,
+        "description": "respectful professional tone",
+        "experiment": "A1",
+        "feature_id": 1806,
+        "max_abs_target_cosine": 0.05699325352907181,
+        "semantic_family": "formality_politeness",
+        "target_feature_id": 23893
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.0001034676585288574,
+        "decoder_norm_ratio": 1.0007299393264306,
+        "description": "not sure, not know, not sure",
+        "experiment": "A1",
+        "feature_id": 53919,
+        "max_abs_target_cosine": 0.018044646829366684,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 30032
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.004821213766110122,
+        "decoder_norm_ratio": 1.0051925069612047,
+        "description": "stuttering and hesitation",
+        "experiment": "A1",
+        "feature_id": 53782,
+        "max_abs_target_cosine": 0.030941706150770187,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 58667
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.021433518190636658,
+        "decoder_norm_ratio": 1.010605620915809,
+        "description": "apology or not sure",
+        "experiment": "A1",
+        "feature_id": 8923,
+        "max_abs_target_cosine": 0.03480587527155876,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 22004
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.00038868445653032427,
+        "decoder_norm_ratio": 1.0014964929701862,
+        "description": "transition and uncertainty",
+        "experiment": "A1",
+        "feature_id": 34259,
+        "max_abs_target_cosine": 0.015322867780923843,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 30686
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.0003749413625676132,
+        "decoder_norm_ratio": 0.9986339698902464,
+        "description": "contrasting or qualifying clauses",
+        "experiment": "A1",
+        "feature_id": 19175,
+        "max_abs_target_cosine": 0.06799444556236267,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 41533
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 6.996780877544728,
+        "decoder_norm_ratio": 0.9305135677933877,
+        "description": "uncertainty and negation",
+        "experiment": "A1",
+        "feature_id": 63519,
+        "max_abs_target_cosine": 0.0484345480799675,
+        "semantic_family": "hedging_uncertainty",
+        "target_feature_id": 23893
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.06720950461533996,
+        "decoder_norm_ratio": 0.9814955777874438,
+        "description": "declining harmful requests",
+        "experiment": "A1",
+        "feature_id": 53974,
+        "max_abs_target_cosine": 0.030185703188180923,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 30032
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.40514994105434843,
+        "decoder_norm_ratio": 1.0481409254764282,
+        "description": "declining requests",
+        "experiment": "A1",
+        "feature_id": 5253,
+        "max_abs_target_cosine": 0.04620496928691864,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 58667
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.008218650871708333,
+        "decoder_norm_ratio": 0.9934635420038369,
+        "description": "refusal to generate harmful content",
+        "experiment": "A1",
+        "feature_id": 61212,
+        "max_abs_target_cosine": 0.05818187817931175,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 22004
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.26003500259278783,
+        "decoder_norm_ratio": 1.0228552730723408,
+        "description": "refusing to provide or discuss",
+        "experiment": "A1",
+        "feature_id": 6599,
+        "max_abs_target_cosine": 0.03423946723341942,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 30686
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.00643378300103049,
+        "decoder_norm_ratio": 1.005669851760744,
+        "description": "refusal to sensitive topics",
+        "experiment": "A1",
+        "feature_id": 12300,
+        "max_abs_target_cosine": 0.02010219544172287,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 41533
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 1.8930830381804045,
+        "decoder_norm_ratio": 0.9992196971370928,
+        "description": "assistant refusals",
+        "experiment": "A1",
+        "feature_id": 13092,
+        "max_abs_target_cosine": 0.04262370243668556,
+        "semantic_family": "refusal_safety",
+        "target_feature_id": 23893
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 4.375075941100344,
+        "decoder_norm_ratio": 1.1628833949280513,
+        "description": "truthfulness and deception",
+        "experiment": "A2",
+        "feature_id": 58294,
+        "max_abs_target_cosine": 0.11330372840166092,
+        "semantic_family": "deception_dishonesty",
+        "target_feature_id": 58667
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.13654008137452558,
+        "decoder_norm_ratio": 0.9721676778091023,
+        "description": "veil of lies",
+        "experiment": "A2",
+        "feature_id": 63851,
+        "max_abs_target_cosine": 0.09832136332988739,
+        "semantic_family": "deception_dishonesty",
+        "target_feature_id": 30686
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 3.506248978937458,
+        "decoder_norm_ratio": 1.13719387650467,
+        "description": "lying or telling lies",
+        "experiment": "A2",
+        "feature_id": 48322,
+        "max_abs_target_cosine": 0.08395330607891083,
+        "semantic_family": "deception_dishonesty",
+        "target_feature_id": 41533
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 0.41474640311442307,
+        "decoder_norm_ratio": 0.9543816688952255,
+        "description": "pretend to be",
+        "experiment": "A2",
+        "feature_id": 26904,
+        "max_abs_target_cosine": 0.015558455139398575,
+        "semantic_family": "pretending_impersonation",
+        "target_feature_id": 30032
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 7.279301845202162e-06,
+        "decoder_norm_ratio": 1.000194891487204,
+        "description": "role play",
+        "experiment": "A2",
+        "feature_id": 44571,
+        "max_abs_target_cosine": 0.024521902203559875,
+        "semantic_family": "roleplay_persona",
+        "target_feature_id": 22004
+      },
+      {
+        "caliper_attempt": "primary",
+        "cost": 1.6987456972445176,
+        "decoder_norm_ratio": 0.9249070362516322,
+        "description": "assistant persona",
+        "experiment": "A2",
+        "feature_id": 2428,
+        "max_abs_target_cosine": 0.04833616316318512,
+        "semantic_family": "roleplay_persona",
+        "target_feature_id": 23893
+      }
+    ]
+  },
+  "status": "pass",
+  "target_feature_ids": [
+    30032,
+    58667,
+    22004,
+    30686,
+    41533,
+    23893
+  ]
+}

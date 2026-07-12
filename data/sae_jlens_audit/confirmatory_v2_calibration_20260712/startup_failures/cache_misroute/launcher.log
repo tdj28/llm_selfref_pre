@@ -1,0 +1,181 @@
+Requirement already satisfied: pip in /usr/local/lib/python3.10/dist-packages (23.3.1)
+Collecting pip
+  Downloading pip-26.1.2-py3-none-any.whl.metadata (4.6 kB)
+Downloading pip-26.1.2-py3-none-any.whl (1.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 8.2 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 23.3.1
+    Uninstalling pip-23.3.1:
+      Successfully uninstalled pip-23.3.1
+Successfully installed pip-26.1.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cu118
+Collecting accelerate==0.34.2 (from -r requirements-runpod-70b.txt (line 5))
+  Downloading accelerate-0.34.2-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.43.3 (from -r requirements-runpod-70b.txt (line 6))
+  Downloading bitsandbytes-0.43.3-py3-none-manylinux_2_24_x86_64.whl.metadata (3.5 kB)
+Collecting huggingface-hub==0.27.1 (from -r requirements-runpod-70b.txt (line 7))
+  Downloading huggingface_hub-0.27.1-py3-none-any.whl.metadata (13 kB)
+Collecting nnsight==0.3.0 (from -r requirements-runpod-70b.txt (line 8))
+  Downloading nnsight-0.3.0-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: numpy==1.24.1 in /usr/local/lib/python3.10/dist-packages (from -r requirements-runpod-70b.txt (line 9)) (1.24.1)
+Collecting pandas==2.3.3 (from -r requirements-runpod-70b.txt (line 10))
+  Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting python-dotenv==1.2.2 (from -r requirements-runpod-70b.txt (line 11))
+  Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+Collecting safetensors==0.8.0 (from -r requirements-runpod-70b.txt (line 12))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting tokenizers==0.21.4 (from -r requirements-runpod-70b.txt (line 13))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Requirement already satisfied: torch==2.1.0+cu118 in /usr/local/lib/python3.10/dist-packages (from -r requirements-runpod-70b.txt (line 14)) (2.1.0+cu118)
+Collecting tqdm==4.68.4 (from -r requirements-runpod-70b.txt (line 15))
+  Downloading tqdm-4.68.4-py3-none-any.whl.metadata (57 kB)
+Collecting transformers==4.47.1 (from -r requirements-runpod-70b.txt (line 16))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.10/dist-packages (from accelerate==0.34.2->-r requirements-runpod-70b.txt (line 5)) (23.2)
+Requirement already satisfied: psutil in /usr/local/lib/python3.10/dist-packages (from accelerate==0.34.2->-r requirements-runpod-70b.txt (line 5)) (5.9.6)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.10/dist-packages (from accelerate==0.34.2->-r requirements-runpod-70b.txt (line 5)) (6.0.1)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (3.9.0)
+Collecting fsspec>=2023.5.0 (from huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7))
+  Downloading fsspec-2026.6.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (2.31.0)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (4.4.0)
+Collecting protobuf (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Collecting python-socketio[client] (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading python_socketio-5.16.3-py3-none-any.whl.metadata (3.3 kB)
+Collecting pydantic>=2.4.0 (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+Collecting sentencepiece (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading sentencepiece-0.2.2-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (33 kB)
+Requirement already satisfied: torchvision in /usr/local/lib/python3.10/dist-packages (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8)) (0.16.0+cu118)
+Collecting diffusers (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading diffusers-0.39.0-py3-none-any.whl.metadata (20 kB)
+Collecting einops (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading einops-0.8.2-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.10/dist-packages (from pandas==2.3.3->-r requirements-runpod-70b.txt (line 10)) (2.8.2)
+Collecting pytz>=2020.1 (from pandas==2.3.3->-r requirements-runpod-70b.txt (line 10))
+  Downloading pytz-2026.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas==2.3.3->-r requirements-runpod-70b.txt (line 10))
+  Downloading tzdata-2026.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: sympy in /usr/local/lib/python3.10/dist-packages (from torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (1.12)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (3.0)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (3.1.2)
+Requirement already satisfied: triton==2.1.0 in /usr/local/lib/python3.10/dist-packages (from torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (2.1.0)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r requirements-runpod-70b.txt (line 16))
+  Downloading regex-2026.7.10-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.4.0->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.4 (from pydantic>=2.4.0->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading pydantic_core-2.46.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting typing-extensions>=3.7.4.3 (from huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic>=2.4.0->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Requirement already satisfied: six>=1.5 in /usr/lib/python3/dist-packages (from python-dateutil>=2.8.2->pandas==2.3.3->-r requirements-runpod-70b.txt (line 10)) (1.16.0)
+Requirement already satisfied: importlib_metadata in /usr/lib/python3/dist-packages (from diffusers->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8)) (4.6.4)
+Collecting httpx<1.0.0 (from diffusers->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+INFO: pip is looking at multiple versions of diffusers to determine which version is compatible with other requirements. This could take a while.
+Collecting diffusers (from nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading diffusers-0.38.0-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.37.1-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.37.0-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.36.0-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.35.2-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.35.1-py3-none-any.whl.metadata (20 kB)
+  Downloading diffusers-0.35.0-py3-none-any.whl.metadata (20 kB)
+INFO: pip is still looking at multiple versions of diffusers to determine which version is compatible with other requirements. This could take a while.
+  Downloading diffusers-0.34.0-py3-none-any.whl.metadata (20 kB)
+Requirement already satisfied: Pillow in /usr/local/lib/python3.10/dist-packages (from diffusers->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8)) (9.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (2.1.2)
+Collecting bidict>=0.21.0 (from python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading bidict-0.23.1-py3-none-any.whl.metadata (8.7 kB)
+Collecting python-engineio>=4.13.2 (from python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading python_engineio-4.13.3-py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: websocket-client>=0.54.0 in /usr/local/lib/python3.10/dist-packages (from python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8)) (1.6.4)
+Collecting simple-websocket>=0.10.0 (from python-engineio>=4.13.2->python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading simple_websocket-1.1.0-py3-none-any.whl.metadata (1.5 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (1.26.13)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->huggingface-hub==0.27.1->-r requirements-runpod-70b.txt (line 7)) (2022.12.7)
+Collecting wsproto (from simple-websocket>=0.10.0->python-engineio>=4.13.2->python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading wsproto-1.3.2-py3-none-any.whl.metadata (5.2 kB)
+Requirement already satisfied: mpmath>=0.19 in /usr/local/lib/python3.10/dist-packages (from sympy->torch==2.1.0+cu118->-r requirements-runpod-70b.txt (line 14)) (1.3.0)
+Collecting h11<1,>=0.16.0 (from wsproto->simple-websocket>=0.10.0->python-engineio>=4.13.2->python-socketio[client]->nnsight==0.3.0->-r requirements-runpod-70b.txt (line 8))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Downloading accelerate-0.34.2-py3-none-any.whl (324 kB)
+Downloading bitsandbytes-0.43.3-py3-none-manylinux_2_24_x86_64.whl (137.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.5/137.5 MB 168.8 MB/s  0:00:00
+Downloading huggingface_hub-0.27.1-py3-none-any.whl (450 kB)
+Downloading nnsight-0.3.0-py3-none-any.whl (3.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.5/3.5 MB 30.5 MB/s  0:00:00
+Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 296.0 MB/s  0:00:00
+Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 190.0 MB/s  0:00:00
+Downloading tqdm-4.68.4-py3-none-any.whl (676 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 676.6/676.6 kB 105.9 MB/s  0:00:00
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 292.9 MB/s  0:00:00
+Downloading fsspec-2026.6.0-py3-none-any.whl (203 kB)
+Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+Downloading pydantic_core-2.46.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 228.8 MB/s  0:00:00
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading pytz-2026.2-py2.py3-none-any.whl (510 kB)
+Downloading regex-2026.7.10-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (794 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 794.2/794.2 kB 124.4 MB/s  0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading tzdata-2026.3-py2.py3-none-any.whl (348 kB)
+Downloading diffusers-0.34.0-py3-none-any.whl (3.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 204.8 MB/s  0:00:00
+Downloading einops-0.8.2-py3-none-any.whl (65 kB)
+Downloading protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl (327 kB)
+Downloading python_socketio-5.16.3-py3-none-any.whl (82 kB)
+Downloading bidict-0.23.1-py3-none-any.whl (32 kB)
+Downloading python_engineio-4.13.3-py3-none-any.whl (59 kB)
+Downloading simple_websocket-1.1.0-py3-none-any.whl (13 kB)
+Downloading sentencepiece-0.2.2-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 186.1 MB/s  0:00:00
+Downloading wsproto-1.3.2-py3-none-any.whl (24 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Installing collected packages: pytz, tzdata, typing-extensions, tqdm, sentencepiece, safetensors, regex, python-dotenv, protobuf, h11, fsspec, einops, bidict, annotated-types, wsproto, typing-inspection, pydantic-core, pandas, huggingface-hub, tokenizers, simple-websocket, pydantic, diffusers, bitsandbytes, accelerate, transformers, python-engineio, python-socketio, nnsight
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing_extensions 4.4.0
+    Uninstalling typing_extensions-4.4.0:
+      Successfully uninstalled typing_extensions-4.4.0
+  Attempting uninstall: fsspec
+    Found existing installation: fsspec 2023.4.0
+    Uninstalling fsspec-2023.4.0:
+      Successfully uninstalled fsspec-2023.4.0
+
+Successfully installed accelerate-0.34.2 annotated-types-0.7.0 bidict-0.23.1 bitsandbytes-0.43.3 diffusers-0.34.0 einops-0.8.2 fsspec-2026.6.0 h11-0.16.0 huggingface-hub-0.27.1 nnsight-0.3.0 pandas-2.3.3 protobuf-7.35.1 pydantic-2.13.4 pydantic-core-2.46.4 python-dotenv-1.2.2 python-engineio-4.13.3 python-socketio-5.16.3 pytz-2026.2 regex-2026.7.10 safetensors-0.8.0 sentencepiece-0.2.2 simple-websocket-1.1.0 tokenizers-0.21.4 tqdm-4.68.4 transformers-4.47.1 typing-extensions-4.16.0 typing-inspection-0.4.2 tzdata-2026.3 wsproto-1.3.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+{'torch': '2.1.0+cu118', 'cuda': '11.8', 'gpu': 'NVIDIA A100-SXM4-80GB'}
+{
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "candidate_rows": 138,
+  "errors": [],
+  "family_counts": {
+    "A1:formality_politeness": 22,
+    "A1:hedging_uncertainty": 25,
+    "A1:refusal_safety": 19,
+    "A2:deception_dishonesty": 10,
+    "A2:pretending_impersonation": 11,
+    "A2:roleplay_persona": 51
+  },
+  "n_errors": 0,
+  "plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "status": "pass"
+}
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading model meta-llama/Llama-3.3-70B-Instruct...
+Using 4-bit quantization (requires ~20GB VRAM for 70B model)
+Downloading shards:   0%|          | 0/30 [00:00<?, ?it/s]Downloading shards:   3%|▎         | 1/30 [00:10<05:05, 10.52s/it]Downloading shards:   7%|▋         | 2/30 [00:23<05:31, 11.82s/it]

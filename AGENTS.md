@@ -90,8 +90,18 @@ immediately public and permanently recoverable.
 - `data/sae_jlens_audit/neuronpedia_labels_20260712/` is the compact public
   provenance snapshot of all available labels for the pinned Goodfire SAE.
   `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` is the
-  independently audited Stage 0 machine plan. Neither directory is a v2
+  independently audited Stage 0 machine plan. Neither directory is a Stage 1
   outcome release.
+- `docs/LLAMA70B_SAE_JLENS_V2_CALIBRATION_RESULTS.md` and
+  `data/sae_jlens_audit/confirmatory_v2_calibration_20260712/` are the complete
+  Stage 0 release. All 24 assignments passed the primary calipers; no
+  relaxation or manual substitution was used. Preserve both technical failure
+  chains and the unchanged calibration hash. This release contains no response
+  text, J-lens readout, residual outcome, detector prediction, or Stage 1
+  target outcome.
+- Agent-owned calibration pod `zd79jm0odi7x2j` was retrieved, hash-verified,
+  and deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
+  inventory was empty. Do not attempt to reuse or mutate it.
 - The associated v2 OSF project is `sz2gb` (`https://osf.io/sz2gb/`). It was
   created private and round-trip audited on 2026-07-12. A project is not a
   registration: do not describe v2 as preregistered until an immutable public

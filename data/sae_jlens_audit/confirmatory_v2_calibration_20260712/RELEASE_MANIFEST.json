@@ -1,0 +1,255 @@
+{
+  "calibration_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4",
+  "claim_boundary": "This release selects matched semantic comparators using outcome-masked activation telemetry. It contains no Stage 1 semantic, reader, residual, behavioral, or consciousness outcome.",
+  "counts": {
+    "behavioral_outputs": 0,
+    "jacobian_readouts": 0,
+    "metric_rows": 144,
+    "residual_outcomes": 0,
+    "selected_comparators": 24
+  },
+  "created_at_utc": "2026-07-12T22:13:43.150307+00:00",
+  "files": [
+    {
+      "bytes": 1542,
+      "path": "RECOVERY_NOTES.md",
+      "sha256": "ee64b4b68d2bdbfe0095baa679b3eafcdad19e9ddebd976ecf87feadfb47bce5"
+    },
+    {
+      "bytes": 2546,
+      "path": "REMOTE_SHA256SUMS.txt",
+      "sha256": "67fb39023aaba43a30b27b109d667ce6e6910d8ede06e0e4b0350901b1b03860"
+    },
+    {
+      "bytes": 1377,
+      "path": "RUNPOD_LEDGER.json",
+      "sha256": "63a8c36f87e5086de03497d002849fcd04bbb7a870d4168004ac45c666ae594f"
+    },
+    {
+      "bytes": 66078,
+      "path": "calibration.json",
+      "sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4"
+    },
+    {
+      "bytes": 6229,
+      "path": "calibration.log",
+      "sha256": "6ff21a132c3aa788a581ace5ddc721db76145ff62fc4e2d2f0e05454583f3f11"
+    },
+    {
+      "bytes": 429,
+      "path": "calibration_audit.log",
+      "sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340"
+    },
+    {
+      "bytes": 429,
+      "path": "independent_calibration_audit.json",
+      "sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340"
+    },
+    {
+      "bytes": 16752,
+      "path": "launcher.log",
+      "sha256": "8f92845e3d967bd44403919d27d1ab7d4c754ba0e29ce11ce78a163a87ba903d"
+    },
+    {
+      "bytes": 545,
+      "path": "plan_audit.log",
+      "sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+    },
+    {
+      "bytes": 545,
+      "path": "remote_plan_audit.json",
+      "sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+    },
+    {
+      "bytes": 541,
+      "path": "startup_failures/cache_misroute/calibration.log",
+      "sha256": "66833f2be846c97c43a2263ee2fac8c0b16dc9c99d2a688640e35335d157c198"
+    },
+    {
+      "bytes": 17345,
+      "path": "startup_failures/cache_misroute/launcher.log",
+      "sha256": "0213725d3908b0afcf5288b7f3391d264b0ceeecf140a7ee180da6eb69683e57"
+    },
+    {
+      "bytes": 545,
+      "path": "startup_failures/cache_misroute/plan_audit.log",
+      "sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+    },
+    {
+      "bytes": 545,
+      "path": "startup_failures/cache_misroute/remote_plan_audit.json",
+      "sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+    },
+    {
+      "bytes": 136,
+      "path": "startup_failures/missing_scipy/CALIBRATION_SHA256_AFTER.txt",
+      "sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150"
+    },
+    {
+      "bytes": 136,
+      "path": "startup_failures/missing_scipy/CALIBRATION_SHA256_BEFORE.txt",
+      "sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150"
+    },
+    {
+      "bytes": 240,
+      "path": "startup_failures/missing_scipy/calibration_audit.failed.log",
+      "sha256": "4fb41d2fdabf16594c0f58600eeb4c91fdbd43d090dc4faf6086921e20e8fd1b"
+    },
+    {
+      "bytes": 938,
+      "path": "startup_failures/missing_scipy/scipy_1.15.3_install.log",
+      "sha256": "37693ef213480b6a0f73de8332e8d8112a6568d849296fbec490623bab48d0e6"
+    },
+    {
+      "bytes": 1530,
+      "path": "startup_failures/missing_scipy/scipy_1.18_python_version_failure.log",
+      "sha256": "b26c93f3aff16a2c8af644fa256713d0dc35375b64c9ae648fd667fcf9dcd3c7"
+    }
+  ],
+  "independent_calibration_audit_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340",
+  "plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "remote_retrieval_audit": {
+    "errors": [],
+    "files": [
+      {
+        "local_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4",
+        "matches": true,
+        "path": "calibration.json",
+        "remote_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4"
+      },
+      {
+        "local_sha256": "6ff21a132c3aa788a581ace5ddc721db76145ff62fc4e2d2f0e05454583f3f11",
+        "matches": true,
+        "path": "calibration.log",
+        "remote_sha256": "6ff21a132c3aa788a581ace5ddc721db76145ff62fc4e2d2f0e05454583f3f11"
+      },
+      {
+        "local_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340",
+        "matches": true,
+        "path": "calibration_audit.log",
+        "remote_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340"
+      },
+      {
+        "local_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340",
+        "matches": true,
+        "path": "independent_calibration_audit.json",
+        "remote_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340"
+      },
+      {
+        "local_sha256": "8f92845e3d967bd44403919d27d1ab7d4c754ba0e29ce11ce78a163a87ba903d",
+        "matches": true,
+        "path": "launcher.log",
+        "remote_sha256": "8f92845e3d967bd44403919d27d1ab7d4c754ba0e29ce11ce78a163a87ba903d"
+      },
+      {
+        "local_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0",
+        "matches": true,
+        "path": "plan_audit.log",
+        "remote_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+      },
+      {
+        "local_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0",
+        "matches": true,
+        "path": "remote_plan_audit.json",
+        "remote_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+      },
+      {
+        "local_sha256": "66833f2be846c97c43a2263ee2fac8c0b16dc9c99d2a688640e35335d157c198",
+        "matches": true,
+        "path": "startup_failures/cache_misroute/calibration.log",
+        "remote_sha256": "66833f2be846c97c43a2263ee2fac8c0b16dc9c99d2a688640e35335d157c198"
+      },
+      {
+        "local_sha256": "0213725d3908b0afcf5288b7f3391d264b0ceeecf140a7ee180da6eb69683e57",
+        "matches": true,
+        "path": "startup_failures/cache_misroute/launcher.log",
+        "remote_sha256": "0213725d3908b0afcf5288b7f3391d264b0ceeecf140a7ee180da6eb69683e57"
+      },
+      {
+        "local_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0",
+        "matches": true,
+        "path": "startup_failures/cache_misroute/plan_audit.log",
+        "remote_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+      },
+      {
+        "local_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0",
+        "matches": true,
+        "path": "startup_failures/cache_misroute/remote_plan_audit.json",
+        "remote_sha256": "711965ddd3d986a2f02eb13a339e1df0938486772aae2577af413596511441b0"
+      },
+      {
+        "local_sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150",
+        "matches": true,
+        "path": "startup_failures/missing_scipy/CALIBRATION_SHA256_AFTER.txt",
+        "remote_sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150"
+      },
+      {
+        "local_sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150",
+        "matches": true,
+        "path": "startup_failures/missing_scipy/CALIBRATION_SHA256_BEFORE.txt",
+        "remote_sha256": "1cddeabbbccb38064cedea0a66cd8e3f91a54afa9d1597f1af292fd74506f150"
+      },
+      {
+        "local_sha256": "4fb41d2fdabf16594c0f58600eeb4c91fdbd43d090dc4faf6086921e20e8fd1b",
+        "matches": true,
+        "path": "startup_failures/missing_scipy/calibration_audit.failed.log",
+        "remote_sha256": "4fb41d2fdabf16594c0f58600eeb4c91fdbd43d090dc4faf6086921e20e8fd1b"
+      },
+      {
+        "local_sha256": "37693ef213480b6a0f73de8332e8d8112a6568d849296fbec490623bab48d0e6",
+        "matches": true,
+        "path": "startup_failures/missing_scipy/scipy_1.15.3_install.log",
+        "remote_sha256": "37693ef213480b6a0f73de8332e8d8112a6568d849296fbec490623bab48d0e6"
+      },
+      {
+        "local_sha256": "b26c93f3aff16a2c8af644fa256713d0dc35375b64c9ae648fd667fcf9dcd3c7",
+        "matches": true,
+        "path": "startup_failures/missing_scipy/scipy_1.18_python_version_failure.log",
+        "remote_sha256": "b26c93f3aff16a2c8af644fa256713d0dc35375b64c9ae648fd667fcf9dcd3c7"
+      }
+    ],
+    "rows": 16,
+    "status": "pass"
+  },
+  "runpod_deletion": {
+    "agent_owned": true,
+    "cloud": "Secure Cloud on-demand",
+    "container_disk_gb": 30,
+    "cost_per_hour_usd": 1.49,
+    "created_at_utc": "2026-07-12T20:57:04.918Z",
+    "delete_http_status": 204,
+    "delete_verified": true,
+    "deleted_at_utc": "2026-07-12T22:10:10.769952Z",
+    "estimated_total_cost_usd": 1.82,
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "gpu_count": 1,
+    "gpu_memory_mib": 81920,
+    "image_name": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+    "last_started_at_utc": "2026-07-12T20:57:04.914Z",
+    "other_pods_mutated": false,
+    "pod_id": "zd79jm0odi7x2j",
+    "pod_name": "codex-sae-jlens-v2-calibration-20260712",
+    "post_delete_account_inventory": [],
+    "post_delete_direct_get_http_status": 404,
+    "provider": "RunPod",
+    "recovery_artifacts": [
+      "startup_failures/cache_misroute/",
+      "startup_failures/missing_scipy/"
+    ],
+    "remote_secret_removed_before_delete": true,
+    "retrieval_audit": {
+      "calibration_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4",
+      "errors": [],
+      "independent_calibration_audit_sha256": "5f284a1b90d8e2972bcae82a147d72e1ad5aba82624e20411ce4f86163ba3340",
+      "listed_files": 16,
+      "remote_ledger_sha256": "67fb39023aaba43a30b27b109d667ce6e6910d8ede06e0e4b0350901b1b03860",
+      "status": "pass",
+      "verified_files": 16
+    },
+    "runtime_seconds_approx": 4385.856,
+    "volume_gb": 200
+  },
+  "schema_version": 1,
+  "status": "complete_outcome_masked_calibration_release"
+}

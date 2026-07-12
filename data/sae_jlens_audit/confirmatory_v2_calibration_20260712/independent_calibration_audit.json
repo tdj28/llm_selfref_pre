@@ -1,0 +1,11 @@
+{
+  "calibration_sha256": "ed9daed9bc00ebd43f0c8461ef0c2cb2c4b7702953f3a9d2bfb6a8153c3fb9d4",
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "errors": [],
+  "metric_rows": 144,
+  "n_errors": 0,
+  "plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "selected_rows": 24,
+  "status": "pass"
+}

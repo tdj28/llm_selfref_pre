@@ -1,0 +1,17 @@
+{
+  "candidate_pool_sha256": "0b617151284a4bdc491ce144cd9b34d08c172bb141ea03466e369f767d83793f",
+  "candidate_rows": 138,
+  "errors": [],
+  "family_counts": {
+    "A1:formality_politeness": 22,
+    "A1:hedging_uncertainty": 25,
+    "A1:refusal_safety": 19,
+    "A2:deception_dishonesty": 10,
+    "A2:pretending_impersonation": 11,
+    "A2:roleplay_persona": 51
+  },
+  "n_errors": 0,
+  "plan_manifest_sha256": "7807d6270aabaf1b9629cdaf94f1e4063e46278043f1c1b3de79cc9c2bdc36b3",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "status": "pass"
+}

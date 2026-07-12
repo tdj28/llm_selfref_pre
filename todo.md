@@ -404,11 +404,13 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   matcher, independent SciPy audit, and uniquely named RunPod wrapper.
 - [x] Commit and push the Stage 0 source, label snapshot, machine plan, and
   independent plan audit before starting GPU calibration.
-- [ ] Run Stage 0 on one uniquely named agent-owned single-GPU pod with at
+- [x] Run Stage 0 on one uniquely named agent-owned single-GPU pod with at
   least 70 GiB VRAM (A100 80 GB preferred); retrieve and hash-verify the
   compact calibration artifacts, then terminate that pod and verify deletion
-  without touching any other pod. RunPod had no qualifying capacity during
-  bounded attempts on 2026-07-12; no pod was created.
+  without touching any other pod. Pod `zd79jm0odi7x2j` completed all 144 rows
+  and 24 primary-caliper assignments; remote/local audits and 16 hashes pass,
+  DELETE returned 204, direct GET returned 404, and total cost was about
+  `$1.82`.
 - [x] Create and round-trip audit the exact private OSF project `sz2gb` that
   will hold preregistration materials and, after outcomes, residual shards.
   No draft or immutable registration exists yet.

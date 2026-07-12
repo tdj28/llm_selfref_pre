@@ -523,7 +523,8 @@ To generate a new confirmatory collection or judge pass, use
 | `data/sae_jlens_audit/confirmatory_v1_20260711/` | Completed 1,581-forward SAE/J-lens release with static projections, sparse pursuit, seven-layer paired trajectories, post-state and paired-reference analyses, six figure pairs, audits, runtime/cost ledger, and hashes. |
 | `data/sae_jlens_audit/neuronpedia_labels_20260712/` | Public label-provenance snapshot for all 65,536 IDs in the exact Goodfire SAE: 61,850 labels, 3,686 missing IDs, and all 484 source-object hashes. |
 | `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` | Independently audited, outcome-masked Stage 0 plan for selecting 18 hard negatives and six same-subfamily comparators before the final OSF-registered v2 experiment. |
-| `experiments/exp2_sae/*sae_jlens_v2*` | Two-stage v2 implementation: frozen semantic calibration plus result-free final-plan, residual, replay, A1/A2, reader-capacity, independent-audit, release, RunPod, and OSF scaffolding. The private OSF project exists at `sz2gb`; no registration or v2 outcome exists yet. |
+| `data/sae_jlens_audit/confirmatory_v2_calibration_20260712/` | Completed outcome-masked Stage 0 release with 144 telemetry rows, 24 primary-caliper assignments, exact lexicons, independent audits, recovery logs, hashes, and verified A100 deletion. |
+| `experiments/exp2_sae/*sae_jlens_v2*` | Two-stage v2 implementation: frozen semantic calibration plus result-free final-plan, residual, replay, A1/A2, 14-reader capacity ladder, exact null randomizations, independent-audit, release, RunPod, and OSF tooling. The private OSF project exists at `sz2gb`; no registration or Stage 1 target outcome exists yet. |
 | `experiments/exp1_elicitation/` | Earlier prompt, lexical, semantic-convergence, and paradox stress tests. |
 | `steering/` | Historical general-purpose SAE framework retained for implementation provenance; its README and draft paper are explicitly superseded and are not current evidence. |
 | `paper/main.tex` | Current causal manuscript. |
@@ -533,6 +534,7 @@ To generate a new confirmatory collection or judge pass, use
 | `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` | Technical comparison of sparse-feature and Jacobian-lens interventions plus the proposed open-model cross-test. |
 | `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` | Frozen threat model, artifact revisions, hypotheses, controls, holdouts, statistics, and failure rules for auditing SAE steering in J-space. |
 | `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | Completed split-access result, feature heterogeneity, artifact map, cost ledger, and permitted claim language. |
+| `docs/LLAMA70B_SAE_JLENS_V2_CALIBRATION_RESULTS.md` | Complete Stage 0 IDs, tokenizer lexicons, matching diagnostics, recovery history, cost/deletion ledger, and Stage 1 claim boundary. |
 | `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
 | `docs/CLAIM_LEDGER.md` | Claim-to-artifact map, permissible wording, and forbidden overclaims. |
 | `technical_blog_posts/` | Public-post source, four editable Gemma follow-ups, editorial handoff, and synchronized figure assets. |

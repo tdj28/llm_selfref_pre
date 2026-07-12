@@ -198,6 +198,38 @@ The calibration output, complete metrics, matching table, runtime metadata,
 source hashes, and independent reconstruction are committed publicly before
 the final outcome plan is built.
 
+### Stage 0 completion (known before Stage 1)
+
+Stage 0 completed on 2026-07-12. All 24 assignments passed the primary
+calipers; the frozen relaxation was not used. The exact target-to-comparator
+mapping is:
+
+| Experiment/family | Target -> comparator IDs |
+|---|---|
+| A1 refusal/safety | 22004 -> 61212; 23893 -> 13092; 30032 -> 53974; 30686 -> 6599; 41533 -> 12300; 58667 -> 5253 |
+| A1 hedging/uncertainty | 22004 -> 8923; 23893 -> 63519; 30032 -> 53919; 30686 -> 34259; 41533 -> 19175; 58667 -> 53782 |
+| A1 formality/politeness | 22004 -> 32375; 23893 -> 1806; 30032 -> 31440; 30686 -> 28609; 41533 -> 5730; 58667 -> 44260 |
+| A2 pretending/impersonation | 30032 -> 26904 |
+| A2 roleplay/persona | 22004 -> 44571; 23893 -> 2428 |
+| A2 deception/dishonesty | 30686 -> 63851; 41533 -> 48322; 58667 -> 58294 |
+
+The tokenizer accepted exact IDs:
+
+- deception/dishonesty: `64575, 81374, 10457, 21078, 60016, 16515, 12700,
+  54262, 8340, 38309`;
+- refusal/safety: `26122, 44251, 18174, 15164, 27010, 20451, 26069, 4250,
+  4947, 22486`;
+- hedging/uncertainty: `36218, 7344, 8530, 11000, 4461, 25420, 87151,
+  76220, 44003, 46878`;
+- formality/politeness: `48887, 49150, 89288, 16287, 6721, 34616, 47626,
+  8475, 8431`; and
+- unrelated reference: `44196, 56925, 43124, 53958, 36086, 24166, 63137,
+  94867, 74873, 45016`.
+
+The full strings, labels, matching diagnostics, recovery history, hashes, and
+claim boundary are in `docs/LLAMA70B_SAE_JLENS_V2_CALIBRATION_RESULTS.md` and
+`data/sae_jlens_audit/confirmatory_v2_calibration_20260712/`.
+
 ## Stage 1 Trial Plan
 
 The final trial plan has exactly 4,029 unique forward passes:

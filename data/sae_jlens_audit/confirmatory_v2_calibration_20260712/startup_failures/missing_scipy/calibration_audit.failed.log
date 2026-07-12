@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/audit_sae_jlens_v2_calibration.py", line 15, in <module>
+    from scipy.optimize import linear_sum_assignment
+ModuleNotFoundError: No module named 'scipy'
