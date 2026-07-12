@@ -42,6 +42,9 @@ immediately public and permanently recoverable.
 - `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` compares the two intervention
   families and defines the bounded open-model follow-up suggested by the 2026
   Jacobian-lens paper.
+- `docs/EXPERIMENT_INTEGRITY_SKILLS.md` is the reusable team playbook for
+  prospectively freezing, validating, executing, auditing, amending, and
+  releasing confirmatory experiments without outcome-contingent tuning.
 - `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` is the prospective protocol for the
   active Llama 3.3 70B forensic audit. It binds the exact public Goodfire SAE,
   Neuronpedia J-lens, matched SAE controls, random-J controls, threat model,
@@ -348,6 +351,25 @@ The steering framework can require substantial GPU memory, HuggingFace downloads
 ## Generated Artifacts
 
 Generated data usually belongs in `data/`, `out/`, or experiment-local `out/` directories. Ad hoc outputs are ignored, while explicitly allowlisted frozen releases are tracked for transparency. LaTeX build products and PDFs are ignored. Keep source artifacts, prompt definitions, scripts, paper `.tex`, compact figures/tables, manifests, and selected raw release bundles in git. Update `DATA_ARTIFACTS.md` whenever a release bundle is added or superseded.
+
+## Prospective Experiment Discipline
+
+Follow `docs/EXPERIMENT_INTEGRITY_SKILLS.md` for every new confirmatory GPU or
+API experiment. No target outcome may be generated or inspected until the
+human-readable protocol, result-free machine plan, runtime, confirmatory
+analysis, validator, failure rules, and claim boundary have passed the staged
+public audit and been pushed to a remote freeze commit.
+
+- Record the full freeze commit and plan-manifest hash in runtime metadata and
+  the final release.
+- Never edit frozen plan artifacts in place or tune sample size, controls,
+  seeds, prompts, endpoints, or analysis after seeing outcomes.
+- Preserve raw rows, failures, logs, remote/local hashes, and every frozen
+  control. Report negative and heterogeneous results without omission.
+- Put post-outcome work in separate files under a dated amendment that states
+  what was already observed. Never relabel it as confirmatory.
+- Call a Git-based freeze prospectively frozen, not formally preregistered,
+  unless it was also deposited with a recognized registry.
 
 ## Checkpoint Discipline
 

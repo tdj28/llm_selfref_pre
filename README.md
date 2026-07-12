@@ -528,6 +528,7 @@ To generate a new confirmatory collection or judge pass, use
 | `docs/CONFIRMATORY_PROTOCOL.md` | Frozen design, estimands, amendments, and interpretation rules. |
 | `docs/GOODFIRE_API_STATUS.md` | Verified legacy Goodfire API deprecation, current SteeringAPI distinction, and archival-access requirements. |
 | `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` | Technical comparison of sparse-feature and Jacobian-lens interventions plus the proposed open-model cross-test. |
+| `docs/EXPERIMENT_INTEGRITY_SKILLS.md` | Team playbook for outcome-blind prospective freezes, machine plans, public commit barriers, execution, amendments, audits, and transparent releases. |
 | `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` | Frozen threat model, artifact revisions, hypotheses, controls, holdouts, statistics, and failure rules for auditing SAE steering in J-space. |
 | `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | Completed split-access result, feature heterogeneity, artifact map, cost ledger, and permitted claim language. |
 | `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
