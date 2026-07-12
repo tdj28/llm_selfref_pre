@@ -82,6 +82,8 @@ def source_paths(calibration_path: Path, audit_path: Path) -> list[Path]:
     return [
         *(script_dir / name for name in names),
         REPO_ROOT / "docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md",
+        REPO_ROOT
+        / "docs/SAE_JLENS_V2_REQUEST_HARD_NEGATIVES_AND_COMPARATORS.md",
         REPO_ROOT / "experiments/exp2_sae/sae_jlens_requirements.txt",
         v1_plan / "PLAN_MANIFEST.json",
         v1_plan / "prompt_plan.jsonl",

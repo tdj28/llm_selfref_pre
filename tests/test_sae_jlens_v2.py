@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import tempfile
 import unittest
 from collections import Counter
 from pathlib import Path
@@ -14,6 +15,11 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     semantic_a1,
     semantic_a2,
 )
+from experiments.exp2_sae.osf_sae_jlens_v2 import (
+    PROJECT_TITLE,
+    registration_metadata_errors,
+)
+from experiments.exp2_sae.run_sae_jlens_v2 import result_inventory
 from experiments.exp2_sae.sae_jlens_v2_final_protocol import (
     array_sha256,
     build_final_trial_plan,
@@ -160,6 +166,63 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
         adjusted = holm_adjust(raw)
         ordered = sorted(zip(raw, adjusted))
         self.assertEqual([value for _, value in ordered], sorted(value for _, value in ordered))
+
+    def test_registration_gate_requires_public_immutable_bound_views(self) -> None:
+        registration_id = "abc12"
+        project_id = "sz2gb"
+        freeze_commit = "a" * 40
+        plan_hash = "b" * 64
+        data = {
+            "id": registration_id,
+            "type": "registrations",
+            "attributes": {
+                "registration": True,
+                "public": True,
+                "withdrawn": False,
+                "pending_registration_approval": False,
+                "pending_embargo_approval": False,
+                "date_registered": "2026-07-12T00:00:00Z",
+                "title": PROJECT_TITLE,
+                "registration_supplement": "Open-Ended Registration",
+                "registered_meta": {
+                    "summary": f"freeze {freeze_commit}; plan {plan_hash}"
+                },
+            },
+            "relationships": {
+                "registered_from": {
+                    "links": {"related": f"https://api.osf.io/v2/nodes/{project_id}/"}
+                }
+            },
+        }
+        errors = registration_metadata_errors(
+            data,
+            data,
+            registration_id=registration_id,
+            project_id=project_id,
+            freeze_commit=freeze_commit,
+            plan_manifest_sha256=plan_hash,
+        )
+        self.assertEqual(errors, [])
+        pending = {**data, "attributes": {**data["attributes"], "public": False}}
+        self.assertIn(
+            "anonymous registration is not public",
+            registration_metadata_errors(
+                data,
+                pending,
+                registration_id=registration_id,
+                project_id=project_id,
+                freeze_commit=freeze_commit,
+                plan_manifest_sha256=plan_hash,
+            ),
+        )
+
+    def test_raw_result_manifest_excludes_live_logs(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "stable.json").write_text("{}\n", encoding="utf-8")
+            (root / "run.log").write_text("still live\n", encoding="utf-8")
+            names = {row["path"] for row in result_inventory(root)}
+        self.assertEqual(names, {"stable.json"})
 
     def synthetic_calibration(self) -> dict[str, object]:
         candidates = semantic_candidate_pool(self.repo_root)

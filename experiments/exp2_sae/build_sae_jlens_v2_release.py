@@ -26,6 +26,7 @@ from experiments.exp2_sae.sae_jlens_v2_protocol import (  # noqa: E402
 
 
 DEFAULT_PLAN_DIR = REPO_ROOT / FINAL_PLAN_DIR
+REMOTE_RUN_MARKER = "/sae_jlens_v2_20260712/"
 
 
 def utc_now() -> str:
@@ -45,6 +46,40 @@ def inventory(run_dir: Path) -> list[dict[str, Any]]:
         and path.name not in excluded
         and not path.name.endswith(".tmp")
     ]
+
+
+def verify_remote_checksums(run_dir: Path) -> dict[str, Any]:
+    ledger_path = run_dir / "REMOTE_SHA256SUMS.txt"
+    errors = []
+    rows = []
+    for line in ledger_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        digest, remote_path = line.split(maxsplit=1)
+        if REMOTE_RUN_MARKER not in remote_path:
+            errors.append(f"unexpected remote checksum path: {remote_path}")
+            continue
+        relative = remote_path.split(REMOTE_RUN_MARKER, 1)[1]
+        local = run_dir / relative
+        observed = sha256_file(local) if local.is_file() else None
+        rows.append(
+            {
+                "path": relative,
+                "remote_sha256": digest,
+                "local_sha256": observed,
+                "matches": observed == digest,
+            }
+        )
+        if observed != digest:
+            errors.append(f"remote/local checksum differs: {relative}")
+    if not rows:
+        errors.append("remote checksum ledger is empty")
+    return {
+        "status": "pass" if not errors else "fail",
+        "rows": len(rows),
+        "errors": errors,
+        "files": rows,
+    }
 
 
 def verify_osf_uploads(
@@ -84,6 +119,22 @@ def build(plan_dir: Path, run_dir: Path, upload_manifest_path: Path) -> None:
     )
     if run.get("status") != "complete" or audit.get("status") != "pass":
         raise ValueError("Complete run and passing independent audit are required")
+    runpod = json.loads(
+        (run_dir / "RUNPOD_LEDGER.json").read_text(encoding="utf-8")
+    )
+    if (
+        runpod.get("delete_verified") is not True
+        or runpod.get("agent_owned") is not True
+        or runpod.get("other_pods_mutated") is not False
+        or runpod.get("delete_http_status") != 204
+        or runpod.get("post_delete_direct_get_http_status") != 404
+        or runpod.get("post_delete_account_inventory") != []
+        or runpod.get("remote_secret_removed_before_delete") is not True
+    ):
+        raise ValueError("RunPod ownership/deletion evidence differs")
+    remote = verify_remote_checksums(run_dir)
+    if remote["status"] != "pass":
+        raise ValueError(f"Remote/local retrieval audit failed: {remote['errors']}")
     plan_hash = sha256_file(plan_dir / "PLAN_MANIFEST.json")
     if run.get("plan_manifest_sha256") != plan_hash:
         raise ValueError("Run binds a different final plan")
@@ -113,6 +164,8 @@ def build(plan_dir: Path, run_dir: Path, upload_manifest_path: Path) -> None:
             "manifest_sha256": sha256_file(upload_manifest_path),
             "files": uploads["files"],
         },
+        "remote_retrieval_audit": remote,
+        "runpod_deletion": runpod,
         "independent_audit": {
             "path": "analysis/independent_audit.json",
             "sha256": sha256_file(run_dir / "analysis/independent_audit.json"),

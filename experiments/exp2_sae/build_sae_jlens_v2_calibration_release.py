@@ -111,8 +111,16 @@ def build(plan_dir: Path, run_dir: Path) -> None:
         errors.append("calibration metric row count differs")
     if calibration_audit.get("selected_rows") != 24:
         errors.append("calibration selected row count differs")
-    if ledger.get("delete_verified") is not True:
-        errors.append("RunPod deletion is not verified")
+    if (
+        ledger.get("delete_verified") is not True
+        or ledger.get("agent_owned") is not True
+        or ledger.get("other_pods_mutated") is not False
+        or ledger.get("delete_http_status") != 204
+        or ledger.get("post_delete_direct_get_http_status") != 404
+        or ledger.get("post_delete_account_inventory") != []
+        or ledger.get("remote_secret_removed_before_delete") is not True
+    ):
+        errors.append("RunPod ownership/deletion evidence differs")
     remote = verify_remote_checksums(run_dir)
     errors.extend(remote["errors"])
     if errors:

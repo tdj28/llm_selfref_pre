@@ -6,12 +6,14 @@ from __future__ import annotations
 import argparse
 import csv
 import gc
+import hashlib
 import json
 import math
 import os
 import subprocess
 import sys
 import time
+import urllib.request
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -64,6 +66,9 @@ from experiments.exp2_sae.sae_jlens_v2_protocol import (  # noqa: E402
 DEFAULT_PLAN_DIR = REPO_ROOT / FINAL_PLAN_DIR
 DEFAULT_OUTDIR = Path("/workspace/results/sae_jlens_v2_20260712")
 DEFAULT_CACHE_DIR = Path("/workspace/hf-cache")
+EXPECTED_REGISTRATION_TITLE = (
+    "SAE-Jacobian Lens V2: Hard Negatives and Reader Capacity"
+)
 INDEX_FIELDS = [
     "trial_id",
     "execution_order",
@@ -85,6 +90,73 @@ INDEX_FIELDS = [
 
 class ProtocolViolation(RuntimeError):
     """A fail-closed discrepancy from the frozen final plan."""
+
+
+def public_json(url: str) -> dict[str, Any]:
+    request = urllib.request.Request(
+        url, headers={"Accept": "application/vnd.api+json"}
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        return json.loads(response.read())
+
+
+def public_sha256(url: str) -> str:
+    digest = hashlib.sha256()
+    with urllib.request.urlopen(url, timeout=600) as response:
+        for chunk in iter(lambda: response.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def verify_public_registration(gate: dict[str, Any], plan_hash: str, head: str) -> None:
+    if gate.get("public_anonymous_access_verified") is not True:
+        raise ProtocolViolation("Registration gate lacks anonymous-access verification")
+    if gate.get("registered_response_binding_verified") is not True:
+        raise ProtocolViolation("Registration gate lacks response-binding verification")
+    registration_id = str(gate["registration_id"])
+    api_url = f"https://api.osf.io/v2/registrations/{registration_id}/"
+    data = public_json(api_url)["data"]
+    attributes = data.get("attributes", {})
+    if data.get("id") != registration_id or data.get("type") != "registrations":
+        raise ProtocolViolation("Public OSF registration identity differs")
+    if (
+        attributes.get("registration") is not True
+        or attributes.get("public") is not True
+        or attributes.get("withdrawn") is not False
+        or attributes.get("pending_registration_approval") is not False
+        or attributes.get("pending_embargo_approval") is not False
+        or not attributes.get("date_registered")
+        or attributes.get("title") != EXPECTED_REGISTRATION_TITLE
+        or attributes.get("registration_supplement") != "Open-Ended Registration"
+    ):
+        raise ProtocolViolation("Public OSF registration state is not accepted")
+    registered_meta = json.dumps(attributes.get("registered_meta", {}), sort_keys=True)
+    if head not in registered_meta or plan_hash not in registered_meta:
+        raise ProtocolViolation("Public OSF responses do not bind this checkout and plan")
+    registered_from = json.dumps(
+        data.get("relationships", {}).get("registered_from", {}), sort_keys=True
+    )
+    project_id = str(gate.get("project_id", ""))
+    if not project_id or project_id not in registered_from:
+        raise ProtocolViolation("Public OSF registration source project differs")
+    files = gate.get("registered_snapshot_files", [])
+    expected_names = {
+        "OSF_REGISTRATION_SUMMARY.md",
+        "SAE_JLENS_V2_PREREGISTRATION_PACKET.zip",
+        "OSF_PACKET_MANIFEST.json",
+    }
+    if len(files) != 3 or {row.get("name") for row in files} != expected_names:
+        raise ProtocolViolation("Registered OSF packet file set differs")
+    for row in files:
+        expected_hash = str(row.get("sha256", ""))
+        download_url = str(row.get("download_url", ""))
+        if (
+            len(expected_hash) != 64
+            or not download_url.startswith("https://")
+            or row.get("anonymous_download_sha256") != expected_hash
+            or public_sha256(download_url) != expected_hash
+        ):
+            raise ProtocolViolation(f"Registered OSF file differs: {row.get('name')}")
 
 
 def git_head() -> str:
@@ -112,17 +184,20 @@ def verify_plan_and_registration(
             raise ProtocolViolation(f"Final plan source differs: {path}")
 
     gate = json.loads(registration_gate_path.read_text(encoding="utf-8"))
+    plan_hash = sha256_file(manifest_path)
+    head = git_head()
     if gate.get("status") != "accepted_public_registration":
         raise ProtocolViolation("OSF registration gate is not accepted and public")
-    if gate.get("plan_manifest_sha256") != sha256_file(manifest_path):
+    if gate.get("plan_manifest_sha256") != plan_hash:
         raise ProtocolViolation("OSF registration binds a different plan manifest")
-    if gate.get("freeze_commit") != git_head():
+    if gate.get("freeze_commit") != head:
         raise ProtocolViolation("Runtime checkout differs from OSF-bound freeze commit")
     registration_url = str(gate.get("registration_url", ""))
     if not registration_url.startswith("https://osf.io/"):
         raise ProtocolViolation("OSF registration URL differs")
     if not gate.get("registration_id"):
         raise ProtocolViolation("OSF registration ID is absent")
+    verify_public_registration(gate, plan_hash, head)
     return manifest, gate
 
 
@@ -263,9 +338,12 @@ def validate_completed_shard(
     from safetensors import safe_open
 
     with safe_open(paths[0], framework="pt", device="cpu") as handle:
-        shape = tuple(handle.get_tensor("residuals").shape)
+        residuals = handle.get_tensor("residuals")
+        shape = tuple(residuals.shape)
     if shape != (len(planned), len(TRAJECTORY_LAYERS), len(POSITIONS), MODEL_WIDTH):
         raise ProtocolViolation(f"Completed residual shard shape differs: {paths[0]}")
+    if str(residuals.dtype) != "torch.bfloat16":
+        raise ProtocolViolation(f"Completed residual shard dtype differs: {paths[0]}")
     readouts = load_jsonl(paths[1])
     index = load_jsonl(paths[2])
     expected_ids = [row["trial_id"] for row in planned]
@@ -562,7 +640,9 @@ def result_inventory(outdir: Path) -> list[dict[str, Any]]:
             "sha256": sha256_file(path),
         }
         for path in sorted(outdir.rglob("*"))
-        if path.is_file() and path.name not in excluded and not path.name.endswith(".tmp")
+        if path.is_file()
+        and path.name not in excluded
+        and not path.name.endswith((".tmp", ".log"))
     ]
 
 

@@ -5,7 +5,7 @@ REPO_DIR="${REPO_DIR:-/workspace/CONSCIOUS}"
 PLAN_DIR="${PLAN_DIR:-${REPO_DIR}/data/sae_jlens_audit/confirmatory_v2_plan_20260712}"
 OUTDIR="${OUTDIR:-/workspace/results/sae_jlens_v2_20260712}"
 CACHE_DIR="${CACHE_DIR:-/workspace/hf-cache}"
-REGISTRATION_GATE="${REGISTRATION_GATE:-${REPO_DIR}/data/sae_jlens_audit/confirmatory_v2_registration_20260712/OSF_REGISTRATION_GATE.json}"
+REGISTRATION_GATE="${REGISTRATION_GATE:-/workspace/registration/OSF_REGISTRATION_GATE.json}"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 EXPECTED_COMMIT="${EXPECTED_COMMIT:?EXPECTED_COMMIT is required}"
 

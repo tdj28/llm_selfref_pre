@@ -66,6 +66,7 @@ def request_json(
     *,
     payload: dict[str, Any] | None = None,
     expected: tuple[int, ...] = (200,),
+    authenticated: bool = True,
 ) -> dict[str, Any]:
     url = (
         path_or_url
@@ -73,10 +74,9 @@ def request_json(
         else f"{API_ROOT}{path_or_url}"
     )
     data = None if payload is None else json.dumps(payload).encode("utf-8")
-    headers = {
-        "Authorization": f"Bearer {token_from_environment()}",
-        "Accept": "application/vnd.api+json",
-    }
+    headers = {"Accept": "application/vnd.api+json"}
+    if authenticated:
+        headers["Authorization"] = f"Bearer {token_from_environment()}"
     if data is not None:
         headers["Content-Type"] = "application/vnd.api+json"
     request = urllib.request.Request(
@@ -232,12 +232,12 @@ def storage_root(project_id: str) -> dict[str, Any]:
     return matches[0]
 
 
-def list_files(url: str) -> list[dict[str, Any]]:
-    payload = request_json("GET", url)
+def list_files(url: str, *, authenticated: bool = True) -> list[dict[str, Any]]:
+    payload = request_json("GET", url, authenticated=authenticated)
     rows = list(payload.get("data", []))
     next_url = payload.get("links", {}).get("next")
     while next_url:
-        payload = request_json("GET", next_url)
+        payload = request_json("GET", next_url, authenticated=authenticated)
         rows.extend(payload.get("data", []))
         next_url = payload.get("links", {}).get("next")
     return rows
@@ -305,7 +305,12 @@ def ensure_folder(project_id: str, name: str) -> dict[str, Any]:
     return row
 
 
-def folder_children_url(project_id: str, folder: dict[str, Any]) -> str:
+def folder_children_url(
+    resource_id: str,
+    folder: dict[str, Any],
+    *,
+    resource_type: str = "nodes",
+) -> str:
     related = (
         folder.get("relationships", {})
         .get("files", {})
@@ -316,14 +321,16 @@ def folder_children_url(project_id: str, folder: dict[str, Any]) -> str:
     if related:
         return str(related)
     folder_id = str(folder["id"]).split("/")[-2 if str(folder["id"]).endswith("/") else -1]
-    return f"{API_ROOT}/nodes/{project_id}/files/osfstorage/{folder_id}/"
-
-
-def remote_sha256(url: str) -> str:
-    request = urllib.request.Request(
-        url,
-        headers={"Authorization": f"Bearer {token_from_environment()}"},
+    return (
+        f"{API_ROOT}/{resource_type}/{resource_id}/files/osfstorage/{folder_id}/"
     )
+
+
+def remote_sha256(url: str, *, authenticated: bool = True) -> str:
+    headers = {}
+    if authenticated:
+        headers["Authorization"] = f"Bearer {token_from_environment()}"
+    request = urllib.request.Request(url, headers=headers)
     digest = hashlib.sha256()
     with urllib.request.urlopen(request, timeout=600) as response:
         for chunk in iter(lambda: response.read(1024 * 1024), b""):
@@ -565,6 +572,242 @@ def cmd_audit_draft(args: argparse.Namespace) -> None:
         raise SystemExit(1)
 
 
+def registration_metadata_errors(
+    authenticated_data: dict[str, Any],
+    public_data: dict[str, Any],
+    *,
+    registration_id: str,
+    project_id: str,
+    freeze_commit: str,
+    plan_manifest_sha256: str,
+) -> list[str]:
+    """Validate the immutable/public registration without trusting one view."""
+    errors: list[str] = []
+    if authenticated_data.get("id") != registration_id:
+        errors.append("authenticated registration ID differs")
+    if public_data.get("id") != registration_id:
+        errors.append("anonymous registration ID differs")
+    if authenticated_data.get("type") != "registrations":
+        errors.append("authenticated resource is not a registration")
+    if public_data.get("type") != "registrations":
+        errors.append("anonymous resource is not a registration")
+    for label, values in (
+        ("authenticated", authenticated_data.get("attributes", {})),
+        ("anonymous", public_data.get("attributes", {})),
+    ):
+        if values.get("registration") is not True:
+            errors.append(f"{label} resource is not immutable registration data")
+        if values.get("public") is not True:
+            errors.append(f"{label} registration is not public")
+        if values.get("withdrawn") is not False:
+            errors.append(f"{label} registration is withdrawn or ambiguous")
+        if values.get("pending_registration_approval") is not False:
+            errors.append(f"{label} registration approval is pending or ambiguous")
+        if values.get("pending_embargo_approval") is not False:
+            errors.append(f"{label} embargo approval is pending or ambiguous")
+        if not values.get("date_registered"):
+            errors.append(f"{label} registration date is absent")
+        if values.get("title") != PROJECT_TITLE:
+            errors.append(f"{label} registration title differs")
+        if values.get("registration_supplement") != OPEN_ENDED_SCHEMA_NAME:
+            errors.append(f"{label} registration schema differs")
+    for label, data in (
+        ("authenticated", authenticated_data),
+        ("anonymous", public_data),
+    ):
+        registered_meta = json.dumps(
+            data.get("attributes", {}).get("registered_meta", {}),
+            sort_keys=True,
+        )
+        if freeze_commit not in registered_meta:
+            errors.append(f"{label} registered responses do not bind the freeze commit")
+        if plan_manifest_sha256 not in registered_meta:
+            errors.append(f"{label} registered responses do not bind the plan manifest")
+        registered_from = json.dumps(
+            data.get("relationships", {}).get("registered_from", {}),
+            sort_keys=True,
+        )
+        if project_id not in registered_from:
+            errors.append(
+                f"{label} registration does not identify the frozen source project"
+            )
+    return errors
+
+
+def registration_snapshot_files(
+    registration_id: str, folder_name: str
+) -> list[dict[str, Any]]:
+    providers = request_json("GET", f"/registrations/{registration_id}/files/")
+    roots = [
+        row
+        for row in providers.get("data", [])
+        if row.get("attributes", {}).get("name") == "osfstorage"
+    ]
+    if len(roots) != 1:
+        raise OSFError(
+            f"Expected one registration OSF Storage provider, found {len(roots)}"
+        )
+    root_url = f"{API_ROOT}/registrations/{registration_id}/files/osfstorage/"
+    folders = [
+        row
+        for row in list_files(root_url)
+        if row.get("attributes", {}).get("name") == folder_name
+        and row.get("attributes", {}).get("kind") == "folder"
+    ]
+    if len(folders) != 1:
+        raise OSFError(
+            f"Expected one registered folder named {folder_name!r}, "
+            f"found {len(folders)}"
+        )
+    children_url = folder_children_url(
+        registration_id, folders[0], resource_type="registrations"
+    )
+    return list_files(children_url)
+
+
+def cmd_registration_gate(args: argparse.Namespace) -> None:
+    project = json.loads(args.project_record.read_text(encoding="utf-8"))
+    packet_dir = args.packet_dir.resolve()
+    packet_manifest_path = packet_dir / "OSF_PACKET_MANIFEST.json"
+    packet_manifest = json.loads(packet_manifest_path.read_text(encoding="utf-8"))
+    plan_manifest_path = args.plan_manifest.resolve()
+    plan_hash = sha256_file(plan_manifest_path)
+    freeze_commit = str(args.freeze_commit)
+    errors: list[str] = []
+    if packet_manifest.get("freeze_commit") != freeze_commit:
+        errors.append("OSF packet freeze commit differs")
+    if packet_manifest.get("plan_manifest_sha256") != plan_hash:
+        errors.append("OSF packet plan-manifest binding differs")
+    plan_project_path = plan_manifest_path.parent / "OSF_PROJECT.json"
+    if not plan_project_path.is_file():
+        errors.append("final plan OSF project record is absent")
+    else:
+        plan_project = json.loads(plan_project_path.read_text(encoding="utf-8"))
+        if plan_project.get("id") != project.get("id"):
+            errors.append("OSF project record differs from the final plan")
+
+    registration_id = str(args.registration_id)
+    authenticated = request_json(
+        "GET", f"/registrations/{registration_id}/"
+    )["data"]
+    anonymous = request_json(
+        "GET",
+        f"/registrations/{registration_id}/",
+        authenticated=False,
+    )["data"]
+    errors.extend(
+        registration_metadata_errors(
+            authenticated,
+            anonymous,
+            registration_id=registration_id,
+            project_id=str(project["id"]),
+            freeze_commit=freeze_commit,
+            plan_manifest_sha256=plan_hash,
+        )
+    )
+
+    expected_names = (
+        "OSF_REGISTRATION_SUMMARY.md",
+        "SAE_JLENS_V2_PREREGISTRATION_PACKET.zip",
+        "OSF_PACKET_MANIFEST.json",
+    )
+    expected = {name: packet_dir / name for name in expected_names}
+    missing = [name for name, path in expected.items() if not path.is_file()]
+    if missing:
+        errors.append(f"local OSF packet files are missing: {missing}")
+    if not missing:
+        if sha256_file(expected[expected_names[0]]) != packet_manifest.get(
+            "summary", {}
+        ).get("sha256"):
+            errors.append("local OSF summary differs from its packet manifest")
+        if sha256_file(expected[expected_names[1]]) != packet_manifest.get(
+            "packet", {}
+        ).get("sha256"):
+            errors.append("local OSF archive differs from its packet manifest")
+
+    registered_files = registration_snapshot_files(
+        registration_id, "preregistration"
+    )
+    by_name: dict[str, list[dict[str, Any]]] = {}
+    for row in registered_files:
+        name = str(row.get("attributes", {}).get("name"))
+        by_name.setdefault(name, []).append(row)
+    if set(by_name) != set(expected_names):
+        errors.append(
+            "registered preregistration folder is not the exact three-file packet"
+        )
+    file_records = []
+    for name, local_path in expected.items():
+        matches = by_name.get(name, [])
+        if len(matches) != 1:
+            errors.append(f"registered packet file count differs: {name}")
+            continue
+        remote = matches[0]
+        attributes = remote.get("attributes", {})
+        download_url = str(remote.get("links", {}).get("download", ""))
+        local_size = local_path.stat().st_size if local_path.is_file() else None
+        local_hash = sha256_file(local_path) if local_path.is_file() else None
+        if int(attributes.get("size", -1)) != local_size:
+            errors.append(f"registered packet byte count differs: {name}")
+        authenticated_hash = (
+            remote_sha256(download_url) if download_url.startswith("https://") else None
+        )
+        public_hash = (
+            remote_sha256(download_url, authenticated=False)
+            if download_url.startswith("https://")
+            else None
+        )
+        if authenticated_hash != local_hash or public_hash != local_hash:
+            errors.append(f"registered packet hash/public access differs: {name}")
+        file_records.append(
+            {
+                "name": name,
+                "bytes": local_size,
+                "sha256": local_hash,
+                "authenticated_download_sha256": authenticated_hash,
+                "anonymous_download_sha256": public_hash,
+                "file_id": remote.get("id"),
+                "download_url": download_url,
+            }
+        )
+    if errors:
+        raise OSFError(f"Accepted registration gate failed: {errors}")
+
+    attributes = authenticated["attributes"]
+    links = authenticated.get("links", {})
+    gate = {
+        "schema_version": 1,
+        "status": "accepted_public_registration",
+        "captured_at_utc": utc_now(),
+        "registration_id": registration_id,
+        "registration_url": links.get("html")
+        or f"https://osf.io/{registration_id}/",
+        "registration_api_url": links.get("self")
+        or f"{API_ROOT}/registrations/{registration_id}/",
+        "registered_at_utc": attributes["date_registered"],
+        "project_id": str(project["id"]),
+        "freeze_commit": freeze_commit,
+        "plan_manifest_sha256": plan_hash,
+        "packet_manifest_sha256": sha256_file(packet_manifest_path),
+        "public_anonymous_access_verified": True,
+        "registered_response_binding_verified": True,
+        "registered_snapshot_files": file_records,
+    }
+    write_json(args.out.resolve(), gate)
+    print(
+        json.dumps(
+            {
+                "status": "pass",
+                "registration_id": registration_id,
+                "registration_url": gate["registration_url"],
+                "registered_snapshot_files": len(file_records),
+                "gate": str(args.out.resolve()),
+            },
+            sort_keys=True,
+        )
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -600,6 +843,17 @@ def parse_args() -> argparse.Namespace:
     audit_draft_parser.add_argument("--summary", type=Path, required=True)
     audit_draft_parser.add_argument("--out", type=Path)
     audit_draft_parser.set_defaults(func=cmd_audit_draft)
+    registration_gate = subparsers.add_parser(
+        "registration-gate",
+        help="Verify a submitted registration and emit the Stage 1 runtime gate",
+    )
+    registration_gate.add_argument("--registration-id", required=True)
+    registration_gate.add_argument("--project-record", type=Path, required=True)
+    registration_gate.add_argument("--plan-manifest", type=Path, required=True)
+    registration_gate.add_argument("--packet-dir", type=Path, required=True)
+    registration_gate.add_argument("--freeze-commit", required=True)
+    registration_gate.add_argument("--out", type=Path, required=True)
+    registration_gate.set_defaults(func=cmd_registration_gate)
     return parser.parse_args()
 
 

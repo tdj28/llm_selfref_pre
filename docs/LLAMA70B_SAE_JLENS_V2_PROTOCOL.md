@@ -399,6 +399,13 @@ The study fails closed if:
 - the OSF Registration and Git freeze identifiers are absent from runtime
   metadata.
 
+The accepted-registration gate is generated only after authenticated and
+anonymous OSF API views agree that the registration is public, immutable,
+nonpending, nonwithdrawn, bound to the exact Git commit and plan-manifest hash,
+and contains public hash-matching snapshots of all three registration packet
+files. The gate is transferred outside the frozen Git checkout so it cannot
+invalidate the clean-worktree runtime check.
+
 The only automatic hardware path is one BF16 180 GB GPU. A different topology,
 quantized outcome run, changed coefficient, changed reader, replacement
 feature, or altered sample requires a dated amendment committed and registered

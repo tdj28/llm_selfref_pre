@@ -204,6 +204,9 @@ def independent_a2_points(rows: list[dict[str, Any]]) -> dict[str, float]:
 def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     errors: list[str] = []
     run = json.loads((run_dir / "RUN_COMPLETE.json").read_text(encoding="utf-8"))
+    result_manifest = json.loads(
+        (run_dir / "RESULT_MANIFEST.json").read_text(encoding="utf-8")
+    )
     gate = json.loads(
         (run_dir / "replay_equivalence_gate.json").read_text(encoding="utf-8")
     )
@@ -215,6 +218,16 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         plan_dir / "PLAN_MANIFEST.json"
     ):
         errors.append("run plan binding differs")
+    if result_manifest.get("status") != "complete":
+        errors.append("raw result manifest is not complete")
+    for record in result_manifest.get("files", []):
+        path = run_dir / record["path"]
+        if not path.is_file():
+            errors.append(f"raw result-manifest file is missing: {record['path']}")
+        elif path.stat().st_size != int(record["bytes"]):
+            errors.append(f"raw result-manifest bytes differ: {record['path']}")
+        elif sha256_file(path) != record["sha256"]:
+            errors.append(f"raw result-manifest hash differs: {record['path']}")
 
     index = csv_rows(run_dir / "residual_index.csv")
     if len(index) != 4_029 or len({row["trial_id"] for row in index}) != 4_029:
@@ -224,9 +237,10 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     from safetensors import safe_open
 
     shard_names = sorted({row["shard"] for row in index})
-    if len(shard_names) != 16:
-        errors.append(f"residual shard count differs: {len(shard_names)}")
-    for shard_name in shard_names:
+    expected_shards = [f"part-{index:03d}.safetensors" for index in range(16)]
+    if shard_names != expected_shards:
+        errors.append(f"residual shard identities differ: {shard_names}")
+    for shard_index, shard_name in enumerate(shard_names):
         path = run_dir / "residuals" / shard_name
         with safe_open(path, framework="pt", device="cpu") as handle:
             tensor = handle.get_tensor("residuals")
@@ -234,6 +248,24 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
             errors.append(f"residual shard shape differs: {shard_name}")
         if str(tensor.dtype) != "torch.bfloat16":
             errors.append(f"residual shard dtype differs: {shard_name}")
+        expected_rows = 256 if shard_index < 15 else 189
+        if int(tensor.shape[0]) != expected_rows:
+            errors.append(f"residual shard row count differs: {shard_name}")
+        shard_index_rows = sorted(
+            (row for row in index if row["shard"] == shard_name),
+            key=lambda row: int(row["row_offset"]),
+        )
+        if [int(row["row_offset"]) for row in shard_index_rows] != list(
+            range(int(tensor.shape[0]))
+        ):
+            errors.append(f"residual row offsets differ: {shard_name}")
+        readout_path = run_dir / "readouts" / f"{Path(shard_name).stem}.jsonl"
+        with readout_path.open(encoding="utf-8") as handle:
+            readout_rows = [json.loads(line) for line in handle if line.strip()]
+        if [row["trial_id"] for row in shard_index_rows] != [
+            row["trial_id"] for row in readout_rows
+        ]:
+            errors.append(f"residual/readout trial mapping differs: {shard_name}")
         shard_rows += int(tensor.shape[0])
     if shard_rows != 4_029:
         errors.append(f"residual shard row total differs: {shard_rows}")
@@ -245,12 +277,38 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     semantic_rows = [row for row in raw_rows if row.get("source_v1_trial_id") is None]
     if len(replay_rows) != 1_581 or len(semantic_rows) != 2_448:
         errors.append("readout replay/semantic split differs")
+    lexicon = json.loads(
+        (run_dir / "lexicon_tokens.json").read_text(encoding="utf-8")
+    )
+    expected_groups = set(lexicon.get("combined", {}).get("accepted", {}))
+    expected_grid = {
+        (layer, position, transport)
+        for layer in TRAJECTORY_LAYERS
+        for transport in TRANSPORTS
+        for position in POSITIONS
+    }
     for row in raw_rows:
-        if len(row.get("readouts", [])) != 147:
+        readouts = row.get("readouts", [])
+        if len(readouts) != 147 or {
+            (int(value["layer"]), value["position"], value["transport"])
+            for value in readouts
+        } != expected_grid:
             errors.append(f"readout transport grid differs: {row.get('trial_id')}")
             break
         expects_tokens = row.get("source_v1_trial_id") is not None
-        for readout in row["readouts"]:
+        intervention = row.get("intervention", {})
+        is_zero = row.get("condition_family") == "zero"
+        if is_zero != bool(intervention.get("zero_is_true_noop")):
+            errors.append(f"intervention no-op marker differs: {row.get('trial_id')}")
+            break
+        vector_norm = float(intervention.get("vector_norm", math.nan))
+        vector_hash = intervention.get("vector_sha256_bfloat16")
+        if (is_zero and (vector_norm != 0.0 or vector_hash is not None)) or (
+            not is_zero and (not math.isfinite(vector_norm) or vector_norm <= 0 or not vector_hash)
+        ):
+            errors.append(f"intervention telemetry differs: {row.get('trial_id')}")
+            break
+        for readout in readouts:
             token_values = readout.get("v1_token_logits")
             if expects_tokens and (token_values is None or len(token_values) != 67):
                 errors.append(f"replay token readout differs: {row.get('trial_id')}")
@@ -258,7 +316,22 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
             if not expects_tokens and token_values is not None:
                 errors.append(f"semantic row contains replay token logits: {row.get('trial_id')}")
                 break
-        if errors and errors[-1].startswith(("replay token", "semantic row")):
+            groups = readout.get("group_logits", {})
+            if set(groups) != expected_groups or not all(
+                math.isfinite(float(value)) for value in groups.values()
+            ):
+                errors.append(f"readout semantic groups differ: {row.get('trial_id')}")
+                break
+            if not all(
+                math.isfinite(float(readout.get(field, math.nan)))
+                and float(readout[field]) >= 0
+                for field in ("source_norm", "transported_norm")
+            ):
+                errors.append(f"readout norms differ: {row.get('trial_id')}")
+                break
+        if errors and errors[-1].startswith(
+            ("replay token", "semantic row", "readout semantic", "readout norms")
+        ):
             break
 
     analysis_dir = run_dir / "analysis"
