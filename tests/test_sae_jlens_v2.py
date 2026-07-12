@@ -19,6 +19,7 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     signflip_pvalues,
     weighted_auc_draws,
 )
+from experiments.exp2_sae.build_sae_jlens_v2_osf_packet import summary_text
 from experiments.exp2_sae.osf_sae_jlens_v2 import (
     PROJECT_TITLE,
     registration_metadata_errors,
@@ -79,6 +80,25 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
         self.assertTrue(
             all(not roots.search(row["description"]) for row in rows if row["experiment"] == "A1")
         )
+
+    def test_osf_summary_uses_roundtrip_stable_comparator_text(self) -> None:
+        selected = [
+            {
+                "experiment": "A1",
+                "semantic_family": "refusal_safety",
+                "target_feature_id": 30032,
+                "feature_id": 61212,
+                "caliper_attempt": "primary",
+            }
+        ]
+        summary = summary_text(
+            self.repo_root / "data/sae_jlens_audit/confirmatory_v2_plan_20260712",
+            "f" * 40,
+            "a" * 64,
+            selected,
+        )
+        self.assertIn("target 30032 to comparator 61212", summary)
+        self.assertNotIn("->", summary)
 
     def test_equal_metric_fixture_selects_24_unique_features(self) -> None:
         candidates = semantic_candidate_pool(self.repo_root)

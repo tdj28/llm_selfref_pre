@@ -27,6 +27,17 @@ The Stage 0 Git freeze is a prospective public precommitment for calibration.
 The accepted OSF Registration will constitute preregistration of Stage 1. The
 registration must disclose all Stage 0 measurements and all prior v1 results.
 
+### Pre-registration transport correction (2026-07-12)
+
+Public freeze `5058b8ec254028cee44ec85b3876adae761b5119` was superseded before
+registration and before any Stage 1 outcome existed. The first editable-draft
+round trip showed that OSF converted each `>` in the packet's ASCII comparator
+arrows to `&gt;`, causing the intentionally exact summary audit to fail. The
+packet now uses OSF-stable plain text, and the uploader replaces changed files
+through OSF's version endpoint before rechecking downloaded hashes. No prompt,
+comparator, endpoint, threshold, analysis, control, seed, or claim boundary
+changed.
+
 ## Prior Knowledge
 
 The completed v1 release was inspected before this protocol was written. The

@@ -89,7 +89,7 @@ def summary_text(
 ) -> str:
     comparator_lines = "\n".join(
         f"- {row['experiment']} / {row['semantic_family']}: target "
-        f"{row['target_feature_id']} -> comparator {row['feature_id']} "
+        f"{row['target_feature_id']} to comparator {row['feature_id']} "
         f"({row['caliper_attempt']})"
         for row in selected
     )
@@ -106,6 +106,13 @@ that hosts this packet and will host residual shards after the registered run.
 - Final plan-manifest SHA-256: `{plan_hash}`
 - Protocol version: `{PROTOCOL_VERSION}`
 - Final machine plan: `{plan_dir.relative_to(REPO_ROOT).as_posix()}`
+
+An earlier result-free freeze at
+`5058b8ec254028cee44ec85b3876adae761b5119` was superseded before registration
+and before any Stage 1 outcome. Its editable-draft audit showed that OSF
+HTML-escaped the `>` characters in comparator arrows. The replacement uses
+OSF-stable plain text and adds version-aware packet replacement; no scientific
+design or calibrated comparator changed.
 
 ## Prior Knowledge And Stage 0 Disclosure
 

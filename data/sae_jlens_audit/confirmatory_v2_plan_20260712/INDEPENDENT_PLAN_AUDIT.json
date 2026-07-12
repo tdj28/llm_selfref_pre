@@ -1,7 +1,7 @@
 {
   "errors": [],
   "n_errors": 0,
-  "plan_manifest_sha256": "1a8623374defc2b094fde8fe745ca112835e4a2cdf5229d871acc487ca91d13d",
+  "plan_manifest_sha256": "76bb17d63048093af9984006e6b25a49690151fd4fe37bcbbc450446aeacc466",
   "protocol_version": "llama70b_sae_jlens_v2",
   "reader_count": 14,
   "replay_rows": 1581,

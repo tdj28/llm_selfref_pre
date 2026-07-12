@@ -425,7 +425,9 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   set, then run synthetic end-to-end release tests before the final freeze.
 - [ ] Commit and push the final Stage 1 freeze; create and audit an OSF draft,
   then obtain explicit owner authorization before submitting the immutable
-  registration and record its DOI/URL and registration timestamp.
+  registration and record its DOI/URL and registration timestamp. The first
+  editable-draft round trip correctly failed on OSF's HTML escaping before
+  registration; the documented transport-only replacement freeze must pass.
 - [ ] Generate v2 target outcomes only after Git and accepted OSF gates pass;
   retrieve, hash-check, independently audit, release, and terminate only the
   agent-owned execution pod.

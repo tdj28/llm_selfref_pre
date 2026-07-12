@@ -395,6 +395,21 @@ def upload_files(
             )
             payload = waterbutler_json("PUT", upload_url, data=resolved.read_bytes())
             remote = payload.get("data", payload)
+        else:
+            links = remote.get("links", {})
+            download_url = str(links.get("download", ""))
+            upload_url = str(links.get("upload", ""))
+            if not download_url.startswith("https://"):
+                raise OSFError(f"Existing OSF file lacks a download URL: {resolved.name}")
+            if remote_sha256(download_url) != sha256_file(resolved):
+                if not upload_url.startswith("https://"):
+                    raise OSFError(
+                        f"Existing OSF file lacks a version-upload URL: {resolved.name}"
+                    )
+                payload = waterbutler_json(
+                    "PUT", upload_url, data=resolved.read_bytes(), expected=(200, 201)
+                )
+                remote = payload.get("data", payload)
         records.append(
             file_upload_record(
                 project_id, folder_name, base_dir, resolved, remote
