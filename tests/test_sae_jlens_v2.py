@@ -98,7 +98,7 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
             selected,
         )
         self.assertIn("target 30032 to comparator 61212", summary)
-        self.assertNotIn("->", summary)
+        self.assertNotIn(">", summary)
 
     def test_equal_metric_fixture_selects_24_unique_features(self) -> None:
         candidates = semantic_candidate_pool(self.repo_root)

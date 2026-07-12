@@ -29,14 +29,14 @@ registration must disclose all Stage 0 measurements and all prior v1 results.
 
 ### Pre-registration transport correction (2026-07-12)
 
-Public freeze `5058b8ec254028cee44ec85b3876adae761b5119` was superseded before
-registration and before any Stage 1 outcome existed. The first editable-draft
-round trip showed that OSF converted each `>` in the packet's ASCII comparator
-arrows to `&gt;`, causing the intentionally exact summary audit to fail. The
-packet now uses OSF-stable plain text, and the uploader replaces changed files
-through OSF's version endpoint before rechecking downloaded hashes. No prompt,
-comparator, endpoint, threshold, analysis, control, seed, or claim boundary
-changed.
+Public freezes `5058b8ec254028cee44ec85b3876adae761b5119` and
+`def6702a89f0b9664a5753df4e0aa5d79ddaae0c` were superseded before
+registration and before any Stage 1 outcome existed. The exact editable-draft
+audits showed that OSF HTML-escaped greater-than characters first in comparator
+arrows and then in the provenance note itself. The packet summary now avoids
+those characters, and the uploader replaces changed files through OSF's
+version endpoint before rechecking downloaded hashes. No prompt, comparator,
+endpoint, threshold, analysis, control, seed, or claim boundary changed.
 
 ## Prior Knowledge
 

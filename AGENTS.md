@@ -102,7 +102,7 @@ immediately public and permanently recoverable.
 - `data/sae_jlens_audit/confirmatory_v2_plan_20260712/` is the final
   result-free Stage 1 plan: 4,029 rows, 24 calibrated comparators, five prompt
   folds, 14 readers, and five stored random projections. Its manifest SHA-256
-  is `76bb17d63048093af9984006e6b25a49690151fd4fe37bcbbc450446aeacc466`,
+  is `0d3ff0f41bbb1cd701d819a4873ce694a31a45f4cca7cd52358febbe7f689fb1`,
   and its independent reconstruction passes. Preserve it unchanged after the
   public freeze. It contains no Stage 1 outcome and cannot authorize execution
   without the separately accepted public OSF registration.

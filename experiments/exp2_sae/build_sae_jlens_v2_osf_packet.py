@@ -107,12 +107,14 @@ that hosts this packet and will host residual shards after the registered run.
 - Protocol version: `{PROTOCOL_VERSION}`
 - Final machine plan: `{plan_dir.relative_to(REPO_ROOT).as_posix()}`
 
-An earlier result-free freeze at
-`5058b8ec254028cee44ec85b3876adae761b5119` was superseded before registration
-and before any Stage 1 outcome. Its editable-draft audit showed that OSF
-HTML-escaped the `>` characters in comparator arrows. The replacement uses
-OSF-stable plain text and adds version-aware packet replacement; no scientific
-design or calibrated comparator changed.
+Earlier result-free freezes at
+`5058b8ec254028cee44ec85b3876adae761b5119` and
+`def6702a89f0b9664a5753df4e0aa5d79ddaae0c` were superseded before
+registration and before any Stage 1 outcome. Exact editable-draft audits showed
+that OSF HTML-escaped greater-than characters first in comparator arrows and
+then in this provenance note. The replacement summary contains no such
+characters and the uploader performs version-aware packet replacement. No
+scientific design or calibrated comparator changed.
 
 ## Prior Knowledge And Stage 0 Disclosure
 
