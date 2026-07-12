@@ -13,7 +13,12 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
+from sklearn.metrics import (
+    average_precision_score,
+    brier_score_loss,
+    roc_auc_score,
+    roc_curve,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -60,6 +65,20 @@ def csv_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def independent_reader_metrics(
+    labels: np.ndarray, scores: np.ndarray
+) -> dict[str, float]:
+    fpr, tpr, thresholds = roc_curve(labels, scores)
+    del thresholds
+    eligible = tpr[fpr <= 0.01 + 1e-12]
+    return {
+        "auroc": float(roc_auc_score(labels, scores)),
+        "auprc": float(average_precision_score(labels, scores)),
+        "brier": float(brier_score_loss(labels, scores)),
+        "tpr_at_1pct_fpr": float(eligible.max()) if len(eligible) else 0.0,
+    }
+
+
 def iter_jsonl(directory: Path):
     for path in sorted(directory.glob("part-*.jsonl")):
         with path.open(encoding="utf-8") as handle:
@@ -87,6 +106,9 @@ def primary_rows(run_dir: Path) -> list[dict[str, Any]]:
                         ),
                         "semantic_experiment": trial.get("semantic_experiment"),
                         "semantic_family": trial.get("semantic_family"),
+                        "comparator_feature_id": trial.get(
+                            "comparator_feature_id"
+                        ),
                         "transport": readout["transport"],
                         "groups": readout["group_logits"],
                     }
@@ -164,6 +186,53 @@ def independent_a1_points(rows: list[dict[str, Any]]) -> dict[tuple[str, str, st
                 if len(template_means) != 51:
                     raise ValueError(f"Independent A1 cell is incomplete: {transport}/{family}/{lexicon}")
                 points[(transport, family, lexicon)] = float(np.mean(template_means))
+    return points
+
+
+def independent_a1_feature_points(
+    rows: list[dict[str, Any]],
+) -> dict[tuple[str, str, int, str], float]:
+    clean, scales = clean_reference(rows)
+    by_template: dict[
+        tuple[str, str, int, str, str], list[float]
+    ] = defaultdict(list)
+    for row in rows:
+        if row["condition_family"] == "target_single":
+            family = "deception_dishonesty"
+            feature_id = int(row["matched_target_feature_id"])
+        elif row.get("semantic_experiment") == "A1":
+            family = row["semantic_family"]
+            feature_id = int(row["comparator_feature_id"])
+        else:
+            continue
+        for lexicon in LEXICONS:
+            by_template[
+                (
+                    row["transport"],
+                    family,
+                    feature_id,
+                    lexicon,
+                    row["template_id"],
+                )
+            ].append(zvalue(row, lexicon, clean, scales))
+    points = {}
+    feature_keys = sorted(
+        {
+            (transport, family, feature_id, lexicon)
+            for transport, family, feature_id, lexicon, template in by_template
+        }
+    )
+    if len(feature_keys) != len(TRANSPORTS) * 24 * len(LEXICONS):
+        raise ValueError("Independent A1 feature-key count differs")
+    for key in feature_keys:
+        template_means = [
+            float(np.mean(values))
+            for row_key, values in by_template.items()
+            if row_key[:4] == key
+        ]
+        if len(template_means) != 51:
+            raise ValueError(f"Independent A1 feature cell is incomplete: {key}")
+        points[key] = float(np.mean(template_means))
     return points
 
 
@@ -338,10 +407,11 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     primary = primary_rows(run_dir)
     try:
         a1_points = independent_a1_points(primary)
+        a1_feature_points = independent_a1_feature_points(primary)
         a2_points = independent_a2_points(primary)
     except (KeyError, ValueError, ZeroDivisionError) as error:
         errors.append(f"independent semantic reconstruction failed: {error}")
-        a1_points, a2_points = {}, {}
+        a1_points, a1_feature_points, a2_points = {}, {}, {}
     promoted_a1 = csv_rows(analysis_dir / "semantic_a1_matrix.csv")
     promoted_a1_contrasts = csv_rows(
         analysis_dir / "semantic_a1_contrasts.csv"
@@ -349,10 +419,15 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
     promoted_a1_leakage = csv_rows(
         analysis_dir / "semantic_a1_deception_leakage.csv"
     )
+    promoted_a1_features = csv_rows(
+        analysis_dir / "semantic_a1_features.csv"
+    )
     if len(promoted_a1) != 112 or len(promoted_a1_contrasts) != 35:
         errors.append("A1 matrix/contrast row counts differ")
     if len(promoted_a1_leakage) != 21:
         errors.append("A1 deception-leakage row count differs")
+    if len(promoted_a1_features) != 672:
+        errors.append("A1 feature-heterogeneity row count differs")
     for row in promoted_a1:
         key = (row["transport"], row["intervention_family"], row["lexicon"])
         expected = a1_points.get(key)
@@ -360,6 +435,18 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
             float(row["mean_oriented_z"]), expected, abs_tol=1e-10
         ):
             errors.append(f"A1 promoted point differs: {key}")
+    for row in promoted_a1_features:
+        key = (
+            row["transport"],
+            row["intervention_family"],
+            int(row["feature_id"]),
+            row["lexicon"],
+        )
+        expected = a1_feature_points.get(key)
+        if expected is None or not math.isclose(
+            float(row["mean_oriented_z"]), expected, abs_tol=1e-10
+        ):
+            errors.append(f"A1 promoted feature point differs: {key}")
     promoted_a2 = csv_rows(analysis_dir / "semantic_a2_summary.csv")
     promoted_a2_pairs = csv_rows(analysis_dir / "semantic_a2_pairs.csv")
     if len(promoted_a2) != 7 or len(promoted_a2_pairs) != 42:
@@ -383,8 +470,30 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         for row in csv_rows(analysis_dir / "reader_metrics.csv")
     }
     promoted_pair_metrics = csv_rows(analysis_dir / "reader_pair_metrics.csv")
+    promoted_holdout_metrics = csv_rows(
+        analysis_dir / "reader_holdout_metrics.csv"
+    )
     if len(promoted_metrics) != 14 or len(promoted_pair_metrics) != 84:
         errors.append("reader metric/pair row counts differ")
+    if len(promoted_holdout_metrics) != 420 or len(
+        {
+            (row["reader_id"], row["feature_pair"], row["prompt_fold"])
+            for row in promoted_holdout_metrics
+        }
+    ) != 420:
+        errors.append("reader holdout metric row count/uniqueness differs")
+    promoted_pairs = {
+        (row["reader_id"], int(row["feature_pair"])): row
+        for row in promoted_pair_metrics
+    }
+    promoted_holdouts = {
+        (
+            row["reader_id"],
+            int(row["feature_pair"]),
+            int(row["prompt_fold"]),
+        ): row
+        for row in promoted_holdout_metrics
+    }
     for reader_id in sorted({row["reader_id"] for row in predictions}):
         reader_rows = [row for row in predictions if row["reader_id"] == reader_id]
         labels = np.asarray([int(row["label"]) for row in reader_rows])
@@ -395,12 +504,42 @@ def audit(plan_dir: Path, run_dir: Path) -> dict[str, Any]:
         pair_aucs = []
         for pair in sorted({int(row["feature_pair"]) for row in reader_rows}):
             mask = np.asarray([int(row["feature_pair"]) == pair for row in reader_rows])
-            pair_aucs.append(float(roc_auc_score(labels[mask], scores[mask])))
-        expected = {
-            "auroc": float(roc_auc_score(labels, scores)),
-            "auprc": float(average_precision_score(labels, scores)),
-            "brier": float(brier_score_loss(labels, scores)),
-            "macro_leave_one_pair_auroc": float(np.mean(pair_aucs)),
+            pair_expected = independent_reader_metrics(labels[mask], scores[mask])
+            pair_aucs.append(pair_expected["auroc"])
+            pair_promoted = promoted_pairs.get((reader_id, pair))
+            if pair_promoted is None:
+                errors.append(f"reader pair metric row is missing: {reader_id}/{pair}")
+            else:
+                for field, value in pair_expected.items():
+                    if not math.isclose(
+                        float(pair_promoted[field]), value, abs_tol=1e-12
+                    ):
+                        errors.append(
+                            f"reader pair metric differs: {reader_id}/{pair}/{field}"
+                        )
+            for fold in range(5):
+                holdout_mask = mask & np.asarray(
+                    [int(row["prompt_fold"]) == fold for row in reader_rows]
+                )
+                holdout_expected = independent_reader_metrics(
+                    labels[holdout_mask], scores[holdout_mask]
+                )
+                holdout_promoted = promoted_holdouts.get((reader_id, pair, fold))
+                if holdout_promoted is None:
+                    errors.append(
+                        f"reader holdout metric row is missing: {reader_id}/{pair}/{fold}"
+                    )
+                else:
+                    for field, value in holdout_expected.items():
+                        if not math.isclose(
+                            float(holdout_promoted[field]), value, abs_tol=1e-12
+                        ):
+                            errors.append(
+                                "reader holdout metric differs: "
+                                f"{reader_id}/{pair}/{fold}/{field}"
+                            )
+        expected = independent_reader_metrics(labels, scores) | {
+            "macro_leave_one_pair_auroc": float(np.mean(pair_aucs))
         }
         promoted = promoted_metrics.get(reader_id)
         if promoted is None:

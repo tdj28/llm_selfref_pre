@@ -9,7 +9,7 @@ import json
 import math
 import sys
 import warnings
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -234,6 +234,7 @@ def semantic_a1(
     list[dict[str, Any]],
     list[dict[str, Any]],
     list[dict[str, Any]],
+    list[dict[str, Any]],
     dict[str, Any],
 ]:
     clean, scales = clean_scales(rows)
@@ -244,23 +245,59 @@ def semantic_a1(
         or row.get("semantic_experiment") == "A1"
     ]
     values: dict[tuple[str, str, str, str], list[float]] = defaultdict(list)
+    feature_values: dict[
+        tuple[str, str, int, str, str], list[float]
+    ] = defaultdict(list)
     for row in eligible:
         family = (
             "deception_dishonesty"
             if row["condition_family"] == "target_single"
             else row["semantic_family"]
         )
+        feature_id = int(
+            row["matched_target_feature_id"]
+            if row["condition_family"] == "target_single"
+            else row["comparator_feature_id"]
+        )
         for lexicon in LEXICONS:
+            value = oriented_z(row, lexicon, clean, scales)
             values[(row["transport"], family, lexicon, row["template_id"])].append(
-                oriented_z(row, lexicon, clean, scales)
+                value
+            )
+            feature_values[
+                (row["transport"], family, feature_id, lexicon, row["template_id"])
+            ].append(
+                value
             )
 
     templates = sorted({row["template_id"] for row in eligible})
     if len(templates) != 51:
         raise AnalysisFailure("A1 template count differs")
+    features_by_family: dict[str, list[int]] = {}
+    for family in INTERVENTION_FAMILIES:
+        feature_ids = sorted(
+            {
+                int(
+                    row["matched_target_feature_id"]
+                    if row["condition_family"] == "target_single"
+                    else row["comparator_feature_id"]
+                )
+                for row in eligible
+                if (
+                    "deception_dishonesty"
+                    if row["condition_family"] == "target_single"
+                    else row["semantic_family"]
+                )
+                == family
+            }
+        )
+        if len(feature_ids) != 6:
+            raise AnalysisFailure(f"A1 feature count differs: {family}")
+        features_by_family[family] = feature_ids
     matrix_rows: list[dict[str, Any]] = []
     contrast_rows: list[dict[str, Any]] = []
     leakage_rows: list[dict[str, Any]] = []
+    feature_rows: list[dict[str, Any]] = []
     verdicts: dict[str, Any] = {}
     for transport_index, transport in enumerate(TRANSPORTS):
         matrix = np.empty((len(templates), 4, 4), dtype=np.float64)
@@ -293,6 +330,41 @@ def semantic_a1(
             for index in range(3)
         ]
         leakage_adjusted = holm_adjust(leakage_p)
+
+        for family in INTERVENTION_FAMILIES:
+            for feature_id in features_by_family[family]:
+                for lexicon in LEXICONS:
+                    feature_template_values = np.asarray(
+                        [
+                            np.mean(
+                                feature_values[
+                                    (transport, family, feature_id, lexicon, template)
+                                ]
+                            )
+                            for template in templates
+                        ],
+                        dtype=np.float64,
+                    )
+                    if not np.isfinite(feature_template_values).all():
+                        raise AnalysisFailure(
+                            f"Invalid A1 feature cell: {transport}/{family}/"
+                            f"{feature_id}/{lexicon}"
+                        )
+                    feature_draws = feature_template_values[indices].mean(axis=1)
+                    low, high = quantiles(feature_draws, (0.025, 0.975))
+                    feature_rows.append(
+                        {
+                            "transport": transport,
+                            "intervention_family": family,
+                            "feature_id": feature_id,
+                            "lexicon": lexicon,
+                            "n_templates": len(templates),
+                            "mean_oriented_z": float(feature_template_values.mean()),
+                            "ci_low": low,
+                            "ci_high": high,
+                            "inference_role": "mandatory_descriptive_heterogeneity",
+                        }
+                    )
 
         for family_index, family in enumerate(INTERVENTION_FAMILIES):
             for lexicon_index, lexicon in enumerate(LEXICONS):
@@ -380,7 +452,7 @@ def semantic_a1(
                 and significant_rows >= 3
             ),
         }
-    return matrix_rows, contrast_rows, leakage_rows, verdicts
+    return matrix_rows, contrast_rows, leakage_rows, feature_rows, verdicts
 
 
 def semantic_a2(
@@ -641,28 +713,68 @@ def metrics(labels: np.ndarray, scores: np.ndarray) -> dict[str, float]:
     }
 
 
+def weighted_auc_draws(
+    labels: np.ndarray,
+    scores: np.ndarray,
+    template_columns: np.ndarray,
+    template_counts: np.ndarray,
+) -> np.ndarray:
+    """Compute tie-aware weighted AUROC for every template-bootstrap draw."""
+    order = np.argsort(scores, kind="stable")
+    ordered_scores = scores[order]
+    ordered_labels = labels[order]
+    weights = template_counts[:, template_columns[order]].astype(
+        np.float64, copy=False
+    )
+    numerator = np.zeros(len(template_counts), dtype=np.float64)
+    negative_before = np.zeros(len(template_counts), dtype=np.float64)
+    starts = np.r_[0, np.flatnonzero(np.diff(ordered_scores) != 0) + 1]
+    ends = np.r_[starts[1:], len(order)]
+    for start, end in zip(starts, ends):
+        group_weights = weights[:, start:end]
+        group_labels = ordered_labels[start:end]
+        negative_tie = group_weights[:, group_labels == 0].sum(axis=1)
+        positive_tie = group_weights[:, group_labels == 1].sum(axis=1)
+        numerator += positive_tie * (negative_before + 0.5 * negative_tie)
+        negative_before += negative_tie
+    positive_total = weights[:, ordered_labels == 1].sum(axis=1)
+    negative_total = weights[:, ordered_labels == 0].sum(axis=1)
+    denominator = positive_total * negative_total
+    if np.any(denominator <= 0):
+        raise AnalysisFailure("Template bootstrap produced a one-class reader draw")
+    return numerator / denominator
+
+
 def reader_bootstrap_macro_auc(
     rows: list[dict[str, Any]], replicates: int, seed: int
 ) -> tuple[float, float]:
     templates = sorted({row["template_id"] for row in rows})
+    template_index = {template: index for index, template in enumerate(templates)}
     pairs = sorted({int(row["feature_pair"]) for row in rows})
     labels = np.asarray([int(row["label"]) for row in rows])
     scores = np.asarray([float(row["probability"]) for row in rows])
-    template_values = np.asarray([row["template_id"] for row in rows], dtype=object)
+    template_columns = np.asarray(
+        [template_index[row["template_id"]] for row in rows], dtype=np.int64
+    )
     pair_values = np.asarray([int(row["feature_pair"]) for row in rows])
     rng = np.random.default_rng(seed)
-    draws = np.empty(replicates, dtype=np.float64)
-    for draw_index in range(replicates):
-        sampled = rng.choice(templates, size=len(templates), replace=True)
-        counts = Counter(sampled.tolist())
-        weights = np.asarray([counts.get(value, 0) for value in template_values])
-        pair_aucs = []
-        for pair in pairs:
-            mask = pair_values == pair
-            pair_aucs.append(
-                roc_auc_score(labels[mask], scores[mask], sample_weight=weights[mask])
+    sampled = rng.integers(
+        0, len(templates), size=(replicates, len(templates)), dtype=np.int16
+    )
+    counts = np.zeros((replicates, len(templates)), dtype=np.int16)
+    draw_rows = np.repeat(np.arange(replicates), len(templates))
+    np.add.at(counts, (draw_rows, sampled.reshape(-1)), 1)
+    pair_draws = []
+    for pair in pairs:
+        mask = pair_values == pair
+        if len(set(template_columns[mask])) != len(templates):
+            raise AnalysisFailure(f"Reader bootstrap template coverage differs: {pair}")
+        pair_draws.append(
+            weighted_auc_draws(
+                labels[mask], scores[mask], template_columns[mask], counts
             )
-        draws[draw_index] = np.mean(pair_aucs)
+        )
+    draws = np.mean(np.stack(pair_draws), axis=0)
     return quantiles(draws, (0.025, 0.975))
 
 
@@ -671,7 +783,13 @@ def reader_analysis(
     run_dir: Path,
     primary: list[dict[str, Any]],
     replicates: int,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[str, Any],
+]:
     metadata, residuals, v1_features = reader_samples(plan_dir, run_dir, primary)
     labels = np.asarray([row["label"] for row in metadata], dtype=np.int64)
     folds = np.asarray([row["prompt_fold"] for row in metadata], dtype=np.int64)
@@ -709,6 +827,7 @@ def reader_analysis(
 
     metric_rows: list[dict[str, Any]] = []
     pair_rows: list[dict[str, Any]] = []
+    holdout_rows: list[dict[str, Any]] = []
     verdicts: dict[str, Any] = {}
     for reader_index, reader in enumerate(reader_plan["readers"]):
         rows = [row for row in prediction_rows if row["reader_id"] == reader["reader_id"]]
@@ -728,6 +847,26 @@ def reader_analysis(
                     **pair_metrics,
                 }
             )
+            for held_fold in range(5):
+                holdout_mask = np.asarray(
+                    [
+                        row["feature_pair"] == pair
+                        and int(row["prompt_fold"]) == held_fold
+                        for row in rows
+                    ]
+                )
+                holdout_metrics = metrics(
+                    row_labels[holdout_mask], row_scores[holdout_mask]
+                )
+                holdout_rows.append(
+                    {
+                        "reader_id": reader["reader_id"],
+                        "feature_pair": pair,
+                        "prompt_fold": held_fold,
+                        "n": int(holdout_mask.sum()),
+                        **holdout_metrics,
+                    }
+                )
         macro = float(np.mean(pair_aucs))
         low, high = reader_bootstrap_macro_auc(
             rows, replicates, 2_026_071_500 + reader_index
@@ -758,7 +897,7 @@ def reader_analysis(
                 else "not_detected_under_this_reader"
             ),
         }
-    return prediction_rows, metric_rows, pair_rows, verdicts
+    return prediction_rows, metric_rows, pair_rows, holdout_rows, verdicts
 
 
 def analyze(plan_dir: Path, run_dir: Path, outdir: Path, replicates: int) -> None:
@@ -769,21 +908,31 @@ def analyze(plan_dir: Path, run_dir: Path, outdir: Path, replicates: int) -> Non
     verify_inputs(plan_dir, run_dir)
     outdir.mkdir(parents=True, exist_ok=True)
     primary = primary_rows(run_dir)
-    a1_matrix, a1_contrasts, a1_leakage, a1_verdicts = semantic_a1(
-        primary, replicates
-    )
+    (
+        a1_matrix,
+        a1_contrasts,
+        a1_leakage,
+        a1_features,
+        a1_verdicts,
+    ) = semantic_a1(primary, replicates)
     a2_pairs, a2_summary, a2_verdicts = semantic_a2(primary, replicates)
-    predictions, reader_metrics, reader_pairs, reader_verdicts = reader_analysis(
-        plan_dir, run_dir, primary, replicates
-    )
+    (
+        predictions,
+        reader_metrics,
+        reader_pairs,
+        reader_holdouts,
+        reader_verdicts,
+    ) = reader_analysis(plan_dir, run_dir, primary, replicates)
     write_csv(outdir / "semantic_a1_matrix.csv", a1_matrix)
     write_csv(outdir / "semantic_a1_contrasts.csv", a1_contrasts)
     write_csv(outdir / "semantic_a1_deception_leakage.csv", a1_leakage)
+    write_csv(outdir / "semantic_a1_features.csv", a1_features)
     write_csv(outdir / "semantic_a2_pairs.csv", a2_pairs)
     write_csv(outdir / "semantic_a2_summary.csv", a2_summary)
     write_csv(outdir / "reader_predictions.csv", predictions)
     write_csv(outdir / "reader_metrics.csv", reader_metrics)
     write_csv(outdir / "reader_pair_metrics.csv", reader_pairs)
+    write_csv(outdir / "reader_holdout_metrics.csv", reader_holdouts)
     write_json(
         outdir / "analysis_summary.json",
         {

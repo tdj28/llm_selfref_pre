@@ -174,6 +174,12 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         errors.append("reader ladder does not contain 14 unique readers")
     if reader.get("crossed_holdouts", {}).get("models_per_reader") != 30:
         errors.append("crossed-holdout model count differs")
+    if reader.get("required_metric_tables") != {
+        "reader": 14,
+        "reader_by_feature_pair": 84,
+        "reader_by_feature_pair_and_prompt_fold": 420,
+    }:
+        errors.append("reader metric-table requirements differ")
     for seed in RANDOM_PROJECTION_SEEDS:
         path = plan_dir / "random_projections" / f"projection_seed_{seed}.npy"
         try:
@@ -216,6 +222,10 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         errors.append("semantic minimum effect differs")
     if len(semantic_analysis.get("transports", [])) != 7:
         errors.append("semantic transport battery differs")
+    if "all 24 features" not in semantic_analysis.get("multiplicity", {}).get(
+        "a1_feature_rows", ""
+    ):
+        errors.append("A1 feature-heterogeneity reporting rule differs")
 
     osf_project = json.loads(
         (plan_dir / "OSF_PROJECT.json").read_text(encoding="utf-8")

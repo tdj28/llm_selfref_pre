@@ -335,6 +335,11 @@ def reader_plan(projection_hashes: dict[int, str]) -> dict[str, Any]:
         },
         "readers": readers,
         "metrics": ["auroc", "auprc", "brier", "tpr_at_1pct_fpr"],
+        "required_metric_tables": {
+            "reader": 14,
+            "reader_by_feature_pair": 84,
+            "reader_by_feature_pair_and_prompt_fold": 420,
+        },
         "material_threshold": {
             "macro_leave_one_pair_auroc": DETECTOR_MINIMUM_AUROC,
             "bootstrap_lower_bound": 0.5,
@@ -342,6 +347,11 @@ def reader_plan(projection_hashes: dict[int, str]) -> dict[str, Any]:
         "bootstrap": {
             "unit": "template_family",
             "replicates": BOOTSTRAP_REPLICATES,
+            "draw_generation": (
+                "numpy Generator.integers with replacement; template counts "
+                "become sample weights"
+            ),
+            "auc_algorithm": "exact tie-aware weighted Mann-Whitney statistic",
         },
     }
 
@@ -391,6 +401,10 @@ def semantic_analysis_plan() -> dict[str, Any]:
         "multiplicity": {
             "a1_row_contrasts": "Holm across four intervention families",
             "a1_hard_negative_deception": "Holm across three hard-negative families",
+            "a1_feature_rows": (
+                "all 24 features by four lexicons are mandatory descriptive "
+                "heterogeneity rows and cannot replace family endpoints"
+            ),
             "a2_primary": "one aggregate contrast; six pair rows descriptive",
         },
         "minimum_effect_z": SEMANTIC_MINIMUM_Z,

@@ -309,6 +309,11 @@ reported. A hard-negative deception score of at least 0.25 whose 95% interval
 excludes zero supports only "not specific among these tested response-style
 families." It does not establish genericity to arbitrary intervention.
 
+All 24 A1 feature identities are also reported against all four lexicons with
+template-cluster intervals (672 rows across seven transports). These rows are
+mandatory descriptive heterogeneity checks. No individual feature may replace
+the frozen family-level endpoint or justify selecting a favorable family.
+
 ### A2 endpoint
 
 For each target and its selected same-subfamily comparator, A2 compares their
@@ -361,7 +366,10 @@ The final plan stores the exact five prompt-fold assignments. For every held
 target/control feature pair and prompt fold, training excludes both that
 feature pair and that prompt fold. Predictions are generated only for their
 intersection. Report pooled AUROC, AUPRC, Brier score, TPR at 1% FPR, all six
-leave-one-feature-pair AUROCs, and their unweighted macro-average.
+leave-one-feature-pair AUROCs, and their unweighted macro-average. The release
+also reports all 30 feature-pair-by-prompt-fold holdout cells for every reader
+(420 rows total), with the same four metrics; these cells are mandatory
+diagnostics and cannot replace the aggregate or pair-macro endpoint.
 
 Material state detection requires both a macro leave-one-pair AUROC of at least
 0.60 and a 95% template-cluster bootstrap lower bound above 0.50. A smaller
@@ -375,6 +383,12 @@ Inference is conditional on the six fixed feature pairs. The protocol does not
 bootstrap six features as though they represented a population. Every primary
 interval uses 20,000 resamples of the 51 template families. Leave-one-pair
 metrics expose feature heterogeneity directly.
+
+Reader bootstrap AUROCs use the exact tie-aware weighted Mann-Whitney
+statistic, with each resampled template multiplicity used as that template's
+row weight. The vectorized implementation is numerically tested against
+scikit-learn's weighted AUROC; this is a computational optimization, not a
+different resampling estimand.
 
 A1 row contrasts use Holm correction across four rows. A1 hard-negative
 deception-leakage checks use Holm correction across three families. A2 has one

@@ -7,6 +7,7 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
+from sklearn.metrics import roc_auc_score
 
 from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     LEXICONS,
@@ -14,6 +15,7 @@ from experiments.exp2_sae.analyze_sae_jlens_v2 import (
     holm_adjust,
     semantic_a1,
     semantic_a2,
+    weighted_auc_draws,
 )
 from experiments.exp2_sae.osf_sae_jlens_v2 import (
     PROJECT_TITLE,
@@ -150,11 +152,12 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
 
     def test_semantic_analyses_cover_every_frozen_transport_and_cell(self) -> None:
         rows = self.synthetic_primary_rows()
-        matrix, contrasts, leakage, a1_verdicts = semantic_a1(rows, 200)
+        matrix, contrasts, leakage, features, a1_verdicts = semantic_a1(rows, 200)
         pairs, summary, a2_verdicts = semantic_a2(rows, 200)
         self.assertEqual(len(matrix), len(TRANSPORTS) * 4 * 4)
         self.assertEqual(len(contrasts), len(TRANSPORTS) * 5)
         self.assertEqual(len(leakage), len(TRANSPORTS) * 3)
+        self.assertEqual(len(features), len(TRANSPORTS) * 24 * len(LEXICONS))
         self.assertEqual(len(pairs), len(TRANSPORTS) * 6)
         self.assertEqual(len(summary), len(TRANSPORTS))
         self.assertEqual(set(a1_verdicts), set(TRANSPORTS))
@@ -223,6 +226,26 @@ class SAEJacobianLensV2Tests(unittest.TestCase):
             (root / "run.log").write_text("still live\n", encoding="utf-8")
             names = {row["path"] for row in result_inventory(root)}
         self.assertEqual(names, {"stable.json"})
+
+    def test_vectorized_weighted_auc_matches_sklearn_with_ties(self) -> None:
+        labels = np.asarray([0, 1, 0, 1, 0, 1])
+        scores = np.asarray([0.1, 0.7, 0.4, 0.4, 0.8, 0.9])
+        template_columns = np.asarray([0, 0, 1, 1, 2, 2])
+        counts = np.asarray([[1, 1, 1], [2, 0, 1], [0, 3, 1]])
+        observed = weighted_auc_draws(
+            labels, scores, template_columns, counts
+        )
+        expected = np.asarray(
+            [
+                roc_auc_score(
+                    labels,
+                    scores,
+                    sample_weight=row[template_columns],
+                )
+                for row in counts
+            ]
+        )
+        np.testing.assert_allclose(observed, expected, atol=1e-12)
 
     def synthetic_calibration(self) -> dict[str, object]:
         candidates = semantic_candidate_pool(self.repo_root)

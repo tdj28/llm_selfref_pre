@@ -158,6 +158,8 @@ def build(plan_dir: Path, run_dir: Path, upload_manifest_path: Path) -> None:
             "semantic_comparator_rows": 2_448,
             "residual_shards": 16,
             "reader_predictions": 17_136,
+            "reader_holdout_metric_rows": 420,
+            "a1_feature_heterogeneity_rows": 672,
         },
         "osf_residual_uploads": {
             "project_id": uploads["project_id"],
