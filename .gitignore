@@ -169,6 +169,7 @@ data/causal_transplant/confirmatory_v1_20260709/annotation_key*_private.csv
 data/causal_transplant/confirmatory_v1_20260709/annotation_key*_private.csv.sha256
 data/causal_transplant/confirmatory_v1_20260709/coder_*.csv
 checkpoint.md
+/blogs/
 
 # Jupyter Notebook
 .ipynb_checkpoints
