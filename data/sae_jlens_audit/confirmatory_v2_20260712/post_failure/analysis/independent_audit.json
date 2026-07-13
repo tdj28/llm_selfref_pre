@@ -1,0 +1,160 @@
+{
+  "analysis_summary_sha256": "10ac7536fdca33f3384c68e6edd3bdbbcb348630b10ba40eb95665ec3b9ea6b0",
+  "components": {
+    "failed_raw": "pass",
+    "independent_endpoints": "pass",
+    "independent_replay": "pass",
+    "post_outcome_labels": "pass",
+    "remote_retrieval": "pass"
+  },
+  "confirmatory_status": "blocked_by_replay_gate",
+  "failed_raw": {
+    "errors": [],
+    "gate": {
+      "status": "fail",
+      "storage_fidelity": {
+        "maximum_absolute_error": 0.0,
+        "median_absolute_error": 0.0,
+        "p99_absolute_error": 0.0,
+        "rows": 1581,
+        "status": "pass",
+        "tolerance": 0.02,
+        "values_compared": 15571269
+      },
+      "v1_reproduction": {
+        "maximum_absolute_error": 0.25,
+        "median_absolute_error": 0.001953125,
+        "p99_absolute_error": 0.03125,
+        "rows": 1581,
+        "status": "fail",
+        "tolerance": 0.02,
+        "values_compared": 15571269
+      }
+    },
+    "result_manifest_sha256": "fa2ec9e81ee1562e36aaf4422736f891aee63585b0856d25c532b6d1de21d1ae",
+    "run": {
+      "completed_at_utc": "2026-07-12T23:14:52.115312+00:00",
+      "freeze_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd",
+      "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+      "plan_manifest_status": "final_result_free_plan",
+      "protocol_version": "llama70b_sae_jlens_v2",
+      "registration_id": "f3tpv",
+      "replay_gate_status": "fail",
+      "residual_shards": 16,
+      "status": "replay_gate_failed",
+      "trial_rows": 4029
+    },
+    "status": "pass"
+  },
+  "independent_endpoint_reconstruction": {
+    "frozen_independent_reconstruction": {
+      "errors": [],
+      "n_errors": 0,
+      "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+      "protocol_version": "llama70b_sae_jlens_v2",
+      "reader_prediction_rows": 17136,
+      "readout_rows": 4029,
+      "residual_rows": 4029,
+      "residual_shards": 16,
+      "run_result_manifest_sha256": "e2ed7d4a676f51ee5aa4989b31c06baa4cdfb1bf92f6ad8713d84b94fad46c70",
+      "status": "pass"
+    },
+    "overlay_disclosure": {
+      "changed_fields": [
+        "RUN_COMPLETE.status: replay_gate_failed -> complete",
+        "replay_equivalence_gate.status: fail -> pass",
+        "RESULT_MANIFEST.status: replay_gate_failed -> complete",
+        "analysis_summary.status: post_outcome_exploratory_complete -> complete"
+      ],
+      "purpose": "Reuse the frozen independent endpoint reconstruction without mislabeling the released failed run.",
+      "scientific_values_changed": false,
+      "temporary_only": true
+    },
+    "status": "pass"
+  },
+  "independent_replay": {
+    "coverage": {
+      "rows": 1581,
+      "values": 15571269
+    },
+    "diagnostic_sha256": "bafd7b7bcffa459e4d0d4529a603176e8a6b4eafc7609cb2352b2bf8dd820d1a",
+    "errors": [],
+    "reconstructed_overall": {
+      "absolute_error_quantiles": {
+        "0.0": 0.0,
+        "0.5": 0.001953125,
+        "0.9": 0.015625,
+        "0.95": 0.015625,
+        "0.99": 0.03125,
+        "0.999": 0.0625,
+        "0.9999": 0.125,
+        "1.0": 0.25
+      },
+      "count": 15571269,
+      "maximum_absolute_error": 0.25,
+      "mean_absolute_error": 0.005004247833564122,
+      "mean_signed_error": -3.9086819886855485e-06,
+      "rmse": 0.009062398804741769,
+      "thresholds": [
+        {
+          "count_above": 8561638,
+          "proportion_above": 0.5498355978565395,
+          "threshold": 0.0
+        },
+        {
+          "count_above": 8185512,
+          "proportion_above": 0.5256804695879315,
+          "threshold": 0.001
+        },
+        {
+          "count_above": 7301133,
+          "proportion_above": 0.4688849059122927,
+          "threshold": 0.002
+        },
+        {
+          "count_above": 5197799,
+          "proportion_above": 0.3338070262609939,
+          "threshold": 0.005
+        },
+        {
+          "count_above": 2482825,
+          "proportion_above": 0.1594491110518995,
+          "threshold": 0.01
+        },
+        {
+          "count_above": 488477,
+          "proportion_above": 0.03137040404349832,
+          "threshold": 0.02
+        },
+        {
+          "count_above": 45031,
+          "proportion_above": 0.002891928718205305,
+          "threshold": 0.03125
+        },
+        {
+          "count_above": 41991,
+          "proportion_above": 0.002696697359733494,
+          "threshold": 0.05
+        },
+        {
+          "count_above": 1691,
+          "proportion_above": 0.00010859744314994494,
+          "threshold": 0.1
+        },
+        {
+          "count_above": 15,
+          "proportion_above": 9.633126240385417e-07,
+          "threshold": 0.2
+        }
+      ]
+    },
+    "status": "pass"
+  },
+  "remote_retrieval": {
+    "checksum_file_sha256": "6036c818fb990794d1dbb6e22b260ea9e0cae3bd00e9eaad4ac8b3676cf1751c",
+    "errors": [],
+    "records": 58,
+    "status": "pass"
+  },
+  "status": "pass_post_outcome_exploratory_audit"
+}

@@ -82,11 +82,11 @@ immediately public and permanently recoverable.
   is chance, while paired clean-reference semantic deltas are large. Never
   collapse those access models or hide feature 23893's failure.
 - `docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md` is the two-stage hard-negative and
-  reader-capacity follow-up. Stage 0 may use only outcome-masked SAE activation
-  telemetry to select 18 A1 and six A2 comparators. Stage 1 is not authorized
-  until the exact selected IDs, final machine plan, analysis, validators, and
-  OSF registration are frozen. Do not generate or inspect v2 target outcomes
-  before both the public Git freeze and accepted OSF registration.
+  reader-capacity follow-up. Stage 0 used only outcome-masked SAE activation
+  telemetry to select 18 A1 and six A2 comparators. Stage 1 was publicly frozen
+  and registered before outcome generation, then failed its registered replay
+  gate. Preserve that failure; do not describe the endpoint calculations as
+  confirmatory.
 - `data/sae_jlens_audit/neuronpedia_labels_20260712/` is the compact public
   provenance snapshot of all available labels for the pinned Goodfire SAE.
   `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` is the
@@ -104,16 +104,25 @@ immediately public and permanently recoverable.
   folds, 14 readers, and five stored random projections. Its manifest SHA-256
   is `47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f`,
   and its independent reconstruction passes. Preserve it unchanged after the
-  public freeze. It contains no Stage 1 outcome and cannot authorize execution
-  without the separately accepted public OSF registration.
+  public freeze. It contains no Stage 1 outcome. Execution was separately
+  authorized by accepted public OSF registration `f3tpv`.
+- `docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md` and
+  `data/sae_jlens_audit/confirmatory_v2_20260712/` are the complete failed-gate
+  release. All 4,029 forwards and exact-fidelity residual persistence completed,
+  but v1 replay reached maximum absolute error `0.25` against the frozen `0.02`
+  maximum; confirmatory endpoints are blocked. The dated amendment preserves
+  the failure and labels all later semantic/reader calculations exploratory.
+  Never summarize this as a successful preregistered endpoint study.
 - Agent-owned calibration pod `zd79jm0odi7x2j` was retrieved, hash-verified,
   and deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
   inventory was empty. Do not attempt to reuse or mutate it.
-- The associated v2 OSF project is `sz2gb` (`https://osf.io/sz2gb/`). It was
-  created private and round-trip audited on 2026-07-12. A project is not a
-  registration: do not describe v2 as preregistered until an immutable public
-  registration has been explicitly authorized, submitted, accepted, and
-  recorded in the runtime gate.
+- Agent-owned Stage 1 pod `uhfq2j32d4h6ze` was retrieved, hash-verified, and
+  deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
+  inventory was empty. Do not attempt to reuse or mutate it.
+- The associated v2 OSF project is public at `https://osf.io/sz2gb/`; all 16
+  residual shards pass anonymous download hash checks. The immutable accepted
+  public registration is `f3tpv` (`https://osf.io/f3tpv/`). Keep the mutable
+  release project and immutable registration conceptually separate.
 
 ## Research Direction
 
@@ -171,7 +180,13 @@ Public SAE work is a separate evidence ladder:
   67-token state reader, PCA-67, five fixed random 67-dimensional projections,
   and a full 8,192-dimensional linear capacity ceiling under identical crossed
   holdouts. No MLP, tuned nonlinear detector, provenance detector, hidden-belief
-  detector, or consciousness detector may be substituted after outcomes.
+  detector, or consciousness detector may be substituted after outcomes. The
+  registered replay maximum failed, so its endpoint results are not
+  confirmatory. Under the dated post-outcome amendment, all 14 readers remain
+  below the frozen 0.60 material threshold; A1 Jacobian global specificity is
+  `0.174 [0.167, 0.182]`, below the frozen 0.25 minimum; and A2 finds practical
+  comparability rather than selected-ID advantage at `0.125` with 90% interval
+  `[0.116, 0.134]`. Report these only as exploratory secondary evidence.
 - Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
   SteeringAPI service was publicly reachable when checked, but its relationship
   to Goodfire and the paper-time experiment is unverified. Exact proprietary

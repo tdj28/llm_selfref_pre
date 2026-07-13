@@ -1,0 +1,41 @@
+{
+  "agent_owned": true,
+  "artifacts_retrieved_before_delete": true,
+  "artifacts_verified_before_delete": true,
+  "billing": {
+    "estimated_cost_usd": 1.9889,
+    "lifetime_seconds": 1215.58,
+    "quoted_cost_per_hour_usd": 5.89
+  },
+  "created_at_utc": "2026-07-12T22:57:56.420000+00:00",
+  "delete_http_status": 204,
+  "delete_verified": true,
+  "deleted_at_utc_approximate": "2026-07-12T23:18:12+00:00",
+  "freeze_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd",
+  "gpu": "NVIDIA B200",
+  "image": "runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04",
+  "other_pods_mutated": false,
+  "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+  "pod_id": "uhfq2j32d4h6ze",
+  "pod_name": "codex-sae-jlens-v2-stage1-20260712",
+  "post_delete_account_inventory": [],
+  "post_delete_direct_get_http_status": 404,
+  "pre_create_account_inventory": [],
+  "registration_id": "f3tpv",
+  "remote_checksum_file_sha256": "6036c818fb990794d1dbb6e22b260ea9e0cae3bd00e9eaad4ac8b3676cf1751c",
+  "remote_result_files": 58,
+  "remote_secret_removed_before_delete": true,
+  "result_manifest_sha256": "fa2ec9e81ee1562e36aaf4422736f891aee63585b0856d25c532b6d1de21d1ae",
+  "result_status": "replay_gate_failed",
+  "startup_events": [
+    {
+      "event": "sparse checkout initially omitted src directory",
+      "outcome_existed": false,
+      "resolution": "added unchanged src directory from the exact freeze and reran preflight"
+    }
+  ],
+  "storage": {
+    "container_disk_gb": 50,
+    "workspace_volume_gb": 350
+  }
+}

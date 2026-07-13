@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "n_errors": 0,
+  "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "reader_count": 14,
+  "replay_rows": 1581,
+  "selected_comparators": 24,
+  "semantic_rows": 2448,
+  "status": "pass",
+  "trial_rows": 4029
+}

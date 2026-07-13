@@ -1,0 +1,8 @@
+{
+  "confirmatory_status": "blocked_by_replay_gate",
+  "indexed_bytes": 560579987,
+  "indexed_files": 82,
+  "osf_residual_shards": 16,
+  "release_manifest_sha256": "8066b6a0b4d2a5f9863d0621d4c643105139811e7a62c094b2935f17be3efe39",
+  "status": "pass_public_failed_confirmatory_release"
+}

@@ -1,0 +1,19 @@
+{
+  "anonymous_api_http_status": 200,
+  "anonymous_access_verified": true,
+  "content_audit_before_publication": {
+    "preregistration_files": 3,
+    "root_folders": [
+      "preregistration",
+      "stage1-failed-replay-20260712"
+    ],
+    "stage1_residual_files_present_at_audit": 10,
+    "unexpected_files": []
+  },
+  "project_id": "sz2gb",
+  "project_url": "https://osf.io/sz2gb/",
+  "public": true,
+  "published_at_utc_approximate": "2026-07-12T23:39:00+00:00",
+  "reason": "The prospectively frozen protocol designates the associated OSF project as the public residual release host after Stage 1 outcomes.",
+  "status": "public_verified"
+}

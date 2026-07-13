@@ -1,0 +1,27 @@
+Fetching 30 files:   0%|          | 0/30 [00:00<?, ?it/s]Fetching 30 files:   3%|▎         | 1/30 [00:22<11:01, 22.80s/it]Fetching 30 files:   7%|▋         | 2/30 [01:23<20:55, 44.84s/it]Fetching 30 files: 100%|██████████| 30/30 [01:23<00:00,  2.77s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:06<02:57,  6.13s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:11<02:35,  5.55s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:15<02:16,  5.07s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:21<02:17,  5.29s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:26<02:09,  5.20s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:31<02:02,  5.08s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:36<01:55,  5.02s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:42<01:56,  5.28s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:42<01:22,  3.91s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:43<00:56,  2.85s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:43<00:40,  2.12s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:44<00:29,  1.61s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:44<00:21,  1.28s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:45<00:16,  1.04s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:45<00:12,  1.15it/s]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:46<00:10,  1.34it/s]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:46<00:08,  1.49it/s]Loading checkpoint shards:  60%|██████    | 18/30 [00:47<00:08,  1.44it/s]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:48<00:07,  1.44it/s]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:48<00:06,  1.48it/s]Loading checkpoint shards:  70%|███████   | 21/30 [00:49<00:05,  1.51it/s]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:50<00:05,  1.57it/s]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:50<00:04,  1.45it/s]Loading checkpoint shards:  80%|████████  | 24/30 [00:51<00:04,  1.44it/s]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:52<00:03,  1.53it/s]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:52<00:02,  1.63it/s]Loading checkpoint shards:  90%|█████████ | 27/30 [00:53<00:01,  1.68it/s]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:53<00:01,  1.72it/s]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:54<00:00,  1.73it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:54<00:00,  2.11it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:54<00:00,  1.82s/it]
+{"phase": "collection", "rows": 256, "rows_per_second": 8.347191241830835, "seconds": 30.668999018147588, "shard": 0}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.398142977253762, "seconds": 30.482929463498294, "shard": 1}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.466984447177612, "seconds": 30.235085655003786, "shard": 2}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.42667501861813, "seconds": 30.379716725088656, "shard": 3}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.115431971249757, "seconds": 31.544839622452855, "shard": 4}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.38405788954957, "seconds": 30.534140313975513, "shard": 5}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.473558920208157, "seconds": 30.211626827716827, "shard": 6}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.37773257766318, "seconds": 30.557194041088223, "shard": 7}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.37487194105795, "seconds": 30.567631577141583, "shard": 8}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.473649658914232, "seconds": 30.211303311400115, "shard": 9}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.419017483700213, "seconds": 30.407348659820855, "shard": 10}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.390710129207582, "seconds": 30.50993253942579, "shard": 11}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.460303161956999, "seconds": 30.258962959051132, "shard": 12}
+{"phase": "collection", "rows": 256, "rows_per_second": 2.321134016890831, "seconds": 110.29091734346002, "shard": 13}
+{"phase": "collection", "rows": 256, "rows_per_second": 8.412631839885268, "seconds": 30.43042948655784, "shard": 14}
+{"phase": "collection", "rows": 189, "rows_per_second": 8.43355042367423, "seconds": 22.410490304231644, "shard": 15}
+{"completed_at_utc": "2026-07-12T23:14:52.115312+00:00", "freeze_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd", "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f", "plan_manifest_status": "final_result_free_plan", "protocol_version": "llama70b_sae_jlens_v2", "registration_id": "f3tpv", "replay_gate_status": "fail", "residual_shards": 16, "status": "replay_gate_failed", "trial_rows": 4029}
+Traceback (most recent call last):
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_sae_jlens_v2.py", line 807, in <module>
+    main()
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_sae_jlens_v2.py", line 803, in main
+    run(parse_args())
+  File "/workspace/CONSCIOUS/experiments/exp2_sae/run_sae_jlens_v2.py", line 789, in run
+    raise ProtocolViolation("Replay-equivalence gate failed")
+ProtocolViolation: Replay-equivalence gate failed

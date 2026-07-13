@@ -1,0 +1,18 @@
+{
+  "attempts": [
+    {
+      "files_present_after_attempt": 10,
+      "failure": "HTTP 404 while anonymously downloading an uploaded private-project shard for hash verification",
+      "success_manifest_written": false
+    },
+    {
+      "action_before_attempt": "Audited all project contents, made the protocol-designated release project public, and verified anonymous node access returned HTTP 200",
+      "files_publicly_downloaded_and_hash_verified": 16,
+      "status": "verified_complete",
+      "success_manifest": "OSF_RESIDUAL_UPLOADS.json"
+    }
+  ],
+  "folder": "stage1-failed-replay-20260712",
+  "project_id": "sz2gb",
+  "status": "complete_with_preserved_initial_failure"
+}

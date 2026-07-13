@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-07-11
+Last updated: 2026-07-12
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -66,6 +66,11 @@ evidence for or against the reported result.
 | A paired-reference score identifies target steering when sign is unknown. | Post-run sensitivity, partly supported in this sample | Same | Same | "The fixed absolute-delta J score has AUROC 0.7174 [0.6973, 0.7379], versus 0.6988 [0.6668, 0.7311] for identity and at most 0.6453 for random-J controls. It still assumes a clean reference." |
 | The paired J fingerprint is uniform across all six target IDs. | Not supported | `analysis/paired_reference_feature_metrics.csv` and `figures/sae_jlens_feature_heterogeneity.*` | Same | "Five features are strong under the known-sign paired score; feature 23893 is below chance at 0.3547 [0.2620, 0.4503]. Report all six." |
 | A J-space fingerprint proves SAE/Goodfire provenance or hidden deception. | Invalid inference | Full release and `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | All SAE/J-lens scripts | "The result characterizes a pinned intervention under specified access. Similar states may arise from prompts, adapters, fine-tunes, weight edits, or other residual additions." |
+| SAE/J-lens v2 completed as a successful preregistered endpoint study. | Not supported; registered gate failed | `data/sae_jlens_audit/confirmatory_v2_20260712/RUN_COMPLETE.json` and `replay_equivalence_gate.json` | `run_sae_jlens_v2.py` | "All 4,029 forwards completed, but v1 replay maximum error was 0.25 against the frozen 0.02 maximum. The registered workflow failed closed and blocked confirmatory endpoints." |
+| The failed replay gate reflects sparse BF16-scale disagreement rather than broad numerical drift. | Supported only as a post-outcome diagnostic | `post_failure/replay_failure_diagnostic.json` and `post_failure/analysis/independent_audit.json` inside the v2 release | `diagnose_sae_jlens_v2_replay_failure.py`, `audit_sae_jlens_v2_post_failure.py` | "Across 15,571,269 values, correlation is 0.9999917 and mean absolute error 0.0050, but 3.137% exceed 0.02 and the maximum is 0.25. This explains the brittle gate; it does not convert failure to pass." |
+| V2 hard-negative families have material Jacobian semantic specificity. | Not supported at the frozen minimum; exploratory | `post_failure/analysis/semantic_a1_contrasts.csv`, `semantic_a1_deception_leakage.csv`, and `figures/sae_jlens_v2_a1_semantic_matrix.*` | `analyze_sae_jlens_v2_post_failure.py` reusing frozen A1 functions | "All four real-Jacobian diagonals are row maxima, but the global contrast is 0.174 [0.167, 0.182], below the frozen 0.25 minimum. No hard-negative family has material deception leakage." |
+| The six accepted paper IDs have a material Jacobian advantage over same-subfamily alternatives. | Not supported; exploratory practical comparability | `post_failure/analysis/semantic_a2_summary.csv` and `figures/sae_jlens_v2_a2_target_comparator.*` | Same | "Real-Jacobian target minus matched comparator is 0.125, with 90% interval [0.116, 0.134] inside the frozen +/-0.25 comparability region. This supports practical comparability, not selected-ID advantage." |
+| A higher-capacity linear reader recovers state-only steering provenance. | Not supported; exploratory | `post_failure/analysis/reader_metrics.csv`, `reader_holdout_metrics.csv`, and `figures/sae_jlens_v2_reader_ladder.*` | Same plus independent audit | "All 14 readers remain near chance and below the frozen 0.60 material threshold; PCA-67 is 0.5101 and full-residual 8192 is 0.5068 under crossed holdouts." |
 
 ## Gemma Scope Cross-Model Evidence
 
@@ -133,6 +138,13 @@ Do not write or imply any of the following:
 - "The J-lens proves the model was lying, hiding consciousness, or modified by
   Goodfire." Token dispositions do not establish belief, intent, experience,
   or intervention provenance.
+- "SAE/J-lens v2 passed preregistration" or any wording that promotes its
+  post-failure A1, A2, or reader calculations to confirmatory evidence. The
+  registered replay gate failed and remains failed.
+- "The paper IDs are meaningless" based on v2 matched comparability. Several
+  IDs have strong semantic effects; the supported exploratory result is only
+  that fixed same-subfamily alternatives are practically comparable in the
+  aggregate under this public implementation.
 - "Human evaluation confirms the result" before three or more independent
   blinded coders complete the frozen 160-row wave 1, the condition-blind gate,
   and reliability reporting.

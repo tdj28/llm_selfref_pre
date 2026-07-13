@@ -1,0 +1,12 @@
+{
+  "completed_at_utc": "2026-07-12T23:14:52.115312+00:00",
+  "freeze_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd",
+  "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+  "plan_manifest_status": "final_result_free_plan",
+  "protocol_version": "llama70b_sae_jlens_v2",
+  "registration_id": "f3tpv",
+  "replay_gate_status": "fail",
+  "residual_shards": 16,
+  "status": "replay_gate_failed",
+  "trial_rows": 4029
+}

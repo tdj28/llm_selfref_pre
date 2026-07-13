@@ -413,7 +413,9 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
   `$1.82`.
 - [x] Create and round-trip audit the exact private OSF project `sz2gb` that
   will hold preregistration materials and, after outcomes, residual shards.
-  No draft or immutable registration exists yet.
+  It was private before outcomes; accepted registration `f3tpv` is immutable
+  and public, and the associated release project is now public with all 16
+  residual shards anonymously hash-verified.
 - [x] Implement result-free Stage 1 scaffolding: exact 4,029-row construction,
   five crossed prompt folds, stored random projections, BF16 residual shards,
   replay gates, A1/A2 analyses, the 14-reader ladder, independent raw-row
@@ -423,16 +425,29 @@ are separate. The result stays inside the frozen `$24`--`$30` core GPU budget.
 - [x] Materialize and independently validate the final Stage 1 plan from the
   audited calibration; complete OSF upload/draft tooling and the frozen figure
   set, then run synthetic end-to-end release tests before the final freeze.
-- [ ] Commit and push the final Stage 1 freeze; create and audit an OSF draft,
+- [x] Commit and push the final Stage 1 freeze; create and audit an OSF draft,
   then obtain explicit owner authorization before submitting the immutable
   registration and record its DOI/URL and registration timestamp. The first
   editable-draft round trip correctly failed on OSF's HTML escaping before
-  registration; the documented transport-only replacement freeze must pass.
-- [ ] Generate v2 target outcomes only after Git and accepted OSF gates pass;
+  registration; the final transport-only replacement freeze passed and public
+  registration `f3tpv` was accepted before Stage 1.
+- [x] Generate v2 target outcomes only after Git and accepted OSF gates pass;
   retrieve, hash-check, independently audit, release, and terminate only the
-  agent-owned execution pod.
-- [ ] Report A1, A2, replay, reader-capacity, and all mandatory control results
+  agent-owned execution pod. All 4,029 forwards completed; the replay gate
+  failed closed, all 58 raw files were verified, and pod `uhfq2j32d4h6ze` was
+  deleted with direct 404 and empty-inventory verification.
+- [x] Report A1, A2, replay, reader-capacity, and all mandatory control results
   together, including failures and nulls, without replacing or relabeling v1.
+  Confirmatory endpoints remain blocked; all post-failure calculations are
+  explicitly exploratory under the dated amendment.
+- [x] Prepare two editable blog drafts and four audited figure assets: the
+  preregistered numerical-gate failure and the exploratory hard-negative /
+  reader-capacity result, with an editorial handoff that fixes publication
+  order and claim boundaries.
+- [ ] Before any new confirmatory v2 rerun, calibrate replay criteria on
+  independent repeated hardware/software executions and freeze distributional
+  plus maximum-error thresholds in a new registration. Never retroactively
+  change the failed `0.02` maximum criterion.
 
 - [ ] Replicate the post-state/paired access split on another model/lens and an
   intervention family absent from training before proposing an operational

@@ -525,7 +525,8 @@ To generate a new confirmatory collection or judge pass, use
 | `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` | Independently audited, outcome-masked Stage 0 plan for selecting 18 hard negatives and six same-subfamily comparators before the final OSF-registered v2 experiment. |
 | `data/sae_jlens_audit/confirmatory_v2_calibration_20260712/` | Completed outcome-masked Stage 0 release with 144 telemetry rows, 24 primary-caliper assignments, exact lexicons, independent audits, recovery logs, hashes, and verified A100 deletion. |
 | `data/sae_jlens_audit/confirmatory_v2_plan_20260712/` | Final independently reconstructed Stage 1 plan: 4,029 forwards, 24 calibrated comparators, five crossed prompt folds, 14 readers, five stored random projections, exact analysis/source hashes, and no outcomes. Manifest SHA-256: `47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f`. |
-| `experiments/exp2_sae/*sae_jlens_v2*` | Two-stage v2 implementation: frozen semantic calibration plus result-free final-plan, residual, replay, A1/A2, 14-reader capacity ladder, exact null randomizations, independent-audit, release, RunPod, and OSF tooling. The private OSF project exists at `sz2gb`; no registration or Stage 1 target outcome exists yet, so Stage 1 remains blocked. |
+| `data/sae_jlens_audit/confirmatory_v2_20260712/` | Complete Stage 1 failed-gate release: all 4,029 forwards, 16 compact readout shards, OSF-bound BF16 residuals, replay diagnostic, dated post-outcome amendment, exploratory A1/A2 and 14-reader analyses, four figure pairs, independent reconstruction, RunPod/OSF lifecycle records, and hashes. The registered replay maximum was `0.25` against `0.02`, so confirmatory endpoints are blocked. |
+| `experiments/exp2_sae/*sae_jlens_v2*` | Two-stage v2 implementation: frozen semantic calibration, final plan, residual/replay runtime, A1/A2, 14-reader ladder, failed-run diagnostic, labeled post-outcome analysis, independent audit, release, RunPod, and OSF tooling. Public registration: [`f3tpv`](https://osf.io/f3tpv/); public release project: [`sz2gb`](https://osf.io/sz2gb/). |
 | `experiments/exp1_elicitation/` | Earlier prompt, lexical, semantic-convergence, and paradox stress tests. |
 | `steering/` | Historical general-purpose SAE framework retained for implementation provenance; its README and draft paper are explicitly superseded and are not current evidence. |
 | `paper/main.tex` | Current causal manuscript. |
@@ -536,9 +537,10 @@ To generate a new confirmatory collection or judge pass, use
 | `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` | Frozen threat model, artifact revisions, hypotheses, controls, holdouts, statistics, and failure rules for auditing SAE steering in J-space. |
 | `docs/LLAMA70B_SAE_JLENS_RESULTS.md` | Completed split-access result, feature heterogeneity, artifact map, cost ledger, and permitted claim language. |
 | `docs/LLAMA70B_SAE_JLENS_V2_CALIBRATION_RESULTS.md` | Complete Stage 0 IDs, tokenizer lexicons, matching diagnostics, recovery history, cost/deletion ledger, and Stage 1 claim boundary. |
+| `docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md` | Registered replay-gate failure, all-value diagnostic, exploratory hard-negative/reader results, lifecycle ledger, artifact map, and permitted claims. |
 | `docs/GEMMA_SCOPE_9B_RESULTS.md` | Gemma outcome summary, artifact map, reproducibility commands, and claim boundaries. |
 | `docs/CLAIM_LEDGER.md` | Claim-to-artifact map, permissible wording, and forbidden overclaims. |
-| `technical_blog_posts/` | Public-post source, four editable Gemma follow-ups, editorial handoff, and synchronized figure assets. |
+| `technical_blog_posts/` | Public-post source, editable Gemma and SAE/J-lens follow-ups, editorial handoffs, and synchronized figure assets. |
 | `DATA_ARTIFACTS.md` | Tracked-data inventory and provenance notes. |
 | `todo.md` | Remaining release and external-validation work. |
 

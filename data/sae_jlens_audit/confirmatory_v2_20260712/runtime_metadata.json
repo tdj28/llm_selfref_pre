@@ -1,0 +1,33 @@
+{
+  "captured_at_utc": "2026-07-12T23:01:58.767983+00:00",
+  "cuda_available": true,
+  "cuda_runtime": "12.8",
+  "environment_flags": {
+    "HF_HUB_ENABLE_HF_TRANSFER": null,
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "freeze_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd",
+  "git_commit": "7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd",
+  "gpu_count": 1,
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA B200",
+      "total_memory": 191503007744
+    }
+  ],
+  "packages": {
+    "accelerate": "1.12.0",
+    "huggingface-hub": "0.36.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "torch": "2.8.0.dev20250319+cu128",
+    "transformers": "4.57.6"
+  },
+  "plan_manifest_sha256": "47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f",
+  "platform": "Linux-6.8.0-100-generic-x86_64-with-glibc2.35",
+  "protocol_version": "llama70b_sae_jlens_v1",
+  "python": "3.11.11",
+  "registration_id": "f3tpv",
+  "registration_url": "https://osf.io/f3tpv/"
+}

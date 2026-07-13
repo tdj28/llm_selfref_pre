@@ -1,0 +1,185 @@
+{
+  "captured_at_utc": "2026-07-12T23:48:49.650110+00:00",
+  "files": [
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5424d29e8ffea6d67afc4b/",
+      "downloaded_sha256": "57ebcad5067519a7e7884d6e1ba367b66ac83fffd09ee13219cc22c2dcf28f97",
+      "file_id": "6a5424d29e8ffea6d67afc4b",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5424d29e8ffea6d67afc4b/",
+      "local_path": "residuals/part-000.safetensors",
+      "name": "part-000.safetensors",
+      "sha256": "57ebcad5067519a7e7884d6e1ba367b66ac83fffd09ee13219cc22c2dcf28f97"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5424fb095cee8976de6fa1/",
+      "downloaded_sha256": "d609c49360e0b4f1a8f5de97b3ae1568426c812375c4e8e605c08fb6eef97fb8",
+      "file_id": "6a5424fb095cee8976de6fa1",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5424fb095cee8976de6fa1/",
+      "local_path": "residuals/part-001.safetensors",
+      "name": "part-001.safetensors",
+      "sha256": "d609c49360e0b4f1a8f5de97b3ae1568426c812375c4e8e605c08fb6eef97fb8"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a54252482bb97efedde6e97/",
+      "downloaded_sha256": "bb896f7e00622bb88afde8f6d1bc4e8c7f06f9cc898ac9113bbdc4c609b0f0c8",
+      "file_id": "6a54252482bb97efedde6e97",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a54252482bb97efedde6e97/",
+      "local_path": "residuals/part-002.safetensors",
+      "name": "part-002.safetensors",
+      "sha256": "bb896f7e00622bb88afde8f6d1bc4e8c7f06f9cc898ac9113bbdc4c609b0f0c8"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a54254e9e8ffea6d67afca9/",
+      "downloaded_sha256": "45f73c529ac4c6ea38d929eb0403f36c0be60cc586fcb3404a0a22a66171dbc1",
+      "file_id": "6a54254e9e8ffea6d67afca9",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a54254e9e8ffea6d67afca9/",
+      "local_path": "residuals/part-003.safetensors",
+      "name": "part-003.safetensors",
+      "sha256": "45f73c529ac4c6ea38d929eb0403f36c0be60cc586fcb3404a0a22a66171dbc1"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5425782909831ee6de6e0f/",
+      "downloaded_sha256": "c13b3aa5938ea52ff8aeb7ed5eee8ae49901a57bc8d70912695f69dcbd1b8ab2",
+      "file_id": "6a5425782909831ee6de6e0f",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5425782909831ee6de6e0f/",
+      "local_path": "residuals/part-004.safetensors",
+      "name": "part-004.safetensors",
+      "sha256": "c13b3aa5938ea52ff8aeb7ed5eee8ae49901a57bc8d70912695f69dcbd1b8ab2"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5425a686797023637afc13/",
+      "downloaded_sha256": "cf469f101de9f9dadc86991acc97b816549e635b179eff0d53d425df05f58602",
+      "file_id": "6a5425a686797023637afc13",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5425a686797023637afc13/",
+      "local_path": "residuals/part-005.safetensors",
+      "name": "part-005.safetensors",
+      "sha256": "cf469f101de9f9dadc86991acc97b816549e635b179eff0d53d425df05f58602"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5425d59e8ffea6d67afcf2/",
+      "downloaded_sha256": "a8e2a09a4d30b533f8bf8a416f97fb5aa562c780f9f8ad245bef80a9c95eadd6",
+      "file_id": "6a5425d59e8ffea6d67afcf2",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5425d59e8ffea6d67afcf2/",
+      "local_path": "residuals/part-006.safetensors",
+      "name": "part-006.safetensors",
+      "sha256": "a8e2a09a4d30b533f8bf8a416f97fb5aa562c780f9f8ad245bef80a9c95eadd6"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a542604c9e772e3cdde6d1d/",
+      "downloaded_sha256": "60477a40a8c222de18c7f8535244e517b09e32d90db20c501caee91ed15bffa7",
+      "file_id": "6a542604c9e772e3cdde6d1d",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a542604c9e772e3cdde6d1d/",
+      "local_path": "residuals/part-007.safetensors",
+      "name": "part-007.safetensors",
+      "sha256": "60477a40a8c222de18c7f8535244e517b09e32d90db20c501caee91ed15bffa7"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a54263559bc113a6f5b91c4/",
+      "downloaded_sha256": "29d973dc8e9f18e837aa26510043774918a9f8b0d436783bc5c64c056df11afb",
+      "file_id": "6a54263559bc113a6f5b91c4",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a54263559bc113a6f5b91c4/",
+      "local_path": "residuals/part-008.safetensors",
+      "name": "part-008.safetensors",
+      "sha256": "29d973dc8e9f18e837aa26510043774918a9f8b0d436783bc5c64c056df11afb"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://osf.io/download/6a5426640a43609ad87afb85/",
+      "downloaded_sha256": "dc3f5a602d069cac8f8e4a3e21c5867a7735bbcb04e01410537f20b4056429e6",
+      "file_id": "6a5426640a43609ad87afb85",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": "https://api.osf.io/v2/files/6a5426640a43609ad87afb85/",
+      "local_path": "residuals/part-009.safetensors",
+      "name": "part-009.safetensors",
+      "sha256": "dc3f5a602d069cac8f8e4a3e21c5867a7735bbcb04e01410537f20b4056429e6"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a54270ec9e772e3cdde6d9d",
+      "downloaded_sha256": "04887a825882404c8291afef5b73a0e243316077898d7acfe9cf45d42ec0c33e",
+      "file_id": "osfstorage/6a54270ec9e772e3cdde6d9d",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-010.safetensors",
+      "name": "part-010.safetensors",
+      "sha256": "04887a825882404c8291afef5b73a0e243316077898d7acfe9cf45d42ec0c33e"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a54273d86797023637afcf1",
+      "downloaded_sha256": "b27fcb1d488131e697ee31651d0e1e237e2f9f4ec12820ef42c7c46e87d32f1c",
+      "file_id": "osfstorage/6a54273d86797023637afcf1",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-011.safetensors",
+      "name": "part-011.safetensors",
+      "sha256": "b27fcb1d488131e697ee31651d0e1e237e2f9f4ec12820ef42c7c46e87d32f1c"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a542769c55f18a5c87afaff",
+      "downloaded_sha256": "1684b26309425530a62b10e9231f13f29857824c68b8683adb538f1f018ce9f6",
+      "file_id": "osfstorage/6a542769c55f18a5c87afaff",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-012.safetensors",
+      "name": "part-012.safetensors",
+      "sha256": "1684b26309425530a62b10e9231f13f29857824c68b8683adb538f1f018ce9f6"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a54279259bc113a6f5b922b",
+      "downloaded_sha256": "7d008d21e562da746bb613195ff1b5538096951d7cb78b41322ceaa3b20e0976",
+      "file_id": "osfstorage/6a54279259bc113a6f5b922b",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-013.safetensors",
+      "name": "part-013.safetensors",
+      "sha256": "7d008d21e562da746bb613195ff1b5538096951d7cb78b41322ceaa3b20e0976"
+    },
+    {
+      "bytes": 88080480,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a5427bb1d4e86b33a5b90e1",
+      "downloaded_sha256": "51fc26cf3abeea61f924146d4fabcc1bae8216bc62a2ba78cba436d93ba20ba7",
+      "file_id": "osfstorage/6a5427bb1d4e86b33a5b90e1",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-014.safetensors",
+      "name": "part-014.safetensors",
+      "sha256": "51fc26cf3abeea61f924146d4fabcc1bae8216bc62a2ba78cba436d93ba20ba7"
+    },
+    {
+      "bytes": 65028192,
+      "download_url": "https://files.us.osf.io/v1/resources/sz2gb/providers/osfstorage/6a5427dd7d7e05471f5b91f6",
+      "downloaded_sha256": "f59051ee212772c7ebff4159332cfeb7cfdc20d3c85803227eafe3c726e19f21",
+      "file_id": "osfstorage/6a5427dd7d7e05471f5b91f6",
+      "folder": "stage1-failed-replay-20260712",
+      "info_url": null,
+      "local_path": "residuals/part-015.safetensors",
+      "name": "part-015.safetensors",
+      "sha256": "f59051ee212772c7ebff4159332cfeb7cfdc20d3c85803227eafe3c726e19f21"
+    }
+  ],
+  "folder": "stage1-failed-replay-20260712",
+  "project_id": "sz2gb",
+  "project_record_sha256": "9ed246498d5eabf63b7fbbc3b159386bbbf49afaf7218eeddd9fe63865f84cb0",
+  "status": "verified_complete"
+}

@@ -1,0 +1,34 @@
+{
+  "analysis_class": "post_outcome_exploratory",
+  "csv_outputs_completed": 10,
+  "failure": "TypeError: Object of type int64 is not JSON serializable",
+  "failure_stage": "analysis_summary_json_serialization_before_figures",
+  "files": {
+    "reader_holdout_metrics.csv": "d552dd6b2fd5dcd534212faaa74d4207809f82604f1ada95398c72fbfe9cac26",
+    "reader_metrics.csv": "7cf02f5f4e164ea9e7703e54296fbd4ccf75dd046d31d9143da90885f2bbfced",
+    "reader_pair_metrics.csv": "ff229b9c52d786f2a5165764b5ba0130a07fcffe6dcbe21a93f188dfcc11ac5e",
+    "reader_predictions.csv": "16c2388f73f63cef23b262d9ced7bcd366dcd436fe274ff8a718dbe4306d1757",
+    "semantic_a1_contrasts.csv": "2c158abba77b0d96835b207a1c41bdebfb1a0557874fa739792f6ca982bc7237",
+    "semantic_a1_deception_leakage.csv": "862b21fbd3e3ebca70d1c3461dfbf9db1306745ba4741945ccc03e57469464d7",
+    "semantic_a1_features.csv": "5edc4e6d9ab84f4fd0cac0e0741558a5d18d16497f2dfe153d0ab22a958b649b",
+    "semantic_a1_matrix.csv": "7d7b18066df325d85f08e336356347388905ffccb41f62807b46fd84bfc89b64",
+    "semantic_a2_pairs.csv": "d20ba8fb1ce488450eeec82db1f48d5e379e6a1db071dc997ba396fade30b92f",
+    "semantic_a2_summary.csv": "e5509917cc3ba994d7a407d2bde92869d4a5c41cc55e67efbf59c250466a4bce"
+  },
+  "macos_accelerate_warning_probe": {
+    "input_dtype": "float32",
+    "input_finite": true,
+    "output_dtype": "float32",
+    "output_finite": true,
+    "output_max": 0.7829201817512512,
+    "output_min": -0.7791232466697693,
+    "warning_classes": [
+      "divide by zero encountered in matmul",
+      "overflow encountered in matmul",
+      "underflow encountered in matmul",
+      "invalid value encountered in matmul"
+    ]
+  },
+  "semantic_outputs_inspected_after_failure": true,
+  "status": "preserved_failed_attempt"
+}
