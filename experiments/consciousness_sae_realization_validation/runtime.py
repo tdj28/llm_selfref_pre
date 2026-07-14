@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import gc
 import hashlib
-import json
 import math
 import os
 import platform
@@ -74,7 +73,11 @@ def _metric_pair(left: Any, right: Any) -> tuple[Any, Any]:
 
     left_device = getattr(left, "device", None)
     right_device = getattr(right, "device", None)
-    if left_device is not None and right_device is not None and left_device != right_device:
+    if (
+        left_device is not None
+        and right_device is not None
+        and left_device != right_device
+    ):
         right = right.to(device=left_device)
     return left, right
 
@@ -120,9 +123,7 @@ def pearson(left: Any, right: Any) -> float:
     a = left.detach().float().reshape(-1)
     b = right.detach().float().reshape(-1)
     if a.shape != b.shape or a.numel() < 2:
-        raise V2RuntimeError(
-            "metric_shape", "Pearson vectors differ or are too short"
-        )
+        raise V2RuntimeError("metric_shape", "Pearson vectors differ or are too short")
     a = a - a.mean()
     b = b - b.mean()
     denominator = torch.linalg.vector_norm(a) * torch.linalg.vector_norm(b)
@@ -138,7 +139,11 @@ def _extract_hidden(output: Any) -> Any:
     torch = _torch()
     if isinstance(output, torch.Tensor):
         return output
-    if isinstance(output, (tuple, list)) and output and isinstance(output[0], torch.Tensor):
+    if (
+        isinstance(output, (tuple, list))
+        and output
+        and isinstance(output[0], torch.Tensor)
+    ):
         return output[0]
     raise V2RuntimeError("hook_output", "transformer block output has no hidden tensor")
 
@@ -191,14 +196,18 @@ class SingleUseResidualHook(AbstractContextManager["SingleUseResidualHook"]):
     def _hook(self, _module: Any, _inputs: Any, output: Any) -> Any:
         torch = _torch()
         if not self.armed or self.fire_count:
-            raise V2RuntimeError("hook_unarmed", "hook fired outside its one armed call")
+            raise V2RuntimeError(
+                "hook_unarmed", "hook fired outside its one armed call"
+            )
         hidden = _extract_hidden(output)
         if hidden.ndim != 3 or hidden.shape[0] != 1 or hidden.shape[1] != 1:
             raise V2RuntimeError(
                 "hook_shape", "edited forward must contain one batch/token position"
             )
         if hidden.shape[-1] != self.vector.numel():
-            raise V2RuntimeError("hook_width", "vector width differs from residual width")
+            raise V2RuntimeError(
+                "hook_width", "vector width differs from residual width"
+            )
         vector = self.vector.to(device=hidden.device, dtype=hidden.dtype)
         pre = hidden.detach().clone()
         post = hidden + vector.view(1, 1, -1)
@@ -253,13 +262,13 @@ def clone_kv_cache(cache: Any) -> Any:
 def _rms_norm(hidden: Any, weight: Any, eps: float) -> Any:
     torch = _torch()
     values = hidden.float()
-    normalized = values * torch.rsqrt(
-        values.square().mean(dim=-1, keepdim=True) + eps
-    )
+    normalized = values * torch.rsqrt(values.square().mean(dim=-1, keepdim=True) + eps)
     return normalized.to(dtype=weight.dtype) * weight
 
 
-def _selected_logits(normalized: Any, lm_head_weight: Any, token_ids: Sequence[int]) -> Any:
+def _selected_logits(
+    normalized: Any, lm_head_weight: Any, token_ids: Sequence[int]
+) -> Any:
     torch = _torch()
     ids = torch.tensor(list(token_ids), dtype=torch.long, device=lm_head_weight.device)
     rows = lm_head_weight.index_select(0, ids)
@@ -295,7 +304,10 @@ def deterministic_direction(layer: int, direction: int) -> Any:
     import numpy as np
 
     torch = _torch()
-    if layer not in protocol.STAGE_A_LAYERS or direction not in protocol.STAGE_A_DIRECTIONS:
+    if (
+        layer not in protocol.STAGE_A_LAYERS
+        or direction not in protocol.STAGE_A_DIRECTIONS
+    ):
         raise V2RuntimeError("direction", "direction coordinate is outside Stage A")
     rng = np.random.Generator(
         np.random.PCG64(protocol.seed64("stage-a-direction", layer, direction))
@@ -344,8 +356,7 @@ def fixed_token_panel() -> tuple[int, ...]:
     # 7,919 is coprime to 128,256, so the first 2,048 values are unique.
     offset = protocol.seed64("fixed-token-panel") % protocol.VOCAB_SIZE
     return tuple(
-        int((offset + 7_919 * index) % protocol.VOCAB_SIZE)
-        for index in range(2_048)
+        int((offset + 7_919 * index) % protocol.VOCAB_SIZE) for index in range(2_048)
     )
 
 
@@ -369,7 +380,9 @@ class ArcPromptSession:
         self.backend = backend
         self.token_ids = normalized
         self.token_ids_sha256 = token_ids_sha256(normalized)
-        prefix = torch.tensor([normalized[:-1]], dtype=torch.long, device=backend.device)
+        prefix = torch.tensor(
+            [normalized[:-1]], dtype=torch.long, device=backend.device
+        )
         with torch.inference_mode():
             output = backend._model_forward(
                 input_ids=prefix, use_cache=True, return_dict=True
@@ -402,7 +415,9 @@ class ArcPromptSession:
                     raise V2RuntimeError("capture_count", f"layer {layer} fired twice")
                 hidden = _extract_hidden(output)
                 if tuple(hidden.shape) != (1, 1, protocol.WIDTH):
-                    raise V2RuntimeError("capture_shape", f"layer {layer} shape differs")
+                    raise V2RuntimeError(
+                        "capture_shape", f"layer {layer} shape differs"
+                    )
                 if hidden.dtype != torch.bfloat16:
                     raise V2RuntimeError("capture_dtype", f"layer {layer} is not BF16")
                 captured[layer] = hidden[0, 0].detach().clone()
@@ -428,7 +443,9 @@ class ArcPromptSession:
             ]
             for handle in reversed(handles):
                 stack.callback(handle.remove)
-            final_handle = self.backend.model.model.norm.register_forward_pre_hook(final_hook)
+            final_handle = self.backend.model.model.norm.register_forward_pre_hook(
+                final_hook
+            )
             stack.callback(final_handle.remove)
             if edit_layer is not None:
                 if edit_layer not in protocol.J_LAYERS or vector is None:
@@ -450,14 +467,18 @@ class ArcPromptSession:
                     return_dict=True,
                 )
 
-        if set(captured) != set(protocol.J_LAYERS) or any(value != 1 for value in counts.values()):
+        if set(captured) != set(protocol.J_LAYERS) or any(
+            value != 1 for value in counts.values()
+        ):
             raise V2RuntimeError("capture_incomplete", "J-layer arc is incomplete")
         if len(final) != 1:
             raise V2RuntimeError("capture_incomplete", "final residual is missing")
         # One device-to-host transfer for the complete arc.
         stacked = torch.stack([captured[layer] for layer in protocol.J_LAYERS] + final)
         stacked = stacked.to(device="cpu", dtype=torch.bfloat16).contiguous()
-        by_layer = {layer: stacked[index] for index, layer in enumerate(protocol.J_LAYERS)}
+        by_layer = {
+            layer: stacked[index] for index, layer in enumerate(protocol.J_LAYERS)
+        }
         final_cpu = stacked[-1]
         if edit_context is None:
             return ArcTrace(
@@ -499,24 +520,38 @@ def _finite_tensor(value: Any, *, label: str) -> None:
         raise V2RuntimeError("nonfinite", f"{label} is not a finite tensor")
 
 
-def _observed_determinism_settings(torch: Any) -> dict[str, Any]:
+def _observed_determinism_settings(
+    torch: Any, *, runtime_seed: int | None = None
+) -> dict[str, Any]:
+    seed = (
+        int(protocol.seed64("runtime") % (2**63 - 1))
+        if runtime_seed is None
+        else int(runtime_seed)
+    )
     return {
-        "seed": int(protocol.seed64("runtime") % (2**63 - 1)),
-        "cublas_workspace_config": os.environ.get(
-            protocol.CUBLAS_WORKSPACE_CONFIG_ENV
-        ),
+        "seed": seed,
+        "cublas_workspace_config": os.environ.get(protocol.CUBLAS_WORKSPACE_CONFIG_ENV),
         "deterministic_algorithms": bool(torch.are_deterministic_algorithms_enabled()),
         "cuda_matmul_tf32": bool(torch.backends.cuda.matmul.allow_tf32),
         "cudnn_tf32": bool(torch.backends.cudnn.allow_tf32),
         "flash_sdp_enabled": bool(torch.backends.cuda.flash_sdp_enabled()),
-        "mem_efficient_sdp_enabled": bool(torch.backends.cuda.mem_efficient_sdp_enabled()),
+        "mem_efficient_sdp_enabled": bool(
+            torch.backends.cuda.mem_efficient_sdp_enabled()
+        ),
         "math_sdp_enabled": bool(torch.backends.cuda.math_sdp_enabled()),
     }
 
 
-def _expected_determinism_settings() -> dict[str, Any]:
+def _expected_determinism_settings(
+    *, runtime_seed: int | None = None
+) -> dict[str, Any]:
+    seed = (
+        int(protocol.seed64("runtime") % (2**63 - 1))
+        if runtime_seed is None
+        else int(runtime_seed)
+    )
     return {
-        "seed": int(protocol.seed64("runtime") % (2**63 - 1)),
+        "seed": seed,
         "cublas_workspace_config": protocol.CUBLAS_WORKSPACE_CONFIG_VALUE,
         "deterministic_algorithms": True,
         "cuda_matmul_tf32": False,
@@ -634,6 +669,7 @@ class V2Backend:
         tokenizer: Any,
         ownership_receipt_sha256: str,
         load_shadow_layers: Sequence[int] = (),
+        runtime_seed: int | None = None,
     ) -> None:
         launch_environment = validate_guest_launch_environment(
             ownership_receipt_sha256=ownership_receipt_sha256
@@ -650,7 +686,9 @@ class V2Backend:
         try:
             from transformers import AutoModelForCausalLM
         except ImportError as exc:  # pragma: no cover - GPU environment only
-            raise V2RuntimeError("transformers_missing", "Transformers is required") from exc
+            raise V2RuntimeError(
+                "transformers_missing", "Transformers is required"
+            ) from exc
 
         required_determinism = (
             "enable_flash_sdp",
@@ -661,7 +699,14 @@ class V2Backend:
             raise V2RuntimeError(
                 "determinism_api", "required CUDA SDPA controls are unavailable"
             )
-        seed = protocol.seed64("runtime") % (2**63 - 1)
+        seed = (
+            int(protocol.seed64("runtime") % (2**63 - 1))
+            if runtime_seed is None
+            else int(runtime_seed)
+        )
+        if isinstance(seed, bool) or not 0 <= seed < 2**63:
+            raise V2RuntimeError("runtime_seed", "runtime seed is outside int63")
+        self.runtime_seed = seed
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
         torch.use_deterministic_algorithms(True)
@@ -670,7 +715,9 @@ class V2Backend:
         torch.backends.cuda.enable_flash_sdp(False)
         torch.backends.cuda.enable_mem_efficient_sdp(False)
         torch.backends.cuda.enable_math_sdp(True)
-        if _observed_determinism_settings(torch) != _expected_determinism_settings():
+        if _observed_determinism_settings(
+            torch, runtime_seed=self.runtime_seed
+        ) != _expected_determinism_settings(runtime_seed=self.runtime_seed):
             raise V2RuntimeError(
                 "determinism_contract", "deterministic CUDA settings differ"
             )
@@ -762,7 +809,9 @@ class V2Backend:
         if requested:
             for layer in requested:
                 if layer not in protocol.STAGE_A_LAYERS:
-                    raise V2RuntimeError("shadow_layer", "FP32 shadow layer is outside Stage A")
+                    raise V2RuntimeError(
+                        "shadow_layer", "FP32 shadow layer is outside Stage A"
+                    )
                 raw = raw_maps[layer] if layer in raw_maps else raw_maps[str(layer)]
                 self._shadow_maps[layer] = raw.to(
                     device=self.device, dtype=torch.float32, non_blocking=True
@@ -801,7 +850,9 @@ class V2Backend:
             self.norm_weight,
             self.rms_eps,
         )
-        result = _selected_logits(normalized, self.model.lm_head.weight, token_ids).reshape(-1)
+        result = _selected_logits(
+            normalized, self.model.lm_head.weight, token_ids
+        ).reshape(-1)
         _finite_tensor(result, label="selected logits")
         return result
 
@@ -853,7 +904,9 @@ class V2Backend:
                 "safetensors": importlib_metadata.version("safetensors"),
                 "transformers": importlib_metadata.version("transformers"),
             },
-            "determinism": _observed_determinism_settings(self.torch),
+            "determinism": _observed_determinism_settings(
+                self.torch, runtime_seed=self.runtime_seed
+            ),
             "model_forward_count": int(self.forward_count),
             "first_model_forward_at_utc": self.first_forward_at_utc,
             "last_model_forward_at_utc": self.last_forward_at_utc,
@@ -876,7 +929,9 @@ class V2Backend:
             result = value.to(dtype=matrix.dtype)
         elif transport.startswith("random_j_"):
             index = int(transport.rsplit("_", 1)[1])
-            result = apply_random_j(value.to(dtype=matrix.dtype), matrix, layer=layer, index=index)
+            result = apply_random_j(
+                value.to(dtype=matrix.dtype), matrix, layer=layer, index=index
+            )
         else:
             raise V2RuntimeError("transport", f"unknown transport: {transport}")
         if not bool(self.torch.isfinite(result).all()):
@@ -918,14 +973,18 @@ def load_tokenizer(model_snapshot: Path) -> Any:
     try:
         from transformers import AutoTokenizer
     except ImportError as exc:  # pragma: no cover - GPU environment only
-        raise V2RuntimeError("transformers_missing", "Transformers is required") from exc
+        raise V2RuntimeError(
+            "transformers_missing", "Transformers is required"
+        ) from exc
     snapshot = model_snapshot.expanduser().resolve(strict=True)
     if not snapshot.is_dir() or snapshot.is_symlink():
         raise V2RuntimeError("model_snapshot", "model snapshot is not a real directory")
     # The independently rehashed staging receipt binds the snapshot revision;
     # its published directory is intentionally the stable name model_snapshot.
     if snapshot.name != "model_snapshot":
-        raise V2RuntimeError("model_revision", "model snapshot publication name differs")
+        raise V2RuntimeError(
+            "model_revision", "model snapshot publication name differs"
+        )
     tokenizer = AutoTokenizer.from_pretrained(
         snapshot, local_files_only=True, trust_remote_code=False
     )
@@ -968,15 +1027,22 @@ def realization_metrics(
     requested_positive_fp32: Any | None = None,
 ) -> tuple[dict[str, Any], Any, Any]:
     torch = _torch()
-    if any(value is None for value in (plus.pre_edit, plus.post_edit, minus.pre_edit, minus.post_edit)):
+    if any(
+        value is None
+        for value in (plus.pre_edit, plus.post_edit, minus.pre_edit, minus.post_edit)
+    ):
         raise V2RuntimeError("realization", "signed edit telemetry is incomplete")
     assert plus.pre_edit is not None and plus.post_edit is not None
     assert minus.pre_edit is not None and minus.post_edit is not None
-    requested = requested_positive.detach().to(device="cpu", dtype=torch.bfloat16).contiguous()
+    requested = (
+        requested_positive.detach().to(device="cpu", dtype=torch.bfloat16).contiguous()
+    )
     requested_fp32 = (
         requested.float()
         if requested_positive_fp32 is None
-        else requested_positive_fp32.detach().to(device="cpu", dtype=torch.float32).contiguous()
+        else requested_positive_fp32.detach()
+        .to(device="cpu", dtype=torch.float32)
+        .contiguous()
     )
     negative = torch.neg(requested).contiguous()
     plus_native = (plus.pre_edit + requested).to(dtype=torch.bfloat16)
@@ -985,9 +1051,8 @@ def realization_metrics(
     realized_minus = minus.post_edit.float() - minus.pre_edit.float()
     central = (plus.post_edit.float() - minus.post_edit.float()) * 0.5
     common = (
-        (plus.post_edit.float() + minus.post_edit.float()) * 0.5
-        - clean_source.float()
-    )
+        plus.post_edit.float() + minus.post_edit.float()
+    ) * 0.5 - clean_source.float()
     central_rms = tensor_rms(central)
     common_rms = float(torch.sqrt(torch.mean(common.square())).item())
     clean_rms = tensor_rms(clean_source)
@@ -997,14 +1062,22 @@ def realization_metrics(
         "pre_equals_clean_plus": bool(torch.equal(plus.pre_edit, clean_source)),
         "pre_equals_clean_minus": bool(torch.equal(minus.pre_edit, clean_source)),
         "native_post_bytes_exact_plus": bool(torch.equal(plus.post_edit, plus_native)),
-        "native_post_bytes_exact_minus": bool(torch.equal(minus.post_edit, minus_native)),
+        "native_post_bytes_exact_minus": bool(
+            torch.equal(minus.post_edit, minus_native)
+        ),
         "requested_vector_sha256": tensor_sha256(requested),
         "realized_central_sha256": tensor_sha256(central),
-        "requested_plus_realized_relative_rmse": relative_rmse(realized_plus, requested),
-        "requested_minus_realized_relative_rmse": relative_rmse(realized_minus, negative),
+        "requested_plus_realized_relative_rmse": relative_rmse(
+            realized_plus, requested
+        ),
+        "requested_minus_realized_relative_rmse": relative_rmse(
+            realized_minus, negative
+        ),
         "requested_realized_central_relative_rmse": relative_rmse(central, requested),
         "requested_realized_central_cosine": cosine(central, requested),
-        "fp32_requested_to_bf16_relative_rmse": relative_rmse(requested, requested_fp32),
+        "fp32_requested_to_bf16_relative_rmse": relative_rmse(
+            requested, requested_fp32
+        ),
         "fp32_requested_to_bf16_cosine": cosine(requested, requested_fp32),
         "native_central_to_fp32_requested_relative_rmse": relative_rmse(
             central, requested_fp32
@@ -1042,8 +1115,12 @@ def transport_metrics(
     )
     clean_final = session.clean.final_residual.to(device=backend.device).float()
     predicted_logits = (
-        backend.selected_logits_from_state(clean_final + predicted.float(), selected_token_ids)
-        - backend.selected_logits_from_state(clean_final - predicted.float(), selected_token_ids)
+        backend.selected_logits_from_state(
+            clean_final + predicted.float(), selected_token_ids
+        )
+        - backend.selected_logits_from_state(
+            clean_final - predicted.float(), selected_token_ids
+        )
     ) * 0.5
     if actual_selected_logit_delta is None:
         actual_plus = backend.selected_logits_from_state(
@@ -1115,7 +1192,9 @@ def aggregate_decoder_columns(decoder: Any, feature_ids: Sequence[int]) -> Any:
         )
     ids = tuple(int(value) for value in feature_ids)
     if not ids or len(ids) != len(set(ids)):
-        raise V2RuntimeError("feature_ids", "aggregate feature IDs are empty or duplicated")
+        raise V2RuntimeError(
+            "feature_ids", "aggregate feature IDs are empty or duplicated"
+        )
     if min(ids) < 0 or max(ids) >= int(decoder.shape[1]):
         raise V2RuntimeError("feature_ids", "aggregate feature ID is outside decoder")
     accumulator = torch.zeros(int(decoder.shape[0]), dtype=torch.float32, device="cpu")
@@ -1123,9 +1202,11 @@ def aggregate_decoder_columns(decoder: Any, feature_ids: Sequence[int]) -> Any:
         accumulator.add_(
             decoder[:, feature_id].to(dtype=torch.bfloat16).to(dtype=torch.float32)
         )
-    return accumulator.mul_(protocol.ABSOLUTE_COEFFICIENT).to(
-        dtype=torch.bfloat16
-    ).contiguous()
+    return (
+        accumulator.mul_(protocol.ABSOLUTE_COEFFICIENT)
+        .to(dtype=torch.bfloat16)
+        .contiguous()
+    )
 
 
 def norm_match(control: Any, target: Any) -> tuple[Any, dict[str, float]]:
@@ -1348,7 +1429,9 @@ def _resolve_matches(
                 sum(
                     (float(left) - float(right)) ** 2
                     for left, right in zip(
-                        target["scaled_coordinates"], row["scaled_coordinates"], strict=True
+                        target["scaled_coordinates"],
+                        row["scaled_coordinates"],
+                        strict=True,
                     )
                 )
             )
@@ -1387,7 +1470,9 @@ def compute_fresh_matches(
     table, mapping, matched_ids = _resolve_matches(stats)
     targets = tuple(int(row["target_feature_id"]) for row in mapping)
     if targets != protocol.TARGET_FEATURE_IDS:
-        raise V2RuntimeError("matching", "source helper target inventory differs from v2")
+        raise V2RuntimeError(
+            "matching", "source helper target inventory differs from v2"
+        )
     if len(matched_ids) != 6 or set(matched_ids) & set(protocol.TARGET_FEATURE_IDS):
         raise V2RuntimeError("matching", "fresh matches are not unique and disjoint")
     return table, mapping, matched_ids, token_count, decoder_hash
@@ -1406,14 +1491,21 @@ def materialize_stage_b_vectors(
         target = aggregate_decoder_columns(decoder, target_ids)
         matched_raw = aggregate_decoder_columns(decoder, matched_ids)
         matched, matched_meta = norm_match(matched_raw, target)
-        isotropic, isotropic_meta = isotropic_vector(assignment["assignment_id"], target)
+        isotropic, isotropic_meta = isotropic_vector(
+            assignment["assignment_id"], target
+        )
         for vector_class, vector, feature_ids, metadata in (
-            ("target", target, target_ids, {
-                "rescale": 1.0,
-                "raw_norm": float(target.float().norm().item()),
-                "final_norm": float(target.float().norm().item()),
-                "norm_relative_error": 0.0,
-            }),
+            (
+                "target",
+                target,
+                target_ids,
+                {
+                    "rescale": 1.0,
+                    "raw_norm": float(target.float().norm().item()),
+                    "final_norm": float(target.float().norm().item()),
+                    "norm_relative_error": 0.0,
+                },
+            ),
             ("matched", matched, matched_ids, matched_meta),
             ("isotropic", isotropic, (), isotropic_meta),
         ):
@@ -1428,7 +1520,9 @@ def materialize_stage_b_vectors(
                     "feature_ids": list(feature_ids),
                     "coefficient": protocol.ABSOLUTE_COEFFICIENT,
                     "seed": (
-                        protocol.seed64("stage-b-isotropic", assignment["assignment_id"])
+                        protocol.seed64(
+                            "stage-b-isotropic", assignment["assignment_id"]
+                        )
                         if vector_class == "isotropic"
                         else None
                     ),
@@ -1480,8 +1574,7 @@ def _jlens_normalized_hidden(
     flat = source_residuals.reshape(-1, shape[-1])
     transported = torch.cat(
         [
-            flat[start : start + row_batch_size].to(dtype=jacobian.dtype)
-            @ jacobian.T
+            flat[start : start + row_batch_size].to(dtype=jacobian.dtype) @ jacobian.T
             for start in range(0, flat.shape[0], row_batch_size)
         ],
         dim=0,
@@ -1527,9 +1620,9 @@ def _stable_topk(values: Any, token_ids: Any, *, k: int, largest: bool) -> _TopK
     by_id = torch.argsort(token_ids, dim=-1, descending=False, stable=True)
     ids_by_id = token_ids.gather(-1, by_id)
     values_by_id = values.gather(-1, by_id)
-    by_score = torch.argsort(
-        values_by_id, dim=-1, descending=largest, stable=True
-    )[:, :k]
+    by_score = torch.argsort(values_by_id, dim=-1, descending=largest, stable=True)[
+        :, :k
+    ]
     return _TopKReadout(
         token_ids=ids_by_id.gather(-1, by_score),
         scores=values_by_id.gather(-1, by_score),
@@ -1583,12 +1676,18 @@ def stage_b_topk_archive(
         for multiplier in protocol.STAGE_B_MULTIPLIERS
     ]
     minus_rows = torch.tensor(
-        [local_lookup[(assignment, vector_class, -1, multiplier)] for assignment, vector_class, multiplier in pair_keys],
+        [
+            local_lookup[(assignment, vector_class, -1, multiplier)]
+            for assignment, vector_class, multiplier in pair_keys
+        ],
         dtype=torch.long,
         device=backend.device,
     )
     plus_rows = torch.tensor(
-        [local_lookup[(assignment, vector_class, 1, multiplier)] for assignment, vector_class, multiplier in pair_keys],
+        [
+            local_lookup[(assignment, vector_class, 1, multiplier)]
+            for assignment, vector_class, multiplier in pair_keys
+        ],
         dtype=torch.long,
         device=backend.device,
     )
@@ -1596,7 +1695,9 @@ def stage_b_topk_archive(
     for state_index, layer in enumerate(state_layers):
         if progress_callback is not None:
             progress_callback()
-        source = residuals[:, state_index].to(device=backend.device, dtype=torch.bfloat16)
+        source = residuals[:, state_index].to(
+            device=backend.device, dtype=torch.bfloat16
+        )
         if layer is None:
             normalized = _llama_rms_norm(
                 source, backend.norm_weight, eps=backend.rms_eps
@@ -1612,9 +1713,7 @@ def stage_b_topk_archive(
         logits = _full_lm_head_logits(
             normalized, backend.model.lm_head.weight, row_batch_size=32
         )
-        ids = torch.arange(
-            protocol.VOCAB_SIZE, device=logits.device, dtype=torch.long
-        )
+        ids = torch.arange(protocol.VOCAB_SIZE, device=logits.device, dtype=torch.long)
         raw = _stable_topk(logits, ids, k=protocol.TOP_K, largest=True)
         delta = logits - logits[0:1]
         positive = _stable_topk(delta, ids, k=protocol.TOP_K, largest=True)
@@ -1664,8 +1763,12 @@ def stage_b_topk_archive(
         "absolute_top_scores": torch.stack(all_raw_scores, dim=1).contiguous(),
         "branch_vs_clean_top_token_ids": torch.stack(all_pos_ids, dim=1).contiguous(),
         "branch_vs_clean_top_scores": torch.stack(all_pos_scores, dim=1).contiguous(),
-        "branch_vs_clean_bottom_token_ids": torch.stack(all_neg_ids, dim=1).contiguous(),
-        "branch_vs_clean_bottom_scores": torch.stack(all_neg_scores, dim=1).contiguous(),
+        "branch_vs_clean_bottom_token_ids": torch.stack(
+            all_neg_ids, dim=1
+        ).contiguous(),
+        "branch_vs_clean_bottom_scores": torch.stack(
+            all_neg_scores, dim=1
+        ).contiguous(),
         "paired_central_top_token_ids": torch.stack(
             all_central_pos_ids, dim=1
         ).contiguous(),

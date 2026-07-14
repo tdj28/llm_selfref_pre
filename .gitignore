@@ -150,6 +150,17 @@ data/consciousness_sae_realization_validation/*
 !data/consciousness_sae_realization_validation/validation_v1_plan_20260714/
 !data/consciousness_sae_realization_validation/validation_v1_plan_20260714/**
 
+# Target-blind calibration v2. Only the prospective machine plan and compact
+# audited metadata are Git payloads; its raw tensor archive stays on the
+# sentinel-bound RunPod network volume.
+!data/consciousness_sae_target_blind_calibration/
+data/consciousness_sae_target_blind_calibration/*
+!data/consciousness_sae_target_blind_calibration/README.md
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/**
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/**
+
 # Defense in depth: these formats are never Git payloads for this study, even
 # if someone accidentally writes them under docs/, experiments/, or tests/.
 **/consciousness_sae_changepoint/**/*.safetensors
@@ -212,10 +223,31 @@ data/consciousness_sae_realization_validation/*
 **/consciousness_sae_realization_validation/**/*.tar.*
 **/consciousness_sae_realization_validation/**/*.zip
 **/consciousness_sae_realization_validation/**/*.log
+
+# Calibration-v2 raw observations and model artifacts are external-only.
+**/consciousness_sae_target_blind_calibration/**/*.safetensors
+**/consciousness_sae_target_blind_calibration/**/*.pt
+**/consciousness_sae_target_blind_calibration/**/*.pth
+**/consciousness_sae_target_blind_calibration/**/*.ckpt
+**/consciousness_sae_target_blind_calibration/**/*.bin
+**/consciousness_sae_target_blind_calibration/**/*.arrow
+**/consciousness_sae_target_blind_calibration/**/*.parquet
+**/consciousness_sae_target_blind_calibration/**/*.npy
+**/consciousness_sae_target_blind_calibration/**/*.npz
+**/consciousness_sae_target_blind_calibration/**/*.pkl
+**/consciousness_sae_target_blind_calibration/**/*.pickle
+**/consciousness_sae_target_blind_calibration/**/*.zst
+**/consciousness_sae_target_blind_calibration/**/*.gz
+**/consciousness_sae_target_blind_calibration/**/*.tar
+**/consciousness_sae_target_blind_calibration/**/*.tar.*
+**/consciousness_sae_target_blind_calibration/**/*.zip
+**/consciousness_sae_target_blind_calibration/**/*.log
 out/
 *.jsonl
 !data/consciousness_readout_validation/pilot_v1_plan_20260714_r15/*.jsonl
 !data/consciousness_sae_realization_validation/validation_v1_plan_20260714/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/*.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_balanced_80_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/*.jsonl
