@@ -30,6 +30,7 @@ from .runpod_preflight import (
 POD_NAME_RE = re.compile(
     rf"^{re.escape(POD_NAME_PREFIX)}[0-9]{{8}}-[0-9a-f]{{32}}$"
 )
+CONTAINER_DISK_GB = 20
 
 
 def _compat_protocol() -> SimpleNamespace:
@@ -103,10 +104,12 @@ def configured_frozen_lifecycle() -> Iterator[object]:
     prior_prefix = frozen.POD_NAME_PREFIX
     prior_name_re = frozen.POD_NAME_RE
     prior_min_volume = frozen.MIN_NETWORK_VOLUME_GB
+    prior_container_disk = frozen.CONTAINER_DISK_GB
     frozen.protocol = _compat_protocol()
     frozen.POD_NAME_PREFIX = POD_NAME_PREFIX
     frozen.POD_NAME_RE = POD_NAME_RE
     frozen.MIN_NETWORK_VOLUME_GB = 500
+    frozen.CONTAINER_DISK_GB = CONTAINER_DISK_GB
     try:
         yield frozen
     finally:
@@ -114,6 +117,7 @@ def configured_frozen_lifecycle() -> Iterator[object]:
         frozen.POD_NAME_PREFIX = prior_prefix
         frozen.POD_NAME_RE = prior_name_re
         frozen.MIN_NETWORK_VOLUME_GB = prior_min_volume
+        frozen.CONTAINER_DISK_GB = prior_container_disk
 
 
 def _flag_value(argv: Sequence[str], flag: str) -> str | None:

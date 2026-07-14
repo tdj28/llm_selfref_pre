@@ -172,7 +172,12 @@ python -m experiments.consciousness_sae_realization_validation.runpod_orchestrat
 
 Before the executing command, independently recheck live B200 stock and price.
 The create contract fixes `NVIDIA B200`, `US-NE-1`, volume `qf2lwehl89`, a
-six-hour provider kill, and a `$36` ceiling. The executing path performs
+`20 GB` container disk, six-hour provider kill, and a `$36` ceiling. Both the
+GraphQL request and the upstream ownership snapshot must report exactly
+`containerDiskInGb=20`; the successor adapter restores the inherited lifecycle
+constant after request/receipt validation. Retained artifacts remain on the
+network volume, so this operational retry does not reduce the raw-data budget
+or move study output onto container-local disk. The executing path performs
 exactly one create call. Use the returned ownership receipt and exact pod ID;
 never target another account pod by name or convenience.
 

@@ -4,6 +4,7 @@ import copy
 import contextlib
 import hashlib
 import io
+import json
 import os
 import tempfile
 import unittest
@@ -496,6 +497,7 @@ class RunPodPreflightTests(unittest.TestCase):
         frozen = runpod_lifecycle_adapter.frozen
         prior_protocol = frozen.protocol
         prior_prefix = frozen.POD_NAME_PREFIX
+        prior_container_disk = frozen.CONTAINER_DISK_GB
         with runpod_lifecycle_adapter.configured_frozen_lifecycle() as lifecycle:
             self.assertEqual(lifecycle.protocol.STUDY_ID, protocol.STUDY_ID)
             self.assertEqual(lifecycle.POD_NAME_PREFIX, gate.POD_NAME_PREFIX)
@@ -504,8 +506,25 @@ class RunPodPreflightTests(unittest.TestCase):
                 protocol.CONTAINER_IMAGE_SPEC["immutable_reference"].rsplit("@", 1)[1],
             )
             self.assertIsNot(lifecycle.protocol, prior_protocol)
+            self.assertEqual(lifecycle.CONTAINER_DISK_GB, 20)
+            request = lifecycle.build_create_request(
+                pod_name=gate.POD_NAME_PREFIX + "20260714-" + "d" * 32,
+                volume_id=gate.EXPECTED_VOLUME_ID,
+                data_center_id=gate.EXPECTED_DATA_CENTER_ID,
+                terminate_after_utc="2026-07-14T18:00:00Z",
+            )
+            self.assertEqual(
+                request["variables"]["input"]["containerDiskInGb"], 20
+            )
         self.assertIs(frozen.protocol, prior_protocol)
         self.assertEqual(frozen.POD_NAME_PREFIX, prior_prefix)
+        self.assertEqual(frozen.CONTAINER_DISK_GB, prior_container_disk)
+
+        with self.assertRaisesRegex(RuntimeError, "forced restoration check"):
+            with runpod_lifecycle_adapter.configured_frozen_lifecycle() as lifecycle:
+                self.assertEqual(lifecycle.CONTAINER_DISK_GB, 20)
+                raise RuntimeError("forced restoration check")
+        self.assertEqual(frozen.CONTAINER_DISK_GB, prior_container_disk)
 
     def test_lifecycle_adapter_actual_cli_path_has_network_free_dry_run(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -586,10 +605,12 @@ class RunPodPreflightTests(unittest.TestCase):
         provider_pod = _pod(
             name=pod_name,
             imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
+            containerDiskInGb=runpod_lifecycle_adapter.CONTAINER_DISK_GB,
         )
         graphql_pod = _graphql_pod(
             name=pod_name,
             imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
+            containerDiskInGb=runpod_lifecycle_adapter.CONTAINER_DISK_GB,
         )
         rest_api = FakeRestApi(
             pod=provider_pod,
@@ -622,6 +643,8 @@ class RunPodPreflightTests(unittest.TestCase):
                     now=lambda: self.created,
                     sleeper=lambda _seconds: None,
                 )
+            upstream = json.loads(upstream_path.read_text(encoding="utf-8"))
+            self.assertEqual(upstream["pod"]["container_disk_gb"], 20)
             status, postcreate_raw = rest_api(
                 "GET", "/pods?includeMachine=true&includeNetworkVolume=true", None
             )

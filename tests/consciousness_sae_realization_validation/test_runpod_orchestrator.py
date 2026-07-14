@@ -44,10 +44,12 @@ def provider_fixture() -> tuple[FakeRestApi, FakeGraphQLApi]:
     provider_pod = _pod(
         name=POD_NAME,
         imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
+        containerDiskInGb=adapter.CONTAINER_DISK_GB,
     )
     graphql_pod = _graphql_pod(
         name=POD_NAME,
         imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
+        containerDiskInGb=adapter.CONTAINER_DISK_GB,
     )
     rest = FakeRestApi(
         pod=provider_pod,
@@ -158,6 +160,14 @@ class RunPodOrchestratorTests(unittest.TestCase):
             self.assertEqual(contract["terminate_after"], upstream["hard_deadline_utc"])
             self.assertEqual(contract["max_total_spend_usd"], 36.0)
             self.assertEqual(contract["max_total_seconds"], 6 * 60 * 60)
+            self.assertEqual(upstream["pod"]["container_disk_gb"], 20)
+            create_inputs = [
+                payload["variables"]["input"]
+                for payload in graphql.calls
+                if "mutation createPod" in str(payload.get("query"))
+            ]
+            self.assertEqual(len(create_inputs), 1)
+            self.assertEqual(create_inputs[0]["containerDiskInGb"], 20)
 
     def test_wrong_status_id_is_rejected_before_provider_read(self) -> None:
         rest, graphql = provider_fixture()

@@ -397,7 +397,13 @@ replay.
 
 Execution is restricted to one newly created `NVIDIA B200` pod in `US-NE-1`,
 with volume `qf2lwehl89` mounted at `/workspace` and the immutable container
-digest above. Live price/stock is checked at creation; the hourly price is
+digest above. The successor create request and ownership validation bind a
+`20 GB` container disk; all retained study data still belongs on the mounted
+network volume. The adapter restores the audited predecessor lifecycle's
+in-memory default after each scoped call. This smaller container disk is an
+operational availability repair after the frozen `50 GB` request found no
+eligible instance, not a scientific or raw-storage change. Live price/stock is
+checked at creation; the hourly price is
 accepted only if six hours cannot exceed the hard `$36` ceiling.
 
 The orchestration layer records sanitized full account inventories before and
