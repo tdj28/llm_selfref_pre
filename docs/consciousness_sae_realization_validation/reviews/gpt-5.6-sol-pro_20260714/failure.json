@@ -1,0 +1,5 @@
+{
+  "error": "response ended with non-completed status 'incomplete'",
+  "error_type": "RuntimeError",
+  "failed_at_utc": "2026-07-14T19:01:41.681293Z"
+}

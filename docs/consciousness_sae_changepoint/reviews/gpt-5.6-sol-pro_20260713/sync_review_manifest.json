@@ -1,0 +1,48 @@
+{
+  "actual_input_characters": 63869,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 50645,
+      "characters": 50465,
+      "path": "workspace-plan/consciousness_sae.md",
+      "role": "complete experiment plan",
+      "sha256": "b7ab293cfb6a466cfaa87be17d74fb2db06ea06bdee40aed377e85e0e9148652"
+    },
+    {
+      "bytes": 10331,
+      "characters": 10329,
+      "path": "docs/consciousness_sae_changepoint/PRO_REVIEW_CONTEXT_20260713.md",
+      "role": "bounded context 1",
+      "sha256": "10a33d00d06e0f972f0001c180943d790d7c2e8b6314cf49b3fd6143c17e7924"
+    }
+  ],
+  "chars_per_token_assumption": 3.0,
+  "cost_cap_usd": 1.25,
+  "created_at_utc": "2026-07-13T19:59:43.185495Z",
+  "estimated_input_tokens_conservative": 21290,
+  "estimated_max_cost_usd": 0.82645,
+  "exact_max_cost_usd_after_preflight": 0.7918,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 14360,
+  "input_tokens_preflight_at_utc": "2026-07-13T19:59:44.542038Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 180000,
+  "max_input_tokens": 40000,
+  "max_output_tokens": 24000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "review_request_sha256": "c3eb6d3c33d55bd61227d8f5186503ee6f893c95db1a1c8e5a731ef2d8da173e",
+  "schema_version": 1,
+  "service_tier": "default",
+  "status": "prepared",
+  "store": false
+}

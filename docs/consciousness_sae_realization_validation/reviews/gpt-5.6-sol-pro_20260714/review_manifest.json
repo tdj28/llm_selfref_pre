@@ -1,0 +1,263 @@
+{
+  "actual_input_characters": 1331159,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 23454,
+      "characters": 23425,
+      "path": "/private/tmp/sae-review-packet-20260714/docs/consciousness_sae_realization_validation/PROTOCOL.md",
+      "role": "complete experiment plan",
+      "sha256": "fc79579281a85f30c12eb6987f7e25115b1b2acd8a0b66862c3f89c48634c0a1"
+    },
+    {
+      "bytes": 14169,
+      "characters": 14150,
+      "path": "/private/tmp/sae-review-packet-20260714/docs/consciousness_sae_realization_validation/PRO_REVIEW_CONTEXT_20260714.md",
+      "role": "bounded context 1",
+      "sha256": "5ffe7a0bbd0bad116dc34a8fb29b1bf9213eddf3dd8d63ccf4944e47592e33ae"
+    },
+    {
+      "bytes": 3431,
+      "characters": 3431,
+      "path": "/private/tmp/sae-review-packet-20260714/docs/consciousness_sae_realization_validation/SMOKE_TEST.md",
+      "role": "bounded context 2",
+      "sha256": "a5adfb90213f6a104743cae7b826a95698bf0dbb1c443bc21b82971f0bd11bb1"
+    },
+    {
+      "bytes": 19480,
+      "characters": 19478,
+      "path": "/private/tmp/sae-review-packet-20260714/docs/consciousness_sae_realization_validation/REPRODUCING.md",
+      "role": "bounded context 3",
+      "sha256": "2caf22e964ed70d4c28c1d8d02f6ff7e37f213e4aae487a47cb49a53a8c538f2"
+    },
+    {
+      "bytes": 1090,
+      "characters": 1090,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/plan_manifest.json",
+      "role": "bounded context 4",
+      "sha256": "8b14df760488de31022a2d92c06135fe93678ff1f82446c89791420d977eef48"
+    },
+    {
+      "bytes": 11932,
+      "characters": 11932,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/protocol_snapshot.json",
+      "role": "bounded context 5",
+      "sha256": "033400d0105d79ba3776bbcede4f3962c833e3d697ab4c75764ca92b1209281d"
+    },
+    {
+      "bytes": 91584,
+      "characters": 91584,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/stage_a_plan.jsonl",
+      "role": "bounded context 6",
+      "sha256": "d0849ebbe2442ad5d3452dac56c2965dfb7c1752296a111e4e3a4452beb8b140"
+    },
+    {
+      "bytes": 1350,
+      "characters": 1350,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/aggregate_assignments.jsonl",
+      "role": "bounded context 7",
+      "sha256": "81b7caf5af59117058b386ae7236f254c9012a836f9057815aa025e449547663"
+    },
+    {
+      "bytes": 248760,
+      "characters": 248760,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/stage_b_plan.jsonl",
+      "role": "bounded context 8",
+      "sha256": "abf40ddee95bd0e00a7faa48eaed04be66a12e90aae0075187293cfa2b928243"
+    },
+    {
+      "bytes": 4785,
+      "characters": 4785,
+      "path": "/private/tmp/sae-review-packet-20260714/out/consciousness_sae_realization_validation/review_candidate_20260714/source_files.json",
+      "role": "bounded context 9",
+      "sha256": "926e7fd739aba104f06964190b8b9cfa67663b16a680b734e23ba160f7a93d8f"
+    },
+    {
+      "bytes": 72,
+      "characters": 72,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/__init__.py",
+      "role": "bounded context 10",
+      "sha256": "6a0519b8c9c44cdebe98f97575f02649e238862c809b58372e49ffbcfd4f1d89"
+    },
+    {
+      "bytes": 20687,
+      "characters": 20683,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/protocol.py",
+      "role": "bounded context 11",
+      "sha256": "d35a81fa6aae0be3c003bf36be4c4640f435c66d7ed7d16b7f1ce9f121f502c1"
+    },
+    {
+      "bytes": 109466,
+      "characters": 109466,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/controls.py",
+      "role": "bounded context 12",
+      "sha256": "f9514d105588d39c51e830e34a151a86535715d7112f7a55bed077631c07ba2e"
+    },
+    {
+      "bytes": 71412,
+      "characters": 71412,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/runtime.py",
+      "role": "bounded context 13",
+      "sha256": "c82b901deb11904d5e1f4bc1fdaa4b4b874be899b7d829384fbcefcfef9bfe3e"
+    },
+    {
+      "bytes": 6073,
+      "characters": 6073,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/guest_launcher.py",
+      "role": "bounded context 14",
+      "sha256": "edb9952b958646b1f2f7b369cdfc902bb6fc8b712d5761343553236fca5ebe46"
+    },
+    {
+      "bytes": 29279,
+      "characters": 29279,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/j_orientation.py",
+      "role": "bounded context 15",
+      "sha256": "6167dcf8fbf9a3d64d41531dd0fc9b996005967aa10984378750c8489dd63fab"
+    },
+    {
+      "bytes": 84204,
+      "characters": 84204,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/runner.py",
+      "role": "bounded context 16",
+      "sha256": "6bf58b70b553ab867d0eab2c59909960fbd1dcc9fa99104a1c56d4c6ba96bc46"
+    },
+    {
+      "bytes": 49652,
+      "characters": 49652,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/smoke_test.py",
+      "role": "bounded context 17",
+      "sha256": "b1e446f73bc9807360dfdb5129c6a8f7637e8d6cc0471cb72938a779d860bff7"
+    },
+    {
+      "bytes": 65412,
+      "characters": 65412,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/analysis.py",
+      "role": "bounded context 18",
+      "sha256": "f2f24cf770be3d9ea3e7a3d31efc75759d721a109bcac951a1d578018ad6e9cd"
+    },
+    {
+      "bytes": 70311,
+      "characters": 70311,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/audit.py",
+      "role": "bounded context 19",
+      "sha256": "5f9c0a536e7976b4a45ae197da0cebea3091b965098b8e9e22bdb4f6780704de"
+    },
+    {
+      "bytes": 6932,
+      "characters": 6932,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/build_plan.py",
+      "role": "bounded context 20",
+      "sha256": "5ce593927ea9d782284616446cb7d288051a050a574a1ba830b81267e4a83a08"
+    },
+    {
+      "bytes": 28592,
+      "characters": 28592,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/gate_receipts.py",
+      "role": "bounded context 21",
+      "sha256": "cb1629b13fc3f6cc1e3fc40271690c6e6a0c0c6b1176a843d093c92ba57a0aa2"
+    },
+    {
+      "bytes": 36076,
+      "characters": 36076,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/preexecution.py",
+      "role": "bounded context 22",
+      "sha256": "bf198cbc4f4aa3473e60e7cd205a683eaef5261583ee00770325c46484784f65"
+    },
+    {
+      "bytes": 86960,
+      "characters": 86952,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/review_adjudication.py",
+      "role": "bounded context 23",
+      "sha256": "949707bec544bc59b42975786cd4ec2757b5fa419e5caa5abdcd8b5fce338b14"
+    },
+    {
+      "bytes": 67173,
+      "characters": 67173,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/runpod_preflight.py",
+      "role": "bounded context 24",
+      "sha256": "367ca81bf56a29231fffc549b27a430861cdae41a1b82d17d7c27d12a7d77040"
+    },
+    {
+      "bytes": 9896,
+      "characters": 9896,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/runpod_lifecycle_adapter.py",
+      "role": "bounded context 25",
+      "sha256": "767bff2c20c066ced4c055c607f0e065a0216b0ec475e6f278f27268a4a3d2e0"
+    },
+    {
+      "bytes": 34796,
+      "characters": 34796,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/runpod_orchestrator.py",
+      "role": "bounded context 26",
+      "sha256": "ab1cfa55c18329ac76980ea7080282d39b06b750a60683be05ed22a42d6f273a"
+    },
+    {
+      "bytes": 21705,
+      "characters": 21705,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/storage_benchmark.py",
+      "role": "bounded context 27",
+      "sha256": "527e32e003ebfc83a80d94e863600786122c6ccdc3e03b257c99c6b4045ebf29"
+    },
+    {
+      "bytes": 8485,
+      "characters": 8485,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_sae_realization_validation/legacy_public_artifact_manifest.json",
+      "role": "bounded context 28",
+      "sha256": "9bea0673d66956797e14731ae90f339da3b3784d8fe81977bef7b0b82e37aecb"
+    },
+    {
+      "bytes": 95240,
+      "characters": 95240,
+      "path": "/private/tmp/sae-review-packet-20260714/experiments/consciousness_readout_validation/runpod_lifecycle.py",
+      "role": "bounded context 29",
+      "sha256": "ffc44e4ddf0381ee6e970354ab36a6ca57a6849752b45f5259456fb496518175"
+    }
+  ],
+  "background": true,
+  "background_initial_status": "queued",
+  "background_response_id": "resp_0d1fe4e83da437e0006a5684ab7a34819886c0b9ac4fce9b7d",
+  "background_started_at_utc": "2026-07-14T18:49:16.396373Z",
+  "budget_authorization_usd": 12.0,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens.",
+  "cache_write_rate_usd_per_million": 12.5,
+  "chars_per_token_assumption": 3.0,
+  "created_at_utc": "2026-07-14T18:49:12.722408Z",
+  "estimated_budget_reserve_usd": 11.0637,
+  "estimated_input_tokens_conservative": 443720,
+  "exact_budget_reserve_usd_after_preflight": 8.4548475,
+  "failed_at_utc": "2026-07-14T19:01:41.681293Z",
+  "failure": {
+    "error": "response ended with non-completed status 'incomplete'",
+    "error_type": "RuntimeError",
+    "failed_at_utc": "2026-07-14T19:01:41.681293Z"
+  },
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 10.0,
+  "input_tokens_preflight": 327771,
+  "input_tokens_preflight_at_utc": "2026-07-14T18:49:14.584409Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 1500000,
+  "max_input_tokens": 500000,
+  "max_output_tokens": 12000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 45.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_output_reserve_multiplier": 2.0,
+  "reasoning": {
+    "effort": "xhigh",
+    "mode": "pro"
+  },
+  "request_payload_sha256": "cb273212334cbf5312d713e8f1a01521529fabc69f5e5b41dbf90b07c31643bf",
+  "reserved_billable_output_tokens": 24000,
+  "review_input_sha256": "61a831b6e84a2722367659ccd909cf06b19c7f22ff37d5fe1c6755181c6de3e1",
+  "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+  "review_request_sha256": "1ca57ec58cfeedfe758f9243d91a576a2a01816992ddd587a672365d6bb07989",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "failed",
+  "store": true
+}

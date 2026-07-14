@@ -1,0 +1,70 @@
+{
+  "actual_cost_usd_conservative": 0.72043,
+  "actual_input_characters": 63869,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 50645,
+      "characters": 50465,
+      "path": "workspace-plan/consciousness_sae.md",
+      "role": "complete experiment plan",
+      "sha256": "b7ab293cfb6a466cfaa87be17d74fb2db06ea06bdee40aed377e85e0e9148652"
+    },
+    {
+      "bytes": 10331,
+      "characters": 10329,
+      "path": "docs/consciousness_sae_changepoint/PRO_REVIEW_CONTEXT_20260713.md",
+      "role": "bounded context 1",
+      "sha256": "10a33d00d06e0f972f0001c180943d790d7c2e8b6314cf49b3fd6143c17e7924"
+    }
+  ],
+  "background": true,
+  "background_initial_status": "queued",
+  "background_response_id": "resp_0b1254368770c76d006a5544ee7eb4819ab3d874a61e49096d",
+  "background_started_at_utc": "2026-07-13T20:05:02.944474Z",
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-07-13T20:10:02.860378Z",
+  "cost_cap_usd": 0.6,
+  "created_at_utc": "2026-07-13T20:05:01.836884Z",
+  "estimated_input_tokens_conservative": 21290,
+  "estimated_max_cost_usd": 0.58645,
+  "exact_max_cost_usd_after_preflight": 0.5518,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 14360,
+  "input_tokens_preflight_at_utc": "2026-07-13T20:05:02.270916Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 180000,
+  "max_input_tokens": 40000,
+  "max_output_tokens": 16000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "response_id": "resp_0b1254368770c76d006a5544ee7eb4819ab3d874a61e49096d",
+  "response_model": "gpt-5.6-sol",
+  "response_sha256": "2522a4555b53a13121940b22759531320643ec617f3df9001be49f9205eda7cb",
+  "review_request_sha256": "c3eb6d3c33d55bd61227d8f5186503ee6f893c95db1a1c8e5a731ef2d8da173e",
+  "review_sha256": "17ebed603f540f7a796e30a1dce15893bbe5998ca51cccde42cf3d8513416f3d",
+  "schema_version": 1,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "usage": {
+    "input_tokens": 14360,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 21621,
+    "output_tokens_details": {
+      "reasoning_tokens": 4581
+    },
+    "total_tokens": 35981
+  }
+}

@@ -513,6 +513,16 @@ To generate a new confirmatory collection or judge pass, use
 | `experiments/causal_transplant/` | Confirmatory generation, judging, blinded annotation, analysis, and release audit. |
 | `data/causal_transplant/confirmatory_v1_20260709/` | Frozen raw confirmatory release and derived analyses. |
 | `experiments/exp2_sae/` | Public notebook reanalysis, public-SAE mapping, steering, and specificity controls. |
+| `experiments/consciousness_sae_changepoint/` | Isolated implementation namespace for the temporal before/after SAE and J-lens study; v1 stopped at a terminal target-blind control failure before target execution. |
+| `docs/consciousness_sae_changepoint/` | Protocol, claim boundary, amendments, terminal-control disposition, and reproduction documentation for that study. |
+| `data/consciousness_sae_changepoint/` | Compact plan/metadata namespace only; target outcomes were never opened and raw target-blind artifacts remain on the checksummed RunPod network volume. |
+| `experiments/consciousness_readout_validation/` | Fresh target-blind pilot for all-layer J arithmetic/transport, clean semantic and polarity controls, exact SAE-vector construction, one-load GPU execution, independent structural audit, and external-only analysis. |
+| `docs/consciousness_readout_validation/` | Frozen investigative pilot scope, tensor identity, numeric gates, failure consequences, and no-import boundary. |
+| `docs/consciousness_sae_switch_arc/` | Separate future successor design, completed Pro-review adjudication, and explicit **not ready to freeze / target execution prohibited** status. |
+| `data/consciousness_readout_validation/` | Frozen r15 plan plus compact audit, analysis, and lifecycle receipts; raw weights, tensors, and row measurements remain on a sentinel-bound network volume. |
+| `experiments/consciousness_sae_realization_validation/` | Fresh neutral-prompt successor that separates requested/native/realized BF16 edits, generic downstream curvature, and SAE-direction-specific dose response under real-J, identity, and random-J controls. |
+| `docs/consciousness_sae_realization_validation/` | Prospective Stage A/Stage B protocol, reproduction boundary, claim limits, and independently adjudicated Pro review. |
+| `data/consciousness_sae_realization_validation/` | Outcome-free machine plan and, after execution, compact audited receipts only; authoritative BF16 residuals and row-level measurements stay on the RunPod network volume. |
 | `data/public_sae_feature_maps/70b_balanced_80_20260709/` | Balanced 70B feature-mapping raw data and bootstrap analyses. |
 | `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/` | Dual-provider paraphrase and lexical-counterfactual activation release with independent audit. |
 | `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/` | Corrected adaptive public-SAE target/control generations, blinded judgments, telemetry, cap sensitivity, and independent audit. |
