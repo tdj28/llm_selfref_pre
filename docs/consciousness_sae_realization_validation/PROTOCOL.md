@@ -370,7 +370,7 @@ separately from collection authorization.
 ## Data, storage, and replay boundary
 
 All raw data are written to a fresh study-owned namespace on RunPod network
-volume `qf2lwehl89`; nothing may spill to container-local disk, Git, or the
+volume `bv9gb9j32y`; nothing may spill to container-local disk, Git, or the
 laptop. Transactions begin in a fresh partial directory, hash every artifact,
 enforce no-extra-file and no-symlink rules, and become complete only through
 atomic publication and a final completion receipt.
@@ -395,8 +395,9 @@ replay.
 
 ## RunPod ownership and resource contract
 
-Execution is restricted to one newly created `NVIDIA B200` pod in `US-NE-1`,
-with volume `qf2lwehl89` mounted at `/workspace` and the immutable container
+Execution is restricted to one newly created `NVIDIA B200` pod in `US-CA-2`,
+with volume `bv9gb9j32y` (`consciousness-sae-realization-v1-us-ca-2`) mounted
+at `/workspace` and the immutable container
 digest above. The successor create request and ownership validation bind a
 `20 GB` container disk; all retained study data still belongs on the mounted
 network volume. The adapter restores the audited predecessor lifecycle's

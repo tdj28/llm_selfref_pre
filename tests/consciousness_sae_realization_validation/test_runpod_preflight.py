@@ -82,7 +82,7 @@ class RunPodPreflightTests(unittest.TestCase):
             "observed_data_center_id": gate.EXPECTED_DATA_CENTER_ID,
             "mount_path": gate.VOLUME_MOUNT_PATH,
             "mount_is_network_volume": True,
-            "filesystem_id": "runpod-network-volume-qf2lwehl89",
+            "filesystem_id": "runpod-network-volume-bv9gb9j32y",
             "mount_evidence_sha256": "2" * 64,
             "provider_volume_size_bytes": gate.EXPECTED_PROVIDER_VOLUME_BYTES,
             "logical_bytes_on_volume": (
@@ -113,7 +113,10 @@ class RunPodPreflightTests(unittest.TestCase):
         return gate.with_self_hash(core)
 
     def test_create_contract_has_exact_provider_kill_and_identity(self) -> None:
-        self.assertEqual(self.contract["network_volume_id"], "qf2lwehl89")
+        self.assertEqual(self.contract["network_volume_id"], "bv9gb9j32y")
+        self.assertEqual(self.contract["data_center_id"], "US-CA-2")
+        self.assertEqual(gate.EXPECTED_PROVIDER_VOLUME_BYTES, 500_000_000_000)
+        self.assertEqual(runpod_lifecycle_adapter.CONTAINER_DISK_GB, 20)
         self.assertEqual(self.contract["gpu_type"], "NVIDIA B200")
         self.assertEqual(
             self.contract["terminate_after"], "2026-07-14T18:00:00Z"
@@ -185,8 +188,8 @@ class RunPodPreflightTests(unittest.TestCase):
             identity = (
                 b"RUNPOD_POD_ID=abc123def456\0"
                 b"UNRELATED_SECRET=never-persist-this\0"
-                b"RUNPOD_VOLUME_ID=qf2lwehl89\0"
-                b"RUNPOD_DC_ID=US-NE-1\0"
+                b"RUNPOD_VOLUME_ID=bv9gb9j32y\0"
+                b"RUNPOD_DC_ID=US-CA-2\0"
             )
             mountinfo = (
                 f"36 25 0:32 / {root} rw,relatime - nfs4 server:/volume rw\n"
@@ -606,18 +609,43 @@ class RunPodPreflightTests(unittest.TestCase):
             name=pod_name,
             imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
             containerDiskInGb=runpod_lifecycle_adapter.CONTAINER_DISK_GB,
+            networkVolumeId=gate.EXPECTED_VOLUME_ID,
+            networkVolume={
+                "id": gate.EXPECTED_VOLUME_ID,
+                "dataCenterId": gate.EXPECTED_DATA_CENTER_ID,
+            },
         )
+        provider_pod["machine"] = {
+            **provider_pod["machine"],
+            "dataCenterId": gate.EXPECTED_DATA_CENTER_ID,
+        }
         graphql_pod = _graphql_pod(
             name=pod_name,
             imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
             containerDiskInGb=runpod_lifecycle_adapter.CONTAINER_DISK_GB,
+            networkVolumeId=gate.EXPECTED_VOLUME_ID,
         )
-        rest_api = FakeRestApi(
+        graphql_pod["machine"] = {
+            **graphql_pod["machine"],
+            "dataCenterId": gate.EXPECTED_DATA_CENTER_ID,
+        }
+
+        class SuccessorFakeRestApi(FakeRestApi):
+            def __call__(self, method, path, payload):
+                if (
+                    method == "GET"
+                    and path == f"/networkvolumes/{gate.EXPECTED_VOLUME_ID}"
+                ):
+                    self.calls.append((method, path, payload))
+                    return self.volume_status, self.volume
+                return super().__call__(method, path, payload)
+
+        rest_api = SuccessorFakeRestApi(
             pod=provider_pod,
             additional_pods=[unrelated_raw],
             volume={
                 "id": gate.EXPECTED_VOLUME_ID,
-                "name": "lens-campaign",
+                "name": "consciousness-sae-realization-v1-us-ca-2",
                 "size": 500,
                 "dataCenterId": gate.EXPECTED_DATA_CENTER_ID,
             },

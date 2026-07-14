@@ -171,7 +171,8 @@ python -m experiments.consciousness_sae_realization_validation.runpod_orchestrat
 ```
 
 Before the executing command, independently recheck live B200 stock and price.
-The create contract fixes `NVIDIA B200`, `US-NE-1`, volume `qf2lwehl89`, a
+The create contract fixes `NVIDIA B200`, `US-CA-2`, volume `bv9gb9j32y`
+(`consciousness-sae-realization-v1-us-ca-2`), a
 `20 GB` container disk, six-hour provider kill, and a `$36` ceiling. Both the
 GraphQL request and the upstream ownership snapshot must report exactly
 `containerDiskInGb=20`; the successor adapter restores the inherited lifecycle
@@ -211,10 +212,10 @@ budget receipt:
 
 ```bash
 python -B -m experiments.consciousness_sae_realization_validation.runner \
-  init-volume --volume-root /workspace --volume-id qf2lwehl89
+  init-volume --volume-root /workspace --volume-id bv9gb9j32y
 
 python -B -m experiments.consciousness_sae_realization_validation.storage_benchmark \
-  --plan-dir "$PLAN_DIR" --volume-root /workspace --volume-id qf2lwehl89 \
+  --plan-dir "$PLAN_DIR" --volume-root /workspace --volume-id bv9gb9j32y \
   --run-id "$FRESH_BENCHMARK_ID" --output "$FRESH_BENCHMARK_RECEIPT"
 
 python -B -m experiments.consciousness_sae_realization_validation.gate_receipts \
@@ -222,7 +223,7 @@ python -B -m experiments.consciousness_sae_realization_validation.gate_receipts 
   --benchmark-receipt "$FRESH_BENCHMARK_RECEIPT" \
   --ownership-receipt "$OWNERSHIP" --guest-receipt "$GUEST_PREFLIGHT" \
   --cache-receipt "$CACHE_PREFLIGHT" --volume-root /workspace \
-  --volume-id qf2lwehl89 --output "$FRESH_STORAGE_BUDGET"
+  --volume-id bv9gb9j32y --output "$FRESH_STORAGE_BUDGET"
 ```
 
 The production benchmark has no reduced-size CLI switch. The storage budget
@@ -282,7 +283,7 @@ the same authorization, and the exact external smoke receipt path:
 ```bash
 python -B -m experiments.consciousness_sae_realization_validation.guest_launcher \
   --ownership-receipt "$OWNERSHIP" stage-a -- \
-  --plan-dir "$PLAN_DIR" --volume-root /workspace --volume-id qf2lwehl89 \
+  --plan-dir "$PLAN_DIR" --volume-root /workspace --volume-id bv9gb9j32y \
   --run-id "$FRESH_STAGE_A_RUN_ID" --model-snapshot "$MODEL_SNAPSHOT" \
   --sae-path "$SAE_PATH" --j-lens-path "$J_LENS_PATH" \
   --hourly-price-usd "$HOURLY_PRICE_USD" \

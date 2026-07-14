@@ -40,23 +40,52 @@ UNRELATED = {
 }
 
 
-def provider_fixture() -> tuple[FakeRestApi, FakeGraphQLApi]:
+class SuccessorFakeRestApi(FakeRestApi):
+    """Adapt the predecessor fixture's hard-coded volume route only."""
+
+    def __call__(self, method, path, payload):
+        if (
+            method == "GET"
+            and path == f"/networkvolumes/{preflight.EXPECTED_VOLUME_ID}"
+        ):
+            self.calls.append((method, path, payload))
+            if self.events is not None:
+                self.events.append(("rest", method, path))
+            return self.volume_status, self.volume
+        return super().__call__(method, path, payload)
+
+
+def provider_fixture() -> tuple[SuccessorFakeRestApi, FakeGraphQLApi]:
     provider_pod = _pod(
         name=POD_NAME,
         imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
         containerDiskInGb=adapter.CONTAINER_DISK_GB,
+        networkVolumeId=preflight.EXPECTED_VOLUME_ID,
+        networkVolume={
+            "id": preflight.EXPECTED_VOLUME_ID,
+            "dataCenterId": preflight.EXPECTED_DATA_CENTER_ID,
+        },
     )
+    provider_pod["machine"] = {
+        **provider_pod["machine"],
+        "dataCenterId": preflight.EXPECTED_DATA_CENTER_ID,
+    }
     graphql_pod = _graphql_pod(
         name=POD_NAME,
         imageName=protocol.CONTAINER_IMAGE_SPEC["immutable_reference"],
         containerDiskInGb=adapter.CONTAINER_DISK_GB,
+        networkVolumeId=preflight.EXPECTED_VOLUME_ID,
     )
-    rest = FakeRestApi(
+    graphql_pod["machine"] = {
+        **graphql_pod["machine"],
+        "dataCenterId": preflight.EXPECTED_DATA_CENTER_ID,
+    }
+    rest = SuccessorFakeRestApi(
         pod=provider_pod,
         additional_pods=[dict(UNRELATED)],
         volume={
             "id": preflight.EXPECTED_VOLUME_ID,
-            "name": "lens-campaign",
+            "name": "consciousness-sae-realization-v1-us-ca-2",
             "size": 500,
             "dataCenterId": preflight.EXPECTED_DATA_CENTER_ID,
         },
@@ -127,8 +156,8 @@ class RunPodOrchestratorTests(unittest.TestCase):
             ownership = json.loads(ownership_path.read_text(encoding="utf-8"))
             self.assertEqual(ownership["pod_id"], "abc123xyz")
             self.assertEqual(ownership["pod_name"], POD_NAME)
-            self.assertEqual(ownership["network_volume_id"], "qf2lwehl89")
-            self.assertEqual(ownership["data_center_id"], "US-NE-1")
+            self.assertEqual(ownership["network_volume_id"], "bv9gb9j32y")
+            self.assertEqual(ownership["data_center_id"], "US-CA-2")
             self.assertEqual(ownership["gpu_type"], "NVIDIA B200")
             self.assertTrue((receipt_dir / "READY.json").is_file())
             pre = json.loads(

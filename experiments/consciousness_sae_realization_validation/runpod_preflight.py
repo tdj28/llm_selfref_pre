@@ -23,8 +23,8 @@ from . import protocol
 
 
 SCHEMA_VERSION = 1
-EXPECTED_VOLUME_ID = "qf2lwehl89"
-EXPECTED_DATA_CENTER_ID = "US-NE-1"
+EXPECTED_VOLUME_ID = "bv9gb9j32y"
+EXPECTED_DATA_CENTER_ID = "US-CA-2"
 EXPECTED_GPU_TYPE = "NVIDIA B200"
 VOLUME_MOUNT_PATH = "/workspace"
 POD_NAME_PREFIX = "consciousness-sae-realization-validation-v1-"

@@ -91,8 +91,8 @@ class PreexecutionFixture:
             "pod_id": "pod-test",
             "pod_name": "experiment-test",
             "ownership_nonce": "nonce-test",
-            "network_volume_id": "qf2lwehl89",
-            "data_center_id": "US-NE-1",
+            "network_volume_id": "bv9gb9j32y",
+            "data_center_id": "US-CA-2",
             "gpu_type": "NVIDIA B200",
             "gpu_count": 1,
             "created_at": "2030-01-01T00:00:00Z",
@@ -391,7 +391,7 @@ class PreexecutionAuthorizationTests(unittest.TestCase):
     def test_stage_a_joins_exact_external_smoke_path_and_campaign(self) -> None:
         with tempfile.TemporaryDirectory(dir=runner.REPO_ROOT) as directory:
             root = Path(directory)
-            volume_id = "qf2lwehl89"
+            volume_id = "bv9gb9j32y"
             sentinel = {
                 "schema_version": controls.CONTROL_SCHEMA_VERSION,
                 "study_slug": protocol.STUDY_SLUG,
