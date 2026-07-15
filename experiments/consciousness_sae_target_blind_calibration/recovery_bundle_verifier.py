@@ -939,6 +939,34 @@ B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
         "11381aba2d87c7a94d08e8c2d37caa5685ae49af4af4a58cfee868635f131e5a"
     ),
 }
+HISTORICAL_B21_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_b21_completed_negative"
+)
+HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS = (
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 = {
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "40375093a762f07256c982f8886dee9388f8530daf9aa7ad565d7cb5b238477a"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json": (
+        "2e333428fb54f6e1c66830a8b468f611e5e8c386300d559f55b558ab41831243"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md": (
+        "1c9fb7de6445b977fe6ebf265fa56d52e01e6882724acf0b5ff7a26bf125d845"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "0a8b2185d8909e66234de40c257034679fec5d2df53db9206679a220516c2b7c"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "adbbb991930e45e2b88b5ae4cf75827d366afa839921de2e94780eb64bd8a43b"
+    ),
+}
 V8_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v8_inputs"
@@ -1080,6 +1108,7 @@ RECOVERY_DOCUMENT_PATHS = (
     *tuple(HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256),
     *tuple(B18_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *tuple(B20_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    *HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS,
     V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -3622,7 +3651,11 @@ def _validate_review(
         "authorization.review.code_freeze_commit",
     )
     final_commit = _string(git_head_commit, "authorization.git_head_commit")
-    required_current_findings = set(HISTORICAL_B17_FINDING_IDS) | {"B20"}
+    required_current_findings = set(HISTORICAL_B17_FINDING_IDS) | {
+        "B20",
+        "B21",
+        "I13",
+    }
     if (
         review["model"] != "gpt-5.6-sol"
         or review["provider_status"] != "completed"
@@ -3850,12 +3883,12 @@ def _validate_review(
             for finding in findings
         )
         or any(
-            (finding.startswith("B") and int(finding[1:]) < 21)
-            or (finding.startswith("I") and int(finding[1:]) < 13)
+            (finding.startswith("B") and int(finding[1:]) < 22)
+            or (finding.startswith("I") and int(finding[1:]) < 14)
             for finding in set(findings) - required_current_findings
         )
         or any(
-            finding.startswith("B") and int(finding[1:]) >= 21
+            finding.startswith("B") and int(finding[1:]) >= 22
             for finding in findings
         )
         or _integer(
@@ -3917,13 +3950,13 @@ def _validate_review(
             "authorization.review.completed_v8_paid_call_count",
             minimum=1,
         )
-        != 1
+        != 2
         or _integer(
             review["cumulative_disclosed_paid_call_count"],
             "authorization.review.cumulative_disclosed_paid_call_count",
             minimum=1,
         )
-        != 11
+        != 12
     ):
         raise RecoveryBundleVerificationError("authorization review semantics differ")
     fixed = _list(review["fixed_finding_ids"], "authorization.review.fixed_finding_ids")
@@ -4316,6 +4349,7 @@ def _validate_authorization(
             **HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256,
             **B18_COMPACT_EVIDENCE_PHYSICAL_SHA256,
             **B20_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+            **HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256,
             **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
             **C7_FAILED_QUALIFICATION_PHYSICAL_SHA256,
         }.items()

@@ -1883,7 +1883,12 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
 
     v8_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V8_PACKET}
     assert not v8_paths & set(audit_recovery.FINAL_V8_PRO_REVIEW_OUTPUT_PATHS)
-    assert set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS[:4]) <= v8_paths
+    assert set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS) <= v8_paths
+    assert audit_recovery._validate_historical_b21_review_evidence() is None
+    assert {
+        path: audit_recovery._sha256(audit_recovery.REPO_ROOT / path)
+        for path in audit_recovery.HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS
+    } == audit_recovery.HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256
     assert {
         audit_recovery.B20_INCIDENT_DOCUMENT,
         f"{audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md",
@@ -1891,6 +1896,8 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
         f"{audit_recovery.HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review.md",
         f"{audit_recovery.B18_COMPACT_EVIDENCE_DIRECTORY}/B18_CLOSURE_RECEIPT.json",
         f"{audit_recovery.B20_COMPACT_EVIDENCE_DIRECTORY}/B20_CLOSURE_RECEIPT.json",
+        f"{audit_recovery.HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md",
+        f"{audit_recovery.HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json",
         audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
         audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
         audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -1979,14 +1986,14 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q11-${FREEZE:0:7}"' in controller
-    assert "EXPECTED_TEST_COUNT=${4:-228}" in controller
-    assert '[[ "$EXPECTED_TEST_COUNT" == 228 ]]' in controller
+    assert 'ROOT="/root/q12-${FREEZE:0:7}"' in controller
+    assert "EXPECTED_TEST_COUNT=${4:-229}" in controller
+    assert '[[ "$EXPECTED_TEST_COUNT" == 229 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q11-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
-    assert '[[ "$LOG_ROOT" == /root/q11-* ]]' in wrapper
+    assert len(os.fsencode("/root/q12-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q12-* ]]' in wrapper
     assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper

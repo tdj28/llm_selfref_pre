@@ -122,6 +122,9 @@ def test_historical_v6_review_is_pinned_nonadjudicable_context_for_v7() -> None:
     assert verifier.B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 == (
         audit_recovery.B20_COMPACT_EVIDENCE_PHYSICAL_SHA256
     )
+    assert verifier.HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 == (
+        audit_recovery.HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256
+    )
     assert verifier.V8_LOCAL_TEST_RECEIPT_SNAPSHOT == (
         audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT
     )
@@ -943,6 +946,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     closure_hashes.update(verifier.HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.B18_COMPACT_EVIDENCE_PHYSICAL_SHA256)
     closure_hashes.update(verifier.B20_COMPACT_EVIDENCE_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256)
     closure_hashes.update(verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
@@ -1422,7 +1426,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             "source_test_qualification"
         ),
         "timed_qualification_final_recovery_scope_must_repeat": True,
-        "finding_ids": sorted([*verifier.HISTORICAL_B17_FINDING_IDS, "B20"]),
+        "finding_ids": sorted(
+            [*verifier.HISTORICAL_B17_FINDING_IDS, "B20", "B21", "I13"]
+        ),
         "review_sha256": closure_hashes[
             f"{verifier.FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
         ],
@@ -1433,7 +1439,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "adjudication_markdown_sha256": closure_hashes[
             verifier.FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "fixed_finding_ids": sorted([*verifier.HISTORICAL_B17_FINDING_IDS, "B20"]),
+        "fixed_finding_ids": sorted(
+            [*verifier.HISTORICAL_B17_FINDING_IDS, "B20", "B21", "I13"]
+        ),
         "rejected_finding_ids": [],
         "reviewed_local_test_receipt_file_sha256": _file_record(
             local_test_receipt_path
@@ -1474,8 +1482,8 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "completed_v7_paid_call_count": 1,
         "incomplete_b17_paid_call_count": 1,
         "completed_b17_paid_call_count": 1,
-        "completed_v8_paid_call_count": 1,
-        "cumulative_disclosed_paid_call_count": 11,
+        "completed_v8_paid_call_count": 2,
+        "cumulative_disclosed_paid_call_count": 12,
     }
     authorization_core = {
         "schema_version": 1,
@@ -1580,6 +1588,14 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         authorization_core["review"]["fixed_finding_ids"] = [
             finding for finding in review["fixed_finding_ids"] if finding != "B20"
         ]
+    elif mutation == "auth_review_b21_omitted":
+        authorization_core["review"] = dict(review)
+        authorization_core["review"]["finding_ids"] = [
+            finding for finding in review["finding_ids"] if finding != "B21"
+        ]
+        authorization_core["review"]["fixed_finding_ids"] = [
+            finding for finding in review["fixed_finding_ids"] if finding != "B21"
+        ]
     elif mutation == "auth_review_historical_b17":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["historical_b17_finding_ids"] = [
@@ -1608,10 +1624,10 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     elif mutation == "auth_review_new_blocker":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["finding_ids"] = sorted(
-            [*review["finding_ids"], "B21"]
+            [*review["finding_ids"], "B22"]
         )
         authorization_core["review"]["fixed_finding_ids"] = sorted(
-            [*review["fixed_finding_ids"], "B21"]
+            [*review["fixed_finding_ids"], "B22"]
         )
     elif mutation == "auth_review_snapshot_receipt":
         authorization_core["review"] = dict(review)
@@ -2346,6 +2362,7 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ("auth_review_terminal", "review semantics differ"),
         ("auth_review_b17_omitted", "review semantics differ"),
         ("auth_review_b20_omitted", "review semantics differ"),
+        ("auth_review_b21_omitted", "review semantics differ"),
         ("auth_review_historical_b17", "review semantics differ"),
         ("auth_review_historical_v4_blocker", "review semantics differ"),
         ("auth_review_historical_pricing", "review semantics differ"),

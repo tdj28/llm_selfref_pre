@@ -12,9 +12,10 @@ finding-ID extraction misclassified the negated phrase `No B05 is invented`.
 That B16 parser incident occurred before any recovery execution or model
 forward, and the C9 qualification pod was deleted after its evidence was
 retrieved. No recovered audit output has been computed or inspected. This
-plan is not executable until the final v7 cumulative review evaluates the
-exact C10/E10 successor bytes, B14--B16, the historical C6--C9 qualification
-chronology, and the complete v5 and v6 review context.
+plan is not executable until fresh local and disposable-B200 qualification
+receipts bind the current successor code freeze, an exact-byte successor review
+evaluates the complete current packet including B17--B21 and I10--I13, and the
+current code-freeze/reviewed-packet/final-freeze lineage passes every gate.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -873,6 +874,30 @@ The v8 packet has a 2,200,000-character and 630,000-token conservative input
 ceiling. The same long-context rates and reserve multipliers apply, with the
 existing `$75.00` hard authorization. This accommodates the complete prior
 review context without weakening the one-call or packet-integrity gates.
+
+### B21 exact-packet successor
+
+The first completed v8 review is immutable negative historical evidence. It
+approved the scientific recovery design, the B20 Git-free ACTIVE repair, the
+Landlock boundary, and the launch chain, but correctly stopped launch because
+the provider packet supplied only the first four of the six bound
+`FINAL_RECOVERY_WRAPPER_PATHS`. The omitted files were
+`FINAL_RECOVERY_INVOCATION_CONTRACT.md` and
+`final_recovery_wrapper_self_test.py`. Both were hash-bound and staged into
+ACTIVE, and the latter was executed by qualification tests, but neither file's
+content was available to that reviewer. This packet-closure defect is B21; it
+does not require a new model transaction or any scientific-design change.
+
+The successor packet includes all six wrapper paths and a regression requiring
+that complete inclusion. It also supplies the first v8 review and manifest as
+immutable context. A fresh successor code freeze must receive new local and
+disposable-B200 qualification receipts. The successor exact-byte review must
+disposition B17--B21 and I10--I13; any new blocker B22 or later stops launch.
+Only after that review returns the exact terminal verdict `READY TO FREEZE` may
+an output-only final freeze add the seven provider-response and structured
+adjudication files. The final controller continues to accept the actual
+code-freeze, reviewed-packet, and final-freeze commit hashes as runtime values;
+the older C11/E11/F11 labels above describe the superseded first-v8 lineage.
 
 ## Claim boundary
 

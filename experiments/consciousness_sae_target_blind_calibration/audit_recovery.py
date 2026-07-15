@@ -938,6 +938,34 @@ B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": "50eae10f172511ad1ed1931d873f875dab0c4441578537ec3c9a618cc54e6bd1",
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/verify_b20_public_compact.py": "11381aba2d87c7a94d08e8c2d37caa5685ae49af4af4a58cfee868635f131e5a",
 }
+HISTORICAL_B21_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_b21_completed_negative"
+)
+HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS = (
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 = {
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "40375093a762f07256c982f8886dee9388f8530daf9aa7ad565d7cb5b238477a"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json": (
+        "2e333428fb54f6e1c66830a8b468f611e5e8c386300d559f55b558ab41831243"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md": (
+        "1c9fb7de6445b977fe6ebf265fa56d52e01e6882724acf0b5ff7a26bf125d845"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "0a8b2185d8909e66234de40c257034679fec5d2df53db9206679a220516c2b7c"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "adbbb991930e45e2b88b5ae4cf75827d366afa839921de2e94780eb64bd8a43b"
+    ),
+}
 V8_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v8_inputs"
@@ -1307,7 +1335,7 @@ FINAL_RECOVERY_WRAPPER_PATHS = (
 )
 _PRO_REVIEW_V8_PATHS = (
     *_PRO_REVIEW_V6_PATHS[:37],
-    *FINAL_RECOVERY_WRAPPER_PATHS[:4],
+    *FINAL_RECOVERY_WRAPPER_PATHS,
     B20_INCIDENT_DOCUMENT,
     f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md",
     f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review_manifest.json",
@@ -1317,6 +1345,8 @@ _PRO_REVIEW_V8_PATHS = (
     f"{B18_COMPACT_EVIDENCE_DIRECTORY}/B18_CLOSURE_RECEIPT.json",
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/B20_CLOSURE_RECEIPT.json",
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/B20_VERIFICATION_OUTPUT.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -1331,13 +1361,18 @@ PRO_REVIEW_V8_PACKET = tuple(
     for index, relative in enumerate(_PRO_REVIEW_V8_PATHS)
 )
 PRO_REVIEW_V8_QUESTION = (
-    "This is the final prospective v8 audit-only successor review, not a new "
+    "This is the successor prospective v8 audit-only exact-byte review after "
+    "B21, not a new "
     "model transaction. No recovered compact audit or scientific summary has "
     "been generated or inspected. Treat the immutable completed v7 review and "
     "adjudication as historical positive evidence, never as a review of the "
     "current bytes. Also consider the complete B17 focused-review feedback and "
     "manifest, including B17-B19 and I10-I12, plus the compact B18 and B20 "
-    "mechanical closures. The first focused B17 call ended incomplete at "
+    "mechanical closures. Also treat the immutable first v8 review and manifest "
+    "as mandatory historical context: that completed negative review approved "
+    "the science and B20 repair but found B21 because two bound wrapper paths "
+    "were omitted from its provider packet. The first focused B17 call ended "
+    "incomplete at "
     "max_output_tokens and the replacement returned READY AFTER SPECIFIED "
     "FIXES; both paid calls are disclosed. The B20 owned B200 attempt completed "
     "authentic issue-time authorization but failed before ATTEMPT_STARTED when "
@@ -1348,20 +1383,25 @@ PRO_REVIEW_V8_QUESTION = (
     "issue from SOURCE; the exact final HEAD is sealed into the self-hashed "
     "authorization and cross-checked by the independent verifier; final ACTIVE "
     "repeats all byte and semantic checks without Git or any /dev/null write "
-    "exception. Fresh C11 local and disposable-B200 qualification receipts in "
-    "the v8 input directory alone qualify current source/test bytes. Verify the "
-    "C11<=E11<=F11 chain, unchanged source/test bytes from C11 through F11, and "
-    "unchanged provider-packet bytes from E11 through F11. Review the tracked "
-    "generic final controller as exact source: its launch-gate-bound C11, E11, "
-    "and F11 arguments must be validated before confinement and it must stage "
-    "a repository-free exact ACTIVE closure. Explicitly disposition B17-B20 "
-    "and I10-I12 without renumbering or omission. Return any genuinely new "
-    "blocker as B21 or later and any genuinely new important finding as I13 or "
+    "exception. The B21 repair adds the two existing omitted wrapper files to "
+    "the packet, adds a regression requiring every FINAL_RECOVERY_WRAPPER_PATHS "
+    "member, and corrects only the stale opening status sentence. Fresh local "
+    "and disposable-B200 qualification receipts for the successor code freeze "
+    "in the v8 input directory alone qualify current source/test bytes. Verify "
+    "the code-freeze <= reviewed-packet <= final-freeze chain, unchanged "
+    "source/test bytes from code freeze through final freeze, and unchanged "
+    "provider-packet bytes from reviewed packet through final freeze. Review "
+    "the tracked generic final controller as exact source: its launch-gate-bound "
+    "commit arguments must be validated before confinement and it must stage a "
+    "repository-free exact ACTIVE closure. Explicitly disposition B17-B21 and "
+    "I10-I13 without renumbering or omission. Return any genuinely new "
+    "blocker as B22 or later and any genuinely new important finding as I14 or "
     "later. Do not request or infer scientific result values. A READY TO "
     "FREEZE verdict applies only to the exact current sources, tests, controller, "
-    "plan inventories, fresh C11 receipts, immutable prior reviews, and compact "
-    "incident evidence in this packet. Any new B21+ blocker stops launch; no "
-    "post-review source fix may be hidden in F11."
+    "plan inventories, fresh successor receipts, immutable prior reviews, and "
+    "compact incident evidence in this packet. Any new B22+ blocker stops "
+    "launch; no post-review source fix may be hidden in the output-only final "
+    "freeze."
 )
 PRO_REVIEW_QUESTION = (
     "This is a prospective audit-only recovery, not a new model transaction. "
@@ -1486,6 +1526,7 @@ RECOVERY_DOCUMENT_PATHS = (
     *tuple(HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256),
     *tuple(B18_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *tuple(B20_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    *HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS,
     V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -5568,7 +5609,9 @@ def _validate_v8_git_chain(
             ).returncode
             != 0
         ):
-            raise AuditRecoveryError("v8 review Git chain is not C11<=E11<=F11")
+            raise AuditRecoveryError(
+                "v8 review Git chain is not code-freeze<=reviewed-packet<=final-freeze"
+            )
     if (
         _git_command(
             "diff",
@@ -5581,7 +5624,7 @@ def _validate_v8_git_chain(
         ).returncode
         != 0
     ):
-        raise AuditRecoveryError("source/test bytes changed after C11 code freeze")
+        raise AuditRecoveryError("source/test bytes changed after successor code freeze")
     packet_paths = [relative for relative, _role in PRO_REVIEW_V8_PACKET]
     if (
         _git_command(
@@ -6757,6 +6800,46 @@ def _validate_historical_b17_review_evidence() -> dict[str, Any]:
     }
 
 
+def _validate_historical_b21_review_evidence() -> None:
+    for relative, expected in sorted(
+        HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256.items()
+    ):
+        if _sha256(REPO_ROOT / relative) != expected:
+            raise AuditRecoveryError("immutable historical B21 review evidence differs")
+    root = REPO_ROOT / HISTORICAL_B21_PRO_REVIEW_DIRECTORY
+    response = _json(root / "response.json")
+    manifest = _json(root / "review_manifest.json")
+    review_text = (root / "review.md").read_text(encoding="utf-8")
+    usage = response.get("usage")
+    if (
+        _response_review_text(response) != review_text
+        or _terminal_review_verdict(review_text) != "NOT READY TO FREEZE"
+        or _v6_review_finding_ids(review_text)
+        != ["B17", "B18", "B19", "B20", "B21", "I10", "I11", "I12", "I13"]
+        or response.get("id")
+        != "resp_05f10e98ae3a18ef016a57d3327be88199a26978a7991fcde9"
+        or response.get("model") != "gpt-5.6-sol"
+        or response.get("status") != "completed"
+        or not isinstance(usage, Mapping)
+        or usage.get("input_tokens") != 2_116_939
+        or usage.get("output_tokens") != 29_257
+        or usage.get("output_tokens_details", {}).get("reasoning_tokens") != 8_298
+        or manifest.get("status") != "completed"
+        or manifest.get("response_id") != response["id"]
+        or manifest.get("review_sha256")
+        != HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or manifest.get("reviewed_packet_git_head_commit")
+        != "0a1d73a7bea98854d1ad281aef8a7fd93fdcd693"
+        or manifest.get("review_input_sha256")
+        != "c52056d2613e4f9a6b5555bf4d9cf2be07df865fe6fc962125e48e3758e68c57"
+        or manifest.get("completed_response_cost_usd_conservative") != 22.485955
+        or manifest.get("budget_authorization_usd") != 75.0
+    ):
+        raise AuditRecoveryError("historical B21 review semantics differ")
+
+
 def _validate_b20_incident_evidence() -> dict[str, Any]:
     for mapping in (
         B18_COMPACT_EVIDENCE_PHYSICAL_SHA256,
@@ -6897,23 +6980,23 @@ def _validate_v8_review_adjudication(
         or value.get("reviewed_qualification_evidence") != reviewed_evidence
         or value.get("finding_ids") != list(finding_ids)
         or value.get("resolved_successor_findings")
-        != ["B17", "B18", "B19", "B20"]
+        != ["B17", "B18", "B19", "B20", "B21"]
         or value.get("final_decision") != "READY_TO_EXECUTE"
         or "Final execution decision: **READY TO EXECUTE**." not in markdown
     ):
         raise AuditRecoveryError("final v8 review adjudication binding differs")
-    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20"}
+    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20", "B21", "I13"}
     if not required_ids.issubset(finding_ids):
         raise AuditRecoveryError("final v8 review omitted a cumulative finding ID")
     if any(
-        finding_id.startswith("B") and int(finding_id[1:]) >= 21
+        finding_id.startswith("B") and int(finding_id[1:]) >= 22
         for finding_id in finding_ids
     ):
         raise AuditRecoveryError("final v8 review introduced a new blocker")
     for finding_id in set(finding_ids) - required_ids:
         prefix = finding_id[0]
         number = int(finding_id[1:])
-        if (prefix == "B" and number < 21) or (prefix == "I" and number < 13):
+        if (prefix == "B" and number < 22) or (prefix == "I" and number < 14):
             raise AuditRecoveryError("final v8 review recycled a reserved finding ID")
     packet_paths = {relative for relative, _role in PRO_REVIEW_V8_PACKET}
     findings = value.get("findings")
@@ -6956,16 +7039,32 @@ def _validate_v8_review_adjudication(
         "tests/consciousness_sae_target_blind_calibration/"
         "test_recovery_bundle_verifier.py",
     }
+    required_b21_paths = {
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_20260714.md",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "recovery_bundle_verifier.py",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "final_recovery_wrapper_self_test.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/"
+        "test_recovery_bundle_verifier.py",
+    }
     if (
         sorted(observed_ids) != list(finding_ids)
         or any(
             rows_by_id.get(finding_id, {}).get("disposition") != "fixed"
-            for finding_id in ("B17", "B18", "B19", "B20")
+            for finding_id in ("B17", "B18", "B19", "B20", "B21")
         )
         or not required_b20_paths
         <= set(rows_by_id.get("B20", {}).get("changed_paths", []))
+        or not required_b21_paths
+        <= set(rows_by_id.get("B21", {}).get("changed_paths", []))
     ):
-        raise AuditRecoveryError("final v8 B17-B20 adjudication differs")
+        raise AuditRecoveryError("final v8 B17-B21 adjudication differs")
     return {
         "receipt_sha256": value["receipt_sha256"],
         "json_sha256": _sha256(json_path),
@@ -7007,6 +7106,7 @@ def _validate_review_evidence(
         validate_git=validate_git
     )
     historical_b17 = _validate_historical_b17_review_evidence()
+    _validate_historical_b21_review_evidence()
     incident = _validate_b20_incident_evidence()
     timed_qualification = _validate_v4_timed_qualification_evidence()
     source_test_files = _source_test_records()
@@ -7165,12 +7265,12 @@ def _validate_review_evidence(
     )
     terminal_verdict = _terminal_review_verdict(review_text)
     finding_ids = _v6_review_finding_ids(review_text)
-    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20"}
+    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20", "B21", "I13"}
     if (
         any(section not in review_text for section in required_sections)
         or terminal_verdict != "READY TO FREEZE"
         or not required_ids.issubset(finding_ids)
-        or any(fid.startswith("B") and int(fid[1:]) >= 21 for fid in finding_ids)
+        or any(fid.startswith("B") and int(fid[1:]) >= 22 for fid in finding_ids)
     ):
         raise AuditRecoveryError("final v8 review did not approve exact packet bytes")
     adjudication = _validate_v8_review_adjudication(
@@ -7399,8 +7499,8 @@ def _validate_review_evidence(
         "completed_v7_paid_call_count": 1,
         "incomplete_b17_paid_call_count": 1,
         "completed_b17_paid_call_count": 1,
-        "completed_v8_paid_call_count": 1,
-        "cumulative_disclosed_paid_call_count": 11,
+        "completed_v8_paid_call_count": 2,
+        "cumulative_disclosed_paid_call_count": 12,
     }
 
 
