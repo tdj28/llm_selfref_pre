@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2, v3, and v4 reviews and bounded v5 repair
+## Completed v2, v3, v4, and v5 reviews; bounded v6 repair
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -114,8 +114,11 @@ approval.
 The separately authorized v4 call completed as provider response
 `resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066` and ended `NOT
 READY TO FREEZE`. It used 1,129,614 input tokens and 27,987 output tokens,
-including 8,904 reasoning tokens, and reconstructed to exactly `$6.48768`
-within the `$25.00` authorization. Its exact review, request artifacts,
+including 8,904 reasoning tokens. Its immutable manifest reconstructed
+`$6.48768` under short-context rates. Its 274,606-token exact preflight crossed
+the 272K threshold; the retrospective long-context reconstruction is
+`$12.555555`, still within the `$25.00` authorization. Neither value is an
+account invoice. Its exact review, request artifacts,
 provider response, manifest, and canonical `NOT READY TO EXECUTE` adjudication
 are preserved under
 `reviews/audit_recovery_landlock_gpt_pro_v4_completed_negative/`. No recovered
@@ -133,18 +136,52 @@ packet and lineage gate, update the inclusion test, regenerate both affected
 source/test receipts, and obtain a successor exact-byte review. It changes no
 scientific calculation, confinement rule, or model-execution requirement.
 
-The prospective v5 packet includes the exact machine JSON and the full v4
+The now-historical v5 packet included the exact machine JSON and the full v4
 negative review, manifest, machine adjudication, and human-readable
 adjudication. The immutable v4 bindings retain the archived request and
 response hashes without recursively embedding the prior 1.2 MB request packet.
 B12 retains its stable ID. Any new blocker begins at B13, and any new important
 non-blocking finding begins at I09; prior findings may not disappear through
 renumbering. Producer and verifier retain the exact `$25.00` review ceiling.
-The prospective input/output envelope is 1,450,000 characters, 450,000
+Its input/output envelope was 1,450,000 characters, 450,000
 estimated input tokens, and 20,000 requested output tokens, with frozen 5.0
 input and 2.2 output reserve multipliers. Both the static
 3.5-characters-per-token estimate and an exact tokenizer preflight must pass
 before submission. Expected spend is lower, and no silent retry is permitted.
+
+V5 subsequently completed as response
+`resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0` with terminal
+verdict `READY TO FREEZE`. It used 1,379,762 input and 29,413 output tokens,
+including 7,256 reasoning tokens. Its immutable manifest reconstructed
+`$7.7812` under short-context rates. Its 336,765-token exact preflight crossed
+the 272K threshold; the retrospective long-context reconstruction is
+`$15.121205`, still within the `$25.00` authorization. Neither value is an
+account invoice. The complete
+review and structured `READY_TO_EXECUTE` adjudication are supplied to v6 as
+bounded context. V5 is preserved as a valid review of its own exact bytes, not
+as approval of the repaired successor packet.
+
+The post-review authentic dry-run then exposed B14 before any new GPU was
+provisioned: v5 had added `pytest==8.4.2` to two files that the immutable r3
+plan binds byte-for-byte. The first real authorization statement rejected
+`requirements-runpod-b200.txt`; the setup script had the same collision. The
+canonical r3 files are restored exactly, while pytest moves to two separately
+bound qualification-only files. An unmocked regression test now runs the real
+plan/provenance gate and requires all 41 historical files and their exact
+inventory hash. The v6 packet supplies this context, the complete v5 review and
+adjudication, the canonical r3 source inventory, repaired source/tests, and
+fresh C6 local and disposable-B200 qualification evidence. B14 must be
+explicitly dispositioned; new IDs begin at B15 and I10.
+
+The official GPT-5.6 Sol model page prices prompts above 272K input tokens at
+2x input and 1.5x output for the full request. The v6 packet is conservatively
+above that threshold, so its prospective reserve uses `$10.00` uncached input,
+`$12.50` cache write, and `$45.00` output per million tokens, with the frozen
+5.0/2.2 aggregate-work multipliers and a `$65.00` hard authorization. The
+immutable v4/v5 cost fields remain their historical manifests' own
+reconstructions; they are not reused as the v6 rate schedule or asserted to be
+account invoices. The machine gate preserves both original fields and both
+retrospective reconstructions.
 
 ## Prospective Landlock replacement
 

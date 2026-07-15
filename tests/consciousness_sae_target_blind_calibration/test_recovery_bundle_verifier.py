@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from experiments.consciousness_sae_target_blind_calibration import (
+    audit_recovery,
     recovery_bundle_verifier as verifier,
 )
 
@@ -810,6 +811,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     closure_hashes.update(verifier.HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.V4_TIMED_QUALIFICATION_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
         closure_hashes[verifier.HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON] = (
             "0" * 64
@@ -824,6 +826,8 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         closure_hashes[verifier.HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON] = (
             "0" * 64
         )
+    if mutation == "historical_v5_review_physical":
+        closure_hashes[verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON] = "0" * 64
     recovery_bound_files = [
         {"path": path, "bytes": 100 + index, "sha256": closure_hashes[path]}
         for index, path in enumerate(verifier.RECOVERY_BOUND_PATHS)
@@ -848,15 +852,15 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         code_freeze="c" * 40,
     )
     snapshot_paths = {
-        verifier.V5_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
-        verifier.V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
-        verifier.V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        verifier.V6_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
+        verifier.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
+        verifier.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
             qualification_ownership_path
         ),
-        verifier.V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        verifier.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
             qualification_landlock_path
         ),
-        verifier.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
+        verifier.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
     }
     for row in recovery_bound_files:
         snapshot = snapshot_paths.get(row["path"])
@@ -865,7 +869,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             closure_hashes[row["path"]] = row["sha256"]
     if mutation == "reviewed_snapshot_mismatch":
         for row in recovery_bound_files:
-            if row["path"] == verifier.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
+            if row["path"] == verifier.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
                 row["sha256"] = "0" * 64
                 closure_hashes[row["path"]] = row["sha256"]
                 break
@@ -886,14 +890,14 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     bootstrap_roots, bootstrap_files = verifier._bootstrap_protected_paths(  # noqa: SLF001
         bootstrap_manifest, paths
     )
-    historical_provenance_files = [
-        {
-            "path": f"data/historical/file-{index}.json",
-            "bytes": 200 + index,
-            "sha256": verifier.canonical_sha256({"historical": index}),
-        }
-        for index in range(4)
-    ]
+    _plan, _provenance_paths, historical_provenance_files = (
+        audit_recovery._validate_pre_gpu_issue_inputs(  # noqa: SLF001
+            audit_recovery.REPO_ROOT / verifier.CANONICAL_PLAN_RELATIVE_PATH
+        )
+    )
+    if mutation == "auth_provenance_semantic":
+        historical_provenance_files = [dict(row) for row in historical_provenance_files]
+        historical_provenance_files[0]["sha256"] = "0" * 64
 
     preflight_child = verifier._expected_preflight_argv(  # noqa: SLF001
         python_executable,
@@ -1115,6 +1119,54 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             verifier.HISTORICAL_V4_NEGATIVE_ADJUDICATION_RECEIPT_SHA256
         ),
         "historical_v4_remaining_blocking_findings": ["B12"],
+        "historical_v4_input_tokens_preflight": (
+            verifier.HISTORICAL_V4_INPUT_TOKENS_PREFLIGHT
+        ),
+        "historical_v4_recorded_cost_usd": verifier.HISTORICAL_V4_RECORDED_COST_USD,
+        "historical_v4_retrospective_long_context_cost_usd": (
+            verifier.HISTORICAL_V4_RETROSPECTIVE_LONG_CONTEXT_COST_USD
+        ),
+        "historical_v4_budget_authorization_usd": (
+            verifier.HISTORICAL_V4_BUDGET_AUTHORIZATION_USD
+        ),
+        "historical_v4_pricing_disclosure_status": (
+            "historical_manifest_short_rate_plus_retrospective_long_context_"
+            "reconstruction_not_invoice"
+        ),
+        "historical_v5_terminal_verdict": "READY TO FREEZE",
+        "historical_v5_response_id": (
+            "resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0"
+        ),
+        "historical_v5_review_sha256": (
+            verifier.HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256[
+                f"{verifier.FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md"
+            ]
+        ),
+        "historical_v5_adjudication_receipt_sha256": (
+            "05e23d2f90de9458b75ef7d84be23d73018ab8a4f46b3edcac12217793607257"
+        ),
+        "historical_v5_adjudication_json_sha256": (
+            verifier.HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256[
+                verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
+            ]
+        ),
+        "historical_v5_superseded_reason": (
+            "post_review_authentic_issue_gate_failed_b14"
+        ),
+        "historical_v5_input_tokens_preflight": (
+            verifier.HISTORICAL_V5_INPUT_TOKENS_PREFLIGHT
+        ),
+        "historical_v5_recorded_cost_usd": verifier.HISTORICAL_V5_RECORDED_COST_USD,
+        "historical_v5_retrospective_long_context_cost_usd": (
+            verifier.HISTORICAL_V5_RETROSPECTIVE_LONG_CONTEXT_COST_USD
+        ),
+        "historical_v5_budget_authorization_usd": (
+            verifier.HISTORICAL_V5_BUDGET_AUTHORIZATION_USD
+        ),
+        "historical_v5_pricing_disclosure_status": (
+            "historical_manifest_short_rate_plus_retrospective_long_context_"
+            "reconstruction_not_invoice"
+        ),
         "timed_qualification_receipt_sha256": (
             "0c83eea18a0b4ed622e02846d224457421ca970c1d72b980ee9825a8420e4d34"
         ),
@@ -1131,18 +1183,20 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             "source_test_qualification"
         ),
         "timed_qualification_final_recovery_scope_must_repeat": True,
-        "finding_ids": list(verifier.HISTORICAL_V4_NEGATIVE_FINDING_IDS),
+        "finding_ids": sorted([*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14"]),
         "review_sha256": closure_hashes[
-            f"{verifier.FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md"
+            f"{verifier.FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md"
         ],
         "adjudication_receipt_sha256": "6" * 64,
         "adjudication_json_sha256": closure_hashes[
-            verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
+            verifier.FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON
         ],
         "adjudication_markdown_sha256": closure_hashes[
-            verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN
+            verifier.FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "fixed_finding_ids": list(verifier.HISTORICAL_V4_NEGATIVE_FINDING_IDS),
+        "fixed_finding_ids": sorted(
+            [*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14"]
+        ),
         "rejected_finding_ids": [],
         "reviewed_local_test_receipt_file_sha256": _file_record(
             local_test_receipt_path
@@ -1179,7 +1233,8 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "historical_v3_paid_call_count": 1,
         "historical_v4_paid_call_count": 1,
         "completed_v5_paid_call_count": 1,
-        "cumulative_disclosed_paid_call_count": 6,
+        "completed_v6_paid_call_count": 1,
+        "cumulative_disclosed_paid_call_count": 7,
     }
     authorization_core = {
         "schema_version": 1,
@@ -1268,19 +1323,24 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     elif mutation == "auth_review_terminal":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["provider_terminal_verdict"] = "READY_TO_EXECUTE"
-    elif mutation == "auth_review_b12_omitted":
+    elif mutation == "auth_review_b14_omitted":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["finding_ids"] = [
-            finding for finding in review["finding_ids"] if finding != "B12"
+            finding for finding in review["finding_ids"] if finding != "B14"
         ]
         authorization_core["review"]["fixed_finding_ids"] = [
-            finding for finding in review["fixed_finding_ids"] if finding != "B12"
+            finding for finding in review["fixed_finding_ids"] if finding != "B14"
         ]
     elif mutation == "auth_review_historical_v4_blocker":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["historical_v4_remaining_blocking_findings"] = [
             "B11"
         ]
+    elif mutation == "auth_review_historical_pricing":
+        authorization_core["review"] = dict(review)
+        authorization_core["review"][
+            "historical_v5_retrospective_long_context_cost_usd"
+        ] = verifier.HISTORICAL_V5_RECORDED_COST_USD
     elif mutation == "auth_review_reserved_finding_id":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["finding_ids"] = sorted(
@@ -1301,7 +1361,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         )
     elif mutation == "auth_review_cost_over":
         authorization_core["review"] = dict(review)
-        authorization_core["review"]["reconstructed_cost_usd"] = 25.000001
+        authorization_core["review"]["reconstructed_cost_usd"] = 65.000001
     elif mutation == "auth_clock":
         authorization_core["provider_deadline_at_unix"] = 4500.0
     authorization = _seal(authorization_core)
@@ -1623,32 +1683,44 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "historical_v4_review_manifest_sha256": closure_hashes[
             f"{verifier.HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json"
         ],
-        "final_v5_review_adjudication_json_sha256": closure_hashes[
+        "historical_v5_review_adjudication_json_sha256": closure_hashes[
             verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
         ],
-        "final_v5_review_adjudication_markdown_sha256": closure_hashes[
+        "historical_v5_review_adjudication_markdown_sha256": closure_hashes[
             verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "final_v5_review_response_sha256": closure_hashes[
+        "historical_v5_review_response_sha256": closure_hashes[
             f"{verifier.FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json"
         ],
-        "final_v5_review_manifest_sha256": closure_hashes[
+        "historical_v5_review_manifest_sha256": closure_hashes[
             f"{verifier.FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json"
         ],
+        "final_v6_review_adjudication_json_sha256": closure_hashes[
+            verifier.FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON
+        ],
+        "final_v6_review_adjudication_markdown_sha256": closure_hashes[
+            verifier.FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ],
+        "final_v6_review_response_sha256": closure_hashes[
+            f"{verifier.FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json"
+        ],
+        "final_v6_review_manifest_sha256": closure_hashes[
+            f"{verifier.FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ],
         "reviewed_local_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V5_LOCAL_TEST_RECEIPT_SNAPSHOT
+            verifier.V6_LOCAL_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_host_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+            verifier.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_qualification_ownership_snapshot_sha256": closure_hashes[
-            verifier.V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+            verifier.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ],
         "reviewed_target_qualification_landlock_snapshot_sha256": closure_hashes[
-            verifier.V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+            verifier.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ],
         "reviewed_target_qualification_cuda_snapshot_sha256": closure_hashes[
-            verifier.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+            verifier.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ],
         "original_failed_audit_log_sha256": verifier.ORIGINAL_FAILURE_LOG_SHA256,
         "original_raw_run_receipt_sha256": authorization["raw_run_receipt_sha256"],
@@ -1966,6 +2038,7 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ("closure_order", "not sorted and unique"),
         ("auth_path_hash", "recovery path hash differs"),
         ("auth_plan_hash", "identity/science boundary differs"),
+        ("auth_provenance_semantic", "historical provenance authority differs"),
         ("auth_external_missing", "external_files keys differ"),
         ("auth_git_mismatch", "git head differs"),
         ("target_designated_skip", "target environment differs"),
@@ -1990,8 +2063,9 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ("auth_review_call_count", "review semantics differ"),
         ("auth_review_git_head", "review semantics differ"),
         ("auth_review_terminal", "review semantics differ"),
-        ("auth_review_b12_omitted", "review semantics differ"),
+        ("auth_review_b14_omitted", "review semantics differ"),
         ("auth_review_historical_v4_blocker", "review semantics differ"),
+        ("auth_review_historical_pricing", "review semantics differ"),
         ("auth_review_reserved_finding_id", "review semantics differ"),
         ("auth_review_snapshot_receipt", "reviewed snapshot binding differs"),
         ("auth_review_cost_over", "review semantics differ"),
@@ -2009,6 +2083,10 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ),
         (
             "historical_v4_review_physical",
+            "immutable historical review physical evidence differs",
+        ),
+        (
+            "historical_v5_review_physical",
             "immutable historical review physical evidence differs",
         ),
         ("reviewed_snapshot_mismatch", "reviewed snapshot binding differs"),

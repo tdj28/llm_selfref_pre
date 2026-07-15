@@ -1,10 +1,12 @@
 # Calibration v2 r3 Audit-Only Recovery
 
 Status: prospective technical-recovery redesign after a pre-claim host
-compatibility failure, two incomplete provider calls, and completed negative
-v2, v3, and v4 provider reviews, before any recovered audit output is computed
-or inspected. This plan is not executable until a separately authorized v5
-review closes the remaining finding.
+compatibility failure, two incomplete provider calls, completed negative v2,
+v3, and v4 reviews, and a completed positive v5 review whose exact reviewed
+bytes failed the authentic pre-GPU authorization dry-run. No recovered audit
+output has been computed or inspected. This plan is not executable until a
+cumulative v6 review evaluates the repaired exact bytes and the complete v5
+review/adjudication context.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -513,6 +515,10 @@ that set remains exactly empty.
 
 ## Review disclosure
 
+The paragraphs below through the description of the v5 packet are retained as
+historical review lineage. The later "v6 pre-GPU repair" section supersedes
+their prospective-v5 status and resource envelope.
+
 Five paid provider calls are historical incomplete or negative evidence and
 none is approval: two incomplete calls and the completed negative v2, v3, and
 v4 calls. Any completed v5 approval is a sixth, separately authorized call and
@@ -552,8 +558,11 @@ response cannot become READY by adjudication.
 The separately authorized v4 review completed as provider response
 `resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066` and ended `NOT
 READY TO FREEZE`. It used 1,129,614 input and 27,987 output tokens, including
-8,904 reasoning tokens, and reconstructed to exactly `$6.48768` within the
-`$25.00` authorization. The exact response, review, request artifacts,
+8,904 reasoning tokens, and its immutable manifest reconstructed `$6.48768`
+under short-context rates. Its 274,606-token exact preflight crossed the 272K
+threshold; retrospective application of the official long-context rates to
+stored usage gives `$12.555555`, still within the `$25.00` authorization.
+Neither value is an account invoice. The exact response, review, request artifacts,
 manifest, and canonical adjudication are preserved under
 `reviews/audit_recovery_landlock_gpt_pro_v4_completed_negative/`. No recovered
 outcome was computed or inspected, and no model transaction, model forward,
@@ -644,6 +653,71 @@ inventory, requires the qualification pod to differ from the recovery pod, and
 places byte-identical copies under the attempt's `evidence/tests/` directory.
 The offline verifier repeats those checks. No authorization is issued and no
 recovered audit is claimed ready until this closure exists.
+
+## V6 pre-GPU repair after the positive v5 review
+
+The v5 Pro call completed as response
+`resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0`, ended `READY TO
+FREEZE`, and was adjudicated `READY_TO_EXECUTE`. It used 1,379,762 input tokens
+and 29,413 output tokens, including 7,256 reasoning tokens. Its immutable
+manifest reconstructed `$7.7812` under short-context rates. Its 336,765-token
+exact preflight crossed the 272K threshold; the retrospective long-context
+reconstruction is `$15.121205`, still within its `$25.00` authorization.
+Neither value is an account invoice. Its exact review, manifest, response, and adjudication remain
+immutable historical positive evidence. They are not relabeled as approval of
+the successor bytes.
+
+Before creating another provider host, the exact first authorization call was
+dry-run locally. Its first statement,
+`authorize._validate_plan(args.plan_dir)`, failed because two active
+source/test files contained qualification-only `pytest==8.4.2` additions while
+the immutable r3 `source_files.json` bound their original bytes. The two
+collisions were:
+
+- `requirements-runpod-b200.txt`: r3 requires 204 bytes and SHA-256
+  `4796c2817460bae757dcbae4c141bca460100fe80b13eb888776270d8df4b806`,
+  while v5 reviewed 218 bytes;
+- `setup_runpod_guest.sh`: r3 requires 1,003 bytes and SHA-256
+  `f420180faf5c229439e4bf626ec05f5e9a10902508e62dbcef36f48abc1ab8fa`,
+  while v5 reviewed 1,026 bytes.
+
+This is tracked as B14. It was caught before provisioning, so it incurred no
+new B200 charge and opened no target outcome. The minimum repair restores both
+canonical runtime files byte-for-byte. `pytest==8.4.2` moves to
+`requirements-runpod-b200-qualification.txt`, installed only by
+`setup_runpod_qualification_guest.sh` on disposable source/test qualification
+hosts. The final recovery continues to use only the canonical r3 setup. The
+qualification-only files are hash-bound in the source/test and provider-review
+closures but are present-and-unused in the minimal final executable tree.
+
+An unmocked pre-GPU regression gate now calls the authentic r3 plan validator,
+derives the historical review closure, hashes all 41 provenance files, and
+requires inventory SHA-256
+`ff02d92e681e662261b57dab00882a654eaf7b0d505dd2f210ab06f57ba8bd74`.
+The gate must pass again from the final pushed review/adjudication commit before
+any recovery B200 is created.
+
+Because the repair changes reviewed source/test and packet bytes, v5 cannot
+authorize it under its own exact-byte rule. A fresh C6 code freeze therefore
+requires new local and disposable-B200 target receipts; E6 adds those receipts
+and the cumulative review packet; one v6 Pro call reviews the exact E6 packet,
+including the complete v5 review and adjudication plus the B14 incident; and F6
+adds only provider outputs and the v6 adjudication. The gate requires
+`C6 <= E6 <= F6`, no source/test diff from C6 to F6, and no reviewed-packet
+diff from E6 to F6. B14 must be explicitly dispositioned. Any genuinely new
+blocking finding starts at B15 and any genuinely new important finding starts
+at I10. No silent retry is permitted.
+
+The v6 resource guard permits at most 1,900,000 input characters, 550,000
+conservatively estimated input tokens, and 20,000 requested output tokens,
+with the same 5.0 input and 2.2 output reserve multipliers. Because the exact
+packet is conservatively above GPT-5.6 Sol's 272K-input long-context threshold,
+the whole request is reserved at the official 2x-input/1.5x-output rates:
+`$10.00` uncached input, `$12.50` cache write, and `$45.00` output per million
+tokens. The hard authorization is therefore `$65.00`; the obsolete
+short-context rates would not cover the frozen worst-case packet. Both static
+and exact tokenizer preflights must pass. The user explicitly authorized
+increasing the budget if necessary; expected spend remains below the ceiling.
 
 ## Claim boundary
 

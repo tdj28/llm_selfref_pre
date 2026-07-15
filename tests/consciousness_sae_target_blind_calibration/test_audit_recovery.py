@@ -42,6 +42,66 @@ def _install_fake_checkpoint(monkeypatch, checkpoint: dict) -> None:
     monkeypatch.setattr(torch, "load", lambda *_args, **_kwargs: checkpoint)
 
 
+def test_pre_gpu_issue_gate_accepts_authentic_r3_plan_and_provenance() -> None:
+    """Exercise the real first authorization gate without provider/GPU mocks."""
+
+    plan_dir = audit_recovery.REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH
+    plan, paths, records = audit_recovery._validate_pre_gpu_issue_inputs(  # noqa: SLF001
+        plan_dir
+    )
+
+    assert plan["manifest"]["plan_manifest_sha256"] == (
+        "aa80cef7ef36fed327fcce99547c0b3bdf92a059c1dea43abba0ba924f404636"
+    )
+    assert len(paths) == len(records) == audit_recovery.HISTORICAL_PROVENANCE_FILE_COUNT
+    assert (
+        protocol.canonical_sha256(records)
+        == audit_recovery.HISTORICAL_PROVENANCE_INVENTORY_SHA256
+    )
+
+
+def test_pre_gpu_issue_gate_rejects_noncanonical_plan_location(tmp_path: Path) -> None:
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="canonical plan path"):
+        audit_recovery._validate_pre_gpu_issue_inputs(tmp_path)  # noqa: SLF001
+
+
+def test_pytest_is_qualification_only_not_in_frozen_r3_runtime() -> None:
+    base_path = (
+        audit_recovery.REPO_ROOT
+        / "experiments/consciousness_sae_target_blind_calibration/"
+        "requirements-runpod-b200.txt"
+    )
+    setup_path = (
+        audit_recovery.REPO_ROOT
+        / "experiments/consciousness_sae_target_blind_calibration/"
+        "setup_runpod_guest.sh"
+    )
+    base = base_path.read_text(encoding="utf-8")
+    qualification = (
+        audit_recovery.REPO_ROOT
+        / "experiments/consciousness_sae_target_blind_calibration/"
+        "requirements-runpod-b200-qualification.txt"
+    ).read_text(encoding="utf-8")
+    setup = (
+        audit_recovery.REPO_ROOT
+        / "experiments/consciousness_sae_target_blind_calibration/"
+        "setup_runpod_qualification_guest.sh"
+    ).read_text(encoding="utf-8")
+
+    assert "pytest" not in base
+    assert base_path.stat().st_size == 204
+    assert audit_recovery._sha256(base_path) == (  # noqa: SLF001
+        "4796c2817460bae757dcbae4c141bca460100fe80b13eb888776270d8df4b806"
+    )
+    assert setup_path.stat().st_size == 1_003
+    assert audit_recovery._sha256(setup_path) == (  # noqa: SLF001
+        "f420180faf5c229439e4bf626ec05f5e9a10902508e62dbcef36f48abc1ab8fa"
+    )
+    assert qualification == "pytest==8.4.2\n"
+    assert "setup_runpod_guest.sh" in setup
+    assert "requirements-runpod-b200-qualification.txt" in setup
+
+
 def test_recovery_loader_accepts_authentic_superset_and_filters_to_required(
     tmp_path: Path, monkeypatch
 ) -> None:
@@ -1422,57 +1482,107 @@ def test_historical_v4_completed_negative_review_is_pinned() -> None:
     assert observed["output_tokens"] == 27_987
     assert observed["reasoning_tokens"] == 8_904
     assert observed["reconstructed_cost_usd"] == 6.48768
+    assert observed["input_tokens_preflight"] == 274_606
+    assert observed["retrospective_long_context_cost_usd"] == 12.555555
+    assert observed["budget_authorization_usd"] == 25.0
+    assert (
+        observed["retrospective_long_context_cost_usd"]
+        < observed["budget_authorization_usd"]
+    )
 
 
-def test_v5_review_packet_includes_equivalence_receipts_and_v4_negative() -> None:
-    paths = {path for path, _role in audit_recovery.PRO_REVIEW_V5_PACKET}
-    roles = [role for _path, role in audit_recovery.PRO_REVIEW_V5_PACKET]
-    assert not paths & set(audit_recovery.FINAL_V5_PRO_REVIEW_OUTPUT_PATHS)
+def test_historical_v5_positive_review_is_pinned_without_current_sources() -> None:
+    observed = audit_recovery._validate_historical_v5_positive_review_evidence()  # noqa: SLF001
+    assert observed["terminal_verdict"] == "READY TO FREEZE"
+    assert observed["response_id"] == (
+        "resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0"
+    )
+    assert observed["superseded_reason"] == (
+        "post_review_authentic_issue_gate_failed_b14"
+    )
+    assert observed["reconstructed_cost_usd"] == 7.7812
+    assert observed["input_tokens_preflight"] == 336_765
+    assert observed["retrospective_long_context_cost_usd"] == 15.121205
+    assert observed["budget_authorization_usd"] == 25.0
+    assert (
+        observed["retrospective_long_context_cost_usd"]
+        < observed["budget_authorization_usd"]
+    )
+
+
+def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() -> None:
+    paths = {path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET}
+    roles = [role for _path, role in audit_recovery.PRO_REVIEW_V6_PACKET]
+    assert not paths & set(audit_recovery.FINAL_V6_PRO_REVIEW_OUTPUT_PATHS)
     assert {
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
-        audit_recovery.V5_LOCAL_TEST_RECEIPT_SNAPSHOT,
-        audit_recovery.V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
-        audit_recovery.V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-        audit_recovery.V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-        audit_recovery.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-        *audit_recovery.V4_TIMED_QUALIFICATION_PHYSICAL_SHA256,
-        f"{audit_recovery.HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review.md",
-        f"{audit_recovery.HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
-        audit_recovery.HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON,
-        audit_recovery.HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN,
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+        "experiments/consciousness_sae_target_blind_calibration/authorize.py",
+        "experiments/consciousness_sae_target_blind_calibration/build_plan.py",
+        "experiments/consciousness_sae_target_blind_calibration/protocol.py",
+        "data/consciousness_sae_target_blind_calibration/"
+        "calibration_v2_plan_20260714_r3/source_files.json",
+        "data/consciousness_sae_target_blind_calibration/"
+        "calibration_v2_plan_20260714_r3/plan_manifest.json",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "requirements-runpod-b200-qualification.txt",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "setup_runpod_qualification_guest.sh",
+        f"{audit_recovery.FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
+        f"{audit_recovery.FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+        audit_recovery.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+        audit_recovery.FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+        audit_recovery.V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     } <= paths
-    assert {
-        f"{audit_recovery.HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review.md",
-        f"{audit_recovery.HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
-        audit_recovery.HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON,
-        audit_recovery.HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN,
-    }.isdisjoint(paths)
+    assert set(audit_recovery.SOURCE_TEST_BOUND_PATHS) <= paths
+    assert paths <= set(audit_recovery.RECOVERY_BOUND_PATHS)
     assert roles == [
         "complete experiment plan",
         *(f"bounded context {index}" for index in range(1, len(roles))),
     ]
 
 
-def test_v5_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
+def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
     assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == (
         recovery_bundle_verifier.COMPLETED_REVIEW_COST_CEILING_USD
     )
-    assert audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS == 1_450_000
-    assert audit_recovery.PRO_REVIEW_MAX_INPUT_TOKENS == 450_000
+    assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == 65.0
+    assert audit_recovery.PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION == 10.0
+    assert audit_recovery.PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION == 12.5
+    assert audit_recovery.PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION == 45.0
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS == 1_900_000
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_TOKENS == 550_000
     assert audit_recovery.PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION == 3.5
-    limits = audit_recovery._validate_v5_packet_limits(  # noqa: SLF001
+    limits = audit_recovery._validate_v6_packet_limits(  # noqa: SLF001
         "x" * audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS,
         "",
     )
+    assert limits["estimated_budget_reserve_usd"] > 35.0
     assert limits["estimated_budget_reserve_usd"] <= (
         audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD
     )
 
 
-def test_v5_review_input_uses_real_newline_delimited_artifact_markers(
+def test_v6_long_context_packet_fails_under_obsolete_short_context_budget(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_BUDGET_AUTHORIZATION_USD", 35.0)
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="resource ceiling"):
+        audit_recovery._validate_v6_packet_limits(  # noqa: SLF001
+            "x" * audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS,
+            "",
+        )
+
+
+def test_v6_review_input_uses_real_newline_delimited_artifact_markers(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     (tmp_path / "plan.md").write_text("# frozen plan\n", encoding="utf-8")
@@ -1480,13 +1590,13 @@ def test_v5_review_input_uses_real_newline_delimited_artifact_markers(
     monkeypatch.setattr(audit_recovery, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(
         audit_recovery,
-        "PRO_REVIEW_V5_PACKET",
+        "PRO_REVIEW_V6_PACKET",
         (
             ("plan.md", "complete experiment plan"),
             ("context.txt", "bounded context 1"),
         ),
     )
-    value = audit_recovery._expected_v5_pro_review_input()
+    value = audit_recovery._expected_v6_pro_review_input()
     assert "<artifact_1>\n# frozen plan\n\n</artifact_1>" in value
     assert "<artifact_2>\nbounded context\n\n</artifact_2>" in value
     request = "# Developer instructions\n\nreview rules\n\n" + value
@@ -1495,7 +1605,7 @@ def test_v5_review_input_uses_real_newline_delimited_artifact_markers(
     )
 
 
-def test_v5_review_git_chain_rejects_nonancestor(
+def test_v6_review_git_chain_rejects_nonancestor(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setattr(
@@ -1503,8 +1613,8 @@ def test_v5_review_git_chain_rejects_nonancestor(
         "_git_command",
         lambda *parts, **kwargs: argparse.Namespace(returncode=1),
     )
-    with pytest.raises(audit_recovery.AuditRecoveryError, match="C<=E<=F"):
-        audit_recovery._validate_v5_git_chain(
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="C6<=E6<=F6"):
+        audit_recovery._validate_v6_git_chain(
             code_freeze_commit="1" * 40,
             reviewed_packet_git_head_commit="2" * 40,
             final_git_head_commit="3" * 40,
@@ -1601,12 +1711,8 @@ def _v5_adjudication_fixture(
         "review_binding": review_binding,
         "historical_v4_binding": {
             "adjudication_path": "historical-v4/ADJUDICATION.json",
-            "adjudication_file_sha256": historical_v4[
-                "adjudication_json_sha256"
-            ],
-            "adjudication_receipt_sha256": historical_v4[
-                "adjudication_receipt_sha256"
-            ],
+            "adjudication_file_sha256": historical_v4["adjudication_json_sha256"],
+            "adjudication_receipt_sha256": historical_v4["adjudication_receipt_sha256"],
             "provider_response_id": historical_v4["response_id"],
             "terminal_verdict": historical_v4["terminal_verdict"],
             "remaining_blocking_findings": ["B12"],
@@ -1617,13 +1723,9 @@ def _v5_adjudication_fixture(
             {
                 "id": finding_id,
                 "blocking": finding_id.startswith("B"),
-                "disposition": (
-                    "fixed" if finding_id.startswith("B") else "rejected"
-                ),
+                "disposition": ("fixed" if finding_id.startswith("B") else "rejected"),
                 "rationale": "exact reviewed-byte disposition",
-                "changed_paths": (
-                    ["plan.md"] if finding_id.startswith("B") else []
-                ),
+                "changed_paths": (["plan.md"] if finding_id.startswith("B") else []),
             }
             for finding_id in finding_ids
         ],
@@ -1695,9 +1797,9 @@ def test_v5_ready_only_adjudication_rejects_invalid_closure(
         )
         kwargs["finding_ids"] = core["finding_ids"]
     elif mutation == "outside_packet":
-        next(row for row in core["findings"] if row["id"] == "B12")[
-            "changed_paths"
-        ] = ["outside.txt"]
+        next(row for row in core["findings"] if row["id"] == "B12")["changed_paths"] = [
+            "outside.txt"
+        ]
     else:
         core["final_decision"] = "NOT_READY_TO_EXECUTE"
     _write_canonical(json_path, _sealed(core))
@@ -1981,6 +2083,15 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
         audit_recovery.V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         audit_recovery.V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         audit_recovery.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        audit_recovery.FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON,
+        audit_recovery.FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+        f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json",
+        f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+        audit_recovery.V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        audit_recovery.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
         "docs/consciousness_sae_target_blind_calibration/"
@@ -2097,7 +2208,10 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v4_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["final_v5_review_adjudication_json_sha256"] in {
+    assert receipt["historical_v5_review_adjudication_json_sha256"] in {
+        row["sha256"] for row in rows
+    }
+    assert receipt["final_v6_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {
