@@ -1264,7 +1264,14 @@ def _validate_descriptor_audit(
 
 def _denied_rows(names: Sequence[str]) -> list[dict[str, Any]]:
     return [
-        {"operation": name, "status": "denied", "errno": errno.EACCES} for name in names
+        {
+            "operation": name,
+            "status": "denied",
+            "errno": (
+                errno.EXDEV if name == "output_cross_directory_link" else errno.EACCES
+            ),
+        }
+        for name in names
     ]
 
 

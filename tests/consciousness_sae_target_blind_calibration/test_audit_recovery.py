@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import errno
 import json
 import os
 from datetime import datetime, timezone
@@ -286,7 +287,15 @@ def test_recovery_validator_accepts_exact_launcher_receipt_schema(
                 for name in audit_recovery.OUTPUT_CANARY_ALLOWED_OPERATIONS
             ]
             + [
-                {"operation": name, "status": "denied", "errno": 13}
+                {
+                    "operation": name,
+                    "status": "denied",
+                    "errno": (
+                        errno.EXDEV
+                        if name == "output_cross_directory_link"
+                        else errno.EACCES
+                    ),
+                }
                 for name in audit_recovery.OUTPUT_CANARY_DENIED_OPERATIONS
             ],
         },

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import errno
 import hashlib
 import json
 import math
@@ -800,7 +801,15 @@ def _validate_landlock_receipt(
         {"operation": operation, "status": "allowed"}
         for operation in OUTPUT_CANARY_ALLOWED_OPERATIONS
     ] + [
-        {"operation": operation, "status": "denied", "errno": 13}
+        {
+            "operation": operation,
+            "status": "denied",
+            "errno": (
+                errno.EXDEV
+                if operation == "output_cross_directory_link"
+                else errno.EACCES
+            ),
+        }
         for operation in OUTPUT_CANARY_DENIED_OPERATIONS
     ]
     expected_writable_baseline = [

@@ -830,16 +830,18 @@ def _denied(
     operation: str,
     action: Callable[[], Any],
     *,
+    expected_errno: int = errno.EACCES,
     cleanup: Callable[[], None] | None = None,
 ) -> dict[str, Any]:
     try:
         result = action()
     except OSError as exc:
-        if exc.errno != errno.EACCES:
+        if exc.errno != expected_errno:
+            expected_name = errno.errorcode.get(expected_errno, str(expected_errno))
             raise LandlockLaunchError(
-                f"{operation} failed with errno {exc.errno}, not EACCES"
+                f"{operation} failed with errno {exc.errno}, not {expected_name}"
             ) from exc
-        return {"operation": operation, "status": "denied", "errno": errno.EACCES}
+        return {"operation": operation, "status": "denied", "errno": expected_errno}
     else:
         if isinstance(result, int):
             try:
@@ -1025,6 +1027,7 @@ def _output_canary_checks(root: Path) -> list[dict[str, Any]]:
         _denied(
             "output_cross_directory_link",
             lambda: os.link(source, destination),
+            expected_errno=errno.EXDEV,
             cleanup=lambda: destination.unlink(),
         )
     )

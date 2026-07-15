@@ -543,6 +543,21 @@ def test_denied_requires_eacces_and_rejects_success() -> None:
         landlock_launcher._denied("test", lambda: None)
 
 
+def test_denied_supports_landlock_refer_exdev() -> None:
+    def refer_denied() -> None:
+        raise OSError(errno.EXDEV, "Landlock cross-directory refer denied")
+
+    assert landlock_launcher._denied(
+        "output_cross_directory_link",
+        refer_denied,
+        expected_errno=errno.EXDEV,
+    ) == {
+        "operation": "output_cross_directory_link",
+        "status": "denied",
+        "errno": errno.EXDEV,
+    }
+
+
 def test_maps_parser_preserves_path_with_spaces() -> None:
     row = landlock_launcher._parse_maps_line(
         "7f00-7f10 rw-s 00000000 08:01 42 /tmp/a mapped file.bin\n"

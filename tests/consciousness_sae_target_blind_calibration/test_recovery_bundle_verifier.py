@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import errno
 import json
 import os
 from pathlib import Path
@@ -140,7 +141,15 @@ def _canary() -> dict:
                 for name in verifier.OUTPUT_ALLOWED_OPERATIONS
             ),
             *(
-                {"operation": name, "status": "denied", "errno": 13}
+                {
+                    "operation": name,
+                    "status": "denied",
+                    "errno": (
+                        errno.EXDEV
+                        if name == "output_cross_directory_link"
+                        else errno.EACCES
+                    ),
+                }
                 for name in verifier.OUTPUT_DENIED_OPERATIONS
             ),
         ],
