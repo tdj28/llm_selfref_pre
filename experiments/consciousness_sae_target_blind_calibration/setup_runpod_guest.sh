@@ -25,6 +25,7 @@ expected = {
     "accelerate": "1.12.0",
     "huggingface-hub": "0.36.0",
     "numpy": "2.2.6",
+    "pytest": "8.4.2",
     "safetensors": "0.8.0",
     "scipy": "1.15.3",
     "tokenizers": "0.22.2",

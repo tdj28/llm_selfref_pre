@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "artifact_type": "completed_negative_provider_review_adjudication",
+  "status": "completed_review_not_ready_material_fixes_required",
+  "provider_review": {
+    "directory": "docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v2_completed",
+    "response_id": "resp_08bf88c21348bec0016a5722977908819a8f86ea3d61725704",
+    "model": "gpt-5.6-sol",
+    "response_status": "completed",
+    "terminal_verdict": "NOT_READY_TO_FREEZE",
+    "response_file_sha256": "e9878bb589158162b38d6cc1ea2791aebfb73b0ffb8fc9f68a7e9811669cc682",
+    "response_semantic_sha256": "d6345b7a689ca78b4014be81e68d174d7abcde23ac3e8c4a21281cff6dd0b3b4",
+    "review_sha256": "8d0effb94420c3c611113eb31c3932add9e1af6094c88d92f1a3ab5fea05f736",
+    "manifest_file_sha256": "28787f7b44c3b678fdd16a6748f5f2fbe9729a6873d775990a0fd547c93d5823",
+    "request_payload_file_sha256": "2432f67d32fb77384b4dd6a7276ca977365e30a1463c9e7e0bd53aa961de78ed",
+    "review_request_file_sha256": "a9b38b175c11637b2314916a9183bea78761a4c1235b91781745b3b3eed982d6",
+    "review_input_sha256": "d81222e17b91d54e46d43004f008cbcd917450acfb631a411e2764e1bd1353c5",
+    "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+    "reported_input_tokens": 823115,
+    "reported_output_tokens": 30179,
+    "reported_reasoning_tokens": 11842,
+    "reconstructed_cost_usd": 5.020945,
+    "budget_authorization_usd": 17,
+    "budget_authorization_exceeded": false
+  },
+  "finding_ids": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08"
+  ],
+  "findings": [
+    {
+      "id": "B01",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "The review found the outcome-blind equivalence design substantively resolves the historical whole-audit gap, contingent on repairing B06 and binding B08 test evidence.",
+      "changed_paths": [
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "experiments/consciousness_sae_target_blind_calibration/scientific_equivalence.py",
+        "tests/consciousness_sae_target_blind_calibration/test_scientific_equivalence.py"
+      ]
+    },
+    {
+      "id": "B02",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "The direct -B -E -s -S bootstrap resolves the source-level startup gap; B08 supplies the missing target-host execution evidence.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
+        "experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+        "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
+        "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py"
+      ]
+    },
+    {
+      "id": "B03",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "The reviewed producer and verifier preserve historical campaign fields and record recovery authority separately.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/recovery_bundle_verifier.py"
+      ]
+    },
+    {
+      "id": "B04",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "The reviewed loader implements literal required-subset selection and the frozen three-field downstream J metadata shape; B06 repairs stale tests without changing the loader.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py"
+      ]
+    },
+    {
+      "id": "B06",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "MacOS skipped Torch-dependent loader tests still expected recovery inventory fields in the downstream metadata record. They must instead assert the frozen record and inspect _OBSERVED_J_INVENTORY.",
+      "changed_paths": [
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py"
+      ]
+    },
+    {
+      "id": "B07",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "The readiness gate used a substring test, so NOT READY TO FREEZE contained the accepted phrase. It requires an exact terminal-verdict parser and negative tests.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py"
+      ]
+    },
+    {
+      "id": "B08",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "The plan promised authorization-bound local and target-host test receipts, but producer and verifier schemas could not represent them. Two canonical receipts and independent validation are required.",
+      "changed_paths": [
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/recovery_bundle_verifier.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/test_recovery_bundle_verifier.py"
+      ]
+    },
+    {
+      "id": "B09",
+      "blocking": true,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "The producer accepted completed-review cost through $17 while the independent verifier capped it at $10. Both must use the same $17 boundary with boundary tests.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/recovery_bundle_verifier.py",
+        "tests/consciousness_sae_target_blind_calibration/test_recovery_bundle_verifier.py"
+      ]
+    },
+    {
+      "id": "I01",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Retain the scoped, conjunctive zero-forward evidence claim; test receipts strengthen execution evidence without turning it into a universal detector.",
+      "changed_paths": []
+    },
+    {
+      "id": "I02",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Retain endpoint inventory equality and the explicit disclaimer of continuous external immutability.",
+      "changed_paths": []
+    },
+    {
+      "id": "I03",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Retain structured adjudication, with B07 adding an independent exact verdict gate.",
+      "changed_paths": [
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py"
+      ]
+    },
+    {
+      "id": "I04",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "Elevated operationally into B08; exact local and target-host test execution must become receipt-bound prerequisites.",
+      "changed_paths": [
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/recovery_bundle_verifier.py"
+      ]
+    },
+    {
+      "id": "I05",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Retain the receipt-verifiable reproduction boundary until private model, J, and raw bytes are independently available.",
+      "changed_paths": []
+    },
+    {
+      "id": "I06",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Retain the eight-prompt fixed-panel scope, repeated-measure structure, and no population-generalization claim.",
+      "changed_paths": []
+    },
+    {
+      "id": "I07",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": true,
+      "rationale": "The target-host receipt must record staging/test/probe timing so the 60-minute window and conservative publication margin can be evaluated before authorization.",
+      "changed_paths": [
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py"
+      ]
+    },
+    {
+      "id": "I08",
+      "blocking": false,
+      "disposition": "accepted",
+      "remaining_blocker": false,
+      "rationale": "Any eventual narrative must keep fixed-panel inferential limitations visible.",
+      "changed_paths": []
+    }
+  ],
+  "remaining_blocking_findings": [
+    "B06",
+    "B07",
+    "B08",
+    "B09"
+  ],
+  "execution_authorized": false,
+  "replacement_review_authorized": true,
+  "replacement_review_must_include_this_review": true,
+  "target_outcomes_opened": false,
+  "final_decision": "NOT_READY_TO_EXECUTE",
+  "receipt_sha256": "48dbbce43125972eacb123d624e420759666ffc02cd51e48cd6eff92c1487c8a"
+}

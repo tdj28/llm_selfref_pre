@@ -1,0 +1,92 @@
+{
+  "actual_input_characters": 287484,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 27873,
+      "characters": 27869,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+      "role": "complete experiment plan",
+      "sha256": "b2ea7fa14287264f66b79c6903a8a2785c1d2b5f342da0fd66354395da495e9d"
+    },
+    {
+      "bytes": 9193,
+      "characters": 9193,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+      "role": "bounded context 1",
+      "sha256": "dddabe9e907f32f64fe057c42cbe30e365936ab460f335cd22792b9c0cc95f92"
+    },
+    {
+      "bytes": 125974,
+      "characters": 125972,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+      "role": "bounded context 2",
+      "sha256": "c3f9f2a6a2ca0fef9a1967411879b814fe4210e308a944a26d4551dd79077ec7"
+    },
+    {
+      "bytes": 49029,
+      "characters": 49029,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+      "role": "bounded context 3",
+      "sha256": "5c9e2472363d5a959886963c60ac10567e92d30a7b1d6311e98df245bb8be479"
+    },
+    {
+      "bytes": 45994,
+      "characters": 45994,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+      "role": "bounded context 4",
+      "sha256": "7e24bd1e0901aaca317f3d49e9d4cbed7a858adc65664c5e3893c96d75b2ecec"
+    },
+    {
+      "bytes": 25086,
+      "characters": 25086,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+      "role": "bounded context 5",
+      "sha256": "63b8223b17786d2219525bffbba59430cb41023de9674e0898aafe02183f505a"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 1.8,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 3.0,
+  "created_at_utc": "2026-07-15T04:33:21.840087Z",
+  "estimated_budget_reserve_usd": 1.738065,
+  "estimated_input_tokens_conservative": 95828,
+  "exact_budget_reserve_usd_after_preflight": 1.41976875,
+  "failed_at_utc": "2026-07-15T04:38:36.069322Z",
+  "failure": {
+    "error": "response ended with non-completed status 'incomplete'",
+    "error_type": "RuntimeError",
+    "failed_at_utc": "2026-07-15T04:38:36.069322Z"
+  },
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 67535,
+  "input_tokens_preflight_at_utc": "2026-07-15T04:33:23.212858Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 300000,
+  "max_input_tokens": 100000,
+  "max_output_tokens": 10000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_output_reserve_multiplier": 2.2,
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "request_payload_sha256": "ad251876f0651dbf76d23d1cf8d60b6b66eaf22d56c2f26671158104e6e8324b",
+  "reserved_billable_output_tokens": 22000,
+  "review_input_sha256": "e99b176c84efab8928f4cd110f75c394208f159c868e5fa4a85a8c0b3f8236bf",
+  "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+  "review_request_sha256": "e7d4c2f239ba21b99b7ffa0c43b1d71aee785fd7dfc1fa89a748ab5820fe4e39",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "failed",
+  "store": false
+}

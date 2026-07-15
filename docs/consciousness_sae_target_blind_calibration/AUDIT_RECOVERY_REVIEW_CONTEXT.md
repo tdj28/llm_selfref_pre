@@ -30,6 +30,100 @@ CalibrationAuditError: J-lens map inventory differs
 Physical failure-log SHA-256:
 `a5936d0fda01b96f193a1ab40c9d7c52dc751ecdf3686896e26d2d3951cdd86f`.
 
+## First recovery-host infrastructure block
+
+The first fresh audit-only recovery host was staged from commit `e0dd9a6`, but
+the audit entry point was never invoked. Before the exclusive attempt marker
+was created, the host proved that its root user lacked `CAP_SYS_ADMIN` in both
+the effective and bounding sets. The exact raw-tree `mount --bind` operation
+failed with return code 32, and both `unshare -m` and `unshare -Urnm` failed
+with return code 1. The host ran Linux `6.8.0-111-generic`; its Landlock ABI
+query returned 4. No marker, failure receipt, or compact directory existed.
+
+The preserved external pre-execution receipt has canonical SHA-256
+`bf8ddbb31b3ddab99c2126d1100691f8d0878c1a0d1d4a091776e5d3f2bc207d`.
+The exact pod was then deleted, direct lookup returned 404, and the account
+pod inventory returned to empty. This is an infrastructure block, not a
+scientific attempt, and its expired authorization will not be reused.
+
+## Incomplete Landlock review and accepted redesign
+
+The exact first Landlock packet received one synchronous `gpt-5.6-sol` Pro
+review. Response `resp_076355ae1eba8bf5016a570d939bcc819ba1a5412f83532777`
+ended `incomplete/max_output_tokens` and `NOT READY TO FREEZE`. It returned four
+visible blockers: missing compact scientific-equivalence evidence; a post-
+Landlock child restart that allowed `site` before guards; overwriting original
+campaign-field semantics with recovery timing; and an exact `0..78` whitelist
+that contradicted literal required-subset prose. All four are accepted in the
+prospective redesign. Aggregate usage reconstructed to $2.44009 against a
+$1.80 estimate; the budget incident and prohibition on a silent replacement
+call are preserved. This context is not itself authority for another paid
+review.
+
+The outcome-blind scientific-equivalence appendix extracts and hash-binds the
+transitively called 49-function frozen scientific closure, protocol/orientation
+semantics, exact recovery adapter surface, and an affirmative output-field
+projection. Its synthetic tests require old/recovery map selection and
+projected scientific fields to remain identical. Its inherited-design manifest
+records eight fixed `prompt_id` units, three directions by five repeated doses,
+prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
+prompt-population generalization. The J artifact's `n_prompts=125` is fitting
+metadata, not the study sample size.
+
+## Completed v2 review and bounded final repair
+
+After the scientific metadata correction and full source/test packet were
+frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
+completed as response
+`resp_08bf88c21348bec0016a5722977908819a8f86ea3d61725704`. It ended `NOT READY
+TO FREEZE`, used 823,115 input and 30,179 output tokens, and reconstructed to
+$5.020945 within its $17 authorization. Its exact review and structured
+`NOT_READY_TO_EXECUTE` adjudication are retained as context for the replacement
+review authorized by the user.
+
+For the expanded final v3 packet, including this negative review and the exact
+local/target qualification receipts, the user explicitly authorized a bounded
+increase: producer and verifier use one $20 preflight ceiling, expected spend
+is lower, and there is no silent retry.
+
+That review found four concrete blockers. B06 identified Torch-dependent loader
+tests that skipped on macOS and still expected recovery inventory fields in the
+downstream J metadata record. B07 identified a fail-open substring check under
+which `NOT READY TO FREEZE` contained `READY TO FREEZE`. B08 identified that the
+plan required exact local and target-host test receipts but the authorization
+and verifier could not bind them. B09 identified a $17 producer versus $10
+offline-verifier completed-review cost ceiling. The bounded repair keeps the
+loader unchanged, makes verdict parsing exact, adds two canonical
+authorization-bound code-freeze test receipts, and aligns the cost boundary.
+No scientific outcome was opened and no GPU scientific audit was launched.
+
+## Prospective Landlock replacement
+
+The material redesign must be reviewed before authorization. The exact plan,
+launcher, direct bootstrap, verifier, and focused tests in this packet define
+the full contract. In brief: a single-threaded absolute-path launcher starts as
+`python -B -E -s -S`, rejects inherited writable/protected descriptors and
+unsafe mappings, installs the ABI-4 `0x7ff2` Landlock policy before project or
+ML imports, and same-PID execs a no-site bootstrap. Two exact directories get
+only `0x1b2`; each identity-bound NVIDIA character device gets only
+`WRITE_FILE`; no device-directory rule exists. An external manifest binds and
+rehashes every approved import-root byte and ordered `sys.path` entry.
+
+Both the pre-authorization probe and real launcher exercise independent
+protected/output canaries. The confined probe imports pinned dependencies and
+performs raw BF16 CUDA arithmetic and synchronization while model loaders and
+`torch.nn.Module` calls are guarded; it renders no prompt and performs zero
+model forwards. The raw and historical-provenance inventories are rehashed at
+both endpoints before compact success publication.
+
+The claim is deliberately narrow. ABI 4 does not mediate metadata-only
+operations, already-open descriptors, sibling processes, other NFS clients,
+or NVIDIA driver `ioctl`. The evidence supports process-tree confinement of
+handled filesystem content/topology writes, with the exact device exception,
+plus equality of frozen byte/path inventories at the pre/post endpoints—not a
+read-only mount or continuous external immutability claim. Upstream caveats:
+<https://docs.kernel.org/6.8/userspace-api/landlock.html>.
+
 ## Frozen runtime predicate
 
 The model runtime loaded the same hash-pinned checkpoint and required the
@@ -81,4 +175,14 @@ The reviewer should assess:
    disclosed in the final receipts;
 5. whether a fresh model run is necessary despite the target-independent,
    pre-publication audit bug; and
-6. any concrete stop-ship flaw that must be fixed before audit execution.
+6. any concrete stop-ship flaw that must be fixed before audit execution;
+7. whether the ABI-4 Landlock launcher, `0x7ff2` handled mask, two exact
+   `0x1b2` output rules, independent pre-authorization and real-launch
+   two-canary tests, exact inode/`rdev`-bound NVIDIA device exceptions,
+   confined dependency imports and BF16 CUDA check, inherited-FD checks, and
+   pre/post rehashes support the narrower stated process-tree
+   filesystem-write-confinement claim;
+8. whether the unhandled device-`ioctl` boundary and zero-model-forward status
+   are stated and evidenced precisely enough; and
+9. whether any remaining gap requires a fresh model transaction rather than
+   stopping only the audit-only recovery.
