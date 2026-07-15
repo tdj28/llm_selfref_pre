@@ -5,7 +5,7 @@ machine plan to the audit-only recovery, but it does **not** claim that the
 recovery revalidates the substantive adequacy of the inherited design. No raw
 run or compact result is an input to the extractor.
 
-Packet SHA-256: `13eca7544822c2d3d26f8716e2acd178a36a1d8a4396f02c6cb64d6312b05c18`
+Packet SHA-256: `5eca00bbaec9799e8fb6ca33a1e447a84b13672ae317bc7153b6d132c931624e`
 
 ## What is mechanically established
 

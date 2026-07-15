@@ -697,6 +697,22 @@ def _inside(root: Path, candidate: Path) -> bool:
     )
 
 
+def _inside_bound_path(
+    root: Path, candidate: Path, *, require_live_paths: bool
+) -> bool:
+    """Check containment live on-host or lexically for relocated receipt paths."""
+
+    if require_live_paths:
+        return _inside(root, candidate)
+    root_text = _canonical_absolute_posix_path(root.as_posix(), "bound root")
+    candidate_text = _canonical_absolute_posix_path(
+        candidate.as_posix(), "bound candidate"
+    )
+    root_path = PurePosixPath(root_text)
+    candidate_path = PurePosixPath(candidate_text)
+    return candidate_path == root_path or root_path in candidate_path.parents
+
+
 def _validate_confinement_environment(output_root: Path) -> dict[str, str]:
     observed = {name: os.environ.get(name, "") for name in CONFINED_FIXED_ENVIRONMENT}
     if observed != CONFINED_FIXED_ENVIRONMENT:
@@ -1038,7 +1054,11 @@ def _validate_cuda_preflight(
         )
         or any(
             not isinstance(environment.get(name), str)
-            or not _inside(output_root, Path(str(environment[name])))
+            or not _inside_bound_path(
+                output_root,
+                Path(str(environment[name])),
+                require_live_paths=require_live_paths,
+            )
             for name in CONFINED_WRITABLE_PATH_ENVIRONMENT
         )
         or not isinstance(cuda, Mapping)

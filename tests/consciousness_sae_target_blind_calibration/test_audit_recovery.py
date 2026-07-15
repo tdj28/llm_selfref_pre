@@ -208,6 +208,20 @@ def test_landlock_policy_is_the_frozen_abi4_narrow_claim() -> None:
     assert audit_recovery.LANDLOCK_POLICY["metadata_and_device_ioctl_outside_claim"]
 
 
+def test_relocated_bound_path_uses_canonical_posix_containment() -> None:
+    root = Path("/remote/qualification/probe/output")
+    child = root / "cache"
+    assert audit_recovery._inside_bound_path(  # noqa: SLF001
+        root, child, require_live_paths=False
+    )
+    assert not audit_recovery._inside_bound_path(  # noqa: SLF001
+        root, root.parent / "escape", require_live_paths=False
+    )
+    assert not audit_recovery._inside_bound_path(  # noqa: SLF001
+        root, child, require_live_paths=True
+    )
+
+
 def test_recovery_validator_accepts_exact_launcher_receipt_schema(
     tmp_path: Path,
 ) -> None:
