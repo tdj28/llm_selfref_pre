@@ -528,7 +528,13 @@ def _descriptor_audit(
             flags = fcntl.fcntl(fd, fcntl.F_GETFL)
             target = os.readlink(f"/proc/self/fd/{fd}")
         except OSError as exc:
-            if exc.errno == errno.ENOENT:
+            # procfs enumeration itself may transiently duplicate the held
+            # directory descriptor and close that duplicate before inspection.
+            # In this already-proven single-threaded launcher, ENOENT/EBADF both
+            # establish that the named descriptor is no longer open and thus is
+            # not an inherited write escape.  Every still-open descriptor must
+            # continue through the full audit below.
+            if exc.errno in (errno.ENOENT, errno.EBADF):
                 continue
             raise LandlockLaunchError("could not inspect inherited descriptor") from exc
         access_mode = flags & os.O_ACCMODE

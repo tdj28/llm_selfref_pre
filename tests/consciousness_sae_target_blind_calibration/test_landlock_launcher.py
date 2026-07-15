@@ -395,6 +395,27 @@ def test_descriptor_audit_excludes_only_its_known_proc_inventory_descriptor(
     ]
 
 
+def test_descriptor_audit_skips_only_a_proc_entry_that_is_already_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(landlock_launcher.sys, "platform", "darwin")
+    monkeypatch.setattr(os, "listdir", lambda _path: ["4"])
+
+    def closed_descriptor(_fd: int) -> None:
+        raise OSError(errno.EBADF, "descriptor closed by procfs enumeration")
+
+    monkeypatch.setattr(os, "fstat", closed_descriptor)
+    receipt = landlock_launcher._descriptor_audit(
+        output_root=tmp_path / "output",
+        canary_protected_root=tmp_path / "canary-protected",
+        canary_output_root=tmp_path / "canary-output",
+        protected_roots=[tmp_path / "raw"],
+        protected_files=[],
+        device_records=[],
+    )
+    assert receipt["descriptors"] == []
+
+
 def test_descriptor_audit_rejects_standard_stream_gpu_device(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
