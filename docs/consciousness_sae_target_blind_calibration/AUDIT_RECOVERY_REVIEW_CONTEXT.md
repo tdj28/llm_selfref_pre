@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2 and v3 reviews and bounded final repair
+## Completed v2, v3, and v4 reviews and bounded v5 repair
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -108,9 +108,43 @@ under `reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/` as
 immutable historical evidence. B10 found that the supplied qualification timing
 missed the then-frozen one-hour recovery envelope; B11 found that one paragraph
 labeled “The precise claim” omitted the otherwise disclosed `/proc/self/task`
-exception. The replacement v4 review must disposition both findings against the
-exact repaired bytes. The v3 call is one historical paid call; it is not the
-future v4 approval call and cannot be relabeled as such.
+exception. The v3 call is one historical paid call and cannot be relabeled as
+approval.
+
+The separately authorized v4 call completed as provider response
+`resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066` and ended `NOT
+READY TO FREEZE`. It used 1,129,614 input tokens and 27,987 output tokens,
+including 8,904 reasoning tokens, and reconstructed to exactly `$6.48768`
+within the `$25.00` authorization. Its exact review, request artifacts,
+provider response, manifest, and canonical `NOT READY TO EXECUTE` adjudication
+are preserved under
+`reviews/audit_recovery_landlock_gpt_pro_v4_completed_negative/`. No recovered
+outcome was computed or inspected, and no model transaction, model forward,
+target prompt render, or target feature extraction occurred.
+
+V4 resolved B10 and B11. Its sole new blocker, B12, is an exact-byte evidence
+closure defect: `AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json` was outside both
+the provider-review packet and the source/test receipt closure, even though
+later authorization and recovery metadata would bind its then-current bytes.
+The supplied tests established generator agreement only when they ran; neither
+the receipts nor the post-review packet Git-diff gate protected the omitted
+machine JSON. The minimum repair is to add that existing generated JSON to the
+packet and lineage gate, update the inclusion test, regenerate both affected
+source/test receipts, and obtain a successor exact-byte review. It changes no
+scientific calculation, confinement rule, or model-execution requirement.
+
+The prospective v5 packet includes the exact machine JSON and the full v4
+negative review, manifest, machine adjudication, and human-readable
+adjudication. The immutable v4 bindings retain the archived request and
+response hashes without recursively embedding the prior 1.2 MB request packet.
+B12 retains its stable ID. Any new blocker begins at B13, and any new important
+non-blocking finding begins at I09; prior findings may not disappear through
+renumbering. Producer and verifier retain the exact `$25.00` review ceiling.
+The prospective input/output envelope is 1,450,000 characters, 450,000
+estimated input tokens, and 20,000 requested output tokens, with frozen 5.0
+input and 2.2 output reserve multipliers. Both the static
+3.5-characters-per-token estimate and an exact tokenizer preflight must pass
+before submission. Expected spend is lower, and no silent retry is permitted.
 
 ## Prospective Landlock replacement
 

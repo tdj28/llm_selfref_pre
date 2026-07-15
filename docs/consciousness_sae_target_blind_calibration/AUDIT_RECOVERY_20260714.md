@@ -2,9 +2,9 @@
 
 Status: prospective technical-recovery redesign after a pre-claim host
 compatibility failure, two incomplete provider calls, and completed negative
-v2 and v3 provider reviews, before any recovered audit output is computed or
-inspected. This plan is not executable until the separately authorized final
-v4 review closes the remaining findings.
+v2, v3, and v4 provider reviews, before any recovered audit output is computed
+or inspected. This plan is not executable until a separately authorized v5
+review closes the remaining finding.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -513,10 +513,10 @@ that set remains exactly empty.
 
 ## Review disclosure
 
-Four paid provider calls are historical incomplete or negative evidence and
-none is approval: two incomplete calls, the completed negative v2 call, and the
-completed negative v3 call. Any completed v4 approval is a fifth, separately
-authorized call and is counted separately.
+Five paid provider calls are historical incomplete or negative evidence and
+none is approval: two incomplete calls and the completed negative v2, v3, and
+v4 calls. Any completed v5 approval is a sixth, separately authorized call and
+is counted separately.
 The earlier plan-only response ended incomplete before seeing the later
 executable. The subsequent exact six-file Landlock packet was submitted once
 to `gpt-5.6-sol` Pro as response
@@ -549,25 +549,58 @@ test receipts, and distinguish the eight prompt units from J-artifact fitting
 metadata. Because these fixes change reviewed packet files, the incomplete
 response cannot become READY by adjudication.
 
-Before any recovery authorization, the material redesign therefore requires a
-separately budget-authorized, completed latest-flagship Pro review of the final
-immutable packet: this plan, bounded runtime context, scientific-equivalence
-appendix, bootstrap/launcher/recovery/verifier surfaces, focused tests, and the
-historical reviews and adjudications. The completed v3 negative review, its
-manifest, canonical adjudication, and updated context are mandatory packet
-members; B10 and B11 must be dispositioned explicitly. The user explicitly
-authorized one final v4 call with a bounded increase for the expanded
-prior-review and qualification-receipt packet: producer and verifier share the
-exact $25 preflight ceiling,
-with a 1.2-million-character/400,000-estimated-token input guard and the same
-20,000-output-token request cap; expected spend is lower, and no silent retry
-is permitted. The exact call must
-use the corrected aggregate-input/output reserve guard and a fresh output
-directory. A completed response's visible text must equal the raw provider
-output, and a machine-readable adjudication must give every stable finding a
-blocking flag, disposition, rationale, and changed-path set. Blockers may be
-fixed or technically rejected but never deferred; any accepted blocker that
-changes a reviewed file requires another separately authorized review.
+The separately authorized v4 review completed as provider response
+`resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066` and ended `NOT
+READY TO FREEZE`. It used 1,129,614 input and 27,987 output tokens, including
+8,904 reasoning tokens, and reconstructed to exactly `$6.48768` within the
+`$25.00` authorization. The exact response, review, request artifacts,
+manifest, and canonical adjudication are preserved under
+`reviews/audit_recovery_landlock_gpt_pro_v4_completed_negative/`. No recovered
+outcome was computed or inspected, and no model transaction, model forward,
+target prompt render, or target feature extraction occurred as part of that
+review or its adjudication.
+
+V4 resolved B10 and B11 but returned one new exact-byte packet blocker, B12.
+The machine-readable
+`AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json` appendix was outside both the
+provider-review packet and the source/test receipt closure even though later
+authorization and recovery metadata would bind its then-current bytes. Tests
+showed that generated JSON existed when they ran, but neither those receipts
+nor the v4 packet allowed the provider reviewer or the post-review Git-diff
+gate to approve that exact file. The minimum repair is evidence-only: include
+the existing generated machine JSON in the provider packet and packet-lineage
+gate, change the inclusion test, regenerate the affected local and target-host
+source/test receipts, and obtain a successor exact-byte review. This does not
+change the scientific design, loader, estimand, confinement, or need for a
+model transaction.
+
+Before any recovery authorization, the evidence-only B12 repair therefore
+requires a separately budget-authorized, completed latest-flagship Pro review
+of the final immutable v5 packet. That packet includes this plan, bounded
+runtime context, both scientific-equivalence appendices including the exact
+machine JSON, bootstrap/launcher/recovery/verifier surfaces, focused tests,
+fresh source/test receipts, and the full completed v4 negative review, manifest,
+machine adjudication, and human-readable adjudication as bounded context. The
+immutable v4 manifest and adjudication retain the physical hash bindings to the
+archived request and response artifacts without recursively embedding the prior
+1.2 MB request packet. B12 must retain its stable ID and be dispositioned
+against the supplied machine JSON; any newly discovered blocker starts at B13,
+and any new important non-blocking finding starts at I09. Findings may not be
+renumbered away or silently omitted.
+
+The prospective v5 envelope keeps the producer and verifier on the same exact
+`$25.00` preflight ceiling. It permits at most 1,450,000 input characters,
+450,000 estimated input tokens, and 20,000 requested output tokens. The
+conservative reserve uses the frozen 5.0 input and 2.2 output multipliers. The
+input gate applies both the static 3.5-characters-per-token estimate and an
+exact tokenizer preflight; both must pass before submission. Expected spend is
+lower, and no silent retry is permitted. The exact call must use the corrected
+aggregate-input/output reserve guard and a fresh output directory. A completed
+response's visible text must equal the raw provider output, and a
+machine-readable adjudication must give every stable finding a blocking flag,
+disposition, rationale, and changed-path set. Blockers may be fixed or
+technically rejected but never deferred; any accepted blocker that changes a
+reviewed file requires another separately authorized review.
 
 The final completed review artifacts, adjudication, source/test inventories,
 hashes, and exactly two self-hashed test inputs -- `LOCAL_TEST_RECEIPT.json` and

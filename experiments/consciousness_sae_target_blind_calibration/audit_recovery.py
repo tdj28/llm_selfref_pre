@@ -94,17 +94,18 @@ RECOVERY_MAX_SPEND_USD = 6.0
 ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
 ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
-# Prospective second-redesign review settings. Freezing these values permits a
+# Prospective successor-review settings. Freezing these values permits a
 # cost-only dry run; it does not authorize or issue the paid provider call.
 PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 25.0
 PRO_REVIEW_INSTRUCTIONS_SHA256 = (
     "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7"
 )
-PRO_REVIEW_MAX_INPUT_CHARACTERS = 1_200_000
-PRO_REVIEW_MAX_INPUT_TOKENS = 400_000
+PRO_REVIEW_MAX_INPUT_CHARACTERS = 1_450_000
+PRO_REVIEW_MAX_INPUT_TOKENS = 450_000
 PRO_REVIEW_MAX_OUTPUT_TOKENS = 20_000
 PRO_REVIEW_INPUT_RESERVE_MULTIPLIER = 5.0
 PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER = 2.2
+PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION = 3.5
 PRO_REVIEW_TERMINAL_VERDICTS = (
     "NOT READY TO FREEZE",
     "READY AFTER SPECIFIED FIXES",
@@ -396,17 +397,62 @@ HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256 = {
 HISTORICAL_V3_NEGATIVE_ADJUDICATION_RECEIPT_SHA256 = (
     "24dce20453445b169fb11c3f3e76c0444cf38d95a8fa85838126500f7830ac9b"
 )
-FINAL_V4_PRO_REVIEW_DIRECTORY = (
+HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
-    "audit_recovery_landlock_gpt_pro_v4_completed"
+    "audit_recovery_landlock_gpt_pro_v4_completed_negative"
 )
-FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON = (
-    "docs/consciousness_sae_target_blind_calibration/reviews/"
-    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V4_ADJUDICATION.json"
+HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON = (
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.json"
 )
-FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
-    "docs/consciousness_sae_target_blind_calibration/reviews/"
-    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V4_ADJUDICATION.md"
+HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN = (
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.md"
+)
+HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON: (
+        "83412e1300c2eb75e0a484635de5ec68b3c30bcd54fa66a21a97c4ed7a5353e6"
+    ),
+    HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN: (
+        "3ee053e6dfb911b57458550d5c68908f2ec4444a0bfa65cbacc274a7d8f9b027"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/request_payload.json": (
+        "ce6936466ce66fc60522d4e6cce04e83ee09083afa993103d9c69cfecc7b2d40"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/response.json": (
+        "48648079d58c32a7b7a264698b74ecb962b0eae01de120aab95c4535e21e0f1a"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review.md": (
+        "97bf3d8f8c34a2014f0635e9491a8a69f917fe87518bea9dac0a9c55e75e45c2"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json": (
+        "2bf3caa69667575e478a82036bf7287826d1f15b6350f3754d45bd688225c6ff"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_request.md": (
+        "c0fb06c093c36d2a8d4f2a02b4e01902e10a8e42776bdc937b379b643ae53844"
+    ),
+}
+HISTORICAL_V4_NEGATIVE_ADJUDICATION_RECEIPT_SHA256 = (
+    "1ccca3495ffe1ba4409751d7398364f0da04d25cb44034fd68244a434b14aab3"
+)
+HISTORICAL_V4_NEGATIVE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
 )
 V3_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
@@ -490,16 +536,47 @@ V4_TIMED_QUALIFICATION_PHYSICAL_SHA256 = {
         "193faab74506cbce725f3c256c31cb8d7072e26866f29eff047c519ca53d5ea3"
     ),
 }
-FINAL_V4_PRO_REVIEW_OUTPUT_PATHS = (
-    FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON,
-    FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN,
-    f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/request_payload.json",
-    f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/response.json",
-    f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/review.md",
-    f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/review_manifest.json",
-    f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/review_request.md",
+V5_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v5_inputs"
 )
-PRO_REVIEW_V4_PACKET = (
+V5_LOCAL_TEST_RECEIPT_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/{LOCAL_TEST_RECEIPT_NAME}"
+)
+V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/{TARGET_HOST_TEST_RECEIPT_NAME}"
+)
+V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_OWNERSHIP_NAME}"
+)
+V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_LANDLOCK_NAME}"
+)
+V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_CUDA_NAME}"
+)
+FINAL_V5_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v5_completed"
+)
+FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V5_ADJUDICATION.json"
+)
+FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V5_ADJUDICATION.md"
+)
+FINAL_V5_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+PRO_REVIEW_V5_PACKET = (
     (
         "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
         "complete experiment plan",
@@ -511,102 +588,107 @@ PRO_REVIEW_V4_PACKET = (
     ),
     (
         "docs/consciousness_sae_target_blind_calibration/"
-        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
         "bounded context 2",
+    ),
+    (
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "bounded context 3",
     ),
     (
         "experiments/consciousness_sae_target_blind_calibration/"
         "scientific_equivalence.py",
-        "bounded context 3",
+        "bounded context 4",
     ),
     (
         "tests/consciousness_sae_target_blind_calibration/"
         "test_scientific_equivalence.py",
-        "bounded context 4",
-    ),
-    (
-        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "bounded context 5",
     ),
     (
-        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "bounded context 6",
     ),
     (
-        "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
         "bounded context 7",
     ),
     (
-        "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
+        "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
         "bounded context 8",
     ),
     (
-        "experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+        "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
         "bounded context 9",
     ),
     (
-        "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+        "experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
         "bounded context 10",
+    ),
+    (
+        "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+        "bounded context 11",
     ),
     (
         "experiments/consciousness_sae_target_blind_calibration/"
         "recovery_bundle_verifier.py",
-        "bounded context 11",
+        "bounded context 12",
     ),
     (
         "tests/consciousness_sae_target_blind_calibration/"
         "test_recovery_bundle_verifier.py",
-        "bounded context 12",
+        "bounded context 13",
     ),
     (
         "experiments/consciousness_sae_target_blind_calibration/"
         "requirements-runpod-b200.txt",
-        "bounded context 13",
-    ),
-    (
-        "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
         "bounded context 14",
     ),
     (
-        "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
+        "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
         "bounded context 15",
     ),
     (
-        f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review.md",
+        "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
         "bounded context 16",
     ),
     (
-        f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
+        f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review.md",
         "bounded context 17",
     ),
     (
-        HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON,
+        f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
         "bounded context 18",
     ),
     (
-        HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN,
+        HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON,
         "bounded context 19",
     ),
-    (V4_TIMED_QUALIFICATION_RECEIPT_SNAPSHOT, "bounded context 20"),
-    (V4_TIMED_QUALIFICATION_OWNERSHIP_SNAPSHOT, "bounded context 21"),
-    (V4_TIMED_QUALIFICATION_GUEST_SNAPSHOT, "bounded context 22"),
-    (V4_TIMED_QUALIFICATION_CACHE_SNAPSHOT, "bounded context 23"),
-    (V4_TIMED_QUALIFICATION_LANDLOCK_SNAPSHOT, "bounded context 24"),
-    (V4_TIMED_QUALIFICATION_CUDA_SNAPSHOT, "bounded context 25"),
-    (V4_TIMED_QUALIFICATION_TERMINATION_AUDIT_SNAPSHOT, "bounded context 26"),
-    (V4_LOCAL_TEST_RECEIPT_SNAPSHOT, "bounded context 27"),
-    (V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, "bounded context 28"),
     (
-        V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-        "bounded context 29",
+        HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN,
+        "bounded context 20",
     ),
+    (V4_TIMED_QUALIFICATION_RECEIPT_SNAPSHOT, "bounded context 21"),
+    (V4_TIMED_QUALIFICATION_OWNERSHIP_SNAPSHOT, "bounded context 22"),
+    (V4_TIMED_QUALIFICATION_GUEST_SNAPSHOT, "bounded context 23"),
+    (V4_TIMED_QUALIFICATION_CACHE_SNAPSHOT, "bounded context 24"),
+    (V4_TIMED_QUALIFICATION_LANDLOCK_SNAPSHOT, "bounded context 25"),
+    (V4_TIMED_QUALIFICATION_CUDA_SNAPSHOT, "bounded context 26"),
+    (V4_TIMED_QUALIFICATION_TERMINATION_AUDIT_SNAPSHOT, "bounded context 27"),
+    (V5_LOCAL_TEST_RECEIPT_SNAPSHOT, "bounded context 28"),
+    (V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, "bounded context 29"),
     (
-        V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         "bounded context 30",
     ),
     (
-        V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         "bounded context 31",
+    ),
+    (
+        V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        "bounded context 32",
     ),
 )
 PRO_REVIEW_QUESTION = (
@@ -622,18 +704,22 @@ PRO_REVIEW_QUESTION = (
     "required for CUDA thread naming, "
     "same-PID handoff, environment/FD/mapping checks, CUDA preflight, failure "
     "semantics, or tests. Do not request or infer scientific result values. "
-    "The completed v2 and v3 reviews were negative. Explicitly disposition every "
-    "existing B01-B04, B06-B11, and I01-I08 finding, including exact-byte "
-    "evaluation of the v3 B10 timing/authority repair and B11 confinement-claim "
-    "wording repair. For B10, evaluate the seven-file timed qualification chain: "
+    "The completed v2, v3, and v4 reviews were negative. Explicitly disposition "
+    "every existing B01-B04, B06-B12, and I01-I08 finding. B12's sole minimum "
+    "repair adds the existing machine-readable scientific-equivalence JSON to "
+    "the exact provider packet and reviewed-packet Git-diff closure, replaces the "
+    "packet exclusion test with an inclusion test, and binds fresh local and "
+    "target-host receipts from the new source/test freeze. Do not redesign the "
+    "scientific or confinement plan. For B10, preserve and evaluate the exact "
+    "seven-file timed qualification chain: "
     "it independently rehashed all 45 public-artifact files/156,023,372,845 "
     "bytes and reached authorization readiness at host age 958 seconds, leaving "
     "2,642 seconds and an 842-second reserve surplus. Its CUDA child necessarily "
-    "used source_test_qualification before a positive v4 review existed; the "
+    "used source_test_qualification before a positive successor review existed; the "
     "fresh recovery pod must repeat final_recovery scope. The target-host "
     "receipt comes from a disposable qualification pod; the later recovery pod "
     "must independently pass its same-host Landlock/CUDA gate. Return every new "
-    "concrete blocker as B12 or later and every new important finding as I09 or "
+    "concrete blocker as B13 or later and every new important finding as I09 or "
     "later; do not recycle an existing ID. A READY TO "
     "FREEZE verdict must apply only to the exact source, tests, and receipt bytes "
     "in this packet. Any packet-changing fix requires another provider review."
@@ -675,6 +761,7 @@ RECOVERY_DOCUMENT_PATHS = (
     *tuple(HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256),
     *tuple(HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256),
     *tuple(HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256),
+    *tuple(HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256),
     V3_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -686,7 +773,12 @@ RECOVERY_DOCUMENT_PATHS = (
     V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
     V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
     V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-    *FINAL_V4_PRO_REVIEW_OUTPUT_PATHS,
+    V5_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *FINAL_V5_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
@@ -3095,21 +3187,21 @@ def _forbidden_module_guard() -> Iterator[dict[str, int]]:
             sys.meta_path.remove(finder)
 
 
-def _expected_v4_pro_review_input() -> str:
+def _expected_v5_pro_review_input() -> str:
     inventory: list[tuple[str, Path, str, bytes, str]] = []
-    packet_paths = {relative for relative, _role in PRO_REVIEW_V4_PACKET}
-    if packet_paths & set(FINAL_V4_PRO_REVIEW_OUTPUT_PATHS):
-        raise AuditRecoveryError("v4 provider packet includes its own outputs")
-    for relative, role in PRO_REVIEW_V4_PACKET:
+    packet_paths = {relative for relative, _role in PRO_REVIEW_V5_PACKET}
+    if packet_paths & set(FINAL_V5_PRO_REVIEW_OUTPUT_PATHS):
+        raise AuditRecoveryError("v5 provider packet includes its own outputs")
+    for relative, role in PRO_REVIEW_V5_PACKET:
         path = REPO_ROOT / relative
         try:
             raw = path.read_bytes()
         except OSError as exc:
-            raise AuditRecoveryError("v4 Pro packet artifact is absent") from exc
+            raise AuditRecoveryError("v5 Pro packet artifact is absent") from exc
         try:
             source = raw.decode("utf-8")
         except UnicodeDecodeError as exc:
-            raise AuditRecoveryError("v4 Pro packet is not UTF-8") from exc
+            raise AuditRecoveryError("v5 Pro packet is not UTF-8") from exc
         inventory.append((relative, path, role, raw, source))
     lines = [
         "# Review packet",
@@ -3151,9 +3243,11 @@ def _expected_v4_pro_review_input() -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def _validate_v4_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
+def _validate_v5_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
     input_characters = len(instructions) + len(review_input)
-    estimated_tokens = math.ceil(input_characters / 3.0)
+    estimated_tokens = math.ceil(
+        input_characters / PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION
+    )
     reserved_input = math.ceil(estimated_tokens * PRO_REVIEW_INPUT_RESERVE_MULTIPLIER)
     reserved_output = math.ceil(
         PRO_REVIEW_MAX_OUTPUT_TOKENS * PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER
@@ -3164,7 +3258,7 @@ def _validate_v4_packet_limits(instructions: str, review_input: str) -> dict[str
         or estimated_tokens > PRO_REVIEW_MAX_INPUT_TOKENS
         or reserve_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
     ):
-        raise AuditRecoveryError("v4 Pro packet exceeds its frozen resource ceiling")
+        raise AuditRecoveryError("v5 Pro packet exceeds its frozen resource ceiling")
     return {
         "actual_input_characters": input_characters,
         "estimated_input_tokens_conservative": estimated_tokens,
@@ -3621,6 +3715,174 @@ def _validate_historical_v3_negative_review_evidence() -> dict[str, Any]:
     }
 
 
+def _validate_historical_v4_negative_review_evidence() -> dict[str, Any]:
+    expected_finding_ids = list(HISTORICAL_V4_NEGATIVE_FINDING_IDS)
+    for relative, expected_sha256 in sorted(
+        HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256.items()
+    ):
+        if _sha256(REPO_ROOT / relative) != expected_sha256:
+            raise AuditRecoveryError(
+                "immutable historical v4 negative-review evidence differs"
+            )
+
+    root = REPO_ROOT / HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY
+    response = _json(root / "response.json")
+    manifest = _json(root / "review_manifest.json")
+    review_text = (root / "review.md").read_text(encoding="utf-8")
+    adjudication_path = (
+        REPO_ROOT / HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON
+    )
+    adjudication = _canonical_json_receipt(
+        adjudication_path, "historical v4 negative review adjudication"
+    )
+    adjudication_markdown = (
+        REPO_ROOT / HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN
+    ).read_text(encoding="utf-8")
+    usage = response.get("usage")
+    response_semantic_sha256 = hashlib.sha256(
+        json.dumps(response, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+    provider = adjudication.get("provider_review")
+    remaining = adjudication.get("remaining_blocking_findings")
+    expected_provider = {
+        "budget_authorization_exceeded": False,
+        "budget_authorization_usd": 25.0,
+        "manifest_file_sha256": (
+            "2bf3caa69667575e478a82036bf7287826d1f15b6350f3754d45bd688225c6ff"
+        ),
+        "model": "gpt-5.6-sol",
+        "reconstructed_cost_usd": 6.48768,
+        "reported_cache_write_tokens": 0,
+        "reported_input_tokens": 1_129_614,
+        "reported_output_tokens": 27_987,
+        "reported_reasoning_tokens": 8_904,
+        "reported_total_tokens": 1_157_601,
+        "request_payload_file_sha256": (
+            "ce6936466ce66fc60522d4e6cce04e83ee09083afa993103d9c69cfecc7b2d40"
+        ),
+        "response_file_sha256": (
+            "48648079d58c32a7b7a264698b74ecb962b0eae01de120aab95c4535e21e0f1a"
+        ),
+        "response_id": "resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066",
+        "response_semantic_sha256": (
+            "8cd95746577c9a79d7923c44abe3646db2aecd5510221546bab9e1042d7a947d"
+        ),
+        "response_status": "completed",
+        "review_file_sha256": (
+            "97bf3d8f8c34a2014f0635e9491a8a69f917fe87518bea9dac0a9c55e75e45c2"
+        ),
+        "review_input_sha256": (
+            "28c386a2152bb180c92b7bacc4ab7ae1c43a9bfabdcd1301b5e09e1e8c077e51"
+        ),
+        "review_request_file_sha256": (
+            "c0fb06c093c36d2a8d4f2a02b4e01902e10a8e42776bdc937b379b643ae53844"
+        ),
+        "reviewed_packet_git_head_commit": (
+            "b869f2bbe7166b3910f4e7602befe80b80fe7ddb"
+        ),
+        "terminal_verdict": "NOT_READY_TO_FREEZE",
+    }
+    if (
+        _response_review_text(response) != review_text
+        or _terminal_review_verdict(review_text) != "NOT READY TO FREEZE"
+        or _review_finding_ids(review_text) != expected_finding_ids
+        or response.get("id") != expected_provider["response_id"]
+        or response.get("model") != "gpt-5.6-sol"
+        or response.get("status") != "completed"
+        or response.get("incomplete_details") not in (None, {})
+        or usage
+        != {
+            "input_tokens": 1_129_614,
+            "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+            },
+            "output_tokens": 27_987,
+            "output_tokens_details": {"reasoning_tokens": 8_904},
+            "total_tokens": 1_157_601,
+        }
+        or response_semantic_sha256
+        != "8cd95746577c9a79d7923c44abe3646db2aecd5510221546bab9e1042d7a947d"
+        or manifest.get("status") != "completed"
+        or manifest.get("response_id") != response["id"]
+        or manifest.get("review_sha256")
+        != HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review.md"
+        ]
+        or manifest.get("response_sha256") != response_semantic_sha256
+        or manifest.get("review_input_sha256")
+        != "28c386a2152bb180c92b7bacc4ab7ae1c43a9bfabdcd1301b5e09e1e8c077e51"
+        or manifest.get("reviewed_packet_git_head_commit")
+        != "b869f2bbe7166b3910f4e7602befe80b80fe7ddb"
+        or manifest.get("usage") != usage
+        or manifest.get("completed_response_cost_usd_conservative") != 6.48768
+        or manifest.get("budget_authorization_usd") != 25.0
+        or manifest.get("completed_response_cost_exceeded_budget_authorization")
+        is not False
+        or set(adjudication)
+        != {
+            "schema_version",
+            "artifact_type",
+            "status",
+            "provider_review",
+            "finding_ids",
+            "resolved_or_nonblocking_findings",
+            "remaining_blocking_findings",
+            "execution_authorized",
+            "replacement_review_authorized",
+            "replacement_review_must_include_this_review",
+            "target_outcomes_opened",
+            "final_decision",
+            "receipt_sha256",
+        }
+        or adjudication.get("schema_version") != 1
+        or adjudication.get("artifact_type")
+        != "completed_negative_provider_review_v4_adjudication"
+        or adjudication.get("status")
+        != "completed_review_not_ready_material_fix_required"
+        or provider != expected_provider
+        or adjudication.get("finding_ids") != expected_finding_ids
+        or adjudication.get("resolved_or_nonblocking_findings")
+        != [finding for finding in expected_finding_ids if finding != "B12"]
+        or not isinstance(remaining, list)
+        or len(remaining) != 1
+        or not isinstance(remaining[0], Mapping)
+        or set(remaining[0]) != {"id", "rationale"}
+        or remaining[0].get("id") != "B12"
+        or not isinstance(remaining[0].get("rationale"), str)
+        or not remaining[0]["rationale"].strip()
+        or adjudication.get("execution_authorized") is not False
+        or adjudication.get("replacement_review_authorized") is not False
+        or adjudication.get("replacement_review_must_include_this_review") is not True
+        or adjudication.get("target_outcomes_opened") is not False
+        or adjudication.get("final_decision") != "NOT_READY_TO_EXECUTE"
+        or adjudication.get("receipt_sha256")
+        != HISTORICAL_V4_NEGATIVE_ADJUDICATION_RECEIPT_SHA256
+        or "Final execution decision: **NOT READY TO EXECUTE**."
+        not in adjudication_markdown
+    ):
+        raise AuditRecoveryError("historical v4 completed negative review differs")
+    return {
+        "response_id": response["id"],
+        "terminal_verdict": "NOT READY TO FREEZE",
+        "review_sha256": _sha256(root / "review.md"),
+        "response_file_sha256": _sha256(root / "response.json"),
+        "response_semantic_sha256": response_semantic_sha256,
+        "review_input_sha256": manifest["review_input_sha256"],
+        "input_tokens": 1_129_614,
+        "output_tokens": 27_987,
+        "reasoning_tokens": 8_904,
+        "reconstructed_cost_usd": 6.48768,
+        "finding_ids": expected_finding_ids,
+        "remaining_blocking_findings": ["B12"],
+        "adjudication_receipt_sha256": adjudication["receipt_sha256"],
+        "adjudication_json_sha256": _sha256(adjudication_path),
+        "adjudication_markdown_sha256": _sha256(
+            REPO_ROOT / HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+    }
+
+
 def _validate_v4_timed_qualification_evidence() -> dict[str, Any]:
     for relative, expected_sha256 in sorted(
         V4_TIMED_QUALIFICATION_PHYSICAL_SHA256.items()
@@ -3821,14 +4083,14 @@ def _snapshot_evidence_row(relative: str, value: Mapping[str, Any]) -> dict[str,
     }
 
 
-def _validate_v4_review_input_snapshots(
+def _validate_v5_review_input_snapshots(
     expected_source_test_files: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    local_path = REPO_ROOT / V4_LOCAL_TEST_RECEIPT_SNAPSHOT
-    target_path = REPO_ROOT / V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
-    ownership_path = REPO_ROOT / V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
-    landlock_path = REPO_ROOT / V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
-    cuda_path = REPO_ROOT / V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+    local_path = REPO_ROOT / V5_LOCAL_TEST_RECEIPT_SNAPSHOT
+    target_path = REPO_ROOT / V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+    ownership_path = REPO_ROOT / V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+    landlock_path = REPO_ROOT / V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+    cuda_path = REPO_ROOT / V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT
     local_value = _canonical_json_receipt(local_path, "reviewed local test receipt")
     target_value = _canonical_json_receipt(
         target_path, "reviewed target-host test receipt"
@@ -3870,25 +4132,25 @@ def _validate_v4_review_input_snapshots(
         "code_freeze_commit": code_freeze,
         "source_test_inventory_sha256": source_inventory_sha256,
         "local_test_receipt": _snapshot_evidence_row(
-            V4_LOCAL_TEST_RECEIPT_SNAPSHOT, local
+            V5_LOCAL_TEST_RECEIPT_SNAPSHOT, local
         ),
         "target_host_test_receipt": _snapshot_evidence_row(
-            V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, target
+            V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, target
         ),
         "target_qualification_ownership": _snapshot_evidence_row(
-            V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT, ownership
+            V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT, ownership
         ),
         "target_qualification_landlock": _snapshot_evidence_row(
-            V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT, landlock
+            V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT, landlock
         ),
         "target_qualification_cuda": _snapshot_evidence_row(
-            V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT, cuda
+            V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT, cuda
         ),
     }
     return {"local": local, "target": target, "evidence": evidence}
 
 
-def _validate_v4_git_chain(
+def _validate_v5_git_chain(
     *,
     code_freeze_commit: str,
     reviewed_packet_git_head_commit: str,
@@ -3900,7 +4162,7 @@ def _validate_v4_git_chain(
         final_git_head_commit,
     )
     if any(HEX40.fullmatch(value) is None for value in commits):
-        raise AuditRecoveryError("v4 review Git chain contains a malformed commit")
+        raise AuditRecoveryError("v5 review Git chain contains a malformed commit")
     for ancestor, descendant in zip(commits[:-1], commits[1:], strict=True):
         if (
             _git_command(
@@ -3912,7 +4174,7 @@ def _validate_v4_git_chain(
             ).returncode
             != 0
         ):
-            raise AuditRecoveryError("v4 review Git chain is not C<=E<=F")
+            raise AuditRecoveryError("v5 review Git chain is not C<=E<=F")
     if (
         _git_command(
             "diff",
@@ -3926,7 +4188,7 @@ def _validate_v4_git_chain(
         != 0
     ):
         raise AuditRecoveryError("source/test bytes changed after code freeze")
-    packet_paths = [relative for relative, _role in PRO_REVIEW_V4_PACKET]
+    packet_paths = [relative for relative, _role in PRO_REVIEW_V5_PACKET]
     if (
         _git_command(
             "diff",
@@ -3942,7 +4204,7 @@ def _validate_v4_git_chain(
         raise AuditRecoveryError("provider-reviewed packet bytes changed after review")
 
 
-def _validate_v4_review_adjudication(
+def _validate_v5_review_adjudication(
     *,
     root: Path,
     response: Mapping[str, Any],
@@ -3950,17 +4212,17 @@ def _validate_v4_review_adjudication(
     review_sha256: str,
     review_input_sha256: str,
     finding_ids: Sequence[str],
-    historical_v3: Mapping[str, Any],
+    historical_v4: Mapping[str, Any],
     reviewed_evidence: Mapping[str, Any],
     reviewed_packet_git_head_commit: str,
 ) -> dict[str, Any]:
-    json_path = REPO_ROOT / FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON
-    markdown_path = REPO_ROOT / FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN
-    value = _canonical_json_receipt(json_path, "final v4 review adjudication")
+    json_path = REPO_ROOT / FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
+    markdown_path = REPO_ROOT / FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN
+    value = _canonical_json_receipt(json_path, "final v5 review adjudication")
     receipt_sha256 = value["receipt_sha256"]
     markdown = markdown_path.read_text(encoding="utf-8")
     expected_review_binding = {
-        "review_directory": FINAL_V4_PRO_REVIEW_DIRECTORY,
+        "review_directory": FINAL_V5_PRO_REVIEW_DIRECTORY,
         "provider_response_id": response["id"],
         "provider_response_file_sha256": _sha256(root / "response.json"),
         "provider_response_semantic_sha256": response_semantic_sha256,
@@ -3972,16 +4234,16 @@ def _validate_v4_review_adjudication(
         "review_instructions_sha256": PRO_REVIEW_INSTRUCTIONS_SHA256,
         "reviewed_packet_git_head_commit": reviewed_packet_git_head_commit,
         "code_freeze_commit": reviewed_evidence["code_freeze_commit"],
-        "adjudication_markdown_path": FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+        "adjudication_markdown_path": FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
         "adjudication_markdown_sha256": _sha256(markdown_path),
     }
     expected_historical_binding = {
-        "adjudication_path": HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON,
-        "adjudication_file_sha256": historical_v3["adjudication_json_sha256"],
-        "adjudication_receipt_sha256": historical_v3["adjudication_receipt_sha256"],
-        "provider_response_id": historical_v3["response_id"],
-        "terminal_verdict": historical_v3["terminal_verdict"],
-        "remaining_blocking_findings": historical_v3["remaining_blocking_findings"],
+        "adjudication_path": HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON,
+        "adjudication_file_sha256": historical_v4["adjudication_json_sha256"],
+        "adjudication_receipt_sha256": historical_v4["adjudication_receipt_sha256"],
+        "provider_response_id": historical_v4["response_id"],
+        "terminal_verdict": historical_v4["terminal_verdict"],
+        "remaining_blocking_findings": historical_v4["remaining_blocking_findings"],
     }
     if (
         set(value)
@@ -3989,39 +4251,39 @@ def _validate_v4_review_adjudication(
             "schema_version",
             "artifact_type",
             "review_binding",
-            "historical_v3_binding",
+            "historical_v4_binding",
             "reviewed_qualification_evidence",
             "finding_ids",
             "findings",
-            "resolved_v3_remaining_findings",
+            "resolved_v4_remaining_findings",
             "final_decision",
             "receipt_sha256",
         }
-        or value.get("schema_version") != 4
-        or value.get("artifact_type") != "completed_provider_review_v4_adjudication"
+        or value.get("schema_version") != 5
+        or value.get("artifact_type") != "completed_provider_review_v5_adjudication"
         or value.get("review_binding") != expected_review_binding
-        or value.get("historical_v3_binding") != expected_historical_binding
+        or value.get("historical_v4_binding") != expected_historical_binding
         or value.get("reviewed_qualification_evidence") != reviewed_evidence
         or value.get("finding_ids") != list(finding_ids)
-        or value.get("resolved_v3_remaining_findings") != ["B10", "B11"]
+        or value.get("resolved_v4_remaining_findings") != ["B12"]
         or value.get("final_decision") != "READY_TO_EXECUTE"
         or "Final execution decision: **READY TO EXECUTE**." not in markdown
     ):
-        raise AuditRecoveryError("final v4 review adjudication binding differs")
+        raise AuditRecoveryError("final v5 review adjudication binding differs")
 
-    historical_ids = set(historical_v3["finding_ids"])
+    historical_ids = set(historical_v4["finding_ids"])
     if not historical_ids.issubset(finding_ids):
-        raise AuditRecoveryError("final v4 review omitted a historical finding ID")
+        raise AuditRecoveryError("final v5 review omitted a historical finding ID")
     for finding_id in set(finding_ids) - historical_ids:
         prefix = finding_id[0]
         number = int(finding_id[1:])
-        if (prefix == "B" and number < 12) or (prefix == "I" and number < 9):
-            raise AuditRecoveryError("final v4 review recycled a reserved finding ID")
+        if (prefix == "B" and number < 13) or (prefix == "I" and number < 9):
+            raise AuditRecoveryError("final v5 review recycled a reserved finding ID")
 
-    packet_paths = {relative for relative, _role in PRO_REVIEW_V4_PACKET}
+    packet_paths = {relative for relative, _role in PRO_REVIEW_V5_PACKET}
     findings = value.get("findings")
     if not isinstance(findings, list) or len(findings) != len(finding_ids):
-        raise AuditRecoveryError("final v4 adjudication finding rows differ")
+        raise AuditRecoveryError("final v5 adjudication finding rows differ")
     observed_ids: list[str] = []
     for row in findings:
         if not isinstance(row, Mapping) or set(row) != {
@@ -4031,7 +4293,7 @@ def _validate_v4_review_adjudication(
             "rationale",
             "changed_paths",
         }:
-            raise AuditRecoveryError("final v4 adjudication finding rows differ")
+            raise AuditRecoveryError("final v5 adjudication finding rows differ")
         finding_id = row.get("id")
         changed_paths = row.get("changed_paths")
         if (
@@ -4049,10 +4311,10 @@ def _validate_v4_review_adjudication(
             or (row["blocking"] and row["disposition"] == "fixed" and not changed_paths)
             or finding_id not in markdown
         ):
-            raise AuditRecoveryError("final v4 adjudication finding rows differ")
+            raise AuditRecoveryError("final v5 adjudication finding rows differ")
         observed_ids.append(finding_id)
     if sorted(observed_ids) != list(finding_ids):
-        raise AuditRecoveryError("final v4 adjudication finding rows differ")
+        raise AuditRecoveryError("final v5 adjudication finding rows differ")
     return {
         "receipt_sha256": receipt_sha256,
         "json_sha256": _sha256(json_path),
@@ -4078,16 +4340,17 @@ def _validate_review_evidence() -> dict[str, Any]:
     _validate_historical_incomplete_review_evidence()
     historical_v2 = _validate_historical_v2_review_evidence()
     historical_v3 = _validate_historical_v3_negative_review_evidence()
+    historical_v4 = _validate_historical_v4_negative_review_evidence()
     timed_qualification = _validate_v4_timed_qualification_evidence()
     source_test_files = _source_test_records()
-    snapshots = _validate_v4_review_input_snapshots(source_test_files)
+    snapshots = _validate_v5_review_input_snapshots(source_test_files)
     reviewed_evidence = {
         **snapshots["evidence"],
         "timed_qualification": timed_qualification,
     }
     adjudication_value = _canonical_json_receipt(
-        REPO_ROOT / FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON,
-        "final v4 review adjudication",
+        REPO_ROOT / FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+        "final v5 review adjudication",
     )
     review_binding = adjudication_value.get("review_binding")
     reviewed_packet_git_head_commit = (
@@ -4098,7 +4361,7 @@ def _validate_review_evidence() -> dict[str, Any]:
     if HEX40.fullmatch(reviewed_packet_git_head_commit) is None:
         raise AuditRecoveryError("reviewed packet Git commit differs")
 
-    root = REPO_ROOT / FINAL_V4_PRO_REVIEW_DIRECTORY
+    root = REPO_ROOT / FINAL_V5_PRO_REVIEW_DIRECTORY
     response = _json(root / "response.json")
     manifest = _json(root / "review_manifest.json")
     payload = _json(root / "request_payload.json")
@@ -4107,31 +4370,31 @@ def _validate_review_evidence() -> dict[str, Any]:
     response_semantic_sha256 = hashlib.sha256(
         json.dumps(response, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()
-    expected_review_input = _expected_v4_pro_review_input()
+    expected_review_input = _expected_v5_pro_review_input()
     review_input_sha256 = hashlib.sha256(
         expected_review_input.encode("utf-8")
     ).hexdigest()
     instructions = payload.get("instructions")
     if not isinstance(instructions, str):
-        raise AuditRecoveryError("final v4 review instructions are absent")
-    limits = _validate_v4_packet_limits(instructions, expected_review_input)
+        raise AuditRecoveryError("final v5 review instructions are absent")
+    limits = _validate_v5_packet_limits(instructions, expected_review_input)
     if (
         hashlib.sha256(instructions.encode("utf-8")).hexdigest()
         != PRO_REVIEW_INSTRUCTIONS_SHA256
     ):
-        raise AuditRecoveryError("final v4 review instructions differ")
+        raise AuditRecoveryError("final v5 review instructions differ")
 
     artifacts = manifest.get("artifacts")
-    if not isinstance(artifacts, list) or len(artifacts) != len(PRO_REVIEW_V4_PACKET):
-        raise AuditRecoveryError("final v4 review packet inventory differs")
+    if not isinstance(artifacts, list) or len(artifacts) != len(PRO_REVIEW_V5_PACKET):
+        raise AuditRecoveryError("final v5 review packet inventory differs")
     # Artifact bodies may themselves contain delimiter-shaped text. Bind them
     # through the manifest rows here and the full payload equality below rather
     # than reparsing the generated review input with delimiter searches.
     for row, (relative, role) in zip(
-        artifacts, PRO_REVIEW_V4_PACKET, strict=True
+        artifacts, PRO_REVIEW_V5_PACKET, strict=True
     ):
         if not isinstance(row, Mapping):
-            raise AuditRecoveryError("final v4 review packet inventory differs")
+            raise AuditRecoveryError("final v5 review packet inventory differs")
         current_path = REPO_ROOT / relative
         current_raw = current_path.read_bytes()
         current_source = current_raw.decode("utf-8")
@@ -4141,7 +4404,7 @@ def _validate_review_evidence() -> dict[str, Any]:
             or not (row_path == relative or row_path.endswith(f"/{relative}"))
             or row.get("role") != role
         ):
-            raise AuditRecoveryError("final v4 review packet inventory differs")
+            raise AuditRecoveryError("final v5 review packet inventory differs")
         if (
             row.get("bytes") != len(current_raw)
             or row.get("characters") != len(current_source)
@@ -4200,8 +4463,25 @@ def _validate_review_evidence() -> dict[str, Any]:
         or _response_review_text(response) != review_text
         or not isinstance(usage, Mapping)
     ):
-        raise AuditRecoveryError("final v4 provider packet binding differs")
+        raise AuditRecoveryError("final v5 provider packet binding differs")
     response_id = response.get("id")
+    preflight_tokens = manifest.get("input_tokens_preflight")
+    exact_reserved_cost = manifest.get("exact_budget_reserve_usd_after_preflight")
+    expected_exact_reserved_cost = (
+        (
+            math.ceil(preflight_tokens * PRO_REVIEW_INPUT_RESERVE_MULTIPLIER)
+            * (5.0 + 6.25)
+            + math.ceil(
+                PRO_REVIEW_MAX_OUTPUT_TOKENS
+                * PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER
+            )
+            * 30.0
+        )
+        / 1_000_000
+        if isinstance(preflight_tokens, int)
+        and not isinstance(preflight_tokens, bool)
+        else math.nan
+    )
     if (
         not isinstance(response_id, str)
         or not response_id.startswith("resp_")
@@ -4246,7 +4526,8 @@ def _validate_review_evidence() -> dict[str, Any]:
         != PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER
         or manifest.get("reserved_billable_output_tokens")
         != limits["reserved_billable_output_tokens"]
-        or manifest.get("chars_per_token_assumption") != 3.0
+        or manifest.get("chars_per_token_assumption")
+        != PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION
         or manifest.get("input_rate_usd_per_million") != 5.0
         or manifest.get("cache_write_rate_usd_per_million") != 6.25
         or manifest.get("output_rate_usd_per_million") != 30.0
@@ -4257,10 +4538,23 @@ def _validate_review_evidence() -> dict[str, Any]:
         )
         or manifest.get("budget_authorization_usd")
         != PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or not isinstance(preflight_tokens, int)
+        or isinstance(preflight_tokens, bool)
+        or not 0 < preflight_tokens <= PRO_REVIEW_MAX_INPUT_TOKENS
+        or not isinstance(exact_reserved_cost, (int, float))
+        or isinstance(exact_reserved_cost, bool)
+        or not math.isfinite(float(exact_reserved_cost))
+        or not math.isclose(
+            float(exact_reserved_cost),
+            expected_exact_reserved_cost,
+            abs_tol=1e-12,
+        )
+        or float(exact_reserved_cost) > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or not isinstance(manifest.get("input_tokens_preflight_at_utc"), str)
         or manifest.get("completed_response_cost_exceeded_budget_authorization")
         is not False
     ):
-        raise AuditRecoveryError("final v4 review evidence differs")
+        raise AuditRecoveryError("final v5 review evidence differs")
 
     required_sections = (
         "# Verdict",
@@ -4275,21 +4569,21 @@ def _validate_review_evidence() -> dict[str, Any]:
         any(section not in review_text for section in required_sections)
         or terminal_verdict != "READY TO FREEZE"
     ):
-        raise AuditRecoveryError("final v4 review did not approve exact packet bytes")
+        raise AuditRecoveryError("final v5 review did not approve exact packet bytes")
     finding_ids = _review_finding_ids(review_text)
-    adjudication = _validate_v4_review_adjudication(
+    adjudication = _validate_v5_review_adjudication(
         root=root,
         response=response,
         response_semantic_sha256=response_semantic_sha256,
         review_sha256=review_sha256,
         review_input_sha256=review_input_sha256,
         finding_ids=finding_ids,
-        historical_v3=historical_v3,
+        historical_v4=historical_v4,
         reviewed_evidence=reviewed_evidence,
         reviewed_packet_git_head_commit=reviewed_packet_git_head_commit,
     )
     final_head = _git_head()
-    _validate_v4_git_chain(
+    _validate_v5_git_chain(
         code_freeze_commit=reviewed_evidence["code_freeze_commit"],
         reviewed_packet_git_head_commit=reviewed_packet_git_head_commit,
         final_git_head_commit=final_head,
@@ -4309,7 +4603,7 @@ def _validate_review_evidence() -> dict[str, Any]:
         or not math.isclose(reconstructed_cost, float(recorded_cost), abs_tol=1e-12)
         or reconstructed_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
     ):
-        raise AuditRecoveryError("final v4 review cost reconstruction differs")
+        raise AuditRecoveryError("final v5 review cost reconstruction differs")
 
     evidence = reviewed_evidence
     return {
@@ -4344,6 +4638,13 @@ def _validate_review_evidence() -> dict[str, Any]:
             "adjudication_receipt_sha256"
         ],
         "historical_v3_remaining_blocking_findings": historical_v3[
+            "remaining_blocking_findings"
+        ],
+        "historical_v4_terminal_verdict": historical_v4["terminal_verdict"],
+        "historical_v4_adjudication_receipt_sha256": historical_v4[
+            "adjudication_receipt_sha256"
+        ],
+        "historical_v4_remaining_blocking_findings": historical_v4[
             "remaining_blocking_findings"
         ],
         "timed_qualification_receipt_sha256": timed_qualification[
@@ -4414,8 +4715,9 @@ def _validate_review_evidence() -> dict[str, Any]:
         "historical_pre_v2_paid_call_count": 2,
         "historical_v2_paid_call_count": 1,
         "historical_v3_paid_call_count": 1,
-        "completed_v4_paid_call_count": 1,
-        "cumulative_disclosed_paid_call_count": 5,
+        "historical_v4_paid_call_count": 1,
+        "completed_v5_paid_call_count": 1,
+        "cumulative_disclosed_paid_call_count": 6,
     }
 
 
@@ -4426,27 +4728,27 @@ def _validate_reviewed_external_evidence(
         (
             "reviewed_local_test_receipt",
             args.local_test_receipt,
-            V4_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V5_LOCAL_TEST_RECEIPT_SNAPSHOT,
         ),
         (
             "reviewed_target_host_test_receipt",
             args.target_host_test_receipt,
-            V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_ownership",
             args.target_qualification_ownership,
-            V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_landlock",
             args.target_qualification_landlock,
-            V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_cuda",
             args.target_qualification_cuda_preflight,
-            V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
         ),
     )
     for prefix, external_path, snapshot_relative in rows:
@@ -5607,48 +5909,64 @@ def _recovery_metadata(
             authorization,
             f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
         ),
-        "final_v4_review_adjudication_json_sha256": _bound_recovery_hash(
+        "historical_v4_review_adjudication_json_sha256": _bound_recovery_hash(
             authorization,
-            FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON,
+            HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON,
         ),
-        "final_v4_review_adjudication_markdown_sha256": _bound_recovery_hash(
+        "historical_v4_review_adjudication_markdown_sha256": _bound_recovery_hash(
             authorization,
-            FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+            HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN,
         ),
-        "final_v4_review_response_sha256": _bound_recovery_hash(
+        "historical_v4_review_response_sha256": _bound_recovery_hash(
             authorization,
-            f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/response.json",
+            f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/response.json",
         ),
-        "final_v4_review_manifest_sha256": _bound_recovery_hash(
+        "historical_v4_review_manifest_sha256": _bound_recovery_hash(
             authorization,
-            f"{FINAL_V4_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+            f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
+        ),
+        "final_v5_review_adjudication_json_sha256": _bound_recovery_hash(
+            authorization,
+            FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+        ),
+        "final_v5_review_adjudication_markdown_sha256": _bound_recovery_hash(
+            authorization,
+            FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+        ),
+        "final_v5_review_response_sha256": _bound_recovery_hash(
+            authorization,
+            f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json",
+        ),
+        "final_v5_review_manifest_sha256": _bound_recovery_hash(
+            authorization,
+            f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
         ),
         "reviewed_local_test_receipt_snapshot_sha256": _bound_recovery_hash(
             authorization,
-            V4_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V5_LOCAL_TEST_RECEIPT_SNAPSHOT,
         ),
         "reviewed_target_host_test_receipt_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+                V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_ownership_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+                V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_landlock_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+                V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_cuda_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+                V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
             )
         ),
         "original_failed_audit_log_sha256": ORIGINAL_FAILURE_LOG_SHA256,

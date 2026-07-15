@@ -1,0 +1,300 @@
+{
+  "actual_input_characters": 1145865,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 38425,
+      "characters": 38411,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+      "role": "complete experiment plan",
+      "sha256": "909d616cd570cf992332005012d0273870a87629b79bd42213a9be468fb736fa"
+    },
+    {
+      "bytes": 11213,
+      "characters": 11207,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+      "role": "bounded context 1",
+      "sha256": "824f2c2d4dca03f57ea30b26672a775716a108fe314055e92862eae3e9b5de2c"
+    },
+    {
+      "bytes": 3090,
+      "characters": 3090,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+      "role": "bounded context 2",
+      "sha256": "8ffa24e0a94304e367be9d6a7e2f6a2455b74c6dcf4f381f7b2ebb4c7ac98741"
+    },
+    {
+      "bytes": 28778,
+      "characters": 28778,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/scientific_equivalence.py",
+      "role": "bounded context 3",
+      "sha256": "ad8455d852af60a6603866db038036bf98ff47bde8e8d990ba067790d59ef61e"
+    },
+    {
+      "bytes": 12429,
+      "characters": 12429,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_scientific_equivalence.py",
+      "role": "bounded context 4",
+      "sha256": "2fe6f3597e7247fbee9ee26b9a21a6c82e00ab07a98731125478ef3c2467bd57"
+    },
+    {
+      "bytes": 266360,
+      "characters": 266358,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+      "role": "bounded context 5",
+      "sha256": "f44cd913576e0b2169bd66193455724a07d401f4f432fef9dd503243d78481bf"
+    },
+    {
+      "bytes": 80675,
+      "characters": 80675,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+      "role": "bounded context 6",
+      "sha256": "2abfc768ca8b2e95bd7e1bfebc0cde6cef396e4507e6aa3ce2e0f09f2d1d82c8"
+    },
+    {
+      "bytes": 33254,
+      "characters": 33254,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
+      "role": "bounded context 7",
+      "sha256": "616104d2711fd9ae18f5cf930e2dcf497d6b113a718b78b812f4bd7383ab227a"
+    },
+    {
+      "bytes": 12315,
+      "characters": 12315,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
+      "role": "bounded context 8",
+      "sha256": "59c0806f66f43eb3468da315e5c37a44a55ad3ad028893b87398f93295ba3ea6"
+    },
+    {
+      "bytes": 52262,
+      "characters": 52262,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+      "role": "bounded context 9",
+      "sha256": "1bf8b658a52fa827e9922410871ac4ebb57564fa695894229d837b6a349b980d"
+    },
+    {
+      "bytes": 29405,
+      "characters": 29405,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+      "role": "bounded context 10",
+      "sha256": "c924f2654eb104563be481e2114a18f93550e026fc109aa7c1e33824f0bf6de9"
+    },
+    {
+      "bytes": 185401,
+      "characters": 185401,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/recovery_bundle_verifier.py",
+      "role": "bounded context 11",
+      "sha256": "d19b39b45968cd685c2a90a5b1bdeeaefc0a346d42590155605e9283d3964d2f"
+    },
+    {
+      "bytes": 83896,
+      "characters": 83896,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/tests/consciousness_sae_target_blind_calibration/test_recovery_bundle_verifier.py",
+      "role": "bounded context 12",
+      "sha256": "ffdb0f8f0bc11dbe014d1717b5f1a52cdd5bdbe15f3d20ac9102ee7c8245cd7d"
+    },
+    {
+      "bytes": 218,
+      "characters": 218,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/requirements-runpod-b200.txt",
+      "role": "bounded context 13",
+      "sha256": "f4be59778bbe1c38ac65e4c0ae99c21d8d2ecf0c2352f48927c0840c423502a0"
+    },
+    {
+      "bytes": 1026,
+      "characters": 1026,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
+      "role": "bounded context 14",
+      "sha256": "71fdd22ee94898333918b8d5d2178d4e743f6415e5c2187c390701e9e03fe8b2"
+    },
+    {
+      "bytes": 67173,
+      "characters": 67173,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_realization_validation/runpod_preflight.py",
+      "role": "bounded context 15",
+      "sha256": "27a0844bc6a55d4db039b47c883987c5e40b85c53c94cc4a07a6c8e73a50721f"
+    },
+    {
+      "bytes": 36387,
+      "characters": 36233,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/review.md",
+      "role": "bounded context 16",
+      "sha256": "e1295704dfc79dac1665d97dc91ec1cae364b9f5c4145ebb294383507c445cb2"
+    },
+    {
+      "bytes": 12165,
+      "characters": 12165,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/review_manifest.json",
+      "role": "bounded context 17",
+      "sha256": "95b24c9d95ca1ccd21e27240c786484d7cbfc3ba0251fc3286abee10b5999f2b"
+    },
+    {
+      "bytes": 2017,
+      "characters": 2017,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/ADJUDICATION.json",
+      "role": "bounded context 18",
+      "sha256": "59e71e96e0684efa69ea050397760cce6979d1ba596be967a6d730edd627c06a"
+    },
+    {
+      "bytes": 951,
+      "characters": 951,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/ADJUDICATION.md",
+      "role": "bounded context 19",
+      "sha256": "18b1ea90dbac2db629a482a9da8d72a0003ba0dbcd779ec7db15109aab842d1c"
+    },
+    {
+      "bytes": 6425,
+      "characters": 6425,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_RECEIPT.json",
+      "role": "bounded context 20",
+      "sha256": "2d681bd9d02bb786234d49336f1fbe49d661658dac16bdbca7c1cc715d7ffa62"
+    },
+    {
+      "bytes": 1665,
+      "characters": 1665,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_OWNERSHIP.json",
+      "role": "bounded context 21",
+      "sha256": "68b6ddf7112a19c0a257edfba16bb24bbed39a140d7a5452bd507b7cf681accf"
+    },
+    {
+      "bytes": 1223,
+      "characters": 1223,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_GUEST.json",
+      "role": "bounded context 22",
+      "sha256": "9286f7bd2088e8b7f67e31d08fe7373f43d166d61700ef77f2086069f876fe37"
+    },
+    {
+      "bytes": 1522,
+      "characters": 1522,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_CACHE.json",
+      "role": "bounded context 23",
+      "sha256": "cf31fc9a0831cfdfcad2971b45df7dab9adf554ad6edd307e23c183c30bba137"
+    },
+    {
+      "bytes": 5948,
+      "characters": 5948,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_LANDLOCK.json",
+      "role": "bounded context 24",
+      "sha256": "8512213aaa7aee53b9cd60c9e57fcd0da4a742a55fd0006f09ab179841b96043"
+    },
+    {
+      "bytes": 9713,
+      "characters": 9713,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_CUDA.json",
+      "role": "bounded context 25",
+      "sha256": "04a5acf780d30dbd13dcf97f33e308285f3e5a71e1040977d1e7ac899cf2f0d7"
+    },
+    {
+      "bytes": 777,
+      "characters": 777,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TIMED_QUALIFICATION_TERMINATION_AUDIT.json",
+      "role": "bounded context 26",
+      "sha256": "193faab74506cbce725f3c256c31cb8d7072e26866f29eff047c519ca53d5ea3"
+    },
+    {
+      "bytes": 62177,
+      "characters": 62177,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/LOCAL_TEST_RECEIPT.json",
+      "role": "bounded context 27",
+      "sha256": "b861998508924bec2741f0a6558a13d25e62a88048a0ae615f1d0773999fdb2f"
+    },
+    {
+      "bytes": 70265,
+      "characters": 70265,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TARGET_HOST_TEST_RECEIPT.json",
+      "role": "bounded context 28",
+      "sha256": "96ecd7bd2e02841988c35ad2003892cec6ad799bee97e58e0381a94da28062ad"
+    },
+    {
+      "bytes": 1665,
+      "characters": 1665,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TARGET_QUALIFICATION_OWNERSHIP.json",
+      "role": "bounded context 29",
+      "sha256": "53d612ce9d14236ec533bb72a92bd9e7f667387ec16a8cdf1b175568d046864f"
+    },
+    {
+      "bytes": 5880,
+      "characters": 5880,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json",
+      "role": "bounded context 30",
+      "sha256": "3674e2cbd8e44302be0e7b2d42fd4c5ae80b9314b9166e90e4ef97b4cd8bc444"
+    },
+    {
+      "bytes": 9579,
+      "characters": 9579,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v4_inputs/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json",
+      "role": "bounded context 31",
+      "sha256": "3644eb4b608170d6bf47acbacfc45821831b77e78bcbfd479f0a370afb260994"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 25.0,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-07-15T10:28:28.282169Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 6.48768,
+  "created_at_utc": "2026-07-15T10:24:47.822192Z",
+  "estimated_budget_reserve_usd": 22.80496875,
+  "estimated_input_tokens_conservative": 381955,
+  "exact_budget_reserve_usd_after_preflight": 16.7665875,
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 274606,
+  "input_tokens_preflight_at_utc": "2026-07-15T10:24:49.545365Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 1200000,
+  "max_input_tokens": 400000,
+  "max_output_tokens": 20000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.2,
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "ce6936466ce66fc60522d4e6cce04e83ee09083afa993103d9c69cfecc7b2d40",
+  "reserved_billable_input_tokens": 1909775,
+  "reserved_billable_output_tokens": 44000,
+  "response_id": "resp_03da5e4ad00bb281016a575ff36b1881998a04bc71e3a8c066",
+  "response_metadata": {
+    "plan_sha256": "909d616cd570cf992332005012d0273870a87629b79bd42213a9be468fb736fa",
+    "review_input_sha256": "28c386a2152bb180c92b7bacc4ab7ae1c43a9bfabdcd1301b5e09e1e8c077e51",
+    "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+    "reviewed_packet_git_head_commit": "b869f2bbe7166b3910f4e7602befe80b80fe7ddb",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "experiment_plan_review"
+  },
+  "response_metadata_sha256": "915c2c0c0670c44aa8fcf4042008b044d434b05a072aa7052ef77e6bd862a9ad",
+  "response_model": "gpt-5.6-sol",
+  "response_sha256": "8cd95746577c9a79d7923c44abe3646db2aecd5510221546bab9e1042d7a947d",
+  "review_input_sha256": "28c386a2152bb180c92b7bacc4ab7ae1c43a9bfabdcd1301b5e09e1e8c077e51",
+  "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+  "review_request_sha256": "c0fb06c093c36d2a8d4f2a02b4e01902e10a8e42776bdc937b379b643ae53844",
+  "review_sha256": "97bf3d8f8c34a2014f0635e9491a8a69f917fe87518bea9dac0a9c55e75e45c2",
+  "reviewed_packet_git_head_commit": "b869f2bbe7166b3910f4e7602befe80b80fe7ddb",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 1129614,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 27987,
+    "output_tokens_details": {
+      "reasoning_tokens": 8904
+    },
+    "total_tokens": 1157601
+  }
+}
