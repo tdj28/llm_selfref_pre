@@ -90,6 +90,7 @@ _FORBIDDEN_STARTUP_ENVIRONMENT = (
     "PYTHONSTARTUP",
     "PYTHONUSERBASE",
 )
+_REQUIRED_STARTUP_ENVIRONMENT = {"LANG": "C", "LC_ALL": "C"}
 
 RECEIPT_REQUIRED_FIELDS = frozenset(
     {
@@ -155,10 +156,17 @@ def validate_startup_state() -> None:
     present_unsafe = [
         name for name in _FORBIDDEN_STARTUP_ENVIRONMENT if name in os.environ
     ]
+    incorrect_required = {
+        name: os.environ.get(name)
+        for name, expected in _REQUIRED_STARTUP_ENVIRONMENT.items()
+        if os.environ.get(name) != expected
+    }
     if present_unsafe:
         raise LandlockLaunchError(
             "unsafe launcher environment is present: " + ", ".join(present_unsafe)
         )
+    if incorrect_required:
+        raise LandlockLaunchError("launcher requires LANG=C and LC_ALL=C")
     if loaded_forbidden:
         raise LandlockLaunchError(
             "project or ML module loaded before confinement: "

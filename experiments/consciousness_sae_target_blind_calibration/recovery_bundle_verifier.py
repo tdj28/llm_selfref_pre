@@ -533,6 +533,8 @@ EXPECTED_IMPORTED_PACKAGES = {
     for name in ("numpy", "safetensors", "torch", "transformers")
 }
 FIXED_ENVIRONMENT = {
+    "LANG": "C",
+    "LC_ALL": "C",
     "PYTHONDONTWRITEBYTECODE": "1",
     "PYTHONNOUSERSITE": "1",
     "CUDA_CACHE_DISABLE": "1",

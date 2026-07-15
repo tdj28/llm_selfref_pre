@@ -112,7 +112,9 @@ directories get only `0x1b2`; one exact `/proc/self/task` rule gets only
 root, required for CUDA thread-name `comm` writes; each
 identity-bound NVIDIA character device gets only `WRITE_FILE`; no broader
 `/proc` or device-directory rule exists. An external manifest binds and
-rehashes every approved import-root byte and ordered `sys.path` entry.
+rehashes every approved import-root byte and ordered `sys.path` entry. The
+launcher requires and the preflight receipt records `LANG=C` and `LC_ALL=C`,
+avoiding locale-dependent inherited shared gconv mappings.
 
 Both the pre-authorization probe and real launcher exercise independent
 protected/output canaries. The confined probe imports pinned dependencies and

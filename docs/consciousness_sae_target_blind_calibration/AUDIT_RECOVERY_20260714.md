@@ -367,6 +367,8 @@ regular-file temporary, cache, and runtime file must be inside the durable
 output leaf. Actual execution uses `PYTHONDONTWRITEBYTECODE=1`,
 `PYTHONNOUSERSITE=1`, `CUDA_CACHE_DISABLE=1`, Hugging
 Face/Transformers offline-local-only settings,
+the fixed `LANG=C` and `LC_ALL=C` locale (preventing locale-dependent inherited
+shared gconv mappings),
 and `TMPDIR` and all cache roots below that durable leaf. No repository, raw,
 provenance, model/J artifact, home, general temporary-directory, or
 device-directory write allowance exists. Any attempt to open an unenumerated

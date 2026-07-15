@@ -174,6 +174,7 @@ def test_launcher_requires_direct_no_site_no_bytecode_startup() -> None:
         }
     }
     environment["PYTHONNOUSERSITE"] = "1"
+    environment.update({"LANG": "C", "LC_ALL": "C"})
     without_no_site = subprocess.run(
         [sys.executable, "-B", script.as_posix(), "--help"],
         env=environment,
@@ -227,6 +228,17 @@ def test_launcher_requires_direct_no_site_no_bytecode_startup() -> None:
         check=False,
     )
     assert exact.returncode == 0, exact.stderr
+
+    wrong_locale = subprocess.run(
+        [sys.executable, "-B", "-E", "-s", "-S", script.as_posix(), "--help"],
+        env={**environment, "LC_ALL": "C.UTF-8"},
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    assert wrong_locale.returncode != 0
+    assert "requires LANG=C and LC_ALL=C" in wrong_locale.stderr
 
     with pytest.raises(landlock_launcher.LandlockLaunchError, match="Python -S"):
         landlock_launcher.launch(SimpleNamespace())
@@ -757,6 +769,8 @@ def test_linux_launcher_enforces_policy_and_same_pid_exec(tmp_path: Path) -> Non
     ]
     environment = {
         **os.environ,
+        "LANG": "C",
+        "LC_ALL": "C",
         "PYTHONDONTWRITEBYTECODE": "1",
         "PYTHONNOUSERSITE": "1",
         "PYTHONUNBUFFERED": "1",
