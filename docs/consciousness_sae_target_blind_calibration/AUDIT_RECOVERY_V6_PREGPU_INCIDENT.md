@@ -1,4 +1,4 @@
-# V6 Pre-GPU Incidents and C8 Successor Review
+# V6 Pre-GPU Incidents and C9 Successor Review
 
 Status: two outcome-blind stop-ships. B14 was caught before provider
 provisioning. B15 was caught after one disposable C6 source/test qualification
@@ -121,7 +121,7 @@ defect.
 The five C6 receipt files remain byte-for-byte historical qualification
 evidence in the separate, immutable
 `reviews/audit_recovery_landlock_c6_superseded_qualification/` directory; that
-directory cannot be confused with or overwritten by the fresh C7 v6-input
+directory cannot be confused with or overwritten by the fresh C9 v6-input
 directory. Their canonical receipt SHA-256 values are:
 
 - local test: `cbe89a85ff57baf99b494298902b33cf75ed0aaf28b7ac349ded8767db824774`;
@@ -211,13 +211,25 @@ features. Its immutable failure archive remains on network volume
 - controller: `49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a`;
 - `SHA256SUMS`: `2288175d16433f881a07b50bc33d0c6efef2fd7d49e0c1aaf79aa81a12dc8378`.
 
+Those five compact artifacts are also physically pinned under
+`reviews/audit_recovery_landlock_c7_failed_qualification/` and included once in
+the cumulative packet. The complete archive remains on the network volume;
+its 6.9 MB import-root manifest, guest receipt, and setup log are represented
+by the pinned `SHA256SUMS` but are not claimed to be embedded in Git.
+
 The minimum controller-only correction is to give the qualification child
 pipe-backed standard streams and let separate `tee` processes own the regular
 log files. The retry must use a wholly fresh root and archive name, retain the
 failed archive, recompute the short socket pathname before setup, and run the
 same unmodified fail-closed descriptor audit. Because this disclosure changes
-the cumulative review packet, C7 cannot be the final reviewed freeze; fresh
-local and B200 receipts must bind its C8 successor.
+the cumulative review packet, C7 cannot be the final reviewed freeze. C8 commit
+`856cd1f247cf1c9b4951da2afa3dc6dd935c461e` disclosed this failure and
+produced a superseded local-only receipt, but never received target-host
+qualification or paid review: an independent packet audit caught stale
+C7/E7/F7 lineage in the main plan and review context. C9 corrects that
+contradiction and pins the exact controller, wrapper, and five selected C7
+failure-archive artifacts,
+so fresh local and B200 receipts must bind C9.
 
 ## Pre-review long-context reserve correction
 
@@ -242,7 +254,7 @@ remain below their respective `$25.00` authorizations. These are transparent
 rate-schedule reconstructions, not provider invoices, and no historical file is
 rewritten.
 
-## Why the C8 cumulative review is required
+## Why the C9 cumulative review is required
 
 V5 remains valid historical evidence for the exact packet it reviewed, but its
 own exact-byte condition prevents it from authorizing either repaired
@@ -254,8 +266,8 @@ logging failure and pipe-backed retry, current
 source/tests, canonical r3 source inventory, and fresh common-freeze local and
 disposable-B200 receipts.
 
-The successor gate must bind C8 code freeze, E8 reviewed packet, and F8
-adjudication with `C8 <= E8 <= F8`, no source/test drift from C8 to F8, and no
-reviewed-packet drift from E8 to F8. B14 and B15 must both be explicitly
+The successor gate must bind C9 code freeze, E9 reviewed packet, and F9
+adjudication with `C9 <= E9 <= F9`, no source/test drift from C9 to F9, and no
+reviewed-packet drift from E9 to F9. B14 and B15 must both be explicitly
 dispositioned. Any genuinely new blocking finding begins at B16 and any
 genuinely new important finding begins at I10. No silent retry is permitted.

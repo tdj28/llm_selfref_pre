@@ -5,6 +5,7 @@ import contextlib
 import errno
 import json
 import os
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -1633,10 +1634,66 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
         *(f"bounded context {index}" for index in range(1, len(roles))),
     ]
     assert "complete positive v5 review" in audit_recovery.PRO_REVIEW_V6_QUESTION
-    assert "C8<=E8<=F8" in audit_recovery.PRO_REVIEW_V6_QUESTION
-    assert "pipe-backed logging repair" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "C9<=E9<=F9" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "pipe-backed" in audit_recovery.PRO_REVIEW_V6_QUESTION
     assert "B14 and B15" in audit_recovery.PRO_REVIEW_V6_QUESTION
     assert "B16 or later" in audit_recovery.PRO_REVIEW_V6_QUESTION
+
+
+def test_v6_cumulative_narratives_share_only_current_git_lineage() -> None:
+    narratives = (
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_20260714.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+    )
+    stale = (
+        "C7 <= E7 <= F7",
+        "C7<=E7<=F7",
+        "C8 <= E8 <= F8",
+        "C8<=E8<=F8",
+    )
+    for relative in narratives:
+        source = (audit_recovery.REPO_ROOT / relative).read_text(encoding="utf-8")
+        assert "C9 <= E9 <= F9" in source
+        assert not any(token in source for token in stale)
+    assert "C9<=E9<=F9" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert not any(token in audit_recovery.PRO_REVIEW_V6_QUESTION for token in stale)
+
+
+def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
+    controller_relative = (
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "runpod_qualification_controller.sh"
+    )
+    wrapper_relative = (
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "run_qualification_pipe_logged.sh"
+    )
+    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET}
+    assert {controller_relative, wrapper_relative} <= packet_paths
+    assert {controller_relative, wrapper_relative} <= set(
+        audit_recovery.SOURCE_TEST_BOUND_PATHS
+    )
+    controller_path = audit_recovery.REPO_ROOT / controller_relative
+    wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
+    controller = controller_path.read_text(encoding="utf-8")
+    wrapper = wrapper_path.read_text(encoding="utf-8")
+    assert 'ROOT="/root/q9-${FREEZE:0:7}"' in controller
+    assert "EXPECTED_TEST_COUNT=${4:-216}" in controller
+    assert '[[ "$EXPECTED_TEST_COUNT" == 216 ]]' in controller
+    assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
+    assert 'copy_if_file "$HOST_WRAPPER"' in controller
+    assert 'test -f "$HOST_WRAPPER"' in controller
+    assert len(os.fsencode("/root/q9-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
+    assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
+    assert '>"$LOG_ROOT/remote.stdout"' not in wrapper
+    assert '2>"$LOG_ROOT/remote.stderr"' not in wrapper
+    for path in (controller_path, wrapper_path):
+        subprocess.run(["bash", "-n", str(path)], check=True)
 
 
 def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
@@ -1702,7 +1759,7 @@ def test_v6_review_git_chain_rejects_nonancestor(
         "_git_command",
         lambda *parts, **kwargs: argparse.Namespace(returncode=1),
     )
-    with pytest.raises(audit_recovery.AuditRecoveryError, match="C8<=E8<=F8"):
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="C9<=E9<=F9"):
         audit_recovery._validate_v6_git_chain(
             code_freeze_commit="1" * 40,
             reviewed_packet_git_head_commit="2" * 40,

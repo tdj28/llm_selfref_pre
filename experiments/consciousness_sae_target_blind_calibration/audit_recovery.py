@@ -690,6 +690,27 @@ C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 = {
         "78175ab88acae3c157ecb91fe36525dfee7d234d2e717056598029247b193796"
     ),
 }
+C7_FAILED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c7_failed_qualification"
+)
+C7_FAILED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/QUALIFICATION_STATUS.json": (
+        "8a7b4f9750d9648d45b99f030d8f76800a26d4a1c3b6c819d58737ae392e36a2"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stdout": (
+        "83a573b66f74ba07ee0df08b7484f5e60fd4298964b259b3e1db9c2a3142d5dc"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stderr": (
+        "e126f6d1a54a5458002985aa70e7d4c5ed9ba8fe53f9fd41dd2b52ecb7232777"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/run_target_qualification.sh": (
+        "49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/SHA256SUMS": (
+        "2288175d16433f881a07b50bc33d0c6efef2fd7d49e0c1aaf79aa81a12dc8378"
+    ),
+}
 V6_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v6_inputs"
@@ -916,6 +937,14 @@ _PRO_REVIEW_V6_PATHS = (
         "experiments/consciousness_sae_target_blind_calibration/"
         "setup_runpod_qualification_guest.sh"
     ),
+    (
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "run_qualification_pipe_logged.sh"
+    ),
+    (
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "runpod_qualification_controller.sh"
+    ),
     "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
     f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
     f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
@@ -923,6 +952,7 @@ _PRO_REVIEW_V6_PATHS = (
     FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
     FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
     *tuple(C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256),
+    *tuple(C7_FAILED_QUALIFICATION_PHYSICAL_SHA256),
     V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -966,9 +996,14 @@ PRO_REVIEW_V6_QUESTION = (
     "C7 successor qualification then failed closed before CUDA or tests because "
     "the controller redirected standard streams to writable regular files and "
     "the frozen descriptor audit rejected them. Its verified failure archive is "
-    "disclosed in the incident document; audit the pipe-backed logging repair, "
-    "fresh-root retry, and preservation of the strict descriptor check. Only "
-    "fresh C8 qualification receipts in the v6 input directory can qualify the "
+    "disclosed in the incident document. The exact controller, pipe-backed "
+    "wrapper and five selected failure-archive artifacts are included; verify "
+    "that fresh target "
+    "evidence demonstrates the unchanged descriptor audit and Landlock/CUDA "
+    "preflight passed. C8 produced only a superseded local receipt and never "
+    "received target-host qualification after a packet audit found stale "
+    "lineage. Only fresh C9 qualification "
+    "receipts in the v6 input directory can qualify the "
     "current source/test bytes. "
     "Verify the separately disclosed pre-review correction to the GPT-5.6 Sol "
     "long-context rate schedule and $75 reserve; no v6 paid call preceded it. "
@@ -978,7 +1013,7 @@ PRO_REVIEW_V6_QUESTION = (
     "neither claimed as an invoice. "
     "Confirm that the qualification wrapper is never invoked in final recovery. "
     "Also re-evaluate the full current exact-byte recovery, confinement, "
-    "zero-forward, receipt, Git C8<=E8<=F8, and offline-verifier design in light "
+    "zero-forward, receipt, Git C9<=E9<=F9, and offline-verifier design in light "
     "of the missed v5 invocation defect and C6 qualification failures. Do not "
     "request or infer scientific "
     "result values. Explicitly disposition every historical B01-B04, B06-B13, "
@@ -1053,6 +1088,10 @@ AUDIT_EXECUTABLE_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
     "experiments/consciousness_sae_target_blind_calibration/"
     "setup_runpod_qualification_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "run_qualification_pipe_logged.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "runpod_qualification_controller.sh",
 )
 RECOVERY_DOCUMENT_PATHS = (
     "data/consciousness_sae_target_blind_calibration/"
@@ -1067,6 +1106,7 @@ RECOVERY_DOCUMENT_PATHS = (
     "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
     "docs/consciousness_sae_target_blind_calibration/"
     "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+    *tuple(C7_FAILED_QUALIFICATION_PHYSICAL_SHA256),
     *tuple(HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256),
     *tuple(HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256),
     *tuple(HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256),
@@ -4800,7 +4840,7 @@ def _validate_v6_git_chain(
             ).returncode
             != 0
         ):
-            raise AuditRecoveryError("v6 review Git chain is not C8<=E8<=F8")
+            raise AuditRecoveryError("v6 review Git chain is not C9<=E9<=F9")
     if (
         _git_command(
             "diff",
@@ -5180,6 +5220,11 @@ def _validate_review_evidence() -> dict[str, Any]:
         raise AuditRecoveryError(
             "immutable superseded C6 qualification evidence differs"
         )
+    if any(
+        _sha256(REPO_ROOT / relative) != expected
+        for relative, expected in C7_FAILED_QUALIFICATION_PHYSICAL_SHA256.items()
+    ):
+        raise AuditRecoveryError("immutable failed C7 qualification evidence differs")
     _validate_historical_incomplete_review_evidence()
     historical_v2 = _validate_historical_v2_review_evidence()
     historical_v3 = _validate_historical_v3_negative_review_evidence()

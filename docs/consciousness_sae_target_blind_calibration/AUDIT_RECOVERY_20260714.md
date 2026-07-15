@@ -4,11 +4,12 @@ Status: prospective technical-recovery redesign after a pre-claim host
 compatibility failure, two incomplete provider calls, completed negative v2,
 v3, and v4 reviews, a completed positive v5 review whose exact reviewed bytes
 failed the authentic pre-GPU authorization dry-run, and a superseded C6
-qualification whose production Unix-socket paths were overlong. No recovered
-audit output has been computed or inspected. This plan is not executable until
-the C7 cumulative review evaluates the repaired exact bytes, both B14 and B15,
-the historical C6 qualification, and the complete v5 review/adjudication
-context.
+qualification whose production Unix-socket paths were overlong, plus a C7
+qualification-controller logging failure caught by the frozen descriptor
+audit. No recovered audit output has been computed or inspected. This plan is
+not executable until the C9 cumulative review evaluates the repaired exact
+bytes, both B14 and B15, the historical C6/C7 qualification chronology, and
+the complete v5 review/adjudication context.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -529,7 +530,7 @@ that set remains exactly empty.
 ## Review disclosure
 
 The paragraphs below through the description of the v5 packet are retained as
-historical review lineage. The later "B14/B15 pre-GPU repair and C7 review"
+historical review lineage. The later "B14/B15 pre-GPU repair and C9 review"
 section supersedes their prospective-v5 status and resource envelope.
 
 Five paid provider calls are historical incomplete or negative evidence and
@@ -667,7 +668,7 @@ places byte-identical copies under the attempt's `evidence/tests/` directory.
 The offline verifier repeats those checks. No authorization is issued and no
 recovered audit is claimed ready until this closure exists.
 
-## B14/B15 pre-GPU repair and C7 cumulative review
+## B14/B15 pre-GPU repair and C9 cumulative review
 
 The v5 Pro call completed as response
 `resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0`, ended `READY TO
@@ -745,7 +746,7 @@ retained.
 Those C6 receipts and the termination chain are preserved byte-for-byte under
 the separate
 `reviews/audit_recovery_landlock_c6_superseded_qualification/` directory as
-historical qualification evidence, so fresh C7 inputs cannot overwrite them.
+historical qualification evidence, so fresh C9 inputs cannot overwrite them.
 A subsequent production-path audit found B15 before any final recovery pod,
 authorization, attempt marker, compact output, or paid v6 Pro call. C6's
 original 123-byte attempt parent plus its
@@ -767,13 +768,27 @@ bind, working-directory mutation, abstract socket, symlink alias, mount, raw
 path, scientific source, estimand, or claim gate changes.
 
 Because B15 changes the source/test bytes, C6 and its receipts cannot qualify
-the successor. A fresh C7 code freeze requires new local and disposable-B200
-target receipts; E7 adds those receipts and the cumulative review packet; one
-successor Pro call reviews the exact E7 packet, including the complete v5
-review and adjudication, the B14 incident, and the C6/B15 chronology; and F7
+the successor. C7's first live target qualification then failed before CUDA or
+tests because direct regular-file stdout/stderr redirection was inherited and
+the frozen descriptor audit correctly rejected it. That zero-forward failure,
+its verified on-volume archive, and the pipe-backed logging correction are
+disclosed in `AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md`. The controller is
+qualification-only operational scaffolding and is never invoked by final
+recovery; the cumulative reviewer receives the exact controller and pipe-backed
+wrapper bytes plus five pinned C7 failure-archive artifacts, and must verify that fresh
+target evidence shows the unchanged descriptor audit and Landlock/CUDA
+preflight passed. C8 disclosed the failure and produced a superseded local-only
+receipt, but never received target-host qualification or paid review because a
+final packet audit caught stale C7/E7/F7 lineage in this plan and the
+review-context document.
+
+A fresh C9 code freeze therefore requires new local and disposable-B200 target
+receipts; E9 adds those receipts and the cumulative review packet; one
+successor Pro call reviews the exact E9 packet, including the complete v5
+review and adjudication, the B14 incident, and the C6/C7/B15 chronology; and F9
 adds only provider outputs and the successor adjudication. The gate requires
-`C7 <= E7 <= F7`, no source/test diff from C7 to F7, and no reviewed-packet
-diff from E7 to F7. B14 and B15 must both be explicitly dispositioned. Any
+`C9 <= E9 <= F9`, no source/test diff from C9 to F9, and no reviewed-packet
+diff from E9 to F9. B14 and B15 must both be explicitly dispositioned. Any
 genuinely new blocking finding starts at B16 and any genuinely new important
 finding starts at I10. No silent retry is permitted.
 

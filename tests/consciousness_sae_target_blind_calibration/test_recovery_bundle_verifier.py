@@ -47,6 +47,41 @@ def test_superseded_c6_qualification_evidence_is_separate_and_pinned() -> None:
         assert verifier.canonical_sha256(receipt) == supplied
 
 
+def test_failed_c7_qualification_archive_is_separate_pinned_context() -> None:
+    assert verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256 == (
+        audit_recovery.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256
+    )
+    packet_paths = [path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET]
+    for relative, expected in verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256.items():
+        path = audit_recovery.REPO_ROOT / relative
+        assert verifier.sha256_file(path) == expected
+        assert packet_paths.count(relative) == 1
+        assert relative in verifier.RECOVERY_DOCUMENT_PATHS
+        assert relative in audit_recovery.RECOVERY_DOCUMENT_PATHS
+    root = (
+        audit_recovery.REPO_ROOT / verifier.C7_FAILED_QUALIFICATION_DIRECTORY
+    )
+    status = json.loads((root / "QUALIFICATION_STATUS.json").read_text())
+    assert status == {
+        "archived_at_utc": "2026-07-15T13:57:27Z",
+        "code_freeze_commit": "4a7abd249d5bbc16e859bafb700f648de5245a50",
+        "exit_code": 2,
+        "pod_id": "t915ydw4gqfb8a",
+        "remote_qualification_root": "/root/q7-4a7abd2",
+        "schema_version": 1,
+        "status": "failed",
+    }
+    assert (root / "remote.stderr").read_text(encoding="utf-8").endswith(
+        "landlock launcher failed: writable regular-file/directory descriptor "
+        "was inherited\n"
+    )
+    ledger = (root / "SHA256SUMS").read_text(encoding="utf-8")
+    assert (
+        "49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a  "
+        "./controller/run_target_qualification.sh"
+    ) in ledger
+
+
 def test_independent_verifier_rejects_overlong_bound_canary_socket_path(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -873,6 +908,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     closure_hashes.update(verifier.V4_TIMED_QUALIFICATION_PHYSICAL_SHA256)
     closure_hashes.update(verifier.HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
         closure_hashes[verifier.HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON] = (
             "0" * 64
@@ -892,6 +928,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     if mutation == "superseded_c6_qualification_physical":
         first_c6_path = next(iter(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256))
         closure_hashes[first_c6_path] = "0" * 64
+    if mutation == "failed_c7_qualification_physical":
+        first_c7_path = next(iter(verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256))
+        closure_hashes[first_c7_path] = "0" * 64
     recovery_bound_files = [
         {"path": path, "bytes": 100 + index, "sha256": closure_hashes[path]}
         for index, path in enumerate(verifier.RECOVERY_BOUND_PATHS)
@@ -2168,6 +2207,10 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ),
         (
             "superseded_c6_qualification_physical",
+            "immutable historical review physical evidence differs",
+        ),
+        (
+            "failed_c7_qualification_physical",
             "immutable historical review physical evidence differs",
         ),
         ("reviewed_snapshot_mismatch", "reviewed snapshot binding differs"),

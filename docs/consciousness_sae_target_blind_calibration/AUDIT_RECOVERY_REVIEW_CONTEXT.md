@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2-v5 reviews; B14, superseded C6, and the C7 review
+## Completed v2-v5 reviews; B14, superseded C6/C7, and the C9 review
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -192,7 +192,7 @@ The pod was deleted and verified absent without mutating the unrelated L40S
 pod or deleting the network volume. The successful five C6 receipts and
 termination chain are pinned under the separate
 `reviews/audit_recovery_landlock_c6_superseded_qualification/` directory, so
-fresh C7 inputs cannot overwrite them. Those files, both failed archives, and
+fresh C9 inputs cannot overwrite them. Those files, both failed archives, and
 the successful archive remain historical qualification evidence; the probe
 rendered no target and performed no model forward.
 
@@ -207,12 +207,21 @@ above 91 bytes. The resulting production preflight and final paths are exactly
 91 and 90 bytes. Producer, launcher, verifier, and boundary tests must agree.
 No relative bind, symlink alias, abstract socket, or scientific path changes.
 
-Because B15 changes source/test bytes, C6 cannot authorize execution and its
-receipts cannot qualify C7. The cumulative successor packet supplies this
-context, the complete v5 review and adjudication, both B14 and B15, the
-canonical r3 source inventory, repaired source/tests, and fresh C7 local and
-disposable-B200 qualification evidence. The lineage is `C7 <= E7 <= F7`, with
-no source/test drift from C7 to F7 and no reviewed-packet drift from E7 to F7.
+Because B15 changes source/test bytes, C6 cannot authorize execution. C7's
+first live successor qualification then failed closed before CUDA or tests:
+direct regular-file stdout/stderr redirection was inherited and the unchanged
+descriptor audit correctly rejected it. The verified failure archive remains
+on the network volume. The retry uses pipe-backed standard streams so separate
+`tee` processes own the regular logs; the controller is qualification-only and
+never part of final recovery. The packet pins the exact controller/wrapper and
+five selected C7 failure-archive artifacts. C8 disclosed this history and produced a superseded
+local-only receipt, but never received target-host qualification or paid review
+because a final packet audit caught stale lineage in this context and the main
+plan. The cumulative successor packet supplies this chronology, the complete
+v5 review and adjudication, both B14 and B15, the canonical r3 source inventory,
+repaired source/tests, and fresh C9 local and disposable-B200 qualification
+evidence. The lineage is `C9 <= E9 <= F9`, with no source/test drift from C9 to
+F9 and no reviewed-packet drift from E9 to F9.
 B14 and B15 must both be explicitly dispositioned; genuinely new IDs begin at
 B16 and I10. No paid v6 call preceded this correction, and no silent retry is
 permitted.

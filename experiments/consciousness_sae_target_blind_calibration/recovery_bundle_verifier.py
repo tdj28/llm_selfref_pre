@@ -640,6 +640,27 @@ C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 = {
         "78175ab88acae3c157ecb91fe36525dfee7d234d2e717056598029247b193796"
     ),
 }
+C7_FAILED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c7_failed_qualification"
+)
+C7_FAILED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/QUALIFICATION_STATUS.json": (
+        "8a7b4f9750d9648d45b99f030d8f76800a26d4a1c3b6c819d58737ae392e36a2"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stdout": (
+        "83a573b66f74ba07ee0df08b7484f5e60fd4298964b259b3e1db9c2a3142d5dc"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stderr": (
+        "e126f6d1a54a5458002985aa70e7d4c5ed9ba8fe53f9fd41dd2b52ecb7232777"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/run_target_qualification.sh": (
+        "49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/SHA256SUMS": (
+        "2288175d16433f881a07b50bc33d0c6efef2fd7d49e0c1aaf79aa81a12dc8378"
+    ),
+}
 V6_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v6_inputs"
@@ -707,6 +728,10 @@ AUDIT_EXECUTABLE_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
     "experiments/consciousness_sae_target_blind_calibration/"
     "setup_runpod_qualification_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "run_qualification_pipe_logged.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "runpod_qualification_controller.sh",
 )
 RECOVERY_DOCUMENT_PATHS = (
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
@@ -717,6 +742,7 @@ RECOVERY_DOCUMENT_PATHS = (
     "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
     "docs/consciousness_sae_target_blind_calibration/"
     "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+    *tuple(C7_FAILED_QUALIFICATION_PHYSICAL_SHA256),
     "data/consciousness_sae_target_blind_calibration/"
     "calibration_v2_plan_20260714_r3/plan_manifest.json",
     "data/consciousness_sae_target_blind_calibration/"
@@ -3825,6 +3851,7 @@ def _validate_authorization(
             **V4_TIMED_QUALIFICATION_PHYSICAL_SHA256,
             **HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256,
             **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
+            **C7_FAILED_QUALIFICATION_PHYSICAL_SHA256,
         }.items()
     ):
         raise RecoveryBundleVerificationError(
