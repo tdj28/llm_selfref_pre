@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2 review and bounded final repair
+## Completed v2 and v3 reviews and bounded final repair
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -81,9 +81,9 @@ $5.020945 within its $17 authorization. Its exact review and structured
 `NOT_READY_TO_EXECUTE` adjudication are retained as context for the replacement
 review authorized by the user.
 
-For the expanded final v3 packet, including this negative review and the exact
+For the now-historical v3 packet, including this negative review and the exact
 local/target qualification receipts, the user explicitly authorized a bounded
-increase: producer and verifier use one $25 preflight ceiling with a
+increase: producer and verifier used one $25 preflight ceiling with a
 1.2-million-character/400,000-estimated-token input guard and the same
 20,000-output-token request cap. Expected spend is lower, and there is no
 silent retry.
@@ -98,6 +98,19 @@ offline-verifier completed-review cost ceiling. The bounded repair keeps the
 loader unchanged, makes verdict parsing exact, adds two canonical
 authorization-bound code-freeze test receipts, and aligns the cost boundary.
 No scientific outcome was opened and no GPU scientific audit was launched.
+
+The separately authorized v3 call then completed as response
+`resp_0c08617bb82fc5ce016a5748c627d881989e5fffdd49f658cf` and ended `NOT
+READY TO FREEZE`. It used 1,051,523 aggregate input tokens and 28,895 output
+tokens (10,935 reasoning), reconstructing to $6.124465 within the $25
+authorization. Its exact provider files and canonical adjudication are retained
+under `reviews/audit_recovery_landlock_gpt_pro_v3_completed_negative/` as
+immutable historical evidence. B10 found that the supplied qualification timing
+missed the then-frozen one-hour recovery envelope; B11 found that one paragraph
+labeled “The precise claim” omitted the otherwise disclosed `/proc/self/task`
+exception. The replacement v4 review must disposition both findings against the
+exact repaired bytes. The v3 call is one historical paid call; it is not the
+future v4 approval call and cannot be relabeled as such.
 
 ## Prospective Landlock replacement
 
@@ -126,8 +139,10 @@ both endpoints before compact success publication.
 The claim is deliberately narrow. ABI 4 does not mediate metadata-only
 operations, already-open descriptors, sibling processes, other NFS clients,
 or NVIDIA driver `ioctl`. The evidence supports process-tree confinement of
-handled filesystem content/topology writes, with the exact device exception,
-plus equality of frozen byte/path inventories at the pre/post endpoints—not a
+handled filesystem content/topology writes with both disclosed exception
+classes: exact `/proc/self/task` `WRITE_FILE|TRUNCATE` access and exact
+inode/`rdev`-bound NVIDIA character-device `WRITE_FILE` access. It also supports
+equality of frozen byte/path inventories at the pre/post endpoints—not a
 read-only mount or continuous external immutability claim. Upstream caveats:
 <https://docs.kernel.org/6.8/userspace-api/landlock.html>.
 

@@ -807,12 +807,18 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     ] = "9" * 64
     closure_hashes.update(verifier.HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.V4_TIMED_QUALIFICATION_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
         closure_hashes[verifier.HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON] = (
             "0" * 64
         )
     if mutation == "historical_v2_review_physical":
         closure_hashes[verifier.HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON] = "0" * 64
+    if mutation == "historical_v3_review_physical":
+        closure_hashes[
+            verifier.HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON
+        ] = "0" * 64
     recovery_bound_files = [
         {"path": path, "bytes": 100 + index, "sha256": closure_hashes[path]}
         for index, path in enumerate(verifier.RECOVERY_BOUND_PATHS)
@@ -837,15 +843,15 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         code_freeze="c" * 40,
     )
     snapshot_paths = {
-        verifier.V3_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
-        verifier.V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
-        verifier.V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        verifier.V4_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
+        verifier.V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
+        verifier.V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
             qualification_ownership_path
         ),
-        verifier.V3_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        verifier.V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
             qualification_landlock_path
         ),
-        verifier.V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
+        verifier.V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
     }
     for row in recovery_bound_files:
         snapshot = snapshot_paths.get(row["path"])
@@ -854,7 +860,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             closure_hashes[row["path"]] = row["sha256"]
     if mutation == "reviewed_snapshot_mismatch":
         for row in recovery_bound_files:
-            if row["path"] == verifier.V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
+            if row["path"] == verifier.V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
                 row["sha256"] = "0" * 64
                 closure_hashes[row["path"]] = row["sha256"]
                 break
@@ -1094,19 +1100,40 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             verifier.HISTORICAL_V2_ADJUDICATION_RECEIPT_SHA256
         ),
         "historical_v2_remaining_blocking_findings": ["B06", "B07", "B08", "B09"],
-        "finding_ids": ["B01", "I02"],
+        "historical_v3_terminal_verdict": "NOT READY TO FREEZE",
+        "historical_v3_adjudication_receipt_sha256": (
+            verifier.HISTORICAL_V3_NEGATIVE_ADJUDICATION_RECEIPT_SHA256
+        ),
+        "historical_v3_remaining_blocking_findings": ["B10", "B11"],
+        "timed_qualification_receipt_sha256": (
+            "0c83eea18a0b4ed622e02846d224457421ca970c1d72b980ee9825a8420e4d34"
+        ),
+        "timed_qualification_termination_receipt_sha256": (
+            "cc5be37fcbc739d3bd15d6df245138910872e717e7abdfaa4f05f9d2abffb1c5"
+        ),
+        "timed_qualification_pod_id": "sguho6ni8p5nbo",
+        "timed_qualification_authorization_ready_host_age_seconds": 958,
+        "timed_qualification_seconds_remaining": 2642,
+        "timed_qualification_reserve_surplus_seconds": 842,
+        "timed_qualification_public_artifact_file_count": 45,
+        "timed_qualification_public_artifact_total_bytes": 156_023_372_845,
+        "timed_qualification_cuda_preflight_closure_scope": (
+            "source_test_qualification"
+        ),
+        "timed_qualification_final_recovery_scope_must_repeat": True,
+        "finding_ids": list(verifier.HISTORICAL_V3_NEGATIVE_FINDING_IDS),
         "review_sha256": closure_hashes[
-            f"{verifier.FINAL_V3_PRO_REVIEW_DIRECTORY}/review.md"
+            f"{verifier.FINAL_V4_PRO_REVIEW_DIRECTORY}/review.md"
         ],
         "adjudication_receipt_sha256": "6" * 64,
         "adjudication_json_sha256": closure_hashes[
-            verifier.FINAL_V3_PRO_REVIEW_ADJUDICATION_JSON
+            verifier.FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON
         ],
         "adjudication_markdown_sha256": closure_hashes[
-            verifier.FINAL_V3_PRO_REVIEW_ADJUDICATION_MARKDOWN
+            verifier.FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "fixed_finding_ids": ["B01"],
-        "rejected_finding_ids": ["I02"],
+        "fixed_finding_ids": list(verifier.HISTORICAL_V3_NEGATIVE_FINDING_IDS),
+        "rejected_finding_ids": [],
         "reviewed_local_test_receipt_file_sha256": _file_record(
             local_test_receipt_path
         )["sha256"],
@@ -1137,9 +1164,11 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "reviewed_target_qualification_cuda_receipt_sha256": qualification_cuda[
             "receipt_sha256"
         ],
+        "historical_pre_v2_paid_call_count": 2,
         "historical_v2_paid_call_count": 1,
-        "completed_v3_paid_call_count": 1,
-        "cumulative_disclosed_paid_call_count": 4,
+        "historical_v3_paid_call_count": 1,
+        "completed_v4_paid_call_count": 1,
+        "cumulative_disclosed_paid_call_count": 5,
     }
     authorization_core = {
         "schema_version": 1,
@@ -1538,32 +1567,44 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "historical_v2_review_adjudication_markdown_sha256": closure_hashes[
             verifier.HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "final_v3_review_adjudication_json_sha256": closure_hashes[
-            verifier.FINAL_V3_PRO_REVIEW_ADJUDICATION_JSON
+        "historical_v3_review_adjudication_json_sha256": closure_hashes[
+            verifier.HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON
         ],
-        "final_v3_review_adjudication_markdown_sha256": closure_hashes[
-            verifier.FINAL_V3_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        "historical_v3_review_adjudication_markdown_sha256": closure_hashes[
+            verifier.HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "final_v3_review_response_sha256": closure_hashes[
-            f"{verifier.FINAL_V3_PRO_REVIEW_DIRECTORY}/response.json"
+        "historical_v3_review_response_sha256": closure_hashes[
+            f"{verifier.HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/response.json"
         ],
-        "final_v3_review_manifest_sha256": closure_hashes[
-            f"{verifier.FINAL_V3_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        "historical_v3_review_manifest_sha256": closure_hashes[
+            f"{verifier.HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json"
+        ],
+        "final_v4_review_adjudication_json_sha256": closure_hashes[
+            verifier.FINAL_V4_PRO_REVIEW_ADJUDICATION_JSON
+        ],
+        "final_v4_review_adjudication_markdown_sha256": closure_hashes[
+            verifier.FINAL_V4_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ],
+        "final_v4_review_response_sha256": closure_hashes[
+            f"{verifier.FINAL_V4_PRO_REVIEW_DIRECTORY}/response.json"
+        ],
+        "final_v4_review_manifest_sha256": closure_hashes[
+            f"{verifier.FINAL_V4_PRO_REVIEW_DIRECTORY}/review_manifest.json"
         ],
         "reviewed_local_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V3_LOCAL_TEST_RECEIPT_SNAPSHOT
+            verifier.V4_LOCAL_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_host_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+            verifier.V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_qualification_ownership_snapshot_sha256": closure_hashes[
-            verifier.V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+            verifier.V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ],
         "reviewed_target_qualification_landlock_snapshot_sha256": closure_hashes[
-            verifier.V3_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+            verifier.V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ],
         "reviewed_target_qualification_cuda_snapshot_sha256": closure_hashes[
-            verifier.V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+            verifier.V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ],
         "original_failed_audit_log_sha256": verifier.ORIGINAL_FAILURE_LOG_SHA256,
         "original_raw_run_receipt_sha256": authorization["raw_run_receipt_sha256"],
@@ -1913,6 +1954,10 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ),
         (
             "historical_v2_review_physical",
+            "immutable historical review physical evidence differs",
+        ),
+        (
+            "historical_v3_review_physical",
             "immutable historical review physical evidence differs",
         ),
         ("reviewed_snapshot_mismatch", "reviewed snapshot binding differs"),

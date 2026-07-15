@@ -1,10 +1,10 @@
 # Calibration v2 r3 Audit-Only Recovery
 
 Status: prospective technical-recovery redesign after a pre-claim host
-compatibility failure, an incomplete `NOT READY` provider review, and a
-completed negative v2 provider review, before any recovered audit output is
-computed or inspected. This plan is not executable until the separately
-authorized final v3 review closes the accepted findings.
+compatibility failure, two incomplete provider calls, and completed negative
+v2 and v3 provider reviews, before any recovered audit output is computed or
+inspected. This plan is not executable until the separately authorized final
+v4 review closes the remaining findings.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -435,10 +435,13 @@ absence of metadata-only change. They establish endpoint equality immediately
 before and after the confined audit. The
 precise claim is that the audit process and descendants can perform handled
 regular-filesystem content/topology mutations only under the durable output
-leaf and the separate disposable self-test output leaf, with only the
-enumerated NVIDIA character-device `WRITE_FILE` exception beyond those two
-directories. It is not a claim that device `ioctl` effects are mediated. These
-limitations are disclosed in every recovered audit receipt and claim.
+leaf and the separate disposable self-test output leaf, with exactly two
+disclosed exception classes beyond those directories: the
+`/proc/self/task` `WRITE_FILE|TRUNCATE` process-thread-metadata exception and
+the individually enumerated, identity-bound NVIDIA character-device
+`WRITE_FILE` exceptions. It is not a claim that device `ioctl` effects are
+mediated. These limitations are disclosed in every recovered audit receipt
+and claim.
 
 Once confined, execution rehashes the complete raw tree against both
 `RUN_COMPLETE.json` and the externally preserved 36-file ledger and validates
@@ -510,7 +513,10 @@ that set remains exactly empty.
 
 ## Review disclosure
 
-Two provider reviews are historical failure evidence and neither is approval.
+Four paid provider calls are historical incomplete or negative evidence and
+none is approval: two incomplete calls, the completed negative v2 call, and the
+completed negative v3 call. Any completed v4 approval is a fifth, separately
+authorized call and is counted separately.
 The earlier plan-only response ended incomplete before seeing the later
 executable. The subsequent exact six-file Landlock packet was submitted once
 to `gpt-5.6-sol` Pro as response
@@ -547,9 +553,12 @@ Before any recovery authorization, the material redesign therefore requires a
 separately budget-authorized, completed latest-flagship Pro review of the final
 immutable packet: this plan, bounded runtime context, scientific-equivalence
 appendix, bootstrap/launcher/recovery/verifier surfaces, focused tests, and the
-historical reviews and adjudications. The user explicitly authorized one final
-v3 call with a bounded increase for the expanded prior-review and qualification-
-receipt packet: producer and verifier share the exact $25 preflight ceiling,
+historical reviews and adjudications. The completed v3 negative review, its
+manifest, canonical adjudication, and updated context are mandatory packet
+members; B10 and B11 must be dispositioned explicitly. The user explicitly
+authorized one final v4 call with a bounded increase for the expanded
+prior-review and qualification-receipt packet: producer and verifier share the
+exact $25 preflight ceiling,
 with a 1.2-million-character/400,000-estimated-token input guard and the same
 20,000-output-token request cap; expected spend is lower, and no silent retry
 is permitted. The exact call must
