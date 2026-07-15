@@ -962,8 +962,13 @@ PRO_REVIEW_V6_QUESTION = (
     "verifier, and regression-tests the exact 91-byte preflight and 90-byte "
     "execution paths plus byte-count boundary failures. The C6 freeze, five "
     "receipts, and termination chain are included in a separately pinned "
-    "superseded-evidence directory as historical context only; only the fresh "
-    "C7 qualification receipts in the v6 input directory can qualify the "
+    "superseded-evidence directory as historical context only. The first live "
+    "C7 successor qualification then failed closed before CUDA or tests because "
+    "the controller redirected standard streams to writable regular files and "
+    "the frozen descriptor audit rejected them. Its verified failure archive is "
+    "disclosed in the incident document; audit the pipe-backed logging repair, "
+    "fresh-root retry, and preservation of the strict descriptor check. Only "
+    "fresh C8 qualification receipts in the v6 input directory can qualify the "
     "current source/test bytes. "
     "Verify the separately disclosed pre-review correction to the GPT-5.6 Sol "
     "long-context rate schedule and $75 reserve; no v6 paid call preceded it. "
@@ -973,7 +978,7 @@ PRO_REVIEW_V6_QUESTION = (
     "neither claimed as an invoice. "
     "Confirm that the qualification wrapper is never invoked in final recovery. "
     "Also re-evaluate the full current exact-byte recovery, confinement, "
-    "zero-forward, receipt, Git C7<=E7<=F7, and offline-verifier design in light "
+    "zero-forward, receipt, Git C8<=E8<=F8, and offline-verifier design in light "
     "of the missed v5 invocation defect and C6 qualification failures. Do not "
     "request or infer scientific "
     "result values. Explicitly disposition every historical B01-B04, B06-B13, "
@@ -4795,7 +4800,7 @@ def _validate_v6_git_chain(
             ).returncode
             != 0
         ):
-            raise AuditRecoveryError("v6 review Git chain is not C7<=E7<=F7")
+            raise AuditRecoveryError("v6 review Git chain is not C8<=E8<=F8")
     if (
         _git_command(
             "diff",

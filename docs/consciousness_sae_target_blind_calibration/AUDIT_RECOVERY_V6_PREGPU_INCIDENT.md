@@ -1,4 +1,4 @@
-# V6 Pre-GPU Incidents and C7 Successor Review
+# V6 Pre-GPU Incidents and C8 Successor Review
 
 Status: two outcome-blind stop-ships. B14 was caught before provider
 provisioning. B15 was caught after one disposable C6 source/test qualification
@@ -180,6 +180,45 @@ socket, mount, scientific input path, raw namespace, or historical evidence
 path is substituted. The new attempt parent remains a clear, separate
 on-volume namespace and is required to be canonical and symlink-free.
 
+## C7 qualification-controller logging failure
+
+The first disposable-B200 qualification of C7 commit
+`4a7abd249d5bbc16e859bafb700f648de5245a50` was launched on owned pod
+`t915ydw4gqfb8a` at `2026-07-15T13:53:16Z`. The full-history checkout, guest
+identity preflight, qualification-only dependency setup, dependency staging,
+and import-root manifest all completed. At `2026-07-15T13:57:27Z`, the
+target-free Landlock/CUDA preflight failed closed before CUDA initialization or
+the exact source/test suite because the SSH controller had redirected its
+standard output and error directly to writable regular files. The launcher
+correctly reported:
+
+```text
+landlock launcher failed: writable regular-file/directory descriptor was inherited
+```
+
+This is a qualification-controller invocation defect, not a relaxation of the
+descriptor audit and not a scientific result. The regular-file standard
+descriptors were deliberately rejected by an already-frozen source test. The
+attempt made zero model forwards and did not render or read target prompts or
+features. Its immutable failure archive remains on network volume
+`bv9gb9j32y` at
+`qualification_archives/v6-c7-target-t915ydw4gqfb8a-4a7abd2`. The archive's
+`SHA256SUMS` verifies, and the relevant physical SHA-256 values are:
+
+- `QUALIFICATION_STATUS.json`: `8a7b4f9750d9648d45b99f030d8f76800a26d4a1c3b6c819d58737ae392e36a2`;
+- archived `remote.stdout`: `83a573b66f74ba07ee0df08b7484f5e60fd4298964b259b3e1db9c2a3142d5dc`;
+- archived `remote.stderr`: `e126f6d1a54a5458002985aa70e7d4c5ed9ba8fe53f9fd41dd2b52ecb7232777`;
+- controller: `49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a`;
+- `SHA256SUMS`: `2288175d16433f881a07b50bc33d0c6efef2fd7d49e0c1aaf79aa81a12dc8378`.
+
+The minimum controller-only correction is to give the qualification child
+pipe-backed standard streams and let separate `tee` processes own the regular
+log files. The retry must use a wholly fresh root and archive name, retain the
+failed archive, recompute the short socket pathname before setup, and run the
+same unmodified fail-closed descriptor audit. Because this disclosure changes
+the cumulative review packet, C7 cannot be the final reviewed freeze; fresh
+local and B200 receipts must bind its C8 successor.
+
 ## Pre-review long-context reserve correction
 
 Before the successor packet was frozen or submitted, the official GPT-5.6 Sol
@@ -203,19 +242,20 @@ remain below their respective `$25.00` authorizations. These are transparent
 rate-schedule reconstructions, not provider invoices, and no historical file is
 rewritten.
 
-## Why the C7 cumulative review is required
+## Why the C8 cumulative review is required
 
 V5 remains valid historical evidence for the exact packet it reviewed, but its
 own exact-byte condition prevents it from authorizing either repaired
 successor. C6 and its receipts remain historical B15 context and cannot be
 reused as proof of the changed source/test bytes. The cumulative successor
 review must receive the complete v5 review and adjudication, the exact B14 and
-B15 incidents and repairs, the C6 qualification chronology, current
+B15 incidents and repairs, the C6 qualification chronology, the disclosed C7
+logging failure and pipe-backed retry, current
 source/tests, canonical r3 source inventory, and fresh common-freeze local and
 disposable-B200 receipts.
 
-The successor gate must bind C7 code freeze, E7 reviewed packet, and F7
-adjudication with `C7 <= E7 <= F7`, no source/test drift from C7 to F7, and no
-reviewed-packet drift from E7 to F7. B14 and B15 must both be explicitly
+The successor gate must bind C8 code freeze, E8 reviewed packet, and F8
+adjudication with `C8 <= E8 <= F8`, no source/test drift from C8 to F8, and no
+reviewed-packet drift from E8 to F8. B14 and B15 must both be explicitly
 dispositioned. Any genuinely new blocking finding begins at B16 and any
 genuinely new important finding begins at I10. No silent retry is permitted.

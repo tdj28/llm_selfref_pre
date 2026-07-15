@@ -1633,7 +1633,8 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
         *(f"bounded context {index}" for index in range(1, len(roles))),
     ]
     assert "complete positive v5 review" in audit_recovery.PRO_REVIEW_V6_QUESTION
-    assert "C7<=E7<=F7" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "C8<=E8<=F8" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "pipe-backed logging repair" in audit_recovery.PRO_REVIEW_V6_QUESTION
     assert "B14 and B15" in audit_recovery.PRO_REVIEW_V6_QUESTION
     assert "B16 or later" in audit_recovery.PRO_REVIEW_V6_QUESTION
 
@@ -1701,7 +1702,7 @@ def test_v6_review_git_chain_rejects_nonancestor(
         "_git_command",
         lambda *parts, **kwargs: argparse.Namespace(returncode=1),
     )
-    with pytest.raises(audit_recovery.AuditRecoveryError, match="C7<=E7<=F7"):
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="C8<=E8<=F8"):
         audit_recovery._validate_v6_git_chain(
             code_freeze_commit="1" * 40,
             reviewed_packet_git_head_commit="2" * 40,
