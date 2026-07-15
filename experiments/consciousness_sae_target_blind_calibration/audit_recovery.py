@@ -883,6 +883,7 @@ _PRO_REVIEW_V6_PATHS = (
         "setup_runpod_qualification_guest.sh"
     ),
     "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json",
     f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
     f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,

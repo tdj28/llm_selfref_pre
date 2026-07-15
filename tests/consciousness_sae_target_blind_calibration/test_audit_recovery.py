@@ -1532,6 +1532,8 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
         "requirements-runpod-b200-qualification.txt",
         "experiments/consciousness_sae_target_blind_calibration/"
         "setup_runpod_qualification_guest.sh",
+        f"{audit_recovery.HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/"
+        "review_manifest.json",
         f"{audit_recovery.FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
         f"{audit_recovery.FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
         audit_recovery.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
