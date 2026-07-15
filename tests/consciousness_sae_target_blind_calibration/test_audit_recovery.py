@@ -6,6 +6,7 @@ import errno
 import json
 import os
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -1616,8 +1617,23 @@ def test_historical_v4_completed_negative_review_is_pinned() -> None:
     )
 
 
-def test_historical_v5_positive_review_is_pinned_without_current_sources() -> None:
+def test_historical_v5_positive_review_is_pinned_without_current_sources(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     observed = audit_recovery._validate_historical_v5_positive_review_evidence()  # noqa: SLF001
+    monkeypatch.setattr(
+        audit_recovery,
+        "_git_command",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("confined review validation invoked Git")
+        ),
+    )
+    assert (
+        audit_recovery._validate_historical_v5_positive_review_evidence(  # noqa: SLF001
+            validate_git=False
+        )
+        == observed
+    )
     assert observed["terminal_verdict"] == "READY TO FREEZE"
     assert observed["response_id"] == (
         "resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0"
@@ -1670,7 +1686,15 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
         audit_recovery.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         audit_recovery.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     } <= paths
-    assert set(audit_recovery.SOURCE_TEST_BOUND_PATHS) <= paths
+    v6_local_snapshot = json.loads(
+        (audit_recovery.REPO_ROOT / audit_recovery.V6_LOCAL_TEST_RECEIPT_SNAPSHOT)
+        .read_text(encoding="utf-8")
+    )
+    historical_v6_source_test_paths = {
+        str(row["path"]) for row in v6_local_snapshot["source_test_files"]
+    }
+    assert historical_v6_source_test_paths <= paths
+    assert not set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS) & paths
     assert set(audit_recovery.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) <= paths
     assert paths <= set(audit_recovery.RECOVERY_BOUND_PATHS)
     assert roles == [
@@ -1684,8 +1708,23 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
     assert "B16 or later" in audit_recovery.PRO_REVIEW_V6_QUESTION
 
 
-def test_historical_v6_ready_review_is_pinned_but_nonadjudicable() -> None:
+def test_historical_v6_ready_review_is_pinned_but_nonadjudicable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     observed = audit_recovery._validate_historical_v6_nonadjudicable_review_evidence()
+    monkeypatch.setattr(
+        audit_recovery,
+        "_git_command",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("confined review validation invoked Git")
+        ),
+    )
+    assert (
+        audit_recovery._validate_historical_v6_nonadjudicable_review_evidence(
+            validate_git=False
+        )
+        == observed
+    )
     assert observed["terminal_verdict"] == "READY TO FREEZE"
     assert observed["authorization_status"] == (
         "historical_ready_verdict_nonadjudicable"
@@ -1702,6 +1741,13 @@ def test_historical_v6_ready_review_is_pinned_but_nonadjudicable() -> None:
 def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    local_snapshot = json.loads(
+        (audit_recovery.REPO_ROOT / audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT)
+        .read_text(encoding="utf-8")
+    )
+    historical_v7_source_test_paths = {
+        str(row["path"]) for row in local_snapshot["source_test_files"]
+    }
     paths = [path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET]
     assert not set(paths) & set(audit_recovery.FINAL_V7_PRO_REVIEW_OUTPUT_PATHS)
     assert {
@@ -1715,13 +1761,100 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
         audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     } <= set(paths)
-    assert set(audit_recovery.SOURCE_TEST_BOUND_PATHS) <= set(paths)
+    assert historical_v7_source_test_paths <= set(paths)
+    assert not set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS) & set(paths)
     assert not set(audit_recovery.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) & set(
         paths
     )
     assert not set(audit_recovery.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256) & set(
         paths
     )
+
+    # Keep historical v7 validation testable after later repairs by supplying
+    # the immutable F10 bytes that the provider actually reviewed.
+    review_bound_paths = {
+        relative for relative, _role in audit_recovery.PRO_REVIEW_V7_PACKET
+    } | historical_v7_source_test_paths
+    reviewed_paths = sorted(review_bound_paths)
+    reviewed_final_commit = "2479ed0c767fba7c872dbbd48666b5a598e2b9f6"
+    reviewed_bytes = {
+        relative: subprocess.run(
+            ["git", "show", f"{reviewed_final_commit}:{relative}"],
+            cwd=audit_recovery.REPO_ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout
+        for relative in reviewed_paths
+    }
+    original_read_bytes = Path.read_bytes
+    original_read_text = Path.read_text
+
+    def reviewed_relative(path: Path) -> str | None:
+        try:
+            return path.resolve().relative_to(audit_recovery.REPO_ROOT).as_posix()
+        except ValueError:
+            return None
+
+    def read_reviewed_bytes(path: Path) -> bytes:
+        relative = reviewed_relative(path)
+        if relative in reviewed_bytes:
+            return reviewed_bytes[relative]
+        return original_read_bytes(path)
+
+    def read_reviewed_text(path: Path, *args, **kwargs) -> str:
+        relative = reviewed_relative(path)
+        if relative in reviewed_bytes:
+            return reviewed_bytes[relative].decode("utf-8")
+        return original_read_text(path, *args, **kwargs)
+
+    with monkeypatch.context() as review_patch:
+        review_patch.setattr(Path, "read_bytes", read_reviewed_bytes)
+        review_patch.setattr(Path, "read_text", read_reviewed_text)
+        review_patch.setattr(
+            audit_recovery,
+            "_source_test_records",
+            lambda *_args, **_kwargs: local_snapshot["source_test_files"],
+        )
+        review_patch.setattr(
+            audit_recovery, "_git_head", lambda: reviewed_final_commit
+        )
+        live_git_command = audit_recovery._git_command
+        git_calls: list[tuple[str, ...]] = []
+
+        def recording_git_command(*parts: str, **kwargs):
+            git_calls.append(parts)
+            return live_git_command(*parts, **kwargs)
+
+        review_patch.setattr(audit_recovery, "_git_command", recording_git_command)
+        live_review = audit_recovery._validate_v7_review_evidence_against_reviewed_tree()
+        final_head = live_review["final_git_head_commit"]
+        assert sum(parts[0] == "merge-base" for parts in git_calls) == 4
+        assert sum(parts[0] == "diff" for parts in git_calls) == 2
+        with pytest.raises(
+            audit_recovery.AuditRecoveryError,
+            match="sealed final Git HEAD binding differs",
+        ):
+            audit_recovery._validate_v7_review_evidence_against_reviewed_tree(
+                expected_final_git_head_commit="0" * 40
+            )
+
+        def reject_git(*_args, **_kwargs):
+            raise AssertionError("confined review validation invoked Git")
+
+        review_patch.setattr(audit_recovery, "_git_command", reject_git)
+        confined_review = audit_recovery._validate_v7_review_evidence_against_reviewed_tree(
+            validate_git=False,
+            expected_final_git_head_commit=final_head,
+        )
+        assert confined_review == live_review
+        with pytest.raises(
+            audit_recovery.AuditRecoveryError,
+            match="sealed final Git HEAD binding differs",
+        ):
+            audit_recovery._validate_v7_review_evidence_against_reviewed_tree(
+                validate_git=False,
+                expected_final_git_head_commit="not-a-commit",
+            )
 
     proxy = {
         audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT: (
@@ -1746,7 +1879,61 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
     )
     monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V7_PACKET", proxied_packet)
     value = audit_recovery._expected_v7_pro_review_input()
-    assert len(value) < 1_900_000
+    assert len(value) < audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS
+
+    v8_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V8_PACKET}
+    assert not v8_paths & set(audit_recovery.FINAL_V8_PRO_REVIEW_OUTPUT_PATHS)
+    assert set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS[:4]) <= v8_paths
+    assert {
+        audit_recovery.B20_INCIDENT_DOCUMENT,
+        f"{audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md",
+        audit_recovery.FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON,
+        f"{audit_recovery.HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review.md",
+        f"{audit_recovery.B18_COMPACT_EVIDENCE_DIRECTORY}/B18_CLOSURE_RECEIPT.json",
+        f"{audit_recovery.B20_COMPACT_EVIDENCE_DIRECTORY}/B20_CLOSURE_RECEIPT.json",
+        audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    } <= v8_paths
+
+    v8_proxy = {
+        audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT: (
+            audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT
+        ),
+        audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
+            audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+        ),
+        audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+            audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+        ),
+        audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+            audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+        ),
+        audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+            audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+        ),
+    }
+    proxied_v8_packet = tuple(
+        (v8_proxy.get(path, path), role)
+        for path, role in audit_recovery.PRO_REVIEW_V8_PACKET
+    )
+    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V8_PACKET", proxied_v8_packet)
+    v8_value = audit_recovery._expected_v8_pro_review_input()
+    v7_payload = json.loads(
+        (
+            audit_recovery.REPO_ROOT
+            / audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY
+            / "request_payload.json"
+        ).read_text(encoding="utf-8")
+    )
+    v8_limits = audit_recovery._validate_v8_packet_limits(
+        v7_payload["instructions"], v8_value
+    )
+    assert v8_limits["actual_input_characters"] <= 2_200_000
+    assert v8_limits["estimated_input_tokens_conservative"] <= 630_000
+    assert v8_limits["estimated_budget_reserve_usd"] <= 75.0
 
 
 def test_v7_cumulative_narratives_share_only_current_git_lineage() -> None:
@@ -1792,14 +1979,14 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q10-${FREEZE:0:7}"' in controller
+    assert 'ROOT="/root/q11-${FREEZE:0:7}"' in controller
     assert "EXPECTED_TEST_COUNT=${4:-228}" in controller
     assert '[[ "$EXPECTED_TEST_COUNT" == 228 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q10-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
-    assert '[[ "$LOG_ROOT" == /root/q10-* ]]' in wrapper
+    assert len(os.fsencode("/root/q11-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q11-* ]]' in wrapper
     assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
@@ -1807,6 +1994,18 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     assert '2>"$LOG_ROOT/remote.stderr"' not in wrapper
     for path in (controller_path, wrapper_path):
         subprocess.run(["bash", "-n", str(path)], check=True)
+    subprocess.run(
+        [
+            sys.executable,
+            str(
+                audit_recovery.REPO_ROOT
+                / "experiments/consciousness_sae_target_blind_calibration/"
+                "final_recovery_wrapper_self_test.py"
+            ),
+        ],
+        check=True,
+        cwd=audit_recovery.REPO_ROOT,
+    )
 
 
 def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
@@ -2686,10 +2885,14 @@ def test_execute_rehashes_raw_and_provenance_before_publication(
         "_current_bootstrap_attestation",
         lambda **_kwargs: {"receipt_sha256": "6" * 64},
     )
+    def validate_authorization(*_args, **kwargs):
+        assert kwargs == {"validate_git": False}
+        return authorization
+
     monkeypatch.setattr(
         audit_recovery,
         "validate_recovery_authorization",
-        lambda *_args, **_kwargs: authorization,
+        validate_authorization,
     )
     monkeypatch.setattr(
         audit_recovery,
@@ -2855,6 +3058,12 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
             audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
             audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
             audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            *audit_recovery.FINAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+            audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
         }
     )
     rows = [
@@ -2974,7 +3183,7 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v6_review_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["final_v7_review_adjudication_json_sha256"] in {
+    assert receipt["final_v8_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {

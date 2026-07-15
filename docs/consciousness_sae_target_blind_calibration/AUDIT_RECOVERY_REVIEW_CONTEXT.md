@@ -376,3 +376,32 @@ The reviewer should assess:
    are stated and evidenced precisely enough; and
 9. whether any remaining gap requires a fresh model transaction rather than
    stopping only the audit-only recovery.
+
+## V8 cumulative review context
+
+The completed v7 review and adjudication remain immutable historical evidence
+for F10, not authorization for current bytes. The successor packet also carries
+the complete focused B17 review and manifest, including B17--B19 and I10--I12,
+plus compact hash-pinned B18 cleanup evidence. One earlier focused-review call
+ended incomplete at `max_output_tokens`; its existence and reconstructed cost
+remain disclosed, while the replacement completed with `READY AFTER SPECIFIED
+FIXES`.
+
+B20 is the owned B200 attempt that passed authentic issue-time authorization
+but failed before `ATTEMPT_STARTED` because final validation invoked Git after
+entering the intentionally repository-free ACTIVE tree. This was structural,
+not merely a missing `/dev/null` exception. The successor retains strict
+Landlock policy, adds no `/dev/null` write permission, performs all live Git
+ancestry/diff checks before confinement in SOURCE, seals the exact F11 HEAD in
+the self-hashed authorization, and performs only Git-free byte/semantic
+validation in ACTIVE.
+
+The prospective v8 reviewer receives the tracked generic final controller and
+launch gates as exact source, fresh C11 local/target qualification snapshots,
+the immutable v7 evidence, the complete B17 evidence, and compact B18/B20
+closures. It must explicitly disposition B17--B20 and I10--I12. Any new
+blocker starts at B21 and stops launch. The Git lineage is
+`C11 <= E11 <= F11`; source/test bytes must be unchanged from C11 through F11,
+and provider-packet bytes must be unchanged from E11 through F11. F11 adds
+only the seven v8 review/adjudication outputs. No such v8 output exists yet,
+and no scientific result is claimed or authorized by this scaffold.

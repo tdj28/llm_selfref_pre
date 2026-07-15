@@ -832,6 +832,48 @@ short-context rates would not cover the frozen worst-case packet. Both static
 and exact tokenizer preflights must pass. The user explicitly authorized
 increasing the budget if necessary; expected spend remains below the ceiling.
 
+## V8 final-controller recovery after B17--B20
+
+The completed v7 review and adjudication are immutable positive historical
+evidence for the exact F10 tree only. They are not a review of later source
+bytes. A subsequent focused review completed after one disclosed
+`max_output_tokens` predecessor and returned `READY AFTER SPECIFIED FIXES` with
+findings B17--B19 and I10--I12. B18's obsolete-volume cleanup was completed and
+is preserved as compact, hash-pinned mechanical evidence.
+
+The first owned B200 execution attempt then established authentic issue-time
+authorization but stopped before `ATTEMPT_STARTED`. Its final validation ran
+inside the repository-free ACTIVE closure and invoked Git. The observed
+`/dev/null` denial was only the first symptom: the structural error was asking
+a Git-free closure to repeat Git ancestry and diff checks. No model forward,
+scientific calculation, or result publication occurred. The portable compact
+evidence and exact root-cause account are pinned in
+`AUDIT_RECOVERY_V8_B20_INCIDENT.md` and are presented to the successor reviewer
+as B20.
+
+V8 keeps every live-repository check at issue time in SOURCE: it must prove
+`C11 <= E11 <= F11`, no source/test diff from C11 through F11, and no provider
+packet diff from E11 through F11. The exact F11 HEAD is then sealed into the
+self-hashed authorization and independently cross-checked by the offline
+verifier. Final validation inside ACTIVE repeats the exact-byte and semantic
+checks without Git and without a `/dev/null` write exception. The tracked
+generic controller and launch-gate wrappers accept C11, E11, and F11 as
+runtime arguments and stage an exact repository-free ACTIVE closure.
+
+Fresh C11 local and disposable-B200 qualification receipts are required; no
+old receipt qualifies current bytes. E11 may add only those input snapshots
+and the prospective v8 packet. One final v8 `gpt-5.6-sol` review must receive
+the immutable completed v7 review/adjudication, the complete B17 review, the
+compact B18 and B20 evidence, and the exact current controller/source/test
+bytes. It must disposition B17--B20 and I10--I12. F11 may add only the seven
+v8 provider-output and adjudication files. Those outputs do not exist in this
+scaffold and no launch is authorized until they exist and validate.
+
+The v8 packet has a 2,200,000-character and 630,000-token conservative input
+ceiling. The same long-context rates and reserve multipliers apply, with the
+existing `$75.00` hard authorization. This accommodates the complete prior
+review context without weakening the one-call or packet-integrity gates.
+
 ## Claim boundary
 
 A successful result is an explicitly disclosed post-run technical recovery of

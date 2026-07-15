@@ -9,7 +9,7 @@ fi
 LOG_ROOT=$1
 shift
 
-[[ "$LOG_ROOT" == /root/q10-* ]]
+[[ "$LOG_ROOT" == /root/q11-* ]]
 test -d "$LOG_ROOT"
 test ! -L "$LOG_ROOT"
 test ! -e "$LOG_ROOT/remote.stdout"

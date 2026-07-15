@@ -149,18 +149,22 @@ def test_syscall_numbers_are_frozen_for_supported_architectures() -> None:
 
 
 def test_device_rule_record_binds_full_character_device_identity() -> None:
+    # Darwin exposes dev_t through a signed 32-bit value for high major numbers,
+    # while os.major/os.minor require its unsigned representation.  Linux's
+    # value is already non-negative, so this preserves the same 195:7 identity.
+    device_number = os.makedev(195, 7) & 0xFFFFFFFF
     details = SimpleNamespace(
         st_mode=stat.S_IFCHR | 0o660,
         st_dev=44,
         st_ino=55,
-        st_rdev=os.makedev(195, 7),
+        st_rdev=device_number,
     )
     record = landlock_launcher._device_rule_record(Path("/dev/nvidia7"), details)
     assert record == {
         "path": "/dev/nvidia7",
         "st_dev": 44,
         "st_ino": 55,
-        "st_rdev": os.makedev(195, 7),
+        "st_rdev": device_number,
         "major": 195,
         "minor": 7,
         "allowed_access_fs": 0x2,
