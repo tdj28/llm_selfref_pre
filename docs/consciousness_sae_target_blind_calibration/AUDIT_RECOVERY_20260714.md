@@ -2,11 +2,13 @@
 
 Status: prospective technical-recovery redesign after a pre-claim host
 compatibility failure, two incomplete provider calls, completed negative v2,
-v3, and v4 reviews, and a completed positive v5 review whose exact reviewed
-bytes failed the authentic pre-GPU authorization dry-run. No recovered audit
-output has been computed or inspected. This plan is not executable until a
-cumulative v6 review evaluates the repaired exact bytes and the complete v5
-review/adjudication context.
+v3, and v4 reviews, a completed positive v5 review whose exact reviewed bytes
+failed the authentic pre-GPU authorization dry-run, and a superseded C6
+qualification whose production Unix-socket paths were overlong. No recovered
+audit output has been computed or inspected. This plan is not executable until
+the C7 cumulative review evaluates the repaired exact bytes, both B14 and B15,
+the historical C6 qualification, and the complete v5 review/adjudication
+context.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -219,6 +221,17 @@ marker with `O_EXCL`; either exclusive receipt prevents authorization reuse.
 No second durable publication directory or retry can be selected inside the
 same authority. The disposable canary output is an enforcement self-test
 exception only and must be empty after that test.
+
+The prospective attempt root is the canonical, symlink-free
+`/workspace/csae/<attempt_id>` namespace. The filesystem Unix-socket canary
+leaf is `.s`. Linux permits at most 107 pathname bytes in
+`sockaddr_un.sun_path`; this recovery freezes a 16-byte safety margin and
+therefore rejects any derived socket pathname above 91 bytes before
+confinement. With the fixed 48-byte attempt ID, the absolute preflight and
+final canary socket paths are exactly 91 and 90 bytes. The launcher,
+authorization producer, independent verifier, and tests must agree on the
+107-byte maximum, 16-byte reserve, 91-byte operational budget, and exact
+derived lengths.
 
 ## Execution and stopping rules
 
@@ -516,8 +529,8 @@ that set remains exactly empty.
 ## Review disclosure
 
 The paragraphs below through the description of the v5 packet are retained as
-historical review lineage. The later "v6 pre-GPU repair" section supersedes
-their prospective-v5 status and resource envelope.
+historical review lineage. The later "B14/B15 pre-GPU repair and C7 review"
+section supersedes their prospective-v5 status and resource envelope.
 
 Five paid provider calls are historical incomplete or negative evidence and
 none is approval: two incomplete calls and the completed negative v2, v3, and
@@ -654,7 +667,7 @@ places byte-identical copies under the attempt's `evidence/tests/` directory.
 The offline verifier repeats those checks. No authorization is issued and no
 recovered audit is claimed ready until this closure exists.
 
-## V6 pre-GPU repair after the positive v5 review
+## B14/B15 pre-GPU repair and C7 cumulative review
 
 The v5 Pro call completed as response
 `resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0`, ended `READY TO
@@ -697,24 +710,82 @@ requires inventory SHA-256
 The gate must pass again from the final pushed review/adjudication commit before
 any recovery B200 is created.
 
-Because the repair changes reviewed source/test and packet bytes, v5 cannot
-authorize it under its own exact-byte rule. A fresh C6 code freeze therefore
-requires new local and disposable-B200 target receipts; E6 adds those receipts
-and the cumulative review packet; one v6 Pro call reviews the exact E6 packet,
-including the complete v5 review and adjudication plus the B14 incident; and F6
-adds only provider outputs and the v6 adjudication. The gate requires
-`C6 <= E6 <= F6`, no source/test diff from C6 to F6, and no reviewed-packet
-diff from E6 to F6. B14 must be explicitly dispositioned. Any genuinely new
-blocking finding starts at B15 and any genuinely new important finding starts
-at I10. No silent retry is permitted.
+Because the B14 repair changed reviewed source/test and packet bytes, v5 could
+not authorize it under its own exact-byte rule. The repair was frozen and
+pushed as C6 commit
+`57c4a6577309a5f112eec199d406c271df554c3a`. Its local test receipt passed from
+`2026-07-15T12:40:32Z` through `2026-07-15T12:40:35Z`. Distinct disposable
+one-B200 pod `0bc07njrv076ba` was created in `US-CA-2` on network volume
+`bv9gb9j32y` at `2026-07-15T12:46:32Z`; its target-free Landlock/CUDA
+preflight completed at `2026-07-15T12:53:11Z`, and its exact C6 target tests
+completed at `2026-07-15T12:53:21Z`. The target performed zero model forwards,
+zero target renders, and zero target-feature reads.
 
-The v6 resource guard permits at most 1,900,000 input characters, 550,000
-conservatively estimated input tokens, and 20,000 requested output tokens,
+The successful qualification was the third controller invocation on that pod.
+The first used a fresh root but fetched the branch with `--depth=1`; the exact
+test suite could not prove its required historical-review ancestry and failed
+closed. That depth-1 ancestry failure was controller-only. Retry2 fetched full
+history but used a longer new root whose absolute
+qualification socket pathname was 114 bytes, so it failed before the expected
+Landlock `EACCES`. Retry3 combined the full-history checkout with the entirely
+fresh short root `/root/q6-0bc07njrv076ba-57c4a65`, yielding the successful
+73-byte qualification socket pathname. These two controller/root failures are
+operational history, not B15 itself; B15 is the subsequent audit of the
+separate production paths.
+
+Neither failed root was reused. Their complete failure archives, including
+status, controller/log, available partial-receipt, and verified SHA256SUMS
+evidence, remain under the network volume's `qualification_archives/` directory
+as `v6-target-0bc07njrv076ba-57c4a65` and
+`v6-target-retry2-0bc07njrv076ba-57c4a65`; the successful retry3 archive is
+preserved alongside them. The pod was then deleted, direct lookup returned
+404, the unrelated L40S pod was unchanged, and the network volume was
+retained.
+
+Those C6 receipts and the termination chain are preserved byte-for-byte under
+the separate
+`reviews/audit_recovery_landlock_c6_superseded_qualification/` directory as
+historical qualification evidence, so fresh C7 inputs cannot overwrite them.
+A subsequent production-path audit found B15 before any final recovery pod,
+authorization, attempt marker, compact output, or paid v6 Pro call. C6's
+original 123-byte attempt parent plus its
+`.landlock-deny-socket` leaf produced absolute pathname-socket candidates of
+218 bytes for `preflight/canary/output` and 217 bytes for
+`landlock_canary/output`. Linux allows at most 107 pathname bytes. The C6
+qualification passed because its corresponding root made that candidate only
+73 bytes; it did not exercise the production path length.
+
+The B15 repair sets the attempt parent to `/workspace/csae` and the canary
+socket leaf to `.s`, retains absolute filesystem-socket binding, and freezes a
+16-byte margin below the 107-byte Linux maximum. The operational ceiling is
+therefore 91 bytes. With the fixed attempt ID, the production preflight socket
+path is exactly 91 bytes and the final socket path is exactly 90 bytes. The
+launcher must reject a longer candidate before confinement; producer and
+offline verifier must independently derive and enforce the same values; tests
+must cover equality and the 91-byte-pass/92-byte-fail boundary. No relative
+bind, working-directory mutation, abstract socket, symlink alias, mount, raw
+path, scientific source, estimand, or claim gate changes.
+
+Because B15 changes the source/test bytes, C6 and its receipts cannot qualify
+the successor. A fresh C7 code freeze requires new local and disposable-B200
+target receipts; E7 adds those receipts and the cumulative review packet; one
+successor Pro call reviews the exact E7 packet, including the complete v5
+review and adjudication, the B14 incident, and the C6/B15 chronology; and F7
+adds only provider outputs and the successor adjudication. The gate requires
+`C7 <= E7 <= F7`, no source/test diff from C7 to F7, and no reviewed-packet
+diff from E7 to F7. B14 and B15 must both be explicitly dispositioned. Any
+genuinely new blocking finding starts at B16 and any genuinely new important
+finding starts at I10. No silent retry is permitted.
+
+The successor-review resource guard permits at most 2,100,000 input
+characters, 600,000 conservatively estimated input tokens, and 20,000
+requested output tokens,
 with the same 5.0 input and 2.2 output reserve multipliers. Because the exact
 packet is conservatively above GPT-5.6 Sol's 272K-input long-context threshold,
 the whole request is reserved at the official 2x-input/1.5x-output rates:
 `$10.00` uncached input, `$12.50` cache write, and `$45.00` output per million
-tokens. The hard authorization is therefore `$65.00`; the obsolete
+tokens. The worst-case reserve is `$69.48`, and the hard authorization is
+therefore `$75.00`; the obsolete
 short-context rates would not cover the frozen worst-case packet. Both static
 and exact tokenizer preflights must pass. The user explicitly authorized
 increasing the budget if necessary; expected spend remains below the ceiling.

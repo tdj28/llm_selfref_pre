@@ -76,6 +76,10 @@ _NVIDIA_DEVICE_PATH = re.compile(
     r"/dev/nvidia-uvm-tools|/dev/nvidia-caps/nvidia-cap[0-9]+)"
 )
 _PURPOSES = ("preauthorization_probe", "audit_recovery")
+AF_UNIX_PATH_MAX_BYTES = 107
+AF_UNIX_PATH_REQUIRED_MARGIN_BYTES = 16
+AF_UNIX_PATH_BUDGET_BYTES = 91
+OUTPUT_CANARY_SOCKET_NAME = ".s"
 
 _FORBIDDEN_PRECONFINEMENT_MODULE_ROOTS = frozenset(
     {"experiments", "numpy", "safetensors", "torch", "transformers"}
@@ -281,6 +285,7 @@ def validate_policy(
     expected_proc_self_task = (
         LANDLOCK_ACCESS_FS_WRITE_FILE | LANDLOCK_ACCESS_FS_TRUNCATE
     )
+    socket_name = os.fsencode(OUTPUT_CANARY_SOCKET_NAME)
     if (
         required_abi != 4
         or handled_access_fs != expected_handled
@@ -294,6 +299,19 @@ def validate_policy(
         or output_allowed_access_fs & ~handled_access_fs
         or device_allowed_access_fs & ~handled_access_fs
         or proc_self_task_allowed_access_fs & ~handled_access_fs
+        or (
+            AF_UNIX_PATH_MAX_BYTES,
+            AF_UNIX_PATH_REQUIRED_MARGIN_BYTES,
+            AF_UNIX_PATH_BUDGET_BYTES,
+            OUTPUT_CANARY_SOCKET_NAME,
+        )
+        != (107, 16, 91, ".s")
+        or not socket_name
+        or b"/" in socket_name
+        or b"\0" in socket_name
+        or AF_UNIX_PATH_BUDGET_BYTES
+        != AF_UNIX_PATH_MAX_BYTES - AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        or len(socket_name) > AF_UNIX_PATH_BUDGET_BYTES
     ):
         raise LandlockLaunchError("frozen Landlock policy differs")
 
@@ -971,7 +989,23 @@ def _write_new_file(path: Path, payload: bytes) -> None:
         os.close(descriptor)
 
 
-def _output_canary_checks(root: Path) -> list[dict[str, Any]]:
+def _output_canary_socket_path(root: Path) -> Path:
+    """Bind only paths retaining a 16-byte reserve below Linux ``sun_path``."""
+
+    validate_policy()
+    path = root / OUTPUT_CANARY_SOCKET_NAME
+    encoded = os.fsencode(path)
+    if b"\0" in encoded or len(encoded) > AF_UNIX_PATH_BUDGET_BYTES:
+        raise LandlockLaunchError(
+            "output Unix-socket canary path exceeds the frozen byte budget: "
+            f"{len(encoded)} > {AF_UNIX_PATH_BUDGET_BYTES} bytes"
+        )
+    return path
+
+
+def _output_canary_checks(
+    root: Path, expected_socket_path: Path
+) -> list[dict[str, Any]]:
     checks: list[dict[str, Any]] = []
     first = root / ".landlock-allowed-create"
     renamed = root / ".landlock-allowed-renamed"
@@ -1029,7 +1063,9 @@ def _output_canary_checks(root: Path) -> list[dict[str, Any]]:
         )
     )
 
-    socket_path = root / ".landlock-deny-socket"
+    socket_path = _output_canary_socket_path(root)
+    if socket_path != expected_socket_path:
+        raise LandlockLaunchError("output Unix-socket canary path changed")
     unix_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     try:
         checks.append(
@@ -1219,6 +1255,7 @@ def _normalized_inputs(args: argparse.Namespace) -> dict[str, Any]:
     canary_output_root = _canonical_directory(
         args.canary_output_root, "output canary root"
     )
+    canary_socket_path = _output_canary_socket_path(canary_output_root)
     validate_directory_layout(
         output_root=output_root,
         canary_protected_root=canary_protected_root,
@@ -1276,6 +1313,7 @@ def _normalized_inputs(args: argparse.Namespace) -> dict[str, Any]:
         "output_root": output_root,
         "canary_protected_root": canary_protected_root,
         "canary_output_root": canary_output_root,
+        "canary_socket_path": canary_socket_path,
         "receipt": receipt,
         "protected_files": protected_files,
         "protected_roots": protected_roots,
@@ -1322,7 +1360,9 @@ def launch(args: argparse.Namespace) -> None:
     protected_canary = _protected_canary_checks(
         values["canary_protected_root"], protected_snapshot
     )
-    output_canary = _output_canary_checks(values["canary_output_root"])
+    output_canary = _output_canary_checks(
+        values["canary_output_root"], values["canary_socket_path"]
+    )
     protected_checks = _real_protected_checks(values["protected_files"])
     protected_after = _snapshot_tree(values["canary_protected_root"])
     if protected_after != protected_snapshot:

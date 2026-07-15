@@ -90,7 +90,9 @@ def test_launcher_source_imports_only_the_standard_library() -> None:
     assert not ({"torch", "transformers", "numpy", "safetensors"} & imported)
 
 
-def test_frozen_policy_masks_are_exact() -> None:
+def test_frozen_policy_masks_and_socket_budget_are_exact(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     landlock_launcher.validate_policy()
     assert landlock_launcher.HANDLED_ACCESS_FS == 0x7FF2
     assert landlock_launcher.OUTPUT_ALLOWED_ACCESS_FS == 0x1B2
@@ -102,6 +104,23 @@ def test_frozen_policy_masks_are_exact() -> None:
         landlock_launcher.validate_policy(output_allowed_access_fs=0x1B3)
     with pytest.raises(landlock_launcher.LandlockLaunchError, match="policy differs"):
         landlock_launcher.validate_policy(proc_self_task_allowed_access_fs=0x2)
+    monkeypatch.setattr(landlock_launcher, "OUTPUT_CANARY_SOCKET_NAME", ".other")
+    with pytest.raises(landlock_launcher.LandlockLaunchError, match="policy differs"):
+        landlock_launcher.validate_policy()
+
+
+def test_unix_socket_canary_enforces_frozen_byte_budget() -> None:
+    allowed_root = Path("/" + "a" * 87)
+    allowed = allowed_root / landlock_launcher.OUTPUT_CANARY_SOCKET_NAME
+    assert len(os.fsencode(allowed)) == landlock_launcher.AF_UNIX_PATH_BUDGET_BYTES
+    assert landlock_launcher._output_canary_socket_path(allowed_root) == allowed  # noqa: SLF001
+
+    for too_long_root in (Path("/" + "a" * 88), Path("/" + "é" * 44)):
+        with pytest.raises(
+            landlock_launcher.LandlockLaunchError,
+            match="exceeds the frozen byte budget",
+        ):
+            landlock_launcher._output_canary_socket_path(too_long_root)  # noqa: SLF001
 
 
 @pytest.mark.parametrize(

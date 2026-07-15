@@ -90,7 +90,7 @@ ORIGINAL_FAILURE_LOG_SHA256 = (
 ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
 ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
-COMPLETED_REVIEW_COST_CEILING_USD = 65.0
+COMPLETED_REVIEW_COST_CEILING_USD = 75.0
 ORIGINAL_RECEIPTS = {
     "ownership": "2aaa6e9e665f511ccfe363eee9deb5496c36bc8b2ae2b7ac67620a58abe914ca",
     "guest": "226e939db167bc3471c4b559aaa2f454ea3fa0cfa51a0f73d378ced11fe33b26",
@@ -138,10 +138,11 @@ RAW_RELATIVE = (
     "consciousness_sae_target_blind_calibration/"
     "consciousness_sae_target_blind_calibration_v2/raw/" + RUN_ID
 )
-RECOVERY_ATTEMPT_PARENT = (
-    "/workspace/consciousness_sae_target_blind_calibration/"
-    "consciousness_sae_target_blind_calibration_v2/audit_recovery_attempts"
-)
+RECOVERY_ATTEMPT_PARENT = "/workspace/csae"
+AF_UNIX_PATH_MAX_BYTES = 107
+AF_UNIX_PATH_REQUIRED_MARGIN_BYTES = 16
+AF_UNIX_PATH_BUDGET_BYTES = 91
+OUTPUT_CANARY_SOCKET_NAME = ".s"
 MODEL_SNAPSHOT_PATH = (
     "/workspace/consciousness_readout_validation/"
     "consciousness_readout_validation_v1/public_artifacts/model_snapshot"
@@ -606,6 +607,39 @@ HISTORICAL_V4_INPUT_TOKENS_PREFLIGHT = 274_606
 HISTORICAL_V4_RECORDED_COST_USD = 6.48768
 HISTORICAL_V4_RETROSPECTIVE_LONG_CONTEXT_COST_USD = 12.555555
 HISTORICAL_V4_BUDGET_AUTHORIZATION_USD = 25.0
+C6_SUPERSEDED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c6_superseded_qualification"
+)
+C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/LOCAL_TEST_RECEIPT.json": (
+        "192f7a2b4268311bbe16112b9a2ec37e91065b46aeb6da0618e14e7d77271d6b"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json": (
+        "0f259ba418856bf17429a75edc8e5ded4dffbc145480435d675d7ef667f00c5e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json": (
+        "a62132284f6a1e281102c6fcfeb6361c736f73d3af066720a54ead6711894d29"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json": (
+        "a2452daf78bd4cdc639e3e0b0c1a96d546a65e0d517c1589382cca076dc74c86"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json": (
+        "93c6d5bd66b1518e8ea4285d009cb9f6fabdaf288d4945492346fd6351a566e4"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_TERMINATION_AUDIT.json": (
+        "ad85debce16388f505709a7bc7e035c680a6773135167e0b97ef90b0c6e8b43e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_FROZEN_TERMINATION.json": (
+        "138a39a87b332da98277998c9b709822c331077a770a71a8abe39cd0b7f5ac99"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "QUALIFICATION_POSTDELETE_INVENTORY.json": (
+        "78175ab88acae3c157ecb91fe36525dfee7d234d2e717056598029247b193796"
+    ),
+}
 V6_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v6_inputs"
@@ -708,6 +742,7 @@ RECOVERY_DOCUMENT_PATHS = (
     V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
     V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     *FINAL_V5_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256),
     V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -988,6 +1023,30 @@ class RecoveryBundleVerificationError(RuntimeError):
     """The retrieved recovery bundle is incomplete or semantically invalid."""
 
 
+def _validate_bound_canary_socket_path(
+    root: PurePosixPath,
+    label: str,
+) -> None:
+    path = root / OUTPUT_CANARY_SOCKET_NAME
+    encoded = os.fsencode(path.as_posix())
+    if (
+        (
+            AF_UNIX_PATH_MAX_BYTES,
+            AF_UNIX_PATH_REQUIRED_MARGIN_BYTES,
+            AF_UNIX_PATH_BUDGET_BYTES,
+            OUTPUT_CANARY_SOCKET_NAME,
+        )
+        != (107, 16, 91, ".s")
+        or AF_UNIX_PATH_BUDGET_BYTES
+        != AF_UNIX_PATH_MAX_BYTES - AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        or b"\0" in encoded
+        or len(encoded) > AF_UNIX_PATH_BUDGET_BYTES
+    ):
+        raise RecoveryBundleVerificationError(
+            f"{label} Unix-socket canary path exceeds the frozen byte budget"
+        )
+
+
 def canonical_json_bytes(value: Any) -> bytes:
     try:
         return json.dumps(
@@ -1220,7 +1279,7 @@ def _expected_paths(attempt_id: str) -> dict[str, str]:
     output = attempt / "output"
     preflight = attempt / "preflight"
     canary = attempt / "landlock_canary"
-    return {
+    paths = {
         "plan_dir": (
             attempt / "provenance_repo" / CANONICAL_PLAN_RELATIVE_PATH
         ).as_posix(),
@@ -1293,6 +1352,9 @@ def _expected_paths(attempt_id: str) -> dict[str, str]:
         "attempt_marker": (output / "ATTEMPT_STARTED.json").as_posix(),
         "failure_out": (output / "FAILURE.json").as_posix(),
     }
+    for name in ("preflight_canary_output_root", "canary_output_root"):
+        _validate_bound_canary_socket_path(PurePosixPath(paths[name]), name)
+    return paths
 
 
 def _expected_confined_argv(
@@ -3319,17 +3381,19 @@ def _validate_review(
         or review["timed_qualification_final_recovery_scope_must_repeat"] is not True
         or findings != sorted(set(findings))
         or not findings
-        or not (set(HISTORICAL_V5_POSITIVE_FINDING_IDS) | {"B14"}).issubset(findings)
+        or not (set(HISTORICAL_V5_POSITIVE_FINDING_IDS) | {"B14", "B15"}).issubset(
+            findings
+        )
         or any(
             not isinstance(finding, str)
             or re.fullmatch(r"[BI][0-9]{2}", finding) is None
             for finding in findings
         )
         or any(
-            (finding.startswith("B") and int(finding[1:]) < 15)
+            (finding.startswith("B") and int(finding[1:]) < 16)
             or (finding.startswith("I") and int(finding[1:]) < 10)
             for finding in set(findings)
-            - (set(HISTORICAL_V5_POSITIVE_FINDING_IDS) | {"B14"})
+            - (set(HISTORICAL_V5_POSITIVE_FINDING_IDS) | {"B14", "B15"})
         )
         or _integer(
             review["historical_pre_v2_paid_call_count"],
@@ -3760,6 +3824,7 @@ def _validate_authorization(
             **HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256,
             **V4_TIMED_QUALIFICATION_PHYSICAL_SHA256,
             **HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256,
+            **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
         }.items()
     ):
         raise RecoveryBundleVerificationError(

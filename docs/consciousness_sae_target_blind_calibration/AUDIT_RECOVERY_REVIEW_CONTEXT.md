@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2, v3, v4, and v5 reviews; bounded v6 repair
+## Completed v2-v5 reviews; B14, superseded C6, and the C7 review
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -168,16 +168,62 @@ plan binds byte-for-byte. The first real authorization statement rejected
 canonical r3 files are restored exactly, while pytest moves to two separately
 bound qualification-only files. An unmocked regression test now runs the real
 plan/provenance gate and requires all 41 historical files and their exact
-inventory hash. The v6 packet supplies this context, the complete v5 review and
-adjudication, the canonical r3 source inventory, repaired source/tests, and
-fresh C6 local and disposable-B200 qualification evidence. B14 must be
-explicitly dispositioned; new IDs begin at B15 and I10.
+inventory hash.
+
+That repair was pushed as C6 commit
+`57c4a6577309a5f112eec199d406c271df554c3a`. Its local receipt passed, and
+disposable B200 pod `0bc07njrv076ba` then passed the target-free Landlock/CUDA
+preflight and exact C6 target tests on `bv9gb9j32y`, but only after two
+preserved controller failures. The first qualification checkout used
+`--depth=1` and could not prove the historical-review ancestry required by the
+exact test suite. That depth-1 ancestry failure was controller-only. Retry2
+fetched full history, but its longer fresh root made
+the qualification socket pathname 114 bytes and failed before the expected
+Landlock `EACCES`. Retry3 retained the full history and used the entirely fresh
+short root `/root/q6-0bc07njrv076ba-57c4a65`, producing the successful 73-byte
+qualification path. The two failed roots were not reused; their complete
+status/log/partial-receipt/SHA256SUMS archives remain under the network
+volume's `qualification_archives/` directory as
+`v6-target-0bc07njrv076ba-57c4a65` and
+`v6-target-retry2-0bc07njrv076ba-57c4a65`. These are controller failures,
+separate from the later B15 production defect.
+
+The pod was deleted and verified absent without mutating the unrelated L40S
+pod or deleting the network volume. The successful five C6 receipts and
+termination chain are pinned under the separate
+`reviews/audit_recovery_landlock_c6_superseded_qualification/` directory, so
+fresh C7 inputs cannot overwrite them. Those files, both failed archives, and
+the successful archive remain historical qualification evidence; the probe
+rendered no target and performed no model forward.
+
+Only after that evidence was retrieved did a production-path audit expose
+B15. C6's absolute `.landlock-deny-socket` pathname was 218 bytes in the
+preflight canary and 217 bytes in the final canary, above Linux's 107-byte
+pathname `AF_UNIX` maximum. The qualification path was only 73 bytes, so its
+pass did not exercise the production length. The exact repair uses
+`/workspace/csae` as the canonical attempt parent and `.s` as the socket leaf,
+freezes a 16-byte margin below 107 bytes, and rejects any derived socket path
+above 91 bytes. The resulting production preflight and final paths are exactly
+91 and 90 bytes. Producer, launcher, verifier, and boundary tests must agree.
+No relative bind, symlink alias, abstract socket, or scientific path changes.
+
+Because B15 changes source/test bytes, C6 cannot authorize execution and its
+receipts cannot qualify C7. The cumulative successor packet supplies this
+context, the complete v5 review and adjudication, both B14 and B15, the
+canonical r3 source inventory, repaired source/tests, and fresh C7 local and
+disposable-B200 qualification evidence. The lineage is `C7 <= E7 <= F7`, with
+no source/test drift from C7 to F7 and no reviewed-packet drift from E7 to F7.
+B14 and B15 must both be explicitly dispositioned; genuinely new IDs begin at
+B16 and I10. No paid v6 call preceded this correction, and no silent retry is
+permitted.
 
 The official GPT-5.6 Sol model page prices prompts above 272K input tokens at
-2x input and 1.5x output for the full request. The v6 packet is conservatively
-above that threshold, so its prospective reserve uses `$10.00` uncached input,
-`$12.50` cache write, and `$45.00` output per million tokens, with the frozen
-5.0/2.2 aggregate-work multipliers and a `$65.00` hard authorization. The
+2x input and 1.5x output for the full request. The successor packet is
+conservatively above that threshold, so its prospective reserve uses `$10.00`
+uncached input, `$12.50` cache write, and `$45.00` output per million tokens,
+with the frozen 2.1-million-character/600,000-token ceilings, 5.0/2.2
+aggregate-work multipliers, a `$69.48` worst-case reserve, and a `$75.00` hard
+authorization. The
 immutable v4/v5 cost fields remain their historical manifests' own
 reconstructions; they are not reused as the v6 rate schedule or asserted to be
 account invoices. The machine gate preserves both original fields and both
@@ -206,6 +252,13 @@ performs raw BF16 CUDA arithmetic and synchronization while model loaders and
 `torch.nn.Module` calls are guarded; it renders no prompt and performs zero
 model forwards. The raw and historical-provenance inventories are rehashed at
 both endpoints before compact success publication.
+
+For both production canaries, the launcher continues to bind an absolute
+filesystem socket pathname. The attempt namespace is `/workspace/csae`, the
+socket leaf is `.s`, and the independently enforced pathname budget is 91
+bytes: Linux's 107-byte maximum less a frozen 16-byte reserve. The fixed
+preflight and final candidates are 91 and 90 bytes respectively. An overlong
+candidate is a pre-confinement stop, not evidence of Landlock denial.
 
 The claim is deliberately narrow. ABI 4 does not mediate metadata-only
 operations, already-open descriptors, sibling processes, other NFS clients,

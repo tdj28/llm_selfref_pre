@@ -17,6 +17,66 @@ def _seal(core: dict) -> dict:
     return {**core, "receipt_sha256": verifier.canonical_sha256(core)}
 
 
+def test_superseded_c6_qualification_evidence_is_separate_and_pinned() -> None:
+    assert verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 == (
+        audit_recovery.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256
+    )
+    assert set(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) <= set(
+        verifier.RECOVERY_DOCUMENT_PATHS
+    )
+    assert set(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) <= set(
+        audit_recovery.RECOVERY_DOCUMENT_PATHS
+    )
+    packet_paths = [path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET]
+    assert not set(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) & {
+        verifier.V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        verifier.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        verifier.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        verifier.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        verifier.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    }
+    for (
+        relative,
+        expected,
+    ) in verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256.items():
+        path = audit_recovery.REPO_ROOT / relative
+        assert verifier.sha256_file(path) == expected
+        assert packet_paths.count(relative) == 1
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+        supplied = receipt.pop("receipt_sha256")
+        assert verifier.canonical_sha256(receipt) == supplied
+
+
+def test_independent_verifier_rejects_overlong_bound_canary_socket_path(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        verifier,
+        "RECOVERY_ATTEMPT_PARENT",
+        "/workspace/" + "x" * 160,
+    )
+    with pytest.raises(
+        verifier.RecoveryBundleVerificationError,
+        match="Unix-socket canary path exceeds",
+    ):
+        verifier._expected_paths(  # noqa: SLF001
+            "calv2-r3-audit-recovery-aaaaaaa-20260715T010203Z"
+        )
+
+
+def test_independent_verifier_rejects_socket_contract_drift(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(verifier, "OUTPUT_CANARY_SOCKET_NAME", ".other")
+    with pytest.raises(
+        verifier.RecoveryBundleVerificationError,
+        match="Unix-socket canary path exceeds",
+    ):
+        verifier._expected_paths(  # noqa: SLF001
+            "calv2-r3-audit-recovery-aaaaaaa-20260715T010203Z"
+        )
+
+
 def _write(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(verifier.canonical_json_bytes(value) + b"\n")
@@ -812,6 +872,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     closure_hashes.update(verifier.HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256)
     closure_hashes.update(verifier.V4_TIMED_QUALIFICATION_PHYSICAL_SHA256)
     closure_hashes.update(verifier.HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
         closure_hashes[verifier.HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON] = (
             "0" * 64
@@ -828,6 +889,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         )
     if mutation == "historical_v5_review_physical":
         closure_hashes[verifier.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON] = "0" * 64
+    if mutation == "superseded_c6_qualification_physical":
+        first_c6_path = next(iter(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256))
+        closure_hashes[first_c6_path] = "0" * 64
     recovery_bound_files = [
         {"path": path, "bytes": 100 + index, "sha256": closure_hashes[path]}
         for index, path in enumerate(verifier.RECOVERY_BOUND_PATHS)
@@ -1183,7 +1247,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             "source_test_qualification"
         ),
         "timed_qualification_final_recovery_scope_must_repeat": True,
-        "finding_ids": sorted([*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14"]),
+        "finding_ids": sorted(
+            [*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14", "B15"]
+        ),
         "review_sha256": closure_hashes[
             f"{verifier.FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md"
         ],
@@ -1195,7 +1261,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             verifier.FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
         "fixed_finding_ids": sorted(
-            [*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14"]
+            [*verifier.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14", "B15"]
         ),
         "rejected_finding_ids": [],
         "reviewed_local_test_receipt_file_sha256": _file_record(
@@ -1331,6 +1397,14 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         authorization_core["review"]["fixed_finding_ids"] = [
             finding for finding in review["fixed_finding_ids"] if finding != "B14"
         ]
+    elif mutation == "auth_review_b15_omitted":
+        authorization_core["review"] = dict(review)
+        authorization_core["review"]["finding_ids"] = [
+            finding for finding in review["finding_ids"] if finding != "B15"
+        ]
+        authorization_core["review"]["fixed_finding_ids"] = [
+            finding for finding in review["fixed_finding_ids"] if finding != "B15"
+        ]
     elif mutation == "auth_review_historical_v4_blocker":
         authorization_core["review"] = dict(review)
         authorization_core["review"]["historical_v4_remaining_blocking_findings"] = [
@@ -1361,7 +1435,9 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         )
     elif mutation == "auth_review_cost_over":
         authorization_core["review"] = dict(review)
-        authorization_core["review"]["reconstructed_cost_usd"] = 65.000001
+        authorization_core["review"]["reconstructed_cost_usd"] = (
+            verifier.COMPLETED_REVIEW_COST_CEILING_USD + 0.000001
+        )
     elif mutation == "auth_clock":
         authorization_core["provider_deadline_at_unix"] = 4500.0
     authorization = _seal(authorization_core)
@@ -2064,6 +2140,7 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ("auth_review_git_head", "review semantics differ"),
         ("auth_review_terminal", "review semantics differ"),
         ("auth_review_b14_omitted", "review semantics differ"),
+        ("auth_review_b15_omitted", "review semantics differ"),
         ("auth_review_historical_v4_blocker", "review semantics differ"),
         ("auth_review_historical_pricing", "review semantics differ"),
         ("auth_review_reserved_finding_id", "review semantics differ"),
@@ -2087,6 +2164,10 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ),
         (
             "historical_v5_review_physical",
+            "immutable historical review physical evidence differs",
+        ),
+        (
+            "superseded_c6_qualification_physical",
             "immutable historical review physical evidence differs",
         ),
         ("reviewed_snapshot_mismatch", "reviewed snapshot binding differs"),

@@ -477,6 +477,86 @@ def _execution_args(commit: str, stamp: str = "20260715T010203Z") -> argparse.Na
     )
 
 
+def test_production_canary_socket_paths_retain_frozen_linux_margin() -> None:
+    commit = "a" * 40
+    args = _execution_args(commit)
+    binding = audit_recovery._execution_binding(  # noqa: SLF001
+        args, git_head=commit, validate_execute_paths=True
+    )
+    verified_paths = recovery_bundle_verifier._expected_paths(args.attempt_id)  # noqa: SLF001
+
+    assert binding["paths"] == verified_paths
+    assert audit_recovery.RECOVERY_ATTEMPT_PARENT == (
+        recovery_bundle_verifier.RECOVERY_ATTEMPT_PARENT
+    )
+    assert audit_recovery.RECOVERY_ATTEMPT_PARENT == "/workspace/csae"
+    assert (
+        audit_recovery.AF_UNIX_PATH_MAX_BYTES
+        == landlock_launcher.AF_UNIX_PATH_MAX_BYTES
+        == recovery_bundle_verifier.AF_UNIX_PATH_MAX_BYTES
+        == 107
+    )
+    assert (
+        audit_recovery.AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        == landlock_launcher.AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        == recovery_bundle_verifier.AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        == 16
+    )
+    assert (
+        audit_recovery.AF_UNIX_PATH_BUDGET_BYTES
+        == landlock_launcher.AF_UNIX_PATH_BUDGET_BYTES
+        == recovery_bundle_verifier.AF_UNIX_PATH_BUDGET_BYTES
+        == 91
+    )
+    assert (
+        audit_recovery.OUTPUT_CANARY_SOCKET_NAME
+        == landlock_launcher.OUTPUT_CANARY_SOCKET_NAME
+        == recovery_bundle_verifier.OUTPUT_CANARY_SOCKET_NAME
+        == ".s"
+    )
+    lengths = {
+        name: len(
+            os.fsencode(
+                str(
+                    Path(binding["paths"][name])
+                    / landlock_launcher.OUTPUT_CANARY_SOCKET_NAME
+                )
+            )
+        )
+        for name in ("preflight_canary_output_root", "canary_output_root")
+    }
+    assert lengths == {
+        "preflight_canary_output_root": 91,
+        "canary_output_root": 90,
+    }
+    assert max(lengths.values()) <= audit_recovery.AF_UNIX_PATH_BUDGET_BYTES
+    assert (
+        min(
+            audit_recovery.AF_UNIX_PATH_MAX_BYTES - length
+            for length in lengths.values()
+        )
+        >= audit_recovery.AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+    )
+
+
+def test_producer_rejects_overlong_bound_canary_socket_path(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    commit = "a" * 40
+    monkeypatch.setattr(
+        audit_recovery,
+        "RECOVERY_ATTEMPT_PARENT",
+        "/workspace/" + "x" * 160,
+    )
+    with pytest.raises(
+        audit_recovery.AuditRecoveryError,
+        match="Unix-socket canary path exceeds",
+    ):
+        audit_recovery._execution_binding(  # noqa: SLF001
+            _execution_args(commit), git_head=commit, validate_execute_paths=True
+        )
+
+
 def _sealed(core: dict) -> dict:
     return {**core, "receipt_sha256": protocol.canonical_sha256(core)}
 
@@ -1511,6 +1591,7 @@ def test_historical_v5_positive_review_is_pinned_without_current_sources() -> No
 
 
 def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() -> None:
+    assert all(len(row) == 2 for row in audit_recovery.PRO_REVIEW_V5_PACKET)
     paths = {path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET}
     roles = [role for _path, role in audit_recovery.PRO_REVIEW_V6_PACKET]
     assert not paths & set(audit_recovery.FINAL_V6_PRO_REVIEW_OUTPUT_PATHS)
@@ -1545,23 +1626,28 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
         audit_recovery.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     } <= paths
     assert set(audit_recovery.SOURCE_TEST_BOUND_PATHS) <= paths
+    assert set(audit_recovery.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) <= paths
     assert paths <= set(audit_recovery.RECOVERY_BOUND_PATHS)
     assert roles == [
         "complete experiment plan",
         *(f"bounded context {index}" for index in range(1, len(roles))),
     ]
+    assert "complete positive v5 review" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "C7<=E7<=F7" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "B14 and B15" in audit_recovery.PRO_REVIEW_V6_QUESTION
+    assert "B16 or later" in audit_recovery.PRO_REVIEW_V6_QUESTION
 
 
 def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
     assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == (
         recovery_bundle_verifier.COMPLETED_REVIEW_COST_CEILING_USD
     )
-    assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == 65.0
+    assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == 75.0
     assert audit_recovery.PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION == 10.0
     assert audit_recovery.PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION == 12.5
     assert audit_recovery.PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION == 45.0
-    assert audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS == 1_900_000
-    assert audit_recovery.PRO_REVIEW_MAX_INPUT_TOKENS == 550_000
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS == 2_100_000
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_TOKENS == 600_000
     assert audit_recovery.PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION == 3.5
     limits = audit_recovery._validate_v6_packet_limits(  # noqa: SLF001
         "x" * audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS,
@@ -1615,7 +1701,7 @@ def test_v6_review_git_chain_rejects_nonancestor(
         "_git_command",
         lambda *parts, **kwargs: argparse.Namespace(returncode=1),
     )
-    with pytest.raises(audit_recovery.AuditRecoveryError, match="C6<=E6<=F6"):
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="C7<=E7<=F7"):
         audit_recovery._validate_v6_git_chain(
             code_freeze_commit="1" * 40,
             reviewed_packet_git_head_commit="2" * 40,
@@ -1807,6 +1893,264 @@ def test_v5_ready_only_adjudication_rejects_invalid_closure(
     _write_canonical(json_path, _sealed(core))
     with pytest.raises(audit_recovery.AuditRecoveryError, match=message):
         audit_recovery._validate_v5_review_adjudication(**kwargs)
+
+
+def _v6_adjudication_fixture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[dict, dict, Path]:
+    review_root = tmp_path / "review-v6"
+    review_root.mkdir()
+    for name in (
+        "response.json",
+        "review_manifest.json",
+        "request_payload.json",
+        "review_request.md",
+    ):
+        (review_root / name).write_text(f"{name}\n", encoding="utf-8")
+
+    incident_relative = (
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md"
+    )
+    incident_path = tmp_path / incident_relative
+    incident_path.parent.mkdir(parents=True)
+    incident_path.write_text("# B14/B15 incident\n", encoding="utf-8")
+
+    packet_paths = sorted(path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET)
+
+    finding_ids = sorted(
+        [*audit_recovery.HISTORICAL_V5_POSITIVE_FINDING_IDS, "B14", "B15"]
+    )
+    markdown_path = tmp_path / "ADJUDICATION_V6.md"
+    markdown_path.write_text(
+        "# V6 adjudication\n\n"
+        + " ".join(finding_ids)
+        + "\n\nFinal execution decision: **READY TO EXECUTE**.\n",
+        encoding="utf-8",
+    )
+    json_path = tmp_path / "ADJUDICATION_V6.json"
+    monkeypatch.setattr(audit_recovery, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(audit_recovery, "FINAL_V6_PRO_REVIEW_DIRECTORY", "review-v6")
+    monkeypatch.setattr(
+        audit_recovery,
+        "FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON",
+        "ADJUDICATION_V6.json",
+    )
+    monkeypatch.setattr(
+        audit_recovery,
+        "FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN",
+        "ADJUDICATION_V6.md",
+    )
+    historical_v5 = {
+        "response_id": "resp_historical_v5",
+        "terminal_verdict": "READY TO FREEZE",
+        "review_sha256": "1" * 64,
+        "response_file_sha256": "2" * 64,
+        "adjudication_json_sha256": "3" * 64,
+        "adjudication_receipt_sha256": "4" * 64,
+        "code_freeze_commit": "1" * 40,
+        "reviewed_packet_git_head_commit": "2" * 40,
+        "superseded_reason": "post_review_authentic_issue_gate_failed_b14",
+        "input_tokens_preflight": 336_765,
+        "recorded_cost_usd": 7.7812,
+        "retrospective_long_context_cost_usd": 15.121205,
+        "budget_authorization_usd": 25.0,
+        "pricing_disclosure_status": (
+            "historical_manifest_short_rate_plus_retrospective_long_context_"
+            "reconstruction_not_invoice"
+        ),
+        "finding_ids": list(audit_recovery.HISTORICAL_V5_POSITIVE_FINDING_IDS),
+    }
+    reviewed_evidence = {"code_freeze_commit": "3" * 40}
+    response = {"id": "resp_v6"}
+    response_semantic_sha256 = "5" * 64
+    review_sha256 = "6" * 64
+    review_input_sha256 = "7" * 64
+    reviewed_packet_commit = "4" * 40
+    review_binding = {
+        "review_directory": "review-v6",
+        "provider_response_id": response["id"],
+        "provider_response_file_sha256": audit_recovery._sha256(  # noqa: SLF001
+            review_root / "response.json"
+        ),
+        "provider_response_semantic_sha256": response_semantic_sha256,
+        "provider_review_sha256": review_sha256,
+        "provider_manifest_file_sha256": audit_recovery._sha256(  # noqa: SLF001
+            review_root / "review_manifest.json"
+        ),
+        "request_payload_file_sha256": audit_recovery._sha256(  # noqa: SLF001
+            review_root / "request_payload.json"
+        ),
+        "review_request_file_sha256": audit_recovery._sha256(  # noqa: SLF001
+            review_root / "review_request.md"
+        ),
+        "review_input_sha256": review_input_sha256,
+        "review_instructions_sha256": audit_recovery.PRO_REVIEW_INSTRUCTIONS_SHA256,
+        "reviewed_packet_git_head_commit": reviewed_packet_commit,
+        "code_freeze_commit": reviewed_evidence["code_freeze_commit"],
+        "adjudication_markdown_path": "ADJUDICATION_V6.md",
+        "adjudication_markdown_sha256": audit_recovery._sha256(  # noqa: SLF001
+            markdown_path
+        ),
+    }
+    historical_binding = {
+        "review_directory": audit_recovery.FINAL_V5_PRO_REVIEW_DIRECTORY,
+        "provider_response_id": historical_v5["response_id"],
+        "terminal_verdict": historical_v5["terminal_verdict"],
+        "review_file_sha256": historical_v5["review_sha256"],
+        "response_file_sha256": historical_v5["response_file_sha256"],
+        "adjudication_path": audit_recovery.FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+        "adjudication_file_sha256": historical_v5["adjudication_json_sha256"],
+        "adjudication_receipt_sha256": historical_v5["adjudication_receipt_sha256"],
+        "code_freeze_commit": historical_v5["code_freeze_commit"],
+        "reviewed_packet_git_head_commit": historical_v5[
+            "reviewed_packet_git_head_commit"
+        ],
+        "superseded_reason": historical_v5["superseded_reason"],
+        "input_tokens_preflight": historical_v5["input_tokens_preflight"],
+        "recorded_cost_usd": historical_v5["recorded_cost_usd"],
+        "retrospective_long_context_cost_usd": historical_v5[
+            "retrospective_long_context_cost_usd"
+        ],
+        "budget_authorization_usd": historical_v5["budget_authorization_usd"],
+        "pricing_disclosure_status": historical_v5["pricing_disclosure_status"],
+    }
+    incident_binding = {
+        "finding_ids": ["B14", "B15"],
+        "path": incident_relative,
+        "file_sha256": audit_recovery._sha256(incident_path),  # noqa: SLF001
+        "historical_provenance_file_count": (
+            audit_recovery.HISTORICAL_PROVENANCE_FILE_COUNT
+        ),
+        "historical_provenance_inventory_sha256": (
+            audit_recovery.HISTORICAL_PROVENANCE_INVENTORY_SHA256
+        ),
+        "r3_requirements_sha256": (
+            "4796c2817460bae757dcbae4c141bca460100fe80b13eb888776270d8df4b806"
+        ),
+        "r3_setup_sha256": (
+            "f420180faf5c229439e4bf626ec05f5e9a10902508e62dbcef36f48abc1ab8fa"
+        ),
+        "superseded_c6_code_freeze_commit": (
+            "57c4a6577309a5f112eec199d406c271df554c3a"
+        ),
+        "af_unix_path_max_bytes": audit_recovery.AF_UNIX_PATH_MAX_BYTES,
+        "af_unix_required_margin_bytes": (
+            audit_recovery.AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        ),
+        "af_unix_path_budget_bytes": audit_recovery.AF_UNIX_PATH_BUDGET_BYTES,
+        "preflight_socket_path_bytes": 91,
+        "execution_socket_path_bytes": 90,
+    }
+    findings = []
+    for finding_id in finding_ids:
+        if finding_id in {"B14", "B15"}:
+            changed_paths = packet_paths
+        elif finding_id.startswith("B"):
+            changed_paths = [packet_paths[0]]
+        else:
+            changed_paths = []
+        findings.append(
+            {
+                "id": finding_id,
+                "blocking": finding_id.startswith("B"),
+                "disposition": "fixed" if finding_id.startswith("B") else "rejected",
+                "rationale": "exact reviewed-byte disposition",
+                "changed_paths": changed_paths,
+            }
+        )
+    core = {
+        "schema_version": 6,
+        "artifact_type": "completed_provider_review_v6_adjudication",
+        "review_binding": review_binding,
+        "historical_v5_binding": historical_binding,
+        "incident_binding": incident_binding,
+        "reviewed_qualification_evidence": reviewed_evidence,
+        "finding_ids": finding_ids,
+        "findings": findings,
+        "resolved_pregpu_findings": ["B14", "B15"],
+        "final_decision": "READY_TO_EXECUTE",
+    }
+    _write_canonical(json_path, _sealed(core))
+    kwargs = {
+        "root": review_root,
+        "response": response,
+        "response_semantic_sha256": response_semantic_sha256,
+        "review_sha256": review_sha256,
+        "review_input_sha256": review_input_sha256,
+        "finding_ids": finding_ids,
+        "historical_v5": historical_v5,
+        "reviewed_evidence": reviewed_evidence,
+        "reviewed_packet_git_head_commit": reviewed_packet_commit,
+    }
+    return core, kwargs, json_path
+
+
+def test_v6_adjudication_accepts_exact_b14_b15_schema(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _core, kwargs, _json_path = _v6_adjudication_fixture(tmp_path, monkeypatch)
+    observed = audit_recovery._validate_v6_review_adjudication(**kwargs)
+    assert {"B14", "B15"} <= set(observed["fixed_finding_ids"])
+    assert observed["rejected_finding_ids"] == [
+        finding
+        for finding in audit_recovery.HISTORICAL_V5_POSITIVE_FINDING_IDS
+        if finding.startswith("I")
+    ]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("missing_b15", "omitted a cumulative finding ID"),
+        ("rejected_b15", "B14/B15 adjudication differs"),
+        ("missing_b15_path", "B14/B15 adjudication differs"),
+        ("incident_length", "binding differs"),
+        ("recycled_b05", "recycled a reserved finding ID"),
+    ],
+)
+def test_v6_adjudication_rejects_invalid_b15_closure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+    message: str,
+) -> None:
+    core, kwargs, json_path = _v6_adjudication_fixture(tmp_path, monkeypatch)
+    if mutation == "missing_b15":
+        core["finding_ids"].remove("B15")
+        core["findings"] = [row for row in core["findings"] if row["id"] != "B15"]
+        kwargs["finding_ids"] = core["finding_ids"]
+    elif mutation == "rejected_b15":
+        b15 = next(row for row in core["findings"] if row["id"] == "B15")
+        b15["disposition"] = "rejected"
+        b15["changed_paths"] = []
+    elif mutation == "missing_b15_path":
+        b15 = next(row for row in core["findings"] if row["id"] == "B15")
+        b15["changed_paths"].remove(
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "landlock_launcher.py"
+        )
+    elif mutation == "incident_length":
+        core["incident_binding"]["preflight_socket_path_bytes"] = 92
+    else:
+        core["finding_ids"] = sorted([*core["finding_ids"], "B05"])
+        core["findings"].append(
+            {
+                "id": "B05",
+                "blocking": True,
+                "disposition": "fixed",
+                "rationale": "invalid recycled identifier",
+                "changed_paths": [
+                    sorted(path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET)[
+                        0
+                    ]
+                ],
+            }
+        )
+        kwargs["finding_ids"] = core["finding_ids"]
+    _write_canonical(json_path, _sealed(core))
+    with pytest.raises(audit_recovery.AuditRecoveryError, match=message):
+        audit_recovery._validate_v6_review_adjudication(**kwargs)
 
 
 def test_attempt_claim_is_one_shot_and_failure_receipt_is_sealed(

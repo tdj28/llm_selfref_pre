@@ -100,12 +100,12 @@ ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
 # Prospective successor-review settings. Freezing these values permits a
 # cost-only dry run; it does not authorize or issue the paid provider call.
-PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 65.0
+PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 75.0
 PRO_REVIEW_INSTRUCTIONS_SHA256 = (
     "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7"
 )
-PRO_REVIEW_MAX_INPUT_CHARACTERS = 1_900_000
-PRO_REVIEW_MAX_INPUT_TOKENS = 550_000
+PRO_REVIEW_MAX_INPUT_CHARACTERS = 2_100_000
+PRO_REVIEW_MAX_INPUT_TOKENS = 600_000
 PRO_REVIEW_MAX_OUTPUT_TOKENS = 20_000
 PRO_REVIEW_INPUT_RESERVE_MULTIPLIER = 5.0
 PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER = 2.2
@@ -146,10 +146,11 @@ PREFLIGHT_CLOSURE_SCOPES = ("final_recovery", "source_test_qualification")
 HEX64 = re.compile(r"[0-9a-f]{64}")
 HEX40 = re.compile(r"[0-9a-f]{40}")
 ATTEMPT_ID_RE = re.compile(r"calv2-r3-audit-recovery-[0-9a-f]{7}-[0-9]{8}T[0-9]{6}Z")
-RECOVERY_ATTEMPT_PARENT = (
-    "/workspace/consciousness_sae_target_blind_calibration/"
-    "consciousness_sae_target_blind_calibration_v2/audit_recovery_attempts"
-)
+RECOVERY_ATTEMPT_PARENT = "/workspace/csae"
+AF_UNIX_PATH_MAX_BYTES = 107
+AF_UNIX_PATH_REQUIRED_MARGIN_BYTES = 16
+AF_UNIX_PATH_BUDGET_BYTES = 91
+OUTPUT_CANARY_SOCKET_NAME = ".s"
 BOOTSTRAP_MANIFEST_RELATIVE = "bootstrap/APPROVED_IMPORT_ROOTS.json"
 MODEL_SNAPSHOT_PATH = runpod_preflight.LEGACY_PUBLIC_ARTIFACT_ROOT + "/model_snapshot"
 J_LENS_PATH = (
@@ -656,6 +657,39 @@ HISTORICAL_V4_INPUT_TOKENS_PREFLIGHT = 274_606
 HISTORICAL_V4_RECORDED_COST_USD = 6.48768
 HISTORICAL_V4_RETROSPECTIVE_LONG_CONTEXT_COST_USD = 12.555555
 HISTORICAL_V4_BUDGET_AUTHORIZATION_USD = 25.0
+C6_SUPERSEDED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c6_superseded_qualification"
+)
+C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/LOCAL_TEST_RECEIPT.json": (
+        "192f7a2b4268311bbe16112b9a2ec37e91065b46aeb6da0618e14e7d77271d6b"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json": (
+        "0f259ba418856bf17429a75edc8e5ded4dffbc145480435d675d7ef667f00c5e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json": (
+        "a62132284f6a1e281102c6fcfeb6361c736f73d3af066720a54ead6711894d29"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json": (
+        "a2452daf78bd4cdc639e3e0b0c1a96d546a65e0d517c1589382cca076dc74c86"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json": (
+        "93c6d5bd66b1518e8ea4285d009cb9f6fabdaf288d4945492346fd6351a566e4"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_TERMINATION_AUDIT.json": (
+        "ad85debce16388f505709a7bc7e035c680a6773135167e0b97ef90b0c6e8b43e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_FROZEN_TERMINATION.json": (
+        "138a39a87b332da98277998c9b709822c331077a770a71a8abe39cd0b7f5ac99"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "QUALIFICATION_POSTDELETE_INVENTORY.json": (
+        "78175ab88acae3c157ecb91fe36525dfee7d234d2e717056598029247b193796"
+    ),
+}
 V6_REVIEW_INPUT_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v6_inputs"
@@ -888,6 +922,7 @@ _PRO_REVIEW_V6_PATHS = (
     f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
     FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    *tuple(C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256),
     V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -905,27 +940,46 @@ PRO_REVIEW_V6_QUESTION = (
     "This is a prospective audit-only recovery, not a new model transaction. "
     "No recovered compact audit or summary has been generated or inspected. "
     "The complete positive v5 review, response metadata, and adjudication are "
-    "included as bounded historical context. After v5, the authentic first "
+    "included as bounded historical context and must be considered rather than "
+    "reviewing this packet in isolation. After v5, the authentic first "
     "authorization call failed before GPU provisioning because two active "
     "qualification-modified dependency files differed from the immutable r3 "
     "source inventory. Treat that disclosed stop-ship as B14 and explicitly "
     "disposition it. Audit whether byte-restoring the two r3 runtime files, "
     "moving pytest to two separately bound qualification-only files, and adding "
     "the unmocked 41-file plan/provenance gate is the smallest sound repair. "
+    "The first live C6 target qualification then exposed a shallow-checkout "
+    "controller defect in an ancestry-dependent test; that operational failure "
+    "was preserved and the controller was changed to fetch full history. A "
+    "second qualification exposed a 114-byte AF_UNIX pathname. Although a short "
+    "qualification root subsequently passed 198 tests, an offline calculation "
+    "then proved that C6's actual production preflight and execution socket "
+    "paths were 218 and 217 bytes, above Linux's 107-byte pathname maximum. "
+    "Treat that production stop-ship as B15 and explicitly disposition it. "
+    "Audit the repair that moves only the fresh attempt parent to /workspace/csae, "
+    "uses the .s socket leaf, enforces a 91-byte operational budget with a "
+    "16-byte reserve below 107 in the producer, launcher, and independent "
+    "verifier, and regression-tests the exact 91-byte preflight and 90-byte "
+    "execution paths plus byte-count boundary failures. The C6 freeze, five "
+    "receipts, and termination chain are included in a separately pinned "
+    "superseded-evidence directory as historical context only; only the fresh "
+    "C7 qualification receipts in the v6 input directory can qualify the "
+    "current source/test bytes. "
     "Verify the separately disclosed pre-review correction to the GPT-5.6 Sol "
-    "long-context rate schedule and $65 reserve; no v6 paid call preceded it. "
+    "long-context rate schedule and $75 reserve; no v6 paid call preceded it. "
     "Also verify the explicit immutable-versus-retrospective v4/v5 accounting: "
     "274,606 preflight tokens imply $12.555555 and 336,765 imply $15.121205 "
     "under the long-context rates, both below their $25 authorizations and "
     "neither claimed as an invoice. "
     "Confirm that the qualification wrapper is never invoked in final recovery. "
     "Also re-evaluate the full current exact-byte recovery, confinement, "
-    "zero-forward, receipt, Git C6<=E6<=F6, and offline-verifier design in light "
-    "of the missed v5 invocation defect. Do not request or infer scientific "
+    "zero-forward, receipt, Git C7<=E7<=F7, and offline-verifier design in light "
+    "of the missed v5 invocation defect and C6 qualification failures. Do not "
+    "request or infer scientific "
     "result values. Explicitly disposition every historical B01-B04, B06-B13, "
-    "and I01-I09 identifier from the supplied v5 review as well as B14; do not "
-    "renumber or "
-    "silently omit them. Return any genuinely new blocker as B15 or later and "
+    "and I01-I09 identifier from the supplied v5 review as well as B14 and B15; "
+    "do not renumber or silently omit them. Return any genuinely new blocker as "
+    "B16 or later and "
     "any genuinely new important finding as I10 or later. A READY TO FREEZE "
     "verdict must apply only to the exact source, tests, plan inventories, fresh "
     "qualification receipts, and prior-review context in this packet. Any "
@@ -1029,6 +1083,7 @@ RECOVERY_DOCUMENT_PATHS = (
     V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
     V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     *FINAL_V5_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256),
     V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
     V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
@@ -1081,6 +1136,30 @@ BOOTSTRAP_PREPUBLICATION_PHASE = "after_guarded_audit_before_compact_publication
 
 class AuditRecoveryError(RuntimeError):
     """The audit-only recovery closure is not admissible."""
+
+
+def _validate_bound_canary_socket_path(
+    root: PurePosixPath,
+    label: str,
+) -> None:
+    path = root / OUTPUT_CANARY_SOCKET_NAME
+    encoded = os.fsencode(path.as_posix())
+    if (
+        (
+            AF_UNIX_PATH_MAX_BYTES,
+            AF_UNIX_PATH_REQUIRED_MARGIN_BYTES,
+            AF_UNIX_PATH_BUDGET_BYTES,
+            OUTPUT_CANARY_SOCKET_NAME,
+        )
+        != (107, 16, 91, ".s")
+        or AF_UNIX_PATH_BUDGET_BYTES
+        != AF_UNIX_PATH_MAX_BYTES - AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        or b"\0" in encoded
+        or len(encoded) > AF_UNIX_PATH_BUDGET_BYTES
+    ):
+        raise AuditRecoveryError(
+            f"{label} Unix-socket canary path exceeds the frozen byte budget"
+        )
 
 
 def _sha256(path: Path) -> str:
@@ -2311,6 +2390,8 @@ def _execution_binding(
         "attempt_marker": (output / "ATTEMPT_STARTED.json").as_posix(),
         "failure_out": (output / "FAILURE.json").as_posix(),
     }
+    for name in ("preflight_canary_output_root", "canary_output_root"):
+        _validate_bound_canary_socket_path(PurePosixPath(expected[name]), name)
     always_observed = {
         name: getattr(args, name).expanduser().absolute().as_posix()
         for name in (
@@ -4714,7 +4795,7 @@ def _validate_v6_git_chain(
             ).returncode
             != 0
         ):
-            raise AuditRecoveryError("v6 review Git chain is not C6<=E6<=F6")
+            raise AuditRecoveryError("v6 review Git chain is not C7<=E7<=F7")
     if (
         _git_command(
             "diff",
@@ -4927,7 +5008,7 @@ def _validate_v6_review_adjudication(
         "pricing_disclosure_status": historical_v5["pricing_disclosure_status"],
     }
     expected_incident_binding = {
-        "finding_id": "B14",
+        "finding_ids": ["B14", "B15"],
         "path": incident_path,
         "file_sha256": _sha256(REPO_ROOT / incident_path),
         "historical_provenance_file_count": HISTORICAL_PROVENANCE_FILE_COUNT,
@@ -4940,6 +5021,14 @@ def _validate_v6_review_adjudication(
         "r3_setup_sha256": (
             "f420180faf5c229439e4bf626ec05f5e9a10902508e62dbcef36f48abc1ab8fa"
         ),
+        "superseded_c6_code_freeze_commit": (
+            "57c4a6577309a5f112eec199d406c271df554c3a"
+        ),
+        "af_unix_path_max_bytes": AF_UNIX_PATH_MAX_BYTES,
+        "af_unix_required_margin_bytes": AF_UNIX_PATH_REQUIRED_MARGIN_BYTES,
+        "af_unix_path_budget_bytes": AF_UNIX_PATH_BUDGET_BYTES,
+        "preflight_socket_path_bytes": 91,
+        "execution_socket_path_bytes": 90,
     }
     if (
         set(value)
@@ -4963,19 +5052,19 @@ def _validate_v6_review_adjudication(
         or value.get("incident_binding") != expected_incident_binding
         or value.get("reviewed_qualification_evidence") != reviewed_evidence
         or value.get("finding_ids") != list(finding_ids)
-        or value.get("resolved_pregpu_findings") != ["B14"]
+        or value.get("resolved_pregpu_findings") != ["B14", "B15"]
         or value.get("final_decision") != "READY_TO_EXECUTE"
         or "Final execution decision: **READY TO EXECUTE**." not in markdown
     ):
         raise AuditRecoveryError("final v6 review adjudication binding differs")
 
-    required_ids = set(historical_v5["finding_ids"]) | {"B14"}
+    required_ids = set(historical_v5["finding_ids"]) | {"B14", "B15"}
     if not required_ids.issubset(finding_ids):
         raise AuditRecoveryError("final v6 review omitted a cumulative finding ID")
     for finding_id in set(finding_ids) - required_ids:
         prefix = finding_id[0]
         number = int(finding_id[1:])
-        if (prefix == "B" and number < 15) or (prefix == "I" and number < 10):
+        if (prefix == "B" and number < 16) or (prefix == "I" and number < 10):
             raise AuditRecoveryError("final v6 review recycled a reserved finding ID")
 
     packet_paths = {relative for relative, _role in PRO_REVIEW_V6_PACKET}
@@ -4984,6 +5073,7 @@ def _validate_v6_review_adjudication(
         raise AuditRecoveryError("final v6 adjudication finding rows differ")
     observed_ids: list[str] = []
     b14_row: Mapping[str, Any] | None = None
+    b15_row: Mapping[str, Any] | None = None
     for row in findings:
         if not isinstance(row, Mapping) or set(row) != {
             "id",
@@ -5013,6 +5103,8 @@ def _validate_v6_review_adjudication(
             raise AuditRecoveryError("final v6 adjudication finding rows differ")
         if finding_id == "B14":
             b14_row = row
+        elif finding_id == "B15":
+            b15_row = row
         observed_ids.append(finding_id)
     required_b14_paths = {
         "experiments/consciousness_sae_target_blind_calibration/"
@@ -5025,13 +5117,35 @@ def _validate_v6_review_adjudication(
         "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     }
+    required_b15_paths = {
+        *C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
+        incident_path,
+        "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+        "experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "recovery_bundle_verifier.py",
+        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+        "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+        "tests/consciousness_sae_target_blind_calibration/"
+        "test_recovery_bundle_verifier.py",
+    }
     if (
         sorted(observed_ids) != list(finding_ids)
         or not isinstance(b14_row, Mapping)
         or b14_row.get("disposition") != "fixed"
         or not required_b14_paths <= set(b14_row.get("changed_paths", []))
+        or not isinstance(b15_row, Mapping)
+        or b15_row.get("disposition") != "fixed"
+        or not required_b15_paths <= set(b15_row.get("changed_paths", []))
     ):
-        raise AuditRecoveryError("final v6 B14 adjudication differs")
+        raise AuditRecoveryError("final v6 B14/B15 adjudication differs")
     return {
         "receipt_sha256": value["receipt_sha256"],
         "json_sha256": _sha256(json_path),
@@ -5051,9 +5165,16 @@ def _validate_review_evidence() -> dict[str, Any]:
         or not isinstance(PRO_REVIEW_BUDGET_AUTHORIZATION_USD, (int, float))
         or isinstance(PRO_REVIEW_BUDGET_AUTHORIZATION_USD, bool)
         or not math.isfinite(float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD))
-        or float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD) != 65.0
+        or float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD) != 75.0
     ):
         raise AuditRecoveryError("prospective final-review settings are not frozen")
+    if any(
+        _sha256(REPO_ROOT / relative) != expected
+        for relative, expected in C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256.items()
+    ):
+        raise AuditRecoveryError(
+            "immutable superseded C6 qualification evidence differs"
+        )
     _validate_historical_incomplete_review_evidence()
     historical_v2 = _validate_historical_v2_review_evidence()
     historical_v3 = _validate_historical_v3_negative_review_evidence()
