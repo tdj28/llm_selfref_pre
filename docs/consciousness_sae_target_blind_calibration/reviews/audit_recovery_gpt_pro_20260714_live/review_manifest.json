@@ -1,0 +1,64 @@
+{
+  "actual_input_characters": 12184,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 5688,
+      "characters": 5688,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+      "role": "complete experiment plan",
+      "sha256": "26ccfd883082938c75ef4ee08f7cb673d5e4b0de8c76770bb807f7f89032be44"
+    },
+    {
+      "bytes": 3285,
+      "characters": 3285,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+      "role": "bounded context 1",
+      "sha256": "c142c0271931c640e36cde589a48059bdc77b3b379ef26b1b0f85582d840eae9"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 0.75,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 1.0,
+  "created_at_utc": "2026-07-15T00:43:09.814814Z",
+  "estimated_budget_reserve_usd": 0.43707,
+  "estimated_input_tokens_conservative": 12184,
+  "exact_budget_reserve_usd_after_preflight": 0.33216375,
+  "failed_at_utc": "2026-07-15T00:45:04.752348Z",
+  "failure": {
+    "error": "response ended with non-completed status 'incomplete'",
+    "error_type": "RuntimeError",
+    "failed_at_utc": "2026-07-15T00:45:04.752348Z"
+  },
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 2859,
+  "input_tokens_preflight_at_utc": "2026-07-15T00:43:10.789539Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "25ad3d417bed37a41b31b0577707134b50a97d22e8b58fb5e55047e8cbd55047",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 40000,
+  "max_input_tokens": 40000,
+  "max_output_tokens": 2500,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_output_reserve_multiplier": 4.0,
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "request_payload_sha256": "d8ede3690eda9808f044a2711ef612c1ce6ee9d126ce5bfaccf53de85774f132",
+  "reserved_billable_output_tokens": 10000,
+  "review_input_sha256": "0e444d1f9987caddca399ac3f6b4e4a3b41304dfd98feee2b8c7b6fc0114f7df",
+  "review_instructions_sha256": "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7",
+  "review_request_sha256": "cb4bdd1b282e76846513368cdaa3d3a97151037c880bbd50949b65021d310905",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "failed",
+  "store": false
+}
