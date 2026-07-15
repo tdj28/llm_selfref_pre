@@ -1535,6 +1535,50 @@ def test_review_finding_ids_use_real_word_boundaries() -> None:
     ]
 
 
+def test_v6_review_finding_ids_require_actual_finding_headings() -> None:
+    mentions_only = """Prose says no B05, B16, or I10 was identified.
+
+# Freeze checklist
+
+- [ ] Do not invent B05 or silently add B16 or I10.
+"""
+    actual_headings = """# Blocking findings
+
+## B05 — Actual finding
+## B16 — Actual new blocker
+
+# Important non-blocking findings
+
+## I10 — Actual new important finding
+"""
+    ignored_structures = """# Verdict
+
+## B05 — Outside a finding section
+
+# Blocking findings
+
+```markdown
+## B16 — Inside a fence
+```
+
+<!--
+## I10 — Inside a comment
+-->
+
+# Freeze checklist
+
+## B17 — Outside a finding section
+"""
+
+    assert audit_recovery._v6_review_finding_ids(mentions_only) == []  # noqa: SLF001
+    assert audit_recovery._v6_review_finding_ids(actual_headings) == [  # noqa: SLF001
+        "B05",
+        "B16",
+        "I10",
+    ]
+    assert audit_recovery._v6_review_finding_ids(ignored_structures) == []  # noqa: SLF001
+
+
 def test_historical_v2_completed_negative_review_is_pinned() -> None:
     observed = audit_recovery._validate_historical_v2_review_evidence()
     assert observed["terminal_verdict"] == "NOT READY TO FREEZE"
@@ -1640,7 +1684,72 @@ def test_v6_review_packet_includes_issue_path_v5_context_and_fresh_receipts() ->
     assert "B16 or later" in audit_recovery.PRO_REVIEW_V6_QUESTION
 
 
-def test_v6_cumulative_narratives_share_only_current_git_lineage() -> None:
+def test_historical_v6_ready_review_is_pinned_but_nonadjudicable() -> None:
+    observed = audit_recovery._validate_historical_v6_nonadjudicable_review_evidence()
+    assert observed["terminal_verdict"] == "READY TO FREEZE"
+    assert observed["authorization_status"] == (
+        "historical_ready_verdict_nonadjudicable"
+    )
+    assert observed["nonadjudicable_reason"] == (
+        "b16_prose_wide_identifier_extraction_included_nonfinding_b05"
+    )
+    assert "B05" not in observed["finding_ids"]
+    assert observed["finding_ids"] == list(
+        audit_recovery.HISTORICAL_V6_NONADJUDICABLE_FINDING_IDS
+    )
+
+
+def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = [path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET]
+    assert not set(paths) & set(audit_recovery.FINAL_V7_PRO_REVIEW_OUTPUT_PATHS)
+    assert {
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md",
+        f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md",
+        f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+        audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    } <= set(paths)
+    assert set(audit_recovery.SOURCE_TEST_BOUND_PATHS) <= set(paths)
+    assert not set(audit_recovery.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256) & set(
+        paths
+    )
+    assert not set(audit_recovery.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256) & set(
+        paths
+    )
+
+    proxy = {
+        audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT: (
+            audit_recovery.V6_LOCAL_TEST_RECEIPT_SNAPSHOT
+        ),
+        audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
+            audit_recovery.V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+        ),
+        audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+            audit_recovery.V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+        ),
+        audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+            audit_recovery.V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+        ),
+        audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+            audit_recovery.V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+        ),
+    }
+    proxied_packet = tuple(
+        (proxy.get(path, path), role)
+        for path, role in audit_recovery.PRO_REVIEW_V7_PACKET
+    )
+    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V7_PACKET", proxied_packet)
+    value = audit_recovery._expected_v7_pro_review_input()
+    assert len(value) < 1_900_000
+
+
+def test_v7_cumulative_narratives_share_only_current_git_lineage() -> None:
     narratives = (
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_20260714.md",
@@ -1648,6 +1757,8 @@ def test_v6_cumulative_narratives_share_only_current_git_lineage() -> None:
         "AUDIT_RECOVERY_REVIEW_CONTEXT.md",
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md",
     )
     stale = (
         "C7 <= E7 <= F7",
@@ -1657,10 +1768,10 @@ def test_v6_cumulative_narratives_share_only_current_git_lineage() -> None:
     )
     for relative in narratives:
         source = (audit_recovery.REPO_ROOT / relative).read_text(encoding="utf-8")
-        assert "C9 <= E9 <= F9" in source
+        assert "C10 <= E10 <= F10" in source
         assert not any(token in source for token in stale)
-    assert "C9<=E9<=F9" in audit_recovery.PRO_REVIEW_V6_QUESTION
-    assert not any(token in audit_recovery.PRO_REVIEW_V6_QUESTION for token in stale)
+    assert "C10<=E10<=F10" in audit_recovery.PRO_REVIEW_V7_QUESTION
+    assert not any(token in audit_recovery.PRO_REVIEW_V7_QUESTION for token in stale)
 
 
 def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
@@ -1672,7 +1783,7 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
         "experiments/consciousness_sae_target_blind_calibration/"
         "run_qualification_pipe_logged.sh"
     )
-    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V6_PACKET}
+    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET}
     assert {controller_relative, wrapper_relative} <= packet_paths
     assert {controller_relative, wrapper_relative} <= set(
         audit_recovery.SOURCE_TEST_BOUND_PATHS
@@ -1681,13 +1792,15 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q9-${FREEZE:0:7}"' in controller
-    assert "EXPECTED_TEST_COUNT=${4:-216}" in controller
-    assert '[[ "$EXPECTED_TEST_COUNT" == 216 ]]' in controller
+    assert 'ROOT="/root/q10-${FREEZE:0:7}"' in controller
+    assert "EXPECTED_TEST_COUNT=${4:-228}" in controller
+    assert '[[ "$EXPECTED_TEST_COUNT" == 228 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q9-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert len(os.fsencode("/root/q10-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q10-* ]]' in wrapper
+    assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
     assert '>"$LOG_ROOT/remote.stdout"' not in wrapper
@@ -1761,6 +1874,22 @@ def test_v6_review_git_chain_rejects_nonancestor(
     )
     with pytest.raises(audit_recovery.AuditRecoveryError, match="C9<=E9<=F9"):
         audit_recovery._validate_v6_git_chain(
+            code_freeze_commit="1" * 40,
+            reviewed_packet_git_head_commit="2" * 40,
+            final_git_head_commit="3" * 40,
+        )
+
+
+def test_v7_review_git_chain_rejects_nonancestor(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        audit_recovery,
+        "_git_command",
+        lambda *parts, **kwargs: argparse.Namespace(returncode=1),
+    )
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="C10<=E10<=F10"):
+        audit_recovery._validate_v7_git_chain(
             code_freeze_commit="1" * 40,
             reviewed_packet_git_head_commit="2" * 40,
             final_git_head_commit="3" * 40,
@@ -2211,6 +2340,221 @@ def test_v6_adjudication_rejects_invalid_b15_closure(
         audit_recovery._validate_v6_review_adjudication(**kwargs)
 
 
+def _v7_adjudication_fixture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[dict, dict, Path]:
+    review_root = tmp_path / "review-v7"
+    review_root.mkdir()
+    for name in (
+        "response.json",
+        "review_manifest.json",
+        "request_payload.json",
+        "review_request.md",
+    ):
+        (review_root / name).write_text(f"{name}\n", encoding="utf-8")
+    incident_relative = (
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md"
+    )
+    incident_path = tmp_path / incident_relative
+    incident_path.parent.mkdir(parents=True)
+    incident_path.write_text("# B16 incident\n", encoding="utf-8")
+    monkeypatch.setattr(audit_recovery, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(audit_recovery, "FINAL_V7_PRO_REVIEW_DIRECTORY", "review-v7")
+    monkeypatch.setattr(
+        audit_recovery,
+        "FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON",
+        "ADJUDICATION_V7.json",
+    )
+    monkeypatch.setattr(
+        audit_recovery,
+        "FINAL_V7_PRO_REVIEW_ADJUDICATION_MARKDOWN",
+        "ADJUDICATION_V7.md",
+    )
+    finding_ids = sorted(
+        [*audit_recovery.HISTORICAL_V6_NONADJUDICABLE_FINDING_IDS, "B16"]
+    )
+    markdown_path = tmp_path / "ADJUDICATION_V7.md"
+    markdown_path.write_text(
+        "# V7 adjudication\n\n"
+        + " ".join(finding_ids)
+        + "\n\nFinal execution decision: **READY TO EXECUTE**.\n",
+        encoding="utf-8",
+    )
+    response = {"id": "resp_v7"}
+    historical_v6 = {
+        "response_id": "resp_v6",
+        "terminal_verdict": "READY TO FREEZE",
+        "review_sha256": "1" * 64,
+        "manifest_file_sha256": "2" * 64,
+        "response_file_sha256": "3" * 64,
+        "response_semantic_sha256": "4" * 64,
+        "request_payload_file_sha256": "5" * 64,
+        "review_request_file_sha256": "6" * 64,
+        "reviewed_packet_git_head_commit": "1" * 40,
+        "finding_ids": list(
+            audit_recovery.HISTORICAL_V6_NONADJUDICABLE_FINDING_IDS
+        ),
+        "nonadjudicable_reason": (
+            "b16_prose_wide_identifier_extraction_included_nonfinding_b05"
+        ),
+        "authorization_status": "historical_ready_verdict_nonadjudicable",
+    }
+    reviewed_evidence = {"code_freeze_commit": "2" * 40}
+    review_semantic = "7" * 64
+    review_sha = "8" * 64
+    review_input = "9" * 64
+    reviewed_commit = "3" * 40
+    review_binding = {
+        "review_directory": "review-v7",
+        "provider_response_id": response["id"],
+        "provider_response_file_sha256": audit_recovery._sha256(
+            review_root / "response.json"
+        ),
+        "provider_response_semantic_sha256": review_semantic,
+        "provider_review_sha256": review_sha,
+        "provider_manifest_file_sha256": audit_recovery._sha256(
+            review_root / "review_manifest.json"
+        ),
+        "request_payload_file_sha256": audit_recovery._sha256(
+            review_root / "request_payload.json"
+        ),
+        "review_request_file_sha256": audit_recovery._sha256(
+            review_root / "review_request.md"
+        ),
+        "review_input_sha256": review_input,
+        "review_instructions_sha256": audit_recovery.PRO_REVIEW_INSTRUCTIONS_SHA256,
+        "reviewed_packet_git_head_commit": reviewed_commit,
+        "code_freeze_commit": reviewed_evidence["code_freeze_commit"],
+        "adjudication_markdown_path": "ADJUDICATION_V7.md",
+        "adjudication_markdown_sha256": audit_recovery._sha256(markdown_path),
+    }
+    historical_binding = {
+        "review_directory": audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY,
+        "provider_response_id": historical_v6["response_id"],
+        "terminal_verdict": historical_v6["terminal_verdict"],
+        "review_file_sha256": historical_v6["review_sha256"],
+        "manifest_file_sha256": historical_v6["manifest_file_sha256"],
+        "response_file_sha256": historical_v6["response_file_sha256"],
+        "response_semantic_sha256": historical_v6["response_semantic_sha256"],
+        "request_payload_file_sha256": historical_v6[
+            "request_payload_file_sha256"
+        ],
+        "review_request_file_sha256": historical_v6["review_request_file_sha256"],
+        "reviewed_packet_git_head_commit": historical_v6[
+            "reviewed_packet_git_head_commit"
+        ],
+        "finding_ids": historical_v6["finding_ids"],
+        "nonadjudicable_reason": historical_v6["nonadjudicable_reason"],
+        "authorization_status": historical_v6["authorization_status"],
+    }
+    incident_binding = {
+        "finding_ids": ["B16"],
+        "path": incident_relative,
+        "file_sha256": audit_recovery._sha256(incident_path),
+        "historical_v6_provider_response_id": historical_v6["response_id"],
+        "historical_v6_review_sha256": historical_v6["review_sha256"],
+        "old_extraction_scope": "all_prose_word_boundary_identifier_tokens",
+        "repaired_extraction_scope": "atx_headings_beginning_with_identifier",
+    }
+    packet_paths = sorted(path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET)
+    required_b16 = sorted(
+        {
+            incident_relative,
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "audit_recovery.py",
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "recovery_bundle_verifier.py",
+            "tests/consciousness_sae_target_blind_calibration/"
+            "test_audit_recovery.py",
+            "tests/consciousness_sae_target_blind_calibration/"
+            "test_recovery_bundle_verifier.py",
+        }
+    )
+    findings = []
+    for finding_id in finding_ids:
+        findings.append(
+            {
+                "id": finding_id,
+                "blocking": finding_id.startswith("B"),
+                "disposition": "fixed" if finding_id.startswith("B") else "rejected",
+                "rationale": "exact reviewed-byte disposition",
+                "changed_paths": (
+                    required_b16
+                    if finding_id == "B16"
+                    else ([packet_paths[0]] if finding_id.startswith("B") else [])
+                ),
+            }
+        )
+    core = {
+        "schema_version": 7,
+        "artifact_type": "completed_provider_review_v7_adjudication",
+        "review_binding": review_binding,
+        "historical_v6_binding": historical_binding,
+        "incident_binding": incident_binding,
+        "reviewed_qualification_evidence": reviewed_evidence,
+        "finding_ids": finding_ids,
+        "findings": findings,
+        "resolved_postreview_findings": ["B16"],
+        "final_decision": "READY_TO_EXECUTE",
+    }
+    json_path = tmp_path / "ADJUDICATION_V7.json"
+    _write_canonical(json_path, _sealed(core))
+    kwargs = {
+        "root": review_root,
+        "response": response,
+        "response_semantic_sha256": review_semantic,
+        "review_sha256": review_sha,
+        "review_input_sha256": review_input,
+        "finding_ids": finding_ids,
+        "historical_v6": historical_v6,
+        "reviewed_evidence": reviewed_evidence,
+        "reviewed_packet_git_head_commit": reviewed_commit,
+    }
+    return core, kwargs, json_path
+
+
+def test_v7_adjudication_requires_fixed_b16_and_excludes_prose_b05(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _core, kwargs, _path = _v7_adjudication_fixture(tmp_path, monkeypatch)
+    observed = audit_recovery._validate_v7_review_adjudication(**kwargs)
+    assert "B16" in observed["fixed_finding_ids"]
+    assert "B05" not in observed["fixed_finding_ids"]
+
+
+@pytest.mark.parametrize("mutation", ["missing_b16", "recycled_b05", "new_b17"])
+def test_v7_adjudication_fails_closed_on_b16_or_reserved_b05(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    core, kwargs, path = _v7_adjudication_fixture(tmp_path, monkeypatch)
+    if mutation == "missing_b16":
+        core["finding_ids"].remove("B16")
+        core["findings"] = [row for row in core["findings"] if row["id"] != "B16"]
+    else:
+        added_id = "B17" if mutation == "new_b17" else "B05"
+        core["finding_ids"] = sorted([*core["finding_ids"], added_id])
+        core["findings"].append(
+            {
+                "id": added_id,
+                "blocking": True,
+                "disposition": "fixed",
+                "rationale": "invalid blocker claimed fixed without reviewed-byte repair",
+                "changed_paths": [
+                    sorted(path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET)[
+                        0
+                    ]
+                ],
+            }
+        )
+    kwargs["finding_ids"] = core["finding_ids"]
+    _write_canonical(path, _sealed(core))
+    with pytest.raises(audit_recovery.AuditRecoveryError):
+        audit_recovery._validate_v7_review_adjudication(**kwargs)
+
+
 def test_attempt_claim_is_one_shot_and_failure_receipt_is_sealed(
     tmp_path: Path,
 ) -> None:
@@ -2487,8 +2831,6 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
         audit_recovery.V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         audit_recovery.V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         audit_recovery.V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-        audit_recovery.FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON,
-        audit_recovery.FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN,
         f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json",
         f"{audit_recovery.FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json",
         audit_recovery.V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
@@ -2501,6 +2843,20 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
         "docs/consciousness_sae_target_blind_calibration/"
         "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
     }
+    bound_paths.update(
+        {
+            *audit_recovery.HISTORICAL_V6_NONADJUDICABLE_REVIEW_OUTPUT_PATHS,
+            audit_recovery.FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON,
+            audit_recovery.FINAL_V7_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+            f"{audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY}/response.json",
+            f"{audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+            audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        }
+    )
     rows = [
         {"path": path, "bytes": 1, "sha256": f"{index + 1:064x}"}
         for index, path in enumerate(sorted(bound_paths))
@@ -2615,7 +2971,10 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v5_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["final_v6_review_adjudication_json_sha256"] in {
+    assert receipt["historical_v6_review_sha256"] in {
+        row["sha256"] for row in rows
+    }
+    assert receipt["final_v7_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {

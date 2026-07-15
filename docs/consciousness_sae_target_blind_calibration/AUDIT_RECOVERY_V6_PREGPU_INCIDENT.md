@@ -1,10 +1,14 @@
-# V6 Pre-GPU Incidents and C9 Successor Review
+# V6 Pre-GPU Incidents, C9 Qualification, and the V7 Successor
 
-Status: two outcome-blind stop-ships. B14 was caught before provider
-provisioning. B15 was caught after one disposable C6 source/test qualification
-on a B200, but before any final recovery pod was created, any recovery
-authorization was issued, any attempt marker was claimed, or any scientific
-output was computed or inspected. No paid v6 Pro review was submitted.
+Status: B14 and B15 were outcome-blind pre-GPU stop-ships. B14 was caught
+before provider provisioning. B15 was caught after one disposable C6
+source/test qualification on a B200, but before any final recovery pod was
+created, any recovery authorization was issued, any attempt marker was
+claimed, or any scientific output was computed or inspected. At that point no
+paid v6 Pro review had been submitted. C9 was later qualified and received a
+completed positive v6 review, but B16 made that response non-adjudicable before
+recovery execution. The current successor is C10/E10/F10 under the final v7
+review.
 
 ## Exact dry-run failure
 
@@ -226,10 +230,11 @@ the cumulative review packet, C7 cannot be the final reviewed freeze. C8 commit
 `856cd1f247cf1c9b4951da2afa3dc6dd935c461e` disclosed this failure and
 produced a superseded local-only receipt, but never received target-host
 qualification or paid review: an independent packet audit caught stale
-C7/E7/F7 lineage in the main plan and review context. C9 corrects that
-contradiction and pins the exact controller, wrapper, and five selected C7
+C7/E7/F7 lineage in the main plan and review context. C9 corrected that
+contradiction and pinned the exact controller, wrapper, and five selected C7
 failure-archive artifacts,
-so fresh local and B200 receipts must bind C9.
+and fresh local and B200 receipts subsequently bound C9. They remain
+historical evidence and are not reused for C10.
 
 ## Pre-review long-context reserve correction
 
@@ -254,20 +259,45 @@ remain below their respective `$25.00` authorizations. These are transparent
 rate-schedule reconstructions, not provider invoices, and no historical file is
 rewritten.
 
-## Why the C9 cumulative review is required
+## C9/v6 completion, B16, and the final C10/v7 lineage
 
 V5 remains valid historical evidence for the exact packet it reviewed, but its
-own exact-byte condition prevents it from authorizing either repaired
-successor. C6 and its receipts remain historical B15 context and cannot be
-reused as proof of the changed source/test bytes. The cumulative successor
-review must receive the complete v5 review and adjudication, the exact B14 and
-B15 incidents and repairs, the C6 qualification chronology, the disclosed C7
-logging failure and pipe-backed retry, current
-source/tests, canonical r3 source inventory, and fresh common-freeze local and
-disposable-B200 receipts.
+own exact-byte condition could not authorize either repaired successor. C6 and
+its receipts remain historical B15 context and could not prove changed
+source/test bytes. C9 commit
+`b404491fe4bd28931e45bed16fb5d7d9a27382f5` therefore received fresh local and
+disposable-B200 qualification. Receipt-owned pod `t915ydw4gqfb8a` passed 216
+of 216 target tests and the target-free Landlock/CUDA preflight with zero model
+forwards, Torch module calls, target renders, or target-feature reads. E9 added
+the five C9 receipts to the cumulative review packet. The exact qualification
+pod was deleted after evidence retrieval; network volume `bv9gb9j32y` was
+retained.
 
-The successor gate must bind C9 code freeze, E9 reviewed packet, and F9
-adjudication with `C9 <= E9 <= F9`, no source/test drift from C9 to F9, and no
-reviewed-packet drift from E9 to F9. B14 and B15 must both be explicitly
-dispositioned. Any genuinely new blocking finding begins at B16 and any
-genuinely new important finding begins at I10. No silent retry is permitted.
+The cumulative v6 `gpt-5.6-sol` review included the complete v5 review and
+adjudication, the exact B14 and B15 incidents and repairs, the C6 chronology,
+the C7 logging failure and pipe-backed correction, C9 source/tests, the
+canonical r3 inventory, and the fresh C9 receipts. It completed as response
+`resp_096bfc4229fd22e6016a57992e0f648199913ca0849879a9a3` with terminal
+verdict `READY TO FREEZE` and no genuinely new B16-or-later blocker.
+
+The exact response was nevertheless non-adjudicable. Its freeze checklist
+said `No B05 is invented`; the v6/current-review parser extracted finding IDs
+from every token in the response and therefore counted that negated prose as
+if it were an actual recycled B05 finding. The reserved-ID check failed closed.
+No recovery authorization, final recovery attempt, scientific computation,
+target read, or model forward followed. This is B16, documented fully in
+`AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md`. The v6 review is preserved
+unchanged as historical positive evidence for its exact packet, but it is
+non-adjudicable and non-authorizing.
+
+The minimum B16 repair is restricted to v6/current-review ID extraction from
+ATX finding headings, leaving historical v2--v5 parsing unchanged. Because
+that parser and its tests change bound source/test bytes, exact-byte integrity
+requires new evidence and a new review. C10 freezes the repair; fresh local
+and disposable-B200 qualifications bind C10; E10 adds their exact receipts;
+one cumulative v7 review evaluates exact E10 bytes and includes the complete
+v6 review as prior context; and F10 adds only the completed v7 artifacts and
+structured adjudication. The current gate requires `C10 <= E10 <= F10`, no
+source/test drift from C10 to F10, and no reviewed-packet drift from E10 to
+F10. B14--B16 must all be explicitly dispositioned. V7 is the final
+prospective review for this repair, and no silent retry is permitted.

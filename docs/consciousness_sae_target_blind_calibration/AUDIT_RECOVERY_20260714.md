@@ -6,10 +6,15 @@ v3, and v4 reviews, a completed positive v5 review whose exact reviewed bytes
 failed the authentic pre-GPU authorization dry-run, and a superseded C6
 qualification whose production Unix-socket paths were overlong, plus a C7
 qualification-controller logging failure caught by the frozen descriptor
-audit. No recovered audit output has been computed or inspected. This plan is
-not executable until the C9 cumulative review evaluates the repaired exact
-bytes, both B14 and B15, the historical C6/C7 qualification chronology, and
-the complete v5 review/adjudication context.
+audit, and a completed C9 qualification and v6 cumulative Pro review whose
+`READY TO FREEZE` response could not be adjudicated because prose-wide
+finding-ID extraction misclassified the negated phrase `No B05 is invented`.
+That B16 parser incident occurred before any recovery execution or model
+forward, and the C9 qualification pod was deleted after its evidence was
+retrieved. No recovered audit output has been computed or inspected. This
+plan is not executable until the final v7 cumulative review evaluates the
+exact C10/E10 successor bytes, B14--B16, the historical C6--C9 qualification
+chronology, and the complete v5 and v6 review context.
 This is not a new model run and cannot change the r3 estimand,
 prompt panel, directions, doses, layers, thresholds, or claim policy.
 
@@ -530,8 +535,9 @@ that set remains exactly empty.
 ## Review disclosure
 
 The paragraphs below through the description of the v5 packet are retained as
-historical review lineage. The later "B14/B15 pre-GPU repair and C9 review"
-section supersedes their prospective-v5 status and resource envelope.
+historical review lineage. The later "B14/B15 pre-GPU repair, C9/v6 history,
+and C10/v7 cumulative review" section supersedes their prospective-v5 status
+and resource envelope.
 
 Five paid provider calls are historical incomplete or negative evidence and
 none is approval: two incomplete calls and the completed negative v2, v3, and
@@ -668,7 +674,7 @@ places byte-identical copies under the attempt's `evidence/tests/` directory.
 The offline verifier repeats those checks. No authorization is issued and no
 recovered audit is claimed ready until this closure exists.
 
-## B14/B15 pre-GPU repair and C9 cumulative review
+## B14/B15 pre-GPU repair, C9/v6 history, and C10/v7 cumulative review
 
 The v5 Pro call completed as response
 `resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0`, ended `READY TO
@@ -782,17 +788,38 @@ receipt, but never received target-host qualification or paid review because a
 final packet audit caught stale C7/E7/F7 lineage in this plan and the
 review-context document.
 
-A fresh C9 code freeze therefore requires new local and disposable-B200 target
-receipts; E9 adds those receipts and the cumulative review packet; one
-successor Pro call reviews the exact E9 packet, including the complete v5
-review and adjudication, the B14 incident, and the C6/C7/B15 chronology; and F9
-adds only provider outputs and the successor adjudication. The gate requires
-`C9 <= E9 <= F9`, no source/test diff from C9 to F9, and no reviewed-packet
-diff from E9 to F9. B14 and B15 must both be explicitly dispositioned. Any
-genuinely new blocking finding starts at B16 and any genuinely new important
-finding starts at I10. No silent retry is permitted.
+A fresh C9 code freeze therefore required new local and disposable-B200 target
+receipts. C9 commit `b404491fe4bd28931e45bed16fb5d7d9a27382f5` passed its
+local qualification and 216 of 216 target-host tests on receipt-owned B200 pod
+`t915ydw4gqfb8a`, with zero model forwards, Torch module calls, target renders,
+or target-feature reads. E9 added those receipts and the cumulative v6 review
+packet. The v6 `gpt-5.6-sol` call completed as response
+`resp_096bfc4229fd22e6016a57992e0f648199913ca0849879a9a3` with terminal
+verdict `READY TO FREEZE` and explicitly identified no new B16-or-later
+blocker. The exact C9 qualification pod was deleted after evidence retrieval.
 
-The successor-review resource guard permits at most 2,100,000 input
+The v6 response nevertheless could not be adjudicated. Its checklist said
+`No B05 is invented`, and the v6/current-review parser extracted stable-ID
+tokens from all prose rather than only actual finding headings. It therefore
+treated the negated B05 mention as a recycled finding and failed closed. No
+recovery authorization, final recovery attempt, scientific calculation, or
+model forward followed. `AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md` records
+this as B16. The immutable v6 review remains positive historical evidence for
+its exact packet, but it is non-adjudicable and non-authorizing.
+
+The smallest repair changes only the v6/current-review extractor to recognize
+stable IDs from ATX finding headings. Because that changes bound source/test
+bytes, C9/E9 evidence cannot qualify or authorize the successor. C10 freezes
+the parser repair and regressions; fresh local and disposable-B200
+qualifications must bind C10; E10 adds those fresh receipts; one cumulative
+v7 Pro call reviews the exact E10 packet including the complete v6 review and
+B16 record; and F10 adds only the v7 provider outputs and structured
+adjudication. The gate requires `C10 <= E10 <= F10`, no source/test diff from
+C10 to F10, and no reviewed-packet diff from E10 to F10. B14--B16 must all be
+explicitly dispositioned. The v7 review is the final prospective review for
+this repair, and no silent retry is permitted.
+
+The final v7 successor-review resource guard permits at most 2,100,000 input
 characters, 600,000 conservatively estimated input tokens, and 20,000
 requested output tokens,
 with the same 5.0 input and 2.2 output reserve multipliers. Because the exact

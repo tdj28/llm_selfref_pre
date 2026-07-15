@@ -70,7 +70,7 @@ prompt-level bootstrap, frozen estimands/gates/missingness/stopping, and no
 prompt-population generalization. The J artifact's `n_prompts=125` is fitting
 metadata, not the study sample size.
 
-## Completed v2-v5 reviews; B14, superseded C6/C7, and the C9 review
+## Completed v2-v6 reviews; B14--B16 and the C10/v7 successor
 
 After the scientific metadata correction and full source/test packet were
 frozen, one explicitly authorized synchronous `gpt-5.6-sol` Pro review
@@ -214,29 +214,63 @@ descriptor audit correctly rejected it. The verified failure archive remains
 on the network volume. The retry uses pipe-backed standard streams so separate
 `tee` processes own the regular logs; the controller is qualification-only and
 never part of final recovery. The packet pins the exact controller/wrapper and
-five selected C7 failure-archive artifacts. C8 disclosed this history and produced a superseded
-local-only receipt, but never received target-host qualification or paid review
-because a final packet audit caught stale lineage in this context and the main
-plan. The cumulative successor packet supplies this chronology, the complete
-v5 review and adjudication, both B14 and B15, the canonical r3 source inventory,
-repaired source/tests, and fresh C9 local and disposable-B200 qualification
-evidence. The lineage is `C9 <= E9 <= F9`, with no source/test drift from C9 to
-F9 and no reviewed-packet drift from E9 to F9.
-B14 and B15 must both be explicitly dispositioned; genuinely new IDs begin at
-B16 and I10. No paid v6 call preceded this correction, and no silent retry is
-permitted.
+five selected C7 failure-archive artifacts. C8 disclosed this history and
+produced a superseded local-only receipt, but never received target-host
+qualification or paid review because a final packet audit caught stale lineage
+in this context and the main plan.
+
+C9 commit `b404491fe4bd28931e45bed16fb5d7d9a27382f5` then received fresh local
+and disposable-B200 qualification. Receipt-owned pod `t915ydw4gqfb8a` passed
+the target-free CUDA/Landlock preflight and all 216 target tests, recording
+zero model forwards, Torch module calls, target renders, and target-feature
+reads. E9 added the five fresh receipts to the cumulative packet. The exact
+C9 qualification pod was deleted after evidence retrieval, without deleting
+network volume `bv9gb9j32y`; it cannot be reused for the successor.
+
+The cumulative v6 `gpt-5.6-sol` review then completed as response
+`resp_096bfc4229fd22e6016a57992e0f648199913ca0849879a9a3` with terminal
+verdict `READY TO FREEZE`. It reviewed the C9/E9 packet, preserved the complete
+v5 context, explicitly accepted the B14 and B15 repairs, and identified no new
+B16-or-later blocker or I10-or-later important finding. It used 2,029,613
+input tokens and 31,829 output tokens and reconstructed to `$21.728435` under
+the stored conservative schedule, below its `$75.00` authorization. These are
+manifested usage and a conservative reconstruction, not an account invoice.
+
+That positive v6 review is immutable historical evidence but cannot authorize
+execution. Its checklist included the negated sentence `No B05 is invented`.
+The v6/current-review gate extracted ID-shaped tokens throughout the response,
+so it counted that prose mention as a recycled B05 finding and correctly
+refused adjudication. This B16 incident is documented in
+`AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md`. No recovery authorization,
+recovery attempt, scientific calculation, target read, or model forward
+followed the v6 review.
+
+The smallest repair is v6/current-only ATX finding-heading extraction:
+stable IDs are findings only when an ATX heading begins with `Bnn` or `Inn`;
+negated prose and checklist mentions are not findings. Historical v2--v5
+parsing remains unchanged. Because the parser and its regressions change
+source/test bytes, C9 qualification and the v6 review cannot be relabeled as
+evidence for the successor. C10 freezes the repair; fresh local and
+disposable-B200 qualifications bind C10; E10 adds their receipts; the final
+cumulative v7 call reviews exact E10 bytes and includes the complete v6 review
+as context; and F10 adds only the v7 provider output and structured
+adjudication. The current lineage is `C10 <= E10 <= F10`, with no source/test
+drift from C10 to F10 and no reviewed-packet drift from E10 to F10. B14--B16
+must all be explicitly dispositioned, and no silent retry is permitted.
 
 The official GPT-5.6 Sol model page prices prompts above 272K input tokens at
-2x input and 1.5x output for the full request. The successor packet is
+2x input and 1.5x output for the full request. The final v7 successor packet is
 conservatively above that threshold, so its prospective reserve uses `$10.00`
 uncached input, `$12.50` cache write, and `$45.00` output per million tokens,
 with the frozen 2.1-million-character/600,000-token ceilings, 5.0/2.2
 aggregate-work multipliers, a `$69.48` worst-case reserve, and a `$75.00` hard
 authorization. The
 immutable v4/v5 cost fields remain their historical manifests' own
-reconstructions; they are not reused as the v6 rate schedule or asserted to be
+reconstructions; they are not reused as the v7 rate schedule or asserted to be
 account invoices. The machine gate preserves both original fields and both
-retrospective reconstructions.
+retrospective reconstructions. A fresh exact preflight must still prove that
+the expanded v7 packet, including v6 review context, fits the frozen guard
+before the separately authorized call is submitted.
 
 ## Prospective Landlock replacement
 
