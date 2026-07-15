@@ -448,6 +448,7 @@ def test_runtime_and_execution_binding_reject_forward_count_tamper(tmp_path) -> 
     binding = {
         "study_id": protocol.STUDY_ID,
         "protocol_version": protocol.PROTOCOL_VERSION,
+        "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
         "plan_manifest_sha256": plan["plan_manifest_sha256"],
         "plan_git_head_commit": plan["git_head_commit"],
         "pod_id": "pod-1",
@@ -517,6 +518,7 @@ def _external_receipt_fixture(tmp_path, monkeypatch):
     cache, live_rehash = _cache_receipt_and_live_rehash()
     authorization = {
         "receipt_sha256": "d" * 64,
+        "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
         "campaign_started_at_unix": started,
         "campaign_deadline_at_unix": deadline,
         "hourly_price_usd": price,
@@ -557,17 +559,19 @@ def _external_receipt_fixture(tmp_path, monkeypatch):
         "guest_receipt_sha256": guest["receipt_sha256"],
         "cache_receipt_sha256": cache["receipt_sha256"],
         "authorization_receipt_sha256": authorization["receipt_sha256"],
+        "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
         "pod_id": ownership["pod_id"],
         "volume_id": ownership["network_volume_id"],
         "data_center_id": ownership["data_center_id"],
         "live_public_cache_rehash": live_rehash,
     }
     complete = {
+        "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
         "resource": {
             "campaign_started_at_unix": started,
             "campaign_deadline_at_unix": deadline,
             "hourly_price_usd": price,
-        }
+        },
     }
     return plan_dir, paths, binding, complete
 

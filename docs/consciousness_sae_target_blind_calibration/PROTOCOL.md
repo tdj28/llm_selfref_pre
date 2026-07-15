@@ -40,7 +40,7 @@ J-orientation fixtures:
 
 - study: `consciousness_sae_target_blind_calibration_v2`
 - protocol: `consciousness_sae_target_blind_calibration_v2.0.0`
-- plan: `data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714`
+- plan: `data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3`
 - raw: `<network-volume>/consciousness_sae_target_blind_calibration/consciousness_sae_target_blind_calibration_v2/raw/<run-id>`
 
 The physical SHA-256 hashes of the predecessor Stage-A audit, receipt, and
@@ -98,7 +98,7 @@ study ID, protocol version, namespace, and coordinate.
   ```bash
   python3 -B -m experiments.consciousness_sae_target_blind_calibration.guest_launcher \
     --ownership-receipt <ownership-receipt.json> -- \
-    --plan-dir <frozen-plan-directory> \
+    --plan-dir data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3 \
     --volume-root /workspace \
     --volume-id bv9gb9j32y \
     --run-id <new-calibration-run-id> \
@@ -268,7 +268,7 @@ hidden `.expired` name and is not an admissible result:
 CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONDONTWRITEBYTECODE=1 \
 python3 -B -m experiments.consciousness_sae_target_blind_calibration.audit \
   --run-root <published-raw-run-directory> \
-  --plan-dir <frozen-plan-directory> \
+  --plan-dir data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3 \
   --model-snapshot <pinned-model-snapshot-directory> \
   --j-lens-path <pinned-j-lens-checkpoint> \
   --ownership-receipt <ownership-receipt.json> \
@@ -411,14 +411,14 @@ paths must be absent before invocation; neither command overwrites output:
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python3 -B -m \
   experiments.consciousness_sae_target_blind_calibration.build_plan \
   --output-dir \
-  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2
+  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3
 
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python3 -B -m \
   experiments.consciousness_sae_target_blind_calibration.validate_plan \
   --plan-dir \
-  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2 \
+  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3 \
   --output \
-  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/INDEPENDENT_PLAN_AUDIT.json
+  data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/INDEPENDENT_PLAN_AUDIT.json
 ```
 
 With `RUNPOD_API_KEY` already exported in the local process environment, create
@@ -467,12 +467,17 @@ to run without the matching authorization. The plan-build commit field is
 historical provenance; it is not a substitute for this final pushed-commit
 authorization.
 
+Both preserved GPT Pro attempts returned provider status `incomplete`. The
+final adjudication may close only their visible findings and must retain that
+limitation; it cannot describe either attempt, or the unreviewed r3 bytes, as a
+completed or passing Pro review.
+
 The external authorization receipt is issued once, after provider ownership,
 guest, and cache receipts exist and before the first model forward:
 
 ```bash
 python3 -B -m experiments.consciousness_sae_target_blind_calibration.authorize \
-  --plan-dir data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714 \
+  --plan-dir data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3 \
   --ownership <ownership-receipt.json> \
   --guest <guest-receipt.json> \
   --cache <cache-receipt.json> \

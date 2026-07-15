@@ -14,6 +14,9 @@ from typing import Any, Mapping
 REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPECTED_STUDY_ID = "consciousness_sae_target_blind_calibration_v2"
 EXPECTED_PROTOCOL_VERSION = "consciousness_sae_target_blind_calibration_v2.0.0"
+EXPECTED_CANONICAL_PLAN_RELATIVE_PATH = (
+    "data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3"
+)
 EXPECTED_PROMPT_IDS = tuple(f"neutral_c{index:02d}" for index in range(1, 9))
 EXPECTED_NEUTRAL_SYSTEM = (
     "Answer the mundane question briefly and literally. Do not add commentary."
@@ -380,6 +383,7 @@ REQUIRED_BOUND_SOURCES = {
     "experiments/consciousness_sae_target_blind_calibration/orientation.py",
     "experiments/consciousness_sae_target_blind_calibration/requirements-runpod-b200.txt",
     "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/review_adjudication.py",
     "experiments/consciousness_sae_target_blind_calibration/authorize.py",
     "experiments/consciousness_sae_target_blind_calibration/validate_plan.py",
 }
@@ -427,8 +431,13 @@ def _write(path: Path, value: Mapping[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
-def validate(plan_dir: Path) -> dict[str, Any]:
+def validate(plan_dir: Path, *, enforce_canonical_path: bool = False) -> dict[str, Any]:
     root = plan_dir.expanduser().resolve(strict=True)
+    canonical = (REPO_ROOT / EXPECTED_CANONICAL_PLAN_RELATIVE_PATH).resolve()
+    if enforce_canonical_path and root != canonical:
+        raise IndependentPlanAuditError(
+            "plan directory differs from the canonical relative path"
+        )
     manifest = _json(root / "plan_manifest.json")
     core = dict(manifest)
     supplied = core.pop("plan_manifest_sha256", None)
@@ -440,6 +449,8 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         or manifest.get("scope") != "adaptive_target_blind_numerical_calibration_only"
         or manifest.get("study_role")
         != "pre_sae_generic_vector_delivery_and_j_readout_calibration"
+        or manifest.get("canonical_plan_relative_path")
+        != EXPECTED_CANONICAL_PLAN_RELATIVE_PATH
         or manifest.get("paper_prompt_render_count") != 0
         or manifest.get("target_prompt_render_count") != 0
         or manifest.get("target_feature_vector_count") != 0
@@ -488,6 +499,8 @@ def validate(plan_dir: Path) -> dict[str, Any]:
         or snapshot.get("protocol_version") != EXPECTED_PROTOCOL_VERSION
         or snapshot.get("study_role")
         != "pre_sae_generic_vector_delivery_and_j_readout_calibration"
+        or snapshot.get("canonical_plan_relative_path")
+        != EXPECTED_CANONICAL_PLAN_RELATIVE_PATH
         or snapshot.get("paper_or_target_prompts_included") is not False
         or snapshot.get("target_sae_features_included") is not False
         or snapshot.get("analysis_data_inputs") != []
@@ -632,7 +645,7 @@ def main() -> int:
     parser.add_argument("--plan-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    receipt = validate(args.plan_dir)
+    receipt = validate(args.plan_dir, enforce_canonical_path=True)
     _write(args.output, receipt)
     print(args.output)
     return 0

@@ -454,6 +454,11 @@ def _validate_plan(plan_dir: Path) -> dict[str, Any]:
     _require_no_symlink_components(root, "plan directory")
     if not root.is_dir():
         raise CalibrationExecutionError("plan directory is missing")
+    canonical = _absolute(REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH)
+    if root != canonical:
+        raise CalibrationExecutionError(
+            "plan directory differs from the canonical relative path"
+        )
     manifest = _read_json(_regular_file(root / "plan_manifest.json", "plan manifest"))
     supplied = manifest.get("plan_manifest_sha256")
     core = dict(manifest)
@@ -464,6 +469,8 @@ def _validate_plan(plan_dir: Path) -> dict[str, Any]:
         manifest.get("schema_version") != protocol.PLAN_SCHEMA_VERSION
         or manifest.get("study_id") != protocol.STUDY_ID
         or manifest.get("protocol_version") != protocol.PROTOCOL_VERSION
+        or manifest.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
         or manifest.get("scope") != "adaptive_target_blind_numerical_calibration_only"
         or manifest.get("paper_prompt_render_count") != 0
         or manifest.get("analysis_data_inputs") != []
@@ -1556,6 +1563,7 @@ def execute(
             {
                 "study_id": protocol.STUDY_ID,
                 "protocol_version": protocol.PROTOCOL_VERSION,
+                "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
                 "plan_manifest_sha256": plan["plan_manifest_sha256"],
                 "plan_git_head_commit": plan["git_head_commit"],
                 "pod_id": os.environ["RUNPOD_POD_ID"],
@@ -1594,6 +1602,7 @@ def execute(
             "study_id": protocol.STUDY_ID,
             "protocol_version": protocol.PROTOCOL_VERSION,
             "run_id": run_id,
+            "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
             "plan_manifest_sha256": plan["plan_manifest_sha256"],
             "volume_id": volume_id,
             "records": records,

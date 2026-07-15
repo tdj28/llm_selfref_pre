@@ -374,6 +374,8 @@ def _manifest(run_root: Path) -> dict[str, Any]:
         complete.get("status") != "complete"
         or complete.get("study_id") != protocol.STUDY_ID
         or complete.get("protocol_version") != protocol.PROTOCOL_VERSION
+        or complete.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
         or complete.get("analysis_data_inputs") != []
         or complete.get("target_prompt_render_count") != 0
         or complete.get("target_feature_vector_count") != 0
@@ -427,7 +429,7 @@ def _manifest(run_root: Path) -> dict[str, Any]:
 
 def _audit_plan(plan_dir: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
-        receipt = validate_plan.validate(plan_dir)
+        receipt = validate_plan.validate(plan_dir, enforce_canonical_path=True)
     except validate_plan.IndependentPlanAuditError as exc:
         raise CalibrationAuditError(f"independent plan audit failed: {exc}") from exc
     manifest = _json(plan_dir.expanduser().resolve(strict=True) / "plan_manifest.json")
@@ -526,6 +528,12 @@ def _audit_external_receipt_chain(
         != float(authorization["campaign_deadline_at_unix"])
         or float(resource.get("hourly_price_usd", math.nan))
         != float(authorization["hourly_price_usd"])
+        or authorization.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
+        or execution_binding.get("canonical_plan_relative_path")
+        != authorization.get("canonical_plan_relative_path")
+        or complete.get("canonical_plan_relative_path")
+        != authorization.get("canonical_plan_relative_path")
         or execution_binding.get("pod_id") != ownership.get("pod_id")
         or execution_binding.get("volume_id") != ownership.get("network_volume_id")
         or execution_binding.get("data_center_id") != ownership.get("data_center_id")
@@ -827,6 +835,7 @@ def _audit_runtime_and_binding(
         {
             "study_id",
             "protocol_version",
+            "canonical_plan_relative_path",
             "plan_manifest_sha256",
             "plan_git_head_commit",
             "pod_id",
@@ -873,6 +882,8 @@ def _audit_runtime_and_binding(
     if (
         binding["study_id"] != protocol.STUDY_ID
         or binding["protocol_version"] != protocol.PROTOCOL_VERSION
+        or binding["canonical_plan_relative_path"]
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
         or binding["plan_manifest_sha256"] != plan["plan_manifest_sha256"]
         or binding["plan_git_head_commit"] != plan["git_head_commit"]
         or not isinstance(binding["pod_id"], str)

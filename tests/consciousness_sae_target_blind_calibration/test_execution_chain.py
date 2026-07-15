@@ -379,3 +379,17 @@ def test_live_remote_freeze_requires_head_local_tracking_and_live_equality(
     )
     with pytest.raises(authorize.AuthorizationError, match="differ"):
         authorize._live_remote_freeze()
+
+
+def test_authorizer_and_runner_reject_a_noncanonical_plan_directory(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(authorize, "REPO_ROOT", tmp_path.parent)
+    monkeypatch.setattr(runner, "REPO_ROOT", tmp_path.parent)
+    with pytest.raises(authorize.AuthorizationError, match="canonical relative path"):
+        authorize._validate_plan(tmp_path)
+    with pytest.raises(
+        runner.CalibrationExecutionError, match="canonical relative path"
+    ):
+        runner._validate_plan(tmp_path)

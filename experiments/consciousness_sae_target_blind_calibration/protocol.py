@@ -30,6 +30,9 @@ STUDY_SLUG = "consciousness_sae_target_blind_calibration"
 STUDY_ID = "consciousness_sae_target_blind_calibration_v2"
 PROTOCOL_VERSION = "consciousness_sae_target_blind_calibration_v2.0.0"
 PLAN_SCHEMA_VERSION = 1
+CANONICAL_PLAN_RELATIVE_PATH = (
+    "data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3"
+)
 NETWORK_VOLUME_ID = "bv9gb9j32y"
 DATA_CENTER_ID = "US-CA-2"
 GPU_TYPE = "NVIDIA B200"
@@ -419,6 +422,7 @@ def protocol_snapshot() -> dict[str, Any]:
         "protocol_version": PROTOCOL_VERSION,
         "scope": "adaptive_target_blind_numerical_calibration_only",
         "study_role": "pre_sae_generic_vector_delivery_and_j_readout_calibration",
+        "canonical_plan_relative_path": CANONICAL_PLAN_RELATIVE_PATH,
         "paper_or_target_prompts_included": False,
         "target_sae_features_included": False,
         "adaptive_design_inputs": ADAPTIVE_DESIGN_INPUTS,
@@ -477,6 +481,11 @@ def protocol_snapshot() -> dict[str, Any]:
 
 
 def validate_protocol() -> None:
+    if CANONICAL_PLAN_RELATIVE_PATH != (
+        "data/consciousness_sae_target_blind_calibration/"
+        "calibration_v2_plan_20260714_r3"
+    ):
+        raise ValueError("canonical plan path differs")
     if (
         len(rows()) != 120
         or len(rows()) * 2 != RESOURCE_LIMITS["expected_edited_forwards"]

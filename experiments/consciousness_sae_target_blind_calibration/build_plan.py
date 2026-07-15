@@ -39,6 +39,7 @@ SOURCE_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/orientation.py",
     "experiments/consciousness_sae_target_blind_calibration/requirements-runpod-b200.txt",
     "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/review_adjudication.py",
     "experiments/consciousness_sae_target_blind_calibration/authorize.py",
     "experiments/consciousness_sae_target_blind_calibration/validate_plan.py",
 )
@@ -104,11 +105,16 @@ def _git_head() -> str:
     return value
 
 
-def build(output_dir: Path) -> Path:
+def build(output_dir: Path, *, enforce_canonical_path: bool = False) -> Path:
     protocol.validate_protocol()
     if len(SOURCE_PATHS) != len(set(SOURCE_PATHS)):
         raise ValueError("bound source closure contains duplicate paths")
     output = _absolute(output_dir)
+    canonical = _absolute(REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH)
+    if enforce_canonical_path and output != canonical:
+        raise ValueError(
+            "production plan output differs from the canonical relative path"
+        )
     partial = output.with_name(f".{output.name}.partial")
     if (
         os.path.lexists(output)
@@ -156,6 +162,7 @@ def build(output_dir: Path) -> Path:
             "protocol_version": protocol.PROTOCOL_VERSION,
             "scope": "adaptive_target_blind_numerical_calibration_only",
             "study_role": ("pre_sae_generic_vector_delivery_and_j_readout_calibration"),
+            "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
             # Historical provenance only. Final execution authority is issued
             # after this complete directory is committed and pushed.
             "git_head_commit": _git_head(),
@@ -197,7 +204,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
-    print(build(args.output_dir))
+    print(build(args.output_dir, enforce_canonical_path=True))
     return 0
 
 

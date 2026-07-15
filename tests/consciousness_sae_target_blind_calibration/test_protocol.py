@@ -32,6 +32,10 @@ def test_protocol_has_separate_adaptive_identity_and_exact_grid() -> None:
     }
     assert protocol.ADAPTIVE_DESIGN_INPUTS["analysis_data_inputs"] == []
     snapshot = protocol.protocol_snapshot()
+    assert snapshot["canonical_plan_relative_path"] == (
+        "data/consciousness_sae_target_blind_calibration/"
+        "calibration_v2_plan_20260714_r3"
+    )
     assert snapshot["target_sae_features_included"] is False
     assert snapshot["study_role"] == (
         "pre_sae_generic_vector_delivery_and_j_readout_calibration"
@@ -151,6 +155,10 @@ def test_build_plan_binds_sources_and_has_no_target_rows(tmp_path, monkeypatch) 
     assert manifest["target_feature_vector_count"] == 0
     assert manifest["analysis_data_inputs"] == []
     assert (
+        manifest["canonical_plan_relative_path"]
+        == protocol.CANONICAL_PLAN_RELATIVE_PATH
+    )
+    assert (
         len(
             json.loads((output / "protocol_snapshot.json").read_text())[
                 "prompt_payloads"
@@ -171,6 +179,22 @@ def test_build_plan_binds_sources_and_has_no_target_rows(tmp_path, monkeypatch) 
     assert len(audit["j_state_contract_sha256"]) == 64
     assert len(audit["fixed_panel_estimand_sha256"]) == 64
     assert len(audit["forward_inventory_sha256"]) == 64
+
+
+def test_production_plan_entry_points_reject_a_moved_plan(
+    tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr(build_plan, "_git_head", lambda: "c" * 40)
+    moved = tmp_path / "moved-plan"
+    with pytest.raises(ValueError, match="canonical relative path"):
+        build_plan.build(moved, enforce_canonical_path=True)
+
+    build_plan.build(moved)
+    with pytest.raises(
+        validate_plan.IndependentPlanAuditError,
+        match="canonical relative path",
+    ):
+        validate_plan.validate(moved, enforce_canonical_path=True)
 
 
 def test_independent_validator_rejects_collection_gate_drift(

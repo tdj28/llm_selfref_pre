@@ -160,6 +160,8 @@ data/consciousness_sae_target_blind_calibration/*
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/**
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/**
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/**
 
 # Defense in depth: these formats are never Git payloads for this study, even
 # if someone accidentally writes them under docs/, experiments/, or tests/.
@@ -248,6 +250,7 @@ out/
 !data/consciousness_sae_realization_validation/validation_v1_plan_20260714/*.jsonl
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/*.jsonl
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/*.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_balanced_80_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/*.jsonl

@@ -18,6 +18,7 @@ from experiments.consciousness_sae_realization_validation import runpod_prefligh
 from experiments.consciousness_sae_target_blind_calibration import (
     build_plan,
     protocol,
+    review_adjudication,
 )
 
 
@@ -35,6 +36,7 @@ AUTHORIZATION_FIELDS = frozenset(
         "study_id",
         "protocol_version",
         "authorized_at_utc",
+        "canonical_plan_relative_path",
         "plan_manifest_sha256",
         "plan_manifest_file_sha256",
         "source_files_sha256",
@@ -199,6 +201,10 @@ def _validate_plan(plan_dir: Path) -> dict[str, Any]:
         plan_prefix = plan_root.relative_to(REPO_ROOT)
     except ValueError as exc:
         raise AuthorizationError("plan directory is outside the repository") from exc
+    if plan_prefix.as_posix() != protocol.CANONICAL_PLAN_RELATIVE_PATH:
+        raise AuthorizationError(
+            "plan directory differs from the canonical relative path"
+        )
     manifest_path = _regular_file(plan_root / "plan_manifest.json", "plan manifest")
     manifest = _json(manifest_path, "plan manifest")
     manifest_core = dict(manifest)
@@ -213,6 +219,8 @@ def _validate_plan(plan_dir: Path) -> dict[str, Any]:
         manifest.get("schema_version") != protocol.PLAN_SCHEMA_VERSION
         or manifest.get("study_id") != protocol.STUDY_ID
         or manifest.get("protocol_version") != protocol.PROTOCOL_VERSION
+        or manifest.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
         or manifest.get("scope") != "adaptive_target_blind_numerical_calibration_only"
         or manifest.get("paper_prompt_render_count") != 0
         or manifest.get("target_prompt_render_count") != 0
@@ -280,6 +288,7 @@ def _validate_plan(plan_dir: Path) -> dict[str, Any]:
         "manifest_path": manifest_path,
         "source": source,
         "source_path": source_path,
+        "canonical_plan_relative_path": plan_prefix.as_posix(),
         "bound_paths": bound_paths,
     }
 
@@ -374,6 +383,145 @@ def _validated_component_revisions(cache: Mapping[str, Any]) -> dict[str, str]:
     return revisions
 
 
+def _physical_plan_evidence(
+    relative_root: str, label: str
+) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]], set[str]]:
+    safe_root = _safe_relative(relative_root, f"{label} root")
+    root = _absolute(REPO_ROOT / safe_root)
+    _require_no_symlink_components(root, f"{label} root")
+    if not root.is_dir():
+        raise AuthorizationError(f"{label} root is missing")
+    manifest_path = _regular_file(root / "plan_manifest.json", f"{label} manifest")
+    manifest = _json(manifest_path, f"{label} manifest")
+    core = dict(manifest)
+    supplied = core.pop("plan_manifest_sha256", None)
+    if supplied != protocol.canonical_sha256(core):
+        raise AuthorizationError(f"{label} manifest self-hash differs")
+    rows = manifest.get("files")
+    if not isinstance(rows, list):
+        raise AuthorizationError(f"{label} plan inventory is missing")
+    paths = {(PurePosixPath(safe_root) / "plan_manifest.json").as_posix()}
+    inventory = []
+    for row in rows:
+        if not isinstance(row, Mapping) or set(row) != {"path", "bytes", "sha256"}:
+            raise AuthorizationError(f"{label} plan row schema differs")
+        name = _safe_relative(row.get("path"), f"{label} plan file")
+        if len(PurePosixPath(name).parts) != 1:
+            raise AuthorizationError(f"{label} plan file is not at the plan root")
+        path = _regular_file(root / name, f"{label} plan file")
+        if (
+            isinstance(row.get("bytes"), bool)
+            or not isinstance(row.get("bytes"), int)
+            or path.stat().st_size != row["bytes"]
+            or protocol.sha256_file(path) != row.get("sha256")
+        ):
+            raise AuthorizationError(f"{label} plan file differs: {name}")
+        inventory.append(dict(row))
+        paths.add((PurePosixPath(safe_root) / name).as_posix())
+    inventory.append(
+        {
+            "path": "plan_manifest.json",
+            "bytes": manifest_path.stat().st_size,
+            "sha256": protocol.sha256_file(manifest_path),
+        }
+    )
+    inventory.sort(key=lambda row: str(row["path"]))
+    source_path = _regular_file(root / "source_files.json", f"{label} source inventory")
+    source = _json(source_path, f"{label} source inventory")
+    if set(source) != {"files"} or not isinstance(source.get("files"), list):
+        raise AuthorizationError(f"{label} source inventory schema differs")
+    audit_path = _regular_file(
+        root / "INDEPENDENT_PLAN_AUDIT.json", f"{label} independent plan audit"
+    )
+    audit = _json(audit_path, f"{label} independent plan audit")
+    _self_hash(audit, f"{label} independent plan audit")
+    if audit.get("plan_manifest_sha256") != supplied:
+        raise AuthorizationError(f"{label} independent plan audit binding differs")
+    paths.add((PurePosixPath(safe_root) / "INDEPENDENT_PLAN_AUDIT.json").as_posix())
+    return manifest, source, inventory, paths
+
+
+def _validate_review_adjudication(
+    review: Mapping[str, Any],
+    *,
+    review_path: Path,
+    final_plan_manifest_sha256: str,
+) -> tuple[dict[str, Any], tuple[str, ...]]:
+    relative = _repo_relative(review_path, "review adjudication")
+    try:
+        validated = review_adjudication.validate_adjudication_receipt(
+            review,
+            final_plan_manifest_sha256=final_plan_manifest_sha256,
+            final_plan_relative_path=protocol.CANONICAL_PLAN_RELATIVE_PATH,
+        )
+        bound = review_adjudication.bound_paths(validated)
+    except review_adjudication.ReviewAdjudicationError as exc:
+        raise AuthorizationError(f"review adjudication failed: {exc}") from exc
+    if relative != validated.get("receipt_path"):
+        raise AuthorizationError("review adjudication path differs")
+    attempts = validated["review_attempts"]
+    for row in attempts:
+        summary_relative = _safe_relative(
+            row.get("summary_relative_path"), "review summary path"
+        )
+        summary = _regular_file(REPO_ROOT / summary_relative, "review summary")
+        if protocol.sha256_file(summary) != row.get("summary_file_sha256"):
+            raise AuthorizationError("review summary file hash differs")
+    if set(bound) != {
+        relative,
+        *(str(row["summary_relative_path"]) for row in attempts),
+    }:
+        raise AuthorizationError("review evidence path inventory differs")
+    r2_root = str(validated["r2_candidate"]["canonical_plan_directory"])
+    r2_manifest, r2_source, r2_inventory, r2_paths = _physical_plan_evidence(
+        r2_root, "r2 reviewed candidate"
+    )
+    r3_manifest, r3_source, r3_inventory, r3_paths = _physical_plan_evidence(
+        protocol.CANONICAL_PLAN_RELATIVE_PATH, "r3 final plan"
+    )
+    r2 = validated["r2_candidate"]
+    r3 = validated["r3_final"]
+    r3_audit_path = _regular_file(
+        REPO_ROOT
+        / protocol.CANONICAL_PLAN_RELATIVE_PATH
+        / "INDEPENDENT_PLAN_AUDIT.json",
+        "r3 independent plan audit",
+    )
+    r3_audit = _json(r3_audit_path, "r3 independent plan audit")
+    if (
+        r2_manifest.get("plan_manifest_sha256") != r2.get("plan_manifest_sha256")
+        or protocol.sha256_file(REPO_ROOT / r2_root / "plan_manifest.json")
+        != r2.get("plan_manifest_file_sha256")
+        or protocol.sha256_file(REPO_ROOT / r2_root / "source_files.json")
+        != r2.get("source_inventory_file_sha256")
+        or protocol.canonical_sha256(r2_source["files"])
+        != r2.get("source_file_inventory_sha256")
+        or validated.get("candidate_source_inventory") != r2_source["files"]
+        or validated.get("candidate_plan_inventory") != r2_inventory
+        or r3_manifest.get("plan_manifest_sha256") != r3.get("plan_manifest_sha256")
+        or r3_manifest.get("git_head_commit") != r3.get("git_head_commit")
+        or protocol.sha256_file(
+            REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH / "plan_manifest.json"
+        )
+        != r3.get("plan_manifest_file_sha256")
+        or protocol.sha256_file(
+            REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH / "source_files.json"
+        )
+        != r3.get("source_inventory_file_sha256")
+        or protocol.canonical_sha256(r3_source["files"])
+        != r3.get("source_file_inventory_sha256")
+        or validated.get("final_source_inventory") != r3_source["files"]
+        or validated.get("final_plan_inventory") != r3_inventory
+        or r3_audit.get("receipt_sha256") != r3.get("independent_plan_audit_sha256")
+        or protocol.sha256_file(r3_audit_path)
+        != r3.get("independent_plan_audit_file_sha256")
+        or r3_audit.get("plan_manifest_sha256")
+        != r3_manifest.get("plan_manifest_sha256")
+    ):
+        raise AuthorizationError("physical candidate/final review lineage differs")
+    return validated, tuple(sorted({*bound, *r2_paths, *r3_paths}))
+
+
 def validate_execution_authorization(
     receipt: Mapping[str, Any],
     *,
@@ -395,6 +543,10 @@ def validate_execution_authorization(
         or receipt.get("status") != "authorized"
         or receipt.get("study_id") != protocol.STUDY_ID
         or receipt.get("protocol_version") != protocol.PROTOCOL_VERSION
+        or receipt.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
+        or plan.get("canonical_plan_relative_path")
+        != protocol.CANONICAL_PLAN_RELATIVE_PATH
         or receipt.get("plan_manifest_sha256") != plan.get("plan_manifest_sha256")
         or receipt.get("plan_manifest_file_sha256")
         != protocol.sha256_file(_regular_file(plan_manifest_path, "plan manifest"))
@@ -438,22 +590,29 @@ def validate_execution_authorization(
         raise AuthorizationError(
             "execution plan is outside the source archive"
         ) from exc
+    if plan_prefix.as_posix() != protocol.CANONICAL_PLAN_RELATIVE_PATH:
+        raise AuthorizationError(
+            "execution plan differs from the canonical relative path"
+        )
     review_relative = _safe_relative(
         receipt.get("review_adjudication_relative_path"),
         "review adjudication path",
     )
     review_path = _regular_file(REPO_ROOT / review_relative, "review adjudication")
     review = _json(review_path, "review adjudication")
+    validated_review, review_bound_paths = _validate_review_adjudication(
+        review,
+        review_path=review_path,
+        final_plan_manifest_sha256=str(receipt["plan_manifest_sha256"]),
+    )
     if (
-        _self_hash(review, "review adjudication")
+        validated_review.get("receipt_sha256")
         != receipt.get("review_adjudication_sha256")
         or protocol.sha256_file(review_path)
         != receipt.get("review_adjudication_file_sha256")
-        or review.get("review_model") != receipt.get("review_model")
-        or review.get("final_plan_manifest_sha256")
+        or validated_review.get("review_model") != receipt.get("review_model")
+        or validated_review.get("final_plan_manifest_sha256")
         != receipt.get("plan_manifest_sha256")
-        or review.get("status") != "adjudicated_no_unresolved_blockers"
-        or review.get("unresolved_blocking_findings") != []
     ):
         raise AuthorizationError("execution review adjudication differs")
     source_paths = [
@@ -465,7 +624,7 @@ def validate_execution_authorization(
         raise AuthorizationError("execution source inventory schema differs")
     bound_paths = {
         *source_paths,
-        review_relative,
+        *review_bound_paths,
         (plan_prefix / "plan_manifest.json").as_posix(),
         *((plan_prefix / name).as_posix() for name in PLAN_FILES),
     }
@@ -548,23 +707,18 @@ def authorize(
         raise AuthorizationError("owned provider resources differ from calibration")
 
     review_path = _regular_file(review_adjudication_path, "review adjudication")
-    review_relative = _repo_relative(review_path, "review adjudication")
     review = _json(review_path, "review adjudication")
-    review_hash = _self_hash(review, "review adjudication")
-    if (
-        review.get("status") != "adjudicated_no_unresolved_blockers"
-        or review.get("study_id") != protocol.STUDY_ID
-        or review.get("protocol_version") != protocol.PROTOCOL_VERSION
-        or review.get("final_plan_manifest_sha256") != supplied_plan_hash
-        or review.get("unresolved_blocking_findings") != []
-        or not isinstance(review.get("review_model"), str)
-        or not review["review_model"]
-    ):
-        raise AuthorizationError("Pro-review adjudication does not authorize this plan")
+    validated_review, review_bound_paths = _validate_review_adjudication(
+        review,
+        review_path=review_path,
+        final_plan_manifest_sha256=supplied_plan_hash,
+    )
+    review_relative = str(validated_review["receipt_path"])
+    review_hash = str(validated_review["receipt_sha256"])
 
     final_git = _live_remote_freeze()
     bound_paths = set(plan["bound_paths"])
-    bound_paths.add(review_relative)
+    bound_paths.update(review_bound_paths)
     ordered_bound = _verify_committed_paths(tuple(bound_paths))
 
     created = _utc(str(ownership["created_at"]), "provider created_at")
@@ -604,6 +758,7 @@ def authorize(
         "study_id": protocol.STUDY_ID,
         "protocol_version": protocol.PROTOCOL_VERSION,
         "authorized_at_utc": authorized_text,
+        "canonical_plan_relative_path": plan["canonical_plan_relative_path"],
         "plan_manifest_sha256": supplied_plan_hash,
         "plan_manifest_file_sha256": protocol.sha256_file(plan["manifest_path"]),
         "source_files_sha256": protocol.sha256_file(plan["source_path"]),
@@ -611,7 +766,7 @@ def authorize(
         "review_adjudication_sha256": review_hash,
         "review_adjudication_file_sha256": protocol.sha256_file(review_path),
         "review_adjudication_relative_path": review_relative,
-        "review_model": review["review_model"],
+        "review_model": validated_review["review_model"],
         **final_git,
         "bound_input_count": len(ordered_bound),
         "bound_input_paths_sha256": protocol.canonical_sha256(ordered_bound),
