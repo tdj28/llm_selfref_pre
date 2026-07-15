@@ -64,6 +64,7 @@ _SYSCALL_NUMBERS = {
 
 _O_PATH = getattr(os, "O_PATH", 0o10000000)
 _O_CLOEXEC = getattr(os, "O_CLOEXEC", 0)
+_O_DIRECTORY = getattr(os, "O_DIRECTORY", 0)
 _O_NOFOLLOW = getattr(os, "O_NOFOLLOW", 0)
 _HEX64 = re.compile(r"[0-9a-f]{64}")
 _NVIDIA_DEVICE_PATH = re.compile(
@@ -490,12 +491,35 @@ def _descriptor_audit(
         for row in device_records
     }
     rows: list[dict[str, Any]] = []
+    inventory_fd: int | None = None
     try:
+        if sys.platform == "linux":
+            # Hold a known procfs directory descriptor while enumerating.
+            # ``os.listdir('/proc/self/fd')`` otherwise exposes its own anonymous
+            # short-lived descriptor in the returned names and can close it
+            # before the following ``fstat``.  The known self-created descriptor
+            # is removed before auditing the inherited set.
+            inventory_fd = os.open(
+                "/proc/self/fd", os.O_RDONLY | _O_DIRECTORY | _O_CLOEXEC
+            )
+            names = os.listdir(inventory_fd)
+        else:  # Unit tests exercise the pure audit logic away from Linux.
+            names = os.listdir("/proc/self/fd")
+        own_inventory_fd = inventory_fd
+        if inventory_fd is not None:
+            inventory_fd = None
+            os.close(own_inventory_fd)
         fd_names = sorted(
-            (name for name in os.listdir("/proc/self/fd") if name.isdigit()),
+            (
+                name
+                for name in names
+                if name.isdigit() and int(name) != own_inventory_fd
+            ),
             key=int,
         )
     except OSError as exc:
+        if inventory_fd is not None:
+            os.close(inventory_fd)
         raise LandlockLaunchError("could not inventory inherited descriptors") from exc
     for name in fd_names:
         fd = int(name)

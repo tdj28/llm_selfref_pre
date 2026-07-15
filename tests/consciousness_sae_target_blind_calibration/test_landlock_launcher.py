@@ -345,6 +345,56 @@ def test_descriptor_audit_allows_standard_stream_pipe(
     ]
 
 
+def test_descriptor_audit_excludes_only_its_known_proc_inventory_descriptor(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    inventory_fd = 9
+    closed: list[int] = []
+
+    def fake_open(path: str, flags: int) -> int:
+        assert path == "/proc/self/fd"
+        assert flags & os.O_RDONLY == os.O_RDONLY
+        assert flags & landlock_launcher._O_DIRECTORY
+        return inventory_fd
+
+    def fake_listdir(path: int) -> list[str]:
+        assert path == inventory_fd
+        return ["1", str(inventory_fd)]
+
+    monkeypatch.setattr(landlock_launcher.sys, "platform", "linux")
+    monkeypatch.setattr(os, "open", fake_open)
+    monkeypatch.setattr(os, "listdir", fake_listdir)
+    monkeypatch.setattr(
+        os,
+        "fstat",
+        lambda fd: SimpleNamespace(st_mode=stat.S_IFIFO | 0o600) if fd == 1 else None,
+    )
+    monkeypatch.setattr(landlock_launcher.fcntl, "fcntl", lambda *_args: os.O_WRONLY)
+    monkeypatch.setattr(os, "readlink", lambda _path: "pipe:[123]")
+    monkeypatch.setattr(os, "close", closed.append)
+
+    receipt = landlock_launcher._descriptor_audit(
+        output_root=tmp_path / "output",
+        canary_protected_root=tmp_path / "canary-protected",
+        canary_output_root=tmp_path / "canary-output",
+        protected_roots=[tmp_path / "raw"],
+        protected_files=[],
+        device_records=[],
+    )
+
+    assert closed == [inventory_fd]
+    assert receipt["descriptors"] == [
+        {
+            "fd": 1,
+            "target": "pipe:[123]",
+            "kind": "fifo",
+            "access_mode": os.O_WRONLY,
+            "writable": True,
+            "allowed_reason": "standard_stream",
+        }
+    ]
+
+
 def test_descriptor_audit_rejects_standard_stream_gpu_device(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
