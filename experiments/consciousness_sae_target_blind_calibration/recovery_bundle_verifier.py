@@ -86,7 +86,7 @@ ORIGINAL_FAILURE_LOG_SHA256 = (
 ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
 ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
-COMPLETED_REVIEW_COST_CEILING_USD = 20.0
+COMPLETED_REVIEW_COST_CEILING_USD = 25.0
 ORIGINAL_RECEIPTS = {
     "ownership": "2aaa6e9e665f511ccfe363eee9deb5496c36bc8b2ae2b7ac67620a58abe914ca",
     "guest": "226e939db167bc3471c4b559aaa2f454ea3fa0cfa51a0f73d378ced11fe33b26",
@@ -474,6 +474,8 @@ POLICY_ABI = 4
 HANDLED_ACCESS_FS = 0x7FF2
 OUTPUT_ALLOWED_ACCESS_FS = 0x1B2
 DEVICE_ALLOWED_ACCESS_FS = 0x2
+PROC_SELF_TASK_ALLOWED_ACCESS_FS = 0x4002
+PROC_SELF_TASK_PATH = "/proc/self/task"
 LANDLOCK_POLICY = {
     "mechanism": "linux_landlock",
     "required_abi": POLICY_ABI,
@@ -501,13 +503,19 @@ LANDLOCK_POLICY = {
         "make_reg",
     ],
     "rule_type": "path_beneath",
-    "directory_rule_count": 2,
+    "directory_rule_count": 3,
     "device_rule_access_fs": DEVICE_ALLOWED_ACCESS_FS,
     "device_rule_access_fs_name": "write_file",
     "write_allowed_directories": [
         "execution.paths.output_root",
         "execution.paths.canary_output_root",
     ],
+    "proc_self_task_allowed_access_fs": PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+    "proc_self_task_allowed_access_fs_names": ["write_file", "truncate"],
+    "proc_self_task_rule_path": PROC_SELF_TASK_PATH,
+    "proc_self_task_exception_scope": (
+        "WRITE_FILE|TRUNCATE on all descendants; required for CUDA thread naming"
+    ),
     "device_write_exceptions": "execution.device_files",
     "raw_and_provenance_write_access": "default_denied",
     "metadata_and_device_ioctl_outside_claim": True,
@@ -560,13 +568,16 @@ FORBIDDEN_ENVIRONMENT = (
 
 WRITE_CONFINEMENT_CLAIM = (
     "process-tree ABI-4 handled filesystem content/topology mutations confined "
-    "to two output directories with exact NVIDIA WRITE_FILE exceptions"
+    "to two output directories, with an exact /proc/self/task "
+    "WRITE_FILE|TRUNCATE thread-name exception and exact NVIDIA WRITE_FILE "
+    "exceptions"
 )
 LANDLOCK_LIMITATIONS = {
     "metadata_operations_unhandled": True,
     "preopened_file_descriptors_unmediated": True,
     "sibling_processes_and_other_nfs_clients_unmediated": True,
     "device_ioctl_unhandled_in_abi4": True,
+    "proc_self_task_path_beneath_write_truncate_exception": True,
     "read_only_mount_claimed": False,
 }
 
@@ -1331,6 +1342,11 @@ def _validate_landlock_receipt(
             "path": canary_output_root,
             "allowed_access_fs": OUTPUT_ALLOWED_ACCESS_FS,
         },
+        {
+            "role": "proc_self_task_thread_names",
+            "path": PROC_SELF_TASK_PATH,
+            "allowed_access_fs": PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+        },
     ]
     if receipt["directory_rules"] != expected_directories:
         raise RecoveryBundleVerificationError(f"{label} directory grants differ")
@@ -2041,22 +2057,12 @@ def _validate_qualification_chain(
     ownership_path: Path,
     landlock_path: Path,
     cuda_path: Path,
-    target_receipt_path: str,
     expected_source_test_files: Sequence[Mapping[str, Any]],
     probe_summary: Any,
 ) -> tuple[dict[str, Any], datetime]:
     """Validate every disposable-host ownership/Landlock/CUDA cross-link."""
 
     validated_ownership = _validate_qualification_ownership(ownership)
-    target_parent = PurePosixPath(target_receipt_path).parent
-    expected_ownership_path = (
-        target_parent / TARGET_QUALIFICATION_OWNERSHIP_NAME
-    ).as_posix()
-    expected_landlock_path = (
-        target_parent / TARGET_QUALIFICATION_LANDLOCK_NAME
-    ).as_posix()
-    expected_cuda_path = (target_parent / TARGET_QUALIFICATION_CUDA_NAME).as_posix()
-
     child_argv = _list(landlock.get("child_argv"), "qualification Landlock child")
     if "--" not in child_argv:
         raise RecoveryBundleVerificationError(
@@ -2114,12 +2120,15 @@ def _validate_qualification_chain(
         _single_argv_option(child, "--qualification-ownership"),
         "qualification ownership receipt path",
     )
+    embedded_output_parent = PurePosixPath(output_root)
     if (
         _single_argv_option(child, "--closure-scope") != "source_test_qualification"
-        or embedded_ownership != expected_ownership_path
-        or embedded_landlock != expected_landlock_path
-        or embedded_probe != expected_cuda_path
-        or output_root != target_parent.as_posix()
+        or PurePosixPath(embedded_ownership).name != TARGET_QUALIFICATION_OWNERSHIP_NAME
+        or PurePosixPath(embedded_landlock).name != TARGET_QUALIFICATION_LANDLOCK_NAME
+        or PurePosixPath(embedded_probe).name != TARGET_QUALIFICATION_CUDA_NAME
+        or PurePosixPath(embedded_landlock).parent != embedded_output_parent
+        or PurePosixPath(embedded_probe).parent != embedded_output_parent
+        or _inside_posix(output_root, embedded_ownership)
     ):
         raise RecoveryBundleVerificationError(
             "qualification evidence path/scope differs"
@@ -2164,13 +2173,13 @@ def _validate_qualification_chain(
     pid, device_rules = _validate_landlock_receipt(
         landlock,
         purpose="preauthorization_probe",
-        receipt_path=expected_landlock_path,
+        receipt_path=embedded_landlock,
         output_root=output_root,
         protected_roots=[canary_protected_root, *bootstrap_roots],
         protected_files=[
             f"{canary_protected_root}/seed.txt",
             *bootstrap_files,
-            expected_ownership_path,
+            embedded_ownership,
         ],
         canary_output_root=canary_output_root,
         authorization_sha256=None,
@@ -2184,12 +2193,12 @@ def _validate_qualification_chain(
         roots_manifest_sha256,
         device_files,
         closure_scope="source_test_qualification",
-        qualification_ownership=expected_ownership_path,
-        landlock_receipt=expected_landlock_path,
+        qualification_ownership=embedded_ownership,
+        landlock_receipt=embedded_landlock,
         output_root=output_root,
         canary_protected_root=canary_protected_root,
         canary_output_root=canary_output_root,
-        output=expected_cuda_path,
+        output=embedded_probe,
     )
     if (
         child_argv != expected_child
@@ -2697,7 +2706,6 @@ def _validate_test_receipt(
         ownership_path=qualification_ownership_path,
         landlock_path=qualification_landlock_path,
         cuda_path=qualification_cuda_path,
-        target_receipt_path=receipt_path,
         expected_source_test_files=expected_source_test_files,
         probe_summary=probe_summary,
     )

@@ -96,12 +96,12 @@ ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
 # Prospective second-redesign review settings. Freezing these values permits a
 # cost-only dry run; it does not authorize or issue the paid provider call.
-PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 20.0
+PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 25.0
 PRO_REVIEW_INSTRUCTIONS_SHA256 = (
     "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7"
 )
-PRO_REVIEW_MAX_INPUT_CHARACTERS = 1_000_000
-PRO_REVIEW_MAX_INPUT_TOKENS = 350_000
+PRO_REVIEW_MAX_INPUT_CHARACTERS = 1_200_000
+PRO_REVIEW_MAX_INPUT_TOKENS = 400_000
 PRO_REVIEW_MAX_OUTPUT_TOKENS = 20_000
 PRO_REVIEW_INPUT_RESERVE_MULTIPLIER = 5.0
 PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER = 2.2
@@ -171,6 +171,13 @@ LANDLOCK_OUTPUT_ACCESS_RIGHTS = (
 LANDLOCK_OUTPUT_ACCESS_MASK = sum(
     value for _name, value in LANDLOCK_OUTPUT_ACCESS_RIGHTS
 )
+LANDLOCK_PROC_SELF_TASK_ACCESS_RIGHTS = (
+    ("write_file", 1 << 1),
+    ("truncate", 1 << 14),
+)
+LANDLOCK_PROC_SELF_TASK_ACCESS_MASK = sum(
+    value for _name, value in LANDLOCK_PROC_SELF_TASK_ACCESS_RIGHTS
+)
 NVIDIA_DEVICE_PATH_RE = re.compile(
     r"(?:/dev/nvidia[0-9]+|/dev/nvidiactl|/dev/nvidia-uvm|"
     r"/dev/nvidia-uvm-tools|/dev/nvidia-caps/nvidia-cap[0-9]+)"
@@ -185,13 +192,21 @@ LANDLOCK_POLICY = {
         name for name, _value in LANDLOCK_OUTPUT_ACCESS_RIGHTS
     ],
     "rule_type": "path_beneath",
-    "directory_rule_count": 2,
+    "directory_rule_count": 3,
     "device_rule_access_fs": 1 << 1,
     "device_rule_access_fs_name": "write_file",
     "write_allowed_directories": [
         "execution.paths.output_root",
         "execution.paths.canary_output_root",
     ],
+    "proc_self_task_allowed_access_fs": LANDLOCK_PROC_SELF_TASK_ACCESS_MASK,
+    "proc_self_task_allowed_access_fs_names": [
+        name for name, _value in LANDLOCK_PROC_SELF_TASK_ACCESS_RIGHTS
+    ],
+    "proc_self_task_rule_path": "/proc/self/task",
+    "proc_self_task_exception_scope": (
+        "WRITE_FILE|TRUNCATE on all descendants; required for CUDA thread naming"
+    ),
     "device_write_exceptions": "execution.device_files",
     "raw_and_provenance_write_access": "default_denied",
     "metadata_and_device_ioctl_outside_claim": True,
@@ -445,45 +460,45 @@ PRO_REVIEW_V3_PACKET = (
     (
         "experiments/consciousness_sae_target_blind_calibration/"
         "requirements-runpod-b200.txt",
-        "target dependency lock",
+        "bounded context 13",
     ),
     (
         "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
-        "target setup verification",
+        "bounded context 14",
     ),
     (
         "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
-        "qualification ownership validator",
+        "bounded context 15",
     ),
     (
         f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/review.md",
-        "historical v2 completed negative provider review",
+        "bounded context 16",
     ),
     (
         f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/review_manifest.json",
-        "historical v2 provider manifest",
+        "bounded context 17",
     ),
     (
         HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON,
-        "historical v2 negative review adjudication",
+        "bounded context 18",
     ),
     (
         HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_MARKDOWN,
-        "historical v2 adjudication summary",
+        "bounded context 19",
     ),
-    (V3_LOCAL_TEST_RECEIPT_SNAPSHOT, "reviewed local test receipt"),
-    (V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, "reviewed target-host test receipt"),
+    (V3_LOCAL_TEST_RECEIPT_SNAPSHOT, "bounded context 20"),
+    (V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, "bounded context 21"),
     (
         V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-        "reviewed target qualification ownership receipt",
+        "bounded context 22",
     ),
     (
         V3_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-        "reviewed target qualification Landlock receipt",
+        "bounded context 23",
     ),
     (
         V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-        "reviewed target qualification CUDA receipt",
+        "bounded context 24",
     ),
 )
 PRO_REVIEW_QUESTION = (
@@ -495,6 +510,8 @@ PRO_REVIEW_QUESTION = (
     "and provenance endpoint inventory equality (not continuous immutability), "
     "zero-forward claim, ABI-4 "
     "Landlock process-tree write confinement, exact NVIDIA device exceptions, "
+    "the exact /proc/self/task path-beneath WRITE_FILE|TRUNCATE exception "
+    "required for CUDA thread naming, "
     "same-PID handoff, environment/FD/mapping checks, CUDA preflight, failure "
     "semantics, or tests. Do not request or infer scientific result values. "
     "The completed v2 review was negative. Explicitly disposition every existing "
@@ -746,6 +763,11 @@ def _validate_landlock_receipt(
             "role": "canary_output_root",
             "path": canary_output_root.expanduser().absolute().as_posix(),
             "allowed_access_fs": LANDLOCK_OUTPUT_ACCESS_MASK,
+        },
+        {
+            "role": "proc_self_task_thread_names",
+            "path": "/proc/self/task",
+            "allowed_access_fs": LANDLOCK_PROC_SELF_TASK_ACCESS_MASK,
         },
     ]
     if directory_rules != expected_rules:
@@ -3036,6 +3058,12 @@ def _response_review_text(response: Mapping[str, Any]) -> str:
     return "\n\n".join(parts).rstrip() + "\n"
 
 
+def _review_finding_ids(review_text: str) -> list[str]:
+    """Extract exact stable finding IDs without matching identifier substrings."""
+
+    return sorted(set(re.findall(r"\b[BI][0-9]{2}\b", review_text)))
+
+
 def _terminal_review_verdict(review_text: str) -> str:
     """Return one exact terminal verdict; reject substring or prose matches."""
 
@@ -3545,7 +3573,7 @@ def _validate_review_evidence() -> dict[str, Any]:
         or not isinstance(PRO_REVIEW_BUDGET_AUTHORIZATION_USD, (int, float))
         or isinstance(PRO_REVIEW_BUDGET_AUTHORIZATION_USD, bool)
         or not math.isfinite(float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD))
-        or float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD) != 20.0
+        or float(PRO_REVIEW_BUDGET_AUTHORIZATION_USD) != 25.0
     ):
         raise AuditRecoveryError("prospective final-review settings are not frozen")
     _validate_historical_incomplete_review_evidence()
@@ -3747,7 +3775,7 @@ def _validate_review_evidence() -> dict[str, Any]:
         or terminal_verdict != "READY TO FREEZE"
     ):
         raise AuditRecoveryError("final v3 review did not approve exact packet bytes")
-    finding_ids = sorted(set(re.findall(r"\\b[BI][0-9]{2}\\b", review_text)))
+    finding_ids = _review_finding_ids(review_text)
     adjudication = _validate_v3_review_adjudication(
         root=root,
         response=response,
@@ -5090,14 +5118,16 @@ def _recovery_metadata(
         "write_confinement_policy": dict(LANDLOCK_POLICY),
         "write_confinement_claim": (
             "process-tree ABI-4 handled filesystem content/topology mutations "
-            "confined to two output directories with exact NVIDIA WRITE_FILE "
-            "exceptions"
+            "confined to two output directories, with an exact /proc/self/task "
+            "WRITE_FILE|TRUNCATE thread-name exception and exact NVIDIA "
+            "WRITE_FILE exceptions"
         ),
         "landlock_limitations": {
             "metadata_operations_unhandled": True,
             "preopened_file_descriptors_unmediated": True,
             "sibling_processes_and_other_nfs_clients_unmediated": True,
             "device_ioctl_unhandled_in_abi4": True,
+            "proc_self_task_path_beneath_write_truncate_exception": True,
             "read_only_mount_claimed": False,
         },
         "executable_isolation_receipt": dict(executable_isolation),

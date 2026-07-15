@@ -239,8 +239,16 @@ ordinary writable storage for its UID by opening `seed.txt` write-only without
 writing, creating and removing a scratch file, and creating and removing a
 scratch directory. Only then may post-restriction `EACCES` outcomes be
 attributed to the Landlock domain rather than DAC or a read-only filesystem.
-The probe's two `0x1b2` directory rules cover only its durable output leaf and
-its canary-output leaf. Under the handled filesystem
+The probe's two `0x1b2` output-directory rules cover only its durable output
+leaf and its canary-output leaf. A third exact rule on `/proc/self/task` grants
+only `WRITE_FILE|TRUNCATE` (`0x4002`), which CUDA needs to write each new
+thread's virtual `comm` name; it grants no `MAKE_*`, remove, or `REFER` right.
+Because Landlock path-beneath rules cannot select a future dynamic TID's
+`comm` filename, those two rights apply to all existing procfs descendants
+beneath `/proc/self/task`, not only `comm`. This exception reaches process
+metadata only and does not overlap the raw, provenance, repository, model, or
+output trees.
+Under the handled filesystem
 mask `0x7ff2`, the protected canary must deny write-open, truncate, creation,
 removal, linking, and rename operations while remaining byte- and
 path-identical. The output canary receives exactly `0x1b2` and must permit
@@ -337,6 +345,11 @@ frozen ABI-4 filesystem mutation mask `0x7ff2`: `WRITE_FILE`, `REMOVE_DIR`,
 exact directory rules: the authorization-bound durable `attempt_root/output`
 leaf and the disposable `attempt_root/landlock_canary/output` self-test leaf.
 The sibling `attempt_root/landlock_canary/protected` subtree receives no rule.
+One additional exact path-beneath rule grants only `WRITE_FILE|TRUNCATE`
+(`0x4002`) on `/proc/self/task`, permitting CUDA's thread-name writes to
+dynamic virtual `task/<tid>/comm` files without granting any handled create,
+remove, link, or rename right. The two rights apply to all existing procfs
+descendants of that task root; no broader `/proc` rule exists.
 The launcher also grants only `WRITE_FILE` (`0x2`) through one file rule for
 each exact authorization-bound NVIDIA character-device inode, after
 revalidating its canonical path, character-device type, `st_dev`, `st_ino`,
@@ -345,7 +358,8 @@ launcher then calls `landlock_restrict_self`.
 
 All other filesystem locations are default-denied for every handled
 operation. The two allowed output directories receive no permission for the
-other handled rights, and the enumerated NVIDIA device files receive no
+other handled rights, `/proc/self/task` receives only the two disclosed
+thread-name rights, and the enumerated NVIDIA device files receive no
 handled right other than the write-open access CUDA requires. The disposable
 canary output is used only for the repeated enforcement test and is empty
 afterward. The marker, failure receipt, compact bundle, and every necessary
@@ -369,7 +383,7 @@ write must return `EACCES` for raw `RUN_COMPLETE.json`, historical provenance
 leaves. No create, remove, truncate, or rename is attempted in the raw or
 provenance trees. The launcher then atomically writes an exclusive self-hashed
 Landlock receipt under the durable output leaf. That receipt binds the PID,
-ABI, exact handled and output-allowed masks, both directory rules, exact
+ABI, exact handled and output-allowed masks, all three path rules, exact
 device-file rules and identities, resolved roots, thread inventory, descriptor
 audit, real-tree and repeated-canary checks, pre-authorization probe receipt
 and dependency/CUDA result, authorization, command, and source hashes.
@@ -400,6 +414,14 @@ filesystem-content/topology claim. CUDA requires that exception. The closed
 device list, exact identities, post-confinement dependency/BF16 CUDA probe, and
 this unhandled-`ioctl` limitation are disclosed, but they do not make device
 operations filesystem output.
+
+CUDA initialization also requires `WRITE_FILE|TRUNCATE` on the virtual
+`/proc/self/task/<tid>/comm` thread-name files. The exact `/proc/self/task`
+path-beneath rule is therefore a disclosed process-metadata exception to the
+default-deny filesystem policy, and its two rights apply to all existing
+procfs descendants beneath that root rather than only `comm`. It does not grant
+handled creation, removal, linking, or rename rights, and it does not broaden
+the raw/provenance immutability claim.
 
 The reviewed executable closure must contain no metadata-only operation
 against a protected tree. Exact pre- and post-audit raw and provenance
@@ -525,8 +547,10 @@ immutable packet: this plan, bounded runtime context, scientific-equivalence
 appendix, bootstrap/launcher/recovery/verifier surfaces, focused tests, and the
 historical reviews and adjudications. The user explicitly authorized one final
 v3 call with a bounded increase for the expanded prior-review and qualification-
-receipt packet: producer and verifier share the exact $20 preflight ceiling,
-expected spend is lower, and no silent retry is permitted. The exact call must
+receipt packet: producer and verifier share the exact $25 preflight ceiling,
+with a 1.2-million-character/400,000-estimated-token input guard and the same
+20,000-output-token request cap; expected spend is lower, and no silent retry
+is permitted. The exact call must
 use the corrected aggregate-input/output reserve guard and a fresh output
 directory. A completed response's visible text must equal the raw provider
 output, and a machine-readable adjudication must give every stable finding a
@@ -565,12 +589,13 @@ Run-specific receipts cannot be members of the Git commit whose tests they
 attest. The circularity is resolved explicitly: first commit the receipt
 schema/producer/verifier and all source/test bytes as `code_freeze_commit`; run
 the local and disposable-target qualifications against that freeze; then copy
-the receipts and their two target-probe support files byte-identically into the
-review-input/evidence commit. Later evidence/review-only commits are admissible
+the receipts and their three target-qualification support files
+byte-identically into the review-input/evidence commit. Later evidence/review-only
+commits are admissible
 only while the code freeze remains an ancestor and `git diff --quiet` proves
 that every bound `experiments/` and `tests/` byte is unchanged. Authorization
-rehashes the current source/test closure, both receipts, and both target probe
-files, requires the two receipts to name the same code freeze and source/test
+rehashes the current source/test closure, both receipts, and all three target
+qualification files, requires the two receipts to name the same code freeze and source/test
 inventory, requires the qualification pod to differ from the recovery pod, and
 places byte-identical copies under the attempt's `evidence/tests/` directory.
 The offline verifier repeats those checks. No authorization is issued and no

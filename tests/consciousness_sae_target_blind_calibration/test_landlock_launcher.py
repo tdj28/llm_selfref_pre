@@ -49,6 +49,11 @@ def _receipt_core(tmp_path: Path) -> dict:
                 "path": (tmp_path / "canary-output").as_posix(),
                 "allowed_access_fs": 0x1B2,
             },
+            {
+                "role": "proc_self_task_thread_names",
+                "path": "/proc/self/task",
+                "allowed_access_fs": 0x4002,
+            },
         ],
         "device_rules": [
             {
@@ -90,10 +95,13 @@ def test_frozen_policy_masks_are_exact() -> None:
     assert landlock_launcher.HANDLED_ACCESS_FS == 0x7FF2
     assert landlock_launcher.OUTPUT_ALLOWED_ACCESS_FS == 0x1B2
     assert landlock_launcher.DEVICE_ALLOWED_ACCESS_FS == 0x2
+    assert landlock_launcher.PROC_SELF_TASK_ALLOWED_ACCESS_FS == 0x4002
     with pytest.raises(landlock_launcher.LandlockLaunchError, match="policy differs"):
         landlock_launcher.validate_policy(handled_access_fs=0x1B2)
     with pytest.raises(landlock_launcher.LandlockLaunchError, match="policy differs"):
         landlock_launcher.validate_policy(output_allowed_access_fs=0x1B3)
+    with pytest.raises(landlock_launcher.LandlockLaunchError, match="policy differs"):
+        landlock_launcher.validate_policy(proc_self_task_allowed_access_fs=0x2)
 
 
 @pytest.mark.parametrize(
@@ -627,6 +635,19 @@ def test_receipt_without_optional_hashes_is_valid(tmp_path: Path) -> None:
     receipt = landlock_launcher.seal_receipt(core)
     assert set(receipt) == set(landlock_launcher.RECEIPT_REQUIRED_FIELDS)
     landlock_launcher.validate_receipt(receipt)
+
+
+@pytest.mark.parametrize("mask", [0x2, 0x4082])
+def test_receipt_rejects_narrowed_or_broadened_proc_task_rule(
+    tmp_path: Path, mask: int
+) -> None:
+    core = _receipt_core(tmp_path)
+    core["directory_rules"] = [dict(row) for row in core["directory_rules"]]
+    core["directory_rules"][2]["allowed_access_fs"] = mask
+    with pytest.raises(
+        landlock_launcher.LandlockLaunchError, match="directory-rule receipt differs"
+    ):
+        landlock_launcher.validate_receipt(landlock_launcher.seal_receipt(core))
 
 
 def test_parser_captures_exact_child_command_after_separator(tmp_path: Path) -> None:

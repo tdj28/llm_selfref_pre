@@ -199,6 +199,11 @@ def _landlock(
                 "path": canary_output_root,
                 "allowed_access_fs": verifier.OUTPUT_ALLOWED_ACCESS_FS,
             },
+            {
+                "role": "proc_self_task_thread_names",
+                "path": verifier.PROC_SELF_TASK_PATH,
+                "allowed_access_fs": verifier.PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+            },
         ],
         "device_rules": devices,
         "protected_checks": [
@@ -415,7 +420,27 @@ def _test_receipt_evidence(
         root / verifier.TARGET_QUALIFICATION_OWNERSHIP_RELATIVE
     )
     _write(qualification_ownership_path, qualification_ownership)
-    qualification_root = qualification_ownership_path.parent
+    qualification_output_root = Path("/root/qualification/probe/output")
+    embedded_ownership_path = (
+        Path("/root/qualification/evidence")
+        / verifier.TARGET_QUALIFICATION_OWNERSHIP_NAME
+    )
+    embedded_landlock_path = (
+        qualification_output_root / verifier.TARGET_QUALIFICATION_LANDLOCK_NAME
+    )
+    embedded_cuda_path = (
+        qualification_output_root / verifier.TARGET_QUALIFICATION_CUDA_NAME
+    )
+    if mutation == "qualification_origin_ownership_inside_output":
+        embedded_ownership_path = (
+            qualification_output_root / verifier.TARGET_QUALIFICATION_OWNERSHIP_NAME
+        )
+    elif mutation == "qualification_origin_landlock_outside_output":
+        embedded_landlock_path = (
+            Path("/root/qualification/elsewhere")
+            / verifier.TARGET_QUALIFICATION_LANDLOCK_NAME
+        )
+    target_test_root = Path("/root/qualification/test")
     active_root = "/root/qualification/active"
     python_executable = f"{active_root}/.venv/bin/python"
     roots_manifest_path = "/root/qualification/bootstrap/APPROVED_IMPORT_ROOTS.json"
@@ -450,20 +475,20 @@ def _test_receipt_evidence(
         roots_manifest_sha256,
         [row["path"] for row in devices],
         closure_scope="source_test_qualification",
-        qualification_ownership=qualification_ownership_path.as_posix(),
-        landlock_receipt=qualification_landlock_path.as_posix(),
-        output_root=qualification_root.as_posix(),
+        qualification_ownership=embedded_ownership_path.as_posix(),
+        landlock_receipt=embedded_landlock_path.as_posix(),
+        output_root=qualification_output_root.as_posix(),
         canary_protected_root=canary_protected_root,
         canary_output_root=canary_output_root,
-        output=qualification_cuda_path.as_posix(),
+        output=embedded_cuda_path.as_posix(),
     )
     if mutation == "qualification_child_argv":
         qualification_child[-1] = "/wrong/qualification.json"
     qualification_landlock = _landlock(
         purpose="preauthorization_probe",
         pid=91,
-        receipt_path=qualification_landlock_path.as_posix(),
-        output_root=qualification_root.as_posix(),
+        receipt_path=embedded_landlock_path.as_posix(),
+        output_root=qualification_output_root.as_posix(),
         protected_roots=[
             canary_protected_root,
             *sorted({*root_paths, str(Path(roots_manifest_path).parent)}),
@@ -472,7 +497,7 @@ def _test_receipt_evidence(
             f"{canary_protected_root}/seed.txt",
             roots_manifest_path,
             f"{active_root}/{verifier.BOOTSTRAP_RELATIVE_PATH}",
-            qualification_ownership_path.as_posix(),
+            embedded_ownership_path.as_posix(),
         ],
         canary_output_root=canary_output_root,
         child_argv=qualification_child,
@@ -509,7 +534,7 @@ def _test_receipt_evidence(
     qualification_environment = dict(verifier.FIXED_ENVIRONMENT)
     qualification_environment.update(
         {
-            name: f"{qualification_root.as_posix()}/writable/{name.lower()}"
+            name: f"{qualification_output_root.as_posix()}/writable/{name.lower()}"
             for name in verifier.DYNAMIC_ENVIRONMENT
         }
     )
@@ -576,10 +601,10 @@ def _test_receipt_evidence(
         receipt_source_test_files = [dict(row) for row in source_test_files]
         if mutation == "target_source_inventory" and target:
             receipt_source_test_files[0]["bytes"] += 1
-        receipt_path = root / (
-            verifier.TARGET_HOST_TEST_RELATIVE
+        receipt_path = (
+            target_test_root / verifier.TARGET_HOST_TEST_RELATIVE.name
             if target
-            else verifier.LOCAL_TEST_RELATIVE
+            else root / verifier.LOCAL_TEST_RELATIVE
         )
         passed_ids = [designated] if target else []
         skipped_ids = [] if target else [designated]
@@ -661,11 +686,20 @@ def _test_receipt_evidence(
                     "--host-created-at-utc",
                     target_host["created_at_utc"],
                     "--qualification-ownership",
-                    qualification_ownership_path.as_posix(),
+                    (
+                        target_test_root
+                        / verifier.TARGET_QUALIFICATION_OWNERSHIP_RELATIVE.name
+                    ).as_posix(),
                     "--qualification-landlock",
-                    qualification_landlock_path.as_posix(),
+                    (
+                        target_test_root
+                        / verifier.TARGET_QUALIFICATION_LANDLOCK_RELATIVE.name
+                    ).as_posix(),
                     "--qualification-cuda-preflight",
-                    qualification_cuda_path.as_posix(),
+                    (
+                        target_test_root
+                        / verifier.TARGET_QUALIFICATION_CUDA_RELATIVE.name
+                    ).as_posix(),
                 ]
             )
         command_tail.extend(["--output", receipt_path.as_posix()])
@@ -1201,10 +1235,12 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         ] = "0" * 64
     elif mutation == "auth_review_cost_boundary":
         authorization_core["review"] = dict(review)
-        authorization_core["review"]["reconstructed_cost_usd"] = 20.0
+        authorization_core["review"]["reconstructed_cost_usd"] = (
+            verifier.COMPLETED_REVIEW_COST_CEILING_USD
+        )
     elif mutation == "auth_review_cost_over":
         authorization_core["review"] = dict(review)
-        authorization_core["review"]["reconstructed_cost_usd"] = 20.000001
+        authorization_core["review"]["reconstructed_cost_usd"] = 25.000001
     elif mutation == "auth_clock":
         authorization_core["provider_deadline_at_unix"] = 4500.0
     authorization = _seal(authorization_core)
@@ -1855,6 +1891,14 @@ def test_superseded_host_contract_and_confined_evidence_argv_are_frozen() -> Non
         ("qualification_closure", "qualification CUDA closure"),
         ("qualification_bootstrap", "qualification bootstrap phase differs"),
         ("qualification_child_argv", "qualification evidence path/scope differs"),
+        (
+            "qualification_origin_ownership_inside_output",
+            "qualification evidence path/scope differs",
+        ),
+        (
+            "qualification_origin_landlock_outside_output",
+            "qualification evidence path/scope differs",
+        ),
         ("qualification_device", "child/device binding differs"),
         ("auth_review_overclaim", "review semantics differ"),
         ("auth_review_final_bytes", "review semantics differ"),

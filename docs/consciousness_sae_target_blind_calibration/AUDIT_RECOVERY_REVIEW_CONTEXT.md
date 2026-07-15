@@ -83,8 +83,10 @@ review authorized by the user.
 
 For the expanded final v3 packet, including this negative review and the exact
 local/target qualification receipts, the user explicitly authorized a bounded
-increase: producer and verifier use one $20 preflight ceiling, expected spend
-is lower, and there is no silent retry.
+increase: producer and verifier use one $25 preflight ceiling with a
+1.2-million-character/400,000-estimated-token input guard and the same
+20,000-output-token request cap. Expected spend is lower, and there is no
+silent retry.
 
 That review found four concrete blockers. B06 identified Torch-dependent loader
 tests that skipped on macOS and still expected recovery inventory fields in the
@@ -104,9 +106,12 @@ launcher, direct bootstrap, verifier, and focused tests in this packet define
 the full contract. In brief: a single-threaded absolute-path launcher starts as
 `python -B -E -s -S`, rejects inherited writable/protected descriptors and
 unsafe mappings, installs the ABI-4 `0x7ff2` Landlock policy before project or
-ML imports, and same-PID execs a no-site bootstrap. Two exact directories get
-only `0x1b2`; each identity-bound NVIDIA character device gets only
-`WRITE_FILE`; no device-directory rule exists. An external manifest binds and
+ML imports, and same-PID execs a no-site bootstrap. Two exact output
+directories get only `0x1b2`; one exact `/proc/self/task` rule gets only
+`WRITE_FILE|TRUNCATE` (`0x4002`) on all procfs descendants beneath that task
+root, required for CUDA thread-name `comm` writes; each
+identity-bound NVIDIA character device gets only `WRITE_FILE`; no broader
+`/proc` or device-directory rule exists. An external manifest binds and
 rehashes every approved import-root byte and ordered `sys.path` entry.
 
 Both the pre-authorization probe and real launcher exercise independent
@@ -177,7 +182,8 @@ The reviewer should assess:
    pre-publication audit bug; and
 6. any concrete stop-ship flaw that must be fixed before audit execution;
 7. whether the ABI-4 Landlock launcher, `0x7ff2` handled mask, two exact
-   `0x1b2` output rules, independent pre-authorization and real-launch
+   `0x1b2` output rules, the exact `/proc/self/task` path-beneath `0x4002`
+   exception required for CUDA thread naming, independent pre-authorization and real-launch
    two-canary tests, exact inode/`rdev`-bound NVIDIA device exceptions,
    confined dependency imports and BF16 CUDA check, inherited-FD checks, and
    pre/post rehashes support the narrower stated process-tree

@@ -47,6 +47,10 @@ LANDLOCK_ACCESS_FS_TRUNCATE = 1 << 14
 HANDLED_ACCESS_FS = 0x7FF2
 OUTPUT_ALLOWED_ACCESS_FS = 0x1B2
 DEVICE_ALLOWED_ACCESS_FS = LANDLOCK_ACCESS_FS_WRITE_FILE
+PROC_SELF_TASK_ALLOWED_ACCESS_FS = (
+    LANDLOCK_ACCESS_FS_WRITE_FILE | LANDLOCK_ACCESS_FS_TRUNCATE
+)
+PROC_SELF_TASK_PATH = Path("/proc/self/task")
 
 LANDLOCK_CREATE_RULESET_VERSION = 1
 LANDLOCK_RULE_PATH_BENEATH = 1
@@ -237,6 +241,7 @@ def validate_policy(
     handled_access_fs: int = HANDLED_ACCESS_FS,
     output_allowed_access_fs: int = OUTPUT_ALLOWED_ACCESS_FS,
     device_allowed_access_fs: int = DEVICE_ALLOWED_ACCESS_FS,
+    proc_self_task_allowed_access_fs: int = PROC_SELF_TASK_ALLOWED_ACCESS_FS,
 ) -> None:
     """Fail if any frozen policy bit or ABI has drifted."""
 
@@ -265,6 +270,9 @@ def validate_policy(
             LANDLOCK_ACCESS_FS_MAKE_REG,
         )
     )
+    expected_proc_self_task = (
+        LANDLOCK_ACCESS_FS_WRITE_FILE | LANDLOCK_ACCESS_FS_TRUNCATE
+    )
     if (
         required_abi != 4
         or handled_access_fs != expected_handled
@@ -273,8 +281,11 @@ def validate_policy(
         or output_allowed_access_fs != 0x1B2
         or device_allowed_access_fs != LANDLOCK_ACCESS_FS_WRITE_FILE
         or device_allowed_access_fs != 0x2
+        or proc_self_task_allowed_access_fs != expected_proc_self_task
+        or proc_self_task_allowed_access_fs != 0x4002
         or output_allowed_access_fs & ~handled_access_fs
         or device_allowed_access_fs & ~handled_access_fs
+        or proc_self_task_allowed_access_fs & ~handled_access_fs
     ):
         raise LandlockLaunchError("frozen Landlock policy differs")
 
@@ -782,6 +793,11 @@ def _install_landlock(
             "path": canary_output_root.as_posix(),
             "allowed_access_fs": OUTPUT_ALLOWED_ACCESS_FS,
         },
+        {
+            "role": "proc_self_task_thread_names",
+            "path": PROC_SELF_TASK_PATH.as_posix(),
+            "allowed_access_fs": PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+        },
     ]
     ordered_devices = sorted(
         (dict(row) for row in device_records), key=lambda row: str(row["path"])
@@ -793,7 +809,7 @@ def _install_landlock(
                 add_rule_number=add_number,
                 ruleset_fd=ruleset_fd,
                 path=Path(str(row["path"])),
-                allowed_access=OUTPUT_ALLOWED_ACCESS_FS,
+                allowed_access=int(row["allowed_access_fs"]),
             )
         for row in ordered_devices:
             _add_path_rule(
@@ -1088,19 +1104,29 @@ def validate_receipt(value: Mapping[str, Any]) -> dict[str, Any]:
     ):
         raise LandlockLaunchError("Landlock receipt identity differs")
     directories = receipt.get("directory_rules")
-    if (
-        not isinstance(directories, list)
-        or len(directories) != 2
-        or [row.get("role") for row in directories if isinstance(row, Mapping)]
-        != ["output_root", "canary_output_root"]
-        or any(
-            not isinstance(row, Mapping)
-            or set(row) != {"role", "path", "allowed_access_fs"}
-            or row.get("allowed_access_fs") != OUTPUT_ALLOWED_ACCESS_FS
-            for row in directories
-        )
+    expected_directory_roles = (
+        ("output_root", OUTPUT_ALLOWED_ACCESS_FS),
+        ("canary_output_root", OUTPUT_ALLOWED_ACCESS_FS),
+        ("proc_self_task_thread_names", PROC_SELF_TASK_ALLOWED_ACCESS_FS),
+    )
+    if not isinstance(directories, list) or len(directories) != len(
+        expected_directory_roles
     ):
         raise LandlockLaunchError("Landlock directory-rule receipt differs")
+    for row, (role, allowed_access_fs) in zip(
+        directories, expected_directory_roles, strict=True
+    ):
+        if (
+            not isinstance(row, Mapping)
+            or set(row) != {"role", "path", "allowed_access_fs"}
+            or row.get("role") != role
+            or row.get("allowed_access_fs") != allowed_access_fs
+            or (
+                role == "proc_self_task_thread_names"
+                and row.get("path") != PROC_SELF_TASK_PATH.as_posix()
+            )
+        ):
+            raise LandlockLaunchError("Landlock directory-rule receipt differs")
     devices = receipt.get("device_rules")
     expected_device_fields = {
         "path",

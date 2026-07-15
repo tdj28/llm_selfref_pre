@@ -202,7 +202,8 @@ def test_audit_runtime_shim_is_byte_equivalent_to_frozen_tensor_hasher() -> None
 def test_landlock_policy_is_the_frozen_abi4_narrow_claim() -> None:
     assert audit_recovery.LANDLOCK_WRITE_ACCESS_MASK == 0x7FF2
     assert audit_recovery.LANDLOCK_OUTPUT_ACCESS_MASK == 0x1B2
-    assert audit_recovery.LANDLOCK_POLICY["directory_rule_count"] == 2
+    assert audit_recovery.LANDLOCK_PROC_SELF_TASK_ACCESS_MASK == 0x4002
+    assert audit_recovery.LANDLOCK_POLICY["directory_rule_count"] == 3
     assert audit_recovery.LANDLOCK_POLICY["device_rule_access_fs"] == 0x2
     assert audit_recovery.LANDLOCK_POLICY["metadata_and_device_ioctl_outside_claim"]
 
@@ -246,6 +247,11 @@ def test_recovery_validator_accepts_exact_launcher_receipt_schema(
                 "role": "canary_output_root",
                 "path": canary_output.as_posix(),
                 "allowed_access_fs": 0x1B2,
+            },
+            {
+                "role": "proc_self_task_thread_names",
+                "path": "/proc/self/task",
+                "allowed_access_fs": 0x4002,
             },
         ],
         "device_rules": [
@@ -1365,6 +1371,15 @@ def test_completed_review_terminal_verdict_is_exact(
             audit_recovery._terminal_review_verdict(review)  # noqa: SLF001
 
 
+def test_review_finding_ids_use_real_word_boundaries() -> None:
+    review = "B06 I04 XB07Y B06 B9 I123 B08."
+    assert audit_recovery._review_finding_ids(review) == [  # noqa: SLF001
+        "B06",
+        "B08",
+        "I04",
+    ]
+
+
 def test_historical_v2_completed_negative_review_is_pinned() -> None:
     observed = audit_recovery._validate_historical_v2_review_evidence()
     assert observed["terminal_verdict"] == "NOT READY TO FREEZE"
@@ -1377,6 +1392,7 @@ def test_historical_v2_completed_negative_review_is_pinned() -> None:
 
 def test_v3_review_packet_includes_receipts_but_not_outputs_or_huge_appendix() -> None:
     paths = {path for path, _role in audit_recovery.PRO_REVIEW_V3_PACKET}
+    roles = [role for _path, role in audit_recovery.PRO_REVIEW_V3_PACKET]
     assert not paths & set(audit_recovery.FINAL_V3_PRO_REVIEW_OUTPUT_PATHS)
     assert (
         "docs/consciousness_sae_target_blind_calibration/"
@@ -1390,6 +1406,25 @@ def test_v3_review_packet_includes_receipts_but_not_outputs_or_huge_appendix() -
         audit_recovery.V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
         audit_recovery.HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON,
     } <= paths
+    assert roles == [
+        "complete experiment plan",
+        *(f"bounded context {index}" for index in range(1, len(roles))),
+    ]
+
+
+def test_v3_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
+    assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == (
+        recovery_bundle_verifier.COMPLETED_REVIEW_COST_CEILING_USD
+    )
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS == 1_200_000
+    assert audit_recovery.PRO_REVIEW_MAX_INPUT_TOKENS == 400_000
+    limits = audit_recovery._validate_v3_packet_limits(  # noqa: SLF001
+        "x" * audit_recovery.PRO_REVIEW_MAX_INPUT_CHARACTERS,
+        "",
+    )
+    assert limits["estimated_budget_reserve_usd"] <= (
+        audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+    )
 
 
 def test_v3_review_input_uses_real_newline_delimited_artifact_markers(
