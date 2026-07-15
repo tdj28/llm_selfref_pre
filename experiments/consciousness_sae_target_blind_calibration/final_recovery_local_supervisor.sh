@@ -15,9 +15,9 @@ REMOTE_INPUT=${10:?missing remote input path}
 REMOTE_CONTROLLER=${11:?missing remote controller path}
 LOCAL_GATE=${12:?missing local hash-and-exec gate}
 LOCAL_GATE_VALIDATOR=${13:?missing local launch-receipt validator}
-CODE_FREEZE=${14:?missing C11 code-freeze commit}
-REVIEWED_PACKET_COMMIT=${15:?missing E11 reviewed-packet commit}
-FINAL_FREEZE=${16:?missing F11 final-freeze commit}
+CODE_FREEZE=${14:?missing C13 code-freeze commit}
+REVIEWED_PACKET_COMMIT=${15:?missing E13 reviewed-packet commit}
+FINAL_FREEZE=${16:?missing F13 final-freeze commit}
 
 for commit in "$CODE_FREEZE" "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE"; do
   [[ "$commit" =~ ^[0-9a-f]{40}$ ]]
@@ -27,11 +27,13 @@ REMOTE_ATTEMPT="/workspace/csae/$ATTEMPT_ID"
 REMOTE_BASE="/root/consciousness_sae_audit_recovery/$ATTEMPT_ID"
 LOCAL_ATTEMPT="$BASE/retrieved/$ATTEMPT_ID"
 DEST="root@$HOST"
-EXPECTED_CONTROLLER_SHA=a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2
-EXPECTED_GATE_SHA=fc444f69b37c21701aac0f9b28baeedb648fa43097d25ca557a3929b1559222e
-EXPECTED_GATE_VALIDATOR_SHA=e427e44e94e6061af61700ef29c1ebd5b83726f38422636277aed14defe5dd39
+EXPECTED_CONTROLLER_SHA=709117f71213073f0c2aa65871f4901594b6ce225968256d64dc8ca0ea5705e8
+EXPECTED_GATE_SHA=4fd8f76c1e304eb3aaf2059b1fa222d59d99fedf2fae1f4b7a1ff6233210878d
+EXPECTED_GATE_VALIDATOR_SHA=7475fcffd4487adce1490dab95f67995840b672ed4b8a40d4eb603cb3a5c4891
 REJECTED_B20_AUTHORIZATION_RECEIPT_SHA=f6d0fa7fdf5b6ec8553fce2fe8df7842dd28f5a63fb5a9674a6358d4af152358
 REJECTED_B20_AUTHORIZATION_FILE_SHA=897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7
+REJECTED_B22_AUTHORIZATION_RECEIPT_SHA=8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4
+REJECTED_B22_AUTHORIZATION_FILE_SHA=682e5a612e48e196a46ea762fe00ab4de32df1bf070aa72edf64d2639735f5ff
 REMOTE_GATE_RECEIPT="/root/final-recovery-launch-gate-$POD_ID.json"
 LOCAL_GATE_RECEIPT_DIR="$BASE/retrieved/launch-gate"
 LOCAL_GATE_RECEIPT="$LOCAL_GATE_RECEIPT_DIR/FINAL_RECOVERY_LAUNCH_GATE.json"
@@ -46,13 +48,14 @@ WATCHDOG_PID_FILE="$BASE/logs/watchdog.pid"
 [[ "$EXPECTED_CREATED_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
 [[ "$REMOTE_INPUT" == /root/final-recovery-inputs-* ]]
 [[ "$REMOTE_CONTROLLER" == /root/final_recovery_controller_f11.sh ]]
-for rejected_pod in 9n5f5a82p1gw1e eeo1skjkwjqot5; do
+for rejected_pod in 9n5f5a82p1gw1e eeo1skjkwjqot5 j7xr357tdlpq3f; do
   [[ "$POD_ID" != "$rejected_pod" ]]
   [[ "$REMOTE_INPUT" != *"$rejected_pod"* ]]
 done
 for rejected_attempt in \
   calv2-r3-audit-recovery-2479ed0-20260715T155035Z \
-  calv2-r3-audit-recovery-2479ed0-20260715T165648Z; do
+  calv2-r3-audit-recovery-2479ed0-20260715T165648Z \
+  calv2-r3-audit-recovery-497b0f8-20260715T191757Z; do
   [[ "$ATTEMPT_ID" != "$rejected_attempt" ]]
   [[ "$REMOTE_INPUT" != *"$rejected_attempt"* ]]
 done
@@ -252,9 +255,11 @@ if [[ -f "$LOCAL_ATTEMPT/RECOVERY_AUTHORIZATION.json" ]]; then
 elif ((REMOTE_RC == 0)); then
   AUTH_VALIDATION_RC=1
 fi
-printf 'SUPERVISOR_AUTHORIZATION_VALIDATION_EXIT rc=%s rejected_receipt_sha=%s rejected_file_sha=%s %s\n' \
+printf 'SUPERVISOR_AUTHORIZATION_VALIDATION_EXIT rc=%s rejected_b20_receipt_sha=%s rejected_b20_file_sha=%s rejected_b22_receipt_sha=%s rejected_b22_file_sha=%s %s\n' \
   "$AUTH_VALIDATION_RC" "$REJECTED_B20_AUTHORIZATION_RECEIPT_SHA" \
   "$REJECTED_B20_AUTHORIZATION_FILE_SHA" \
+  "$REJECTED_B22_AUTHORIZATION_RECEIPT_SHA" \
+  "$REJECTED_B22_AUTHORIZATION_FILE_SHA" \
   "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 printf 'SUPERVISOR_TERMINATE_START %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"

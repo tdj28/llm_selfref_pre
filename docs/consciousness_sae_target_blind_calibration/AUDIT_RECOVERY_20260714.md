@@ -1,23 +1,19 @@
 # Calibration v2 r3 Audit-Only Recovery
 
-Status: prospective technical-recovery redesign after a pre-claim host
-compatibility failure, two incomplete provider calls, completed negative v2,
-v3, and v4 reviews, a completed positive v5 review whose exact reviewed bytes
-failed the authentic pre-GPU authorization dry-run, and a superseded C6
-qualification whose production Unix-socket paths were overlong, plus a C7
-qualification-controller logging failure caught by the frozen descriptor
-audit, and a completed C9 qualification and v6 cumulative Pro review whose
-`READY TO FREEZE` response could not be adjudicated because prose-wide
-finding-ID extraction misclassified the negated phrase `No B05 is invented`.
-That B16 parser incident occurred before any recovery execution or model
-forward, and the C9 qualification pod was deleted after its evidence was
-retrieved. No recovered audit output has been computed or inspected. This
-plan is not executable until fresh local and disposable-B200 qualification
-receipts bind the current successor code freeze, an exact-byte successor review
-evaluates the complete current packet including B17--B21 and I10--I13, and the
-current code-freeze/reviewed-packet/final-freeze lineage passes every gate.
-This is not a new model run and cannot change the r3 estimand,
-prompt panel, directions, doses, layers, thresholds, or claim policy.
+Status: prospective audit-only B22 successor after the F12 recovery consumed
+its one-shot authorization, Landlock receipt, and attempt marker, then stopped
+without compact publication because its final sanitized environment omitted
+`CUBLAS_WORKSPACE_CONFIG=:4096:8`. The failure is mechanically closed and
+independently verified. Frozen raw rows were opened and row-level quantities
+may have been recomputed before the late artifact-device guard, but no compact
+metric was published, logged, inspected, or used to adapt the design. The exact
+owned pod was deleted and unrelated account inventory was unchanged. The F12
+authority is permanently rejected. This plan is not executable until fresh
+C13 local and disposable-B200 qualification receipts bind the repaired bytes,
+one cumulative v9 exact-byte review evaluates the immutable positive v8 review
+plus B22, and the C13<=E13<=F13 lineage passes every gate. This is not a new
+model transaction and cannot change the r3 estimand, prompts, directions,
+doses, layers, raw inputs, thresholds, metrics, or claim policy.
 
 ## Why recovery is necessary
 
@@ -898,6 +894,45 @@ an output-only final freeze add the seven provider-response and structured
 adjudication files. The final controller continues to accept the actual
 code-freeze, reviewed-packet, and final-freeze commit hashes as runtime values;
 the older C11/E11/F11 labels above describe the superseded first-v8 lineage.
+
+## V9 B22 deterministic-environment successor
+
+The completed F12 v8 review and adjudication are immutable positive historical
+evidence for the exact F12 bytes only. They are not reusable authority. The F12
+owned B200 attempt `calv2-r3-audit-recovery-497b0f8-20260715T191757Z` reached
+the final confined process, created `ATTEMPT_STARTED.json`, and then raised
+`CalibrationAuditError: artifact audit CUBLAS determinism differs`. The exact
+root cause is that the reviewed controller's final `env -i` block did not carry
+the protocol-required `CUBLAS_WORKSPACE_CONFIG=:4096:8`. This was a missing
+startup precondition, not observed numerical nondeterminism.
+
+The immutable B22 bundle is under
+`reviews/audit_recovery_b22_cublas_incident/`. Its offline verification receipt
+is `b9ccbac4029f82d4aeafc75fec8412936c6ca801197d530534b0d15a5143ebb2`.
+It proves that the prior authorization was consumed, the designated output tree
+contained only Landlock, attempt-marker, and failure receipts, no compact
+success publication existed, and the exact owned pod was deleted without
+changing unrelated inventory. It also discloses that frozen raw rows had been
+opened and row-level recomputation may have preceded the late guard. No result
+value is included in the successor review packet.
+
+The B22 repair is operational only. It derives the final and preflight
+environment requirement from the frozen protocol constant, binds the same
+literal independently in the offline verifier, passes it through every
+sanitized controller and qualification environment, and adds missing, wrong,
+and correct-value regressions. A designated B200 test must invoke the authentic
+`audit._configure_artifact_device("cuda:0")` boundary; a generic BF16 matmul is
+not qualifying evidence. `audit.py`, the r3 machine plan, raw data, prompts,
+directions, doses, layers, thresholds, metrics, and claim gates remain
+unchanged.
+
+C13 freezes the corrected source, tests, B22 closure, and v9 future paths. E13
+adds only fresh local and distinct disposable-B200 qualification snapshots.
+One cumulative `gpt-5.6-sol` review receives the complete current packet, the
+substantive F12 v8 review/adjudication, and B22 evidence. It must explicitly
+disposition B17--B22 and I10--I14; B23 or later stops launch. F13 may add only
+the seven v9 provider-output/adjudication files. No further repair/review loop
+is authorized: once these frozen gates are green, launch follows immediately.
 
 ## Claim boundary
 

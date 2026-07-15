@@ -630,8 +630,9 @@ def _fixture_qualification_probe_binding(
     cuda_path: Path,
     *,
     expected_source_test_files: list[dict],
+    expected_fixed_environment: dict[str, str] | None = None,
 ) -> dict:
-    del expected_source_test_files
+    del expected_source_test_files, expected_fixed_environment
     ownership = audit_recovery._json(ownership_path)
     landlock = audit_recovery._json(landlock_path)
     cuda = audit_recovery._json(cuda_path)
@@ -1018,9 +1019,9 @@ def test_target_test_receipt_rejects_skipped_designated_live_test(
         tmp_path, "target_host"
     )
     designated = audit_recovery.TARGET_DESIGNATED_TEST_IDS[0]
-    target["passed_ids"] = []
+    target["passed_ids"] = list(audit_recovery.TARGET_DESIGNATED_TEST_IDS[1:])
     target["skipped_ids"] = [designated]
-    target["passed_count"] = 0
+    target["passed_count"] = len(target["passed_ids"])
     target["skipped_count"] = 1
     core = dict(target)
     core.pop("receipt_sha256")
@@ -1281,6 +1282,15 @@ def test_confined_environment_rejects_forbidden_and_parent_escape(
         monkeypatch.delenv(name, raising=False)
     observed = audit_recovery._validate_confinement_environment(output)
     assert observed["PYTHONNOUSERSITE"] == "1"
+    assert observed["CUBLAS_WORKSPACE_CONFIG"] == ":4096:8"
+
+    monkeypatch.delenv("CUBLAS_WORKSPACE_CONFIG")
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="environment differs"):
+        audit_recovery._validate_confinement_environment(output)
+    monkeypatch.setenv("CUBLAS_WORKSPACE_CONFIG", ":16:8")
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="environment differs"):
+        audit_recovery._validate_confinement_environment(output)
+    monkeypatch.setenv("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
     monkeypatch.setenv("PYTHONPATH", "/tmp/injected")
     with pytest.raises(audit_recovery.AuditRecoveryError, match="forbidden"):
@@ -1293,6 +1303,27 @@ def test_confined_environment_rejects_forbidden_and_parent_escape(
     monkeypatch.setenv("TMPDIR", (output / ".." / "raw").as_posix())
     with pytest.raises(audit_recovery.AuditRecoveryError, match="escaped"):
         audit_recovery._validate_confinement_environment(output)
+
+
+def test_target_b200_artifact_device_determinism_contract() -> None:
+    """Exercise the real production guard that precedes artifact recomputation."""
+
+    torch = pytest.importorskip("torch")
+    if not torch.cuda.is_available() or torch.cuda.device_count() != 1:
+        pytest.skip("requires the designated single-GPU target host")
+    properties = torch.cuda.get_device_properties(0)
+    if "B200" not in str(properties.name):
+        pytest.skip("requires the designated B200 target host")
+
+    device = audit._configure_artifact_device("cuda:0")  # noqa: SLF001
+
+    assert device.type == "cuda"
+    assert torch.are_deterministic_algorithms_enabled()
+    assert torch.backends.cuda.matmul.allow_tf32 is False
+    assert torch.backends.cudnn.allow_tf32 is False
+    assert torch.backends.cuda.flash_sdp_enabled() is False
+    assert torch.backends.cuda.mem_efficient_sdp_enabled() is False
+    assert torch.backends.cuda.math_sdp_enabled() is True
 
 
 def test_preflight_child_argv_binds_exact_executable_cwd_and_inputs() -> None:
@@ -1905,29 +1936,40 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
         audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     } <= v8_paths
 
-    v8_proxy = {
-        audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT: (
+    v9_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V9_PACKET}
+    assert not v9_paths & set(audit_recovery.FINAL_V9_PRO_REVIEW_OUTPUT_PATHS)
+    assert set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS) <= v9_paths
+    assert {
+        f"{audit_recovery.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+        f"{audit_recovery.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+        audit_recovery.HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+        audit_recovery.B22_INCIDENT_DOCUMENT,
+        f"{audit_recovery.B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json",
+        f"{audit_recovery.B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json",
+    } <= v9_paths
+    v9_proxy = {
+        audit_recovery.V9_LOCAL_TEST_RECEIPT_SNAPSHOT: (
             audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT
         ),
-        audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
+        audit_recovery.V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
             audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ),
-        audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        audit_recovery.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
             audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ),
-        audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        audit_recovery.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
             audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ),
-        audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+        audit_recovery.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
             audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ),
     }
-    proxied_v8_packet = tuple(
-        (v8_proxy.get(path, path), role)
-        for path, role in audit_recovery.PRO_REVIEW_V8_PACKET
+    proxied_v9_packet = tuple(
+        (v9_proxy.get(path, path), role)
+        for path, role in audit_recovery.PRO_REVIEW_V9_PACKET
     )
-    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V8_PACKET", proxied_v8_packet)
-    v8_value = audit_recovery._expected_v8_pro_review_input()
+    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V9_PACKET", proxied_v9_packet)
+    v9_value = audit_recovery._expected_v9_pro_review_input()
     v7_payload = json.loads(
         (
             audit_recovery.REPO_ROOT
@@ -1935,12 +1977,12 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
             / "request_payload.json"
         ).read_text(encoding="utf-8")
     )
-    v8_limits = audit_recovery._validate_v8_packet_limits(
-        v7_payload["instructions"], v8_value
+    v9_limits = audit_recovery._validate_v9_packet_limits(
+        v7_payload["instructions"], v9_value
     )
-    assert v8_limits["actual_input_characters"] <= 2_200_000
-    assert v8_limits["estimated_input_tokens_conservative"] <= 630_000
-    assert v8_limits["estimated_budget_reserve_usd"] <= 75.0
+    assert v9_limits["actual_input_characters"] <= 2_200_000
+    assert v9_limits["estimated_input_tokens_conservative"] <= 630_000
+    assert v9_limits["estimated_budget_reserve_usd"] <= 75.0
 
 
 def test_v7_cumulative_narratives_share_only_current_git_lineage() -> None:
@@ -1977,7 +2019,7 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
         "experiments/consciousness_sae_target_blind_calibration/"
         "run_qualification_pipe_logged.sh"
     )
-    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V7_PACKET}
+    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V9_PACKET}
     assert {controller_relative, wrapper_relative} <= packet_paths
     assert {controller_relative, wrapper_relative} <= set(
         audit_recovery.SOURCE_TEST_BOUND_PATHS
@@ -1986,14 +2028,14 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q12-${FREEZE:0:7}"' in controller
-    assert "EXPECTED_TEST_COUNT=${4:-229}" in controller
-    assert '[[ "$EXPECTED_TEST_COUNT" == 229 ]]' in controller
+    assert 'ROOT="/root/q13-${FREEZE:0:7}"' in controller
+    assert "EXPECTED_TEST_COUNT=${4:-231}" in controller
+    assert '[[ "$EXPECTED_TEST_COUNT" == 231 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q12-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
-    assert '[[ "$LOG_ROOT" == /root/q12-* ]]' in wrapper
+    assert len(os.fsencode("/root/q13-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q13-* ]]' in wrapper
     assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
@@ -3069,10 +3111,17 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
             audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
             audit_recovery.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
             audit_recovery.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-            audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-            audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-        }
-    )
+                audit_recovery.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+                audit_recovery.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+                *audit_recovery.B22_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+                *audit_recovery.FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
+                audit_recovery.V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+                audit_recovery.V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+                audit_recovery.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+                audit_recovery.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+                audit_recovery.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            }
+        )
     rows = [
         {"path": path, "bytes": 1, "sha256": f"{index + 1:064x}"}
         for index, path in enumerate(sorted(bound_paths))
@@ -3190,7 +3239,7 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v6_review_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["final_v8_review_adjudication_json_sha256"] in {
+    assert receipt["final_v9_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {

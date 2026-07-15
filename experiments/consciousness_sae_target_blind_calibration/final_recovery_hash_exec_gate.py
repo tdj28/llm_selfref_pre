@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed hash-and-exec gate for the generic F11 recovery controller.
+"""Fail-closed hash-and-exec gate for the generic F13 recovery controller.
 
 This program is intentionally delivered to ``/usr/bin/python3.11 -B -`` on
 standard input by the local supervisor.  The supervisor separately binds the
@@ -26,32 +26,43 @@ SCHEMA_VERSION = 1
 PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.1.0"
 EXPECTED_CONTROLLER_PATH = Path("/root/final_recovery_controller_f11.sh")
 EXPECTED_CONTROLLER_SHA256 = (
-    "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2"
+    "709117f71213073f0c2aa65871f4901594b6ce225968256d64dc8ca0ea5705e8"
 )
 REJECTED_CONTROLLER_SHA256 = frozenset(
     {
         "1a1baa67fa9c12b8af309581ff85d1e200af907b80cd0b8185eb8f9a68cd08cc",
         "6d4501c9fc46a72d58dbe3832bb3fd0f17ad056f4955bb8809ccb5b6cd67371c",
+        "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
     }
 )
-REJECTED_POD_IDS = frozenset({"9n5f5a82p1gw1e", "eeo1skjkwjqot5"})
+REJECTED_POD_IDS = frozenset(
+    {"9n5f5a82p1gw1e", "eeo1skjkwjqot5", "j7xr357tdlpq3f"}
+)
 REJECTED_ATTEMPT_IDS = frozenset(
     {
         "calv2-r3-audit-recovery-2479ed0-20260715T155035Z",
         "calv2-r3-audit-recovery-2479ed0-20260715T165648Z",
+        "calv2-r3-audit-recovery-497b0f8-20260715T191757Z",
     }
 )
 REJECTED_OWNERSHIP_RECEIPT_SHA256 = frozenset(
     {
         "b7563a26c01646a68cb7618107b17743f38b14c87bc6bbf306e87a852a40ab2f",
         "54e0f4754b1dfd0a009da42ccae287d447cb6acbcd4d7394f3c149fbcac176b2",
+        "6eb967c18c93cb008f273c507364b7610b3ca811d869cf275db9d594cd6f7e45",
     }
 )
 REJECTED_AUTHORIZATION_RECEIPT_SHA256 = frozenset(
-    {"f6d0fa7fdf5b6ec8553fce2fe8df7842dd28f5a63fb5a9674a6358d4af152358"}
+    {
+        "f6d0fa7fdf5b6ec8553fce2fe8df7842dd28f5a63fb5a9674a6358d4af152358",
+        "8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4",
+    }
 )
 REJECTED_AUTHORIZATION_FILE_SHA256 = frozenset(
-    {"897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7"}
+    {
+        "897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7",
+        "682e5a612e48e196a46ea762fe00ab4de32df1bf070aa72edf64d2639735f5ff",
+    }
 )
 EXPECTED_NETWORK_VOLUME_ID = "bv9gb9j32y"
 EXPECTED_DATA_CENTER_ID = "US-CA-2"
@@ -377,7 +388,7 @@ def _write_receipt_exclusive(path: Path, core: dict[str, Any]) -> tuple[str, byt
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Bind and exec the exact reviewed generic F11 recovery controller",
+        description="Bind and exec the exact reviewed generic F13 recovery controller",
         allow_abbrev=False,
     )
     parser.add_argument("--code-freeze", required=True)

@@ -1,9 +1,9 @@
-# Generic F11 launch-chain invocation contract
+# Generic F13 launch-chain invocation contract
 
 The controller accepts exactly seven nonempty positional arguments:
 
 ```text
-/root/final_recovery_controller_f11.sh \
+/root/final_recovery_controller_f13.sh \
   CODE_FREEZE REVIEWED_PACKET_COMMIT FINAL_FREEZE \
   POD_ID EXPECTED_CREATED_AT ATTEMPT_ID INPUT_ROOT
 ```
@@ -26,14 +26,16 @@ same values, in that order, in `controller_argv`:
 
 `CODE_FREEZE`, `REVIEWED_PACKET_COMMIT`, and `FINAL_FREEZE` are full lowercase
 40-hex Git object IDs. `ATTEMPT_ID` must contain the first seven hex characters
-of `FINAL_FREEZE`. The controller checks `C11 <= E11 <= F11`, requires no change
-under `experiments/` or `tests/` from C11 through F11, and requires the E11..F11
-name-only delta to equal the two V8 adjudication files plus the five completed
-provider-review files. Qualification inputs are staged only from the V8 input
+of `FINAL_FREEZE`. The controller checks `C13 <= E13 <= F13`, requires no change
+under `experiments/` or `tests/` from C13 through F13, and requires the E13..F13
+name-only delta to equal the two V9 adjudication files plus the five completed
+provider-review files. Qualification inputs are staged only from the V9 input
 snapshot directory.
 
 The local supervisor adds the three commits as positional arguments 14–16,
 passes them to the gate, and passes them again to the retrieved-receipt
 validator. The validator optionally takes `--retrieved-authorization` after
 retrieval to bind the final Git commit, pod, and attempt and to reject the
-consumed B20 authorization by both receipt self-hash and physical file hash.
+consumed B20 and B22 authorizations by both receipt self-hash and physical file
+hash. Every sanitized controller environment carries
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` before Torch/CUDA startup.

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CODE_FREEZE=${1:?missing C13 code-freeze commit}
-REVIEWED_PACKET_COMMIT=${2:?missing E13 reviewed-packet commit}
-FINAL_FREEZE=${3:?missing F13 final-freeze commit}
+CODE_FREEZE=${1:?missing C11 code-freeze commit}
+REVIEWED_PACKET_COMMIT=${2:?missing E11 reviewed-packet commit}
+FINAL_FREEZE=${3:?missing F11 final-freeze commit}
 POD_ID=${4:?missing receipt-owned pod id}
 EXPECTED_CREATED_AT=${5:?missing provider-created UTC}
 ATTEMPT_ID=${6:?missing attempt id}
@@ -17,22 +17,19 @@ FINAL_SHORT=${FINAL_FREEZE:0:7}
 [[ "$EXPECTED_CREATED_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
 [[ "$ATTEMPT_ID" =~ ^calv2-r3-audit-recovery-${FINAL_SHORT}-[0-9]{8}T[0-9]{6}Z$ ]]
 [[ "$INPUT_ROOT" == /root/final-recovery-inputs-* ]]
-for rejected_pod in 9n5f5a82p1gw1e eeo1skjkwjqot5 j7xr357tdlpq3f; do
+for rejected_pod in 9n5f5a82p1gw1e eeo1skjkwjqot5; do
   [[ "$POD_ID" != "$rejected_pod" ]]
   [[ "$INPUT_ROOT" != *"$rejected_pod"* ]]
 done
 for rejected_attempt in \
   calv2-r3-audit-recovery-2479ed0-20260715T155035Z \
-  calv2-r3-audit-recovery-2479ed0-20260715T165648Z \
-  calv2-r3-audit-recovery-497b0f8-20260715T191757Z; do
+  calv2-r3-audit-recovery-2479ed0-20260715T165648Z; do
   [[ "$ATTEMPT_ID" != "$rejected_attempt" ]]
   [[ "$INPUT_ROOT" != *"$rejected_attempt"* ]]
 done
 
 REJECTED_B20_AUTHORIZATION_RECEIPT_SHA256=f6d0fa7fdf5b6ec8553fce2fe8df7842dd28f5a63fb5a9674a6358d4af152358
 REJECTED_B20_AUTHORIZATION_FILE_SHA256=897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7
-REJECTED_B22_AUTHORIZATION_RECEIPT_SHA256=8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4
-REJECTED_B22_AUTHORIZATION_FILE_SHA256=682e5a612e48e196a46ea762fe00ab4de32df1bf070aa72edf64d2639735f5ff
 
 PYTHON=/usr/bin/python3.11
 BASE="/root/consciousness_sae_audit_recovery/$ATTEMPT_ID"
@@ -58,7 +55,7 @@ CANARY_OUTPUT="$ATTEMPT/landlock_canary/output"
 MANIFEST="$ATTEMPT/bootstrap/APPROVED_IMPORT_ROOTS.json"
 AUTH="$ATTEMPT/RECOVERY_AUTHORIZATION.json"
 PLAN_REL=data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3
-V9_INPUT_REL=docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_inputs
+V8_INPUT_REL=docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_inputs
 
 stage() {
   printf '%s %s\n' "$1" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -92,28 +89,28 @@ git -C "$SOURCE" merge-base --is-ancestor "$CODE_FREEZE" "$REVIEWED_PACKET_COMMI
 git -C "$SOURCE" merge-base --is-ancestor "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE"
 git -C "$SOURCE" diff --quiet "$CODE_FREEZE" "$FINAL_FREEZE" -- experiments tests
 
-V9_EXPECTED_POSTREVIEW_PATHS=(
-  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json
-  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.md
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/request_payload.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/response.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review.md
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review_manifest.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review_request.md
+V8_EXPECTED_POSTREVIEW_PATHS=(
+  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.json
+  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_completed/request_payload.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_completed/response.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_completed/review.md
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_completed/review_manifest.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v8_completed/review_request.md
 )
-mapfile -t V9_OBSERVED_POSTREVIEW_PATHS < <(
+mapfile -t V8_OBSERVED_POSTREVIEW_PATHS < <(
   git -C "$SOURCE" diff --name-only "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE" |
     LC_ALL=C sort
 )
-mapfile -t V9_EXPECTED_POSTREVIEW_PATHS < <(
-  printf '%s\n' "${V9_EXPECTED_POSTREVIEW_PATHS[@]}" | LC_ALL=C sort
+mapfile -t V8_EXPECTED_POSTREVIEW_PATHS < <(
+  printf '%s\n' "${V8_EXPECTED_POSTREVIEW_PATHS[@]}" | LC_ALL=C sort
 )
-((${#V9_OBSERVED_POSTREVIEW_PATHS[@]} == ${#V9_EXPECTED_POSTREVIEW_PATHS[@]}))
-for index in "${!V9_EXPECTED_POSTREVIEW_PATHS[@]}"; do
-  test "${V9_OBSERVED_POSTREVIEW_PATHS[$index]}" = "${V9_EXPECTED_POSTREVIEW_PATHS[$index]}"
-  test -f "$SOURCE/${V9_EXPECTED_POSTREVIEW_PATHS[$index]}"
+((${#V8_OBSERVED_POSTREVIEW_PATHS[@]} == ${#V8_EXPECTED_POSTREVIEW_PATHS[@]}))
+for index in "${!V8_EXPECTED_POSTREVIEW_PATHS[@]}"; do
+  test "${V8_OBSERVED_POSTREVIEW_PATHS[$index]}" = "${V8_EXPECTED_POSTREVIEW_PATHS[$index]}"
+  test -f "$SOURCE/${V8_EXPECTED_POSTREVIEW_PATHS[$index]}"
 done
-test -d "$SOURCE/$V9_INPUT_REL"
+test -d "$SOURCE/$V8_INPUT_REL"
 test -z "$(git -C "$SOURCE" status --porcelain=v1 --untracked-files=all)"
 stage SOURCE_CHECKOUT_COMPLETE
 
@@ -242,11 +239,11 @@ install -D -m 600 "$INPUT_ROOT/superseded/TERMINATION_AUDIT.json" "$SUPERSEDED/T
 install -D -m 600 "$INPUT_ROOT/superseded/POSTDELETE_INVENTORY.json" "$SUPERSEDED/POSTDELETE_INVENTORY.json"
 install -D -m 600 "$INPUT_ROOT/superseded/frozen_lifecycle/TERMINATION.json" "$SUPERSEDED/frozen_lifecycle/TERMINATION.json"
 
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/LOCAL_TEST_RECEIPT.json" "$TESTS/LOCAL_TEST_RECEIPT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_HOST_TEST_RECEIPT.json" "$TESTS/TARGET_HOST_TEST_RECEIPT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_OWNERSHIP.json" "$TESTS/TARGET_QUALIFICATION_OWNERSHIP.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+install -D -m 600 "$SOURCE/$V8_INPUT_REL/LOCAL_TEST_RECEIPT.json" "$TESTS/LOCAL_TEST_RECEIPT.json"
+install -D -m 600 "$SOURCE/$V8_INPUT_REL/TARGET_HOST_TEST_RECEIPT.json" "$TESTS/TARGET_HOST_TEST_RECEIPT.json"
+install -D -m 600 "$SOURCE/$V8_INPUT_REL/TARGET_QUALIFICATION_OWNERSHIP.json" "$TESTS/TARGET_QUALIFICATION_OWNERSHIP.json"
+install -D -m 600 "$SOURCE/$V8_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+install -D -m 600 "$SOURCE/$V8_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
 stage HISTORICAL_AND_TEST_EVIDENCE_STAGING_COMPLETE
 
 stage FRESH_GUEST_CACHE_PREFLIGHT_START
@@ -392,7 +389,6 @@ cd "$ACTIVE"
 env -i \
   PATH=/usr/bin:/bin LANG=C LC_ALL=C \
   PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 \
-  CUBLAS_WORKSPACE_CONFIG=:4096:8 \
   CUDA_CACHE_DISABLE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
   HF_DATASETS_OFFLINE=1 TOKENIZERS_PARALLELISM=false \
   HOME="$PREFLIGHT_OUT" TMPDIR="$PREFLIGHT_OUT" HF_HOME="$PREFLIGHT_OUT" \
@@ -565,11 +561,9 @@ PY
 [[ "$AUTH_RECEIPT_SHA" =~ ^[0-9a-f]{64}$ ]]
 [[ "$PREFLIGHT_RECEIPT_SHA" =~ ^[0-9a-f]{64}$ ]]
 [[ "$AUTH_RECEIPT_SHA" != "$REJECTED_B20_AUTHORIZATION_RECEIPT_SHA256" ]]
-[[ "$AUTH_RECEIPT_SHA" != "$REJECTED_B22_AUTHORIZATION_RECEIPT_SHA256" ]]
 AUTH_FILE_SHA=$(sha256sum "$AUTH" | awk '{print $1}')
 [[ "$AUTH_FILE_SHA" =~ ^[0-9a-f]{64}$ ]]
 [[ "$AUTH_FILE_SHA" != "$REJECTED_B20_AUTHORIZATION_FILE_SHA256" ]]
-[[ "$AUTH_FILE_SHA" != "$REJECTED_B22_AUTHORIZATION_FILE_SHA256" ]]
 
 FINAL_LAUNCH=(
   "$PYTHON" -B -E -s -S
@@ -606,7 +600,6 @@ cd "$ACTIVE"
 env -i \
   PATH=/usr/bin:/bin LANG=C LC_ALL=C \
   PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 \
-  CUBLAS_WORKSPACE_CONFIG=:4096:8 \
   CUDA_CACHE_DISABLE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
   HF_DATASETS_OFFLINE=1 TOKENIZERS_PARALLELISM=false \
   HOME="$OUTPUT" TMPDIR="$OUTPUT" HF_HOME="$OUTPUT" \

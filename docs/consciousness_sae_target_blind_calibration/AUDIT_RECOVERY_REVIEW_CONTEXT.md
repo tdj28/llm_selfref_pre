@@ -396,12 +396,28 @@ ancestry/diff checks before confinement in SOURCE, seals the exact F11 HEAD in
 the self-hashed authorization, and performs only Git-free byte/semantic
 validation in ACTIVE.
 
-The prospective v8 reviewer receives the tracked generic final controller and
-launch gates as exact source, fresh C11 local/target qualification snapshots,
-the immutable v7 evidence, the complete B17 evidence, and compact B18/B20
-closures. It must explicitly disposition B17--B20 and I10--I12. Any new
-blocker starts at B21 and stops launch. The Git lineage is
-`C11 <= E11 <= F11`; source/test bytes must be unchanged from C11 through F11,
-and provider-packet bytes must be unchanged from E11 through F11. F11 adds
-only the seven v8 review/adjudication outputs. No such v8 output exists yet,
-and no scientific result is claimed or authorized by this scaffold.
+This is now historical context. The completed F12 v8 call returned `READY TO
+FREEZE` and its structured adjudication returned `READY_TO_EXECUTE`, but its
+one-shot authority was later consumed by B22 and cannot authorize a successor.
+
+## V9 cumulative review context
+
+B22 is the F12 owned B200 attempt that passed the launch gate, authentic
+issue-time authorization, same-host Landlock/CUDA preflight, and final
+confinement, then failed after `ATTEMPT_STARTED` because the final `env -i`
+launch omitted `CUBLAS_WORKSPACE_CONFIG=:4096:8`. Numerical nondeterminism was
+not observed. Frozen raw rows had been opened and row-level quantities may have
+been recomputed before the late guard, but no compact result was published,
+logged, inspected, or used for adaptation. The exact pod was deleted and the
+authorization, pod, attempt, and output namespace are permanently rejected.
+
+The prospective v9 reviewer receives the exact current sources/tests and all
+six launch wrappers, fresh C13 local/target qualification snapshots, the
+substantive immutable F12 v8 review/manifest/adjudication, and independently
+verified compact B22 evidence. The sole repair binds the frozen cuBLAS variable
+through every sanitized environment and exercises the real artifact-device
+guard on a disposable B200 before review. It must disposition B17--B22 and
+I10--I14; any B23-or-later blocker stops launch. The lineage is
+`C13 <= E13 <= F13`; source/test bytes cannot change after C13 and provider
+packet bytes cannot change after E13. F13 adds only seven v9 provider and
+adjudication outputs. No scientific result is claimed by this packet.

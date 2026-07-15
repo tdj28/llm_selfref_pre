@@ -187,6 +187,8 @@ FOCUSED_PYTEST_ARGV = ("-q", *FOCUSED_TEST_PATHS)
 TARGET_DESIGNATED_TEST_IDS = (
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py::"
     "test_linux_launcher_enforces_policy_and_same_pid_exec",
+    "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py::"
+    "test_target_b200_artifact_device_determinism_contract",
 )
 TARGET_QUALIFICATION_LANDLOCK_NAME = "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
 TARGET_QUALIFICATION_CUDA_NAME = "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
@@ -939,6 +941,40 @@ B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
         "11381aba2d87c7a94d08e8c2d37caa5685ae49af4af4a58cfee868635f131e5a"
     ),
 }
+B22_COMPACT_EVIDENCE_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_b22_cublas_incident"
+)
+B22_INCIDENT_DOCUMENT = f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22.md"
+B22_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/ATTEMPT_TREE_INVENTORY.json": "90a7272cd71ed10891ebe74a92846012f8ea580ba9664da9fdf15913834ee4fd",
+    B22_INCIDENT_DOCUMENT: "119ffd7889ff4f48acc9a7135892643dec79e3b4aaab1171a9d5c15b2f7cd889",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json": "092853c8acda0fc2c96baace4e40bb13835c95b715b92ee63af4f7167b61e74b",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json": "e127de856db05a5cde0de47d96e3ba81e3f01dc5344e75e369707a5cbd61acde",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/CUBLAS_CAUSE.json": "d9d8a15b4f3ed41523abe4044a7c98aa68a832c6acd5500f2d2f3cddae7f0d78",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/DESIGNATED_OUTPUT_TREE_INVENTORY.json": "0a002473a8595214fbb541dc42d91a822afc3ffc4ffbd5ec7037f69adef2d6bc",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/PRIVATE_SOURCE_ANCHOR.json": "c89757a87303264369cbebcb4b63104e5a9466521ca5061efa67b994bb55cb6d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/SHA256SUMS": "ae67a5ef824f847a7a034d8f1d2357955aa0b28d44630cb3d7370ca4e1afe6e8",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/ATTEMPT_STARTED.json": "3b7ec3427e6ef5062a246fce0fefeffa28a032097d83c924f97b98165a064599",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/AUTHORIZATION_BINDING.json": "3fd3b12c2b070aba65983b716179b9ed70db1c3553a2bf4ec3eb7bbbfe323381",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_audit.py": "271f4f17a5ed66eaff43dc63f5a02d7ce45cdfd4a3c6a5b5c03bac33cf96a465",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_base_protocol.py": "d35a81fa6aae0be3c003bf36be4c4640f435c66d7ed7d16b7f1ce9f121f502c1",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_final_recovery_controller.sh": "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FAILURE.json": "f77244d3ee5cc50aa15a951a135415bce467e33ae075670f1bc984ae121fa602",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_LANDLOCK_ENFORCEMENT.json": "98c59460298af035eae9cb991bf34318f233bbf690b87249517aac899f4a473e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_RECOVERY_LAUNCH_GATE.json": "ff31ef0be905e74eda19ef3dd8736f2dab55b57d7ea3a70c8a2efb5342bd2014",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FROZEN_TERMINATION.json": "9c93e6943e7bf44e57864d4a5a22c0c5deb5658c80018a467628c9ce40fc7236",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/OWNERSHIP.json": "e26b2a1f6c91dc9499572995087303f5b2646a540bc830fe062337cbd1bd2ec6",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTCREATE_INVENTORY.json": "7543387801f18376ed082f4f6ee15e9135dcd96193b82b561920feb143c5e60d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTDELETE_INVENTORY.json": "5c89a7716393ee731dc589e17cbff07930c91b76a213357d107945c4cec4d69d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PRECREATE_INVENTORY.json": "e6c72bdba6483e9cb4dc9b0cd81846c3398f9ce43391a1b9cab895e5d7d04e75",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_CUDA.json": "58b8ab1ef9f4cfa5e7226bfc2c08c768b6467428424e2e1505219bf5846cfdc2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_ENFORCEMENT.json": "77ff3a6d368fc3154c829ba7f09dd35745da44264abcb4a3f88af9273e7fe87e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": "2f2c5bdeabfd619f0b67d553645a2a18cdfd40c28958b403de7297164e5a03d2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stderr": "ecff3e226982aeb25103aa0d97f6efd7bb46532f16e941e6cba284caefe408f0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stdout": "cd00f24e6f5a234a6f02ab96f6d72d1e01c92352d59d14a85d74342edfeda0e0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/build_and_verify_b22_evidence.py": "f088de7ef0cbf13ddb26afdba6d221befb7f144cd6fb447edeccb4a6d299cb17",
+}
 HISTORICAL_B21_PRO_REVIEW_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v8_b21_completed_negative"
@@ -965,6 +1001,50 @@ HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 = {
     ),
     f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md": (
         "adbbb991930e45e2b88b5ae4cf75827d366afa839921de2e94780eb64bd8a43b"
+    ),
+}
+HISTORICAL_V8_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_completed"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.json"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md"
+)
+HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON: (
+        "13134eb8a030ada0eeb1fbfdd7af5e9daad75e4130773d60705e3c12925f8c5e"
+    ),
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "6aeb6e7ce7d1597ea2583a4e38b7f5f3d70b64dc168b4cf33c80f8edafef962a"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "f4622ebf5e2dd20c310a6e9688ff4da7f938c32ad1a9cc6d8b19f00df8ef47f1"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json": (
+        "9505a5c450f01bd460e65d6655f21e3d864b4aad485fc728ffef59085a8c5407"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md": (
+        "f34b389ff2cc31e14bfcb4a9288e6532ace35c4a3ab3e7a16dbb2ffde9f2b9b0"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "ba1454a18b23d853a4c442aca38c6bf40713c2502b22ff67e7d85adc5229bb54"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "c51b814ff7c5cee6ebb90d3f6c60462f59768a6eb4f101dca372a982ea0cc118"
     ),
 }
 V8_REVIEW_INPUT_DIRECTORY = (
@@ -1004,6 +1084,44 @@ FINAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+V9_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_inputs"
+)
+V9_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V9_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+FINAL_V9_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_completed"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.md"
+)
+FINAL_V9_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md",
 )
 FINAL_RECOVERY_WRAPPER_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/"
@@ -1109,12 +1227,14 @@ RECOVERY_DOCUMENT_PATHS = (
     *tuple(B18_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *tuple(B20_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS,
-    V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
-    V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-    *FINAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+    *HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(B22_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
@@ -1227,6 +1347,7 @@ FIXED_ENVIRONMENT = {
     "LC_ALL": "C",
     "PYTHONDONTWRITEBYTECODE": "1",
     "PYTHONNOUSERSITE": "1",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
     "CUDA_CACHE_DISABLE": "1",
     "HF_HUB_OFFLINE": "1",
     "TRANSFORMERS_OFFLINE": "1",
@@ -3591,6 +3712,24 @@ def _validate_review(
             "b20_attempt_id",
             "b20_pod_id",
             "b20_scientific_result_status",
+            "historical_v8_terminal_verdict",
+            "historical_v8_response_id",
+            "historical_v8_review_sha256",
+            "historical_v8_manifest_file_sha256",
+            "historical_v8_adjudication_receipt_sha256",
+            "historical_v8_final_git_head_commit",
+            "historical_v8_superseded_reason",
+            "b22_closure_receipt_sha256",
+            "b22_verification_receipt_sha256",
+            "b22_attempt_id",
+            "b22_pod_id",
+            "b22_authorization_receipt_sha256",
+            "b22_attempt_marker_receipt_sha256",
+            "b22_failure_receipt_sha256",
+            "b22_scientific_result_status",
+            "b22_raw_row_recomputation_may_have_preceded_late_guard",
+            "b22_same_authorization_retry_permitted",
+            "b22_termination_status",
             "timed_qualification_receipt_sha256",
             "timed_qualification_termination_receipt_sha256",
             "timed_qualification_pod_id",
@@ -3628,6 +3767,7 @@ def _validate_review(
             "incomplete_b17_paid_call_count",
             "completed_b17_paid_call_count",
             "completed_v8_paid_call_count",
+            "completed_v9_paid_call_count",
             "cumulative_disclosed_paid_call_count",
         ),
         "authorization.review",
@@ -3651,10 +3791,9 @@ def _validate_review(
         "authorization.review.code_freeze_commit",
     )
     final_commit = _string(git_head_commit, "authorization.git_head_commit")
-    required_current_findings = set(HISTORICAL_B17_FINDING_IDS) | {
-        "B20",
-        "B21",
-        "I13",
+    required_current_findings = {
+        "B17", "B18", "B19", "B20", "B21", "B22",
+        "I10", "I11", "I12", "I13", "I14",
     }
     if (
         review["model"] != "gpt-5.6-sol"
@@ -3860,6 +3999,43 @@ def _validate_review(
         != "calv2-r3-audit-recovery-2479ed0-20260715T165648Z"
         or review["b20_pod_id"] != "eeo1skjkwjqot5"
         or review["b20_scientific_result_status"] != "none_produced"
+        or review["historical_v8_terminal_verdict"] != "READY TO FREEZE"
+        or review["historical_v8_response_id"]
+        != "resp_04c0c207ee499e0e016a57da9747bc81989d7632f52ee2a89f"
+        or review["historical_v8_review_sha256"]
+        != HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v8_manifest_file_sha256"]
+        != HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ]
+        or review["historical_v8_adjudication_receipt_sha256"]
+        != "8a76dcf72a63014590296e20ff592c6c248a24678ebde69e6f2cf4c6bcaf8355"
+        or review["historical_v8_final_git_head_commit"]
+        != "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7"
+        or review["historical_v8_superseded_reason"]
+        != "post_authorization_b22_missing_cublas_environment"
+        or review["b22_closure_receipt_sha256"]
+        != "8fb1e84d34027daf87f81635cf8ad89eb4c41dd7ac66f930e78938f0e79ab2f9"
+        or review["b22_verification_receipt_sha256"]
+        != "b9ccbac4029f82d4aeafc75fec8412936c6ca801197d530534b0d15a5143ebb2"
+        or review["b22_attempt_id"]
+        != "calv2-r3-audit-recovery-497b0f8-20260715T191757Z"
+        or review["b22_pod_id"] != "j7xr357tdlpq3f"
+        or review["b22_authorization_receipt_sha256"]
+        != "8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4"
+        or review["b22_attempt_marker_receipt_sha256"]
+        != "9875b7810382910f5aa67b3a2e82217fbd4cc44de293b5091e172de0b1b58fa5"
+        or review["b22_failure_receipt_sha256"]
+        != "a50ff250cf654ea00acb24191a2aa602320eb6ac5c6e1e5a2e7af6a7a1d60391"
+        or review["b22_scientific_result_status"]
+        != "no_compact_scientific_result"
+        or review["b22_raw_row_recomputation_may_have_preceded_late_guard"]
+        is not True
+        or review["b22_same_authorization_retry_permitted"] is not False
+        or review["b22_termination_status"]
+        != "deleted_exact_owned_pod_unrelated_inventory_unchanged"
         or review["timed_qualification_receipt_sha256"]
         != "0c83eea18a0b4ed622e02846d224457421ca970c1d72b980ee9825a8420e4d34"
         or review["timed_qualification_termination_receipt_sha256"]
@@ -3883,12 +4059,12 @@ def _validate_review(
             for finding in findings
         )
         or any(
-            (finding.startswith("B") and int(finding[1:]) < 22)
-            or (finding.startswith("I") and int(finding[1:]) < 14)
+            (finding.startswith("B") and int(finding[1:]) < 23)
+            or (finding.startswith("I") and int(finding[1:]) < 15)
             for finding in set(findings) - required_current_findings
         )
         or any(
-            finding.startswith("B") and int(finding[1:]) >= 22
+            finding.startswith("B") and int(finding[1:]) >= 23
             for finding in findings
         )
         or _integer(
@@ -3952,11 +4128,17 @@ def _validate_review(
         )
         != 2
         or _integer(
+            review["completed_v9_paid_call_count"],
+            "authorization.review.completed_v9_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
             review["cumulative_disclosed_paid_call_count"],
             "authorization.review.cumulative_disclosed_paid_call_count",
             minimum=1,
         )
-        != 12
+        != 13
     ):
         raise RecoveryBundleVerificationError("authorization review semantics differ")
     fixed = _list(review["fixed_finding_ids"], "authorization.review.fixed_finding_ids")
@@ -3992,11 +4174,11 @@ def _validate_review(
     )
     if (
         review_sha
-        != _closure_hash(closure, f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md")
+        != _closure_hash(closure, f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md")
         or adjudication_json_sha
-        != _closure_hash(closure, FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON)
+        != _closure_hash(closure, FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON)
         or adjudication_markdown_sha
-        != _closure_hash(closure, FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN)
+        != _closure_hash(closure, FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN)
     ):
         raise RecoveryBundleVerificationError(
             "authorization review closure links differ"
@@ -4004,27 +4186,27 @@ def _validate_review(
     snapshot_bindings = (
         (
             "reviewed_local_test_receipt",
-            V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
             local_test_receipt,
         ),
         (
             "reviewed_target_host_test_receipt",
-            V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
             target_host_test_receipt,
         ),
         (
             "reviewed_target_qualification_ownership",
-            V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
             qualification_ownership,
         ),
         (
             "reviewed_target_qualification_landlock",
-            V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
             qualification_landlock,
         ),
         (
             "reviewed_target_qualification_cuda",
-            V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
             qualification_cuda,
         ),
     )
@@ -4350,6 +4532,8 @@ def _validate_authorization(
             **B18_COMPACT_EVIDENCE_PHYSICAL_SHA256,
             **B20_COMPACT_EVIDENCE_PHYSICAL_SHA256,
             **HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256,
+            **B22_COMPACT_EVIDENCE_PHYSICAL_SHA256,
             **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
             **C7_FAILED_QUALIFICATION_PHYSICAL_SHA256,
         }.items()
@@ -4585,11 +4769,11 @@ def _validate_authorization(
         "authorization.external_files.roots_manifest",
     )
     reviewed_snapshot_bindings = {
-        V8_LOCAL_TEST_RECEIPT_SNAPSHOT: "local_test_receipt",
-        V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: "target_host_test_receipt",
-        V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: ("target_qualification_ownership"),
-        V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: "target_qualification_landlock",
-        V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT: ("target_qualification_cuda_preflight"),
+        V9_LOCAL_TEST_RECEIPT_SNAPSHOT: "local_test_receipt",
+        V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: "target_host_test_receipt",
+        V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: ("target_qualification_ownership"),
+        V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: "target_qualification_landlock",
+        V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT: ("target_qualification_cuda_preflight"),
     }
     for snapshot_path, external_key in reviewed_snapshot_bindings.items():
         if _closure_file_record(closure, snapshot_path) != external[external_key]:
@@ -4862,10 +5046,10 @@ def _validate_recovery_metadata(
             "historical_v6_review_sha256",
             "historical_v6_review_manifest_sha256",
             "historical_v6_review_request_sha256",
-            "final_v8_review_adjudication_json_sha256",
-            "final_v8_review_adjudication_markdown_sha256",
-            "final_v8_review_response_sha256",
-            "final_v8_review_manifest_sha256",
+            "final_v9_review_adjudication_json_sha256",
+            "final_v9_review_adjudication_markdown_sha256",
+            "final_v9_review_response_sha256",
+            "final_v9_review_manifest_sha256",
             "reviewed_local_test_receipt_snapshot_sha256",
             "reviewed_target_host_test_receipt_snapshot_sha256",
             "reviewed_target_qualification_ownership_snapshot_sha256",
@@ -5028,30 +5212,30 @@ def _validate_recovery_metadata(
         "historical_v6_review_request_sha256": (
             f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md"
         ),
-        "final_v8_review_adjudication_json_sha256": (
-            FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON
+        "final_v9_review_adjudication_json_sha256": (
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
         ),
-        "final_v8_review_adjudication_markdown_sha256": (
-            FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        "final_v9_review_adjudication_markdown_sha256": (
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ),
-        "final_v8_review_response_sha256": (
-            f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/response.json"
+        "final_v9_review_response_sha256": (
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json"
         ),
-        "final_v8_review_manifest_sha256": (
-            f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        "final_v9_review_manifest_sha256": (
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json"
         ),
-        "reviewed_local_test_receipt_snapshot_sha256": (V8_LOCAL_TEST_RECEIPT_SNAPSHOT),
+        "reviewed_local_test_receipt_snapshot_sha256": (V9_LOCAL_TEST_RECEIPT_SNAPSHOT),
         "reviewed_target_host_test_receipt_snapshot_sha256": (
-            V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+            V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ),
         "reviewed_target_qualification_ownership_snapshot_sha256": (
-            V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+            V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ),
         "reviewed_target_qualification_landlock_snapshot_sha256": (
-            V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+            V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ),
         "reviewed_target_qualification_cuda_snapshot_sha256": (
-            V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+            V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ),
     }
     if any(

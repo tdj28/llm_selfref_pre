@@ -13,6 +13,13 @@ from experiments.consciousness_sae_target_blind_calibration import (
 )
 
 
+def test_offline_verifier_binds_frozen_cublas_environment() -> None:
+    assert verifier.FIXED_ENVIRONMENT["CUBLAS_WORKSPACE_CONFIG"] == ":4096:8"
+    assert audit_recovery.CONFINED_FIXED_ENVIRONMENT["CUBLAS_WORKSPACE_CONFIG"] == (
+        verifier.FIXED_ENVIRONMENT["CUBLAS_WORKSPACE_CONFIG"]
+    )
+
+
 def _seal(core: dict) -> dict:
     return {**core, "receipt_sha256": verifier.canonical_sha256(core)}
 
@@ -127,6 +134,9 @@ def test_historical_v6_review_is_pinned_nonadjudicable_context_for_v7() -> None:
     )
     assert verifier.V8_LOCAL_TEST_RECEIPT_SNAPSHOT == (
         audit_recovery.V8_LOCAL_TEST_RECEIPT_SNAPSHOT
+    )
+    assert verifier.V9_LOCAL_TEST_RECEIPT_SNAPSHOT == (
+        audit_recovery.V9_LOCAL_TEST_RECEIPT_SNAPSHOT
     )
     assert verifier.RECOVERY_BOUND_PATHS == audit_recovery.RECOVERY_BOUND_PATHS
 
@@ -734,10 +744,10 @@ def _test_receipt_evidence(
             if target
             else root / verifier.LOCAL_TEST_RELATIVE
         )
-        passed_ids = [designated] if target else []
-        skipped_ids = [] if target else [designated]
+        passed_ids = list(verifier.TARGET_DESIGNATED_TEST_IDS) if target else []
+        skipped_ids = [] if target else list(verifier.TARGET_DESIGNATED_TEST_IDS)
         if mutation == "target_designated_skip" and target:
-            passed_ids = []
+            passed_ids = list(verifier.TARGET_DESIGNATED_TEST_IDS[1:])
             skipped_ids = [designated]
         target_host = None
         probe_summary = None
@@ -947,6 +957,8 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     closure_hashes.update(verifier.B18_COMPACT_EVIDENCE_PHYSICAL_SHA256)
     closure_hashes.update(verifier.B20_COMPACT_EVIDENCE_PHYSICAL_SHA256)
     closure_hashes.update(verifier.HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256)
+    closure_hashes.update(verifier.B22_COMPACT_EVIDENCE_PHYSICAL_SHA256)
     closure_hashes.update(verifier.C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256)
     closure_hashes.update(verifier.C7_FAILED_QUALIFICATION_PHYSICAL_SHA256)
     if mutation == "historical_review_physical":
@@ -1002,15 +1014,15 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         code_freeze="c" * 40,
     )
     snapshot_paths = {
-        verifier.V8_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
-        verifier.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
-        verifier.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        verifier.V9_LOCAL_TEST_RECEIPT_SNAPSHOT: local_test_receipt_path,
+        verifier.V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: target_host_test_receipt_path,
+        verifier.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
             qualification_ownership_path
         ),
-        verifier.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        verifier.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
             qualification_landlock_path
         ),
-        verifier.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
+        verifier.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT: qualification_cuda_path,
     }
     for row in recovery_bound_files:
         snapshot = snapshot_paths.get(row["path"])
@@ -1019,7 +1031,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
             closure_hashes[row["path"]] = row["sha256"]
     if mutation == "reviewed_snapshot_mismatch":
         for row in recovery_bound_files:
-            if row["path"] == verifier.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
+            if row["path"] == verifier.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT:
                 row["sha256"] = "0" * 64
                 closure_hashes[row["path"]] = row["sha256"]
                 break
@@ -1410,6 +1422,54 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         ),
         "b20_pod_id": "eeo1skjkwjqot5",
         "b20_scientific_result_status": "none_produced",
+        "historical_v8_terminal_verdict": "READY TO FREEZE",
+        "historical_v8_response_id": (
+            "resp_04c0c207ee499e0e016a57da9747bc81989d7632f52ee2a89f"
+        ),
+        "historical_v8_review_sha256": (
+            verifier.HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+                f"{verifier.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
+            ]
+        ),
+        "historical_v8_manifest_file_sha256": (
+            verifier.HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+                f"{verifier.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+            ]
+        ),
+        "historical_v8_adjudication_receipt_sha256": (
+            "8a76dcf72a63014590296e20ff592c6c248a24678ebde69e6f2cf4c6bcaf8355"
+        ),
+        "historical_v8_final_git_head_commit": (
+            "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7"
+        ),
+        "historical_v8_superseded_reason": (
+            "post_authorization_b22_missing_cublas_environment"
+        ),
+        "b22_closure_receipt_sha256": (
+            "8fb1e84d34027daf87f81635cf8ad89eb4c41dd7ac66f930e78938f0e79ab2f9"
+        ),
+        "b22_verification_receipt_sha256": (
+            "b9ccbac4029f82d4aeafc75fec8412936c6ca801197d530534b0d15a5143ebb2"
+        ),
+        "b22_attempt_id": (
+            "calv2-r3-audit-recovery-497b0f8-20260715T191757Z"
+        ),
+        "b22_pod_id": "j7xr357tdlpq3f",
+        "b22_authorization_receipt_sha256": (
+            "8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4"
+        ),
+        "b22_attempt_marker_receipt_sha256": (
+            "9875b7810382910f5aa67b3a2e82217fbd4cc44de293b5091e172de0b1b58fa5"
+        ),
+        "b22_failure_receipt_sha256": (
+            "a50ff250cf654ea00acb24191a2aa602320eb6ac5c6e1e5a2e7af6a7a1d60391"
+        ),
+        "b22_scientific_result_status": "no_compact_scientific_result",
+        "b22_raw_row_recomputation_may_have_preceded_late_guard": True,
+        "b22_same_authorization_retry_permitted": False,
+        "b22_termination_status": (
+            "deleted_exact_owned_pod_unrelated_inventory_unchanged"
+        ),
         "timed_qualification_receipt_sha256": (
             "0c83eea18a0b4ed622e02846d224457421ca970c1d72b980ee9825a8420e4d34"
         ),
@@ -1427,20 +1487,26 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         ),
         "timed_qualification_final_recovery_scope_must_repeat": True,
         "finding_ids": sorted(
-            [*verifier.HISTORICAL_B17_FINDING_IDS, "B20", "B21", "I13"]
+            [
+                "B17", "B18", "B19", "B20", "B21", "B22",
+                "I10", "I11", "I12", "I13", "I14",
+            ]
         ),
         "review_sha256": closure_hashes[
-            f"{verifier.FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
+            f"{verifier.FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md"
         ],
         "adjudication_receipt_sha256": "6" * 64,
         "adjudication_json_sha256": closure_hashes[
-            verifier.FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON
+            verifier.FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
         ],
         "adjudication_markdown_sha256": closure_hashes[
-            verifier.FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
+            verifier.FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
         "fixed_finding_ids": sorted(
-            [*verifier.HISTORICAL_B17_FINDING_IDS, "B20", "B21", "I13"]
+            [
+                "B17", "B18", "B19", "B20", "B21", "B22",
+                "I10", "I11", "I12", "I13", "I14",
+            ]
         ),
         "rejected_finding_ids": [],
         "reviewed_local_test_receipt_file_sha256": _file_record(
@@ -1483,7 +1549,8 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "incomplete_b17_paid_call_count": 1,
         "completed_b17_paid_call_count": 1,
         "completed_v8_paid_call_count": 2,
-        "cumulative_disclosed_paid_call_count": 12,
+        "completed_v9_paid_call_count": 1,
+        "cumulative_disclosed_paid_call_count": 13,
     }
     authorization_core = {
         "schema_version": 1,
@@ -1992,32 +2059,32 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
         "historical_v6_review_request_sha256": closure_hashes[
             f"{verifier.FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md"
         ],
-        "final_v8_review_adjudication_json_sha256": closure_hashes[
-            verifier.FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON
+        "final_v9_review_adjudication_json_sha256": closure_hashes[
+            verifier.FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
         ],
-        "final_v8_review_adjudication_markdown_sha256": closure_hashes[
-            verifier.FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        "final_v9_review_adjudication_markdown_sha256": closure_hashes[
+            verifier.FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ],
-        "final_v8_review_response_sha256": closure_hashes[
-            f"{verifier.FINAL_V8_PRO_REVIEW_DIRECTORY}/response.json"
+        "final_v9_review_response_sha256": closure_hashes[
+            f"{verifier.FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json"
         ],
-        "final_v8_review_manifest_sha256": closure_hashes[
-            f"{verifier.FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        "final_v9_review_manifest_sha256": closure_hashes[
+            f"{verifier.FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json"
         ],
         "reviewed_local_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V8_LOCAL_TEST_RECEIPT_SNAPSHOT
+            verifier.V9_LOCAL_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_host_test_receipt_snapshot_sha256": closure_hashes[
-            verifier.V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+            verifier.V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ],
         "reviewed_target_qualification_ownership_snapshot_sha256": closure_hashes[
-            verifier.V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+            verifier.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ],
         "reviewed_target_qualification_landlock_snapshot_sha256": closure_hashes[
-            verifier.V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+            verifier.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ],
         "reviewed_target_qualification_cuda_snapshot_sha256": closure_hashes[
-            verifier.V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+            verifier.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ],
         "original_failed_audit_log_sha256": verifier.ORIGINAL_FAILURE_LOG_SHA256,
         "original_raw_run_receipt_sha256": authorization["raw_run_receipt_sha256"],

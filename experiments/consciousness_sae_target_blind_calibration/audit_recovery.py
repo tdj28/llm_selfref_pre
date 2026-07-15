@@ -26,7 +26,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterator, Mapping, Sequence
 
-from experiments.consciousness_sae_realization_validation import runpod_preflight
+from experiments.consciousness_sae_realization_validation import (
+    protocol as base_protocol,
+    runpod_preflight,
+)
 from experiments.consciousness_sae_target_blind_calibration import (
     audit_runtime_shim,
     authorize,
@@ -108,6 +111,8 @@ PRO_REVIEW_MAX_INPUT_CHARACTERS = 2_100_000
 PRO_REVIEW_MAX_INPUT_TOKENS = 600_000
 PRO_REVIEW_V8_MAX_INPUT_CHARACTERS = 2_200_000
 PRO_REVIEW_V8_MAX_INPUT_TOKENS = 630_000
+PRO_REVIEW_V9_MAX_INPUT_CHARACTERS = PRO_REVIEW_V8_MAX_INPUT_CHARACTERS
+PRO_REVIEW_V9_MAX_INPUT_TOKENS = PRO_REVIEW_V8_MAX_INPUT_TOKENS
 PRO_REVIEW_MAX_OUTPUT_TOKENS = 20_000
 PRO_REVIEW_INPUT_RESERVE_MULTIPLIER = 5.0
 PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER = 2.2
@@ -138,7 +143,10 @@ FOCUSED_PYTEST_ARGV = ("-q", *FOCUSED_TEST_PATHS)
 TARGET_DESIGNATED_TEST_IDS = (
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py::"
     "test_linux_launcher_enforces_policy_and_same_pid_exec",
+    "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py::"
+    "test_target_b200_artifact_device_determinism_contract",
 )
+LEGACY_TARGET_DESIGNATED_TEST_IDS = TARGET_DESIGNATED_TEST_IDS[:1]
 LOCAL_TEST_RECEIPT_NAME = "LOCAL_TEST_RECEIPT.json"
 TARGET_HOST_TEST_RECEIPT_NAME = "TARGET_HOST_TEST_RECEIPT.json"
 TARGET_QUALIFICATION_LANDLOCK_NAME = "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
@@ -239,11 +247,19 @@ CONFINED_FIXED_ENVIRONMENT = {
     "LC_ALL": "C",
     "PYTHONDONTWRITEBYTECODE": "1",
     "PYTHONNOUSERSITE": "1",
+    base_protocol.CUBLAS_WORKSPACE_CONFIG_ENV: (
+        base_protocol.CUBLAS_WORKSPACE_CONFIG_VALUE
+    ),
     "CUDA_CACHE_DISABLE": "1",
     "HF_HUB_OFFLINE": "1",
     "TRANSFORMERS_OFFLINE": "1",
     "HF_DATASETS_OFFLINE": "1",
     "TOKENIZERS_PARALLELISM": "false",
+}
+LEGACY_CONFINED_FIXED_ENVIRONMENT = {
+    name: value
+    for name, value in CONFINED_FIXED_ENVIRONMENT.items()
+    if name != base_protocol.CUBLAS_WORKSPACE_CONFIG_ENV
 }
 CONFINED_WRITABLE_PATH_ENVIRONMENT = (
     "HOME",
@@ -938,6 +954,40 @@ B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": "50eae10f172511ad1ed1931d873f875dab0c4441578537ec3c9a618cc54e6bd1",
     f"{B20_COMPACT_EVIDENCE_DIRECTORY}/verify_b20_public_compact.py": "11381aba2d87c7a94d08e8c2d37caa5685ae49af4af4a58cfee868635f131e5a",
 }
+B22_COMPACT_EVIDENCE_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_b22_cublas_incident"
+)
+B22_INCIDENT_DOCUMENT = f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22.md"
+B22_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/ATTEMPT_TREE_INVENTORY.json": "90a7272cd71ed10891ebe74a92846012f8ea580ba9664da9fdf15913834ee4fd",
+    B22_INCIDENT_DOCUMENT: "119ffd7889ff4f48acc9a7135892643dec79e3b4aaab1171a9d5c15b2f7cd889",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json": "092853c8acda0fc2c96baace4e40bb13835c95b715b92ee63af4f7167b61e74b",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json": "e127de856db05a5cde0de47d96e3ba81e3f01dc5344e75e369707a5cbd61acde",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/CUBLAS_CAUSE.json": "d9d8a15b4f3ed41523abe4044a7c98aa68a832c6acd5500f2d2f3cddae7f0d78",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/DESIGNATED_OUTPUT_TREE_INVENTORY.json": "0a002473a8595214fbb541dc42d91a822afc3ffc4ffbd5ec7037f69adef2d6bc",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/PRIVATE_SOURCE_ANCHOR.json": "c89757a87303264369cbebcb4b63104e5a9466521ca5061efa67b994bb55cb6d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/SHA256SUMS": "ae67a5ef824f847a7a034d8f1d2357955aa0b28d44630cb3d7370ca4e1afe6e8",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/ATTEMPT_STARTED.json": "3b7ec3427e6ef5062a246fce0fefeffa28a032097d83c924f97b98165a064599",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/AUTHORIZATION_BINDING.json": "3fd3b12c2b070aba65983b716179b9ed70db1c3553a2bf4ec3eb7bbbfe323381",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_audit.py": "271f4f17a5ed66eaff43dc63f5a02d7ce45cdfd4a3c6a5b5c03bac33cf96a465",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_base_protocol.py": "d35a81fa6aae0be3c003bf36be4c4640f435c66d7ed7d16b7f1ce9f121f502c1",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_final_recovery_controller.sh": "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FAILURE.json": "f77244d3ee5cc50aa15a951a135415bce467e33ae075670f1bc984ae121fa602",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_LANDLOCK_ENFORCEMENT.json": "98c59460298af035eae9cb991bf34318f233bbf690b87249517aac899f4a473e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_RECOVERY_LAUNCH_GATE.json": "ff31ef0be905e74eda19ef3dd8736f2dab55b57d7ea3a70c8a2efb5342bd2014",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FROZEN_TERMINATION.json": "9c93e6943e7bf44e57864d4a5a22c0c5deb5658c80018a467628c9ce40fc7236",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/OWNERSHIP.json": "e26b2a1f6c91dc9499572995087303f5b2646a540bc830fe062337cbd1bd2ec6",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTCREATE_INVENTORY.json": "7543387801f18376ed082f4f6ee15e9135dcd96193b82b561920feb143c5e60d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTDELETE_INVENTORY.json": "5c89a7716393ee731dc589e17cbff07930c91b76a213357d107945c4cec4d69d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PRECREATE_INVENTORY.json": "e6c72bdba6483e9cb4dc9b0cd81846c3398f9ce43391a1b9cab895e5d7d04e75",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_CUDA.json": "58b8ab1ef9f4cfa5e7226bfc2c08c768b6467428424e2e1505219bf5846cfdc2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_ENFORCEMENT.json": "77ff3a6d368fc3154c829ba7f09dd35745da44264abcb4a3f88af9273e7fe87e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": "2f2c5bdeabfd619f0b67d553645a2a18cdfd40c28958b403de7297164e5a03d2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stderr": "ecff3e226982aeb25103aa0d97f6efd7bb46532f16e941e6cba284caefe408f0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stdout": "cd00f24e6f5a234a6f02ab96f6d72d1e01c92352d59d14a85d74342edfeda0e0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/build_and_verify_b22_evidence.py": "f088de7ef0cbf13ddb26afdba6d221befb7f144cd6fb447edeccb4a6d299cb17",
+}
 HISTORICAL_B21_PRO_REVIEW_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v8_b21_completed_negative"
@@ -964,6 +1014,50 @@ HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 = {
     ),
     f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md": (
         "adbbb991930e45e2b88b5ae4cf75827d366afa839921de2e94780eb64bd8a43b"
+    ),
+}
+HISTORICAL_V8_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_completed"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.json"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md"
+)
+HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON: (
+        "13134eb8a030ada0eeb1fbfdd7af5e9daad75e4130773d60705e3c12925f8c5e"
+    ),
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "6aeb6e7ce7d1597ea2583a4e38b7f5f3d70b64dc168b4cf33c80f8edafef962a"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "f4622ebf5e2dd20c310a6e9688ff4da7f938c32ad1a9cc6d8b19f00df8ef47f1"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json": (
+        "9505a5c450f01bd460e65d6655f21e3d864b4aad485fc728ffef59085a8c5407"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md": (
+        "f34b389ff2cc31e14bfcb4a9288e6532ace35c4a3ab3e7a16dbb2ffde9f2b9b0"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "ba1454a18b23d853a4c442aca38c6bf40713c2502b22ff67e7d85adc5229bb54"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "c51b814ff7c5cee6ebb90d3f6c60462f59768a6eb4f101dca372a982ea0cc118"
     ),
 }
 V8_REVIEW_INPUT_DIRECTORY = (
@@ -995,6 +1089,44 @@ FINAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+V9_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_inputs"
+)
+V9_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V9_REVIEW_INPUT_DIRECTORY}/{LOCAL_TEST_RECEIPT_NAME}"
+V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/{TARGET_HOST_TEST_RECEIPT_NAME}"
+)
+V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_OWNERSHIP_NAME}"
+)
+V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_LANDLOCK_NAME}"
+)
+V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_CUDA_NAME}"
+)
+FINAL_V9_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_completed"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.md"
+)
+FINAL_V9_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md",
 )
 PRO_REVIEW_V5_PACKET = (
     (
@@ -1333,6 +1465,61 @@ FINAL_RECOVERY_WRAPPER_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/"
     "final_recovery_wrapper_self_test.py",
 )
+_PRO_REVIEW_V9_PATHS = (
+    *_PRO_REVIEW_V6_PATHS[:37],
+    *FINAL_RECOVERY_WRAPPER_PATHS,
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    B22_INCIDENT_DOCUMENT,
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json",
+    V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+)
+PRO_REVIEW_V9_PACKET = tuple(
+    (
+        relative,
+        "complete experiment plan" if index == 0 else f"bounded context {index}",
+    )
+    for index, relative in enumerate(_PRO_REVIEW_V9_PATHS)
+)
+PRO_REVIEW_V9_QUESTION = (
+    "This is the prospective v9 audit-only exact-byte successor review after "
+    "B22, not a new model transaction. The immutable completed v8 provider "
+    "review, manifest, and adjudication are mandatory historical context and "
+    "aggregate the earlier review history; they are not authority for these "
+    "successor bytes. The F12 recovery consumed its one-shot authorization, "
+    "Landlock receipt, and ATTEMPT_STARTED marker, then failed before compact "
+    "publication because the final env -i launch omitted the frozen "
+    "CUBLAS_WORKSPACE_CONFIG=:4096:8 precondition. No numerical nondeterminism "
+    "was observed. Raw-row recomputation may have occurred before the late "
+    "artifact-device guard, but no compact result or metric was published, "
+    "logged, or used to change the scientific plan. Treat this disclosed "
+    "stop-ship as B22 and decide explicitly whether a fresh one-shot retry is "
+    "non-adaptive and legitimate. Audit only the smallest repair: bind the exact "
+    "CUBLAS value in every sanitized environment that reaches artifact-device "
+    "setup, bind the same requirement in the independent verifier, and require "
+    "a disposable-B200 regression to execute the real artifact-device guard "
+    "under missing, wrong, and correct environment values. The frozen audit.py, "
+    "r3 plan, raw data, prompts, metrics, and thresholds must remain unchanged. "
+    "Fresh C13 local and disposable-B200 qualification receipts in the v9 input "
+    "directory alone qualify current source/test bytes. Verify the exact "
+    "C13<=E13<=F13 chain, unchanged source/test bytes from C13 through F13, and "
+    "unchanged provider-packet bytes from E13 through F13. Explicitly "
+    "disposition B17-B22 and I10-I14 without renumbering or omission. Return "
+    "any genuinely new blocker as B23 or later and any genuinely new important "
+    "finding as I15 or later. Do not request or infer scientific result values. "
+    "A READY TO FREEZE verdict applies only to the exact packet bytes and fresh "
+    "receipts supplied here. Any packet-changing repair after review requires "
+    "new authority; F13 may add only provider outputs and their adjudication."
+)
+
+# Immutable F12 packet definition retained for historical reconstruction only.
 _PRO_REVIEW_V8_PATHS = (
     *_PRO_REVIEW_V6_PATHS[:37],
     *FINAL_RECOVERY_WRAPPER_PATHS,
@@ -1361,47 +1548,9 @@ PRO_REVIEW_V8_PACKET = tuple(
     for index, relative in enumerate(_PRO_REVIEW_V8_PATHS)
 )
 PRO_REVIEW_V8_QUESTION = (
-    "This is the successor prospective v8 audit-only exact-byte review after "
-    "B21, not a new "
-    "model transaction. No recovered compact audit or scientific summary has "
-    "been generated or inspected. Treat the immutable completed v7 review and "
-    "adjudication as historical positive evidence, never as a review of the "
-    "current bytes. Also consider the complete B17 focused-review feedback and "
-    "manifest, including B17-B19 and I10-I12, plus the compact B18 and B20 "
-    "mechanical closures. Also treat the immutable first v8 review and manifest "
-    "as mandatory historical context: that completed negative review approved "
-    "the science and B20 repair but found B21 because two bound wrapper paths "
-    "were omitted from its provider packet. The first focused B17 call ended "
-    "incomplete at "
-    "max_output_tokens and the replacement returned READY AFTER SPECIFIED "
-    "FIXES; both paid calls are disclosed. The B20 owned B200 attempt completed "
-    "authentic issue-time authorization but failed before ATTEMPT_STARTED when "
-    "final-confined validation invoked Git. The observed /dev/null error was "
-    "only the first symptom because ACTIVE intentionally has no .git. Treat "
-    "that stop-ship as B20 and explicitly disposition it. Audit the smallest "
-    "repair: live Git ancestry and source/review diffs remain mandatory during "
-    "issue from SOURCE; the exact final HEAD is sealed into the self-hashed "
-    "authorization and cross-checked by the independent verifier; final ACTIVE "
-    "repeats all byte and semantic checks without Git or any /dev/null write "
-    "exception. The B21 repair adds the two existing omitted wrapper files to "
-    "the packet, adds a regression requiring every FINAL_RECOVERY_WRAPPER_PATHS "
-    "member, and corrects only the stale opening status sentence. Fresh local "
-    "and disposable-B200 qualification receipts for the successor code freeze "
-    "in the v8 input directory alone qualify current source/test bytes. Verify "
-    "the code-freeze <= reviewed-packet <= final-freeze chain, unchanged "
-    "source/test bytes from code freeze through final freeze, and unchanged "
-    "provider-packet bytes from reviewed packet through final freeze. Review "
-    "the tracked generic final controller as exact source: its launch-gate-bound "
-    "commit arguments must be validated before confinement and it must stage a "
-    "repository-free exact ACTIVE closure. Explicitly disposition B17-B21 and "
-    "I10-I13 without renumbering or omission. Return any genuinely new "
-    "blocker as B22 or later and any genuinely new important finding as I14 or "
-    "later. Do not request or infer scientific result values. A READY TO "
-    "FREEZE verdict applies only to the exact current sources, tests, controller, "
-    "plan inventories, fresh successor receipts, immutable prior reviews, and "
-    "compact incident evidence in this packet. Any new B22+ blocker stops "
-    "launch; no post-review source fix may be hidden in the output-only final "
-    "freeze."
+    "Historical F12 v8 successor review after B21. This packet definition is "
+    "retained only to reconstruct the immutable completed provider call; it is "
+    "not current authority and must never be used for a B22 retry."
 )
 PRO_REVIEW_QUESTION = (
     "This is a prospective audit-only recovery, not a new model transaction. "
@@ -1527,12 +1676,14 @@ RECOVERY_DOCUMENT_PATHS = (
     *tuple(B18_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *tuple(B20_COMPACT_EVIDENCE_PHYSICAL_SHA256),
     *HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS,
-    V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
-    V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-    V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
-    *FINAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+    *HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(B22_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
@@ -1897,6 +2048,7 @@ def _validate_cuda_preflight(
     expected_qualification_ownership_path: Path | None = None,
     expected_provider: Mapping[str, Any] | None = None,
     require_live_paths: bool = True,
+    expected_fixed_environment: Mapping[str, str] = CONFINED_FIXED_ENVIRONMENT,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     if closure_scope not in PREFLIGHT_CLOSURE_SCOPES:
         raise AuditRecoveryError("CUDA preflight closure scope differs")
@@ -2039,7 +2191,7 @@ def _validate_cuda_preflight(
         or not isinstance(environment, Mapping)
         or any(
             environment.get(name) != expected
-            for name, expected in CONFINED_FIXED_ENVIRONMENT.items()
+                for name, expected in expected_fixed_environment.items()
         )
         or any(
             not isinstance(environment.get(name), str)
@@ -3105,6 +3257,7 @@ def _qualification_probe_binding(
     cuda_path: Path,
     *,
     expected_source_test_files: Sequence[Mapping[str, Any]],
+    expected_fixed_environment: Mapping[str, str] = CONFINED_FIXED_ENVIRONMENT,
 ) -> dict[str, Any]:
     ownership = _validate_qualification_ownership(ownership_path)
     landlock = _canonical_json_receipt(landlock_path, "qualification Landlock receipt")
@@ -3257,6 +3410,7 @@ def _qualification_probe_binding(
         expected_qualification_ownership_path=embedded_ownership_path,
         expected_provider=expected_provider,
         require_live_paths=False,
+        expected_fixed_environment=expected_fixed_environment,
     )
     host_created_at = _provider_utc(
         str(ownership["created_at"]), "qualification host creation"
@@ -3477,6 +3631,8 @@ def _validate_test_receipt(
     qualification_landlock_path: Path | None = None,
     qualification_cuda_path: Path | None = None,
     authorized_at: datetime | None = None,
+    expected_designated_target_ids: Sequence[str] = TARGET_DESIGNATED_TEST_IDS,
+    expected_fixed_environment: Mapping[str, str] = CONFINED_FIXED_ENVIRONMENT,
 ) -> dict[str, Any]:
     receipt = dict(value)
     fields = {
@@ -3646,8 +3802,9 @@ def _validate_test_receipt(
         or failed_ids
         or not_run_ids
         or receipt.get("exit_code") != 0
-        or receipt.get("designated_target_ids") != list(TARGET_DESIGNATED_TEST_IDS)
-        or not set(TARGET_DESIGNATED_TEST_IDS) <= collected
+        or receipt.get("designated_target_ids")
+        != list(expected_designated_target_ids)
+        or not set(expected_designated_target_ids) <= collected
     ):
         raise AuditRecoveryError(f"{kind} test outcomes differ")
     started = _utc(str(receipt.get("started_at_utc", "")), "test receipt start")
@@ -3688,6 +3845,7 @@ def _validate_test_receipt(
         qualification_landlock_path,
         qualification_cuda_path,
         expected_source_test_files=expected_source_test_files,
+        expected_fixed_environment=expected_fixed_environment,
     )
     if (
         set(target)
@@ -3720,8 +3878,8 @@ def _validate_test_receipt(
         )
         or not isinstance(gpu.get("total_memory_bytes"), int)
         or int(gpu["total_memory_bytes"]) < 160 * 1024**3
-        or not set(TARGET_DESIGNATED_TEST_IDS) <= passed_ids
-        or set(TARGET_DESIGNATED_TEST_IDS) & skipped_ids
+        or not set(expected_designated_target_ids) <= passed_ids
+        or set(expected_designated_target_ids) & skipped_ids
         or any(
             dependency_map.get(name) != expected
             for name, expected in PINNED_PROBE_PACKAGE_VERSIONS.items()
@@ -4078,11 +4236,22 @@ def _expected_v7_pro_review_input() -> str:
 
 
 def _expected_v8_pro_review_input() -> str:
+    """Reconstruct the historical F12 packet; never use it as current authority."""
+
     return _expected_pro_review_input(
         PRO_REVIEW_V8_PACKET,
         FINAL_V8_PRO_REVIEW_OUTPUT_PATHS,
         PRO_REVIEW_V8_QUESTION,
         label="v8",
+    )
+
+
+def _expected_v9_pro_review_input() -> str:
+    return _expected_pro_review_input(
+        PRO_REVIEW_V9_PACKET,
+        FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
+        PRO_REVIEW_V9_QUESTION,
+        label="v9",
     )
 
 
@@ -4150,6 +4319,12 @@ def _validate_v7_packet_limits(instructions: str, review_input: str) -> dict[str
 
 
 def _validate_v8_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
+    """Apply the immutable F12 packet ceiling for historical reconstruction."""
+
+    return _validate_v9_packet_limits(instructions, review_input)
+
+
+def _validate_v9_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
     """Apply the V8 long-context ceiling while retaining the $75 cap."""
 
     input_characters = len(instructions) + len(review_input)
@@ -4169,11 +4344,11 @@ def _validate_v8_packet_limits(instructions: str, review_input: str) -> dict[str
         + reserved_output * PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION
     ) / 1_000_000
     if (
-        input_characters > PRO_REVIEW_V8_MAX_INPUT_CHARACTERS
-        or estimated_tokens > PRO_REVIEW_V8_MAX_INPUT_TOKENS
+        input_characters > PRO_REVIEW_V9_MAX_INPUT_CHARACTERS
+        or estimated_tokens > PRO_REVIEW_V9_MAX_INPUT_TOKENS
         or reserve_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
     ):
-        raise AuditRecoveryError("v8 Pro packet exceeds its frozen resource ceiling")
+        raise AuditRecoveryError("v9 Pro packet exceeds its frozen resource ceiling")
     return {
         "actual_input_characters": input_characters,
         "estimated_input_tokens_conservative": estimated_tokens,
@@ -5383,6 +5558,8 @@ def _validate_review_input_snapshots(
     ownership_relative: str,
     landlock_relative: str,
     cuda_relative: str,
+    expected_designated_target_ids: Sequence[str] = TARGET_DESIGNATED_TEST_IDS,
+    expected_fixed_environment: Mapping[str, str] = CONFINED_FIXED_ENVIRONMENT,
 ) -> dict[str, Any]:
     local_path = REPO_ROOT / local_relative
     target_path = REPO_ROOT / target_relative
@@ -5404,6 +5581,8 @@ def _validate_review_input_snapshots(
         local_value,
         kind="local",
         expected_source_test_files=expected_source_test_files,
+        expected_designated_target_ids=expected_designated_target_ids,
+        expected_fixed_environment=expected_fixed_environment,
     )
     target = _validate_test_receipt(
         target_value,
@@ -5412,6 +5591,8 @@ def _validate_review_input_snapshots(
         qualification_ownership_path=ownership_path,
         qualification_landlock_path=landlock_path,
         qualification_cuda_path=cuda_path,
+        expected_designated_target_ids=expected_designated_target_ids,
+        expected_fixed_environment=expected_fixed_environment,
     )
     code_freeze = str(local["code_freeze_commit"])
     source_inventory_sha256 = protocol.canonical_sha256(
@@ -5452,6 +5633,8 @@ def _validate_v6_review_input_snapshots(
         ownership_relative=V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         landlock_relative=V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         cuda_relative=V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        expected_designated_target_ids=LEGACY_TARGET_DESIGNATED_TEST_IDS,
+        expected_fixed_environment=LEGACY_CONFINED_FIXED_ENVIRONMENT,
     )
 
 
@@ -5465,19 +5648,21 @@ def _validate_v7_review_input_snapshots(
         ownership_relative=V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         landlock_relative=V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         cuda_relative=V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        expected_designated_target_ids=LEGACY_TARGET_DESIGNATED_TEST_IDS,
+        expected_fixed_environment=LEGACY_CONFINED_FIXED_ENVIRONMENT,
     )
 
 
-def _validate_v8_review_input_snapshots(
+def _validate_v9_review_input_snapshots(
     expected_source_test_files: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
     return _validate_review_input_snapshots(
         expected_source_test_files,
-        local_relative=V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
-        target_relative=V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
-        ownership_relative=V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-        landlock_relative=V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-        cuda_relative=V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+        local_relative=V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        target_relative=V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        ownership_relative=V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        landlock_relative=V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        cuda_relative=V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     )
 
 
@@ -5589,7 +5774,7 @@ def _validate_v7_git_chain(
         raise AuditRecoveryError("v7 provider-reviewed packet bytes changed after review")
 
 
-def _validate_v8_git_chain(
+def _validate_v9_git_chain(
     *,
     code_freeze_commit: str,
     reviewed_packet_git_head_commit: str,
@@ -5601,7 +5786,7 @@ def _validate_v8_git_chain(
         final_git_head_commit,
     )
     if any(HEX40.fullmatch(value) is None for value in commits):
-        raise AuditRecoveryError("v8 review Git chain contains a malformed commit")
+        raise AuditRecoveryError("v9 review Git chain contains a malformed commit")
     for ancestor, descendant in zip(commits[:-1], commits[1:], strict=True):
         if (
             _git_command(
@@ -5610,7 +5795,7 @@ def _validate_v8_git_chain(
             != 0
         ):
             raise AuditRecoveryError(
-                "v8 review Git chain is not code-freeze<=reviewed-packet<=final-freeze"
+                "v9 review Git chain is not C13<=E13<=F13"
             )
     if (
         _git_command(
@@ -5625,7 +5810,7 @@ def _validate_v8_git_chain(
         != 0
     ):
         raise AuditRecoveryError("source/test bytes changed after successor code freeze")
-    packet_paths = [relative for relative, _role in PRO_REVIEW_V8_PACKET]
+    packet_paths = [relative for relative, _role in PRO_REVIEW_V9_PACKET]
     if (
         _git_command(
             "diff",
@@ -5638,7 +5823,7 @@ def _validate_v8_git_chain(
         ).returncode
         != 0
     ):
-        raise AuditRecoveryError("v8 provider-reviewed packet bytes changed after review")
+        raise AuditRecoveryError("v9 provider-reviewed packet bytes changed after review")
 
 
 def _validate_v5_review_adjudication(
@@ -6840,6 +7025,101 @@ def _validate_historical_b21_review_evidence() -> None:
         raise AuditRecoveryError("historical B21 review semantics differ")
 
 
+def _validate_historical_v8_positive_review_evidence(
+    *, validate_git: bool = True
+) -> dict[str, Any]:
+    """Validate the immutable positive F12 review without reusing its authority."""
+
+    for relative, expected in sorted(
+        HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256.items()
+    ):
+        if _sha256(REPO_ROOT / relative) != expected:
+            raise AuditRecoveryError("immutable historical v8 review evidence differs")
+    root = REPO_ROOT / HISTORICAL_V8_PRO_REVIEW_DIRECTORY
+    response = _json(root / "response.json")
+    manifest = _json(root / "review_manifest.json")
+    review_text = (root / "review.md").read_text(encoding="utf-8")
+    adjudication = _canonical_json_receipt(
+        REPO_ROOT / HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+        "historical v8 positive review adjudication",
+    )
+    usage = response.get("usage")
+    response_semantic_sha256 = hashlib.sha256(
+        json.dumps(response, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+    finding_ids = [
+        "B17", "B18", "B19", "B20", "B21",
+        "I10", "I11", "I12", "I13", "I14",
+    ]
+    if (
+        _response_review_text(response) != review_text
+        or _terminal_review_verdict(review_text) != "READY TO FREEZE"
+        or _v6_review_finding_ids(review_text) != finding_ids
+        or response.get("id")
+        != "resp_04c0c207ee499e0e016a57da9747bc81989d7632f52ee2a89f"
+        or response.get("model") != "gpt-5.6-sol"
+        or response.get("status") != "completed"
+        or response_semantic_sha256
+        != "02706a7b515ee291c26abafada745c6d8b78d2476925a91e55e59a69845318c6"
+        or not isinstance(usage, Mapping)
+        or usage.get("input_tokens") != 2_196_183
+        or usage.get("output_tokens") != 28_342
+        or usage.get("output_tokens_details", {}).get("reasoning_tokens") != 5_113
+        or manifest.get("status") != "completed"
+        or manifest.get("response_id") != response["id"]
+        or manifest.get("review_sha256")
+        != HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or manifest.get("response_sha256") != response_semantic_sha256
+        or manifest.get("review_input_sha256")
+        != "f27426b2833579510d71461f441246bbaffb88c8cdaf01220a9e4b6f7eb1259e"
+        or manifest.get("reviewed_packet_git_head_commit")
+        != "00a4b11a1b5fb3038f2489ae73733393141fa374"
+        or manifest.get("completed_response_cost_usd_conservative") != 23.23722
+        or manifest.get("budget_authorization_usd") != 75.0
+        or adjudication.get("schema_version") != 8
+        or adjudication.get("artifact_type")
+        != "completed_provider_review_v8_adjudication"
+        or adjudication.get("final_decision") != "READY_TO_EXECUTE"
+        or adjudication.get("finding_ids") != finding_ids
+        or adjudication.get("receipt_sha256")
+        != "8a76dcf72a63014590296e20ff592c6c248a24678ebde69e6f2cf4c6bcaf8355"
+    ):
+        raise AuditRecoveryError("historical v8 positive review semantics differ")
+    if validate_git and (
+        _git_command(
+            "merge-base",
+            "--is-ancestor",
+            "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7",
+            _git_head(),
+            check=False,
+        ).returncode
+        != 0
+    ):
+        raise AuditRecoveryError("historical v8 final commit is not an ancestor")
+    return {
+        "response_id": response["id"],
+        "terminal_verdict": "READY TO FREEZE",
+        "review_sha256": _sha256(root / "review.md"),
+        "manifest_file_sha256": _sha256(root / "review_manifest.json"),
+        "adjudication_receipt_sha256": adjudication["receipt_sha256"],
+        "adjudication_json_sha256": _sha256(
+            REPO_ROOT / HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "adjudication_markdown_sha256": _sha256(
+            REPO_ROOT / HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "finding_ids": finding_ids,
+        "code_freeze_commit": "f8a05e00ee0f8d2c0f33de6bd32c24c2022e36cd",
+        "reviewed_packet_git_head_commit": (
+            "00a4b11a1b5fb3038f2489ae73733393141fa374"
+        ),
+        "final_git_head_commit": "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7",
+        "superseded_reason": "post_authorization_b22_missing_cublas_environment",
+    }
+
+
 def _validate_b20_incident_evidence() -> dict[str, Any]:
     for mapping in (
         B18_COMPACT_EVIDENCE_PHYSICAL_SHA256,
@@ -6894,7 +7174,90 @@ def _validate_b20_incident_evidence() -> dict[str, Any]:
     }
 
 
-def _validate_v8_review_adjudication(
+def _validate_b22_incident_evidence() -> dict[str, Any]:
+    """Validate the immutable consumed-attempt closure without result access."""
+
+    for relative, expected in sorted(B22_COMPACT_EVIDENCE_PHYSICAL_SHA256.items()):
+        if _sha256(REPO_ROOT / relative) != expected:
+            raise AuditRecoveryError("B22 compact incident evidence differs")
+    root = REPO_ROOT / B22_COMPACT_EVIDENCE_DIRECTORY
+    closure = _canonical_json_receipt(
+        root / "B22_CLOSURE_RECEIPT.json", "B22 closure receipt"
+    )
+    verification = _canonical_json_receipt(
+        root / "B22_VERIFICATION_OUTPUT.json", "B22 verification output"
+    )
+    cause = _canonical_json_receipt(root / "CUBLAS_CAUSE.json", "B22 cause")
+    output_inventory = _canonical_json_receipt(
+        root / "DESIGNATED_OUTPUT_TREE_INVENTORY.json",
+        "B22 designated output inventory",
+    )
+    identity = closure.get("identity")
+    scientific = closure.get("scientific_result")
+    one_shot = closure.get("one_shot_authority")
+    termination = closure.get("termination")
+    if (
+        closure.get("incident_id") != "B22"
+        or closure.get("status")
+        != "closed_technical_failure_no_compact_scientific_result"
+        or closure.get("receipt_sha256")
+        != "8fb1e84d34027daf87f81635cf8ad89eb4c41dd7ac66f930e78938f0e79ab2f9"
+        or not isinstance(identity, Mapping)
+        or identity.get("pod_id") != "j7xr357tdlpq3f"
+        or identity.get("attempt_id")
+        != "calv2-r3-audit-recovery-497b0f8-20260715T191757Z"
+        or identity.get("authorization_receipt_sha256")
+        != "8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4"
+        or identity.get("attempt_marker_receipt_sha256")
+        != "9875b7810382910f5aa67b3a2e82217fbd4cc44de293b5091e172de0b1b58fa5"
+        or not isinstance(one_shot, Mapping)
+        or one_shot.get("authorization_consumed") is not True
+        or one_shot.get("same_authorization_retry_permitted") is not False
+        or not isinstance(scientific, Mapping)
+        or scientific.get("compact_success_publication") != "absent"
+        or scientific.get("raw_row_recomputation_may_have_preceded_late_guard")
+        is not True
+        or scientific.get("success_claim_permitted") is not False
+        or not isinstance(termination, Mapping)
+        or termination.get("status")
+        != "deleted_exact_owned_pod_unrelated_inventory_unchanged"
+        or cause.get("status") != "pass_missing_cublas_launch_precondition_proven"
+        or cause.get("environment_contract")
+        != {"name": "CUBLAS_WORKSPACE_CONFIG", "required_value": ":4096:8"}
+        or cause.get("interpretation", {}).get("numerical_nondeterminism_observed")
+        is not False
+        or output_inventory.get("compact_success_publication_present") is not False
+        or output_inventory.get("exact_file_names")
+        != ["ATTEMPT_STARTED.json", "FAILURE.json", "LANDLOCK_ENFORCEMENT.json"]
+        or verification.get("status") != "pass_b22_closed_mechanically"
+        or verification.get("receipt_sha256")
+        != "b9ccbac4029f82d4aeafc75fec8412936c6ca801197d530534b0d15a5143ebb2"
+        or verification.get("closure_receipt_sha256") != closure["receipt_sha256"]
+    ):
+        raise AuditRecoveryError("B22 compact incident semantics differ")
+    return {
+        "incident_id": "B22",
+        "path": B22_INCIDENT_DOCUMENT,
+        "document_file_sha256": _sha256(REPO_ROOT / B22_INCIDENT_DOCUMENT),
+        "closure_receipt_sha256": closure["receipt_sha256"],
+        "verification_receipt_sha256": verification["receipt_sha256"],
+        "pod_id": identity["pod_id"],
+        "attempt_id": identity["attempt_id"],
+        "authorization_receipt_sha256": identity[
+            "authorization_receipt_sha256"
+        ],
+        "attempt_marker_receipt_sha256": identity[
+            "attempt_marker_receipt_sha256"
+        ],
+        "failure_receipt_sha256": identity["failure_receipt_sha256"],
+        "scientific_result_status": "no_compact_scientific_result",
+        "raw_row_recomputation_may_have_preceded_late_guard": True,
+        "same_authorization_retry_permitted": False,
+        "termination_status": termination["status"],
+    }
+
+
+def _validate_v9_review_adjudication(
     *,
     root: Path,
     response: Mapping[str, Any],
@@ -6902,18 +7265,17 @@ def _validate_v8_review_adjudication(
     review_sha256: str,
     review_input_sha256: str,
     finding_ids: Sequence[str],
-    historical_v7: Mapping[str, Any],
-    historical_b17: Mapping[str, Any],
-    incident: Mapping[str, Any],
+    historical_v8: Mapping[str, Any],
+    b22: Mapping[str, Any],
     reviewed_evidence: Mapping[str, Any],
     reviewed_packet_git_head_commit: str,
 ) -> dict[str, Any]:
-    json_path = REPO_ROOT / FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON
-    markdown_path = REPO_ROOT / FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN
-    value = _canonical_json_receipt(json_path, "final v8 review adjudication")
+    json_path = REPO_ROOT / FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
+    markdown_path = REPO_ROOT / FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
+    value = _canonical_json_receipt(json_path, "final v9 review adjudication")
     markdown = markdown_path.read_text(encoding="utf-8")
     expected_review_binding = {
-        "review_directory": FINAL_V8_PRO_REVIEW_DIRECTORY,
+        "review_directory": FINAL_V9_PRO_REVIEW_DIRECTORY,
         "provider_response_id": response["id"],
         "provider_response_file_sha256": _sha256(root / "response.json"),
         "provider_response_semantic_sha256": response_semantic_sha256,
@@ -6925,35 +7287,20 @@ def _validate_v8_review_adjudication(
         "review_instructions_sha256": PRO_REVIEW_INSTRUCTIONS_SHA256,
         "reviewed_packet_git_head_commit": reviewed_packet_git_head_commit,
         "code_freeze_commit": reviewed_evidence["code_freeze_commit"],
-        "adjudication_markdown_path": FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+        "adjudication_markdown_path": FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
         "adjudication_markdown_sha256": _sha256(markdown_path),
     }
-    expected_historical_v7_binding = {
-        "review_directory": FINAL_V7_PRO_REVIEW_DIRECTORY,
-        "provider_response_id": historical_v7["response_id"],
-        "terminal_verdict": historical_v7["terminal_verdict"],
-        "review_sha256": historical_v7["review_sha256"],
-        "adjudication_receipt_sha256": historical_v7[
+    expected_historical_v8_binding = {
+        "review_directory": HISTORICAL_V8_PRO_REVIEW_DIRECTORY,
+        "provider_response_id": historical_v8["response_id"],
+        "terminal_verdict": historical_v8["terminal_verdict"],
+        "review_sha256": historical_v8["review_sha256"],
+        "manifest_file_sha256": historical_v8["manifest_file_sha256"],
+        "adjudication_receipt_sha256": historical_v8[
             "adjudication_receipt_sha256"
         ],
-        "final_git_head_commit": historical_v7["final_git_head_commit"],
-        "superseded_reason": historical_v7["superseded_reason"],
-    }
-    expected_historical_b17_binding = {
-        "review_directory": HISTORICAL_B17_PRO_REVIEW_DIRECTORY,
-        "provider_response_id": historical_b17["response_id"],
-        "terminal_verdict": historical_b17["terminal_verdict"],
-        "review_sha256": historical_b17["review_sha256"],
-        "finding_ids": historical_b17["finding_ids"],
-        "incomplete_predecessor_response_id": historical_b17[
-            "incomplete_predecessor_response_id"
-        ],
-    }
-    expected_incident_binding = {
-        "finding_ids": ["B17", "B18", "B19", "B20"],
-        "path": B20_INCIDENT_DOCUMENT,
-        "file_sha256": _sha256(REPO_ROOT / B20_INCIDENT_DOCUMENT),
-        **incident,
+        "final_git_head_commit": historical_v8["final_git_head_commit"],
+        "superseded_reason": historical_v8["superseded_reason"],
     }
     if (
         set(value)
@@ -6961,9 +7308,8 @@ def _validate_v8_review_adjudication(
             "schema_version",
             "artifact_type",
             "review_binding",
-            "historical_v7_binding",
-            "historical_b17_binding",
-            "incident_binding",
+            "historical_v8_binding",
+            "b22_incident_binding",
             "reviewed_qualification_evidence",
             "finding_ids",
             "findings",
@@ -6971,44 +7317,45 @@ def _validate_v8_review_adjudication(
             "final_decision",
             "receipt_sha256",
         }
-        or value.get("schema_version") != 8
-        or value.get("artifact_type") != "completed_provider_review_v8_adjudication"
+        or value.get("schema_version") != 9
+        or value.get("artifact_type") != "completed_provider_review_v9_adjudication"
         or value.get("review_binding") != expected_review_binding
-        or value.get("historical_v7_binding") != expected_historical_v7_binding
-        or value.get("historical_b17_binding") != expected_historical_b17_binding
-        or value.get("incident_binding") != expected_incident_binding
+        or value.get("historical_v8_binding") != expected_historical_v8_binding
+        or value.get("b22_incident_binding") != b22
         or value.get("reviewed_qualification_evidence") != reviewed_evidence
         or value.get("finding_ids") != list(finding_ids)
-        or value.get("resolved_successor_findings")
-        != ["B17", "B18", "B19", "B20", "B21"]
+        or value.get("resolved_successor_findings") != ["B22"]
         or value.get("final_decision") != "READY_TO_EXECUTE"
         or "Final execution decision: **READY TO EXECUTE**." not in markdown
     ):
-        raise AuditRecoveryError("final v8 review adjudication binding differs")
-    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20", "B21", "I13"}
+        raise AuditRecoveryError("final v9 review adjudication binding differs")
+    required_ids = {
+        "B17", "B18", "B19", "B20", "B21", "B22",
+        "I10", "I11", "I12", "I13", "I14",
+    }
     if not required_ids.issubset(finding_ids):
-        raise AuditRecoveryError("final v8 review omitted a cumulative finding ID")
+        raise AuditRecoveryError("final v9 review omitted a cumulative finding ID")
     if any(
-        finding_id.startswith("B") and int(finding_id[1:]) >= 22
+        finding_id.startswith("B") and int(finding_id[1:]) >= 23
         for finding_id in finding_ids
     ):
-        raise AuditRecoveryError("final v8 review introduced a new blocker")
+        raise AuditRecoveryError("final v9 review introduced a new blocker")
     for finding_id in set(finding_ids) - required_ids:
         prefix = finding_id[0]
         number = int(finding_id[1:])
-        if (prefix == "B" and number < 22) or (prefix == "I" and number < 14):
-            raise AuditRecoveryError("final v8 review recycled a reserved finding ID")
-    packet_paths = {relative for relative, _role in PRO_REVIEW_V8_PACKET}
+        if (prefix == "B" and number < 23) or (prefix == "I" and number < 15):
+            raise AuditRecoveryError("final v9 review recycled a reserved finding ID")
+    packet_paths = {relative for relative, _role in PRO_REVIEW_V9_PACKET}
     findings = value.get("findings")
     if not isinstance(findings, list) or len(findings) != len(finding_ids):
-        raise AuditRecoveryError("final v8 adjudication finding rows differ")
+        raise AuditRecoveryError("final v9 adjudication finding rows differ")
     observed_ids: list[str] = []
     rows_by_id: dict[str, Mapping[str, Any]] = {}
     for row in findings:
         if not isinstance(row, Mapping) or set(row) != {
             "id", "blocking", "disposition", "rationale", "changed_paths"
         }:
-            raise AuditRecoveryError("final v8 adjudication finding rows differ")
+            raise AuditRecoveryError("final v9 adjudication finding rows differ")
         finding_id = row.get("id")
         changed_paths = row.get("changed_paths")
         if (
@@ -7026,45 +7373,28 @@ def _validate_v8_review_adjudication(
             or (row["blocking"] and row["disposition"] == "fixed" and not changed_paths)
             or finding_id not in markdown
         ):
-            raise AuditRecoveryError("final v8 adjudication finding rows differ")
+            raise AuditRecoveryError("final v9 adjudication finding rows differ")
         observed_ids.append(finding_id)
         rows_by_id[finding_id] = row
-    required_b20_paths = {
-        B20_INCIDENT_DOCUMENT,
+    required_b22_paths = {
+        B22_INCIDENT_DOCUMENT,
         FINAL_RECOVERY_CONTROLLER_TEMPLATE,
         "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "experiments/consciousness_sae_target_blind_calibration/"
         "recovery_bundle_verifier.py",
-        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
-        "tests/consciousness_sae_target_blind_calibration/"
-        "test_recovery_bundle_verifier.py",
-    }
-    required_b21_paths = {
-        "docs/consciousness_sae_target_blind_calibration/"
-        "AUDIT_RECOVERY_20260714.md",
-        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "experiments/consciousness_sae_target_blind_calibration/"
-        "recovery_bundle_verifier.py",
-        "experiments/consciousness_sae_target_blind_calibration/"
-        "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
-        "experiments/consciousness_sae_target_blind_calibration/"
-        "final_recovery_wrapper_self_test.py",
+        "runpod_qualification_controller.sh",
         "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
         "tests/consciousness_sae_target_blind_calibration/"
         "test_recovery_bundle_verifier.py",
     }
     if (
         sorted(observed_ids) != list(finding_ids)
-        or any(
-            rows_by_id.get(finding_id, {}).get("disposition") != "fixed"
-            for finding_id in ("B17", "B18", "B19", "B20", "B21")
-        )
-        or not required_b20_paths
-        <= set(rows_by_id.get("B20", {}).get("changed_paths", []))
-        or not required_b21_paths
-        <= set(rows_by_id.get("B21", {}).get("changed_paths", []))
+        or rows_by_id.get("B22", {}).get("disposition") != "fixed"
+        or not required_b22_paths
+        <= set(rows_by_id.get("B22", {}).get("changed_paths", []))
     ):
-        raise AuditRecoveryError("final v8 B17-B21 adjudication differs")
+        raise AuditRecoveryError("final v9 B22 adjudication differs")
     return {
         "receipt_sha256": value["receipt_sha256"],
         "json_sha256": _sha256(json_path),
@@ -7083,7 +7413,7 @@ def _validate_review_evidence(
     validate_git: bool = True,
     expected_final_git_head_commit: str | None = None,
 ) -> dict[str, Any]:
-    """Validate the prospective V8 review; final mode is completely Git-free."""
+    """Validate the prospective V9 review; final mode is completely Git-free."""
 
     if not isinstance(validate_git, bool):
         raise AuditRecoveryError("review Git-validation mode differs")
@@ -7107,19 +7437,23 @@ def _validate_review_evidence(
     )
     historical_b17 = _validate_historical_b17_review_evidence()
     _validate_historical_b21_review_evidence()
+    historical_v8 = _validate_historical_v8_positive_review_evidence(
+        validate_git=validate_git
+    )
     incident = _validate_b20_incident_evidence()
+    b22 = _validate_b22_incident_evidence()
     timed_qualification = _validate_v4_timed_qualification_evidence()
     source_test_files = _source_test_records()
-    snapshots = _validate_v8_review_input_snapshots(source_test_files)
+    snapshots = _validate_v9_review_input_snapshots(source_test_files)
     reviewed_evidence = {**snapshots["evidence"], "timed_qualification": timed_qualification}
 
-    root = REPO_ROOT / FINAL_V8_PRO_REVIEW_DIRECTORY
-    required_paths = tuple(REPO_ROOT / relative for relative in FINAL_V8_PRO_REVIEW_OUTPUT_PATHS)
+    root = REPO_ROOT / FINAL_V9_PRO_REVIEW_DIRECTORY
+    required_paths = tuple(REPO_ROOT / relative for relative in FINAL_V9_PRO_REVIEW_OUTPUT_PATHS)
     if any(not path.is_file() for path in required_paths):
-        raise AuditRecoveryError("prospective v8 review outputs are not complete")
+        raise AuditRecoveryError("prospective v9 review outputs are not complete")
     adjudication_value = _canonical_json_receipt(
-        REPO_ROOT / FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
-        "final v8 review adjudication",
+        REPO_ROOT / FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON,
+        "final v9 review adjudication",
     )
     review_binding = adjudication_value.get("review_binding")
     reviewed_packet_git_head_commit = (
@@ -7128,7 +7462,7 @@ def _validate_review_evidence(
         else ""
     )
     if HEX40.fullmatch(reviewed_packet_git_head_commit) is None:
-        raise AuditRecoveryError("v8 reviewed packet Git commit differs")
+        raise AuditRecoveryError("v9 reviewed packet Git commit differs")
     response = _json(root / "response.json")
     manifest = _json(root / "review_manifest.json")
     payload = _json(root / "request_payload.json")
@@ -7137,20 +7471,20 @@ def _validate_review_evidence(
     response_semantic_sha256 = hashlib.sha256(
         json.dumps(response, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()
-    expected_review_input = _expected_v8_pro_review_input()
+    expected_review_input = _expected_v9_pro_review_input()
     review_input_sha256 = hashlib.sha256(expected_review_input.encode("utf-8")).hexdigest()
     instructions = payload.get("instructions")
     if not isinstance(instructions, str):
-        raise AuditRecoveryError("final v8 review instructions are absent")
-    limits = _validate_v8_packet_limits(instructions, expected_review_input)
+        raise AuditRecoveryError("final v9 review instructions are absent")
+    limits = _validate_v9_packet_limits(instructions, expected_review_input)
     if hashlib.sha256(instructions.encode("utf-8")).hexdigest() != PRO_REVIEW_INSTRUCTIONS_SHA256:
-        raise AuditRecoveryError("final v8 review instructions differ")
+        raise AuditRecoveryError("final v9 review instructions differ")
     artifacts = manifest.get("artifacts")
-    if not isinstance(artifacts, list) or len(artifacts) != len(PRO_REVIEW_V8_PACKET):
-        raise AuditRecoveryError("final v8 review packet inventory differs")
-    for row, (relative, role) in zip(artifacts, PRO_REVIEW_V8_PACKET, strict=True):
+    if not isinstance(artifacts, list) or len(artifacts) != len(PRO_REVIEW_V9_PACKET):
+        raise AuditRecoveryError("final v9 review packet inventory differs")
+    for row, (relative, role) in zip(artifacts, PRO_REVIEW_V9_PACKET, strict=True):
         if not isinstance(row, Mapping):
-            raise AuditRecoveryError("final v8 review packet inventory differs")
+            raise AuditRecoveryError("final v9 review packet inventory differs")
         current_path = REPO_ROOT / relative
         current_raw = current_path.read_bytes()
         current_source = current_raw.decode("utf-8")
@@ -7163,7 +7497,7 @@ def _validate_review_evidence(
             or row.get("characters") != len(current_source)
             or row.get("sha256") != hashlib.sha256(current_raw).hexdigest()
         ):
-            raise AuditRecoveryError("v8 provider-reviewed packet bytes differ")
+            raise AuditRecoveryError("v9 provider-reviewed packet bytes differ")
     expected_metadata = {
         "workflow": "experiment_plan_review",
         "plan_sha256": artifacts[0]["sha256"],
@@ -7209,7 +7543,7 @@ def _validate_review_evidence(
         or _response_review_text(response) != review_text
         or not isinstance(usage, Mapping)
     ):
-        raise AuditRecoveryError("final v8 provider packet binding differs")
+        raise AuditRecoveryError("final v9 provider packet binding differs")
     response_id = response.get("id")
     preflight_tokens = manifest.get("input_tokens_preflight")
     exact_reserved_cost = manifest.get("exact_budget_reserve_usd_after_preflight")
@@ -7245,44 +7579,46 @@ def _validate_review_evidence(
         or manifest.get("single_call_policy") != "trusted_procedural_rule"
         or manifest.get("actual_input_characters") != limits["actual_input_characters"]
         or manifest.get("estimated_input_tokens_conservative") != limits["estimated_input_tokens_conservative"]
-        or manifest.get("max_input_characters") != PRO_REVIEW_V8_MAX_INPUT_CHARACTERS
-        or manifest.get("max_input_tokens") != PRO_REVIEW_V8_MAX_INPUT_TOKENS
+        or manifest.get("max_input_characters") != PRO_REVIEW_V9_MAX_INPUT_CHARACTERS
+        or manifest.get("max_input_tokens") != PRO_REVIEW_V9_MAX_INPUT_TOKENS
         or manifest.get("reserved_billable_input_tokens") != limits["reserved_billable_input_tokens"]
         or manifest.get("reserved_billable_output_tokens") != limits["reserved_billable_output_tokens"]
         or manifest.get("budget_authorization_usd") != PRO_REVIEW_BUDGET_AUTHORIZATION_USD
         or not isinstance(preflight_tokens, int)
         or isinstance(preflight_tokens, bool)
-        or not 0 < preflight_tokens <= PRO_REVIEW_V8_MAX_INPUT_TOKENS
+        or not 0 < preflight_tokens <= PRO_REVIEW_V9_MAX_INPUT_TOKENS
         or not isinstance(exact_reserved_cost, (int, float))
         or not math.isclose(float(exact_reserved_cost), expected_exact_reserved_cost, abs_tol=1e-12)
         or float(exact_reserved_cost) > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
         or manifest.get("completed_response_cost_exceeded_budget_authorization") is not False
     ):
-        raise AuditRecoveryError("final v8 review evidence differs")
+        raise AuditRecoveryError("final v9 review evidence differs")
     required_sections = (
         "# Verdict", "# Blocking findings", "# Important non-blocking findings",
         "# What should remain unchanged", "# Minimal revised design", "# Freeze checklist",
     )
     terminal_verdict = _terminal_review_verdict(review_text)
     finding_ids = _v6_review_finding_ids(review_text)
-    required_ids = set(HISTORICAL_B17_FINDING_IDS) | {"B20", "B21", "I13"}
+    required_ids = {
+        "B17", "B18", "B19", "B20", "B21", "B22",
+        "I10", "I11", "I12", "I13", "I14",
+    }
     if (
         any(section not in review_text for section in required_sections)
         or terminal_verdict != "READY TO FREEZE"
         or not required_ids.issubset(finding_ids)
-        or any(fid.startswith("B") and int(fid[1:]) >= 22 for fid in finding_ids)
+        or any(fid.startswith("B") and int(fid[1:]) >= 23 for fid in finding_ids)
     ):
-        raise AuditRecoveryError("final v8 review did not approve exact packet bytes")
-    adjudication = _validate_v8_review_adjudication(
+        raise AuditRecoveryError("final v9 review did not approve exact packet bytes")
+    adjudication = _validate_v9_review_adjudication(
         root=root,
         response=response,
         response_semantic_sha256=response_semantic_sha256,
         review_sha256=review_sha256,
         review_input_sha256=review_input_sha256,
         finding_ids=finding_ids,
-        historical_v7=historical_v7,
-        historical_b17=historical_b17,
-        incident=incident,
+        historical_v8=historical_v8,
+        b22=b22,
         reviewed_evidence=reviewed_evidence,
         reviewed_packet_git_head_commit=reviewed_packet_git_head_commit,
     )
@@ -7290,7 +7626,7 @@ def _validate_review_evidence(
     if expected_final_git_head_commit is not None and final_head != expected_final_git_head_commit:
         raise AuditRecoveryError("sealed final Git HEAD binding differs")
     if validate_git:
-        _validate_v8_git_chain(
+        _validate_v9_git_chain(
             code_freeze_commit=reviewed_evidence["code_freeze_commit"],
             reviewed_packet_git_head_commit=reviewed_packet_git_head_commit,
             final_git_head_commit=final_head,
@@ -7307,7 +7643,7 @@ def _validate_review_evidence(
         or not math.isclose(reconstructed_cost, float(recorded_cost), abs_tol=1e-12)
         or reconstructed_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
     ):
-        raise AuditRecoveryError("final v8 review cost reconstruction differs")
+        raise AuditRecoveryError("final v9 review cost reconstruction differs")
     evidence = reviewed_evidence
     return {
         "model": "gpt-5.6-sol",
@@ -7490,6 +7826,38 @@ def _validate_review_evidence(
         "b20_attempt_id": incident["b20_attempt_id"],
         "b20_pod_id": incident["b20_pod_id"],
         "b20_scientific_result_status": incident["scientific_result_status"],
+        "historical_v8_terminal_verdict": historical_v8["terminal_verdict"],
+        "historical_v8_response_id": historical_v8["response_id"],
+        "historical_v8_review_sha256": historical_v8["review_sha256"],
+        "historical_v8_manifest_file_sha256": historical_v8[
+            "manifest_file_sha256"
+        ],
+        "historical_v8_adjudication_receipt_sha256": historical_v8[
+            "adjudication_receipt_sha256"
+        ],
+        "historical_v8_final_git_head_commit": historical_v8[
+            "final_git_head_commit"
+        ],
+        "historical_v8_superseded_reason": historical_v8["superseded_reason"],
+        "b22_closure_receipt_sha256": b22["closure_receipt_sha256"],
+        "b22_verification_receipt_sha256": b22["verification_receipt_sha256"],
+        "b22_attempt_id": b22["attempt_id"],
+        "b22_pod_id": b22["pod_id"],
+        "b22_authorization_receipt_sha256": b22[
+            "authorization_receipt_sha256"
+        ],
+        "b22_attempt_marker_receipt_sha256": b22[
+            "attempt_marker_receipt_sha256"
+        ],
+        "b22_failure_receipt_sha256": b22["failure_receipt_sha256"],
+        "b22_scientific_result_status": b22["scientific_result_status"],
+        "b22_raw_row_recomputation_may_have_preceded_late_guard": b22[
+            "raw_row_recomputation_may_have_preceded_late_guard"
+        ],
+        "b22_same_authorization_retry_permitted": b22[
+            "same_authorization_retry_permitted"
+        ],
+        "b22_termination_status": b22["termination_status"],
         "historical_pre_v2_paid_call_count": 2,
         "historical_v2_paid_call_count": 1,
         "historical_v3_paid_call_count": 1,
@@ -7500,7 +7868,8 @@ def _validate_review_evidence(
         "incomplete_b17_paid_call_count": 1,
         "completed_b17_paid_call_count": 1,
         "completed_v8_paid_call_count": 2,
-        "cumulative_disclosed_paid_call_count": 12,
+        "completed_v9_paid_call_count": 1,
+        "cumulative_disclosed_paid_call_count": 13,
     }
 
 
@@ -7511,27 +7880,27 @@ def _validate_reviewed_external_evidence(
         (
             "reviewed_local_test_receipt",
             args.local_test_receipt,
-            V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
         ),
         (
             "reviewed_target_host_test_receipt",
             args.target_host_test_receipt,
-            V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_ownership",
             args.target_qualification_ownership,
-            V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_landlock",
             args.target_qualification_landlock,
-            V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         ),
         (
             "reviewed_target_qualification_cuda",
             args.target_qualification_cuda_preflight,
-            V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
         ),
     )
     for prefix, external_path, snapshot_relative in rows:
@@ -8753,48 +9122,48 @@ def _recovery_metadata(
             authorization,
             f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md",
         ),
-        "final_v8_review_adjudication_json_sha256": _bound_recovery_hash(
+        "final_v9_review_adjudication_json_sha256": _bound_recovery_hash(
             authorization,
-            FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON,
         ),
-        "final_v8_review_adjudication_markdown_sha256": _bound_recovery_hash(
+        "final_v9_review_adjudication_markdown_sha256": _bound_recovery_hash(
             authorization,
-            FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
         ),
-        "final_v8_review_response_sha256": _bound_recovery_hash(
+        "final_v9_review_response_sha256": _bound_recovery_hash(
             authorization,
-            f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/response.json",
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json",
         ),
-        "final_v8_review_manifest_sha256": _bound_recovery_hash(
+        "final_v9_review_manifest_sha256": _bound_recovery_hash(
             authorization,
-            f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json",
         ),
         "reviewed_local_test_receipt_snapshot_sha256": _bound_recovery_hash(
             authorization,
-            V8_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
         ),
         "reviewed_target_host_test_receipt_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+                V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_ownership_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+                V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_landlock_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+                V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
             )
         ),
         "reviewed_target_qualification_cuda_snapshot_sha256": (
             _bound_recovery_hash(
                 authorization,
-                V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+                V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
             )
         ),
         "original_failed_audit_log_sha256": ORIGINAL_FAILURE_LOG_SHA256,

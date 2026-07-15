@@ -4,14 +4,14 @@ set -euo pipefail
 FREEZE=${1:?missing exact code-freeze commit}
 POD_ID=${2:?missing exact owned pod ID}
 EXPECTED_CREATED_AT=${3:?missing host-created timestamp}
-EXPECTED_TEST_COUNT=${4:-229}
+EXPECTED_TEST_COUNT=${4:-231}
 
 [[ "$FREEZE" =~ ^[0-9a-f]{40}$ ]]
 [[ "$POD_ID" =~ ^[a-z0-9]{5,64}$ ]]
 [[ "$EXPECTED_CREATED_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
-[[ "$EXPECTED_TEST_COUNT" == 229 ]]
+[[ "$EXPECTED_TEST_COUNT" == 231 ]]
 
-ROOT="/root/q12-${FREEZE:0:7}"
+ROOT="/root/q13-${FREEZE:0:7}"
 ACTIVE="$ROOT/checkout"
 DEPS="$ROOT/dependencies"
 BOOTSTRAP="$ROOT/bootstrap"
@@ -20,7 +20,7 @@ OWNERSHIP="$ROOT/evidence/TARGET_QUALIFICATION_OWNERSHIP.json"
 HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"
 PYTHON=/usr/bin/python3.11
 ARCHIVE_PARENT=/workspace/consciousness_sae_target_blind_calibration/consciousness_sae_target_blind_calibration_v2/qualification_archives
-ARCHIVE="$ARCHIVE_PARENT/v8-b21-c12-target-${POD_ID}-${FREEZE:0:7}"
+ARCHIVE="$ARCHIVE_PARENT/v9-b22-c13-target-${POD_ID}-${FREEZE:0:7}"
 ARCHIVE_PARTIAL="${ARCHIVE}.partial"
 ARCHIVE_PUBLISHED=0
 
@@ -122,7 +122,7 @@ import os
 import sys
 
 path = sys.argv[1]
-assert path.startswith("/root/q12-")
+assert path.startswith("/root/q13-")
 assert len(os.fsencode(path)) <= 91
 assert len(os.fsencode(path)) <= 107 - 16
 PY
@@ -364,6 +364,7 @@ cd "$ACTIVE"
 env -i \
   PATH=/usr/bin:/bin LANG=C LC_ALL=C \
   PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 \
+  CUBLAS_WORKSPACE_CONFIG=:4096:8 \
   CUDA_CACHE_DISABLE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
   HF_DATASETS_OFFLINE=1 TOKENIZERS_PARALLELISM=false \
   HOME="$OUT" TMPDIR="$OUT" HF_HOME="$OUT" TRANSFORMERS_CACHE="$OUT" \
@@ -385,6 +386,7 @@ cp "$CUDA" "$TEST/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
 
 cd "$ACTIVE"
 PYTHONDONTWRITEBYTECODE=1 \
+CUBLAS_WORKSPACE_CONFIG=:4096:8 \
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_DATASETS_OFFLINE=1 \
 "$PYTHON" -B -m \
   experiments.consciousness_sae_target_blind_calibration.audit_recovery \
@@ -405,7 +407,7 @@ from pathlib import Path
 receipt = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 freeze = sys.argv[2]
 expected = int(sys.argv[3])
-assert expected == 229
+assert expected == 231
 assert receipt["status"] == "pass_exact_code_freeze_tests"
 assert receipt["code_freeze_commit"] == freeze
 assert receipt["observed_git_head_commit"] == freeze
