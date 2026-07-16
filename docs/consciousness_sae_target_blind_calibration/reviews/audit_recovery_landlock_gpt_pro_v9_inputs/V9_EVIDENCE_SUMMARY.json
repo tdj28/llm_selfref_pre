@@ -1,0 +1,102 @@
+{
+  "artifact_type": "v9_compact_qualification_evidence_summary",
+  "schema_version": 1,
+  "scope": {
+    "mechanical_gate": "retained_full_receipts_must_validate_before_authorization",
+    "provider_did_not_review": [
+      "exact source or test bytes",
+      "full qualification receipts or logs",
+      "raw data or scientific results"
+    ],
+    "provider_review_scope": "director_level_plan_review"
+  },
+  "code_freeze": {
+    "commit": "974f7aa9908f614a33bca49b4dbe60864358a6d4",
+    "source_test_inventory_sha256": "8cd0fea2be5fb96fdb43420215f7cc0a1ab0a788236ca74f52830a5f85286de1"
+  },
+  "tests": {
+    "local": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "2e619b28db4fcd387ec3131d9392a09d1cd7426aeea8557aa6d42fba5ac3851d",
+      "passed_count": 217,
+      "receipt_sha256": "84e9cbaa5bc54b30eab354c31fc293dfd33bbfe58a89af9ac9db7049ccb176e9",
+      "skipped_count": 14,
+      "status": "pass_exact_code_freeze_tests"
+    },
+    "target_host": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "22c85817bacd776d1ce7dde1f15e37fc34f6c74257e356e0145804506f21f711",
+      "passed_count": 231,
+      "receipt_sha256": "c3404330b02b901e5f881f25394f0a128b0c954e8d0802e6e9e2fc2b860fd2c4",
+      "skipped_count": 0,
+      "status": "pass_exact_code_freeze_tests"
+    }
+  },
+  "qualification": {
+    "bootstrap_status": "pass_hash_bound_confined_bootstrap",
+    "closure_file_count": 36,
+    "closure_inventory_sha256": "8cd0fea2be5fb96fdb43420215f7cc0a1ab0a788236ca74f52830a5f85286de1",
+    "closure_scope": "source_test_qualification",
+    "cublas_workspace_config": ":4096:8",
+    "cuda_status": "pass_target_free_landlock_cuda_preflight",
+    "gpu": {
+      "device_capability": [
+        10,
+        0
+      ],
+      "device_count": 1,
+      "device_name": "NVIDIA B200"
+    },
+    "landlock": {
+      "canary_status": "pass_protected_unchanged_output_empty",
+      "descriptor_status": "pass_no_escaping_writable_or_protected_descriptors",
+      "mapping_status": "pass_no_shared_file_backed_mappings",
+      "no_new_privs": true,
+      "observed_abi": 4,
+      "required_abi": 4,
+      "status": "pass_landlock_enforced"
+    },
+    "ownership_status": "owned_running_isolated",
+    "provider": {
+      "data_center_id": "US-CA-2",
+      "pod_id": "21xepcts9fvgjt",
+      "volume_id": "bv9gb9j32y"
+    },
+    "zero_target_activity": {
+      "external_or_prior_outcome_inputs": [],
+      "model_forward_count": 0,
+      "target_feature_vector_count": 0,
+      "target_prompt_render_count": 0,
+      "torch_module_call_count": 0
+    }
+  },
+  "source_receipts": [
+    {
+      "file_sha256": "2e619b28db4fcd387ec3131d9392a09d1cd7426aeea8557aa6d42fba5ac3851d",
+      "path": "LOCAL_TEST_RECEIPT.json",
+      "receipt_sha256": "84e9cbaa5bc54b30eab354c31fc293dfd33bbfe58a89af9ac9db7049ccb176e9"
+    },
+    {
+      "file_sha256": "22c85817bacd776d1ce7dde1f15e37fc34f6c74257e356e0145804506f21f711",
+      "path": "TARGET_HOST_TEST_RECEIPT.json",
+      "receipt_sha256": "c3404330b02b901e5f881f25394f0a128b0c954e8d0802e6e9e2fc2b860fd2c4"
+    },
+    {
+      "file_sha256": "b92827af4941066b254348f65f44dbc82af8ec69f1a12312cb907ac103cd18a8",
+      "path": "TARGET_QUALIFICATION_OWNERSHIP.json",
+      "receipt_sha256": "12f9cf125e6da9d3dee99f7feb12443251546a44881876d51faaa4f5e1c43112"
+    },
+    {
+      "file_sha256": "4434c4c1bfec59ea02952638b2e1287cf2949f2195a5207b217f9c037d0a1c48",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json",
+      "receipt_sha256": "660a49e4815d3dd12e61bec1e0731fd3522ab0abf870acec13da51546e1fa3b2"
+    },
+    {
+      "file_sha256": "2eb65abe482966d5f86d874227ff568ab18d1e4bf74cfd2c813233e7f352ba5a",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json",
+      "receipt_sha256": "16919a681d4992bc844859c4cad6d916c198a3afb47b0a75fdbb4ca94218707c"
+    }
+  ]
+}

@@ -411,13 +411,14 @@ been recomputed before the late guard, but no compact result was published,
 logged, inspected, or used for adaptation. The exact pod was deleted and the
 authorization, pod, attempt, and output namespace are permanently rejected.
 
-The prospective v9 reviewer receives the exact current sources/tests and all
-six launch wrappers, fresh C13 local/target qualification snapshots, the
-substantive immutable F12 v8 review/manifest/adjudication, and independently
-verified compact B22 evidence. The sole repair binds the frozen cuBLAS variable
-through every sanitized environment and exercises the real artifact-device
-guard on a disposable B200 before review. It must disposition B17--B22 and
+The prospective v9 reviewer receives only a compact director-level brief,
+scientific-equivalence appendix, v8 adjudication summary, B22 summary,
+invocation contract, and a mechanically derived qualification summary. It does
+not receive or certify exact source/test bytes, full receipts, logs, raw data,
+or results. Separate local gates bind the frozen cuBLAS variable through every
+sanitized environment and exercise the real artifact-device guard on a
+disposable B200 before review. The reviewer must disposition B17--B22 and
 I10--I14; any B23-or-later blocker stops launch. The lineage is
-`C13 <= E13 <= F13`; source/test bytes cannot change after C13 and provider
-packet bytes cannot change after E13. F13 adds only seven v9 provider and
+`C14 <= E14 <= F14`; source/test bytes cannot change after C14 and provider
+packet bytes cannot change after E14. F14 adds only seven v9 provider and
 adjudication outputs. No scientific result is claimed by this packet.

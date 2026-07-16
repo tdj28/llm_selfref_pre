@@ -90,7 +90,7 @@ ORIGINAL_FAILURE_LOG_SHA256 = (
 ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
 ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
-COMPLETED_REVIEW_COST_CEILING_USD = 75.0
+COMPLETED_REVIEW_COST_CEILING_USD = 1.25
 ORIGINAL_RECEIPTS = {
     "ownership": "2aaa6e9e665f511ccfe363eee9deb5496c36bc8b2ae2b7ac67620a58abe914ca",
     "guest": "226e939db167bc3471c4b559aaa2f454ea3fa0cfa51a0f73d378ced11fe33b26",
@@ -1102,6 +1102,7 @@ V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
 V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
     f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
 )
+V9_COMPACT_EVIDENCE_SUMMARY = f"{V9_REVIEW_INPUT_DIRECTORY}/V9_EVIDENCE_SUMMARY.json"
 FINAL_V9_PRO_REVIEW_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v9_completed"
@@ -1175,6 +1176,7 @@ AUDIT_EXECUTABLE_PATHS = (
 RECOVERY_DOCUMENT_PATHS = (
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+    "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
     "docs/consciousness_sae_target_blind_calibration/"
     "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
     "docs/consciousness_sae_target_blind_calibration/"
@@ -1234,6 +1236,7 @@ RECOVERY_DOCUMENT_PATHS = (
     V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
     V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
     V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V9_COMPACT_EVIDENCE_SUMMARY,
     *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
@@ -3820,9 +3823,9 @@ def _validate_review(
         or review["provider_approval_claimed"] is not False
         or review["provider_terminal_verdict"] != "READY TO FREEZE"
         or review["provider_ready_to_freeze_verdict"] is not True
-        or review["source_and_tests_reviewed_by_provider"] is not True
+        or review["source_and_tests_reviewed_by_provider"] is not False
         or review["reviewed_packet_was_pre_fix"] is not False
-        or review["final_source_reviewed_by_provider"] is not True
+        or review["final_source_reviewed_by_provider"] is not False
         or review["provider_reviewed_final_bytes_unchanged"] is not True
         or any(
             HEX40.fullmatch(value) is None

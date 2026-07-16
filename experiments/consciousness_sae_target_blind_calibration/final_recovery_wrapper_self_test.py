@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local structural self-tests for the F13 launch chain."""
+"""Local structural self-tests for the F14 launch chain."""
 
 from __future__ import annotations
 
@@ -18,9 +18,9 @@ VALIDATOR = ROOT / "validate_final_recovery_launch_gate.py"
 SUPERVISOR = ROOT / "final_recovery_local_supervisor.sh"
 
 EXPECTED_SHA256 = {
-    CONTROLLER.name: "709117f71213073f0c2aa65871f4901594b6ce225968256d64dc8ca0ea5705e8",
-    GATE.name: "4fd8f76c1e304eb3aaf2059b1fa222d59d99fedf2fae1f4b7a1ff6233210878d",
-    VALIDATOR.name: "7475fcffd4487adce1490dab95f67995840b672ed4b8a40d4eb603cb3a5c4891",
+    CONTROLLER.name: "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006",
+    GATE.name: "0f91c891dbcf30d574bf0b12307001936ed49b9c9afb11ff1a70099aad9ea78b",
+    VALIDATOR.name: "b91a132f71390865447de5a664abf8f79c110a50bdfe216d96324d2c2868d09e",
 }
 REJECTED_PODS = {"9n5f5a82p1gw1e", "eeo1skjkwjqot5", "j7xr357tdlpq3f"}
 REJECTED_ATTEMPTS = {
@@ -58,8 +58,8 @@ def main() -> int:
     for filename, expected in EXPECTED_SHA256.items():
         assert sha256(ROOT / filename) == expected
 
-    gate = load("f13_gate_selftest", GATE)
-    validator = load("f13_validator_selftest", VALIDATOR)
+    gate = load("f14_gate_selftest", GATE)
+    validator = load("f14_validator_selftest", VALIDATOR)
     for module in (gate, validator):
         assert module.EXPECTED_CONTROLLER_SHA256 == EXPECTED_SHA256[CONTROLLER.name]
         assert set(module.REJECTED_POD_IDS) == REJECTED_PODS
@@ -127,7 +127,7 @@ def main() -> int:
         assert result.returncode != 0
         assert "FINAL_RECOVERY_CONTROLLER_START" not in result.stdout
 
-    print("F13_LAUNCH_CHAIN_SELF_TEST_PASS")
+    print("F14_LAUNCH_CHAIN_SELF_TEST_PASS")
     return 0
 
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CODE_FREEZE=${1:?missing C13 code-freeze commit}
-REVIEWED_PACKET_COMMIT=${2:?missing E13 reviewed-packet commit}
-FINAL_FREEZE=${3:?missing F13 final-freeze commit}
+CODE_FREEZE=${1:?missing C14 code-freeze commit}
+REVIEWED_PACKET_COMMIT=${2:?missing E14 reviewed-packet commit}
+FINAL_FREEZE=${3:?missing F14 final-freeze commit}
 POD_ID=${4:?missing receipt-owned pod id}
 EXPECTED_CREATED_AT=${5:?missing provider-created UTC}
 ATTEMPT_ID=${6:?missing attempt id}

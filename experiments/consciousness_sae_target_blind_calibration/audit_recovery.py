@@ -103,20 +103,30 @@ ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
 # Prospective successor-review settings. Freezing these values permits a
 # cost-only dry run; it does not authorize or issue the paid provider call.
+# Historical v6--v8 reviews used the long-context ceiling below.  Keep that
+# value immutable for receipt reconstruction; the compact v9 review has its
+# own deliberately small authorization and standard-rate constants.
 PRO_REVIEW_BUDGET_AUTHORIZATION_USD = 75.0
+PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD = 1.25
 PRO_REVIEW_INSTRUCTIONS_SHA256 = (
     "3e51d5a292ca46fb6cbf685f74e37f2dbfe7e302addcc4bac8715a19aeefe1d7"
+)
+PRO_REVIEW_V9_INSTRUCTIONS_SHA256 = (
+    "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c"
 )
 PRO_REVIEW_MAX_INPUT_CHARACTERS = 2_100_000
 PRO_REVIEW_MAX_INPUT_TOKENS = 600_000
 PRO_REVIEW_V8_MAX_INPUT_CHARACTERS = 2_200_000
 PRO_REVIEW_V8_MAX_INPUT_TOKENS = 630_000
-PRO_REVIEW_V9_MAX_INPUT_CHARACTERS = PRO_REVIEW_V8_MAX_INPUT_CHARACTERS
-PRO_REVIEW_V9_MAX_INPUT_TOKENS = PRO_REVIEW_V8_MAX_INPUT_TOKENS
+PRO_REVIEW_V9_MAX_INPUT_CHARACTERS = 60_000
+PRO_REVIEW_V9_MAX_INPUT_TOKENS = 20_000
 PRO_REVIEW_MAX_OUTPUT_TOKENS = 20_000
+PRO_REVIEW_V9_MAX_OUTPUT_TOKENS = 6_000
 PRO_REVIEW_INPUT_RESERVE_MULTIPLIER = 5.0
 PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER = 2.2
 PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION = 3.5
+PRO_REVIEW_V9_OUTPUT_RESERVE_MULTIPLIER = 2.0
+PRO_REVIEW_V9_CHARS_PER_TOKEN_ASSUMPTION = 3.0
 # GPT-5.6 Sol prices the full request at 2x input and 1.5x output when the
 # prompt exceeds 272K input tokens. This packet is conservatively above that
 # boundary, so v6 always reserves the long-context rates rather than switching
@@ -124,6 +134,9 @@ PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION = 3.5
 PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION = 10.0
 PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION = 12.5
 PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION = 45.0
+PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION = 5.0
+PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION = 6.25
+PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION = 30.0
 PRO_REVIEW_TERMINAL_VERDICTS = (
     "NOT READY TO FREEZE",
     "READY AFTER SPECIFIED FIXES",
@@ -1107,6 +1120,7 @@ V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
 V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
     f"{V9_REVIEW_INPUT_DIRECTORY}/{TARGET_QUALIFICATION_CUDA_NAME}"
 )
+V9_COMPACT_EVIDENCE_SUMMARY = f"{V9_REVIEW_INPUT_DIRECTORY}/V9_EVIDENCE_SUMMARY.json"
 FINAL_V9_PRO_REVIEW_DIRECTORY = (
     "docs/consciousness_sae_target_blind_calibration/reviews/"
     "audit_recovery_landlock_gpt_pro_v9_completed"
@@ -1466,57 +1480,56 @@ FINAL_RECOVERY_WRAPPER_PATHS = (
     "final_recovery_wrapper_self_test.py",
 )
 _PRO_REVIEW_V9_PATHS = (
-    *_PRO_REVIEW_V6_PATHS[:37],
-    *FINAL_RECOVERY_WRAPPER_PATHS,
-    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
-    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
-    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
+    (
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md"
+    ),
     HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
     B22_INCIDENT_DOCUMENT,
-    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json",
-    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json",
-    V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
-    V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
-    V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
-    V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
-    V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    (
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "FINAL_RECOVERY_INVOCATION_CONTRACT.md"
+    ),
+    V9_COMPACT_EVIDENCE_SUMMARY,
 )
 PRO_REVIEW_V9_PACKET = tuple(
     (
         relative,
-        "complete experiment plan" if index == 0 else f"bounded context {index}",
+        (
+            "compact research-director plan brief"
+            if index == 0
+            else f"synthesized context {index}"
+        ),
     )
     for index, relative in enumerate(_PRO_REVIEW_V9_PATHS)
 )
 PRO_REVIEW_V9_QUESTION = (
-    "This is the prospective v9 audit-only exact-byte successor review after "
-    "B22, not a new model transaction. The immutable completed v8 provider "
-    "review, manifest, and adjudication are mandatory historical context and "
-    "aggregate the earlier review history; they are not authority for these "
-    "successor bytes. The F12 recovery consumed its one-shot authorization, "
-    "Landlock receipt, and ATTEMPT_STARTED marker, then failed before compact "
-    "publication because the final env -i launch omitted the frozen "
-    "CUBLAS_WORKSPACE_CONFIG=:4096:8 precondition. No numerical nondeterminism "
-    "was observed. Raw-row recomputation may have occurred before the late "
-    "artifact-device guard, but no compact result or metric was published, "
-    "logged, or used to change the scientific plan. Treat this disclosed "
-    "stop-ship as B22 and decide explicitly whether a fresh one-shot retry is "
-    "non-adaptive and legitimate. Audit only the smallest repair: bind the exact "
-    "CUBLAS value in every sanitized environment that reaches artifact-device "
-    "setup, bind the same requirement in the independent verifier, and require "
-    "a disposable-B200 regression to execute the real artifact-device guard "
-    "under missing, wrong, and correct environment values. The frozen audit.py, "
-    "r3 plan, raw data, prompts, metrics, and thresholds must remain unchanged. "
-    "Fresh C13 local and disposable-B200 qualification receipts in the v9 input "
-    "directory alone qualify current source/test bytes. Verify the exact "
-    "C13<=E13<=F13 chain, unchanged source/test bytes from C13 through F13, and "
-    "unchanged provider-packet bytes from E13 through F13. Explicitly "
-    "disposition B17-B22 and I10-I14 without renumbering or omission. Return "
-    "any genuinely new blocker as B23 or later and any genuinely new important "
-    "finding as I15 or later. Do not request or infer scientific result values. "
-    "A READY TO FREEZE verdict applies only to the exact packet bytes and fresh "
-    "receipts supplied here. Any packet-changing repair after review requires "
-    "new authority; F13 may add only provider outputs and their adjudication."
+    "Perform a top-level, big-picture review of the proposed audit-only recovery "
+    "after B22. Decide whether a fresh one-shot retry remains scientifically "
+    "non-adaptive, whether the target-blind design and scientific-equivalence "
+    "argument remain sound, and whether the described recovery, confinement, "
+    "qualification, Git-lineage, and publication safeguards are conceptually "
+    "sufficient. The F12 attempt consumed its authority and may have recomputed "
+    "raw rows before a late CUBLAS precondition stopped compact publication; no "
+    "compact result or metric was published or used to alter the plan. The "
+    "smallest repair supplies CUBLAS_WORKSPACE_CONFIG=:4096:8 in every sanitized "
+    "environment that reaches artifact-device setup and tests the real guard on "
+    "a disposable B200. The scientific plan, raw data, prompts, metrics, and "
+    "thresholds remain unchanged. Use the v8 adjudication summary as historical "
+    "context and explicitly disposition B17-B22 and I10-I14; assign any new "
+    "blocker B23 or later and any new important finding I15 or later. Do not "
+    "request, infer, or discuss scientific result values. This deliberately "
+    "compact packet does not include Python or shell source, test source, raw "
+    "data/results, full JSON receipts, or logs. Therefore do not claim to have "
+    "reviewed or certified exact implementation or test bytes. Exact-byte "
+    "source/test identity, full-receipt validation, disposable-B200 "
+    "qualification, C14<=E14<=F14 ancestry, source/test immutability from C14 "
+    "through F14, and packet immutability from E14 through F14 are separate "
+    "mechanical launch gates. A READY TO FREEZE verdict means only that this "
+    "top-level recovery design is ready to proceed subject to those gates. Any "
+    "packet-changing repair after review requires new authority; F14 may add "
+    "only provider outputs and their adjudication."
 )
 
 # Immutable F12 packet definition retained for historical reconstruction only.
@@ -1628,6 +1641,7 @@ RECOVERY_DOCUMENT_PATHS = (
     "calibration_v2_plan_20260714_r3/source_files.json",
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+    "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
     "docs/consciousness_sae_target_blind_calibration/"
     "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
     "docs/consciousness_sae_target_blind_calibration/"
@@ -1683,6 +1697,7 @@ RECOVERY_DOCUMENT_PATHS = (
     V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
     V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
     V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V9_COMPACT_EVIDENCE_SUMMARY,
     *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
@@ -4247,12 +4262,60 @@ def _expected_v8_pro_review_input() -> str:
 
 
 def _expected_v9_pro_review_input() -> str:
-    return _expected_pro_review_input(
-        PRO_REVIEW_V9_PACKET,
-        FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
-        PRO_REVIEW_V9_QUESTION,
-        label="v9",
+    """Reconstruct the canonical compact research-director client input."""
+
+    packet_paths = {relative for relative, _role in PRO_REVIEW_V9_PACKET}
+    if packet_paths & set(FINAL_V9_PRO_REVIEW_OUTPUT_PATHS):
+        raise AuditRecoveryError("v9 provider packet includes its own outputs")
+    inventory: list[tuple[Path, str, bytes, str]] = []
+    for relative, role in PRO_REVIEW_V9_PACKET:
+        path = REPO_ROOT / relative
+        try:
+            raw = path.read_bytes()
+            source = raw.decode("utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            raise AuditRecoveryError("v9 Pro packet artifact is unreadable") from exc
+        inventory.append((path, role, raw, source))
+    lines = [
+        "# Research-director review packet",
+        "",
+        (
+            "The first artifact is the compact decision-level plan under review. "
+            "Later artifacts are bounded synthesized context. Raw datasets, trial "
+            "records, long logs, model-output dumps, and source-tree dumps do not "
+            "belong in this packet. File contents may describe prior outcomes; "
+            "those are disclosed prior evidence, not outcomes from the proposed "
+            "experiment."
+        ),
+        "",
+        "## Artifact inventory",
+        "",
+    ]
+    for index, (path, role, raw, _source) in enumerate(inventory, start=1):
+        lines.append(
+            f"{index}. {role}: `{path.name}`; bytes={len(raw)}; "
+            f"sha256={hashlib.sha256(raw).hexdigest()}"
+        )
+    lines.extend(
+        [
+            "",
+            "## Responsible researcher's emphasis",
+            "",
+            PRO_REVIEW_V9_QUESTION.strip(),
+        ]
     )
+    for index, (path, role, _raw, source) in enumerate(inventory, start=1):
+        lines.extend(
+            [
+                "",
+                f"## Artifact {index}: {role} — {path.name}",
+                "",
+                f"<artifact_{index}>",
+                source,
+                f"</artifact_{index}>",
+            ]
+        )
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def _validate_v5_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
@@ -4321,12 +4384,6 @@ def _validate_v7_packet_limits(instructions: str, review_input: str) -> dict[str
 def _validate_v8_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
     """Apply the immutable F12 packet ceiling for historical reconstruction."""
 
-    return _validate_v9_packet_limits(instructions, review_input)
-
-
-def _validate_v9_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
-    """Apply the V8 long-context ceiling while retaining the $75 cap."""
-
     input_characters = len(instructions) + len(review_input)
     estimated_tokens = math.ceil(
         input_characters / PRO_REVIEW_CHARS_PER_TOKEN_ASSUMPTION
@@ -4344,9 +4401,44 @@ def _validate_v9_packet_limits(instructions: str, review_input: str) -> dict[str
         + reserved_output * PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION
     ) / 1_000_000
     if (
+        input_characters > PRO_REVIEW_V8_MAX_INPUT_CHARACTERS
+        or estimated_tokens > PRO_REVIEW_V8_MAX_INPUT_TOKENS
+        or reserve_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+    ):
+        raise AuditRecoveryError("v8 Pro packet exceeds its frozen resource ceiling")
+    return {
+        "actual_input_characters": input_characters,
+        "estimated_input_tokens_conservative": estimated_tokens,
+        "reserved_billable_input_tokens": reserved_input,
+        "reserved_billable_output_tokens": reserved_output,
+        "estimated_budget_reserve_usd": reserve_cost,
+    }
+
+
+def _validate_v9_packet_limits(instructions: str, review_input: str) -> dict[str, Any]:
+    """Apply the compact director-level V9 ceiling at standard rates."""
+
+    input_characters = len(instructions) + len(review_input)
+    estimated_tokens = math.ceil(
+        input_characters / PRO_REVIEW_V9_CHARS_PER_TOKEN_ASSUMPTION
+    )
+    reserved_input = math.ceil(estimated_tokens * PRO_REVIEW_INPUT_RESERVE_MULTIPLIER)
+    reserved_output = math.ceil(
+        PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
+        * PRO_REVIEW_V9_OUTPUT_RESERVE_MULTIPLIER
+    )
+    reserve_cost = (
+        reserved_input
+        * (
+            PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION
+            + PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION
+        )
+        + reserved_output * PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION
+    ) / 1_000_000
+    if (
         input_characters > PRO_REVIEW_V9_MAX_INPUT_CHARACTERS
         or estimated_tokens > PRO_REVIEW_V9_MAX_INPUT_TOKENS
-        or reserve_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or reserve_cost > PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD
     ):
         raise AuditRecoveryError("v9 Pro packet exceeds its frozen resource ceiling")
     return {
@@ -5653,10 +5745,125 @@ def _validate_v7_review_input_snapshots(
     )
 
 
+def _expected_v9_compact_evidence_summary() -> dict[str, Any]:
+    """Derive the provider-facing summary from the retained full receipts."""
+
+    receipt_paths = (
+        V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+        V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+        V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+        V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+        V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    )
+    local, target, ownership, landlock, cuda = (
+        _canonical_json_receipt(REPO_ROOT / relative, relative)
+        for relative in receipt_paths
+    )
+
+    def source_row(relative: str, receipt: Mapping[str, Any]) -> dict[str, Any]:
+        return {
+            "file_sha256": _sha256(REPO_ROOT / relative),
+            "path": PurePosixPath(relative).name,
+            "receipt_sha256": receipt["receipt_sha256"],
+        }
+
+    def test_row(relative: str, receipt: Mapping[str, Any]) -> dict[str, Any]:
+        return {
+            "collected_count": receipt["collected_count"],
+            "failed_count": receipt["failed_count"],
+            "file_sha256": _sha256(REPO_ROOT / relative),
+            "passed_count": receipt["passed_count"],
+            "receipt_sha256": receipt["receipt_sha256"],
+            "skipped_count": receipt["skipped_count"],
+            "status": receipt["status"],
+        }
+
+    return {
+        "artifact_type": "v9_compact_qualification_evidence_summary",
+        "schema_version": 1,
+        "scope": {
+            "mechanical_gate": (
+                "retained_full_receipts_must_validate_before_authorization"
+            ),
+            "provider_did_not_review": [
+                "exact source or test bytes",
+                "full qualification receipts or logs",
+                "raw data or scientific results",
+            ],
+            "provider_review_scope": "director_level_plan_review",
+        },
+        "code_freeze": {
+            "commit": local["code_freeze_commit"],
+            "source_test_inventory_sha256": local[
+                "source_test_inventory_sha256"
+            ],
+        },
+        "tests": {
+            "local": test_row(V9_LOCAL_TEST_RECEIPT_SNAPSHOT, local),
+            "target_host": test_row(V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT, target),
+        },
+        "qualification": {
+            "bootstrap_status": cuda["bootstrap"]["attestation"]["status"],
+            "closure_file_count": cuda["closure_file_count"],
+            "closure_inventory_sha256": cuda["closure_inventory_sha256"],
+            "closure_scope": cuda["closure_scope"],
+            "cublas_workspace_config": cuda["environment"][
+                "CUBLAS_WORKSPACE_CONFIG"
+            ],
+            "cuda_status": cuda["status"],
+            "gpu": {
+                "device_capability": cuda["cuda"]["device_capability"],
+                "device_count": cuda["cuda"]["device_count"],
+                "device_name": cuda["cuda"]["device_name"],
+            },
+            "landlock": {
+                "canary_status": landlock["canary_checks"]["status"],
+                "descriptor_status": landlock["descriptor_audit"]["status"],
+                "mapping_status": landlock["mapping_audit"]["status"],
+                "no_new_privs": landlock["no_new_privs"],
+                "observed_abi": landlock["observed_abi"],
+                "required_abi": landlock["required_abi"],
+                "status": landlock["status"],
+            },
+            "ownership_status": ownership["status"],
+            "provider": cuda["provider"],
+            "zero_target_activity": {
+                "external_or_prior_outcome_inputs": cuda[
+                    "external_or_prior_outcome_inputs"
+                ],
+                "model_forward_count": cuda["model_forward_count"],
+                "target_feature_vector_count": cuda[
+                    "target_feature_vector_count"
+                ],
+                "target_prompt_render_count": cuda["target_prompt_render_count"],
+                "torch_module_call_count": cuda["torch_module_call_count"],
+            },
+        },
+        "source_receipts": [
+            source_row(relative, receipt)
+            for relative, receipt in zip(
+                receipt_paths,
+                (local, target, ownership, landlock, cuda),
+                strict=True,
+            )
+        ],
+    }
+
+
+def _validate_v9_compact_evidence_summary() -> dict[str, Any]:
+    summary = _json(REPO_ROOT / V9_COMPACT_EVIDENCE_SUMMARY)
+    expected = _expected_v9_compact_evidence_summary()
+    if summary != expected:
+        raise AuditRecoveryError(
+            "v9 compact evidence summary differs from retained full receipts"
+        )
+    return summary
+
+
 def _validate_v9_review_input_snapshots(
     expected_source_test_files: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    return _validate_review_input_snapshots(
+    snapshots = _validate_review_input_snapshots(
         expected_source_test_files,
         local_relative=V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
         target_relative=V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
@@ -5664,6 +5871,8 @@ def _validate_v9_review_input_snapshots(
         landlock_relative=V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
         cuda_relative=V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     )
+    _validate_v9_compact_evidence_summary()
+    return snapshots
 
 
 def _validate_v6_git_chain(
@@ -5795,7 +6004,7 @@ def _validate_v9_git_chain(
             != 0
         ):
             raise AuditRecoveryError(
-                "v9 review Git chain is not C13<=E13<=F13"
+                "v9 review Git chain is not C14<=E14<=F14"
             )
     if (
         _git_command(
@@ -7284,7 +7493,7 @@ def _validate_v9_review_adjudication(
         "request_payload_file_sha256": _sha256(root / "request_payload.json"),
         "review_request_file_sha256": _sha256(root / "review_request.md"),
         "review_input_sha256": review_input_sha256,
-        "review_instructions_sha256": PRO_REVIEW_INSTRUCTIONS_SHA256,
+        "review_instructions_sha256": PRO_REVIEW_V9_INSTRUCTIONS_SHA256,
         "reviewed_packet_git_head_commit": reviewed_packet_git_head_commit,
         "code_freeze_commit": reviewed_evidence["code_freeze_commit"],
         "adjudication_markdown_path": FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
@@ -7310,7 +7519,7 @@ def _validate_v9_review_adjudication(
             "review_binding",
             "historical_v8_binding",
             "b22_incident_binding",
-            "reviewed_qualification_evidence",
+            "mechanically_validated_qualification_evidence",
             "finding_ids",
             "findings",
             "resolved_successor_findings",
@@ -7322,7 +7531,8 @@ def _validate_v9_review_adjudication(
         or value.get("review_binding") != expected_review_binding
         or value.get("historical_v8_binding") != expected_historical_v8_binding
         or value.get("b22_incident_binding") != b22
-        or value.get("reviewed_qualification_evidence") != reviewed_evidence
+        or value.get("mechanically_validated_qualification_evidence")
+        != reviewed_evidence
         or value.get("finding_ids") != list(finding_ids)
         or value.get("resolved_successor_findings") != ["B22"]
         or value.get("final_decision") != "READY_TO_EXECUTE"
@@ -7377,16 +7587,12 @@ def _validate_v9_review_adjudication(
         observed_ids.append(finding_id)
         rows_by_id[finding_id] = row
     required_b22_paths = {
+        "docs/consciousness_sae_target_blind_calibration/"
+        "V9_TOP_LEVEL_REVIEW_BRIEF.md",
         B22_INCIDENT_DOCUMENT,
-        FINAL_RECOVERY_CONTROLLER_TEMPLATE,
-        "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "experiments/consciousness_sae_target_blind_calibration/"
-        "recovery_bundle_verifier.py",
-        "experiments/consciousness_sae_target_blind_calibration/"
-        "runpod_qualification_controller.sh",
-        "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
-        "tests/consciousness_sae_target_blind_calibration/"
-        "test_recovery_bundle_verifier.py",
+        "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+        V9_COMPACT_EVIDENCE_SUMMARY,
     }
     if (
         sorted(observed_ids) != list(finding_ids)
@@ -7477,7 +7683,10 @@ def _validate_review_evidence(
     if not isinstance(instructions, str):
         raise AuditRecoveryError("final v9 review instructions are absent")
     limits = _validate_v9_packet_limits(instructions, expected_review_input)
-    if hashlib.sha256(instructions.encode("utf-8")).hexdigest() != PRO_REVIEW_INSTRUCTIONS_SHA256:
+    if (
+        hashlib.sha256(instructions.encode("utf-8")).hexdigest()
+        != PRO_REVIEW_V9_INSTRUCTIONS_SHA256
+    ):
         raise AuditRecoveryError("final v9 review instructions differ")
     artifacts = manifest.get("artifacts")
     if not isinstance(artifacts, list) or len(artifacts) != len(PRO_REVIEW_V9_PACKET):
@@ -7500,9 +7709,10 @@ def _validate_review_evidence(
             raise AuditRecoveryError("v9 provider-reviewed packet bytes differ")
     expected_metadata = {
         "workflow": "experiment_plan_review",
+        "review_scope": "director_level_plan_review",
         "plan_sha256": artifacts[0]["sha256"],
         "review_input_sha256": review_input_sha256,
-        "review_instructions_sha256": PRO_REVIEW_INSTRUCTIONS_SHA256,
+        "review_instructions_sha256": PRO_REVIEW_V9_INSTRUCTIONS_SHA256,
         "single_call_policy": "trusted_procedural_rule",
         "reviewed_packet_git_head_commit": reviewed_packet_git_head_commit,
     }
@@ -7516,26 +7726,26 @@ def _validate_review_evidence(
         or payload.get("metadata") != expected_metadata
         or payload.get("model") != "gpt-5.6-sol"
         or payload.get("reasoning") != {"mode": "pro", "effort": "medium"}
-        or payload.get("max_output_tokens") != PRO_REVIEW_MAX_OUTPUT_TOKENS
+        or payload.get("max_output_tokens") != PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
         or payload.get("service_tier") != "default"
         or payload.get("tools") != []
         or payload.get("store") is not False
         or payload.get("truncation") != "disabled"
         or payload.get("prompt_cache_options") != {"mode": "explicit"}
-        or payload.get("text") != {"verbosity": "high"}
+        or payload.get("text") != {"verbosity": "medium"}
         or payload.get("background", False) is not False
         or response.get("metadata") != expected_metadata
         or response.get("instructions") != instructions
         or not isinstance(response_reasoning, Mapping)
         or response_reasoning.get("mode") != "pro"
         or response_reasoning.get("effort") != "medium"
-        or response.get("max_output_tokens") != PRO_REVIEW_MAX_OUTPUT_TOKENS
+        or response.get("max_output_tokens") != PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
         or response.get("service_tier") != "default"
         or response.get("tools") != []
         or response.get("store") is not False
         or response.get("truncation") != "disabled"
         or not isinstance(response_text, Mapping)
-        or response_text.get("verbosity") != "high"
+        or response_text.get("verbosity") != "medium"
         or not isinstance(response_prompt_cache, Mapping)
         or response_prompt_cache.get("mode") != "explicit"
         or response.get("background") is not False
@@ -7549,9 +7759,15 @@ def _validate_review_evidence(
     exact_reserved_cost = manifest.get("exact_budget_reserve_usd_after_preflight")
     expected_exact_reserved_cost = (
         math.ceil(preflight_tokens * PRO_REVIEW_INPUT_RESERVE_MULTIPLIER)
-        * (PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION + PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION)
-        + math.ceil(PRO_REVIEW_MAX_OUTPUT_TOKENS * PRO_REVIEW_OUTPUT_RESERVE_MULTIPLIER)
-        * PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION
+        * (
+            PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION
+            + PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION
+        )
+        + math.ceil(
+            PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
+            * PRO_REVIEW_V9_OUTPUT_RESERVE_MULTIPLIER
+        )
+        * PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION
     ) / 1_000_000 if isinstance(preflight_tokens, int) and not isinstance(preflight_tokens, bool) else math.nan
     if (
         not isinstance(response_id, str)
@@ -7565,6 +7781,7 @@ def _validate_review_evidence(
         or usage["output_tokens"] <= 0
         or manifest.get("status") != "completed"
         or manifest.get("model") != "gpt-5.6-sol"
+        or manifest.get("review_scope") != "director_level_plan_review"
         or manifest.get("official_latest_model") != "gpt-5.6-sol"
         or manifest.get("response_id") != response_id
         or manifest.get("response_model") != "gpt-5.6-sol"
@@ -7572,7 +7789,8 @@ def _validate_review_evidence(
         or manifest.get("response_sha256") != response_semantic_sha256
         or manifest.get("response_metadata") != expected_metadata
         or manifest.get("reviewed_packet_git_head_commit") != reviewed_packet_git_head_commit
-        or manifest.get("review_instructions_sha256") != PRO_REVIEW_INSTRUCTIONS_SHA256
+        or manifest.get("review_instructions_sha256")
+        != PRO_REVIEW_V9_INSTRUCTIONS_SHA256
         or manifest.get("review_input_sha256") != review_input_sha256
         or manifest.get("review_request_sha256") != _sha256(root / "review_request.md")
         or manifest.get("request_payload_sha256") != _sha256(root / "request_payload.json")
@@ -7581,15 +7799,29 @@ def _validate_review_evidence(
         or manifest.get("estimated_input_tokens_conservative") != limits["estimated_input_tokens_conservative"]
         or manifest.get("max_input_characters") != PRO_REVIEW_V9_MAX_INPUT_CHARACTERS
         or manifest.get("max_input_tokens") != PRO_REVIEW_V9_MAX_INPUT_TOKENS
+        or manifest.get("max_output_tokens") != PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
+        or manifest.get("pro_input_reserve_multiplier")
+        != PRO_REVIEW_INPUT_RESERVE_MULTIPLIER
+        or manifest.get("pro_output_reserve_multiplier")
+        != PRO_REVIEW_V9_OUTPUT_RESERVE_MULTIPLIER
+        or manifest.get("chars_per_token_assumption")
+        != PRO_REVIEW_V9_CHARS_PER_TOKEN_ASSUMPTION
+        or manifest.get("input_rate_usd_per_million")
+        != PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION
+        or manifest.get("cache_write_rate_usd_per_million")
+        != PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION
+        or manifest.get("output_rate_usd_per_million")
+        != PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION
         or manifest.get("reserved_billable_input_tokens") != limits["reserved_billable_input_tokens"]
         or manifest.get("reserved_billable_output_tokens") != limits["reserved_billable_output_tokens"]
-        or manifest.get("budget_authorization_usd") != PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or manifest.get("budget_authorization_usd")
+        != PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD
         or not isinstance(preflight_tokens, int)
         or isinstance(preflight_tokens, bool)
         or not 0 < preflight_tokens <= PRO_REVIEW_V9_MAX_INPUT_TOKENS
         or not isinstance(exact_reserved_cost, (int, float))
         or not math.isclose(float(exact_reserved_cost), expected_exact_reserved_cost, abs_tol=1e-12)
-        or float(exact_reserved_cost) > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or float(exact_reserved_cost) > PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD
         or manifest.get("completed_response_cost_exceeded_budget_authorization") is not False
     ):
         raise AuditRecoveryError("final v9 review evidence differs")
@@ -7609,7 +7841,7 @@ def _validate_review_evidence(
         or not required_ids.issubset(finding_ids)
         or any(fid.startswith("B") and int(fid[1:]) >= 23 for fid in finding_ids)
     ):
-        raise AuditRecoveryError("final v9 review did not approve exact packet bytes")
+        raise AuditRecoveryError("final v9 director review did not approve the design")
     adjudication = _validate_v9_review_adjudication(
         root=root,
         response=response,
@@ -7632,16 +7864,16 @@ def _validate_review_evidence(
             final_git_head_commit=final_head,
         )
     reconstructed_cost = (
-        float(usage["input_tokens"]) * PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION
+        float(usage["input_tokens"]) * PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION
         + float(usage.get("input_tokens_details", {}).get("cache_write_tokens", 0))
-        * PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION
-        + float(usage["output_tokens"]) * PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION
+        * PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION
+        + float(usage["output_tokens"]) * PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION
     ) / 1_000_000
     recorded_cost = manifest.get("completed_response_cost_usd_conservative")
     if (
         not isinstance(recorded_cost, (int, float))
         or not math.isclose(reconstructed_cost, float(recorded_cost), abs_tol=1e-12)
-        or reconstructed_cost > PRO_REVIEW_BUDGET_AUTHORIZATION_USD
+        or reconstructed_cost > PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD
     ):
         raise AuditRecoveryError("final v9 review cost reconstruction differs")
     evidence = reviewed_evidence
@@ -7658,9 +7890,9 @@ def _validate_review_evidence(
         "reconstructed_cost_usd": reconstructed_cost,
         "provider_approval_claimed": False,
         "provider_ready_to_freeze_verdict": True,
-        "source_and_tests_reviewed_by_provider": True,
+        "source_and_tests_reviewed_by_provider": False,
         "reviewed_packet_was_pre_fix": False,
-        "final_source_reviewed_by_provider": True,
+        "final_source_reviewed_by_provider": False,
         "provider_reviewed_final_bytes_unchanged": True,
         "reviewed_packet_git_head_commit": reviewed_packet_git_head_commit,
         "final_git_head_commit": final_head,

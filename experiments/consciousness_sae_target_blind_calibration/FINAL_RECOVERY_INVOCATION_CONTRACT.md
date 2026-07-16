@@ -1,9 +1,9 @@
-# Generic F13 launch-chain invocation contract
+# Generic F14 launch-chain invocation contract
 
 The controller accepts exactly seven nonempty positional arguments:
 
 ```text
-/root/final_recovery_controller_f13.sh \
+/root/final_recovery_controller_f14.sh \
   CODE_FREEZE REVIEWED_PACKET_COMMIT FINAL_FREEZE \
   POD_ID EXPECTED_CREATED_AT ATTEMPT_ID INPUT_ROOT
 ```
@@ -26,8 +26,8 @@ same values, in that order, in `controller_argv`:
 
 `CODE_FREEZE`, `REVIEWED_PACKET_COMMIT`, and `FINAL_FREEZE` are full lowercase
 40-hex Git object IDs. `ATTEMPT_ID` must contain the first seven hex characters
-of `FINAL_FREEZE`. The controller checks `C13 <= E13 <= F13`, requires no change
-under `experiments/` or `tests/` from C13 through F13, and requires the E13..F13
+of `FINAL_FREEZE`. The controller checks `C14 <= E14 <= F14`, requires no change
+under `experiments/` or `tests/` from C14 through F14, and requires the E14..F14
 name-only delta to equal the two V9 adjudication files plus the five completed
 provider-review files. Qualification inputs are staged only from the V9 input
 snapshot directory.

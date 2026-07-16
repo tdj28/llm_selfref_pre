@@ -1937,52 +1937,50 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
     } <= v8_paths
 
     v9_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V9_PACKET}
+    assert len(audit_recovery.PRO_REVIEW_V9_PACKET) == 6
     assert not v9_paths & set(audit_recovery.FINAL_V9_PRO_REVIEW_OUTPUT_PATHS)
-    assert set(audit_recovery.FINAL_RECOVERY_WRAPPER_PATHS) <= v9_paths
-    assert {
-        f"{audit_recovery.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
-        f"{audit_recovery.HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
-        audit_recovery.HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    assert v9_paths == {
+        "docs/consciousness_sae_target_blind_calibration/"
+        "V9_TOP_LEVEL_REVIEW_BRIEF.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        audit_recovery.HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
         audit_recovery.B22_INCIDENT_DOCUMENT,
-        f"{audit_recovery.B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json",
-        f"{audit_recovery.B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json",
-    } <= v9_paths
-    v9_proxy = {
-        audit_recovery.V9_LOCAL_TEST_RECEIPT_SNAPSHOT: (
-            audit_recovery.V7_LOCAL_TEST_RECEIPT_SNAPSHOT
-        ),
-        audit_recovery.V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
-            audit_recovery.V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
-        ),
-        audit_recovery.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
-            audit_recovery.V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
-        ),
-        audit_recovery.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
-            audit_recovery.V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
-        ),
-        audit_recovery.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
-            audit_recovery.V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT
-        ),
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+        audit_recovery.V9_COMPACT_EVIDENCE_SUMMARY,
     }
-    proxied_v9_packet = tuple(
-        (v9_proxy.get(path, path), role)
-        for path, role in audit_recovery.PRO_REVIEW_V9_PACKET
+    assert all(Path(path).suffix.lower() in {".md", ".json"} for path in v9_paths)
+    source_or_test_code = {
+        path
+        for path in audit_recovery.SOURCE_TEST_BOUND_PATHS
+        if path.startswith("tests/") or Path(path).suffix.lower() in {".py", ".sh"}
+    }
+    assert not v9_paths & source_or_test_code
+    assert audit_recovery._validate_v9_compact_evidence_summary() == (
+        audit_recovery._expected_v9_compact_evidence_summary()
     )
-    monkeypatch.setattr(audit_recovery, "PRO_REVIEW_V9_PACKET", proxied_v9_packet)
+    live_json = audit_recovery._json
+    with monkeypatch.context() as summary_patch:
+        def tampered_summary(path: Path) -> dict:
+            value = live_json(path)
+            if path == audit_recovery.REPO_ROOT / audit_recovery.V9_COMPACT_EVIDENCE_SUMMARY:
+                value["code_freeze"]["commit"] = "0" * 40
+            return value
+
+        summary_patch.setattr(audit_recovery, "_json", tampered_summary)
+        with pytest.raises(
+            audit_recovery.AuditRecoveryError,
+            match="compact evidence summary differs",
+        ):
+            audit_recovery._validate_v9_compact_evidence_summary()
     v9_value = audit_recovery._expected_v9_pro_review_input()
-    v7_payload = json.loads(
-        (
-            audit_recovery.REPO_ROOT
-            / audit_recovery.FINAL_V7_PRO_REVIEW_DIRECTORY
-            / "request_payload.json"
-        ).read_text(encoding="utf-8")
-    )
     v9_limits = audit_recovery._validate_v9_packet_limits(
-        v7_payload["instructions"], v9_value
+        "x" * 4_000, v9_value
     )
-    assert v9_limits["actual_input_characters"] <= 2_200_000
-    assert v9_limits["estimated_input_tokens_conservative"] <= 630_000
-    assert v9_limits["estimated_budget_reserve_usd"] <= 75.0
+    assert v9_limits["actual_input_characters"] <= 60_000
+    assert v9_limits["estimated_input_tokens_conservative"] <= 20_000
+    assert v9_limits["estimated_budget_reserve_usd"] <= 1.25
 
 
 def test_v7_cumulative_narratives_share_only_current_git_lineage() -> None:
@@ -2020,7 +2018,7 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
         "run_qualification_pipe_logged.sh"
     )
     packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V9_PACKET}
-    assert {controller_relative, wrapper_relative} <= packet_paths
+    assert not {controller_relative, wrapper_relative} & packet_paths
     assert {controller_relative, wrapper_relative} <= set(
         audit_recovery.SOURCE_TEST_BOUND_PATHS
     )
@@ -2028,14 +2026,14 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q13-${FREEZE:0:7}"' in controller
+    assert 'ROOT="/root/q14-${FREEZE:0:7}"' in controller
     assert "EXPECTED_TEST_COUNT=${4:-231}" in controller
     assert '[[ "$EXPECTED_TEST_COUNT" == 231 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q13-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
-    assert '[[ "$LOG_ROOT" == /root/q13-* ]]' in wrapper
+    assert len(os.fsencode("/root/q14-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q14-* ]]' in wrapper
     assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
@@ -2058,10 +2056,17 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
 
 
 def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
-    assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == (
+    assert audit_recovery.PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD == (
         recovery_bundle_verifier.COMPLETED_REVIEW_COST_CEILING_USD
     )
     assert audit_recovery.PRO_REVIEW_BUDGET_AUTHORIZATION_USD == 75.0
+    assert audit_recovery.PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD == 1.25
+    assert audit_recovery.PRO_REVIEW_V9_INPUT_RATE_USD_PER_MILLION == 5.0
+    assert audit_recovery.PRO_REVIEW_V9_CACHE_WRITE_RATE_USD_PER_MILLION == 6.25
+    assert audit_recovery.PRO_REVIEW_V9_OUTPUT_RATE_USD_PER_MILLION == 30.0
+    assert audit_recovery.PRO_REVIEW_V9_MAX_INPUT_CHARACTERS == 60_000
+    assert audit_recovery.PRO_REVIEW_V9_MAX_INPUT_TOKENS == 20_000
+    assert audit_recovery.PRO_REVIEW_V9_MAX_OUTPUT_TOKENS == 6_000
     assert audit_recovery.PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION == 10.0
     assert audit_recovery.PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION == 12.5
     assert audit_recovery.PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION == 45.0
@@ -3048,6 +3053,7 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
 ) -> None:
     bound_paths = {
         "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+        "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
         "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
         "experiments/consciousness_sae_target_blind_calibration/"
@@ -3120,6 +3126,7 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
                 audit_recovery.V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
                 audit_recovery.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
                 audit_recovery.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+                audit_recovery.V9_COMPACT_EVIDENCE_SUMMARY,
             }
         )
     rows = [
@@ -3132,9 +3139,9 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
             "provider_status": "completed",
             "provider_approval_claimed": False,
             "provider_ready_to_freeze_verdict": True,
-            "source_and_tests_reviewed_by_provider": True,
+            "source_and_tests_reviewed_by_provider": False,
             "reviewed_packet_was_pre_fix": False,
-            "final_source_reviewed_by_provider": True,
+            "final_source_reviewed_by_provider": False,
             "provider_reviewed_final_bytes_unchanged": True,
         },
         "execution": {"attempt_id": "attempt", "command_sha256": "b" * 64},
@@ -3245,9 +3252,9 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["provider_review_source_and_tests_seen"] is True
+    assert receipt["provider_review_source_and_tests_seen"] is False
     assert receipt["provider_reviewed_packet_was_pre_fix"] is False
-    assert receipt["provider_reviewed_final_source"] is True
+    assert receipt["provider_reviewed_final_source"] is False
     assert receipt["bootstrap_import_roots"] == {"status": "bound"}
     assert receipt["bootstrap_execute_entry_phase"] == bootstrap_entry
     assert receipt["bootstrap_prepublication_phase"] == bootstrap_prepublication

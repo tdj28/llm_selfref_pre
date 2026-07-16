@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed hash-and-exec gate for the generic F13 recovery controller.
+"""Fail-closed hash-and-exec gate for the generic F14 recovery controller.
 
 This program is intentionally delivered to ``/usr/bin/python3.11 -B -`` on
 standard input by the local supervisor.  The supervisor separately binds the
@@ -26,7 +26,7 @@ SCHEMA_VERSION = 1
 PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.1.0"
 EXPECTED_CONTROLLER_PATH = Path("/root/final_recovery_controller_f11.sh")
 EXPECTED_CONTROLLER_SHA256 = (
-    "709117f71213073f0c2aa65871f4901594b6ce225968256d64dc8ca0ea5705e8"
+    "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006"
 )
 REJECTED_CONTROLLER_SHA256 = frozenset(
     {
@@ -388,7 +388,7 @@ def _write_receipt_exclusive(path: Path, core: dict[str, Any]) -> tuple[str, byt
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Bind and exec the exact reviewed generic F13 recovery controller",
+        description="Bind and exec the exact reviewed generic F14 recovery controller",
         allow_abbrev=False,
     )
     parser.add_argument("--code-freeze", required=True)

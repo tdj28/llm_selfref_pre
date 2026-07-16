@@ -9,9 +9,10 @@ may have been recomputed before the late artifact-device guard, but no compact
 metric was published, logged, inspected, or used to adapt the design. The exact
 owned pod was deleted and unrelated account inventory was unchanged. The F12
 authority is permanently rejected. This plan is not executable until fresh
-C13 local and disposable-B200 qualification receipts bind the repaired bytes,
-one cumulative v9 exact-byte review evaluates the immutable positive v8 review
-plus B22, and the C13<=E13<=F13 lineage passes every gate. This is not a new
+C14 local and disposable-B200 qualification receipts bind the repaired bytes,
+one compact v9 director-level review evaluates the high-level recovery design
+after B22, and the C14<=E14<=F14 lineage passes every gate. The provider does
+not review or certify exact source/test bytes; those remain mechanical gates. This is not a new
 model transaction and cannot change the r3 estimand, prompts, directions,
 doses, layers, raw inputs, thresholds, metrics, or claim policy.
 
@@ -926,11 +927,14 @@ not qualifying evidence. `audit.py`, the r3 machine plan, raw data, prompts,
 directions, doses, layers, thresholds, metrics, and claim gates remain
 unchanged.
 
-C13 freezes the corrected source, tests, B22 closure, and v9 future paths. E13
-adds only fresh local and distinct disposable-B200 qualification snapshots.
-One cumulative `gpt-5.6-sol` review receives the complete current packet, the
-substantive F12 v8 review/adjudication, and B22 evidence. It must explicitly
-disposition B17--B22 and I10--I14; B23 or later stops launch. F13 may add only
+C14 freezes the corrected source, tests, B22 closure, compact review brief, and
+v9 future paths. E14 adds only fresh local and distinct disposable-B200
+qualification snapshots plus their mechanically derived compact summary. One
+director-level `gpt-5.6-sol` review receives the compact brief, scientific-
+equivalence appendix, v8 adjudication summary, B22 summary, invocation contract,
+and compact qualification summary. It does not receive source or test files and
+must not be cited as certifying them. It must explicitly
+disposition B17--B22 and I10--I14; B23 or later stops launch. F14 may add only
 the seven v9 provider-output/adjudication files. No further repair/review loop
 is authorized: once these frozen gates are green, launch follows immediately.
 
