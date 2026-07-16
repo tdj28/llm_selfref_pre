@@ -163,6 +163,15 @@ data/consciousness_sae_target_blind_calibration/*
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/**
 
+# Signed residual-RMS dose scan. Only the dated prospective machine plan and
+# compact audited metadata are Git payloads. The complete residual arcs remain
+# in the study-specific RunPod network-volume namespace.
+!data/consciousness_sae_signed_dose_scan/
+data/consciousness_sae_signed_dose_scan/*
+!data/consciousness_sae_signed_dose_scan/README.md
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/**
+
 # Defense in depth: these formats are never Git payloads for this study, even
 # if someone accidentally writes them under docs/, experiments/, or tests/.
 **/consciousness_sae_changepoint/**/*.safetensors
@@ -244,6 +253,26 @@ data/consciousness_sae_target_blind_calibration/*
 **/consciousness_sae_target_blind_calibration/**/*.tar.*
 **/consciousness_sae_target_blind_calibration/**/*.zip
 **/consciousness_sae_target_blind_calibration/**/*.log
+
+# Signed-dose-scan raw observations and model artifacts are external-only.
+**/consciousness_sae_signed_dose_scan/**/*.safetensors
+**/consciousness_sae_signed_dose_scan/**/*.pt
+**/consciousness_sae_signed_dose_scan/**/*.pth
+**/consciousness_sae_signed_dose_scan/**/*.ckpt
+**/consciousness_sae_signed_dose_scan/**/*.bin
+**/consciousness_sae_signed_dose_scan/**/*.arrow
+**/consciousness_sae_signed_dose_scan/**/*.parquet
+**/consciousness_sae_signed_dose_scan/**/*.npy
+**/consciousness_sae_signed_dose_scan/**/*.npz
+**/consciousness_sae_signed_dose_scan/**/*.pkl
+**/consciousness_sae_signed_dose_scan/**/*.pickle
+**/consciousness_sae_signed_dose_scan/**/*.jsonl
+**/consciousness_sae_signed_dose_scan/**/*.zst
+**/consciousness_sae_signed_dose_scan/**/*.gz
+**/consciousness_sae_signed_dose_scan/**/*.tar
+**/consciousness_sae_signed_dose_scan/**/*.tar.*
+**/consciousness_sae_signed_dose_scan/**/*.zip
+**/consciousness_sae_signed_dose_scan/**/*.log
 out/
 *.jsonl
 !data/consciousness_readout_validation/pilot_v1_plan_20260714_r15/*.jsonl
@@ -251,6 +280,7 @@ out/
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/*.jsonl
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/*.jsonl
 !data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/*.jsonl
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/*.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_balanced_80_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/*.jsonl

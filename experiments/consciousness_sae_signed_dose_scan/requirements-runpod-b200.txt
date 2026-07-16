@@ -1,0 +1,8 @@
+# Torch 2.8.0.dev20250319+cu128 is supplied by the immutable RunPod image.
+accelerate==1.12.0
+huggingface-hub==0.36.0
+numpy==2.2.6
+safetensors==0.8.0
+scipy==1.15.3
+tokenizers==0.22.2
+transformers==4.57.6
