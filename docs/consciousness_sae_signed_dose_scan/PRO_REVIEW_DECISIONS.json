@@ -1,0 +1,49 @@
+{
+  "decisions": [
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "The frozen brief defines hook timing, requested and realized dose, branch/central/common-mode decomposition, and the 43,200-row fixed-panel primary census.",
+      "finding_id": "B01"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "The protocol separates transaction invalidity, anchor invalidity, retained diagnostic-dose failures, valid nonlinearity, and J-only failure.",
+      "finding_id": "B02"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "The frozen schedule prohibits outcome-driven stopping and binds one authorization to one attempt, with fresh authorization and full disclosure required for any permitted retry.",
+      "finding_id": "B03"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "The intended use is limited to exploratory intervention mechanics and hypothesis generation; no preferred or safe dose may be selected.",
+      "finding_id": "I01"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "Secondary J comparisons are frozen to identity and exactly five deterministic fresh random-J controls at 3 percent.",
+      "finding_id": "I02"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "The prompt-direction-dose panel is a complete fixed census; population intervals and independent-sample claims are prohibited.",
+      "finding_id": "I03"
+    },
+    {
+      "blocks_execution": false,
+      "disposition": "accept",
+      "evidence": "Generic directions use fresh seed-committed PCG64 Gaussian float32 draws, unit-RMS normalization, fixed signs, and no outcome-dependent selection or reorientation.",
+      "finding_id": "I04"
+    }
+  ],
+  "provider_terminal_verdict": "READY TO FREEZE",
+  "review_response_id": "resp_0771e3684280ebf7016a595c85174c8198ae40e01f160772f0",
+  "schema_version": 1
+}
