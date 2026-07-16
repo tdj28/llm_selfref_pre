@@ -1,0 +1,125 @@
+{
+  "artifact_type": "consciousness_sae_target_blind_calibration_v2_postrun_result_index",
+  "attestation_incident": {
+    "impact": "The controller, publication, scientific bundle, offline verification, and exact-pod termination passed. No scientific rerun is warranted.",
+    "issue": "The gate emitted the same two rejected B20/B22 authorization hashes in sorted order while the redundant local validator expected them in reverse insertion order.",
+    "status": "post_retrieval_validator_array_order_mismatch",
+    "supervisor_exit_code": 100
+  },
+  "frozen_commits": {
+    "c15_code_freeze": "af0d8b94921f0fb8809f06aacbf8546fb726cb54",
+    "e15_qualification_freeze": "386d68d3fc6bf0f89e0d6ee5f6b9fc04529c322a",
+    "f15_review_freeze": "3a9a54dc4ff7ec60265a86e7d340e0b6c0b39749"
+  },
+  "recovery_attempt_id": "calv2-r3-audit-recovery-3a9a54d-20260716T202903Z",
+  "remote_storage": {
+    "compact_attempt_root": "/workspace/csae/calv2-r3-audit-recovery-3a9a54d-20260716T202903Z",
+    "network_volume_id": "bv9gb9j32y",
+    "raw_transaction_root": "/workspace/consciousness_sae_target_blind_calibration/consciousness_sae_target_blind_calibration_v2/raw/calv2-r3-1a16572-20260715T002344Z"
+  },
+  "run_id": "calv2-r3-1a16572-20260715T002344Z",
+  "schema_version": 1,
+  "scientific_result": {
+    "claim_eligibility": {
+      "consciousness_semantic_or_target_feature_claim": "not_permitted",
+      "descriptive_layer_50_j_readout_beyond_random": "eligible",
+      "j_projection": "eligible",
+      "later_actual_state_sae_collection": "eligible_for_a_separately_frozen_experiment",
+      "layers_51_through_78": "descriptive_only_cannot_rescue_primary",
+      "learned_j_added_value_over_identity": "not_eligible"
+    },
+    "delivery": {
+      "diagnostic_1_percent_fidelity_failures": 24,
+      "gated_2_to_8_percent_failures": 0,
+      "gated_2_to_8_percent_rows": 96,
+      "hard_safety_failures_all_120_rows": 0,
+      "primary_3_percent_median_requested_realized_cosine": 0.9986431002616882,
+      "primary_3_percent_median_requested_realized_relative_rmse": 0.05219348147511482
+    },
+    "linearity_2_3_4_percent": {
+      "actual_final": {
+        "cosine_range": [
+          0.7683185935020447,
+          0.8762583136558533
+        ],
+        "passed_rows": 0,
+        "slope_discrepancy_range": [
+          0.5111762285232544,
+          0.7137824892997742
+        ],
+        "status": "nonlinear_observed",
+        "total_rows": 24
+      },
+      "j_of_realized": {
+        "passed_rows": 24,
+        "total_rows": 24,
+        "worst_cosine": 0.9921299815177917,
+        "worst_slope_discrepancy": 0.12666484713554382
+      },
+      "realized_source": {
+        "passed_rows": 24,
+        "total_rows": 24,
+        "worst_cosine": 0.9948871731758118,
+        "worst_slope_discrepancy": 0.1011369377374649
+      }
+    },
+    "primary_layer_50_at_3_percent": {
+      "fixed_token_logit_delta_pearson": {
+        "real_j": [
+          0.33731858556469285,
+          0.31335489203532535,
+          0.35673821220795315
+        ],
+        "real_j_minus_best_of_five_random": [
+          0.29280005694211775,
+          0.2608530312233294,
+          0.3182337945327163
+        ],
+        "real_j_minus_identity": [
+          0.03880322600404421,
+          0.026900015150507293,
+          0.05086465676625569
+        ],
+        "status": "all_components_pass"
+      },
+      "interval_order": [
+        "estimate",
+        "lcb_95",
+        "ucb_95"
+      ],
+      "interval_type": "fixed_panel_prompt_resampling_stability_interval",
+      "residual_delta_cosine": {
+        "real_j": [
+          0.3531387560069561,
+          0.33434824521342915,
+          0.3686579229931036
+        ],
+        "real_j_minus_best_of_five_random": [
+          0.3381795556633733,
+          0.31762522164111334,
+          0.3536882027391888
+        ],
+        "real_j_minus_identity": [
+          0.003988339255253474,
+          -0.0048292217155297594,
+          0.011579056705037704
+        ],
+        "status": "identity_margin_fails"
+      }
+    },
+    "scope_warning": "This target-blind generic-vector calibration used zero target SAE feature vectors and zero target or paper prompts. It is not an SAE, consciousness, semantic, or behavioral result."
+  },
+  "source_of_truth": {
+    "audit_file_sha256": "88e96ecb554aa18acbd838649a49034ae4f532898255cdc27220e25ed662f596",
+    "audit_receipt_sha256": "1354a9402d8931b43b7a7816329fe17c86cf96da425458c605d8169076fa1d32",
+    "offline_verification_receipt_sha256": "fc1619b095734a5707093ea53f54c526688a3fff6c8b82ced0c88c9a4a708e17",
+    "publication_receipt_sha256": "c31f8db0d7e37cdbdf9c1610bd0cc3609446f3dce0d37b13704082f254814216",
+    "raw_file_count": 35,
+    "raw_stored_bytes": 323365550,
+    "summary_file_sha256": "053d4585cc139f8a0ec9bc93e6eeaaa105cda822b3a6144292d5038328712f93",
+    "summary_receipt_sha256": "8be1f734a26e8ece190ed9c24f996212e515683ebc8d2226f59cb3369a71045f",
+    "termination_receipt_sha256": "4ff7144b98f9bdbb7383e90be99212e87c2e2e9ec39da2d8d217a7f9ed99a661"
+  },
+  "status": "verified_scientific_success_with_post_retrieval_attestation_ordering_incident",
+  "study_id": "consciousness_sae_target_blind_calibration_v2"
+}
