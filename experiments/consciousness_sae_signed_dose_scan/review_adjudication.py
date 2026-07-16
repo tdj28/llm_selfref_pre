@@ -32,6 +32,7 @@ REVIEW_PACKET = (
     ),
 )
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
+EXPECTED_REVIEW_SCOPE = "director_level_plan_review"
 
 
 class ReviewAdjudicationError(RuntimeError):
@@ -112,7 +113,7 @@ def build(
         or manifest.get("official_latest_model") != "gpt-5.6-sol"
         or manifest.get("response_model") != "gpt-5.6-sol"
         or manifest.get("response_id") != response.get("id")
-        or manifest.get("review_scope") != "advisory_plan_review_only"
+        or manifest.get("review_scope") != EXPECTED_REVIEW_SCOPE
         or COMMIT_RE.fullmatch(reviewed_commit) is None
     ):
         raise ReviewAdjudicationError("provider review identity/completion differs")

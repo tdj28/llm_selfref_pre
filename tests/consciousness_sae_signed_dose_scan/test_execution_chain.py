@@ -157,6 +157,13 @@ def test_review_verdict_must_be_final_and_unopposed() -> None:
         )
 
 
+def test_review_scope_matches_the_frozen_director_review() -> None:
+    assert (
+        review_adjudication.EXPECTED_REVIEW_SCOPE
+        == "director_level_plan_review"
+    )
+
+
 def test_runner_binds_one_run_id_per_authorization(tmp_path: Path) -> None:
     path = tmp_path / "authorization.json"
     _write_canonical(path, {"authorized_run_id": "signed-scan-run-001"})
