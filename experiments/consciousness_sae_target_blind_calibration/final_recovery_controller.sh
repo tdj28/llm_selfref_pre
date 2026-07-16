@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CODE_FREEZE=${1:?missing C14 code-freeze commit}
-REVIEWED_PACKET_COMMIT=${2:?missing E14 reviewed-packet commit}
-FINAL_FREEZE=${3:?missing F14 final-freeze commit}
+CODE_FREEZE=${1:?missing C15 code-freeze commit}
+REVIEWED_PACKET_COMMIT=${2:?missing E15 reviewed-packet commit}
+FINAL_FREEZE=${3:?missing F15 final-freeze commit}
 POD_ID=${4:?missing receipt-owned pod id}
 EXPECTED_CREATED_AT=${5:?missing provider-created UTC}
 ATTEMPT_ID=${6:?missing attempt id}
@@ -58,7 +58,8 @@ CANARY_OUTPUT="$ATTEMPT/landlock_canary/output"
 MANIFEST="$ATTEMPT/bootstrap/APPROVED_IMPORT_ROOTS.json"
 AUTH="$ATTEMPT/RECOVERY_AUTHORIZATION.json"
 PLAN_REL=data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3
-V9_INPUT_REL=docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_inputs
+V10_INPUT_REL=docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs
+V9_CONDITIONAL_ADJUDICATION_REL=docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json
 
 stage() {
   printf '%s %s\n' "$1" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -92,28 +93,63 @@ git -C "$SOURCE" merge-base --is-ancestor "$CODE_FREEZE" "$REVIEWED_PACKET_COMMI
 git -C "$SOURCE" merge-base --is-ancestor "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE"
 git -C "$SOURCE" diff --quiet "$CODE_FREEZE" "$FINAL_FREEZE" -- experiments tests
 
-V9_EXPECTED_POSTREVIEW_PATHS=(
-  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json
-  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.md
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/request_payload.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/response.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review.md
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review_manifest.json
-  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_completed/review_request.md
+V10_EXPECTED_PREREVIEW_PATHS=(
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/LOCAL_TEST_RECEIPT.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/TARGET_HOST_TEST_RECEIPT.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/TARGET_QUALIFICATION_OWNERSHIP.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/V10_EVIDENCE_SUMMARY.json
 )
-mapfile -t V9_OBSERVED_POSTREVIEW_PATHS < <(
+V10_EXPECTED_POSTREVIEW_PATHS=(
+  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.json
+  docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.md
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_completed/request_payload.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_completed/response.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_completed/review.md
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_completed/review_manifest.json
+  docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_completed/review_request.md
+)
+mapfile -t V10_OBSERVED_PREREVIEW_PATHS < <(
+  git -C "$SOURCE" diff --name-only "$CODE_FREEZE" "$REVIEWED_PACKET_COMMIT" |
+    LC_ALL=C sort
+)
+mapfile -t V10_EXPECTED_PREREVIEW_PATHS < <(
+  printf '%s\n' "${V10_EXPECTED_PREREVIEW_PATHS[@]}" | LC_ALL=C sort
+)
+((${#V10_OBSERVED_PREREVIEW_PATHS[@]} == ${#V10_EXPECTED_PREREVIEW_PATHS[@]}))
+for index in "${!V10_EXPECTED_PREREVIEW_PATHS[@]}"; do
+  test "${V10_OBSERVED_PREREVIEW_PATHS[$index]}" = "${V10_EXPECTED_PREREVIEW_PATHS[$index]}"
+  test -f "$SOURCE/${V10_EXPECTED_PREREVIEW_PATHS[$index]}"
+done
+mapfile -t V10_OBSERVED_POSTREVIEW_PATHS < <(
   git -C "$SOURCE" diff --name-only "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE" |
     LC_ALL=C sort
 )
-mapfile -t V9_EXPECTED_POSTREVIEW_PATHS < <(
-  printf '%s\n' "${V9_EXPECTED_POSTREVIEW_PATHS[@]}" | LC_ALL=C sort
+mapfile -t V10_EXPECTED_POSTREVIEW_PATHS < <(
+  printf '%s\n' "${V10_EXPECTED_POSTREVIEW_PATHS[@]}" | LC_ALL=C sort
 )
-((${#V9_OBSERVED_POSTREVIEW_PATHS[@]} == ${#V9_EXPECTED_POSTREVIEW_PATHS[@]}))
-for index in "${!V9_EXPECTED_POSTREVIEW_PATHS[@]}"; do
-  test "${V9_OBSERVED_POSTREVIEW_PATHS[$index]}" = "${V9_EXPECTED_POSTREVIEW_PATHS[$index]}"
-  test -f "$SOURCE/${V9_EXPECTED_POSTREVIEW_PATHS[$index]}"
+((${#V10_OBSERVED_POSTREVIEW_PATHS[@]} == ${#V10_EXPECTED_POSTREVIEW_PATHS[@]}))
+for index in "${!V10_EXPECTED_POSTREVIEW_PATHS[@]}"; do
+  test "${V10_OBSERVED_POSTREVIEW_PATHS[$index]}" = "${V10_EXPECTED_POSTREVIEW_PATHS[$index]}"
+  test -f "$SOURCE/${V10_EXPECTED_POSTREVIEW_PATHS[$index]}"
 done
-test -d "$SOURCE/$V9_INPUT_REL"
+test -d "$SOURCE/$V10_INPUT_REL"
+test -f "$SOURCE/$V9_CONDITIONAL_ADJUDICATION_REL"
+"$PYTHON" -B - "$SOURCE/$V9_CONDITIONAL_ADJUDICATION_REL" <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+raw = path.read_bytes()
+assert hashlib.sha256(raw).hexdigest() == "0d3e928d3d4221917e43dcce29fd51ac028d46c9035a4b339dcd378f79225643"
+value = json.loads(raw)
+assert value["artifact_type"] == "completed_conditional_provider_review_v9_adjudication"
+assert value["final_decision"] == "NOT_READY_TO_EXECUTE"
+assert value["receipt_sha256"] == "fb4f4c2b88580c2e57c3a477de3ba43b527d382e28e97cb1b06dbc323430ba6a"
+PY
 test -z "$(git -C "$SOURCE" status --porcelain=v1 --untracked-files=all)"
 stage SOURCE_CHECKOUT_COMPLETE
 
@@ -242,11 +278,11 @@ install -D -m 600 "$INPUT_ROOT/superseded/TERMINATION_AUDIT.json" "$SUPERSEDED/T
 install -D -m 600 "$INPUT_ROOT/superseded/POSTDELETE_INVENTORY.json" "$SUPERSEDED/POSTDELETE_INVENTORY.json"
 install -D -m 600 "$INPUT_ROOT/superseded/frozen_lifecycle/TERMINATION.json" "$SUPERSEDED/frozen_lifecycle/TERMINATION.json"
 
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/LOCAL_TEST_RECEIPT.json" "$TESTS/LOCAL_TEST_RECEIPT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_HOST_TEST_RECEIPT.json" "$TESTS/TARGET_HOST_TEST_RECEIPT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_OWNERSHIP.json" "$TESTS/TARGET_QUALIFICATION_OWNERSHIP.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
-install -D -m 600 "$SOURCE/$V9_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+install -D -m 600 "$SOURCE/$V10_INPUT_REL/LOCAL_TEST_RECEIPT.json" "$TESTS/LOCAL_TEST_RECEIPT.json"
+install -D -m 600 "$SOURCE/$V10_INPUT_REL/TARGET_HOST_TEST_RECEIPT.json" "$TESTS/TARGET_HOST_TEST_RECEIPT.json"
+install -D -m 600 "$SOURCE/$V10_INPUT_REL/TARGET_QUALIFICATION_OWNERSHIP.json" "$TESTS/TARGET_QUALIFICATION_OWNERSHIP.json"
+install -D -m 600 "$SOURCE/$V10_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+install -D -m 600 "$SOURCE/$V10_INPUT_REL/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json" "$TESTS/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
 stage HISTORICAL_AND_TEST_EVIDENCE_STAGING_COMPLETE
 
 stage FRESH_GUEST_CACHE_PREFLIGHT_START

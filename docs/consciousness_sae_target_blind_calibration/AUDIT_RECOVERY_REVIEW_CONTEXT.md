@@ -422,3 +422,32 @@ I10--I14; any B23-or-later blocker stops launch. The lineage is
 `C14 <= E14 <= F14`; source/test bytes cannot change after C14 and provider
 packet bytes cannot change after E14. F14 adds only seven v9 provider and
 adjudication outputs. No scientific result is claimed by this packet.
+
+## V10 cumulative review context
+
+The completed V9 review and its structured conditional adjudication are
+immutable evidence, not current authority. V9 returned `READY AFTER SPECIFIED
+FIXES` and identified B23: wording in the compact claim boundary implied a
+broader confirmatory role for released J maps than the frozen estimand permits.
+The primary J comparison is solely at layer 50; layers 51--78 are descriptive.
+The V9 response also did not express all required historical dispositions as
+individual level-two headings, so the frozen parser correctly refused to turn
+the conditional response into authority. The V9 adjudication remains
+`NOT_READY_TO_EXECUTE` and the prior controller hash is rejected.
+
+V10 makes only that prose/publication-boundary correction. Its seven-artifact
+director packet includes the corrected brief, scientific-equivalence summary,
+invocation contract, compact qualification summary, the complete V9 review in
+two contiguous byte-complete parts, and the byte-identical V9 adjudication. It
+contains no raw data, model outputs, source, tests, full receipts, or logs. The
+provider does not certify implementation or mechanical evidence.
+
+Fresh C15 local and disposable-B200 receipts must bind the exact current
+source/test inventory and the B22 missing/wrong/correct real-guard regression.
+E15 adds only those five snapshots and their derived compact summary. The V10
+review must disposition B17--B23 and I10--I15 in separate level-two headings;
+any B24-or-later blocker stops launch. F15 adds only the seven V10 provider and
+adjudication outputs. The final lineage is `C15 <= E15 <= F15`, with immutable
+source/test bytes after C15 and immutable V10 packet bytes after E15. V9,
+B20, and B22 authority cannot be reused. No scientific result is claimed by
+this packet and no additional review loop is authorized.

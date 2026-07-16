@@ -16,15 +16,16 @@ from typing import Any
 
 
 SCHEMA_VERSION = 1
-PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.1.0"
-EXPECTED_CONTROLLER_PATH = "/root/final_recovery_controller_f11.sh"
+PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.2.0"
+EXPECTED_CONTROLLER_PATH = "/root/final_recovery_controller_f15.sh"
 EXPECTED_CONTROLLER_SHA256 = (
-    "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006"
+    "18b9de87e550c85863629be842c97f863b87ed1fa87cc1d3cdaed59becbe3704"
 )
 REJECTED_CONTROLLER_SHA256 = [
     "1a1baa67fa9c12b8af309581ff85d1e200af907b80cd0b8185eb8f9a68cd08cc",
     "6d4501c9fc46a72d58dbe3832bb3fd0f17ad056f4955bb8809ccb5b6cd67371c",
     "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
+    "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006",
 ]
 REJECTED_POD_IDS = ["9n5f5a82p1gw1e", "eeo1skjkwjqot5", "j7xr357tdlpq3f"]
 REJECTED_ATTEMPT_IDS = [

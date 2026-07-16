@@ -1,0 +1,113 @@
+{
+  "artifact_type": "v10_compact_qualification_evidence_summary",
+  "code_freeze": {
+    "commit": "228ece966675b7e0a19ccc84a5b00c5b951be4ee",
+    "source_test_inventory_sha256": "6c25f8758a6fe90f00f9bf2b048f5774e2f0c28e3765a1eae4fb43d313803f68"
+  },
+  "qualification": {
+    "bootstrap_status": "pass_hash_bound_confined_bootstrap",
+    "closure_file_count": 36,
+    "closure_inventory_sha256": "6c25f8758a6fe90f00f9bf2b048f5774e2f0c28e3765a1eae4fb43d313803f68",
+    "closure_scope": "source_test_qualification",
+    "cublas_real_guard_regression": {
+      "cases": {
+        "exact_:4096:8": "accepted",
+        "missing": "rejected",
+        "wrong": "rejected"
+      },
+      "source_test_inventory_sha256": "6c25f8758a6fe90f00f9bf2b048f5774e2f0c28e3765a1eae4fb43d313803f68",
+      "status": "passed_on_disposable_b200",
+      "target_test_receipt_sha256": "74b5b2d7e3f2a8076a3361ca3e6a479ca4e9b72afabae5d22e484e7e55eb444b",
+      "test_id": "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py::test_target_b200_artifact_device_determinism_contract"
+    },
+    "cublas_workspace_config": ":4096:8",
+    "cuda_status": "pass_target_free_landlock_cuda_preflight",
+    "gpu": {
+      "device_capability": [
+        10,
+        0
+      ],
+      "device_count": 1,
+      "device_name": "NVIDIA B200"
+    },
+    "landlock": {
+      "canary_status": "pass_protected_unchanged_output_empty",
+      "descriptor_status": "pass_no_escaping_writable_or_protected_descriptors",
+      "mapping_status": "pass_no_shared_file_backed_mappings",
+      "no_new_privs": true,
+      "observed_abi": 4,
+      "required_abi": 4,
+      "status": "pass_landlock_enforced"
+    },
+    "ownership_status": "owned_running_isolated",
+    "provider": {
+      "data_center_id": "US-CA-2",
+      "pod_id": "w90yxfghxxqyxn",
+      "volume_id": "bv9gb9j32y"
+    },
+    "zero_target_activity": {
+      "external_or_prior_outcome_inputs": [],
+      "model_forward_count": 0,
+      "target_feature_vector_count": 0,
+      "target_prompt_render_count": 0,
+      "torch_module_call_count": 0
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "mechanical_gate": "retained_full_receipts_must_validate_before_authorization",
+    "provider_did_not_review": [
+      "exact source or test bytes",
+      "full qualification receipts or logs",
+      "raw data or scientific results"
+    ],
+    "provider_review_scope": "director_level_plan_review"
+  },
+  "source_receipts": [
+    {
+      "file_sha256": "19bc55ea249b2d9cf84021aec93e7088161987153ccf619cb50c4905c5326a24",
+      "path": "LOCAL_TEST_RECEIPT.json",
+      "receipt_sha256": "16c2d1e1f0a8d41a8a40ff84fb7ac347ae39ddda27129c4197c57df8ba23a1e2"
+    },
+    {
+      "file_sha256": "7283d9a0fa8a83cf2c6d71bed37a6c432fde64b35f2840d4544c1785112f83f4",
+      "path": "TARGET_HOST_TEST_RECEIPT.json",
+      "receipt_sha256": "74b5b2d7e3f2a8076a3361ca3e6a479ca4e9b72afabae5d22e484e7e55eb444b"
+    },
+    {
+      "file_sha256": "b27931f050fb432fda2f7c73120129e2d96d262487e22dcc37e83293328eef97",
+      "path": "TARGET_QUALIFICATION_OWNERSHIP.json",
+      "receipt_sha256": "1f51dbcb1e004421b52cd866cb73fbcafaa015663e5e1f8588592b2a7c4f8fa9"
+    },
+    {
+      "file_sha256": "9d03c0edd9282a6ba9a7c303bd387890b53411160c43004e8d8b852a5c0eea01",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json",
+      "receipt_sha256": "6936376b3ade7f06dfe762fd6751a0ec435cfbb14ea70f8feeeec462c9430c51"
+    },
+    {
+      "file_sha256": "9721d0cbaed28bdadc9666daa5fedc13410b1ba171d501f7b4a854d2dd05938a",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json",
+      "receipt_sha256": "8a75f797bb2dd872640b879d34dba28250d7d153afc2517752aff88acb9d1ae5"
+    }
+  ],
+  "tests": {
+    "local": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "19bc55ea249b2d9cf84021aec93e7088161987153ccf619cb50c4905c5326a24",
+      "passed_count": 217,
+      "receipt_sha256": "16c2d1e1f0a8d41a8a40ff84fb7ac347ae39ddda27129c4197c57df8ba23a1e2",
+      "skipped_count": 14,
+      "status": "pass_exact_code_freeze_tests"
+    },
+    "target_host": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "7283d9a0fa8a83cf2c6d71bed37a6c432fde64b35f2840d4544c1785112f83f4",
+      "passed_count": 231,
+      "receipt_sha256": "74b5b2d7e3f2a8076a3361ca3e6a479ca4e9b72afabae5d22e484e7e55eb444b",
+      "skipped_count": 0,
+      "status": "pass_exact_code_freeze_tests"
+    }
+  }
+}

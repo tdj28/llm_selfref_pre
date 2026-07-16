@@ -91,6 +91,9 @@ ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
 ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
 ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
 COMPLETED_REVIEW_COST_CEILING_USD = 1.25
+PRO_REVIEW_V10_INPUT_RATE_USD_PER_MILLION = 5.0
+PRO_REVIEW_V10_CACHE_WRITE_RATE_USD_PER_MILLION = 6.25
+PRO_REVIEW_V10_OUTPUT_RATE_USD_PER_MILLION = 30.0
 ORIGINAL_RECEIPTS = {
     "ownership": "2aaa6e9e665f511ccfe363eee9deb5496c36bc8b2ae2b7ac67620a58abe914ca",
     "guest": "226e939db167bc3471c4b559aaa2f454ea3fa0cfa51a0f73d378ced11fe33b26",
@@ -1124,6 +1127,72 @@ FINAL_V9_PRO_REVIEW_OUTPUT_PATHS = (
     f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json",
     f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md",
 )
+HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256 = {
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON: (
+        "0d3e928d3d4221917e43dcce29fd51ac028d46c9035a4b339dcd378f79225643"
+    ),
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "fa661f0f3b78b743f645c3c1e2e297c8908daec24d95a531ae0e2647134161c0"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "e446312861edf4d6b4042bd07703d39c475b358ad79eb9890e06eea551d08be4"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json": (
+        "3dbd5aefb65101bfa402a1d1e6249db163114fc6ea2bdf74044e3cc93fd8dead"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md": (
+        "886cf769e2c87f0831a88d9ea4ec5ed6b70d8d0e9f605675c67366ed7e44968f"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "af09296394727cd66cdfe208333060e01934327ff91c59b228674a452af20bd2"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "8ae6c63d0eb7c5a71bdaeafb8fae47a6350b92cf5a73990e7763b32cf21ec4f5"
+    ),
+}
+V10_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v10_inputs"
+)
+V10_LOCAL_TEST_RECEIPT_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+)
+V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+V10_COMPACT_EVIDENCE_SUMMARY = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V10_EVIDENCE_SUMMARY.json"
+)
+FINAL_V10_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v10_completed"
+)
+FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.json"
+)
+FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.md"
+)
+FINAL_V10_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
 FINAL_RECOVERY_WRAPPER_PATHS = (
     "experiments/consciousness_sae_target_blind_calibration/"
     "final_recovery_controller.sh",
@@ -1177,6 +1246,7 @@ RECOVERY_DOCUMENT_PATHS = (
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
     "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
     "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_target_blind_calibration/V10_TOP_LEVEL_REVIEW_BRIEF.md",
     "docs/consciousness_sae_target_blind_calibration/"
     "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
     "docs/consciousness_sae_target_blind_calibration/"
@@ -1238,6 +1308,17 @@ RECOVERY_DOCUMENT_PATHS = (
     V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
     V9_COMPACT_EVIDENCE_SUMMARY,
     *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
+    V10_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V10_COMPACT_EVIDENCE_SUMMARY,
+    f"{V10_REVIEW_INPUT_DIRECTORY}/PROSPECTIVE_EVIDENCE_NOTE.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_1.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_2.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_CONDITIONAL_ADJUDICATION_SUMMARY.json",
+    *FINAL_V10_PRO_REVIEW_OUTPUT_PATHS,
     "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
     "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
     "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
@@ -3722,6 +3803,11 @@ def _validate_review(
             "historical_v8_adjudication_receipt_sha256",
             "historical_v8_final_git_head_commit",
             "historical_v8_superseded_reason",
+            "historical_v9_terminal_verdict",
+            "historical_v9_execution_authorized",
+            "historical_v9_review_sha256",
+            "historical_v9_adjudication_receipt_sha256",
+            "historical_v9_remaining_blocking_findings",
             "b22_closure_receipt_sha256",
             "b22_verification_receipt_sha256",
             "b22_attempt_id",
@@ -3748,7 +3834,8 @@ def _validate_review(
             "adjudication_receipt_sha256",
             "adjudication_json_sha256",
             "adjudication_markdown_sha256",
-            "fixed_finding_ids",
+            "historically_fixed_finding_ids",
+            "fixed_in_v10_finding_ids",
             "rejected_finding_ids",
             "reviewed_local_test_receipt_file_sha256",
             "reviewed_local_test_receipt_receipt_sha256",
@@ -3771,6 +3858,7 @@ def _validate_review(
             "completed_b17_paid_call_count",
             "completed_v8_paid_call_count",
             "completed_v9_paid_call_count",
+            "completed_v10_paid_call_count",
             "cumulative_disclosed_paid_call_count",
         ),
         "authorization.review",
@@ -3781,6 +3869,16 @@ def _validate_review(
         review["reconstructed_cost_usd"],
         "authorization.review.reconstructed_cost_usd",
     )
+    input_tokens = _integer(
+        review["input_tokens"], "authorization.review.input_tokens", minimum=1
+    )
+    output_tokens = _integer(
+        review["output_tokens"], "authorization.review.output_tokens", minimum=1
+    )
+    minimum_reconstructed_cost_usd = (
+        input_tokens * PRO_REVIEW_V10_INPUT_RATE_USD_PER_MILLION
+        + output_tokens * PRO_REVIEW_V10_OUTPUT_RATE_USD_PER_MILLION
+    ) / 1_000_000
     reviewed_packet_commit = _string(
         review["reviewed_packet_git_head_commit"],
         "authorization.review.reviewed_packet_git_head_commit",
@@ -3795,31 +3893,20 @@ def _validate_review(
     )
     final_commit = _string(git_head_commit, "authorization.git_head_commit")
     required_current_findings = {
-        "B17", "B18", "B19", "B20", "B21", "B22",
-        "I10", "I11", "I12", "I13", "I14",
+        "B17", "B18", "B19", "B20", "B21", "B22", "B23",
+        "I10", "I11", "I12", "I13", "I14", "I15",
     }
     if (
         review["model"] != "gpt-5.6-sol"
         or review["provider_status"] != "completed"
         or not response_id.startswith("resp_")
         or _integer(
-            review["input_tokens"],
-            "authorization.review.input_tokens",
-            minimum=1,
-        )
-        < 1
-        or _integer(
-            review["output_tokens"],
-            "authorization.review.output_tokens",
-            minimum=1,
-        )
-        < 1
-        or _integer(
             review["reasoning_tokens"],
             "authorization.review.reasoning_tokens",
         )
         < 0
         or not 0 < cost <= COMPLETED_REVIEW_COST_CEILING_USD
+        or cost + 1e-12 < minimum_reconstructed_cost_usd
         or review["provider_approval_claimed"] is not False
         or review["provider_terminal_verdict"] != "READY TO FREEZE"
         or review["provider_ready_to_freeze_verdict"] is not True
@@ -3837,6 +3924,7 @@ def _validate_review(
             )
         )
         or review_final_commit != final_commit
+        or len({code_freeze_commit, reviewed_packet_commit, review_final_commit}) != 3
         or code_freeze_commit != local_test_receipt.get("code_freeze_commit")
         or code_freeze_commit != target_host_test_receipt.get("code_freeze_commit")
         or review["source_test_inventory_sha256"]
@@ -4019,6 +4107,16 @@ def _validate_review(
         != "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7"
         or review["historical_v8_superseded_reason"]
         != "post_authorization_b22_missing_cublas_environment"
+        or review["historical_v9_terminal_verdict"]
+        != "READY AFTER SPECIFIED FIXES"
+        or review["historical_v9_execution_authorized"] is not False
+        or review["historical_v9_review_sha256"]
+        != HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v9_adjudication_receipt_sha256"]
+        != "fb4f4c2b88580c2e57c3a477de3ba43b527d382e28e97cb1b06dbc323430ba6a"
+        or review["historical_v9_remaining_blocking_findings"] != ["B23"]
         or review["b22_closure_receipt_sha256"]
         != "8fb1e84d34027daf87f81635cf8ad89eb4c41dd7ac66f930e78938f0e79ab2f9"
         or review["b22_verification_receipt_sha256"]
@@ -4062,12 +4160,12 @@ def _validate_review(
             for finding in findings
         )
         or any(
-            (finding.startswith("B") and int(finding[1:]) < 23)
-            or (finding.startswith("I") and int(finding[1:]) < 15)
+            (finding.startswith("B") and int(finding[1:]) < 24)
+            or (finding.startswith("I") and int(finding[1:]) < 16)
             for finding in set(findings) - required_current_findings
         )
         or any(
-            finding.startswith("B") and int(finding[1:]) >= 23
+            finding.startswith("B") and int(finding[1:]) >= 24
             for finding in findings
         )
         or _integer(
@@ -4137,14 +4235,27 @@ def _validate_review(
         )
         != 1
         or _integer(
+            review["completed_v10_paid_call_count"],
+            "authorization.review.completed_v10_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
             review["cumulative_disclosed_paid_call_count"],
             "authorization.review.cumulative_disclosed_paid_call_count",
             minimum=1,
         )
-        != 13
+        != 14
     ):
         raise RecoveryBundleVerificationError("authorization review semantics differ")
-    fixed = _list(review["fixed_finding_ids"], "authorization.review.fixed_finding_ids")
+    historically_fixed = _list(
+        review["historically_fixed_finding_ids"],
+        "authorization.review.historically_fixed_finding_ids",
+    )
+    fixed_in_v10 = _list(
+        review["fixed_in_v10_finding_ids"],
+        "authorization.review.fixed_in_v10_finding_ids",
+    )
     rejected = _list(
         review["rejected_finding_ids"], "authorization.review.rejected_finding_ids"
     )
@@ -4152,12 +4263,15 @@ def _validate_review(
         any(
             not isinstance(finding, str)
             or re.fullmatch(r"[BI][0-9]{2}", finding) is None
-            for finding in [*fixed, *rejected]
+            for finding in [*historically_fixed, *fixed_in_v10, *rejected]
         )
-        or fixed != sorted(set(fixed))
+        or historically_fixed != sorted(set(historically_fixed))
+        or fixed_in_v10 != ["B23"]
         or rejected != sorted(set(rejected))
-        or set(fixed) & set(rejected)
-        or sorted([*fixed, *rejected]) != findings
+        or set(historically_fixed) & set(fixed_in_v10)
+        or set(historically_fixed) & set(rejected)
+        or set(fixed_in_v10) & set(rejected)
+        or sorted([*historically_fixed, *fixed_in_v10, *rejected]) != findings
     ):
         raise RecoveryBundleVerificationError(
             "authorization review dispositions differ"
@@ -4177,11 +4291,11 @@ def _validate_review(
     )
     if (
         review_sha
-        != _closure_hash(closure, f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md")
+        != _closure_hash(closure, f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review.md")
         or adjudication_json_sha
-        != _closure_hash(closure, FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON)
+        != _closure_hash(closure, FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON)
         or adjudication_markdown_sha
-        != _closure_hash(closure, FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN)
+        != _closure_hash(closure, FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN)
     ):
         raise RecoveryBundleVerificationError(
             "authorization review closure links differ"
@@ -4189,27 +4303,27 @@ def _validate_review(
     snapshot_bindings = (
         (
             "reviewed_local_test_receipt",
-            V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            V10_LOCAL_TEST_RECEIPT_SNAPSHOT,
             local_test_receipt,
         ),
         (
             "reviewed_target_host_test_receipt",
-            V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
             target_host_test_receipt,
         ),
         (
             "reviewed_target_qualification_ownership",
-            V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
             qualification_ownership,
         ),
         (
             "reviewed_target_qualification_landlock",
-            V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
             qualification_landlock,
         ),
         (
             "reviewed_target_qualification_cuda",
-            V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
             qualification_cuda,
         ),
     )
@@ -4537,6 +4651,7 @@ def _validate_authorization(
             **HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256,
             **HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256,
             **B22_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+            **HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256,
             **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
             **C7_FAILED_QUALIFICATION_PHYSICAL_SHA256,
         }.items()
@@ -4772,16 +4887,22 @@ def _validate_authorization(
         "authorization.external_files.roots_manifest",
     )
     reviewed_snapshot_bindings = {
-        V9_LOCAL_TEST_RECEIPT_SNAPSHOT: "local_test_receipt",
-        V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: "target_host_test_receipt",
-        V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: ("target_qualification_ownership"),
-        V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: "target_qualification_landlock",
-        V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT: ("target_qualification_cuda_preflight"),
+        V10_LOCAL_TEST_RECEIPT_SNAPSHOT: "local_test_receipt",
+        V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: "target_host_test_receipt",
+        V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+            "target_qualification_ownership"
+        ),
+        V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+            "target_qualification_landlock"
+        ),
+        V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+            "target_qualification_cuda_preflight"
+        ),
     }
     for snapshot_path, external_key in reviewed_snapshot_bindings.items():
         if _closure_file_record(closure, snapshot_path) != external[external_key]:
             raise RecoveryBundleVerificationError(
-                "v8 reviewed receipt snapshot differs from authorization evidence"
+                "V10 reviewed receipt snapshot differs from authorization evidence"
             )
     original_receipts = _mapping(
         authorization["original_receipts"], "authorization.original_receipts"
@@ -5049,10 +5170,14 @@ def _validate_recovery_metadata(
             "historical_v6_review_sha256",
             "historical_v6_review_manifest_sha256",
             "historical_v6_review_request_sha256",
-            "final_v9_review_adjudication_json_sha256",
-            "final_v9_review_adjudication_markdown_sha256",
-            "final_v9_review_response_sha256",
-            "final_v9_review_manifest_sha256",
+            "historical_v9_review_adjudication_json_sha256",
+            "historical_v9_review_adjudication_markdown_sha256",
+            "historical_v9_review_response_sha256",
+            "historical_v9_review_manifest_sha256",
+            "final_v10_review_adjudication_json_sha256",
+            "final_v10_review_adjudication_markdown_sha256",
+            "final_v10_review_response_sha256",
+            "final_v10_review_manifest_sha256",
             "reviewed_local_test_receipt_snapshot_sha256",
             "reviewed_target_host_test_receipt_snapshot_sha256",
             "reviewed_target_qualification_ownership_snapshot_sha256",
@@ -5215,30 +5340,44 @@ def _validate_recovery_metadata(
         "historical_v6_review_request_sha256": (
             f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md"
         ),
-        "final_v9_review_adjudication_json_sha256": (
+        "historical_v9_review_adjudication_json_sha256": (
             FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
         ),
-        "final_v9_review_adjudication_markdown_sha256": (
+        "historical_v9_review_adjudication_markdown_sha256": (
             FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
         ),
-        "final_v9_review_response_sha256": (
+        "historical_v9_review_response_sha256": (
             f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json"
         ),
-        "final_v9_review_manifest_sha256": (
+        "historical_v9_review_manifest_sha256": (
             f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json"
         ),
-        "reviewed_local_test_receipt_snapshot_sha256": (V9_LOCAL_TEST_RECEIPT_SNAPSHOT),
+        "final_v10_review_adjudication_json_sha256": (
+            FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "final_v10_review_adjudication_markdown_sha256": (
+            FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "final_v10_review_response_sha256": (
+            f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/response.json"
+        ),
+        "final_v10_review_manifest_sha256": (
+            f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "reviewed_local_test_receipt_snapshot_sha256": (
+            V10_LOCAL_TEST_RECEIPT_SNAPSHOT
+        ),
         "reviewed_target_host_test_receipt_snapshot_sha256": (
-            V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+            V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
         ),
         "reviewed_target_qualification_ownership_snapshot_sha256": (
-            V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+            V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
         ),
         "reviewed_target_qualification_landlock_snapshot_sha256": (
-            V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+            V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
         ),
         "reviewed_target_qualification_cuda_snapshot_sha256": (
-            V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+            V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT
         ),
     }
     if any(

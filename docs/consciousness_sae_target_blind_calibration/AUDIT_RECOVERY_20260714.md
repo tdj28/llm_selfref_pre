@@ -1,7 +1,17 @@
 # Calibration v2 r3 Audit-Only Recovery
 
-Status: prospective audit-only B22 successor after the F12 recovery consumed
-its one-shot authorization, Landlock receipt, and attempt marker, then stopped
+Status: prospective audit-only B23 successor after the V9 director review
+returned `READY AFTER SPECIFIED FIXES` and remained non-authorizing. The V9
+review correctly required the prose-only clarification that layer 50 is the
+sole confirmatory J readout and layers 51--78 are descriptive. Its finding
+dispositions were also not emitted as the individually parseable level-two
+headings required by the frozen adjudication contract. The complete V9 review
+and conditional adjudication remain immutable historical evidence, not launch
+authority. This explicitly authorized, bounded V10 successor freezes that
+claim-boundary correction without changing calculations or scientific code.
+
+The underlying B22 incident remains closed: the F12 recovery consumed its
+one-shot authorization, Landlock receipt, and attempt marker, then stopped
 without compact publication because its final sanitized environment omitted
 `CUBLAS_WORKSPACE_CONFIG=:4096:8`. The failure is mechanically closed and
 independently verified. Frozen raw rows were opened and row-level quantities
@@ -9,9 +19,10 @@ may have been recomputed before the late artifact-device guard, but no compact
 metric was published, logged, inspected, or used to adapt the design. The exact
 owned pod was deleted and unrelated account inventory was unchanged. The F12
 authority is permanently rejected. This plan is not executable until fresh
-C14 local and disposable-B200 qualification receipts bind the repaired bytes,
-one compact v9 director-level review evaluates the high-level recovery design
-after B22, and the C14<=E14<=F14 lineage passes every gate. The provider does
+C15 local and disposable-B200 qualification receipts bind the V10 bytes, one
+compact V10 director-level review evaluates the corrected high-level recovery
+design with complete V9 context, and the C15<=E15<=F15 lineage passes every
+gate. The provider does
 not review or certify exact source/test bytes; those remain mechanical gates. This is not a new
 model transaction and cannot change the r3 estimand, prompts, directions,
 doses, layers, raw inputs, thresholds, metrics, or claim policy.
@@ -937,6 +948,42 @@ must not be cited as certifying them. It must explicitly
 disposition B17--B22 and I10--I14; B23 or later stops launch. F14 may add only
 the seven v9 provider-output/adjudication files. No further repair/review loop
 is authorized: once these frozen gates are green, launch follows immediately.
+
+## V10 B23 claim-boundary successor
+
+The completed V9 response and structured conditional adjudication are
+immutable historical evidence. V9 returned `READY AFTER SPECIFIED FIXES`, not
+`READY TO FREEZE`, and its adjudication records `NOT_READY_TO_EXECUTE`. It
+identified B23: the compact claim wording could be read as treating every
+released J map as confirmatory even though the frozen primary J estimand is at
+layer 50. V9 also placed cumulative dispositions in tables rather than the
+individual level-two headings required by the fail-closed parser. V9 therefore
+cannot authorize execution, and the F15 launch gate rejects the prior
+controller hash.
+
+The B23 correction is prose-only. Layer 50 is the sole confirmatory J-readout
+layer. Layers 51--78 and their trajectories are descriptive only and cannot
+establish, rescue, or broaden the confirmatory result. No calculation, raw row,
+seed, threshold, metric, transport, map, intervention, or scientific source
+changes for this correction.
+
+C15 freezes that corrected brief and every executable/test byte. Fresh local
+and distinct disposable-B200 qualification receipts must bind C15 and the same
+complete source/test inventory. E15 may add only the five receipt snapshots and
+their mechanically derived V10 compact evidence summary. One bounded V10
+director-level review receives seven high-level artifacts, including the
+complete immutable V9 review and adjudication, but no raw data, source, tests,
+full receipts, or logs. It must render B17--B23 and I10--I15 as individual
+level-two headings. `READY TO FREEZE` is green only if B23 is resolved and no
+B24-or-later blocker appears. F15 may add only the five completed V10 provider
+files and two V10 adjudication files.
+
+The final gate requires `C15 <= E15 <= F15`, no source/test change from C15
+through F15, no V10 packet change from E15 through F15, the exact C15..E15
+six-file qualification delta, and the exact E15..F15 seven-file review delta.
+Qualification evidence is staged only from the V10 input directory. B20 and
+B22 pod, attempt, authorization, and output identities remain permanently
+rejected. No further review loop is authorized.
 
 ## Claim boundary
 

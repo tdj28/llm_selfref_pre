@@ -1609,6 +1609,29 @@ def test_v6_review_finding_ids_require_actual_finding_headings() -> None:
         "I10",
     ]
     assert audit_recovery._v6_review_finding_ids(ignored_structures) == []  # noqa: SLF001
+    v10_h2s = audit_recovery._v10_review_finding_h2s(actual_headings)  # noqa: SLF001
+    assert v10_h2s == {"blocking": ["B05", "B16"], "important": ["I10"]}
+    assert audit_recovery._v10_review_finding_h2s(ignored_structures) == {  # noqa: SLF001
+        "blocking": [],
+        "important": [],
+    }
+    duplicate_and_wrong_section = """# Blocking findings
+
+## B17 — First blocker
+## B17 — Duplicate blocker
+## I10 — Wrong section
+
+# Important non-blocking findings
+
+## I10 — Correct section
+## B18 — Wrong section
+"""
+    assert audit_recovery._v10_review_finding_h2s(  # noqa: SLF001
+        duplicate_and_wrong_section
+    ) == {
+        "blocking": ["B17", "B17", "I10"],
+        "important": ["I10", "B18"],
+    }
 
 
 def test_historical_v2_completed_negative_review_is_pinned() -> None:
@@ -1982,6 +2005,52 @@ def test_v7_packet_is_trimmed_and_includes_v6_context_and_fresh_c10_receipts(
     assert v9_limits["estimated_input_tokens_conservative"] <= 20_000
     assert v9_limits["estimated_budget_reserve_usd"] <= 1.25
 
+    v10_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V10_PACKET}
+    assert len(audit_recovery.PRO_REVIEW_V10_PACKET) == 7
+    assert not v10_paths & set(audit_recovery.FINAL_V10_PRO_REVIEW_OUTPUT_PATHS)
+    assert v10_paths == {
+        "docs/consciousness_sae_target_blind_calibration/"
+        "V10_TOP_LEVEL_REVIEW_BRIEF.md",
+        "docs/consciousness_sae_target_blind_calibration/"
+        "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+        "experiments/consciousness_sae_target_blind_calibration/"
+        "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+        audit_recovery.V10_COMPACT_EVIDENCE_SUMMARY,
+        f"{audit_recovery.V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_1.md",
+        f"{audit_recovery.V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_2.md",
+        f"{audit_recovery.V10_REVIEW_INPUT_DIRECTORY}/"
+        "V9_CONDITIONAL_ADJUDICATION_SUMMARY.json",
+    }
+    assert all(Path(path).suffix.lower() in {".md", ".json"} for path in v10_paths)
+    assert not v10_paths & source_or_test_code
+    assert all(
+        "RECEIPT" not in Path(path).name.upper()
+        and "LOG" not in Path(path).name.upper()
+        and Path(path).suffix.lower() not in {".py", ".sh", ".csv", ".jsonl"}
+        for path in v10_paths
+    )
+    historical_v9 = audit_recovery._validate_historical_v9_conditional_review_evidence()
+    assert historical_v9["terminal_verdict"] == "READY AFTER SPECIFIED FIXES"
+    assert historical_v9["execution_authorized"] is False
+    assert historical_v9["remaining_blocking_findings"] == ["B23"]
+    audit_recovery._validate_v10_historical_context_copies()
+    v10_summary = audit_recovery._validate_v10_compact_evidence_summary()
+    assert v10_summary == audit_recovery._expected_v10_compact_evidence_summary()
+    assert v10_summary["qualification"]["cublas_real_guard_regression"]["cases"] == {
+        "exact_:4096:8": "accepted",
+        "missing": "rejected",
+        "wrong": "rejected",
+    }
+    assert (
+        v10_summary["qualification"]["cublas_real_guard_regression"]["test_id"]
+        == audit_recovery.TARGET_DESIGNATED_TEST_IDS[1]
+    )
+    v10_value = audit_recovery._expected_v10_pro_review_input()
+    v10_limits = audit_recovery._validate_v10_packet_limits("x" * 4_000, v10_value)
+    assert v10_limits["actual_input_characters"] <= 60_000
+    assert v10_limits["estimated_input_tokens_conservative"] <= 20_000
+    assert v10_limits["estimated_budget_reserve_usd"] <= 1.25
+
 
 def test_v7_cumulative_narratives_share_only_current_git_lineage() -> None:
     narratives = (
@@ -2017,7 +2086,7 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
         "experiments/consciousness_sae_target_blind_calibration/"
         "run_qualification_pipe_logged.sh"
     )
-    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V9_PACKET}
+    packet_paths = {path for path, _role in audit_recovery.PRO_REVIEW_V10_PACKET}
     assert not {controller_relative, wrapper_relative} & packet_paths
     assert {controller_relative, wrapper_relative} <= set(
         audit_recovery.SOURCE_TEST_BOUND_PATHS
@@ -2026,14 +2095,14 @@ def test_qualification_controller_and_pipe_logger_are_review_bound() -> None:
     wrapper_path = audit_recovery.REPO_ROOT / wrapper_relative
     controller = controller_path.read_text(encoding="utf-8")
     wrapper = wrapper_path.read_text(encoding="utf-8")
-    assert 'ROOT="/root/q14-${FREEZE:0:7}"' in controller
+    assert 'ROOT="/root/q15-${FREEZE:0:7}"' in controller
     assert "EXPECTED_TEST_COUNT=${4:-231}" in controller
     assert '[[ "$EXPECTED_TEST_COUNT" == 231 ]]' in controller
     assert 'HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"' in controller
     assert 'copy_if_file "$HOST_WRAPPER"' in controller
     assert 'test -f "$HOST_WRAPPER"' in controller
-    assert len(os.fsencode("/root/q14-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
-    assert '[[ "$LOG_ROOT" == /root/q14-* ]]' in wrapper
+    assert len(os.fsencode("/root/q15-" + "f" * 7 + "/probe/canary/output/.s")) <= 91
+    assert '[[ "$LOG_ROOT" == /root/q15-* ]]' in wrapper
     assert '/root/q9-' not in wrapper
     assert '> >(exec tee "$LOG_ROOT/remote.stdout")' in wrapper
     assert '2> >(exec tee "$LOG_ROOT/remote.stderr" >&2)' in wrapper
@@ -2067,6 +2136,22 @@ def test_v6_review_resource_ceilings_are_symmetric_and_cover_hard_cap() -> None:
     assert audit_recovery.PRO_REVIEW_V9_MAX_INPUT_CHARACTERS == 60_000
     assert audit_recovery.PRO_REVIEW_V9_MAX_INPUT_TOKENS == 20_000
     assert audit_recovery.PRO_REVIEW_V9_MAX_OUTPUT_TOKENS == 6_000
+    assert (
+        audit_recovery.PRO_REVIEW_V10_BUDGET_AUTHORIZATION_USD
+        == audit_recovery.PRO_REVIEW_V9_BUDGET_AUTHORIZATION_USD
+    )
+    assert (
+        audit_recovery.PRO_REVIEW_V10_MAX_INPUT_CHARACTERS
+        == audit_recovery.PRO_REVIEW_V9_MAX_INPUT_CHARACTERS
+    )
+    assert (
+        audit_recovery.PRO_REVIEW_V10_MAX_INPUT_TOKENS
+        == audit_recovery.PRO_REVIEW_V9_MAX_INPUT_TOKENS
+    )
+    assert (
+        audit_recovery.PRO_REVIEW_V10_MAX_OUTPUT_TOKENS
+        == audit_recovery.PRO_REVIEW_V9_MAX_OUTPUT_TOKENS
+    )
     assert audit_recovery.PRO_REVIEW_V6_INPUT_RATE_USD_PER_MILLION == 10.0
     assert audit_recovery.PRO_REVIEW_V6_CACHE_WRITE_RATE_USD_PER_MILLION == 12.5
     assert audit_recovery.PRO_REVIEW_V6_OUTPUT_RATE_USD_PER_MILLION == 45.0
@@ -3054,6 +3139,7 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     bound_paths = {
         "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
         "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
+        "docs/consciousness_sae_target_blind_calibration/V10_TOP_LEVEL_REVIEW_BRIEF.md",
         "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
         "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
         "experiments/consciousness_sae_target_blind_calibration/"
@@ -3127,6 +3213,13 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
                 audit_recovery.V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
                 audit_recovery.V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
                 audit_recovery.V9_COMPACT_EVIDENCE_SUMMARY,
+                *audit_recovery.FINAL_V10_PRO_REVIEW_OUTPUT_PATHS,
+                audit_recovery.V10_LOCAL_TEST_RECEIPT_SNAPSHOT,
+                audit_recovery.V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+                audit_recovery.V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+                audit_recovery.V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+                audit_recovery.V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+                audit_recovery.V10_COMPACT_EVIDENCE_SUMMARY,
             }
         )
     rows = [
@@ -3246,7 +3339,10 @@ def test_real_recovery_metadata_constructor_discloses_bound_hashes(
     assert receipt["historical_v6_review_sha256"] in {
         row["sha256"] for row in rows
     }
-    assert receipt["final_v9_review_adjudication_json_sha256"] in {
+    assert receipt["historical_v9_review_adjudication_json_sha256"] in {
+        row["sha256"] for row in rows
+    }
+    assert receipt["final_v10_review_adjudication_json_sha256"] in {
         row["sha256"] for row in rows
     }
     assert receipt["historical_v2_review_adjudication_json_sha256"] in {

@@ -1,9 +1,9 @@
-# Generic F14 launch-chain invocation contract
+# Generic F15 launch-chain invocation contract
 
 The controller accepts exactly seven nonempty positional arguments:
 
 ```text
-/root/final_recovery_controller_f14.sh \
+/root/final_recovery_controller_f15.sh \
   CODE_FREEZE REVIEWED_PACKET_COMMIT FINAL_FREEZE \
   POD_ID EXPECTED_CREATED_AT ATTEMPT_ID INPUT_ROOT
 ```
@@ -26,11 +26,18 @@ same values, in that order, in `controller_argv`:
 
 `CODE_FREEZE`, `REVIEWED_PACKET_COMMIT`, and `FINAL_FREEZE` are full lowercase
 40-hex Git object IDs. `ATTEMPT_ID` must contain the first seven hex characters
-of `FINAL_FREEZE`. The controller checks `C14 <= E14 <= F14`, requires no change
-under `experiments/` or `tests/` from C14 through F14, and requires the E14..F14
-name-only delta to equal the two V9 adjudication files plus the five completed
-provider-review files. Qualification inputs are staged only from the V9 input
-snapshot directory.
+of `FINAL_FREEZE`. The controller checks `C15 <= E15 <= F15`, requires no change
+under `experiments/` or `tests/` from C15 through F15, requires the C15..E15
+name-only delta to equal the six fresh V10 qualification-evidence files, and
+requires the E15..F15 name-only delta to equal the two V10 adjudication files
+plus the five completed provider-review files. Qualification inputs are staged
+only from the V10 input snapshot directory.
+
+The completed V9 response and adjudication are immutable historical context.
+Their conditional verdict is explicitly non-authorizing: only a completed V10
+`READY TO FREEZE` response, its validating V10 adjudication, and the exact
+C15/E15/F15 chain can reach issue-time authorization. The prior controller hash
+is rejected by the F15 hash-and-exec gate.
 
 The local supervisor adds the three commits as positional arguments 14–16,
 passes them to the gate, and passes them again to the retrieved-receipt

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed hash-and-exec gate for the generic F14 recovery controller.
+"""Fail-closed hash-and-exec gate for the generic F15 recovery controller.
 
 This program is intentionally delivered to ``/usr/bin/python3.11 -B -`` on
 standard input by the local supervisor.  The supervisor separately binds the
@@ -23,16 +23,17 @@ from typing import Any
 
 
 SCHEMA_VERSION = 1
-PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.1.0"
-EXPECTED_CONTROLLER_PATH = Path("/root/final_recovery_controller_f11.sh")
+PROTOCOL_VERSION = "final_recovery_hash_exec_gate_v1.2.0"
+EXPECTED_CONTROLLER_PATH = Path("/root/final_recovery_controller_f15.sh")
 EXPECTED_CONTROLLER_SHA256 = (
-    "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006"
+    "18b9de87e550c85863629be842c97f863b87ed1fa87cc1d3cdaed59becbe3704"
 )
 REJECTED_CONTROLLER_SHA256 = frozenset(
     {
         "1a1baa67fa9c12b8af309581ff85d1e200af907b80cd0b8185eb8f9a68cd08cc",
         "6d4501c9fc46a72d58dbe3832bb3fd0f17ad056f4955bb8809ccb5b6cd67371c",
         "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
+        "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006",
     }
 )
 REJECTED_POD_IDS = frozenset(
@@ -388,7 +389,7 @@ def _write_receipt_exclusive(path: Path, core: dict[str, Any]) -> tuple[str, byt
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Bind and exec the exact reviewed generic F14 recovery controller",
+        description="Bind and exec the exact reviewed generic F15 recovery controller",
         allow_abbrev=False,
     )
     parser.add_argument("--code-freeze", required=True)

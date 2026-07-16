@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local structural self-tests for the F14 launch chain."""
+"""Local structural self-tests for the F15 launch chain."""
 
 from __future__ import annotations
 
@@ -18,9 +18,9 @@ VALIDATOR = ROOT / "validate_final_recovery_launch_gate.py"
 SUPERVISOR = ROOT / "final_recovery_local_supervisor.sh"
 
 EXPECTED_SHA256 = {
-    CONTROLLER.name: "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006",
-    GATE.name: "0f91c891dbcf30d574bf0b12307001936ed49b9c9afb11ff1a70099aad9ea78b",
-    VALIDATOR.name: "b91a132f71390865447de5a664abf8f79c110a50bdfe216d96324d2c2868d09e",
+    CONTROLLER.name: "18b9de87e550c85863629be842c97f863b87ed1fa87cc1d3cdaed59becbe3704",
+    GATE.name: "09cf18df192f54cc110faeb9c3da4750d75e09c07d499a17d5718a5ccee14b34",
+    VALIDATOR.name: "609edd7368d6e775d0c5feca9122ad2cb33d77e1f45e2c705543c9cd8da68c06",
 }
 REJECTED_PODS = {"9n5f5a82p1gw1e", "eeo1skjkwjqot5", "j7xr357tdlpq3f"}
 REJECTED_ATTEMPTS = {
@@ -36,6 +36,9 @@ REJECTED_AUTH_FILES = {
     "897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7",
     "682e5a612e48e196a46ea762fe00ab4de32df1bf070aa72edf64d2639735f5ff",
 }
+REJECTED_V9_CONTROLLER_SHA = (
+    "ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006"
+)
 
 
 def sha256(path: Path) -> str:
@@ -58,10 +61,15 @@ def main() -> int:
     for filename, expected in EXPECTED_SHA256.items():
         assert sha256(ROOT / filename) == expected
 
-    gate = load("f14_gate_selftest", GATE)
-    validator = load("f14_validator_selftest", VALIDATOR)
+    gate = load("f15_gate_selftest", GATE)
+    validator = load("f15_validator_selftest", VALIDATOR)
     for module in (gate, validator):
+        assert module.PROTOCOL_VERSION == "final_recovery_hash_exec_gate_v1.2.0"
+        assert str(module.EXPECTED_CONTROLLER_PATH) == (
+            "/root/final_recovery_controller_f15.sh"
+        )
         assert module.EXPECTED_CONTROLLER_SHA256 == EXPECTED_SHA256[CONTROLLER.name]
+        assert REJECTED_V9_CONTROLLER_SHA in set(module.REJECTED_CONTROLLER_SHA256)
         assert set(module.REJECTED_POD_IDS) == REJECTED_PODS
         assert set(module.REJECTED_ATTEMPT_IDS) == REJECTED_ATTEMPTS
         assert REJECTED_AUTH_RECEIPTS <= set(
@@ -83,12 +91,15 @@ def main() -> int:
     ):
         assert token in controller
         assert token in supervisor or token in GATE.read_text(encoding="utf-8")
-    assert "audit_recovery_landlock_gpt_pro_v9_inputs" in controller
-    assert "V8_INPUT_REL" not in controller
+    assert "audit_recovery_landlock_gpt_pro_v10_inputs" in controller
+    assert "V9_INPUT_REL" not in controller
     assert 'diff --quiet "$CODE_FREEZE" "$FINAL_FREEZE" -- experiments tests' in controller
     assert 'merge-base --is-ancestor "$CODE_FREEZE" "$REVIEWED_PACKET_COMMIT"' in controller
     assert 'merge-base --is-ancestor "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE"' in controller
-    assert controller.count("audit_recovery_landlock_gpt_pro_v9_completed/") == 5
+    assert controller.count("audit_recovery_landlock_gpt_pro_v10_completed/") == 5
+    assert "completed_conditional_provider_review_v9_adjudication" in controller
+    assert 'value["final_decision"] == "NOT_READY_TO_EXECUTE"' in controller
+    assert "V10_EXPECTED_PREREVIEW_PATHS" in controller
     assert controller.count("CUBLAS_WORKSPACE_CONFIG=:4096:8") == 2
 
     supervisor_bindings = {
@@ -127,7 +138,7 @@ def main() -> int:
         assert result.returncode != 0
         assert "FINAL_RECOVERY_CONTROLLER_START" not in result.stdout
 
-    print("F14_LAUNCH_CHAIN_SELF_TEST_PASS")
+    print("F15_LAUNCH_CHAIN_SELF_TEST_PASS")
     return 0
 
 

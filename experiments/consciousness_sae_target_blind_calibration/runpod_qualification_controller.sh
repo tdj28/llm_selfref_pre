@@ -11,7 +11,7 @@ EXPECTED_TEST_COUNT=${4:-231}
 [[ "$EXPECTED_CREATED_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
 [[ "$EXPECTED_TEST_COUNT" == 231 ]]
 
-ROOT="/root/q14-${FREEZE:0:7}"
+ROOT="/root/q15-${FREEZE:0:7}"
 ACTIVE="$ROOT/checkout"
 DEPS="$ROOT/dependencies"
 BOOTSTRAP="$ROOT/bootstrap"
@@ -20,7 +20,7 @@ OWNERSHIP="$ROOT/evidence/TARGET_QUALIFICATION_OWNERSHIP.json"
 HOST_WRAPPER="$ROOT/run_qualification_pipe_logged.sh"
 PYTHON=/usr/bin/python3.11
 ARCHIVE_PARENT=/workspace/consciousness_sae_target_blind_calibration/consciousness_sae_target_blind_calibration_v2/qualification_archives
-ARCHIVE="$ARCHIVE_PARENT/v9-b22-c14-target-${POD_ID}-${FREEZE:0:7}"
+ARCHIVE="$ARCHIVE_PARENT/v10-b23-c15-target-${POD_ID}-${FREEZE:0:7}"
 ARCHIVE_PARTIAL="${ARCHIVE}.partial"
 ARCHIVE_PUBLISHED=0
 
@@ -122,7 +122,7 @@ import os
 import sys
 
 path = sys.argv[1]
-assert path.startswith("/root/q14-")
+assert path.startswith("/root/q15-")
 assert len(os.fsencode(path)) <= 91
 assert len(os.fsencode(path)) <= 107 - 16
 PY

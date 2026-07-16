@@ -15,9 +15,9 @@ REMOTE_INPUT=${10:?missing remote input path}
 REMOTE_CONTROLLER=${11:?missing remote controller path}
 LOCAL_GATE=${12:?missing local hash-and-exec gate}
 LOCAL_GATE_VALIDATOR=${13:?missing local launch-receipt validator}
-CODE_FREEZE=${14:?missing C14 code-freeze commit}
-REVIEWED_PACKET_COMMIT=${15:?missing E14 reviewed-packet commit}
-FINAL_FREEZE=${16:?missing F14 final-freeze commit}
+CODE_FREEZE=${14:?missing C15 code-freeze commit}
+REVIEWED_PACKET_COMMIT=${15:?missing E15 reviewed-packet commit}
+FINAL_FREEZE=${16:?missing F15 final-freeze commit}
 
 for commit in "$CODE_FREEZE" "$REVIEWED_PACKET_COMMIT" "$FINAL_FREEZE"; do
   [[ "$commit" =~ ^[0-9a-f]{40}$ ]]
@@ -27,9 +27,9 @@ REMOTE_ATTEMPT="/workspace/csae/$ATTEMPT_ID"
 REMOTE_BASE="/root/consciousness_sae_audit_recovery/$ATTEMPT_ID"
 LOCAL_ATTEMPT="$BASE/retrieved/$ATTEMPT_ID"
 DEST="root@$HOST"
-EXPECTED_CONTROLLER_SHA=ca9d6606b992507dd9e76afbb9fc219222c858831c93a385de22ac56d4b80006
-EXPECTED_GATE_SHA=0f91c891dbcf30d574bf0b12307001936ed49b9c9afb11ff1a70099aad9ea78b
-EXPECTED_GATE_VALIDATOR_SHA=b91a132f71390865447de5a664abf8f79c110a50bdfe216d96324d2c2868d09e
+EXPECTED_CONTROLLER_SHA=18b9de87e550c85863629be842c97f863b87ed1fa87cc1d3cdaed59becbe3704
+EXPECTED_GATE_SHA=09cf18df192f54cc110faeb9c3da4750d75e09c07d499a17d5718a5ccee14b34
+EXPECTED_GATE_VALIDATOR_SHA=609edd7368d6e775d0c5feca9122ad2cb33d77e1f45e2c705543c9cd8da68c06
 REJECTED_B20_AUTHORIZATION_RECEIPT_SHA=f6d0fa7fdf5b6ec8553fce2fe8df7842dd28f5a63fb5a9674a6358d4af152358
 REJECTED_B20_AUTHORIZATION_FILE_SHA=897a0fe5fac8e898f6367b8115a982a7580c0224843a76e2514589f6277274a7
 REJECTED_B22_AUTHORIZATION_RECEIPT_SHA=8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4
@@ -47,7 +47,7 @@ WATCHDOG_PID_FILE="$BASE/logs/watchdog.pid"
 [[ "$ATTEMPT_ID" =~ ^calv2-r3-audit-recovery-${FINAL_SHORT}-[0-9]{8}T[0-9]{6}Z$ ]]
 [[ "$EXPECTED_CREATED_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
 [[ "$REMOTE_INPUT" == /root/final-recovery-inputs-* ]]
-[[ "$REMOTE_CONTROLLER" == /root/final_recovery_controller_f11.sh ]]
+[[ "$REMOTE_CONTROLLER" == /root/final_recovery_controller_f15.sh ]]
 for rejected_pod in 9n5f5a82p1gw1e eeo1skjkwjqot5 j7xr357tdlpq3f; do
   [[ "$POD_ID" != "$rejected_pod" ]]
   [[ "$REMOTE_INPUT" != *"$rejected_pod"* ]]
