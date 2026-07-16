@@ -11,25 +11,25 @@
     "provider_review_scope": "director_level_plan_review"
   },
   "code_freeze": {
-    "commit": "974f7aa9908f614a33bca49b4dbe60864358a6d4",
-    "source_test_inventory_sha256": "8cd0fea2be5fb96fdb43420215f7cc0a1ab0a788236ca74f52830a5f85286de1"
+    "commit": "228ece966675b7e0a19ccc84a5b00c5b951be4ee",
+    "source_test_inventory_sha256": "6c25f8758a6fe90f00f9bf2b048f5774e2f0c28e3765a1eae4fb43d313803f68"
   },
   "tests": {
     "local": {
       "collected_count": 231,
       "failed_count": 0,
-      "file_sha256": "2e619b28db4fcd387ec3131d9392a09d1cd7426aeea8557aa6d42fba5ac3851d",
+      "file_sha256": "19bc55ea249b2d9cf84021aec93e7088161987153ccf619cb50c4905c5326a24",
       "passed_count": 217,
-      "receipt_sha256": "84e9cbaa5bc54b30eab354c31fc293dfd33bbfe58a89af9ac9db7049ccb176e9",
+      "receipt_sha256": "16c2d1e1f0a8d41a8a40ff84fb7ac347ae39ddda27129c4197c57df8ba23a1e2",
       "skipped_count": 14,
       "status": "pass_exact_code_freeze_tests"
     },
     "target_host": {
       "collected_count": 231,
       "failed_count": 0,
-      "file_sha256": "22c85817bacd776d1ce7dde1f15e37fc34f6c74257e356e0145804506f21f711",
+      "file_sha256": "7283d9a0fa8a83cf2c6d71bed37a6c432fde64b35f2840d4544c1785112f83f4",
       "passed_count": 231,
-      "receipt_sha256": "c3404330b02b901e5f881f25394f0a128b0c954e8d0802e6e9e2fc2b860fd2c4",
+      "receipt_sha256": "74b5b2d7e3f2a8076a3361ca3e6a479ca4e9b72afabae5d22e484e7e55eb444b",
       "skipped_count": 0,
       "status": "pass_exact_code_freeze_tests"
     }
@@ -37,7 +37,7 @@
   "qualification": {
     "bootstrap_status": "pass_hash_bound_confined_bootstrap",
     "closure_file_count": 36,
-    "closure_inventory_sha256": "8cd0fea2be5fb96fdb43420215f7cc0a1ab0a788236ca74f52830a5f85286de1",
+    "closure_inventory_sha256": "6c25f8758a6fe90f00f9bf2b048f5774e2f0c28e3765a1eae4fb43d313803f68",
     "closure_scope": "source_test_qualification",
     "cublas_workspace_config": ":4096:8",
     "cuda_status": "pass_target_free_landlock_cuda_preflight",
@@ -61,7 +61,7 @@
     "ownership_status": "owned_running_isolated",
     "provider": {
       "data_center_id": "US-CA-2",
-      "pod_id": "21xepcts9fvgjt",
+      "pod_id": "w90yxfghxxqyxn",
       "volume_id": "bv9gb9j32y"
     },
     "zero_target_activity": {
@@ -74,29 +74,29 @@
   },
   "source_receipts": [
     {
-      "file_sha256": "2e619b28db4fcd387ec3131d9392a09d1cd7426aeea8557aa6d42fba5ac3851d",
+      "file_sha256": "19bc55ea249b2d9cf84021aec93e7088161987153ccf619cb50c4905c5326a24",
       "path": "LOCAL_TEST_RECEIPT.json",
-      "receipt_sha256": "84e9cbaa5bc54b30eab354c31fc293dfd33bbfe58a89af9ac9db7049ccb176e9"
+      "receipt_sha256": "16c2d1e1f0a8d41a8a40ff84fb7ac347ae39ddda27129c4197c57df8ba23a1e2"
     },
     {
-      "file_sha256": "22c85817bacd776d1ce7dde1f15e37fc34f6c74257e356e0145804506f21f711",
+      "file_sha256": "7283d9a0fa8a83cf2c6d71bed37a6c432fde64b35f2840d4544c1785112f83f4",
       "path": "TARGET_HOST_TEST_RECEIPT.json",
-      "receipt_sha256": "c3404330b02b901e5f881f25394f0a128b0c954e8d0802e6e9e2fc2b860fd2c4"
+      "receipt_sha256": "74b5b2d7e3f2a8076a3361ca3e6a479ca4e9b72afabae5d22e484e7e55eb444b"
     },
     {
-      "file_sha256": "b92827af4941066b254348f65f44dbc82af8ec69f1a12312cb907ac103cd18a8",
+      "file_sha256": "b27931f050fb432fda2f7c73120129e2d96d262487e22dcc37e83293328eef97",
       "path": "TARGET_QUALIFICATION_OWNERSHIP.json",
-      "receipt_sha256": "12f9cf125e6da9d3dee99f7feb12443251546a44881876d51faaa4f5e1c43112"
+      "receipt_sha256": "1f51dbcb1e004421b52cd866cb73fbcafaa015663e5e1f8588592b2a7c4f8fa9"
     },
     {
-      "file_sha256": "4434c4c1bfec59ea02952638b2e1287cf2949f2195a5207b217f9c037d0a1c48",
+      "file_sha256": "9d03c0edd9282a6ba9a7c303bd387890b53411160c43004e8d8b852a5c0eea01",
       "path": "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json",
-      "receipt_sha256": "660a49e4815d3dd12e61bec1e0731fd3522ab0abf870acec13da51546e1fa3b2"
+      "receipt_sha256": "6936376b3ade7f06dfe762fd6751a0ec435cfbb14ea70f8feeeec462c9430c51"
     },
     {
-      "file_sha256": "2eb65abe482966d5f86d874227ff568ab18d1e4bf74cfd2c813233e7f352ba5a",
+      "file_sha256": "9721d0cbaed28bdadc9666daa5fedc13410b1ba171d501f7b4a854d2dd05938a",
       "path": "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json",
-      "receipt_sha256": "16919a681d4992bc844859c4cad6d916c198a3afb47b0a75fdbb4ca94218707c"
+      "receipt_sha256": "8a75f797bb2dd872640b879d34dba28250d7d153afc2517752aff88acb9d1ae5"
     }
   ]
 }
