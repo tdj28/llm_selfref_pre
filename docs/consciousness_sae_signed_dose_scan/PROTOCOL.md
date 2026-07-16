@@ -52,14 +52,41 @@ included: -3,000, -2,950, ..., 0, ..., 2,950, 3,000 basis points.
 Dose membership is defined by integer basis points, not floating-point
 accumulation. For magnitude `b`, the requested fraction is `b / 10_000` and
 the requested edit norm is that fraction times the clean layer-50 source RMS.
-The positive and negative branches use the same realized BF16 direction and
-requested norm with opposite signs.
+Each direction is constructed prospectively as
+`Generator(PCG64(seed64(fresh_namespace, direction)))`, followed by 8,192
+independent standard-normal draws in float32 and division by their RMS. The
+draw's sign is seed-committed. There is no semantic/SAE selection, post-hoc sign
+flip, or outcome-dependent rejection; a zero-RMS or non-finite draw is a
+mechanical failure.
 
-For a readout `y`, report the branches separately and derive:
+Let `h0[p,s]` be the clean residual for prompt `p` at state `s`; let `u[d]`
+have unit RMS; and let `b` be positive integer basis points. At the last
+rendered generation-prompt token:
 
-- central signed response: `(y_plus - y_minus) / 2`;
-- common-mode response: `(y_plus + y_minus) / 2 - y_clean`; and
-- realized dose and direction fidelity from the archived pre/post residuals.
+- `q_fp32 = u[d] * RMS(h0[p,block50]) * b / 10000`;
+- `q_bf16 = BF16(q_fp32)` with one native cast;
+- the positive/negative hooks execute native `pre + q_bf16` and
+  `pre - q_bf16` once at post-block-50/pre-block-51;
+- realized central edit `e = (h_plus_post50 - h_minus_post50) / 2`; and
+- realized basis points `= 10000 * RMS(e) / RMS(h0[p,block50])`.
+
+The measured continuation-token states are explicit post-edit block 50,
+post-block outputs 51 through 78, and post-block 79 equal to the final RMSNorm
+input. At every state:
+
+- positive clean-referenced branch `B_plus = h_plus - h0`;
+- negative clean-referenced branch `B_minus = h_minus - h0`;
+- central response `C = (h_plus - h_minus) / 2`; and
+- common-mode response `M = (h_plus + h_minus) / 2 - h0`.
+
+The primary output is the complete 43,200-row census: one row for every prompt,
+direction, nonzero magnitude, and one of the 30 observed states. Each row keeps
+the signed branch coordinates, realized central dose, `RMS(B_plus)/RMS(h0)`,
+`RMS(B_minus)/RMS(h0)`, `RMS(C)/RMS(h0)`, `RMS(M)/RMS(h0)`,
+`RMS(M)/RMS(C)`, and `RMS(C)/RMS(e)`. The shared clean zero is the executed
+origin. Prompt-direction curves are always retained; by-dose aggregates are
+diagnostics of this exact census, not population estimates. The 2,880 forwards
+are never treated as independent samples.
 
 High doses are explicitly a stress regime. A dramatic effect at 20-30% must
 not be described as evidence that the intervention is subtle, selective, or
@@ -73,11 +100,60 @@ the predecessor's local-linearity diagnostic. Other grid points, including
 0.5% and 1%, are retained and reported as diagnostics; a failed diagnostic
 does not permit deleting a row.
 
+The frozen numerical rules are:
+
+- for every plus, minus, and central anchor row, requested-versus-realized
+  relative RMSE must be at most 0.10 and cosine at least 0.995;
+- common-mode-to-central RMS must be at most 0.10 at all four anchors;
+- local-linearity cosine must be at least 0.95 and slope discrepancy at most
+  0.15 over 2%, 3%, and 4%; a failure is valid observed nonlinearity, not an
+  invalid intervention;
+- transaction integrity requires one hook fire, clean-equal pre-edit and
+  layers 45-49, byte-exact native BF16 addition, finite arithmetic, exact
+  file/row/shape/dtype/hash inventories, and independent replay; any failure
+  invalidates the entire transaction and cannot be called a null; and
+- any anchor delivery/common-mode failure makes the fixed-panel primary result
+  ineligible and explicitly invalid, while all rows remain disclosed. A
+  diagnostic-dose delivery failure is retained and flagged but does not delete
+  a row or invalidate otherwise eligible anchor delivery.
+
+A small or null response is interpretable only when transaction integrity and
+all 96 anchor cells (8 prompts x 3 directions x 4 doses) pass. J orientation or
+BF16/FP32 shadow failure invalidates J claims only; it cannot invalidate or
+rescue an eligible actual-state curve.
+
 The actual residual-state curve and the transported J-lens curve are different
 objects. J-lens results are secondary and descriptive. J orientation and
 BF16-versus-FP32 shadow checks gate J-projection claims only; they cannot rescue
 or replace an invalid actual-state intervention curve. The learned J is not
 assumed to outperform identity.
+
+Exactly five random-J controls per layer are fixed by fresh
+`seed64(namespace, layer, control_index)` signed input/output permutations of
+the learned J. A comparison applies only to those exact controls at 3%; it is
+not evidence of distributional random-J superiority.
+
+## One-attempt execution policy
+
+The whole grid is committed and scheduled before execution. Model outcomes are
+not inspected during the transaction, and an interesting, alarming, null, or
+nonlinear response is never an early-stop or replacement reason. The only
+early stops are the frozen budget/provider watchdog, storage ceiling/reserve,
+pinned dependency/artifact mismatch, non-finite arithmetic, hook/replay/
+manifest failure, or infrastructure/I/O failure.
+
+One authorization permits one attempt. A partial attempt remains retained as
+aborted/incomplete and supports no primary or selected-subset summary. The same
+authorization cannot resume, retry, or choose among attempts. An enumerated
+target-independent mechanical failure may be retried only with fresh user
+authority, a fresh run ID/namespace, a new short-lived authorization, and a new
+review if the plan changes; every attempt remains linked and disclosed. The
+first complete independently audited atomic transaction is canonical.
+
+This scan diagnoses intervention mechanics and generates safe-range hypotheses
+for a separately reviewed future semantic/SAE study. It does not select a
+preferred or "safe" dose; any future selection rule requires a new prospective
+review.
 
 ## Separation from the predecessor
 

@@ -138,6 +138,174 @@ SMALL_MODEL_PROMOTION_SPEC = {
     "dose_threshold_tuning_gate": False,
 }
 
+GENERIC_DIRECTION_SPEC = {
+    "count": len(DIRECTIONS),
+    "coordinates": list(DIRECTIONS),
+    "generator": "numpy.random.Generator(PCG64(seed64(namespace,direction)))",
+    "draw_distribution": "independent_standard_normal_float32_per_residual_coordinate",
+    "residual_width": WIDTH,
+    "normalization": "divide_by_sqrt_mean_square_to_unit_rms_float32",
+    "seed_namespace": FRESH_RANDOMIZATION_SPEC["direction_seed_namespace"],
+    "sign_orientation": "seed_committed_draw_no_posthoc_sign_flip",
+    "outcome_dependent_selection": False,
+    "semantic_or_sae_selection": False,
+    "rejection_rule": "reject_only_nonfinite_or_zero_rms_as_mechanical_failure",
+    "population_sample_claim": False,
+}
+
+PRIMARY_ACTUAL_STATE_ESTIMAND = {
+    "claim": (
+        "For the exact frozen three directions and eight prompts in the pinned "
+        "Llama model, describe the clean-referenced continuation-token residual "
+        "response at every frozen signed dose and downstream state; make no "
+        "semantic or population claim."
+    ),
+    "panel_role": "fixed_census_not_random_population_sample",
+    "edited_token": "last_rendered_generation_prompt_token_in_one_token_continuation",
+    "edit_site": "explicit_post_block_50_output_pre_block_51",
+    "observed_sites": [
+        "explicit_post_edit_block_50_output",
+        *[f"post_block_{layer}_output" for layer in range(51, 79)],
+        "post_block_79_output_equal_to_final_rmsnorm_input",
+    ],
+    "clean_state": "h_zero[p,state]",
+    "positive_state": "h_plus[p,d,b,state]",
+    "negative_state": "h_minus[p,d,b,state]",
+    "direction_definition": "u_d_has_unit_RMS_in_float32",
+    "requested_fp32": "q_fp32=u_d*RMS(h_zero[p,block50])*b/10000",
+    "requested_native": "q_bf16=BF16(q_fp32)_with_one_cast",
+    "realized_plus": "e_plus=h_plus_post50-h_plus_pre50",
+    "realized_minus": "e_minus=h_minus_post50-h_minus_pre50",
+    "realized_central": "e=(h_plus_post50-h_minus_post50)/2",
+    "requested_dose_basis_points": "b",
+    "realized_dose_basis_points": "10000*RMS(e)/RMS(h_zero[p,block50])",
+    "positive_clean_referenced": "B_plus=h_plus-h_zero",
+    "negative_clean_referenced": "B_minus=h_minus-h_zero",
+    "central": "C=(h_plus-h_minus)/2",
+    "common_mode": "M=(h_plus+h_minus)/2-h_zero",
+    "primary_output": (
+        "one row per prompt,direction,nonzero magnitude,state containing signed "
+        "branch coordinates, realized central dose, RMS(B_plus)/RMS(h_zero), "
+        "RMS(B_minus)/RMS(h_zero), RMS(C)/RMS(h_zero), "
+        "RMS(M)/RMS(h_zero), RMS(M)/RMS(C), and RMS(C)/RMS(e)"
+    ),
+    "primary_row_count": (
+        len(PROMPT_IDS) * len(DIRECTIONS) * len(DOSE_BASIS_POINTS) * 30
+    ),
+    "shared_zero": "one executed clean origin per prompt_with_response_zero_by_definition",
+    "all_coordinates_retained": True,
+    "prompt_direction_curves_retained": True,
+    "aggregates_role": "diagnostic_summaries_of_exact_census_only",
+    "confidence_intervals_on_primary_curve": False,
+    "model_forward_count_is_not_sample_size": True,
+}
+
+LARGE_MODEL_VALIDITY_HIERARCHY = {
+    "transaction_integrity": {
+        "requirements": [
+            "complete_atomic_raw_transaction_and_manifest",
+            "one_hook_fire_per_edited_forward",
+            "pre_edit_equals_clean_and_layers_45_through_49_equal_clean",
+            "native_bfloat16_post_edit_bytes_exact",
+            "all_required_shapes_dtypes_hashes_rows_and_files_exact",
+            "all_arithmetic_finite",
+            "independent_archive_replay_exact_with_frozen_numeric_tolerance",
+        ],
+        "failure_scope": "entire_transaction_invalid_no_scientific_null_or_primary_curve",
+    },
+    "anchor_delivery": {
+        "dose_fractions": list(REALIZATION_GATE_DOSES),
+        "components": ["plus", "minus", "central"],
+        "relative_rmse_max_inclusive": GATE_THRESHOLDS[
+            "requested_realized_relative_rmse_max"
+        ],
+        "cosine_min_inclusive": GATE_THRESHOLDS["requested_realized_cosine_min"],
+        "common_mode_to_central_rms_max_inclusive": GATE_THRESHOLDS[
+            "common_mode_to_central_rms_max"
+        ],
+        "failure_scope": (
+            "fixed_panel_primary_result_ineligible_and_reported_invalid_not_null; "
+            "all rows remain archived and disclosed"
+        ),
+    },
+    "diagnostic_delivery": {
+        "dose_fractions": list(DIAGNOSTIC_DOSES),
+        "same_numeric_thresholds_reported": True,
+        "failure_scope": "row_retained_and_flagged_no_deletion_no_global_invalidation",
+    },
+    "local_linearity": {
+        "dose_fractions": list(LINEARITY_GATE_DOSES),
+        "cosine_min_inclusive": GATE_THRESHOLDS["linearity_cosine_min"],
+        "slope_discrepancy_max_inclusive": GATE_THRESHOLDS[
+            "linearity_slope_discrepancy_max"
+        ],
+        "failure_scope": "nonlinearity_is_a_descriptive_result_not_invalid_delivery",
+    },
+    "j_projection": {
+        "orientation_cosine_min_inclusive": GATE_THRESHOLDS[
+            "j_orientation_reference_cosine_min"
+        ],
+        "orientation_relative_rmse_max_inclusive": GATE_THRESHOLDS[
+            "j_orientation_reference_relative_rmse_max"
+        ],
+        "bf16_fp32_cosine_min_inclusive": GATE_THRESHOLDS[
+            "bf16_fp32_j_cosine_min"
+        ],
+        "bf16_fp32_relative_rmse_max_inclusive": GATE_THRESHOLDS[
+            "bf16_fp32_j_relative_rmse_max"
+        ],
+        "failure_scope": "j_claims_ineligible_actual_state_curve_unaffected",
+    },
+    "null_interpretation": (
+        "a_small_or_null_actual_state_response_is_interpretable_only_if_transaction_"
+        "integrity_and_all_anchor_delivery_checks_pass"
+    ),
+}
+
+EXECUTION_TRANSACTION_POLICY = {
+    "full_coordinate_schedule_committed_before_execution": True,
+    "outcome_inspection_during_model_transaction": False,
+    "scientific_oddity_can_stop_or_replace_attempt": False,
+    "early_stop_reasons": [
+        "provider_or_campaign_watchdog_expired",
+        "storage_ceiling_or_free_reserve_failed",
+        "dependency_or_pinned_artifact_mismatch",
+        "nonfinite_arithmetic",
+        "hook_or_replay_or_manifest_integrity_failure",
+        "infrastructure_or_io_failure",
+    ],
+    "partial_attempt_status": "aborted_incomplete_invalid_retained_and_disclosed",
+    "same_authorization_retry_permitted": False,
+    "retry_requires": (
+        "new_user_in_scope_authority_new_review_adjudicated_if_plan_changes_new_"
+        "short_lived_authorization_and_fresh_run_id"
+    ),
+    "retry_reasons": "enumerated_mechanical_failure_only_never_scientific_outcome",
+    "canonical_attempt_rule": "first_complete_independently_audited_atomic_transaction",
+    "all_attempts_linked_and_disclosed": True,
+    "incomplete_campaign_reporting": (
+        "report_incomplete_with_attempt_receipt_and_no_primary_or_selected_subset_summary"
+    ),
+}
+
+RANDOM_J_CONTROL_SPEC = {
+    "count": RANDOM_J_COUNT,
+    "generator": "fresh_seeded_signed_permutation_of_each_frozen_learned_J",
+    "seed_namespace": FRESH_RANDOMIZATION_SPEC["random_j_seed_namespace"],
+    "coordinates": "layer_and_control_index_zero_through_four",
+    "comparison_scope": "only_these_exact_five_fixed_controls_at_the_3_percent_reference",
+    "distributional_random_j_superiority_claim": False,
+}
+
+INTENDED_USE_POLICY = {
+    "current_use": (
+        "diagnose_signed_intervention_mechanics_and_generate_safe_range_hypotheses_"
+        "for_a_separately_reviewed_future_semantic_or_SAE_study"
+    ),
+    "preferred_dose_selected_by_this_scan": False,
+    "future_dose_rule_requires_separate_prospective_review": True,
+}
+
 DOSE_CURVE_ESTIMAND = {
     "status": "exploratory_full_curve",
     "requested_axis": "signed_residual_rms_basis_points",
@@ -421,6 +589,12 @@ def protocol_snapshot() -> dict[str, Any]:
         ),
         "zero_baseline": ZERO_BASELINE_CONTRACT,
         "small_model_promotion": SMALL_MODEL_PROMOTION_SPEC,
+        "generic_directions": GENERIC_DIRECTION_SPEC,
+        "primary_actual_state_estimand": PRIMARY_ACTUAL_STATE_ESTIMAND,
+        "large_model_validity_hierarchy": LARGE_MODEL_VALIDITY_HIERARCHY,
+        "execution_transaction_policy": EXECUTION_TRANSACTION_POLICY,
+        "random_j_controls": RANDOM_J_CONTROL_SPEC,
+        "intended_use": INTENDED_USE_POLICY,
         "dose_curve_estimand": DOSE_CURVE_ESTIMAND,
         "reference_online_j_readout": REFERENCE_ONLINE_J_READOUT,
         "fixed_panel_estimand": FIXED_PANEL_ESTIMAND,
@@ -496,6 +670,26 @@ def validate_protocol() -> None:
         )
     ):
         raise ValueError("small-model promotion boundary differs")
+    if (
+        GENERIC_DIRECTION_SPEC["count"] != len(DIRECTIONS)
+        or GENERIC_DIRECTION_SPEC["seed_namespace"]
+        != FRESH_RANDOMIZATION_SPEC["direction_seed_namespace"]
+        or GENERIC_DIRECTION_SPEC["outcome_dependent_selection"] is not False
+        or PRIMARY_ACTUAL_STATE_ESTIMAND["primary_row_count"] != PAIR_COUNT * 30
+        or PRIMARY_ACTUAL_STATE_ESTIMAND["panel_role"]
+        != "fixed_census_not_random_population_sample"
+        or LARGE_MODEL_VALIDITY_HIERARCHY["anchor_delivery"]["dose_fractions"]
+        != list(REALIZATION_GATE_DOSES)
+        or EXECUTION_TRANSACTION_POLICY["same_authorization_retry_permitted"]
+        is not False
+        or EXECUTION_TRANSACTION_POLICY[
+            "scientific_oddity_can_stop_or_replace_attempt"
+        ]
+        is not False
+        or RANDOM_J_CONTROL_SPEC["count"] != RANDOM_J_COUNT
+        or INTENDED_USE_POLICY["preferred_dose_selected_by_this_scan"] is not False
+    ):
+        raise ValueError("review-repair scientific boundary differs")
     if DESIGN_PROVENANCE["analysis_data_inputs"] or DESIGN_PROVENANCE["raw_data_inputs"]:
         raise ValueError("predecessor rows may not enter successor analysis")
     if STORAGE_POLICY["raw_namespace"] == (

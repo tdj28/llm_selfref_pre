@@ -20,6 +20,7 @@ SOURCE_PATHS = (
     "data/consciousness_sae_signed_dose_scan/README.md",
     "docs/consciousness_sae_signed_dose_scan/PRIOR_REVIEW_CONTEXT.md",
     "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_REPAIR_CONTEXT.md",
     "docs/consciousness_sae_signed_dose_scan/PROTOCOL.md",
     "docs/consciousness_sae_target_blind_calibration/results/"
     "calv2-r3-audit-recovery-3a9a54d-20260716T202903Z/RESULT_SUMMARY.json",

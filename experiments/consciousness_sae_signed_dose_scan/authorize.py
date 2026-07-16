@@ -23,6 +23,7 @@ from . import protocol
 REPO_ROOT = Path(__file__).resolve().parents[2]
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
 HEX64_RE = re.compile(r"[0-9a-f]{64}")
+SAFE_RUN_ID_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 CONSERVATIVE_RATE_USD_PER_HOUR = float(
     protocol.RESOURCE_LIMITS["conservative_accounting_rate_usd_per_hour"]
 )
@@ -34,6 +35,7 @@ AUTHORIZATION_FIELDS = frozenset(
         "protocol_version",
         "authorized_at_utc",
         "canonical_plan_relative_path",
+        "authorized_run_id",
         "plan_manifest_sha256",
         "plan_manifest_file_sha256",
         "source_files_sha256",
@@ -267,9 +269,12 @@ def authorize(
     cache_path: Path,
     review_adjudication_path: Path,
     small_model_gate_path: Path,
+    run_id: str,
     hourly_price_usd: float,
     now: datetime | None = None,
 ) -> dict[str, Any]:
+    if SAFE_RUN_ID_RE.fullmatch(run_id) is None:
+        raise AuthorizationError("authorized run ID is unsafe")
     manifest, source, manifest_path, source_path = _plan(plan_dir)
     ownership_raw = _json(ownership_path, "ownership receipt")
     guest_raw = _json(guest_path, "guest receipt")
@@ -333,6 +338,7 @@ def authorize(
         "protocol_version": protocol.PROTOCOL_VERSION,
         "authorized_at_utc": current.isoformat().replace("+00:00", "Z"),
         "canonical_plan_relative_path": protocol.CANONICAL_PLAN_RELATIVE_PATH,
+        "authorized_run_id": run_id,
         "plan_manifest_sha256": manifest["plan_manifest_sha256"],
         "plan_manifest_file_sha256": protocol.sha256_file(manifest_path),
         "source_files_sha256": protocol.sha256_file(source_path),
@@ -405,6 +411,8 @@ def validate_execution_authorization(
         or receipt.get("protocol_version") != protocol.PROTOCOL_VERSION
         or receipt.get("canonical_plan_relative_path")
         != protocol.CANONICAL_PLAN_RELATIVE_PATH
+        or SAFE_RUN_ID_RE.fullmatch(str(receipt.get("authorized_run_id", "")))
+        is None
         or receipt.get("plan_manifest_sha256") != plan.get("plan_manifest_sha256")
         or receipt.get("plan_manifest_file_sha256")
         != protocol.sha256_file(_regular_file(plan_manifest_path, "plan manifest"))
@@ -479,6 +487,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--review-adjudication", type=Path, required=True)
     parser.add_argument("--small-model-gate", type=Path, required=True)
+    parser.add_argument("--run-id", required=True)
     parser.add_argument("--hourly-price-usd", type=float, default=6.0)
     parser.add_argument("--output", type=Path, required=True)
     return parser
@@ -493,6 +502,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         cache_path=args.cache,
         review_adjudication_path=args.review_adjudication,
         small_model_gate_path=args.small_model_gate,
+        run_id=args.run_id,
         hourly_price_usd=args.hourly_price_usd,
     )
     _write(args.output, receipt)

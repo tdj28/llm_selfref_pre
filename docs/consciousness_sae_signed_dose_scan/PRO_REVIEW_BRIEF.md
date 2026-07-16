@@ -38,18 +38,65 @@ archive is 2.3 GB with a 4 GiB ceiling and 64 GiB required free reserve.
 
 ## Measurement boundary
 
-Actual residual arcs are the primary archive. Delivery and common-mode checks
-are prespecified at 2%, 3%, 4%, and 8%; local linearity uses 2%, 3%, and 4%.
-All other doses remain diagnostic and cannot be discarded. Full online learned-
-J, identity, and random-J transport is stored only at the 3% reference to bound
-storage. The J result is secondary, cannot rescue the actual-state curve, and
-is not assumed to beat identity. Complete archived arcs permit later readout
-replay without another 70B forward.
+The edit and measurement use the last rendered generation-prompt token. The
+single hook is explicit post-block 50/pre-block 51. States are explicit
+post-edit block 50, post-block 51-78, and post-block 79/final RMSNorm input.
+For unit-RMS seeded direction `u`, clean block-50 state `h0`, and basis points
+`b`, `q_fp32=u*RMS(h0)*b/10000`, `q_bf16=BF16(q_fp32)`, and realized central
+edit `e=(h_plus_post50-h_minus_post50)/2`. Realized basis points are
+`10000*RMS(e)/RMS(h0)`.
+
+At every observed state, `B_plus=h_plus-h0`, `B_minus=h_minus-h0`,
+`C=(h_plus-h_minus)/2`, and `M=(h_plus+h_minus)/2-h0`. The primary output is
+the complete 43,200-row prompt x direction x magnitude x state census with
+signed coordinates, realized dose, branch/central/common RMS fractions,
+common-to-central ratio, and downstream central gain. Every cell-resolved
+curve remains visible. Aggregates are diagnostic summaries of the exact panel;
+2,880 forwards are not a sample size and no population interval is allowed.
+
+Directions are exactly fresh PCG64-seeded standard-normal float32 vectors
+normalized to unit RMS. Their sign is seed-committed; there is no semantic/SAE
+selection, post-hoc orientation, or outcome rejection.
+
+Delivery and common-mode checks are prespecified at 2%, 3%, 4%, and 8%; local
+linearity uses 2%, 3%, and 4%. All other doses remain diagnostic and cannot be
+discarded. Full online learned-J, identity, and five freshly seeded fixed
+random-J controls is stored only at 3%. J comparisons are limited to those
+exact controls; the J result is secondary and cannot rescue actual-state data.
+Complete arcs permit later readout replay without another 70B forward.
 
 The prior compact result informs design provenance only. Old observations and
 randomization are not analysis inputs. Fresh seeds, directions, token panel,
 random-J controls, orientation fixtures, raw transaction, and namespace are
 required.
+
+## Frozen 70B validity and attempt rules
+
+Transaction integrity is all-or-nothing: every row/file/hash/shape/dtype must
+exist; arithmetic must be finite; every edited forward must fire one hook;
+pre-edit and layers 45-49 must equal clean; native BF16 post-edit bytes and
+independent replay must be exact. Failure invalidates the transaction, never a
+scientific null.
+
+At every one of the 96 anchor cells, plus/minus/central requested-realized RMSE
+must be <=0.10, cosine >=0.995, and common/central RMS <=0.10. Any anchor failure
+makes the fixed-panel primary result ineligible and invalid while retaining all
+rows. Diagnostic-dose failure is reported without deletion. Local-linearity
+cosine >=0.95 and slope discrepancy <=0.15 are descriptive checks: failure is
+valid nonlinearity. J orientation/shadow failure blocks J claims only. A null is
+interpretable only after transaction integrity and all anchor delivery pass.
+
+The full schedule is frozen before outcomes. Outcomes are not inspected during
+the transaction; scientific oddity cannot stop or replace it. Only budget,
+storage, pinned-artifact, non-finite, hook/replay/manifest, infrastructure, or
+I/O failures stop it. One authorization permits one attempt. A partial attempt
+is retained as incomplete with no selected-subset result; the same authorization
+cannot retry. An enumerated mechanical failure requires fresh authority,
+run identity, and authorization, with all attempts disclosed. The first complete
+independently audited transaction is canonical.
+
+This scan diagnoses mechanics and generates safe-range hypotheses for a
+separately reviewed future study. It does not choose a preferred or safe dose.
 
 ## Smaller-model-first gate
 

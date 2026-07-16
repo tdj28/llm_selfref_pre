@@ -65,6 +65,24 @@ EXPECTED_FROZEN_OBJECT_SHA256 = {
         "9bb63adfba04ac26305a7894fe87117f837c50189a53cfc972219eec7bfc0ef9"
     ),
     "storage": "d6efeb8bee76f2acb6bbe7fd34d28ca44ae22485b74fd3db3f7d319be0d70b20",
+    "generic_directions": (
+        "85b39a73725bf82b6aaa19649bf579a92deac891273e3055740e0dbc5151ec7c"
+    ),
+    "primary_actual_state_estimand": (
+        "b8a765a97e1de6d0cfbbb88325a51235678113f8557ad156be372e8df8e62931"
+    ),
+    "large_model_validity_hierarchy": (
+        "0d8ecbe1c810c92b140dcf5408245ac4992c7f3e9749b396d906388f661ef596"
+    ),
+    "execution_transaction_policy": (
+        "c711b286c3a8172f59efd14d834a3f865fc22467f18c9cb2c4be39cb2aaf355d"
+    ),
+    "random_j_controls": (
+        "7866f7a96054d2f79be1f2ddef47424d4badfd06f5327691ac92c61e2c387821"
+    ),
+    "intended_use": (
+        "60cdb031459121a2468c75316c3d1841e71755cefe34ea6c4e84f87586d1eedd"
+    ),
 }
 EXPECTED_RANDOMIZATION_NAMESPACES = {
     "runtime_seed_namespace": "signed-dose-scan-runtime-v1",
@@ -104,6 +122,7 @@ REQUIRED_BOUND_SOURCES = (
     "data/consciousness_sae_signed_dose_scan/README.md",
     "docs/consciousness_sae_signed_dose_scan/PRIOR_REVIEW_CONTEXT.md",
     "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_REPAIR_CONTEXT.md",
     "docs/consciousness_sae_signed_dose_scan/PROTOCOL.md",
     "docs/consciousness_sae_target_blind_calibration/results/"
     "calv2-r3-audit-recovery-3a9a54d-20260716T202903Z/RESULT_SUMMARY.json",

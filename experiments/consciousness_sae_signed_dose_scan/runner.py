@@ -104,8 +104,19 @@ def _patch_engine() -> None:
     _impl._validate_authorization = _validate_authorization  # noqa: SLF001
 
 
+def _validate_authorized_run_id(path: Path, run_id: str) -> None:
+    authorization = _impl._read_json(path)  # noqa: SLF001
+    if authorization.get("authorized_run_id") != run_id:
+        raise _impl.CalibrationExecutionError(
+            "requested run ID differs from the one-attempt authorization"
+        )
+
+
 def execute(**kwargs: Any) -> Path:
     _patch_engine()
+    _validate_authorized_run_id(
+        Path(kwargs["authorization_receipt_path"]), str(kwargs.get("run_id", ""))
+    )
     return _impl.execute(**kwargs)
 
 
@@ -116,7 +127,23 @@ def build_parser() -> Any:
 
 def main(argv: Sequence[str] | None = None) -> int:
     _patch_engine()
-    return _impl.main(argv)
+    args = _impl.build_parser().parse_args(argv)
+    print(
+        execute(
+            plan_dir=args.plan_dir,
+            volume_root=args.volume_root,
+            volume_id=args.volume_id,
+            run_id=args.run_id,
+            model_snapshot=args.model_snapshot,
+            sae_path=args.sae_path,
+            j_lens_path=args.j_lens_path,
+            ownership_receipt_path=args.ownership_receipt,
+            guest_receipt_path=args.guest_receipt,
+            cache_receipt_path=args.cache_receipt,
+            authorization_receipt_path=args.authorization_receipt,
+        )
+    )
+    return 0
 
 
 if __name__ == "__main__":

@@ -549,6 +549,7 @@ def _audit_external_receipt_chain(
         != authorization.get("canonical_plan_relative_path")
         or complete.get("canonical_plan_relative_path")
         != authorization.get("canonical_plan_relative_path")
+        or complete.get("run_id") != authorization.get("authorized_run_id")
         or execution_binding.get("pod_id") != ownership.get("pod_id")
         or execution_binding.get("volume_id") != ownership.get("network_volume_id")
         or execution_binding.get("data_center_id") != ownership.get("data_center_id")
@@ -1792,6 +1793,93 @@ def _linearity_summary(
     return rows, failures
 
 
+def _primary_actual_state_arc_rows(
+    *,
+    prompt_id: str,
+    direction: int,
+    dose: float,
+    clean_arc: Any,
+    plus_arc: Any,
+    minus_arc: Any,
+    realized_source: Any,
+) -> list[dict[str, Any]]:
+    """Recompute the frozen cell-resolved layer-by-dose primary output."""
+
+    dose_basis_points = int(round(dose * 10_000))
+    clean_source = clean_arc[protocol.EDIT_LAYER - 45].float()
+    clean_source_rms = _rms(clean_source)
+    realized_basis_points = 10_000.0 * _rms(realized_source) / clean_source_rms
+    coordinates: list[tuple[int, str, Any, Any, Any]] = [
+        (
+            50,
+            "explicit_post_edit_block_50_output",
+            plus_arc[-2],
+            minus_arc[-2],
+            clean_arc[protocol.EDIT_LAYER - 45],
+        )
+    ]
+    coordinates.extend(
+        (
+            layer,
+            f"post_block_{layer}_output",
+            plus_arc[layer - 45],
+            minus_arc[layer - 45],
+            clean_arc[layer - 45],
+        )
+        for layer in range(51, 79)
+    )
+    coordinates.append(
+        (
+            79,
+            "post_block_79_output_equal_to_final_rmsnorm_input",
+            plus_arc[-1],
+            minus_arc[-1],
+            clean_arc[-1],
+        )
+    )
+    rows: list[dict[str, Any]] = []
+    for state_index, state_label, plus_state, minus_state, clean_state in coordinates:
+        plus_delta = plus_state.float() - clean_state.float()
+        minus_delta = minus_state.float() - clean_state.float()
+        central = (plus_state.float() - minus_state.float()) * 0.5
+        common = (
+            plus_state.float() + minus_state.float()
+        ) * 0.5 - clean_state.float()
+        clean_state_rms = _rms(clean_state)
+        central_rms = _rms(central)
+        rows.append(
+            {
+                "prompt_id": prompt_id,
+                "direction": direction,
+                "requested_dose_basis_points": dose_basis_points,
+                "plus_signed_dose_basis_points": dose_basis_points,
+                "minus_signed_dose_basis_points": -dose_basis_points,
+                "realized_central_dose_basis_points": realized_basis_points,
+                "state_index": state_index,
+                "state_label": state_label,
+                "plus_clean_referenced_rms_fraction": (
+                    _rms(plus_delta) / clean_state_rms
+                ),
+                "minus_clean_referenced_rms_fraction": (
+                    _rms(minus_delta) / clean_state_rms
+                ),
+                "central_clean_referenced_rms_fraction": (
+                    central_rms / clean_state_rms
+                ),
+                "common_mode_clean_referenced_rms_fraction": (
+                    _rms(common) / clean_state_rms
+                ),
+                "common_mode_to_central_rms": _safe_ratio(
+                    _rms(common), central_rms
+                ),
+                "central_gain_over_realized_source_rms": _safe_ratio(
+                    central_rms, _rms(realized_source)
+                ),
+            }
+        )
+    return rows
+
+
 def audit(
     run_root: Path,
     plan_dir: Path,
@@ -1924,6 +2012,7 @@ def audit(
         raise CalibrationAuditError("clean residual tensor differs")
 
     recomputed_realization: list[dict[str, Any]] = []
+    primary_actual_state_arc_rows: list[dict[str, Any]] = []
     linearity_inputs: dict[
         tuple[str, int], dict[float, tuple[Any, Any, Any, float, float]]
     ] = defaultdict(dict)
@@ -2228,6 +2317,17 @@ def audit(
                     ),
                 }
             )
+            primary_actual_state_arc_rows.extend(
+                _primary_actual_state_arc_rows(
+                    prompt_id=prompt_id,
+                    direction=direction,
+                    dose=dose,
+                    clean_arc=clean[prompt_offset],
+                    plus_arc=plus,
+                    minus_arc=minus,
+                    realized_source=realized,
+                )
+            )
             linearity_inputs[(prompt_id, direction)][dose] = (
                 realized,
                 arithmetic["j_prediction_fp32"][pair_offset],
@@ -2507,6 +2607,9 @@ def audit(
         }
 
     linearity_rows, component_failures = _linearity_summary(linearity_inputs)
+    expected_primary_rows = EXPECTED_PAIR_COUNT * (len(range(50, 79)) + 1)
+    if len(primary_actual_state_arc_rows) != expected_primary_rows:
+        raise CalibrationAuditError("primary actual-state arc inventory differs")
 
     claim_statuses = _separated_claim_statuses(
         edit_failure_count=len(hard_safety_failures) + len(realization_failures),
@@ -2540,6 +2643,7 @@ def audit(
         "campaign_deadline_at_unix": binding_hashes["campaign_deadline_at_unix"],
         "hourly_price_usd": binding_hashes["hourly_price_usd"],
         "recomputed_realization_row_count": len(recomputed_realization),
+        "primary_actual_state_arc_row_count": len(primary_actual_state_arc_rows),
         "recomputed_readout_transport_row_count": len(transport_recomputed),
         "recomputed_linearity_row_count": len(linearity_rows),
         "independent_plan_audit_receipt_sha256": plan_audit_receipt["receipt_sha256"],
@@ -2575,6 +2679,14 @@ def audit(
             diagnostic_j_shadow_failures
         ),
         "linearity_failure_counts": component_failures,
+        "primary_actual_state_estimand": protocol.PRIMARY_ACTUAL_STATE_ESTIMAND,
+        "primary_actual_state_arc_row_count": len(primary_actual_state_arc_rows),
+        "primary_actual_state_arc_rows": primary_actual_state_arc_rows,
+        "shared_zero_baseline": {
+            "requested_dose_basis_points": 0,
+            "response_by_definition": 0.0,
+            "execution": "one_clean_continuation_per_prompt_not_direction_duplicated",
+        },
         "by_dose": dose_summaries,
         "linearity_rows": linearity_rows,
         "readout_transport": transport_summary,
@@ -2585,6 +2697,9 @@ def audit(
             "j_over_identity_failure_blocks_actual_state_contrasts": False,
             "j_over_identity_failure_blocks_learned_j_added_value_claim": True,
             "target_or_semantic_claim_permitted": False,
+            "fixed_panel_population_inference_permitted": False,
+            "primary_output": "cell_resolved_layer_by_dose_actual_state_arc_rows",
+            "by_dose_aggregates_are_diagnostic": True,
         },
         "adaptive_design_inputs": protocol.ADAPTIVE_DESIGN_INPUTS,
         "analysis_data_inputs": [],

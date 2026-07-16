@@ -155,3 +155,39 @@ def test_review_verdict_must_be_final_and_unopposed() -> None:
         review_adjudication.terminal_verdict(
             "READY TO FREEZE\n\nTrailing qualification.\n"
         )
+
+
+def test_runner_binds_one_run_id_per_authorization(tmp_path: Path) -> None:
+    path = tmp_path / "authorization.json"
+    _write_canonical(path, {"authorized_run_id": "signed-scan-run-001"})
+    runner._validate_authorized_run_id(path, "signed-scan-run-001")
+    with pytest.raises(engine.CalibrationExecutionError, match="one-attempt"):
+        runner._validate_authorized_run_id(path, "signed-scan-run-002")
+
+
+def test_primary_actual_state_arc_rows_cover_every_downstream_state() -> None:
+    torch = pytest.importorskip("torch")
+    clean = torch.ones((len(protocol.J_LAYERS) + 1, 4), dtype=torch.bfloat16)
+    plus = torch.ones((len(protocol.J_LAYERS) + 2, 4), dtype=torch.bfloat16)
+    minus = torch.ones_like(plus)
+    plus[-2] = 1.1015625
+    minus[-2] = 0.8984375
+    plus[6:-2] = 1.203125
+    minus[6:-2] = 0.796875
+    plus[-1] = 1.296875
+    minus[-1] = 0.703125
+    realized = (plus[-2].float() - minus[-2].float()) * 0.5
+    rows = audit._primary_actual_state_arc_rows(
+        prompt_id=protocol.PROMPT_IDS[0],
+        direction=0,
+        dose=0.03,
+        clean_arc=clean,
+        plus_arc=plus,
+        minus_arc=minus,
+        realized_source=realized,
+    )
+    assert len(rows) == 30
+    assert [row["state_index"] for row in rows] == list(range(50, 80))
+    assert rows[0]["state_label"] == "explicit_post_edit_block_50_output"
+    assert rows[-1]["state_label"].endswith("final_rmsnorm_input")
+    assert all(row["requested_dose_basis_points"] == 300 for row in rows)

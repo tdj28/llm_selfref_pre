@@ -26,6 +26,10 @@ REVIEW_PACKET = (
         "docs/consciousness_sae_signed_dose_scan/PRIOR_REVIEW_CONTEXT.md",
         "synthesized context 1",
     ),
+    (
+        "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_REPAIR_CONTEXT.md",
+        "synthesized context 2",
+    ),
 )
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
 
