@@ -46,6 +46,87 @@ ORIGINAL_PLAN_AUDIT_RECEIPT = (
 ORIGINAL_SOURCE_INVENTORY_RECEIPT = (
     "94fa3e25e2aa7c9e40ea00cb9cb4e3d516d0606fe7c8f140f3b5dbf81eaeb0b5"
 )
+C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
+RECOVERY_EQUIVALENCE_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v2"
+)
+QUALIFICATION_INCIDENT_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
+)
+QUALIFICATION_INCIDENT_FILENAMES = (
+    "RECOVERY_EQUIVALENCE_PACKET.json",
+    "RECOVERY_EQUIVALENCE_VERIFICATION.json",
+    "ATTEMPT_STARTED.json",
+    "QUALIFICATION_FAILED.json",
+    "OWNERSHIP.json",
+    "FROZEN_OWNERSHIP.json",
+    "PRECREATE_INVENTORY.json",
+    "POSTCREATE_INVENTORY.json",
+    "STATUS_0001.json",
+    "FROZEN_STATUS_0001.json",
+    "READY.json",
+    "TERMINATION_AUDIT.json",
+    "FROZEN_TERMINATION.json",
+    "POSTDELETE_INVENTORY.json",
+    "INCIDENT_CAUSE.json",
+    "INCIDENT_CLOSURE_SCHEMA.json",
+    "INCIDENT_CLOSURE.json",
+    "INCIDENT_CLOSURE_VERIFICATION.json",
+)
+SUCCESSOR_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_SUCCESSOR_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_SUCCESSOR_REPRODUCTION.md",
+)
+ORIGINAL_TO_C1_NAME_STATUS = {
+    path: "A"
+    for path in (
+        "docs/consciousness_sae_signed_dose_scan/AUDIT_ONLY_RECOVERY_AMENDMENT_20260717.md",
+        "docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE.json",
+        "docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE_SCHEMA.json",
+        "docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE_VERIFICATION.json",
+        "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER.json",
+        "docs/consciousness_sae_signed_dose_scan/RECOVERY_REPRODUCTION.md",
+        "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+        "experiments/consciousness_sae_signed_dose_scan/incident_closure.py",
+        "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+        "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
+        "experiments/consciousness_sae_signed_dose_scan/verify_incident_closure.py",
+        "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+        "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
+        "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+        "tests/consciousness_sae_signed_dose_scan/test_incident_closure.py",
+        "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+        "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+    )
+}
+C1_TO_C2_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in (
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+        )
+    },
+    **{
+        path: "A"
+        for path in (
+            *SUCCESSOR_DOC_PATHS,
+            *(f"{QUALIFICATION_INCIDENT_ROOT}/{name}" for name in QUALIFICATION_INCIDENT_FILENAMES),
+            "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
+            "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
+        )
+    },
+}
 PREDECESSOR_PRECEDENT_COMMIT = "e187342"
 PREDECESSOR_PRECEDENT_PATHS = {
     "experiments/consciousness_sae_target_blind_calibration/scientific_equivalence.py": (
@@ -84,6 +165,8 @@ RECOVERY_CLOSURE_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/PROTOCOL.md",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_REPRODUCTION.md",
+    *SUCCESSOR_DOC_PATHS,
+    *(f"{QUALIFICATION_INCIDENT_ROOT}/{name}" for name in QUALIFICATION_INCIDENT_FILENAMES),
     "docs/consciousness_sae_target_blind_calibration/results/"
     "calv2-r3-audit-recovery-3a9a54d-20260716T202903Z/RESULT_SUMMARY.json",
     "experiments/__init__.py",
@@ -113,6 +196,7 @@ RECOVERY_CLOSURE_PATHS = (
     "experiments/consciousness_sae_signed_dose_scan/incident_closure.py",
     "experiments/consciousness_sae_signed_dose_scan/orientation.py",
     "experiments/consciousness_sae_signed_dose_scan/protocol.py",
+    "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
     "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
     "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
     "experiments/consciousness_sae_signed_dose_scan/requirements-runpod-b200.txt",
@@ -121,6 +205,7 @@ RECOVERY_CLOSURE_PATHS = (
     "experiments/consciousness_sae_signed_dose_scan/setup_runpod_guest.sh",
     "experiments/consciousness_sae_signed_dose_scan/validate_plan.py",
     "experiments/consciousness_sae_signed_dose_scan/verify_incident_closure.py",
+    "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
     "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
     "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
     "src/prompts.py",
@@ -130,6 +215,7 @@ RECOVERY_CLOSURE_PATHS = (
     "tests/consciousness_sae_signed_dose_scan/test_gemma9b_validation.py",
     "tests/consciousness_sae_signed_dose_scan/test_incident_closure.py",
     "tests/consciousness_sae_signed_dose_scan/test_plan.py",
+    "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
     "tests/consciousness_sae_signed_dose_scan/test_protocol.py",
     "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
     "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
@@ -236,6 +322,118 @@ def _git(repo_root: Path, *args: str) -> bytes:
             f"git {' '.join(args)} failed"
         )
     return result.stdout
+
+
+def _status_rows(mapping: Mapping[str, str]) -> list[dict[str, str]]:
+    return [
+        {"path": path, "status": mapping[path]}
+        for path in sorted(mapping)
+    ]
+
+
+def _observed_name_status(
+    repo_root: Path, parent: str, child: str
+) -> dict[str, str]:
+    raw = _git(
+        repo_root,
+        "diff",
+        "--name-status",
+        "--no-renames",
+        parent,
+        child,
+    ).decode("utf-8")
+    observed: dict[str, str] = {}
+    for line in raw.splitlines():
+        fields = line.split("\t")
+        if len(fields) != 2 or fields[0] not in {"A", "M", "D", "T"}:
+            raise RecoveryEquivalenceVerificationError(
+                "freeze name-status record differs"
+            )
+        status, path = fields
+        candidate = Path(path)
+        if candidate.is_absolute() or ".." in candidate.parts or path in observed:
+            raise RecoveryEquivalenceVerificationError(
+                "freeze name-status path differs"
+            )
+        observed[path] = status
+    return observed
+
+
+def _verify_freeze_lineage(
+    packet: Mapping[str, Any],
+    *,
+    code_freeze_commit: str,
+    repo_root: Path,
+    enforce_git: bool,
+) -> None:
+    original_rows = _status_rows(ORIGINAL_TO_C1_NAME_STATUS)
+    successor_rows = _status_rows(C1_TO_C2_NAME_STATUS)
+    expected = {
+        "status": "pass_exact_original_C1_C2_successor_lineage",
+        "original_freeze_commit": ORIGINAL_FREEZE_COMMIT,
+        "c1_recovery_freeze_commit": C1_RECOVERY_FREEZE_COMMIT,
+        "c2_code_freeze_commit": code_freeze_commit,
+        "direct_parent_chain": [
+            ORIGINAL_FREEZE_COMMIT,
+            C1_RECOVERY_FREEZE_COMMIT,
+            code_freeze_commit,
+        ],
+        "original_to_c1_name_status": original_rows,
+        "original_to_c1_name_status_sha256": canonical_sha256(original_rows),
+        "c1_to_c2_name_status": successor_rows,
+        "c1_to_c2_name_status_sha256": canonical_sha256(successor_rows),
+        "original_science_mutation_paths": [],
+        "original_science_bytes_immutable": True,
+    }
+    if packet.get("freeze_lineage") != expected:
+        raise RecoveryEquivalenceVerificationError(
+            "freeze lineage binding differs"
+        )
+    if not enforce_git:
+        return
+    for commit in (
+        ORIGINAL_FREEZE_COMMIT,
+        C1_RECOVERY_FREEZE_COMMIT,
+        code_freeze_commit,
+    ):
+        if _git(repo_root, "rev-parse", f"{commit}^{{commit}}").decode().strip() != commit:
+            raise RecoveryEquivalenceVerificationError(
+                "freeze commit does not resolve exactly"
+            )
+    c1_lineage = _git(
+        repo_root,
+        "rev-list",
+        "--parents",
+        "-n",
+        "1",
+        C1_RECOVERY_FREEZE_COMMIT,
+    ).decode().split()
+    c2_lineage = _git(
+        repo_root,
+        "rev-list",
+        "--parents",
+        "-n",
+        "1",
+        code_freeze_commit,
+    ).decode().split()
+    if c1_lineage != [C1_RECOVERY_FREEZE_COMMIT, ORIGINAL_FREEZE_COMMIT]:
+        raise RecoveryEquivalenceVerificationError(
+            "original-to-C1 direct parent differs"
+        )
+    if c2_lineage != [code_freeze_commit, C1_RECOVERY_FREEZE_COMMIT]:
+        raise RecoveryEquivalenceVerificationError("C1-to-C2 direct parent differs")
+    if _observed_name_status(
+        repo_root, ORIGINAL_FREEZE_COMMIT, C1_RECOVERY_FREEZE_COMMIT
+    ) != ORIGINAL_TO_C1_NAME_STATUS:
+        raise RecoveryEquivalenceVerificationError(
+            "original-to-C1 name-status map differs"
+        )
+    if _observed_name_status(
+        repo_root, C1_RECOVERY_FREEZE_COMMIT, code_freeze_commit
+    ) != C1_TO_C2_NAME_STATUS:
+        raise RecoveryEquivalenceVerificationError(
+            "C1-to-C2 name-status map differs"
+        )
 
 
 def git_blob(repo_root: Path, commit: str, path: str) -> bytes:
@@ -517,10 +715,13 @@ def verify_packet(
         reader = blob_reader
     identity = {
         "schema_version": 1,
-        "packet_type": "signed_dose_outcome_blind_audit_recovery_equivalence",
+        "packet_type": "signed_dose_outcome_blind_audit_recovery_equivalence_v2",
         "status": "pass_source_design_and_compatibility_bound_no_outcomes_loaded",
         "study_id": "consciousness_sae_signed_dose_scan_v1",
         "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+        "recovery_equivalence_protocol_version": (
+            RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
+        ),
         "outcome_input_paths": [],
         "raw_run_opened": False,
         "compact_result_opened": False,
@@ -535,6 +736,7 @@ def verify_packet(
         *identity,
         "scope",
         "original_freeze",
+        "freeze_lineage",
         "recovery_closure",
         "recovery_runtime_surface",
         "predecessor_recovery_precedent",
@@ -547,6 +749,12 @@ def verify_packet(
     commit = _verify_closure(
         packet, repo_root=repo_root, reader=reader, enforce_git=enforce_git
     )
+    _verify_freeze_lineage(
+        packet,
+        code_freeze_commit=commit,
+        repo_root=repo_root,
+        enforce_git=enforce_git,
+    )
     _verify_runtime(packet, commit, reader)
     _verify_precedent(packet, reader, repo_root)
     if packet.get("compatibility_proof") != _expected_compatibility():
@@ -556,6 +764,9 @@ def verify_packet(
         "status": "pass_outcome_blind_recovery_equivalence_verified",
         "study_id": identity["study_id"],
         "protocol_version": identity["protocol_version"],
+        "recovery_equivalence_protocol_version": (
+            RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
+        ),
         "packet_path": packet_path.expanduser().absolute().as_posix(),
         "packet_file_sha256": _sha256(packet_raw),
         "packet_sha256": packet_hash,
@@ -563,6 +774,7 @@ def verify_packet(
         "recovery_closure_inventory_sha256": packet["recovery_closure"][
             "inventory_sha256"
         ],
+        "freeze_lineage_sha256": canonical_sha256(packet["freeze_lineage"]),
         "scientific_field_projection_sha256": packet["compatibility_proof"][
             "scientific_field_projection_sha256"
         ],

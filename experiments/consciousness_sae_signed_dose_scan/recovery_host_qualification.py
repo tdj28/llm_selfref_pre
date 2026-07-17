@@ -11,6 +11,7 @@ and Transformers model load, and performs only one tiny raw BF16 CUDA matmul.
 from __future__ import annotations
 
 import argparse
+import errno
 import hashlib
 import json
 import math
@@ -25,16 +26,40 @@ from typing import Any, Callable, Mapping
 
 from experiments.consciousness_sae_realization_validation import runpod_preflight
 from experiments.consciousness_sae_signed_dose_scan import audit as frozen_audit
-from experiments.consciousness_sae_signed_dose_scan import audit_recovery, protocol
+from experiments.consciousness_sae_signed_dose_scan import (
+    audit_recovery,
+    protocol,
+    qualification_incident,
+)
 from experiments.consciousness_sae_signed_dose_scan import (
     verify_recovery_equivalence,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-QUALIFICATION_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v1"
+QUALIFICATION_INCIDENT_DIR = REPO_ROOT / (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
 )
+RECOVERY_CYCLE_LEDGER_PATH = (
+    REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+)
+EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
+    "41c7a12dde095fdf19dc00a0f211afe8b0d2f12299b7ab1a5e12f70b5eee8f26"
+)
+QUALIFICATION_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+)
+QUALIFICATION_CYCLE_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
+)
+GLOBAL_QUALIFICATION_ORDINAL = 2
+SUCCESSOR_QUALIFICATION_ATTEMPT = 1
+REJECTED_PREDECESSOR_POD_IDS = frozenset(
+    {"wl8obvtuq0ax8t", "69d9kxugxuf6up"}
+)
+PATH_DIAGNOSTIC_LIMIT = 16
 ATTEMPT_MARKER_NAME = "ATTEMPT_STARTED.json"
 SUCCESS_NAME = "TARGET_HOST_QUALIFICATION.json"
 FAILURE_NAME = "QUALIFICATION_FAILED.json"
@@ -161,8 +186,10 @@ def _utc_timestamp(value: Any, label: str) -> float:
     return parsed.astimezone(timezone.utc).timestamp()
 
 
-def _strict_path(value: Any, label: str, *, must_exist: bool) -> Path:
-    """Resolve a path while rejecting every existing symlink component."""
+def _strict_path_resolution(
+    value: Any, label: str, *, must_exist: bool
+) -> tuple[Path, int | None]:
+    """Resolve a path and report a tolerated non-directory probe errno."""
 
     if isinstance(value, int):
         raise RecoveryHostQualificationError(f"{label} is a file descriptor")
@@ -180,6 +207,15 @@ def _strict_path(value: Any, label: str, *, must_exist: bool) -> Path:
                 if must_exist:
                     raise RecoveryHostQualificationError(f"{label} is missing")
                 continue
+            except OSError as exc:
+                if not must_exist and exc.errno == errno.ENOTDIR:
+                    # Import machinery legitimately probes a child below a
+                    # file-shaped ``*.egg-info`` entry.  The lexical path is
+                    # still safe to compare with the forbidden raw root: all
+                    # existing ancestors up to the non-directory component
+                    # were lstat'd and none was a symlink.
+                    return lexical, exc.errno
+                raise
             if stat.S_ISLNK(details.st_mode):
                 raise RecoveryHostQualificationError(
                     f"{label} contains a symlink component"
@@ -191,6 +227,15 @@ def _strict_path(value: Any, label: str, *, must_exist: bool) -> Path:
         raise RecoveryHostQualificationError(f"{label} is missing") from exc
     if resolved != lexical:
         raise RecoveryHostQualificationError(f"{label} canonical path differs")
+    return resolved, None
+
+
+def _strict_path(value: Any, label: str, *, must_exist: bool) -> Path:
+    """Resolve a path while rejecting every existing symlink component."""
+
+    resolved, _tolerated_errno = _strict_path_resolution(
+        value, label, must_exist=must_exist
+    )
     return resolved
 
 
@@ -212,7 +257,70 @@ class RawPathAuditGuard:
         if not self.forbidden_raw_root.is_dir():
             raise RecoveryHostQualificationError("forbidden raw root is not a directory")
         self.open_event_count = 0
-        self.forbidden_attempt_count = 0
+        self.raw_forbidden_attempt_count = 0
+        self.path_guard_rejected_attempt_count = 0
+        self.allowed_outside_raw_enotdir_probe_count = 0
+        self.path_diagnostics: list[dict[str, Any]] = []
+
+    @property
+    def forbidden_attempt_count(self) -> int:
+        """Backward-compatible alias with corrected raw-only semantics."""
+
+        return self.raw_forbidden_attempt_count
+
+    def _record_diagnostic(
+        self,
+        *,
+        classification: str,
+        value: Any,
+        error_errno: int | None,
+    ) -> None:
+        if len(self.path_diagnostics) >= PATH_DIAGNOSTIC_LIMIT:
+            return
+        try:
+            lexical = Path(
+                os.path.abspath(os.path.expanduser(os.fsdecode(value)))
+            ).as_posix()
+        except (AttributeError, TypeError, ValueError):
+            lexical = f"<{type(value).__name__}>"
+        self.path_diagnostics.append(
+            {
+                "classification": classification,
+                "errno": error_errno,
+                "path_sha256": hashlib.sha256(lexical.encode("utf-8")).hexdigest(),
+            }
+        )
+
+    def evidence(self) -> dict[str, Any]:
+        diagnostics = list(self.path_diagnostics)
+        return {
+            "status": (
+                "pass_no_forbidden_raw_or_path_guard_rejection"
+                if self.raw_forbidden_attempt_count == 0
+                and self.path_guard_rejected_attempt_count == 0
+                else "fail_raw_or_path_guard_rejection_observed"
+            ),
+            "forbidden_raw_root": self.forbidden_raw_root.as_posix(),
+            "raw_forbidden_attempt_count": self.raw_forbidden_attempt_count,
+            "path_guard_rejected_attempt_count": (
+                self.path_guard_rejected_attempt_count
+            ),
+            "allowed_outside_raw_enotdir_probe_count": (
+                self.allowed_outside_raw_enotdir_probe_count
+            ),
+            "counter_semantics": {
+                "raw_forbidden_attempt_count": "lexically_inside_forbidden_raw_root",
+                "path_guard_rejected_attempt_count": (
+                    "pre_containment_symlink_noncanonical_or_unresolvable_rejection"
+                ),
+                "allowed_outside_raw_enotdir_probe_count": (
+                    "errno_ENOTDIR_after_verified_non_symlink_ancestors"
+                ),
+            },
+            "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
+            "path_diagnostics": diagnostics,
+            "path_diagnostics_sha256": canonical_sha256(diagnostics),
+        }
 
     def __call__(self, event: str, args: tuple[Any, ...]) -> None:
         if event != "open" or not args:
@@ -222,16 +330,37 @@ class RawPathAuditGuard:
             # The pathname was already checked when this descriptor was opened.
             return
         try:
-            candidate = _strict_path(args[0], "opened path", must_exist=False)
-        except RecoveryHostQualificationError:
+            candidate, tolerated_errno = _strict_path_resolution(
+                args[0], "opened path", must_exist=False
+            )
+        except RecoveryHostQualificationError as exc:
             # Fail closed on any symlink/noncanonical open.  This prevents a
             # parent-symlink alias from escaping the raw-root comparison.
-            self.forbidden_attempt_count += 1
+            cause = exc.__cause__
+            error_errno = cause.errno if isinstance(cause, OSError) else None
+            self.path_guard_rejected_attempt_count += 1
+            self._record_diagnostic(
+                classification="path_guard_rejected",
+                value=args[0],
+                error_errno=error_errno,
+            )
             raise
         if _inside(candidate, self.forbidden_raw_root):
-            self.forbidden_attempt_count += 1
+            self.raw_forbidden_attempt_count += 1
+            self._record_diagnostic(
+                classification="raw_forbidden",
+                value=args[0],
+                error_errno=tolerated_errno,
+            )
             raise RecoveryHostQualificationError(
                 "signed-dose raw access is forbidden during qualification"
+            )
+        if tolerated_errno == errno.ENOTDIR:
+            self.allowed_outside_raw_enotdir_probe_count += 1
+            self._record_diagnostic(
+                classification="allowed_outside_raw_enotdir",
+                value=args[0],
+                error_errno=tolerated_errno,
             )
 
 
@@ -314,6 +443,8 @@ def _validate_fresh_receipt_chain(
     ):
         raise RecoveryHostQualificationError("fresh pod lifecycle window differs")
     if (
+        ownership["pod_id"] in REJECTED_PREDECESSOR_POD_IDS
+        or
         ownership["network_volume_id"] != protocol.NETWORK_VOLUME_ID
         or ownership["data_center_id"] != protocol.DATA_CENTER_ID
         or ownership["gpu_type"] != protocol.GPU_TYPE
@@ -533,6 +664,8 @@ def qualify_host(
     cache_path: Path,
     j_lens_path: Path,
     output_dir: Path,
+    qualification_incident_dir: Path = QUALIFICATION_INCIDENT_DIR,
+    recovery_cycle_ledger_path: Path = RECOVERY_CYCLE_LEDGER_PATH,
     repo_root: Path = REPO_ROOT,
     now_unix: float | None = None,
     hourly_price_usd: float,
@@ -585,8 +718,25 @@ def qualify_host(
     raw_guard = RawPathAuditGuard(canonical_raw_root)
     if install_raw_audit_hook:
         sys.addaudithook(raw_guard)
+    forward_counts: Mapping[str, int] | None = None
     input_paths = {
         "equivalence_packet": packet_path,
+        "predecessor_qualification_failure": (
+            qualification_incident_dir / "QUALIFICATION_FAILED.json"
+        ),
+        "qualification_incident_cause": (
+            qualification_incident_dir / "INCIDENT_CAUSE.json"
+        ),
+        "qualification_incident_closure": (
+            qualification_incident_dir / "INCIDENT_CLOSURE.json"
+        ),
+        "qualification_incident_schema": (
+            qualification_incident_dir / "INCIDENT_CLOSURE_SCHEMA.json"
+        ),
+        "qualification_incident_verification": (
+            qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json"
+        ),
+        "recovery_cycle_ledger_v2": recovery_cycle_ledger_path,
         "independent_plan_audit": plan_audit_path,
         "fresh_ownership": ownership_path,
         "fresh_guest": guest_path,
@@ -603,8 +753,14 @@ def qualify_host(
             "status": "attempt_started_irrevocably",
             "study_id": protocol.STUDY_ID,
             "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
-            "attempt_number": 1,
+            "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+            "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+            "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
+            "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
             "retry_authorized": False,
+            "successor_authority_binding_sha256": (
+                EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+            ),
             "started_at_unix": started,
             "qualification_deadline_at_unix": watchdog.deadline,
             "hourly_price_usd": watchdog.rate,
@@ -633,6 +789,20 @@ def qualify_host(
                 for role, path in sorted(input_paths.items())
             ]
             watchdog.check()
+            successor_authority = dict(
+                qualification_incident.successor_authority_binding(
+                    qualification_incident_dir,
+                    recovery_cycle_ledger_path,
+                )
+            )
+            if (
+                successor_authority.get("binding_sha256")
+                != EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+            ):
+                raise RecoveryHostQualificationError(
+                    "successor authority binding differs"
+                )
+            watchdog.check()
             verified = dict(
                 verifier(
                     packet_path,
@@ -659,6 +829,14 @@ def qualify_host(
         if dict(forward_counts) != EXPECTED_ZERO_FORWARD_COUNTS:
             raise RecoveryHostQualificationError("zero-forward guard observed a call")
         completed = watchdog.check()
+        raw_guard_evidence = raw_guard.evidence()
+        if (
+            raw_guard.raw_forbidden_attempt_count != 0
+            or raw_guard.path_guard_rejected_attempt_count != 0
+        ):
+            raise RecoveryHostQualificationError(
+                "raw/path guard observed a caught rejection"
+            )
         watchdog_record = {
             "status": "pass_independent_qualification_time_cost_cap",
             "started_at_unix": started,
@@ -677,12 +855,19 @@ def qualify_host(
             "study_id": protocol.STUDY_ID,
             "protocol_version": protocol.PROTOCOL_VERSION,
             "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
-            "attempt_number": 1,
+            "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+            "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+            "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
+            "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
             "retry_authorized": False,
             "started_at_unix": started,
             "completed_at_unix": completed,
             "qualification_watchdog": watchdog_record,
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
+            "successor_authority_binding_sha256": (
+                EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+            ),
+            "successor_authority": successor_authority,
             "inputs": inputs,
             "input_inventory_sha256": canonical_sha256(inputs),
             "equivalence_verification": verified,
@@ -694,11 +879,7 @@ def qualify_host(
             "j_checkpoint": checkpoint,
             "cuda_startup": cuda,
             "zero_forward_guard": dict(forward_counts),
-            "raw_access_guard": {
-                "status": "pass_no_forbidden_raw_open",
-                "forbidden_raw_root": canonical_raw_root.as_posix(),
-                "forbidden_attempt_count": raw_guard.forbidden_attempt_count,
-            },
+            "raw_access_guard": raw_guard_evidence,
             "raw_input_paths": [],
             "outcome_input_paths": [],
             "analysis_data_inputs": [],
@@ -715,8 +896,14 @@ def qualify_host(
             "status": "qualification_failed_attempt_consumed",
             "study_id": protocol.STUDY_ID,
             "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
-            "attempt_number": 1,
+            "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+            "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+            "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
+            "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
             "retry_authorized": False,
+            "successor_authority_binding_sha256": (
+                EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+            ),
             "started_at_unix": started,
             "failed_at_unix": time.time() if now_unix is None else started,
             "qualification_deadline_at_unix": watchdog.deadline,
@@ -724,7 +911,28 @@ def qualify_host(
             "max_spend_usd": QUALIFICATION_MAX_SPEND_USD,
             "error_type": type(exc).__name__,
             "error_message": str(exc),
-            "raw_forbidden_attempt_count": raw_guard.forbidden_attempt_count,
+            "raw_forbidden_attempt_count": (
+                raw_guard.raw_forbidden_attempt_count
+            ),
+            "path_guard_rejected_attempt_count": (
+                raw_guard.path_guard_rejected_attempt_count
+            ),
+            "allowed_outside_raw_enotdir_probe_count": (
+                raw_guard.allowed_outside_raw_enotdir_probe_count
+            ),
+            "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
+            "path_diagnostics": list(raw_guard.path_diagnostics),
+            "path_diagnostics_sha256": canonical_sha256(
+                raw_guard.path_diagnostics
+            ),
+            "zero_forward_guard_observation_status": (
+                "observed"
+                if forward_counts is not None
+                else "not_entered_before_failure"
+            ),
+            "zero_forward_guard": (
+                dict(forward_counts) if forward_counts is not None else None
+            ),
             "model_forward_count": 0,
             "target_prompt_render_count": 0,
         }
@@ -747,6 +955,16 @@ def main() -> int:
     parser.add_argument("--guest", type=Path, required=True)
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--j-checkpoint", type=Path, required=True)
+    parser.add_argument(
+        "--qualification-incident-dir",
+        type=Path,
+        default=QUALIFICATION_INCIDENT_DIR,
+    )
+    parser.add_argument(
+        "--recovery-cycle-ledger",
+        type=Path,
+        default=RECOVERY_CYCLE_LEDGER_PATH,
+    )
     parser.add_argument("--hourly-price-usd", type=float, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
@@ -757,6 +975,8 @@ def main() -> int:
         guest_path=args.guest,
         cache_path=args.cache,
         j_lens_path=args.j_checkpoint,
+        qualification_incident_dir=args.qualification_incident_dir,
+        recovery_cycle_ledger_path=args.recovery_cycle_ledger,
         hourly_price_usd=args.hourly_price_usd,
         output_dir=args.output_dir,
     )

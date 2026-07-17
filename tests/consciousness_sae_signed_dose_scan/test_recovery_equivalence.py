@@ -48,6 +48,22 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         "pass_outcome_blind_recovery_equivalence_verified"
     )
     assert verified["code_freeze_commit"] == FAKE_CODE_FREEZE
+    assert packet["recovery_equivalence_protocol_version"].endswith("_v2")
+    lineage = packet["freeze_lineage"]
+    assert lineage["direct_parent_chain"] == [
+        recovery_equivalence.ORIGINAL_FREEZE_COMMIT,
+        recovery_equivalence.C1_RECOVERY_FREEZE_COMMIT,
+        FAKE_CODE_FREEZE,
+    ]
+    assert {
+        row["path"]: row["status"]
+        for row in lineage["original_to_c1_name_status"]
+    } == recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
+    assert {
+        row["path"]: row["status"]
+        for row in lineage["c1_to_c2_name_status"]
+    } == recovery_equivalence.C1_TO_C2_NAME_STATUS
+    assert lineage["original_science_mutation_paths"] == []
     assert packet["outcome_input_paths"] == []
     assert packet["raw_run_opened"] is False
     assert packet["compact_result_opened"] is False
@@ -75,6 +91,27 @@ def test_independent_verifier_rejects_rehashed_semantic_tamper(
     with pytest.raises(
         verify_recovery_equivalence.RecoveryEquivalenceVerificationError,
         match="compatibility proof differs",
+    ):
+        verify_recovery_equivalence.verify_packet(
+            packet_path,
+            plan_audit_path=plan_audit_path,
+            enforce_git=False,
+        )
+
+
+def test_independent_verifier_rejects_rehashed_lineage_tamper(
+    tmp_path: Path,
+) -> None:
+    packet_path, plan_audit_path, packet = _packet_fixture(tmp_path)
+    packet["freeze_lineage"]["c1_to_c2_name_status"][0]["status"] = "M"
+    core = dict(packet)
+    core.pop("packet_sha256")
+    packet["packet_sha256"] = recovery_equivalence.canonical_sha256(core)
+    _write(packet_path, packet)
+
+    with pytest.raises(
+        verify_recovery_equivalence.RecoveryEquivalenceVerificationError,
+        match="freeze lineage binding differs",
     ):
         verify_recovery_equivalence.verify_packet(
             packet_path,

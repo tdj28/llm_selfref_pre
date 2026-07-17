@@ -25,13 +25,34 @@ from experiments.consciousness_sae_realization_validation import runpod_prefligh
 from experiments.consciousness_sae_signed_dose_scan import protocol
 from experiments.consciousness_sae_signed_dose_scan import (
     verify_recovery_equivalence,
+    verify_qualification_incident,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-QUALIFICATION_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v1"
+QUALIFICATION_INCIDENT_DIR = REPO_ROOT / (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
 )
+RECOVERY_CYCLE_LEDGER_PATH = (
+    REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+)
+EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
+    "41c7a12dde095fdf19dc00a0f211afe8b0d2f12299b7ab1a5e12f70b5eee8f26"
+)
+QUALIFICATION_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+)
+QUALIFICATION_CYCLE_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
+)
+GLOBAL_QUALIFICATION_ORDINAL = 2
+SUCCESSOR_QUALIFICATION_ATTEMPT = 1
+REJECTED_PREDECESSOR_POD_IDS = frozenset(
+    {"wl8obvtuq0ax8t", "69d9kxugxuf6up"}
+)
+PATH_DIAGNOSTIC_LIMIT = 16
 ATTEMPT_MARKER_NAME = "ATTEMPT_STARTED.json"
 SUCCESS_NAME = "TARGET_HOST_QUALIFICATION.json"
 FAILURE_NAME = "QUALIFICATION_FAILED.json"
@@ -266,8 +287,14 @@ def _verify_marker(
         "status": "attempt_started_irrevocably",
         "study_id": protocol.STUDY_ID,
         "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
-        "attempt_number": 1,
+        "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+        "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+        "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
+        "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
         "retry_authorized": False,
+        "successor_authority_binding_sha256": (
+            EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+        ),
         "started_at_unix": started,
         "qualification_deadline_at_unix": deadline,
         "hourly_price_usd": hourly_price_usd,
@@ -372,6 +399,61 @@ def _verify_cuda(value: Any) -> None:
         raise RecoveryHostQualificationVerificationError("CUDA evidence differs")
 
 
+def _verify_raw_guard(value: Any, forbidden_raw_root: Path) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise RecoveryHostQualificationVerificationError(
+            "raw/path guard evidence is absent"
+        )
+    diagnostics = value.get("path_diagnostics")
+    allowed_count = value.get("allowed_outside_raw_enotdir_probe_count")
+    fixed = {
+        "status": "pass_no_forbidden_raw_or_path_guard_rejection",
+        "forbidden_raw_root": forbidden_raw_root.as_posix(),
+        "raw_forbidden_attempt_count": 0,
+        "path_guard_rejected_attempt_count": 0,
+        "counter_semantics": {
+            "raw_forbidden_attempt_count": (
+                "lexically_inside_forbidden_raw_root"
+            ),
+            "path_guard_rejected_attempt_count": (
+                "pre_containment_symlink_noncanonical_or_unresolvable_rejection"
+            ),
+            "allowed_outside_raw_enotdir_probe_count": (
+                "errno_ENOTDIR_after_verified_non_symlink_ancestors"
+            ),
+        },
+        "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
+    }
+    if (
+        any(value.get(key) != expected for key, expected in fixed.items())
+        or set(value)
+        != {
+            *fixed,
+            "allowed_outside_raw_enotdir_probe_count",
+            "path_diagnostics",
+            "path_diagnostics_sha256",
+        }
+        or isinstance(allowed_count, bool)
+        or not isinstance(allowed_count, int)
+        or allowed_count < 0
+        or not isinstance(diagnostics, list)
+        or len(diagnostics) != min(allowed_count, PATH_DIAGNOSTIC_LIMIT)
+        or any(
+            not isinstance(row, Mapping)
+            or set(row) != {"classification", "errno", "path_sha256"}
+            or row.get("classification") != "allowed_outside_raw_enotdir"
+            or row.get("errno") != 20
+            or HEX64.fullmatch(str(row.get("path_sha256", ""))) is None
+            for row in diagnostics
+        )
+        or value.get("path_diagnostics_sha256") != canonical_sha256(diagnostics)
+    ):
+        raise RecoveryHostQualificationVerificationError(
+            "raw/path guard evidence differs"
+        )
+    return dict(value)
+
+
 def verify_qualification(
     *,
     receipt_path: Path,
@@ -382,6 +464,8 @@ def verify_qualification(
     guest_path: Path,
     cache_path: Path,
     j_lens_path: Path,
+    qualification_incident_dir: Path = QUALIFICATION_INCIDENT_DIR,
+    recovery_cycle_ledger_path: Path = RECOVERY_CYCLE_LEDGER_PATH,
     repo_root: Path = REPO_ROOT,
     enforce_git: bool = True,
     forbidden_raw_root: Path = FORBIDDEN_RAW_ROOT,
@@ -408,6 +492,12 @@ def verify_qualification(
         guest_path,
         cache_path,
         j_lens_path,
+        qualification_incident_dir / "QUALIFICATION_FAILED.json",
+        qualification_incident_dir / "INCIDENT_CAUSE.json",
+        qualification_incident_dir / "INCIDENT_CLOSURE_SCHEMA.json",
+        qualification_incident_dir / "INCIDENT_CLOSURE.json",
+        qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json",
+        recovery_cycle_ledger_path,
     )
     canonical_paths = [
         _strict_existing_path(path, "qualification verification input")
@@ -445,6 +535,22 @@ def verify_qualification(
         )
     input_paths = {
         "equivalence_packet": packet_path,
+        "predecessor_qualification_failure": (
+            qualification_incident_dir / "QUALIFICATION_FAILED.json"
+        ),
+        "qualification_incident_cause": (
+            qualification_incident_dir / "INCIDENT_CAUSE.json"
+        ),
+        "qualification_incident_closure": (
+            qualification_incident_dir / "INCIDENT_CLOSURE.json"
+        ),
+        "qualification_incident_schema": (
+            qualification_incident_dir / "INCIDENT_CLOSURE_SCHEMA.json"
+        ),
+        "qualification_incident_verification": (
+            qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json"
+        ),
+        "recovery_cycle_ledger_v2": recovery_cycle_ledger_path,
         "independent_plan_audit": plan_audit_path,
         "fresh_ownership": ownership_path,
         "fresh_guest": guest_path,
@@ -500,9 +606,26 @@ def verify_qualification(
         repo_root=repo_root,
         enforce_git=enforce_git,
     )
+    successor_authority = (
+        verify_qualification_incident.successor_authority_binding(
+            qualification_incident_dir,
+            recovery_cycle_ledger_path,
+        )
+    )
+    if (
+        successor_authority.get("binding_sha256")
+        != EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+    ):
+        raise RecoveryHostQualificationVerificationError(
+            "successor authority binding differs"
+        )
     ownership, guest, cache, file_hashes = _validated_receipt_chain(
         ownership_path, guest_path, cache_path
     )
+    if ownership.get("pod_id") in REJECTED_PREDECESSOR_POD_IDS:
+        raise RecoveryHostQualificationVerificationError(
+            "qualification reused a rejected predecessor pod"
+        )
     chain = _expected_chain_record(
         ownership,
         guest,
@@ -545,15 +668,25 @@ def verify_qualification(
         receipt.get("j_checkpoint"), j_lens_path
     )
     _verify_cuda(receipt.get("cuda_startup"))
+    raw_guard = _verify_raw_guard(
+        receipt.get("raw_access_guard"), canonical_raw_root
+    )
     fixed = {
         "schema_version": 1,
         "status": "pass_one_shot_zero_forward_target_host_qualification",
         "study_id": protocol.STUDY_ID,
         "protocol_version": protocol.PROTOCOL_VERSION,
         "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
-        "attempt_number": 1,
+        "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+        "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+        "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
+        "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
         "retry_authorized": False,
         "attempt_marker_receipt_sha256": marker_hash,
+        "successor_authority_binding_sha256": (
+            EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+        ),
+        "successor_authority": successor_authority,
         "qualification_watchdog": {
             "status": "pass_independent_qualification_time_cost_cap",
             "started_at_unix": started,
@@ -581,11 +714,7 @@ def verify_qualification(
             "model_construction_calls": 0,
             "model_state_load_calls": 0,
         },
-        "raw_access_guard": {
-            "status": "pass_no_forbidden_raw_open",
-            "forbidden_raw_root": canonical_raw_root.as_posix(),
-            "forbidden_attempt_count": 0,
-        },
+        "raw_access_guard": raw_guard,
         "raw_input_paths": [],
         "outcome_input_paths": [],
         "analysis_data_inputs": [],
@@ -616,6 +745,9 @@ def verify_qualification(
         "study_id": protocol.STUDY_ID,
         "protocol_version": protocol.PROTOCOL_VERSION,
         "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
+        "qualification_cycle_version": QUALIFICATION_CYCLE_VERSION,
+        "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+        "successor_qualification_attempt": SUCCESSOR_QUALIFICATION_ATTEMPT,
         "qualification_receipt_path": (
             receipt_path.expanduser().absolute().as_posix()
         ),
@@ -625,6 +757,10 @@ def verify_qualification(
         "qualification_receipt_sha256": receipt_hash,
         "attempt_marker_file_sha256": hashlib.sha256(marker_raw).hexdigest(),
         "attempt_marker_receipt_sha256": marker_hash,
+        "successor_authority_binding_sha256": (
+            EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+        ),
+        "successor_authority": successor_authority,
         "equivalence_packet_sha256": equivalence["packet_sha256"],
         "code_freeze_commit": equivalence["code_freeze_commit"],
         "recovery_closure_inventory_sha256": equivalence[
@@ -632,7 +768,7 @@ def verify_qualification(
         ],
         "j_checkpoint_evidence_sha256": checkpoint_evidence_hash,
         "j_checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
-        "attempt_number": 1,
+        "attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
         "retry_authorized": False,
         "model_forward_count": 0,
         "target_prompt_render_count": 0,
@@ -663,6 +799,16 @@ def main() -> int:
     parser.add_argument("--guest", type=Path, required=True)
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--j-checkpoint", type=Path, required=True)
+    parser.add_argument(
+        "--qualification-incident-dir",
+        type=Path,
+        default=QUALIFICATION_INCIDENT_DIR,
+    )
+    parser.add_argument(
+        "--recovery-cycle-ledger",
+        type=Path,
+        default=RECOVERY_CYCLE_LEDGER_PATH,
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     verified = verify_qualification(
@@ -674,6 +820,8 @@ def main() -> int:
         guest_path=args.guest,
         cache_path=args.cache,
         j_lens_path=args.j_checkpoint,
+        qualification_incident_dir=args.qualification_incident_dir,
+        recovery_cycle_ledger_path=args.recovery_cycle_ledger,
     )
     _write_exclusive(args.output, verified)
     print(args.output.expanduser().absolute(), flush=True)

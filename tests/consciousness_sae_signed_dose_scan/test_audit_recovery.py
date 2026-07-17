@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -355,6 +356,18 @@ def test_c_closure_matches_both_equivalence_implementations() -> None:
     assert recovery_equivalence.RECOVERY_CLOSURE_PATHS == expected
     assert verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS == expected
     assert len(expected) == len(set(expected))
+    assert audit_recovery.ORIGINAL_TO_C1_NAME_STATUS == (
+        recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
+    )
+    assert audit_recovery.ORIGINAL_TO_C1_NAME_STATUS == (
+        verify_recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
+    )
+    assert audit_recovery.C1_TO_C2_NAME_STATUS == (
+        recovery_equivalence.C1_TO_C2_NAME_STATUS
+    )
+    assert audit_recovery.C1_TO_C2_NAME_STATUS == (
+        verify_recovery_equivalence.C1_TO_C2_NAME_STATUS
+    )
 
 
 @pytest.mark.parametrize(
@@ -395,15 +408,15 @@ def test_c_to_f_drift_in_live_recovery_dependencies_is_rejected(
 def test_extra_e_or_f_changed_path_is_rejected(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, label: str
 ) -> None:
-    expected = {"required.json"}
+    expected = {"required.json": "A"}
 
     def fake_git(_repo: Path, *args: str, **_kwargs: Any) -> Any:
         assert args[:3] == ("diff", "--name-status", "--no-renames")
         return SimpleNamespace(stdout="A\trequired.json\nA\textra.json\n")
 
     monkeypatch.setattr(audit_recovery, "_git", fake_git)
-    with pytest.raises(audit_recovery.AuditRecoveryError, match="changed-path set"):
-        audit_recovery._require_exact_added_paths(
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="name-status map"):
+        audit_recovery._require_exact_name_status(
             tmp_path,
             parent="parent",
             child="child",
@@ -481,9 +494,29 @@ def _hashed(core: dict[str, Any], field: str = "receipt_sha256") -> dict[str, An
 
 
 def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
+    source_root = Path(audit_recovery.__file__).resolve().parents[2]
+    incident_target = root / audit_recovery.QUALIFICATION_INCIDENT_ROOT
+    incident_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(
+        source_root / audit_recovery.QUALIFICATION_INCIDENT_ROOT,
+        incident_target,
+    )
+    ledger_target = (
+        root
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+    )
+    shutil.copy2(
+        source_root
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json",
+        ledger_target,
+    )
+    successor_authority = (
+        audit_recovery.verify_qualification_incident.successor_authority_binding(
+            incident_target, ledger_target
+        )
+    )
     relative_parent = (
-        "docs/consciousness_sae_signed_dose_scan/"
-        "audit_recovery_qualification_fixture"
+        audit_recovery.QUALIFICATION_DIRECTORY
     )
     parent = root / relative_parent
     parent.mkdir(parents=True)
@@ -545,6 +578,12 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "fresh_ownership",
             "independent_plan_audit",
             "pinned_j_checkpoint",
+            "predecessor_qualification_failure",
+            "qualification_incident_cause",
+            "qualification_incident_closure",
+            "qualification_incident_schema",
+            "qualification_incident_verification",
+            "recovery_cycle_ledger_v2",
         )
     ]
     declared_inputs = [
@@ -553,8 +592,15 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     marker = _hashed(
         {
             "status": "attempt_started_irrevocably",
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
+            "global_qualification_ordinal": 2,
+            "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
+            "successor_authority_binding_sha256": successor_authority[
+                "binding_sha256"
+            ],
             "started_at_unix": started,
             "qualification_deadline_at_unix": deadline,
             "hourly_price_usd": hourly_price,
@@ -592,6 +638,10 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     target = _hashed(
         {
             "status": "pass_one_shot_zero_forward_target_host_qualification",
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
+            "global_qualification_ordinal": 2,
+            "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
             "started_at_unix": started,
@@ -607,6 +657,10 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
                 "completed_at_unix": completed,
             },
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
+            "successor_authority_binding_sha256": successor_authority[
+                "binding_sha256"
+            ],
+            "successor_authority": successor_authority,
             "equivalence_verification": equivalence,
             "code_freeze_commit": commit,
             "recovery_closure_inventory_sha256": closure_hash,
@@ -619,9 +673,19 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             },
             "zero_forward_guard": dict(audit_recovery.ZERO_GUARD_COUNTS),
             "raw_access_guard": {
-                "status": "pass_no_forbidden_raw_open",
+                "status": "pass_no_forbidden_raw_or_path_guard_rejection",
                 "forbidden_raw_root": "/workspace/consciousness_sae_signed_dose_scan/consciousness_sae_signed_dose_scan_v1/raw",
-                "forbidden_attempt_count": 0,
+                "raw_forbidden_attempt_count": 0,
+                "path_guard_rejected_attempt_count": 0,
+                "allowed_outside_raw_enotdir_probe_count": 0,
+                "counter_semantics": {
+                    "raw_forbidden_attempt_count": "lexically_inside_forbidden_raw_root",
+                    "path_guard_rejected_attempt_count": "pre_containment_symlink_noncanonical_or_unresolvable_rejection",
+                    "allowed_outside_raw_enotdir_probe_count": "errno_ENOTDIR_after_verified_non_symlink_ancestors",
+                },
+                "path_diagnostic_limit": 16,
+                "path_diagnostics": [],
+                "path_diagnostics_sha256": protocol.canonical_sha256([]),
             },
             "inputs": inputs,
             "input_inventory_sha256": protocol.canonical_sha256(inputs),
@@ -636,8 +700,16 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     verified = _hashed(
         {
             "status": "pass_independent_target_host_qualification_verified",
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
+            "global_qualification_ordinal": 2,
+            "successor_qualification_attempt": 1,
             "qualification_receipt_sha256": target["receipt_sha256"],
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
+            "successor_authority_binding_sha256": successor_authority[
+                "binding_sha256"
+            ],
+            "successor_authority": successor_authority,
             "equivalence_packet_sha256": packet["packet_sha256"],
             "code_freeze_commit": commit,
             "recovery_closure_inventory_sha256": closure_hash,

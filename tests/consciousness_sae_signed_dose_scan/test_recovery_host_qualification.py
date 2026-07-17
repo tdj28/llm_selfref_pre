@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import errno
 import hashlib
 import json
 import sys
@@ -183,7 +184,97 @@ def test_raw_guard_rejects_direct_and_parent_symlink_aliases(tmp_path: Path) -> 
         match="symlink component",
     ):
         guard("open", ((alias / "raw" / secret.name).as_posix(), "r", 0))
-    assert guard.forbidden_attempt_count == 2
+    assert guard.raw_forbidden_attempt_count == 1
+    assert guard.path_guard_rejected_attempt_count == 1
+    assert guard.allowed_outside_raw_enotdir_probe_count == 0
+    assert [row["classification"] for row in guard.path_diagnostics] == [
+        "raw_forbidden",
+        "path_guard_rejected",
+    ]
+
+
+def test_raw_guard_allows_linux_egg_info_child_probe_below_regular_file(
+    tmp_path: Path,
+) -> None:
+    raw_root = tmp_path / "study" / "v1" / "raw"
+    raw_root.mkdir(parents=True)
+    egg_info = _write(
+        tmp_path / "site-packages" / "blinker-1.4.egg-info",
+        b"Metadata-Version: 1.0\n",
+    )
+    probed = egg_info / "entry_points.txt"
+    guard = qualification.RawPathAuditGuard(raw_root)
+
+    with pytest.raises(OSError) as observed:
+        probed.open("rb")
+    assert observed.value.errno == errno.ENOTDIR == 20
+    resolved, tolerated_errno = qualification._strict_path_resolution(  # noqa: SLF001
+        probed, "Linux import probe", must_exist=False
+    )
+    assert resolved == probed
+    assert tolerated_errno == errno.ENOTDIR
+    guard("open", (probed.as_posix(), "r", 0))
+    assert guard.open_event_count == 1
+    assert guard.raw_forbidden_attempt_count == 0
+    assert guard.path_guard_rejected_attempt_count == 0
+    assert guard.allowed_outside_raw_enotdir_probe_count == 1
+    assert guard.path_diagnostics == [
+        {
+            "classification": "allowed_outside_raw_enotdir",
+            "errno": 20,
+            "path_sha256": hashlib.sha256(
+                probed.as_posix().encode("utf-8")
+            ).hexdigest(),
+        }
+    ]
+
+
+def test_raw_guard_still_rejects_enotdir_probe_lexically_inside_raw(
+    tmp_path: Path,
+) -> None:
+    raw_root = tmp_path / "study" / "v1" / "raw"
+    egg_info = _write(
+        raw_root / "blinker-1.4.egg-info",
+        b"Metadata-Version: 1.0\n",
+    )
+    guard = qualification.RawPathAuditGuard(raw_root)
+
+    with pytest.raises(
+        qualification.RecoveryHostQualificationError,
+        match="raw access is forbidden",
+    ):
+        guard("open", ((egg_info / "entry_points.txt").as_posix(), "r", 0))
+    assert guard.raw_forbidden_attempt_count == 1
+    assert guard.path_guard_rejected_attempt_count == 0
+    assert guard.allowed_outside_raw_enotdir_probe_count == 0
+
+
+def test_enotdir_probe_does_not_weaken_strict_existing_or_symlink_checks(
+    tmp_path: Path,
+) -> None:
+    raw_root = tmp_path / "raw"
+    raw_root.mkdir()
+    egg_info = _write(tmp_path / "real" / "blinker-1.4.egg-info")
+    probed = egg_info / "entry_points.txt"
+    with pytest.raises(
+        qualification.RecoveryHostQualificationError,
+        match="missing",
+    ):
+        qualification._strict_path(  # noqa: SLF001
+            probed, "strict input", must_exist=True
+        )
+
+    alias = tmp_path / "alias"
+    alias.symlink_to(egg_info)
+    guard = qualification.RawPathAuditGuard(raw_root)
+    with pytest.raises(
+        qualification.RecoveryHostQualificationError,
+        match="symlink component",
+    ):
+        guard("open", ((alias / "entry_points.txt").as_posix(), "r", 0))
+    assert guard.raw_forbidden_attempt_count == 0
+    assert guard.path_guard_rejected_attempt_count == 1
+    assert guard.allowed_outside_raw_enotdir_probe_count == 0
 
 
 def test_strict_input_path_rejects_parent_symlink(tmp_path: Path) -> None:
@@ -485,6 +576,8 @@ def test_one_shot_receipt_and_independent_verifier(
         "pass_independent_target_host_qualification_verified"
     )
     assert verified["attempt_number"] == 1
+    assert verified["global_qualification_ordinal"] == 2
+    assert verified["successor_qualification_attempt"] == 1
     assert verified["model_forward_count"] == 0
 
     success_path = attempt / qualification.SUCCESS_NAME
@@ -542,6 +635,16 @@ def test_failed_attempt_is_consumed(tmp_path: Path) -> None:
         qualification.ATTEMPT_MARKER_NAME,
         qualification.FAILURE_NAME,
     }
+    failed = json.loads(
+        (attempt / qualification.FAILURE_NAME).read_text(encoding="utf-8")
+    )
+    assert failed["global_qualification_ordinal"] == 2
+    assert failed["successor_qualification_attempt"] == 1
+    assert failed["raw_forbidden_attempt_count"] == 0
+    assert failed["path_guard_rejected_attempt_count"] == 0
+    assert failed["allowed_outside_raw_enotdir_probe_count"] == 0
+    assert failed["zero_forward_guard_observation_status"] == "observed"
+    assert failed["zero_forward_guard"] == ZERO_COUNTS
 
 
 def test_symlink_input_is_rejected_after_attempt_marker(tmp_path: Path) -> None:
