@@ -42,7 +42,7 @@ from experiments.consciousness_sae_signed_dose_scan import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RECOVERY_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v2"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v3"
 )
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -51,22 +51,26 @@ REQUIRED_J_LAYERS = tuple(range(45, 79))
 ORIGINAL_PLAN_ADJUDICATION_PATH = (
     "docs/consciousness_sae_signed_dose_scan/PRO_REVIEW_ADJUDICATION.json"
 )
-RECOVERY_CYCLE_DEADLINE_AT_UNIX = 1_784_289_600.0  # 2026-07-17T12:00:00Z
+RECOVERY_CYCLE_DEADLINE_AT_UNIX = 1_784_311_200.0  # 2026-07-17T18:00:00Z
 RECOVERY_MAX_SECONDS = 3_600
 RECOVERY_MAX_SPEND_USD = 6.0
 ORIGINAL_FREEZE_COMMIT = "a084caafc2ec27860044d80d3b33912f656fd08a"
 C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
+C2_RECOVERY_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
+PUBLIC_J_CHECKPOINT_BYTES = 10_603_226_027
+PUBLIC_J_SOURCE_DTYPE = "torch.float16"
+PUBLIC_J_SOURCE_SHAPE = (8192, 8192)
 REJECTED_PREDECESSOR_POD_IDS = frozenset(
-    {"wl8obvtuq0ax8t", "69d9kxugxuf6up"}
+    {"wl8obvtuq0ax8t", "69d9kxugxuf6up", "g2azyjkpm17f1s"}
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
-    "41c7a12dde095fdf19dc00a0f211afe8b0d2f12299b7ab1a5e12f70b5eee8f26"
+    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
 )
-QUALIFICATION_INCIDENT_ROOT = (
+C1_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
     "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
 )
-QUALIFICATION_INCIDENT_FILENAMES = (
+C1_QUALIFICATION_INCIDENT_FILENAMES = (
     "RECOVERY_EQUIVALENCE_PACKET.json",
     "RECOVERY_EQUIVALENCE_VERIFICATION.json",
     "ATTEMPT_STARTED.json",
@@ -86,12 +90,48 @@ QUALIFICATION_INCIDENT_FILENAMES = (
     "INCIDENT_CLOSURE.json",
     "INCIDENT_CLOSURE_VERIFICATION.json",
 )
-SUCCESSOR_DOC_PATHS = (
+V2_SUCCESSOR_DOC_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/"
     "AUDIT_ONLY_RECOVERY_SUCCESSOR_AMENDMENT_20260717.md",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_SUCCESSOR_REPRODUCTION.md",
 )
+C3_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_C3_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json",
+)
+C2_QUALIFICATION_INCIDENT_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
+)
+C2_QUALIFICATION_INCIDENT_FILENAMES = (
+    "ATTEMPT_STARTED.json",
+    "CACHE_PREFLIGHT.json",
+    "FROZEN_OWNERSHIP.json",
+    "FROZEN_STATUS_0001.json",
+    "FROZEN_TERMINATION.json",
+    "GUEST_PREFLIGHT.json",
+    "INCIDENT_CAUSE.json",
+    "INCIDENT_CLOSURE.json",
+    "INCIDENT_CLOSURE_SCHEMA.json",
+    "INCIDENT_CLOSURE_VERIFICATION.json",
+    "INCIDENT_CLOSURE.md",
+    "OWNERSHIP.json",
+    "POSTCREATE_INVENTORY.json",
+    "POSTDELETE_INVENTORY.json",
+    "PRECREATE_INVENTORY.json",
+    "QUALIFICATION_FAILED.json",
+    "QUALIFICATION_STDERR.log",
+    "READY.json",
+    "RECOVERY_EQUIVALENCE_PACKET.json",
+    "RECOVERY_EQUIVALENCE_VERIFICATION.json",
+    "STATUS_0001.json",
+    "TERMINATION_AUDIT.json",
+)
+QUALIFICATION_INCIDENT_ROOT = C2_QUALIFICATION_INCIDENT_ROOT
+QUALIFICATION_INCIDENT_FILENAMES = C2_QUALIFICATION_INCIDENT_FILENAMES
 MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
     ".gitignore",
     "data/consciousness_sae_signed_dose_scan/README.md",
@@ -105,8 +145,16 @@ MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/PROTOCOL.md",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_REPRODUCTION.md",
-    *SUCCESSOR_DOC_PATHS,
-    *(f"{QUALIFICATION_INCIDENT_ROOT}/{name}" for name in QUALIFICATION_INCIDENT_FILENAMES),
+    *V2_SUCCESSOR_DOC_PATHS,
+    *C3_DOC_PATHS,
+    *(
+        f"{C1_QUALIFICATION_INCIDENT_ROOT}/{name}"
+        for name in C1_QUALIFICATION_INCIDENT_FILENAMES
+    ),
+    *(
+        f"{C2_QUALIFICATION_INCIDENT_ROOT}/{name}"
+        for name in C2_QUALIFICATION_INCIDENT_FILENAMES
+    ),
     "docs/consciousness_sae_target_blind_calibration/results/"
     "calv2-r3-audit-recovery-3a9a54d-20260716T202903Z/RESULT_SUMMARY.json",
     "experiments/__init__.py",
@@ -211,24 +259,55 @@ C1_TO_C2_NAME_STATUS = {
     **{
         path: "A"
         for path in {
-            *SUCCESSOR_DOC_PATHS,
-            *(f"{QUALIFICATION_INCIDENT_ROOT}/{name}" for name in QUALIFICATION_INCIDENT_FILENAMES),
+            *V2_SUCCESSOR_DOC_PATHS,
+            *(
+                f"{C1_QUALIFICATION_INCIDENT_ROOT}/{name}"
+                for name in C1_QUALIFICATION_INCIDENT_FILENAMES
+            ),
             "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
             "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
             "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
         }
     },
 }
+C2_TO_C3_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in {
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+        }
+    },
+    **{
+        path: "A"
+        for path in {
+            *C3_DOC_PATHS,
+            *(
+                f"{C2_QUALIFICATION_INCIDENT_ROOT}/{name}"
+                for name in C2_QUALIFICATION_INCIDENT_FILENAMES
+            ),
+        }
+    },
+}
 QUALIFICATION_DIRECTORY = (
     "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_host_qualification_v2"
+    "audit_recovery_host_qualification_v3"
 )
 MANDATORY_E_QUALIFICATION_PATHS = frozenset(
     f"{QUALIFICATION_DIRECTORY}/{name}"
     for name in MANDATORY_E_QUALIFICATION_FILENAMES
 )
 RECOVERY_REVIEW_ROOT = (
-    "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v2"
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3"
 )
 MANDATORY_F_ADDITION_FILENAMES = frozenset(
     {
@@ -475,7 +554,13 @@ def _require_exact_freeze_chain(
         "C1 recovery freeze",
     )
     _require_direct_parent(
-        repo_root, code_commit, C1_RECOVERY_FREEZE_COMMIT, "C2 code freeze"
+        repo_root,
+        C2_RECOVERY_FREEZE_COMMIT,
+        C1_RECOVERY_FREEZE_COMMIT,
+        "C2 recovery freeze",
+    )
+    _require_direct_parent(
+        repo_root, code_commit, C2_RECOVERY_FREEZE_COMMIT, "C3 code freeze"
     )
     _require_direct_parent(repo_root, evidence_commit, code_commit, "evidence freeze")
     _require_direct_parent(repo_root, final_commit, evidence_commit, "final freeze")
@@ -489,9 +574,16 @@ def _require_exact_freeze_chain(
     _require_exact_name_status(
         repo_root,
         parent=C1_RECOVERY_FREEZE_COMMIT,
-        child=code_commit,
+        child=C2_RECOVERY_FREEZE_COMMIT,
         expected=C1_TO_C2_NAME_STATUS,
         label="C1-to-C2 freeze",
+    )
+    _require_exact_name_status(
+        repo_root,
+        parent=C2_RECOVERY_FREEZE_COMMIT,
+        child=code_commit,
+        expected=C2_TO_C3_NAME_STATUS,
+        label="C2-to-C3 freeze",
     )
     _require_exact_name_status(
         repo_root,
@@ -636,7 +728,15 @@ def load_j_checkpoint_superset(
     j_lens_path: Path,
     watchdog: Any,
 ) -> tuple[Path, Mapping[int, Any], dict[str, Any], dict[str, Any]]:
-    """Load the exact pinned checkpoint and expose exactly study layers 45..78."""
+    """Load the exact FP16 release and expose exactly study layers 45..78.
+
+    The public checkpoint stores its 79 source maps in FP16.  That source
+    representation is distinct from the frozen auditor's computation
+    representation: ``_ArtifactJBackend.j_matrix`` explicitly converts each
+    selected source map to BF16 on the authorized device before use.
+    """
+
+    import torch
 
     lexical = j_lens_path.expanduser().absolute()
     if lexical.is_symlink():
@@ -649,6 +749,7 @@ def load_j_checkpoint_superset(
     if (
         not path.is_file()
         or path.stat().st_nlink != 1
+        or path.stat().st_size != PUBLIC_J_CHECKPOINT_BYTES
         or protocol.sha256_file(path) != protocol.J_LENS_SPEC["sha256"]
     ):
         raise AuditRecoveryError("J-lens checkpoint hash or file type differs")
@@ -670,6 +771,15 @@ def load_j_checkpoint_superset(
     required = tuple(protocol.J_LAYERS)
     if required != REQUIRED_J_LAYERS or not set(required) <= set(available):
         raise AuditRecoveryError("J-lens checkpoint lacks a required study layer")
+    for layer, tensor in normalized.items():
+        if tuple(tensor.shape) != PUBLIC_J_SOURCE_SHAPE:
+            raise AuditRecoveryError(
+                f"J-lens source map shape differs at layer {layer}"
+            )
+        if tensor.dtype != torch.float16:
+            raise AuditRecoveryError(
+                f"J-lens source map dtype differs at layer {layer}"
+            )
     filtered = {layer: normalized[layer] for layer in required}
     extras = tuple(layer for layer in available if layer not in set(required))
     inventory_core = {
@@ -680,8 +790,16 @@ def load_j_checkpoint_superset(
         "available_map_count": len(available),
         "required_map_count": len(required),
         "checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
+        "checkpoint_bytes": PUBLIC_J_CHECKPOINT_BYTES,
         "checkpoint_n_prompts": checkpoint["n_prompts"],
         "checkpoint_d_model": checkpoint["d_model"],
+        "source_map_shape": list(PUBLIC_J_SOURCE_SHAPE),
+        "source_map_dtype": PUBLIC_J_SOURCE_DTYPE,
+        "computation_dtype": "torch.bfloat16",
+        "computation_cast_contract": (
+            "source.to(device=self.device,dtype=torch.bfloat16,"
+            "non_blocking=True).contiguous()"
+        ),
     }
     inventory = {
         **inventory_core,
@@ -1135,6 +1253,9 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
         raise AuditRecoveryError("qualification raw/path guard evidence is absent")
     diagnostics = value.get("path_diagnostics")
     allowed = value.get("allowed_outside_raw_enotdir_probe_count")
+    proc_allowed = value.get(
+        "allowed_outside_raw_proc_self_maps_probe_count"
+    )
     if (
         value.get("status")
         != "pass_no_forbidden_raw_or_path_guard_rejection"
@@ -1154,23 +1275,49 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
             "allowed_outside_raw_enotdir_probe_count": (
                 "errno_ENOTDIR_after_verified_non_symlink_ancestors"
             ),
+            "allowed_outside_raw_proc_self_maps_probe_count": (
+                "exact_kernel_proc_self_maps_alias_to_current_numeric_pid"
+            ),
         }
         or value.get("path_diagnostic_limit") != 16
         or isinstance(allowed, bool)
         or not isinstance(allowed, int)
         or allowed < 0
+        or isinstance(proc_allowed, bool)
+        or not isinstance(proc_allowed, int)
+        or proc_allowed != 1
         or not isinstance(diagnostics, list)
-        or len(diagnostics) != min(allowed, 16)
+        or len(diagnostics) != min(allowed + proc_allowed, 16)
         or any(
             not isinstance(row, Mapping)
             or set(row) != {"classification", "errno", "path_sha256"}
-            or row.get("classification") != "allowed_outside_raw_enotdir"
-            or row.get("errno") != 20
+            or (
+                row.get("classification") == "allowed_outside_raw_enotdir"
+                and row.get("errno") != 20
+            )
+            or (
+                row.get("classification")
+                == "allowed_outside_raw_proc_self_maps"
+                and row.get("errno") is not None
+            )
+            or row.get("classification")
+            not in {
+                "allowed_outside_raw_enotdir",
+                "allowed_outside_raw_proc_self_maps",
+            }
             or HEX64.fullmatch(str(row.get("path_sha256", ""))) is None
             for row in diagnostics
         )
         or value.get("path_diagnostics_sha256")
         != protocol.canonical_sha256(diagnostics)
+        or sum(
+            row.get("classification")
+            == "allowed_outside_raw_proc_self_maps"
+            and row.get("path_sha256")
+            == "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665"
+            for row in diagnostics
+        )
+        != 1
     ):
         raise AuditRecoveryError("qualification raw/path guard evidence differs")
     return dict(value)
@@ -1183,10 +1330,10 @@ def _validate_qualification_evidence(
     code_freeze_commit: str,
 ) -> dict[str, Any]:
     successor_authority = (
-        verify_qualification_incident.successor_authority_binding(
+        verify_qualification_incident.successor_c3_authority_binding(
             repo_root / QUALIFICATION_INCIDENT_ROOT,
             repo_root
-            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json",
+            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
         )
     )
     if (
@@ -1259,10 +1406,10 @@ def _validate_qualification_evidence(
     if (
         marker.get("status") != "attempt_started_irrevocably"
         or marker.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
         or marker.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
-        or marker.get("global_qualification_ordinal") != 2
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
+        or marker.get("global_qualification_ordinal") != 3
         or marker.get("successor_qualification_attempt") != 1
         or marker.get("attempt_number") != 1
         or marker.get("retry_authorized") is not False
@@ -1304,6 +1451,11 @@ def _validate_qualification_evidence(
     target_inputs = target.get("inputs")
     fresh_pod = target.get("fresh_pod")
     checkpoint = target.get("j_checkpoint")
+    cast_probe = (
+        checkpoint.get("frozen_bf16_cast_probe")
+        if isinstance(checkpoint, Mapping)
+        else None
+    )
     cuda = target.get("cuda_startup")
     raw_guard = target.get("raw_access_guard")
     _validate_raw_guard_evidence(raw_guard)
@@ -1320,7 +1472,7 @@ def _validate_qualification_evidence(
         "qualification_incident_closure",
         "qualification_incident_schema",
         "qualification_incident_verification",
-        "recovery_cycle_ledger_v2",
+        "recovery_cycle_ledger_v3",
     ]
     target_input_projection = [
         {"role": row.get("role"), "path": row.get("path")}
@@ -1350,10 +1502,10 @@ def _validate_qualification_evidence(
         target.get("status")
         != "pass_one_shot_zero_forward_target_host_qualification"
         or target.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
         or target.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
-        or target.get("global_qualification_ordinal") != 2
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
+        or target.get("global_qualification_ordinal") != 3
         or target.get("successor_qualification_attempt") != 1
         or target.get("attempt_number") != 1
         or target.get("retry_authorized") is not False
@@ -1411,12 +1563,43 @@ def _validate_qualification_evidence(
         or checkpoint.get("filtered_layers") != list(range(45, 79))
         or checkpoint.get("missing_required_layer_negative")
         != "pass_rejected_missing_required_layer_45"
+        or checkpoint.get("checkpoint_bytes") != PUBLIC_J_CHECKPOINT_BYTES
+        or checkpoint.get("required_map_source_dtype") != PUBLIC_J_SOURCE_DTYPE
+        or checkpoint.get("required_map_computation_dtype") != "torch.bfloat16"
+        or checkpoint.get("required_map_shape")
+        != list(PUBLIC_J_SOURCE_SHAPE)
+        or not isinstance(cast_probe, Mapping)
+        or cast_probe.get("status")
+        != "pass_exact_frozen_fp16_source_to_bf16_full_cast"
+        or cast_probe.get("frozen_entrypoint")
+        != (
+            "experiments.consciousness_sae_signed_dose_scan.audit."
+            "_ArtifactJBackend.j_matrix"
+        )
+        or cast_probe.get("source_layer") != 45
+        or cast_probe.get("source_shape") != list(PUBLIC_J_SOURCE_SHAPE)
+        or cast_probe.get("source_dtype") != PUBLIC_J_SOURCE_DTYPE
+        or cast_probe.get("computation_shape") != list(PUBLIC_J_SOURCE_SHAPE)
+        or cast_probe.get("computation_dtype") != "torch.bfloat16"
+        or cast_probe.get("device") != "cuda:0"
+        or "B200" not in str(cast_probe.get("device_name"))
+        or cast_probe.get("tiny_cross_device_probe_shape") != [16, 16]
+        or cast_probe.get("tiny_cpu_cast_matches_full_cuda_cast") is not True
+        or cast_probe.get("full_cast_finite") is not True
+        or cast_probe.get("backend_watchdog_check_count") != 1
+        or cast_probe.get("model_forward_count") != 0
+        or cast_probe.get("target_prompt_render_count") != 0
         or not isinstance(cuda, Mapping)
         or cuda.get("status") != "pass_frozen_startup_and_real_bf16_cublas"
         or "B200" not in str(cuda.get("device_name"))
         or cuda.get("model_forward_count") != 0
     ):
         raise AuditRecoveryError("target-host qualification evidence differs")
+    _nested_self_hash(
+        cast_probe,
+        "receipt_sha256",
+        "qualification J cast evidence",
+    )
     _nested_self_hash(checkpoint, "receipt_sha256", "qualification J evidence")
     _require_zero_outcome_scope(target, "target-host qualification")
 
@@ -1426,10 +1609,10 @@ def _validate_qualification_evidence(
         verified.get("status")
         != "pass_independent_target_host_qualification_verified"
         or verified.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
         or verified.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
-        or verified.get("global_qualification_ordinal") != 2
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
+        or verified.get("global_qualification_ordinal") != 3
         or verified.get("successor_qualification_attempt") != 1
         or verified.get("qualification_receipt_sha256") != target_hash
         or verified.get("attempt_marker_receipt_sha256") != marker_hash
@@ -1440,6 +1623,8 @@ def _validate_qualification_evidence(
         or verified.get("code_freeze_commit") != code_freeze_commit
         or verified.get("recovery_closure_inventory_sha256") != closure_hash
         or verified.get("j_checkpoint_sha256") != protocol.J_LENS_SPEC["sha256"]
+        or verified.get("j_checkpoint_evidence_sha256")
+        != checkpoint.get("receipt_sha256")
         or verified.get("attempt_number") != 1
         or verified.get("retry_authorized") is not False
     ):
@@ -2310,8 +2495,8 @@ def _validate_execution_paths(execution: Mapping[str, Any]) -> dict[str, Any]:
         or output.parent != attempt_root
         or marker.parent != attempt_root
         or failure.parent != attempt_root
-        or not attempt_root.name.startswith("audit_recovery_v2")
-        or not output.name.startswith("audit_recovery_v2")
+        or not attempt_root.name.startswith("audit_recovery_v3")
+        or not output.name.startswith("audit_recovery_v3")
         or output.name.startswith(".")
         or marker.name != "ATTEMPT_CLAIMED.json"
         or failure.name != "RECOVERY_FAILED.json"

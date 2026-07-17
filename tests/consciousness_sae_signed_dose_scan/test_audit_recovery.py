@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -40,6 +41,14 @@ def _load(
 ) -> tuple[Path, Any, dict[str, Any], dict[str, Any]]:
     path = tmp_path / "j.pt"
     path.write_bytes(b"pinned-test-checkpoint")
+    fake_dtype = object()
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(float16=fake_dtype))
+    monkeypatch.setattr(
+        audit_recovery, "PUBLIC_J_CHECKPOINT_BYTES", path.stat().st_size
+    )
+    for value in checkpoint.get("J", {}).values():
+        if type(value) is _FakeJMap:
+            value.dtype = fake_dtype
     monkeypatch.setattr(
         protocol,
         "sha256_file",
@@ -55,10 +64,17 @@ def _load(
     return audit_recovery.load_j_checkpoint_superset(path, _Watchdog())
 
 
+class _FakeJMap:
+    shape = (protocol.WIDTH, protocol.WIDTH)
+
+    def __init__(self) -> None:
+        self.dtype: object | None = None
+
+
 def test_authentic_zero_through_78_superset_is_behaviorally_filtered(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    values = {str(layer): object() for layer in range(79)}
+    values = {str(layer): _FakeJMap() for layer in range(79)}
     path, filtered, record, inventory = _load(
         tmp_path, monkeypatch, _checkpoint(values)
     )
@@ -82,7 +98,7 @@ def test_authentic_zero_through_78_superset_is_behaviorally_filtered(
 def test_superset_loader_rejects_a_missing_study_layer(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    values = {layer: object() for layer in range(79) if layer != 61}
+    values = {layer: _FakeJMap() for layer in range(79) if layer != 61}
     with pytest.raises(
         audit_recovery.AuditRecoveryError, match="lacks a required study layer"
     ):
@@ -110,7 +126,7 @@ def test_normalizer_rejects_duplicate_or_noncanonical_keys(
 def test_superset_loader_binds_checkpoint_metadata_and_records_it(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    values = {layer: object() for layer in range(79)}
+    values = {layer: _FakeJMap() for layer in range(79)}
     _path, _maps, _record, inventory = _load(
         tmp_path, monkeypatch, _checkpoint(values, harmless_release_note=1)
     )
@@ -118,6 +134,10 @@ def test_superset_loader_binds_checkpoint_metadata_and_records_it(
         protocol.J_LENS_SPEC["release_config"]["prompts_fitted"]
     )
     assert inventory["checkpoint_d_model"] == protocol.WIDTH
+    assert inventory["checkpoint_bytes"] == len(b"pinned-test-checkpoint")
+    assert inventory["source_map_shape"] == [protocol.WIDTH, protocol.WIDTH]
+    assert inventory["source_map_dtype"] == "torch.float16"
+    assert inventory["computation_dtype"] == "torch.bfloat16"
 
     bad = _checkpoint(values)
     bad["n_prompts"] = int(bad["n_prompts"]) + 1
@@ -125,6 +145,30 @@ def test_superset_loader_binds_checkpoint_metadata_and_records_it(
         audit_recovery.AuditRecoveryError, match="checkpoint metadata differs"
     ):
         _load(tmp_path, monkeypatch, bad)
+
+
+def test_superset_loader_rejects_wrong_source_shape_or_dtype(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    wrong_shape = {layer: _FakeJMap() for layer in range(79)}
+    wrong_shape[45].shape = (1, protocol.WIDTH)
+    with pytest.raises(
+        audit_recovery.AuditRecoveryError,
+        match="source map shape differs at layer 45",
+    ):
+        _load(tmp_path, monkeypatch, _checkpoint(wrong_shape))
+
+    class _WrongDtypeMap(_FakeJMap):
+        pass
+
+    wrong_dtype = {layer: _FakeJMap() for layer in range(79)}
+    wrong_dtype[45] = _WrongDtypeMap()
+    # _load assigns the authenticated dtype only to the exact fixture class.
+    with pytest.raises(
+        audit_recovery.AuditRecoveryError,
+        match="source map dtype differs at layer 45",
+    ):
+        _load(tmp_path, monkeypatch, _checkpoint(wrong_dtype))
 
 
 def test_zero_forward_guard_blocks_module_calls_and_model_loads() -> None:
@@ -503,15 +547,20 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     )
     ledger_target = (
         root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json"
     )
     shutil.copy2(
         source_root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json",
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
         ledger_target,
     )
+    shutil.copy2(
+        source_root
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json",
+        ledger_target.parent / "RECOVERY_C3_STATUS_MAP.json",
+    )
     successor_authority = (
-        audit_recovery.verify_qualification_incident.successor_authority_binding(
+        audit_recovery.verify_qualification_incident.successor_c3_authority_binding(
             incident_target, ledger_target
         )
     )
@@ -583,7 +632,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "qualification_incident_closure",
             "qualification_incident_schema",
             "qualification_incident_verification",
-            "recovery_cycle_ledger_v2",
+            "recovery_cycle_ledger_v3",
         )
     ]
     declared_inputs = [
@@ -592,9 +641,9 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     marker = _hashed(
         {
             "status": "attempt_started_irrevocably",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
-            "global_qualification_ordinal": 2,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
+            "global_qualification_ordinal": 3,
             "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
@@ -625,6 +674,28 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
         "precreate_unrelated_pod_count": 0,
         "precreate_unrelated_inventory_sha256": empty_inventory,
     }
+    cast_probe = _hashed(
+        {
+            "status": "pass_exact_frozen_fp16_source_to_bf16_full_cast",
+            "frozen_entrypoint": (
+                "experiments.consciousness_sae_signed_dose_scan.audit."
+                "_ArtifactJBackend.j_matrix"
+            ),
+            "source_layer": 45,
+            "source_shape": [protocol.WIDTH, protocol.WIDTH],
+            "source_dtype": "torch.float16",
+            "computation_shape": [protocol.WIDTH, protocol.WIDTH],
+            "computation_dtype": "torch.bfloat16",
+            "device": "cuda:0",
+            "device_name": "NVIDIA B200",
+            "tiny_cross_device_probe_shape": [16, 16],
+            "tiny_cpu_cast_matches_full_cuda_cast": True,
+            "full_cast_finite": True,
+            "backend_watchdog_check_count": 1,
+            "model_forward_count": 0,
+            "target_prompt_render_count": 0,
+        }
+    )
     checkpoint = _hashed(
         {
             "checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
@@ -633,14 +704,19 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "required_layers": list(range(45, 79)),
             "filtered_layers": list(range(45, 79)),
             "missing_required_layer_negative": "pass_rejected_missing_required_layer_45",
+            "checkpoint_bytes": audit_recovery.PUBLIC_J_CHECKPOINT_BYTES,
+            "required_map_source_dtype": "torch.float16",
+            "required_map_computation_dtype": "torch.bfloat16",
+            "required_map_shape": [protocol.WIDTH, protocol.WIDTH],
+            "frozen_bf16_cast_probe": cast_probe,
         }
     )
     target = _hashed(
         {
             "status": "pass_one_shot_zero_forward_target_host_qualification",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
-            "global_qualification_ordinal": 2,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
+            "global_qualification_ordinal": 3,
             "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
@@ -678,14 +754,30 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
                 "raw_forbidden_attempt_count": 0,
                 "path_guard_rejected_attempt_count": 0,
                 "allowed_outside_raw_enotdir_probe_count": 0,
+                "allowed_outside_raw_proc_self_maps_probe_count": 1,
                 "counter_semantics": {
                     "raw_forbidden_attempt_count": "lexically_inside_forbidden_raw_root",
                     "path_guard_rejected_attempt_count": "pre_containment_symlink_noncanonical_or_unresolvable_rejection",
                     "allowed_outside_raw_enotdir_probe_count": "errno_ENOTDIR_after_verified_non_symlink_ancestors",
+                    "allowed_outside_raw_proc_self_maps_probe_count": "exact_kernel_proc_self_maps_alias_to_current_numeric_pid",
                 },
                 "path_diagnostic_limit": 16,
-                "path_diagnostics": [],
-                "path_diagnostics_sha256": protocol.canonical_sha256([]),
+                "path_diagnostics": [
+                    {
+                        "classification": "allowed_outside_raw_proc_self_maps",
+                        "errno": None,
+                        "path_sha256": "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665",
+                    }
+                ],
+                "path_diagnostics_sha256": protocol.canonical_sha256(
+                    [
+                        {
+                            "classification": "allowed_outside_raw_proc_self_maps",
+                            "errno": None,
+                            "path_sha256": "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665",
+                        }
+                    ]
+                ),
             },
             "inputs": inputs,
             "input_inventory_sha256": protocol.canonical_sha256(inputs),
@@ -700,9 +792,9 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     verified = _hashed(
         {
             "status": "pass_independent_target_host_qualification_verified",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2",
-            "global_qualification_ordinal": 2,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
+            "global_qualification_ordinal": 3,
             "successor_qualification_attempt": 1,
             "qualification_receipt_sha256": target["receipt_sha256"],
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
@@ -713,6 +805,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "equivalence_packet_sha256": packet["packet_sha256"],
             "code_freeze_commit": commit,
             "recovery_closure_inventory_sha256": closure_hash,
+            "j_checkpoint_evidence_sha256": checkpoint["receipt_sha256"],
             "j_checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
             "attempt_number": 1,
             "retry_authorized": False,
@@ -806,6 +899,41 @@ def test_mandatory_E_qualification_receipts_are_semantically_bound(
     value["receipt_sha256"] = protocol.canonical_sha256(core)
     target.write_bytes(protocol.canonical_json_bytes(value) + b"\n")
     with pytest.raises(audit_recovery.AuditRecoveryError):
+        audit_recovery._validate_qualification_evidence(
+            rows, repo_root=tmp_path, code_freeze_commit=commit
+        )
+
+
+def test_qualification_rejects_self_consistent_false_full_j_cast(
+    tmp_path: Path,
+) -> None:
+    commit = "a" * 40
+    rows = _qualification_fixture(tmp_path, commit=commit)
+    target = next(
+        tmp_path / row["path"]
+        for row in rows
+        if row["path"].endswith("TARGET_HOST_QUALIFICATION.json")
+    )
+    value = json.loads(target.read_text(encoding="utf-8"))
+    cast = value["j_checkpoint"]["frozen_bf16_cast_probe"]
+    cast["full_cast_finite"] = False
+    cast_core = dict(cast)
+    cast_core.pop("receipt_sha256")
+    cast["receipt_sha256"] = protocol.canonical_sha256(cast_core)
+    checkpoint_core = dict(value["j_checkpoint"])
+    checkpoint_core.pop("receipt_sha256")
+    value["j_checkpoint"]["receipt_sha256"] = protocol.canonical_sha256(
+        checkpoint_core
+    )
+    target_core = dict(value)
+    target_core.pop("receipt_sha256")
+    value["receipt_sha256"] = protocol.canonical_sha256(target_core)
+    target.write_bytes(protocol.canonical_json_bytes(value) + b"\n")
+
+    with pytest.raises(
+        audit_recovery.AuditRecoveryError,
+        match="target-host qualification evidence differs",
+    ):
         audit_recovery._validate_qualification_evidence(
             rows, repo_root=tmp_path, code_freeze_commit=commit
         )

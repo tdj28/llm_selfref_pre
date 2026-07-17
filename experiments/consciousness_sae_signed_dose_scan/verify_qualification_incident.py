@@ -58,6 +58,53 @@ EXPECTED_LEDGER_FILE_SHA256 = (
 EXPECTED_LEDGER_RECEIPT_SHA256 = (
     "534531c3825a5d91521b417ba92482845ed663f86d66a18ddaa9f5a31fd9c787"
 )
+C2_INCIDENT_DIRECTORY_NAME = (
+    "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
+)
+C2_INCIDENT_ID = "qualification-79db4e7-g2azyjkpm17f1s"
+C2_CODE_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
+C2_FAILED_POD_ID = "g2azyjkpm17f1s"
+C3_REJECTED_POD_IDS = ["wl8obvtuq0ax8t", "69d9kxugxuf6up", C2_FAILED_POD_ID]
+C3_CYCLE_ID = "signed-dose-audit-only-recovery-v3-20260717"
+C3_AUTHORITY_STATEMENT = (
+    "Authorize C3 and augment the experiment skill with lesson learned"
+)
+C3_AUTHORITY_BINDING_SHA256 = (
+    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
+)
+C3_LEDGER_FILE_SHA256 = (
+    "b2d28577a4e985b7922290b7def34a43f36a9b68feea8dc1f28a707663280a1c"
+)
+C3_LEDGER_RECEIPT_SHA256 = (
+    "cbe07edf29f2068f346957c1639ace2f1c985b6df93dd540c464bbc79d35925d"
+)
+C3_STATUS_MAP_FILE_SHA256 = (
+    "b9c6c95938332e4f34071879a548f9450185386895c6dbaf16065a597397cd2e"
+)
+C3_STATUS_MAP_RECEIPT_SHA256 = (
+    "d53847535b6ccdf56f19b0094ac146b5093bc1d4ccfccaf153dceb32db0f1d59"
+)
+C2_CAUSE_FILE_SHA256 = (
+    "8bc3b88be6d47f827def12bb4db2f4340d8451ce71d106dbaf2a07b749daf321"
+)
+C2_CAUSE_RECEIPT_SHA256 = (
+    "547aedaf4e9daca603355c4d67d5f946568462634080881bd58c8d6601210628"
+)
+C2_SCHEMA_FILE_SHA256 = (
+    "f6f2fe4dacd3e460e9fe210d5c90d20df8ec46120a7dac825ba32ca00d3e0229"
+)
+C2_CLOSURE_FILE_SHA256 = (
+    "eb2c13f8c8a62d36af41af773ae2e828409124a9d4ee988eecfad1a7f12a9c72"
+)
+C2_CLOSURE_RECEIPT_SHA256 = (
+    "599a712f93fecca1e1007b88a5403de2ed84b76fd6c12c2d273e279e9c979fab"
+)
+C2_VERIFICATION_FILE_SHA256 = (
+    "d7053fed05db4d48f47830accb1ebf365fde9315d213b7b5d80f9975015f0643"
+)
+C2_VERIFICATION_RECEIPT_SHA256 = (
+    "7c080c426e5e1da99b35c1b5c0e2a152b9b98a2f71a2ab12eedca3ab0fed1e2e"
+)
 EXPECTED_FILES = {
     "ATTEMPT_STARTED.json": (
         "irreversible_attempt_marker", 1394,
@@ -532,6 +579,285 @@ def successor_authority_binding(
         "successor_deadline_utc": "2026-07-17T12:00:00Z",
     }
     return {**core, "binding_sha256": canonical_sha256(core)}
+
+
+def _load_exact_json(path: Path, label: str) -> tuple[dict[str, Any], bytes]:
+    """Load an exact physically anchored JSON object, independent of layout."""
+
+    candidate = path.expanduser().absolute()
+    try:
+        details = candidate.lstat()
+        raw = candidate.read_bytes()
+        value = json.loads(raw)
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise QualificationIncidentVerificationError(
+            f"{label} is unreadable"
+        ) from exc
+    if (
+        not stat.S_ISREG(details.st_mode)
+        or details.st_nlink != 1
+        or not isinstance(value, dict)
+    ):
+        raise QualificationIncidentVerificationError(
+            f"{label} is not single-link JSON"
+        )
+    return value, raw
+
+
+def _verify_c2_incident_for_c3(incident_dir: Path) -> dict[str, Any]:
+    """Independently authenticate the zero-forward C2 qualification failure."""
+
+    root = incident_dir.expanduser().absolute()
+    if root.name != C2_INCIDENT_DIRECTORY_NAME:
+        raise QualificationIncidentVerificationError(
+            "C2 qualification namespace differs"
+        )
+    cause, cause_raw = _load_exact_json(
+        root / "INCIDENT_CAUSE.json", "C2 incident cause"
+    )
+    schema, schema_raw = _load_exact_json(
+        root / "INCIDENT_CLOSURE_SCHEMA.json", "C2 incident schema"
+    )
+    closure, closure_raw = _load_exact_json(
+        root / "INCIDENT_CLOSURE.json", "C2 incident closure"
+    )
+    verification, verification_raw = _load_exact_json(
+        root / "INCIDENT_CLOSURE_VERIFICATION.json",
+        "C2 incident verification",
+    )
+    cause_receipt = _self_hash(cause, "receipt_sha256", "C2 incident cause")
+    closure_receipt = _self_hash(
+        closure, "receipt_sha256", "C2 incident closure"
+    )
+    verification_receipt = _self_hash(
+        verification, "receipt_sha256", "C2 incident verification"
+    )
+    physical = {
+        "cause": hashlib.sha256(cause_raw).hexdigest(),
+        "schema": hashlib.sha256(schema_raw).hexdigest(),
+        "closure": hashlib.sha256(closure_raw).hexdigest(),
+        "verification": hashlib.sha256(verification_raw).hexdigest(),
+    }
+    evidence = closure.get("evidence_inventory")
+    if not isinstance(evidence, list) or len(evidence) != 17:
+        raise QualificationIncidentVerificationError(
+            "C2 evidence inventory differs"
+        )
+    loaded: dict[str, Mapping[str, Any]] = {}
+    for row in evidence:
+        if (
+            not isinstance(row, Mapping)
+            or set(row)
+            != {"name", "role", "bytes", "physical_sha256", "content_sha256"}
+            or not isinstance(row.get("name"), str)
+            or Path(str(row["name"])).name != row["name"]
+            or isinstance(row.get("bytes"), bool)
+            or not isinstance(row.get("bytes"), int)
+            or row["bytes"] < 0
+            or HEX64.fullmatch(str(row.get("physical_sha256", ""))) is None
+        ):
+            raise QualificationIncidentVerificationError(
+                "C2 evidence row differs"
+            )
+        path = root / str(row["name"])
+        try:
+            details = path.lstat()
+            raw = path.read_bytes()
+        except OSError as exc:
+            raise QualificationIncidentVerificationError(
+                "C2 evidence is unreadable"
+            ) from exc
+        if (
+            not stat.S_ISREG(details.st_mode)
+            or details.st_nlink != 1
+            or len(raw) != row["bytes"]
+            or hashlib.sha256(raw).hexdigest() != row["physical_sha256"]
+        ):
+            raise QualificationIncidentVerificationError(
+                "C2 evidence physical hash differs"
+            )
+        content_hash = row.get("content_sha256")
+        if content_hash is None:
+            if row["name"] != "QUALIFICATION_STDERR.log":
+                raise QualificationIncidentVerificationError(
+                    "C2 unhashed-content role differs"
+                )
+            continue
+        if HEX64.fullmatch(str(content_hash)) is None:
+            raise QualificationIncidentVerificationError(
+                "C2 evidence content hash differs"
+            )
+        try:
+            value = json.loads(raw)
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise QualificationIncidentVerificationError(
+                "C2 evidence JSON differs"
+            ) from exc
+        field = (
+            "packet_sha256"
+            if row["name"] == "RECOVERY_EQUIVALENCE_PACKET.json"
+            else "receipt_sha256"
+        )
+        if (
+            not isinstance(value, Mapping)
+            or raw != canonical_json_bytes(value) + b"\n"
+            or _self_hash(value, field, f"C2 evidence {row['name']}")
+            != content_hash
+        ):
+            raise QualificationIncidentVerificationError(
+                "C2 evidence self hash differs"
+            )
+        loaded[str(row["name"])] = value
+    attempt = closure.get("attempt")
+    successor = closure.get("successor_requirements")
+    termination = closure.get("termination")
+    failure = loaded.get("QUALIFICATION_FAILED.json")
+    if (
+        physical
+        != {
+            "cause": C2_CAUSE_FILE_SHA256,
+            "schema": C2_SCHEMA_FILE_SHA256,
+            "closure": C2_CLOSURE_FILE_SHA256,
+            "verification": C2_VERIFICATION_FILE_SHA256,
+        }
+        or cause_receipt != C2_CAUSE_RECEIPT_SHA256
+        or closure_receipt != C2_CLOSURE_RECEIPT_SHA256
+        or verification_receipt != C2_VERIFICATION_RECEIPT_SHA256
+        or schema.get("additionalProperties") is not False
+        or closure.get("incident_id") != C2_INCIDENT_ID
+        or closure.get("status")
+        != "closed_no_raw_no_forward_attempt_consumed_fresh_c3_authority_required"
+        or not isinstance(attempt, Mapping)
+        or attempt.get("pod_id") != C2_FAILED_POD_ID
+        or attempt.get("global_qualification_ordinal") != 2
+        or attempt.get("attempt_number") != 1
+        or attempt.get("retry_authorized") is not False
+        or attempt.get("declared_raw_input_paths") != []
+        or attempt.get("raw_opened_or_recomputed") is not False
+        or attempt.get("model_forward_count") != 0
+        or attempt.get("target_prompt_render_count") != 0
+        or attempt.get("zero_forward_guard_total") != 0
+        or not isinstance(failure, Mapping)
+        or failure.get("status") != "qualification_failed_attempt_consumed"
+        or failure.get("global_qualification_ordinal") != 2
+        or failure.get("retry_authorized") is not False
+        or failure.get("raw_forbidden_attempt_count") != 0
+        or failure.get("model_forward_count") != 0
+        or failure.get("target_prompt_render_count") != 0
+        or not isinstance(successor, Mapping)
+        or successor.get("global_qualification_ordinal") != 3
+        or successor.get("successor_attempt_number") != 1
+        or successor.get("retry_count") != 0
+        or successor.get("rejected_pod_ids") != C3_REJECTED_POD_IDS
+        or not isinstance(termination, Mapping)
+        or termination.get("pod_id") != C2_FAILED_POD_ID
+        or termination.get("absent_from_account_inventory") is not True
+        or termination.get("other_pods_mutated") is not False
+        or verification.get("status")
+        != "pass_c2_qualification_incident_independent_verification_for_fresh_c3_authority"
+        or verification.get("incident_closure_file_sha256")
+        != C2_CLOSURE_FILE_SHA256
+        or verification.get("incident_closure_receipt_sha256")
+        != C2_CLOSURE_RECEIPT_SHA256
+        or verification.get("evidence_file_count") != 17
+        or verification.get("qualification_outcome_classification")
+        != "no_raw_or_scientific_outcome_access"
+    ):
+        raise QualificationIncidentVerificationError(
+            "C2 incident semantics differ"
+        )
+    return {
+        "incident_id": C2_INCIDENT_ID,
+        "predecessor_pod_id": C2_FAILED_POD_ID,
+        "closure_file_sha256": physical["closure"],
+        "closure_receipt_sha256": closure_receipt,
+        "closure_verification_file_sha256": physical["verification"],
+        "closure_verification_receipt_sha256": verification_receipt,
+        "model_forward_count": 0,
+        "target_prompt_render_count": 0,
+        "raw_run_opened": False,
+    }
+
+
+def successor_c3_authority_binding(
+    incident_dir: Path, recovery_cycle_ledger_path: Path
+) -> dict[str, Any]:
+    """Independently bind the C2 incident to the frozen one-shot C3 cycle."""
+
+    incident = _verify_c2_incident_for_c3(incident_dir)
+    ledger, ledger_raw = _load_exact_json(
+        recovery_cycle_ledger_path, "C3 recovery cycle ledger"
+    )
+    status_map, status_raw = _load_exact_json(
+        recovery_cycle_ledger_path.parent / "RECOVERY_C3_STATUS_MAP.json",
+        "C3 status map",
+    )
+    ledger_receipt = _self_hash(
+        ledger, "receipt_sha256", "C3 recovery cycle ledger"
+    )
+    status_receipt = _self_hash(status_map, "receipt_sha256", "C3 status map")
+    authority = ledger.get("successor_authority_binding")
+    cardinality = ledger.get("cardinality_limits")
+    limits = ledger.get("time_and_cost_limits")
+    usage = ledger.get("usage_at_freeze")
+    if (
+        hashlib.sha256(ledger_raw).hexdigest() != C3_LEDGER_FILE_SHA256
+        or ledger_receipt != C3_LEDGER_RECEIPT_SHA256
+        or hashlib.sha256(status_raw).hexdigest() != C3_STATUS_MAP_FILE_SHA256
+        or status_receipt != C3_STATUS_MAP_RECEIPT_SHA256
+        or ledger.get("receipt_kind")
+        != "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v3"
+        or ledger.get("status") != "frozen_c3_cycle_authorized_pending_pushed_c3"
+        or ledger.get("cycle_id") != C3_CYCLE_ID
+        or not isinstance(authority, Mapping)
+        or authority.get("human_authorization_statement")
+        != C3_AUTHORITY_STATEMENT
+        or authority.get("c2_commit") != C2_CODE_FREEZE_COMMIT
+        or authority.get("closure_file_sha256")
+        != incident["closure_file_sha256"]
+        or authority.get("closure_receipt_sha256")
+        != incident["closure_receipt_sha256"]
+        or authority.get("closure_verification_file_sha256")
+        != incident["closure_verification_file_sha256"]
+        or authority.get("closure_verification_receipt_sha256")
+        != incident["closure_verification_receipt_sha256"]
+        or authority.get("cycle_id") != C3_CYCLE_ID
+        or authority.get("global_qualification_ordinal") != 3
+        or authority.get("qualification_attempt_number") != 1
+        or authority.get("no_automatic_retry") is not True
+        or authority.get("no_model_forward") is not True
+        or authority.get("qualification_and_review_raw_or_outcome_access") is not False
+        or authority.get("rejected_pod_ids") != C3_REJECTED_POD_IDS
+        or authority.get("hard_deadline_utc") != "2026-07-17T18:00:00Z"
+        or authority.get("status_map_file_sha256") != C3_STATUS_MAP_FILE_SHA256
+        or authority.get("status_map_receipt_sha256")
+        != C3_STATUS_MAP_RECEIPT_SHA256
+        or ledger.get("successor_authority_binding_sha256")
+        != C3_AUTHORITY_BINDING_SHA256
+        or canonical_sha256(authority) != C3_AUTHORITY_BINDING_SHA256
+        or not isinstance(cardinality, Mapping)
+        or cardinality.get("replacement_target_qualification_attempts") != 1
+        or cardinality.get("paid_top_level_review_calls") != 1
+        or cardinality.get("audit_only_recovery_attempts") != 1
+        or cardinality.get("automatic_retries") != 0
+        or not isinstance(usage, Mapping)
+        or any(value != 0 for value in usage.values())
+        or not isinstance(limits, Mapping)
+        or limits.get("qualification_cap_seconds") != 1800
+        or limits.get("qualification_cap_usd") != "3.00"
+        or limits.get("paid_top_level_review_cap_usd") != "1.25"
+        or limits.get("recovery_cap_seconds") != 3600
+        or limits.get("recovery_cap_usd") != "6.00"
+        or status_map.get("base_commit") != C2_CODE_FREEZE_COMMIT
+        or status_map.get("status") != "frozen_allowed_surface_pending_c3_commit"
+        or status_map.get("c2_to_c3", {}).get("other_paths_forbidden") is not True
+        or status_map.get("c2_to_c3", {}).get("required_direct_parent")
+        != C2_CODE_FREEZE_COMMIT
+    ):
+        raise QualificationIncidentVerificationError(
+            "C3 successor authority differs"
+        )
+    return {**dict(authority), "binding_sha256": C3_AUTHORITY_BINDING_SHA256}
 
 
 def main() -> int:

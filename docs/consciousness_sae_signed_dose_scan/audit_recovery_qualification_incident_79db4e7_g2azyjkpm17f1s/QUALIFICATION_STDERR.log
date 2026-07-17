@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/signed-dose-q2-g2azyjkpm17f1s/experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py", line 988, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/signed-dose-q2-g2azyjkpm17f1s/experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py", line 971, in main
+    receipt = qualify_host(
+              ^^^^^^^^^^^^^
+  File "/root/signed-dose-q2-g2azyjkpm17f1s/experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py", line 825, in qualify_host
+    checkpoint = dict(inspect_checkpoint(j_lens_path))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/signed-dose-q2-g2azyjkpm17f1s/experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py", line 529, in inspect_pinned_checkpoint
+    raise RecoveryHostQualificationError(
+RecoveryHostQualificationError: required J[45] shape/dtype differs

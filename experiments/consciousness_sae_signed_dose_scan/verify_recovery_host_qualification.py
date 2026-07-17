@@ -32,25 +32,25 @@ from experiments.consciousness_sae_signed_dose_scan import (
 REPO_ROOT = Path(__file__).resolve().parents[2]
 QUALIFICATION_INCIDENT_DIR = REPO_ROOT / (
     "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
+    "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
 )
 RECOVERY_CYCLE_LEDGER_PATH = (
     REPO_ROOT
-    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json"
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
-    "41c7a12dde095fdf19dc00a0f211afe8b0d2f12299b7ab1a5e12f70b5eee8f26"
+    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
 )
 QUALIFICATION_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
 )
 QUALIFICATION_CYCLE_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
 )
-GLOBAL_QUALIFICATION_ORDINAL = 2
+GLOBAL_QUALIFICATION_ORDINAL = 3
 SUCCESSOR_QUALIFICATION_ATTEMPT = 1
 REJECTED_PREDECESSOR_POD_IDS = frozenset(
-    {"wl8obvtuq0ax8t", "69d9kxugxuf6up"}
+    {"wl8obvtuq0ax8t", "69d9kxugxuf6up", "g2azyjkpm17f1s"}
 )
 PATH_DIAGNOSTIC_LIMIT = 16
 ATTEMPT_MARKER_NAME = "ATTEMPT_STARTED.json"
@@ -61,6 +61,7 @@ MAX_GUEST_AGE_SECONDS = 15 * 60
 MIN_LIFECYCLE_REMAINING_SECONDS = 15 * 60
 QUALIFICATION_MAX_SECONDS = 30 * 60
 QUALIFICATION_MAX_SPEND_USD = 3.0
+QUALIFICATION_CYCLE_DEADLINE_AT_UNIX = 1_784_311_200.0
 FORBIDDEN_RAW_ROOT = Path(
     "/workspace/consciousness_sae_signed_dose_scan/"
     "consciousness_sae_signed_dose_scan_v1/raw"
@@ -281,6 +282,14 @@ def _verify_marker(
     hourly_price_usd: float,
     declared_inputs: list[dict[str, str]],
 ) -> str:
+    if (
+        not math.isfinite(started)
+        or started + QUALIFICATION_MAX_SECONDS
+        > QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
+    ):
+        raise RecoveryHostQualificationVerificationError(
+            "C3 qualification cycle deadline cannot fit the full attempt cap"
+        )
     receipt_hash = _self_hash(marker, "attempt marker")
     expected = {
         "schema_version": 1,
@@ -322,11 +331,46 @@ def _verify_checkpoint(value: Any, checkpoint_path: Path) -> str:
     }
     core = dict(value)
     core.pop("receipt_sha256")
+    cast = core.get("frozen_bf16_cast_probe")
+    if not isinstance(cast, Mapping):
+        raise RecoveryHostQualificationVerificationError(
+            "J source-to-computation cast evidence is absent"
+        )
+    cast_receipt = _self_hash(cast, "J source-to-computation cast evidence")
+    expected_cast = {
+        "status": "pass_exact_frozen_fp16_source_to_bf16_full_cast",
+        "frozen_entrypoint": (
+            "experiments.consciousness_sae_signed_dose_scan.audit."
+            "_ArtifactJBackend.j_matrix"
+        ),
+        "source_layer": 45,
+        "source_shape": [protocol.WIDTH, protocol.WIDTH],
+        "source_dtype": "torch.float16",
+        "computation_shape": [protocol.WIDTH, protocol.WIDTH],
+        "computation_dtype": "torch.bfloat16",
+        "device": "cuda:0",
+        "tiny_cross_device_probe_shape": [16, 16],
+        "tiny_cpu_cast_matches_full_cuda_cast": True,
+        "full_cast_finite": True,
+        "backend_watchdog_check_count": 1,
+        "model_forward_count": 0,
+        "target_prompt_render_count": 0,
+        "receipt_sha256": cast_receipt,
+    }
+    if (
+        any(cast.get(key) != expected for key, expected in expected_cast.items())
+        or set(cast) != {*expected_cast, "device_name"}
+        or "B200" not in str(cast.get("device_name"))
+    ):
+        raise RecoveryHostQualificationVerificationError(
+            "J source-to-computation cast evidence differs"
+        )
     fixed = {
         "status": "pass_exact_pinned_superset_and_required_filter",
         "checkpoint_path": checkpoint_path.expanduser().absolute().as_posix(),
         "checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
         "checkpoint_revision": protocol.J_LENS_SPEC["revision"],
+        "checkpoint_bytes": 10_603_226_027,
         "checkpoint_n_prompts": int(
             protocol.J_LENS_SPEC["release_config"]["prompts_fitted"]
         ),
@@ -338,7 +382,12 @@ def _verify_checkpoint(value: Any, checkpoint_path: Path) -> str:
         "available_map_count": 79,
         "required_map_count": 34,
         "required_map_shape": [protocol.WIDTH, protocol.WIDTH],
-        "required_map_dtype": "torch.bfloat16",
+        "required_map_source_dtype": "torch.float16",
+        "required_map_computation_dtype": "torch.bfloat16",
+        "computation_cast_contract": (
+            "source.to(device=self.device,dtype=torch.bfloat16,"
+            "non_blocking=True).contiguous()"
+        ),
         "selected_map_object_contract": (
             "same_checkpoint_objects_no_numeric_transform"
         ),
@@ -346,6 +395,7 @@ def _verify_checkpoint(value: Any, checkpoint_path: Path) -> str:
             "pass_rejected_missing_required_layer_45"
         ),
         "frozen_audit_record": expected_audit_record,
+        "frozen_bf16_cast_probe": cast,
     }
     if (
         any(core.get(key) != expected for key, expected in fixed.items())
@@ -353,6 +403,7 @@ def _verify_checkpoint(value: Any, checkpoint_path: Path) -> str:
         or isinstance(core.get("loader_watchdog_check_count"), bool)
         or not isinstance(core.get("loader_watchdog_check_count"), int)
         or core["loader_watchdog_check_count"] < 2
+        or checkpoint_path.stat().st_size != 10_603_226_027
         or sha256_file(checkpoint_path) != protocol.J_LENS_SPEC["sha256"]
     ):
         raise RecoveryHostQualificationVerificationError("J evidence differs")
@@ -399,13 +450,21 @@ def _verify_cuda(value: Any) -> None:
         raise RecoveryHostQualificationVerificationError("CUDA evidence differs")
 
 
-def _verify_raw_guard(value: Any, forbidden_raw_root: Path) -> dict[str, Any]:
+def _verify_raw_guard(
+    value: Any,
+    forbidden_raw_root: Path,
+    *,
+    expected_proc_self_maps_count: int | None,
+) -> dict[str, Any]:
     if not isinstance(value, Mapping):
         raise RecoveryHostQualificationVerificationError(
             "raw/path guard evidence is absent"
         )
     diagnostics = value.get("path_diagnostics")
     allowed_count = value.get("allowed_outside_raw_enotdir_probe_count")
+    proc_count = value.get(
+        "allowed_outside_raw_proc_self_maps_probe_count"
+    )
     fixed = {
         "status": "pass_no_forbidden_raw_or_path_guard_rejection",
         "forbidden_raw_root": forbidden_raw_root.as_posix(),
@@ -421,6 +480,9 @@ def _verify_raw_guard(value: Any, forbidden_raw_root: Path) -> dict[str, Any]:
             "allowed_outside_raw_enotdir_probe_count": (
                 "errno_ENOTDIR_after_verified_non_symlink_ancestors"
             ),
+            "allowed_outside_raw_proc_self_maps_probe_count": (
+                "exact_kernel_proc_self_maps_alias_to_current_numeric_pid"
+            ),
         },
         "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
     }
@@ -430,23 +492,69 @@ def _verify_raw_guard(value: Any, forbidden_raw_root: Path) -> dict[str, Any]:
         != {
             *fixed,
             "allowed_outside_raw_enotdir_probe_count",
+            "allowed_outside_raw_proc_self_maps_probe_count",
             "path_diagnostics",
             "path_diagnostics_sha256",
         }
         or isinstance(allowed_count, bool)
         or not isinstance(allowed_count, int)
         or allowed_count < 0
+        or isinstance(proc_count, bool)
+        or not isinstance(proc_count, int)
+        or proc_count < 0
+        or (
+            expected_proc_self_maps_count is not None
+            and proc_count != expected_proc_self_maps_count
+        )
         or not isinstance(diagnostics, list)
-        or len(diagnostics) != min(allowed_count, PATH_DIAGNOSTIC_LIMIT)
+        or len(diagnostics)
+        != min(allowed_count + proc_count, PATH_DIAGNOSTIC_LIMIT)
         or any(
             not isinstance(row, Mapping)
             or set(row) != {"classification", "errno", "path_sha256"}
-            or row.get("classification") != "allowed_outside_raw_enotdir"
-            or row.get("errno") != 20
+            or (
+                row.get("classification") == "allowed_outside_raw_enotdir"
+                and row.get("errno") != 20
+            )
+            or (
+                row.get("classification")
+                == "allowed_outside_raw_proc_self_maps"
+                and row.get("errno") is not None
+            )
+            or row.get("classification")
+            not in {
+                "allowed_outside_raw_enotdir",
+                "allowed_outside_raw_proc_self_maps",
+            }
             or HEX64.fullmatch(str(row.get("path_sha256", ""))) is None
             for row in diagnostics
         )
+        or sum(
+            row.get("classification") == "allowed_outside_raw_enotdir"
+            for row in diagnostics
+        )
+        != min(allowed_count, PATH_DIAGNOSTIC_LIMIT)
+        or (
+            allowed_count < PATH_DIAGNOSTIC_LIMIT
+            and sum(
+                row.get("classification")
+                == "allowed_outside_raw_proc_self_maps"
+                for row in diagnostics
+            )
+            != min(proc_count, PATH_DIAGNOSTIC_LIMIT - allowed_count)
+        )
         or value.get("path_diagnostics_sha256") != canonical_sha256(diagnostics)
+        or (
+            expected_proc_self_maps_count == 1
+            and sum(
+                row.get("classification")
+                == "allowed_outside_raw_proc_self_maps"
+                and row.get("path_sha256")
+                == "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665"
+                for row in diagnostics
+            )
+            != 1
+        )
     ):
         raise RecoveryHostQualificationVerificationError(
             "raw/path guard evidence differs"
@@ -550,7 +658,7 @@ def verify_qualification(
         "qualification_incident_verification": (
             qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json"
         ),
-        "recovery_cycle_ledger_v2": recovery_cycle_ledger_path,
+        "recovery_cycle_ledger_v3": recovery_cycle_ledger_path,
         "independent_plan_audit": plan_audit_path,
         "fresh_ownership": ownership_path,
         "fresh_guest": guest_path,
@@ -592,6 +700,8 @@ def verify_qualification(
             for value in (qualification_deadline, hourly_price)
         )
         or qualification_deadline - started != QUALIFICATION_MAX_SECONDS
+        or started + QUALIFICATION_MAX_SECONDS
+        > QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
         or hourly_price <= 0
         or hourly_price * QUALIFICATION_MAX_SECONDS / 3600
         > QUALIFICATION_MAX_SPEND_USD
@@ -607,7 +717,7 @@ def verify_qualification(
         enforce_git=enforce_git,
     )
     successor_authority = (
-        verify_qualification_incident.successor_authority_binding(
+        verify_qualification_incident.successor_c3_authority_binding(
             qualification_incident_dir,
             recovery_cycle_ledger_path,
         )
@@ -669,7 +779,9 @@ def verify_qualification(
     )
     _verify_cuda(receipt.get("cuda_startup"))
     raw_guard = _verify_raw_guard(
-        receipt.get("raw_access_guard"), canonical_raw_root
+        receipt.get("raw_access_guard"),
+        canonical_raw_root,
+        expected_proc_self_maps_count=1 if enforce_git else None,
     )
     fixed = {
         "schema_version": 1,

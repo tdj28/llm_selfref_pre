@@ -3,6 +3,8 @@ from __future__ import annotations
 import errno
 import hashlib
 import json
+import os
+import stat
 import sys
 import types
 from contextlib import contextmanager
@@ -40,11 +42,13 @@ def _iso(timestamp: float) -> str:
 
 
 def _checkpoint_evidence(checkpoint: Path) -> dict[str, Any]:
+    cast = _cast_evidence()
     core = {
         "status": "pass_exact_pinned_superset_and_required_filter",
         "checkpoint_path": checkpoint.as_posix(),
         "checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
         "checkpoint_revision": protocol.J_LENS_SPEC["revision"],
+        "checkpoint_bytes": qualification.audit_recovery.PUBLIC_J_CHECKPOINT_BYTES,
         "checkpoint_n_prompts": int(
             protocol.J_LENS_SPEC["release_config"]["prompts_fitted"]
         ),
@@ -56,7 +60,12 @@ def _checkpoint_evidence(checkpoint: Path) -> dict[str, Any]:
         "available_map_count": 79,
         "required_map_count": 34,
         "required_map_shape": [protocol.WIDTH, protocol.WIDTH],
-        "required_map_dtype": "torch.bfloat16",
+        "required_map_source_dtype": "torch.float16",
+        "required_map_computation_dtype": "torch.bfloat16",
+        "computation_cast_contract": (
+            "source.to(device=self.device,dtype=torch.bfloat16,"
+            "non_blocking=True).contiguous()"
+        ),
         "selected_map_object_contract": (
             "same_checkpoint_objects_no_numeric_transform"
         ),
@@ -69,6 +78,31 @@ def _checkpoint_evidence(checkpoint: Path) -> dict[str, Any]:
             "map_count": 34,
             "revision": protocol.J_LENS_SPEC["revision"],
         },
+        "frozen_bf16_cast_probe": cast,
+    }
+    return {**core, "receipt_sha256": qualification.canonical_sha256(core)}
+
+
+def _cast_evidence() -> dict[str, Any]:
+    core = {
+        "status": "pass_exact_frozen_fp16_source_to_bf16_full_cast",
+        "frozen_entrypoint": (
+            "experiments.consciousness_sae_signed_dose_scan.audit."
+            "_ArtifactJBackend.j_matrix"
+        ),
+        "source_layer": 45,
+        "source_shape": [protocol.WIDTH, protocol.WIDTH],
+        "source_dtype": "torch.float16",
+        "computation_shape": [protocol.WIDTH, protocol.WIDTH],
+        "computation_dtype": "torch.bfloat16",
+        "device": "cuda:0",
+        "device_name": "NVIDIA B200",
+        "tiny_cross_device_probe_shape": [16, 16],
+        "tiny_cpu_cast_matches_full_cuda_cast": True,
+        "full_cast_finite": True,
+        "backend_watchdog_check_count": 1,
+        "model_forward_count": 0,
+        "target_prompt_render_count": 0,
     }
     return {**core, "receipt_sha256": qualification.canonical_sha256(core)}
 
@@ -102,6 +136,37 @@ def _cuda_evidence() -> dict[str, Any]:
         "model_forward_count": 0,
         "target_prompt_render_count": 0,
     }
+
+
+def test_independent_checkpoint_verifier_rejects_rehashed_false_cast(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    checkpoint = tmp_path / "j.pt"
+    checkpoint.touch()
+    os.truncate(checkpoint, qualification.audit_recovery.PUBLIC_J_CHECKPOINT_BYTES)
+    monkeypatch.setattr(
+        verifier,
+        "sha256_file",
+        lambda _path: protocol.J_LENS_SPEC["sha256"],
+    )
+    evidence = _checkpoint_evidence(checkpoint)
+    assert verifier._verify_checkpoint(evidence, checkpoint) == evidence[  # noqa: SLF001
+        "receipt_sha256"
+    ]
+
+    cast = evidence["frozen_bf16_cast_probe"]
+    cast["full_cast_finite"] = False
+    cast_core = dict(cast)
+    cast_core.pop("receipt_sha256")
+    cast["receipt_sha256"] = qualification.canonical_sha256(cast_core)
+    evidence_core = dict(evidence)
+    evidence_core.pop("receipt_sha256")
+    evidence["receipt_sha256"] = qualification.canonical_sha256(evidence_core)
+    with pytest.raises(
+        verifier.RecoveryHostQualificationVerificationError,
+        match="source-to-computation cast evidence differs",
+    ):
+        verifier._verify_checkpoint(evidence, checkpoint)  # noqa: SLF001
 
 
 @contextmanager
@@ -169,6 +234,95 @@ def test_production_mode_rejects_test_only_bypasses(tmp_path: Path) -> None:
         )
 
 
+def test_c3_production_authority_is_explicit_and_one_shot() -> None:
+    assert qualification.QUALIFICATION_AUTHORITY_STATE == "authorized"
+    assert qualification.GLOBAL_QUALIFICATION_ORDINAL == 3
+    assert qualification.SUCCESSOR_QUALIFICATION_ATTEMPT == 1
+    assert qualification.EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 == (
+        "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
+    )
+    assert qualification.REJECTED_PREDECESSOR_POD_IDS == {
+        "wl8obvtuq0ax8t",
+        "69d9kxugxuf6up",
+        "g2azyjkpm17f1s",
+    }
+
+
+def test_c3_cycle_deadline_requires_the_full_qualification_cap(
+    tmp_path: Path,
+) -> None:
+    attempt = tmp_path / "late-attempt"
+    with pytest.raises(
+        qualification.RecoveryHostQualificationError,
+        match="cycle deadline cannot fit",
+    ):
+        qualification.qualify_host(
+            packet_path=tmp_path / "packet",
+            plan_audit_path=tmp_path / "plan",
+            ownership_path=tmp_path / "ownership",
+            guest_path=tmp_path / "guest",
+            cache_path=tmp_path / "cache",
+            j_lens_path=tmp_path / "J.pt",
+            hourly_price_usd=5.0,
+            output_dir=attempt,
+            now_unix=(
+                qualification.QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
+                - qualification.QUALIFICATION_MAX_SECONDS
+                + 1
+            ),
+            enforce_git=False,
+            install_raw_audit_hook=False,
+        )
+    assert not attempt.exists()
+
+    late = (
+        verifier.QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
+        - verifier.QUALIFICATION_MAX_SECONDS
+        + 1
+    )
+    declared: list[dict[str, str]] = []
+    marker_core = {
+        "schema_version": 1,
+        "status": "attempt_started_irrevocably",
+        "study_id": protocol.STUDY_ID,
+        "qualification_protocol_version": verifier.QUALIFICATION_PROTOCOL_VERSION,
+        "qualification_cycle_version": verifier.QUALIFICATION_CYCLE_VERSION,
+        "global_qualification_ordinal": verifier.GLOBAL_QUALIFICATION_ORDINAL,
+        "successor_qualification_attempt": verifier.SUCCESSOR_QUALIFICATION_ATTEMPT,
+        "attempt_number": verifier.SUCCESSOR_QUALIFICATION_ATTEMPT,
+        "retry_authorized": False,
+        "successor_authority_binding_sha256": (
+            verifier.EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256
+        ),
+        "started_at_unix": late,
+        "qualification_deadline_at_unix": (
+            late + verifier.QUALIFICATION_MAX_SECONDS
+        ),
+        "hourly_price_usd": 5.0,
+        "max_spend_usd": verifier.QUALIFICATION_MAX_SPEND_USD,
+        "declared_input_paths": declared,
+        "declared_input_paths_sha256": verifier.canonical_sha256(declared),
+        "authorized_raw_input_paths": [],
+        "model_forward_count": 0,
+        "target_prompt_render_count": 0,
+    }
+    marker = {
+        **marker_core,
+        "receipt_sha256": verifier.canonical_sha256(marker_core),
+    }
+    with pytest.raises(
+        verifier.RecoveryHostQualificationVerificationError,
+        match="cycle deadline cannot fit",
+    ):
+        verifier._verify_marker(  # noqa: SLF001
+            marker,
+            started=late,
+            deadline=late + verifier.QUALIFICATION_MAX_SECONDS,
+            hourly_price_usd=5.0,
+            declared_inputs=declared,
+        )
+
+
 def test_raw_guard_rejects_direct_and_parent_symlink_aliases(tmp_path: Path) -> None:
     raw_root = tmp_path / "study" / "v1" / "raw"
     secret = _write(raw_root / "RUN_COMPLETE.json")
@@ -187,6 +341,7 @@ def test_raw_guard_rejects_direct_and_parent_symlink_aliases(tmp_path: Path) -> 
     assert guard.raw_forbidden_attempt_count == 1
     assert guard.path_guard_rejected_attempt_count == 1
     assert guard.allowed_outside_raw_enotdir_probe_count == 0
+    assert guard.allowed_outside_raw_proc_self_maps_probe_count == 0
     assert [row["classification"] for row in guard.path_diagnostics] == [
         "raw_forbidden",
         "path_guard_rejected",
@@ -218,6 +373,7 @@ def test_raw_guard_allows_linux_egg_info_child_probe_below_regular_file(
     assert guard.raw_forbidden_attempt_count == 0
     assert guard.path_guard_rejected_attempt_count == 0
     assert guard.allowed_outside_raw_enotdir_probe_count == 1
+    assert guard.allowed_outside_raw_proc_self_maps_probe_count == 0
     assert guard.path_diagnostics == [
         {
             "classification": "allowed_outside_raw_enotdir",
@@ -227,6 +383,31 @@ def test_raw_guard_allows_linux_egg_info_child_probe_below_regular_file(
             ).hexdigest(),
         }
     ]
+
+    for mode, flags in (
+        ("w", os.O_WRONLY),
+        ("r+", os.O_RDWR),
+        ("a", os.O_APPEND | os.O_CREAT),
+    ):
+        write_guard = qualification.RawPathAuditGuard(raw_root)
+        with pytest.raises(
+            qualification.RecoveryHostQualificationError,
+            match="non-read-only",
+        ):
+            write_guard("open", ("/proc/self/maps", mode, flags))
+        assert write_guard.allowed_outside_raw_proc_self_maps_probe_count == 0
+        assert write_guard.path_guard_rejected_attempt_count == 1
+
+    for other_path in (
+        "/proc/self/status",
+        "/proc/self/map_files",
+        "/proc/self/maps/child",
+    ):
+        other_proc_guard = qualification.RawPathAuditGuard(raw_root)
+        with pytest.raises(qualification.RecoveryHostQualificationError):
+            other_proc_guard("open", (other_path, "r", os.O_RDONLY))
+        assert other_proc_guard.allowed_outside_raw_proc_self_maps_probe_count == 0
+        assert other_proc_guard.path_guard_rejected_attempt_count == 1
 
 
 def test_raw_guard_still_rejects_enotdir_probe_lexically_inside_raw(
@@ -247,6 +428,7 @@ def test_raw_guard_still_rejects_enotdir_probe_lexically_inside_raw(
     assert guard.raw_forbidden_attempt_count == 1
     assert guard.path_guard_rejected_attempt_count == 0
     assert guard.allowed_outside_raw_enotdir_probe_count == 0
+    assert guard.allowed_outside_raw_proc_self_maps_probe_count == 0
 
 
 def test_enotdir_probe_does_not_weaken_strict_existing_or_symlink_checks(
@@ -275,6 +457,83 @@ def test_enotdir_probe_does_not_weaken_strict_existing_or_symlink_checks(
     assert guard.raw_forbidden_attempt_count == 0
     assert guard.path_guard_rejected_attempt_count == 1
     assert guard.allowed_outside_raw_enotdir_probe_count == 0
+    assert guard.allowed_outside_raw_proc_self_maps_probe_count == 0
+
+
+def test_exact_linux_proc_self_maps_alias_is_narrowly_recognized(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    pid = 4321
+    modes = {
+        "/proc": stat.S_IFDIR | 0o555,
+        "/proc/self": stat.S_IFLNK | 0o777,
+        f"/proc/{pid}": stat.S_IFDIR | 0o555,
+        f"/proc/{pid}/maps": stat.S_IFREG | 0o444,
+    }
+
+    def fake_lstat(path: str) -> types.SimpleNamespace:
+        return types.SimpleNamespace(st_mode=modes[path])
+
+    assert qualification._is_verified_linux_proc_self_maps(  # noqa: SLF001
+        "/proc/self/maps",
+        pid=pid,
+        lstat=fake_lstat,
+        readlink=lambda path: str(pid) if path == "/proc/self" else "",
+        realpath=lambda path: f"/proc/{pid}/maps",
+    )
+    assert not qualification._is_verified_linux_proc_self_maps(  # noqa: SLF001
+        "/proc/self/status",
+        pid=pid,
+        lstat=fake_lstat,
+        readlink=lambda _path: str(pid),
+        realpath=lambda _path: f"/proc/{pid}/status",
+    )
+    for alias in (
+        "/proc/self/./maps",
+        "/proc/self/x/../maps",
+        "proc/self/maps",
+        "//proc/self/maps",
+    ):
+        assert not qualification._is_verified_linux_proc_self_maps(  # noqa: SLF001
+            alias,
+            pid=pid,
+            lstat=fake_lstat,
+            readlink=lambda _path: str(pid),
+            realpath=lambda _path: f"/proc/{pid}/maps",
+        )
+
+    raw_root = tmp_path / "raw"
+    raw_root.mkdir()
+    guard = qualification.RawPathAuditGuard(raw_root)
+    monkeypatch.setattr(
+        qualification, "_is_verified_linux_proc_self_maps", lambda _path: True
+    )
+    guard("open", ("/proc/self/maps", "r", 0))
+    assert guard.raw_forbidden_attempt_count == 0
+    assert guard.path_guard_rejected_attempt_count == 0
+    assert guard.allowed_outside_raw_proc_self_maps_probe_count == 1
+    assert guard.path_diagnostics == [
+        {
+            "classification": "allowed_outside_raw_proc_self_maps",
+            "errno": None,
+            "path_sha256": (
+                "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665"
+            ),
+        }
+    ]
+
+    monkeypatch.chdir("/")
+    for alias in (
+        "/proc/self/./maps",
+        "/proc/self/x/../maps",
+        "proc/self/maps",
+        "//proc/self/maps",
+    ):
+        alias_guard = qualification.RawPathAuditGuard(raw_root)
+        with pytest.raises(qualification.RecoveryHostQualificationError):
+            alias_guard("open", (alias, "r", os.O_RDONLY))
+        assert alias_guard.allowed_outside_raw_proc_self_maps_probe_count == 0
+        assert alias_guard.path_guard_rejected_attempt_count == 1
 
 
 def test_strict_input_path_rejects_parent_symlink(tmp_path: Path) -> None:
@@ -349,18 +608,97 @@ def test_checkpoint_inspection_exercises_missing_negative(
         ),
         "checkpoint_d_model": protocol.WIDTH,
     }
-    monkeypatch.setitem(sys.modules, "torch", types.SimpleNamespace(bfloat16=fake_dtype))
+    monkeypatch.setitem(
+        sys.modules,
+        "torch",
+        types.SimpleNamespace(float16=fake_dtype, bfloat16=object()),
+    )
     monkeypatch.setattr(
         qualification.audit_recovery,
         "load_j_checkpoint_superset",
         lambda *_args: (checkpoint, filtered, audit_record, inventory),
     )
-    evidence = qualification.inspect_pinned_checkpoint(checkpoint)
+    evidence = qualification.inspect_pinned_checkpoint(
+        checkpoint, cast_probe=lambda _source: _cast_evidence()
+    )
     assert evidence["available_layers"] == list(range(79))
     assert evidence["filtered_layers"] == list(range(45, 79))
     assert evidence["missing_required_layer_negative"] == (
         "pass_rejected_missing_required_layer_45"
     )
+    assert evidence["required_map_source_dtype"] == "torch.float16"
+    assert evidence["required_map_computation_dtype"] == "torch.bfloat16"
+
+
+def test_full_j_cast_probe_uses_exact_frozen_backend(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fp16 = object()
+    bf16 = object()
+
+    class Tiny:
+        def to(self, **_kwargs: Any) -> Tiny:
+            return self
+
+        def contiguous(self) -> Tiny:
+            return self
+
+    class Source:
+        shape = (protocol.WIDTH, protocol.WIDTH)
+        dtype = fp16
+
+        def __getitem__(self, _key: object) -> Tiny:
+            return Tiny()
+
+    class Full:
+        shape = (protocol.WIDTH, protocol.WIDTH)
+        dtype = bf16
+
+        def __getitem__(self, _key: object) -> Tiny:
+            return Tiny()
+
+    class Scalar:
+        def all(self) -> Scalar:
+            return self
+
+        def item(self) -> bool:
+            return True
+
+    class Backend:
+        def __init__(
+            self, _maps: object, *, device: object, watchdog: object
+        ) -> None:
+            assert device == "cuda:0"
+            self.watchdog = watchdog
+
+        def j_matrix(self, layer: int) -> Full:
+            assert layer == 45
+            self.watchdog.check()
+            return Full()
+
+    fake_torch = types.SimpleNamespace(
+        float16=fp16,
+        bfloat16=bf16,
+        equal=lambda _left, _right: True,
+        isfinite=lambda _value: Scalar(),
+        cuda=types.SimpleNamespace(
+            synchronize=lambda _device: None,
+            get_device_properties=lambda _device: types.SimpleNamespace(
+                name="NVIDIA B200"
+            ),
+        ),
+    )
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setattr(
+        qualification.frozen_audit,
+        "_configure_artifact_device",
+        lambda device: device,
+    )
+    monkeypatch.setattr(qualification.frozen_audit, "_ArtifactJBackend", Backend)
+    evidence = qualification._exercise_frozen_j_bf16_cast(Source())  # noqa: SLF001
+    assert evidence["source_dtype"] == "torch.float16"
+    assert evidence["computation_dtype"] == "torch.bfloat16"
+    assert evidence["tiny_cpu_cast_matches_full_cuda_cast"] is True
 
 
 def test_frozen_cuda_probe_calls_exact_entrypoint_and_raw_matmul(
@@ -494,7 +832,7 @@ def _synthetic_inputs(tmp_path: Path, started: float) -> dict[str, Any]:
 def test_one_shot_receipt_and_independent_verifier(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    started = 2_000_000_000.0
+    started = qualification.QUALIFICATION_CYCLE_DEADLINE_AT_UNIX - 3600
     fixture = _synthetic_inputs(tmp_path, started)
     paths = fixture["paths"]
     attempt = tmp_path / "attempt"
@@ -576,7 +914,7 @@ def test_one_shot_receipt_and_independent_verifier(
         "pass_independent_target_host_qualification_verified"
     )
     assert verified["attempt_number"] == 1
-    assert verified["global_qualification_ordinal"] == 2
+    assert verified["global_qualification_ordinal"] == 3
     assert verified["successor_qualification_attempt"] == 1
     assert verified["model_forward_count"] == 0
 
@@ -606,7 +944,7 @@ def test_one_shot_receipt_and_independent_verifier(
 
 
 def test_failed_attempt_is_consumed(tmp_path: Path) -> None:
-    started = 2_000_000_000.0
+    started = qualification.QUALIFICATION_CYCLE_DEADLINE_AT_UNIX - 3600
     fixture = _synthetic_inputs(tmp_path, started)
     paths = fixture["paths"]
     attempt = tmp_path / "failed-attempt"
@@ -638,17 +976,18 @@ def test_failed_attempt_is_consumed(tmp_path: Path) -> None:
     failed = json.loads(
         (attempt / qualification.FAILURE_NAME).read_text(encoding="utf-8")
     )
-    assert failed["global_qualification_ordinal"] == 2
+    assert failed["global_qualification_ordinal"] == 3
     assert failed["successor_qualification_attempt"] == 1
     assert failed["raw_forbidden_attempt_count"] == 0
     assert failed["path_guard_rejected_attempt_count"] == 0
     assert failed["allowed_outside_raw_enotdir_probe_count"] == 0
+    assert failed["allowed_outside_raw_proc_self_maps_probe_count"] == 0
     assert failed["zero_forward_guard_observation_status"] == "observed"
     assert failed["zero_forward_guard"] == ZERO_COUNTS
 
 
 def test_symlink_input_is_rejected_after_attempt_marker(tmp_path: Path) -> None:
-    started = 2_000_000_000.0
+    started = qualification.QUALIFICATION_CYCLE_DEADLINE_AT_UNIX - 3600
     fixture = _synthetic_inputs(tmp_path, started)
     paths = fixture["paths"]
     alias = tmp_path / "packet-alias.json"

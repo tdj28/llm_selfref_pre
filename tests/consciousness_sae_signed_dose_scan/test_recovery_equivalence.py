@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,10 @@ FAKE_CODE_FREEZE = "f" * 40
 PLAN_DIR = (
     recovery_equivalence.REPO_ROOT
     / "data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716"
+)
+C3_STATUS_MAP_PATH = (
+    recovery_equivalence.REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json"
 )
 
 
@@ -48,11 +53,12 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         "pass_outcome_blind_recovery_equivalence_verified"
     )
     assert verified["code_freeze_commit"] == FAKE_CODE_FREEZE
-    assert packet["recovery_equivalence_protocol_version"].endswith("_v2")
+    assert packet["recovery_equivalence_protocol_version"].endswith("_v3")
     lineage = packet["freeze_lineage"]
     assert lineage["direct_parent_chain"] == [
         recovery_equivalence.ORIGINAL_FREEZE_COMMIT,
         recovery_equivalence.C1_RECOVERY_FREEZE_COMMIT,
+        recovery_equivalence.C2_RECOVERY_FREEZE_COMMIT,
         FAKE_CODE_FREEZE,
     ]
     assert {
@@ -63,6 +69,10 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         row["path"]: row["status"]
         for row in lineage["c1_to_c2_name_status"]
     } == recovery_equivalence.C1_TO_C2_NAME_STATUS
+    assert {
+        row["path"]: row["status"]
+        for row in lineage["c2_to_c3_name_status"]
+    } == recovery_equivalence.C2_TO_C3_NAME_STATUS
     assert lineage["original_science_mutation_paths"] == []
     assert packet["outcome_input_paths"] == []
     assert packet["raw_run_opened"] is False
@@ -76,6 +86,25 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         range(45, 79)
     )
     assert proof["scientific_field_projection_unchanged"] is True
+
+
+def test_c3_status_map_matches_both_independent_lineage_restatements() -> None:
+    status_map = json.loads(C3_STATUS_MAP_PATH.read_bytes())
+    core = dict(status_map)
+    claimed = core.pop("receipt_sha256")
+    assert claimed == recovery_equivalence.canonical_sha256(core)
+    surface = status_map["c2_to_c3"]
+    expected = {
+        **{path: "A" for path in surface["added"]},
+        **{path: "M" for path in surface["modified"]},
+        **{path: "D" for path in surface["deleted"]},
+    }
+    assert expected == recovery_equivalence.C2_TO_C3_NAME_STATUS
+    assert expected == verify_recovery_equivalence.C2_TO_C3_NAME_STATUS
+    assert set(expected) <= set(recovery_equivalence.RECOVERY_CLOSURE_PATHS)
+    assert set(expected) <= set(
+        verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS
+    )
 
 
 def test_independent_verifier_rejects_rehashed_semantic_tamper(
@@ -103,7 +132,7 @@ def test_independent_verifier_rejects_rehashed_lineage_tamper(
     tmp_path: Path,
 ) -> None:
     packet_path, plan_audit_path, packet = _packet_fixture(tmp_path)
-    packet["freeze_lineage"]["c1_to_c2_name_status"][0]["status"] = "M"
+    packet["freeze_lineage"]["c2_to_c3_name_status"][0]["status"] = "D"
     core = dict(packet)
     core.pop("packet_sha256")
     packet["packet_sha256"] = recovery_equivalence.canonical_sha256(core)

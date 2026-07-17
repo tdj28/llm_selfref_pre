@@ -2,10 +2,11 @@
 """One-shot, zero-forward target-host qualification for audit recovery.
 
 The probe authenticates the fresh provider/guest/cache chain, the exact pinned
-J checkpoint and its 0..78 inventory, the recovery 45..78 subset behavior, and
-the frozen auditor's real B200/CUBLAS startup path.  It has no raw-run argument,
-installs a fail-closed raw-path audit hook, blocks every ``torch.nn.Module`` call
-and Transformers model load, and performs only one tiny raw BF16 CUDA matmul.
+FP16 J checkpoint and its 0..78 inventory, the recovery 45..78 subset behavior,
+the frozen auditor's explicit source-FP16-to-computation-BF16 cast, and its real
+B200/CUBLAS startup path.  It has no raw-run argument, installs a fail-closed
+raw-path audit hook, and blocks every ``torch.nn.Module`` call and Transformers
+model load.
 """
 
 from __future__ import annotations
@@ -39,25 +40,26 @@ from experiments.consciousness_sae_signed_dose_scan import (
 REPO_ROOT = Path(__file__).resolve().parents[2]
 QUALIFICATION_INCIDENT_DIR = REPO_ROOT / (
     "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_qualification_incident_f1307fc_69d9kxugxuf6up"
+    "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
 )
 RECOVERY_CYCLE_LEDGER_PATH = (
     REPO_ROOT
-    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V2.json"
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json"
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
-    "41c7a12dde095fdf19dc00a0f211afe8b0d2f12299b7ab1a5e12f70b5eee8f26"
+    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
 )
+QUALIFICATION_AUTHORITY_STATE = "authorized"
 QUALIFICATION_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v2"
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
 )
 QUALIFICATION_CYCLE_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v2"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
 )
-GLOBAL_QUALIFICATION_ORDINAL = 2
+GLOBAL_QUALIFICATION_ORDINAL = 3
 SUCCESSOR_QUALIFICATION_ATTEMPT = 1
 REJECTED_PREDECESSOR_POD_IDS = frozenset(
-    {"wl8obvtuq0ax8t", "69d9kxugxuf6up"}
+    {"wl8obvtuq0ax8t", "69d9kxugxuf6up", "g2azyjkpm17f1s"}
 )
 PATH_DIAGNOSTIC_LIMIT = 16
 ATTEMPT_MARKER_NAME = "ATTEMPT_STARTED.json"
@@ -70,6 +72,7 @@ MAX_GUEST_AGE_SECONDS = 15 * 60
 MIN_LIFECYCLE_REMAINING_SECONDS = 15 * 60
 QUALIFICATION_MAX_SECONDS = 30 * 60
 QUALIFICATION_MAX_SPEND_USD = 3.0
+QUALIFICATION_CYCLE_DEADLINE_AT_UNIX = 1_784_311_200.0
 FORBIDDEN_RAW_ROOT = Path(
     "/workspace/consciousness_sae_signed_dose_scan/"
     "consciousness_sae_signed_dose_scan_v1/raw"
@@ -247,6 +250,79 @@ def _inside(path: Path, root: Path) -> bool:
     return path == root or root in path.parents
 
 
+def _lexical_absolute_path(value: Any) -> str | None:
+    try:
+        return os.path.abspath(os.path.expanduser(os.fsdecode(value)))
+    except (AttributeError, TypeError, ValueError):
+        return None
+
+
+def _decoded_path(value: Any) -> str | None:
+    """Decode a pathname without normalizing any lexical component."""
+
+    try:
+        return os.fsdecode(value)
+    except (AttributeError, TypeError, ValueError):
+        return None
+
+
+def _audit_open_is_read_only(args: tuple[Any, ...]) -> bool:
+    """Accept only audit-hook opens with neither write mode nor write flags."""
+
+    mode = args[1] if len(args) > 1 else None
+    flags = args[2] if len(args) > 2 else 0
+    if mode not in {None, "r", "rb"} or isinstance(flags, bool):
+        return False
+    if not isinstance(flags, int):
+        return False
+    write_flags = os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND
+    return flags & write_flags == 0
+
+
+def _is_verified_linux_proc_self_maps(
+    value: Any,
+    *,
+    pid: int | None = None,
+    lstat: Callable[[str], os.stat_result] = os.lstat,
+    readlink: Callable[[str], str] = os.readlink,
+    realpath: Callable[[str], str] = os.path.realpath,
+) -> bool:
+    """Recognize exactly Linux's kernel-owned ``/proc/self/maps`` alias.
+
+    PyTorch opens this one procfs file while loading the pinned checkpoint and
+    catches failures.  ``/proc/self`` is necessarily a symlink, so the generic
+    path guard rejects it.  This recognizer is intentionally exact: it permits
+    no other procfs path and proves that ``self`` targets the current numeric
+    PID, the resolved PID directory is not itself a symlink, and ``maps`` is a
+    regular procfs file.  Any uncertainty returns ``False`` to the generic
+    fail-closed path logic.
+    """
+
+    lexical = _decoded_path(value)
+    if lexical != "/proc/self/maps":
+        return False
+    current_pid = os.getpid() if pid is None else int(pid)
+    numeric_root = f"/proc/{current_pid}"
+    numeric_maps = f"{numeric_root}/maps"
+    try:
+        proc = lstat("/proc")
+        self_link = lstat("/proc/self")
+        pid_root = lstat(numeric_root)
+        maps = lstat(numeric_maps)
+        return (
+            stat.S_ISDIR(proc.st_mode)
+            and stat.S_ISLNK(self_link.st_mode)
+            and readlink("/proc/self") == str(current_pid)
+            and stat.S_ISDIR(pid_root.st_mode)
+            and not stat.S_ISLNK(pid_root.st_mode)
+            and stat.S_ISREG(maps.st_mode)
+            and not stat.S_ISLNK(maps.st_mode)
+            and realpath(lexical) == numeric_maps
+        )
+    except (OSError, TypeError, ValueError):
+        return False
+
+
 class RawPathAuditGuard:
     """A process-lifetime audit hook rejecting the signed-dose raw tree."""
 
@@ -260,6 +336,7 @@ class RawPathAuditGuard:
         self.raw_forbidden_attempt_count = 0
         self.path_guard_rejected_attempt_count = 0
         self.allowed_outside_raw_enotdir_probe_count = 0
+        self.allowed_outside_raw_proc_self_maps_probe_count = 0
         self.path_diagnostics: list[dict[str, Any]] = []
 
     @property
@@ -308,6 +385,9 @@ class RawPathAuditGuard:
             "allowed_outside_raw_enotdir_probe_count": (
                 self.allowed_outside_raw_enotdir_probe_count
             ),
+            "allowed_outside_raw_proc_self_maps_probe_count": (
+                self.allowed_outside_raw_proc_self_maps_probe_count
+            ),
             "counter_semantics": {
                 "raw_forbidden_attempt_count": "lexically_inside_forbidden_raw_root",
                 "path_guard_rejected_attempt_count": (
@@ -315,6 +395,9 @@ class RawPathAuditGuard:
                 ),
                 "allowed_outside_raw_enotdir_probe_count": (
                     "errno_ENOTDIR_after_verified_non_symlink_ancestors"
+                ),
+                "allowed_outside_raw_proc_self_maps_probe_count": (
+                    "exact_kernel_proc_self_maps_alias_to_current_numeric_pid"
                 ),
             },
             "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
@@ -329,6 +412,41 @@ class RawPathAuditGuard:
         if isinstance(args[0], int):
             # The pathname was already checked when this descriptor was opened.
             return
+        exact_lexical = _decoded_path(args[0])
+        normalized_lexical = _lexical_absolute_path(args[0])
+        if exact_lexical == "/proc/self/maps":
+            if _audit_open_is_read_only(args) and _is_verified_linux_proc_self_maps(
+                args[0]
+            ):
+                self.allowed_outside_raw_proc_self_maps_probe_count += 1
+                self._record_diagnostic(
+                    classification="allowed_outside_raw_proc_self_maps",
+                    value=args[0],
+                    error_errno=None,
+                )
+                return
+            self.path_guard_rejected_attempt_count += 1
+            self._record_diagnostic(
+                classification="path_guard_rejected",
+                value=args[0],
+                error_errno=None,
+            )
+            raise RecoveryHostQualificationError(
+                "non-read-only or unverified /proc/self/maps open is forbidden"
+            )
+        if normalized_lexical is not None and (
+            normalized_lexical == "/proc/self"
+            or normalized_lexical.startswith("/proc/self/")
+        ):
+            self.path_guard_rejected_attempt_count += 1
+            self._record_diagnostic(
+                classification="path_guard_rejected",
+                value=args[0],
+                error_errno=None,
+            )
+            raise RecoveryHostQualificationError(
+                "non-allowlisted /proc/self open is forbidden"
+            )
         try:
             candidate, tolerated_errno = _strict_path_resolution(
                 args[0], "opened path", must_exist=False
@@ -498,8 +616,72 @@ class _NoopWatchdog:
         self.check_count += 1
 
 
-def inspect_pinned_checkpoint(j_lens_path: Path) -> dict[str, Any]:
-    """Authenticate release inventory and required-map identity without CUDA."""
+def _exercise_frozen_j_bf16_cast(source: Any) -> dict[str, Any]:
+    """Exercise one full source map through the frozen BF16 backend contract."""
+
+    import torch
+
+    if (
+        tuple(source.shape) != audit_recovery.PUBLIC_J_SOURCE_SHAPE
+        or source.dtype != torch.float16
+    ):
+        raise RecoveryHostQualificationError("J cast probe source differs")
+    device = frozen_audit._configure_artifact_device("cuda:0")  # noqa: SLF001
+    tiny_expected = (
+        source[:16, :16]
+        .to(device="cpu", dtype=torch.bfloat16)
+        .contiguous()
+    )
+    backend_watchdog = _NoopWatchdog()
+    backend = frozen_audit._ArtifactJBackend(  # noqa: SLF001
+        {REQUIRED_LAYERS[0]: source},
+        device=device,
+        watchdog=backend_watchdog,
+    )
+    full = backend.j_matrix(REQUIRED_LAYERS[0])
+    torch.cuda.synchronize(device)
+    tiny_observed = full[:16, :16].to(device="cpu").contiguous()
+    exact = bool(torch.equal(tiny_observed, tiny_expected))
+    finite = bool(torch.isfinite(full).all().item())
+    if (
+        tuple(full.shape) != audit_recovery.PUBLIC_J_SOURCE_SHAPE
+        or full.dtype != torch.bfloat16
+        or not exact
+        or not finite
+        or backend_watchdog.check_count != 1
+    ):
+        raise RecoveryHostQualificationError(
+            "frozen J source-to-computation cast differs"
+        )
+    core = {
+        "status": "pass_exact_frozen_fp16_source_to_bf16_full_cast",
+        "frozen_entrypoint": (
+            "experiments.consciousness_sae_signed_dose_scan.audit."
+            "_ArtifactJBackend.j_matrix"
+        ),
+        "source_layer": REQUIRED_LAYERS[0],
+        "source_shape": list(audit_recovery.PUBLIC_J_SOURCE_SHAPE),
+        "source_dtype": audit_recovery.PUBLIC_J_SOURCE_DTYPE,
+        "computation_shape": list(audit_recovery.PUBLIC_J_SOURCE_SHAPE),
+        "computation_dtype": "torch.bfloat16",
+        "device": str(device),
+        "device_name": str(torch.cuda.get_device_properties(device).name),
+        "tiny_cross_device_probe_shape": [16, 16],
+        "tiny_cpu_cast_matches_full_cuda_cast": exact,
+        "full_cast_finite": finite,
+        "backend_watchdog_check_count": backend_watchdog.check_count,
+        "model_forward_count": 0,
+        "target_prompt_render_count": 0,
+    }
+    return {**core, "receipt_sha256": canonical_sha256(core)}
+
+
+def inspect_pinned_checkpoint(
+    j_lens_path: Path,
+    *,
+    cast_probe: Callable[[Any], Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Authenticate exact FP16 release inventory and frozen BF16 conversion."""
 
     import torch
 
@@ -522,12 +704,13 @@ def inspect_pinned_checkpoint(j_lens_path: Path) -> dict[str, Any]:
     ):
         raise RecoveryHostQualificationError("pinned J inventory differs")
     for layer, tensor in filtered.items():
-        if (
-            tuple(tensor.shape) != (protocol.WIDTH, protocol.WIDTH)
-            or tensor.dtype != torch.bfloat16
-        ):
+        if tuple(tensor.shape) != (protocol.WIDTH, protocol.WIDTH):
             raise RecoveryHostQualificationError(
-                f"required J[{layer}] shape/dtype differs"
+                f"required J[{layer}] source shape differs"
+            )
+        if tensor.dtype != torch.float16:
+            raise RecoveryHostQualificationError(
+                f"required J[{layer}] source dtype differs"
             )
     selected = select_required_maps(filtered)
     if any(selected[layer] is not filtered[layer] for layer in REQUIRED_LAYERS):
@@ -540,11 +723,17 @@ def inspect_pinned_checkpoint(j_lens_path: Path) -> dict[str, Any]:
         missing_negative = "pass_rejected_missing_required_layer_45"
     else:
         raise RecoveryHostQualificationError("missing-map negative did not reject")
+    cast = dict(
+        (cast_probe or _exercise_frozen_j_bf16_cast)(
+            filtered[REQUIRED_LAYERS[0]]
+        )
+    )
     core = {
         "status": "pass_exact_pinned_superset_and_required_filter",
         "checkpoint_path": path.as_posix(),
         "checkpoint_sha256": protocol.J_LENS_SPEC["sha256"],
         "checkpoint_revision": protocol.J_LENS_SPEC["revision"],
+        "checkpoint_bytes": audit_recovery.PUBLIC_J_CHECKPOINT_BYTES,
         "checkpoint_n_prompts": inventory["checkpoint_n_prompts"],
         "checkpoint_d_model": inventory["checkpoint_d_model"],
         "available_layers": list(available),
@@ -554,11 +743,17 @@ def inspect_pinned_checkpoint(j_lens_path: Path) -> dict[str, Any]:
         "available_map_count": len(available),
         "required_map_count": len(filtered),
         "required_map_shape": [protocol.WIDTH, protocol.WIDTH],
-        "required_map_dtype": "torch.bfloat16",
+        "required_map_source_dtype": "torch.float16",
+        "required_map_computation_dtype": "torch.bfloat16",
+        "computation_cast_contract": (
+            "source.to(device=self.device,dtype=torch.bfloat16,"
+            "non_blocking=True).contiguous()"
+        ),
         "selected_map_object_contract": "same_checkpoint_objects_no_numeric_transform",
         "missing_required_layer_negative": missing_negative,
         "loader_watchdog_check_count": watchdog.check_count,
         "frozen_audit_record": audit_record,
+        "frozen_bf16_cast_probe": cast,
     }
     return {**core, "receipt_sha256": canonical_sha256(core)}
 
@@ -694,7 +889,19 @@ def qualify_host(
         raise RecoveryHostQualificationError(
             "test-only qualification override is forbidden in production"
         )
+    if enforce_git and QUALIFICATION_AUTHORITY_STATE != "authorized":
+        raise RecoveryHostQualificationError(
+            "C3 qualification lacks explicit post-v2-failure human authority"
+        )
     started = time.time() if now_unix is None else float(now_unix)
+    if (
+        not math.isfinite(started)
+        or started + QUALIFICATION_MAX_SECONDS
+        > QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
+    ):
+        raise RecoveryHostQualificationError(
+            "C3 qualification cycle deadline cannot fit the full attempt cap"
+        )
     clock = time.time if now_unix is None else (lambda: started)
     watchdog = QualificationWatchdog(
         started_at_unix=started,
@@ -736,7 +943,7 @@ def qualify_host(
         "qualification_incident_verification": (
             qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json"
         ),
-        "recovery_cycle_ledger_v2": recovery_cycle_ledger_path,
+        "recovery_cycle_ledger_v3": recovery_cycle_ledger_path,
         "independent_plan_audit": plan_audit_path,
         "fresh_ownership": ownership_path,
         "fresh_guest": guest_path,
@@ -790,7 +997,7 @@ def qualify_host(
             ]
             watchdog.check()
             successor_authority = dict(
-                qualification_incident.successor_authority_binding(
+                qualification_incident.successor_c3_authority_binding(
                     qualification_incident_dir,
                     recovery_cycle_ledger_path,
                 )
@@ -833,6 +1040,10 @@ def qualify_host(
         if (
             raw_guard.raw_forbidden_attempt_count != 0
             or raw_guard.path_guard_rejected_attempt_count != 0
+            or (
+                enforce_git
+                and raw_guard.allowed_outside_raw_proc_self_maps_probe_count != 1
+            )
         ):
             raise RecoveryHostQualificationError(
                 "raw/path guard observed a caught rejection"
@@ -919,6 +1130,9 @@ def qualify_host(
             ),
             "allowed_outside_raw_enotdir_probe_count": (
                 raw_guard.allowed_outside_raw_enotdir_probe_count
+            ),
+            "allowed_outside_raw_proc_self_maps_probe_count": (
+                raw_guard.allowed_outside_raw_proc_self_maps_probe_count
             ),
             "path_diagnostic_limit": PATH_DIAGNOSTIC_LIMIT,
             "path_diagnostics": list(raw_guard.path_diagnostics),

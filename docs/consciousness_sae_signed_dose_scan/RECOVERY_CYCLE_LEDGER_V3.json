@@ -1,0 +1,136 @@
+{
+  "authorization_state": {
+    "audit_only_recovery_authorized_conditionally_after_all_gates": true,
+    "authority_minted_at_utc": "2026-07-17T07:11:56Z",
+    "explicit_human_authorization_observed": true,
+    "explicit_human_authorization_statement": "Authorize C3 and augment the experiment skill with lesson learned",
+    "qualification_and_review_outcome_blind": true,
+    "skill_update_is_a_separate_non_provider_deliverable": true,
+    "user_authorization_scope": "one C3 code/evidence freeze, one fresh replacement qualification, one compact top-level Pro review, and one zero-forward audit-only recovery; no retry"
+  },
+  "cardinality_limits": {
+    "audit_only_recovery_attempts": 1,
+    "automatic_retries": 0,
+    "paid_top_level_review_calls": 1,
+    "provider_capacity_retries": 0,
+    "replacement_target_qualification_attempts": 1
+  },
+  "cycle_id": "signed-dose-audit-only-recovery-v3-20260717",
+  "immutable_scientific_contract": {
+    "compatibility_change": "j_checkpoint_inventory_predicate_and_required_map_filter",
+    "compatibility_change_count": 1,
+    "new_model_forwards": 0,
+    "new_scientific_observations_before_recovery": 0,
+    "original_scientific_freeze_commit": "a084caafc2ec27860044d80d3b33912f656fd08a",
+    "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+    "raw_bytes_changed": false,
+    "scientific_design_changed": false
+  },
+  "incident_binding": {
+    "cause_file_sha256": "8bc3b88be6d47f827def12bb4db2f4340d8451ce71d106dbaf2a07b749daf321",
+    "cause_receipt_sha256": "547aedaf4e9daca603355c4d67d5f946568462634080881bd58c8d6601210628",
+    "closure_file_sha256": "eb2c13f8c8a62d36af41af773ae2e828409124a9d4ee988eecfad1a7f12a9c72",
+    "closure_receipt_sha256": "599a712f93fecca1e1007b88a5403de2ed84b76fd6c12c2d273e279e9c979fab",
+    "closure_schema_file_sha256": "f6f2fe4dacd3e460e9fe210d5c90d20df8ec46120a7dac825ba32ca00d3e0229",
+    "closure_verification_file_sha256": "d7053fed05db4d48f47830accb1ebf365fde9315d213b7b5d80f9975015f0643",
+    "closure_verification_receipt_sha256": "7c080c426e5e1da99b35c1b5c0e2a152b9b98a2f71a2ab12eedca3ab0fed1e2e",
+    "failed_qualification_pod_id": "g2azyjkpm17f1s",
+    "qualification_status": "qualification_failed_attempt_consumed",
+    "status_map_file_sha256": "b9c6c95938332e4f34071879a548f9450185386895c6dbaf16065a597397cd2e",
+    "status_map_receipt_sha256": "d53847535b6ccdf56f19b0094ac146b5093bc1d4ccfccaf153dceb32db0f1d59"
+  },
+  "lineage_contract": {
+    "c2_commit": "79db4e7526948a3c826e3dc62adbf2895a5b5528",
+    "c2_to_c3": "direct_single_parent_with_exact_allowed_status_map",
+    "c3_to_e3": "direct_single_parent_exactly_eight_added_qualification_receipts",
+    "e3_to_f3": "direct_single_parent_exactly_eight_added_review_artifacts",
+    "global_qualification_ordinal": 3,
+    "predecessor_global_qualification_ordinal": 2,
+    "qualification_pod_must_be_fresh": true,
+    "recovery_pod_must_differ_from_qualification_pod": true,
+    "rejected_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s"
+    ],
+    "successor_qualification_attempt_number": 1
+  },
+  "namespace_contract": {
+    "qualification_root": "audit_recovery_host_qualification_v3",
+    "recovery_root": "audit_only_recovery_v3",
+    "reuse_of_any_v1_or_v2_namespace_forbidden": true,
+    "review_root": "audit_recovery_pro_review_v3"
+  },
+  "operational_repair": {
+    "exact_proc_self_maps_read_exception": true,
+    "full_layer_45_fp16_to_bf16_production_cast_rehearsal": true,
+    "scientific_compatibility_change_count_increment": 0,
+    "serialized_j_source_authentication": "torch.float16"
+  },
+  "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
+  "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
+  "receipt_kind": "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v3",
+  "receipt_sha256": "cbe07edf29f2068f346957c1639ace2f1c985b6df93dd540c464bbc79d35925d",
+  "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v3",
+  "schema_version": 1,
+  "status": "frozen_c3_cycle_authorized_pending_pushed_c3",
+  "study_id": "consciousness_sae_signed_dose_scan_v1",
+  "successor_authority_binding": {
+    "authority_minted_at_utc": "2026-07-17T07:11:56Z",
+    "c2_commit": "79db4e7526948a3c826e3dc62adbf2895a5b5528",
+    "closure_file_sha256": "eb2c13f8c8a62d36af41af773ae2e828409124a9d4ee988eecfad1a7f12a9c72",
+    "closure_receipt_sha256": "599a712f93fecca1e1007b88a5403de2ed84b76fd6c12c2d273e279e9c979fab",
+    "closure_verification_file_sha256": "d7053fed05db4d48f47830accb1ebf365fde9315d213b7b5d80f9975015f0643",
+    "closure_verification_receipt_sha256": "7c080c426e5e1da99b35c1b5c0e2a152b9b98a2f71a2ab12eedca3ab0fed1e2e",
+    "cycle_id": "signed-dose-audit-only-recovery-v3-20260717",
+    "global_qualification_ordinal": 3,
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "human_authorization_statement": "Authorize C3 and augment the experiment skill with lesson learned",
+    "no_automatic_retry": true,
+    "no_model_forward": true,
+    "qualification_and_review_raw_or_outcome_access": false,
+    "qualification_attempt_number": 1,
+    "qualification_namespace": "audit_recovery_host_qualification_v3",
+    "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
+    "recovery_namespace": "audit_only_recovery_v3",
+    "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v3",
+    "rejected_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s"
+    ],
+    "review_namespace": "audit_recovery_pro_review_v3",
+    "status_map_file_sha256": "b9c6c95938332e4f34071879a548f9450185386895c6dbaf16065a597397cd2e",
+    "status_map_receipt_sha256": "d53847535b6ccdf56f19b0094ac146b5093bc1d4ccfccaf153dceb32db0f1d59",
+    "study_id": "consciousness_sae_signed_dose_scan_v1"
+  },
+  "successor_authority_binding_sha256": "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950",
+  "terminal_action": {
+    "all_gates_green": "launch_exactly_one_zero_forward_audit_only_recovery_on_a_distinct_fresh_pod",
+    "any_gate_red": "preserve_evidence_terminate_exact_owned_pod_and_stop_no_retry",
+    "deadline_missed": "stop_requires_new_human_approved_cycle",
+    "paid_review_blocker": "stop_requires_new_human_approved_cycle",
+    "qualification_failure": "attempt_consumed_stop_no_retry",
+    "recovery_failure": "attempt_consumed_stop_no_retry"
+  },
+  "time_and_cost_limits": {
+    "c2_failed_qualification_estimated_compute_usd": "0.7070248556583333333333333333",
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "paid_top_level_review_cap_usd": "1.25",
+    "pre_c3_conservative_accounting_subtotal_usd": "21.38293137507500000000000033",
+    "qualification_cap_seconds": 1800,
+    "qualification_cap_usd": "3.00",
+    "recovery_cap_seconds": 3600,
+    "recovery_cap_usd": "6.00",
+    "successor_additional_cycle_envelope_usd": "12.00",
+    "user_overall_ceiling_usd": "50.00",
+    "worst_case_total_after_c3_envelope_usd": "33.38293137507500000000000033"
+  },
+  "usage_at_freeze": {
+    "audit_only_recovery_attempts_used": 0,
+    "automatic_retries_used": 0,
+    "paid_top_level_review_calls_used": 0,
+    "provider_capacity_retries_used": 0,
+    "replacement_target_qualification_attempts_used": 0
+  }
+}
