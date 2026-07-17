@@ -35,14 +35,16 @@ from experiments.consciousness_sae_realization_validation import runpod_prefligh
 from experiments.consciousness_sae_signed_dose_scan import (
     audit as frozen_audit,
     protocol,
+    recovery_equivalence,
     verify_incident_closure,
     verify_qualification_incident,
+    verify_recovery_equivalence,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RECOVERY_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v5"
 )
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -59,16 +61,21 @@ C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
 C2_RECOVERY_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
 C3_RECOVERY_FREEZE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
 E3_QUALIFICATION_FREEZE_COMMIT = "44d9e178567bbf31e524b79e4434474a4e5d888e"
+C4_RECOVERY_FREEZE_COMMIT = "c43e40f79d197943c55e803371350ffafff1e0ed"
+E4_QUALIFICATION_FREEZE_COMMIT = "e45832e9319814824a8f84840d2b8a4649aeb6f1"
 PUBLIC_J_CHECKPOINT_BYTES = 10_603_226_027
 PUBLIC_J_SOURCE_DTYPE = "torch.float16"
 PUBLIC_J_SOURCE_SHAPE = (8192, 8192)
-REJECTED_PREDECESSOR_POD_IDS = frozenset(
+QUALIFICATION_REJECTED_PREDECESSOR_POD_IDS = frozenset(
     {
         "wl8obvtuq0ax8t",
         "69d9kxugxuf6up",
         "g2azyjkpm17f1s",
         "6am4twond0cd8v",
     }
+)
+RECOVERY_REJECTED_POD_IDS = frozenset(
+    {*QUALIFICATION_REJECTED_PREDECESSOR_POD_IDS, "jam8legy7six6l"}
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
     "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
@@ -115,6 +122,12 @@ C4_DOC_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json",
 )
+C5_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_C5_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V5.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_C5_STATUS_MAP.json",
+)
 C2_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
     "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
@@ -144,8 +157,7 @@ C2_QUALIFICATION_INCIDENT_FILENAMES = (
     "TERMINATION_AUDIT.json",
 )
 QUALIFICATION_INCIDENT_ROOT = (
-    "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_host_qualification_v3"
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v3"
 )
 QUALIFICATION_INCIDENT_FILENAMES = C2_QUALIFICATION_INCIDENT_FILENAMES
 MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
@@ -164,6 +176,7 @@ MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
     *V2_SUCCESSOR_DOC_PATHS,
     *C3_DOC_PATHS,
     *C4_DOC_PATHS,
+    *C5_DOC_PATHS,
     *(
         f"{C1_QUALIFICATION_INCIDENT_ROOT}/{name}"
         for name in C1_QUALIFICATION_INCIDENT_FILENAMES
@@ -316,8 +329,7 @@ C2_TO_C3_NAME_STATUS = {
     },
 }
 C3_QUALIFICATION_DIRECTORY = (
-    "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_host_qualification_v3"
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v3"
 )
 C3_TO_E3_NAME_STATUS = {
     f"{C3_QUALIFICATION_DIRECTORY}/{name}": "A"
@@ -342,14 +354,35 @@ E3_TO_C4_NAME_STATUS = {
     },
     **{path: "A" for path in C4_DOC_PATHS},
 }
+E4_TO_C5_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in {
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+        }
+    },
+    **{path: "A" for path in C5_DOC_PATHS},
+}
 QUALIFICATION_DIRECTORY = (
-    "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_host_qualification_v4"
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v4"
 )
 MANDATORY_E_QUALIFICATION_PATHS = frozenset(
-    f"{QUALIFICATION_DIRECTORY}/{name}"
-    for name in MANDATORY_E_QUALIFICATION_FILENAMES
+    f"{QUALIFICATION_DIRECTORY}/{name}" for name in MANDATORY_E_QUALIFICATION_FILENAMES
 )
+C4_TO_E4_NAME_STATUS = {path: "A" for path in MANDATORY_E_QUALIFICATION_PATHS}
+AUTHENTIC_BUNDLE_PREFLIGHT_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_authentic_bundle_preflight_v5"
+)
+AUTHENTIC_BUNDLE_PREFLIGHT_PATH = (
+    f"{AUTHENTIC_BUNDLE_PREFLIGHT_ROOT}/AUTHENTIC_BUNDLE_PREFLIGHT.json"
+)
+MANDATORY_E5_PREFLIGHT_PATHS = frozenset({AUTHENTIC_BUNDLE_PREFLIGHT_PATH})
+C5_TO_E5_NAME_STATUS = {AUTHENTIC_BUNDLE_PREFLIGHT_PATH: "A"}
 RECOVERY_REVIEW_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3"
 )
@@ -366,9 +399,9 @@ MANDATORY_F_ADDITION_FILENAMES = frozenset(
     }
 )
 MANDATORY_F_ADDITION_PATHS = frozenset(
-    f"{RECOVERY_REVIEW_ROOT}/{name}"
-    for name in MANDATORY_F_ADDITION_FILENAMES
+    f"{RECOVERY_REVIEW_ROOT}/{name}" for name in MANDATORY_F_ADDITION_FILENAMES
 )
+E5_TO_F5_NAME_STATUS = {path: "A" for path in MANDATORY_F_ADDITION_PATHS}
 MANDATORY_CUMULATIVE_REVIEW_PATHS = frozenset(
     {ORIGINAL_PLAN_ADJUDICATION_PATH, *MANDATORY_F_ADDITION_PATHS}
 )
@@ -384,6 +417,20 @@ EXPECTED_ORIGINAL_ADJUDICATION_RECEIPT_SHA256 = (
 EXPECTED_REVIEW_INSTRUCTIONS_SHA256 = (
     "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c"
 )
+EXPECTED_RECOVERY_REVIEW_EMPHASIS = (
+    "Review the cumulative C3 audit-only recovery at the big-picture level. "
+    "Preserve the original scientific freeze; distinguish an execution blocker "
+    "from a locally verified implementation detail; do not request raw data or "
+    "outcomes."
+)
+EXPECTED_RECOVERY_REVIEW_EMPHASIS_SHA256 = (
+    "d727307b7da9bbb3fcbd47c9617a4a367e7bae727e8b9862fc26299ef70e353e"
+)
+EXPECTED_RECOVERY_REVIEW_EMPHASIS_CHARACTERS = 228
+EXPECTED_RECOVERY_REVIEW_INPUT_SHA256 = (
+    "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e"
+)
+EXPECTED_RECOVERY_REVIEW_INPUT_CHARACTERS = 14_640
 RECOVERY_REVIEW_MAX_OUTPUT_TOKENS = 4_000
 RECOVERY_REVIEW_REASONING_EFFORT = "high"
 RECOVERY_REVIEW_VERDICTS = frozenset(
@@ -458,6 +505,7 @@ RECOVERY_AUTHORIZATION_FIELDS = frozenset(
         "code_freeze_commit",
         "evidence_freeze_commit",
         "final_freeze_commit",
+        "final_freeze_lineage_validation",
         "git_remote_ref",
         "git_live_remote_commit",
         "source_test_files",
@@ -465,6 +513,9 @@ RECOVERY_AUTHORIZATION_FIELDS = frozenset(
         "qualification_files",
         "qualification_inventory_sha256",
         "qualification_validation",
+        "authentic_bundle_preflight_files",
+        "authentic_bundle_preflight_inventory_sha256",
+        "authentic_bundle_preflight_validation",
         "cumulative_review_files",
         "cumulative_review_inventory_sha256",
         "recovery_adjudication",
@@ -513,17 +564,14 @@ def _self_hash(value: Mapping[str, Any], label: str) -> str:
 def _safe_relative(value: Any, label: str) -> str:
     text = str(value)
     path = PurePosixPath(text)
-    if (
-        not text
-        or path.is_absolute()
-        or ".." in path.parts
-        or path.as_posix() != text
-    ):
+    if not text or path.is_absolute() or ".." in path.parts or path.as_posix() != text:
         raise AuditRecoveryError(f"{label} is not a canonical relative path")
     return text
 
 
-def _git(repo_root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+def _git(
+    repo_root: Path, *args: str, check: bool = True
+) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
         ["git", *args],
         cwd=repo_root,
@@ -549,9 +597,7 @@ def _require_ancestry(repo_root: Path, ancestor: str, descendant: str) -> None:
 def _require_direct_parent(
     repo_root: Path, child: str, expected_parent: str, label: str
 ) -> None:
-    lineage = _git(
-        repo_root, "rev-list", "--parents", "-n", "1", child
-    ).stdout.split()
+    lineage = _git(repo_root, "rev-list", "--parents", "-n", "1", child).stdout.split()
     if lineage != [child, expected_parent]:
         raise AuditRecoveryError(f"{label} parent differs")
 
@@ -594,6 +640,8 @@ def _require_exact_freeze_chain(
     final_commit: str,
     qualification_paths: Sequence[str],
 ) -> None:
+    if set(qualification_paths) != MANDATORY_E_QUALIFICATION_PATHS:
+        raise AuditRecoveryError("C4 qualification path set differs")
     _require_direct_parent(
         repo_root,
         C1_RECOVERY_FREEZE_COMMIT,
@@ -619,10 +667,24 @@ def _require_exact_freeze_chain(
         "E3 qualification freeze",
     )
     _require_direct_parent(
-        repo_root, code_commit, E3_QUALIFICATION_FREEZE_COMMIT, "C4 code freeze"
+        repo_root,
+        C4_RECOVERY_FREEZE_COMMIT,
+        E3_QUALIFICATION_FREEZE_COMMIT,
+        "C4 code freeze",
     )
-    _require_direct_parent(repo_root, evidence_commit, code_commit, "E4 evidence freeze")
-    _require_direct_parent(repo_root, final_commit, evidence_commit, "F4 final freeze")
+    _require_direct_parent(
+        repo_root,
+        E4_QUALIFICATION_FREEZE_COMMIT,
+        C4_RECOVERY_FREEZE_COMMIT,
+        "E4 qualification freeze",
+    )
+    _require_direct_parent(
+        repo_root, code_commit, E4_QUALIFICATION_FREEZE_COMMIT, "C5 code freeze"
+    )
+    _require_direct_parent(
+        repo_root, evidence_commit, code_commit, "E5 evidence freeze"
+    )
+    _require_direct_parent(repo_root, final_commit, evidence_commit, "F5 final freeze")
     _require_exact_name_status(
         repo_root,
         parent=ORIGINAL_FREEZE_COMMIT,
@@ -654,24 +716,65 @@ def _require_exact_freeze_chain(
     _require_exact_name_status(
         repo_root,
         parent=E3_QUALIFICATION_FREEZE_COMMIT,
-        child=code_commit,
+        child=C4_RECOVERY_FREEZE_COMMIT,
         expected=E3_TO_C4_NAME_STATUS,
         label="E3-to-C4 freeze",
     )
     _require_exact_name_status(
         repo_root,
+        parent=C4_RECOVERY_FREEZE_COMMIT,
+        child=E4_QUALIFICATION_FREEZE_COMMIT,
+        expected=C4_TO_E4_NAME_STATUS,
+        label="C4-to-E4 freeze",
+    )
+    _require_exact_name_status(
+        repo_root,
+        parent=E4_QUALIFICATION_FREEZE_COMMIT,
+        child=code_commit,
+        expected=E4_TO_C5_NAME_STATUS,
+        label="E4-to-C5 freeze",
+    )
+    _require_exact_name_status(
+        repo_root,
         parent=code_commit,
         child=evidence_commit,
-        expected={path: "A" for path in qualification_paths},
-        label="E4 evidence freeze",
+        expected=C5_TO_E5_NAME_STATUS,
+        label="C5-to-E5 freeze",
     )
     _require_exact_name_status(
         repo_root,
         parent=evidence_commit,
         child=final_commit,
-        expected={path: "A" for path in MANDATORY_F_ADDITION_PATHS},
-        label="F4 final freeze",
+        expected=E5_TO_F5_NAME_STATUS,
+        label="E5-to-F5 freeze",
     )
+
+
+def _validate_v5_final_freeze_lineage(
+    repo_root: Path,
+    *,
+    code_commit: str,
+    evidence_commit: str,
+    final_commit: str,
+) -> dict[str, Any]:
+    """Require agreement between producer and independent C5 lineage checks."""
+
+    arguments = {
+        "code_freeze_commit": code_commit,
+        "evidence_freeze_commit": evidence_commit,
+        "final_freeze_commit": final_commit,
+        "repo_root": repo_root,
+    }
+    try:
+        producer = recovery_equivalence.verify_v5_final_freeze_lineage(**arguments)
+        independent = verify_recovery_equivalence.verify_v5_final_freeze_lineage(
+            **arguments
+        )
+    except (RuntimeError, OSError, ValueError) as exc:
+        raise AuditRecoveryError("C5 final-freeze lineage validation failed") from exc
+    if producer != independent:
+        raise AuditRecoveryError("C5 final-freeze validators disagree")
+    return producer
 
 
 def _git_blob(repo_root: Path, commit: str, relative: str) -> tuple[str, bytes]:
@@ -746,11 +849,7 @@ def _final_inventory(
             live = physical.read_bytes()
         except OSError as exc:
             raise AuditRecoveryError(f"{label} is absent at final freeze") from exc
-        if (
-            not stat.S_ISREG(details.st_mode)
-            or details.st_nlink != 1
-            or live != frozen
-        ):
+        if not stat.S_ISREG(details.st_mode) or details.st_nlink != 1 or live != frozen:
             raise AuditRecoveryError(f"{label} live bytes differ: {normalized}")
         rows.append(
             {
@@ -1030,15 +1129,18 @@ def zero_forward_guard(
         descriptor = vars(cls).get("forward")
         if isinstance(descriptor, (classmethod, staticmethod)):
             descriptor = descriptor.__func__
-        if descriptor is not None and callable(descriptor) and not hasattr(
-            descriptor, "__code__"
+        if (
+            descriptor is not None
+            and callable(descriptor)
+            and not hasattr(descriptor, "__code__")
         ):
             raise AuditRecoveryError(
                 "torch module has a nonpatchable forward descriptor"
             )
-        if getattr(descriptor, "__code__", None) is not None and id(
-            descriptor
-        ) not in seen_forward_functions:
+        if (
+            getattr(descriptor, "__code__", None) is not None
+            and id(descriptor) not in seen_forward_functions
+        ):
             seen_forward_functions.add(id(descriptor))
             forward_functions.append(descriptor)
     loader_classes: list[type[Any]] = [
@@ -1064,7 +1166,11 @@ def zero_forward_guard(
             if id(namespace) not in seen_globals:
                 seen_globals.add(id(namespace))
                 persistent_global_records.append(
-                    (namespace, persistent_name in namespace, namespace.get(persistent_name))
+                    (
+                        namespace,
+                        persistent_name in namespace,
+                        namespace.get(persistent_name),
+                    )
                 )
                 namespace[persistent_name] = blocked_forward
             original_code = function.__code__
@@ -1098,6 +1204,7 @@ def zero_forward_guard(
             if isinstance(optional, type):
                 loader_classes.append(optional)
         for cls in loader_classes:
+
             def blocked_loader(_cls: Any, *_args: Any, **_kwargs: Any) -> Any:
                 counts["transformers_model_load_calls"] += 1
                 raise AuditRecoveryError(
@@ -1286,9 +1393,7 @@ def _validate_git_file_rows(
     return expected
 
 
-def _nested_self_hash(
-    value: Mapping[str, Any], field: str, label: str
-) -> str:
+def _nested_self_hash(value: Mapping[str, Any], field: str, label: str) -> str:
     core = dict(value)
     supplied = core.pop(field, None)
     if (
@@ -1326,12 +1431,9 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
         raise AuditRecoveryError("qualification raw/path guard evidence is absent")
     diagnostics = value.get("path_diagnostics")
     allowed = value.get("allowed_outside_raw_enotdir_probe_count")
-    proc_allowed = value.get(
-        "allowed_outside_raw_proc_self_maps_probe_count"
-    )
+    proc_allowed = value.get("allowed_outside_raw_proc_self_maps_probe_count")
     if (
-        value.get("status")
-        != "pass_no_forbidden_raw_or_path_guard_rejection"
+        value.get("status") != "pass_no_forbidden_raw_or_path_guard_rejection"
         or value.get("forbidden_raw_root")
         != "/workspace/consciousness_sae_signed_dose_scan/"
         "consciousness_sae_signed_dose_scan_v1/raw"
@@ -1339,9 +1441,7 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
         or value.get("path_guard_rejected_attempt_count") != 0
         or value.get("counter_semantics")
         != {
-            "raw_forbidden_attempt_count": (
-                "lexically_inside_forbidden_raw_root"
-            ),
+            "raw_forbidden_attempt_count": ("lexically_inside_forbidden_raw_root"),
             "path_guard_rejected_attempt_count": (
                 "pre_containment_symlink_noncanonical_or_unresolvable_rejection"
             ),
@@ -1369,8 +1469,7 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
                 and row.get("errno") != 20
             )
             or (
-                row.get("classification")
-                == "allowed_outside_raw_proc_self_maps"
+                row.get("classification") == "allowed_outside_raw_proc_self_maps"
                 and row.get("errno") is not None
             )
             or row.get("classification")
@@ -1384,8 +1483,7 @@ def _validate_raw_guard_evidence(value: Any) -> dict[str, Any]:
         or value.get("path_diagnostics_sha256")
         != protocol.canonical_sha256(diagnostics)
         or sum(
-            row.get("classification")
-            == "allowed_outside_raw_proc_self_maps"
+            row.get("classification") == "allowed_outside_raw_proc_self_maps"
             and row.get("path_sha256")
             == "8f9bcd1250f4c9fbe2eb0de0e4f9f2d4702ba9b7d168c54a35496ca5e51d7665"
             for row in diagnostics
@@ -1402,12 +1500,10 @@ def _validate_qualification_evidence(
     repo_root: Path,
     code_freeze_commit: str,
 ) -> dict[str, Any]:
-    successor_authority = (
-        verify_qualification_incident.successor_c4_authority_binding(
-            repo_root / QUALIFICATION_INCIDENT_ROOT,
-            repo_root
-            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
-        )
+    successor_authority = verify_qualification_incident.successor_c4_authority_binding(
+        repo_root / QUALIFICATION_INCIDENT_ROOT,
+        repo_root
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
     )
     if (
         successor_authority.get("binding_sha256")
@@ -1457,8 +1553,7 @@ def _validate_qualification_evidence(
     equivalence_hash = _self_hash(equivalence, "equivalence verification")
     closure_hash = str(closure["inventory_sha256"])
     if (
-        equivalence.get("status")
-        != "pass_outcome_blind_recovery_equivalence_verified"
+        equivalence.get("status") != "pass_outcome_blind_recovery_equivalence_verified"
         or equivalence.get("packet_sha256") != packet_hash
         or equivalence.get("code_freeze_commit") != code_freeze_commit
         or equivalence.get("recovery_closure_inventory_sha256") != closure_hash
@@ -1509,8 +1604,7 @@ def _validate_qualification_evidence(
                 qualification_max_spend,
             )
         )
-        or qualification_deadline - qualification_started
-        != QUALIFICATION_MAX_SECONDS
+        or qualification_deadline - qualification_started != QUALIFICATION_MAX_SECONDS
         or qualification_rate <= 0
         or qualification_max_spend != QUALIFICATION_MAX_SPEND_USD
         or qualification_rate * QUALIFICATION_MAX_SECONDS / 3600
@@ -1551,11 +1645,15 @@ def _validate_qualification_evidence(
         "recovery_c4_status_map",
         "recovery_cycle_ledger_v4",
     ]
-    target_input_projection = [
-        {"role": row.get("role"), "path": row.get("path")}
-        for row in target_inputs
-        if isinstance(row, Mapping)
-    ] if isinstance(target_inputs, list) else []
+    target_input_projection = (
+        [
+            {"role": row.get("role"), "path": row.get("path")}
+            for row in target_inputs
+            if isinstance(row, Mapping)
+        ]
+        if isinstance(target_inputs, list)
+        else []
+    )
     try:
         target_started = float(target["started_at_unix"])
         target_completed = float(target["completed_at_unix"])
@@ -1564,9 +1662,7 @@ def _validate_qualification_evidence(
     expected_watchdog = {
         "status": "pass_independent_qualification_time_cost_cap",
         "started_at_unix": target.get("started_at_unix"),
-        "qualification_deadline_at_unix": marker.get(
-            "qualification_deadline_at_unix"
-        ),
+        "qualification_deadline_at_unix": marker.get("qualification_deadline_at_unix"),
         "maximum_seconds": QUALIFICATION_MAX_SECONDS,
         "hourly_price_usd": marker.get("hourly_price_usd"),
         "max_spend_usd": QUALIFICATION_MAX_SPEND_USD,
@@ -1576,8 +1672,7 @@ def _validate_qualification_evidence(
         "completed_at_unix": target.get("completed_at_unix"),
     }
     if (
-        target.get("status")
-        != "pass_one_shot_zero_forward_target_host_qualification"
+        target.get("status") != "pass_one_shot_zero_forward_target_host_qualification"
         or target.get("qualification_protocol_version")
         != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
         or target.get("qualification_cycle_version")
@@ -1621,7 +1716,7 @@ def _validate_qualification_evidence(
         or not isinstance(fresh_pod, Mapping)
         or not isinstance(fresh_pod.get("pod_id"), str)
         or not fresh_pod["pod_id"]
-        or fresh_pod["pod_id"] in REJECTED_PREDECESSOR_POD_IDS
+        or fresh_pod["pod_id"] in QUALIFICATION_REJECTED_PREDECESSOR_POD_IDS
         or fresh_pod.get("gpu_type") != protocol.GPU_TYPE
         or fresh_pod.get("gpu_count") != 1
         or any(
@@ -1643,11 +1738,9 @@ def _validate_qualification_evidence(
         or checkpoint.get("checkpoint_bytes") != PUBLIC_J_CHECKPOINT_BYTES
         or checkpoint.get("required_map_source_dtype") != PUBLIC_J_SOURCE_DTYPE
         or checkpoint.get("required_map_computation_dtype") != "torch.bfloat16"
-        or checkpoint.get("required_map_shape")
-        != list(PUBLIC_J_SOURCE_SHAPE)
+        or checkpoint.get("required_map_shape") != list(PUBLIC_J_SOURCE_SHAPE)
         or not isinstance(cast_probe, Mapping)
-        or cast_probe.get("status")
-        != "pass_exact_frozen_fp16_source_to_bf16_full_cast"
+        or cast_probe.get("status") != "pass_exact_frozen_fp16_source_to_bf16_full_cast"
         or cast_probe.get("frozen_entrypoint")
         != (
             "experiments.consciousness_sae_signed_dose_scan.audit."
@@ -1683,8 +1776,7 @@ def _validate_qualification_evidence(
     verified = by_name["TARGET_HOST_QUALIFICATION_VERIFICATION.json"]
     verified_hash = _self_hash(verified, "target-host qualification verification")
     if (
-        verified.get("status")
-        != "pass_independent_target_host_qualification_verified"
+        verified.get("status") != "pass_independent_target_host_qualification_verified"
         or verified.get("qualification_protocol_version")
         != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
         or verified.get("qualification_cycle_version")
@@ -1726,8 +1818,7 @@ def _validate_qualification_evidence(
     if (
         termination.get("status")
         != "deleted_exact_owned_pod_unrelated_inventory_unchanged"
-        or termination.get("receipt_kind")
-        != "runpod_successor_termination_audit_v1"
+        or termination.get("receipt_kind") != "runpod_successor_termination_audit_v1"
         or termination.get("pod_id") != fresh_pod["pod_id"]
         or termination.get("successor_ownership_receipt_sha256")
         != fresh_pod["ownership_receipt_sha256"]
@@ -1813,7 +1904,7 @@ def _fresh_pod_binding(
     except runpod_preflight.PreflightError as exc:
         raise AuditRecoveryError("fresh pod receipt chain differs") from exc
     if (
-        ownership.get("pod_id") in REJECTED_PREDECESSOR_POD_IDS
+        ownership.get("pod_id") in RECOVERY_REJECTED_POD_IDS
         or ownership.get("network_volume_id") != protocol.NETWORK_VOLUME_ID
         or ownership.get("data_center_id") != protocol.DATA_CENTER_ID
         or ownership.get("gpu_type") != protocol.GPU_TYPE
@@ -1869,8 +1960,7 @@ def _incident_binding(
             }
         )
     evidence = [
-        _physical_record(path, role)
-        for role, path in sorted(incident_evidence.items())
+        _physical_record(path, role) for role, path in sorted(incident_evidence.items())
     ]
     required = {
         "original_audit_failure_log",
@@ -1909,9 +1999,7 @@ def _incident_binding(
         verification_path, "incident independent verification"
     )
     termination, termination_file_hash = _canonical_file(
-        Path(
-            str(evidence_by_role["original_pod_termination_audit"]["path"])
-        ),
+        Path(str(evidence_by_role["original_pod_termination_audit"]["path"])),
         "original termination audit",
     )
     postdelete, postdelete_file_hash = _canonical_file(
@@ -1921,8 +2009,7 @@ def _incident_binding(
     raw_records = complete.get("records")
     if (
         stored_verification != recomputed_closure
-        or stored_verification_file_hash
-        != EXPECTED_INCIDENT_VERIFICATION_FILE_SHA256
+        or stored_verification_file_hash != EXPECTED_INCIDENT_VERIFICATION_FILE_SHA256
         or _self_hash(stored_verification, "incident independent verification")
         != EXPECTED_INCIDENT_VERIFICATION_RECEIPT_SHA256
         or evidence_by_role["incident_closure"]["sha256"]
@@ -1952,8 +2039,7 @@ def _incident_binding(
         or postdelete.get("phase") != "postdelete"
         or postdelete.get("pods") != []
         or postdelete.get("all_account_pod_count") != 0
-        or postdelete.get("inventory_sha256")
-        != EXPECTED_EMPTY_POD_INVENTORY_SHA256
+        or postdelete.get("inventory_sha256") != EXPECTED_EMPTY_POD_INVENTORY_SHA256
     ):
         raise AuditRecoveryError("incident closure/termination semantics differ")
     return {
@@ -1962,9 +2048,9 @@ def _incident_binding(
         "run_id": complete.get("run_id"),
         "run_receipt_sha256": complete["receipt_sha256"],
         "run_complete_file_sha256": complete_file_hash,
-        "original_pod_id": json.loads(
-            original_ownership.read_text(encoding="utf-8")
-        )["pod_id"],
+        "original_pod_id": json.loads(original_ownership.read_text(encoding="utf-8"))[
+            "pod_id"
+        ],
         "failure_signature": signature,
         "failure_log_sha256": failure["sha256"],
         "raw_file_count": ledger["file_count"],
@@ -2035,7 +2121,11 @@ def _review_input_artifacts(
 
 
 def _reconstruct_review_input(
-    artifacts: Sequence[Mapping[str, Any]], *, brief_text: str, context_text: str
+    artifacts: Sequence[Mapping[str, Any]],
+    *,
+    brief_text: str,
+    context_text: str,
+    emphasis: str | None = None,
 ) -> str:
     texts = (brief_text, context_text)
     lines = [
@@ -2055,14 +2145,20 @@ def _reconstruct_review_input(
             f"{index}. {row['role']}: `{Path(str(row['path'])).name}`; "
             f"bytes={row['bytes']}; sha256={row['sha256']}"
         )
-    for index, (row, artifact_text) in enumerate(
-        zip(artifacts, texts), start=1
-    ):
+    if emphasis is not None:
         lines.extend(
             [
                 "",
-                f"## Artifact {index}: {row['role']} — "
-                f"{Path(str(row['path'])).name}",
+                "## Responsible researcher's emphasis",
+                "",
+                emphasis,
+            ]
+        )
+    for index, (row, artifact_text) in enumerate(zip(artifacts, texts), start=1):
+        lines.extend(
+            [
+                "",
+                f"## Artifact {index}: {row['role']} — {Path(str(row['path'])).name}",
                 "",
                 f"<artifact_{index}>",
                 artifact_text,
@@ -2070,6 +2166,87 @@ def _reconstruct_review_input(
             ]
         )
     return "\n".join(lines).rstrip() + "\n"
+
+
+def _extract_review_emphasis(
+    review_input: str,
+    artifacts: Sequence[Mapping[str, Any]],
+    *,
+    required: bool,
+) -> str | None:
+    """Extract only the bounded, non-artifact emphasis from a signed input.
+
+    All surrounding packet bytes are reconstructed independently from the
+    authenticated manifest, brief, and context. The extracted text is the only
+    producer-supplied prose that is not one of those artifacts.
+    """
+
+    if not isinstance(review_input, str) or not artifacts:
+        raise AuditRecoveryError("review emphasis input differs")
+    heading = "## Responsible researcher's emphasis"
+    normalized_heading_lines = [
+        line
+        for line in review_input.splitlines()
+        if line.strip().casefold() == heading.casefold()
+    ]
+    if len(normalized_heading_lines) > 1:
+        raise AuditRecoveryError("review emphasis heading is duplicated")
+    if normalized_heading_lines and normalized_heading_lines != [heading]:
+        raise AuditRecoveryError("review emphasis heading differs")
+
+    inventory_lines = [
+        "# Research-director review packet",
+        "",
+        "The first artifact is the compact decision-level plan under review. "
+        "Later artifacts are bounded synthesized context. Raw datasets, trial "
+        "records, long logs, model-output dumps, and source-tree dumps do not "
+        "belong in this packet. File contents may describe prior outcomes; those "
+        "are disclosed prior evidence, not outcomes from the proposed experiment.",
+        "",
+        "## Artifact inventory",
+        "",
+    ]
+    for index, row in enumerate(artifacts, start=1):
+        inventory_lines.append(
+            f"{index}. {row['role']}: `{Path(str(row['path'])).name}`; "
+            f"bytes={row['bytes']}; sha256={row['sha256']}"
+        )
+    inventory = "\n".join(inventory_lines).rstrip()
+    first = artifacts[0]
+    artifact_heading = (
+        f"## Artifact 1: {first['role']} — {Path(str(first['path'])).name}"
+    )
+    no_emphasis_prefix = inventory + "\n\n" + artifact_heading
+
+    if not normalized_heading_lines:
+        if required:
+            raise AuditRecoveryError("required review emphasis is absent")
+        if not review_input.startswith(no_emphasis_prefix):
+            raise AuditRecoveryError("review emphasis placement differs")
+        return None
+
+    emphasized_prefix = inventory + "\n\n" + heading + "\n\n"
+    if not review_input.startswith(emphasized_prefix):
+        raise AuditRecoveryError("review emphasis placement differs")
+    remainder = review_input[len(emphasized_prefix) :]
+    boundary = "\n\n" + artifact_heading
+    boundary_index = remainder.find(boundary)
+    if boundary_index < 0:
+        raise AuditRecoveryError("review emphasis boundary differs")
+    emphasis = remainder[:boundary_index]
+    heading_injection = re.compile(r"(?m)^\s{0,3}#{1,6}(?:\s|$)")
+    if (
+        not emphasis
+        or emphasis.strip() != emphasis
+        or len(emphasis) > 1_000
+        or len(emphasis.splitlines()) > 4
+        or heading_injection.search(emphasis)
+        or "<artifact_" in emphasis.casefold()
+        or "</artifact_" in emphasis.casefold()
+        or any(ord(character) < 32 for character in emphasis if character != "\n")
+    ):
+        raise AuditRecoveryError("review emphasis content differs")
+    return emphasis
 
 
 def _provider_verdict(review_text: str) -> str:
@@ -2082,9 +2259,7 @@ def _provider_verdict(review_text: str) -> str:
         len(lines),
     )
     nonblank = [
-        (index, lines[index])
-        for index in range(start, end)
-        if lines[index].strip()
+        (index, lines[index]) for index in range(start, end) if lines[index].strip()
     ]
     if not nonblank or nonblank[-1][1] not in RECOVERY_REVIEW_VERDICTS:
         raise AuditRecoveryError("provider review verdict differs")
@@ -2116,7 +2291,11 @@ def _provider_finding_headings(review_text: str) -> list[str]:
             raise AuditRecoveryError("provider review finding section differs")
         start = lines.index(section) + 1
         end = next(
-            (index for index in range(start, len(lines)) if lines[index].startswith("# ")),
+            (
+                index
+                for index in range(start, len(lines))
+                if lines[index].startswith("# ")
+            ),
             len(lines),
         )
         section_lines = [line for line in lines[start:end] if line.strip()]
@@ -2131,9 +2310,7 @@ def _provider_finding_headings(review_text: str) -> list[str]:
             )
             if match:
                 if not match.group(1).startswith(prefix):
-                    raise AuditRecoveryError(
-                        "provider review finding section differs"
-                    )
+                    raise AuditRecoveryError("provider review finding section differs")
                 section_identifiers.append(match.group(1))
         if not section_identifiers or "None." in section_lines:
             raise AuditRecoveryError("provider review finding section differs")
@@ -2191,9 +2368,7 @@ def _validated_review_cost(
         input_rate = float(manifest["input_rate_usd_per_million"])
         cache_rate = float(manifest["cache_write_rate_usd_per_million"])
         output_rate = float(manifest["output_rate_usd_per_million"])
-        reported_cost = float(
-            manifest["completed_response_cost_usd_conservative"]
-        )
+        reported_cost = float(manifest["completed_response_cost_usd_conservative"])
     except (KeyError, TypeError, ValueError, OverflowError) as exc:
         raise AuditRecoveryError("provider review usage/cost differs") from exc
     recomputed_cost = (
@@ -2241,23 +2416,21 @@ def _response_output_text(response: Mapping[str, Any]) -> str:
     return "\n\n".join(parts).rstrip() + "\n"
 
 
-def _validate_adjudication(
+def _validate_adjudication_content(
     path: Path,
     *,
     repo_root: Path,
     evidence_commit: str,
-    final_commit: str,
 ) -> dict[str, Any]:
     candidate = path.expanduser().absolute()
     try:
         relative = candidate.relative_to(repo_root).as_posix()
     except ValueError as exc:
-        raise AuditRecoveryError("recovery adjudication is outside the repository") from exc
+        raise AuditRecoveryError(
+            "recovery adjudication is outside the repository"
+        ) from exc
     value, file_hash = _canonical_file(candidate, "recovery adjudication")
     receipt_hash = _self_hash(value, "recovery adjudication")
-    _oid, frozen = _git_blob(repo_root, final_commit, relative)
-    if frozen != candidate.read_bytes():
-        raise AuditRecoveryError("recovery adjudication differs from final freeze")
     if relative != RECOVERY_ADJUDICATION_PATH:
         raise AuditRecoveryError("recovery adjudication path differs")
 
@@ -2315,18 +2488,36 @@ def _validate_adjudication(
     review_input = payload.get("input")
     metadata = payload.get("metadata")
     reasoning = payload.get("reasoning")
+    emphasis = _extract_review_emphasis(
+        review_input,
+        review_artifacts,
+        required=True,
+    )
+    if emphasis is None:  # Defensive type narrowing; required=True rejects this.
+        raise AuditRecoveryError("required review emphasis is absent")
     expected_review_input = _reconstruct_review_input(
         review_artifacts,
         brief_text=brief_text,
         context_text=context_text,
+        emphasis=emphasis,
     )
+    emphasis_sha256 = hashlib.sha256(emphasis.encode("utf-8")).hexdigest()
+    review_input_sha256 = hashlib.sha256(
+        expected_review_input.encode("utf-8")
+    ).hexdigest()
+    if (
+        emphasis != EXPECTED_RECOVERY_REVIEW_EMPHASIS
+        or len(emphasis) != EXPECTED_RECOVERY_REVIEW_EMPHASIS_CHARACTERS
+        or emphasis_sha256 != EXPECTED_RECOVERY_REVIEW_EMPHASIS_SHA256
+        or len(expected_review_input) != EXPECTED_RECOVERY_REVIEW_INPUT_CHARACTERS
+        or review_input_sha256 != EXPECTED_RECOVERY_REVIEW_INPUT_SHA256
+    ):
+        raise AuditRecoveryError("authentic review emphasis or input differs")
     expected_metadata = {
         "workflow": "experiment_plan_review",
         "review_scope": "director_level_plan_review",
         "plan_sha256": hashlib.sha256(raw["brief"]).hexdigest(),
-        "review_input_sha256": hashlib.sha256(
-            expected_review_input.encode("utf-8")
-        ).hexdigest(),
+        "review_input_sha256": review_input_sha256,
         "review_instructions_sha256": EXPECTED_REVIEW_INSTRUCTIONS_SHA256,
         "single_call_policy": "trusted_procedural_rule",
         "reviewed_packet_git_head_commit": evidence_commit,
@@ -2370,8 +2561,7 @@ def _validate_adjudication(
     if (
         set(payload) != expected_payload_fields
         or payload.get("model") != "gpt-5.6-sol"
-        or reasoning
-        != {"mode": "pro", "effort": RECOVERY_REVIEW_REASONING_EFFORT}
+        or reasoning != {"mode": "pro", "effort": RECOVERY_REVIEW_REASONING_EFFORT}
         or not isinstance(instructions, str)
         or hashlib.sha256(instructions.encode("utf-8")).hexdigest()
         != EXPECTED_REVIEW_INSTRUCTIONS_SHA256
@@ -2514,13 +2704,154 @@ def _validate_adjudication(
         "review_manifest_file_sha256": value["review_manifest_file_sha256"],
         "review_brief_file_sha256": value["review_brief_file_sha256"],
         "review_context_file_sha256": value["review_context_file_sha256"],
+        "review_emphasis_sha256": emphasis_sha256,
+        "review_emphasis_characters": len(emphasis),
+        "review_input_sha256": review_input_sha256,
+        "review_input_characters": len(expected_review_input),
         "original_plan_adjudication_receipt_sha256": original_receipt,
     }
 
 
-def _strict_execution_path(
-    value: Any, label: str, *, must_exist: bool
-) -> Path:
+def validate_physical_authentic_review_bundle(
+    *,
+    code_freeze_commit: str | None = None,
+    repo_root: Path = REPO_ROOT,
+    evidence_commit: str = E3_QUALIFICATION_FREEZE_COMMIT,
+) -> dict[str, Any]:
+    """Content-validate and receipt-bind the review without a final commit."""
+
+    repo = repo_root.expanduser().resolve(strict=True)
+    if code_freeze_commit is None:
+        code_freeze_commit = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    if HEX40.fullmatch(code_freeze_commit) is None:
+        raise AuditRecoveryError("physical review code freeze commit is malformed")
+    review_root = repo / RECOVERY_REVIEW_ROOT
+    expected_names = sorted(MANDATORY_F_ADDITION_FILENAMES)
+    try:
+        actual_names = sorted(entry.name for entry in review_root.iterdir())
+    except OSError as exc:
+        raise AuditRecoveryError(
+            "physical authentic review bundle is unreadable"
+        ) from exc
+    if actual_names != expected_names:
+        raise AuditRecoveryError("physical authentic review bundle inventory differs")
+    artifacts: list[dict[str, Any]] = []
+    for relative in sorted(MANDATORY_F_ADDITION_PATHS):
+        raw = _regular_bytes(repo / relative, f"physical review artifact {relative}")
+        artifacts.append(
+            {
+                "path": relative,
+                "bytes": len(raw),
+                "sha256": hashlib.sha256(raw).hexdigest(),
+            }
+        )
+    adjudication = _validate_adjudication_content(
+        repo / RECOVERY_ADJUDICATION_PATH,
+        repo_root=repo,
+        evidence_commit=evidence_commit,
+    )
+    core = {
+        "schema_version": 1,
+        "status": "pass_authentic_review_bundle_content_validated",
+        "study_id": protocol.STUDY_ID,
+        "protocol_version": RECOVERY_PROTOCOL_VERSION,
+        "code_freeze_commit": code_freeze_commit,
+        "reviewed_packet_git_head_commit": evidence_commit,
+        "validator_source_file_sha256": protocol.sha256_file(Path(__file__).resolve()),
+        "review_emphasis_sha256": adjudication["review_emphasis_sha256"],
+        "review_emphasis_characters": adjudication["review_emphasis_characters"],
+        "review_input_sha256": adjudication["review_input_sha256"],
+        "review_input_characters": adjudication["review_input_characters"],
+        "new_paid_review_call_count": 0,
+        "raw_data_inputs": [],
+        "outcome_inputs": [],
+        "provider_verdict": adjudication["provider_verdict"],
+        "review_cost_usd": adjudication["review_cost_usd"],
+        "review_response_id": adjudication["review_response_id"],
+        "artifacts": artifacts,
+        "artifact_inventory_sha256": protocol.canonical_sha256(artifacts),
+        "adjudication": adjudication,
+    }
+    return {**core, "receipt_sha256": protocol.canonical_sha256(core)}
+
+
+def _validate_authentic_bundle_preflight_evidence(
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    repo_root: Path,
+    code_freeze_commit: str,
+) -> dict[str, Any]:
+    """Recompute the completed bundle and require the exact E5 receipt."""
+
+    paths = [str(row.get("path", "")) for row in rows]
+    if (
+        len(rows) != 1
+        or set(paths) != MANDATORY_E5_PREFLIGHT_PATHS
+        or paths[0] != AUTHENTIC_BUNDLE_PREFLIGHT_PATH
+    ):
+        raise AuditRecoveryError("authentic-bundle preflight receipt set differs")
+    stored, file_sha256 = _canonical_file(
+        repo_root / AUTHENTIC_BUNDLE_PREFLIGHT_PATH,
+        "authentic-bundle preflight receipt",
+    )
+    expected = validate_physical_authentic_review_bundle(
+        code_freeze_commit=code_freeze_commit,
+        repo_root=repo_root,
+        evidence_commit=E3_QUALIFICATION_FREEZE_COMMIT,
+    )
+    if (
+        stored != expected
+        or rows[0].get("sha256") != file_sha256
+        or stored.get("protocol_version") != RECOVERY_PROTOCOL_VERSION
+        or stored.get("code_freeze_commit") != code_freeze_commit
+        or stored.get("reviewed_packet_git_head_commit")
+        != E3_QUALIFICATION_FREEZE_COMMIT
+        or stored.get("new_paid_review_call_count") != 0
+        or stored.get("raw_data_inputs") != []
+        or stored.get("outcome_inputs") != []
+    ):
+        raise AuditRecoveryError("authentic-bundle preflight receipt differs")
+    return {
+        "status": "pass_exact_authentic_bundle_preflight_evidence",
+        "path": AUTHENTIC_BUNDLE_PREFLIGHT_PATH,
+        "file_sha256": file_sha256,
+        "receipt_sha256": stored["receipt_sha256"],
+        "validator_source_file_sha256": stored["validator_source_file_sha256"],
+        "review_input_sha256": stored["review_input_sha256"],
+        "review_bundle_inventory_sha256": stored["artifact_inventory_sha256"],
+        "review_response_id": stored["review_response_id"],
+        "new_paid_review_call_count": 0,
+        "raw_or_outcome_inputs": [],
+    }
+
+
+def _validate_adjudication(
+    path: Path,
+    *,
+    repo_root: Path,
+    evidence_commit: str,
+    final_commit: str,
+) -> dict[str, Any]:
+    """Run the same content validation plus the final-freeze Git binding."""
+
+    candidate = path.expanduser().absolute()
+    try:
+        relative = candidate.relative_to(repo_root).as_posix()
+    except ValueError as exc:
+        raise AuditRecoveryError(
+            "recovery adjudication is outside the repository"
+        ) from exc
+    _oid, frozen = _git_blob(repo_root, final_commit, relative)
+    if frozen != _regular_bytes(candidate, "recovery adjudication"):
+        raise AuditRecoveryError("recovery adjudication differs from final freeze")
+    return _validate_adjudication_content(
+        candidate,
+        repo_root=repo_root,
+        evidence_commit=evidence_commit,
+    )
+
+
+def _strict_execution_path(value: Any, label: str, *, must_exist: bool) -> Path:
     if not isinstance(value, str):
         raise AuditRecoveryError(f"recovery execution path is malformed: {label}")
     lexical = Path(value)
@@ -2538,9 +2869,7 @@ def _strict_execution_path(
             details = current.lstat()
         except FileNotFoundError:
             if must_exist or current != lexical:
-                raise AuditRecoveryError(
-                    f"recovery execution path is missing: {label}"
-                )
+                raise AuditRecoveryError(f"recovery execution path is missing: {label}")
             missing_seen = True
             break
         except OSError as exc:
@@ -2563,9 +2892,7 @@ def _strict_execution_path(
                 f"recovery execution path is noncanonical: {label}"
             )
     elif not missing_seen and lexical.is_symlink():
-        raise AuditRecoveryError(
-            f"recovery execution path contains a symlink: {label}"
-        )
+        raise AuditRecoveryError(f"recovery execution path contains a symlink: {label}")
     return lexical
 
 
@@ -2623,8 +2950,8 @@ def _validate_execution_paths(execution: Mapping[str, Any]) -> dict[str, Any]:
         or output.parent != attempt_root
         or marker.parent != attempt_root
         or failure.parent != attempt_root
-        or not attempt_root.name.startswith("audit_recovery_v4")
-        or not output.name.startswith("audit_recovery_v4")
+        or not attempt_root.name.startswith("audit_recovery_v5")
+        or not output.name.startswith("audit_recovery_v5")
         or output.name.startswith(".")
         or marker.name != "ATTEMPT_CLAIMED.json"
         or failure.name != "RECOVERY_FAILED.json"
@@ -2652,6 +2979,7 @@ def build_recovery_authorization(
     final_freeze_commit: str,
     git_remote_ref: str,
     qualification_paths: Sequence[str],
+    authentic_bundle_preflight_paths: Sequence[str],
     cumulative_review_paths: Sequence[str],
     recovery_adjudication_path: Path,
     fresh_ownership_path: Path,
@@ -2680,12 +3008,20 @@ def build_recovery_authorization(
     _require_ancestry(repo, evidence_freeze_commit, final_freeze_commit)
     if set(cumulative_review_paths) != MANDATORY_CUMULATIVE_REVIEW_PATHS:
         raise AuditRecoveryError("cumulative review path set differs")
+    if set(authentic_bundle_preflight_paths) != MANDATORY_E5_PREFLIGHT_PATHS:
+        raise AuditRecoveryError("authentic-bundle preflight path set differs")
     _require_exact_freeze_chain(
         repo,
         code_commit=code_freeze_commit,
         evidence_commit=evidence_freeze_commit,
         final_commit=final_freeze_commit,
         qualification_paths=qualification_paths,
+    )
+    final_freeze_lineage = _validate_v5_final_freeze_lineage(
+        repo,
+        code_commit=code_freeze_commit,
+        evidence_commit=evidence_freeze_commit,
+        final_commit=final_freeze_commit,
     )
     head = _git(repo, "rev-parse", "HEAD").stdout.strip()
     if head != final_freeze_commit:
@@ -2705,13 +3041,25 @@ def build_recovery_authorization(
     )
     qualification_rows = _freeze_inventory(
         repo,
-        first_commit=evidence_freeze_commit,
+        first_commit=E4_QUALIFICATION_FREEZE_COMMIT,
         final_commit=final_freeze_commit,
         paths=qualification_paths,
         label="qualification packet",
     )
     qualification_validation = _validate_qualification_evidence(
         qualification_rows,
+        repo_root=repo,
+        code_freeze_commit=C4_RECOVERY_FREEZE_COMMIT,
+    )
+    preflight_rows = _freeze_inventory(
+        repo,
+        first_commit=evidence_freeze_commit,
+        final_commit=final_freeze_commit,
+        paths=authentic_bundle_preflight_paths,
+        label="authentic-bundle preflight packet",
+    )
+    preflight_validation = _validate_authentic_bundle_preflight_evidence(
+        preflight_rows,
         repo_root=repo,
         code_freeze_commit=code_freeze_commit,
     )
@@ -2721,9 +3069,7 @@ def build_recovery_authorization(
         cumulative_review_paths,
         "cumulative review packet",
     )
-    if {str(row["path"]) for row in review_rows} != (
-        MANDATORY_CUMULATIVE_REVIEW_PATHS
-    ):
+    if {str(row["path"]) for row in review_rows} != (MANDATORY_CUMULATIVE_REVIEW_PATHS):
         raise AuditRecoveryError("cumulative review packet is incomplete")
     adjudication = _validate_adjudication(
         recovery_adjudication_path,
@@ -2733,9 +3079,7 @@ def build_recovery_authorization(
     )
     if adjudication["path"] not in {row["path"] for row in review_rows}:
         raise AuditRecoveryError("cumulative review packet omits its adjudication")
-    pod = _fresh_pod_binding(
-        fresh_ownership_path, fresh_guest_path, fresh_cache_path
-    )
+    pod = _fresh_pod_binding(fresh_ownership_path, fresh_guest_path, fresh_cache_path)
     bound_execution = _validate_execution_paths(execution)
     incident = _incident_binding(
         raw_root=Path(str(bound_execution["raw_root"])),
@@ -2773,19 +3117,21 @@ def build_recovery_authorization(
         "code_freeze_commit": code_freeze_commit,
         "evidence_freeze_commit": evidence_freeze_commit,
         "final_freeze_commit": final_freeze_commit,
+        "final_freeze_lineage_validation": final_freeze_lineage,
         "git_remote_ref": git_remote_ref,
         "git_live_remote_commit": final_freeze_commit,
         "source_test_files": source_rows,
         "source_test_inventory_sha256": protocol.canonical_sha256(source_rows),
         "qualification_files": qualification_rows,
-        "qualification_inventory_sha256": protocol.canonical_sha256(
-            qualification_rows
-        ),
+        "qualification_inventory_sha256": protocol.canonical_sha256(qualification_rows),
         "qualification_validation": qualification_validation,
-        "cumulative_review_files": review_rows,
-        "cumulative_review_inventory_sha256": protocol.canonical_sha256(
-            review_rows
+        "authentic_bundle_preflight_files": preflight_rows,
+        "authentic_bundle_preflight_inventory_sha256": (
+            protocol.canonical_sha256(preflight_rows)
         ),
+        "authentic_bundle_preflight_validation": preflight_validation,
+        "cumulative_review_files": review_rows,
+        "cumulative_review_inventory_sha256": protocol.canonical_sha256(review_rows),
         "recovery_adjudication": adjudication,
         "fresh_pod": pod,
         "incident": incident,
@@ -2844,24 +3190,23 @@ def validate_recovery_authorization(
         final_commit=final_commit,
         label="source/test closure",
     )
-    if (
-        tuple(str(row["path"]) for row in source_rows)
-        != tuple(sorted(MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS))
-        or receipt["source_test_inventory_sha256"]
-        != protocol.canonical_sha256(source_rows)
+    if tuple(str(row["path"]) for row in source_rows) != tuple(
+        sorted(MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS)
+    ) or receipt["source_test_inventory_sha256"] != protocol.canonical_sha256(
+        source_rows
     ):
         raise AuditRecoveryError("source/test closure is incomplete")
     qualification_rows = _validate_git_file_rows(
         receipt["qualification_files"],
         repo_root=repo,
-        first_commit=evidence_commit,
+        first_commit=E4_QUALIFICATION_FREEZE_COMMIT,
         final_commit=final_commit,
         label="qualification packet",
     )
     qualification_validation = _validate_qualification_evidence(
         qualification_rows,
         repo_root=repo,
-        code_freeze_commit=code_commit,
+        code_freeze_commit=C4_RECOVERY_FREEZE_COMMIT,
     )
     _require_exact_freeze_chain(
         repo,
@@ -2870,6 +3215,28 @@ def validate_recovery_authorization(
         final_commit=final_commit,
         qualification_paths=[str(row["path"]) for row in qualification_rows],
     )
+    final_freeze_lineage = _validate_v5_final_freeze_lineage(
+        repo,
+        code_commit=code_commit,
+        evidence_commit=evidence_commit,
+        final_commit=final_commit,
+    )
+    if receipt["final_freeze_lineage_validation"] != final_freeze_lineage:
+        raise AuditRecoveryError("C5 final-freeze lineage binding differs")
+    preflight_rows = _validate_git_file_rows(
+        receipt["authentic_bundle_preflight_files"],
+        repo_root=repo,
+        first_commit=evidence_commit,
+        final_commit=final_commit,
+        label="authentic-bundle preflight packet",
+    )
+    if {str(row["path"]) for row in preflight_rows} != (MANDATORY_E5_PREFLIGHT_PATHS):
+        raise AuditRecoveryError("authentic-bundle preflight packet is incomplete")
+    preflight_validation = _validate_authentic_bundle_preflight_evidence(
+        preflight_rows,
+        repo_root=repo,
+        code_freeze_commit=code_commit,
+    )
     review_rows = _validate_git_file_rows(
         receipt["cumulative_review_files"],
         repo_root=repo,
@@ -2877,16 +3244,17 @@ def validate_recovery_authorization(
         final_commit=final_commit,
         label="cumulative review packet",
     )
-    if {str(row["path"]) for row in review_rows} != (
-        MANDATORY_CUMULATIVE_REVIEW_PATHS
-    ):
+    if {str(row["path"]) for row in review_rows} != (MANDATORY_CUMULATIVE_REVIEW_PATHS):
         raise AuditRecoveryError("cumulative review packet is incomplete")
     if (
         receipt["qualification_inventory_sha256"]
         != protocol.canonical_sha256(qualification_rows)
+        or receipt["authentic_bundle_preflight_inventory_sha256"]
+        != protocol.canonical_sha256(preflight_rows)
         or receipt["cumulative_review_inventory_sha256"]
         != protocol.canonical_sha256(review_rows)
         or receipt["qualification_validation"] != qualification_validation
+        or receipt["authentic_bundle_preflight_validation"] != preflight_validation
         or {str(row["path"]) for row in review_rows}
         != MANDATORY_CUMULATIVE_REVIEW_PATHS
     ):
@@ -2900,10 +3268,9 @@ def validate_recovery_authorization(
         evidence_commit=E3_QUALIFICATION_FREEZE_COMMIT,
         final_commit=final_commit,
     )
-    if (
-        adjudication_record != adjudication
-        or adjudication["path"] not in {row["path"] for row in review_rows}
-    ):
+    if adjudication_record != adjudication or adjudication["path"] not in {
+        row["path"] for row in review_rows
+    }:
         raise AuditRecoveryError("recovery adjudication binding differs")
     pod_record = receipt["fresh_pod"]
     if not isinstance(pod_record, Mapping):
@@ -3162,8 +3529,7 @@ def _recovery_provenance(
     j_inventory: Mapping[str, Any],
 ) -> dict[str, Any]:
     if (
-        pre_ledger["file_inventory_sha256"]
-        != post_ledger["file_inventory_sha256"]
+        pre_ledger["file_inventory_sha256"] != post_ledger["file_inventory_sha256"]
         or pre_ledger["directory_inventory_sha256"]
         != post_ledger["directory_inventory_sha256"]
         or pre_ledger["run_receipt_sha256"] != post_ledger["run_receipt_sha256"]
@@ -3185,9 +3551,7 @@ def _recovery_provenance(
         "code_freeze_commit": authorization["code_freeze_commit"],
         "evidence_freeze_commit": authorization["evidence_freeze_commit"],
         "final_freeze_commit": authorization["final_freeze_commit"],
-        "source_test_inventory_sha256": authorization[
-            "source_test_inventory_sha256"
-        ],
+        "source_test_inventory_sha256": authorization["source_test_inventory_sha256"],
         "qualification_inventory_sha256": authorization[
             "qualification_inventory_sha256"
         ],
@@ -3203,9 +3567,7 @@ def _recovery_provenance(
             "hourly_price_usd": authorization["hourly_price_usd"],
             "max_spend_usd": authorization["max_spend_usd"],
         },
-        "historical_original_receipt_validation": dict(
-            historical_receipt_validation
-        ),
+        "historical_original_receipt_validation": dict(historical_receipt_validation),
         "pre_raw_tree_ledger": dict(pre_ledger),
         "post_raw_tree_ledger": dict(post_ledger),
         "raw_tree_unchanged": True,
@@ -3294,15 +3656,13 @@ def publish_compact_atomic(
             "attempt_id": authorization["attempt_id"],
             "audit_receipt_sha256": audit_receipt["receipt_sha256"],
             "summary_receipt_sha256": summary["receipt_sha256"],
-            "recovery_provenance_receipt_sha256": audit_receipt[
-                "recovery_provenance"
-            ]["receipt_sha256"],
+            "recovery_provenance_receipt_sha256": audit_receipt["recovery_provenance"][
+                "receipt_sha256"
+            ],
             "audit_file_sha256": protocol.sha256_file(audit_path),
             "summary_file_sha256": protocol.sha256_file(summary_path),
             "publication_completed_at_unix": time.time(),
-            "recovery_deadline_at_unix": authorization[
-                "recovery_deadline_at_unix"
-            ],
+            "recovery_deadline_at_unix": authorization["recovery_deadline_at_unix"],
         }
         marker = {
             **marker_core,
@@ -3344,9 +3704,7 @@ def execute_recovery(authorization_path: Path) -> Path:
         run_complete, _ = _canonical_file(
             raw_root / "RUN_COMPLETE.json", "historical RUN_COMPLETE"
         )
-        historical_completed = float(
-            run_complete["resource"]["run_completed_at_unix"]
-        )
+        historical_completed = float(run_complete["resource"]["run_completed_at_unix"])
         inventory: dict[str, Any] = {}
         with _private_frozen_audit_module() as isolated_audit:
             historical_validation = validate_historical_original_receipts(
@@ -3356,9 +3714,7 @@ def execute_recovery(authorization_path: Path) -> Path:
                 original_ownership=Path(str(execution["original_ownership"])),
                 original_guest=Path(str(execution["original_guest"])),
                 original_cache=Path(str(execution["original_cache"])),
-                original_authorization=Path(
-                    str(execution["original_authorization"])
-                ),
+                original_authorization=Path(str(execution["original_authorization"])),
             )
             pre_ledger = raw_tree_ledger(raw_root)
             _bind_private_recovery_adapters(
@@ -3446,6 +3802,7 @@ def _issue_from_args(args: argparse.Namespace) -> Path:
         final_freeze_commit=args.final_freeze_commit,
         git_remote_ref=args.git_remote_ref,
         qualification_paths=args.qualification_path,
+        authentic_bundle_preflight_paths=(args.authentic_bundle_preflight_path),
         cumulative_review_paths=args.cumulative_review_path,
         recovery_adjudication_path=args.recovery_adjudication,
         fresh_ownership_path=args.fresh_ownership,
@@ -3469,6 +3826,9 @@ def _add_issue_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--final-freeze-commit", required=True)
     parser.add_argument("--git-remote-ref", required=True)
     parser.add_argument("--qualification-path", action="append", required=True)
+    parser.add_argument(
+        "--authentic-bundle-preflight-path", action="append", required=True
+    )
     parser.add_argument("--cumulative-review-path", action="append", required=True)
     parser.add_argument("--recovery-adjudication", type=Path, required=True)
     parser.add_argument("--fresh-ownership", type=Path, required=True)
@@ -3479,9 +3839,7 @@ def _add_issue_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--original-postdelete-inventory", type=Path, required=True)
     parser.add_argument("--incident-closure", type=Path, required=True)
     parser.add_argument("--incident-closure-schema", type=Path, required=True)
-    parser.add_argument(
-        "--incident-closure-verification", type=Path, required=True
-    )
+    parser.add_argument("--incident-closure-verification", type=Path, required=True)
     parser.add_argument("--recovery-cycle-ledger", type=Path, required=True)
     parser.add_argument("--recovery-id", required=True)
     parser.add_argument("--attempt-id", required=True)

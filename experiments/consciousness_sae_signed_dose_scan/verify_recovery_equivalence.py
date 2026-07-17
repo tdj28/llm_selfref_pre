@@ -50,11 +50,16 @@ C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
 C2_RECOVERY_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
 C3_RECOVERY_FREEZE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
 E3_QUALIFICATION_FREEZE_COMMIT = "44d9e178567bbf31e524b79e4434474a4e5d888e"
+C4_RECOVERY_FREEZE_COMMIT = "c43e40f79d197943c55e803371350ffafff1e0ed"
+E4_QUALIFICATION_FREEZE_COMMIT = "e45832e9319814824a8f84840d2b8a4649aeb6f1"
 RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3 = (
     "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v3"
 )
-RECOVERY_EQUIVALENCE_PROTOCOL_VERSION = (
+RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V4 = (
     "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v4"
+)
+RECOVERY_EQUIVALENCE_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v5"
 )
 C1_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
@@ -127,6 +132,111 @@ C4_REVIEW_FILENAMES = (
     "RECOVERY_PRO_REVIEW_REQUEST.md",
     "RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json",
     "RECOVERY_PRO_REVIEW_RESPONSE.json",
+)
+C5_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_C5_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V5.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_C5_STATUS_MAP.json",
+)
+C5_LEDGER_PATH = C5_DOC_PATHS[1]
+C5_STATUS_MAP_PATH = C5_DOC_PATHS[2]
+C5_PREFLIGHT_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_authentic_bundle_preflight_v5"
+)
+C5_PREFLIGHT_FILENAME = "AUTHENTIC_BUNDLE_PREFLIGHT.json"
+C5_PREFLIGHT_PATH = f"{C5_PREFLIGHT_ROOT}/{C5_PREFLIGHT_FILENAME}"
+EXPECTED_C5_STATUS_MAP_FILE_SHA256 = (
+    "f45f2ce75a8ecddc2b42728ed80faefc191deebf69b180c3c17c5c5141dd0495"
+)
+EXPECTED_C5_STATUS_MAP_RECEIPT_SHA256 = (
+    "dbec2f49cfb0166f67558ce529030326798fed8c083368b3c9301f21ffa1c996"
+)
+EXPECTED_C5_LEDGER_FILE_SHA256 = (
+    "a39879a6655f35e41c6287450cdd04da4b87a5066313f71ef3fde031c56822f2"
+)
+EXPECTED_C5_LEDGER_RECEIPT_SHA256 = (
+    "2fa5efff560fcee6d28aaed220b95b6979050485be33bfe21a3bcef19763fe71"
+)
+EXPECTED_C5_AUTHORITY_BINDING_SHA256 = (
+    "ed1141e0345a26623c0967655187a19e40ad463c163f00b35b23cf2ec4b0a3e8"
+)
+C4_QUALIFICATION_INVENTORY_SHA256 = (
+    "b98b41cafba9c663e346d39c35ae1769792e33f4ebb0fdcd002c4f3f18e58c79"
+)
+C4_QUALIFICATION_POD_ID = "jam8legy7six6l"
+C4_TARGET_QUALIFICATION_FILE_SHA256 = (
+    "fec568f61a1950c2fb72de273bbb4696b9b815c2c80fb40aff1a9624925e15d9"
+)
+C4_TARGET_QUALIFICATION_RECEIPT_SHA256 = (
+    "ea57e2f9c1185ff2d080d508e14e9d551b97a325e7c82b70962c6ab1dd6be912"
+)
+C4_TARGET_VERIFICATION_FILE_SHA256 = (
+    "c07ebfe8aec71e6f7bc19c3719f6781ada9fd026dee685727fa74868ff381fd2"
+)
+C4_TARGET_VERIFICATION_RECEIPT_SHA256 = (
+    "9144367ac1e523fa58f4f7ef6ac5c915d95a009dddf20e20ffed7bfad6dbd4f8"
+)
+AUTHENTIC_REVIEW_INPUT_SHA256 = (
+    "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e"
+)
+AUTHENTIC_REVIEW_RESPONSE_ID = "resp_04d4093548a29511016a59e1285d70819aa84d3b6fe44c6ec7"
+AUTHENTIC_REVIEW_ADJUDICATION_RECEIPT_SHA256 = (
+    "a98b0d78e513bf7227a028e0b0a77be924c36417e646813f0f3b3ac5f4a439f0"
+)
+AUTHENTIC_REVIEW_EMPHASIS_SHA256 = (
+    "d727307b7da9bbb3fcbd47c9617a4a367e7bae727e8b9862fc26299ef70e353e"
+)
+AUTHENTIC_REVIEW_EMPHASIS_CHARACTERS = 228
+AUTHENTIC_REVIEW_INPUT_CHARACTERS = 14_640
+ORIGINAL_PLAN_ADJUDICATION_RECEIPT_SHA256 = (
+    "234254e67f8b897ea837590117932e4bfdfc261df7fc4eb460acf7047edba0d8"
+)
+EXPECTED_REVIEW_BUNDLE_FILES = (
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW.md",
+        "bytes": 7_573,
+        "sha256": "e64bb7f6df244a6bbe079c60dd01d5972fa71db5931960562fa1852856e82acc",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_ADJUDICATION.json",
+        "bytes": 1_068,
+        "sha256": "a27c6d6ca5d0f77c45600c1761416624d9d1aa165e4dc48282e980a480bda6e2",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_BRIEF.md",
+        "bytes": 8_798,
+        "sha256": "a13d536223e23cbb0dfe50ed9883255d27704464331291f8755ae2585f28665d",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_CONTEXT.md",
+        "bytes": 4_650,
+        "sha256": "074759a85babcd7e47b78680269da8c0bc81eaf078757ae500a2d62c4bed0306",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_MANIFEST.json",
+        "bytes": 4_475,
+        "sha256": "b66f658f7d450238f9f5d9c51285fc94811dff52c341670be11f16b28a829d0a",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_REQUEST.md",
+        "bytes": 17_848,
+        "sha256": "a50b715c32f860f69c2267c9dc91f15a18885a4630e8e2cb67cb0358784d4668",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json",
+        "bytes": 18_994,
+        "sha256": "97495dd8da4983a51c44a1f88e67f6f641f233bb8b34611a50fa22ba1571a34e",
+    },
+    {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_RESPONSE.json",
+        "bytes": 27_520,
+        "sha256": "bb5db44ba5e7c45292eacbad35fb61763e782a191da286421ec0c72d9de77c63",
+    },
+)
+EXPECTED_REVIEW_BUNDLE_INVENTORY_SHA256 = (
+    "4ef110c501c219305bc0d447329d4bffd48557e0b92870ab1d39c40201500542"
 )
 C2_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
@@ -260,6 +370,21 @@ C4_TO_E4_NAME_STATUS = {
     f"{C4_QUALIFICATION_ROOT}/{name}": "A" for name in C4_QUALIFICATION_FILENAMES
 }
 E4_TO_F4_NAME_STATUS = {f"{C4_REVIEW_ROOT}/{name}": "A" for name in C4_REVIEW_FILENAMES}
+E4_TO_C5_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in (
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+        )
+    },
+    **{path: "A" for path in C5_DOC_PATHS},
+}
+C5_TO_E5_NAME_STATUS = {C5_PREFLIGHT_PATH: "A"}
+E5_TO_F5_NAME_STATUS = {f"{C4_REVIEW_ROOT}/{name}": "A" for name in C4_REVIEW_FILENAMES}
 PREDECESSOR_PRECEDENT_COMMIT = "e187342"
 PREDECESSOR_PRECEDENT_PATHS = {
     "experiments/consciousness_sae_target_blind_calibration/scientific_equivalence.py": (
@@ -361,7 +486,7 @@ RECOVERY_CLOSURE_PATHS_V3 = (
     "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
     "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
 )
-RECOVERY_CLOSURE_PATHS = (
+RECOVERY_CLOSURE_PATHS_V4 = (
     *RECOVERY_CLOSURE_PATHS_V3[
         : RECOVERY_CLOSURE_PATHS_V3.index(
             f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
@@ -370,6 +495,19 @@ RECOVERY_CLOSURE_PATHS = (
     *C4_DOC_PATHS,
     *RECOVERY_CLOSURE_PATHS_V3[
         RECOVERY_CLOSURE_PATHS_V3.index(
+            f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
+        ) :
+    ],
+)
+RECOVERY_CLOSURE_PATHS = (
+    *RECOVERY_CLOSURE_PATHS_V4[
+        : RECOVERY_CLOSURE_PATHS_V4.index(
+            f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
+        )
+    ],
+    *C5_DOC_PATHS,
+    *RECOVERY_CLOSURE_PATHS_V4[
+        RECOVERY_CLOSURE_PATHS_V4.index(
             f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
         ) :
     ],
@@ -722,6 +860,127 @@ def _verify_freeze_lineage(
             )
 
 
+def _verify_freeze_lineage_v5(
+    packet: Mapping[str, Any],
+    *,
+    code_freeze_commit: str,
+    repo_root: Path,
+    enforce_git: bool,
+) -> None:
+    maps = {
+        "original_to_c1": ORIGINAL_TO_C1_NAME_STATUS,
+        "c1_to_c2": C1_TO_C2_NAME_STATUS,
+        "c2_to_c3": C2_TO_C3_NAME_STATUS,
+        "c3_to_e3": C3_TO_E3_NAME_STATUS,
+        "e3_to_c4": E3_TO_C4_NAME_STATUS,
+        "c4_to_e4": C4_TO_E4_NAME_STATUS,
+        "e4_to_c5": E4_TO_C5_NAME_STATUS,
+    }
+    expected: dict[str, Any] = {
+        "status": "pass_exact_original_C1_C2_C3_E3_C4_E4_C5_successor_lineage",
+        "original_freeze_commit": ORIGINAL_FREEZE_COMMIT,
+        "c1_recovery_freeze_commit": C1_RECOVERY_FREEZE_COMMIT,
+        "c2_recovery_freeze_commit": C2_RECOVERY_FREEZE_COMMIT,
+        "c3_recovery_freeze_commit": C3_RECOVERY_FREEZE_COMMIT,
+        "e3_qualification_freeze_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "c4_recovery_freeze_commit": C4_RECOVERY_FREEZE_COMMIT,
+        "e4_qualification_freeze_commit": E4_QUALIFICATION_FREEZE_COMMIT,
+        "c5_code_freeze_commit": code_freeze_commit,
+        "direct_parent_chain": [
+            ORIGINAL_FREEZE_COMMIT,
+            C1_RECOVERY_FREEZE_COMMIT,
+            C2_RECOVERY_FREEZE_COMMIT,
+            C3_RECOVERY_FREEZE_COMMIT,
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            C4_RECOVERY_FREEZE_COMMIT,
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+        ],
+    }
+    for label, mapping in maps.items():
+        rows = _status_rows(mapping)
+        expected[f"{label}_name_status"] = rows
+        expected[f"{label}_name_status_sha256"] = canonical_sha256(rows)
+    expected.update(
+        original_science_mutation_paths=[],
+        original_science_bytes_immutable=True,
+    )
+    if packet.get("freeze_lineage") != expected:
+        raise RecoveryEquivalenceVerificationError("freeze lineage binding differs")
+    if not enforce_git:
+        return
+    commits = (
+        ORIGINAL_FREEZE_COMMIT,
+        C1_RECOVERY_FREEZE_COMMIT,
+        C2_RECOVERY_FREEZE_COMMIT,
+        C3_RECOVERY_FREEZE_COMMIT,
+        E3_QUALIFICATION_FREEZE_COMMIT,
+        C4_RECOVERY_FREEZE_COMMIT,
+        E4_QUALIFICATION_FREEZE_COMMIT,
+        code_freeze_commit,
+    )
+    for commit in commits:
+        resolved = _git(repo_root, "rev-parse", f"{commit}^{{commit}}").decode().strip()
+        if resolved != commit:
+            raise RecoveryEquivalenceVerificationError(
+                "v5 freeze commit does not resolve exactly"
+            )
+    edges = (
+        (
+            ORIGINAL_FREEZE_COMMIT,
+            C1_RECOVERY_FREEZE_COMMIT,
+            ORIGINAL_TO_C1_NAME_STATUS,
+            "original-to-C1",
+        ),
+        (
+            C1_RECOVERY_FREEZE_COMMIT,
+            C2_RECOVERY_FREEZE_COMMIT,
+            C1_TO_C2_NAME_STATUS,
+            "C1-to-C2",
+        ),
+        (
+            C2_RECOVERY_FREEZE_COMMIT,
+            C3_RECOVERY_FREEZE_COMMIT,
+            C2_TO_C3_NAME_STATUS,
+            "C2-to-C3",
+        ),
+        (
+            C3_RECOVERY_FREEZE_COMMIT,
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            C3_TO_E3_NAME_STATUS,
+            "C3-to-E3",
+        ),
+        (
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            C4_RECOVERY_FREEZE_COMMIT,
+            E3_TO_C4_NAME_STATUS,
+            "E3-to-C4",
+        ),
+        (
+            C4_RECOVERY_FREEZE_COMMIT,
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            C4_TO_E4_NAME_STATUS,
+            "C4-to-E4",
+        ),
+        (
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+            E4_TO_C5_NAME_STATUS,
+            "E4-to-C5",
+        ),
+    )
+    for parent, child, expected_status, label in edges:
+        lineage = (
+            _git(repo_root, "rev-list", "--parents", "-n", "1", child).decode().split()
+        )
+        if lineage != [child, parent]:
+            raise RecoveryEquivalenceVerificationError(f"{label} direct parent differs")
+        if _observed_name_status(repo_root, parent, child) != expected_status:
+            raise RecoveryEquivalenceVerificationError(
+                f"{label} name-status map differs"
+            )
+
+
 def git_blob(repo_root: Path, commit: str, path: str) -> bytes:
     if Path(path).is_absolute() or ".." in Path(path).parts:
         raise RecoveryEquivalenceVerificationError("noncanonical Git path")
@@ -921,6 +1180,173 @@ def _verify_c4_authority_documents(
         )
 
 
+def _verify_c5_authority_documents(
+    packet: Mapping[str, Any], code_freeze_commit: str, reader: BlobReader
+) -> None:
+    status_raw = reader(code_freeze_commit, C5_STATUS_MAP_PATH)
+    ledger_raw = reader(code_freeze_commit, C5_LEDGER_PATH)
+    status_map = _json_object(status_raw, "C5 status map")
+    ledger = _json_object(ledger_raw, "C5 cycle ledger")
+    status_receipt = _self_hash(status_map, "receipt_sha256", "C5 status map")
+    ledger_receipt = _self_hash(ledger, "receipt_sha256", "C5 cycle ledger")
+    status_file_hash = _sha256(status_raw)
+    ledger_file_hash = _sha256(ledger_raw)
+    if (
+        status_file_hash != EXPECTED_C5_STATUS_MAP_FILE_SHA256
+        or status_receipt != EXPECTED_C5_STATUS_MAP_RECEIPT_SHA256
+        or ledger_file_hash != EXPECTED_C5_LEDGER_FILE_SHA256
+        or ledger_receipt != EXPECTED_C5_LEDGER_RECEIPT_SHA256
+    ):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 authority document physical hash differs"
+        )
+    if set(status_map) != {
+        "base_commit",
+        "qualified_code_commit",
+        "c4_to_e4",
+        "e4_to_c5",
+        "c5_to_e5",
+        "e5_to_f5",
+        "excluded_preexisting_user_paths",
+        "receipt_kind",
+        "receipt_sha256",
+        "schema_version",
+        "status",
+        "study_id",
+    }:
+        raise RecoveryEquivalenceVerificationError("C5 status-map schema differs")
+    if (
+        status_map.get("schema_version") != 1
+        or status_map.get("study_id") != "consciousness_sae_signed_dose_scan_v1"
+        or status_map.get("receipt_kind")
+        != "consciousness_sae_signed_dose_scan_c5_status_map_v1"
+        or status_map.get("status") != "frozen_allowed_surface_pending_c5_commit"
+        or status_map.get("base_commit") != E4_QUALIFICATION_FREEZE_COMMIT
+        or status_map.get("qualified_code_commit") != C4_RECOVERY_FREEZE_COMMIT
+    ):
+        raise RecoveryEquivalenceVerificationError("C5 status-map identity differs")
+    c4_to_e4 = status_map.get("c4_to_e4")
+    e4_to_c5 = status_map.get("e4_to_c5")
+    c5_to_e5 = status_map.get("c5_to_e5")
+    e5_to_f5 = status_map.get("e5_to_f5")
+    if not all(
+        isinstance(value, Mapping) for value in (c4_to_e4, e4_to_c5, c5_to_e5, e5_to_f5)
+    ):
+        raise RecoveryEquivalenceVerificationError("C5 status-map edge is absent")
+    if (
+        _added_directory_mapping(c4_to_e4, "C4-to-E4") != C4_TO_E4_NAME_STATUS
+        or c4_to_e4.get("required_direct_parent") != C4_RECOVERY_FREEZE_COMMIT
+        or c4_to_e4.get("required_evidence_commit") != E4_QUALIFICATION_FREEZE_COMMIT
+        or c4_to_e4.get("other_paths_forbidden") is not True
+        or _surface_mapping(e4_to_c5, "E4-to-C5") != E4_TO_C5_NAME_STATUS
+        or e4_to_c5.get("required_direct_parent") != E4_QUALIFICATION_FREEZE_COMMIT
+        or e4_to_c5.get("parent_count") != 1
+        or e4_to_c5.get("other_paths_forbidden") is not True
+        or _added_directory_mapping(c5_to_e5, "C5-to-E5") != C5_TO_E5_NAME_STATUS
+        or c5_to_e5.get("other_paths_forbidden") is not True
+        or _added_directory_mapping(e5_to_f5, "E5-to-F5") != E5_TO_F5_NAME_STATUS
+        or e5_to_f5.get("other_paths_forbidden") is not True
+        or e5_to_f5.get("new_paid_review_call_forbidden") is not True
+        or e5_to_f5.get("existing_paid_artifacts_are_immutable") is not True
+        or e5_to_f5.get("review_input_anchor_commit") != E3_QUALIFICATION_FREEZE_COMMIT
+    ):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 status-map edge contract differs"
+        )
+    authority = ledger.get("successor_authority_binding")
+    authority_hash = ledger.get("successor_authority_binding_sha256")
+    if (
+        not isinstance(authority, Mapping)
+        or authority_hash != EXPECTED_C5_AUTHORITY_BINDING_SHA256
+        or authority_hash != canonical_sha256(authority)
+    ):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 successor authority binding differs"
+        )
+    required_authority = {
+        "study_id": "consciousness_sae_signed_dose_scan_v1",
+        "human_authorization_statement": "C5 approved",
+        "c4_code_commit": C4_RECOVERY_FREEZE_COMMIT,
+        "c4_evidence_commit": E4_QUALIFICATION_FREEZE_COMMIT,
+        "new_qualification_attempt_count": 0,
+        "qualification_evidence_commit_reused": E4_QUALIFICATION_FREEZE_COMMIT,
+        "qualification_pod_id_reused": C4_QUALIFICATION_POD_ID,
+        "recovery_protocol_version": (
+            "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v5"
+        ),
+        "recovery_namespace": "audit_recovery_v5",
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "review_input_sha256": AUTHENTIC_REVIEW_INPUT_SHA256,
+        "review_artifact_inventory_sha256": (EXPECTED_REVIEW_BUNDLE_INVENTORY_SHA256),
+        "new_paid_review_call_count": 0,
+        "no_automatic_retry": True,
+        "no_model_forward_before_recovery": True,
+        "raw_or_outcome_access_before_recovery": False,
+        "status_map_file_sha256": status_file_hash,
+        "status_map_receipt_sha256": status_receipt,
+    }
+    if any(authority.get(key) != value for key, value in required_authority.items()):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 successor authority semantics differ"
+        )
+    if authority.get("rejected_recovery_pod_ids") != [
+        "wl8obvtuq0ax8t",
+        "69d9kxugxuf6up",
+        "g2azyjkpm17f1s",
+        "6am4twond0cd8v",
+        C4_QUALIFICATION_POD_ID,
+    ]:
+        raise RecoveryEquivalenceVerificationError("C5 rejected-pod lineage differs")
+    reuse = ledger.get("target_qualification_reuse_binding")
+    required_reuse = {
+        "qualification_pod_id": C4_QUALIFICATION_POD_ID,
+        "global_qualification_ordinal": 4,
+        "new_qualification_attempt_count": 0,
+        "qualification_inventory_sha256": C4_QUALIFICATION_INVENTORY_SHA256,
+        "target_file_sha256": C4_TARGET_QUALIFICATION_FILE_SHA256,
+        "target_receipt_sha256": C4_TARGET_QUALIFICATION_RECEIPT_SHA256,
+        "verification_file_sha256": C4_TARGET_VERIFICATION_FILE_SHA256,
+        "verification_receipt_sha256": C4_TARGET_VERIFICATION_RECEIPT_SHA256,
+    }
+    if (
+        not isinstance(reuse, Mapping)
+        or any(reuse.get(key) != value for key, value in required_reuse.items())
+        or ledger.get("schema_version") != 1
+        or ledger.get("study_id") != "consciousness_sae_signed_dose_scan_v1"
+        or ledger.get("receipt_kind")
+        != "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v5"
+        or ledger.get("status") != "frozen_c5_cycle_authorized_pending_pushed_c5"
+        or ledger.get("qualification_protocol_version_reused")
+        != (
+            "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
+        )
+        or ledger.get("recovery_protocol_version")
+        != required_authority["recovery_protocol_version"]
+    ):
+        raise RecoveryEquivalenceVerificationError("C5 cycle ledger differs")
+    expected = {
+        "ledger_path": C5_LEDGER_PATH,
+        "ledger_file_sha256": ledger_file_hash,
+        "ledger_receipt_sha256": ledger_receipt,
+        "status_map_path": C5_STATUS_MAP_PATH,
+        "status_map_file_sha256": status_file_hash,
+        "status_map_receipt_sha256": status_receipt,
+        "successor_authority_binding_sha256": authority_hash,
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "qualification_evidence_commit_reused": E4_QUALIFICATION_FREEZE_COMMIT,
+        "qualification_pod_id_reused": C4_QUALIFICATION_POD_ID,
+        "global_qualification_ordinal": 4,
+        "new_qualification_attempt_count": 0,
+        "new_paid_review_call_count": 0,
+        "outcome_input_paths": [],
+        "model_forward_count": 0,
+    }
+    if packet.get("c5_authority_documents") != expected:
+        raise RecoveryEquivalenceVerificationError(
+            "C5 authority-document binding differs"
+        )
+
+
 def verify_v4_final_freeze_lineage(
     *,
     code_freeze_commit: str,
@@ -981,6 +1407,233 @@ def verify_v4_final_freeze_lineage(
             _status_rows(E4_TO_F4_NAME_STATUS)
         ),
     }
+    return {**core, "receipt_sha256": canonical_sha256(core)}
+
+
+def _verify_v5_preflight_evidence(
+    *,
+    code_freeze_commit: str,
+    evidence_freeze_commit: str,
+    final_freeze_commit: str,
+    reader: BlobReader,
+) -> dict[str, Any]:
+    evidence_raw = reader(evidence_freeze_commit, C5_PREFLIGHT_PATH)
+    final_raw = reader(final_freeze_commit, C5_PREFLIGHT_PATH)
+    if evidence_raw != final_raw:
+        raise RecoveryEquivalenceVerificationError(
+            "C5 preflight receipt changed before F5"
+        )
+    receipt = _json_object(evidence_raw, "C5 authentic-bundle preflight")
+    if evidence_raw != canonical_json_bytes(receipt) + b"\n":
+        raise RecoveryEquivalenceVerificationError(
+            "C5 preflight receipt is noncanonical"
+        )
+    receipt_hash = _self_hash(
+        receipt, "receipt_sha256", "C5 authentic-bundle preflight"
+    )
+    expected_fields = {
+        "schema_version",
+        "status",
+        "study_id",
+        "protocol_version",
+        "code_freeze_commit",
+        "reviewed_packet_git_head_commit",
+        "validator_source_file_sha256",
+        "review_emphasis_sha256",
+        "review_emphasis_characters",
+        "review_input_sha256",
+        "review_input_characters",
+        "new_paid_review_call_count",
+        "raw_data_inputs",
+        "outcome_inputs",
+        "provider_verdict",
+        "review_cost_usd",
+        "review_response_id",
+        "artifacts",
+        "artifact_inventory_sha256",
+        "adjudication",
+        "receipt_sha256",
+    }
+    expected_bundle = [dict(row) for row in EXPECTED_REVIEW_BUNDLE_FILES]
+    expected_adjudication = {
+        "path": f"{C4_REVIEW_ROOT}/RECOVERY_PRO_REVIEW_ADJUDICATION.json",
+        "file_sha256": "a27c6d6ca5d0f77c45600c1761416624d9d1aa165e4dc48282e980a480bda6e2",
+        "receipt_sha256": AUTHENTIC_REVIEW_ADJUDICATION_RECEIPT_SHA256,
+        "status": "adjudicated_ready_to_execute",
+        "review_model": "gpt-5.6-sol",
+        "review_mode": "pro",
+        "review_response_id": AUTHENTIC_REVIEW_RESPONSE_ID,
+        "provider_verdict": "READY TO FREEZE",
+        "review_cost_usd": 0.485525,
+        "review_finding_ids": [],
+        "review_packet_outcome_inputs": [],
+        "review_packet_raw_data_included": False,
+        "review_response_file_sha256": (
+            "bb5db44ba5e7c45292eacbad35fb61763e782a191da286421ec0c72d9de77c63"
+        ),
+        "review_review_file_sha256": (
+            "e64bb7f6df244a6bbe079c60dd01d5972fa71db5931960562fa1852856e82acc"
+        ),
+        "review_manifest_file_sha256": (
+            "b66f658f7d450238f9f5d9c51285fc94811dff52c341670be11f16b28a829d0a"
+        ),
+        "review_brief_file_sha256": (
+            "a13d536223e23cbb0dfe50ed9883255d27704464331291f8755ae2585f28665d"
+        ),
+        "review_context_file_sha256": (
+            "074759a85babcd7e47b78680269da8c0bc81eaf078757ae500a2d62c4bed0306"
+        ),
+        "review_emphasis_sha256": AUTHENTIC_REVIEW_EMPHASIS_SHA256,
+        "review_emphasis_characters": AUTHENTIC_REVIEW_EMPHASIS_CHARACTERS,
+        "review_input_sha256": AUTHENTIC_REVIEW_INPUT_SHA256,
+        "review_input_characters": AUTHENTIC_REVIEW_INPUT_CHARACTERS,
+        "original_plan_adjudication_receipt_sha256": (
+            ORIGINAL_PLAN_ADJUDICATION_RECEIPT_SHA256
+        ),
+    }
+    if (
+        set(receipt) != expected_fields
+        or receipt.get("schema_version") != 1
+        or receipt.get("status") != "pass_authentic_review_bundle_content_validated"
+        or receipt.get("study_id") != "consciousness_sae_signed_dose_scan_v1"
+        or receipt.get("protocol_version")
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v5"
+        or receipt.get("code_freeze_commit") != code_freeze_commit
+        or receipt.get("reviewed_packet_git_head_commit")
+        != E3_QUALIFICATION_FREEZE_COMMIT
+        or receipt.get("validator_source_file_sha256")
+        != _sha256(reader(code_freeze_commit, RECOVERY_RUNTIME_PATH))
+        or receipt.get("review_emphasis_sha256") != AUTHENTIC_REVIEW_EMPHASIS_SHA256
+        or receipt.get("review_emphasis_characters")
+        != AUTHENTIC_REVIEW_EMPHASIS_CHARACTERS
+        or receipt.get("review_input_sha256") != AUTHENTIC_REVIEW_INPUT_SHA256
+        or receipt.get("review_input_characters") != AUTHENTIC_REVIEW_INPUT_CHARACTERS
+        or receipt.get("new_paid_review_call_count") != 0
+        or receipt.get("raw_data_inputs") != []
+        or receipt.get("outcome_inputs") != []
+        or receipt.get("provider_verdict") != "READY TO FREEZE"
+        or receipt.get("review_cost_usd") != 0.485525
+        or receipt.get("review_response_id") != AUTHENTIC_REVIEW_RESPONSE_ID
+        or receipt.get("artifacts") != expected_bundle
+        or receipt.get("artifact_inventory_sha256")
+        != EXPECTED_REVIEW_BUNDLE_INVENTORY_SHA256
+        or canonical_sha256(expected_bundle) != EXPECTED_REVIEW_BUNDLE_INVENTORY_SHA256
+        or receipt.get("adjudication") != expected_adjudication
+    ):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 authentic-bundle preflight differs"
+        )
+    for row in expected_bundle:
+        raw = reader(final_freeze_commit, str(row["path"]))
+        if len(raw) != row["bytes"] or _sha256(raw) != row["sha256"]:
+            raise RecoveryEquivalenceVerificationError(
+                "F5 authentic review bundle differs"
+            )
+    return {
+        "path": C5_PREFLIGHT_PATH,
+        "file_sha256": _sha256(evidence_raw),
+        "receipt_sha256": receipt_hash,
+        "validator_code_commit": code_freeze_commit,
+        "review_bundle_inventory_sha256": EXPECTED_REVIEW_BUNDLE_INVENTORY_SHA256,
+        "adjudication_receipt_sha256": (AUTHENTIC_REVIEW_ADJUDICATION_RECEIPT_SHA256),
+        "review_response_id": AUTHENTIC_REVIEW_RESPONSE_ID,
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "qualification_evidence_commit_reused": E4_QUALIFICATION_FREEZE_COMMIT,
+        "new_qualification_attempt_count": 0,
+        "new_paid_review_call_count": 0,
+        "outcome_input_paths": [],
+        "model_forward_count": 0,
+    }
+
+
+def verify_v5_final_freeze_lineage(
+    *,
+    code_freeze_commit: str,
+    evidence_freeze_commit: str,
+    final_freeze_commit: str,
+    repo_root: Path = REPO_ROOT,
+    blob_reader: BlobReader | None = None,
+) -> dict[str, Any]:
+    """Independently verify fixed C4/E4 and dynamic C5/E5/F5."""
+
+    commits = (
+        code_freeze_commit,
+        evidence_freeze_commit,
+        final_freeze_commit,
+    )
+    if any(HEX40.fullmatch(commit) is None for commit in commits):
+        raise RecoveryEquivalenceVerificationError(
+            "C5 final freeze commit is malformed"
+        )
+    for commit in (
+        E3_QUALIFICATION_FREEZE_COMMIT,
+        C4_RECOVERY_FREEZE_COMMIT,
+        E4_QUALIFICATION_FREEZE_COMMIT,
+        *commits,
+    ):
+        resolved = _git(repo_root, "rev-parse", f"{commit}^{{commit}}").decode().strip()
+        if resolved != commit:
+            raise RecoveryEquivalenceVerificationError("C5 final freeze commit differs")
+    edges = (
+        (
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            C4_RECOVERY_FREEZE_COMMIT,
+            E3_TO_C4_NAME_STATUS,
+            "E3-to-C4",
+        ),
+        (
+            C4_RECOVERY_FREEZE_COMMIT,
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            C4_TO_E4_NAME_STATUS,
+            "C4-to-E4",
+        ),
+        (
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+            E4_TO_C5_NAME_STATUS,
+            "E4-to-C5",
+        ),
+        (code_freeze_commit, evidence_freeze_commit, C5_TO_E5_NAME_STATUS, "C5-to-E5"),
+        (evidence_freeze_commit, final_freeze_commit, E5_TO_F5_NAME_STATUS, "E5-to-F5"),
+    )
+    for parent, child, expected_status, label in edges:
+        lineage = (
+            _git(repo_root, "rev-list", "--parents", "-n", "1", child).decode().split()
+        )
+        if lineage != [child, parent]:
+            raise RecoveryEquivalenceVerificationError(f"{label} direct parent differs")
+        if _observed_name_status(repo_root, parent, child) != expected_status:
+            raise RecoveryEquivalenceVerificationError(
+                f"{label} name-status map differs"
+            )
+    reader = blob_reader or (lambda commit, path: git_blob(repo_root, commit, path))
+    preflight = _verify_v5_preflight_evidence(
+        code_freeze_commit=code_freeze_commit,
+        evidence_freeze_commit=evidence_freeze_commit,
+        final_freeze_commit=final_freeze_commit,
+        reader=reader,
+    )
+    maps = {
+        "e3_to_c4": E3_TO_C4_NAME_STATUS,
+        "c4_to_e4": C4_TO_E4_NAME_STATUS,
+        "e4_to_c5": E4_TO_C5_NAME_STATUS,
+        "c5_to_e5": C5_TO_E5_NAME_STATUS,
+        "e5_to_f5": E5_TO_F5_NAME_STATUS,
+    }
+    core: dict[str, Any] = {
+        "status": "pass_exact_C4_E4_C5_E5_F5_final_freeze_lineage",
+        "direct_parent_chain": [
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            C4_RECOVERY_FREEZE_COMMIT,
+            E4_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+            evidence_freeze_commit,
+            final_freeze_commit,
+        ],
+        "authentic_bundle_preflight": preflight,
+    }
+    for label, mapping in maps.items():
+        core[f"{label}_name_status_sha256"] = canonical_sha256(_status_rows(mapping))
     return {**core, "receipt_sha256": canonical_sha256(core)}
 
 
@@ -1257,18 +1910,24 @@ def verify_packet(
     equivalence_protocol_version = packet.get("recovery_equivalence_protocol_version")
     if equivalence_protocol_version not in {
         RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3,
+        RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V4,
         RECOVERY_EQUIVALENCE_PROTOCOL_VERSION,
     }:
         raise RecoveryEquivalenceVerificationError(
             "packet recovery-equivalence version differs"
         )
-    is_v4 = equivalence_protocol_version == RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
+    is_v5 = equivalence_protocol_version == RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
+    is_v4 = equivalence_protocol_version == RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V4
     identity = {
         "schema_version": 1,
         "packet_type": (
-            "signed_dose_outcome_blind_audit_recovery_equivalence_v4"
-            if is_v4
-            else "signed_dose_outcome_blind_audit_recovery_equivalence_v3"
+            "signed_dose_outcome_blind_audit_recovery_equivalence_v5"
+            if is_v5
+            else (
+                "signed_dose_outcome_blind_audit_recovery_equivalence_v4"
+                if is_v4
+                else "signed_dose_outcome_blind_audit_recovery_equivalence_v3"
+            )
         ),
         "status": "pass_source_design_and_compatibility_bound_no_outcomes_loaded",
         "study_id": "consciousness_sae_signed_dose_scan_v1",
@@ -1295,21 +1954,29 @@ def verify_packet(
         "compatibility_proof",
         "packet_sha256",
     }
+    if is_v5:
+        expected_keys.add("c5_authority_documents")
+    elif is_v4:
+        expected_keys.add("c4_authority_documents")
     if set(packet) != expected_keys:
-        expected_v4_keys = (
-            {*expected_keys, "c4_authority_documents"} if is_v4 else expected_keys
-        )
-        if set(packet) != expected_v4_keys:
-            raise RecoveryEquivalenceVerificationError("packet schema differs")
+        raise RecoveryEquivalenceVerificationError("packet schema differs")
     _verify_original(packet, plan_audit_path, reader)
     commit = _verify_closure(
         packet,
         repo_root=repo_root,
         reader=reader,
         enforce_git=enforce_git,
-        closure_paths=(RECOVERY_CLOSURE_PATHS if is_v4 else RECOVERY_CLOSURE_PATHS_V3),
+        closure_paths=(
+            RECOVERY_CLOSURE_PATHS
+            if is_v5
+            else (RECOVERY_CLOSURE_PATHS_V4 if is_v4 else RECOVERY_CLOSURE_PATHS_V3)
+        ),
     )
-    lineage_verifier = _verify_freeze_lineage if is_v4 else _verify_freeze_lineage_v3
+    lineage_verifier = (
+        _verify_freeze_lineage_v5
+        if is_v5
+        else (_verify_freeze_lineage if is_v4 else _verify_freeze_lineage_v3)
+    )
     lineage_verifier(
         packet,
         code_freeze_commit=commit,
@@ -1318,6 +1985,8 @@ def verify_packet(
     )
     if is_v4:
         _verify_c4_authority_documents(packet, commit, reader)
+    elif is_v5:
+        _verify_c5_authority_documents(packet, commit, reader)
     _verify_runtime(packet, commit, reader)
     _verify_precedent(packet, reader, repo_root)
     if packet.get("compatibility_proof") != _expected_compatibility():

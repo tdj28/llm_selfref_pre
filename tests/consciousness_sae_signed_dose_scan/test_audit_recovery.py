@@ -53,9 +53,7 @@ def _load(
         protocol,
         "sha256_file",
         lambda candidate: (
-            protocol.J_LENS_SPEC["sha256"]
-            if Path(candidate) == path
-            else "0" * 64
+            protocol.J_LENS_SPEC["sha256"] if Path(candidate) == path else "0" * 64
         ),
     )
     monkeypatch.setattr(
@@ -117,7 +115,7 @@ def test_superset_loader_rejects_a_missing_study_layer(
     ],
 )
 def test_normalizer_rejects_duplicate_or_noncanonical_keys(
-    maps: dict[Any, Any]
+    maps: dict[Any, Any],
 ) -> None:
     with pytest.raises(audit_recovery.AuditRecoveryError, match="J-lens layer key"):
         audit_recovery.normalize_j_map_keys(maps)
@@ -226,8 +224,10 @@ def test_zero_forward_guard_blocks_module_calls_and_model_loads() -> None:
         with pytest.raises(
             audit_recovery.AuditRecoveryError, match="new torch.nn.Module subclasses"
         ):
+
             class ForbiddenFutureModule(FakeChild):
                 pass
+
         with pytest.raises(audit_recovery.AuditRecoveryError, match="state loading"):
             existing_module.load_state_dict({})
         with pytest.raises(audit_recovery.AuditRecoveryError, match="forward call"):
@@ -318,7 +318,9 @@ def test_full_raw_tree_ledger_detects_post_hash_mutation(tmp_path: Path) -> None
         audit_recovery.raw_tree_ledger(tmp_path)
 
 
-def _execution_paths(root: Path, *, attempt_root: Path, raw_root: Path) -> dict[str, str]:
+def _execution_paths(
+    root: Path, *, attempt_root: Path, raw_root: Path
+) -> dict[str, str]:
     plan = root / "plan"
     model = root / "model"
     plan.mkdir(exist_ok=True)
@@ -375,7 +377,10 @@ def test_claim_rejects_attempt_root_parent_symlink_before_marker(
 
 def test_recovery_source_never_imports_predecessor_recovery_mutable_state() -> None:
     source = Path(audit_recovery.__file__).read_text(encoding="utf-8")
-    assert "from experiments.consciousness_sae_target_blind_calibration import audit_recovery" not in source
+    assert (
+        "from experiments.consciousness_sae_target_blind_calibration import audit_recovery"
+        not in source
+    )
     assert "predecessor_recovery." not in source
 
 
@@ -386,6 +391,8 @@ def test_authorization_schema_names_explicit_cef_freezes() -> None:
         "final_freeze_commit",
         "source_test_files",
         "qualification_files",
+        "authentic_bundle_preflight_files",
+        "authentic_bundle_preflight_validation",
         "cumulative_review_files",
         "recovery_adjudication",
         "fresh_pod",
@@ -401,30 +408,36 @@ def test_c_closure_matches_both_equivalence_implementations() -> None:
     assert verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS == expected
 
 
-def test_c4_freeze_surface_matches_the_frozen_status_map() -> None:
+def test_c5_freeze_surface_matches_the_frozen_status_map() -> None:
     root = Path(audit_recovery.__file__).resolve().parents[2]
     status_map = json.loads(
         (
-            root
-            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json"
+            root / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C5_STATUS_MAP.json"
         ).read_text(encoding="utf-8")
     )
-    frozen = status_map["e3_to_c4"]
+    frozen = status_map["e4_to_c5"]
     expected = {
         **{path: "A" for path in frozen["added"]},
         **{path: "M" for path in frozen["modified"]},
     }
     assert frozen["deleted"] == []
-    assert audit_recovery.E3_TO_C4_NAME_STATUS == expected
-    assert audit_recovery.C3_RECOVERY_FREEZE_COMMIT == status_map["c3_code_commit"]
-    assert audit_recovery.E3_QUALIFICATION_FREEZE_COMMIT == status_map["base_commit"]
-    assert audit_recovery.RECOVERY_PROTOCOL_VERSION.endswith(
-        ".audit_only_recovery_v4"
+    assert audit_recovery.E4_TO_C5_NAME_STATUS == expected
+    assert (
+        audit_recovery.C4_RECOVERY_FREEZE_COMMIT
+        == (status_map["qualified_code_commit"])
     )
+    assert audit_recovery.E4_QUALIFICATION_FREEZE_COMMIT == status_map["base_commit"]
+    assert audit_recovery.RECOVERY_PROTOCOL_VERSION.endswith(".audit_only_recovery_v5")
     assert audit_recovery.QUALIFICATION_DIRECTORY.endswith(
         "/audit_recovery_host_qualification_v4"
     )
     assert len(expected) == len(set(expected))
+    assert audit_recovery.C5_TO_E5_NAME_STATUS == {
+        path: "A" for path in audit_recovery.MANDATORY_E5_PREFLIGHT_PATHS
+    }
+    assert audit_recovery.E5_TO_F5_NAME_STATUS == {
+        path: "A" for path in audit_recovery.MANDATORY_F_ADDITION_PATHS
+    }
     assert audit_recovery.ORIGINAL_TO_C1_NAME_STATUS == (
         recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
     )
@@ -566,6 +579,177 @@ Preserve the narrow claim boundary.
     assert audit_recovery._adjudication_decision_ids([], [], []) == []
 
 
+def _copy_authentic_review_bundle(tmp_path: Path) -> Path:
+    source_root = Path(audit_recovery.__file__).resolve().parents[2]
+    review_target = tmp_path / audit_recovery.RECOVERY_REVIEW_ROOT
+    review_target.parent.mkdir(parents=True)
+    shutil.copytree(source_root / audit_recovery.RECOVERY_REVIEW_ROOT, review_target)
+    original_target = tmp_path / audit_recovery.ORIGINAL_PLAN_ADJUDICATION_PATH
+    original_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(
+        source_root / audit_recovery.ORIGINAL_PLAN_ADJUDICATION_PATH,
+        original_target,
+    )
+    return review_target
+
+
+def test_actual_frozen_authentic_review_bundle_passes_physical_preflight() -> None:
+    code_freeze_commit = "c" * 40
+    result = audit_recovery.validate_physical_authentic_review_bundle(
+        code_freeze_commit=code_freeze_commit
+    )
+    assert {
+        "schema_version": result["schema_version"],
+        "status": result["status"],
+        "study_id": result["study_id"],
+        "protocol_version": result["protocol_version"],
+        "code_freeze_commit": result["code_freeze_commit"],
+        "new_paid_review_call_count": result["new_paid_review_call_count"],
+        "raw_data_inputs": result["raw_data_inputs"],
+        "outcome_inputs": result["outcome_inputs"],
+    } == {
+        "schema_version": 1,
+        "status": "pass_authentic_review_bundle_content_validated",
+        "study_id": protocol.STUDY_ID,
+        "protocol_version": audit_recovery.RECOVERY_PROTOCOL_VERSION,
+        "code_freeze_commit": code_freeze_commit,
+        "new_paid_review_call_count": 0,
+        "raw_data_inputs": [],
+        "outcome_inputs": [],
+    }
+    assert result["reviewed_packet_git_head_commit"] == (
+        audit_recovery.E3_QUALIFICATION_FREEZE_COMMIT
+    )
+    assert result["validator_source_file_sha256"] == protocol.sha256_file(
+        Path(audit_recovery.__file__).resolve()
+    )
+    assert result["review_emphasis_sha256"] == (
+        audit_recovery.EXPECTED_RECOVERY_REVIEW_EMPHASIS_SHA256
+    )
+    assert result["review_emphasis_characters"] == 228
+    assert result["review_input_sha256"] == (
+        audit_recovery.EXPECTED_RECOVERY_REVIEW_INPUT_SHA256
+    )
+    assert result["review_input_characters"] == 14_640
+    assert result["provider_verdict"] == "READY TO FREEZE"
+    assert result["review_cost_usd"] == pytest.approx(0.485525)
+    assert result["review_response_id"].startswith("resp_")
+    assert len(result["artifacts"]) == len(
+        audit_recovery.MANDATORY_F_ADDITION_FILENAMES
+    )
+    core = dict(result)
+    supplied = core.pop("receipt_sha256")
+    assert supplied == protocol.canonical_sha256(core)
+
+
+@pytest.mark.parametrize(
+    ("tamper", "message"),
+    (
+        ("duplicate", "duplicated"),
+        ("case_variant_duplicate", "duplicated"),
+        ("misplaced", "placement"),
+        ("empty", "content"),
+        ("heading_injection", "content"),
+    ),
+)
+def test_actual_authentic_review_bundle_rejects_emphasis_tampering(
+    tmp_path: Path, tamper: str, message: str
+) -> None:
+    review_root = _copy_authentic_review_bundle(tmp_path)
+    payload_path = review_root / "RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json"
+    payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    review_input = payload["input"]
+    heading = "## Responsible researcher's emphasis"
+    artifact_heading = (
+        "## Artifact 1: compact research-director plan brief — "
+        "RECOVERY_PRO_REVIEW_BRIEF.md"
+    )
+    manifest = json.loads(
+        (review_root / "RECOVERY_PRO_REVIEW_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    emphasis = audit_recovery._extract_review_emphasis(
+        review_input, manifest["artifacts"], required=True
+    )
+    assert emphasis is not None
+    block = f"{heading}\n\n{emphasis}\n\n"
+    if tamper == "duplicate":
+        injected = f"{heading}\n\nInjected duplicate.\n\n{artifact_heading}"
+        review_input = review_input.replace(artifact_heading, injected, 1)
+    elif tamper == "case_variant_duplicate":
+        injected = f"{heading.upper()}\n\nInjected duplicate.\n\n{artifact_heading}"
+        review_input = review_input.replace(artifact_heading, injected, 1)
+    elif tamper == "misplaced":
+        review_input = review_input.replace(block, "", 1).replace(
+            artifact_heading,
+            f"{artifact_heading}\n\n{block.rstrip()}",
+            1,
+        )
+    elif tamper == "empty":
+        review_input = review_input.replace(emphasis, "", 1)
+    else:
+        review_input = review_input.replace(
+            emphasis, f"{emphasis}\n## Injected heading", 1
+        )
+    payload["input"] = review_input
+    payload_path.write_text(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(audit_recovery.AuditRecoveryError, match=message):
+        audit_recovery.validate_physical_authentic_review_bundle(
+            code_freeze_commit="c" * 40,
+            repo_root=tmp_path,
+        )
+
+
+def test_review_emphasis_is_optional_only_when_explicitly_allowed() -> None:
+    source_root = Path(audit_recovery.__file__).resolve().parents[2]
+    review_root = source_root / audit_recovery.RECOVERY_REVIEW_ROOT
+    manifest = json.loads(
+        (review_root / "RECOVERY_PRO_REVIEW_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    without = audit_recovery._reconstruct_review_input(
+        manifest["artifacts"],
+        brief_text=(review_root / "RECOVERY_PRO_REVIEW_BRIEF.md").read_text(
+            encoding="utf-8"
+        ),
+        context_text=(review_root / "RECOVERY_PRO_REVIEW_CONTEXT.md").read_text(
+            encoding="utf-8"
+        ),
+    )
+    assert (
+        audit_recovery._extract_review_emphasis(
+            without, manifest["artifacts"], required=False
+        )
+        is None
+    )
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="required"):
+        audit_recovery._extract_review_emphasis(
+            without, manifest["artifacts"], required=True
+        )
+
+
+def test_physical_authentic_review_bundle_rejects_malformed_code_freeze() -> None:
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="code freeze"):
+        audit_recovery.validate_physical_authentic_review_bundle(
+            code_freeze_commit="not-a-commit"
+        )
+
+
+def test_physical_authentic_review_bundle_can_bind_current_code_freeze(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    expected = "d" * 40
+
+    def fake_git(_repo: Path, *args: str, **_kwargs: Any) -> Any:
+        assert args == ("rev-parse", "HEAD")
+        return SimpleNamespace(stdout=f"{expected}\n")
+
+    monkeypatch.setattr(audit_recovery, "_git", fake_git)
+    result = audit_recovery.validate_physical_authentic_review_bundle()
+    assert result["code_freeze_commit"] == expected
+
+
 @pytest.mark.parametrize(
     "review",
     (
@@ -617,9 +801,9 @@ I99 is historical.
             "blocks_execution": False,
         }
     ]
-    assert audit_recovery._adjudication_decision_ids(
-        decisions, ["I03"], ["I03"]
-    ) == ["I03"]
+    assert audit_recovery._adjudication_decision_ids(decisions, ["I03"], ["I03"]) == [
+        "I03"
+    ]
     with pytest.raises(audit_recovery.AuditRecoveryError, match="coverage"):
         audit_recovery._adjudication_decision_ids(decisions, ["I04"], ["I03"])
 
@@ -736,8 +920,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
         incident_target,
     )
     ledger_target = (
-        root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json"
+        root / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json"
     )
     shutil.copy2(
         source_root
@@ -754,9 +937,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             incident_target, ledger_target
         )
     )
-    relative_parent = (
-        audit_recovery.QUALIFICATION_DIRECTORY
-    )
+    relative_parent = audit_recovery.QUALIFICATION_DIRECTORY
     parent = root / relative_parent
     parent.mkdir(parents=True)
     closure_hash = "1" * 64
@@ -829,9 +1010,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "recovery_cycle_ledger_v4",
         )
     ]
-    declared_inputs = [
-        {"role": row["role"], "path": row["path"]} for row in inputs
-    ]
+    declared_inputs = [{"role": row["role"], "path": row["path"]} for row in inputs]
     marker = _hashed(
         {
             "status": "attempt_started_irrevocably",
@@ -841,17 +1020,13 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
-            "successor_authority_binding_sha256": successor_authority[
-                "binding_sha256"
-            ],
+            "successor_authority_binding_sha256": successor_authority["binding_sha256"],
             "started_at_unix": started,
             "qualification_deadline_at_unix": deadline,
             "hourly_price_usd": hourly_price,
             "max_spend_usd": audit_recovery.QUALIFICATION_MAX_SPEND_USD,
             "declared_input_paths": declared_inputs,
-            "declared_input_paths_sha256": protocol.canonical_sha256(
-                declared_inputs
-            ),
+            "declared_input_paths_sha256": protocol.canonical_sha256(declared_inputs),
             "authorized_raw_input_paths": [],
             "model_forward_count": 0,
             "target_prompt_render_count": 0,
@@ -927,9 +1102,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
                 "completed_at_unix": completed,
             },
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
-            "successor_authority_binding_sha256": successor_authority[
-                "binding_sha256"
-            ],
+            "successor_authority_binding_sha256": successor_authority["binding_sha256"],
             "successor_authority": successor_authority,
             "equivalence_verification": equivalence,
             "code_freeze_commit": commit,
@@ -992,9 +1165,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "successor_qualification_attempt": 1,
             "qualification_receipt_sha256": target["receipt_sha256"],
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],
-            "successor_authority_binding_sha256": successor_authority[
-                "binding_sha256"
-            ],
+            "successor_authority_binding_sha256": successor_authority["binding_sha256"],
             "successor_authority": successor_authority,
             "equivalence_packet_sha256": packet["packet_sha256"],
             "code_freeze_commit": commit,
@@ -1045,9 +1216,7 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "status": "deleted_exact_owned_pod_unrelated_inventory_unchanged",
             "receipt_kind": "runpod_successor_termination_audit_v1",
             "pod_id": pod["pod_id"],
-            "successor_ownership_receipt_sha256": pod[
-                "ownership_receipt_sha256"
-            ],
+            "successor_ownership_receipt_sha256": pod["ownership_receipt_sha256"],
             "frozen_termination_receipt_sha256": frozen["receipt_sha256"],
             "precreate_inventory_sha256": empty_inventory,
             "postdelete_inventory_sha256": empty_inventory,
@@ -1116,9 +1285,7 @@ def test_qualification_rejects_self_consistent_false_full_j_cast(
     cast["receipt_sha256"] = protocol.canonical_sha256(cast_core)
     checkpoint_core = dict(value["j_checkpoint"])
     checkpoint_core.pop("receipt_sha256")
-    value["j_checkpoint"]["receipt_sha256"] = protocol.canonical_sha256(
-        checkpoint_core
-    )
+    value["j_checkpoint"]["receipt_sha256"] = protocol.canonical_sha256(checkpoint_core)
     target_core = dict(value)
     target_core.pop("receipt_sha256")
     value["receipt_sha256"] = protocol.canonical_sha256(target_core)
