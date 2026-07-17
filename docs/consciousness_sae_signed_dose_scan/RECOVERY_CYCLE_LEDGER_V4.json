@@ -1,0 +1,145 @@
+{
+  "authorization_state": {
+    "audit_only_recovery_authorized_conditionally_after_all_gates": true,
+    "authority_minted_at_utc": "2026-07-17T16:00:00Z",
+    "explicit_human_authorization_observed": true,
+    "explicit_human_authorization_statement": "Authorize C4",
+    "qualification_and_review_outcome_blind": true,
+    "user_authorization_scope": "validator-only C4 repair, one fresh replacement qualification capped at $3, reuse the completed review without a second Pro call, then one zero-forward recovery capped at $6; no retries"
+  },
+  "cardinality_limits": {
+    "audit_only_recovery_attempts": 1,
+    "automatic_retries": 0,
+    "new_paid_top_level_review_calls": 0,
+    "provider_capacity_retries": 0,
+    "replacement_target_qualification_attempts": 1
+  },
+  "cycle_id": "signed-dose-audit-only-recovery-v4-20260717",
+  "immutable_scientific_contract": {
+    "compatibility_change": "j_checkpoint_inventory_predicate_and_required_map_filter",
+    "compatibility_change_count": 1,
+    "new_model_forwards": 0,
+    "new_scientific_observations_before_recovery": 0,
+    "original_scientific_freeze_commit": "a084caafc2ec27860044d80d3b33912f656fd08a",
+    "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+    "raw_bytes_changed": false,
+    "scientific_design_changed": false,
+    "validator_only_change": true
+  },
+  "lineage_contract": {
+    "c3_code_commit": "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21",
+    "c3_evidence_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "c3_to_e3": "direct_single_parent_exactly_eight_added_qualification_receipts",
+    "e3_to_c4": "direct_single_parent_with_exact_allowed_status_map",
+    "c4_to_e4": "direct_single_parent_exactly_eight_added_v4_qualification_receipts",
+    "e4_to_f4": "direct_single_parent_exactly_eight_added_existing_v3_review_directory_artifacts",
+    "global_qualification_ordinal": 4,
+    "predecessor_global_qualification_ordinal": 3,
+    "predecessor_qualification_pod_id": "6am4twond0cd8v",
+    "qualification_pod_must_be_fresh": true,
+    "recovery_pod_must_differ_from_qualification_pod": true,
+    "rejected_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s",
+      "6am4twond0cd8v"
+    ],
+    "successor_qualification_attempt_number": 1
+  },
+  "namespace_contract": {
+    "qualification_root": "audit_recovery_host_qualification_v4",
+    "recovery_root": "audit_only_recovery_v4",
+    "review_root": "audit_recovery_pro_review_v3",
+    "review_root_reused_only_for_immutable_paid_artifacts": true,
+    "reuse_of_any_old_qualification_or_recovery_namespace_forbidden": true
+  },
+  "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4",
+  "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+  "receipt_kind": "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v4",
+  "receipt_sha256": "68adc657a12191f612cc81d079cdc247daf8d55d16508b9cfd847f9aa89d1250",
+  "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4",
+  "review_reuse_binding": {
+    "completed_response_cost_usd": "0.485525",
+    "new_paid_review_call_count": 0,
+    "paid_artifact_inventory": [
+      {"bytes": 7573, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW.md", "sha256": "e64bb7f6df244a6bbe079c60dd01d5972fa71db5931960562fa1852856e82acc"},
+      {"bytes": 8798, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_BRIEF.md", "sha256": "a13d536223e23cbb0dfe50ed9883255d27704464331291f8755ae2585f28665d"},
+      {"bytes": 4650, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_CONTEXT.md", "sha256": "074759a85babcd7e47b78680269da8c0bc81eaf078757ae500a2d62c4bed0306"},
+      {"bytes": 4475, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_MANIFEST.json", "sha256": "b66f658f7d450238f9f5d9c51285fc94811dff52c341670be11f16b28a829d0a"},
+      {"bytes": 17848, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_REQUEST.md", "sha256": "a50b715c32f860f69c2267c9dc91f15a18885a4630e8e2cb67cb0358784d4668"},
+      {"bytes": 18994, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json", "sha256": "97495dd8da4983a51c44a1f88e67f6f641f233bb8b34611a50fa22ba1571a34e"},
+      {"bytes": 27520, "path": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_RESPONSE.json", "sha256": "bb5db44ba5e7c45292eacbad35fb61763e782a191da286421ec0c72d9de77c63"}
+    ],
+    "paid_artifact_inventory_sha256": "bcdd58053d7f5d65e1937a01cf532ae597e94426c130aea80de13741c872d172",
+    "paid_review_call_count_inherited": 1,
+    "response_id": "resp_04d4093548a29511016a59e1285d70819aa84d3b6fe44c6ec7",
+    "review_input_anchor_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e"
+  },
+  "schema_version": 1,
+  "status": "frozen_c4_cycle_authorized_pending_pushed_c4",
+  "study_id": "consciousness_sae_signed_dose_scan_v1",
+  "successor_authority_binding": {
+    "authority_minted_at_utc": "2026-07-17T16:00:00Z",
+    "c3_code_commit": "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21",
+    "c3_evidence_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "cycle_id": "signed-dose-audit-only-recovery-v4-20260717",
+    "global_qualification_ordinal": 4,
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "human_authorization_statement": "Authorize C4",
+    "new_paid_review_call_count": 0,
+    "no_automatic_retry": true,
+    "no_model_forward": true,
+    "predecessor_qualification_pod_id": "6am4twond0cd8v",
+    "qualification_and_review_raw_or_outcome_access": false,
+    "qualification_attempt_number": 1,
+    "qualification_namespace": "audit_recovery_host_qualification_v4",
+    "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+    "recovery_namespace": "audit_only_recovery_v4",
+    "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4",
+    "rejected_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s",
+      "6am4twond0cd8v"
+    ],
+    "review_artifact_inventory_sha256": "bcdd58053d7f5d65e1937a01cf532ae597e94426c130aea80de13741c872d172",
+    "review_input_anchor_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "review_namespace": "audit_recovery_pro_review_v3",
+    "status_map_file_sha256": "195e3dcb9ecee2ca4c0b13ea81f7f17ca6aa25f40438b2e0e5e0620f1e344935",
+    "status_map_receipt_sha256": "31eaffabf9863e086221a6452db228f791effe0a90ee3a3e630ab6b3d2ae58d7",
+    "study_id": "consciousness_sae_signed_dose_scan_v1"
+  },
+  "successor_authority_binding_sha256": "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8",
+  "terminal_action": {
+    "all_gates_green": "reuse_the_frozen_completed_review_then_launch_exactly_one_zero_forward_audit_only_recovery_on_a_distinct_fresh_pod",
+    "any_gate_red": "preserve_evidence_terminate_exact_owned_pod_and_stop_no_retry",
+    "deadline_missed": "stop_requires_new_human_approved_cycle",
+    "qualification_failure": "attempt_consumed_stop_no_retry",
+    "recovery_failure": "attempt_consumed_stop_no_retry"
+  },
+  "time_and_cost_limits": {
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "new_paid_top_level_review_cap_usd": "0.00",
+    "qualification_cap_seconds": 1800,
+    "qualification_cap_usd": "3.00",
+    "recovery_cap_seconds": 3600,
+    "recovery_cap_usd": "6.00",
+    "successor_additional_cycle_envelope_usd": "9.00",
+    "user_overall_ceiling_usd": "50.00"
+  },
+  "usage_at_freeze": {
+    "audit_only_recovery_attempts_used": 0,
+    "automatic_retries_used": 0,
+    "inherited_paid_top_level_review_calls": 1,
+    "new_paid_top_level_review_calls_used": 0,
+    "provider_capacity_retries_used": 0,
+    "replacement_target_qualification_attempts_used": 0
+  },
+  "validator_only_repair": {
+    "accept_authentic_final_verdict_inside_verdict_section": true,
+    "accept_exact_none_in_both_finding_sections": true,
+    "charge_frozen_cache_write_rate_usd_per_million": "6.25",
+    "provider_artifacts_modified": false,
+    "scientific_fields_modified": false
+  }
+}

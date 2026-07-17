@@ -33,6 +33,18 @@ C3_STATUS_MAP = (
     REPO_ROOT
     / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json"
 )
+C3_QUALIFICATION_DIR = REPO_ROOT / (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_host_qualification_v3"
+)
+C4_LEDGER = (
+    REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json"
+)
+C4_STATUS_MAP = (
+    REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json"
+)
 
 
 def _rewrite_rehashed(path: Path, mutate) -> None:
@@ -58,6 +70,15 @@ def _copy_c3_fixture(tmp_path: Path) -> tuple[Path, Path]:
     shutil.copy2(C3_LEDGER, ledger)
     shutil.copy2(C3_STATUS_MAP, tmp_path / C3_STATUS_MAP.name)
     return incident, ledger
+
+
+def _copy_c4_fixture(tmp_path: Path) -> tuple[Path, Path]:
+    qualification = tmp_path / C3_QUALIFICATION_DIR.name
+    shutil.copytree(C3_QUALIFICATION_DIR, qualification)
+    ledger = tmp_path / C4_LEDGER.name
+    shutil.copy2(C4_LEDGER, ledger)
+    shutil.copy2(C4_STATUS_MAP, tmp_path / C4_STATUS_MAP.name)
+    return qualification, ledger
 
 
 def test_producer_and_independent_successor_bindings_are_identical() -> None:
@@ -91,6 +112,35 @@ def test_c3_producer_and_independent_authority_bindings_are_identical() -> None:
     assert produced["qualification_attempt_number"] == 1
     assert produced["no_automatic_retry"] is True
     assert produced["qualification_and_review_raw_or_outcome_access"] is False
+
+
+def test_c4_producer_and_independent_authority_bindings_are_identical() -> None:
+    produced = qualification_incident.successor_c4_authority_binding(
+        C3_QUALIFICATION_DIR, C4_LEDGER
+    )
+    verified = verify_qualification_incident.successor_c4_authority_binding(
+        C3_QUALIFICATION_DIR, C4_LEDGER
+    )
+    assert produced == verified
+    assert produced["binding_sha256"] == (
+        "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
+    )
+    assert produced["human_authorization_statement"] == "Authorize C4"
+    assert produced["c3_evidence_commit"] == (
+        "44d9e178567bbf31e524b79e4434474a4e5d888e"
+    )
+    assert produced["global_qualification_ordinal"] == 4
+    assert produced["qualification_attempt_number"] == 1
+    assert produced["new_paid_review_call_count"] == 0
+    assert produced["no_automatic_retry"] is True
+    assert produced["no_model_forward"] is True
+    assert produced["qualification_and_review_raw_or_outcome_access"] is False
+    assert produced["rejected_pod_ids"] == [
+        "wl8obvtuq0ax8t",
+        "69d9kxugxuf6up",
+        "g2azyjkpm17f1s",
+        "6am4twond0cd8v",
+    ]
 
 
 def test_independent_verifier_does_not_import_producer() -> None:
@@ -183,6 +233,48 @@ def test_c3_rehashed_authority_and_incident_tamper_are_rejected(
             incident, ledger
         )
 
+
+@pytest.mark.parametrize(
+    ("target", "mutate"),
+    [
+        (
+            "ledger",
+            lambda value: value["cardinality_limits"].__setitem__(
+                "new_paid_top_level_review_calls", 1
+            ),
+        ),
+        (
+            "status",
+            lambda value: value["e3_to_c4"].__setitem__(
+                "other_paths_forbidden", False
+            ),
+        ),
+        (
+            "qualification",
+            lambda value: value.__setitem__("model_forward_count", 1),
+        ),
+    ],
+)
+def test_c4_rehashed_authority_or_predecessor_tamper_is_rejected(
+    tmp_path: Path, target: str, mutate
+) -> None:
+    qualification, ledger = _copy_c4_fixture(tmp_path)
+    path = {
+        "ledger": ledger,
+        "status": tmp_path / C4_STATUS_MAP.name,
+        "qualification": qualification / "TARGET_HOST_QUALIFICATION.json",
+    }[target]
+    _rewrite_rehashed(path, mutate)
+    with pytest.raises(qualification_incident.QualificationIncidentError):
+        qualification_incident.successor_c4_authority_binding(
+            qualification, ledger
+        )
+    with pytest.raises(
+        verify_qualification_incident.QualificationIncidentVerificationError
+    ):
+        verify_qualification_incident.successor_c4_authority_binding(
+            qualification, ledger
+        )
 
 def test_immutable_predecessor_receipt_tamper_is_rejected(tmp_path: Path) -> None:
     incident, _ledger = _copy_fixture(tmp_path)

@@ -84,6 +84,92 @@ C3_STATUS_MAP_FILE_SHA256 = (
 C3_STATUS_MAP_RECEIPT_SHA256 = (
     "d53847535b6ccdf56f19b0094ac146b5093bc1d4ccfccaf153dceb32db0f1d59"
 )
+C3_CODE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
+E3_QUALIFICATION_FREEZE_COMMIT = (
+    "44d9e178567bbf31e524b79e4434474a4e5d888e"
+)
+C3_QUALIFICATION_DIRECTORY_NAME = "audit_recovery_host_qualification_v3"
+C3_QUALIFICATION_POD_ID = "6am4twond0cd8v"
+C4_REJECTED_POD_IDS = [
+    "wl8obvtuq0ax8t",
+    "69d9kxugxuf6up",
+    "g2azyjkpm17f1s",
+    C3_QUALIFICATION_POD_ID,
+]
+C4_CYCLE_ID = "signed-dose-audit-only-recovery-v4-20260717"
+C4_AUTHORITY_STATEMENT = "Authorize C4"
+C4_QUALIFICATION_PROTOCOL = (
+    "consciousness_sae_signed_dose_scan_v1."
+    "audit_recovery_host_qualification_v4"
+)
+C4_RECOVERY_PROTOCOL = (
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4"
+)
+C4_AUTHORITY_BINDING_SHA256 = (
+    "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
+)
+C4_LEDGER_FILE_SHA256 = (
+    "1f9f88f9bb2946454801f336893e6622c74157f2aff0e957029f5e9b692e00f9"
+)
+C4_LEDGER_RECEIPT_SHA256 = (
+    "68adc657a12191f612cc81d079cdc247daf8d55d16508b9cfd847f9aa89d1250"
+)
+C4_STATUS_MAP_FILE_SHA256 = (
+    "195e3dcb9ecee2ca4c0b13ea81f7f17ca6aa25f40438b2e0e5e0620f1e344935"
+)
+C4_STATUS_MAP_RECEIPT_SHA256 = (
+    "31eaffabf9863e086221a6452db228f791effe0a90ee3a3e630ab6b3d2ae58d7"
+)
+C3_QUALIFICATION_EVIDENCE_SPECS = {
+    "ATTEMPT_STARTED.json": (
+        3604,
+        "53ea4f59f0871c06368c05bacc0a224ca4b3591185b079b9195c3d5b3154c5a3",
+        "2a468b8a8235a410bd7ecae9406b88b5b2f6bf833d62e756ec8196a1d09f650c",
+        "receipt_sha256",
+    ),
+    "QUALIFICATION_FROZEN_TERMINATION.json": (
+        1434,
+        "342edd53d24f402e1a0766481c9bec3f39712c46713f06ad2f445c8421730ec2",
+        "2142e57c89a0c4eeed8692889040265b00bb638b0ba089561088b9730a962ce1",
+        "receipt_sha256",
+    ),
+    "QUALIFICATION_POSTDELETE_INVENTORY.json": (
+        493,
+        "19d18dfe1301437df4a09a7d18cf6504dcb2dde1a950013ece262a342539e9e5",
+        "31616fb9459f7a23c3acc9f60be89882bd00e6fa95146fc3156180ec00349687",
+        "receipt_sha256",
+    ),
+    "QUALIFICATION_TERMINATION_AUDIT.json": (
+        777,
+        "1ae77d7521b3a2937ea8bf9e0f883299f5a5d189c0814277b5fddd98af3a22d0",
+        "07b26522ce89a72fe090becc5ce3eca3df81759ff43ccbe25753fb5d0acf1327",
+        "receipt_sha256",
+    ),
+    "RECOVERY_EQUIVALENCE_PACKET.json": (
+        53164,
+        "e0d01accdf7423f9d48b1a42bb8153c85e51eb27d662e8081e92529cce5c532f",
+        "196844210145811a14389de3091a7334f3655a0a5e4e0bd6181b70e0073dea75",
+        "packet_sha256",
+    ),
+    "RECOVERY_EQUIVALENCE_VERIFICATION.json": (
+        1247,
+        "a6d24e46ea22af62a1d143e3b52e4941c76c8f7aa7bf80bc7a0cd4429acf22fa",
+        "6d4f514f8b50955e5c54b4dcfb345ed383d488e13514cb83ff7030cdbdc6f5c4",
+        "receipt_sha256",
+    ),
+    "TARGET_HOST_QUALIFICATION.json": (
+        15799,
+        "10fac1fcf3e22c22459bd3ac79c483ff763d6ce12df2baa6d6df6e77212af3f8",
+        "b2d304c7ada76e972e3d0220d0b1888b0ca590ffcc370eff3400c7f9e9fc75f5",
+        "receipt_sha256",
+    ),
+    "TARGET_HOST_QUALIFICATION_VERIFICATION.json": (
+        3595,
+        "c6343d84bb63482deb2efe2996b1ff1a0d5a2b843a733c72c9ae01c4b4698023",
+        "7df61ffee1a47d16124854f43af597915b06500ef203f3679ac47f50dabebc74",
+        "receipt_sha256",
+    ),
+}
 C2_CAUSE_FILE_SHA256 = (
     "8bc3b88be6d47f827def12bb4db2f4340d8451ce71d106dbaf2a07b749daf321"
 )
@@ -860,18 +946,295 @@ def successor_c3_authority_binding(
     return {**dict(authority), "binding_sha256": C3_AUTHORITY_BINDING_SHA256}
 
 
+def _verify_c3_qualification_for_c4(
+    qualification_dir: Path,
+) -> dict[str, Any]:
+    """Independently authenticate the successful E3 qualification receipts."""
+
+    root = qualification_dir.expanduser().absolute()
+    if root.name != C3_QUALIFICATION_DIRECTORY_NAME:
+        raise QualificationIncidentVerificationError(
+            "C3 qualification namespace differs"
+        )
+    try:
+        names = sorted(path.name for path in root.iterdir())
+    except OSError as exc:
+        raise QualificationIncidentVerificationError(
+            "C3 qualification directory is unreadable"
+        ) from exc
+    if names != sorted(C3_QUALIFICATION_EVIDENCE_SPECS):
+        raise QualificationIncidentVerificationError(
+            "C3 qualification inventory differs"
+        )
+    values: dict[str, dict[str, Any]] = {}
+    for name, (size, expected_file_sha, expected_receipt, field) in (
+        C3_QUALIFICATION_EVIDENCE_SPECS.items()
+    ):
+        value, raw = _load_exact_json(root / name, f"C3 qualification {name}")
+        if (
+            raw != canonical_json_bytes(value) + b"\n"
+            or len(raw) != size
+            or hashlib.sha256(raw).hexdigest() != expected_file_sha
+            or _self_hash(value, field, f"C3 qualification {name}")
+            != expected_receipt
+        ):
+            raise QualificationIncidentVerificationError(
+                f"C3 qualification receipt differs: {name}"
+            )
+        values[name] = value
+
+    marker = values["ATTEMPT_STARTED.json"]
+    qualification = values["TARGET_HOST_QUALIFICATION.json"]
+    verification = values["TARGET_HOST_QUALIFICATION_VERIFICATION.json"]
+    packet = values["RECOVERY_EQUIVALENCE_PACKET.json"]
+    packet_verification = values["RECOVERY_EQUIVALENCE_VERIFICATION.json"]
+    termination = values["QUALIFICATION_FROZEN_TERMINATION.json"]
+    termination_audit = values["QUALIFICATION_TERMINATION_AUDIT.json"]
+    postdelete = values["QUALIFICATION_POSTDELETE_INVENTORY.json"]
+    fresh_pod = qualification.get("fresh_pod")
+    raw_guard = qualification.get("raw_access_guard")
+    zero_forward = qualification.get("zero_forward_guard")
+    if (
+        marker.get("status") != "attempt_started_irrevocably"
+        or marker.get("global_qualification_ordinal") != 3
+        or marker.get("attempt_number") != 1
+        or marker.get("successor_qualification_attempt") != 1
+        or marker.get("retry_authorized") is not False
+        or marker.get("successor_authority_binding_sha256")
+        != C3_AUTHORITY_BINDING_SHA256
+        or marker.get("authorized_raw_input_paths") != []
+        or marker.get("model_forward_count") != 0
+        or marker.get("target_prompt_render_count") != 0
+        or qualification.get("status")
+        != "pass_one_shot_zero_forward_target_host_qualification"
+        or qualification.get("code_freeze_commit") != C3_CODE_COMMIT
+        or qualification.get("global_qualification_ordinal") != 3
+        or qualification.get("attempt_number") != 1
+        or qualification.get("retry_authorized") is not False
+        or qualification.get("model_forward_count") != 0
+        or qualification.get("target_prompt_render_count") != 0
+        or qualification.get("target_feature_vector_count") != 0
+        or qualification.get("analysis_data_inputs") != []
+        or qualification.get("outcome_input_paths") != []
+        or qualification.get("raw_input_paths") != []
+        or not isinstance(fresh_pod, Mapping)
+        or fresh_pod.get("pod_id") != C3_QUALIFICATION_POD_ID
+        or fresh_pod.get("status") != "pass_fresh_owned_guest_cache_chain"
+        or fresh_pod.get("prior_outcome_inputs") != []
+        or not isinstance(raw_guard, Mapping)
+        or raw_guard.get("raw_forbidden_attempt_count") != 0
+        or raw_guard.get("path_guard_rejected_attempt_count") != 0
+        or not isinstance(zero_forward, Mapping)
+        or any(value != 0 for value in zero_forward.values())
+        or verification.get("status")
+        != "pass_independent_target_host_qualification_verified"
+        or verification.get("code_freeze_commit") != C3_CODE_COMMIT
+        or verification.get("global_qualification_ordinal") != 3
+        or verification.get("attempt_number") != 1
+        or verification.get("retry_authorized") is not False
+        or verification.get("raw_run_opened") is not False
+        or verification.get("compact_result_opened") is not False
+        or verification.get("analysis_data_inputs") != []
+        or verification.get("model_forward_count") != 0
+        or verification.get("target_prompt_render_count") != 0
+        or verification.get("target_feature_vector_count") != 0
+        or verification.get("qualification_receipt_file_sha256")
+        != C3_QUALIFICATION_EVIDENCE_SPECS["TARGET_HOST_QUALIFICATION.json"][1]
+        or verification.get("qualification_receipt_sha256")
+        != C3_QUALIFICATION_EVIDENCE_SPECS["TARGET_HOST_QUALIFICATION.json"][2]
+        or packet.get("status")
+        != "pass_source_design_and_compatibility_bound_no_outcomes_loaded"
+        or packet.get("raw_run_opened") is not False
+        or packet.get("compact_result_opened") is not False
+        or packet.get("analysis_data_inputs") != []
+        or packet.get("outcome_input_paths") != []
+        or packet.get("model_forward_count") != 0
+        or packet.get("target_prompt_render_count") != 0
+        or packet.get("target_feature_vector_count") != 0
+        or packet_verification.get("status")
+        != "pass_outcome_blind_recovery_equivalence_verified"
+        or packet_verification.get("raw_run_opened") is not False
+        or packet_verification.get("compact_result_opened") is not False
+        or packet_verification.get("analysis_data_inputs") != []
+        or packet_verification.get("model_forward_count") != 0
+        or packet_verification.get("target_prompt_render_count") != 0
+        or packet_verification.get("target_feature_vector_count") != 0
+        or termination.get("status") != "deleted_verified"
+        or termination.get("pod_id") != C3_QUALIFICATION_POD_ID
+        or termination.get("absent_from_account_inventory") is not True
+        or termination.get("other_pods_mutated") is not False
+        or termination_audit.get("status")
+        != "deleted_exact_owned_pod_unrelated_inventory_unchanged"
+        or termination_audit.get("pod_id") != C3_QUALIFICATION_POD_ID
+        or postdelete.get("status") != "captured_read_only"
+        or postdelete.get("phase") != "postdelete"
+        or postdelete.get("all_account_pod_count") != 0
+        or postdelete.get("pods") != []
+    ):
+        raise QualificationIncidentVerificationError(
+            "C3 qualification semantics differ"
+        )
+    return {
+        "e3_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "global_qualification_ordinal": 3,
+        "model_forward_count": 0,
+        "pod_id": C3_QUALIFICATION_POD_ID,
+        "raw_run_opened": False,
+        "target_prompt_render_count": 0,
+        "termination_proven": True,
+    }
+
+
+def successor_c4_authority_binding(
+    predecessor_qualification_dir: Path,
+    recovery_cycle_ledger_path: Path,
+) -> dict[str, Any]:
+    """Independently reconstruct and verify the one-shot C4 authority."""
+
+    predecessor = _verify_c3_qualification_for_c4(
+        predecessor_qualification_dir
+    )
+    ledger, ledger_raw = _load_exact_json(
+        recovery_cycle_ledger_path, "C4 recovery cycle ledger"
+    )
+    status_map, status_raw = _load_exact_json(
+        recovery_cycle_ledger_path.parent / "RECOVERY_C4_STATUS_MAP.json",
+        "C4 status map",
+    )
+    ledger_receipt = _self_hash(
+        ledger, "receipt_sha256", "C4 recovery cycle ledger"
+    )
+    status_receipt = _self_hash(
+        status_map, "receipt_sha256", "C4 status map"
+    )
+    expected_authority = {
+        "authority_minted_at_utc": "2026-07-17T16:00:00Z",
+        "c3_code_commit": C3_CODE_COMMIT,
+        "c3_evidence_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "cycle_id": C4_CYCLE_ID,
+        "global_qualification_ordinal": 4,
+        "hard_deadline_utc": "2026-07-17T18:00:00Z",
+        "human_authorization_statement": C4_AUTHORITY_STATEMENT,
+        "new_paid_review_call_count": 0,
+        "no_automatic_retry": True,
+        "no_model_forward": True,
+        "predecessor_qualification_pod_id": C3_QUALIFICATION_POD_ID,
+        "qualification_and_review_raw_or_outcome_access": False,
+        "qualification_attempt_number": 1,
+        "qualification_namespace": "audit_recovery_host_qualification_v4",
+        "qualification_protocol_version": C4_QUALIFICATION_PROTOCOL,
+        "recovery_namespace": "audit_only_recovery_v4",
+        "recovery_protocol_version": C4_RECOVERY_PROTOCOL,
+        "rejected_pod_ids": C4_REJECTED_POD_IDS,
+        "review_artifact_inventory_sha256": (
+            "bcdd58053d7f5d65e1937a01cf532ae597e94426c130aea80de13741c872d172"
+        ),
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "review_namespace": "audit_recovery_pro_review_v3",
+        "status_map_file_sha256": C4_STATUS_MAP_FILE_SHA256,
+        "status_map_receipt_sha256": C4_STATUS_MAP_RECEIPT_SHA256,
+        "study_id": "consciousness_sae_signed_dose_scan_v1",
+    }
+    authority = ledger.get("successor_authority_binding")
+    cardinality = ledger.get("cardinality_limits")
+    limits = ledger.get("time_and_cost_limits")
+    usage = ledger.get("usage_at_freeze")
+    authorization = ledger.get("authorization_state")
+    review = ledger.get("review_reuse_binding")
+    lineage = ledger.get("lineage_contract")
+    if (
+        hashlib.sha256(ledger_raw).hexdigest() != C4_LEDGER_FILE_SHA256
+        or ledger_receipt != C4_LEDGER_RECEIPT_SHA256
+        or hashlib.sha256(status_raw).hexdigest() != C4_STATUS_MAP_FILE_SHA256
+        or status_receipt != C4_STATUS_MAP_RECEIPT_SHA256
+        or ledger.get("receipt_kind")
+        != "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v4"
+        or ledger.get("status") != "frozen_c4_cycle_authorized_pending_pushed_c4"
+        or ledger.get("cycle_id") != C4_CYCLE_ID
+        or ledger.get("qualification_protocol_version")
+        != C4_QUALIFICATION_PROTOCOL
+        or ledger.get("recovery_protocol_version") != C4_RECOVERY_PROTOCOL
+        or authority != expected_authority
+        or ledger.get("successor_authority_binding_sha256")
+        != C4_AUTHORITY_BINDING_SHA256
+        or canonical_sha256(expected_authority) != C4_AUTHORITY_BINDING_SHA256
+        or cardinality
+        != {
+            "audit_only_recovery_attempts": 1,
+            "automatic_retries": 0,
+            "new_paid_top_level_review_calls": 0,
+            "provider_capacity_retries": 0,
+            "replacement_target_qualification_attempts": 1,
+        }
+        or not isinstance(limits, Mapping)
+        or limits.get("hard_deadline_utc") != "2026-07-17T18:00:00Z"
+        or limits.get("qualification_cap_seconds") != 1800
+        or limits.get("qualification_cap_usd") != "3.00"
+        or limits.get("recovery_cap_seconds") != 3600
+        or limits.get("recovery_cap_usd") != "6.00"
+        or limits.get("new_paid_top_level_review_cap_usd") != "0.00"
+        or limits.get("successor_additional_cycle_envelope_usd") != "9.00"
+        or not isinstance(usage, Mapping)
+        or usage.get("replacement_target_qualification_attempts_used") != 0
+        or usage.get("audit_only_recovery_attempts_used") != 0
+        or usage.get("new_paid_top_level_review_calls_used") != 0
+        or usage.get("automatic_retries_used") != 0
+        or usage.get("provider_capacity_retries_used") != 0
+        or not isinstance(authorization, Mapping)
+        or authorization.get("explicit_human_authorization_observed") is not True
+        or authorization.get("explicit_human_authorization_statement")
+        != C4_AUTHORITY_STATEMENT
+        or authorization.get("qualification_and_review_outcome_blind") is not True
+        or not isinstance(review, Mapping)
+        or review.get("new_paid_review_call_count") != 0
+        or review.get("paid_review_call_count_inherited") != 1
+        or review.get("review_input_anchor_commit")
+        != E3_QUALIFICATION_FREEZE_COMMIT
+        or review.get("paid_artifact_inventory_sha256")
+        != expected_authority["review_artifact_inventory_sha256"]
+        or not isinstance(lineage, Mapping)
+        or lineage.get("global_qualification_ordinal") != 4
+        or lineage.get("predecessor_global_qualification_ordinal") != 3
+        or lineage.get("predecessor_qualification_pod_id")
+        != predecessor["pod_id"]
+        or lineage.get("rejected_pod_ids") != C4_REJECTED_POD_IDS
+        or status_map.get("base_commit") != E3_QUALIFICATION_FREEZE_COMMIT
+        or status_map.get("status") != "frozen_allowed_surface_pending_c4_commit"
+        or status_map.get("e3_to_c4", {}).get("required_direct_parent")
+        != E3_QUALIFICATION_FREEZE_COMMIT
+        or status_map.get("e3_to_c4", {}).get("other_paths_forbidden") is not True
+        or status_map.get("c4_to_e4", {}).get("added_directory")
+        != "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v4"
+        or status_map.get("c4_to_e4", {}).get("other_paths_forbidden") is not True
+    ):
+        raise QualificationIncidentVerificationError(
+            "C4 successor authority differs"
+        )
+    return {
+        **expected_authority,
+        "binding_sha256": C4_AUTHORITY_BINDING_SHA256,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--incident-dir", type=Path, required=True)
     parser.add_argument("--recovery-cycle-ledger", type=Path)
     args = parser.parse_args()
-    value = (
-        successor_authority_binding(
+    if args.recovery_cycle_ledger is None:
+        value = verify_incident(args.incident_dir)
+    elif args.recovery_cycle_ledger.name == "RECOVERY_CYCLE_LEDGER_V4.json":
+        value = successor_c4_authority_binding(
             args.incident_dir, args.recovery_cycle_ledger
         )
-        if args.recovery_cycle_ledger is not None
-        else verify_incident(args.incident_dir)
-    )
+    elif args.recovery_cycle_ledger.name == "RECOVERY_CYCLE_LEDGER_V3.json":
+        value = successor_c3_authority_binding(
+            args.incident_dir, args.recovery_cycle_ledger
+        )
+    else:
+        value = successor_authority_binding(
+            args.incident_dir, args.recovery_cycle_ledger
+        )
     print(json.dumps(value, sort_keys=True), flush=True)
     return 0
 

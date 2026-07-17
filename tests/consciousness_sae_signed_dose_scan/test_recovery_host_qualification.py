@@ -234,21 +234,56 @@ def test_production_mode_rejects_test_only_bypasses(tmp_path: Path) -> None:
         )
 
 
-def test_c3_production_authority_is_explicit_and_one_shot() -> None:
+def test_c4_production_authority_is_explicit_and_one_shot() -> None:
     assert qualification.QUALIFICATION_AUTHORITY_STATE == "authorized"
-    assert qualification.GLOBAL_QUALIFICATION_ORDINAL == 3
+    assert qualification.GLOBAL_QUALIFICATION_ORDINAL == 4
     assert qualification.SUCCESSOR_QUALIFICATION_ATTEMPT == 1
     assert qualification.EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 == (
-        "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
+        "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
     )
     assert qualification.REJECTED_PREDECESSOR_POD_IDS == {
         "wl8obvtuq0ax8t",
         "69d9kxugxuf6up",
         "g2azyjkpm17f1s",
+        "6am4twond0cd8v",
     }
+    assert qualification.QUALIFICATION_PROTOCOL_VERSION.endswith(
+        "audit_recovery_host_qualification_v4"
+    )
+    assert qualification.QUALIFICATION_CYCLE_VERSION.endswith(
+        "audit_only_recovery_cycle_v4"
+    )
+    assert qualification.RECOVERY_CYCLE_LEDGER_PATH.name == (
+        "RECOVERY_CYCLE_LEDGER_V4.json"
+    )
+    assert verifier.GLOBAL_QUALIFICATION_ORDINAL == 4
+    assert verifier.REJECTED_PREDECESSOR_POD_IDS == (
+        qualification.REJECTED_PREDECESSOR_POD_IDS
+    )
 
 
-def test_c3_cycle_deadline_requires_the_full_qualification_cap(
+def test_c4_execution_and_independent_authority_boundaries_restate_contract() -> None:
+    authority = qualification.qualification_incident.successor_c4_authority_binding(
+        qualification.PREDECESSOR_QUALIFICATION_DIR,
+        qualification.RECOVERY_CYCLE_LEDGER_PATH,
+    )
+    assert qualification._validated_c4_successor_authority(authority) == authority  # noqa: SLF001
+    assert verifier._validated_c4_successor_authority(authority) == authority  # noqa: SLF001
+
+    tampered = {**authority, "no_model_forward": False}
+    with pytest.raises(
+        qualification.RecoveryHostQualificationError,
+        match="C4 successor authority differs",
+    ):
+        qualification._validated_c4_successor_authority(tampered)  # noqa: SLF001
+    with pytest.raises(
+        verifier.RecoveryHostQualificationVerificationError,
+        match="C4 successor authority differs",
+    ):
+        verifier._validated_c4_successor_authority(tampered)  # noqa: SLF001
+
+
+def test_c4_cycle_deadline_requires_the_full_qualification_cap(
     tmp_path: Path,
 ) -> None:
     attempt = tmp_path / "late-attempt"
@@ -858,6 +893,18 @@ def test_one_shot_receipt_and_independent_verifier(
     assert receipt["status"] == (
         "pass_one_shot_zero_forward_target_host_qualification"
     )
+    input_roles = {row["role"] for row in receipt["inputs"]}
+    assert set(qualification.PREDECESSOR_QUALIFICATION_FILENAMES) < input_roles
+    assert {
+        "recovery_cycle_ledger_v4",
+        "recovery_c4_status_map",
+    } < input_roles
+    assert not any("incident" in role for role in input_roles)
+    assert receipt["successor_authority"]["human_authorization_statement"] == (
+        "Authorize C4"
+    )
+    assert receipt["successor_authority"]["global_qualification_ordinal"] == 4
+    assert receipt["successor_authority"]["qualification_attempt_number"] == 1
     assert set(path.name for path in attempt.iterdir()) == {
         qualification.ATTEMPT_MARKER_NAME,
         qualification.SUCCESS_NAME,
@@ -914,11 +961,51 @@ def test_one_shot_receipt_and_independent_verifier(
         "pass_independent_target_host_qualification_verified"
     )
     assert verified["attempt_number"] == 1
-    assert verified["global_qualification_ordinal"] == 3
+    assert verified["global_qualification_ordinal"] == 4
     assert verified["successor_qualification_attempt"] == 1
     assert verified["model_forward_count"] == 0
 
     success_path = attempt / qualification.SUCCESS_NAME
+    rejected_ownership = {
+        **fixture["ownership"],
+        "pod_id": "6am4twond0cd8v",
+    }
+    monkeypatch.setattr(
+        verifier,
+        "_validated_receipt_chain",
+        lambda *_args: (
+            rejected_ownership,
+            fixture["guest"],
+            fixture["cache"],
+            fixture["hashes"],
+        ),
+    )
+    with pytest.raises(
+        verifier.RecoveryHostQualificationVerificationError,
+        match="reused a rejected predecessor pod",
+    ):
+        verifier.verify_qualification(
+            receipt_path=success_path,
+            marker_path=attempt / qualification.ATTEMPT_MARKER_NAME,
+            packet_path=paths["packet"],
+            plan_audit_path=paths["plan"],
+            ownership_path=paths["ownership"],
+            guest_path=paths["guest"],
+            cache_path=paths["cache"],
+            j_lens_path=paths["checkpoint"],
+            enforce_git=False,
+            forbidden_raw_root=fixture["raw_root"],
+        )
+    monkeypatch.setattr(
+        verifier,
+        "_validated_receipt_chain",
+        lambda *_args: (
+            fixture["ownership"],
+            fixture["guest"],
+            fixture["cache"],
+            fixture["hashes"],
+        ),
+    )
     tampered = json.loads(success_path.read_text(encoding="utf-8"))
     tampered["qualification_watchdog"]["qualification_deadline_at_unix"] += 1
     tampered_core = dict(tampered)
@@ -976,7 +1063,7 @@ def test_failed_attempt_is_consumed(tmp_path: Path) -> None:
     failed = json.loads(
         (attempt / qualification.FAILURE_NAME).read_text(encoding="utf-8")
     )
-    assert failed["global_qualification_ordinal"] == 3
+    assert failed["global_qualification_ordinal"] == 4
     assert failed["successor_qualification_attempt"] == 1
     assert failed["raw_forbidden_attempt_count"] == 0
     assert failed["path_guard_rejected_attempt_count"] == 0

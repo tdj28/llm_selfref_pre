@@ -21,6 +21,10 @@ C3_STATUS_MAP_PATH = (
     recovery_equivalence.REPO_ROOT
     / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json"
 )
+C4_STATUS_MAP_PATH = (
+    recovery_equivalence.REPO_ROOT
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json"
+)
 
 
 def _write(path: Path, value: object) -> None:
@@ -49,30 +53,33 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         enforce_git=False,
     )
 
-    assert verified["status"] == (
-        "pass_outcome_blind_recovery_equivalence_verified"
-    )
+    assert verified["status"] == ("pass_outcome_blind_recovery_equivalence_verified")
     assert verified["code_freeze_commit"] == FAKE_CODE_FREEZE
-    assert packet["recovery_equivalence_protocol_version"].endswith("_v3")
+    assert packet["recovery_equivalence_protocol_version"].endswith("_v4")
     lineage = packet["freeze_lineage"]
     assert lineage["direct_parent_chain"] == [
         recovery_equivalence.ORIGINAL_FREEZE_COMMIT,
         recovery_equivalence.C1_RECOVERY_FREEZE_COMMIT,
         recovery_equivalence.C2_RECOVERY_FREEZE_COMMIT,
+        recovery_equivalence.C3_RECOVERY_FREEZE_COMMIT,
+        recovery_equivalence.E3_QUALIFICATION_FREEZE_COMMIT,
         FAKE_CODE_FREEZE,
     ]
     assert {
-        row["path"]: row["status"]
-        for row in lineage["original_to_c1_name_status"]
+        row["path"]: row["status"] for row in lineage["original_to_c1_name_status"]
     } == recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
     assert {
-        row["path"]: row["status"]
-        for row in lineage["c1_to_c2_name_status"]
+        row["path"]: row["status"] for row in lineage["c1_to_c2_name_status"]
     } == recovery_equivalence.C1_TO_C2_NAME_STATUS
     assert {
-        row["path"]: row["status"]
-        for row in lineage["c2_to_c3_name_status"]
+        row["path"]: row["status"] for row in lineage["c2_to_c3_name_status"]
     } == recovery_equivalence.C2_TO_C3_NAME_STATUS
+    assert {
+        row["path"]: row["status"] for row in lineage["c3_to_e3_name_status"]
+    } == recovery_equivalence.C3_TO_E3_NAME_STATUS
+    assert {
+        row["path"]: row["status"] for row in lineage["e3_to_c4_name_status"]
+    } == recovery_equivalence.E3_TO_C4_NAME_STATUS
     assert lineage["original_science_mutation_paths"] == []
     assert packet["outcome_input_paths"] == []
     assert packet["raw_run_opened"] is False
@@ -82,10 +89,40 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
     assert proof["compatibility_change_count"] == 1
     assert proof["pinned_available_layers"] == list(range(79))
     assert proof["required_layers"] == list(range(45, 79))
-    assert proof["filtered_layers_handed_to_frozen_auditor"] == list(
-        range(45, 79)
-    )
+    assert proof["filtered_layers_handed_to_frozen_auditor"] == list(range(45, 79))
     assert proof["scientific_field_projection_unchanged"] is True
+    authority = packet["c4_authority_documents"]
+    assert authority["global_qualification_ordinal"] == 4
+    assert authority["new_paid_review_call_count"] == 0
+    assert authority["review_input_anchor_commit"] == (
+        recovery_equivalence.E3_QUALIFICATION_FREEZE_COMMIT
+    )
+
+
+def test_v3_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
+    plan_audit = validate_plan.validate(PLAN_DIR)
+    plan_audit_path = tmp_path / "PLAN_AUDIT.json"
+    _write(plan_audit_path, plan_audit)
+    packet = recovery_equivalence.build_packet(
+        plan_audit_path=plan_audit_path,
+        code_freeze_commit=FAKE_CODE_FREEZE,
+        enforce_git=False,
+        equivalence_protocol_version=(
+            recovery_equivalence.RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3
+        ),
+    )
+    packet_path = tmp_path / "RECOVERY_EQUIVALENCE_PACKET_V3.json"
+    _write(packet_path, packet)
+
+    verified = verify_recovery_equivalence.verify_packet(
+        packet_path,
+        plan_audit_path=plan_audit_path,
+        enforce_git=False,
+    )
+
+    assert packet["packet_type"].endswith("_v3")
+    assert "c4_authority_documents" not in packet
+    assert verified["recovery_equivalence_protocol_version"].endswith("_v3")
 
 
 def test_c3_status_map_matches_both_independent_lineage_restatements() -> None:
@@ -102,9 +139,29 @@ def test_c3_status_map_matches_both_independent_lineage_restatements() -> None:
     assert expected == recovery_equivalence.C2_TO_C3_NAME_STATUS
     assert expected == verify_recovery_equivalence.C2_TO_C3_NAME_STATUS
     assert set(expected) <= set(recovery_equivalence.RECOVERY_CLOSURE_PATHS)
-    assert set(expected) <= set(
-        verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS
+    assert set(expected) <= set(verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS)
+
+
+def test_c4_status_map_matches_both_independent_lineage_restatements() -> None:
+    status_map = json.loads(C4_STATUS_MAP_PATH.read_bytes())
+    core = dict(status_map)
+    claimed = core.pop("receipt_sha256")
+    assert claimed == recovery_equivalence.canonical_sha256(core)
+    surface = status_map["e3_to_c4"]
+    expected = {
+        **{path: "A" for path in surface["added"]},
+        **{path: "M" for path in surface["modified"]},
+        **{path: "D" for path in surface["deleted"]},
+    }
+    assert expected == recovery_equivalence.E3_TO_C4_NAME_STATUS
+    assert expected == verify_recovery_equivalence.E3_TO_C4_NAME_STATUS
+    assert recovery_equivalence.C4_TO_E4_NAME_STATUS == (
+        verify_recovery_equivalence.C4_TO_E4_NAME_STATUS
     )
+    assert recovery_equivalence.E4_TO_F4_NAME_STATUS == (
+        verify_recovery_equivalence.E4_TO_F4_NAME_STATUS
+    )
+    assert set(expected) <= set(recovery_equivalence.RECOVERY_CLOSURE_PATHS)
 
 
 def test_independent_verifier_rejects_rehashed_semantic_tamper(
@@ -149,6 +206,90 @@ def test_independent_verifier_rejects_rehashed_lineage_tamper(
         )
 
 
+def test_independent_verifier_rejects_rehashed_c4_authority_tamper(
+    tmp_path: Path,
+) -> None:
+    packet_path, plan_audit_path, packet = _packet_fixture(tmp_path)
+    packet["c4_authority_documents"]["new_paid_review_call_count"] = 1
+    core = dict(packet)
+    core.pop("packet_sha256")
+    packet["packet_sha256"] = recovery_equivalence.canonical_sha256(core)
+    _write(packet_path, packet)
+
+    with pytest.raises(
+        verify_recovery_equivalence.RecoveryEquivalenceVerificationError,
+        match="authority-document binding differs",
+    ):
+        verify_recovery_equivalence.verify_packet(
+            packet_path,
+            plan_audit_path=plan_audit_path,
+            enforce_git=False,
+        )
+
+
+def test_both_final_chain_validators_bind_dynamic_c4_e4_f4(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    c4 = "4" * 40
+    e4 = "5" * 40
+    f4 = "6" * 40
+    parents = {
+        c4: recovery_equivalence.E3_QUALIFICATION_FREEZE_COMMIT,
+        e4: c4,
+        f4: e4,
+    }
+
+    def builder_git(*args: str, repo_root: Path) -> bytes:
+        if args[0] == "rev-parse":
+            return args[1].split("^", 1)[0].encode() + b"\n"
+        if args[0] == "rev-list":
+            child = args[-1]
+            return f"{child} {parents[child]}\n".encode()
+        raise AssertionError(args)
+
+    def verifier_git(_repo_root: Path, *args: str) -> bytes:
+        return builder_git(*args, repo_root=_repo_root)
+
+    edge_maps = {
+        (recovery_equivalence.E3_QUALIFICATION_FREEZE_COMMIT, c4): (
+            recovery_equivalence.E3_TO_C4_NAME_STATUS
+        ),
+        (c4, e4): recovery_equivalence.C4_TO_E4_NAME_STATUS,
+        (e4, f4): recovery_equivalence.E4_TO_F4_NAME_STATUS,
+    }
+    monkeypatch.setattr(recovery_equivalence, "_git", builder_git)
+    monkeypatch.setattr(
+        recovery_equivalence,
+        "_observed_name_status",
+        lambda parent, child, *, repo_root: edge_maps[(parent, child)],
+    )
+    monkeypatch.setattr(verify_recovery_equivalence, "_git", verifier_git)
+    monkeypatch.setattr(
+        verify_recovery_equivalence,
+        "_observed_name_status",
+        lambda repo_root, parent, child: edge_maps[(parent, child)],
+    )
+
+    built = recovery_equivalence.verify_v4_final_freeze_lineage(
+        code_freeze_commit=c4,
+        evidence_freeze_commit=e4,
+        final_freeze_commit=f4,
+    )
+    independently_verified = verify_recovery_equivalence.verify_v4_final_freeze_lineage(
+        code_freeze_commit=c4,
+        evidence_freeze_commit=e4,
+        final_freeze_commit=f4,
+    )
+
+    assert built == independently_verified
+    assert built["direct_parent_chain"] == [
+        recovery_equivalence.E3_QUALIFICATION_FREEZE_COMMIT,
+        c4,
+        e4,
+        f4,
+    ]
+
+
 def test_independent_verifier_rejects_live_closure_tamper(
     tmp_path: Path,
 ) -> None:
@@ -160,6 +301,7 @@ def test_independent_verifier_rejects_live_closure_tamper(
         destination = alternate / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes((original / relative).read_bytes())
+
     # Original plan and precedent reads still come from the real repository.
     def reader(_commit: str, relative: str) -> bytes:
         candidate = alternate / relative
@@ -170,8 +312,7 @@ def test_independent_verifier_rejects_live_closure_tamper(
         )
 
     victim = (
-        alternate
-        / "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py"
+        alternate / "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py"
     )
     victim.write_bytes(victim.read_bytes() + b"\n")
     with pytest.raises(
@@ -189,9 +330,7 @@ def test_independent_verifier_rejects_live_closure_tamper(
 
 def test_scientific_projection_is_affirmative() -> None:
     audit = {field: field for field in recovery_equivalence.SCIENTIFIC_AUDIT_FIELDS}
-    summary = {
-        field: field for field in recovery_equivalence.SCIENTIFIC_SUMMARY_FIELDS
-    }
+    summary = {field: field for field in recovery_equivalence.SCIENTIFIC_SUMMARY_FIELDS}
     projected = recovery_equivalence.scientific_projection(audit, summary)
     assert tuple(projected["audit"]) == recovery_equivalence.SCIENTIFIC_AUDIT_FIELDS
     del audit[recovery_equivalence.SCIENTIFIC_AUDIT_FIELDS[-1]]

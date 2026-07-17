@@ -399,6 +399,31 @@ def test_c_closure_matches_both_equivalence_implementations() -> None:
     expected = audit_recovery.MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS
     assert recovery_equivalence.RECOVERY_CLOSURE_PATHS == expected
     assert verify_recovery_equivalence.RECOVERY_CLOSURE_PATHS == expected
+
+
+def test_c4_freeze_surface_matches_the_frozen_status_map() -> None:
+    root = Path(audit_recovery.__file__).resolve().parents[2]
+    status_map = json.loads(
+        (
+            root
+            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json"
+        ).read_text(encoding="utf-8")
+    )
+    frozen = status_map["e3_to_c4"]
+    expected = {
+        **{path: "A" for path in frozen["added"]},
+        **{path: "M" for path in frozen["modified"]},
+    }
+    assert frozen["deleted"] == []
+    assert audit_recovery.E3_TO_C4_NAME_STATUS == expected
+    assert audit_recovery.C3_RECOVERY_FREEZE_COMMIT == status_map["c3_code_commit"]
+    assert audit_recovery.E3_QUALIFICATION_FREEZE_COMMIT == status_map["base_commit"]
+    assert audit_recovery.RECOVERY_PROTOCOL_VERSION.endswith(
+        ".audit_only_recovery_v4"
+    )
+    assert audit_recovery.QUALIFICATION_DIRECTORY.endswith(
+        "/audit_recovery_host_qualification_v4"
+    )
     assert len(expected) == len(set(expected))
     assert audit_recovery.ORIGINAL_TO_C1_NAME_STATUS == (
         recovery_equivalence.ORIGINAL_TO_C1_NAME_STATUS
@@ -517,6 +542,48 @@ def test_empty_recovery_adjudication_decisions_are_rejected() -> None:
         audit_recovery._adjudication_decision_ids([], [], ["B01"])
 
 
+def test_authentic_provider_verdict_and_empty_findings_are_accepted() -> None:
+    review = """# Verdict
+
+The bounded recovery is execution-ready.
+
+READY TO FREEZE
+
+# Blocking findings
+
+None.
+
+# Important non-blocking findings
+
+None.
+
+# What should remain unchanged
+
+Preserve the narrow claim boundary.
+"""
+    assert audit_recovery._provider_verdict(review) == "READY TO FREEZE"
+    assert audit_recovery._provider_finding_headings(review) == []
+    assert audit_recovery._adjudication_decision_ids([], [], []) == []
+
+
+@pytest.mark.parametrize(
+    "review",
+    (
+        "# Verdict\nREADY TO FREEZE\nMore verdict-section prose.\n",
+        "# Verdict\nREADY TO FREEZE\n# Notes\nREADY TO FREEZE\n",
+        "# Verdict\nREADY TO FREEZE\n# Notes\nNOT READY TO FREEZE\n",
+        "# Verdict\nREADY TO FREEZE\n# Notes\n**NOT READY TO FREEZE**\n",
+        "# Verdict\nREADY TO FREEZE \n# Notes\nDone.\n",
+        "# Verdict\nREADY TO FREEZE\n# Verdict\nREADY TO FREEZE\n",
+    ),
+)
+def test_provider_verdict_rejects_nonfinal_duplicate_or_conflicting_lines(
+    review: str,
+) -> None:
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="verdict"):
+        audit_recovery._provider_verdict(review)
+
+
 def test_provider_finding_parser_ignores_historical_ids_outside_sections() -> None:
     review = """# Verdict
 Prior B01 and I01 remain historical.
@@ -533,6 +600,129 @@ READY TO FREEZE
     assert audit_recovery._provider_finding_headings(review) == ["B07", "I03"]
 
 
+def test_one_none_finding_section_retains_exact_other_section_coverage() -> None:
+    review = """# Blocking findings
+None.
+# Important non-blocking findings
+### I03 — current note
+details
+# What should remain unchanged
+I99 is historical.
+"""
+    assert audit_recovery._provider_finding_headings(review) == ["I03"]
+    decisions = [
+        {
+            "finding_id": "I03",
+            "disposition": "defer_nonblocking",
+            "blocks_execution": False,
+        }
+    ]
+    assert audit_recovery._adjudication_decision_ids(
+        decisions, ["I03"], ["I03"]
+    ) == ["I03"]
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="coverage"):
+        audit_recovery._adjudication_decision_ids(decisions, ["I04"], ["I03"])
+
+
+@pytest.mark.parametrize(
+    "blocking,important",
+    (
+        ("", "None."),
+        ("No findings.", "None."),
+        ("None.\n### B01 — impossible mixture", "None."),
+        ("### B01 — duplicate\n### B01 — duplicate again", "None."),
+        ("### I01 — wrong section", "None."),
+    ),
+)
+def test_provider_finding_parser_rejects_ambiguous_empty_or_duplicate_sections(
+    blocking: str, important: str
+) -> None:
+    review = (
+        f"# Blocking findings\n{blocking}\n"
+        f"# Important non-blocking findings\n{important}\n"
+        "# What should remain unchanged\nPreserve it.\n"
+    )
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="finding"):
+        audit_recovery._provider_finding_headings(review)
+
+
+def _review_cost_fixture() -> tuple[dict[str, Any], dict[str, Any]]:
+    usage = {
+        "input_tokens": 29_731,
+        "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0,
+        },
+        "output_tokens": 11_229,
+        "output_tokens_details": {"reasoning_tokens": 9_050},
+        "total_tokens": 40_960,
+    }
+    return (
+        {"usage": usage},
+        {
+            "usage": usage,
+            "input_rate_usd_per_million": 5.0,
+            "cache_write_rate_usd_per_million": 6.25,
+            "output_rate_usd_per_million": 30.0,
+            "completed_response_cost_usd_conservative": 0.485525,
+        },
+    )
+
+
+def test_authentic_provider_usage_and_cache_write_rate_are_accepted() -> None:
+    response, manifest = _review_cost_fixture()
+    assert audit_recovery._validated_review_cost(response, manifest) == pytest.approx(
+        0.485525
+    )
+
+
+def test_nonzero_cache_write_tokens_are_charged_at_frozen_rate() -> None:
+    usage = {
+        "input_tokens": 100,
+        "input_tokens_details": {"cache_write_tokens": 80},
+        "output_tokens": 10,
+    }
+    response = {"usage": usage}
+    manifest = {
+        "usage": usage,
+        "input_rate_usd_per_million": 5.0,
+        "cache_write_rate_usd_per_million": 6.25,
+        "output_rate_usd_per_million": 30.0,
+        "completed_response_cost_usd_conservative": 0.0013,
+    }
+    assert audit_recovery._validated_review_cost(response, manifest) == pytest.approx(
+        0.0013
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    (
+        ("cache_write_rate_usd_per_million", 0.0),
+        ("cache_write_rate_usd_per_million", 6.24),
+        ("completed_response_cost_usd_conservative", 0.485524),
+        ("completed_response_cost_usd_conservative", float("nan")),
+    ),
+)
+def test_provider_cost_rate_or_total_tampering_is_rejected(
+    field: str, value: float
+) -> None:
+    response, manifest = _review_cost_fixture()
+    manifest[field] = value
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="usage/cost"):
+        audit_recovery._validated_review_cost(response, manifest)
+
+
+def test_provider_usage_tampering_is_rejected() -> None:
+    response, manifest = _review_cost_fixture()
+    response["usage"] = {
+        **response["usage"],
+        "input_tokens": response["usage"]["input_tokens"] + 1,
+    }
+    with pytest.raises(audit_recovery.AuditRecoveryError, match="usage/cost"):
+        audit_recovery._validated_review_cost(response, manifest)
+
+
 def _hashed(core: dict[str, Any], field: str = "receipt_sha256") -> dict[str, Any]:
     return {**core, field: protocol.canonical_sha256(core)}
 
@@ -547,20 +737,20 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     )
     ledger_target = (
         root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json"
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json"
     )
     shutil.copy2(
         source_root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
         ledger_target,
     )
     shutil.copy2(
         source_root
-        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json",
-        ledger_target.parent / "RECOVERY_C3_STATUS_MAP.json",
+        / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json",
+        ledger_target.parent / "RECOVERY_C4_STATUS_MAP.json",
     )
     successor_authority = (
-        audit_recovery.verify_qualification_incident.successor_c3_authority_binding(
+        audit_recovery.verify_qualification_incident.successor_c4_authority_binding(
             incident_target, ledger_target
         )
     )
@@ -627,12 +817,16 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
             "fresh_ownership",
             "independent_plan_audit",
             "pinned_j_checkpoint",
-            "predecessor_qualification_failure",
-            "qualification_incident_cause",
-            "qualification_incident_closure",
-            "qualification_incident_schema",
-            "qualification_incident_verification",
-            "recovery_cycle_ledger_v3",
+            "predecessor_qualification_attempt_marker",
+            "predecessor_qualification_frozen_termination",
+            "predecessor_qualification_postdelete_inventory",
+            "predecessor_qualification_termination_audit",
+            "predecessor_recovery_equivalence_packet",
+            "predecessor_recovery_equivalence_verification",
+            "predecessor_target_host_qualification",
+            "predecessor_target_host_qualification_verification",
+            "recovery_c4_status_map",
+            "recovery_cycle_ledger_v4",
         )
     ]
     declared_inputs = [
@@ -641,9 +835,9 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     marker = _hashed(
         {
             "status": "attempt_started_irrevocably",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
-            "global_qualification_ordinal": 3,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4",
+            "global_qualification_ordinal": 4,
             "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
@@ -714,9 +908,9 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     target = _hashed(
         {
             "status": "pass_one_shot_zero_forward_target_host_qualification",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
-            "global_qualification_ordinal": 3,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4",
+            "global_qualification_ordinal": 4,
             "successor_qualification_attempt": 1,
             "attempt_number": 1,
             "retry_authorized": False,
@@ -792,9 +986,9 @@ def _qualification_fixture(root: Path, *, commit: str) -> list[dict[str, str]]:
     verified = _hashed(
         {
             "status": "pass_independent_target_host_qualification_verified",
-            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3",
-            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3",
-            "global_qualification_ordinal": 3,
+            "qualification_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+            "qualification_cycle_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4",
+            "global_qualification_ordinal": 4,
             "successor_qualification_attempt": 1,
             "qualification_receipt_sha256": target["receipt_sha256"],
             "attempt_marker_receipt_sha256": marker["receipt_sha256"],

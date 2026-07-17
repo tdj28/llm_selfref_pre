@@ -59,8 +59,13 @@ ORIGINAL_SOURCE_INVENTORY_RECEIPT = (
 )
 C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
 C2_RECOVERY_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
-RECOVERY_EQUIVALENCE_PROTOCOL_VERSION = (
+C3_RECOVERY_FREEZE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
+E3_QUALIFICATION_FREEZE_COMMIT = "44d9e178567bbf31e524b79e4434474a4e5d888e"
+RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3 = (
     "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v3"
+)
+RECOVERY_EQUIVALENCE_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_equivalence_v4"
 )
 C1_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
@@ -97,6 +102,42 @@ C3_DOC_PATHS = (
     "AUDIT_ONLY_RECOVERY_C3_AMENDMENT_20260717.md",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json",
+)
+C3_QUALIFICATION_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v3"
+)
+C3_QUALIFICATION_FILENAMES = (
+    "ATTEMPT_STARTED.json",
+    "QUALIFICATION_FROZEN_TERMINATION.json",
+    "QUALIFICATION_POSTDELETE_INVENTORY.json",
+    "QUALIFICATION_TERMINATION_AUDIT.json",
+    "RECOVERY_EQUIVALENCE_PACKET.json",
+    "RECOVERY_EQUIVALENCE_VERIFICATION.json",
+    "TARGET_HOST_QUALIFICATION.json",
+    "TARGET_HOST_QUALIFICATION_VERIFICATION.json",
+)
+C4_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_C4_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json",
+)
+C4_LEDGER_PATH = C4_DOC_PATHS[1]
+C4_STATUS_MAP_PATH = C4_DOC_PATHS[2]
+C4_QUALIFICATION_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v4"
+)
+C4_QUALIFICATION_FILENAMES = C3_QUALIFICATION_FILENAMES
+C4_REVIEW_ROOT = "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3"
+C4_REVIEW_FILENAMES = (
+    "RECOVERY_PRO_REVIEW.md",
+    "RECOVERY_PRO_REVIEW_ADJUDICATION.json",
+    "RECOVERY_PRO_REVIEW_BRIEF.md",
+    "RECOVERY_PRO_REVIEW_CONTEXT.md",
+    "RECOVERY_PRO_REVIEW_MANIFEST.json",
+    "RECOVERY_PRO_REVIEW_REQUEST.md",
+    "RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json",
+    "RECOVERY_PRO_REVIEW_RESPONSE.json",
 )
 C2_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
@@ -204,6 +245,32 @@ C2_TO_C3_NAME_STATUS = {
         )
     },
 }
+C3_TO_E3_NAME_STATUS = {
+    f"{C3_QUALIFICATION_ROOT}/{name}": "A" for name in C3_QUALIFICATION_FILENAMES
+}
+E3_TO_C4_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in (
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+        )
+    },
+    **{path: "A" for path in C4_DOC_PATHS},
+}
+C4_TO_E4_NAME_STATUS = {
+    f"{C4_QUALIFICATION_ROOT}/{name}": "A" for name in C4_QUALIFICATION_FILENAMES
+}
+E4_TO_F4_NAME_STATUS = {f"{C4_REVIEW_ROOT}/{name}": "A" for name in C4_REVIEW_FILENAMES}
 
 PREDECESSOR_PRECEDENT_COMMIT = "e187342"
 PREDECESSOR_PRECEDENT_PATHS = {
@@ -231,7 +298,7 @@ PREDECESSOR_PRECEDENT_PATHS = {
     ),
 }
 
-RECOVERY_CLOSURE_PATHS = (
+RECOVERY_CLOSURE_PATHS_V3 = (
     ".gitignore",
     "data/consciousness_sae_signed_dose_scan/README.md",
     "docs/consciousness_sae_signed_dose_scan/AUDIT_ONLY_RECOVERY_AMENDMENT_20260717.md",
@@ -306,6 +373,19 @@ RECOVERY_CLOSURE_PATHS = (
     "tests/consciousness_sae_signed_dose_scan/test_protocol.py",
     "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
     "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+)
+RECOVERY_CLOSURE_PATHS = (
+    *RECOVERY_CLOSURE_PATHS_V3[
+        : RECOVERY_CLOSURE_PATHS_V3.index(
+            f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
+        )
+    ],
+    *C4_DOC_PATHS,
+    *RECOVERY_CLOSURE_PATHS_V3[
+        RECOVERY_CLOSURE_PATHS_V3.index(
+            f"{C1_QUALIFICATION_INCIDENT_ROOT}/{C1_QUALIFICATION_INCIDENT_FILENAMES[0]}"
+        ) :
+    ],
 )
 
 RECOVERY_RUNTIME_PATH = (
@@ -444,10 +524,7 @@ def _git(*args: str, repo_root: Path = REPO_ROOT) -> bytes:
 
 
 def _status_rows(mapping: Mapping[str, str]) -> list[dict[str, str]]:
-    return [
-        {"path": path, "status": mapping[path]}
-        for path in sorted(mapping)
-    ]
+    return [{"path": path, "status": mapping[path]} for path in sorted(mapping)]
 
 
 def _observed_name_status(
@@ -474,7 +551,7 @@ def _observed_name_status(
     return observed
 
 
-def _freeze_lineage(
+def _freeze_lineage_v3(
     code_freeze_commit: str,
     *,
     repo_root: Path,
@@ -488,59 +565,80 @@ def _freeze_lineage(
             code_freeze_commit,
         ):
             if (
-                _git(
-                    "rev-parse", f"{commit}^{{commit}}", repo_root=repo_root
-                ).decode().strip()
+                _git("rev-parse", f"{commit}^{{commit}}", repo_root=repo_root)
+                .decode()
+                .strip()
                 != commit
             ):
                 raise RecoveryEquivalenceError("freeze commit does not resolve exactly")
-        c1_lineage = _git(
-            "rev-list",
-            "--parents",
-            "-n",
-            "1",
-            C1_RECOVERY_FREEZE_COMMIT,
-            repo_root=repo_root,
-        ).decode().split()
-        c2_lineage = _git(
-            "rev-list",
-            "--parents",
-            "-n",
-            "1",
-            C2_RECOVERY_FREEZE_COMMIT,
-            repo_root=repo_root,
-        ).decode().split()
-        c3_lineage = _git(
-            "rev-list",
-            "--parents",
-            "-n",
-            "1",
-            code_freeze_commit,
-            repo_root=repo_root,
-        ).decode().split()
+        c1_lineage = (
+            _git(
+                "rev-list",
+                "--parents",
+                "-n",
+                "1",
+                C1_RECOVERY_FREEZE_COMMIT,
+                repo_root=repo_root,
+            )
+            .decode()
+            .split()
+        )
+        c2_lineage = (
+            _git(
+                "rev-list",
+                "--parents",
+                "-n",
+                "1",
+                C2_RECOVERY_FREEZE_COMMIT,
+                repo_root=repo_root,
+            )
+            .decode()
+            .split()
+        )
+        c3_lineage = (
+            _git(
+                "rev-list",
+                "--parents",
+                "-n",
+                "1",
+                code_freeze_commit,
+                repo_root=repo_root,
+            )
+            .decode()
+            .split()
+        )
         if c1_lineage != [C1_RECOVERY_FREEZE_COMMIT, ORIGINAL_FREEZE_COMMIT]:
             raise RecoveryEquivalenceError("original-to-C1 direct parent differs")
         if c2_lineage != [C2_RECOVERY_FREEZE_COMMIT, C1_RECOVERY_FREEZE_COMMIT]:
             raise RecoveryEquivalenceError("C1-to-C2 direct parent differs")
         if c3_lineage != [code_freeze_commit, C2_RECOVERY_FREEZE_COMMIT]:
             raise RecoveryEquivalenceError("C2-to-C3 direct parent differs")
-        if _observed_name_status(
-            ORIGINAL_FREEZE_COMMIT,
-            C1_RECOVERY_FREEZE_COMMIT,
-            repo_root=repo_root,
-        ) != ORIGINAL_TO_C1_NAME_STATUS:
+        if (
+            _observed_name_status(
+                ORIGINAL_FREEZE_COMMIT,
+                C1_RECOVERY_FREEZE_COMMIT,
+                repo_root=repo_root,
+            )
+            != ORIGINAL_TO_C1_NAME_STATUS
+        ):
             raise RecoveryEquivalenceError("original-to-C1 name-status map differs")
-        if _observed_name_status(
-            C1_RECOVERY_FREEZE_COMMIT,
-            C2_RECOVERY_FREEZE_COMMIT,
-            repo_root=repo_root,
-        ) != C1_TO_C2_NAME_STATUS:
+        if (
+            _observed_name_status(
+                C1_RECOVERY_FREEZE_COMMIT,
+                C2_RECOVERY_FREEZE_COMMIT,
+                repo_root=repo_root,
+            )
+            != C1_TO_C2_NAME_STATUS
+        ):
             raise RecoveryEquivalenceError("C1-to-C2 name-status map differs")
-        if _observed_name_status(
-            C2_RECOVERY_FREEZE_COMMIT,
-            code_freeze_commit,
-            repo_root=repo_root,
-        ) != C2_TO_C3_NAME_STATUS:
+        if (
+            _observed_name_status(
+                C2_RECOVERY_FREEZE_COMMIT,
+                code_freeze_commit,
+                repo_root=repo_root,
+            )
+            != C2_TO_C3_NAME_STATUS
+        ):
             raise RecoveryEquivalenceError("C2-to-C3 name-status map differs")
     original_rows = _status_rows(ORIGINAL_TO_C1_NAME_STATUS)
     c1_to_c2_rows = _status_rows(C1_TO_C2_NAME_STATUS)
@@ -568,6 +666,117 @@ def _freeze_lineage(
     }
 
 
+def _freeze_lineage(
+    code_freeze_commit: str,
+    *,
+    repo_root: Path,
+    enforce_git: bool,
+) -> dict[str, Any]:
+    """Bind the exact original→C1→C2→C3→E3→C4 code-freeze chain."""
+
+    if enforce_git:
+        commits = (
+            ORIGINAL_FREEZE_COMMIT,
+            C1_RECOVERY_FREEZE_COMMIT,
+            C2_RECOVERY_FREEZE_COMMIT,
+            C3_RECOVERY_FREEZE_COMMIT,
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+        )
+        for commit in commits:
+            resolved = (
+                _git("rev-parse", f"{commit}^{{commit}}", repo_root=repo_root)
+                .decode()
+                .strip()
+            )
+            if resolved != commit:
+                raise RecoveryEquivalenceError("freeze commit does not resolve exactly")
+        parent_pairs = (
+            (ORIGINAL_FREEZE_COMMIT, C1_RECOVERY_FREEZE_COMMIT, "original-to-C1"),
+            (C1_RECOVERY_FREEZE_COMMIT, C2_RECOVERY_FREEZE_COMMIT, "C1-to-C2"),
+            (C2_RECOVERY_FREEZE_COMMIT, C3_RECOVERY_FREEZE_COMMIT, "C2-to-C3"),
+            (C3_RECOVERY_FREEZE_COMMIT, E3_QUALIFICATION_FREEZE_COMMIT, "C3-to-E3"),
+            (E3_QUALIFICATION_FREEZE_COMMIT, code_freeze_commit, "E3-to-C4"),
+        )
+        for parent, child, label in parent_pairs:
+            lineage = (
+                _git("rev-list", "--parents", "-n", "1", child, repo_root=repo_root)
+                .decode()
+                .split()
+            )
+            if lineage != [child, parent]:
+                raise RecoveryEquivalenceError(f"{label} direct parent differs")
+        status_pairs = (
+            (
+                ORIGINAL_FREEZE_COMMIT,
+                C1_RECOVERY_FREEZE_COMMIT,
+                ORIGINAL_TO_C1_NAME_STATUS,
+                "original-to-C1",
+            ),
+            (
+                C1_RECOVERY_FREEZE_COMMIT,
+                C2_RECOVERY_FREEZE_COMMIT,
+                C1_TO_C2_NAME_STATUS,
+                "C1-to-C2",
+            ),
+            (
+                C2_RECOVERY_FREEZE_COMMIT,
+                C3_RECOVERY_FREEZE_COMMIT,
+                C2_TO_C3_NAME_STATUS,
+                "C2-to-C3",
+            ),
+            (
+                C3_RECOVERY_FREEZE_COMMIT,
+                E3_QUALIFICATION_FREEZE_COMMIT,
+                C3_TO_E3_NAME_STATUS,
+                "C3-to-E3",
+            ),
+            (
+                E3_QUALIFICATION_FREEZE_COMMIT,
+                code_freeze_commit,
+                E3_TO_C4_NAME_STATUS,
+                "E3-to-C4",
+            ),
+        )
+        for parent, child, expected, label in status_pairs:
+            if _observed_name_status(parent, child, repo_root=repo_root) != expected:
+                raise RecoveryEquivalenceError(f"{label} name-status map differs")
+
+    maps = {
+        "original_to_c1": ORIGINAL_TO_C1_NAME_STATUS,
+        "c1_to_c2": C1_TO_C2_NAME_STATUS,
+        "c2_to_c3": C2_TO_C3_NAME_STATUS,
+        "c3_to_e3": C3_TO_E3_NAME_STATUS,
+        "e3_to_c4": E3_TO_C4_NAME_STATUS,
+    }
+    core: dict[str, Any] = {
+        "status": "pass_exact_original_C1_C2_C3_E3_C4_successor_lineage",
+        "original_freeze_commit": ORIGINAL_FREEZE_COMMIT,
+        "c1_recovery_freeze_commit": C1_RECOVERY_FREEZE_COMMIT,
+        "c2_recovery_freeze_commit": C2_RECOVERY_FREEZE_COMMIT,
+        "c3_recovery_freeze_commit": C3_RECOVERY_FREEZE_COMMIT,
+        "e3_qualification_freeze_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "c4_code_freeze_commit": code_freeze_commit,
+        "direct_parent_chain": [
+            ORIGINAL_FREEZE_COMMIT,
+            C1_RECOVERY_FREEZE_COMMIT,
+            C2_RECOVERY_FREEZE_COMMIT,
+            C3_RECOVERY_FREEZE_COMMIT,
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+        ],
+    }
+    for label, mapping in maps.items():
+        rows = _status_rows(mapping)
+        core[f"{label}_name_status"] = rows
+        core[f"{label}_name_status_sha256"] = canonical_sha256(rows)
+    return {
+        **core,
+        "original_science_mutation_paths": [],
+        "original_science_bytes_immutable": True,
+    }
+
+
 def git_blob(commit: str, relative_path: str, *, repo_root: Path = REPO_ROOT) -> bytes:
     if ".." in Path(relative_path).parts or Path(relative_path).is_absolute():
         raise RecoveryEquivalenceError("Git-bound path is not canonical relative")
@@ -584,6 +793,251 @@ def _blob_oid(payload: bytes) -> str:
 BlobReader = Callable[[str, str], bytes]
 
 
+def _surface_mapping(value: Mapping[str, Any], label: str) -> dict[str, str]:
+    try:
+        added = value["added"]
+        modified = value["modified"]
+        deleted = value["deleted"]
+    except KeyError as exc:
+        raise RecoveryEquivalenceError(f"{label} status surface is incomplete") from exc
+    if not all(isinstance(rows, list) for rows in (added, modified, deleted)):
+        raise RecoveryEquivalenceError(f"{label} status surface differs")
+    paths = [*added, *modified, *deleted]
+    if (
+        any(not isinstance(path, str) for path in paths)
+        or len(paths) != len(set(paths))
+        or any(Path(path).is_absolute() or ".." in Path(path).parts for path in paths)
+    ):
+        raise RecoveryEquivalenceError(f"{label} status paths differ")
+    return {
+        **{path: "A" for path in added},
+        **{path: "M" for path in modified},
+        **{path: "D" for path in deleted},
+    }
+
+
+def _added_directory_mapping(value: Mapping[str, Any], label: str) -> dict[str, str]:
+    root = value.get("added_directory")
+    filenames = value.get("added_filenames")
+    if (
+        not isinstance(root, str)
+        or not isinstance(filenames, list)
+        or any(
+            not isinstance(name, str) or Path(name).name != name for name in filenames
+        )
+        or len(filenames) != len(set(filenames))
+    ):
+        raise RecoveryEquivalenceError(f"{label} added-directory surface differs")
+    return {f"{root}/{name}": "A" for name in filenames}
+
+
+def _c4_authority_documents(
+    code_freeze_commit: str, reader: BlobReader
+) -> dict[str, Any]:
+    """Validate the two self-hashed C4 authority documents at C4."""
+
+    status_raw = reader(code_freeze_commit, C4_STATUS_MAP_PATH)
+    ledger_raw = reader(code_freeze_commit, C4_LEDGER_PATH)
+    status_map = _json_bytes(status_raw, "C4 status map")
+    ledger = _json_bytes(ledger_raw, "C4 cycle ledger")
+    status_receipt = _self_hash(status_map, "receipt_sha256", "C4 status map")
+    ledger_receipt = _self_hash(ledger, "receipt_sha256", "C4 cycle ledger")
+
+    if set(status_map) != {
+        "base_commit",
+        "c3_code_commit",
+        "c3_to_e3",
+        "e3_to_c4",
+        "c4_to_e4",
+        "e4_to_f4",
+        "excluded_preexisting_user_paths",
+        "receipt_kind",
+        "receipt_sha256",
+        "schema_version",
+        "status",
+        "study_id",
+    }:
+        raise RecoveryEquivalenceError("C4 status-map schema differs")
+    if (
+        status_map.get("schema_version") != 1
+        or status_map.get("study_id") != "consciousness_sae_signed_dose_scan_v1"
+        or status_map.get("receipt_kind")
+        != "consciousness_sae_signed_dose_scan_c4_status_map_v1"
+        or status_map.get("base_commit") != E3_QUALIFICATION_FREEZE_COMMIT
+        or status_map.get("c3_code_commit") != C3_RECOVERY_FREEZE_COMMIT
+    ):
+        raise RecoveryEquivalenceError("C4 status-map identity differs")
+    c3_to_e3 = status_map.get("c3_to_e3")
+    e3_to_c4 = status_map.get("e3_to_c4")
+    c4_to_e4 = status_map.get("c4_to_e4")
+    e4_to_f4 = status_map.get("e4_to_f4")
+    if not all(
+        isinstance(value, Mapping) for value in (c3_to_e3, e3_to_c4, c4_to_e4, e4_to_f4)
+    ):
+        raise RecoveryEquivalenceError("C4 status-map edge is absent")
+    if (
+        _added_directory_mapping(c3_to_e3, "C3-to-E3") != C3_TO_E3_NAME_STATUS
+        or c3_to_e3.get("required_direct_parent") != C3_RECOVERY_FREEZE_COMMIT
+        or c3_to_e3.get("required_evidence_commit") != E3_QUALIFICATION_FREEZE_COMMIT
+        or c3_to_e3.get("other_paths_forbidden") is not True
+        or _surface_mapping(e3_to_c4, "E3-to-C4") != E3_TO_C4_NAME_STATUS
+        or e3_to_c4.get("required_direct_parent") != E3_QUALIFICATION_FREEZE_COMMIT
+        or e3_to_c4.get("parent_count") != 1
+        or e3_to_c4.get("other_paths_forbidden") is not True
+        or _added_directory_mapping(c4_to_e4, "C4-to-E4") != C4_TO_E4_NAME_STATUS
+        or c4_to_e4.get("other_paths_forbidden") is not True
+        or _added_directory_mapping(e4_to_f4, "E4-to-F4") != E4_TO_F4_NAME_STATUS
+        or e4_to_f4.get("other_paths_forbidden") is not True
+        or e4_to_f4.get("new_paid_review_call_forbidden") is not True
+        or e4_to_f4.get("existing_paid_artifacts_are_immutable") is not True
+        or e4_to_f4.get("review_input_anchor_commit") != E3_QUALIFICATION_FREEZE_COMMIT
+    ):
+        raise RecoveryEquivalenceError("C4 status-map edge contract differs")
+
+    authority = ledger.get("successor_authority_binding")
+    authority_hash = ledger.get("successor_authority_binding_sha256")
+    if (
+        not isinstance(authority, Mapping)
+        or not isinstance(authority_hash, str)
+        or authority_hash != canonical_sha256(authority)
+    ):
+        raise RecoveryEquivalenceError("C4 successor authority binding differs")
+    status_file_hash = sha256_bytes(status_raw)
+    required_authority = {
+        "study_id": "consciousness_sae_signed_dose_scan_v1",
+        "human_authorization_statement": "Authorize C4",
+        "c3_code_commit": C3_RECOVERY_FREEZE_COMMIT,
+        "c3_evidence_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "global_qualification_ordinal": 4,
+        "qualification_attempt_number": 1,
+        "qualification_protocol_version": (
+            "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
+        ),
+        "qualification_namespace": "audit_recovery_host_qualification_v4",
+        "recovery_protocol_version": (
+            "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4"
+        ),
+        "recovery_namespace": "audit_only_recovery_v4",
+        "review_namespace": "audit_recovery_pro_review_v3",
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "new_paid_review_call_count": 0,
+        "no_automatic_retry": True,
+        "no_model_forward": True,
+        "qualification_and_review_raw_or_outcome_access": False,
+        "status_map_file_sha256": status_file_hash,
+        "status_map_receipt_sha256": status_receipt,
+    }
+    if any(authority.get(key) != value for key, value in required_authority.items()):
+        raise RecoveryEquivalenceError("C4 successor authority semantics differ")
+    if authority.get("rejected_pod_ids") != [
+        "wl8obvtuq0ax8t",
+        "69d9kxugxuf6up",
+        "g2azyjkpm17f1s",
+        "6am4twond0cd8v",
+    ]:
+        raise RecoveryEquivalenceError("C4 rejected-pod lineage differs")
+    if (
+        ledger.get("schema_version") != 1
+        or ledger.get("study_id") != "consciousness_sae_signed_dose_scan_v1"
+        or ledger.get("qualification_cycle_version")
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4"
+        or ledger.get("qualification_protocol_version")
+        != required_authority["qualification_protocol_version"]
+        or ledger.get("recovery_protocol_version")
+        != required_authority["recovery_protocol_version"]
+    ):
+        raise RecoveryEquivalenceError("C4 cycle-ledger identity differs")
+    return {
+        "ledger_path": C4_LEDGER_PATH,
+        "ledger_file_sha256": sha256_bytes(ledger_raw),
+        "ledger_receipt_sha256": ledger_receipt,
+        "status_map_path": C4_STATUS_MAP_PATH,
+        "status_map_file_sha256": status_file_hash,
+        "status_map_receipt_sha256": status_receipt,
+        "successor_authority_binding_sha256": authority_hash,
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "global_qualification_ordinal": 4,
+        "new_paid_review_call_count": 0,
+        "outcome_input_paths": [],
+        "model_forward_count": 0,
+    }
+
+
+def verify_v4_final_freeze_lineage(
+    *,
+    code_freeze_commit: str,
+    evidence_freeze_commit: str,
+    final_freeze_commit: str,
+    repo_root: Path = REPO_ROOT,
+) -> dict[str, Any]:
+    """Verify the dynamic C4→E4→F4 tail before recovery authority issues."""
+
+    commits = (
+        code_freeze_commit,
+        evidence_freeze_commit,
+        final_freeze_commit,
+    )
+    if any(HEX40_RE.fullmatch(commit) is None for commit in commits):
+        raise RecoveryEquivalenceError("C4 final freeze commit is malformed")
+    for commit in (*commits, E3_QUALIFICATION_FREEZE_COMMIT):
+        resolved = (
+            _git("rev-parse", f"{commit}^{{commit}}", repo_root=repo_root)
+            .decode()
+            .strip()
+        )
+        if resolved != commit:
+            raise RecoveryEquivalenceError("C4 final freeze commit differs")
+    edges = (
+        (
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+            E3_TO_C4_NAME_STATUS,
+            "E3-to-C4",
+        ),
+        (
+            code_freeze_commit,
+            evidence_freeze_commit,
+            C4_TO_E4_NAME_STATUS,
+            "C4-to-E4",
+        ),
+        (
+            evidence_freeze_commit,
+            final_freeze_commit,
+            E4_TO_F4_NAME_STATUS,
+            "E4-to-F4",
+        ),
+    )
+    for parent, child, expected, label in edges:
+        lineage = (
+            _git("rev-list", "--parents", "-n", "1", child, repo_root=repo_root)
+            .decode()
+            .split()
+        )
+        if lineage != [child, parent]:
+            raise RecoveryEquivalenceError(f"{label} direct parent differs")
+        if _observed_name_status(parent, child, repo_root=repo_root) != expected:
+            raise RecoveryEquivalenceError(f"{label} name-status map differs")
+    core = {
+        "status": "pass_exact_C4_E4_F4_final_freeze_lineage",
+        "direct_parent_chain": [
+            E3_QUALIFICATION_FREEZE_COMMIT,
+            code_freeze_commit,
+            evidence_freeze_commit,
+            final_freeze_commit,
+        ],
+        "e3_to_c4_name_status_sha256": canonical_sha256(
+            _status_rows(E3_TO_C4_NAME_STATUS)
+        ),
+        "c4_to_e4_name_status_sha256": canonical_sha256(
+            _status_rows(C4_TO_E4_NAME_STATUS)
+        ),
+        "e4_to_f4_name_status_sha256": canonical_sha256(
+            _status_rows(E4_TO_F4_NAME_STATUS)
+        ),
+    }
+    return {**core, "receipt_sha256": canonical_sha256(core)}
+
+
 def _record(commit: str, path: str, reader: BlobReader) -> dict[str, Any]:
     raw = reader(commit, path)
     return {
@@ -595,7 +1049,9 @@ def _record(commit: str, path: str, reader: BlobReader) -> dict[str, Any]:
 
 
 def _original_bindings(plan_audit_path: Path, reader: BlobReader) -> dict[str, Any]:
-    records = [_record(ORIGINAL_FREEZE_COMMIT, path, reader) for path in ORIGINAL_PLAN_PATHS]
+    records = [
+        _record(ORIGINAL_FREEZE_COMMIT, path, reader) for path in ORIGINAL_PLAN_PATHS
+    ]
     by_name = {Path(row["path"]).name: row for row in records}
     manifest = _json_bytes(
         reader(ORIGINAL_FREEZE_COMMIT, f"{ORIGINAL_PLAN_ROOT}/plan_manifest.json"),
@@ -637,15 +1093,16 @@ def _original_bindings(plan_audit_path: Path, reader: BlobReader) -> dict[str, A
         details = plan_audit_path.lstat()
         raw_audit = plan_audit_path.read_bytes()
     except OSError as exc:
-        raise RecoveryEquivalenceError("original independent plan audit is missing") from exc
+        raise RecoveryEquivalenceError(
+            "original independent plan audit is missing"
+        ) from exc
     if not stat.S_ISREG(details.st_mode) or details.st_nlink != 1:
         raise RecoveryEquivalenceError("original independent plan audit file differs")
     plan_audit = _json_bytes(raw_audit, "original independent plan audit")
     audit_hash = _self_hash(plan_audit, "receipt_sha256", "original plan audit")
     if (
         audit_hash != ORIGINAL_PLAN_AUDIT_RECEIPT
-        or plan_audit.get("status")
-        != "pass_prospectively_frozen_exploratory_plan"
+        or plan_audit.get("status") != "pass_prospectively_frozen_exploratory_plan"
         or plan_audit.get("plan_manifest_sha256") != manifest_hash
         or plan_audit.get("source_inventory_sha256")
         != ORIGINAL_SOURCE_INVENTORY_RECEIPT
@@ -676,37 +1133,52 @@ def _recovery_closure(
     *,
     repo_root: Path,
     enforce_git: bool,
+    closure_paths: tuple[str, ...] = RECOVERY_CLOSURE_PATHS,
 ) -> dict[str, Any]:
     if HEX40_RE.fullmatch(code_freeze_commit) is None:
         raise RecoveryEquivalenceError("code-freeze commit is malformed")
     if enforce_git:
-        resolved = _git(
-            "rev-parse", f"{code_freeze_commit}^{{commit}}", repo_root=repo_root
-        ).decode().strip()
+        resolved = (
+            _git("rev-parse", f"{code_freeze_commit}^{{commit}}", repo_root=repo_root)
+            .decode()
+            .strip()
+        )
         if resolved != code_freeze_commit:
-            raise RecoveryEquivalenceError("code-freeze commit does not resolve exactly")
+            raise RecoveryEquivalenceError(
+                "code-freeze commit does not resolve exactly"
+            )
         ancestry = subprocess.run(
-            ["git", "merge-base", "--is-ancestor", ORIGINAL_FREEZE_COMMIT, code_freeze_commit],
+            [
+                "git",
+                "merge-base",
+                "--is-ancestor",
+                ORIGINAL_FREEZE_COMMIT,
+                code_freeze_commit,
+            ],
             cwd=repo_root,
             check=False,
         )
         if ancestry.returncode:
             raise RecoveryEquivalenceError("original freeze is not an ancestor of C")
     rows = []
-    for path in sorted(RECOVERY_CLOSURE_PATHS):
+    for path in sorted(closure_paths):
         row = _record(code_freeze_commit, path, reader)
         live_path = repo_root / path
         try:
             details = live_path.lstat()
             live = live_path.read_bytes()
         except OSError as exc:
-            raise RecoveryEquivalenceError(f"recovery closure file is missing: {path}") from exc
+            raise RecoveryEquivalenceError(
+                f"recovery closure file is missing: {path}"
+            ) from exc
         if (
             not stat.S_ISREG(details.st_mode)
             or details.st_nlink != 1
             or live != reader(code_freeze_commit, path)
         ):
-            raise RecoveryEquivalenceError(f"recovery closure live bytes differ: {path}")
+            raise RecoveryEquivalenceError(
+                f"recovery closure live bytes differ: {path}"
+            )
         rows.append(row)
     return {
         "code_freeze_commit": code_freeze_commit,
@@ -727,7 +1199,9 @@ def _runtime_surface(code_freeze_commit: str, reader: BlobReader) -> dict[str, A
     }
     missing = sorted(set(REQUIRED_RUNTIME_SYMBOLS) - set(symbols))
     if missing:
-        raise RecoveryEquivalenceError(f"recovery runtime symbols are missing: {missing}")
+        raise RecoveryEquivalenceError(
+            f"recovery runtime symbols are missing: {missing}"
+        )
     symbol_rows = []
     for name in REQUIRED_RUNTIME_SYMBOLS:
         node = symbols[name]
@@ -751,12 +1225,16 @@ def _runtime_surface(code_freeze_commit: str, reader: BlobReader) -> dict[str, A
 
 
 def _precedent(reader: BlobReader) -> dict[str, Any]:
-    resolved = _git("rev-parse", f"{PREDECESSOR_PRECEDENT_COMMIT}^{{commit}}").decode().strip()
+    resolved = (
+        _git("rev-parse", f"{PREDECESSOR_PRECEDENT_COMMIT}^{{commit}}").decode().strip()
+    )
     rows = []
     for path, expected_hash in sorted(PREDECESSOR_PRECEDENT_PATHS.items()):
         raw = reader(resolved, path)
         if sha256_bytes(raw) != expected_hash:
-            raise RecoveryEquivalenceError(f"predecessor recovery precedent differs: {path}")
+            raise RecoveryEquivalenceError(
+                f"predecessor recovery precedent differs: {path}"
+            )
         rows.append(
             {
                 "path": path,
@@ -791,9 +1269,13 @@ def scientific_projection(
 def _compatibility_proof() -> dict[str, Any]:
     if not set(REQUIRED_J_LAYERS) < set(PINNED_AVAILABLE_J_LAYERS):
         raise RecoveryEquivalenceError("required J layers are not a strict subset")
-    filtered = [layer for layer in PINNED_AVAILABLE_J_LAYERS if layer in REQUIRED_J_LAYERS]
+    filtered = [
+        layer for layer in PINNED_AVAILABLE_J_LAYERS if layer in REQUIRED_J_LAYERS
+    ]
     if tuple(filtered) != REQUIRED_J_LAYERS:
-        raise RecoveryEquivalenceError("J-layer filter does not preserve required order")
+        raise RecoveryEquivalenceError(
+            "J-layer filter does not preserve required order"
+        )
     projection = {
         "audit_fields": list(SCIENTIFIC_AUDIT_FIELDS),
         "summary_fields": list(SCIENTIFIC_SUMMARY_FIELDS),
@@ -835,37 +1317,57 @@ def build_packet(
     repo_root: Path = REPO_ROOT,
     enforce_git: bool = True,
     blob_reader: BlobReader | None = None,
+    equivalence_protocol_version: str = RECOVERY_EQUIVALENCE_PROTOCOL_VERSION,
 ) -> dict[str, Any]:
     if blob_reader is None:
         if enforce_git:
+
             def reader(commit: str, path: str) -> bytes:
                 return git_blob(commit, path, repo_root=repo_root)
         else:
+
             def reader(_commit: str, path: str) -> bytes:
                 return (repo_root / path).read_bytes()
     else:
         reader = blob_reader
     original = _original_bindings(plan_audit_path, reader)
-    freeze_lineage = _freeze_lineage(
-        code_freeze_commit,
-        repo_root=repo_root,
-        enforce_git=enforce_git,
+    if equivalence_protocol_version not in {
+        RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3,
+        RECOVERY_EQUIVALENCE_PROTOCOL_VERSION,
+    }:
+        raise RecoveryEquivalenceError("recovery-equivalence protocol version differs")
+    is_v4 = equivalence_protocol_version == RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
+    freeze_lineage = (
+        _freeze_lineage(
+            code_freeze_commit,
+            repo_root=repo_root,
+            enforce_git=enforce_git,
+        )
+        if is_v4
+        else _freeze_lineage_v3(
+            code_freeze_commit,
+            repo_root=repo_root,
+            enforce_git=enforce_git,
+        )
     )
     closure = _recovery_closure(
         code_freeze_commit,
         reader,
         repo_root=repo_root,
         enforce_git=enforce_git,
+        closure_paths=(RECOVERY_CLOSURE_PATHS if is_v4 else RECOVERY_CLOSURE_PATHS_V3),
     )
     core = {
         "schema_version": 1,
-        "packet_type": "signed_dose_outcome_blind_audit_recovery_equivalence_v3",
+        "packet_type": (
+            "signed_dose_outcome_blind_audit_recovery_equivalence_v4"
+            if is_v4
+            else "signed_dose_outcome_blind_audit_recovery_equivalence_v3"
+        ),
         "status": "pass_source_design_and_compatibility_bound_no_outcomes_loaded",
         "study_id": "consciousness_sae_signed_dose_scan_v1",
         "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
-        "recovery_equivalence_protocol_version": (
-            RECOVERY_EQUIVALENCE_PROTOCOL_VERSION
-        ),
+        "recovery_equivalence_protocol_version": equivalence_protocol_version,
         "outcome_input_paths": [],
         "raw_run_opened": False,
         "compact_result_opened": False,
@@ -884,6 +1386,10 @@ def build_packet(
         "predecessor_recovery_precedent": _precedent(reader),
         "compatibility_proof": _compatibility_proof(),
     }
+    if is_v4:
+        core["c4_authority_documents"] = _c4_authority_documents(
+            code_freeze_commit, reader
+        )
     return {**core, "packet_sha256": canonical_sha256(core)}
 
 

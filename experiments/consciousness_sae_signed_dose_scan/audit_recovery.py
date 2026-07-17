@@ -42,7 +42,7 @@ from experiments.consciousness_sae_signed_dose_scan import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RECOVERY_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v3"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4"
 )
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -57,14 +57,21 @@ RECOVERY_MAX_SPEND_USD = 6.0
 ORIGINAL_FREEZE_COMMIT = "a084caafc2ec27860044d80d3b33912f656fd08a"
 C1_RECOVERY_FREEZE_COMMIT = "f1307fc56d9d8fbd0625bf30524e6eea16575326"
 C2_RECOVERY_FREEZE_COMMIT = "79db4e7526948a3c826e3dc62adbf2895a5b5528"
+C3_RECOVERY_FREEZE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
+E3_QUALIFICATION_FREEZE_COMMIT = "44d9e178567bbf31e524b79e4434474a4e5d888e"
 PUBLIC_J_CHECKPOINT_BYTES = 10_603_226_027
 PUBLIC_J_SOURCE_DTYPE = "torch.float16"
 PUBLIC_J_SOURCE_SHAPE = (8192, 8192)
 REJECTED_PREDECESSOR_POD_IDS = frozenset(
-    {"wl8obvtuq0ax8t", "69d9kxugxuf6up", "g2azyjkpm17f1s"}
+    {
+        "wl8obvtuq0ax8t",
+        "69d9kxugxuf6up",
+        "g2azyjkpm17f1s",
+        "6am4twond0cd8v",
+    }
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
-    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
+    "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
 )
 C1_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
@@ -102,6 +109,12 @@ C3_DOC_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json",
 )
+C4_DOC_PATHS = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "AUDIT_ONLY_RECOVERY_C4_AMENDMENT_20260717.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_C4_STATUS_MAP.json",
+)
 C2_QUALIFICATION_INCIDENT_ROOT = (
     "docs/consciousness_sae_signed_dose_scan/"
     "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
@@ -130,7 +143,10 @@ C2_QUALIFICATION_INCIDENT_FILENAMES = (
     "STATUS_0001.json",
     "TERMINATION_AUDIT.json",
 )
-QUALIFICATION_INCIDENT_ROOT = C2_QUALIFICATION_INCIDENT_ROOT
+QUALIFICATION_INCIDENT_ROOT = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_host_qualification_v3"
+)
 QUALIFICATION_INCIDENT_FILENAMES = C2_QUALIFICATION_INCIDENT_FILENAMES
 MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
     ".gitignore",
@@ -147,6 +163,7 @@ MANDATORY_C_SOURCE_TEST_INCIDENT_PATHS = (
     "docs/consciousness_sae_signed_dose_scan/RECOVERY_REPRODUCTION.md",
     *V2_SUCCESSOR_DOC_PATHS,
     *C3_DOC_PATHS,
+    *C4_DOC_PATHS,
     *(
         f"{C1_QUALIFICATION_INCIDENT_ROOT}/{name}"
         for name in C1_QUALIFICATION_INCIDENT_FILENAMES
@@ -298,9 +315,36 @@ C2_TO_C3_NAME_STATUS = {
         }
     },
 }
-QUALIFICATION_DIRECTORY = (
+C3_QUALIFICATION_DIRECTORY = (
     "docs/consciousness_sae_signed_dose_scan/"
     "audit_recovery_host_qualification_v3"
+)
+C3_TO_E3_NAME_STATUS = {
+    f"{C3_QUALIFICATION_DIRECTORY}/{name}": "A"
+    for name in MANDATORY_E_QUALIFICATION_FILENAMES
+}
+E3_TO_C4_NAME_STATUS = {
+    **{
+        path: "M"
+        for path in {
+            "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+            "experiments/consciousness_sae_signed_dose_scan/qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/recovery_host_qualification.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_qualification_incident.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+            "experiments/consciousness_sae_signed_dose_scan/verify_recovery_host_qualification.py",
+            "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+            "tests/consciousness_sae_signed_dose_scan/test_qualification_incident.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py",
+            "tests/consciousness_sae_signed_dose_scan/test_recovery_host_qualification.py",
+        }
+    },
+    **{path: "A" for path in C4_DOC_PATHS},
+}
+QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_signed_dose_scan/"
+    "audit_recovery_host_qualification_v4"
 )
 MANDATORY_E_QUALIFICATION_PATHS = frozenset(
     f"{QUALIFICATION_DIRECTORY}/{name}"
@@ -342,6 +386,9 @@ EXPECTED_REVIEW_INSTRUCTIONS_SHA256 = (
 )
 RECOVERY_REVIEW_MAX_OUTPUT_TOKENS = 4_000
 RECOVERY_REVIEW_REASONING_EFFORT = "high"
+RECOVERY_REVIEW_VERDICTS = frozenset(
+    {"READY TO FREEZE", "READY AFTER SPECIFIED FIXES", "NOT READY TO FREEZE"}
+)
 EXPECTED_INCIDENT_CLOSURE_FILE_SHA256 = (
     "7afe9aa8bae10c2965f40eab92fbbb331a51ad0fd2a0895d6fc55bd0af7cbd3c"
 )
@@ -560,10 +607,22 @@ def _require_exact_freeze_chain(
         "C2 recovery freeze",
     )
     _require_direct_parent(
-        repo_root, code_commit, C2_RECOVERY_FREEZE_COMMIT, "C3 code freeze"
+        repo_root,
+        C3_RECOVERY_FREEZE_COMMIT,
+        C2_RECOVERY_FREEZE_COMMIT,
+        "C3 code freeze",
     )
-    _require_direct_parent(repo_root, evidence_commit, code_commit, "evidence freeze")
-    _require_direct_parent(repo_root, final_commit, evidence_commit, "final freeze")
+    _require_direct_parent(
+        repo_root,
+        E3_QUALIFICATION_FREEZE_COMMIT,
+        C3_RECOVERY_FREEZE_COMMIT,
+        "E3 qualification freeze",
+    )
+    _require_direct_parent(
+        repo_root, code_commit, E3_QUALIFICATION_FREEZE_COMMIT, "C4 code freeze"
+    )
+    _require_direct_parent(repo_root, evidence_commit, code_commit, "E4 evidence freeze")
+    _require_direct_parent(repo_root, final_commit, evidence_commit, "F4 final freeze")
     _require_exact_name_status(
         repo_root,
         parent=ORIGINAL_FREEZE_COMMIT,
@@ -581,23 +640,37 @@ def _require_exact_freeze_chain(
     _require_exact_name_status(
         repo_root,
         parent=C2_RECOVERY_FREEZE_COMMIT,
-        child=code_commit,
+        child=C3_RECOVERY_FREEZE_COMMIT,
         expected=C2_TO_C3_NAME_STATUS,
         label="C2-to-C3 freeze",
+    )
+    _require_exact_name_status(
+        repo_root,
+        parent=C3_RECOVERY_FREEZE_COMMIT,
+        child=E3_QUALIFICATION_FREEZE_COMMIT,
+        expected=C3_TO_E3_NAME_STATUS,
+        label="C3-to-E3 freeze",
+    )
+    _require_exact_name_status(
+        repo_root,
+        parent=E3_QUALIFICATION_FREEZE_COMMIT,
+        child=code_commit,
+        expected=E3_TO_C4_NAME_STATUS,
+        label="E3-to-C4 freeze",
     )
     _require_exact_name_status(
         repo_root,
         parent=code_commit,
         child=evidence_commit,
         expected={path: "A" for path in qualification_paths},
-        label="evidence freeze",
+        label="E4 evidence freeze",
     )
     _require_exact_name_status(
         repo_root,
         parent=evidence_commit,
         child=final_commit,
         expected={path: "A" for path in MANDATORY_F_ADDITION_PATHS},
-        label="final freeze",
+        label="F4 final freeze",
     )
 
 
@@ -1330,10 +1403,10 @@ def _validate_qualification_evidence(
     code_freeze_commit: str,
 ) -> dict[str, Any]:
     successor_authority = (
-        verify_qualification_incident.successor_c3_authority_binding(
+        verify_qualification_incident.successor_c4_authority_binding(
             repo_root / QUALIFICATION_INCIDENT_ROOT,
             repo_root
-            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json",
+            / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json",
         )
     )
     if (
@@ -1406,10 +1479,10 @@ def _validate_qualification_evidence(
     if (
         marker.get("status") != "attempt_started_irrevocably"
         or marker.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
         or marker.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
-        or marker.get("global_qualification_ordinal") != 3
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4"
+        or marker.get("global_qualification_ordinal") != 4
         or marker.get("successor_qualification_attempt") != 1
         or marker.get("attempt_number") != 1
         or marker.get("retry_authorized") is not False
@@ -1467,12 +1540,16 @@ def _validate_qualification_evidence(
         "fresh_ownership",
         "independent_plan_audit",
         "pinned_j_checkpoint",
-        "predecessor_qualification_failure",
-        "qualification_incident_cause",
-        "qualification_incident_closure",
-        "qualification_incident_schema",
-        "qualification_incident_verification",
-        "recovery_cycle_ledger_v3",
+        "predecessor_qualification_attempt_marker",
+        "predecessor_qualification_frozen_termination",
+        "predecessor_qualification_postdelete_inventory",
+        "predecessor_qualification_termination_audit",
+        "predecessor_recovery_equivalence_packet",
+        "predecessor_recovery_equivalence_verification",
+        "predecessor_target_host_qualification",
+        "predecessor_target_host_qualification_verification",
+        "recovery_c4_status_map",
+        "recovery_cycle_ledger_v4",
     ]
     target_input_projection = [
         {"role": row.get("role"), "path": row.get("path")}
@@ -1502,10 +1579,10 @@ def _validate_qualification_evidence(
         target.get("status")
         != "pass_one_shot_zero_forward_target_host_qualification"
         or target.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
         or target.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
-        or target.get("global_qualification_ordinal") != 3
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4"
+        or target.get("global_qualification_ordinal") != 4
         or target.get("successor_qualification_attempt") != 1
         or target.get("attempt_number") != 1
         or target.get("retry_authorized") is not False
@@ -1609,10 +1686,10 @@ def _validate_qualification_evidence(
         verified.get("status")
         != "pass_independent_target_host_qualification_verified"
         or verified.get("qualification_protocol_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
+        != "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
         or verified.get("qualification_cycle_version")
-        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
-        or verified.get("global_qualification_ordinal") != 3
+        != "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4"
+        or verified.get("global_qualification_ordinal") != 4
         or verified.get("successor_qualification_attempt") != 1
         or verified.get("qualification_receipt_sha256") != target_hash
         or verified.get("attempt_marker_receipt_sha256") != marker_hash
@@ -1995,28 +2072,74 @@ def _reconstruct_review_input(
     return "\n".join(lines).rstrip() + "\n"
 
 
+def _provider_verdict(review_text: str) -> str:
+    lines = review_text.splitlines()
+    if lines.count("# Verdict") != 1:
+        raise AuditRecoveryError("provider review verdict section differs")
+    start = lines.index("# Verdict") + 1
+    end = next(
+        (index for index in range(start, len(lines)) if lines[index].startswith("# ")),
+        len(lines),
+    )
+    nonblank = [
+        (index, lines[index])
+        for index in range(start, end)
+        if lines[index].strip()
+    ]
+    if not nonblank or nonblank[-1][1] not in RECOVERY_REVIEW_VERDICTS:
+        raise AuditRecoveryError("provider review verdict differs")
+    verdict_index, verdict = nonblank[-1]
+
+    standalone: list[tuple[int, str]] = []
+    emphasized = re.compile(
+        r"^(?:\*\*|__)?(READY TO FREEZE|READY AFTER SPECIFIED FIXES|"
+        r"NOT READY TO FREEZE)(?:\*\*|__)?$"
+    )
+    for index, line in enumerate(lines):
+        match = emphasized.fullmatch(line.strip())
+        if match:
+            standalone.append((index, match.group(1)))
+    if standalone != [(verdict_index, verdict)]:
+        raise AuditRecoveryError("provider review verdict is duplicated or conflicts")
+    return verdict
+
+
 def _provider_finding_headings(review_text: str) -> list[str]:
     lines = review_text.splitlines()
     identifiers: list[str] = []
+    none_sections = 0
     for section, prefix in (
         ("# Blocking findings", "B"),
         ("# Important non-blocking findings", "I"),
     ):
-        try:
-            start = lines.index(section) + 1
-        except ValueError as exc:
-            raise AuditRecoveryError("provider review finding section differs") from exc
+        if lines.count(section) != 1:
+            raise AuditRecoveryError("provider review finding section differs")
+        start = lines.index(section) + 1
         end = next(
             (index for index in range(start, len(lines)) if lines[index].startswith("# ")),
             len(lines),
         )
-        for line in lines[start:end]:
+        section_lines = [line for line in lines[start:end] if line.strip()]
+        if section_lines == ["None."]:
+            none_sections += 1
+            continue
+        section_identifiers: list[str] = []
+        for line in section_lines:
             match = re.fullmatch(
-                rf"#{{2,6}}\s+({prefix}[0-9]{{2}})(?:\s*[:—-].*|\s+.*)?",
+                r"#{2,6}\s+([BI][0-9]{2})(?:\s*[:—-].*|\s+.*)?",
                 line,
             )
             if match:
-                identifiers.append(match.group(1))
+                if not match.group(1).startswith(prefix):
+                    raise AuditRecoveryError(
+                        "provider review finding section differs"
+                    )
+                section_identifiers.append(match.group(1))
+        if not section_identifiers or "None." in section_lines:
+            raise AuditRecoveryError("provider review finding section differs")
+        identifiers.extend(section_identifiers)
+    if not identifiers and none_sections != 2:
+        raise AuditRecoveryError("provider review empty findings differ")
     if len(identifiers) != len(set(identifiers)):
         raise AuditRecoveryError("provider review finding IDs are duplicated")
     return identifiers
@@ -2027,14 +2150,20 @@ def _adjudication_decision_ids(
 ) -> list[str]:
     if (
         not isinstance(decisions, list)
-        or not decisions
         or not all(isinstance(row, Mapping) for row in decisions)
+        or not isinstance(finding_ids, list)
+        or not all(isinstance(finding_id, str) for finding_id in finding_ids)
     ):
+        raise AuditRecoveryError("recovery adjudication decision coverage differs")
+    if not provider_finding_ids:
+        if decisions or finding_ids:
+            raise AuditRecoveryError("recovery adjudication decision coverage differs")
+        return []
+    if not decisions:
         raise AuditRecoveryError("recovery adjudication decisions are empty")
     normalized = [str(row.get("finding_id")) for row in decisions]
     if (
-        not provider_finding_ids
-        or normalized != finding_ids
+        normalized != finding_ids
         or normalized != list(provider_finding_ids)
         or len(normalized) != len(set(normalized))
         or any(
@@ -2048,6 +2177,45 @@ def _adjudication_decision_ids(
     ):
         raise AuditRecoveryError("recovery adjudication decision coverage differs")
     return normalized
+
+
+def _validated_review_cost(
+    response: Mapping[str, Any], manifest: Mapping[str, Any]
+) -> float:
+    usage = response.get("usage")
+    details = usage.get("input_tokens_details") if isinstance(usage, Mapping) else None
+    try:
+        input_tokens = int(usage["input_tokens"])
+        output_tokens = int(usage["output_tokens"])
+        cache_tokens = int((details or {}).get("cache_write_tokens") or 0)
+        input_rate = float(manifest["input_rate_usd_per_million"])
+        cache_rate = float(manifest["cache_write_rate_usd_per_million"])
+        output_rate = float(manifest["output_rate_usd_per_million"])
+        reported_cost = float(
+            manifest["completed_response_cost_usd_conservative"]
+        )
+    except (KeyError, TypeError, ValueError, OverflowError) as exc:
+        raise AuditRecoveryError("provider review usage/cost differs") from exc
+    recomputed_cost = (
+        input_tokens * input_rate
+        + cache_tokens * cache_rate
+        + output_tokens * output_rate
+    ) / 1_000_000
+    if (
+        any(value < 0 for value in (input_tokens, output_tokens, cache_tokens))
+        or not all(
+            math.isfinite(value)
+            for value in (input_rate, cache_rate, output_rate, reported_cost)
+        )
+        or input_rate != 5.0
+        or cache_rate != 6.25
+        or output_rate != 30.0
+        or manifest.get("usage") != usage
+        or not math.isclose(reported_cost, recomputed_cost, abs_tol=1e-12)
+        or reported_cost > 1.25
+    ):
+        raise AuditRecoveryError("provider review usage/cost differs")
+    return recomputed_cost
 
 
 def _response_output_text(response: Mapping[str, Any]) -> str:
@@ -2187,14 +2355,7 @@ def _validate_adjudication(
     response_id = response.get("id")
     response_model = response.get("model")
     response_metadata = response.get("metadata")
-    negative_verdict = any(
-        re.match(
-            r"^(?:\*\*|__)?(?:NOT READY TO FREEZE|READY AFTER SPECIFIED FIXES)",
-            line.strip(),
-        )
-        is not None
-        for line in review_text.splitlines()
-    )
+    provider_verdict = _provider_verdict(review_text)
     response_sha = hashlib.sha256(
         json.dumps(response, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()
@@ -2235,8 +2396,7 @@ def _validate_adjudication(
         or response.get("store") is not False
         or response.get("tools") != []
         or response_text != review_text
-        or review_text.rstrip().splitlines()[-1] != "READY TO FREEZE"
-        or negative_verdict
+        or provider_verdict != "READY TO FREEZE"
         or manifest.get("status") != "completed"
         or manifest.get("model") != "gpt-5.6-sol"
         or manifest.get("official_latest_model") != "gpt-5.6-sol"
@@ -2273,39 +2433,7 @@ def _validate_adjudication(
     ):
         raise AuditRecoveryError("provider review artifact chain differs")
 
-    usage = response.get("usage")
-    details = usage.get("input_tokens_details") if isinstance(usage, Mapping) else None
-    try:
-        input_tokens = int(usage["input_tokens"])
-        output_tokens = int(usage["output_tokens"])
-        cache_tokens = int((details or {}).get("cache_write_tokens") or 0)
-        input_rate = float(manifest["input_rate_usd_per_million"])
-        cache_rate = float(manifest["cache_write_rate_usd_per_million"])
-        output_rate = float(manifest["output_rate_usd_per_million"])
-        reported_cost = float(
-            manifest["completed_response_cost_usd_conservative"]
-        )
-    except (KeyError, TypeError, ValueError, OverflowError) as exc:
-        raise AuditRecoveryError("provider review usage/cost differs") from exc
-    recomputed_cost = (
-        input_tokens * input_rate
-        + cache_tokens * cache_rate
-        + output_tokens * output_rate
-    ) / 1_000_000
-    if (
-        any(value < 0 for value in (input_tokens, output_tokens, cache_tokens))
-        or not all(
-            math.isfinite(value)
-            for value in (input_rate, cache_rate, output_rate, reported_cost)
-        )
-        or input_rate != 5.0
-        or cache_rate != 0.0
-        or output_rate != 30.0
-        or manifest.get("usage") != usage
-        or not math.isclose(reported_cost, recomputed_cost, abs_tol=1e-12)
-        or reported_cost > 1.25
-    ):
-        raise AuditRecoveryError("provider review usage/cost differs")
+    recomputed_cost = _validated_review_cost(response, manifest)
 
     decisions = value.get("decisions")
     finding_ids = value.get("review_finding_ids")
@@ -2342,7 +2470,7 @@ def _validate_adjudication(
         or value.get("status") != "adjudicated_ready_to_execute"
         or value.get("study_id") != protocol.STUDY_ID
         or value.get("protocol_version") != protocol.PROTOCOL_VERSION
-        or value.get("provider_verdict") != "READY TO FREEZE"
+        or value.get("provider_verdict") != provider_verdict
         or value.get("unresolved_blockers") != []
         or value.get("review_packet_outcome_inputs") != []
         or value.get("review_packet_raw_data_included") is not False
@@ -2495,8 +2623,8 @@ def _validate_execution_paths(execution: Mapping[str, Any]) -> dict[str, Any]:
         or output.parent != attempt_root
         or marker.parent != attempt_root
         or failure.parent != attempt_root
-        or not attempt_root.name.startswith("audit_recovery_v3")
-        or not output.name.startswith("audit_recovery_v3")
+        or not attempt_root.name.startswith("audit_recovery_v4")
+        or not output.name.startswith("audit_recovery_v4")
         or output.name.startswith(".")
         or marker.name != "ATTEMPT_CLAIMED.json"
         or failure.name != "RECOVERY_FAILED.json"
@@ -2600,7 +2728,7 @@ def build_recovery_authorization(
     adjudication = _validate_adjudication(
         recovery_adjudication_path,
         repo_root=repo,
-        evidence_commit=evidence_freeze_commit,
+        evidence_commit=E3_QUALIFICATION_FREEZE_COMMIT,
         final_commit=final_freeze_commit,
     )
     if adjudication["path"] not in {row["path"] for row in review_rows}:
@@ -2769,7 +2897,7 @@ def validate_recovery_authorization(
     adjudication = _validate_adjudication(
         repo / str(adjudication_record.get("path")),
         repo_root=repo,
-        evidence_commit=evidence_commit,
+        evidence_commit=E3_QUALIFICATION_FREEZE_COMMIT,
         final_commit=final_commit,
     )
     if (

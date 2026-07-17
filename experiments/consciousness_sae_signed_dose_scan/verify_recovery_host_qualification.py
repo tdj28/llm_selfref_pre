@@ -30,27 +30,43 @@ from experiments.consciousness_sae_signed_dose_scan import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-QUALIFICATION_INCIDENT_DIR = REPO_ROOT / (
+PREDECESSOR_QUALIFICATION_DIR = REPO_ROOT / (
     "docs/consciousness_sae_signed_dose_scan/"
-    "audit_recovery_qualification_incident_79db4e7_g2azyjkpm17f1s"
+    "audit_recovery_host_qualification_v3"
 )
+QUALIFICATION_INCIDENT_DIR = PREDECESSOR_QUALIFICATION_DIR
 RECOVERY_CYCLE_LEDGER_PATH = (
     REPO_ROOT
-    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V3.json"
+    / "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V4.json"
 )
 EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256 = (
-    "f4358f97989936e3a4c366568a3a5acb54f1f144eff082be1df9a11bd9e55950"
+    "adc2c34302af92ec8da6b40d5a8c3745e9ced1be93f3fbaae31b691afabc20b8"
 )
 QUALIFICATION_PROTOCOL_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v3"
+    "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4"
 )
 QUALIFICATION_CYCLE_VERSION = (
-    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v3"
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_cycle_v4"
 )
-GLOBAL_QUALIFICATION_ORDINAL = 3
+GLOBAL_QUALIFICATION_ORDINAL = 4
 SUCCESSOR_QUALIFICATION_ATTEMPT = 1
-REJECTED_PREDECESSOR_POD_IDS = frozenset(
-    {"wl8obvtuq0ax8t", "69d9kxugxuf6up", "g2azyjkpm17f1s"}
+REJECTED_PREDECESSOR_POD_ID_ORDER = (
+    "wl8obvtuq0ax8t",
+    "69d9kxugxuf6up",
+    "g2azyjkpm17f1s",
+    "6am4twond0cd8v",
+)
+REJECTED_PREDECESSOR_POD_IDS = frozenset(REJECTED_PREDECESSOR_POD_ID_ORDER)
+C3_CODE_FREEZE_COMMIT = "7223ec9f4fcdf1e413a7143f9aebe9ee45648e21"
+E3_QUALIFICATION_FREEZE_COMMIT = "44d9e178567bbf31e524b79e4434474a4e5d888e"
+C3_QUALIFICATION_POD_ID = "6am4twond0cd8v"
+C4_CYCLE_ID = "signed-dose-audit-only-recovery-v4-20260717"
+C4_HUMAN_AUTHORIZATION_STATEMENT = "Authorize C4"
+C4_RECOVERY_PROTOCOL_VERSION = (
+    "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v4"
+)
+C4_REVIEW_INVENTORY_SHA256 = (
+    "bcdd58053d7f5d65e1937a01cf532ae597e94426c130aea80de13741c872d172"
 )
 PATH_DIAGNOSTIC_LIMIT = 16
 ATTEMPT_MARKER_NAME = "ATTEMPT_STARTED.json"
@@ -67,10 +83,73 @@ FORBIDDEN_RAW_ROOT = Path(
     "consciousness_sae_signed_dose_scan_v1/raw"
 )
 HEX64 = re.compile(r"[0-9a-f]{64}")
+PREDECESSOR_QUALIFICATION_FILENAMES = {
+    "predecessor_qualification_attempt_marker": "ATTEMPT_STARTED.json",
+    "predecessor_qualification_frozen_termination": (
+        "QUALIFICATION_FROZEN_TERMINATION.json"
+    ),
+    "predecessor_qualification_postdelete_inventory": (
+        "QUALIFICATION_POSTDELETE_INVENTORY.json"
+    ),
+    "predecessor_qualification_termination_audit": (
+        "QUALIFICATION_TERMINATION_AUDIT.json"
+    ),
+    "predecessor_recovery_equivalence_packet": (
+        "RECOVERY_EQUIVALENCE_PACKET.json"
+    ),
+    "predecessor_recovery_equivalence_verification": (
+        "RECOVERY_EQUIVALENCE_VERIFICATION.json"
+    ),
+    "predecessor_target_host_qualification": "TARGET_HOST_QUALIFICATION.json",
+    "predecessor_target_host_qualification_verification": (
+        "TARGET_HOST_QUALIFICATION_VERIFICATION.json"
+    ),
+}
 
 
 class RecoveryHostQualificationVerificationError(RuntimeError):
     """The target-host qualification evidence failed verification."""
+
+
+def _validated_c4_successor_authority(value: Any) -> dict[str, Any]:
+    """Independently restate the complete frozen C4 authority contract."""
+
+    expected = {
+        "authority_minted_at_utc": "2026-07-17T16:00:00Z",
+        "c3_code_commit": C3_CODE_FREEZE_COMMIT,
+        "c3_evidence_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "cycle_id": C4_CYCLE_ID,
+        "global_qualification_ordinal": GLOBAL_QUALIFICATION_ORDINAL,
+        "hard_deadline_utc": "2026-07-17T18:00:00Z",
+        "human_authorization_statement": C4_HUMAN_AUTHORIZATION_STATEMENT,
+        "new_paid_review_call_count": 0,
+        "no_automatic_retry": True,
+        "no_model_forward": True,
+        "predecessor_qualification_pod_id": C3_QUALIFICATION_POD_ID,
+        "qualification_and_review_raw_or_outcome_access": False,
+        "qualification_attempt_number": SUCCESSOR_QUALIFICATION_ATTEMPT,
+        "qualification_namespace": "audit_recovery_host_qualification_v4",
+        "qualification_protocol_version": QUALIFICATION_PROTOCOL_VERSION,
+        "recovery_namespace": "audit_only_recovery_v4",
+        "recovery_protocol_version": C4_RECOVERY_PROTOCOL_VERSION,
+        "rejected_pod_ids": list(REJECTED_PREDECESSOR_POD_ID_ORDER),
+        "review_artifact_inventory_sha256": C4_REVIEW_INVENTORY_SHA256,
+        "review_input_anchor_commit": E3_QUALIFICATION_FREEZE_COMMIT,
+        "review_namespace": "audit_recovery_pro_review_v3",
+        "status_map_file_sha256": (
+            "195e3dcb9ecee2ca4c0b13ea81f7f17ca6aa25f40438b2e0e5e0620f1e344935"
+        ),
+        "status_map_receipt_sha256": (
+            "31eaffabf9863e086221a6452db228f791effe0a90ee3a3e630ab6b3d2ae58d7"
+        ),
+        "study_id": protocol.STUDY_ID,
+        "binding_sha256": EXPECTED_SUCCESSOR_AUTHORITY_BINDING_SHA256,
+    }
+    if not isinstance(value, Mapping) or dict(value) != expected:
+        raise RecoveryHostQualificationVerificationError(
+            "C4 successor authority differs"
+        )
+    return dict(value)
 
 
 def canonical_json_bytes(value: Any) -> bytes:
@@ -288,7 +367,7 @@ def _verify_marker(
         > QUALIFICATION_CYCLE_DEADLINE_AT_UNIX
     ):
         raise RecoveryHostQualificationVerificationError(
-            "C3 qualification cycle deadline cannot fit the full attempt cap"
+            "C4 qualification cycle deadline cannot fit the full attempt cap"
         )
     receipt_hash = _self_hash(marker, "attempt marker")
     expected = {
@@ -591,6 +670,10 @@ def verify_qualification(
         raise RecoveryHostQualificationVerificationError(
             "forbidden raw root is not a directory"
         )
+    predecessor_paths = tuple(
+        qualification_incident_dir / filename
+        for filename in PREDECESSOR_QUALIFICATION_FILENAMES.values()
+    )
     paths = (
         receipt_path,
         marker_path,
@@ -600,12 +683,9 @@ def verify_qualification(
         guest_path,
         cache_path,
         j_lens_path,
-        qualification_incident_dir / "QUALIFICATION_FAILED.json",
-        qualification_incident_dir / "INCIDENT_CAUSE.json",
-        qualification_incident_dir / "INCIDENT_CLOSURE_SCHEMA.json",
-        qualification_incident_dir / "INCIDENT_CLOSURE.json",
-        qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json",
+        *predecessor_paths,
         recovery_cycle_ledger_path,
+        recovery_cycle_ledger_path.parent / "RECOVERY_C4_STATUS_MAP.json",
     )
     canonical_paths = [
         _strict_existing_path(path, "qualification verification input")
@@ -643,22 +723,14 @@ def verify_qualification(
         )
     input_paths = {
         "equivalence_packet": packet_path,
-        "predecessor_qualification_failure": (
-            qualification_incident_dir / "QUALIFICATION_FAILED.json"
+        **{
+            role: qualification_incident_dir / filename
+            for role, filename in PREDECESSOR_QUALIFICATION_FILENAMES.items()
+        },
+        "recovery_cycle_ledger_v4": recovery_cycle_ledger_path,
+        "recovery_c4_status_map": (
+            recovery_cycle_ledger_path.parent / "RECOVERY_C4_STATUS_MAP.json"
         ),
-        "qualification_incident_cause": (
-            qualification_incident_dir / "INCIDENT_CAUSE.json"
-        ),
-        "qualification_incident_closure": (
-            qualification_incident_dir / "INCIDENT_CLOSURE.json"
-        ),
-        "qualification_incident_schema": (
-            qualification_incident_dir / "INCIDENT_CLOSURE_SCHEMA.json"
-        ),
-        "qualification_incident_verification": (
-            qualification_incident_dir / "INCIDENT_CLOSURE_VERIFICATION.json"
-        ),
-        "recovery_cycle_ledger_v3": recovery_cycle_ledger_path,
         "independent_plan_audit": plan_audit_path,
         "fresh_ownership": ownership_path,
         "fresh_guest": guest_path,
@@ -716,8 +788,8 @@ def verify_qualification(
         repo_root=repo_root,
         enforce_git=enforce_git,
     )
-    successor_authority = (
-        verify_qualification_incident.successor_c3_authority_binding(
+    successor_authority = _validated_c4_successor_authority(
+        verify_qualification_incident.successor_c4_authority_binding(
             qualification_incident_dir,
             recovery_cycle_ledger_path,
         )
@@ -912,7 +984,9 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--j-checkpoint", type=Path, required=True)
     parser.add_argument(
+        "--predecessor-qualification-dir",
         "--qualification-incident-dir",
+        dest="qualification_incident_dir",
         type=Path,
         default=QUALIFICATION_INCIDENT_DIR,
     )
