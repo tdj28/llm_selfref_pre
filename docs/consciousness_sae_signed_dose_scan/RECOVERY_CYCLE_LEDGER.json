@@ -1,0 +1,104 @@
+{
+  "authorization_state": {
+    "audit_only_recovery_authorized": false,
+    "incident_closure_grants_launch_authority": false,
+    "local_closure_authorized": true,
+    "paid_cumulative_review_authorized": false,
+    "paid_cumulative_review_requires_explicit_human_approval": true,
+    "target_qualification_authorized": true
+  },
+  "cardinality_limits": {
+    "audit_only_recovery_attempts": 1,
+    "automatic_retries": 0,
+    "local_closure_passes": 1,
+    "paid_cumulative_review_calls": 1,
+    "provider_capacity_retries": 0,
+    "target_qualification_attempts": 1
+  },
+  "closure_table": [
+    {
+      "failure_id": "INC-GEMMA-CACHE-001",
+      "independent_verifier_rule": "verify_incident_closure.verify_closure requires the exact Gemma-v1 startup-not-reached and Gemma-v2 operational-pass rows plus both wrapper hashes",
+      "launch_gate_check": "python3 -B -m experiments.consciousness_sae_signed_dose_scan.verify_incident_closure --closure docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE.json --schema docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE_SCHEMA.json",
+      "negative_regression": "tests/consciousness_sae_signed_dose_scan/test_incident_closure.py::test_semantic_attempt_tamper_fails_after_rehash and ::test_producer_refuses_changed_evidence",
+      "production_command": "gemma_v1_wrapper@330fcf3d64ae8692d9c827ea83b027df5c2e585c8a351d53654def1c3f4f17c5 then fresh gemma_v2_wrapper@23d64db6b9e2603d1dd40ade67dddcb016a219c5cb6306a1d184fe4e04c6c89a",
+      "receipt_field": "attempt_classifications[0].execution_boundary=tokenizer_resolution_failed_before_model_load_or_forward; attempt_classifications[1].terminal_status=pass_small_model_promotion_gate",
+      "target_platform_rehearsal": "Gemma-v2 target receipt f5417228aa80eed0004d1f1ac59f96abf937f9cb94590cb06d4957cdf4aba02b independently replayed 122 forwards and all four mechanics gates"
+    },
+    {
+      "failure_id": "INC-70B-WRAPPER-001",
+      "independent_verifier_rule": "verify_incident_closure.verify_closure requires exit 127 before guest launch, the missing-/usr/bin/time boundary, both one-shot authorization hashes, and both wrapper hashes",
+      "launch_gate_check": "python3 -B -m experiments.consciousness_sae_signed_dose_scan.verify_incident_closure --closure docs/consciousness_sae_signed_dose_scan/INCIDENT_CLOSURE.json --recovery-ledger docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER.json",
+      "negative_regression": "tests/consciousness_sae_signed_dose_scan/test_incident_closure.py::test_wrapper_hash_tamper_fails_after_rehash",
+      "production_command": "llama70b_v1_wrapper@2d1ab8d41900a8fda9205449b3d017db1de5b8379126c7725c88fc9a6358f820 then fresh llama70b_v2_wrapper@527c87909c6a4eb261f50da525bd56b7982041d9de28b83dfc47de840bba09ac",
+      "receipt_field": "attempt_classifications[2].execution_boundary=wrapper_failed_on_missing_usr_bin_time_before_guest_launcher; attempt_classifications[2].model_forward_count=0",
+      "target_platform_rehearsal": "The fresh v2 wrapper reached the real guest launcher and prospectively completed the exact 2,896-forward inventory in RUN_COMPLETE receipt f714f16e2f6d5bb532d522c3ad0e2985e6f6b169ff5875911d296f42cd8fdc7d"
+    },
+    {
+      "failure_id": "INC-70B-J-INVENTORY-001",
+      "independent_verifier_rule": "verify_recovery_equivalence.py permits only j_checkpoint_inventory_predicate_and_required_map_filter; verify_incident_closure.py binds the failed raw run and terminal closure",
+      "launch_gate_check": "audit_recovery.validate_recovery_authorization requires the verified incident closure, C/E/F ancestry, exact source/test inventory, one target qualification inventory, one cumulative review inventory, fresh provider receipts, fresh ATTEMPT_CLAIMED.json, and fresh compact output",
+      "negative_regression": "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py::test_authentic_zero_through_78_superset_is_behaviorally_filtered, ::test_superset_loader_rejects_a_missing_study_layer, and ::test_normalizer_rejects_duplicate_or_noncanonical_keys",
+      "production_command": "python3 -B -u -m experiments.consciousness_sae_signed_dose_scan.audit_recovery execute --authorization <fresh-self-hashed-authorization>",
+      "receipt_field": "j_checkpoint_inventory.status=pass_pinned_canonical_superset_filtered; available_layers=0..78; required_layers=45..78; unused_extra_layers=0..44; zero_forward_guard counts=0; final status=pass_audit_only_recovery_with_immutable_raw",
+      "target_platform_rehearsal": "python3 -B -m experiments.consciousness_sae_signed_dose_scan.recovery_host_qualification must run the exact corrected J loader and zero-forward guard on the one allowed qualification attempt before recovery authorization"
+    }
+  ],
+  "cycle_id": "signed-dose-audit-only-recovery-v1-20260717",
+  "immutable_scientific_contract": {
+    "allowed_scope": "audit_only_mechanical_j_inventory_repair",
+    "analysis_changed": false,
+    "directions_changed": false,
+    "dose_grid_changed": false,
+    "endpoints_changed": false,
+    "fresh_compact_output_required": true,
+    "prompts_changed": false,
+    "raw_input_run_id": "signed-dose-a084caa-wl8obvtuq0ax8t-v2",
+    "raw_outcome_bytes_changed": false,
+    "scientific_plan_changed": false
+  },
+  "incident_binding": {
+    "failed_run_id": "signed-dose-a084caa-wl8obvtuq0ax8t-v2",
+    "incident_closure_file_sha256": "7afe9aa8bae10c2965f40eab92fbbb331a51ad0fd2a0895d6fc55bd0af7cbd3c",
+    "incident_closure_receipt_sha256": "172ebb2e4ea06160df7d3a3d9e356dfdc0996ffb50019c6bc35a48a724103dd4",
+    "raw_records_sha256": "b5c784f4feb87ba01a9fc5d9b2f22d12eee01930d98718cd5c54e3d398692cf4",
+    "raw_run_complete_receipt_sha256": "f714f16e2f6d5bb532d522c3ad0e2985e6f6b169ff5875911d296f42cd8fdc7d"
+  },
+  "receipt_kind": "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v1",
+  "receipt_sha256": "72f2d473c68698a24160523265a9786b9382a14432e418d24a2f6596f910314b",
+  "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v1",
+  "schema_version": 1,
+  "status": "frozen_pending_explicit_review_authorization",
+  "study_id": "consciousness_sae_signed_dose_scan_v1",
+  "terminal_action": {
+    "all_gates_green": "launch_exactly_one_audit_only_recovery_in_same_execution_turn",
+    "any_gate_red": "stop_and_report_blocker",
+    "cycle_budget_exhausted": "stop_requires_human_approved_new_cycle_amendment",
+    "recovery_failure": "preserve_failure_and_stop_no_retry",
+    "review_new_blocker": "stop_requires_human_approved_new_cycle_amendment"
+  },
+  "time_and_cost_limits": {
+    "audit_only_recovery": {
+      "maximum_cost_usd": 6.0,
+      "maximum_walltime_seconds": 3600
+    },
+    "cycle_deadline_utc": "2026-07-17T08:00:00Z",
+    "maximum_additional_cycle_cost_usd": 12.0,
+    "nonexecution_reserve_usd": 1.75,
+    "overall_user_hard_ceiling_usd": 50.0,
+    "paid_cumulative_review": {
+      "maximum_cost_usd": 1.25
+    },
+    "pre_recovery_estimated_spend_usd": 19.6,
+    "target_qualification": {
+      "maximum_cost_usd": 3.0,
+      "maximum_walltime_seconds": 1800
+    }
+  },
+  "usage_at_freeze": {
+    "audit_only_recovery_attempts": 0,
+    "local_closure_passes": 0,
+    "paid_cumulative_review_calls": 0,
+    "target_qualification_attempts": 0
+  }
+}
