@@ -1,0 +1,127 @@
+{
+  "actual_input_characters": 44425,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 11397,
+      "characters": 11395,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/V10_TOP_LEVEL_REVIEW_BRIEF.md",
+      "role": "compact research-director plan brief",
+      "sha256": "862f953019da17531e3bd00b20aff98f8bf3551191e380eebf7bbc6684b66645"
+    },
+    {
+      "bytes": 3090,
+      "characters": 3090,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+      "role": "synthesized context 1",
+      "sha256": "1fd1f69d4704e56f5aa53405048df1f34c03a0491667666588c2723a7789e5aa"
+    },
+    {
+      "bytes": 2228,
+      "characters": 2226,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+      "role": "synthesized context 2",
+      "sha256": "a99ba0d74474faa25b58b9bbd0031f8f2883285a6073234713241b3c44b210cf"
+    },
+    {
+      "bytes": 4437,
+      "characters": 4437,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/V10_EVIDENCE_SUMMARY.json",
+      "role": "synthesized context 3",
+      "sha256": "eb8114fe40b3d347f0324e727f7c64624c5352c03564ec4867af17324c273d5e"
+    },
+    {
+      "bytes": 9446,
+      "characters": 9400,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/V9_REVIEW_PART_1.md",
+      "role": "synthesized context 4",
+      "sha256": "933c797600ab321dc72499dbefeba1ae2d6aac490e0a93dca6eae3431622c7be"
+    },
+    {
+      "bytes": 4001,
+      "characters": 3997,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/V9_REVIEW_PART_2.md",
+      "role": "synthesized context 5",
+      "sha256": "c67bc12c12f7512fdf1b1daa2957c42d58478b06bbf29e4d74ee99d1c297979c"
+    },
+    {
+      "bytes": 3401,
+      "characters": 3401,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v10_inputs/V9_CONDITIONAL_ADJUDICATION_SUMMARY.json",
+      "role": "synthesized context 6",
+      "sha256": "0d3e928d3d4221917e43dcce29fd51ac028d46c9035a4b339dcd378f79225643"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 1.25,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-07-16T20:20:27.375187Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.63172,
+  "created_at_utc": "2026-07-16T20:18:49.865915Z",
+  "estimated_budget_reserve_usd": 1.19300625,
+  "estimated_input_tokens_conservative": 14809,
+  "exact_budget_reserve_usd_after_preflight": 0.95405625,
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 10561,
+  "input_tokens_preflight_at_utc": "2026-07-16T20:18:50.817018Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "de11d0784c6fda841363ab0603b74fd6c74a062f1458e02ebecaf01d06aa0ef3",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 60000,
+  "max_input_tokens": 20000,
+  "max_output_tokens": 6000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "5d165eafbcd5138330a016b136fd5c2a93ba7e2818e06ceb4aee05702f5a5d7a",
+  "reserved_billable_input_tokens": 74045,
+  "reserved_billable_output_tokens": 12000,
+  "response_id": "resp_0cd2aad98e3cdd53016a593cab139081989347eaeaaca831c6",
+  "response_metadata": {
+    "plan_sha256": "862f953019da17531e3bd00b20aff98f8bf3551191e380eebf7bbc6684b66645",
+    "review_input_sha256": "e688110f12b75c9c31ecb08802844a220bc5eea4019998026bc57f2b4911a67a",
+    "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+    "review_scope": "director_level_plan_review",
+    "reviewed_packet_git_head_commit": "386d68d3fc6bf0f89e0d6ee5f6b9fc04529c322a",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "experiment_plan_review"
+  },
+  "response_metadata_sha256": "1d7177dc71887cd7261903da81b9aff2a575bc2b327debbde98bdc86f37729e1",
+  "response_model": "gpt-5.6-sol",
+  "response_sha256": "3b19c63319b6f5f22d4862b56eb73da68165884372531f3fdaf091183a7e5100",
+  "review_input_sha256": "e688110f12b75c9c31ecb08802844a220bc5eea4019998026bc57f2b4911a67a",
+  "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+  "review_request_sha256": "2dbcf0e9ea305bed87f52da7fae720e2dcd10e8d421784082ffc096967e91170",
+  "review_scope": "director_level_plan_review",
+  "review_sha256": "1588c04003abc7ed84beecc76202078fc535fc62d6abdac1a26057e62e28ea6a",
+  "reviewed_packet_git_head_commit": "386d68d3fc6bf0f89e0d6ee5f6b9fc04529c322a",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 54596,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 11958,
+    "output_tokens_details": {
+      "reasoning_tokens": 2946
+    },
+    "total_tokens": 66554
+  }
+}

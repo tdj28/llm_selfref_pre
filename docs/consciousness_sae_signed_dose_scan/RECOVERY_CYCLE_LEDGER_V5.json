@@ -1,0 +1,145 @@
+{
+  "authorization_state": {
+    "audit_only_recovery_authorized_conditionally_after_all_gates": true,
+    "authority_minted_at_utc": "2026-07-17T09:55:00Z",
+    "explicit_human_authorization_observed": true,
+    "explicit_human_authorization_statement": "C5 approved",
+    "qualification_and_review_outcome_blind": true,
+    "user_authorization_scope": "one local validator-only C5 repair, no new qualification and no new paid review, one authentic-bundle preflight evidence freeze, then one audit-only recovery capped at $6; no retries"
+  },
+  "cardinality_limits": {
+    "audit_only_recovery_attempts": 1,
+    "authentic_bundle_preflight_evidence_freezes": 1,
+    "automatic_retries": 0,
+    "new_paid_top_level_review_calls": 0,
+    "replacement_target_qualification_attempts": 0
+  },
+  "cycle_id": "signed-dose-audit-only-recovery-v5-20260717",
+  "immutable_scientific_contract": {
+    "compatibility_change_count": 0,
+    "new_model_forwards": 0,
+    "new_scientific_observations_before_recovery": 0,
+    "original_scientific_freeze_commit": "a084caafc2ec27860044d80d3b33912f656fd08a",
+    "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+    "raw_bytes_changed": false,
+    "scientific_design_changed": false,
+    "validator_only_change": true
+  },
+  "lineage_contract": {
+    "c4_code_commit": "c43e40f79d197943c55e803371350ffafff1e0ed",
+    "c4_evidence_commit": "e45832e9319814824a8f84840d2b8a4649aeb6f1",
+    "c4_to_e4": "direct_single_parent_exactly_eight_added_v4_qualification_receipts",
+    "e4_to_c5": "direct_single_parent_with_exact_allowed_status_map",
+    "c5_to_e5": "direct_single_parent_exactly_one_authentic_bundle_preflight_receipt",
+    "e5_to_f5": "direct_single_parent_exactly_eight_added_existing_v3_review_directory_artifacts",
+    "qualification_evidence_commit_reused": "e45832e9319814824a8f84840d2b8a4649aeb6f1",
+    "qualification_global_ordinal_reused": 4,
+    "qualification_pod_id_reused": "jam8legy7six6l",
+    "recovery_pod_must_differ_from_qualification_pod": true,
+    "rejected_recovery_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s",
+      "6am4twond0cd8v",
+      "jam8legy7six6l"
+    ]
+  },
+  "namespace_contract": {
+    "authentic_bundle_preflight_root": "audit_recovery_authentic_bundle_preflight_v5",
+    "qualification_root_reused": "audit_recovery_host_qualification_v4",
+    "recovery_root": "audit_recovery_v5",
+    "review_root": "audit_recovery_pro_review_v3",
+    "reuse_of_any_old_recovery_namespace_forbidden": true
+  },
+  "qualification_protocol_version_reused": "consciousness_sae_signed_dose_scan_v1.audit_recovery_host_qualification_v4",
+  "receipt_kind": "consciousness_sae_signed_dose_scan_recovery_cycle_ledger_v5",
+  "receipt_sha256": "2fa5efff560fcee6d28aaed220b95b6979050485be33bfe21a3bcef19763fe71",
+  "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v5",
+  "review_reuse_binding": {
+    "completed_response_cost_usd": "0.485525",
+    "new_paid_review_call_count": 0,
+    "paid_review_call_count_inherited": 1,
+    "provider_verdict": "READY TO FREEZE",
+    "response_id": "resp_04d4093548a29511016a59e1285d70819aa84d3b6fe44c6ec7",
+    "review_artifact_inventory_sha256": "4ef110c501c219305bc0d447329d4bffd48557e0b92870ab1d39c40201500542",
+    "review_emphasis_characters": 228,
+    "review_emphasis_sha256": "d727307b7da9bbb3fcbd47c9617a4a367e7bae727e8b9862fc26299ef70e353e",
+    "review_input_anchor_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "review_input_characters": 14640,
+    "review_input_sha256": "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e"
+  },
+  "schema_version": 1,
+  "status": "frozen_c5_cycle_authorized_pending_pushed_c5",
+  "study_id": "consciousness_sae_signed_dose_scan_v1",
+  "successor_authority_binding": {
+    "authority_minted_at_utc": "2026-07-17T09:55:00Z",
+    "c4_code_commit": "c43e40f79d197943c55e803371350ffafff1e0ed",
+    "c4_evidence_commit": "e45832e9319814824a8f84840d2b8a4649aeb6f1",
+    "cycle_id": "signed-dose-audit-only-recovery-v5-20260717",
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "human_authorization_statement": "C5 approved",
+    "new_paid_review_call_count": 0,
+    "new_qualification_attempt_count": 0,
+    "no_automatic_retry": true,
+    "no_model_forward_before_recovery": true,
+    "qualification_evidence_commit_reused": "e45832e9319814824a8f84840d2b8a4649aeb6f1",
+    "qualification_pod_id_reused": "jam8legy7six6l",
+    "raw_or_outcome_access_before_recovery": false,
+    "recovery_namespace": "audit_recovery_v5",
+    "recovery_protocol_version": "consciousness_sae_signed_dose_scan_v1.audit_only_recovery_v5",
+    "rejected_recovery_pod_ids": [
+      "wl8obvtuq0ax8t",
+      "69d9kxugxuf6up",
+      "g2azyjkpm17f1s",
+      "6am4twond0cd8v",
+      "jam8legy7six6l"
+    ],
+    "review_artifact_inventory_sha256": "4ef110c501c219305bc0d447329d4bffd48557e0b92870ab1d39c40201500542",
+    "review_input_anchor_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "review_input_sha256": "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e",
+    "status_map_file_sha256": "f45f2ce75a8ecddc2b42728ed80faefc191deebf69b180c3c17c5c5141dd0495",
+    "status_map_receipt_sha256": "dbec2f49cfb0166f67558ce529030326798fed8c083368b3c9301f21ffa1c996",
+    "study_id": "consciousness_sae_signed_dose_scan_v1"
+  },
+  "successor_authority_binding_sha256": "ed1141e0345a26623c0967655187a19e40ad463c163f00b35b23cf2ec4b0a3e8",
+  "target_qualification_reuse_binding": {
+    "global_qualification_ordinal": 4,
+    "new_qualification_attempt_count": 0,
+    "qualification_inventory_sha256": "b98b41cafba9c663e346d39c35ae1769792e33f4ebb0fdcd002c4f3f18e58c79",
+    "qualification_pod_id": "jam8legy7six6l",
+    "target_file_sha256": "fec568f61a1950c2fb72de273bbb4696b9b815c2c80fb40aff1a9624925e15d9",
+    "target_receipt_sha256": "ea57e2f9c1185ff2d080d508e14e9d551b97a325e7c82b70962c6ab1dd6be912",
+    "verification_file_sha256": "c07ebfe8aec71e6f7bc19c3719f6781ada9fd026dee685727fa74868ff381fd2",
+    "verification_receipt_sha256": "9144367ac1e523fa58f4f7ef6ac5c915d95a009dddf20e20ffed7bfad6dbd4f8"
+  },
+  "terminal_action": {
+    "all_gates_green": "launch_exactly_one_audit_only_recovery_on_a_distinct_fresh_pod",
+    "any_gate_red": "preserve_evidence_terminate_exact_owned_pod_and_stop_no_retry",
+    "deadline_missed": "stop_requires_new_human_approved_cycle",
+    "recovery_failure": "attempt_consumed_stop_no_retry"
+  },
+  "time_and_cost_limits": {
+    "hard_deadline_utc": "2026-07-17T18:00:00Z",
+    "new_paid_top_level_review_cap_usd": "0.00",
+    "new_qualification_cap_usd": "0.00",
+    "recovery_cap_seconds": 3600,
+    "recovery_cap_usd": "6.00",
+    "successor_additional_cycle_envelope_usd": "6.00",
+    "user_overall_ceiling_usd": "50.00"
+  },
+  "usage_at_freeze": {
+    "audit_only_recovery_attempts_used": 0,
+    "authentic_bundle_preflight_evidence_freezes_used": 0,
+    "automatic_retries_used": 0,
+    "inherited_paid_top_level_review_calls": 1,
+    "inherited_target_qualification_attempts": 1,
+    "new_paid_top_level_review_calls_used": 0,
+    "new_target_qualification_attempts_used": 0
+  },
+  "validator_only_repair": {
+    "accept_and_authenticate_exact_producer_emphasis_block": true,
+    "authentic_bundle_preflight_required_before_final_freeze": true,
+    "provider_artifacts_modified": false,
+    "scientific_fields_modified": false
+  }
+}

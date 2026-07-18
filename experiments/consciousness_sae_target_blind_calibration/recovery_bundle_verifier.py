@@ -1,0 +1,6061 @@
+#!/usr/bin/env python3
+"""Deterministically verify a retrieved audit-recovery bundle offline.
+
+The verifier is intentionally standard-library-only and read-only with respect
+to the retrieved attempt.  Its only write is an exclusive, self-hashed receipt
+at the caller-supplied path outside the bundle.
+"""
+
+from __future__ import annotations
+
+import argparse
+import errno
+import hashlib
+import json
+import math
+import os
+import re
+import shlex
+import stat
+from datetime import datetime, timedelta, timezone
+from pathlib import Path, PurePosixPath
+from typing import Any, Mapping, Sequence
+
+
+AUTHORIZATION_RELATIVE = Path("RECOVERY_AUTHORIZATION.json")
+BOOTSTRAP_MANIFEST_RELATIVE = Path("bootstrap/APPROVED_IMPORT_ROOTS.json")
+PREFLIGHT_ENFORCEMENT_RELATIVE = Path("preflight/output/LANDLOCK_ENFORCEMENT.json")
+PREFLIGHT_CUDA_RELATIVE = Path("preflight/output/LANDLOCK_CUDA_PREFLIGHT.json")
+LOCAL_TEST_RELATIVE = Path("evidence/tests/LOCAL_TEST_RECEIPT.json")
+TARGET_HOST_TEST_RELATIVE = Path("evidence/tests/TARGET_HOST_TEST_RECEIPT.json")
+TARGET_QUALIFICATION_OWNERSHIP_RELATIVE = Path(
+    "evidence/tests/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+TARGET_QUALIFICATION_LANDLOCK_RELATIVE = Path(
+    "evidence/tests/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+TARGET_QUALIFICATION_CUDA_RELATIVE = Path(
+    "evidence/tests/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+CONFINEMENT_RELATIVE = Path("output/LANDLOCK_ENFORCEMENT.json")
+ATTEMPT_MARKER_RELATIVE = Path("output/ATTEMPT_STARTED.json")
+FAILURE_RELATIVE = Path("output/FAILURE.json")
+COMPACT_RELATIVE = Path("output/compact")
+AUDIT_RELATIVE = COMPACT_RELATIVE / "CALIBRATION_AUDIT.json"
+SUMMARY_RELATIVE = COMPACT_RELATIVE / "CALIBRATION_SUMMARY.json"
+PUBLICATION_RELATIVE = COMPACT_RELATIVE / "PUBLICATION_COMPLETE.json"
+COMPACT_FILE_NAMES = frozenset(
+    {"CALIBRATION_AUDIT.json", "CALIBRATION_SUMMARY.json", "PUBLICATION_COMPLETE.json"}
+)
+REQUIRED_RECEIPT_PATHS = (
+    AUTHORIZATION_RELATIVE,
+    BOOTSTRAP_MANIFEST_RELATIVE,
+    PREFLIGHT_ENFORCEMENT_RELATIVE,
+    PREFLIGHT_CUDA_RELATIVE,
+    LOCAL_TEST_RELATIVE,
+    TARGET_HOST_TEST_RELATIVE,
+    TARGET_QUALIFICATION_OWNERSHIP_RELATIVE,
+    TARGET_QUALIFICATION_LANDLOCK_RELATIVE,
+    TARGET_QUALIFICATION_CUDA_RELATIVE,
+    CONFINEMENT_RELATIVE,
+    ATTEMPT_MARKER_RELATIVE,
+    AUDIT_RELATIVE,
+    SUMMARY_RELATIVE,
+    PUBLICATION_RELATIVE,
+)
+
+SCHEMA_VERSION = 1
+STUDY_ID = "consciousness_sae_target_blind_calibration_v2"
+PROTOCOL_VERSION = "consciousness_sae_target_blind_calibration_v2.0.0"
+RECOVERY_PROTOCOL_VERSION = (
+    "consciousness_sae_target_blind_calibration_v2.audit_recovery_r3"
+)
+RUN_ID = "calv2-r3-1a16572-20260715T002344Z"
+ORIGINAL_RUN_RECEIPT_SHA256 = (
+    "bab48b452c7e7c5b9db5d09ecc34c7e530813e2f5093aff1b8a8152017e4695d"
+)
+PLAN_MANIFEST_SHA256 = (
+    "aa80cef7ef36fed327fcce99547c0b3bdf92a059c1dea43abba0ba924f404636"
+)
+HISTORICAL_PROVENANCE_FILE_COUNT = 41
+HISTORICAL_PROVENANCE_INVENTORY_SHA256 = (
+    "ff02d92e681e662261b57dab00882a654eaf7b0d505dd2f210ab06f57ba8bd74"
+)
+ORIGINAL_RAW_LEDGER_SHA256 = (
+    "7bffb6306b67814d2f4618b6aaf4f243ab2992d7b6b92ebb955a370654e0a20c"
+)
+ORIGINAL_FAILURE_LOG_SHA256 = (
+    "a5936d0fda01b96f193a1ab40c9d7c52dc751ecdf3686896e26d2d3951cdd86f"
+)
+ORIGINAL_CAMPAIGN_STARTED_AT_UNIX = 1_784_074_604.0
+ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX = 1_784_080_004.0
+ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD = 6.0
+COMPLETED_REVIEW_COST_CEILING_USD = 1.25
+PRO_REVIEW_V10_INPUT_RATE_USD_PER_MILLION = 5.0
+PRO_REVIEW_V10_CACHE_WRITE_RATE_USD_PER_MILLION = 6.25
+PRO_REVIEW_V10_OUTPUT_RATE_USD_PER_MILLION = 30.0
+ORIGINAL_RECEIPTS = {
+    "ownership": "2aaa6e9e665f511ccfe363eee9deb5496c36bc8b2ae2b7ac67620a58abe914ca",
+    "guest": "226e939db167bc3471c4b559aaa2f454ea3fa0cfa51a0f73d378ced11fe33b26",
+    "cache": "fa91d5a98475711a4a939b65dd5656a76dcda05eb92e8dfb0dffe9dcd5931c77",
+    "authorization": "9f44dfdf1820bb1e359e962925e9dffd13fcd13d4b88fffa72fa1226ddda0033",
+    "termination_audit": (
+        "b346b5c575ba1a903d93874b6dea58101cd208539ef5e30e8d069955d864ebfd"
+    ),
+    "frozen_termination": (
+        "86d0efdcf0b54b927bd3062ff448d0abf3d12aa873c837766249e1b7a110dfe5"
+    ),
+}
+SUPERSEDED_RECOVERY_POD_ID = "faz2t3bcrdwymn"
+SUPERSEDED_RECOVERY_ATTEMPT_ID = "calv2-r3-audit-recovery-e0dd9a6-20260715T015420Z"
+SUPERSEDED_RUNTIME_BLOCK_SHA256 = (
+    "bf8ddbb31b3ddab99c2126d1100691f8d0878c1a0d1d4a091776e5d3f2bc207d"
+)
+SUPERSEDED_TERMINATION_AUDIT_SHA256 = (
+    "a7fa432b64f594926fac22070a59c5081e68e8a4cc230ae4a2ffc0032dd30300"
+)
+SUPERSEDED_FROZEN_TERMINATION_SHA256 = (
+    "0bc9fd91dc816e70e95809da50b667cb67bc6b0674d7b4c84415b3287bbebbd0"
+)
+SUPERSEDED_POSTDELETE_INVENTORY_SHA256 = (
+    "7d0c31b4830fdedad2e985e28168418a86483241ced2bd415d45ff12eecf1d06"
+)
+SUPERSEDED_RECOVERY_HOST = {
+    "status": "validated_superseded_preclaim_recovery_host",
+    "pod_id": SUPERSEDED_RECOVERY_POD_ID,
+    "attempt_id": SUPERSEDED_RECOVERY_ATTEMPT_ID,
+    "audit_execute_invoked": False,
+    "attempt_marker_present": False,
+    "runtime_block_receipt_sha256": SUPERSEDED_RUNTIME_BLOCK_SHA256,
+    "termination_audit_receipt_sha256": SUPERSEDED_TERMINATION_AUDIT_SHA256,
+    "frozen_termination_receipt_sha256": SUPERSEDED_FROZEN_TERMINATION_SHA256,
+    "postdelete_inventory_receipt_sha256": (SUPERSEDED_POSTDELETE_INVENTORY_SHA256),
+}
+SUPERSEDED_EXTERNAL_KEYS = (
+    "superseded_runtime_block",
+    "superseded_termination_audit",
+    "superseded_frozen_termination",
+    "superseded_postdelete_inventory",
+)
+RAW_RELATIVE = (
+    "consciousness_sae_target_blind_calibration/"
+    "consciousness_sae_target_blind_calibration_v2/raw/" + RUN_ID
+)
+RECOVERY_ATTEMPT_PARENT = "/workspace/csae"
+AF_UNIX_PATH_MAX_BYTES = 107
+AF_UNIX_PATH_REQUIRED_MARGIN_BYTES = 16
+AF_UNIX_PATH_BUDGET_BYTES = 91
+OUTPUT_CANARY_SOCKET_NAME = ".s"
+MODEL_SNAPSHOT_PATH = (
+    "/workspace/consciousness_readout_validation/"
+    "consciousness_readout_validation_v1/public_artifacts/model_snapshot"
+)
+J_LENS_PATH = (
+    "/workspace/consciousness_readout_validation/"
+    "consciousness_readout_validation_v1/public_artifacts/jlens/"
+    "Llama-3.3-70B-Instruct_jacobian_lens.pt"
+)
+CANONICAL_PLAN_RELATIVE_PATH = (
+    "data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3"
+)
+NETWORK_VOLUME_ID = "bv9gb9j32y"
+DATA_CENTER_ID = "US-CA-2"
+GPU_TYPE = "NVIDIA B200"
+BOOTSTRAP_RELATIVE_PATH = (
+    "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py"
+)
+BOOTSTRAP_MANIFEST_STATUS = "approved_exact_python_import_roots"
+BOOTSTRAP_GUARDED_MODULES = (
+    "torch.nn.modules.module",
+    "transformers.modeling_utils",
+    "transformers.models.auto.auto_factory",
+)
+BOOTSTRAP_PREFLIGHT_PHASE = (
+    "after_hash_bound_guard_priming_before_preflight_publication"
+)
+BOOTSTRAP_EXECUTE_ENTRY_PHASE = (
+    "after_hash_bound_guard_priming_before_recovery_validation"
+)
+BOOTSTRAP_PREPUBLICATION_PHASE = "after_guarded_audit_before_compact_publication"
+TEST_RECEIPT_TYPE = "audit_recovery_test_receipt_v1"
+TEST_RECEIPT_STATUS = "pass_exact_code_freeze_tests"
+FOCUSED_TEST_PATHS = (
+    "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+    "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
+    "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+    "tests/consciousness_sae_target_blind_calibration/test_recovery_bundle_verifier.py",
+    "tests/consciousness_sae_target_blind_calibration/test_scientific_equivalence.py",
+)
+FOCUSED_PYTEST_ARGV = ("-q", *FOCUSED_TEST_PATHS)
+TARGET_DESIGNATED_TEST_IDS = (
+    "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py::"
+    "test_linux_launcher_enforces_policy_and_same_pid_exec",
+    "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py::"
+    "test_target_b200_artifact_device_determinism_contract",
+)
+TARGET_QUALIFICATION_LANDLOCK_NAME = "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+TARGET_QUALIFICATION_CUDA_NAME = "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+TARGET_QUALIFICATION_OWNERSHIP_NAME = "TARGET_QUALIFICATION_OWNERSHIP.json"
+PREFLIGHT_CLOSURE_SCOPES = ("final_recovery", "source_test_qualification")
+
+OWNERSHIP_POD_NAME_PREFIX = "consciousness-sae-realization-validation-v1-"
+OWNERSHIP_PROVIDER_VOLUME_SIZE_BYTES = 500 * 1000**3
+OWNERSHIP_MAX_TOTAL_SECONDS = 6 * 3600
+OWNERSHIP_FIELDS = frozenset(
+    {
+        "schema_version",
+        "status",
+        "study_id",
+        "protocol_version",
+        "pod_id",
+        "pod_name",
+        "ownership_nonce",
+        "network_volume_id",
+        "provider_volume_size_bytes",
+        "data_center_id",
+        "gpu_type",
+        "gpu_count",
+        "volume_mount_path",
+        "created_at",
+        "terminate_after",
+        "create_contract_sha256",
+        "upstream_lifecycle_receipt_sha256",
+        "provider_container_image_attestation",
+        "desired_status",
+        "locked",
+        "precreate_unrelated_pod_count",
+        "precreate_unrelated_inventory_sha256",
+        "receipt_sha256",
+    }
+)
+OWNERSHIP_IMAGE_IMMUTABLE_REFERENCE = (
+    "runpod/pytorch@sha256:"
+    "cb154fcca15d1d6ce858cfa672b76505e30861ef981d28ec94bd44168767d853"
+)
+OWNERSHIP_STUDY_ID = "consciousness_sae_realization_validation_v1"
+OWNERSHIP_PROTOCOL_VERSION = "consciousness_sae_realization_validation_v1.0.0"
+
+HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_20260715_live"
+)
+HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_ADJUDICATION.json"
+)
+HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_ADJUDICATION.md"
+)
+HISTORICAL_INCOMPLETE_REVIEW_BUDGET_INCIDENT = (
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/BUDGET_INCIDENT.json"
+)
+HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON: (
+        "96fad9342ebe064357ac6e06fd26de1fb11209aa713e12805180f81316bced1a"
+    ),
+    HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_MARKDOWN: (
+        "87c76f756db4dd90f69e7ceda55cf8f4ecd729f473cb40fdb887fcb711ccbcbc"
+    ),
+    HISTORICAL_INCOMPLETE_REVIEW_BUDGET_INCIDENT: (
+        "b7610eee2578297644c6606aa0d87d31391c24c6b44c857862024c445ebefdee"
+    ),
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/failure.json": (
+        "2cf4f10787b4c56c4709b4444fccb48aa7fe09ef7c85f860da0436625f2733c4"
+    ),
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/request_payload.json": (
+        "ad251876f0651dbf76d23d1cf8d60b6b66eaf22d56c2f26671158104e6e8324b"
+    ),
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/response.json": (
+        "230e5147347a9c035244b8f3a2750c2545c5f108ac1aa09747ec70993c006bfc"
+    ),
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/review_manifest.json": (
+        "86a3387f8f96ffb18f885ed26b926cca55aae7c8cca22266749bf134ff1b50f6"
+    ),
+    f"{HISTORICAL_INCOMPLETE_REVIEW_DIRECTORY}/review_request.md": (
+        "e7d4c2f239ba21b99b7ffa0c43b1d71aee785fd7dfc1fa89a748ab5820fe4e39"
+    ),
+}
+HISTORICAL_V2_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v2_completed"
+)
+HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V2_ADJUDICATION.json"
+)
+HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V2_ADJUDICATION.md"
+)
+HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON: (
+        "6e404501248a9e9a13b46cc75bc58ab40276c617001a87c60dd14a6c1627f81d"
+    ),
+    HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "abacd1ca2bd3612ebc6123b650a15734bbf68953d23a1934101a0c1ff86c6f72"
+    ),
+    f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "2432f67d32fb77384b4dd6a7276ca977365e30a1463c9e7e0bd53aa961de78ed"
+    ),
+    f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/response.json": (
+        "e9878bb589158162b38d6cc1ea2791aebfb73b0ffb8fc9f68a7e9811669cc682"
+    ),
+    f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/review.md": (
+        "8d0effb94420c3c611113eb31c3932add9e1af6094c88d92f1a3ab5fea05f736"
+    ),
+    f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "28787f7b44c3b678fdd16a6748f5f2fbe9729a6873d775990a0fd547c93d5823"
+    ),
+    f"{HISTORICAL_V2_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "a9b38b175c11637b2314916a9183bea78761a4c1235b91781745b3b3eed982d6"
+    ),
+}
+HISTORICAL_V2_ADJUDICATION_RECEIPT_SHA256 = (
+    "48dbbce43125972eacb123d624e420759666ffc02cd51e48cd6eff92c1487c8a"
+)
+HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v3_completed_negative"
+)
+HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON = (
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.json"
+)
+HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN = (
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.md"
+)
+HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON: (
+        "59e71e96e0684efa69ea050397760cce6979d1ba596be967a6d730edd627c06a"
+    ),
+    HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN: (
+        "18b1ea90dbac2db629a482a9da8d72a0003ba0dbcd779ec7db15109aab842d1c"
+    ),
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/request_payload.json": (
+        "2a2544489cb50fdc76509fa9c47c9b466fe388d9adf4b0f62d2925a0224a703b"
+    ),
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/response.json": (
+        "ec43e39e6f7ed37dc30256199c21a34456dbb010398c9e10c4455baeef64ae67"
+    ),
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review.md": (
+        "e1295704dfc79dac1665d97dc91ec1cae364b9f5c4145ebb294383507c445cb2"
+    ),
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json": (
+        "95b24c9d95ca1ccd21e27240c786484d7cbfc3ba0251fc3286abee10b5999f2b"
+    ),
+    f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_request.md": (
+        "ea9d20786e73f9ffdaff202bb298d4d49cc7f98aa34912e3e05cc0655488235d"
+    ),
+}
+HISTORICAL_V3_NEGATIVE_ADJUDICATION_RECEIPT_SHA256 = (
+    "24dce20453445b169fb11c3f3e76c0444cf38d95a8fa85838126500f7830ac9b"
+)
+HISTORICAL_V3_NEGATIVE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+)
+HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v4_completed_negative"
+)
+HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON = (
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.json"
+)
+HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN = (
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/ADJUDICATION.md"
+)
+HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON: (
+        "83412e1300c2eb75e0a484635de5ec68b3c30bcd54fa66a21a97c4ed7a5353e6"
+    ),
+    HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN: (
+        "3ee053e6dfb911b57458550d5c68908f2ec4444a0bfa65cbacc274a7d8f9b027"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/request_payload.json": (
+        "ce6936466ce66fc60522d4e6cce04e83ee09083afa993103d9c69cfecc7b2d40"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/response.json": (
+        "48648079d58c32a7b7a264698b74ecb962b0eae01de120aab95c4535e21e0f1a"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review.md": (
+        "97bf3d8f8c34a2014f0635e9491a8a69f917fe87518bea9dac0a9c55e75e45c2"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json": (
+        "2bf3caa69667575e478a82036bf7287826d1f15b6350f3754d45bd688225c6ff"
+    ),
+    f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_request.md": (
+        "c0fb06c093c36d2a8d4f2a02b4e01902e10a8e42776bdc937b379b643ae53844"
+    ),
+}
+HISTORICAL_V4_NEGATIVE_ADJUDICATION_RECEIPT_SHA256 = (
+    "1ccca3495ffe1ba4409751d7398364f0da04d25cb44034fd68244a434b14aab3"
+)
+HISTORICAL_V4_NEGATIVE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+)
+FINAL_V5_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v5_completed"
+)
+FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V5_ADJUDICATION.json"
+)
+FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V5_ADJUDICATION.md"
+)
+V3_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v3_inputs"
+)
+V3_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V3_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V3_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V3_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V3_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V3_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V3_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+V4_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v4_inputs"
+)
+V4_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V4_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+V4_TIMED_QUALIFICATION_RECEIPT_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_RECEIPT.json"
+)
+V4_TIMED_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_OWNERSHIP.json"
+)
+V4_TIMED_QUALIFICATION_GUEST_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_GUEST.json"
+)
+V4_TIMED_QUALIFICATION_CACHE_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_CACHE.json"
+)
+V4_TIMED_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_LANDLOCK.json"
+)
+V4_TIMED_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_CUDA.json"
+)
+V4_TIMED_QUALIFICATION_TERMINATION_AUDIT_SNAPSHOT = (
+    f"{V4_REVIEW_INPUT_DIRECTORY}/TIMED_QUALIFICATION_TERMINATION_AUDIT.json"
+)
+V4_TIMED_QUALIFICATION_PHYSICAL_SHA256 = {
+    V4_TIMED_QUALIFICATION_RECEIPT_SNAPSHOT: (
+        "2d681bd9d02bb786234d49336f1fbe49d661658dac16bdbca7c1cc715d7ffa62"
+    ),
+    V4_TIMED_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        "68b6ddf7112a19c0a257edfba16bb24bbed39a140d7a5452bd507b7cf681accf"
+    ),
+    V4_TIMED_QUALIFICATION_GUEST_SNAPSHOT: (
+        "9286f7bd2088e8b7f67e31d08fe7373f43d166d61700ef77f2086069f876fe37"
+    ),
+    V4_TIMED_QUALIFICATION_CACHE_SNAPSHOT: (
+        "cf31fc9a0831cfdfcad2971b45df7dab9adf554ad6edd307e23c183c30bba137"
+    ),
+    V4_TIMED_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        "8512213aaa7aee53b9cd60c9e57fcd0da4a742a55fd0006f09ab179841b96043"
+    ),
+    V4_TIMED_QUALIFICATION_CUDA_SNAPSHOT: (
+        "04a5acf780d30dbd13dcf97f33e308285f3e5a71e1040977d1e7ac899cf2f0d7"
+    ),
+    V4_TIMED_QUALIFICATION_TERMINATION_AUDIT_SNAPSHOT: (
+        "193faab74506cbce725f3c256c31cb8d7072e26866f29eff047c519ca53d5ea3"
+    ),
+}
+V5_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v5_inputs"
+)
+V5_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V5_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V5_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+FINAL_V5_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256 = {
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON: (
+        "896e9712f6047ca4ddf3a4b992efe07795702665a12e0ce0d10cef9fb3814e47"
+    ),
+    FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "01eba1850a5578fed06b6af8bc760b2e0ef32648931fbddce8169136243b97da"
+    ),
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "61842691ad8080693c273405af486bd2795d3bcf666d0eb0d16f10f7218f25da"
+    ),
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json": (
+        "3e81e2ed357b949b296ce9693e53b2f164c7c86c82159761fabddb0a691fdeb2"
+    ),
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md": (
+        "11fe4403eb9c6e9fbf4dc3e59e8211d3cd98667657d9e9c2210360f65771b9e4"
+    ),
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "da53103fdd26ba18166adb1680423b329f683dce87409d35ed5d2d181450eb56"
+    ),
+    f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "4953ea163fd02f6b9dc65b7205dbaa166749717ce7a1e74583f7d801fc60e7a9"
+    ),
+    V5_LOCAL_TEST_RECEIPT_SNAPSHOT: (
+        "3a570bc92a15c298a572deb1123fd3a07d1dd779e8224fb82c57ee1d0de86767"
+    ),
+    V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: (
+        "76dff49824b0933a33ffdc8a5facfe9ef7495c95f201900560a99d4032a6c1c7"
+    ),
+    V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+        "abc9925fd413bda6033f69428c48e108bfed5a59a85b3accf2b3ef12d6bcce36"
+    ),
+    V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+        "0b5af3f6c1fe1f0da7ece718bd3c786d6ea96e483ce665f33d8e4a75d0a757cf"
+    ),
+    V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+        "8f4ea22d9fd975229a7fea9827f352f299c5f49bfc3fa0fd18cb68da1cb2133c"
+    ),
+}
+HISTORICAL_V5_POSITIVE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+)
+HISTORICAL_V5_INPUT_TOKENS_PREFLIGHT = 336_765
+HISTORICAL_V5_RECORDED_COST_USD = 7.7812
+HISTORICAL_V5_RETROSPECTIVE_LONG_CONTEXT_COST_USD = 15.121205
+HISTORICAL_V5_BUDGET_AUTHORIZATION_USD = 25.0
+HISTORICAL_V4_INPUT_TOKENS_PREFLIGHT = 274_606
+HISTORICAL_V4_RECORDED_COST_USD = 6.48768
+HISTORICAL_V4_RETROSPECTIVE_LONG_CONTEXT_COST_USD = 12.555555
+HISTORICAL_V4_BUDGET_AUTHORIZATION_USD = 25.0
+C6_SUPERSEDED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c6_superseded_qualification"
+)
+C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/LOCAL_TEST_RECEIPT.json": (
+        "192f7a2b4268311bbe16112b9a2ec37e91065b46aeb6da0618e14e7d77271d6b"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json": (
+        "0f259ba418856bf17429a75edc8e5ded4dffbc145480435d675d7ef667f00c5e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json": (
+        "a62132284f6a1e281102c6fcfeb6361c736f73d3af066720a54ead6711894d29"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json": (
+        "a2452daf78bd4cdc639e3e0b0c1a96d546a65e0d517c1589382cca076dc74c86"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json": (
+        "93c6d5bd66b1518e8ea4285d009cb9f6fabdaf288d4945492346fd6351a566e4"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_TERMINATION_AUDIT.json": (
+        "ad85debce16388f505709a7bc7e035c680a6773135167e0b97ef90b0c6e8b43e"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/QUALIFICATION_FROZEN_TERMINATION.json": (
+        "138a39a87b332da98277998c9b709822c331077a770a71a8abe39cd0b7f5ac99"
+    ),
+    f"{C6_SUPERSEDED_QUALIFICATION_DIRECTORY}/"
+    "QUALIFICATION_POSTDELETE_INVENTORY.json": (
+        "78175ab88acae3c157ecb91fe36525dfee7d234d2e717056598029247b193796"
+    ),
+}
+C7_FAILED_QUALIFICATION_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_c7_failed_qualification"
+)
+C7_FAILED_QUALIFICATION_PHYSICAL_SHA256 = {
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/QUALIFICATION_STATUS.json": (
+        "8a7b4f9750d9648d45b99f030d8f76800a26d4a1c3b6c819d58737ae392e36a2"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stdout": (
+        "83a573b66f74ba07ee0df08b7484f5e60fd4298964b259b3e1db9c2a3142d5dc"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/remote.stderr": (
+        "e126f6d1a54a5458002985aa70e7d4c5ed9ba8fe53f9fd41dd2b52ecb7232777"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/run_target_qualification.sh": (
+        "49caca53952b9c00ab27536b78d2df928094dd986450074a4d66f77ae405315a"
+    ),
+    f"{C7_FAILED_QUALIFICATION_DIRECTORY}/SHA256SUMS": (
+        "2288175d16433f881a07b50bc33d0c6efef2fd7d49e0c1aaf79aa81a12dc8378"
+    ),
+}
+V6_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v6_inputs"
+)
+V6_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V6_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V6_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V6_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V6_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V6_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+FINAL_V6_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v6_completed"
+)
+FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V6_ADJUDICATION.json"
+)
+FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V6_ADJUDICATION.md"
+)
+FINAL_V6_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V6_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V6_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V6_NONADJUDICABLE_REVIEW_OUTPUT_PATHS = (
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256 = {
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "565dd71160456e6d0570d00888dfbcffd657e55491679f4c88d17c6aee4017b8"
+    ),
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json": (
+        "419c416a49dac0d936476e65f84866580adb30c789a6f336a34bc584bd88df52"
+    ),
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md": (
+        "750e5ab386a08038fa6378a827af8b16bbebf97147022334b05d5ab5691a7c6c"
+    ),
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "893ae3486f3c41492c45c9688e0bb28cdf64957fbc515b42022a91c5d2dd191f"
+    ),
+    f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "1d6ef38b6234c2f0a3f8a804c198b976128c6879876de4d425a720b547f20600"
+    ),
+}
+HISTORICAL_V6_NONADJUDICABLE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+)
+V7_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v7_inputs"
+)
+V7_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V7_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V7_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V7_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V7_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V7_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+FINAL_V7_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v7_completed"
+)
+FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V7_ADJUDICATION.json"
+)
+FINAL_V7_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V7_ADJUDICATION.md"
+)
+FINAL_V7_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V7_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V7_POSITIVE_REVIEW_PHYSICAL_SHA256 = {
+    FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON: (
+        "0eb64d7ef327056ba6872b56b6bff3eaef2d9575115463cd2771cc51bda9e787"
+    ),
+    FINAL_V7_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "a65ae2064b5b32b50afb17b114dab0dac18cecc573edb4cf4a3698c3af7d8dc0"
+    ),
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "3595d50b08a1e1f2f009238570aab4ed5cc58be894384d81b7dcbcb29ac7a279"
+    ),
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/response.json": (
+        "0994d4050fc3a0e4c3664e7c42572ef37488f5a660f717d96cfeb728450e231f"
+    ),
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md": (
+        "75607c805f68833f5826175c66a89544dbcb4b65a9471803ffd806c65f600672"
+    ),
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "24bf65a4fca84db9149783b3017f4f3953b1c8cd24a19f1f4150f95d12c1768f"
+    ),
+    f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "19dcdf32f353d6898a3e432f22750a47a54bf549281f577da92ca8f0856b7389"
+    ),
+}
+HISTORICAL_V7_POSITIVE_FINDING_IDS = (
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "B16",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+)
+HISTORICAL_B17_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_bindingfix_gpt_pro_20260715_completed"
+)
+HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256 = {
+    f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "9dee2b68e81fdfce82dcfeae2a9c58ef8f328d3c5ac449565fbb40c0c933a1b4"
+    ),
+    f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/response.json": (
+        "2f97c324f99ebe6e8fa3217b1a6ff2b11522e54308f332b4d0ab4bbe0647a4fd"
+    ),
+    f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review.md": (
+        "6cf7601b6d218bc348b1e15f84845676749861e8fa0f5c51a42a0a452012107d"
+    ),
+    f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "4971619899e03cfa3dc6dddc694a740c7dd3d761654266337452aeaedbdf2881"
+    ),
+    f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "697eab33a379290799ca739c203c3ef157f7ca519a801dbef2011f75c271bbe7"
+    ),
+}
+HISTORICAL_B17_FINDING_IDS = ("B17", "B18", "B19", "I10", "I11", "I12")
+B18_COMPACT_EVIDENCE_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_b18_cleanup_closure"
+)
+B18_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
+    f"{B18_COMPACT_EVIDENCE_DIRECTORY}/B18_CLOSURE_RECEIPT.json": (
+        "e53b5656300c78740c6e6698a80b72e02c8467f825a48d1dbaa19e266c405748"
+    ),
+    f"{B18_COMPACT_EVIDENCE_DIRECTORY}/B18_VERIFICATION_OUTPUT.json": (
+        "b9325d744eca0dc34c31ff9dbfdf91666ef8bca38eb5ac802387a6bdd1f0145a"
+    ),
+    f"{B18_COMPACT_EVIDENCE_DIRECTORY}/DESIGNATED_OUTPUT_TREE_INVENTORY.json": (
+        "006fae24117af7878d7277bd205a39639386b29ee0f3bc0122937db97f19eec8"
+    ),
+    f"{B18_COMPACT_EVIDENCE_DIRECTORY}/RETRIEVED_ATTEMPT_TREE_INVENTORY.json": (
+        "c39fcaa03539cb1cfd9396e8688112184ddabaaedf4694a4c7e98689803cf1f4"
+    ),
+}
+B20_INCIDENT_DOCUMENT = (
+    "docs/consciousness_sae_target_blind_calibration/"
+    "AUDIT_RECOVERY_V8_B20_INCIDENT.md"
+)
+B20_COMPACT_EVIDENCE_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_b20_gitless_active_incident"
+)
+B20_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/ATTEMPT_TREE_INVENTORY.json": (
+        "7661f26235ec919924bd126fc0e2a29c323059031ae1a82337395e4a3e17ab5f"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/B20.md": (
+        "d807944aa8801228984077e6d3a044dafe8d039944b44d19f81c8e799fd89bf0"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/B20_CLOSURE_RECEIPT.json": (
+        "e3b2e3d28bb6f0f865be968c969393c106fe16f3429f2b8a0f01e7bc8549fa4b"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/B20_VERIFICATION_OUTPUT.json": (
+        "f1b23d4f49df732dae5e05f1ff685e8d8e13d6cb65c7202b8459547e25b47d15"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/DESIGNATED_OUTPUT_TREE_INVENTORY.json": (
+        "5ca6aeb934188ba7a9757e1579d29a9e6f9a4faa619500ee5695c6d38220509e"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/SHA256SUMS": (
+        "654a2dabcac3a783fbe27e4a9895dcab1d0c7c7225a5220982d33aa20c48d6c8"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/SOURCE_ARCHIVE_VERIFICATION_OUTPUT.json": (
+        "bcb5340a1136674793466c5eb789a822fd1fbc6cc616c0a807cdc6c04c8da2d2"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/AUTHORIZATION_BINDING.json": (
+        "0bb80f98f0b199a94c866fd02de9500b464dfdc4e3ebd55f9775e0cb116d9014"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/FAILURE_EVIDENCE.json": (
+        "9be15025415447e9cc1c61c65699c8a8e026934bea361d1bbf011f1a08871e5c"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/FROZEN_TERMINATION.json": (
+        "8c6ab40983c8b7bdec3162c7234cb86669699fbe81c9c912cf05b77b71edc156"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/LANDLOCK_BINDING.json": (
+        "c8859eba627b376a1a6ef9b3661fd3f4719b977762a15bf09dfd88d800d3658a"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/LAUNCH_BINDING.json": (
+        "cd3d69aa62a7fc9c2495bbd3aafa6629dead7c1684fd44db9d70d127cd81f435"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/OWNERSHIP.json": (
+        "445de6bbaef6df69ffe8c65d2da689207367eacc89353ca164271dff069983a8"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTCREATE_INVENTORY.json": (
+        "1b2cb3063ca4ce057c18d884b69ccb936bd0f47a6f641c2af70a61e2d2cf9d42"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTDELETE_INVENTORY.json": (
+        "89597e9200deef14657e976988c526aeb7c20a3d4e9e453cf2e2f131544110e7"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/PRECREATE_INVENTORY.json": (
+        "793671ca893cb22312d031833df496f767ba08f116de8326954633a1433b092f"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": (
+        "50eae10f172511ad1ed1931d873f875dab0c4441578537ec3c9a618cc54e6bd1"
+    ),
+    f"{B20_COMPACT_EVIDENCE_DIRECTORY}/verify_b20_public_compact.py": (
+        "11381aba2d87c7a94d08e8c2d37caa5685ae49af4af4a58cfee868635f131e5a"
+    ),
+}
+B22_COMPACT_EVIDENCE_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_b22_cublas_incident"
+)
+B22_INCIDENT_DOCUMENT = f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22.md"
+B22_COMPACT_EVIDENCE_PHYSICAL_SHA256 = {
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/ATTEMPT_TREE_INVENTORY.json": "90a7272cd71ed10891ebe74a92846012f8ea580ba9664da9fdf15913834ee4fd",
+    B22_INCIDENT_DOCUMENT: "119ffd7889ff4f48acc9a7135892643dec79e3b4aaab1171a9d5c15b2f7cd889",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_CLOSURE_RECEIPT.json": "092853c8acda0fc2c96baace4e40bb13835c95b715b92ee63af4f7167b61e74b",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/B22_VERIFICATION_OUTPUT.json": "e127de856db05a5cde0de47d96e3ba81e3f01dc5344e75e369707a5cbd61acde",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/CUBLAS_CAUSE.json": "d9d8a15b4f3ed41523abe4044a7c98aa68a832c6acd5500f2d2f3cddae7f0d78",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/DESIGNATED_OUTPUT_TREE_INVENTORY.json": "0a002473a8595214fbb541dc42d91a822afc3ffc4ffbd5ec7037f69adef2d6bc",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/PRIVATE_SOURCE_ANCHOR.json": "c89757a87303264369cbebcb4b63104e5a9466521ca5061efa67b994bb55cb6d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/SHA256SUMS": "ae67a5ef824f847a7a034d8f1d2357955aa0b28d44630cb3d7370ca4e1afe6e8",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/ATTEMPT_STARTED.json": "3b7ec3427e6ef5062a246fce0fefeffa28a032097d83c924f97b98165a064599",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/AUTHORIZATION_BINDING.json": "3fd3b12c2b070aba65983b716179b9ed70db1c3553a2bf4ec3eb7bbbfe323381",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_audit.py": "271f4f17a5ed66eaff43dc63f5a02d7ce45cdfd4a3c6a5b5c03bac33cf96a465",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_base_protocol.py": "d35a81fa6aae0be3c003bf36be4c4640f435c66d7ed7d16b7f1ce9f121f502c1",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/F12_final_recovery_controller.sh": "a0617d371df00f6b75f2c8cb7b75a619e6ce5adb20895cc6553fac9a044d3cb2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FAILURE.json": "f77244d3ee5cc50aa15a951a135415bce467e33ae075670f1bc984ae121fa602",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_LANDLOCK_ENFORCEMENT.json": "98c59460298af035eae9cb991bf34318f233bbf690b87249517aac899f4a473e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FINAL_RECOVERY_LAUNCH_GATE.json": "ff31ef0be905e74eda19ef3dd8736f2dab55b57d7ea3a70c8a2efb5342bd2014",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/FROZEN_TERMINATION.json": "9c93e6943e7bf44e57864d4a5a22c0c5deb5658c80018a467628c9ce40fc7236",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/OWNERSHIP.json": "e26b2a1f6c91dc9499572995087303f5b2646a540bc830fe062337cbd1bd2ec6",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTCREATE_INVENTORY.json": "7543387801f18376ed082f4f6ee15e9135dcd96193b82b561920feb143c5e60d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/POSTDELETE_INVENTORY.json": "5c89a7716393ee731dc589e17cbff07930c91b76a213357d107945c4cec4d69d",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PRECREATE_INVENTORY.json": "e6c72bdba6483e9cb4dc9b0cd81846c3398f9ce43391a1b9cab895e5d7d04e75",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_CUDA.json": "58b8ab1ef9f4cfa5e7226bfc2c08c768b6467428424e2e1505219bf5846cfdc2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/PREFLIGHT_LANDLOCK_ENFORCEMENT.json": "77ff3a6d368fc3154c829ba7f09dd35745da44264abcb4a3f88af9273e7fe87e",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/TERMINATION_AUDIT.json": "2f2c5bdeabfd619f0b67d553645a2a18cdfd40c28958b403de7297164e5a03d2",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stderr": "ecff3e226982aeb25103aa0d97f6efd7bb46532f16e941e6cba284caefe408f0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/attachments/controller.stdout": "cd00f24e6f5a234a6f02ab96f6d72d1e01c92352d59d14a85d74342edfeda0e0",
+    f"{B22_COMPACT_EVIDENCE_DIRECTORY}/build_and_verify_b22_evidence.py": "f088de7ef0cbf13ddb26afdba6d221befb7f144cd6fb447edeccb4a6d299cb17",
+}
+HISTORICAL_B21_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_b21_completed_negative"
+)
+HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS = (
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256 = {
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "40375093a762f07256c982f8886dee9388f8530daf9aa7ad565d7cb5b238477a"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/response.json": (
+        "2e333428fb54f6e1c66830a8b468f611e5e8c386300d559f55b558ab41831243"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review.md": (
+        "1c9fb7de6445b977fe6ebf265fa56d52e01e6882724acf0b5ff7a26bf125d845"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "0a8b2185d8909e66234de40c257034679fec5d2df53db9206679a220516c2b7c"
+    ),
+    f"{HISTORICAL_B21_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "adbbb991930e45e2b88b5ae4cf75827d366afa839921de2e94780eb64bd8a43b"
+    ),
+}
+HISTORICAL_V8_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_completed"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.json"
+)
+HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md"
+)
+HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256 = {
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_JSON: (
+        "13134eb8a030ada0eeb1fbfdd7af5e9daad75e4130773d60705e3c12925f8c5e"
+    ),
+    HISTORICAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "6aeb6e7ce7d1597ea2583a4e38b7f5f3d70b64dc168b4cf33c80f8edafef962a"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "f4622ebf5e2dd20c310a6e9688ff4da7f938c32ad1a9cc6d8b19f00df8ef47f1"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/response.json": (
+        "9505a5c450f01bd460e65d6655f21e3d864b4aad485fc728ffef59085a8c5407"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md": (
+        "f34b389ff2cc31e14bfcb4a9288e6532ace35c4a3ab3e7a16dbb2ffde9f2b9b0"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "ba1454a18b23d853a4c442aca38c6bf40713c2502b22ff67e7d85adc5229bb54"
+    ),
+    f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "c51b814ff7c5cee6ebb90d3f6c60462f59768a6eb4f101dca372a982ea0cc118"
+    ),
+}
+V8_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_inputs"
+)
+V8_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V8_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V8_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V8_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V8_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V8_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V8_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V8_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V8_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V8_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+FINAL_V8_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v8_completed"
+)
+FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.json"
+)
+FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md"
+)
+FINAL_V8_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V8_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V8_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V8_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+V9_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_inputs"
+)
+V9_LOCAL_TEST_RECEIPT_SNAPSHOT = f"{V9_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V9_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+V9_COMPACT_EVIDENCE_SUMMARY = f"{V9_REVIEW_INPUT_DIRECTORY}/V9_EVIDENCE_SUMMARY.json"
+FINAL_V9_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v9_completed"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.json"
+)
+FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V9_ADJUDICATION.md"
+)
+FINAL_V9_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256 = {
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON: (
+        "0d3e928d3d4221917e43dcce29fd51ac028d46c9035a4b339dcd378f79225643"
+    ),
+    FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN: (
+        "fa661f0f3b78b743f645c3c1e2e297c8908daec24d95a531ae0e2647134161c0"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/request_payload.json": (
+        "e446312861edf4d6b4042bd07703d39c475b358ad79eb9890e06eea551d08be4"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json": (
+        "3dbd5aefb65101bfa402a1d1e6249db163114fc6ea2bdf74044e3cc93fd8dead"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md": (
+        "886cf769e2c87f0831a88d9ea4ec5ed6b70d8d0e9f605675c67366ed7e44968f"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json": (
+        "af09296394727cd66cdfe208333060e01934327ff91c59b228674a452af20bd2"
+    ),
+    f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_request.md": (
+        "8ae6c63d0eb7c5a71bdaeafb8fae47a6350b92cf5a73990e7763b32cf21ec4f5"
+    ),
+}
+V10_REVIEW_INPUT_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v10_inputs"
+)
+V10_LOCAL_TEST_RECEIPT_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/LOCAL_TEST_RECEIPT.json"
+)
+V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_HOST_TEST_RECEIPT.json"
+)
+V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_OWNERSHIP.json"
+)
+V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json"
+)
+V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json"
+)
+V10_COMPACT_EVIDENCE_SUMMARY = (
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V10_EVIDENCE_SUMMARY.json"
+)
+FINAL_V10_PRO_REVIEW_DIRECTORY = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "audit_recovery_landlock_gpt_pro_v10_completed"
+)
+FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.json"
+)
+FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN = (
+    "docs/consciousness_sae_target_blind_calibration/reviews/"
+    "AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V10_ADJUDICATION.md"
+)
+FINAL_V10_PRO_REVIEW_OUTPUT_PATHS = (
+    FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON,
+    FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN,
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/request_payload.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/response.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review.md",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_manifest.json",
+    f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_request.md",
+)
+FINAL_RECOVERY_WRAPPER_PATHS = (
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "final_recovery_controller.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "final_recovery_hash_exec_gate.py",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "validate_final_recovery_launch_gate.py",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "final_recovery_local_supervisor.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "final_recovery_wrapper_self_test.py",
+)
+AUDIT_EXECUTABLE_PATHS = (
+    "experiments/__init__.py",
+    "experiments/consciousness_sae_realization_validation/__init__.py",
+    "experiments/consciousness_sae_realization_validation/protocol.py",
+    "experiments/consciousness_sae_realization_validation/runpod_preflight.py",
+    "experiments/consciousness_sae_realization_validation/"
+    "legacy_public_artifact_manifest.json",
+    "experiments/consciousness_sae_target_blind_calibration/__init__.py",
+    "experiments/consciousness_sae_target_blind_calibration/protocol.py",
+    "experiments/consciousness_sae_target_blind_calibration/build_plan.py",
+    "experiments/consciousness_sae_target_blind_calibration/review_adjudication.py",
+    "experiments/consciousness_sae_target_blind_calibration/validate_plan.py",
+    "experiments/consciousness_sae_target_blind_calibration/orientation.py",
+    "experiments/consciousness_sae_target_blind_calibration/authorize.py",
+    "experiments/consciousness_sae_target_blind_calibration/audit.py",
+    "experiments/consciousness_sae_target_blind_calibration/audit_runtime_shim.py",
+    "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py",
+    "experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py",
+    "experiments/consciousness_sae_target_blind_calibration/scientific_equivalence.py",
+    "experiments/consciousness_sae_target_blind_calibration/landlock_launcher.py",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "recovery_bundle_verifier.py",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "requirements-runpod-b200.txt",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "requirements-runpod-b200-qualification.txt",
+    "experiments/consciousness_sae_target_blind_calibration/setup_runpod_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "setup_runpod_qualification_guest.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "run_qualification_pipe_logged.sh",
+    "experiments/consciousness_sae_target_blind_calibration/"
+    "runpod_qualification_controller.sh",
+    *FINAL_RECOVERY_WRAPPER_PATHS,
+)
+RECOVERY_DOCUMENT_PATHS = (
+    "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md",
+    "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_REVIEW_CONTEXT.md",
+    "docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_target_blind_calibration/V10_TOP_LEVEL_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_target_blind_calibration/"
+    "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json",
+    "docs/consciousness_sae_target_blind_calibration/"
+    "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+    "docs/consciousness_sae_target_blind_calibration/"
+    "AUDIT_RECOVERY_V6_PREGPU_INCIDENT.md",
+    "docs/consciousness_sae_target_blind_calibration/"
+    "AUDIT_RECOVERY_V7_POSTREVIEW_INCIDENT.md",
+    B20_INCIDENT_DOCUMENT,
+    *tuple(C7_FAILED_QUALIFICATION_PHYSICAL_SHA256),
+    "data/consciousness_sae_target_blind_calibration/"
+    "calibration_v2_plan_20260714_r3/plan_manifest.json",
+    "data/consciousness_sae_target_blind_calibration/"
+    "calibration_v2_plan_20260714_r3/source_files.json",
+    *tuple(HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256),
+    *tuple(HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256),
+    *tuple(HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256),
+    *tuple(HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256),
+    V3_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V3_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V3_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V3_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V3_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *tuple(V4_TIMED_QUALIFICATION_PHYSICAL_SHA256),
+    V4_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V4_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V4_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V4_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V4_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V5_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V5_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V5_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *FINAL_V5_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256),
+    V6_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V6_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V6_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V6_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V6_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *HISTORICAL_V6_NONADJUDICABLE_REVIEW_OUTPUT_PATHS,
+    V7_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V7_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V7_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V7_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V7_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    *FINAL_V7_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256),
+    *tuple(B18_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    *tuple(B20_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    *HISTORICAL_B21_PRO_REVIEW_OUTPUT_PATHS,
+    *HISTORICAL_V8_PRO_REVIEW_OUTPUT_PATHS,
+    *tuple(B22_COMPACT_EVIDENCE_PHYSICAL_SHA256),
+    V9_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V9_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V9_COMPACT_EVIDENCE_SUMMARY,
+    *FINAL_V9_PRO_REVIEW_OUTPUT_PATHS,
+    V10_LOCAL_TEST_RECEIPT_SNAPSHOT,
+    V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+    V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+    V10_COMPACT_EVIDENCE_SUMMARY,
+    f"{V10_REVIEW_INPUT_DIRECTORY}/PROSPECTIVE_EVIDENCE_NOTE.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_1.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_REVIEW_PART_2.md",
+    f"{V10_REVIEW_INPUT_DIRECTORY}/V9_CONDITIONAL_ADJUDICATION_SUMMARY.json",
+    *FINAL_V10_PRO_REVIEW_OUTPUT_PATHS,
+    "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py",
+    "tests/consciousness_sae_target_blind_calibration/test_confined_bootstrap.py",
+    "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py",
+    "tests/consciousness_sae_target_blind_calibration/test_recovery_bundle_verifier.py",
+    "tests/consciousness_sae_target_blind_calibration/test_scientific_equivalence.py",
+)
+RECOVERY_BOUND_PATHS = tuple(
+    sorted(set(AUDIT_EXECUTABLE_PATHS) | set(RECOVERY_DOCUMENT_PATHS))
+)
+SOURCE_TEST_BOUND_PATHS = tuple(
+    path
+    for path in RECOVERY_BOUND_PATHS
+    if path.startswith("experiments/") or path.startswith("tests/")
+)
+EXTERNAL_FILE_KEYS = frozenset(
+    {
+        "run_complete",
+        "raw_ledger",
+        "raw_inventory",
+        "failure_log",
+        "original_ownership",
+        "original_guest",
+        "original_cache",
+        "original_authorization",
+        "termination_audit",
+        "postdelete_inventory",
+        "frozen_termination",
+        "superseded_runtime_block",
+        "superseded_termination_audit",
+        "superseded_frozen_termination",
+        "superseded_postdelete_inventory",
+        "fresh_ownership",
+        "fresh_guest",
+        "fresh_cache",
+        "preflight_landlock",
+        "preflight_probe",
+        "local_test_receipt",
+        "target_host_test_receipt",
+        "target_qualification_ownership",
+        "target_qualification_landlock",
+        "target_qualification_cuda_preflight",
+        "roots_manifest",
+    }
+)
+
+POLICY_ABI = 4
+HANDLED_ACCESS_FS = 0x7FF2
+OUTPUT_ALLOWED_ACCESS_FS = 0x1B2
+DEVICE_ALLOWED_ACCESS_FS = 0x2
+PROC_SELF_TASK_ALLOWED_ACCESS_FS = 0x4002
+PROC_SELF_TASK_PATH = "/proc/self/task"
+LANDLOCK_POLICY = {
+    "mechanism": "linux_landlock",
+    "required_abi": POLICY_ABI,
+    "handled_access_fs": HANDLED_ACCESS_FS,
+    "handled_access_fs_names": [
+        "write_file",
+        "remove_dir",
+        "remove_file",
+        "make_char",
+        "make_dir",
+        "make_reg",
+        "make_sock",
+        "make_fifo",
+        "make_block",
+        "make_sym",
+        "refer",
+        "truncate",
+    ],
+    "output_allowed_access_fs": OUTPUT_ALLOWED_ACCESS_FS,
+    "output_allowed_access_fs_names": [
+        "write_file",
+        "remove_dir",
+        "remove_file",
+        "make_dir",
+        "make_reg",
+    ],
+    "rule_type": "path_beneath",
+    "directory_rule_count": 3,
+    "device_rule_access_fs": DEVICE_ALLOWED_ACCESS_FS,
+    "device_rule_access_fs_name": "write_file",
+    "write_allowed_directories": [
+        "execution.paths.output_root",
+        "execution.paths.canary_output_root",
+    ],
+    "proc_self_task_allowed_access_fs": PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+    "proc_self_task_allowed_access_fs_names": ["write_file", "truncate"],
+    "proc_self_task_rule_path": PROC_SELF_TASK_PATH,
+    "proc_self_task_exception_scope": (
+        "WRITE_FILE|TRUNCATE on all descendants; required for CUDA thread naming"
+    ),
+    "device_write_exceptions": "execution.device_files",
+    "raw_and_provenance_write_access": "default_denied",
+    "metadata_and_device_ioctl_outside_claim": True,
+}
+
+EXPECTED_PACKAGES = {
+    "numpy": "2.2.6",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.22.2",
+    "torch": "2.8.0.dev20250319+cu128",
+    "transformers": "4.57.6",
+}
+EXPECTED_IMPORTED_PACKAGES = {
+    name: EXPECTED_PACKAGES[name]
+    for name in ("numpy", "safetensors", "torch", "transformers")
+}
+FIXED_ENVIRONMENT = {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_CACHE_DISABLE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+}
+DYNAMIC_ENVIRONMENT = (
+    "HOME",
+    "TMPDIR",
+    "HF_HOME",
+    "TRANSFORMERS_CACHE",
+    "XDG_CACHE_HOME",
+    "TORCH_HOME",
+    "PIP_CACHE_DIR",
+    "NUMBA_CACHE_DIR",
+    "CUDA_CACHE_PATH",
+    "TRITON_CACHE_DIR",
+    "TORCHINDUCTOR_CACHE_DIR",
+    "PYTHONPYCACHEPREFIX",
+)
+FORBIDDEN_ENVIRONMENT = (
+    "LD_AUDIT",
+    "LD_PRELOAD",
+    "PYTHONHOME",
+    "PYTHONINSPECT",
+    "PYTHONPATH",
+    "PYTHONPLATLIBDIR",
+    "PYTHONSTARTUP",
+    "PYTHONUSERBASE",
+)
+
+WRITE_CONFINEMENT_CLAIM = (
+    "process-tree ABI-4 handled filesystem content/topology mutations confined "
+    "to two output directories, with an exact /proc/self/task "
+    "WRITE_FILE|TRUNCATE thread-name exception and exact NVIDIA WRITE_FILE "
+    "exceptions"
+)
+LANDLOCK_LIMITATIONS = {
+    "metadata_operations_unhandled": True,
+    "preopened_file_descriptors_unmediated": True,
+    "sibling_processes_and_other_nfs_clients_unmediated": True,
+    "device_ioctl_unhandled_in_abi4": True,
+    "proc_self_task_path_beneath_write_truncate_exception": True,
+    "read_only_mount_claimed": False,
+}
+
+PROTECTED_OPERATIONS = (
+    "protected_create",
+    "protected_mkdir",
+    "protected_symlink",
+    "protected_link",
+    "protected_unlink",
+    "protected_rename",
+    "protected_truncate",
+    "protected_open_write",
+)
+OUTPUT_ALLOWED_OPERATIONS = (
+    "output_create_write_fsync",
+    "output_same_directory_rename",
+    "output_unlink",
+    "output_mkdir",
+    "output_rmdir",
+)
+OUTPUT_DENIED_OPERATIONS = (
+    "output_truncate",
+    "output_symlink",
+    "output_fifo",
+    "output_unix_socket",
+    "output_cross_directory_link",
+)
+PRECONFINEMENT_WRITABLE_BASELINE = (
+    "baseline_seed_open_write_no_write",
+    "baseline_create_unlink",
+    "baseline_mkdir_rmdir",
+)
+CONFINED_EVIDENCE_ARGUMENTS = (
+    "plan_dir",
+    "raw_root",
+    "run_complete",
+    "raw_ledger",
+    "raw_inventory",
+    "failure_log",
+    "original_ownership",
+    "original_guest",
+    "original_cache",
+    "original_authorization",
+    "termination_audit",
+    "postdelete_inventory",
+    "frozen_termination",
+    "superseded_runtime_block",
+    "superseded_termination_audit",
+    "superseded_frozen_termination",
+    "superseded_postdelete_inventory",
+    "fresh_ownership",
+    "fresh_guest",
+    "fresh_cache",
+    "preflight_landlock",
+    "preflight_probe",
+    "local_test_receipt",
+    "target_host_test_receipt",
+    "target_qualification_ownership",
+    "target_qualification_landlock",
+    "target_qualification_cuda_preflight",
+)
+CONFINED_PATH_ARGUMENTS = (
+    "provenance_root",
+    "roots_manifest",
+    "output_root",
+    "preflight_output_root",
+    "preflight_canary_protected_root",
+    "preflight_canary_output_root",
+    "canary_protected_root",
+    "canary_output_root",
+    "landlock_receipt",
+    "model_snapshot",
+    "j_lens_path",
+    "audit_out",
+    "summary_out",
+    "attempt_marker",
+    "failure_out",
+)
+
+HEX64 = re.compile(r"[0-9a-f]{64}")
+HEX40 = re.compile(r"[0-9a-f]{40}")
+ROOT_NAME = re.compile(r"[a-z][a-z0-9_]{0,63}")
+ATTEMPT_ID_RE = re.compile(r"calv2-r3-audit-recovery-[0-9a-f]{7}-[0-9]{8}T[0-9]{6}Z")
+NVIDIA_DEVICE_PATH = re.compile(
+    r"(?:/dev/nvidia[0-9]+|/dev/nvidiactl|/dev/nvidia-uvm|"
+    r"/dev/nvidia-uvm-tools|/dev/nvidia-caps/nvidia-cap[0-9]+)"
+)
+
+LANDLOCK_REQUIRED_FIELDS = frozenset(
+    {
+        "schema_version",
+        "status",
+        "purpose",
+        "pid",
+        "observed_abi",
+        "required_abi",
+        "handled_access_fs",
+        "output_allowed_access_fs",
+        "no_new_privs",
+        "thread_ids",
+        "descriptor_audit",
+        "mapping_audit",
+        "directory_rules",
+        "device_rules",
+        "protected_checks",
+        "canary_checks",
+        "child_argv",
+        "child_argv_sha256",
+        "source_sha256",
+        "receipt_path",
+        "receipt_sha256",
+    }
+)
+
+
+class RecoveryBundleVerificationError(RuntimeError):
+    """The retrieved recovery bundle is incomplete or semantically invalid."""
+
+
+def _validate_bound_canary_socket_path(
+    root: PurePosixPath,
+    label: str,
+) -> None:
+    path = root / OUTPUT_CANARY_SOCKET_NAME
+    encoded = os.fsencode(path.as_posix())
+    if (
+        (
+            AF_UNIX_PATH_MAX_BYTES,
+            AF_UNIX_PATH_REQUIRED_MARGIN_BYTES,
+            AF_UNIX_PATH_BUDGET_BYTES,
+            OUTPUT_CANARY_SOCKET_NAME,
+        )
+        != (107, 16, 91, ".s")
+        or AF_UNIX_PATH_BUDGET_BYTES
+        != AF_UNIX_PATH_MAX_BYTES - AF_UNIX_PATH_REQUIRED_MARGIN_BYTES
+        or b"\0" in encoded
+        or len(encoded) > AF_UNIX_PATH_BUDGET_BYTES
+    ):
+        raise RecoveryBundleVerificationError(
+            f"{label} Unix-socket canary path exceeds the frozen byte budget"
+        )
+
+
+def canonical_json_bytes(value: Any) -> bytes:
+    try:
+        return json.dumps(
+            value,
+            ensure_ascii=False,
+            allow_nan=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    except (TypeError, ValueError) as exc:
+        raise RecoveryBundleVerificationError("value is not canonical JSON") from exc
+
+
+def canonical_sha256(value: Any) -> str:
+    return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        while block := handle.read(8 * 1024 * 1024):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _reject_constant(value: str) -> None:
+    raise RecoveryBundleVerificationError(f"non-finite JSON constant: {value}")
+
+
+def _object_without_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise RecoveryBundleVerificationError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def _finite_json(value: Any) -> bool:
+    if value is None or isinstance(value, (bool, str, int)):
+        return True
+    if isinstance(value, float):
+        return math.isfinite(value)
+    if isinstance(value, list):
+        return all(_finite_json(item) for item in value)
+    if isinstance(value, dict):
+        return all(
+            isinstance(key, str) and _finite_json(item) for key, item in value.items()
+        )
+    return False
+
+
+def _mapping(value: Any, label: str) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        raise RecoveryBundleVerificationError(f"{label} must be an object")
+    return value
+
+
+def _list(value: Any, label: str) -> list[Any]:
+    if not isinstance(value, list):
+        raise RecoveryBundleVerificationError(f"{label} must be an array")
+    return value
+
+
+def _string(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise RecoveryBundleVerificationError(f"{label} must be a nonempty string")
+    return value
+
+
+def _integer(value: Any, label: str, *, minimum: int = 0) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+        raise RecoveryBundleVerificationError(
+            f"{label} must be an integer >= {minimum}"
+        )
+    return value
+
+
+def _number(value: Any, label: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise RecoveryBundleVerificationError(f"{label} must be numeric")
+    result = float(value)
+    if not math.isfinite(result):
+        raise RecoveryBundleVerificationError(f"{label} must be finite")
+    return result
+
+
+def _hex64(value: Any, label: str) -> str:
+    text = _string(value, label)
+    if HEX64.fullmatch(text) is None:
+        raise RecoveryBundleVerificationError(f"{label} must be lowercase SHA-256")
+    return text
+
+
+def _keys(value: Mapping[str, Any], names: Sequence[str], label: str) -> None:
+    missing = sorted(set(names) - set(value))
+    if missing:
+        raise RecoveryBundleVerificationError(f"{label} is missing keys: {missing}")
+
+
+def _exact_keys(value: Mapping[str, Any], names: Sequence[str], label: str) -> None:
+    expected = set(names)
+    if set(value) != expected:
+        raise RecoveryBundleVerificationError(
+            f"{label} keys differ: expected={sorted(expected)} observed={sorted(value)}"
+        )
+
+
+def _self_hash(value: Mapping[str, Any], label: str) -> str:
+    core = dict(value)
+    supplied = _hex64(core.pop("receipt_sha256", None), f"{label}.receipt_sha256")
+    if supplied != canonical_sha256(core):
+        raise RecoveryBundleVerificationError(f"{label} self-hash differs")
+    return supplied
+
+
+def _inside_posix(root: str, candidate: str) -> bool:
+    paths: list[PurePosixPath] = []
+    for value in (root, candidate):
+        if (
+            not isinstance(value, str)
+            or not value.startswith("/")
+            or value.startswith("//")
+            or ".." in PurePosixPath(value).parts
+            or PurePosixPath(value).as_posix() != value
+        ):
+            raise RecoveryBundleVerificationError(
+                "path is not canonical single-leading-slash absolute POSIX text"
+            )
+        paths.append(PurePosixPath(value))
+    root_path, candidate_path = paths
+    return candidate_path == root_path or root_path in candidate_path.parents
+
+
+def _plain_file(root: Path, relative: Path) -> Path:
+    current = root
+    for part in relative.parts:
+        current /= part
+        try:
+            details = current.lstat()
+        except OSError as exc:
+            raise RecoveryBundleVerificationError(
+                f"required bundle path is missing: {relative}"
+            ) from exc
+        if stat.S_ISLNK(details.st_mode):
+            raise RecoveryBundleVerificationError(
+                f"required bundle path contains a symlink: {relative}"
+            )
+    details = current.lstat()
+    if not stat.S_ISREG(details.st_mode) or details.st_nlink != 1:
+        raise RecoveryBundleVerificationError(
+            f"required bundle path is not a unique regular file: {relative}"
+        )
+    return current
+
+
+def _read_receipt(
+    root: Path, relative: Path, label: str
+) -> tuple[dict[str, Any], Path]:
+    path = _plain_file(root, relative)
+    try:
+        raw = path.read_bytes()
+        value = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_object_without_duplicates,
+            parse_constant=_reject_constant,
+        )
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise RecoveryBundleVerificationError(f"{label} is unreadable JSON") from exc
+    if not isinstance(value, dict) or not _finite_json(value):
+        raise RecoveryBundleVerificationError(f"{label} is not a finite JSON object")
+    if raw != canonical_json_bytes(value) + b"\n":
+        raise RecoveryBundleVerificationError(f"{label} file encoding is noncanonical")
+    _self_hash(value, label)
+    return value, path
+
+
+def _validate_output_tree(root: Path) -> None:
+    output = root / "output"
+    try:
+        details = output.lstat()
+    except OSError as exc:
+        raise RecoveryBundleVerificationError("output directory is missing") from exc
+    if not stat.S_ISDIR(details.st_mode) or stat.S_ISLNK(details.st_mode):
+        raise RecoveryBundleVerificationError("output is not a plain directory")
+    for directory, names, files in os.walk(output, topdown=True, followlinks=False):
+        base = Path(directory)
+        for name in [*names, *files]:
+            path = base / name
+            details = path.lstat()
+            relative = path.relative_to(root).as_posix()
+            if stat.S_ISLNK(details.st_mode):
+                raise RecoveryBundleVerificationError(
+                    f"output contains a symlink: {relative}"
+                )
+            if stat.S_ISREG(details.st_mode) and details.st_nlink != 1:
+                raise RecoveryBundleVerificationError(
+                    f"output contains a hard-linked file: {relative}"
+                )
+            if not (stat.S_ISREG(details.st_mode) or stat.S_ISDIR(details.st_mode)):
+                raise RecoveryBundleVerificationError(
+                    f"output contains a special filesystem object: {relative}"
+                )
+
+
+def _validate_compact_directory(root: Path) -> None:
+    compact = root / COMPACT_RELATIVE
+    try:
+        details = compact.lstat()
+    except OSError as exc:
+        raise RecoveryBundleVerificationError("compact directory is missing") from exc
+    if not stat.S_ISDIR(details.st_mode) or stat.S_ISLNK(details.st_mode):
+        raise RecoveryBundleVerificationError("compact is not a plain directory")
+    observed = {entry.name for entry in compact.iterdir()}
+    if observed != COMPACT_FILE_NAMES:
+        raise RecoveryBundleVerificationError(
+            f"compact file set differs: {sorted(observed)}"
+        )
+    if os.path.lexists(root / FAILURE_RELATIVE):
+        raise RecoveryBundleVerificationError(
+            "successful bundle also contains output/FAILURE.json"
+        )
+
+
+def _expected_paths(attempt_id: str) -> dict[str, str]:
+    attempt = PurePosixPath(RECOVERY_ATTEMPT_PARENT) / attempt_id
+    original = attempt / "evidence/original"
+    superseded = attempt / "evidence/superseded_recovery_host"
+    fresh = attempt / "evidence/fresh"
+    output = attempt / "output"
+    preflight = attempt / "preflight"
+    canary = attempt / "landlock_canary"
+    paths = {
+        "plan_dir": (
+            attempt / "provenance_repo" / CANONICAL_PLAN_RELATIVE_PATH
+        ).as_posix(),
+        "raw_root": f"/workspace/{RAW_RELATIVE}",
+        "run_complete": (original / "RUN_COMPLETE.json").as_posix(),
+        "raw_ledger": (original / "REMOTE_RAW_SHA256SUMS.txt").as_posix(),
+        "raw_inventory": (original / "REMOTE_RAW_INVENTORY.txt").as_posix(),
+        "failure_log": (original / "calibration_audit_1a16572.log").as_posix(),
+        "original_ownership": (original / "OWNERSHIP.json").as_posix(),
+        "original_guest": (original / "GUEST_PREFLIGHT.json").as_posix(),
+        "original_cache": (original / "CACHE_PREFLIGHT.json").as_posix(),
+        "original_authorization": (
+            original / "CALIBRATION_AUTHORIZATION.json"
+        ).as_posix(),
+        "termination_audit": (original / "TERMINATION_AUDIT.json").as_posix(),
+        "postdelete_inventory": (original / "POSTDELETE_INVENTORY.json").as_posix(),
+        "frozen_termination": (
+            original / "frozen_lifecycle/TERMINATION.json"
+        ).as_posix(),
+        "superseded_runtime_block": (
+            superseded / "PREEXECUTION_RUNTIME_BLOCK.json"
+        ).as_posix(),
+        "superseded_termination_audit": (
+            superseded / "TERMINATION_AUDIT.json"
+        ).as_posix(),
+        "superseded_frozen_termination": (
+            superseded / "frozen_lifecycle/TERMINATION.json"
+        ).as_posix(),
+        "superseded_postdelete_inventory": (
+            superseded / "POSTDELETE_INVENTORY.json"
+        ).as_posix(),
+        "fresh_ownership": (fresh / "OWNERSHIP.json").as_posix(),
+        "fresh_guest": (fresh / "GUEST_PREFLIGHT.json").as_posix(),
+        "fresh_cache": (fresh / "CACHE_PREFLIGHT.json").as_posix(),
+        "preflight_landlock": (
+            preflight / "output/LANDLOCK_ENFORCEMENT.json"
+        ).as_posix(),
+        "preflight_probe": (
+            preflight / "output/LANDLOCK_CUDA_PREFLIGHT.json"
+        ).as_posix(),
+        "local_test_receipt": (
+            attempt / "evidence/tests/LOCAL_TEST_RECEIPT.json"
+        ).as_posix(),
+        "target_host_test_receipt": (
+            attempt / "evidence/tests/TARGET_HOST_TEST_RECEIPT.json"
+        ).as_posix(),
+        "target_qualification_ownership": (
+            attempt / f"evidence/tests/{TARGET_QUALIFICATION_OWNERSHIP_NAME}"
+        ).as_posix(),
+        "target_qualification_landlock": (
+            attempt / f"evidence/tests/{TARGET_QUALIFICATION_LANDLOCK_NAME}"
+        ).as_posix(),
+        "target_qualification_cuda_preflight": (
+            attempt / f"evidence/tests/{TARGET_QUALIFICATION_CUDA_NAME}"
+        ).as_posix(),
+        "preflight_output_root": (preflight / "output").as_posix(),
+        "preflight_canary_protected_root": (preflight / "canary/protected").as_posix(),
+        "preflight_canary_output_root": (preflight / "canary/output").as_posix(),
+        "recovery_authorization": (attempt / "RECOVERY_AUTHORIZATION.json").as_posix(),
+        "provenance_root": (attempt / "provenance_repo").as_posix(),
+        "roots_manifest": (attempt / BOOTSTRAP_MANIFEST_RELATIVE).as_posix(),
+        "output_root": output.as_posix(),
+        "canary_protected_root": (canary / "protected").as_posix(),
+        "canary_output_root": (canary / "output").as_posix(),
+        "landlock_receipt": (output / "LANDLOCK_ENFORCEMENT.json").as_posix(),
+        "model_snapshot": MODEL_SNAPSHOT_PATH,
+        "j_lens_path": J_LENS_PATH,
+        "audit_out": (output / "compact/CALIBRATION_AUDIT.json").as_posix(),
+        "summary_out": (output / "compact/CALIBRATION_SUMMARY.json").as_posix(),
+        "attempt_marker": (output / "ATTEMPT_STARTED.json").as_posix(),
+        "failure_out": (output / "FAILURE.json").as_posix(),
+    }
+    for name in ("preflight_canary_output_root", "canary_output_root"):
+        _validate_bound_canary_socket_path(PurePosixPath(paths[name]), name)
+    return paths
+
+
+def _expected_confined_argv(
+    python_executable: str,
+    active_root: str,
+    attempt_id: str,
+    paths: Mapping[str, str],
+    roots_manifest_sha256: str,
+    device_files: Sequence[str],
+) -> list[str]:
+    result = [
+        python_executable,
+        "-B",
+        "-E",
+        "-s",
+        "-S",
+        f"{active_root}/{BOOTSTRAP_RELATIVE_PATH}",
+        "--mode",
+        "execute-confined",
+        "--active-root",
+        active_root,
+        "--roots-manifest",
+        paths["roots_manifest"],
+        "--roots-manifest-sha256",
+        roots_manifest_sha256,
+        "--",
+    ]
+    for name in CONFINED_EVIDENCE_ARGUMENTS:
+        result.extend((f"--{name.replace('_', '-')}", paths[name]))
+    result.extend(("--attempt-id", attempt_id))
+    result.extend(("--active-root", active_root))
+    result.extend(("--python-executable", python_executable))
+    for name in CONFINED_PATH_ARGUMENTS:
+        result.extend((f"--{name.replace('_', '-')}", paths[name]))
+    result.extend(("--roots-manifest-sha256", roots_manifest_sha256))
+    for path in device_files:
+        result.extend(("--device-file", path))
+    result.extend(("--artifact-device", "cuda:0"))
+    result.extend(("--recovery-authorization", paths["recovery_authorization"]))
+    return result
+
+
+def _expected_preflight_argv(
+    python_executable: str,
+    active_root: str,
+    paths: Mapping[str, str],
+    roots_manifest_sha256: str,
+    device_files: Sequence[str],
+    *,
+    closure_scope: str = "final_recovery",
+    qualification_ownership: str | None = None,
+    landlock_receipt: str | None = None,
+    output_root: str | None = None,
+    canary_protected_root: str | None = None,
+    canary_output_root: str | None = None,
+    output: str | None = None,
+) -> list[str]:
+    """Return the frozen target-free preflight child command (not its launcher)."""
+
+    if closure_scope not in PREFLIGHT_CLOSURE_SCOPES or (
+        closure_scope == "source_test_qualification"
+    ) is not bool(qualification_ownership):
+        raise RecoveryBundleVerificationError("preflight closure scope differs")
+
+    landlock_receipt = landlock_receipt or paths["preflight_landlock"]
+    output_root = output_root or paths["preflight_output_root"]
+    canary_protected_root = (
+        canary_protected_root or paths["preflight_canary_protected_root"]
+    )
+    canary_output_root = canary_output_root or paths["preflight_canary_output_root"]
+    output = output or paths["preflight_probe"]
+
+    result = [
+        python_executable,
+        "-B",
+        "-E",
+        "-s",
+        "-S",
+        f"{active_root}/{BOOTSTRAP_RELATIVE_PATH}",
+        "--mode",
+        "preflight-child",
+        "--active-root",
+        active_root,
+        "--roots-manifest",
+        paths["roots_manifest"],
+        "--roots-manifest-sha256",
+        roots_manifest_sha256,
+        "--",
+        "--python-executable",
+        python_executable,
+        "--active-root",
+        active_root,
+        "--roots-manifest",
+        paths["roots_manifest"],
+        "--roots-manifest-sha256",
+        roots_manifest_sha256,
+        "--landlock-receipt",
+        landlock_receipt,
+        "--output-root",
+        output_root,
+        "--canary-protected-root",
+        canary_protected_root,
+        "--canary-output-root",
+        canary_output_root,
+        "--closure-scope",
+        closure_scope,
+    ]
+    if qualification_ownership is not None:
+        result.extend(("--qualification-ownership", qualification_ownership))
+    for path in sorted(device_files):
+        result.extend(("--device-file", path))
+    result.extend(("--output", output))
+    return result
+
+
+def _validate_device_rules(value: Any, label: str) -> list[dict[str, Any]]:
+    rows = _list(value, label)
+    if not rows:
+        raise RecoveryBundleVerificationError(f"{label} is empty")
+    normalized: list[dict[str, Any]] = []
+    fields = (
+        "path",
+        "st_dev",
+        "st_ino",
+        "st_rdev",
+        "major",
+        "minor",
+        "allowed_access_fs",
+    )
+    for index, item in enumerate(rows):
+        row_label = f"{label}[{index}]"
+        row = _mapping(item, row_label)
+        _exact_keys(row, fields, row_label)
+        path = _string(row["path"], f"{row_label}.path")
+        if NVIDIA_DEVICE_PATH.fullmatch(path) is None:
+            raise RecoveryBundleVerificationError(
+                f"{row_label}.path is not a NVIDIA device"
+            )
+        st_rdev = _integer(row["st_rdev"], f"{row_label}.st_rdev")
+        if st_rdev > 0xFFFFFFFFFFFFFFFF:
+            raise RecoveryBundleVerificationError(
+                f"{row_label}.st_rdev exceeds Linux dev_t"
+            )
+        major = _integer(row["major"], f"{row_label}.major")
+        minor = _integer(row["minor"], f"{row_label}.minor")
+        identity = (_linux_device_major(st_rdev), _linux_device_minor(st_rdev))
+        if (
+            identity != (major, minor)
+            or row["allowed_access_fs"] != DEVICE_ALLOWED_ACCESS_FS
+        ):
+            raise RecoveryBundleVerificationError(
+                f"{row_label} identity/access differs"
+            )
+        normalized.append(
+            {
+                "path": path,
+                "st_dev": _integer(row["st_dev"], f"{row_label}.st_dev"),
+                "st_ino": _integer(row["st_ino"], f"{row_label}.st_ino", minimum=1),
+                "st_rdev": st_rdev,
+                "major": major,
+                "minor": minor,
+                "allowed_access_fs": DEVICE_ALLOWED_ACCESS_FS,
+            }
+        )
+    paths = [row["path"] for row in normalized]
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
+        raise RecoveryBundleVerificationError(f"{label} is not sorted and unique")
+    return normalized
+
+
+def _linux_device_major(device: int) -> int:
+    """Decode Linux ``dev_t`` without depending on the verifier host ABI."""
+
+    return ((device >> 8) & 0xFFF) | ((device >> 32) & 0xFFFFF000)
+
+
+def _linux_device_minor(device: int) -> int:
+    """Decode Linux ``dev_t`` without depending on the verifier host ABI."""
+
+    return (device & 0xFF) | ((device >> 12) & 0xFFFFFF00)
+
+
+def _validate_descriptor_audit(
+    value: Any,
+    *,
+    output_root: str,
+    canary_output_root: str,
+    expected_protected_roots: Sequence[str],
+    label: str,
+) -> None:
+    audit = _mapping(value, label)
+    _exact_keys(
+        audit, ("status", "protected_roots", "descriptor_count", "descriptors"), label
+    )
+    protected = _list(audit["protected_roots"], f"{label}.protected_roots")
+    if any(not isinstance(path, str) or not path.startswith("/") for path in protected):
+        raise RecoveryBundleVerificationError(f"{label}.protected_roots differs")
+    if protected != sorted(set(expected_protected_roots)):
+        raise RecoveryBundleVerificationError(f"{label}.protected_roots differs")
+    rows = _list(audit["descriptors"], f"{label}.descriptors")
+    if audit["status"] != "pass_no_escaping_writable_or_protected_descriptors" or audit[
+        "descriptor_count"
+    ] != len(rows):
+        raise RecoveryBundleVerificationError(f"{label} status/count differs")
+    observed_fds: list[int] = []
+    for index, item in enumerate(rows):
+        row_label = f"{label}.descriptors[{index}]"
+        row = _mapping(item, row_label)
+        _exact_keys(
+            row,
+            ("fd", "target", "kind", "access_mode", "writable", "allowed_reason"),
+            row_label,
+        )
+        fd = _integer(row["fd"], f"{row_label}.fd")
+        observed_fds.append(fd)
+        target = _string(row["target"], f"{row_label}.target")
+        kind = _string(row["kind"], f"{row_label}.kind")
+        if kind not in {
+            "regular_file",
+            "directory",
+            "character_device",
+            "block_device",
+            "fifo",
+            "socket",
+            "other",
+        }:
+            raise RecoveryBundleVerificationError(f"{row_label}.kind differs")
+        access_mode = _integer(row["access_mode"], f"{row_label}.access_mode")
+        if access_mode not in (os.O_RDONLY, os.O_WRONLY, os.O_RDWR):
+            raise RecoveryBundleVerificationError(f"{row_label}.access_mode differs")
+        writable = row["writable"]
+        if not isinstance(writable, bool) or writable != (
+            access_mode in (os.O_WRONLY, os.O_RDWR)
+        ):
+            raise RecoveryBundleVerificationError(f"{row_label}.writable differs")
+        in_output = target.startswith("/") and _inside_posix(output_root, target)
+        if target.startswith("/") and (
+            _inside_posix(canary_output_root, target)
+            or any(_inside_posix(path, target) for path in protected)
+        ):
+            raise RecoveryBundleVerificationError(
+                f"{row_label} is a forbidden inherited FD"
+            )
+        if target == "anon_inode:[io_uring]":
+            raise RecoveryBundleVerificationError(
+                f"{row_label} is a forbidden io_uring FD"
+            )
+        if NVIDIA_DEVICE_PATH.fullmatch(target) is not None:
+            raise RecoveryBundleVerificationError(f"{row_label} is a forbidden GPU FD")
+        if fd >= 3 and writable and kind in {"character_device", "block_device"}:
+            raise RecoveryBundleVerificationError(
+                f"{row_label} is a forbidden writable device FD"
+            )
+        if writable and kind in {"regular_file", "directory"}:
+            raise RecoveryBundleVerificationError(
+                f"{row_label} is a forbidden writable regular/directory FD"
+            )
+        if fd in (0, 1, 2):
+            expected_reason = "standard_stream"
+        elif in_output:
+            expected_reason = "durable_output_root"
+        elif not writable:
+            expected_reason = "read_only_descriptor"
+        else:
+            expected_reason = "non_regular_non_directory_descriptor"
+        if row["allowed_reason"] != expected_reason:
+            raise RecoveryBundleVerificationError(f"{row_label}.allowed_reason differs")
+    if observed_fds != sorted(set(observed_fds)):
+        raise RecoveryBundleVerificationError(f"{label} descriptor inventory differs")
+
+
+def _denied_rows(names: Sequence[str]) -> list[dict[str, Any]]:
+    return [
+        {
+            "operation": name,
+            "status": "denied",
+            "errno": (
+                errno.EXDEV if name == "output_cross_directory_link" else errno.EACCES
+            ),
+        }
+        for name in names
+    ]
+
+
+def _validate_landlock_receipt(
+    receipt: Mapping[str, Any],
+    *,
+    purpose: str,
+    receipt_path: str,
+    output_root: str,
+    protected_roots: Sequence[str],
+    protected_files: Sequence[str],
+    canary_output_root: str,
+    authorization_sha256: str | None,
+    preflight_sha256: str | None,
+    label: str,
+) -> tuple[int, list[dict[str, Any]]]:
+    optional: set[str] = set()
+    if authorization_sha256 is not None:
+        optional.add("authorization_sha256")
+    if preflight_sha256 is not None:
+        optional.add("preflight_receipt_sha256")
+    _exact_keys(receipt, tuple(LANDLOCK_REQUIRED_FIELDS | optional), label)
+    pid = _integer(receipt["pid"], f"{label}.pid", minimum=1)
+    if (
+        receipt["schema_version"] != SCHEMA_VERSION
+        or receipt["status"] != "pass_landlock_enforced"
+        or receipt["purpose"] != purpose
+        or receipt["required_abi"] != POLICY_ABI
+        or _integer(receipt["observed_abi"], f"{label}.observed_abi") < POLICY_ABI
+        or receipt["handled_access_fs"] != HANDLED_ACCESS_FS
+        or receipt["output_allowed_access_fs"] != OUTPUT_ALLOWED_ACCESS_FS
+        or receipt["no_new_privs"] is not True
+        or receipt["thread_ids"] != [pid]
+        or receipt["receipt_path"] != receipt_path
+        or receipt.get("authorization_sha256") != authorization_sha256
+        or receipt.get("preflight_receipt_sha256") != preflight_sha256
+    ):
+        raise RecoveryBundleVerificationError(
+            f"{label} identity/ABI/no_new_privs differs"
+        )
+    _hex64(receipt["source_sha256"], f"{label}.source_sha256")
+    child = _list(receipt["child_argv"], f"{label}.child_argv")
+    if (
+        not child
+        or any(not isinstance(part, str) or not part for part in child)
+        or receipt["child_argv_sha256"] != canonical_sha256(child)
+    ):
+        raise RecoveryBundleVerificationError(f"{label} child command differs")
+    expected_directories = [
+        {
+            "role": "output_root",
+            "path": output_root,
+            "allowed_access_fs": OUTPUT_ALLOWED_ACCESS_FS,
+        },
+        {
+            "role": "canary_output_root",
+            "path": canary_output_root,
+            "allowed_access_fs": OUTPUT_ALLOWED_ACCESS_FS,
+        },
+        {
+            "role": "proc_self_task_thread_names",
+            "path": PROC_SELF_TASK_PATH,
+            "allowed_access_fs": PROC_SELF_TASK_ALLOWED_ACCESS_FS,
+        },
+    ]
+    if receipt["directory_rules"] != expected_directories:
+        raise RecoveryBundleVerificationError(f"{label} directory grants differ")
+    devices = _validate_device_rules(receipt["device_rules"], f"{label}.device_rules")
+    _validate_descriptor_audit(
+        receipt["descriptor_audit"],
+        output_root=output_root,
+        canary_output_root=canary_output_root,
+        expected_protected_roots=protected_roots,
+        label=f"{label}.descriptor_audit",
+    )
+    mappings = _mapping(receipt["mapping_audit"], f"{label}.mapping_audit")
+    _exact_keys(
+        mappings,
+        ("status", "mapping_count", "shared_file_backed"),
+        f"{label}.mapping_audit",
+    )
+    if (
+        mappings["status"] != "pass_no_shared_file_backed_mappings"
+        or _integer(mappings["mapping_count"], f"{label}.mapping_audit.mapping_count")
+        < 1
+        or mappings["shared_file_backed"] != []
+    ):
+        raise RecoveryBundleVerificationError(f"{label} mapping audit differs")
+    expected_protected_checks = [
+        {
+            "path": path,
+            "operation": "protected_file_open_write_no_write",
+            "status": "denied",
+            "errno": errno.EACCES,
+        }
+        for path in sorted(protected_files)
+    ]
+    if receipt["protected_checks"] != expected_protected_checks:
+        raise RecoveryBundleVerificationError(f"{label}.protected_checks differs")
+    canary = _mapping(receipt["canary_checks"], f"{label}.canary_checks")
+    _exact_keys(
+        canary,
+        (
+            "status",
+            "protected_inventory_sha256_before",
+            "protected_inventory_sha256_after",
+            "protected_unchanged",
+            "output_empty_before",
+            "output_empty_after",
+            "preconfinement_writable_baseline",
+            "protected_operations",
+            "output_operations",
+        ),
+        f"{label}.canary_checks",
+    )
+    before = _hex64(
+        canary["protected_inventory_sha256_before"],
+        f"{label}.canary_checks.protected_inventory_sha256_before",
+    )
+    if (
+        canary["status"] != "pass_protected_unchanged_output_empty"
+        or canary["protected_inventory_sha256_after"] != before
+        or canary["protected_unchanged"] is not True
+        or canary["output_empty_before"] is not True
+        or canary["output_empty_after"] is not True
+        or canary["preconfinement_writable_baseline"]
+        != [
+            {"operation": name, "status": "allowed"}
+            for name in PRECONFINEMENT_WRITABLE_BASELINE
+        ]
+        or canary["protected_operations"] != _denied_rows(PROTECTED_OPERATIONS)
+        or canary["output_operations"]
+        != [
+            *(
+                {"operation": name, "status": "allowed"}
+                for name in OUTPUT_ALLOWED_OPERATIONS
+            ),
+            *_denied_rows(OUTPUT_DENIED_OPERATIONS),
+        ]
+    ):
+        raise RecoveryBundleVerificationError(f"{label} canary checks differ")
+    return pid, devices
+
+
+def _file_record_matches(value: Any, path: Path, label: str) -> None:
+    record = _mapping(value, label)
+    _exact_keys(record, ("bytes", "sha256"), label)
+    if record["bytes"] != path.stat().st_size or record["sha256"] != sha256_file(path):
+        raise RecoveryBundleVerificationError(f"{label} physical hash differs")
+
+
+def _validate_detached_file_record(value: Any, label: str) -> None:
+    """Validate an authorization-bound file record absent from the retrieval."""
+
+    record = _mapping(value, label)
+    _exact_keys(record, ("bytes", "sha256"), label)
+    _integer(record["bytes"], f"{label}.bytes")
+    _hex64(record["sha256"], f"{label}.sha256")
+
+
+def _validate_file_rows(
+    value: Any,
+    label: str,
+    *,
+    expected_paths: Sequence[str] | None = None,
+) -> list[dict[str, Any]]:
+    rows = _list(value, label)
+    if not rows:
+        raise RecoveryBundleVerificationError(f"{label} is empty")
+    normalized: list[dict[str, Any]] = []
+    for index, item in enumerate(rows):
+        row_label = f"{label}[{index}]"
+        row = _mapping(item, row_label)
+        _exact_keys(row, ("path", "bytes", "sha256"), row_label)
+        path = _string(row["path"], f"{row_label}.path")
+        posix = PurePosixPath(path)
+        if (
+            path.startswith("/")
+            or path.startswith("//")
+            or path == "."
+            or ".." in posix.parts
+            or posix.as_posix() != path
+        ):
+            raise RecoveryBundleVerificationError(f"{row_label}.path is unsafe")
+        normalized.append(
+            {
+                "path": path,
+                "bytes": _integer(row["bytes"], f"{row_label}.bytes"),
+                "sha256": _hex64(row["sha256"], f"{row_label}.sha256"),
+            }
+        )
+    paths = [row["path"] for row in normalized]
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
+        raise RecoveryBundleVerificationError(f"{label} is not sorted and unique")
+    if expected_paths is not None and paths != list(expected_paths):
+        raise RecoveryBundleVerificationError(f"{label} paths differ")
+    return normalized
+
+
+def _validate_bootstrap_root_record(value: Any, index: int) -> dict[str, Any]:
+    label = f"bootstrap_manifest.roots[{index}]"
+    row = _mapping(value, label)
+    _exact_keys(
+        row,
+        (
+            "name",
+            "role",
+            "path",
+            "files",
+            "directories",
+            "file_count",
+            "directory_count",
+            "total_bytes",
+            "file_inventory_sha256",
+            "directory_inventory_sha256",
+            "inventory_sha256",
+        ),
+        label,
+    )
+    name = _string(row["name"], f"{label}.name")
+    role = _string(row["role"], f"{label}.role")
+    path = _string(row["path"], f"{label}.path")
+    if (
+        ROOT_NAME.fullmatch(name) is None
+        or role not in {"active", "dependency"}
+        or (index == 0) != (role == "active")
+        or (index == 0 and name != "active_root")
+        or not _inside_posix(path, path)
+    ):
+        raise RecoveryBundleVerificationError(f"{label} identity differs")
+
+    files_raw = _list(row["files"], f"{label}.files")
+    files: list[dict[str, Any]] = []
+    for file_index, value in enumerate(files_raw):
+        file_label = f"{label}.files[{file_index}]"
+        item = _mapping(value, file_label)
+        _exact_keys(item, ("path", "bytes", "sha256"), file_label)
+        relative = _string(item["path"], f"{file_label}.path")
+        parsed = PurePosixPath(relative)
+        if (
+            parsed.is_absolute()
+            or parsed.as_posix() != relative
+            or relative == "."
+            or ".." in parsed.parts
+        ):
+            raise RecoveryBundleVerificationError(f"{file_label}.path is unsafe")
+        files.append(
+            {
+                "path": relative,
+                "bytes": _integer(item["bytes"], f"{file_label}.bytes"),
+                "sha256": _hex64(item["sha256"], f"{file_label}.sha256"),
+            }
+        )
+    file_paths = [item["path"] for item in files]
+    if file_paths != sorted(file_paths) or len(file_paths) != len(set(file_paths)):
+        raise RecoveryBundleVerificationError(f"{label}.files is not sorted and unique")
+
+    directories_raw = _list(row["directories"], f"{label}.directories")
+    directories: list[str] = []
+    for directory_index, value in enumerate(directories_raw):
+        directory_label = f"{label}.directories[{directory_index}]"
+        relative = _string(value, directory_label)
+        parsed = PurePosixPath(relative)
+        if (
+            parsed.is_absolute()
+            or parsed.as_posix() != relative
+            or relative == "."
+            or ".." in parsed.parts
+        ):
+            raise RecoveryBundleVerificationError(f"{directory_label} is unsafe")
+        directories.append(relative)
+    if directories != sorted(directories) or len(directories) != len(set(directories)):
+        raise RecoveryBundleVerificationError(
+            f"{label}.directories is not sorted and unique"
+        )
+
+    core = dict(row)
+    inventory_sha256 = _hex64(core.pop("inventory_sha256"), f"{label}.inventory_sha256")
+    file_count = _integer(row["file_count"], f"{label}.file_count")
+    directory_count = _integer(row["directory_count"], f"{label}.directory_count")
+    total_bytes = _integer(row["total_bytes"], f"{label}.total_bytes")
+    file_inventory_sha256 = _hex64(
+        row["file_inventory_sha256"], f"{label}.file_inventory_sha256"
+    )
+    directory_inventory_sha256 = _hex64(
+        row["directory_inventory_sha256"],
+        f"{label}.directory_inventory_sha256",
+    )
+    if (
+        file_count != len(files)
+        or directory_count != len(directories)
+        or total_bytes != sum(item["bytes"] for item in files)
+        or file_inventory_sha256 != canonical_sha256(files)
+        or directory_inventory_sha256 != canonical_sha256(directories)
+        or inventory_sha256 != canonical_sha256(core)
+    ):
+        raise RecoveryBundleVerificationError(f"{label} inventory links differ")
+    return dict(row)
+
+
+def _validate_bootstrap_manifest(
+    manifest: Mapping[str, Any],
+    *,
+    execution: Mapping[str, Any],
+    paths: Mapping[str, str],
+    closure: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    _exact_keys(
+        manifest,
+        (
+            "schema_version",
+            "status",
+            "python_executable",
+            "bootstrap_relative_path",
+            "bootstrap_sha256",
+            "active_root",
+            "roots",
+            "sys_path",
+            "roots_inventory_sha256",
+            "receipt_sha256",
+        ),
+        "bootstrap_manifest",
+    )
+    _self_hash(manifest, "bootstrap_manifest")
+    executable = _mapping(
+        manifest["python_executable"], "bootstrap_manifest.python_executable"
+    )
+    _exact_keys(
+        executable,
+        ("path", "bytes", "sha256"),
+        "bootstrap_manifest.python_executable",
+    )
+    if (
+        executable["path"] != execution["python_executable"]
+        or _integer(executable["bytes"], "bootstrap_manifest.python_executable.bytes")
+        < 1
+        or HEX64.fullmatch(str(executable["sha256"])) is None
+    ):
+        raise RecoveryBundleVerificationError(
+            "bootstrap_manifest Python executable differs"
+        )
+    roots_raw = _list(manifest["roots"], "bootstrap_manifest.roots")
+    if len(roots_raw) < 2:
+        raise RecoveryBundleVerificationError(
+            "bootstrap_manifest requires active and dependency roots"
+        )
+    roots = [
+        _validate_bootstrap_root_record(value, index)
+        for index, value in enumerate(roots_raw)
+    ]
+    names = [str(row["name"]) for row in roots]
+    root_paths = [str(row["path"]) for row in roots]
+    sys_path = _list(manifest["sys_path"], "bootstrap_manifest.sys_path")
+    if (
+        manifest["schema_version"] != SCHEMA_VERSION
+        or manifest["status"] != BOOTSTRAP_MANIFEST_STATUS
+        or manifest["bootstrap_relative_path"] != BOOTSTRAP_RELATIVE_PATH
+        or manifest["bootstrap_sha256"]
+        != _closure_hash(closure, BOOTSTRAP_RELATIVE_PATH)
+        or manifest["active_root"] != execution["active_root"]
+        or roots[0]["path"] != execution["active_root"]
+        or roots[0]["files"] != list(closure)
+        or len(names) != len(set(names))
+        or len(root_paths) != len(set(root_paths))
+        or not sys_path
+        or any(not isinstance(value, str) for value in sys_path)
+        or sys_path[0] != execution["active_root"]
+        or len(sys_path) != len(set(sys_path))
+        or any(
+            not any(_inside_posix(root_path, value) for root_path in root_paths)
+            for value in sys_path
+        )
+        or manifest["roots_inventory_sha256"] != canonical_sha256(roots)
+        or any(
+            _inside_posix(root_path, paths["roots_manifest"])
+            for root_path in root_paths
+        )
+    ):
+        raise RecoveryBundleVerificationError(
+            "bootstrap_manifest semantic links differ"
+        )
+    return dict(manifest)
+
+
+def _bootstrap_protected_paths(
+    manifest: Mapping[str, Any], paths: Mapping[str, str]
+) -> tuple[list[str], list[str]]:
+    root_paths = [str(row["path"]) for row in manifest["roots"]]
+    manifest_path = PurePosixPath(paths["roots_manifest"])
+    protected_roots = sorted(set(root_paths) | {manifest_path.parent.as_posix()})
+    protected_files = sorted(
+        {
+            paths["roots_manifest"],
+            f"{manifest['active_root']}/{BOOTSTRAP_RELATIVE_PATH}",
+        }
+    )
+    return protected_roots, protected_files
+
+
+def _validate_bootstrap_attestation(
+    value: Any,
+    *,
+    mode: str,
+    pid: int,
+    execution: Mapping[str, Any],
+    paths: Mapping[str, str],
+    manifest: Mapping[str, Any],
+) -> dict[str, Any]:
+    label = "confined bootstrap attestation"
+    attestation = _mapping(value, label)
+    _exact_keys(
+        attestation,
+        (
+            "schema_version",
+            "status",
+            "mode",
+            "pid",
+            "active_root",
+            "python_executable",
+            "roots_manifest_path",
+            "roots_manifest_file_sha256",
+            "roots_manifest_receipt_sha256",
+            "roots_inventory_sha256",
+            "sys_path",
+            "bootstrap_sha256",
+            "site_imported",
+            "startup_project_or_ml_module_count",
+            "guards",
+            "receipt_sha256",
+        ),
+        label,
+    )
+    _self_hash(attestation, label)
+    guards = _mapping(attestation["guards"], f"{label}.guards")
+    _exact_keys(
+        guards,
+        (
+            "status",
+            "forbidden_module_import_attempts",
+            "forbidden_startup_import_attempts",
+            "torch_module_calls",
+            "transformers_model_load_calls",
+            "patched_modules",
+        ),
+        f"{label}.guards",
+    )
+    if (
+        attestation["schema_version"] != SCHEMA_VERSION
+        or attestation["status"] != "pass_hash_bound_confined_bootstrap"
+        or attestation["mode"] != mode
+        or attestation["pid"] != pid
+        or attestation["active_root"] != execution["active_root"]
+        or attestation["python_executable"] != execution["python_executable"]
+        or attestation["roots_manifest_path"] != paths["roots_manifest"]
+        or attestation["roots_manifest_file_sha256"]
+        != execution["roots_manifest_sha256"]
+        or attestation["roots_manifest_receipt_sha256"] != manifest["receipt_sha256"]
+        or attestation["roots_inventory_sha256"] != manifest["roots_inventory_sha256"]
+        or attestation["sys_path"] != manifest["sys_path"]
+        or attestation["bootstrap_sha256"] != manifest["bootstrap_sha256"]
+        or attestation["site_imported"] is not False
+        or attestation["startup_project_or_ml_module_count"] != 0
+        or guards
+        != {
+            "status": "process_lifetime_guards_installed",
+            "forbidden_module_import_attempts": 0,
+            "forbidden_startup_import_attempts": 0,
+            "torch_module_calls": 0,
+            "transformers_model_load_calls": 0,
+            "patched_modules": list(BOOTSTRAP_GUARDED_MODULES),
+        }
+    ):
+        raise RecoveryBundleVerificationError(f"{label} differs")
+    return dict(attestation)
+
+
+def _validate_bootstrap_phase(
+    value: Any,
+    *,
+    phase: str,
+    mode: str,
+    pid: int,
+    execution: Mapping[str, Any],
+    paths: Mapping[str, str],
+    manifest: Mapping[str, Any],
+) -> dict[str, Any]:
+    label = f"bootstrap phase {phase}"
+    record = _mapping(value, label)
+    _exact_keys(
+        record,
+        (
+            "status",
+            "phase",
+            "attestation",
+            "attestation_receipt_sha256",
+            "receipt_sha256",
+        ),
+        label,
+    )
+    _self_hash(record, label)
+    attestation = _validate_bootstrap_attestation(
+        record["attestation"],
+        mode=mode,
+        pid=pid,
+        execution=execution,
+        paths=paths,
+        manifest=manifest,
+    )
+    if (
+        record["status"] != "pass_hash_bound_bootstrap_phase"
+        or record["phase"] != phase
+        or record["attestation_receipt_sha256"] != attestation["receipt_sha256"]
+    ):
+        raise RecoveryBundleVerificationError(f"{label} differs")
+    return dict(record)
+
+
+def _closure_hash(rows: Sequence[Mapping[str, Any]], path: str) -> str:
+    for row in rows:
+        if row["path"] == path:
+            return str(row["sha256"])
+    raise RecoveryBundleVerificationError(f"recovery closure is missing {path}")
+
+
+def _closure_file_record(
+    rows: Sequence[Mapping[str, Any]], path: str
+) -> dict[str, Any]:
+    for row in rows:
+        if row["path"] == path:
+            return {"bytes": row["bytes"], "sha256": row["sha256"]}
+    raise RecoveryBundleVerificationError(f"recovery closure is missing {path}")
+
+
+def _parse_utc(value: Any, label: str) -> datetime:
+    text = _string(value, label)
+    if (
+        re.fullmatch(
+            r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+            r"(?:\.[0-9]{1,9})?Z",
+            text,
+        )
+        is None
+    ):
+        raise RecoveryBundleVerificationError(f"{label} is not canonical UTC")
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).astimezone(
+            timezone.utc
+        )
+    except ValueError as exc:
+        raise RecoveryBundleVerificationError(f"{label} is not parseable UTC") from exc
+
+
+def _validate_qualification_ownership(value: Any) -> dict[str, Any]:
+    """Validate the disposable qualification pod's immutable ownership receipt."""
+
+    label = "qualification ownership"
+    ownership = _mapping(value, label)
+    _exact_keys(ownership, tuple(OWNERSHIP_FIELDS), label)
+    _self_hash(ownership, label)
+    pod_id = _string(ownership["pod_id"], f"{label}.pod_id")
+    pod_name = _string(ownership["pod_name"], f"{label}.pod_name")
+    nonce = _string(ownership["ownership_nonce"], f"{label}.ownership_nonce")
+    created_text = _string(ownership["created_at"], f"{label}.created_at")
+    terminate_text = _string(ownership["terminate_after"], f"{label}.terminate_after")
+    created = _parse_utc(created_text, f"{label}.created_at")
+    terminate = _parse_utc(terminate_text, f"{label}.terminate_after")
+    image = _mapping(
+        ownership["provider_container_image_attestation"],
+        f"{label}.provider_container_image_attestation",
+    )
+    _exact_keys(
+        image,
+        (
+            "source",
+            "immutable_reference",
+            "graphql_create_snapshot_source",
+            "create_request_sha256",
+            "final_rest_proof_source",
+            "rest_image_fields",
+            "upstream_lifecycle_receipt_sha256",
+        ),
+        f"{label}.provider_container_image_attestation",
+    )
+    rest_fields = _list(
+        image["rest_image_fields"],
+        f"{label}.provider_container_image_attestation.rest_image_fields",
+    )
+    if (
+        ownership["schema_version"] != SCHEMA_VERSION
+        or ownership["status"] != "owned_running_isolated"
+        or ownership["study_id"] != OWNERSHIP_STUDY_ID
+        or ownership["protocol_version"] != OWNERSHIP_PROTOCOL_VERSION
+        or re.fullmatch(r"[a-z0-9]{6,32}", pod_id) is None
+        or not pod_name.startswith(OWNERSHIP_POD_NAME_PREFIX)
+        or re.fullmatch(r"[0-9a-f]{32}", nonce) is None
+        or nonce not in pod_name
+        or ownership["network_volume_id"] != NETWORK_VOLUME_ID
+        or ownership["provider_volume_size_bytes"]
+        != OWNERSHIP_PROVIDER_VOLUME_SIZE_BYTES
+        or ownership["data_center_id"] != DATA_CENTER_ID
+        or ownership["gpu_type"] != GPU_TYPE
+        or ownership["gpu_count"] != 1
+        or ownership["volume_mount_path"] != "/workspace"
+        or ownership["desired_status"] != "RUNNING"
+        or ownership["locked"] is not False
+        or terminate - created != timedelta(seconds=OWNERSHIP_MAX_TOTAL_SECONDS)
+        or created.microsecond != 0
+        or terminate.microsecond != 0
+        or created_text != created.isoformat(timespec="seconds").replace("+00:00", "Z")
+        or terminate_text
+        != terminate.isoformat(timespec="seconds").replace("+00:00", "Z")
+        or _integer(
+            ownership["precreate_unrelated_pod_count"],
+            f"{label}.precreate_unrelated_pod_count",
+        )
+        < 0
+        or image["source"] != "validated_graphql_create_plus_final_rest_readback_v1"
+        or image["immutable_reference"] != OWNERSHIP_IMAGE_IMMUTABLE_REFERENCE
+        or image["graphql_create_snapshot_source"]
+        != "graphql_create_plus_rest_volume_proof"
+        or image["final_rest_proof_source"]
+        != "rest_v1_pod_get_final_after_graphql_locked_state"
+        or rest_fields != sorted(set(rest_fields))
+        or not rest_fields
+        or any(field not in {"image", "imageName"} for field in rest_fields)
+        or image["upstream_lifecycle_receipt_sha256"]
+        != ownership["upstream_lifecycle_receipt_sha256"]
+    ):
+        raise RecoveryBundleVerificationError(
+            "qualification ownership resource binding differs"
+        )
+    for field in (
+        "create_contract_sha256",
+        "upstream_lifecycle_receipt_sha256",
+        "precreate_unrelated_inventory_sha256",
+    ):
+        _hex64(ownership[field], f"{label}.{field}")
+    _hex64(
+        image["create_request_sha256"],
+        f"{label}.provider_container_image_attestation.create_request_sha256",
+    )
+    return dict(ownership)
+
+
+def _canonical_absolute_posix(value: Any, label: str) -> str:
+    path = _string(value, label)
+    _inside_posix(path, path)
+    return path
+
+
+def _single_argv_option(argv: Sequence[str], name: str) -> str:
+    indices = [index for index, value in enumerate(argv) if value == name]
+    if len(indices) != 1 or indices[0] + 1 >= len(argv):
+        raise RecoveryBundleVerificationError(
+            f"qualification child option differs: {name}"
+        )
+    value = argv[indices[0] + 1]
+    if not isinstance(value, str) or not value or value.startswith("--"):
+        raise RecoveryBundleVerificationError(
+            f"qualification child option differs: {name}"
+        )
+    return value
+
+
+def _validate_compact_bootstrap_phase(
+    value: Any,
+    *,
+    pid: int,
+    active_root: str,
+    python_executable: str,
+    roots_manifest_path: str,
+    commitment: Mapping[str, Any],
+    expected_bootstrap_sha256: str,
+) -> None:
+    phase = _mapping(value, "qualification bootstrap phase")
+    _exact_keys(
+        phase,
+        (
+            "status",
+            "phase",
+            "attestation",
+            "attestation_receipt_sha256",
+            "receipt_sha256",
+        ),
+        "qualification bootstrap phase",
+    )
+    _self_hash(phase, "qualification bootstrap phase")
+    attestation = _mapping(phase["attestation"], "qualification bootstrap attestation")
+    _exact_keys(
+        attestation,
+        (
+            "schema_version",
+            "status",
+            "mode",
+            "pid",
+            "active_root",
+            "python_executable",
+            "roots_manifest_path",
+            "roots_manifest_file_sha256",
+            "roots_manifest_receipt_sha256",
+            "roots_inventory_sha256",
+            "sys_path",
+            "bootstrap_sha256",
+            "site_imported",
+            "startup_project_or_ml_module_count",
+            "guards",
+            "receipt_sha256",
+        ),
+        "qualification bootstrap attestation",
+    )
+    _self_hash(attestation, "qualification bootstrap attestation")
+    guards = _mapping(
+        attestation["guards"], "qualification bootstrap attestation.guards"
+    )
+    expected_guards = {
+        "status": "process_lifetime_guards_installed",
+        "forbidden_module_import_attempts": 0,
+        "forbidden_startup_import_attempts": 0,
+        "torch_module_calls": 0,
+        "transformers_model_load_calls": 0,
+        "patched_modules": list(BOOTSTRAP_GUARDED_MODULES),
+    }
+    root_paths = _list(commitment.get("root_paths"), "qualification root paths")
+    sys_path = _list(commitment.get("sys_path"), "qualification sys.path")
+    if (
+        phase["status"] != "pass_hash_bound_bootstrap_phase"
+        or phase["phase"] != BOOTSTRAP_PREFLIGHT_PHASE
+        or phase["attestation_receipt_sha256"] != attestation["receipt_sha256"]
+        or attestation["schema_version"] != SCHEMA_VERSION
+        or attestation["status"] != "pass_hash_bound_confined_bootstrap"
+        or attestation["mode"] != "preflight-child"
+        or attestation["pid"] != pid
+        or attestation["active_root"] != active_root
+        or attestation["python_executable"] != python_executable
+        or attestation["roots_manifest_path"] != roots_manifest_path
+        or attestation["roots_manifest_file_sha256"] != commitment.get("file_sha256")
+        or attestation["roots_manifest_receipt_sha256"]
+        != commitment.get("receipt_sha256")
+        or attestation["roots_inventory_sha256"]
+        != commitment.get("roots_inventory_sha256")
+        or attestation["sys_path"] != sys_path
+        or attestation["bootstrap_sha256"] != expected_bootstrap_sha256
+        or commitment.get("bootstrap_sha256") != expected_bootstrap_sha256
+        or attestation["site_imported"] is not False
+        or attestation["startup_project_or_ml_module_count"] != 0
+        or guards != expected_guards
+        or root_paths != sorted(set(root_paths))
+        or not root_paths
+        or any(
+            not isinstance(path, str) or _canonical_absolute_posix(path, "root") != path
+            for path in root_paths
+        )
+        or sys_path != list(dict.fromkeys(sys_path))
+        or not sys_path
+        or sys_path[0] != active_root
+        or any(
+            not isinstance(path, str)
+            or not any(_inside_posix(root, path) for root in root_paths)
+            for path in sys_path
+        )
+    ):
+        raise RecoveryBundleVerificationError("qualification bootstrap phase differs")
+    for name in ("file_sha256", "receipt_sha256", "roots_inventory_sha256"):
+        _hex64(commitment.get(name), f"qualification bootstrap.{name}")
+
+
+def _validate_qualification_chain(
+    *,
+    ownership: Mapping[str, Any],
+    landlock: Mapping[str, Any],
+    cuda: Mapping[str, Any],
+    ownership_path: Path,
+    landlock_path: Path,
+    cuda_path: Path,
+    expected_source_test_files: Sequence[Mapping[str, Any]],
+    probe_summary: Any,
+) -> tuple[dict[str, Any], datetime]:
+    """Validate every disposable-host ownership/Landlock/CUDA cross-link."""
+
+    validated_ownership = _validate_qualification_ownership(ownership)
+    child_argv = _list(landlock.get("child_argv"), "qualification Landlock child")
+    if "--" not in child_argv:
+        raise RecoveryBundleVerificationError(
+            "qualification Landlock child command differs"
+        )
+    child = child_argv[child_argv.index("--") + 1 :]
+    device_files = [
+        child[index + 1]
+        for index, value in enumerate(child[:-1])
+        if value == "--device-file"
+    ]
+    if (
+        not device_files
+        or device_files != sorted(set(device_files))
+        or any(
+            not isinstance(path, str) or NVIDIA_DEVICE_PATH.fullmatch(path) is None
+            for path in device_files
+        )
+    ):
+        raise RecoveryBundleVerificationError("qualification device inventory differs")
+    active_root = _canonical_absolute_posix(
+        _single_argv_option(child, "--active-root"), "qualification active root"
+    )
+    python_executable = _canonical_absolute_posix(
+        _single_argv_option(child, "--python-executable"),
+        "qualification Python executable",
+    )
+    roots_manifest_path = _canonical_absolute_posix(
+        _single_argv_option(child, "--roots-manifest"),
+        "qualification roots manifest",
+    )
+    roots_manifest_sha256 = _hex64(
+        _single_argv_option(child, "--roots-manifest-sha256"),
+        "qualification roots manifest file hash",
+    )
+    embedded_landlock = _canonical_absolute_posix(
+        _single_argv_option(child, "--landlock-receipt"),
+        "qualification Landlock receipt path",
+    )
+    output_root = _canonical_absolute_posix(
+        _single_argv_option(child, "--output-root"), "qualification output root"
+    )
+    canary_protected_root = _canonical_absolute_posix(
+        _single_argv_option(child, "--canary-protected-root"),
+        "qualification protected canary root",
+    )
+    canary_output_root = _canonical_absolute_posix(
+        _single_argv_option(child, "--canary-output-root"),
+        "qualification output canary root",
+    )
+    embedded_probe = _canonical_absolute_posix(
+        _single_argv_option(child, "--output"), "qualification CUDA receipt path"
+    )
+    embedded_ownership = _canonical_absolute_posix(
+        _single_argv_option(child, "--qualification-ownership"),
+        "qualification ownership receipt path",
+    )
+    embedded_output_parent = PurePosixPath(output_root)
+    if (
+        _single_argv_option(child, "--closure-scope") != "source_test_qualification"
+        or PurePosixPath(embedded_ownership).name != TARGET_QUALIFICATION_OWNERSHIP_NAME
+        or PurePosixPath(embedded_landlock).name != TARGET_QUALIFICATION_LANDLOCK_NAME
+        or PurePosixPath(embedded_probe).name != TARGET_QUALIFICATION_CUDA_NAME
+        or PurePosixPath(embedded_landlock).parent != embedded_output_parent
+        or PurePosixPath(embedded_probe).parent != embedded_output_parent
+        or _inside_posix(output_root, embedded_ownership)
+    ):
+        raise RecoveryBundleVerificationError(
+            "qualification evidence path/scope differs"
+        )
+
+    commitment = _mapping(
+        cuda.get("bootstrap_roots_manifest"), "qualification bootstrap commitment"
+    )
+    _exact_keys(
+        commitment,
+        (
+            "path",
+            "file_sha256",
+            "receipt_sha256",
+            "roots_inventory_sha256",
+            "bootstrap_sha256",
+            "active_root",
+            "python_executable",
+            "root_paths",
+            "sys_path",
+        ),
+        "qualification bootstrap commitment",
+    )
+    if (
+        commitment["path"] != roots_manifest_path
+        or commitment["file_sha256"] != roots_manifest_sha256
+        or commitment["active_root"] != active_root
+        or commitment["python_executable"] != python_executable
+    ):
+        raise RecoveryBundleVerificationError(
+            "qualification bootstrap commitment differs"
+        )
+    root_paths = _list(commitment["root_paths"], "qualification root paths")
+    roots_manifest_parent = PurePosixPath(roots_manifest_path).parent.as_posix()
+    bootstrap_roots = sorted(set(root_paths) | {roots_manifest_parent})
+    bootstrap_files = sorted(
+        {
+            roots_manifest_path,
+            f"{active_root}/{BOOTSTRAP_RELATIVE_PATH}",
+        }
+    )
+    pid, device_rules = _validate_landlock_receipt(
+        landlock,
+        purpose="preauthorization_probe",
+        receipt_path=embedded_landlock,
+        output_root=output_root,
+        protected_roots=[canary_protected_root, *bootstrap_roots],
+        protected_files=[
+            f"{canary_protected_root}/seed.txt",
+            *bootstrap_files,
+            embedded_ownership,
+        ],
+        canary_output_root=canary_output_root,
+        authorization_sha256=None,
+        preflight_sha256=None,
+        label="qualification_landlock",
+    )
+    expected_child = _expected_preflight_argv(
+        python_executable,
+        active_root,
+        {"roots_manifest": roots_manifest_path},
+        roots_manifest_sha256,
+        device_files,
+        closure_scope="source_test_qualification",
+        qualification_ownership=embedded_ownership,
+        landlock_receipt=embedded_landlock,
+        output_root=output_root,
+        canary_protected_root=canary_protected_root,
+        canary_output_root=canary_output_root,
+        output=embedded_probe,
+    )
+    if (
+        child_argv != expected_child
+        or landlock.get("child_argv_sha256") != canonical_sha256(expected_child)
+        or [row["path"] for row in device_rules] != device_files
+    ):
+        raise RecoveryBundleVerificationError(
+            "qualification Landlock child/device binding differs"
+        )
+
+    closure = list(expected_source_test_files)
+    _exact_keys(
+        cuda,
+        (
+            "schema_version",
+            "status",
+            "pid",
+            "python_executable",
+            "active_root",
+            "closure_scope",
+            "closure_files",
+            "closure_file_count",
+            "closure_inventory_sha256",
+            "recovery_closure_sha256",
+            "bootstrap_roots_manifest",
+            "qualification_ownership_receipt_sha256",
+            "landlock_receipt_sha256",
+            "bootstrap",
+            "package_versions",
+            "imported_package_versions",
+            "environment",
+            "absent_environment_variables",
+            "provider",
+            "cuda",
+            "model_forward_count",
+            "torch_module_call_count",
+            "target_prompt_render_count",
+            "target_feature_vector_count",
+            "external_or_prior_outcome_inputs",
+            "completed_at_utc",
+            "receipt_sha256",
+        ),
+        "qualification_cuda",
+    )
+    environment = _mapping(cuda["environment"], "qualification_cuda.environment")
+    _exact_keys(
+        environment,
+        (*FIXED_ENVIRONMENT, *DYNAMIC_ENVIRONMENT),
+        "qualification_cuda.environment",
+    )
+    provider = _mapping(cuda["provider"], "qualification_cuda.provider")
+    _exact_keys(
+        provider,
+        ("pod_id", "volume_id", "data_center_id"),
+        "qualification_cuda.provider",
+    )
+    cuda_result = _mapping(cuda["cuda"], "qualification_cuda.cuda")
+    _exact_keys(
+        cuda_result,
+        (
+            "available",
+            "device",
+            "device_count",
+            "device_name",
+            "device_capability",
+            "dtype",
+            "shape",
+            "matmul_finite",
+            "synchronized",
+            "raw_tensor_operations_only",
+        ),
+        "qualification_cuda.cuda",
+    )
+    expected_provider = {
+        "pod_id": validated_ownership["pod_id"],
+        "volume_id": validated_ownership["network_volume_id"],
+        "data_center_id": validated_ownership["data_center_id"],
+    }
+    capability = _list(
+        cuda_result["device_capability"], "qualification_cuda.device_capability"
+    )
+    if (
+        cuda["schema_version"] != SCHEMA_VERSION
+        or cuda["status"] != "pass_target_free_landlock_cuda_preflight"
+        or cuda["pid"] != pid
+        or cuda["python_executable"] != python_executable
+        or cuda["active_root"] != active_root
+        or cuda["closure_scope"] != "source_test_qualification"
+        or cuda["closure_files"] != closure
+        or cuda["closure_file_count"] != len(closure)
+        or cuda["closure_inventory_sha256"] != canonical_sha256(closure)
+        or cuda["recovery_closure_sha256"] != canonical_sha256(closure)
+        or cuda["qualification_ownership_receipt_sha256"]
+        != validated_ownership["receipt_sha256"]
+        or cuda["landlock_receipt_sha256"] != landlock["receipt_sha256"]
+        or cuda["package_versions"] != EXPECTED_PACKAGES
+        or cuda["imported_package_versions"] != EXPECTED_IMPORTED_PACKAGES
+        or cuda["absent_environment_variables"] != list(FORBIDDEN_ENVIRONMENT)
+        or any(
+            environment[name] != expected
+            for name, expected in FIXED_ENVIRONMENT.items()
+        )
+        or any(
+            not isinstance(environment[name], str)
+            or not _inside_posix(output_root, environment[name])
+            for name in DYNAMIC_ENVIRONMENT
+        )
+        or provider != expected_provider
+        or cuda_result["available"] is not True
+        or cuda_result["device"] != "cuda:0"
+        or cuda_result["device_count"] != 1
+        or "B200" not in str(cuda_result["device_name"])
+        or capability != [10, 0]
+        or cuda_result["dtype"] != "torch.bfloat16"
+        or cuda_result["shape"] != [16, 16]
+        or cuda_result["matmul_finite"] is not True
+        or cuda_result["synchronized"] is not True
+        or cuda_result["raw_tensor_operations_only"] is not True
+        or cuda["model_forward_count"] != 0
+        or cuda["torch_module_call_count"] != 0
+        or cuda["target_prompt_render_count"] != 0
+        or cuda["target_feature_vector_count"] != 0
+        or cuda["external_or_prior_outcome_inputs"] != []
+    ):
+        raise RecoveryBundleVerificationError(
+            "qualification CUDA closure/bootstrap/device result differs"
+        )
+    _validate_compact_bootstrap_phase(
+        cuda["bootstrap"],
+        pid=pid,
+        active_root=active_root,
+        python_executable=python_executable,
+        roots_manifest_path=roots_manifest_path,
+        commitment=commitment,
+        expected_bootstrap_sha256=_closure_hash(closure, BOOTSTRAP_RELATIVE_PATH),
+    )
+    completed_at = _parse_utc(
+        cuda["completed_at_utc"], "qualification_cuda.completed_at_utc"
+    )
+    created_at = _parse_utc(
+        validated_ownership["created_at"], "qualification ownership created_at"
+    )
+    if completed_at < created_at:
+        raise RecoveryBundleVerificationError("qualification CUDA predated ownership")
+
+    summary = _mapping(probe_summary, "target_host.qualification_probe")
+    _exact_keys(
+        summary,
+        (
+            "ownership_file",
+            "ownership_receipt_sha256",
+            "ownership_created_at_utc",
+            "landlock_file",
+            "landlock_receipt_sha256",
+            "landlock_status",
+            "landlock_observed_abi",
+            "cuda_preflight_file",
+            "cuda_preflight_receipt_sha256",
+            "cuda_preflight_status",
+            "cuda_preflight_closure_scope",
+            "cuda_preflight_closure_inventory_sha256",
+            "cuda_preflight_completed_at_utc",
+            "cuda_preflight_completed_host_age_seconds",
+            "bootstrap_roots_manifest_receipt_sha256",
+            "python_executable",
+            "active_root",
+            "device_files",
+            "child_argv_sha256",
+            "provider",
+            "cuda",
+        ),
+        "target_host.qualification_probe",
+    )
+    _file_record_matches(
+        summary["ownership_file"], ownership_path, "qualification ownership file"
+    )
+    _file_record_matches(
+        summary["landlock_file"], landlock_path, "qualification Landlock file"
+    )
+    _file_record_matches(
+        summary["cuda_preflight_file"], cuda_path, "qualification CUDA file"
+    )
+    expected_summary = {
+        "ownership_file": summary["ownership_file"],
+        "ownership_receipt_sha256": validated_ownership["receipt_sha256"],
+        "ownership_created_at_utc": validated_ownership["created_at"],
+        "landlock_file": summary["landlock_file"],
+        "landlock_receipt_sha256": landlock["receipt_sha256"],
+        "landlock_status": landlock["status"],
+        "landlock_observed_abi": landlock["observed_abi"],
+        "cuda_preflight_file": summary["cuda_preflight_file"],
+        "cuda_preflight_receipt_sha256": cuda["receipt_sha256"],
+        "cuda_preflight_status": cuda["status"],
+        "cuda_preflight_closure_scope": cuda["closure_scope"],
+        "cuda_preflight_closure_inventory_sha256": cuda["closure_inventory_sha256"],
+        "cuda_preflight_completed_at_utc": cuda["completed_at_utc"],
+        "cuda_preflight_completed_host_age_seconds": int(
+            (completed_at - created_at).total_seconds()
+        ),
+        "bootstrap_roots_manifest_receipt_sha256": commitment["receipt_sha256"],
+        "python_executable": python_executable,
+        "active_root": active_root,
+        "device_files": device_files,
+        "child_argv_sha256": landlock["child_argv_sha256"],
+        "provider": dict(provider),
+        "cuda": {
+            name: cuda_result[name]
+            for name in (
+                "device",
+                "device_count",
+                "device_name",
+                "device_capability",
+                "matmul_finite",
+                "synchronized",
+                "raw_tensor_operations_only",
+            )
+        },
+    }
+    if summary != expected_summary:
+        raise RecoveryBundleVerificationError(
+            "target-host qualification summary differs"
+        )
+    return validated_ownership, completed_at
+
+
+def _validate_test_receipt(
+    value: Any,
+    *,
+    kind: str,
+    expected_source_test_files: Sequence[Mapping[str, Any]],
+    qualification_ownership: Mapping[str, Any] | None = None,
+    qualification_landlock: Mapping[str, Any] | None = None,
+    qualification_cuda: Mapping[str, Any] | None = None,
+    qualification_ownership_path: Path | None = None,
+    qualification_landlock_path: Path | None = None,
+    qualification_cuda_path: Path | None = None,
+    authorized_at: datetime | None = None,
+) -> dict[str, Any]:
+    label = f"{kind} test receipt"
+    receipt = _mapping(value, label)
+    _exact_keys(
+        receipt,
+        (
+            "schema_version",
+            "receipt_type",
+            "kind",
+            "status",
+            "code_freeze_commit",
+            "observed_git_head_commit",
+            "source_test_files",
+            "source_test_file_count",
+            "source_test_inventory_sha256",
+            "command_argv",
+            "command",
+            "command_argv_sha256",
+            "receipt_path",
+            "pytest_argv",
+            "interpreter",
+            "platform",
+            "dependencies",
+            "dependency_inventory_sha256",
+            "collected_ids",
+            "passed_ids",
+            "failed_ids",
+            "skipped_ids",
+            "not_run_ids",
+            "collected_count",
+            "passed_count",
+            "failed_count",
+            "skipped_count",
+            "not_run_count",
+            "designated_target_ids",
+            "started_at_utc",
+            "completed_at_utc",
+            "exit_code",
+            "target_host",
+            "qualification_probe",
+            "receipt_sha256",
+        ),
+        label,
+    )
+    _self_hash(receipt, label)
+    code_freeze = _string(receipt["code_freeze_commit"], f"{label}.code_freeze_commit")
+    observed_head = _string(
+        receipt["observed_git_head_commit"],
+        f"{label}.observed_git_head_commit",
+    )
+    source_test_files = _list(
+        receipt["source_test_files"], f"{label}.source_test_files"
+    )
+    command_argv = _list(receipt["command_argv"], f"{label}.command_argv")
+    receipt_path = _string(receipt["receipt_path"], f"{label}.receipt_path")
+    if (
+        receipt["schema_version"] != SCHEMA_VERSION
+        or receipt["receipt_type"] != TEST_RECEIPT_TYPE
+        or receipt["kind"] != kind
+        or receipt["status"] != TEST_RECEIPT_STATUS
+        or HEX40.fullmatch(code_freeze) is None
+        or HEX40.fullmatch(observed_head) is None
+        or source_test_files != list(expected_source_test_files)
+        or receipt["source_test_file_count"] != len(expected_source_test_files)
+        or receipt["source_test_inventory_sha256"]
+        != canonical_sha256(list(expected_source_test_files))
+        or not command_argv
+        or any(not isinstance(part, str) or not part for part in command_argv)
+        or receipt["command"] != shlex.join(command_argv)
+        or receipt["command_argv_sha256"] != canonical_sha256(command_argv)
+        or not receipt_path.startswith("/")
+        or receipt_path.startswith("//")
+        or ".." in PurePosixPath(receipt_path).parts
+        or PurePosixPath(receipt_path).as_posix() != receipt_path
+    ):
+        raise RecoveryBundleVerificationError(f"{label} identity/command differs")
+    try:
+        command_index = command_argv.index("test-receipt")
+    except ValueError as exc:
+        raise RecoveryBundleVerificationError(
+            f"{label} command omits test-receipt"
+        ) from exc
+    expected_tail: list[Any] = [
+        "test-receipt",
+        "--kind",
+        kind,
+        "--code-freeze-commit",
+        code_freeze,
+    ]
+    if kind == "target_host" and isinstance(receipt.get("target_host"), Mapping):
+        original_parent = PurePosixPath(receipt_path).parent
+        expected_tail.extend(
+            [
+                "--host-created-at-utc",
+                receipt["target_host"].get("created_at_utc"),
+                "--qualification-ownership",
+                (original_parent / TARGET_QUALIFICATION_OWNERSHIP_NAME).as_posix(),
+                "--qualification-landlock",
+                (original_parent / TARGET_QUALIFICATION_LANDLOCK_NAME).as_posix(),
+                "--qualification-cuda-preflight",
+                (original_parent / TARGET_QUALIFICATION_CUDA_NAME).as_posix(),
+            ]
+        )
+    expected_tail.extend(["--output", receipt_path])
+    if command_argv[command_index:] != expected_tail or receipt["pytest_argv"] != list(
+        FOCUSED_PYTEST_ARGV
+    ):
+        raise RecoveryBundleVerificationError(f"{label} frozen command differs")
+
+    interpreter = _mapping(receipt["interpreter"], f"{label}.interpreter")
+    _exact_keys(
+        interpreter,
+        ("executable", "implementation", "version", "cache_tag"),
+        f"{label}.interpreter",
+    )
+    interpreter_executable = _string(
+        interpreter["executable"], f"{label}.interpreter.executable"
+    )
+    if not interpreter_executable.startswith("/"):
+        raise RecoveryBundleVerificationError(
+            f"{label}.interpreter.executable is not absolute"
+        )
+    for name in ("implementation", "version", "cache_tag"):
+        _string(interpreter[name], f"{label}.interpreter.{name}")
+    platform_record = _mapping(receipt["platform"], f"{label}.platform")
+    _exact_keys(
+        platform_record,
+        ("system", "release", "version", "machine"),
+        f"{label}.platform",
+    )
+    for name in ("system", "release", "version", "machine"):
+        _string(platform_record[name], f"{label}.platform.{name}")
+
+    dependencies = _list(receipt["dependencies"], f"{label}.dependencies")
+    dependency_names: list[str] = []
+    dependency_map: dict[str, str] = {}
+    for index, item in enumerate(dependencies):
+        row_label = f"{label}.dependencies[{index}]"
+        row = _mapping(item, row_label)
+        _exact_keys(row, ("name", "version"), row_label)
+        name = _string(row["name"], f"{row_label}.name")
+        version = _string(row["version"], f"{row_label}.version")
+        if name != name.lower().replace("_", "-"):
+            raise RecoveryBundleVerificationError(f"{row_label}.name is noncanonical")
+        dependency_names.append(name)
+        dependency_map[name] = version
+    if dependency_names != sorted(set(dependency_names)) or receipt[
+        "dependency_inventory_sha256"
+    ] != canonical_sha256(dependencies):
+        raise RecoveryBundleVerificationError(f"{label} dependency inventory differs")
+
+    id_keys = (
+        "collected_ids",
+        "passed_ids",
+        "failed_ids",
+        "skipped_ids",
+        "not_run_ids",
+    )
+    ids: dict[str, set[str]] = {}
+    for name in id_keys:
+        rows = _list(receipt[name], f"{label}.{name}")
+        if any(
+            not isinstance(node_id, str) or not node_id for node_id in rows
+        ) or rows != sorted(set(rows)):
+            raise RecoveryBundleVerificationError(f"{label}.{name} differs")
+        ids[name] = set(rows)
+    partitions = (
+        ids["passed_ids"],
+        ids["failed_ids"],
+        ids["skipped_ids"],
+        ids["not_run_ids"],
+    )
+    collected = ids["collected_ids"]
+    if (
+        any(
+            left & right
+            for index, left in enumerate(partitions)
+            for right in partitions[index + 1 :]
+        )
+        or set().union(*partitions) != collected
+        or not collected
+        or ids["failed_ids"]
+        or ids["not_run_ids"]
+        or receipt["collected_count"] != len(collected)
+        or receipt["passed_count"] != len(ids["passed_ids"])
+        or receipt["failed_count"] != len(ids["failed_ids"])
+        or receipt["skipped_count"] != len(ids["skipped_ids"])
+        or receipt["not_run_count"] != len(ids["not_run_ids"])
+        or receipt["exit_code"] != 0
+        or receipt["designated_target_ids"] != list(TARGET_DESIGNATED_TEST_IDS)
+        or not set(TARGET_DESIGNATED_TEST_IDS) <= collected
+    ):
+        raise RecoveryBundleVerificationError(f"{label} test outcomes differ")
+    started_at = _parse_utc(receipt["started_at_utc"], f"{label}.started_at_utc")
+    completed_at = _parse_utc(receipt["completed_at_utc"], f"{label}.completed_at_utc")
+    if completed_at < started_at or (
+        authorized_at is not None and completed_at > authorized_at
+    ):
+        raise RecoveryBundleVerificationError(f"{label} clocks differ")
+
+    if kind == "local":
+        if (
+            receipt["target_host"] is not None
+            or receipt["qualification_probe"] is not None
+            or any(
+                item is not None
+                for item in (
+                    qualification_ownership,
+                    qualification_landlock,
+                    qualification_cuda,
+                    qualification_ownership_path,
+                    qualification_landlock_path,
+                    qualification_cuda_path,
+                )
+            )
+            or observed_head != code_freeze
+        ):
+            raise RecoveryBundleVerificationError(f"{label} host/commit differs")
+        return dict(receipt)
+    if kind != "target_host":
+        raise RecoveryBundleVerificationError(f"{label} kind differs")
+    target = _mapping(receipt["target_host"], f"{label}.target_host")
+    probe_summary = _mapping(
+        receipt["qualification_probe"], f"{label}.qualification_probe"
+    )
+    if (
+        qualification_ownership is None
+        or qualification_ownership_path is None
+        or qualification_landlock is None
+        or qualification_cuda is None
+        or qualification_landlock_path is None
+        or qualification_cuda_path is None
+    ):
+        raise RecoveryBundleVerificationError(
+            f"{label} qualification evidence is missing"
+        )
+    _exact_keys(
+        target,
+        (
+            "pod_id",
+            "volume_id",
+            "data_center_id",
+            "kernel_release",
+            "landlock_abi",
+            "gpu",
+            "created_at_utc",
+            "test_started_host_age_seconds",
+            "test_completed_host_age_seconds",
+        ),
+        f"{label}.target_host",
+    )
+    gpu = _mapping(target["gpu"], f"{label}.target_host.gpu")
+    _exact_keys(
+        gpu,
+        ("device_count", "device_name", "device_capability", "total_memory_bytes"),
+        f"{label}.target_host.gpu",
+    )
+    capability = _list(
+        gpu["device_capability"], f"{label}.target_host.gpu.device_capability"
+    )
+    host_created_at = _parse_utc(
+        target["created_at_utc"], f"{label}.target_host.created_at_utc"
+    )
+    validated_ownership, probe_completed_at = _validate_qualification_chain(
+        ownership=qualification_ownership,
+        landlock=qualification_landlock,
+        cuda=qualification_cuda,
+        ownership_path=qualification_ownership_path,
+        landlock_path=qualification_landlock_path,
+        cuda_path=qualification_cuda_path,
+        expected_source_test_files=expected_source_test_files,
+        probe_summary=probe_summary,
+    )
+    if (
+        platform_record["system"] != "Linux"
+        or _string(target["kernel_release"], f"{label}.target_host.kernel_release")
+        != platform_record["release"]
+        or _integer(target["landlock_abi"], f"{label}.target_host.landlock_abi")
+        < POLICY_ABI
+        or gpu["device_count"] != 1
+        or "B200"
+        not in _string(gpu["device_name"], f"{label}.target_host.gpu.device_name")
+        or len(capability) != 2
+        or any(
+            isinstance(item, bool) or not isinstance(item, int) for item in capability
+        )
+        or _integer(
+            gpu["total_memory_bytes"],
+            f"{label}.target_host.gpu.total_memory_bytes",
+        )
+        < 160 * 1024**3
+        or not set(TARGET_DESIGNATED_TEST_IDS) <= ids["passed_ids"]
+        or bool(set(TARGET_DESIGNATED_TEST_IDS) & ids["skipped_ids"])
+        or any(
+            dependency_map.get(name) != version
+            for name, version in EXPECTED_PACKAGES.items()
+        )
+        or not isinstance(target["pod_id"], str)
+        or not target["pod_id"]
+        or observed_head != code_freeze
+        or target["pod_id"] != validated_ownership["pod_id"]
+        or target["volume_id"] != NETWORK_VOLUME_ID
+        or target["data_center_id"] != DATA_CENTER_ID
+        or target["created_at_utc"] != validated_ownership["created_at"]
+        or target["test_started_host_age_seconds"]
+        != (started_at - host_created_at).total_seconds()
+        or target["test_completed_host_age_seconds"]
+        != (completed_at - host_created_at).total_seconds()
+        or started_at < host_created_at
+        or probe_completed_at > started_at
+        or probe_summary["provider"]
+        != {
+            "pod_id": target["pod_id"],
+            "volume_id": target["volume_id"],
+            "data_center_id": target["data_center_id"],
+        }
+    ):
+        raise RecoveryBundleVerificationError(f"{label} target environment differs")
+    return dict(receipt)
+
+
+def _validate_git_ref(value: Any, label: str, *, prefix: str) -> str:
+    ref = _string(value, label)
+    if not ref.startswith(prefix):
+        raise RecoveryBundleVerificationError(f"{label} prefix differs")
+    branch = ref.removeprefix(prefix)
+    components = branch.split("/")
+    forbidden = set(" ~^:?*[\\")
+    if (
+        not branch
+        or branch.startswith("/")
+        or branch.endswith("/")
+        or "//" in branch
+        or ".." in branch
+        or "@{" in branch
+        or branch.endswith(".lock")
+        or any(
+            not part
+            or part.startswith(".")
+            or part.endswith(".")
+            or any(character in forbidden or ord(character) < 32 for character in part)
+            for part in components
+        )
+    ):
+        raise RecoveryBundleVerificationError(f"{label} is not a sane git ref")
+    return branch
+
+
+def _validate_review(
+    value: Any,
+    closure: Sequence[Mapping[str, Any]],
+    *,
+    git_head_commit: Any,
+    local_test_receipt: Mapping[str, Any],
+    target_host_test_receipt: Mapping[str, Any],
+    qualification_ownership: Mapping[str, Any],
+    qualification_landlock: Mapping[str, Any],
+    qualification_cuda: Mapping[str, Any],
+) -> None:
+    review = _mapping(value, "authorization.review")
+    _exact_keys(
+        review,
+        (
+            "model",
+            "provider_status",
+            "response_id",
+            "input_tokens",
+            "output_tokens",
+            "reasoning_tokens",
+            "reconstructed_cost_usd",
+            "provider_approval_claimed",
+            "provider_terminal_verdict",
+            "provider_ready_to_freeze_verdict",
+            "source_and_tests_reviewed_by_provider",
+            "reviewed_packet_was_pre_fix",
+            "final_source_reviewed_by_provider",
+            "provider_reviewed_final_bytes_unchanged",
+            "reviewed_packet_git_head_commit",
+            "final_git_head_commit",
+            "code_freeze_commit",
+            "source_test_inventory_sha256",
+            "historical_v2_terminal_verdict",
+            "historical_v2_adjudication_receipt_sha256",
+            "historical_v2_remaining_blocking_findings",
+            "historical_v3_terminal_verdict",
+            "historical_v3_adjudication_receipt_sha256",
+            "historical_v3_remaining_blocking_findings",
+            "historical_v4_terminal_verdict",
+            "historical_v4_adjudication_receipt_sha256",
+            "historical_v4_remaining_blocking_findings",
+            "historical_v4_input_tokens_preflight",
+            "historical_v4_recorded_cost_usd",
+            "historical_v4_retrospective_long_context_cost_usd",
+            "historical_v4_budget_authorization_usd",
+            "historical_v4_pricing_disclosure_status",
+            "historical_v5_terminal_verdict",
+            "historical_v5_response_id",
+            "historical_v5_review_sha256",
+            "historical_v5_adjudication_receipt_sha256",
+            "historical_v5_adjudication_json_sha256",
+            "historical_v5_superseded_reason",
+            "historical_v5_input_tokens_preflight",
+            "historical_v5_recorded_cost_usd",
+            "historical_v5_retrospective_long_context_cost_usd",
+            "historical_v5_budget_authorization_usd",
+            "historical_v5_pricing_disclosure_status",
+            "historical_v6_terminal_verdict",
+            "historical_v6_response_id",
+            "historical_v6_review_sha256",
+            "historical_v6_manifest_file_sha256",
+            "historical_v6_response_file_sha256",
+            "historical_v6_request_payload_file_sha256",
+            "historical_v6_review_request_file_sha256",
+            "historical_v6_reviewed_packet_git_head_commit",
+            "historical_v6_nonadjudicable_reason",
+            "historical_v6_authorization_status",
+            "historical_v7_terminal_verdict",
+            "historical_v7_response_id",
+            "historical_v7_review_sha256",
+            "historical_v7_adjudication_receipt_sha256",
+            "historical_v7_adjudication_json_sha256",
+            "historical_v7_final_git_head_commit",
+            "historical_b17_terminal_verdict",
+            "historical_b17_response_id",
+            "historical_b17_review_sha256",
+            "historical_b17_manifest_file_sha256",
+            "historical_b17_finding_ids",
+            "historical_b17_recorded_cost_usd",
+            "historical_b17_incomplete_response_id",
+            "historical_b17_incomplete_cost_usd",
+            "b18_closure_receipt_sha256",
+            "b20_closure_receipt_sha256",
+            "b20_verification_receipt_sha256",
+            "b20_attempt_id",
+            "b20_pod_id",
+            "b20_scientific_result_status",
+            "historical_v8_terminal_verdict",
+            "historical_v8_response_id",
+            "historical_v8_review_sha256",
+            "historical_v8_manifest_file_sha256",
+            "historical_v8_adjudication_receipt_sha256",
+            "historical_v8_final_git_head_commit",
+            "historical_v8_superseded_reason",
+            "historical_v9_terminal_verdict",
+            "historical_v9_execution_authorized",
+            "historical_v9_review_sha256",
+            "historical_v9_adjudication_receipt_sha256",
+            "historical_v9_remaining_blocking_findings",
+            "b22_closure_receipt_sha256",
+            "b22_verification_receipt_sha256",
+            "b22_attempt_id",
+            "b22_pod_id",
+            "b22_authorization_receipt_sha256",
+            "b22_attempt_marker_receipt_sha256",
+            "b22_failure_receipt_sha256",
+            "b22_scientific_result_status",
+            "b22_raw_row_recomputation_may_have_preceded_late_guard",
+            "b22_same_authorization_retry_permitted",
+            "b22_termination_status",
+            "timed_qualification_receipt_sha256",
+            "timed_qualification_termination_receipt_sha256",
+            "timed_qualification_pod_id",
+            "timed_qualification_authorization_ready_host_age_seconds",
+            "timed_qualification_seconds_remaining",
+            "timed_qualification_reserve_surplus_seconds",
+            "timed_qualification_public_artifact_file_count",
+            "timed_qualification_public_artifact_total_bytes",
+            "timed_qualification_cuda_preflight_closure_scope",
+            "timed_qualification_final_recovery_scope_must_repeat",
+            "finding_ids",
+            "review_sha256",
+            "adjudication_receipt_sha256",
+            "adjudication_json_sha256",
+            "adjudication_markdown_sha256",
+            "historically_fixed_finding_ids",
+            "fixed_in_v10_finding_ids",
+            "rejected_finding_ids",
+            "reviewed_local_test_receipt_file_sha256",
+            "reviewed_local_test_receipt_receipt_sha256",
+            "reviewed_target_host_test_receipt_file_sha256",
+            "reviewed_target_host_test_receipt_receipt_sha256",
+            "reviewed_target_qualification_ownership_file_sha256",
+            "reviewed_target_qualification_ownership_receipt_sha256",
+            "reviewed_target_qualification_landlock_file_sha256",
+            "reviewed_target_qualification_landlock_receipt_sha256",
+            "reviewed_target_qualification_cuda_file_sha256",
+            "reviewed_target_qualification_cuda_receipt_sha256",
+            "historical_pre_v2_paid_call_count",
+            "historical_v2_paid_call_count",
+            "historical_v3_paid_call_count",
+            "historical_v4_paid_call_count",
+            "completed_v5_paid_call_count",
+            "completed_v6_paid_call_count",
+            "completed_v7_paid_call_count",
+            "incomplete_b17_paid_call_count",
+            "completed_b17_paid_call_count",
+            "completed_v8_paid_call_count",
+            "completed_v9_paid_call_count",
+            "completed_v10_paid_call_count",
+            "cumulative_disclosed_paid_call_count",
+        ),
+        "authorization.review",
+    )
+    findings = _list(review["finding_ids"], "authorization.review.finding_ids")
+    response_id = _string(review["response_id"], "authorization.review.response_id")
+    cost = _number(
+        review["reconstructed_cost_usd"],
+        "authorization.review.reconstructed_cost_usd",
+    )
+    input_tokens = _integer(
+        review["input_tokens"], "authorization.review.input_tokens", minimum=1
+    )
+    output_tokens = _integer(
+        review["output_tokens"], "authorization.review.output_tokens", minimum=1
+    )
+    minimum_reconstructed_cost_usd = (
+        input_tokens * PRO_REVIEW_V10_INPUT_RATE_USD_PER_MILLION
+        + output_tokens * PRO_REVIEW_V10_OUTPUT_RATE_USD_PER_MILLION
+    ) / 1_000_000
+    reviewed_packet_commit = _string(
+        review["reviewed_packet_git_head_commit"],
+        "authorization.review.reviewed_packet_git_head_commit",
+    )
+    review_final_commit = _string(
+        review["final_git_head_commit"],
+        "authorization.review.final_git_head_commit",
+    )
+    code_freeze_commit = _string(
+        review["code_freeze_commit"],
+        "authorization.review.code_freeze_commit",
+    )
+    final_commit = _string(git_head_commit, "authorization.git_head_commit")
+    required_current_findings = {
+        "B17", "B18", "B19", "B20", "B21", "B22", "B23",
+        "I10", "I11", "I12", "I13", "I14", "I15",
+    }
+    if (
+        review["model"] != "gpt-5.6-sol"
+        or review["provider_status"] != "completed"
+        or not response_id.startswith("resp_")
+        or _integer(
+            review["reasoning_tokens"],
+            "authorization.review.reasoning_tokens",
+        )
+        < 0
+        or not 0 < cost <= COMPLETED_REVIEW_COST_CEILING_USD
+        or cost + 1e-12 < minimum_reconstructed_cost_usd
+        or review["provider_approval_claimed"] is not False
+        or review["provider_terminal_verdict"] != "READY TO FREEZE"
+        or review["provider_ready_to_freeze_verdict"] is not True
+        or review["source_and_tests_reviewed_by_provider"] is not False
+        or review["reviewed_packet_was_pre_fix"] is not False
+        or review["final_source_reviewed_by_provider"] is not False
+        or review["provider_reviewed_final_bytes_unchanged"] is not True
+        or any(
+            HEX40.fullmatch(value) is None
+            for value in (
+                code_freeze_commit,
+                reviewed_packet_commit,
+                review_final_commit,
+                final_commit,
+            )
+        )
+        or review_final_commit != final_commit
+        or len({code_freeze_commit, reviewed_packet_commit, review_final_commit}) != 3
+        or code_freeze_commit != local_test_receipt.get("code_freeze_commit")
+        or code_freeze_commit != target_host_test_receipt.get("code_freeze_commit")
+        or review["source_test_inventory_sha256"]
+        != local_test_receipt.get("source_test_inventory_sha256")
+        or review["source_test_inventory_sha256"]
+        != target_host_test_receipt.get("source_test_inventory_sha256")
+        or review["historical_v2_terminal_verdict"] != "NOT READY TO FREEZE"
+        or review["historical_v2_adjudication_receipt_sha256"]
+        != HISTORICAL_V2_ADJUDICATION_RECEIPT_SHA256
+        or review["historical_v2_remaining_blocking_findings"]
+        != ["B06", "B07", "B08", "B09"]
+        or review["historical_v3_terminal_verdict"] != "NOT READY TO FREEZE"
+        or review["historical_v3_adjudication_receipt_sha256"]
+        != HISTORICAL_V3_NEGATIVE_ADJUDICATION_RECEIPT_SHA256
+        or review["historical_v3_remaining_blocking_findings"] != ["B10", "B11"]
+        or review["historical_v4_terminal_verdict"] != "NOT READY TO FREEZE"
+        or review["historical_v4_adjudication_receipt_sha256"]
+        != HISTORICAL_V4_NEGATIVE_ADJUDICATION_RECEIPT_SHA256
+        or review["historical_v4_remaining_blocking_findings"] != ["B12"]
+        or _integer(
+            review["historical_v4_input_tokens_preflight"],
+            "authorization.review.historical_v4_input_tokens_preflight",
+            minimum=1,
+        )
+        != HISTORICAL_V4_INPUT_TOKENS_PREFLIGHT
+        or _number(
+            review["historical_v4_recorded_cost_usd"],
+            "authorization.review.historical_v4_recorded_cost_usd",
+        )
+        != HISTORICAL_V4_RECORDED_COST_USD
+        or _number(
+            review["historical_v4_retrospective_long_context_cost_usd"],
+            ("authorization.review.historical_v4_retrospective_long_context_cost_usd"),
+        )
+        != HISTORICAL_V4_RETROSPECTIVE_LONG_CONTEXT_COST_USD
+        or _number(
+            review["historical_v4_budget_authorization_usd"],
+            "authorization.review.historical_v4_budget_authorization_usd",
+        )
+        != HISTORICAL_V4_BUDGET_AUTHORIZATION_USD
+        or review["historical_v4_pricing_disclosure_status"]
+        != (
+            "historical_manifest_short_rate_plus_retrospective_long_context_"
+            "reconstruction_not_invoice"
+        )
+        or review["historical_v5_terminal_verdict"] != "READY TO FREEZE"
+        or review["historical_v5_response_id"]
+        != "resp_0322d12a79eb8aa5016a576d65fc94819ba2ed3994c7f8cbf0"
+        or review["historical_v5_review_sha256"]
+        != HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v5_adjudication_receipt_sha256"]
+        != "05e23d2f90de9458b75ef7d84be23d73018ab8a4f46b3edcac12217793607257"
+        or review["historical_v5_adjudication_json_sha256"]
+        != HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256[
+            FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
+        ]
+        or review["historical_v5_superseded_reason"]
+        != "post_review_authentic_issue_gate_failed_b14"
+        or _integer(
+            review["historical_v5_input_tokens_preflight"],
+            "authorization.review.historical_v5_input_tokens_preflight",
+            minimum=1,
+        )
+        != HISTORICAL_V5_INPUT_TOKENS_PREFLIGHT
+        or _number(
+            review["historical_v5_recorded_cost_usd"],
+            "authorization.review.historical_v5_recorded_cost_usd",
+        )
+        != HISTORICAL_V5_RECORDED_COST_USD
+        or _number(
+            review["historical_v5_retrospective_long_context_cost_usd"],
+            ("authorization.review.historical_v5_retrospective_long_context_cost_usd"),
+        )
+        != HISTORICAL_V5_RETROSPECTIVE_LONG_CONTEXT_COST_USD
+        or _number(
+            review["historical_v5_budget_authorization_usd"],
+            "authorization.review.historical_v5_budget_authorization_usd",
+        )
+        != HISTORICAL_V5_BUDGET_AUTHORIZATION_USD
+        or review["historical_v5_pricing_disclosure_status"]
+        != (
+            "historical_manifest_short_rate_plus_retrospective_long_context_"
+            "reconstruction_not_invoice"
+        )
+        or review["historical_v6_terminal_verdict"] != "READY TO FREEZE"
+        or review["historical_v6_response_id"]
+        != "resp_096bfc4229fd22e6016a57992e0f648199913ca0849879a9a3"
+        or review["historical_v6_review_sha256"]
+        != HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v6_manifest_file_sha256"]
+        != HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ]
+        or review["historical_v6_response_file_sha256"]
+        != HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json"
+        ]
+        or review["historical_v6_request_payload_file_sha256"]
+        != HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/request_payload.json"
+        ]
+        or review["historical_v6_review_request_file_sha256"]
+        != HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md"
+        ]
+        or review["historical_v6_reviewed_packet_git_head_commit"]
+        != "4e8752ebc89ff69924c1604022720cb5258cbbdd"
+        or review["historical_v6_nonadjudicable_reason"]
+        != "b16_prose_wide_identifier_extraction_included_nonfinding_b05"
+        or review["historical_v6_authorization_status"]
+        != "historical_ready_verdict_nonadjudicable"
+        or review["historical_v7_terminal_verdict"] != "READY TO FREEZE"
+        or review["historical_v7_response_id"]
+        != "resp_0162174969ec5bcb016a57a36b0030819ba940698d372c5f40"
+        or review["historical_v7_review_sha256"]
+        != HISTORICAL_V7_POSITIVE_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V7_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v7_adjudication_receipt_sha256"]
+        != "029ae539291a6307c2c49609655bfb427a42a11629e6c9283f212ae2b5e8f93c"
+        or review["historical_v7_adjudication_json_sha256"]
+        != HISTORICAL_V7_POSITIVE_REVIEW_PHYSICAL_SHA256[
+            FINAL_V7_PRO_REVIEW_ADJUDICATION_JSON
+        ]
+        or review["historical_v7_final_git_head_commit"]
+        != "2479ed0c767fba7c872dbbd48666b5a598e2b9f6"
+        or review["historical_b17_terminal_verdict"]
+        != "READY AFTER SPECIFIED FIXES"
+        or review["historical_b17_response_id"]
+        != "resp_0038445e5c1ea968016a57b46d6378819893a1587d331ce1a6"
+        or review["historical_b17_review_sha256"]
+        != HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_b17_manifest_file_sha256"]
+        != HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_B17_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ]
+        or review["historical_b17_finding_ids"] != list(HISTORICAL_B17_FINDING_IDS)
+        or _number(
+            review["historical_b17_recorded_cost_usd"],
+            "authorization.review.historical_b17_recorded_cost_usd",
+        )
+        != 1.830595
+        or review["historical_b17_incomplete_response_id"]
+        != "resp_0a3a9f471779e79c016a57b366162481988f0d8b2d3f04e061"
+        or _number(
+            review["historical_b17_incomplete_cost_usd"],
+            "authorization.review.historical_b17_incomplete_cost_usd",
+        )
+        != 3.00996
+        or review["b18_closure_receipt_sha256"]
+        != "7d1d702efeace1d16010fec2bc1093069b1ed3c43a24bf669485ff283a6ca35f"
+        or review["b20_closure_receipt_sha256"]
+        != "3f5dee0ccbef6af18302667c0cea95be0c7e4c4cd6d1f9b0d61a4222c1e157d9"
+        or review["b20_verification_receipt_sha256"]
+        != "49376b10210fb4ac0409c560287ff817bbc21bc0fadbf1e28c6fc1d36f9de84d"
+        or review["b20_attempt_id"]
+        != "calv2-r3-audit-recovery-2479ed0-20260715T165648Z"
+        or review["b20_pod_id"] != "eeo1skjkwjqot5"
+        or review["b20_scientific_result_status"] != "none_produced"
+        or review["historical_v8_terminal_verdict"] != "READY TO FREEZE"
+        or review["historical_v8_response_id"]
+        != "resp_04c0c207ee499e0e016a57da9747bc81989d7632f52ee2a89f"
+        or review["historical_v8_review_sha256"]
+        != HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v8_manifest_file_sha256"]
+        != HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{HISTORICAL_V8_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ]
+        or review["historical_v8_adjudication_receipt_sha256"]
+        != "8a76dcf72a63014590296e20ff592c6c248a24678ebde69e6f2cf4c6bcaf8355"
+        or review["historical_v8_final_git_head_commit"]
+        != "497b0f8326af7f3fd0b9aa0e9dd50ce553e947c7"
+        or review["historical_v8_superseded_reason"]
+        != "post_authorization_b22_missing_cublas_environment"
+        or review["historical_v9_terminal_verdict"]
+        != "READY AFTER SPECIFIED FIXES"
+        or review["historical_v9_execution_authorized"] is not False
+        or review["historical_v9_review_sha256"]
+        != HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256[
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review.md"
+        ]
+        or review["historical_v9_adjudication_receipt_sha256"]
+        != "fb4f4c2b88580c2e57c3a477de3ba43b527d382e28e97cb1b06dbc323430ba6a"
+        or review["historical_v9_remaining_blocking_findings"] != ["B23"]
+        or review["b22_closure_receipt_sha256"]
+        != "8fb1e84d34027daf87f81635cf8ad89eb4c41dd7ac66f930e78938f0e79ab2f9"
+        or review["b22_verification_receipt_sha256"]
+        != "b9ccbac4029f82d4aeafc75fec8412936c6ca801197d530534b0d15a5143ebb2"
+        or review["b22_attempt_id"]
+        != "calv2-r3-audit-recovery-497b0f8-20260715T191757Z"
+        or review["b22_pod_id"] != "j7xr357tdlpq3f"
+        or review["b22_authorization_receipt_sha256"]
+        != "8cb249316e406f795150cb55409c6053b8e29c4b510918ea7c539bbb969306d4"
+        or review["b22_attempt_marker_receipt_sha256"]
+        != "9875b7810382910f5aa67b3a2e82217fbd4cc44de293b5091e172de0b1b58fa5"
+        or review["b22_failure_receipt_sha256"]
+        != "a50ff250cf654ea00acb24191a2aa602320eb6ac5c6e1e5a2e7af6a7a1d60391"
+        or review["b22_scientific_result_status"]
+        != "no_compact_scientific_result"
+        or review["b22_raw_row_recomputation_may_have_preceded_late_guard"]
+        is not True
+        or review["b22_same_authorization_retry_permitted"] is not False
+        or review["b22_termination_status"]
+        != "deleted_exact_owned_pod_unrelated_inventory_unchanged"
+        or review["timed_qualification_receipt_sha256"]
+        != "0c83eea18a0b4ed622e02846d224457421ca970c1d72b980ee9825a8420e4d34"
+        or review["timed_qualification_termination_receipt_sha256"]
+        != "cc5be37fcbc739d3bd15d6df245138910872e717e7abdfaa4f05f9d2abffb1c5"
+        or review["timed_qualification_pod_id"] != "sguho6ni8p5nbo"
+        or review["timed_qualification_pod_id"] == qualification_ownership.get("pod_id")
+        or review["timed_qualification_authorization_ready_host_age_seconds"] != 958
+        or review["timed_qualification_seconds_remaining"] != 2642
+        or review["timed_qualification_reserve_surplus_seconds"] != 842
+        or review["timed_qualification_public_artifact_file_count"] != 45
+        or review["timed_qualification_public_artifact_total_bytes"] != 156_023_372_845
+        or review["timed_qualification_cuda_preflight_closure_scope"]
+        != "source_test_qualification"
+        or review["timed_qualification_final_recovery_scope_must_repeat"] is not True
+        or findings != sorted(set(findings))
+        or not findings
+        or not required_current_findings.issubset(findings)
+        or any(
+            not isinstance(finding, str)
+            or re.fullmatch(r"[BI][0-9]{2}", finding) is None
+            for finding in findings
+        )
+        or any(
+            (finding.startswith("B") and int(finding[1:]) < 24)
+            or (finding.startswith("I") and int(finding[1:]) < 16)
+            for finding in set(findings) - required_current_findings
+        )
+        or any(
+            finding.startswith("B") and int(finding[1:]) >= 24
+            for finding in findings
+        )
+        or _integer(
+            review["historical_pre_v2_paid_call_count"],
+            "authorization.review.historical_pre_v2_paid_call_count",
+            minimum=1,
+        )
+        != 2
+        or _integer(
+            review["historical_v2_paid_call_count"],
+            "authorization.review.historical_v2_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["historical_v3_paid_call_count"],
+            "authorization.review.historical_v3_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["historical_v4_paid_call_count"],
+            "authorization.review.historical_v4_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_v5_paid_call_count"],
+            "authorization.review.completed_v5_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_v6_paid_call_count"],
+            "authorization.review.completed_v6_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_v7_paid_call_count"],
+            "authorization.review.completed_v7_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["incomplete_b17_paid_call_count"],
+            "authorization.review.incomplete_b17_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_b17_paid_call_count"],
+            "authorization.review.completed_b17_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_v8_paid_call_count"],
+            "authorization.review.completed_v8_paid_call_count",
+            minimum=1,
+        )
+        != 2
+        or _integer(
+            review["completed_v9_paid_call_count"],
+            "authorization.review.completed_v9_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["completed_v10_paid_call_count"],
+            "authorization.review.completed_v10_paid_call_count",
+            minimum=1,
+        )
+        != 1
+        or _integer(
+            review["cumulative_disclosed_paid_call_count"],
+            "authorization.review.cumulative_disclosed_paid_call_count",
+            minimum=1,
+        )
+        != 14
+    ):
+        raise RecoveryBundleVerificationError("authorization review semantics differ")
+    historically_fixed = _list(
+        review["historically_fixed_finding_ids"],
+        "authorization.review.historically_fixed_finding_ids",
+    )
+    fixed_in_v10 = _list(
+        review["fixed_in_v10_finding_ids"],
+        "authorization.review.fixed_in_v10_finding_ids",
+    )
+    rejected = _list(
+        review["rejected_finding_ids"], "authorization.review.rejected_finding_ids"
+    )
+    if (
+        any(
+            not isinstance(finding, str)
+            or re.fullmatch(r"[BI][0-9]{2}", finding) is None
+            for finding in [*historically_fixed, *fixed_in_v10, *rejected]
+        )
+        or historically_fixed != sorted(set(historically_fixed))
+        or fixed_in_v10 != ["B23"]
+        or rejected != sorted(set(rejected))
+        or set(historically_fixed) & set(fixed_in_v10)
+        or set(historically_fixed) & set(rejected)
+        or set(fixed_in_v10) & set(rejected)
+        or sorted([*historically_fixed, *fixed_in_v10, *rejected]) != findings
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization review dispositions differ"
+        )
+    review_sha = _hex64(review["review_sha256"], "authorization.review.review_sha256")
+    _hex64(
+        review["adjudication_receipt_sha256"],
+        "authorization.review.adjudication_receipt_sha256",
+    )
+    adjudication_json_sha = _hex64(
+        review["adjudication_json_sha256"],
+        "authorization.review.adjudication_json_sha256",
+    )
+    adjudication_markdown_sha = _hex64(
+        review["adjudication_markdown_sha256"],
+        "authorization.review.adjudication_markdown_sha256",
+    )
+    if (
+        review_sha
+        != _closure_hash(closure, f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review.md")
+        or adjudication_json_sha
+        != _closure_hash(closure, FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON)
+        or adjudication_markdown_sha
+        != _closure_hash(closure, FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN)
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization review closure links differ"
+        )
+    snapshot_bindings = (
+        (
+            "reviewed_local_test_receipt",
+            V10_LOCAL_TEST_RECEIPT_SNAPSHOT,
+            local_test_receipt,
+        ),
+        (
+            "reviewed_target_host_test_receipt",
+            V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT,
+            target_host_test_receipt,
+        ),
+        (
+            "reviewed_target_qualification_ownership",
+            V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT,
+            qualification_ownership,
+        ),
+        (
+            "reviewed_target_qualification_landlock",
+            V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT,
+            qualification_landlock,
+        ),
+        (
+            "reviewed_target_qualification_cuda",
+            V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT,
+            qualification_cuda,
+        ),
+    )
+    for prefix, snapshot_path, receipt in snapshot_bindings:
+        if review[f"{prefix}_file_sha256"] != _closure_hash(
+            closure, snapshot_path
+        ) or review[f"{prefix}_receipt_sha256"] != receipt.get("receipt_sha256"):
+            raise RecoveryBundleVerificationError(
+                "authorization reviewed snapshot binding differs"
+            )
+
+
+def _validate_cuda_preflight(
+    receipt: Mapping[str, Any],
+    *,
+    landlock: Mapping[str, Any],
+    preflight_output_root: str,
+    execution: Mapping[str, Any],
+    paths: Mapping[str, str],
+    bootstrap_manifest: Mapping[str, Any],
+    recovery_closure: Sequence[Mapping[str, Any]],
+) -> None:
+    _exact_keys(
+        receipt,
+        (
+            "schema_version",
+            "status",
+            "pid",
+            "python_executable",
+            "active_root",
+            "closure_scope",
+            "closure_files",
+            "closure_file_count",
+            "closure_inventory_sha256",
+            "recovery_closure_sha256",
+            "bootstrap_roots_manifest",
+            "qualification_ownership_receipt_sha256",
+            "landlock_receipt_sha256",
+            "package_versions",
+            "imported_package_versions",
+            "environment",
+            "absent_environment_variables",
+            "provider",
+            "cuda",
+            "model_forward_count",
+            "torch_module_call_count",
+            "target_prompt_render_count",
+            "target_feature_vector_count",
+            "external_or_prior_outcome_inputs",
+            "bootstrap",
+            "completed_at_utc",
+            "receipt_sha256",
+        ),
+        "preflight_cuda",
+    )
+    closure = list(recovery_closure)
+    root_paths = sorted(str(row["path"]) for row in bootstrap_manifest["roots"])
+    expected_bootstrap_commitment = {
+        "path": paths["roots_manifest"],
+        "file_sha256": execution["roots_manifest_sha256"],
+        "receipt_sha256": bootstrap_manifest["receipt_sha256"],
+        "roots_inventory_sha256": bootstrap_manifest["roots_inventory_sha256"],
+        "bootstrap_sha256": bootstrap_manifest["bootstrap_sha256"],
+        "active_root": execution["active_root"],
+        "python_executable": execution["python_executable"],
+        "root_paths": root_paths,
+        "sys_path": bootstrap_manifest["sys_path"],
+    }
+    environment = _mapping(receipt["environment"], "preflight_cuda.environment")
+    _exact_keys(
+        environment,
+        (*FIXED_ENVIRONMENT, *DYNAMIC_ENVIRONMENT),
+        "preflight_cuda.environment",
+    )
+    if any(
+        environment[name] != expected for name, expected in FIXED_ENVIRONMENT.items()
+    ):
+        raise RecoveryBundleVerificationError(
+            "preflight CUDA fixed environment differs"
+        )
+    if any(
+        not isinstance(environment[name], str)
+        or not _inside_posix(preflight_output_root, environment[name])
+        for name in DYNAMIC_ENVIRONMENT
+    ):
+        raise RecoveryBundleVerificationError(
+            "preflight CUDA writable environment escapes"
+        )
+    if receipt["absent_environment_variables"] != list(FORBIDDEN_ENVIRONMENT):
+        raise RecoveryBundleVerificationError(
+            "preflight CUDA absent environment inventory differs"
+        )
+    provider = _mapping(receipt["provider"], "preflight_cuda.provider")
+    _exact_keys(
+        provider,
+        ("pod_id", "volume_id", "data_center_id"),
+        "preflight_cuda.provider",
+    )
+    if (
+        not isinstance(provider["pod_id"], str)
+        or not provider["pod_id"]
+        or provider["volume_id"] != NETWORK_VOLUME_ID
+        or provider["data_center_id"] != DATA_CENTER_ID
+    ):
+        raise RecoveryBundleVerificationError("preflight CUDA provider differs")
+    cuda = _mapping(receipt["cuda"], "preflight_cuda.cuda")
+    _exact_keys(
+        cuda,
+        (
+            "available",
+            "device",
+            "device_count",
+            "device_name",
+            "device_capability",
+            "dtype",
+            "shape",
+            "matmul_finite",
+            "synchronized",
+            "raw_tensor_operations_only",
+        ),
+        "preflight_cuda.cuda",
+    )
+    capability = cuda["device_capability"]
+    if (
+        receipt["schema_version"] != SCHEMA_VERSION
+        or receipt["status"] != "pass_target_free_landlock_cuda_preflight"
+        or receipt["pid"] != landlock["pid"]
+        or receipt["python_executable"] != execution["python_executable"]
+        or receipt["active_root"] != execution["active_root"]
+        or receipt["closure_scope"] != "final_recovery"
+        or receipt["closure_files"] != closure
+        or receipt["closure_file_count"] != len(closure)
+        or receipt["closure_inventory_sha256"] != canonical_sha256(closure)
+        or receipt["recovery_closure_sha256"] != canonical_sha256(closure)
+        or receipt["bootstrap_roots_manifest"] != expected_bootstrap_commitment
+        or receipt["qualification_ownership_receipt_sha256"] is not None
+        or receipt["landlock_receipt_sha256"] != landlock["receipt_sha256"]
+        or receipt["package_versions"] != EXPECTED_PACKAGES
+        or receipt["imported_package_versions"] != EXPECTED_IMPORTED_PACKAGES
+        or receipt["model_forward_count"] != 0
+        or receipt["torch_module_call_count"] != 0
+        or receipt["target_prompt_render_count"] != 0
+        or receipt["target_feature_vector_count"] != 0
+        or receipt["external_or_prior_outcome_inputs"] != []
+        or cuda["available"] is not True
+        or cuda["device"] != "cuda:0"
+        or cuda["device_count"] != 1
+        or not isinstance(cuda["device_name"], str)
+        or not cuda["device_name"]
+        or not isinstance(capability, list)
+        or len(capability) != 2
+        or any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for value in capability
+        )
+        or cuda["dtype"] != "torch.bfloat16"
+        or cuda["shape"] != [16, 16]
+        or cuda["matmul_finite"] is not True
+        or cuda["synchronized"] is not True
+        or cuda["raw_tensor_operations_only"] is not True
+    ):
+        raise RecoveryBundleVerificationError(
+            "preflight package/CUDA/zero-forward result differs"
+        )
+    _validate_bootstrap_phase(
+        receipt["bootstrap"],
+        phase=BOOTSTRAP_PREFLIGHT_PHASE,
+        mode="preflight-child",
+        pid=int(landlock["pid"]),
+        execution=execution,
+        paths=paths,
+        manifest=bootstrap_manifest,
+    )
+    _string(receipt["completed_at_utc"], "preflight_cuda.completed_at_utc")
+
+
+def _validate_authorization(
+    authorization: Mapping[str, Any],
+    *,
+    bootstrap_manifest: Mapping[str, Any],
+    bootstrap_manifest_path: Path,
+    preflight_landlock: Mapping[str, Any],
+    preflight_cuda: Mapping[str, Any],
+    preflight_landlock_path: Path,
+    preflight_cuda_path: Path,
+    local_test_receipt: Mapping[str, Any],
+    target_host_test_receipt: Mapping[str, Any],
+    local_test_receipt_path: Path,
+    target_host_test_receipt_path: Path,
+    qualification_ownership: Mapping[str, Any],
+    qualification_landlock: Mapping[str, Any],
+    qualification_cuda: Mapping[str, Any],
+    qualification_ownership_path: Path,
+    qualification_landlock_path: Path,
+    qualification_cuda_path: Path,
+) -> tuple[Mapping[str, Any], dict[str, str], str, float, float]:
+    _exact_keys(
+        authorization,
+        (
+            "schema_version",
+            "status",
+            "study_id",
+            "protocol_version",
+            "recovery_protocol_version",
+            "run_id",
+            "raw_root",
+            "raw_run_receipt_sha256",
+            "plan_manifest_sha256",
+            "recovery_bound_files",
+            "recovery_bound_paths_sha256",
+            "historical_provenance_files",
+            "historical_provenance_inventory_sha256",
+            "bootstrap_import_roots",
+            "external_files",
+            "original_receipts",
+            "superseded_recovery_host",
+            "fresh_receipts",
+            "preflight",
+            "test_receipts",
+            "fresh_pod_id",
+            "volume_id",
+            "data_center_id",
+            "gpu_type",
+            "gpu_count",
+            "recovery_started_at_unix",
+            "recovery_deadline_at_unix",
+            "provider_deadline_at_unix",
+            "max_walltime_seconds",
+            "hourly_price_usd",
+            "max_spend_usd",
+            "authorized_at_utc",
+            "model_forward_limit",
+            "target_prompt_render_limit",
+            "target_feature_vector_limit",
+            "external_or_prior_outcome_inputs",
+            "write_confinement",
+            "execution",
+            "review",
+            "git_head_commit",
+            "git_remote_ref",
+            "git_local_remote_ref",
+            "git_local_remote_commit",
+            "git_live_remote_commit",
+            "receipt_sha256",
+        ),
+        "authorization",
+    )
+    if (
+        authorization["schema_version"] != SCHEMA_VERSION
+        or authorization["status"] != "authorized_audit_only_recovery_landlock_confined"
+        or authorization["study_id"] != STUDY_ID
+        or authorization["protocol_version"] != PROTOCOL_VERSION
+        or authorization["recovery_protocol_version"] != RECOVERY_PROTOCOL_VERSION
+        or authorization["run_id"] != RUN_ID
+        or authorization["raw_root"] != f"/workspace/{RAW_RELATIVE}"
+        or authorization["raw_run_receipt_sha256"] != ORIGINAL_RUN_RECEIPT_SHA256
+        or authorization["plan_manifest_sha256"] != PLAN_MANIFEST_SHA256
+        or authorization["volume_id"] != NETWORK_VOLUME_ID
+        or authorization["data_center_id"] != DATA_CENTER_ID
+        or authorization["gpu_type"] != GPU_TYPE
+        or authorization["gpu_count"] != 1
+        or authorization["max_walltime_seconds"] != 3600
+        or authorization["hourly_price_usd"] != 6.0
+        or authorization["max_spend_usd"] != 6.0
+        or authorization["model_forward_limit"] != 0
+        or authorization["target_prompt_render_limit"] != 0
+        or authorization["target_feature_vector_limit"] != 0
+        or authorization["external_or_prior_outcome_inputs"] != []
+        or authorization["write_confinement"] != LANDLOCK_POLICY
+        or authorization["superseded_recovery_host"] != SUPERSEDED_RECOVERY_HOST
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization identity/science boundary differs"
+        )
+    started = _number(
+        authorization["recovery_started_at_unix"],
+        "authorization.recovery_started_at_unix",
+    )
+    deadline = _number(
+        authorization["recovery_deadline_at_unix"],
+        "authorization.recovery_deadline_at_unix",
+    )
+    provider_deadline = _number(
+        authorization["provider_deadline_at_unix"],
+        "authorization.provider_deadline_at_unix",
+    )
+    authorized_at = _parse_utc(
+        authorization["authorized_at_utc"], "authorization.authorized_at_utc"
+    )
+    authorized = authorized_at.timestamp()
+    if (
+        deadline - started != 3600
+        or deadline >= provider_deadline
+        or not started <= authorized < deadline
+        or deadline - authorized < 1800
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization ownership-bound clocks differ"
+        )
+    closure = _validate_file_rows(
+        authorization["recovery_bound_files"],
+        "authorization.recovery_bound_files",
+        expected_paths=RECOVERY_BOUND_PATHS,
+    )
+    if authorization["recovery_bound_paths_sha256"] != canonical_sha256(
+        RECOVERY_BOUND_PATHS
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization recovery path hash differs"
+        )
+    if any(
+        _closure_hash(closure, path) != expected_sha256
+        for path, expected_sha256 in {
+            **HISTORICAL_INCOMPLETE_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V2_PRO_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V3_NEGATIVE_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V4_NEGATIVE_REVIEW_PHYSICAL_SHA256,
+            **V4_TIMED_QUALIFICATION_PHYSICAL_SHA256,
+            **HISTORICAL_V5_POSITIVE_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V6_NONADJUDICABLE_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V7_POSITIVE_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_B17_PRO_REVIEW_PHYSICAL_SHA256,
+            **B18_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+            **B20_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+            **HISTORICAL_B21_PRO_REVIEW_PHYSICAL_SHA256,
+            **HISTORICAL_V8_PRO_REVIEW_PHYSICAL_SHA256,
+            **B22_COMPACT_EVIDENCE_PHYSICAL_SHA256,
+            **HISTORICAL_V9_PRO_REVIEW_PHYSICAL_SHA256,
+            **C6_SUPERSEDED_QUALIFICATION_PHYSICAL_SHA256,
+            **C7_FAILED_QUALIFICATION_PHYSICAL_SHA256,
+        }.items()
+    ):
+        raise RecoveryBundleVerificationError(
+            "immutable historical review physical evidence differs"
+        )
+    provenance = _validate_file_rows(
+        authorization["historical_provenance_files"],
+        "authorization.historical_provenance_files",
+    )
+    if (
+        len(provenance) != HISTORICAL_PROVENANCE_FILE_COUNT
+        or canonical_sha256(provenance) != HISTORICAL_PROVENANCE_INVENTORY_SHA256
+        or authorization["historical_provenance_inventory_sha256"]
+        != HISTORICAL_PROVENANCE_INVENTORY_SHA256
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization historical provenance authority differs"
+        )
+    _validate_review(
+        authorization["review"],
+        closure,
+        git_head_commit=authorization["git_head_commit"],
+        local_test_receipt=local_test_receipt,
+        target_host_test_receipt=target_host_test_receipt,
+        qualification_ownership=qualification_ownership,
+        qualification_landlock=qualification_landlock,
+        qualification_cuda=qualification_cuda,
+    )
+    git_head = _string(
+        authorization["git_head_commit"], "authorization.git_head_commit"
+    )
+    local_commit = _string(
+        authorization["git_local_remote_commit"],
+        "authorization.git_local_remote_commit",
+    )
+    live_commit = _string(
+        authorization["git_live_remote_commit"],
+        "authorization.git_live_remote_commit",
+    )
+    branch = _validate_git_ref(
+        authorization["git_remote_ref"],
+        "authorization.git_remote_ref",
+        prefix="refs/heads/",
+    )
+    local_branch = _validate_git_ref(
+        authorization["git_local_remote_ref"],
+        "authorization.git_local_remote_ref",
+        prefix="refs/remotes/origin/",
+    )
+    if (
+        any(
+            HEX40.fullmatch(value) is None
+            for value in (git_head, local_commit, live_commit)
+        )
+        or git_head != local_commit
+        or git_head != live_commit
+        or branch != local_branch
+    ):
+        raise RecoveryBundleVerificationError("authorization git head differs")
+    execution = _mapping(authorization["execution"], "authorization.execution")
+    _exact_keys(
+        execution,
+        (
+            "attempt_id",
+            "attempt_root",
+            "paths",
+            "artifact_device",
+            "device_files",
+            "launcher_mode",
+            "active_root",
+            "python_executable",
+            "roots_manifest_sha256",
+            "confined_child_argv",
+            "confined_child_argv_sha256",
+            "command_sha256",
+        ),
+        "authorization.execution",
+    )
+    attempt_id = _string(execution["attempt_id"], "authorization.execution.attempt_id")
+    if (
+        ATTEMPT_ID_RE.fullmatch(attempt_id) is None
+        or not attempt_id.startswith(f"calv2-r3-audit-recovery-{git_head[:7]}-")
+        or execution["attempt_root"]
+        != (PurePosixPath(RECOVERY_ATTEMPT_PARENT) / attempt_id).as_posix()
+    ):
+        raise RecoveryBundleVerificationError("authorization attempt identity differs")
+    expected_paths = _expected_paths(attempt_id)
+    if execution["paths"] != expected_paths:
+        raise RecoveryBundleVerificationError("authorization execution paths differ")
+    devices = _list(execution["device_files"], "authorization.execution.device_files")
+    if (
+        devices != sorted(set(devices))
+        or not devices
+        or any(
+            not isinstance(path, str) or NVIDIA_DEVICE_PATH.fullmatch(path) is None
+            for path in devices
+        )
+        or execution["artifact_device"] != "cuda:0"
+        or execution["launcher_mode"] != "audit_recovery"
+        or execution["active_root"]
+        != f"/root/consciousness_sae_audit_recovery/{attempt_id}/active"
+        or not isinstance(execution["python_executable"], str)
+        or not execution["python_executable"].startswith("/")
+        or execution["roots_manifest_sha256"] != sha256_file(bootstrap_manifest_path)
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization executable/device binding differs"
+        )
+    expected_argv = _expected_confined_argv(
+        execution["python_executable"],
+        execution["active_root"],
+        attempt_id,
+        expected_paths,
+        execution["roots_manifest_sha256"],
+        devices,
+    )
+    if execution["confined_child_argv"] != expected_argv or execution[
+        "confined_child_argv_sha256"
+    ] != canonical_sha256(expected_argv):
+        raise RecoveryBundleVerificationError("authorization confined command differs")
+    execution_core = dict(execution)
+    command_sha256 = _hex64(
+        execution_core.pop("command_sha256"), "authorization.execution.command_sha256"
+    )
+    if command_sha256 != canonical_sha256(execution_core):
+        raise RecoveryBundleVerificationError("authorization command hash differs")
+    validated_manifest = _validate_bootstrap_manifest(
+        bootstrap_manifest,
+        execution=execution,
+        paths=expected_paths,
+        closure=closure,
+    )
+    bootstrap_binding = _mapping(
+        authorization["bootstrap_import_roots"],
+        "authorization.bootstrap_import_roots",
+    )
+    _exact_keys(
+        bootstrap_binding,
+        ("path", "physical_file", "manifest"),
+        "authorization.bootstrap_import_roots",
+    )
+    if (
+        bootstrap_binding["path"] != expected_paths["roots_manifest"]
+        or bootstrap_binding["manifest"] != validated_manifest
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization bootstrap import-root binding differs"
+        )
+    _file_record_matches(
+        bootstrap_binding["physical_file"],
+        bootstrap_manifest_path,
+        "authorization.bootstrap_import_roots.physical_file",
+    )
+    preflight = _mapping(authorization["preflight"], "authorization.preflight")
+    _exact_keys(
+        preflight,
+        (
+            "landlock_receipt",
+            "landlock_file",
+            "probe_receipt",
+            "probe_file",
+            "device_rules",
+        ),
+        "authorization.preflight",
+    )
+    if (
+        preflight["landlock_receipt"] != preflight_landlock
+        or preflight["probe_receipt"] != preflight_cuda
+        or preflight["device_rules"] != preflight_landlock["device_rules"]
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization preflight receipt links differ"
+        )
+    _file_record_matches(
+        preflight["landlock_file"],
+        preflight_landlock_path,
+        "authorization.preflight.landlock_file",
+    )
+    _file_record_matches(
+        preflight["probe_file"],
+        preflight_cuda_path,
+        "authorization.preflight.probe_file",
+    )
+    external = _mapping(authorization["external_files"], "authorization.external_files")
+    if set(external) != EXTERNAL_FILE_KEYS:
+        raise RecoveryBundleVerificationError(
+            "authorization.external_files keys differ"
+        )
+    for name in sorted(EXTERNAL_FILE_KEYS):
+        _validate_detached_file_record(
+            external[name], f"authorization.external_files.{name}"
+        )
+    _file_record_matches(
+        external["preflight_landlock"],
+        preflight_landlock_path,
+        "authorization.external_files.preflight_landlock",
+    )
+    _file_record_matches(
+        external["preflight_probe"],
+        preflight_cuda_path,
+        "authorization.external_files.preflight_probe",
+    )
+    _file_record_matches(
+        external["local_test_receipt"],
+        local_test_receipt_path,
+        "authorization.external_files.local_test_receipt",
+    )
+    _file_record_matches(
+        external["target_host_test_receipt"],
+        target_host_test_receipt_path,
+        "authorization.external_files.target_host_test_receipt",
+    )
+    _file_record_matches(
+        external["target_qualification_ownership"],
+        qualification_ownership_path,
+        "authorization.external_files.target_qualification_ownership",
+    )
+    _file_record_matches(
+        external["target_qualification_landlock"],
+        qualification_landlock_path,
+        "authorization.external_files.target_qualification_landlock",
+    )
+    _file_record_matches(
+        external["target_qualification_cuda_preflight"],
+        qualification_cuda_path,
+        "authorization.external_files.target_qualification_cuda_preflight",
+    )
+    _file_record_matches(
+        external["roots_manifest"],
+        bootstrap_manifest_path,
+        "authorization.external_files.roots_manifest",
+    )
+    reviewed_snapshot_bindings = {
+        V10_LOCAL_TEST_RECEIPT_SNAPSHOT: "local_test_receipt",
+        V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT: "target_host_test_receipt",
+        V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT: (
+            "target_qualification_ownership"
+        ),
+        V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT: (
+            "target_qualification_landlock"
+        ),
+        V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT: (
+            "target_qualification_cuda_preflight"
+        ),
+    }
+    for snapshot_path, external_key in reviewed_snapshot_bindings.items():
+        if _closure_file_record(closure, snapshot_path) != external[external_key]:
+            raise RecoveryBundleVerificationError(
+                "V10 reviewed receipt snapshot differs from authorization evidence"
+            )
+    original_receipts = _mapping(
+        authorization["original_receipts"], "authorization.original_receipts"
+    )
+    if original_receipts != ORIGINAL_RECEIPTS:
+        raise RecoveryBundleVerificationError(
+            "authorization original receipt chain differs"
+        )
+    fresh_receipts = _mapping(
+        authorization["fresh_receipts"], "authorization.fresh_receipts"
+    )
+    _exact_keys(
+        fresh_receipts,
+        ("ownership", "guest", "cache"),
+        "authorization.fresh_receipts",
+    )
+    for name in ("ownership", "guest", "cache"):
+        _hex64(fresh_receipts[name], f"authorization.fresh_receipts.{name}")
+    fresh_pod_id = _string(authorization["fresh_pod_id"], "authorization.fresh_pod_id")
+    if preflight_cuda["provider"]["pod_id"] != fresh_pod_id:
+        raise RecoveryBundleVerificationError(
+            "authorization fresh pod/preflight provider link differs"
+        )
+    source_test_files = [
+        row for row in closure if str(row["path"]) in set(SOURCE_TEST_BOUND_PATHS)
+    ]
+    if [str(row["path"]) for row in source_test_files] != list(SOURCE_TEST_BOUND_PATHS):
+        raise RecoveryBundleVerificationError(
+            "authorization source/test closure differs"
+        )
+    validated_local_test_receipt = _validate_test_receipt(
+        local_test_receipt,
+        kind="local",
+        expected_source_test_files=source_test_files,
+        authorized_at=authorized_at,
+    )
+    validated_target_host_test_receipt = _validate_test_receipt(
+        target_host_test_receipt,
+        kind="target_host",
+        expected_source_test_files=source_test_files,
+        qualification_ownership=qualification_ownership,
+        qualification_landlock=qualification_landlock,
+        qualification_cuda=qualification_cuda,
+        qualification_ownership_path=qualification_ownership_path,
+        qualification_landlock_path=qualification_landlock_path,
+        qualification_cuda_path=qualification_cuda_path,
+        authorized_at=authorized_at,
+    )
+    test_receipts = _mapping(
+        authorization["test_receipts"], "authorization.test_receipts"
+    )
+    _exact_keys(test_receipts, ("local", "target_host"), "authorization.test_receipts")
+    if (
+        test_receipts["local"] != validated_local_test_receipt
+        or test_receipts["target_host"] != validated_target_host_test_receipt
+        or validated_local_test_receipt["code_freeze_commit"]
+        != validated_target_host_test_receipt["code_freeze_commit"]
+        or validated_target_host_test_receipt["target_host"]["pod_id"] == fresh_pod_id
+    ):
+        raise RecoveryBundleVerificationError(
+            "authorization test receipt chain differs"
+        )
+    if (
+        authorization["superseded_recovery_host"]["attempt_id"]
+        == execution["attempt_id"]
+        or authorization["superseded_recovery_host"]["pod_id"] == fresh_pod_id
+    ):
+        raise RecoveryBundleVerificationError(
+            "superseded/current recovery host schemas overlap"
+        )
+    return execution, expected_paths, command_sha256, started, deadline
+
+
+def _validate_marker(
+    marker: Mapping[str, Any],
+    *,
+    authorization: Mapping[str, Any],
+    execution: Mapping[str, Any],
+    confinement: Mapping[str, Any],
+    started: float,
+    deadline: float,
+) -> float:
+    _exact_keys(
+        marker,
+        (
+            "schema_version",
+            "status",
+            "study_id",
+            "run_id",
+            "attempt_id",
+            "claimed_at_utc",
+            "claimed_at_unix",
+            "recovery_authorization_receipt_sha256",
+            "landlock_confinement_receipt_sha256",
+            "landlock_pid",
+            "command_sha256",
+            "recovery_source_sha256",
+            "receipt_sha256",
+        ),
+        "attempt_marker",
+    )
+    claimed = _number(marker["claimed_at_unix"], "attempt_marker.claimed_at_unix")
+    if (
+        marker["schema_version"] != SCHEMA_VERSION
+        or marker["status"] != "claimed_exactly_once"
+        or marker["study_id"] != authorization["study_id"]
+        or marker["run_id"] != authorization["run_id"]
+        or marker["attempt_id"] != execution["attempt_id"]
+        or marker["recovery_authorization_receipt_sha256"]
+        != authorization["receipt_sha256"]
+        or marker["landlock_confinement_receipt_sha256"]
+        != confinement["receipt_sha256"]
+        or marker["landlock_pid"] != confinement["pid"]
+        or marker["command_sha256"] != execution["command_sha256"]
+        or not started <= claimed < deadline
+    ):
+        raise RecoveryBundleVerificationError("attempt marker cross-links differ")
+    _string(marker["claimed_at_utc"], "attempt_marker.claimed_at_utc")
+    _hex64(marker["recovery_source_sha256"], "attempt_marker.recovery_source_sha256")
+    return claimed
+
+
+def _validate_nested_receipt(
+    recovery: Mapping[str, Any],
+    key: str,
+    hash_key: str,
+    expected: Mapping[str, Any] | None = None,
+) -> Mapping[str, Any]:
+    value = _mapping(recovery.get(key), f"recovery_audit.{key}")
+    digest = _self_hash(value, f"recovery_audit.{key}")
+    if recovery.get(hash_key) != digest or (expected is not None and value != expected):
+        raise RecoveryBundleVerificationError(f"recovery_audit.{key} link differs")
+    return value
+
+
+def _validate_rehash_pair(
+    recovery: Mapping[str, Any],
+    *,
+    pre_key: str,
+    post_key: str,
+    unchanged_key: str,
+    exact_fields: Sequence[str],
+    expected: Mapping[str, Any],
+    label: str,
+) -> None:
+    pre = _validate_nested_receipt(recovery, pre_key, f"{pre_key}_sha256")
+    post = _validate_nested_receipt(recovery, post_key, f"{post_key}_sha256")
+    _exact_keys(pre, exact_fields, f"recovery_audit.{pre_key}")
+    _exact_keys(post, exact_fields, f"recovery_audit.{post_key}")
+    for name, expected_value in expected.items():
+        if pre[name] != expected_value or post[name] != expected_value:
+            raise RecoveryBundleVerificationError(f"{label} pre/post {name} differs")
+    pre_inventory = _hex64(
+        pre.get("file_inventory_sha256"),
+        f"recovery_audit.{pre_key}.file_inventory_sha256",
+    )
+    post_inventory = _hex64(
+        post.get("file_inventory_sha256"),
+        f"recovery_audit.{post_key}.file_inventory_sha256",
+    )
+    pre_directory_count = _integer(
+        pre.get("directory_count"),
+        f"recovery_audit.{pre_key}.directory_count",
+    )
+    post_directory_count = _integer(
+        post.get("directory_count"),
+        f"recovery_audit.{post_key}.directory_count",
+    )
+    pre_directory_inventory = _hex64(
+        pre.get("directory_inventory_sha256"),
+        f"recovery_audit.{pre_key}.directory_inventory_sha256",
+    )
+    post_directory_inventory = _hex64(
+        post.get("directory_inventory_sha256"),
+        f"recovery_audit.{post_key}.directory_inventory_sha256",
+    )
+    if (
+        recovery.get(unchanged_key) is not True
+        or pre_inventory != post_inventory
+        or pre_directory_count != post_directory_count
+        or pre_directory_inventory != post_directory_inventory
+    ):
+        raise RecoveryBundleVerificationError(
+            f"{label} pre/post file or directory hashes differ"
+        )
+
+
+def _expected_directory_inventory(paths: Sequence[str]) -> list[str]:
+    directories: set[str] = set()
+    for value in paths:
+        parent = PurePosixPath(value).parent
+        while parent != PurePosixPath("."):
+            directories.add(parent.as_posix())
+            parent = parent.parent
+    return sorted(directories)
+
+
+def _validate_recovery_metadata(
+    recovery: Mapping[str, Any],
+    *,
+    authorization: Mapping[str, Any],
+    execution: Mapping[str, Any],
+    preflight_landlock: Mapping[str, Any],
+    preflight_cuda: Mapping[str, Any],
+    confinement: Mapping[str, Any],
+    marker: Mapping[str, Any],
+    bootstrap_manifest: Mapping[str, Any],
+    paths: Mapping[str, str],
+) -> None:
+    _self_hash(recovery, "recovery_audit")
+    _exact_keys(
+        recovery,
+        (
+            "recovery_protocol_version",
+            "status",
+            "correction",
+            "provider_review_status",
+            "provider_review_approval_claimed",
+            "provider_review_ready_to_freeze_verdict",
+            "provider_review_source_and_tests_seen",
+            "provider_reviewed_packet_was_pre_fix",
+            "provider_reviewed_final_source",
+            "provider_reviewed_final_bytes_unchanged",
+            "recovery_authorization_receipt_sha256",
+            "attempt_id",
+            "attempt_marker_receipt_sha256",
+            "command_sha256",
+            "recovery_bound_paths_sha256",
+            "plan_manifest_sha256",
+            "local_test_receipt_sha256",
+            "target_host_test_receipt_sha256",
+            "code_freeze_commit",
+            "source_test_inventory_sha256",
+            "recovery_plan_sha256",
+            "recovery_source_sha256",
+            "confined_bootstrap_sha256",
+            "scientific_equivalence_source_sha256",
+            "scientific_equivalence_test_sha256",
+            "scientific_equivalence_json_sha256",
+            "scientific_equivalence_markdown_sha256",
+            "landlock_launcher_sha256",
+            "bundle_verifier_sha256",
+            "recovery_test_sha256",
+            "confined_bootstrap_test_sha256",
+            "landlock_test_sha256",
+            "bundle_verifier_test_sha256",
+            "historical_review_adjudication_json_sha256",
+            "historical_review_adjudication_markdown_sha256",
+            "historical_v2_review_adjudication_json_sha256",
+            "historical_v2_review_adjudication_markdown_sha256",
+            "historical_v3_review_adjudication_json_sha256",
+            "historical_v3_review_adjudication_markdown_sha256",
+            "historical_v3_review_response_sha256",
+            "historical_v3_review_manifest_sha256",
+            "historical_v4_review_adjudication_json_sha256",
+            "historical_v4_review_adjudication_markdown_sha256",
+            "historical_v4_review_response_sha256",
+            "historical_v4_review_manifest_sha256",
+            "historical_v5_review_adjudication_json_sha256",
+            "historical_v5_review_adjudication_markdown_sha256",
+            "historical_v5_review_response_sha256",
+            "historical_v5_review_manifest_sha256",
+            "historical_v6_review_request_payload_sha256",
+            "historical_v6_review_response_sha256",
+            "historical_v6_review_sha256",
+            "historical_v6_review_manifest_sha256",
+            "historical_v6_review_request_sha256",
+            "historical_v9_review_adjudication_json_sha256",
+            "historical_v9_review_adjudication_markdown_sha256",
+            "historical_v9_review_response_sha256",
+            "historical_v9_review_manifest_sha256",
+            "final_v10_review_adjudication_json_sha256",
+            "final_v10_review_adjudication_markdown_sha256",
+            "final_v10_review_response_sha256",
+            "final_v10_review_manifest_sha256",
+            "reviewed_local_test_receipt_snapshot_sha256",
+            "reviewed_target_host_test_receipt_snapshot_sha256",
+            "reviewed_target_qualification_ownership_snapshot_sha256",
+            "reviewed_target_qualification_landlock_snapshot_sha256",
+            "reviewed_target_qualification_cuda_snapshot_sha256",
+            "original_failed_audit_log_sha256",
+            "original_raw_run_receipt_sha256",
+            "original_receipts",
+            "superseded_recovery_host",
+            "fresh_receipts",
+            "fresh_pod_id",
+            "bootstrap_import_roots",
+            "bootstrap_execute_entry_phase",
+            "bootstrap_prepublication_phase",
+            "bootstrap_postdispatch_assertion",
+            "preflight_landlock_receipt",
+            "preflight_landlock_receipt_sha256",
+            "preflight_probe_receipt",
+            "preflight_probe_receipt_sha256",
+            "landlock_confinement_receipt",
+            "landlock_confinement_receipt_sha256",
+            "write_confinement_policy",
+            "write_confinement_claim",
+            "landlock_limitations",
+            "executable_isolation_receipt",
+            "executable_isolation_receipt_sha256",
+            "provenance_pre_rehash_receipt",
+            "provenance_pre_rehash_receipt_sha256",
+            "provenance_post_rehash_receipt",
+            "provenance_post_rehash_receipt_sha256",
+            "historical_provenance_unchanged",
+            "pre_rehash_receipt",
+            "pre_rehash_receipt_sha256",
+            "post_rehash_receipt",
+            "post_rehash_receipt_sha256",
+            "raw_unchanged",
+            "zero_forward_guards",
+            "forbidden_module_guards",
+            "j_checkpoint_inventory",
+            "scientific_metrics_thresholds_layers_and_rows_changed",
+            "fresh_model_execution_performed",
+            "target_prompt_render_count",
+            "target_feature_vector_count",
+            "external_or_prior_outcome_inputs",
+            "receipt_sha256",
+        ),
+        "recovery_audit",
+    )
+    closure = _validate_file_rows(
+        authorization["recovery_bound_files"],
+        "authorization.recovery_bound_files",
+        expected_paths=RECOVERY_BOUND_PATHS,
+    )
+    closure_links = {
+        "recovery_plan_sha256": (
+            "docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_20260714.md"
+        ),
+        "recovery_source_sha256": (
+            "experiments/consciousness_sae_target_blind_calibration/audit_recovery.py"
+        ),
+        "confined_bootstrap_sha256": BOOTSTRAP_RELATIVE_PATH,
+        "scientific_equivalence_source_sha256": (
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "scientific_equivalence.py"
+        ),
+        "scientific_equivalence_test_sha256": (
+            "tests/consciousness_sae_target_blind_calibration/"
+            "test_scientific_equivalence.py"
+        ),
+        "scientific_equivalence_json_sha256": (
+            "docs/consciousness_sae_target_blind_calibration/"
+            "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.json"
+        ),
+        "scientific_equivalence_markdown_sha256": (
+            "docs/consciousness_sae_target_blind_calibration/"
+            "AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md"
+        ),
+        "landlock_launcher_sha256": (
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "landlock_launcher.py"
+        ),
+        "bundle_verifier_sha256": (
+            "experiments/consciousness_sae_target_blind_calibration/"
+            "recovery_bundle_verifier.py"
+        ),
+        "recovery_test_sha256": (
+            "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py"
+        ),
+        "confined_bootstrap_test_sha256": (
+            "tests/consciousness_sae_target_blind_calibration/"
+            "test_confined_bootstrap.py"
+        ),
+        "landlock_test_sha256": (
+            "tests/consciousness_sae_target_blind_calibration/test_landlock_launcher.py"
+        ),
+        "bundle_verifier_test_sha256": (
+            "tests/consciousness_sae_target_blind_calibration/"
+            "test_recovery_bundle_verifier.py"
+        ),
+        "historical_review_adjudication_json_sha256": (
+            HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_review_adjudication_markdown_sha256": (
+            HISTORICAL_INCOMPLETE_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v2_review_adjudication_json_sha256": (
+            HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_v2_review_adjudication_markdown_sha256": (
+            HISTORICAL_V2_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v3_review_adjudication_json_sha256": (
+            HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_v3_review_adjudication_markdown_sha256": (
+            HISTORICAL_V3_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v3_review_response_sha256": (
+            f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/response.json"
+        ),
+        "historical_v3_review_manifest_sha256": (
+            f"{HISTORICAL_V3_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "historical_v4_review_adjudication_json_sha256": (
+            HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_v4_review_adjudication_markdown_sha256": (
+            HISTORICAL_V4_NEGATIVE_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v4_review_response_sha256": (
+            f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/response.json"
+        ),
+        "historical_v4_review_manifest_sha256": (
+            f"{HISTORICAL_V4_NEGATIVE_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "historical_v5_review_adjudication_json_sha256": (
+            FINAL_V5_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_v5_review_adjudication_markdown_sha256": (
+            FINAL_V5_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v5_review_response_sha256": (
+            f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/response.json"
+        ),
+        "historical_v5_review_manifest_sha256": (
+            f"{FINAL_V5_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "historical_v6_review_request_payload_sha256": (
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/request_payload.json"
+        ),
+        "historical_v6_review_response_sha256": (
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/response.json"
+        ),
+        "historical_v6_review_sha256": (
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review.md"
+        ),
+        "historical_v6_review_manifest_sha256": (
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "historical_v6_review_request_sha256": (
+            f"{FINAL_V6_PRO_REVIEW_DIRECTORY}/review_request.md"
+        ),
+        "historical_v9_review_adjudication_json_sha256": (
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "historical_v9_review_adjudication_markdown_sha256": (
+            FINAL_V9_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "historical_v9_review_response_sha256": (
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/response.json"
+        ),
+        "historical_v9_review_manifest_sha256": (
+            f"{FINAL_V9_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "final_v10_review_adjudication_json_sha256": (
+            FINAL_V10_PRO_REVIEW_ADJUDICATION_JSON
+        ),
+        "final_v10_review_adjudication_markdown_sha256": (
+            FINAL_V10_PRO_REVIEW_ADJUDICATION_MARKDOWN
+        ),
+        "final_v10_review_response_sha256": (
+            f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/response.json"
+        ),
+        "final_v10_review_manifest_sha256": (
+            f"{FINAL_V10_PRO_REVIEW_DIRECTORY}/review_manifest.json"
+        ),
+        "reviewed_local_test_receipt_snapshot_sha256": (
+            V10_LOCAL_TEST_RECEIPT_SNAPSHOT
+        ),
+        "reviewed_target_host_test_receipt_snapshot_sha256": (
+            V10_TARGET_HOST_TEST_RECEIPT_SNAPSHOT
+        ),
+        "reviewed_target_qualification_ownership_snapshot_sha256": (
+            V10_TARGET_QUALIFICATION_OWNERSHIP_SNAPSHOT
+        ),
+        "reviewed_target_qualification_landlock_snapshot_sha256": (
+            V10_TARGET_QUALIFICATION_LANDLOCK_SNAPSHOT
+        ),
+        "reviewed_target_qualification_cuda_snapshot_sha256": (
+            V10_TARGET_QUALIFICATION_CUDA_SNAPSHOT
+        ),
+    }
+    if any(
+        recovery[name] != _closure_hash(closure, path)
+        for name, path in closure_links.items()
+    ):
+        raise RecoveryBundleVerificationError("recovery closure hash links differ")
+    review = _mapping(authorization["review"], "authorization.review")
+    test_receipts = _mapping(
+        authorization["test_receipts"], "authorization.test_receipts"
+    )
+    local_test_receipt = _mapping(
+        test_receipts["local"], "authorization.test_receipts.local"
+    )
+    target_host_test_receipt = _mapping(
+        test_receipts["target_host"], "authorization.test_receipts.target_host"
+    )
+    if (
+        recovery["recovery_protocol_version"]
+        != authorization["recovery_protocol_version"]
+        or recovery["status"] != "pass_disclosed_post_run_technical_recovery"
+        or recovery["correction"]
+        != "required_j_layers_subset_of_hash_pinned_release_inventory"
+        or recovery["recovery_authorization_receipt_sha256"]
+        != authorization["receipt_sha256"]
+        or recovery["attempt_id"] != execution["attempt_id"]
+        or recovery["attempt_marker_receipt_sha256"] != marker["receipt_sha256"]
+        or recovery["command_sha256"] != execution["command_sha256"]
+        or recovery["recovery_bound_paths_sha256"]
+        != authorization["recovery_bound_paths_sha256"]
+        or recovery["plan_manifest_sha256"] != authorization["plan_manifest_sha256"]
+        or recovery["local_test_receipt_sha256"] != local_test_receipt["receipt_sha256"]
+        or recovery["target_host_test_receipt_sha256"]
+        != target_host_test_receipt["receipt_sha256"]
+        or recovery["code_freeze_commit"] != local_test_receipt["code_freeze_commit"]
+        or recovery["code_freeze_commit"]
+        != target_host_test_receipt["code_freeze_commit"]
+        or recovery["source_test_inventory_sha256"]
+        != local_test_receipt["source_test_inventory_sha256"]
+        or recovery["source_test_inventory_sha256"]
+        != target_host_test_receipt["source_test_inventory_sha256"]
+        or recovery["recovery_source_sha256"] != marker["recovery_source_sha256"]
+        or recovery["provider_review_status"] != review["provider_status"]
+        or recovery["provider_review_status"] != "completed"
+        or recovery["provider_review_approval_claimed"]
+        != review["provider_approval_claimed"]
+        or recovery["provider_review_ready_to_freeze_verdict"]
+        != review["provider_ready_to_freeze_verdict"]
+        or recovery["provider_review_source_and_tests_seen"]
+        != review["source_and_tests_reviewed_by_provider"]
+        or recovery["provider_reviewed_packet_was_pre_fix"]
+        != review["reviewed_packet_was_pre_fix"]
+        or recovery["provider_reviewed_final_source"]
+        != review["final_source_reviewed_by_provider"]
+        or recovery["provider_reviewed_final_bytes_unchanged"]
+        != review["provider_reviewed_final_bytes_unchanged"]
+        or recovery["original_failed_audit_log_sha256"] != ORIGINAL_FAILURE_LOG_SHA256
+        or recovery["original_raw_run_receipt_sha256"]
+        != authorization["raw_run_receipt_sha256"]
+        or recovery["original_receipts"] != authorization.get("original_receipts")
+        or recovery["fresh_receipts"] != authorization.get("fresh_receipts")
+        or recovery["fresh_pod_id"] != authorization["fresh_pod_id"]
+        or recovery["superseded_recovery_host"]
+        != authorization["superseded_recovery_host"]
+        or recovery["bootstrap_import_roots"] != authorization["bootstrap_import_roots"]
+        or recovery["bootstrap_postdispatch_assertion"]
+        != "same_process_bootstrap_assert_clean_runs_after_recovery_dispatch_returns"
+        or recovery["write_confinement_policy"] != LANDLOCK_POLICY
+        or recovery["write_confinement_claim"] != WRITE_CONFINEMENT_CLAIM
+        or recovery["landlock_limitations"] != LANDLOCK_LIMITATIONS
+    ):
+        raise RecoveryBundleVerificationError("recovery metadata cross-links differ")
+    _validate_bootstrap_phase(
+        recovery["bootstrap_execute_entry_phase"],
+        phase=BOOTSTRAP_EXECUTE_ENTRY_PHASE,
+        mode="execute-confined",
+        pid=int(confinement["pid"]),
+        execution=execution,
+        paths=paths,
+        manifest=bootstrap_manifest,
+    )
+    _validate_bootstrap_phase(
+        recovery["bootstrap_prepublication_phase"],
+        phase=BOOTSTRAP_PREPUBLICATION_PHASE,
+        mode="execute-confined",
+        pid=int(confinement["pid"]),
+        execution=execution,
+        paths=paths,
+        manifest=bootstrap_manifest,
+    )
+    _validate_nested_receipt(
+        recovery,
+        "preflight_landlock_receipt",
+        "preflight_landlock_receipt_sha256",
+        preflight_landlock,
+    )
+    _validate_nested_receipt(
+        recovery,
+        "preflight_probe_receipt",
+        "preflight_probe_receipt_sha256",
+        preflight_cuda,
+    )
+    _validate_nested_receipt(
+        recovery,
+        "landlock_confinement_receipt",
+        "landlock_confinement_receipt_sha256",
+        confinement,
+    )
+    isolation = _validate_nested_receipt(
+        recovery, "executable_isolation_receipt", "executable_isolation_receipt_sha256"
+    )
+    _exact_keys(
+        isolation,
+        (
+            "status",
+            "active_root",
+            "historical_provenance_root",
+            "file_count",
+            "file_inventory_sha256",
+            "directory_count",
+            "directory_inventory_sha256",
+            "forbidden_module_count",
+            "model_runtime_replaced_by",
+            "receipt_sha256",
+        ),
+        "recovery_audit.executable_isolation_receipt",
+    )
+    executable_directories = _expected_directory_inventory(RECOVERY_BOUND_PATHS)
+    if (
+        isolation["status"] != "pass_minimal_audit_only_executable"
+        or isolation["active_root"] != execution["active_root"]
+        or isolation["historical_provenance_root"]
+        != execution["paths"]["provenance_root"]
+        or isolation["file_count"] != len(closure)
+        or isolation["file_inventory_sha256"] != canonical_sha256(closure)
+        or isolation["directory_count"] != len(executable_directories)
+        or isolation["directory_inventory_sha256"]
+        != canonical_sha256(executable_directories)
+        or isolation["forbidden_module_count"] != 0
+        or isolation["model_runtime_replaced_by"]
+        != "experiments.consciousness_sae_target_blind_calibration.audit_runtime_shim"
+    ):
+        raise RecoveryBundleVerificationError("recovery executable isolation differs")
+    _validate_rehash_pair(
+        recovery,
+        pre_key="pre_rehash_receipt",
+        post_key="post_rehash_receipt",
+        unchanged_key="raw_unchanged",
+        exact_fields=(
+            "status",
+            "raw_root",
+            "file_count",
+            "total_bytes",
+            "file_inventory_sha256",
+            "directory_count",
+            "directory_inventory_sha256",
+            "run_receipt_sha256",
+            "external_ledger_file_sha256",
+            "receipt_sha256",
+        ),
+        expected={
+            "status": "pass_exact_36_file_rehash",
+            "raw_root": execution["paths"]["raw_root"],
+            "file_count": 36,
+            "total_bytes": 323375434,
+            "run_receipt_sha256": ORIGINAL_RUN_RECEIPT_SHA256,
+            "external_ledger_file_sha256": ORIGINAL_RAW_LEDGER_SHA256,
+        },
+        label="raw",
+    )
+    _validate_rehash_pair(
+        recovery,
+        pre_key="provenance_pre_rehash_receipt",
+        post_key="provenance_post_rehash_receipt",
+        unchanged_key="historical_provenance_unchanged",
+        exact_fields=(
+            "status",
+            "root",
+            "file_count",
+            "file_inventory_sha256",
+            "directory_count",
+            "directory_inventory_sha256",
+            "receipt_sha256",
+        ),
+        expected={
+            "status": "pass_exact_nonimportable_historical_provenance",
+            "root": execution["paths"]["provenance_root"],
+            "file_count": len(authorization["historical_provenance_files"]),
+            "file_inventory_sha256": authorization[
+                "historical_provenance_inventory_sha256"
+            ],
+        },
+        label="historical provenance",
+    )
+    if (
+        recovery["target_prompt_render_count"] != 0
+        or recovery["target_feature_vector_count"] != 0
+        or recovery["external_or_prior_outcome_inputs"] != []
+        or recovery["scientific_metrics_thresholds_layers_and_rows_changed"]
+        is not False
+        or recovery["fresh_model_execution_performed"] is not False
+        or recovery["zero_forward_guards"]
+        != {"torch_module_calls": 0, "transformers_model_load_calls": 0}
+        or recovery["forbidden_module_guards"]
+        != {"forbidden_module_import_attempts": 0}
+    ):
+        raise RecoveryBundleVerificationError(
+            "recovery zero-forward/science boundary differs"
+        )
+    available = list(range(79))
+    required = list(range(45, 79))
+    extras = list(range(45))
+    inventory = _mapping(
+        recovery["j_checkpoint_inventory"], "recovery_audit.j_checkpoint_inventory"
+    )
+    if inventory != {
+        "available_layers": available,
+        "required_layers": required,
+        "unused_extra_layers": extras,
+        "available_map_count": 79,
+        "required_map_count": 34,
+        "inventory_sha256": canonical_sha256(available),
+    }:
+        raise RecoveryBundleVerificationError("recovery J inventory differs")
+    if (
+        recovery["landlock_launcher_sha256"] != confinement["source_sha256"]
+        or preflight_landlock["source_sha256"] != confinement["source_sha256"]
+    ):
+        raise RecoveryBundleVerificationError("recovery launcher source links differ")
+
+
+def _validate_compact_pair(
+    audit: Mapping[str, Any],
+    summary: Mapping[str, Any],
+    *,
+    authorization: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    _keys(
+        audit,
+        (
+            "schema_version",
+            "status",
+            "study_id",
+            "protocol_version",
+            "run_id",
+            "raw_run_receipt_sha256",
+            "campaign_started_at_unix",
+            "campaign_deadline_at_unix",
+            "hourly_price_usd",
+            "original_execution_campaign",
+            "recovery_execution_campaign",
+            "analysis_data_inputs",
+            "target_prompt_render_count",
+            "target_feature_vector_count",
+            "recovery_audit",
+        ),
+        "calibration_audit",
+    )
+    _keys(
+        summary,
+        (
+            "schema_version",
+            "status",
+            "study_id",
+            "protocol_version",
+            "run_id",
+            "raw_run_receipt_sha256",
+            "audit_receipt_sha256",
+            "later_actual_state_collection_eligibility",
+            "analysis_data_inputs",
+            "target_prompt_render_count",
+            "target_feature_vector_count",
+            "recovery_execution_campaign",
+            "recovery_audit",
+        ),
+        "calibration_summary",
+    )
+    original_campaign = _mapping(
+        audit["original_execution_campaign"], "original_execution_campaign"
+    )
+    recovery_campaign = _mapping(
+        audit["recovery_execution_campaign"], "recovery_execution_campaign"
+    )
+    _exact_keys(
+        original_campaign,
+        (
+            "campaign_started_at_unix",
+            "campaign_deadline_at_unix",
+            "hourly_price_usd",
+        ),
+        "original_execution_campaign",
+    )
+    _exact_keys(
+        recovery_campaign,
+        ("started_at_unix", "deadline_at_unix", "hourly_price_usd", "max_spend_usd"),
+        "recovery_execution_campaign",
+    )
+    if (
+        audit["schema_version"] != SCHEMA_VERSION
+        or audit["status"] != "pass"
+        or summary["schema_version"] != SCHEMA_VERSION
+        or summary["status"] != summary["later_actual_state_collection_eligibility"]
+        or audit["study_id"] != authorization["study_id"]
+        or summary["study_id"] != audit["study_id"]
+        or audit["protocol_version"] != authorization["protocol_version"]
+        or summary["protocol_version"] != audit["protocol_version"]
+        or audit["run_id"] != authorization["run_id"]
+        or summary["run_id"] != audit["run_id"]
+        or audit["raw_run_receipt_sha256"] != authorization["raw_run_receipt_sha256"]
+        or summary["raw_run_receipt_sha256"] != audit["raw_run_receipt_sha256"]
+        or summary["audit_receipt_sha256"] != audit["receipt_sha256"]
+        or original_campaign
+        != {
+            "campaign_started_at_unix": ORIGINAL_CAMPAIGN_STARTED_AT_UNIX,
+            "campaign_deadline_at_unix": ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX,
+            "hourly_price_usd": ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD,
+        }
+        or audit["campaign_started_at_unix"] != ORIGINAL_CAMPAIGN_STARTED_AT_UNIX
+        or audit["campaign_deadline_at_unix"] != ORIGINAL_CAMPAIGN_DEADLINE_AT_UNIX
+        or audit["hourly_price_usd"] != ORIGINAL_CAMPAIGN_HOURLY_PRICE_USD
+        or recovery_campaign
+        != {
+            "started_at_unix": authorization["recovery_started_at_unix"],
+            "deadline_at_unix": authorization["recovery_deadline_at_unix"],
+            "hourly_price_usd": authorization["hourly_price_usd"],
+            "max_spend_usd": authorization["max_spend_usd"],
+        }
+        or summary["recovery_execution_campaign"] != recovery_campaign
+        or audit["analysis_data_inputs"] != []
+        or summary["analysis_data_inputs"] != []
+        or audit["target_prompt_render_count"] != 0
+        or audit["target_feature_vector_count"] != 0
+        or summary["target_prompt_render_count"] != 0
+        or summary["target_feature_vector_count"] != 0
+        or audit["recovery_audit"] != summary["recovery_audit"]
+    ):
+        raise RecoveryBundleVerificationError("audit/summary semantic links differ")
+    return _mapping(audit["recovery_audit"], "recovery_audit")
+
+
+def _validate_publication(
+    publication: Mapping[str, Any],
+    *,
+    audit: Mapping[str, Any],
+    summary: Mapping[str, Any],
+    audit_path: Path,
+    summary_path: Path,
+    claimed: float,
+    deadline: float,
+) -> None:
+    _exact_keys(
+        publication,
+        (
+            "schema_version",
+            "status",
+            "study_id",
+            "protocol_version",
+            "audit_receipt_sha256",
+            "summary_receipt_sha256",
+            "audit_file_sha256",
+            "summary_file_sha256",
+            "publication_completed_at_unix",
+            "recovery_deadline_at_unix",
+            "receipt_sha256",
+        ),
+        "publication_complete",
+    )
+    published = _number(
+        publication["publication_completed_at_unix"],
+        "publication_complete.publication_completed_at_unix",
+    )
+    if (
+        publication["schema_version"] != SCHEMA_VERSION
+        or publication["status"] != "complete"
+        or publication["study_id"] != audit["study_id"]
+        or publication["protocol_version"] != audit["protocol_version"]
+        or publication["audit_receipt_sha256"] != audit["receipt_sha256"]
+        or publication["summary_receipt_sha256"] != summary["receipt_sha256"]
+        or publication["audit_file_sha256"] != sha256_file(audit_path)
+        or publication["summary_file_sha256"] != sha256_file(summary_path)
+        or float(publication["recovery_deadline_at_unix"]) != deadline
+        or not claimed <= published < deadline
+    ):
+        raise RecoveryBundleVerificationError("publication receipt links differ")
+
+
+def _manifest_records(root: Path) -> list[dict[str, Any]]:
+    records = [
+        {
+            "path": relative.as_posix(),
+            "bytes": (root / relative).stat().st_size,
+            "sha256": sha256_file(root / relative),
+        }
+        for relative in REQUIRED_RECEIPT_PATHS
+    ]
+    return sorted(records, key=lambda row: row["path"])
+
+
+def verify_bundle(bundle_root: Path) -> dict[str, Any]:
+    """Verify the success bundle without network access or bundle mutation."""
+
+    lexical = bundle_root.expanduser().absolute()
+    try:
+        details = lexical.lstat()
+    except OSError as exc:
+        raise RecoveryBundleVerificationError("bundle root is missing") from exc
+    if not stat.S_ISDIR(details.st_mode) or stat.S_ISLNK(details.st_mode):
+        raise RecoveryBundleVerificationError("bundle root is not a plain directory")
+    root = lexical.resolve(strict=True)
+    _validate_output_tree(root)
+    _validate_compact_directory(root)
+
+    authorization, _ = _read_receipt(root, AUTHORIZATION_RELATIVE, "authorization")
+    bootstrap_manifest, bootstrap_manifest_path = _read_receipt(
+        root, BOOTSTRAP_MANIFEST_RELATIVE, "bootstrap_manifest"
+    )
+    preflight_landlock, preflight_landlock_path = _read_receipt(
+        root, PREFLIGHT_ENFORCEMENT_RELATIVE, "preflight_landlock"
+    )
+    preflight_cuda, preflight_cuda_path = _read_receipt(
+        root, PREFLIGHT_CUDA_RELATIVE, "preflight_cuda"
+    )
+    local_test_receipt, local_test_receipt_path = _read_receipt(
+        root, LOCAL_TEST_RELATIVE, "local_test_receipt"
+    )
+    target_host_test_receipt, target_host_test_receipt_path = _read_receipt(
+        root, TARGET_HOST_TEST_RELATIVE, "target_host_test_receipt"
+    )
+    qualification_ownership, qualification_ownership_path = _read_receipt(
+        root,
+        TARGET_QUALIFICATION_OWNERSHIP_RELATIVE,
+        "target_qualification_ownership",
+    )
+    qualification_landlock, qualification_landlock_path = _read_receipt(
+        root,
+        TARGET_QUALIFICATION_LANDLOCK_RELATIVE,
+        "target_qualification_landlock",
+    )
+    qualification_cuda, qualification_cuda_path = _read_receipt(
+        root,
+        TARGET_QUALIFICATION_CUDA_RELATIVE,
+        "target_qualification_cuda",
+    )
+    confinement, _ = _read_receipt(root, CONFINEMENT_RELATIVE, "confinement")
+    marker, _ = _read_receipt(root, ATTEMPT_MARKER_RELATIVE, "attempt_marker")
+    audit, audit_path = _read_receipt(root, AUDIT_RELATIVE, "calibration_audit")
+    summary, summary_path = _read_receipt(root, SUMMARY_RELATIVE, "calibration_summary")
+    publication, _ = _read_receipt(root, PUBLICATION_RELATIVE, "publication_complete")
+
+    execution, paths, command_sha256, started, deadline = _validate_authorization(
+        authorization,
+        bootstrap_manifest=bootstrap_manifest,
+        bootstrap_manifest_path=bootstrap_manifest_path,
+        preflight_landlock=preflight_landlock,
+        preflight_cuda=preflight_cuda,
+        preflight_landlock_path=preflight_landlock_path,
+        preflight_cuda_path=preflight_cuda_path,
+        local_test_receipt=local_test_receipt,
+        target_host_test_receipt=target_host_test_receipt,
+        local_test_receipt_path=local_test_receipt_path,
+        target_host_test_receipt_path=target_host_test_receipt_path,
+        qualification_ownership=qualification_ownership,
+        qualification_landlock=qualification_landlock,
+        qualification_cuda=qualification_cuda,
+        qualification_ownership_path=qualification_ownership_path,
+        qualification_landlock_path=qualification_landlock_path,
+        qualification_cuda_path=qualification_cuda_path,
+    )
+    bootstrap_roots, bootstrap_files = _bootstrap_protected_paths(
+        bootstrap_manifest, paths
+    )
+    preflight_pid, preflight_devices = _validate_landlock_receipt(
+        preflight_landlock,
+        purpose="preauthorization_probe",
+        receipt_path=paths["preflight_landlock"],
+        output_root=paths["preflight_output_root"],
+        protected_roots=[paths["preflight_canary_protected_root"], *bootstrap_roots],
+        protected_files=[
+            f"{paths['preflight_canary_protected_root']}/seed.txt",
+            *bootstrap_files,
+        ],
+        canary_output_root=paths["preflight_canary_output_root"],
+        authorization_sha256=None,
+        preflight_sha256=None,
+        label="preflight_landlock",
+    )
+    _validate_cuda_preflight(
+        preflight_cuda,
+        landlock=preflight_landlock,
+        preflight_output_root=paths["preflight_output_root"],
+        execution=execution,
+        paths=paths,
+        bootstrap_manifest=bootstrap_manifest,
+        recovery_closure=authorization["recovery_bound_files"],
+    )
+    if preflight_cuda["pid"] != preflight_pid:
+        raise RecoveryBundleVerificationError("preflight PID link differs")
+    confinement_pid, confinement_devices = _validate_landlock_receipt(
+        confinement,
+        purpose="audit_recovery",
+        receipt_path=paths["landlock_receipt"],
+        output_root=paths["output_root"],
+        protected_roots=[
+            paths["raw_root"],
+            paths["provenance_root"],
+            paths["canary_protected_root"],
+            *bootstrap_roots,
+        ],
+        protected_files=[
+            f"{paths['raw_root']}/RUN_COMPLETE.json",
+            (
+                f"{paths['provenance_root']}/{CANONICAL_PLAN_RELATIVE_PATH}/"
+                "plan_manifest.json"
+            ),
+            paths["recovery_authorization"],
+            *bootstrap_files,
+        ],
+        canary_output_root=paths["canary_output_root"],
+        authorization_sha256=authorization["receipt_sha256"],
+        preflight_sha256=preflight_cuda["receipt_sha256"],
+        label="confinement",
+    )
+    if (
+        preflight_devices != confinement_devices
+        or [row["path"] for row in confinement_devices] != execution["device_files"]
+        or authorization["preflight"]["device_rules"] != confinement_devices
+        or confinement["child_argv"] != execution["confined_child_argv"]
+        or confinement["child_argv_sha256"] != execution["confined_child_argv_sha256"]
+    ):
+        raise RecoveryBundleVerificationError(
+            "Landlock device/command inventories differ"
+        )
+    expected_preflight_argv = _expected_preflight_argv(
+        execution["python_executable"],
+        execution["active_root"],
+        paths,
+        execution["roots_manifest_sha256"],
+        execution["device_files"],
+    )
+    if preflight_landlock[
+        "child_argv"
+    ] != expected_preflight_argv or preflight_landlock[
+        "child_argv_sha256"
+    ] != canonical_sha256(expected_preflight_argv):
+        raise RecoveryBundleVerificationError(
+            "preflight Landlock child command differs"
+        )
+    if command_sha256 != execution["command_sha256"]:
+        raise RecoveryBundleVerificationError("execution command cross-link differs")
+    provider = _mapping(preflight_cuda["provider"], "preflight_cuda.provider")
+    _exact_keys(
+        provider, ("pod_id", "volume_id", "data_center_id"), "preflight_cuda.provider"
+    )
+    if provider != {
+        "pod_id": authorization["fresh_pod_id"],
+        "volume_id": NETWORK_VOLUME_ID,
+        "data_center_id": DATA_CENTER_ID,
+    }:
+        raise RecoveryBundleVerificationError("preflight provider identity differs")
+    claimed = _validate_marker(
+        marker,
+        authorization=authorization,
+        execution=execution,
+        confinement=confinement,
+        started=started,
+        deadline=deadline,
+    )
+    if marker["landlock_pid"] != confinement_pid:
+        raise RecoveryBundleVerificationError(
+            "attempt/confinement PID cross-link differs"
+        )
+    recovery = _validate_compact_pair(audit, summary, authorization=authorization)
+    _validate_recovery_metadata(
+        recovery,
+        authorization=authorization,
+        execution=execution,
+        preflight_landlock=preflight_landlock,
+        preflight_cuda=preflight_cuda,
+        confinement=confinement,
+        marker=marker,
+        bootstrap_manifest=bootstrap_manifest,
+        paths=paths,
+    )
+    _validate_publication(
+        publication,
+        audit=audit,
+        summary=summary,
+        audit_path=audit_path,
+        summary_path=summary_path,
+        claimed=claimed,
+        deadline=deadline,
+    )
+
+    records = _manifest_records(root)
+    core = {
+        "schema_version": 1,
+        "status": "pass_recovery_bundle_verified_offline",
+        "attempt_id": execution["attempt_id"],
+        "run_id": audit["run_id"],
+        "recovery_authorization_receipt_sha256": authorization["receipt_sha256"],
+        "preflight_landlock_receipt_sha256": preflight_landlock["receipt_sha256"],
+        "preflight_probe_receipt_sha256": preflight_cuda["receipt_sha256"],
+        "target_qualification_ownership_receipt_sha256": qualification_ownership[
+            "receipt_sha256"
+        ],
+        "target_qualification_landlock_receipt_sha256": qualification_landlock[
+            "receipt_sha256"
+        ],
+        "target_qualification_cuda_receipt_sha256": qualification_cuda[
+            "receipt_sha256"
+        ],
+        "landlock_confinement_receipt_sha256": confinement["receipt_sha256"],
+        "attempt_marker_receipt_sha256": marker["receipt_sha256"],
+        "audit_receipt_sha256": audit["receipt_sha256"],
+        "summary_receipt_sha256": summary["receipt_sha256"],
+        "publication_receipt_sha256": publication["receipt_sha256"],
+        "verified_files": records,
+        "verified_file_count": len(records),
+        "verified_files_sha256": canonical_sha256(records),
+        "network_accessed": False,
+        "bundle_modified": False,
+    }
+    return {**core, "receipt_sha256": canonical_sha256(core)}
+
+
+def write_verification_receipt(
+    output: Path, receipt: Mapping[str, Any], *, bundle_root: Path
+) -> Path:
+    """Exclusively write the receipt outside the retrieved bundle."""
+
+    root = bundle_root.expanduser().absolute().resolve(strict=True)
+    destination = output.expanduser().absolute()
+    try:
+        parent = destination.parent.resolve(strict=True)
+    except OSError as exc:
+        raise RecoveryBundleVerificationError(
+            "verification output parent is missing"
+        ) from exc
+    resolved = parent / destination.name
+    if resolved == root or root in resolved.parents:
+        raise RecoveryBundleVerificationError(
+            "verification output must be outside the bundle"
+        )
+    if not parent.is_dir() or parent.is_symlink() or os.path.lexists(resolved):
+        raise RecoveryBundleVerificationError("verification output is not fresh/safe")
+    _self_hash(receipt, "verification_receipt")
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    descriptor = os.open(resolved, flags, 0o600)
+    with os.fdopen(descriptor, "wb") as handle:
+        handle.write(canonical_json_bytes(dict(receipt)) + b"\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    directory_fd = os.open(parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    return resolved
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--bundle-root", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    return parser
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+    receipt = verify_bundle(args.bundle_root)
+    published = write_verification_receipt(
+        args.output, receipt, bundle_root=args.bundle_root
+    )
+    print(published)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

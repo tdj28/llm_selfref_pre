@@ -4,3 +4,20 @@
 
 # Preserve this GPU-produced markdown byte-for-byte for remote hash matching.
 data/public_sae_feature_maps/70b_construct_validity_extension_20260710/feature_cards.md whitespace=-blank-at-eof
+
+# Preserve immutable consciousness-study provenance bytes. Markdown's two-space
+# hard breaks and the archived review diff are intentional; the two source/test
+# files are frozen into the r15 source inventory with their existing EOF bytes.
+docs/consciousness_readout_validation/PROTOCOL.md whitespace=-blank-at-eol
+docs/consciousness_readout_validation/README.md whitespace=-blank-at-eol
+docs/consciousness_sae_changepoint/PROTOCOL.md whitespace=-blank-at-eol
+docs/consciousness_sae_changepoint/PRO_REVIEW_CONTEXT_20260713.md whitespace=-blank-at-eol
+docs/consciousness_sae_changepoint/reviews/gpt-5.6-sol-pro_20260713/*.md whitespace=-blank-at-eol
+docs/consciousness_sae_changepoint/reviews/gpt-5.6-sol-pro_20260713/PLAN_CHANGES.diff whitespace=-blank-at-eol,-blank-at-eof
+docs/consciousness_sae_switch_arc/DESIGN_EXPOSURE_LOG.md whitespace=-blank-at-eol
+docs/consciousness_sae_switch_arc/PROTOCOL_DRAFT.md whitespace=-blank-at-eol
+docs/consciousness_sae_switch_arc/PRO_REVIEW_ADJUDICATION.md whitespace=-blank-at-eol
+experiments/consciousness_readout_validation/tokenizer_audit.py whitespace=-blank-at-eof
+experiments/consciousness_sae_switch_arc/__init__.py whitespace=-blank-at-eof
+experiments/consciousness_sae_switch_arc/protocol.py whitespace=-blank-at-eof
+tests/consciousness_readout_validation/__init__.py whitespace=-blank-at-eof

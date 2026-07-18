@@ -1,0 +1,8 @@
+# Frozen GPU image (the human-readable tag is recorded in protocol.py):
+# runpod/pytorch@sha256:cb154fcca15d1d6ce858cfa672b76505e30861ef981d28ec94bd44168767d853
+# Do not replace the image's CUDA-compatible torch wheel.
+accelerate==1.12.0
+huggingface-hub==0.36.0
+numpy==2.2.6
+safetensors==0.6.2
+transformers==4.57.6

@@ -1,0 +1,28 @@
+From https://github.com/tdj28/llm_selfref_pre
+ * [new branch]      feat/sae-changepoint -> origin/feat/sae-changepoint
+/usr/local/lib/python3.11/dist-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py", line 817, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py", line 810, in main
+    result = _dispatch(args.mode, recovery_argv, active)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/confined_bootstrap.py", line 745, in _dispatch
+    result = recovery.execute_recovery(args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/audit_recovery.py", line 9200, in execute_recovery
+    audit_receipt, summary = audit.audit(
+                             ^^^^^^^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/audit.py", line 2238, in audit
+    artifact_recomputation = _audit_artifact_recomputation(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/audit.py", line 1292, in _audit_artifact_recomputation
+    device = _configure_artifact_device(device_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/consciousness_sae_audit_recovery/calv2-r3-audit-recovery-497b0f8-20260715T191757Z/active/experiments/consciousness_sae_target_blind_calibration/audit.py", line 1189, in _configure_artifact_device
+    raise CalibrationAuditError("artifact audit CUBLAS determinism differs")
+experiments.consciousness_sae_target_blind_calibration.audit.CalibrationAuditError: artifact audit CUBLAS determinism differs

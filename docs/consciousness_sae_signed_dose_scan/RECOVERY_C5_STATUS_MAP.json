@@ -1,0 +1,74 @@
+{
+  "base_commit": "e45832e9319814824a8f84840d2b8a4649aeb6f1",
+  "qualified_code_commit": "c43e40f79d197943c55e803371350ffafff1e0ed",
+  "c4_to_e4": {
+    "added_directory": "docs/consciousness_sae_signed_dose_scan/audit_recovery_host_qualification_v4",
+    "added_filenames": [
+      "ATTEMPT_STARTED.json",
+      "QUALIFICATION_FROZEN_TERMINATION.json",
+      "QUALIFICATION_POSTDELETE_INVENTORY.json",
+      "QUALIFICATION_TERMINATION_AUDIT.json",
+      "RECOVERY_EQUIVALENCE_PACKET.json",
+      "RECOVERY_EQUIVALENCE_VERIFICATION.json",
+      "TARGET_HOST_QUALIFICATION.json",
+      "TARGET_HOST_QUALIFICATION_VERIFICATION.json"
+    ],
+    "other_paths_forbidden": true,
+    "required_direct_parent": "c43e40f79d197943c55e803371350ffafff1e0ed",
+    "required_evidence_commit": "e45832e9319814824a8f84840d2b8a4649aeb6f1"
+  },
+  "e4_to_c5": {
+    "added": [
+      "docs/consciousness_sae_signed_dose_scan/AUDIT_ONLY_RECOVERY_C5_AMENDMENT_20260717.md",
+      "docs/consciousness_sae_signed_dose_scan/RECOVERY_C5_STATUS_MAP.json",
+      "docs/consciousness_sae_signed_dose_scan/RECOVERY_CYCLE_LEDGER_V5.json"
+    ],
+    "deleted": [],
+    "modified": [
+      "experiments/consciousness_sae_signed_dose_scan/audit_recovery.py",
+      "experiments/consciousness_sae_signed_dose_scan/recovery_equivalence.py",
+      "experiments/consciousness_sae_signed_dose_scan/verify_recovery_equivalence.py",
+      "tests/consciousness_sae_signed_dose_scan/test_audit_recovery.py",
+      "tests/consciousness_sae_signed_dose_scan/test_recovery_equivalence.py"
+    ],
+    "other_paths_forbidden": true,
+    "parent_count": 1,
+    "required_direct_parent": "e45832e9319814824a8f84840d2b8a4649aeb6f1"
+  },
+  "c5_to_e5": {
+    "added_directory": "docs/consciousness_sae_signed_dose_scan/audit_recovery_authentic_bundle_preflight_v5",
+    "added_filenames": [
+      "AUTHENTIC_BUNDLE_PREFLIGHT.json"
+    ],
+    "other_paths_forbidden": true
+  },
+  "e5_to_f5": {
+    "added_directory": "docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3",
+    "added_filenames": [
+      "RECOVERY_PRO_REVIEW.md",
+      "RECOVERY_PRO_REVIEW_ADJUDICATION.json",
+      "RECOVERY_PRO_REVIEW_BRIEF.md",
+      "RECOVERY_PRO_REVIEW_CONTEXT.md",
+      "RECOVERY_PRO_REVIEW_MANIFEST.json",
+      "RECOVERY_PRO_REVIEW_REQUEST.md",
+      "RECOVERY_PRO_REVIEW_REQUEST_PAYLOAD.json",
+      "RECOVERY_PRO_REVIEW_RESPONSE.json"
+    ],
+    "existing_paid_artifacts_are_immutable": true,
+    "new_paid_review_call_forbidden": true,
+    "other_paths_forbidden": true,
+    "review_input_anchor_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e"
+  },
+  "excluded_preexisting_user_paths": [
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_PRO_REVIEW_BRIEF.md",
+    "docs/consciousness_sae_signed_dose_scan/RECOVERY_PRO_REVIEW_CONTEXT.md",
+    "technical_blog_posts/GEMMA_SERIES_EDITORIAL_HANDOFF.md",
+    "technical_blog_posts/The_Jacobian_Lens_Read_The_Words_And_Failed_The_Intervention_Test.md",
+    "technical_blog_posts/We_Traced_A_Signal_Through_Gemma.md"
+  ],
+  "receipt_kind": "consciousness_sae_signed_dose_scan_c5_status_map_v1",
+  "receipt_sha256": "dbec2f49cfb0166f67558ce529030326798fed8c083368b3c9301f21ffa1c996",
+  "schema_version": 1,
+  "status": "frozen_allowed_surface_pending_c5_commit",
+  "study_id": "consciousness_sae_signed_dose_scan_v1"
+}

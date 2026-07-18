@@ -115,6 +115,15 @@ PLACEHOLDER_MARKERS = (
     "your_",
 )
 
+# Exact inert value used to prove that guest attestation never retains
+# non-allowlisted PID 1 environment entries. Keep this allowlist literal and
+# narrow: broad markers such as ``unit`` or ``secret`` would weaken the scanner.
+EXACT_TEST_PLACEHOLDERS = frozenset(
+    {
+        "unit-secret-that-must-never-be-retained",
+    }
+)
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -188,6 +197,8 @@ def is_allowed_placeholder(raw_value: bytes) -> bool:
     value = raw_value.decode("utf-8", errors="replace").strip().strip("\"'")
     lowered = value.lower()
     if not value or lowered in {"none", "null", "true", "false"}:
+        return True
+    if lowered in EXACT_TEST_PLACEHOLDERS:
         return True
     if value.startswith(("$", "<", "%", "{{")):
         return True

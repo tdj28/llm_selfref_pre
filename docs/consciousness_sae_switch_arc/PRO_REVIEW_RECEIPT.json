@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "review_id": "gpt-5.6-sol-pro_20260713",
+  "reviewed_study_id": "consciousness_sae_switch_arc_v1",
+  "status": "completed_not_ready_to_freeze",
+  "model": "gpt-5.6-sol",
+  "reasoning_mode": "pro",
+  "completed_date": "2026-07-13",
+  "request_payload_sha256": "5d4f33fa3f64d08065332e952603fabadc94a9b5bf0e0618bcc136cc2b9c8616",
+  "review_request_sha256": "767b70f3a3561a8204d82eff061a73025459a5711b87b64f1603a061883db38c",
+  "review_sha256": "65fc0e63855e68d290c70363f76eddb28a7cd497b08613a48c238e5d2fdce3e0",
+  "review_manifest_sha256": "3a1b3995e709b3ec485a7353b07b485e2d8232024e9c5beb950358944bdef3bd",
+  "response_sha256": "6c99de07ef05581246640f0c11c687d7c6cfe1f3c4026968c1c1a27a1e5a06ce",
+  "usage": {
+    "input_tokens": 73119,
+    "output_tokens": 39708,
+    "reasoning_tokens": 10110,
+    "total_tokens": 112827
+  },
+  "conservative_measured_cost_usd": 1.556835,
+  "authorized_ceiling_usd": 1.25,
+  "cost_incident": "The one authorized review exceeded the stated ceiling. No second paid review is permitted for this draft.",
+  "full_review_external_path": "out/consciousness_sae_switch_arc/plan_review/gpt-5.6-sol-pro_20260713/review.md"
+}

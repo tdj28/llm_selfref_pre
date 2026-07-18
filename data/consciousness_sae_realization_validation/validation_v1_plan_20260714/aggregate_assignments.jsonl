@@ -1,0 +1,15 @@
+{"assignment_id":"pair_30032_58667","coefficient":0.5,"target_feature_ids":[30032,58667]}
+{"assignment_id":"pair_30032_22004","coefficient":0.5,"target_feature_ids":[30032,22004]}
+{"assignment_id":"pair_30032_30686","coefficient":0.5,"target_feature_ids":[30032,30686]}
+{"assignment_id":"pair_30032_41533","coefficient":0.5,"target_feature_ids":[30032,41533]}
+{"assignment_id":"pair_30032_23893","coefficient":0.5,"target_feature_ids":[30032,23893]}
+{"assignment_id":"pair_58667_22004","coefficient":0.5,"target_feature_ids":[58667,22004]}
+{"assignment_id":"pair_58667_30686","coefficient":0.5,"target_feature_ids":[58667,30686]}
+{"assignment_id":"pair_58667_41533","coefficient":0.5,"target_feature_ids":[58667,41533]}
+{"assignment_id":"pair_58667_23893","coefficient":0.5,"target_feature_ids":[58667,23893]}
+{"assignment_id":"pair_22004_30686","coefficient":0.5,"target_feature_ids":[22004,30686]}
+{"assignment_id":"pair_22004_41533","coefficient":0.5,"target_feature_ids":[22004,41533]}
+{"assignment_id":"pair_22004_23893","coefficient":0.5,"target_feature_ids":[22004,23893]}
+{"assignment_id":"pair_30686_41533","coefficient":0.5,"target_feature_ids":[30686,41533]}
+{"assignment_id":"pair_30686_23893","coefficient":0.5,"target_feature_ids":[30686,23893]}
+{"assignment_id":"pair_41533_23893","coefficient":0.5,"target_feature_ids":[41533,23893]}

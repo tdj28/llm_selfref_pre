@@ -31,6 +31,23 @@ class PublicReleaseAuditTests(unittest.TestCase):
         self.assertEqual([finding.rule for finding in findings], ["secret-assignment"])
         self.assertNotIn(secret.decode(), repr(findings))
 
+    def test_exact_guest_attestation_fixture_is_the_only_allowed_variant(self) -> None:
+        placeholder = b"unit-secret-that-must-never-be-retained"
+        self.assertTrue(is_allowed_placeholder(placeholder))
+        self.assertFalse(is_allowed_placeholder(placeholder + b"-changed"))
+        self.assertEqual(
+            scan_blob(
+                "fixture.py",
+                b'"RUNPOD_API_KEY": "' + placeholder + b'"\n',
+            ),
+            [],
+        )
+        findings = scan_blob(
+            "fixture.py",
+            b'"RUNPOD_API_KEY": "' + placeholder + b'-changed"\n',
+        )
+        self.assertEqual([finding.rule for finding in findings], ["quoted-secret-mapping"])
+
     def test_known_token_prefix_is_rejected(self) -> None:
         token = b"sk-" + (b"a" * 32)
         findings = scan_blob("fixture.txt", b"value: " + token)

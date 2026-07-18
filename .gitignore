@@ -125,8 +125,162 @@ data/sae_jlens_audit/*
 !data/sae_jlens_audit/confirmatory_v2_plan_20260712/**
 !data/sae_jlens_audit/confirmatory_v2_20260712/
 !data/sae_jlens_audit/confirmatory_v2_20260712/**
+# Namespace reservation only. Add narrow, dated exceptions for result-free
+# plans and compact audited metadata receipts; never unignore a raw release or
+# this entire experiment tree wholesale. Canonical raw artifacts live on the
+# external RunPod network volume.
+!data/consciousness_sae_changepoint/
+data/consciousness_sae_changepoint/*
+!data/consciousness_sae_changepoint/README.md
+
+!data/consciousness_readout_validation/
+data/consciousness_readout_validation/*
+!data/consciousness_readout_validation/README.md
+!data/consciousness_readout_validation/pilot_v1_plan_20260714_r15/
+!data/consciousness_readout_validation/pilot_v1_plan_20260714_r15/**
+!data/consciousness_readout_validation/pilot_v1_result_20260714_r15/
+!data/consciousness_readout_validation/pilot_v1_result_20260714_r15/**
+
+# Fresh successor validation. Only the dated, outcome-free machine plan is
+# tracked before execution. Compact audited receipts get their own narrow
+# exception after their exact release layout has passed review.
+!data/consciousness_sae_realization_validation/
+data/consciousness_sae_realization_validation/*
+!data/consciousness_sae_realization_validation/README.md
+!data/consciousness_sae_realization_validation/validation_v1_plan_20260714/
+!data/consciousness_sae_realization_validation/validation_v1_plan_20260714/**
+
+# Target-blind calibration v2. Only the prospective machine plan and compact
+# audited metadata are Git payloads; its raw tensor archive stays on the
+# sentinel-bound RunPod network volume.
+!data/consciousness_sae_target_blind_calibration/
+data/consciousness_sae_target_blind_calibration/*
+!data/consciousness_sae_target_blind_calibration/README.md
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/**
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/**
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/**
+
+# Signed residual-RMS dose scan. Only the dated prospective machine plan and
+# compact audited metadata are Git payloads. The complete residual arcs remain
+# in the study-specific RunPod network-volume namespace.
+!data/consciousness_sae_signed_dose_scan/
+data/consciousness_sae_signed_dose_scan/*
+!data/consciousness_sae_signed_dose_scan/README.md
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/**
+
+# Defense in depth: these formats are never Git payloads for this study, even
+# if someone accidentally writes them under docs/, experiments/, or tests/.
+**/consciousness_sae_changepoint/**/*.safetensors
+**/consciousness_sae_changepoint/**/*.pt
+**/consciousness_sae_changepoint/**/*.pth
+**/consciousness_sae_changepoint/**/*.ckpt
+**/consciousness_sae_changepoint/**/*.bin
+**/consciousness_sae_changepoint/**/*.arrow
+**/consciousness_sae_changepoint/**/*.parquet
+**/consciousness_sae_changepoint/**/*.npy
+**/consciousness_sae_changepoint/**/*.npz
+**/consciousness_sae_changepoint/**/*.pkl
+**/consciousness_sae_changepoint/**/*.pickle
+**/consciousness_sae_changepoint/**/*.jsonl
+**/consciousness_sae_changepoint/**/*.zst
+**/consciousness_sae_changepoint/**/*.gz
+**/consciousness_sae_changepoint/**/*.tar
+**/consciousness_sae_changepoint/**/*.tar.*
+**/consciousness_sae_changepoint/**/*.zip
+**/consciousness_sae_changepoint/**/*.log
+
+# The readout-validation Git namespace is compact metadata only. Raw model,
+# tensor, activation, logit, row, archive, and runtime-log formats stay external
+# even if an accidental broad exception is added later.
+**/consciousness_readout_validation/**/*.safetensors
+**/consciousness_readout_validation/**/*.pt
+**/consciousness_readout_validation/**/*.pth
+**/consciousness_readout_validation/**/*.ckpt
+**/consciousness_readout_validation/**/*.bin
+**/consciousness_readout_validation/**/*.arrow
+**/consciousness_readout_validation/**/*.parquet
+**/consciousness_readout_validation/**/*.npy
+**/consciousness_readout_validation/**/*.npz
+**/consciousness_readout_validation/**/*.pkl
+**/consciousness_readout_validation/**/*.pickle
+**/consciousness_readout_validation/**/*.zst
+**/consciousness_readout_validation/**/*.gz
+**/consciousness_readout_validation/**/*.tar
+**/consciousness_readout_validation/**/*.tar.*
+**/consciousness_readout_validation/**/*.zip
+**/consciousness_readout_validation/**/*.log
+
+# Realization-validation Git content is plans, code, documentation, hashes,
+# and compact receipts only. Canonical residuals and row-level runtime output
+# remain on the sentinel-bound RunPod network volume.
+**/consciousness_sae_realization_validation/**/*.safetensors
+**/consciousness_sae_realization_validation/**/*.pt
+**/consciousness_sae_realization_validation/**/*.pth
+**/consciousness_sae_realization_validation/**/*.ckpt
+**/consciousness_sae_realization_validation/**/*.bin
+**/consciousness_sae_realization_validation/**/*.arrow
+**/consciousness_sae_realization_validation/**/*.parquet
+**/consciousness_sae_realization_validation/**/*.npy
+**/consciousness_sae_realization_validation/**/*.npz
+**/consciousness_sae_realization_validation/**/*.pkl
+**/consciousness_sae_realization_validation/**/*.pickle
+**/consciousness_sae_realization_validation/**/*.zst
+**/consciousness_sae_realization_validation/**/*.gz
+**/consciousness_sae_realization_validation/**/*.tar
+**/consciousness_sae_realization_validation/**/*.tar.*
+**/consciousness_sae_realization_validation/**/*.zip
+**/consciousness_sae_realization_validation/**/*.log
+
+# Calibration-v2 raw observations and model artifacts are external-only.
+**/consciousness_sae_target_blind_calibration/**/*.safetensors
+**/consciousness_sae_target_blind_calibration/**/*.pt
+**/consciousness_sae_target_blind_calibration/**/*.pth
+**/consciousness_sae_target_blind_calibration/**/*.ckpt
+**/consciousness_sae_target_blind_calibration/**/*.bin
+**/consciousness_sae_target_blind_calibration/**/*.arrow
+**/consciousness_sae_target_blind_calibration/**/*.parquet
+**/consciousness_sae_target_blind_calibration/**/*.npy
+**/consciousness_sae_target_blind_calibration/**/*.npz
+**/consciousness_sae_target_blind_calibration/**/*.pkl
+**/consciousness_sae_target_blind_calibration/**/*.pickle
+**/consciousness_sae_target_blind_calibration/**/*.zst
+**/consciousness_sae_target_blind_calibration/**/*.gz
+**/consciousness_sae_target_blind_calibration/**/*.tar
+**/consciousness_sae_target_blind_calibration/**/*.tar.*
+**/consciousness_sae_target_blind_calibration/**/*.zip
+**/consciousness_sae_target_blind_calibration/**/*.log
+
+# Signed-dose-scan raw observations and model artifacts are external-only.
+**/consciousness_sae_signed_dose_scan/**/*.safetensors
+**/consciousness_sae_signed_dose_scan/**/*.pt
+**/consciousness_sae_signed_dose_scan/**/*.pth
+**/consciousness_sae_signed_dose_scan/**/*.ckpt
+**/consciousness_sae_signed_dose_scan/**/*.bin
+**/consciousness_sae_signed_dose_scan/**/*.arrow
+**/consciousness_sae_signed_dose_scan/**/*.parquet
+**/consciousness_sae_signed_dose_scan/**/*.npy
+**/consciousness_sae_signed_dose_scan/**/*.npz
+**/consciousness_sae_signed_dose_scan/**/*.pkl
+**/consciousness_sae_signed_dose_scan/**/*.pickle
+**/consciousness_sae_signed_dose_scan/**/*.jsonl
+**/consciousness_sae_signed_dose_scan/**/*.zst
+**/consciousness_sae_signed_dose_scan/**/*.gz
+**/consciousness_sae_signed_dose_scan/**/*.tar
+**/consciousness_sae_signed_dose_scan/**/*.tar.*
+**/consciousness_sae_signed_dose_scan/**/*.zip
+**/consciousness_sae_signed_dose_scan/**/*.log
 out/
 *.jsonl
+!data/consciousness_readout_validation/pilot_v1_plan_20260714_r15/*.jsonl
+!data/consciousness_sae_realization_validation/validation_v1_plan_20260714/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r2/*.jsonl
+!data/consciousness_sae_target_blind_calibration/calibration_v2_plan_20260714_r3/*.jsonl
+!data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716/*.jsonl
 !data/public_sae_feature_maps/70b_clean_pilot_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_balanced_80_20260709/*.jsonl
 !data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/*.jsonl

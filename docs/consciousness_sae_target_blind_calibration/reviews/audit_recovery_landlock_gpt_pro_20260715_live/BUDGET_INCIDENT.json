@@ -1,0 +1,23 @@
+{
+  "authorization_exceeded_usd": 0.64009,
+  "budget_authorization_usd": 1.8,
+  "cache_write_rate_usd_per_million": 6.25,
+  "exact_budget_reserve_usd_after_preflight": 1.41976875,
+  "gpu_created": false,
+  "incomplete_reason": "max_output_tokens",
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 67535,
+  "output_rate_usd_per_million": 30.0,
+  "receipt_sha256": "190f7d867b6d4f3230107642dca0b2db63cf31899c37cf148458d6b035f5ebf5",
+  "reconstructed_cost_usd": 2.44009,
+  "recovery_authorization_issued": false,
+  "replacement_call_authorized": false,
+  "reported_cache_write_tokens": 0,
+  "reported_input_tokens": 302642,
+  "reported_output_tokens": 30896,
+  "reported_reasoning_tokens": 13711,
+  "response_id": "resp_076355ae1eba8bf5016a570d939bcc819ba1a5412f83532777",
+  "response_status": "incomplete",
+  "schema_version": 1,
+  "status": "budget_authorization_estimate_exceeded_by_provider_aggregate_usage"
+}

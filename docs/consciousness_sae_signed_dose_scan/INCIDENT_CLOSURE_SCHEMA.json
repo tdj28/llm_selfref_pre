@@ -1,0 +1,248 @@
+{
+  "$id": "urn:llm-selfref-pre:signed-dose-scan:incident-closure:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Compact terminal closure for the July 2026 signed-dose campaign. Raw rows and tensors remain external; their complete file ledger is embedded.",
+  "properties": {
+    "attempt_classifications": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_id": {"minLength": 1, "type": "string"},
+          "authority_disposition": {"minLength": 1, "type": "string"},
+          "compact_outputs_produced": {"type": "boolean"},
+          "evidence_roles": {
+            "items": {"minLength": 1, "type": "string"},
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "execution_boundary": {"minLength": 1, "type": "string"},
+          "guest_launcher_reached": {"type": "boolean"},
+          "model_forward_count": {"minimum": 0, "type": "integer"},
+          "model_load_reached": {"type": "boolean"},
+          "outcome_access_classification": {
+            "enum": [
+              "startup_not_reached",
+              "operational_validation_completed",
+              "raw_inputs_opened_or_recomputed"
+            ]
+          },
+          "raw_artifacts_final": {"type": "boolean"},
+          "raw_opened_or_recomputed_by_audit": {"type": "boolean"},
+          "role": {
+            "enum": [
+              "smaller_model_operational_gate",
+              "llama70b_scientific_attempt"
+            ]
+          },
+          "scientific_claims_authorized": {"const": false},
+          "semantic_outcomes_collected": {"const": false},
+          "terminal_status": {"minLength": 1, "type": "string"}
+        },
+        "required": [
+          "attempt_id",
+          "role",
+          "terminal_status",
+          "outcome_access_classification",
+          "execution_boundary",
+          "model_load_reached",
+          "model_forward_count",
+          "guest_launcher_reached",
+          "raw_artifacts_final",
+          "raw_opened_or_recomputed_by_audit",
+          "compact_outputs_produced",
+          "semantic_outcomes_collected",
+          "scientific_claims_authorized",
+          "authority_disposition",
+          "evidence_roles"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "authority": {
+      "additionalProperties": false,
+      "properties": {
+        "data_center_id": {"const": "US-CA-2"},
+        "freeze_commit": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+        "gpu_type": {"const": "NVIDIA B200"},
+        "plan_git_head_commit": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+        "plan_manifest_file_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "plan_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "pod_id": {"const": "wl8obvtuq0ax8t"},
+        "review_adjudication_receipt_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "review_model": {"const": "gpt-5.6-sol"},
+        "review_response_id": {"minLength": 1, "type": "string"},
+        "volume_id": {"const": "bv9gb9j32y"}
+      },
+      "required": [
+        "freeze_commit",
+        "plan_git_head_commit",
+        "plan_manifest_sha256",
+        "plan_manifest_file_sha256",
+        "review_adjudication_receipt_sha256",
+        "review_model",
+        "review_response_id",
+        "pod_id",
+        "volume_id",
+        "data_center_id",
+        "gpu_type"
+      ],
+      "type": "object"
+    },
+    "evidence_inventory": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {"minimum": 1, "type": "integer"},
+          "content_receipt_sha256": {
+            "oneOf": [
+              {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+              {"type": "null"}
+            ]
+          },
+          "relative_name": {"minLength": 1, "type": "string"},
+          "role": {"minLength": 1, "type": "string"},
+          "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+        },
+        "required": [
+          "role",
+          "relative_name",
+          "bytes",
+          "sha256",
+          "content_receipt_sha256"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "protocol_version": {"const": "consciousness_sae_signed_dose_scan_v1.0.0"},
+    "raw_ledger": {
+      "additionalProperties": false,
+      "properties": {
+        "file_count": {"const": 35},
+        "records": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "bytes": {"minimum": 1, "type": "integer"},
+              "path": {"minLength": 1, "type": "string"},
+              "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+            },
+            "required": ["path", "bytes", "sha256"],
+            "type": "object"
+          },
+          "maxItems": 35,
+          "minItems": 35,
+          "type": "array"
+        },
+        "records_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "run_complete_file_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "run_complete_receipt_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "run_id": {"const": "signed-dose-a084caa-wl8obvtuq0ax8t-v2"},
+        "storage_role": {"const": "immutable_runpod_network_volume_raw_not_git"},
+        "stored_bytes": {"const": 2229288980}
+      },
+      "required": [
+        "run_id",
+        "storage_role",
+        "file_count",
+        "stored_bytes",
+        "records_sha256",
+        "run_complete_file_sha256",
+        "run_complete_receipt_sha256",
+        "records"
+      ],
+      "type": "object"
+    },
+    "receipt_kind": {"const": "consciousness_sae_signed_dose_scan_incident_closure_v1"},
+    "receipt_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "schema_version": {"const": 1},
+    "status": {"const": "closed_recovery_required_no_compact_publication"},
+    "study_id": {"const": "consciousness_sae_signed_dose_scan_v1"},
+    "terminal_disposition": {
+      "additionalProperties": false,
+      "properties": {
+        "closure_grants_launch_authority": {"const": false},
+        "compact_publication_status": {"const": "not_produced"},
+        "raw_outcome_bytes_changed": {"const": false},
+        "raw_reuse_scope": {"const": "audit_only_recovery_after_fresh_authority_and_verified_cycle_ledger"},
+        "rejected_authorization_receipt_sha256": {
+          "items": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rejected_authorized_run_ids": {
+          "items": {"minLength": 1, "type": "string"},
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rejected_pod_ids": {
+          "items": {"minLength": 1, "type": "string"},
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "scientific_plan_changed": {"const": false},
+        "scientific_result_release_status": {"const": "blocked_pending_passing_independent_audit"}
+      },
+      "required": [
+        "rejected_authorized_run_ids",
+        "rejected_authorization_receipt_sha256",
+        "rejected_pod_ids",
+        "compact_publication_status",
+        "scientific_plan_changed",
+        "raw_outcome_bytes_changed",
+        "raw_reuse_scope",
+        "scientific_result_release_status",
+        "closure_grants_launch_authority"
+      ],
+      "type": "object"
+    },
+    "termination": {
+      "additionalProperties": false,
+      "properties": {
+        "network_volume_retained": {"const": true},
+        "pod_id": {"const": "wl8obvtuq0ax8t"},
+        "postdelete_account_pod_count": {"const": 0},
+        "postdelete_inventory_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "status": {"const": "deleted_exact_owned_pod_unrelated_inventory_unchanged"},
+        "termination_receipt_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+      },
+      "required": [
+        "status",
+        "pod_id",
+        "termination_receipt_sha256",
+        "postdelete_account_pod_count",
+        "postdelete_inventory_sha256",
+        "network_volume_retained"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "receipt_kind",
+    "status",
+    "study_id",
+    "protocol_version",
+    "authority",
+    "evidence_inventory",
+    "attempt_classifications",
+    "raw_ledger",
+    "termination",
+    "terminal_disposition",
+    "receipt_sha256"
+  ],
+  "title": "Signed-dose incident closure v1",
+  "type": "object"
+}

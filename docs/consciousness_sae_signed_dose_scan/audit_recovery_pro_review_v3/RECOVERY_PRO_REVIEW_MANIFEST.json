@@ -1,0 +1,92 @@
+{
+  "actual_input_characters": 17817,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 8798,
+      "characters": 8798,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_BRIEF.md",
+      "role": "compact research-director plan brief",
+      "sha256": "a13d536223e23cbb0dfe50ed9883255d27704464331291f8755ae2585f28665d"
+    },
+    {
+      "bytes": 4650,
+      "characters": 4650,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_signed_dose_scan/audit_recovery_pro_review_v3/RECOVERY_PRO_REVIEW_CONTEXT.md",
+      "role": "synthesized context 1",
+      "sha256": "074759a85babcd7e47b78680269da8c0bc81eaf078757ae500a2d62c4bed0306"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 1.25,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-07-17T08:02:07.347124Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.485525,
+  "created_at_utc": "2026-07-17T08:00:39.088519Z",
+  "estimated_budget_reserve_usd": 0.57406875,
+  "estimated_input_tokens_conservative": 5939,
+  "exact_budget_reserve_usd_after_preflight": 0.4804125,
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 4274,
+  "input_tokens_preflight_at_utc": "2026-07-17T08:00:40.035941Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "de11d0784c6fda841363ab0603b74fd6c74a062f1458e02ebecaf01d06aa0ef3",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 36000,
+  "max_input_tokens": 12000,
+  "max_output_tokens": 4000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "reasoning": {
+    "effort": "high",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "97495dd8da4983a51c44a1f88e67f6f641f233bb8b34611a50fa22ba1571a34e",
+  "reserved_billable_input_tokens": 29695,
+  "reserved_billable_output_tokens": 8000,
+  "response_id": "resp_04d4093548a29511016a59e1285d70819aa84d3b6fe44c6ec7",
+  "response_metadata": {
+    "plan_sha256": "a13d536223e23cbb0dfe50ed9883255d27704464331291f8755ae2585f28665d",
+    "review_input_sha256": "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e",
+    "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+    "review_scope": "director_level_plan_review",
+    "reviewed_packet_git_head_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "experiment_plan_review"
+  },
+  "response_metadata_sha256": "589ce081861f82994404249d9aa4f3159122a0279914366c57a1dcf3c8466f3f",
+  "response_model": "gpt-5.6-sol",
+  "response_sha256": "1efe10003972c61f9342b5a7a9a8013f8271ec86d788c47567375d0d8e49895e",
+  "review_input_sha256": "097fe120d7884218776d0320f61edaa7de494273e8bf3c920c90d7b62181dd5e",
+  "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+  "review_request_sha256": "a50b715c32f860f69c2267c9dc91f15a18885a4630e8e2cb67cb0358784d4668",
+  "review_scope": "director_level_plan_review",
+  "review_sha256": "e64bb7f6df244a6bbe079c60dd01d5972fa71db5931960562fa1852856e82acc",
+  "reviewed_packet_git_head_commit": "44d9e178567bbf31e524b79e4434474a4e5d888e",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 29731,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 11229,
+    "output_tokens_details": {
+      "reasoning_tokens": 9050
+    },
+    "total_tokens": 40960
+  }
+}

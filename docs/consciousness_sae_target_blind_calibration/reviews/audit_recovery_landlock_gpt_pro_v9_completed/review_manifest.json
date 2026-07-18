@@ -1,0 +1,120 @@
+{
+  "actual_input_characters": 35097,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 14068,
+      "characters": 14068,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/V9_TOP_LEVEL_REVIEW_BRIEF.md",
+      "role": "compact research-director plan brief",
+      "sha256": "23bd4080919641a8cbd6efacafa44cde59b80ea5bde2b05de3286565c981cc98"
+    },
+    {
+      "bytes": 3090,
+      "characters": 3090,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/AUDIT_RECOVERY_SCIENTIFIC_EQUIVALENCE.md",
+      "role": "synthesized context 1",
+      "sha256": "1958f5c3d10d489c0882f0f7c9b8ee09354591c0249218a4d271e3035d0fe2e3"
+    },
+    {
+      "bytes": 2505,
+      "characters": 2485,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/AUDIT_RECOVERY_LANDLOCK_GPT_PRO_V8_ADJUDICATION.md",
+      "role": "synthesized context 2",
+      "sha256": "6aeb6e7ce7d1597ea2583a4e38b7f5f3d70b64dc168b4cf33c80f8edafef962a"
+    },
+    {
+      "bytes": 2896,
+      "characters": 2896,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_b22_cublas_incident/B22.md",
+      "role": "synthesized context 3",
+      "sha256": "119ffd7889ff4f48acc9a7135892643dec79e3b4aaab1171a9d5c15b2f7cd889"
+    },
+    {
+      "bytes": 1777,
+      "characters": 1775,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/experiments/consciousness_sae_target_blind_calibration/FINAL_RECOVERY_INVOCATION_CONTRACT.md",
+      "role": "synthesized context 4",
+      "sha256": "4c1e278a68453e1f8d116cd452c23d15a647f3fe32ff1fad9d2e0e424803e2ba"
+    },
+    {
+      "bytes": 3868,
+      "characters": 3868,
+      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/docs/consciousness_sae_target_blind_calibration/reviews/audit_recovery_landlock_gpt_pro_v9_inputs/V9_EVIDENCE_SUMMARY.json",
+      "role": "synthesized context 5",
+      "sha256": "050a21cc7103ffa0d2492928194a4e8bb40123bea5444bc1b088b52a4b4962ed"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 1.25,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 6.25,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-07-16T19:19:53.041132Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.648145,
+  "created_at_utc": "2026-07-16T19:18:02.285172Z",
+  "estimated_budget_reserve_usd": 1.01806875,
+  "estimated_input_tokens_conservative": 11699,
+  "exact_budget_reserve_usd_after_preflight": 0.82378125,
+  "global_uniqueness_attested": false,
+  "input_rate_usd_per_million": 5.0,
+  "input_tokens_preflight": 8245,
+  "input_tokens_preflight_at_utc": "2026-07-16T19:18:03.217409Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "de11d0784c6fda841363ab0603b74fd6c74a062f1458e02ebecaf01d06aa0ef3",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 60000,
+  "max_input_tokens": 20000,
+  "max_output_tokens": 6000,
+  "model": "gpt-5.6-sol",
+  "official_latest_model": "gpt-5.6-sol",
+  "output_rate_usd_per_million": 30.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "e446312861edf4d6b4042bd07703d39c475b358ad79eb9890e06eea551d08be4",
+  "reserved_billable_input_tokens": 58495,
+  "reserved_billable_output_tokens": 12000,
+  "response_id": "resp_08635c6824ff7ee4016a592e6b8d3c819aabea49b09294947c",
+  "response_metadata": {
+    "plan_sha256": "23bd4080919641a8cbd6efacafa44cde59b80ea5bde2b05de3286565c981cc98",
+    "review_input_sha256": "fea8d587c4cd90d388044fa6efb80045b1c3921a8f9e1dc72202cf2da13c3d42",
+    "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+    "review_scope": "director_level_plan_review",
+    "reviewed_packet_git_head_commit": "3683a3187203d0bbe110869ae8d502b6e08b175f",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "experiment_plan_review"
+  },
+  "response_metadata_sha256": "11df3ef2dcfbc666edfc347d37f2bb7d6242f9f42df6866b875601ac231f8371",
+  "response_model": "gpt-5.6-sol",
+  "response_sha256": "14e9c7e0baecf223ffed6f1df0a52d28605fa5d651837bed7c8710f74a8849e4",
+  "review_input_sha256": "fea8d587c4cd90d388044fa6efb80045b1c3921a8f9e1dc72202cf2da13c3d42",
+  "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+  "review_request_sha256": "8ae6c63d0eb7c5a71bdaeafb8fae47a6350b92cf5a73990e7763b32cf21ec4f5",
+  "review_scope": "director_level_plan_review",
+  "review_sha256": "886cf769e2c87f0831a88d9ea4ec5ed6b70d8d0e9f605675c67366ed7e44968f",
+  "reviewed_packet_git_head_commit": "3683a3187203d0bbe110869ae8d502b6e08b175f",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 47711,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 13653,
+    "output_tokens_details": {
+      "reasoning_tokens": 6765
+    },
+    "total_tokens": 61364
+  }
+}

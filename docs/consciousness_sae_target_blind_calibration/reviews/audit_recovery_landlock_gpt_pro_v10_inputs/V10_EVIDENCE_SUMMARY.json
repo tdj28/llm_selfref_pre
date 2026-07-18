@@ -1,0 +1,113 @@
+{
+  "artifact_type": "v10_compact_qualification_evidence_summary",
+  "code_freeze": {
+    "commit": "af0d8b94921f0fb8809f06aacbf8546fb726cb54",
+    "source_test_inventory_sha256": "1f7cb794db7d65b4de585bc96de1b4148bec7d60451885ebfec5e597425c3cec"
+  },
+  "qualification": {
+    "bootstrap_status": "pass_hash_bound_confined_bootstrap",
+    "closure_file_count": 36,
+    "closure_inventory_sha256": "1f7cb794db7d65b4de585bc96de1b4148bec7d60451885ebfec5e597425c3cec",
+    "closure_scope": "source_test_qualification",
+    "cublas_real_guard_regression": {
+      "cases": {
+        "exact_:4096:8": "accepted",
+        "missing": "rejected",
+        "wrong": "rejected"
+      },
+      "source_test_inventory_sha256": "1f7cb794db7d65b4de585bc96de1b4148bec7d60451885ebfec5e597425c3cec",
+      "status": "passed_on_disposable_b200",
+      "target_test_receipt_sha256": "31a91cfee8c2c111bae99507d01769f87378ca390801f7a13322030b96a666bc",
+      "test_id": "tests/consciousness_sae_target_blind_calibration/test_audit_recovery.py::test_target_b200_artifact_device_determinism_contract"
+    },
+    "cublas_workspace_config": ":4096:8",
+    "cuda_status": "pass_target_free_landlock_cuda_preflight",
+    "gpu": {
+      "device_capability": [
+        10,
+        0
+      ],
+      "device_count": 1,
+      "device_name": "NVIDIA B200"
+    },
+    "landlock": {
+      "canary_status": "pass_protected_unchanged_output_empty",
+      "descriptor_status": "pass_no_escaping_writable_or_protected_descriptors",
+      "mapping_status": "pass_no_shared_file_backed_mappings",
+      "no_new_privs": true,
+      "observed_abi": 4,
+      "required_abi": 4,
+      "status": "pass_landlock_enforced"
+    },
+    "ownership_status": "owned_running_isolated",
+    "provider": {
+      "data_center_id": "US-CA-2",
+      "pod_id": "q2nsbiyqwctee3",
+      "volume_id": "bv9gb9j32y"
+    },
+    "zero_target_activity": {
+      "external_or_prior_outcome_inputs": [],
+      "model_forward_count": 0,
+      "target_feature_vector_count": 0,
+      "target_prompt_render_count": 0,
+      "torch_module_call_count": 0
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "mechanical_gate": "retained_full_receipts_must_validate_before_authorization",
+    "provider_did_not_review": [
+      "exact source or test bytes",
+      "full qualification receipts or logs",
+      "raw data or scientific results"
+    ],
+    "provider_review_scope": "director_level_plan_review"
+  },
+  "source_receipts": [
+    {
+      "file_sha256": "44a19b09440f961fc9c29623cd690437a12bf959aaf82dcdb21b00056026e135",
+      "path": "LOCAL_TEST_RECEIPT.json",
+      "receipt_sha256": "41f717579edde202064e393a1ba315cf87901969acfe4b03c965404518f060e4"
+    },
+    {
+      "file_sha256": "936d4c9fe88c2a51545326f9934e87fed7605b486e658822dd61d4ba6c7b8cbf",
+      "path": "TARGET_HOST_TEST_RECEIPT.json",
+      "receipt_sha256": "31a91cfee8c2c111bae99507d01769f87378ca390801f7a13322030b96a666bc"
+    },
+    {
+      "file_sha256": "0c21d77882197c78a129fa660b5d94525103cc81010b1818780d09c419c33185",
+      "path": "TARGET_QUALIFICATION_OWNERSHIP.json",
+      "receipt_sha256": "2db501e3b1c9d88571fa4ad0f72ee50c7a85da1ed89ea684e9d0d06a3f73b672"
+    },
+    {
+      "file_sha256": "aaa0057f1e8cf7e6c3c18b78ac9f82076336c98fd0691e5e8d81fc66cd24597a",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_ENFORCEMENT.json",
+      "receipt_sha256": "907fbc5947e07d883b0c39129f00252a7b4540f8d92802aafb6ba711a9bcff93"
+    },
+    {
+      "file_sha256": "e82081c91c3a29a9df4866f1b7aa949738c2b8c0218daa641dfb68a083a7cc2d",
+      "path": "TARGET_QUALIFICATION_LANDLOCK_CUDA_PREFLIGHT.json",
+      "receipt_sha256": "392921f9b115af4cef30ba25f141c32f1e85cbed326f089598bab3b3682b399c"
+    }
+  ],
+  "tests": {
+    "local": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "44a19b09440f961fc9c29623cd690437a12bf959aaf82dcdb21b00056026e135",
+      "passed_count": 217,
+      "receipt_sha256": "41f717579edde202064e393a1ba315cf87901969acfe4b03c965404518f060e4",
+      "skipped_count": 14,
+      "status": "pass_exact_code_freeze_tests"
+    },
+    "target_host": {
+      "collected_count": 231,
+      "failed_count": 0,
+      "file_sha256": "936d4c9fe88c2a51545326f9934e87fed7605b486e658822dd61d4ba6c7b8cbf",
+      "passed_count": 231,
+      "receipt_sha256": "31a91cfee8c2c111bae99507d01769f87378ca390801f7a13322030b96a666bc",
+      "skipped_count": 0,
+      "status": "pass_exact_code_freeze_tests"
+    }
+  }
+}

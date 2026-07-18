@@ -1,0 +1,99 @@
+{
+  "adjudication_markdown_sha256": "fa661f0f3b78b743f645c3c1e2e297c8908daec24d95a531ae0e2647134161c0",
+  "artifact_type": "completed_conditional_provider_review_v9_adjudication",
+  "execution_authorized": false,
+  "final_decision": "NOT_READY_TO_EXECUTE",
+  "finding_ids": [
+    "B17",
+    "B18",
+    "B19",
+    "B20",
+    "B21",
+    "B22",
+    "B23",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15"
+  ],
+  "mechanical_adjudicability": {
+    "all_disclosed_finding_ids": [
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21",
+      "B22",
+      "B23",
+      "I10",
+      "I11",
+      "I12",
+      "I13",
+      "I14",
+      "I15"
+    ],
+    "heading_parser_finding_ids": [
+      "B23",
+      "I15"
+    ],
+    "reason": "Required historical dispositions were rendered in tables rather than level-two finding headings.",
+    "status": "failed_frozen_heading_only_finding_parser"
+  },
+  "provider_review": {
+    "budget_authorization_exceeded": false,
+    "budget_authorization_usd": 1.25,
+    "manifest_file_sha256": "af09296394727cd66cdfe208333060e01934327ff91c59b228674a452af20bd2",
+    "model": "gpt-5.6-sol",
+    "reconstructed_cost_usd": 0.648145,
+    "reported_input_tokens": 47711,
+    "reported_output_tokens": 13653,
+    "reported_reasoning_tokens": 6765,
+    "reported_total_tokens": 61364,
+    "request_payload_file_sha256": "e446312861edf4d6b4042bd07703d39c475b358ad79eb9890e06eea551d08be4",
+    "response_file_sha256": "3dbd5aefb65101bfa402a1d1e6249db163114fc6ea2bdf74044e3cc93fd8dead",
+    "response_id": "resp_08635c6824ff7ee4016a592e6b8d3c819aabea49b09294947c",
+    "response_semantic_sha256": "14e9c7e0baecf223ffed6f1df0a52d28605fa5d651837bed7c8710f74a8849e4",
+    "response_status": "completed",
+    "review_file_sha256": "886cf769e2c87f0831a88d9ea4ec5ed6b70d8d0e9f605675c67366ed7e44968f",
+    "review_input_sha256": "fea8d587c4cd90d388044fa6efb80045b1c3921a8f9e1dc72202cf2da13c3d42",
+    "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+    "review_request_file_sha256": "8ae6c63d0eb7c5a71bdaeafb8fae47a6350b92cf5a73990e7763b32cf21ec4f5",
+    "reviewed_packet_git_head_commit": "3683a3187203d0bbe110869ae8d502b6e08b175f",
+    "terminal_verdict": "READY AFTER SPECIFIED FIXES"
+  },
+  "receipt_sha256": "fb4f4c2b88580c2e57c3a477de3ba43b527d382e28e97cb1b06dbc323430ba6a",
+  "remaining_blocking_findings": [
+    {
+      "id": "B23",
+      "rationale": "The compact strict-claim bullet says each released real J map is confirmatory, while the frozen estimand makes layer 50 sole primary and layers 51-78 descriptive. Narrow prose only; do not change calculations, thresholds, data, or seeds."
+    }
+  ],
+  "replacement_review_authorized": false,
+  "replacement_review_must_include_this_review": true,
+  "replacement_review_requires_explicit_human_amendment": true,
+  "resolved_or_nonblocking_findings": [
+    "B17",
+    "B18",
+    "B19",
+    "B20",
+    "B21",
+    "B22",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15"
+  ],
+  "review_scope": {
+    "full_receipts_or_logs_reviewed_by_provider": false,
+    "provider_scope": "director_level_plan_review",
+    "raw_data_or_scientific_results_reviewed_by_provider": false,
+    "source_and_tests_reviewed_by_provider": false
+  },
+  "schema_version": 1,
+  "status": "completed_review_ready_after_specified_fixes",
+  "target_outcomes_opened": false
+}
