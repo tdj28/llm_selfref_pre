@@ -354,6 +354,7 @@ dmypy.json
 !data/gemma_scope_9b/**/*.pdf
 !data/sae_jlens_audit/confirmatory_v1_20260711/**/*.pdf
 !data/sae_jlens_audit/confirmatory_v2_20260712/**/*.pdf
+!docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures/*.pdf
 *.dvi
 *.ps
 *.idx
