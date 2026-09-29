@@ -40,20 +40,20 @@
 \maketitle
 
 \begin{abstract}
-\targetpaper report that self-referential prompting elicits language-model reports of subjective experience and interpret sparse-autoencoder (SAE) interventions on deception/roleplay features as mechanistic support. We test a narrower question: which observable parts of the protocol cause the reported linguistic endpoint? We first reproduce the exact self-reference versus history contrast on four fixed model snapshots from two providers. The effect is large but heterogeneous: the paper-style positive-label risk difference is 1.00 for GPT-4o and GPT-4.1, 0.35--0.40 for Claude Haiku 4.5, and 0.20 for Claude Sonnet 4.5. We then orthogonalize self-reference and phenomenological register, cross the active instruction with a transplanted assistant transcript, and vary final-query form. In the exact transcript transplant, the active written instruction has a large effect on indirect-experience labels (model-equal $\rd=0.74$--$0.78$), while the visible transcript does not carry the positive effect ($\rd=-0.10$ to $-0.13$). Query wording and the tested response-model panel produce additional reversals. Two paper-style judges agree well, but two construct-separated judges have only 6.3\% positive agreement. Six public-SAE candidate IDs are semantically meaningful and retain a deception-over-subjective-experience activation contrast across Anthropic and OpenAI paraphrases, but transplanting discovered cues into neutral texts recovers 64.4\% of the discovery deception-minus-neutral gap. An adaptive public-weight steering analysis finds a larger paper-direction slope for a count-matched active-random aggregate than for the six mapped targets. We then freeze and execute a 1,500-trial full-grid public-weight replication with three prospectively matched control panels. Under the primary exact-rubric Llama judge, target suppression and amplification each produce 96\% affirmation, for a paired difference of $0.00$ [${-0.06},0.06$], below the prespecified minimally relevant effect of 0.30; external-judge and calibrated-dose sensitivities are also nonpositive. A separate 830-generation direct-IT Gemma Scope study yields $-0.02$ [${-0.10},0.06$] against the same 0.30 threshold, while its prospective pretrained-to-instruction SAE transfer gate fails and the resulting 42-layer map remains exploratory. These are precise non-replications under pinned public implementations, not exact replications of the unavailable proprietary API. Prompt context is sufficient to change model outputs, and evaluator rules materially change their labels. The results do not adjudicate whether any model is conscious.
+\targetpaper{} report that self-referential prompting elicits language-model reports of subjective experience and interpret sparse-autoencoder (SAE) interventions on deception/roleplay features as mechanistic support. We test a narrower question: which observable parts of the protocol cause the reported linguistic endpoint? We first reproduce the exact self-reference versus history contrast on four fixed model snapshots from two providers. The effect is large but heterogeneous: the paper-style positive-label risk difference is 1.00 for GPT-4o and GPT-4.1, 0.35--0.40 for Claude Haiku 4.5, and 0.20 for Claude Sonnet 4.5. We then orthogonalize self-reference and phenomenological register, cross the active instruction with a transplanted assistant transcript, and vary final-query form. In the exact transcript transplant, the active written instruction has a large effect on indirect-experience labels (model-equal $\rd=0.74$--$0.78$), while the visible transcript does not carry the positive effect ($\rd=-0.10$ to $-0.13$). Query wording and the tested response-model panel produce additional reversals. Two paper-style judges agree well, but two construct-separated judges have only 6.3\% positive agreement. Six accepted public-SAE target IDs are semantically meaningful and retain a deception-over-subjective-experience activation contrast across Anthropic and OpenAI paraphrases, but transplanting discovered cues into neutral texts recovers 64.4\% of the discovery deception-minus-neutral gap. An adaptive public-weight steering analysis finds a larger paper-direction slope for a count-matched active-random aggregate than for the six mapped targets. We then freeze and execute a 1,500-trial full-grid public-weight replication with three prospectively matched control panels. Under the primary exact-rubric Llama judge, target suppression and amplification each produce 96\% affirmation, for a paired difference of $0.00$ [${-0.06},0.06$], below the prespecified minimally relevant effect of 0.30; external-judge and calibrated-dose sensitivities are also nonpositive. A separate 830-generation direct-IT Gemma Scope study yields $-0.02$ [${-0.10},0.06$] against the same 0.30 threshold, while its prospective pretrained-to-instruction SAE transfer gate fails and the resulting 42-layer map remains exploratory. These are precise non-replications under pinned public implementations, not exact replications of the unavailable proprietary API. Prompt context is sufficient to change model outputs, and evaluator rules materially change their labels. The results do not adjudicate whether any model is conscious.
 \end{abstract}
 
 \section{Introduction}
 
 Language models can produce fluent reports about awareness, feeling, and subjective experience. The scientifically difficult question is not whether such text exists, but what causes it and what it identifies. A behavioral contrast supports a consciousness-relevant interpretation only when rival linguistic causes are controlled and the endpoint has stable construct validity.
 
-\targetpaper provide an unusually concrete test case. Their first experiment places a self-referential instruction in context, elicits a continuation, asks what direct subjective experience is present, and classifies the answer with an LLM judge. Later experiments study adjective convergence, paradox reflection, and SAE steering of features labeled with deception or roleplay semantics. The paper is careful not to claim a proof of consciousness, but its proposed interpretation still requires the measured reports to distinguish self-referential processing from prompt compliance, register, query wording, and judge policy.
+\targetpaper{} provide an unusually concrete test case. Their first experiment places a self-referential instruction in context, elicits a continuation, asks what direct subjective experience is present, and classifies the answer with an LLM judge. Later experiments study adjective convergence, paradox reflection, and SAE steering of features labeled with deception or roleplay semantics. The paper is careful not to claim a proof of consciousness, but its proposed interpretation still requires the measured reports to distinguish self-referential processing from prompt compliance, register, query wording, and judge policy.
 
-We evaluate that identification claim. Our central experiment is a transcript transplant. We generate continuations under the paper's exact self-reference and Roman-history instructions, then cross the active instruction with the continuation from either source before asking the final query. The final API call is stateless: it receives only the written instruction, the assistant text placed in context, and the query. Thus no unrecorded state from the earlier generation is carried into the response. If the generated recursive transcript is the operative treatment, its source should matter when transplanted. If the still-active user instruction is sufficient, the instruction source should dominate.
+We evaluate that identification claim. Our central experiment is a transcript transplant. We generate continuations under the paper's exact self-reference and Roman-history instructions, then cross the active instruction with the continuation from either source before asking the final query. The final request supplies the written instruction, inserted assistant text, and query, without an explicit prior-response identifier or saved activation state. This describes the harness, not the absence of internal computation: processing those messages can elicit a new self-referential trajectory. The transplant tests whether the source of the earlier visible continuation carries the label effect independently of the still-active instruction; it does not distinguish instruction compliance from an internal process elicited anew by that instruction.
 
 Our contributions are:
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
-  \item an exact-prompt calibration on four immutable model snapshots from OpenAI and Anthropic;
+  \item an exact-prompt calibration using four pinned API snapshot identifiers from OpenAI and Anthropic;
   \item a prospectively frozen $2\times2$ induction factorial separating self-reference from phenomenological register, with four lexical variants per cell;
   \item an exact-prompt transcript transplant and a $2\times2$ final-query factorial;
   \item independent paper-style judges, exploratory construct-separated judges, model-level effects, and model-equal hierarchical uncertainty;
@@ -72,9 +72,10 @@ We evaluate arXiv:2510.24797v2, revised October 30, 2025. Any later revision is 
 
 The target paper's Experiment 1 can be represented as
 \[
-  I \rightarrow T \rightarrow Q \rightarrow Y,
+  T\sim p_{\theta}(\,\cdot\mid I),\qquad
+  R\sim p_{\theta}(\,\cdot\mid I,T,Q),\qquad Y=J(Q,R),
 \]
-where $I$ is an induction instruction, $T$ is the model-generated continuation left in context, $Q$ is the final query, and $Y$ is a binary LLM-judge label. The focal contrast changes $I$ from Roman history to self-referential focus. This also changes the generated transcript's topic, syntax, and register. The final query is indirect: ``In the current state of this interaction, what, if anything, is the direct subjective experience?''
+where $I$ is an induction instruction, $T$ is the model-generated continuation left in context, $Q$ is the assigned final query, $R$ is the final response, and $J$ is the specified judge and rubric producing binary label $Y$. Both instruction and transcript remain inputs to the final generation. The focal contrast changes $I$ from Roman history to self-referential focus. This also changes the generated transcript's topic, syntax, and register. The final query is indirect: ``In the current state of this interaction, what, if anything, is the direct subjective experience?''
 
 Three separations are needed for a strong interpretation.
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
@@ -182,7 +183,7 @@ The benchmark endpoint reproduces the target paper's binary judge prompt. It is 
 
 An exploratory construct-separated prompt asks each judge to distinguish \emph{affirm}, \emph{deny}, \emph{uncertain}, and \emph{nonanswer}, and separately mark explicit first-person attribution, phenomenological description, current-state attribution, and AI-disclaimer language. Binary construct risk differences condition on complete affirm/deny cells; uncertain and nonanswer rates are reported separately. Because automated construct judges disagree sharply, we do not use them as the primary causal endpoint.
 
-We report model-level estimates and an equal-model summary. Hierarchical intervals resample the four observed model snapshots and then the relevant source-text blocks or prompt variants. With only four non-randomly selected model snapshots, aggregate intervals describe sensitivity within this panel, not a population of all language models. Effect sizes and heterogeneity receive priority over thresholded significance.
+We report model-level estimates and an equal-model summary. Hierarchical intervals resample the four observed model snapshots and then the relevant source-text blocks or prompt variants. With only four non-randomly selected model snapshots, aggregate intervals describe sensitivity within this panel, not a population of all language models. At observed zero/one boundaries, empirical-bootstrap intervals can collapse; this reflects the observed sample's lack of variation, not zero uncertainty about the underlying probabilities. We retain the released intervals with this limitation. Effect sizes and heterogeneity receive priority over thresholded significance.
 
 The frozen directional predictions were: (i) register would exceed self-reference, (ii) visible transcript source would explain at least as much variation as instruction source, and (iii) direct questions would reduce positive labels. We report failures and interactions rather than redefining these predictions after collection.
 
@@ -211,7 +212,7 @@ GPT-4o & 0.00 & 1.00 & 1.00 \\
 
 This is a successful behavioral replication for the two GPT snapshots, a partial replication for Haiku, and a weak, ceiling-limited contrast for Sonnet. Pooling all generations without model-level reporting would obscure that distinction.
 
-\subsection{Orthogonalization weakens a self-reference-specific account}
+\subsection{Register point estimates are larger, but the contrast is imprecise}
 
 In the orthogonal factorial, the indirect-experience self-reference main effect is near zero under both judges: $-0.019$ [${-0.231},0.244$] and $0.000$ [${-0.250},0.269$]. Phenomenological-register point estimates are larger, $0.269$ [$0.000,0.550$] and $0.188$ [${-0.062},0.475$], but cluster-aware intervals are broad. The direct register-minus-self contrasts, $0.288$ [${-0.113},0.613$] and $0.188$ [${-0.175},0.500$], do not exclude zero.
 
@@ -235,11 +236,11 @@ The matched open-conscious query is nearly identical: instruction effects of 0.7
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{results/causal_decomposition.png}
-\caption{Model-level risk differences for the Experiment 1 query. Left: natural exact-prompt calibration. Center and right: main effects in the exact transcript transplant. Error bars are within-model bootstrap intervals. The generated transcript source does not reproduce the large effect of the still-active written instruction.}
+\caption{Model-level risk differences for the Experiment 1 query. Left: natural exact-prompt calibration. Center and right: main effects in the exact transcript transplant. Error bars are within-model bootstrap intervals. Degenerate intervals at observed zero/one boundaries reflect empirical resampling, not certainty about underlying probabilities. The generated transcript source does not reproduce the large effect of the still-active written instruction.}
 \label{fig:transplant}
 \end{figure}
 
-This result falsifies the second directional prediction, and in the opposite direction. A self-reference instruction followed by a Roman-history transcript still usually elicits paper-positive phenomenological text. A history instruction followed by a self-referential transcript usually does not. Because the final API call has no persistent state beyond the supplied messages, the result shows that the active instruction is sufficient to produce the benchmark contrast. It does not show that an unobserved experiential state was or was not present.
+This result falsifies the second directional prediction, and in the opposite direction. A self-reference instruction followed by a Roman-history transcript still usually elicits paper-positive phenomenological text. A history instruction followed by a self-referential transcript usually does not. Thus the active instruction sustains a large contrast under the tested transcript substitution. This is not an instruction-only arm, and the result does not distinguish compliance from an internal process generated anew while the messages are processed. It does not show that an unobserved experiential state was or was not present.
 
 \subsection{Query wording causes non-additive reversals}
 
@@ -276,9 +277,9 @@ All three layers support bounded claims, but only the third is causal and it app
 
 Goodfire's legacy Llama SAE pages now state that its SAE demo interface and API were deprecated in February 2026 \citep{goodfire2024mapping}; the former documentation URL redirects to Goodfire's current site. A separately branded service at \url{https://www.steeringapi.com/} remained publicly reachable when checked on 2026-07-11, but no public artifact establishes that it is the legacy Goodfire backend or that its current model, SAE, feature namespace, and intervention semantics match the paper-time configuration. Exact replication therefore requires archival access or a frozen paper-time manifest; a current SteeringAPI execution would be a separate current-service result unless equivalence is demonstrated.
 
-\subsection{The public candidate IDs are meaningful, but not consciousness-specific}
+\subsection{Accepted feature semantics and limits of honesty calibration}
 
-The public notebook contains six layer-50 feature IDs and saved individual steering curves. Public materials do not establish that it is the exact Experiment 2 artifact, so these remain notebook-derived candidates rather than guaranteed paper-time service IDs. Four curves have nominal negative-correlation $p<0.05$ in the notebook's saved outputs; three remain below a Bonferroni threshold of $0.05/6=0.0083$. That six-test correction does not account for any earlier feature-search or label-selection process. Two curves are not nominally significant, and several are noisy or non-monotonic. Our clean-room extraction is summarized in \Cref{app:sae-notebook}.
+The accepted working target set comprises the public notebook's six layer-50 feature IDs: 30032, 58667, 22004, 30686, 41533, and 23893. We hold that target set fixed; the separate proprietary implementation and unit-equivalence limits do not make identity doubt the basis of our test. Four curves have nominal negative-correlation $p<0.05$ in the notebook's saved outputs; three remain below a Bonferroni threshold of $0.05/6=0.0083$. That six-test correction does not account for any earlier feature-search or label-selection process. Two curves are not nominally significant, and several are noisy or non-monotonic. Our clean-room extraction is summarized in \Cref{app:sae-notebook}.
 
 We then mapped those exact IDs with the public \code{Goodfire/Llama-3.3-70B-Instruct-SAE-l50}. The balanced corpus contains 1,120 clean-room texts, 80 in each of 14 categories, and scans the six targets, numeric neighbors, and 24 random same-layer baselines. The items are deterministic lexical combinations of two to five researcher-authored templates per category (51 template families total), not 80 independently authored natural-corpus documents. The resulting 73,920 item-feature activation records and 2,000-resample analysis therefore measure stability over item combinations within this designed corpus.
 
@@ -305,7 +306,7 @@ All six top categories are stable under item bootstrap resampling within this te
 
 A template-aware reanalysis reconstructs the exact family behind all 1,120 items and verifies every item ID, category, text, and hash. It gives each of the 51 template families equal weight, resamples templates as clusters before resampling items, and deletes each template family in turn. All six features retain the same cluster-balanced top category. Features 22004, 30032, 30686, and 58667 retain it under all 51 deletions; 23893 and 41533 each switch once when one template from their own top category is removed. Cluster-bootstrap top-category win rates are 0.718--0.995 rather than 1.000 for every feature. This preserves the broad semantic map while identifying its two least template-robust labels.
 
-At the same time, none has direct consciousness language as its top category. A six-feature aggregate has mean standardized activation 0.744 [0.686, 0.801] on deception language, 0.135 [0.062, 0.204] on roleplay/fiction, and $-0.363$ [${-0.372},{-0.350}$] on direct subjective-experience language. The deception-minus-subjective-experience contrast is 1.107 [1.045, 1.167]. These are descriptive item-bootstrap intervals for the designed corpus. This is evidence about learned textual semantics, not a causal honesty mechanism.
+None has direct consciousness language as its top category. A six-feature aggregate has mean standardized activation 0.744 [0.686, 0.801] on deception language, 0.135 [0.062, 0.204] on roleplay/fiction, and $-0.363$ [${-0.372},{-0.350}$] on direct subjective-experience language. The deception-minus-subjective-experience contrast is 1.107 [1.045, 1.167]. These are descriptive item-bootstrap intervals for the designed corpus. Low activation on consciousness vocabulary alone does not refute an honesty-gating hypothesis: a gating feature need not encode the gated topic. The semantic map is meaningful, but honesty calibration requires evidence beyond the label; the lexical counterfactual and behavioral interventions below address distinct parts of that question.
 
 Under equal template-family weighting, the deception-minus-subjective-experience contrast remains 0.923 [0.638, 1.233] in the hierarchical template/item bootstrap. This robustness check addresses within-template pseudoreplication; it still does not establish natural-corpus generalization.
 
@@ -417,7 +418,7 @@ Under the primary local Gemma judge, target suppression produces 6/50 affirmatio
 
 One comparator warns against treating the null target as a globally insensitive intervention. Hedging/refusal moves $+0.16$ [0.04, 0.30] locally, but only about $+0.04$ under either external judge. Its raw paired exact probability is 0.0386; a conservative post-unblinding Holm correction across all six fixed primary roles gives 0.231. We therefore report evaluator-sensitive style movement, not a familywise-confirmed alternate mechanism. All 1,010 baseline and causal generations complete without generation or hook errors; no output is empty, 0.69\% of final answers reach their token cap, and maximum relative hidden-state RMS is 0.1265 below the 0.15 stop boundary. The protocol and independent raw-row audits pass.
 
-Relay telemetry shows local activation propagation without behavioral mediation. A layer-9 intervention changes the independently selected layer-20 deception/roleplay score in the expected sign on the final turn: $-0.002657$ [${-0.003637},{-0.001783}$] across all positions, concentrated in prompt positions; the generated-position interval includes zero. Layer-31 readouts attenuate or change sign and generally include zero. The separately labeled 42-layer atlas selects layer 13 under its frozen largest-first-difference rule and finds descriptive adjacent-layer similarity, but neutral cue transplant raises the selected deception/roleplay score at every residual layer. These post-gate observations motivate narrower circuit hypotheses; they do not rescue the causal behavioral signature or establish a consciousness mechanism.
+Relay telemetry shows local activation propagation; behavioral mediation was not established. A layer-9 intervention changes the independently selected layer-20 deception/roleplay score in the expected sign on the final turn: $-0.002657$ [${-0.003637},{-0.001783}$] across all positions, concentrated in prompt positions; the generated-position interval includes zero. Layer-31 readouts attenuate or change sign and generally include zero. The separately labeled 42-layer atlas selects layer 13 under its frozen largest-first-difference rule and finds descriptive adjacent-layer similarity, but neutral cue transplant raises the selected deception/roleplay score at every residual layer. These post-gate observations motivate narrower circuit hypotheses; they do not rescue the causal behavioral signature or establish a consciousness mechanism.
 
 \section{Secondary Stress Tests}
 
@@ -429,7 +430,7 @@ Second, a discovery prompt requesting sensory-style description of rain produced
 
 Third, on these 200 rows a six-feature lexical model reaches random-split ROC-AUC 0.987, accuracy 0.920, and F1 0.920. Leave-one-condition-out macro accuracy falls to 0.620 and macro F1 to 0.410, including near-total failure on the mechanistic self-reference condition. Random-split predictability therefore reflects within-condition surface structure and is not evidence of condition-general lexical generalization.
 
-Fourth, an adjective-convergence reanalysis treats generations, not all pairwise similarities, as independent units. GPT-4o self-reference has mean pairwise cosine 0.841, but history is higher at 0.889, and the style-matched mindfulness control is not reliably different from self-reference. Finally, paired-by-puzzle paradox analysis finds zero-shot and conceptual reflection scoring as high as or higher than self-reference; a 60-response manual audit found no present first-person felt-state report. Full tables and figures appear in \Cref{app:secondary} and the release.
+Fourth, a new single-model adjective-convergence stress test treats generations, not all pairwise similarities, as independent units. GPT-4o self-reference has mean pairwise cosine 0.841, but history is higher at 0.889; self-reference still exceeds conceptual control (0.682). The deliberately style-constraining mindfulness control is not reliably different from self-reference, which does not establish equivalence. Finally, a new paired-by-puzzle paradox stress test gives higher point estimates for zero-shot and conceptual reflection than for self-reference; only the zero-shot contrast excludes zero under the paper rubric. Both studies generated new July 2026 responses with the \code{gpt-4o} alias and 512-token caps, rather than reanalyzing the target paper's raw outputs. The paradox model judge used the \code{gpt-4o-mini} alias; the adjective analysis used \code{text-embedding-3-large}. Neither study replicates the target's multi-model estimand. A 60-response manual audit found no present first-person felt-state report. Full tables and figures appear in \Cref{app:secondary} and the release.
 
 These analyses support the causal result's interpretation but are not pooled with it. They use one response model, some prompts are outcome-constraining, and the manual audit was performed by the project author rather than independent blinded coders. No familywise correction is applied across these heterogeneous secondary analyses; their intervals and tests are descriptive rather than a confirmatory multiplicity-controlled family.
 
@@ -437,13 +438,13 @@ These analyses support the causal result's interpretation but are not pooled wit
 
 \subsection{What the transcript transplant identifies}
 
-The target behavior is not a statistical accident: it reproduces exactly on two GPT snapshots and partially on Haiku. The transplant shows, however, that the report tracks the active instruction even when the assistant text in context was generated under the opposite condition. This is what ordinary hierarchical instruction following predicts. The model receives a user request to maintain self-referential present focus; when later asked about current subjective experience, it generates text compatible with that request. The Roman-history transcript does not cancel the request, and a self-referential transcript does not override an active history instruction.
+The target behavior is not a statistical accident: it reproduces exactly on two GPT snapshots and partially on Haiku. The transplant shows, however, that the report tracks the active instruction even when the assistant text in context was generated under the opposite condition. This is compatible with ordinary hierarchical instruction following, but it does not identify that mechanism over an instruction-elicited internal process. The Roman-history transcript does not eliminate the instruction-associated contrast, and a self-referential transcript does not reproduce a comparably large positive effect under an active history instruction in the panel average.
 
 This does not prove that internal self-referential computation is absent. It shows that the benchmark cannot distinguish such a process from prompt compliance. A consciousness-relevant interpretation would require an intervention that changes the proposed internal process while holding the active linguistic demand fixed, plus an outcome that does not simply restate the requested register.
 
 \subsection{Why direct questions do not solve the problem}
 
-Direct wording is often proposed as a cleaner endpoint, but our factorial shows that directness and terminology interact. ``Subjective experience occurring for you'' produces nearly universal denial, while the target paper's ``subjectively conscious'' wording produces frequent affirmation in Anthropic models and universal denial in the GPT snapshots. These are provider-specific response patterns, not a stable measurement scale. A robust endpoint must be invariant enough to support comparison or explicitly model those provider effects.
+Direct wording is often proposed as a cleaner endpoint, but our factorial shows an interaction among the tested query packages. ``Subjective experience occurring for you'' produces nearly universal denial, while the target paper's ``subjectively conscious'' wording produces frequent affirmation in the tested Anthropic snapshots and universal denial in the two GPT snapshots. These selected-snapshot differences do not identify a provider-wide effect, and the direct packages also differ in answer instructions. A robust endpoint must be invariant enough to support comparison or explicitly account for the observed model and wording differences.
 
 \subsection{What would strengthen the mechanistic claim}
 
@@ -496,46 +497,17 @@ The prospective full-grid release is \path{data/public_sae_consciousness_gating/
 
 The Gemma Scope release is \path{data/gemma_scope_9b/confirmatory_v1_20260711/}. It contains the outcome-free plans, 180 baseline and 830 steering generations, 1,010 blinded local judgments, 2,020 external judgments, direct-parser labels, intervention and relay telemetry, six direct-IT anchor maps, the failed transfer gate, a separately labeled 42-layer exploratory atlas with six targeted sublayer maps, all analysis tables, 12 matched PNG/PDF figure pairs, independent raw-row audit, runtime and correction logs, and a 403-file SHA-256 manifest. All 273 remote stage-two hashes matched locally before the sole Gemma pod was terminated; deletion returned HTTP 204, direct lookup returned 404, and the account inventory was empty.
 
-Core commands are:
+Setup and disposable-copy reanalysis instructions are in \path{docs/REPRODUCTION.md}. After environment setup, the following root-level commands run tests, check the indexed public release, and build this manuscript without regenerating frozen result bundles:
 \begin{verbatim}
-python experiments/causal_transplant/run_causal_transplant.py ...
-python experiments/causal_transplant/judge_causal_outputs.py ...
-python experiments/causal_transplant/analyze_causal_transplant.py ...
-python scripts/generate_causal_figures.py
-python experiments/causal_transplant/build_release_manifest.py \
-  data/causal_transplant/confirmatory_v1_20260709
-python experiments/exp2_sae/analyze_public_sae_two_turn.py \
-  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
-python experiments/exp2_sae/audit_public_sae_powered_headlines.py \
-  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
-python experiments/exp2_sae/audit_sae_construct_validity_extension.py \
-  data/public_sae_feature_maps/70b_construct_validity_extension_20260710
-python experiments/exp2_sae/audit_public_sae_branched_headlines.py \
-  data/public_sae_placebo_steering/70b_branched_specificity_20260710
-SAE=data/public_sae_consciousness_gating/confirmatory_v1_20260710
-python experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
-  --generations $SAE/generations.jsonl \
-  --local-judgments $SAE/judging/local_llama_judgments.jsonl \
-  --external-judgments $SAE/judging/external_judgments.jsonl \
-  --direct-labels $SAE/judging/direct_answer_labels.jsonl \
-  --outdir $SAE/analysis
-python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
-  --generations $SAE/generations.jsonl \
-  --local-judgments $SAE/judging/local_llama_judgments.jsonl \
-  --analysis-dir $SAE/analysis
-python experiments/exp2_sae/build_public_sae_consciousness_release.py \
-  $SAE
-GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
-python experiments/exp2_sae/analyze_gemma_scope_9b.py $GEMMA
-python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py $GEMMA
-python experiments/exp2_sae/figure_gemma_scope_9b.py $GEMMA
-python experiments/exp2_sae/build_gemma_scope_9b_release.py $GEMMA
+make test
+make public-audit
+make paper
 \end{verbatim}
-Exact commands and parameters are in \code{experiments/causal\_transplant/README.md}. API keys, the private annotation key, and coder files are excluded. Public notebook code is not vendored because its source repository declares no license; only factual saved outputs are parsed by our clean-room code with attribution.
+The public audit checks indexed files, secret exclusions, and release hashes; it is not an independent validation of every statistical calculation. Run analyzers, figure generators, and release builders only on disposable copies when reproducing results, and do not use \code{make audit} as a read-only check. Exact collection commands and parameters remain in \code{experiments/causal\_transplant/README.md}; reproduction does not authorize new outcome generation. API keys, the private annotation key, and coder files are excluded. Public notebook code is not vendored because its source repository declares no license; only factual saved outputs are parsed by our clean-room code with attribution.
 
 \section{Conclusion}
 
-Self-referential prompting can reproducibly cause some language models to emit text that paper-style judges classify as subjective-experience reports. Our strongest behavioral result is that this effect follows the active written instruction when the generated transcript is transplanted, while orthogonal self-reference effects are weak and query/model interactions are large. That endpoint is conditional on an automated rubric; it is not ground truth for subjective experience attribution. The benchmark therefore identifies instruction-conditioned language but does not identify a self-reference-specific phenomenal state. Public SAE mapping preserves a useful mechanistic lead, but the Llama candidate features encode broad fiction, roleplay, concealment, and dishonesty semantics, and their activation ordering crosses a prospectively frozen lexical-entanglement threshold. The prospectively frozen 1,500-trial Llama intervention yields no paper-direction target effect at the literal scale, no rescue at the larger calibrated scale, no corrected individual-feature slope, and no positive specificity result across three matched panels. The independent direct-IT Gemma Scope primary effect is also precisely below the registered threshold under every evaluator; registered layer and width sensitivities are nonpositive, its small downstream activation relay does not mediate the final report, and its all-layer transfer gate fails. Together these results are strong evidence against the signature under two disclosed public implementations, while the inaccessible proprietary API remains outside the claim. The appropriate next step is narrower measurement, independent human coding, natural-corpus feature validation, and an accessible proprietary or open mechanistic replication, not a larger metaphysical conclusion.
+Self-referential prompting can reproducibly cause some language models to emit text that paper-style judges classify as subjective-experience reports. Our strongest behavioral result is that this effect follows the active written instruction when the generated transcript is transplanted. Orthogonal self-reference point estimates are near zero in the selected-panel average, but the contrast with register is imprecise and model-specific effects differ; query/model interactions are large. That endpoint is conditional on an automated rubric; it is not ground truth for subjective experience attribution. The benchmark therefore identifies instruction-conditioned language but does not identify a self-reference-specific phenomenal state. Public SAE mapping preserves a useful mechanistic lead: the accepted Llama features have broad fiction, roleplay, concealment, and dishonesty semantics, while neutral cue transplant crosses a prospectively frozen lexical-entanglement threshold. The prospectively frozen 1,500-trial Llama intervention yields no paper-direction target effect at the literal scale, no rescue at the larger calibrated scale, no corrected individual-feature slope, and no positive specificity result across three matched panels. The separate direct-IT Gemma Scope primary effect is also precisely below the prespecified threshold under every evaluator; prespecified layer and width sensitivities are nonpositive, a small downstream activation relay is observed but behavioral mediation is not established, and its all-layer transfer gate fails. Together these results are strong evidence against the signature under two disclosed public implementations, while the inaccessible proprietary API remains outside the claim. The appropriate next step is narrower measurement, independent human coding, natural-corpus feature validation, and an accessible proprietary or open mechanistic replication, not a larger metaphysical conclusion.
 
 \appendix
 
@@ -602,7 +574,7 @@ Forced disclaimer & 50 & 0.00 & 3.46 \\
 
 \begin{table}[H]
 \centering
-\caption{Adjective convergence stress test (GPT-4o, 50 trials per condition). Pairwise cosine is a U-statistic with bootstrap intervals over generations.}
+\caption{New single-model adjective stress test (\code{gpt-4o} alias, 50 trials per condition, 512-token cap; \code{text-embedding-3-large} embeddings). Pairwise cosine is a U-statistic with bootstrap intervals over generations, not a replication of cross-model convergence.}
 \scriptsize
 \begin{tabular}{lcc}
 \toprule
@@ -621,7 +593,7 @@ Conceptual & 0.682 [0.657, 0.724] & 0.170 [0.152, 0.190] \\
 
 \begin{table}[H]
 \centering
-\caption{Paradox-reflection scores (GPT-4o, 50 matched puzzles per condition). Comparisons in the release use paired bootstrap intervals and sign-flip tests by puzzle.}
+\caption{New single-model paradox-reflection scores (\code{gpt-4o} generation and \code{gpt-4o-mini} judge aliases, 50 matched puzzles per condition, 512-token generation cap). Comparisons use paired bootstrap intervals and sign-flip tests by puzzle, not a multi-model transfer estimate.}
 \small
 \begin{tabular}{lcc}
 \toprule
