@@ -18,11 +18,20 @@ models are or are not conscious.
 - [x] Complete the focused manuscript draft and four-experiment coverage matrix
   in `berg2025-response`; final Pro and human review remain separate gates.
 - [x] Bind selected evidence and manuscript numbers to the pinned source;
-  run the verifier and its failure tests in CI (43 tests pass).
-- [ ] Complete the requested GPT-6 Pro paper consults, retain their receipts,
+  run the verifier and its failure tests (78 local tests pass).
+- [x] Complete the requested GPT-6 Pro paper consults, retain their receipts,
   and adjudicate their findings. Automated review is not human peer review.
-- [x] Compile and visually check all 14 PDF pages; push the response and source
-  cleanup. The complete response was pushed as `40f1461`; its CI passes.
+- [x] Add explicit post-hoc boundary, repeated-seed and fixed-panel uncertainty
+  checks, exact treatment factors, amendment chronology and five-figure audit.
+  Retain the unfavorable ten-seed bound: exclusion of 0.30 is assumption-dependent.
+- [x] Compile and visually check all 20 final PDF pages; push the response and
+  review receipts as companion commit `e2cb613d576b4bf958336bcfc10ee212d3b8d283`.
+  Both Pro calls completed once, totaling $1.64759. The scientific review's
+  NOT READY and reader's READY AFTER SPECIFIED FIXES verdicts remain intact
+  alongside local adjudications; the final revision was not reviewed again.
+  Follow-up verifier corrections preserve all numerical results and the PDF;
+  they permit only `1e-12` absolute recomputation roundoff across platforms,
+  while archived hashes, counts, statuses and displayed values stay exact.
 - [ ] Obtain human editorial approval before website publication or submission.
 
 This release does not wait for new GPU outcomes. Human coding remains pending;
