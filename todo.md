@@ -15,12 +15,14 @@ models are or are not conscious.
   reproduction commands into `docs/REPRODUCTION.md`; preserve all evidence.
 - [x] Recheck the causal, public-SAE and Gemma headline calculations on copies
   of the frozen data, without new model calls or changing released artifacts.
-- [ ] Finish the focused manuscript and four-experiment coverage matrix.
-- [ ] Bind selected evidence and manuscript numbers to the pinned source;
-  run the verifier and its failure tests in CI.
+- [x] Complete the focused manuscript draft and four-experiment coverage matrix
+  in `berg2025-response`; final Pro and human review remain separate gates.
+- [x] Bind selected evidence and manuscript numbers to the pinned source;
+  run the verifier and its failure tests in CI (43 tests pass).
 - [ ] Complete the requested GPT-6 Pro paper consults, retain their receipts,
   and adjudicate their findings. Automated review is not human peer review.
-- [ ] Compile and visually check the PDF; push the response and source cleanup.
+- [x] Compile and visually check all 14 PDF pages; push the response and source
+  cleanup. The complete response was pushed as `40f1461`; its CI passes.
 - [ ] Obtain human editorial approval before website publication or submission.
 
 This release does not wait for new GPU outcomes. Human coding remains pending;
