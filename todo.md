@@ -7,6 +7,26 @@ models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Focused Response Release (2026-09-29)
+
+- [x] Create the public paper-specific companion repository:
+  [berg2025-response](https://github.com/tdj28/berg2025-response).
+- [x] Replace the long root README with a results-first summary and move
+  reproduction commands into `docs/REPRODUCTION.md`; preserve all evidence.
+- [x] Recheck the causal, public-SAE and Gemma headline calculations on copies
+  of the frozen data, without new model calls or changing released artifacts.
+- [ ] Finish the focused manuscript and four-experiment coverage matrix.
+- [ ] Bind selected evidence and manuscript numbers to the pinned source;
+  run the verifier and its failure tests in CI.
+- [ ] Complete the requested GPT-6 Pro paper consults, retain their receipts,
+  and adjudicate their findings. Automated review is not human peer review.
+- [ ] Compile and visually check the PDF; push the response and source cleanup.
+- [ ] Obtain human editorial approval before website publication or submission.
+
+This release does not wait for new GPU outcomes. Human coding remains pending;
+the response must say so. Keep J-lens findings separate from a consciousness
+verdict, and retain the v2 failed replay gate.
+
 This is the operational checklist. Completed evidence is preserved in the
 sections below. Do not start a later phase before its preceding freeze or gate
 is complete.

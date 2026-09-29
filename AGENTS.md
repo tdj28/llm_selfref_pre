@@ -31,6 +31,10 @@ immediately public and permanently recoverable.
 ## Project Shape
 
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
+- The paper-specific response is now maintained at
+  `https://github.com/tdj28/berg2025-response`. This repository retains the full
+  experimental record. Keep the root README short and results-first; detailed
+  commands belong in `docs/REPRODUCTION.md`, with disposable-copy reanalysis.
 - `todo.md` is the finish-line checklist. It separates completed evidence from genuine remaining work and external blockers.
 - `docs/CONFIRMATORY_PROTOCOL.md` is the authoritative protocol for the causal factorial and transcript-transplant study, including the dated analysis amendment.
 - `docs/CLAIM_LEDGER.md` maps every headline claim to its artifacts, analysis code, permissible wording, and forbidden overclaims.
