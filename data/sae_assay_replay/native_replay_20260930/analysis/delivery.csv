@@ -1,0 +1,5 @@
+historical_split,mode,fidelity_denominator,fidelity_fraction,norm_denominator,norm_fraction,zero_request_positions,rounded_away_positions,median_non_target_changed,requested_nonspecial_positions,median_non_target_changed_requested_only,median_non_target_change_norm,median_reconstruction_relative_error,all_components_pass
+calibration,suppression,2261,0.6625386996904025,2261,1.0,4756,0,0.0,2261,199.0,0.0,0.5561746954917908,False
+calibration,amplification,2261,0.6735957540911102,2261,1.0,4756,0,0.0,2261,215.0,0.0,0.5561746954917908,False
+validation,suppression,2323,0.6577701248385708,2323,1.0,4685,0,0.0,2323,199.0,0.0,0.5581910014152527,False
+validation,amplification,2323,0.6659492036160137,2323,1.0,4685,0,0.0,2323,214.0,0.0,0.5581910014152527,False

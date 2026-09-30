@@ -26,6 +26,18 @@ implementations are automated checks, not independent human validation.
 
 ## Public SAE Evidence
 
+The later [native SAE replay](SAE_ASSAY_REPLAY_RESULTS_20260930.md) is
+engineering on saved states, not a new behavioral replication. Its complete
+544-row release is `data/sae_assay_replay/native_replay_20260930/`; frozen
+analysis is `experiments/sae_assay_replay/analysis.py`. All 24 native median
+efficacy checks pass and every realized edit meets the norm limit. Fidelity is
+65.8--67.4% versus the unchanged 95% requirement, and 22004 has only 16/23
+eligible positions. Permissible wording: "Native coordinate delivery improves,
+but the assay remains unqualified." Forbidden: "consciousness suppression
+replicated," "fresh validation passed," or "the older behavioral null is now
+mechanistically validated." The 224-text exposure design has no activation
+outcomes. Preserve the failed live-snapshot audit and its reconciliation.
+
 | Claim | Status | Direct artifact | Analysis code | Permissible wording |
 |---|---|---|---|---|
 | The six public candidate feature IDs are meaningful under the public Goodfire SAE. | Supported within a designed template corpus | `data/public_sae_feature_maps/70b_balanced_80_20260709/`, including `independent_headline_audit.json` and `template_robustness/` | `map_public_sae_features.py`, `analyze_public_sae_mapping_stability.py`, `analyze_public_sae_mapping_template_robustness.py`, `audit_public_sae_mapping_headlines.py` | "All six retain the same cluster-balanced top category; four survive every template deletion and two switch once. The broad semantic map is robust within the designed corpus, not yet validated on natural text." |

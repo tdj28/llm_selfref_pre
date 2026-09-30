@@ -52,8 +52,11 @@ accurately. None meets every frozen qualification rule. Its 3,897 rows, 544
 clean states, four figure sets and a disclosed audit-ordering correction are
 released; this is not another consciousness-report steering result.
 The [offline redesign](docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md) tests a
-norm-capped alternative using saved geometry, without GPU spending. Its native
-delivery and rare-feature coverage still require validation.
+norm-capped alternative using saved geometry. The subsequent
+[native replay](docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md) reaches the median
+coordinate targets in the fixed 544-state panel, within the norm limit. Vector
+fidelity still fails, as does rare-feature exposure. Full-model behavioral
+qualification remains open; the raw replay and two figure pairs are released.
 
 Results and their supporting files:
 [causal analysis](docs/CLAIM_LEDGER.md),

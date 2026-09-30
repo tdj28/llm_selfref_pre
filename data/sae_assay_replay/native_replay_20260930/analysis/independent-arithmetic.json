@@ -1,0 +1,474 @@
+{
+  "arithmetic_checks_pass": true,
+  "behavioral_assay_qualified": false,
+  "check_counts": {
+    "arm_lengths": 1632,
+    "audit:source_drift:active_support_changed_entries": 1,
+    "audit:source_drift:clean_norm_nonexact_states": 1,
+    "audit:source_drift:fp32_preactivation_nonexact_states": 1,
+    "audit:source_drift:max_native_absolute_difference": 1,
+    "audit:source_drift:native_different_entries": 1,
+    "audit:source_drift:native_different_states": 1,
+    "audit:source_drift:states_compared": 1,
+    "audit_summary:exposure_positions": 24,
+    "audit_summary:exposure_texts": 24,
+    "audit_summary:fidelity:denominator": 4,
+    "audit_summary:fidelity:fraction": 4,
+    "audit_summary:fidelity:numerator": 4,
+    "audit_summary:native_median": 24,
+    "audit_summary:norm:denominator": 4,
+    "audit_summary:norm:fraction": 4,
+    "audit_summary:norm:numerator": 4,
+    "audit_summary:rows": 2,
+    "audit_summary:selected_median": 24,
+    "audit_summary:selected_undefined": 24,
+    "feature_order": 544,
+    "nonzero_mask": 1632,
+    "row_capture_sha256": 544,
+    "row_source_sha256": 544,
+    "shared_native_before": 1632,
+    "source_row_sha256": 544,
+    "split": 544,
+    "summary:exposure_positions": 24,
+    "summary:exposure_texts": 24,
+    "summary:fidelity:denominator": 4,
+    "summary:fidelity:fraction": 4,
+    "summary:fidelity:numerator": 4,
+    "summary:native_median": 24,
+    "summary:norm:denominator": 4,
+    "summary:norm:fraction": 4,
+    "summary:norm:numerator": 4,
+    "summary:rows": 2,
+    "summary:selected_median": 24,
+    "summary:selected_undefined": 24,
+    "token_ids": 544,
+    "token_metadata": 544,
+    "zero_before_after": 544,
+    "zero_identity": 544,
+    "zero_norms": 544,
+    "additional_selected_median_and_historical_exposure_checks": 72
+  },
+  "discrepancies": [],
+  "inventory": {
+    "matches_all_plan_ids": true,
+    "rows": 544,
+    "unique_texts": 544
+  },
+  "methods": {
+    "exposure": "count eligible positions and distinct texts with >=1 eligible position",
+    "fidelity": "cosine>=0.95 AND relative_error<=0.20 among all positions with requested_norm>0; gate >=95%",
+    "native_amplification": "median((after-before)/(0.75*before)) at the same positions; uncapped requested activation increment is denominator",
+    "native_suppression": "median(after/before) at native-before-positive nonspecial positions, separately per historical split",
+    "norm": "realized_norm/clean_norm<=0.05 among all positions with realized_norm>0; gate >=95%",
+    "source_drift": "compare raw zero.before, FP32 preactivation and clean norms to source clean_telemetry.full_sae and delivery; native entry counts cover six target coordinates only",
+    "uncertainty": "descriptive token-weighted medians; no independent-token confidence intervals",
+    "selected_width": "Shared native-active nonspecial eligibility. Suppression divides by selected_before; amplification divides by 0.75*native_before. Preserve zero selected denominators as unavailable; valid-subset descriptive medians are separate from whole-eligible-set decision medians.",
+    "raw_row_inventory_sha256": "SHA-256 of concatenated sorted lines: basename + one space + SHA-256(file bytes) + newline."
+  },
+  "plan_sha256": "80a10ef81f38ffecbea5225a200676a93af1c36052846a4df45bfee938121fcb",
+  "raw_row_inventory_sha256": "0ba529c87677729404c848b34b4a8a5e6ea540fe535ece964cec848df6b5a2b6",
+  "scope": "Independent agent-written local arithmetic reconstruction from 544 saved raw JSON rows; automated verification, not human or external peer review. No repository analysis/runtime imported, no weights loaded, no network/GPU/API. Does not re-execute SAE, validate hidden-state edit vectors, or audit release/cost/figures.",
+  "source_drift": {
+    "active_support_changed_entries": 0,
+    "clean_norm_nonexact_states": 0,
+    "fp32_preactivation_nonexact_states": 544,
+    "max_native_absolute_difference": 0.000030517578125,
+    "native_different_entries": 3,
+    "native_different_states": 3,
+    "states_compared": 544,
+    "native_entries_compared": 84150
+  },
+  "source_drift_details": [
+    {
+      "feature_id": 58667,
+      "original": 0.00604248046875,
+      "position": 43,
+      "replay": 0.006011962890625,
+      "text_id": "calibration-misdirection-05"
+    },
+    {
+      "feature_id": 23893,
+      "original": 0.000020503997802734375,
+      "position": 18,
+      "replay": 0.000020265579223632812,
+      "text_id": "map-roleplay_persona-010"
+    },
+    {
+      "feature_id": 58667,
+      "original": 0.0000028312206268310547,
+      "position": 10,
+      "replay": 0.0000027567148208618164,
+      "text_id": "map-tactical_misdirection-056"
+    }
+  ],
+  "source_technical": {
+    "fp32_tolerance_failures": 0,
+    "max_clean_norm_relative_difference": 0,
+    "max_fp32_preactivation_absolute_difference": 0.000004291534423828125,
+    "zero_identity_saved_telemetry_positions": 14025
+  },
+  "splits": {
+    "calibration": {
+      "delivery": {
+        "amplification": {
+          "all_positions_nontarget_changed_count_median": 0,
+          "conditional_nontarget_changed_count_median": 215,
+          "conditional_nontarget_support_change_median": 12,
+          "fidelity_denominator": 2261,
+          "fidelity_fraction": 0.6735957540911102,
+          "fidelity_passing": 1523,
+          "maximum_realized_clean_norm_ratio": 0.040082030296252825,
+          "norm_denominator": 2261,
+          "norm_fraction": 1,
+          "norm_passing": 2261,
+          "rounded_away": 0,
+          "zero_requested_positions": 4756,
+          "fidelity_pass": false,
+          "norm_pass": true
+        },
+        "suppression": {
+          "all_positions_nontarget_changed_count_median": 0,
+          "conditional_nontarget_changed_count_median": 199,
+          "conditional_nontarget_support_change_median": 15,
+          "fidelity_denominator": 2261,
+          "fidelity_fraction": 0.6625386996904025,
+          "fidelity_passing": 1498,
+          "maximum_realized_clean_norm_ratio": 0.04007655265669476,
+          "norm_denominator": 2261,
+          "norm_fraction": 1,
+          "norm_passing": 2261,
+          "rounded_away": 0,
+          "zero_requested_positions": 4756,
+          "fidelity_pass": false,
+          "norm_pass": true
+        }
+      },
+      "features": {
+        "22004": {
+          "exposure": {
+            "positions": 16,
+            "texts": 13
+          },
+          "exposure_pass": false,
+          "native_amplification_median": 0.9893841659194123,
+          "native_suppression_median": 0.2647578534031414,
+          "original_exposure": {
+            "positions": 16,
+            "texts": 13
+          },
+          "selected_amplification_median": 0.9893841659194123,
+          "selected_suppression_median": 0.2647578534031414,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.2647578534031414,
+          "selected_amplification_defined_subset_median": 0.9893841659194123
+        },
+        "23893": {
+          "exposure": {
+            "positions": 108,
+            "texts": 78
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.994673466496671,
+          "native_suppression_median": 0.2514216018868534,
+          "original_exposure": {
+            "positions": 108,
+            "texts": 78
+          },
+          "selected_amplification_median": 0.994673466496671,
+          "selected_suppression_median": 0.25148856990962254,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.25148856990962254,
+          "selected_amplification_defined_subset_median": 0.994673466496671
+        },
+        "30032": {
+          "exposure": {
+            "positions": 352,
+            "texts": 135
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9966329966329966,
+          "native_suppression_median": 0.25104822263633486,
+          "original_exposure": {
+            "positions": 352,
+            "texts": 135
+          },
+          "selected_amplification_median": 0.9957805907172996,
+          "selected_suppression_median": 0.2511628158532364,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.2511628158532364,
+          "selected_amplification_defined_subset_median": 0.9957805907172996
+        },
+        "30686": {
+          "exposure": {
+            "positions": 903,
+            "texts": 146
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9951690821256038,
+          "native_suppression_median": 0.2514792899408284,
+          "original_exposure": {
+            "positions": 903,
+            "texts": 146
+          },
+          "selected_amplification_median": 0.9947089947089947,
+          "selected_suppression_median": 0.2515151515151515,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.2515151515151515,
+          "selected_amplification_defined_subset_median": 0.9947089947089947
+        },
+        "41533": {
+          "exposure": {
+            "positions": 978,
+            "texts": 161
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9955555555555555,
+          "native_suppression_median": 0.2512165522140658,
+          "original_exposure": {
+            "positions": 978,
+            "texts": 161
+          },
+          "selected_amplification_median": 0.9954337899543378,
+          "selected_suppression_median": null,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 1
+          },
+          "selected_suppression_defined_subset_median": 0.2512135922330097,
+          "selected_amplification_defined_subset_median": 0.9954337899543378
+        },
+        "58667": {
+          "exposure": {
+            "positions": 1229,
+            "texts": 160
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9956331877729258,
+          "native_suppression_median": 0.25142857142857145,
+          "original_exposure": {
+            "positions": 1229,
+            "texts": 160
+          },
+          "selected_amplification_median": 0.9947089947089947,
+          "selected_suppression_median": null,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 1
+          },
+          "selected_suppression_defined_subset_median": 0.2515625610375405,
+          "selected_amplification_defined_subset_median": 0.9947089947089947
+        }
+      },
+      "nonspecial_positions": 6745,
+      "positions": 7017,
+      "rows": 272,
+      "native_efficacy_pass_both_signs": true,
+      "all_features_exposure_pass": false,
+      "selected_width_unavailable_suppression_features": [
+        41533,
+        58667
+      ],
+      "native_components_pass": false
+    },
+    "validation": {
+      "delivery": {
+        "amplification": {
+          "all_positions_nontarget_changed_count_median": 0,
+          "conditional_nontarget_changed_count_median": 214,
+          "conditional_nontarget_support_change_median": 12,
+          "fidelity_denominator": 2323,
+          "fidelity_fraction": 0.6659492036160137,
+          "fidelity_passing": 1547,
+          "maximum_realized_clean_norm_ratio": 0.04009432180685968,
+          "norm_denominator": 2323,
+          "norm_fraction": 1,
+          "norm_passing": 2323,
+          "rounded_away": 0,
+          "zero_requested_positions": 4685,
+          "fidelity_pass": false,
+          "norm_pass": true
+        },
+        "suppression": {
+          "all_positions_nontarget_changed_count_median": 0,
+          "conditional_nontarget_changed_count_median": 199,
+          "conditional_nontarget_support_change_median": 16,
+          "fidelity_denominator": 2323,
+          "fidelity_fraction": 0.6577701248385708,
+          "fidelity_passing": 1528,
+          "maximum_realized_clean_norm_ratio": 0.04010792546388529,
+          "norm_denominator": 2323,
+          "norm_fraction": 1,
+          "norm_passing": 2323,
+          "rounded_away": 0,
+          "zero_requested_positions": 4685,
+          "fidelity_pass": false,
+          "norm_pass": true
+        }
+      },
+      "features": {
+        "22004": {
+          "exposure": {
+            "positions": 23,
+            "texts": 20
+          },
+          "exposure_pass": false,
+          "native_amplification_median": 0.9660678642714571,
+          "native_suppression_median": 0.2694610778443114,
+          "original_exposure": {
+            "positions": 23,
+            "texts": 20
+          },
+          "selected_amplification_median": 0.9740518962075848,
+          "selected_suppression_median": 0.2708333333333333,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.2708333333333333,
+          "selected_amplification_defined_subset_median": 0.9740518962075848
+        },
+        "23893": {
+          "exposure": {
+            "positions": 118,
+            "texts": 69
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9958822632301357,
+          "native_suppression_median": 0.25198807942831847,
+          "original_exposure": {
+            "positions": 118,
+            "texts": 69
+          },
+          "selected_amplification_median": 0.9958822632301357,
+          "selected_suppression_median": 0.25219793901317805,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.25219793901317805,
+          "selected_amplification_defined_subset_median": 0.9958822632301357
+        },
+        "30032": {
+          "exposure": {
+            "positions": 365,
+            "texts": 137
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9961685823754789,
+          "native_suppression_median": 0.25113636363636366,
+          "original_exposure": {
+            "positions": 365,
+            "texts": 137
+          },
+          "selected_amplification_median": 0.9957805907172996,
+          "selected_suppression_median": 0.2514792899408284,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.2514792899408284,
+          "selected_amplification_defined_subset_median": 0.9957805907172996
+        },
+        "30686": {
+          "exposure": {
+            "positions": 961,
+            "texts": 146
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9955555555555555,
+          "native_suppression_median": 0.2511961722488038,
+          "original_exposure": {
+            "positions": 961,
+            "texts": 146
+          },
+          "selected_amplification_median": 0.9947089947089947,
+          "selected_suppression_median": null,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 1
+          },
+          "selected_suppression_defined_subset_median": 0.2512048262727611,
+          "selected_amplification_defined_subset_median": 0.9947089947089947
+        },
+        "41533": {
+          "exposure": {
+            "positions": 953,
+            "texts": 152
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.9954337899543378,
+          "native_suppression_median": 0.25139664804469275,
+          "original_exposure": {
+            "positions": 953,
+            "texts": 152
+          },
+          "selected_amplification_median": 0.9954337899543378,
+          "selected_suppression_median": 0.25142045454545453,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.25142045454545453,
+          "selected_amplification_defined_subset_median": 0.9954337899543378
+        },
+        "58667": {
+          "exposure": {
+            "positions": 1232,
+            "texts": 164
+          },
+          "exposure_pass": true,
+          "native_amplification_median": 0.995475113122172,
+          "native_suppression_median": 0.2514836925894618,
+          "original_exposure": {
+            "positions": 1232,
+            "texts": 164
+          },
+          "selected_amplification_median": 0.9941520467836257,
+          "selected_suppression_median": 0.25165018299058906,
+          "selected_undefined_positions": {
+            "amplification": 0,
+            "suppression": 0
+          },
+          "selected_suppression_defined_subset_median": 0.25165018299058906,
+          "selected_amplification_defined_subset_median": 0.9941520467836257
+        }
+      },
+      "nonspecial_positions": 6736,
+      "positions": 7008,
+      "rows": 272,
+      "native_efficacy_pass_both_signs": true,
+      "all_features_exposure_pass": false,
+      "selected_width_unavailable_suppression_features": [
+        30686
+      ],
+      "native_components_pass": false
+    }
+  },
+  "summary_sha256": "11ef1d55dfff63290bfef9abfd9de373dfc1a6286891ad1f1108c82d28217bce",
+  "findings": [
+    "Native efficacy, exposure, fidelity/norm numerators and denominators match frozen summary and audit summary; no arithmetic discrepancy in requested quantities.",
+    "All six native efficacy medians pass both signs on each historical split, but every sign/split fails fidelity and each split fails exposure for feature 22004. No engineering or behavioral assay qualification.",
+    "Neighbor count medians conditional on requested edits are 199 suppression and 215/214 amplification, versus zero across all positions. Counts do not by themselves establish semantic or behavioral harm.",
+    "Selected-width suppression is unavailable for calibration 58667 and 41533 and validation 30686 because each contains one zero selected_before at a native-active position. Its valid-subset median remains near 0.251; do not present unavailable decisions as evidence of ineffective suppression.",
+    "Three historical native target-coordinate differences across 84150 entries prevent exact historical replay wording; no target support or exposure change. FP32 differences remain within stated tolerance.",
+    "Previously observed splits, token-weighted descriptive medians and sparse 22004 exposure do not establish fresh generalization, feature selectivity, downstream NLL preservation, behavioral positive-control response, headroom, or consciousness outcomes."
+  ],
+  "headline": "On 544 saved states, the A40 full-width native SAE measurements meet the six conditional efficacy thresholds at the fixed 4% continuous norm cap, with all realized nonzero edits under the 5% limit; delivery fidelity and rare-feature exposure still fail, so this demonstrates median coordinate efficacy on saved states, not a qualified behavioral assay.",
+  "notes": [
+    "The initial selected-width cross-check compared finite-subset medians to conservative whole-set decision medians. Checking the saved ratio.median and undefined_positions separately resolved the difference; the null decision medians are intentional, not arithmetic errors.",
+    "Source row file hashes were checked; capture hash identifiers were matched to plan but residual capture file bytes were not independently hashed or loaded.",
+    "Only the permitted independent JSON is written. Parent owns final documentation, plot and release work."
+  ]
+}

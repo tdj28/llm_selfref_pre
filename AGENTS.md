@@ -30,6 +30,16 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- Native SAE-only replay is complete at
+  `data/sae_assay_replay/native_replay_20260930/`; see
+  `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`. All 544 states pass structural
+  audit, all six native median efficacy checks pass both signs/splits, and norm
+  checks pass. Fidelity is only 65.8--67.4% versus 95%; 22004 exposure still
+  fails. Do not call this behavioral qualification or fresh validation.
+  Preserve the failed in-flight snapshot audit and its byte-exact reconciliation.
+  Pod mv3qjsgn79vjos is deleted (GET404); do not reuse it. New cost bound
+  $0.250534; cumulative diagnostic/repair bound $27.635070. The 224-text
+  exposure design is token-certified but not activation-screened.
 - The owner authorized the next native SAE-only replay on 2026-09-30.
   `docs/SAE_ASSAY_REPLAY_PROTOCOL_20260930.md` and the separate
   `experiments/sae_assay_replay/` package govern it. Replay all 544 saved

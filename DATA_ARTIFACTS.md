@@ -1,5 +1,12 @@
 # Data Artifacts
 
+`data/sae_assay_replay/native_replay_20260930/` is the completed 544-state
+native SAE-only engineering release. It preserves zero and both signed arms,
+full-width/selected-width telemetry, two figure pairs, the complete audit,
+streaming audit failure/reconciliation, runtime environment, hashes and verified
+pod deletion/cost. Native median efficacy improves, but fidelity and rare-feature
+coverage still fail; no behavioral assay or fresh-validation pass is claimed.
+
 `data/sae_assay_replay/plan_20260930/` is the separate result-free native
 SAE-only replay plan. It binds all 544 existing clean captures and code hashes;
 it does not contain new activations or a successful validation result. The

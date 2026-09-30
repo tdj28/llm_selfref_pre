@@ -123,15 +123,24 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   inequality bounds, 4%-capped active-support prototype, failure census and
   windowed variant's coverage loss. This is exploratory; native behavior is
   not tested and neither prototype qualifies. New spending: zero.
-- [ ] Validate the capped prototype using the pinned SAE and saved states
+- [x] Validate the capped prototype using the pinned SAE and saved states
   before full-model generation. Record actual native re-encoding, rounding,
   all-active and dispatched-only efficacy, neighbor changes and every skipped
   position. Do not accept the windowed variant as a six-feature solution:
   it dispatches zero calibration positions for feature 22004.
+  The complete 544-state native replay passes structural audit and native
+  median efficacy for all six IDs/signs/splits, with 100% norm compliance.
+  Fidelity is only 65.8--67.4%; 22004 has 16/23 eligible positions. Neither
+  unchanged gate passes. New cost $0.250534; owned pod deleted. Full results:
+  `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`.
+- [ ] Repair delivery fidelity under the same thresholds before another
+  full-model intervention run; native coordinate efficacy alone is insufficient.
 - [ ] Build activation-enriched discovery and family-disjoint fresh validation
   for all six IDs, with a frozen screening cap and separate representative
   panel. Preserve the original 100-position/six-text minimum; do not inflate
   exposure with duplicate texts, NF4 measurements or dropped feature IDs.
+  The 224-text authored design and exact tokenizer certificate are complete;
+  actual activation screening and delivered-edit validation remain unrun.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

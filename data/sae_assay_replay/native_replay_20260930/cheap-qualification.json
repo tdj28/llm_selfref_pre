@@ -1,0 +1,1 @@
+{"checks":{"amplification":true,"inactive_zero":true,"neighbor_zero":true,"suppression":true,"zero":true},"device":"cuda","pass":true,"seconds":0.908888173289597,"synthetic_only":true}
