@@ -336,6 +336,10 @@ data/sae_assay_diagnostic/*
 !data/sae_assay_diagnostic/bootstrap_failure_20260930/
 !data/sae_assay_diagnostic/bootstrap_failure_20260930/*.json
 !data/sae_assay_diagnostic/bootstrap_failure_20260930/*.log
+!data/sae_assay_diagnostic/cuda_qualification_20260930/
+!data/sae_assay_diagnostic/cuda_qualification_20260930/*.json
+!data/sae_assay_diagnostic/cuda_qualification_20260930/*.md
+!data/sae_assay_diagnostic/cuda_qualification_20260930/*.txt
 /blogs/
 
 # Jupyter Notebook
@@ -360,6 +364,7 @@ dmypy.json
 *.fls
 *.log
 !data/sae_assay_diagnostic/bootstrap_failure_20260930/controller.log
+!data/sae_assay_diagnostic/cuda_qualification_20260930/controller.log
 *.out
 *.synctex.gz
 *.toc

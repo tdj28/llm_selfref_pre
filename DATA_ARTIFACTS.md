@@ -9,6 +9,10 @@ Bootstrap-only amendment A1 has a separate outcome-free plan in
 `data/sae_assay_diagnostic/stage1_plan_20260930a/`. The original plan is preserved;
 the scientific design is unchanged and the failed attempt counts toward the
 same budget.
+`data/sae_assay_diagnostic/cuda_qualification_20260930/` preserves the passing
+RTX 4090 tiny-Llama qualification: 19 known-answer/identity/replay checks, one
+NF4 linear-layer check, exact runtime dependencies, raw logs and verified
+termination. This does not validate 70B delivery or any consciousness endpoint.
 Live controller credentials, SSH files, and temporary retrieval snapshots stay
 under ignored `out/`, never in a public result bundle.
 

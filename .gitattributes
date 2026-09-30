@@ -14,6 +14,7 @@ reviews/sae_assay_pre_spend_20260929/review.md whitespace=-blank-at-eol
 
 # Preserve the original bootstrap error bytes bound in its failure manifest.
 data/sae_assay_diagnostic/bootstrap_failure_20260930/controller.log whitespace=-blank-at-eol
+data/sae_assay_diagnostic/cuda_qualification_20260930/controller.log whitespace=-blank-at-eol
 
 # Preserve immutable consciousness-study provenance bytes. Markdown's two-space
 # hard breaks and the archived review diff are intentional; the two source/test
