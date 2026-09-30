@@ -347,6 +347,10 @@ data/sae_assay_diagnostic/*
 !data/sae_assay_diagnostic/stage1_20260930/*.txt
 !data/sae_assay_diagnostic/stage1_20260930/rows/
 !data/sae_assay_diagnostic/stage1_20260930/rows/*.json
+!data/sae_assay_diagnostic/stage1_20260930/figures/
+!data/sae_assay_diagnostic/stage1_20260930/figures/*.md
+!data/sae_assay_diagnostic/stage1_20260930/figures/*.svg
+!data/sae_assay_diagnostic/stage1_20260930/figures/*.png
 /blogs/
 
 # Jupyter Notebook
@@ -376,6 +380,7 @@ dmypy.json
 *.synctex.gz
 *.toc
 *.pdf
+!data/sae_assay_diagnostic/stage1_20260930/figures/*.pdf
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/*.pdf
 !data/gemma_scope_9b/**/*.pdf
 !data/sae_jlens_audit/confirmatory_v1_20260711/**/*.pdf
