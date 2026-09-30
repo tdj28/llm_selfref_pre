@@ -359,6 +359,7 @@ dmypy.json
 *.fdb_latexmk
 *.fls
 *.log
+!data/sae_assay_diagnostic/bootstrap_failure_20260930/controller.log
 *.out
 *.synctex.gz
 *.toc

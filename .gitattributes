@@ -12,6 +12,9 @@ data/public_sae_feature_maps/70b_construct_validity_extension_20260710/feature_c
 # Preserve the provider's original Markdown hard breaks and review hash.
 reviews/sae_assay_pre_spend_20260929/review.md whitespace=-blank-at-eol
 
+# Preserve the original bootstrap error bytes bound in its failure manifest.
+data/sae_assay_diagnostic/bootstrap_failure_20260930/controller.log whitespace=-blank-at-eol
+
 # Preserve immutable consciousness-study provenance bytes. Markdown's two-space
 # hard breaks and the archived review diff are intentional; the two source/test
 # files are frozen into the r15 source inventory with their existing EOF bytes.
