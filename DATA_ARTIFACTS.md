@@ -17,7 +17,14 @@ termination. This does not validate 70B delivery or any consciousness endpoint.
 diagnostic: 443 raw rows and 468 hash-verified remote artifacts. Neither dose
 qualified, the local paper baseline was 71/80, and the formatting candidate
 had no calibration activation. Conditional branches were not run by gate.
-The B200 was retrieved and deleted. Modern judging remains in progress.
+The B200 was retrieved and deleted. The modern panel is complete in
+`data/sae_assay_diagnostic/stage1_judges_20260930/`: 24 fixture and 160 baseline
+judgments, no missingness or retries. Both readers return 0/80 explicit but
+78/80 inclusive current self-attributions; both endpoints must be reported.
+The machine path in the input attestation is omitted in a labeled projection;
+the four substantive receipt streams and all raw provider responses are exact.
+The final tables, two figure sets and total cost bound ($13.0788598033) are in
+the main diagnostic release. This is not a new target steering outcome.
 The original 247-row calibration snapshot remains unchanged. Never overwrite
 an already released raw row.
 Live controller credentials, SSH files, and temporary retrieval snapshots stay

@@ -40,3 +40,10 @@ CPU tests use `tests/test_sae_assay_*.py`. Transformers
 weights or API calls are used. The review packet records the exact executed
 command, results and source hashes. All experimental artifacts must use a new
 namespace; historical releases remain unchanged.
+
+Post-outcome release utilities (not part of the prospective runtime):
+`audit_judges.py` verifies the byte-exact provider receipt streams against
+public response inputs without exposing workstation paths. `reproduce.py`
+checks GPU hashes and frozen calibration decisions, runs that receipt audit,
+recomputes baseline rates and creates descriptive figures in a fresh output
+directory. Neither utility dispatches model calls or changes the frozen plan.

@@ -30,3 +30,24 @@ python -m experiments.sae_assay_diagnostic.figures \
 
 The plotting code was added after calibration outcomes and only displays the
 already frozen diagnostics. It changes no test, threshold, analysis, or raw row.
+
+## Core Baseline Readers
+
+`core-baseline-readers` displays all five eligible reader/endpoint estimates
+on the same 80 unsteered BF16 paper-input trials. Horizontal bars are Wilson
+95% intervals under independent fixed-prompt seeded draws. The local notebook
+rubric is absent because it failed its fixture gate, not because it returned
+zero labels. Sixteen first turns and two final answers were token-capped and
+retained. No prompt-population inference is claimed.
+
+OpenAI denotes GPT-6 Astra; Anthropic denotes Claude Opus 5.5. Each produced
+0/80 explicit and 78/80 explicit-or-implicit current self-attributions. The
+implicit cases remain positive under the inclusive endpoint. These two lines
+must not be separated to suggest that experience claims disappeared. Model
+agreement is not human validation, and comparison with local Llama changes
+both judge and rubric. The local paper-rubric estimate is 71/80.
+
+Source: `../analysis/summary.json`. Reproduce with the same command above,
+substituting `--summary data/sae_assay_diagnostic/stage1_20260930/analysis/summary.json`
+for `--selection`. The separate one-command release reproduction rebuilds
+both figures without changing raw data.

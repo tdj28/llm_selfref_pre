@@ -39,6 +39,13 @@ the investigators had never seen a related result.
 The [September review response](docs/CLAUDE_REVIEW_RESPONSE_20260929.md) records
 the corrections, disagreements and remaining experiments.
 
+The [new assay diagnostic](docs/SAE_ASSAY_STAGE1_RESULTS_20260930.md) is complete:
+neither proposed BF16 dose passed delivery qualification. The unsteered local
+paper score was 71/80; Astra and Opus each counted 0/80 explicit but 78/80
+contextually implicit-or-explicit self-attributions. Both endpoints matter.
+This does not supply a comparable target-steering test or a consciousness
+verdict. Raw data, evaluator receipts and two figures are released.
+
 Results and their supporting files:
 [causal analysis](docs/CLAIM_LEDGER.md),
 [Llama steering](data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json),

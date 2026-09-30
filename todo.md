@@ -90,8 +90,14 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   failed branches, and verify deletion of all three newly owned pods. No
   pre-existing pod was claimed. Target doses and formatting candidate failed
   qualification; local paper baseline 71/80 fails the headroom window.
-- [ ] Finish the eligible Astra/Opus baseline panel, portable receipt audit,
-  final figures and cost summary. This does not authorize Stage 2.
+- [x] Finish the eligible Astra/Opus baseline panel, portable receipt audit,
+  final figures and cost summary. All 184 calls validate; each modern reader
+  gives 0/80 explicit but 78/80 inclusive self-attributions. Retain both.
+  Full diagnostic upper bound $13.0788598033. No Stage 2 was authorized.
+- [ ] Integrate the completed diagnostic into the focused companion using
+  pinned evidence and its verifier, then obtain editorial review. The proposed
+  BF16 operator failed qualification; do not portray it as an explanation of
+  the older NF4 run or as a new consciousness-report non-replication.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.

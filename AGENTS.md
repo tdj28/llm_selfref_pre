@@ -56,7 +56,12 @@ immediately public and permanently recoverable.
   activation. Gated validation/behavioral/optional branches were not run, not
   zero effects. Both replacement qualification pod `qgpy4gtpswy460` and main
   B200 `oyvmqyc22wffsd` were retrieved/deleted, direct GET 404. Modern judging
-  is ongoing; see checkpoint. Do not recreate a pod or launch Stage 2 from
+  is complete: Astra and Opus each give 0/80 explicit but 78/80 inclusive
+  self-attributions, with four row-level disagreements on the latter. Never
+  cite the explicit floor as absence of experience claims. All 184 judge
+  calls verify, no retries. Total diagnostic bound is $13.0788598033.
+  See `docs/SAE_ASSAY_STAGE1_RESULTS_20260930.md` and the sibling judge release.
+  Do not recreate a pod or launch Stage 2 from
   these assay failures without a new approved design.
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
 - The paper-specific response is now maintained at
