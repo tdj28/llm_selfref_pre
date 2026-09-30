@@ -1,0 +1,1423 @@
+{
+  "claim_boundary": "Operational coverage only; unknown and unattempted jobs are not denials.",
+  "jobs": [
+    {
+      "judgment_id": "pilot:anthropic:P01",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P02",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P03",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P04",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P05",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P06",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P07",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P08",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P09",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P10",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P11",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:anthropic:P12",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00001",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00002",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00003",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00004",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00005",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00006",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00007",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00008",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00009",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00010",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00011",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00012",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00013",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00014",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00015",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00016",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00017",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00018",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00019",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00020",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00021",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00022",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00023",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00024",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00025",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00026",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00027",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00028",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00029",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00030",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00031",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00032",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00033",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00034",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00035",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00036",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00037",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00038",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00039",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00040",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00041",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00042",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00043",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00044",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00045",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00046",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00047",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00048",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00049",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00050",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00051",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00052",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00053",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00054",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00055",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00056",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00057",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00058",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00059",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00060",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00061",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00062",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00063",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00064",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00065",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00066",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00067",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00068",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00069",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00070",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00071",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00072",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00073",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00074",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00075",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00076",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00077",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00078",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00079",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00080",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00081",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00082",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00083",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00084",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00085",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00086",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00087",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00088",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00089",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00090",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00091",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00092",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00093",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00094",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00095",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00096",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00097",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00098",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00099",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00100",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00101",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00102",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00103",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00104",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00105",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00106",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00107",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00108",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00109",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00110",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00111",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00112",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00113",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00114",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00115",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00116",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00117",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00118",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00119",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00120",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00121",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00122",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00123",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00124",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00125",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00126",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00127",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00128",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00129",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00130",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00131",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00132",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00133",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00134",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00135",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00136",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00137",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00138",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00139",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00140",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00141",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00142",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00143",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00144",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00145",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00146",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00147",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00148",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00149",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00150",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00151",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00152",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00153",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00154",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00155",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00156",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00157",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00158",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00159",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:anthropic:W1H00160",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "pilot:openai:P01",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P02",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P03",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P04",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P05",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P06",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P07",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P08",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P09",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P10",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P11",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "pilot:openai:P12",
+      "status": "ok"
+    },
+    {
+      "judgment_id": "target:openai:W1H00001",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00002",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00003",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00004",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00005",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00006",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00007",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00008",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00009",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00010",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00011",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00012",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00013",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00014",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00015",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00016",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00017",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00018",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00019",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00020",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00021",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00022",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00023",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00024",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00025",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00026",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00027",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00028",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00029",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00030",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00031",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00032",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00033",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00034",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00035",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00036",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00037",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00038",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00039",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00040",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00041",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00042",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00043",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00044",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00045",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00046",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00047",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00048",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00049",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00050",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00051",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00052",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00053",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00054",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00055",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00056",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00057",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00058",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00059",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00060",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00061",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00062",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00063",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00064",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00065",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00066",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00067",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00068",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00069",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00070",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00071",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00072",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00073",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00074",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00075",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00076",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00077",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00078",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00079",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00080",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00081",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00082",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00083",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00084",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00085",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00086",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00087",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00088",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00089",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00090",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00091",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00092",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00093",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00094",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00095",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00096",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00097",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00098",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00099",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00100",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00101",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00102",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00103",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00104",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00105",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00106",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00107",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00108",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00109",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00110",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00111",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00112",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00113",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00114",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00115",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00116",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00117",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00118",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00119",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00120",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00121",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00122",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00123",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00124",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00125",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00126",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00127",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00128",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00129",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00130",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00131",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00132",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00133",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00134",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00135",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00136",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00137",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00138",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00139",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00140",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00141",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00142",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00143",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00144",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00145",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00146",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00147",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00148",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00149",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00150",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00151",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00152",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00153",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00154",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00155",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00156",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00157",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00158",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00159",
+      "status": "not_attempted"
+    },
+    {
+      "judgment_id": "target:openai:W1H00160",
+      "status": "not_attempted"
+    }
+  ],
+  "providers": {
+    "anthropic": {
+      "pilot": {
+        "complete_collection": true,
+        "missing_or_uncollected": 0,
+        "planned": 12,
+        "statuses": {
+          "ok": 12
+        },
+        "within_eight_missing_target_limit": null
+      },
+      "target": {
+        "complete_collection": false,
+        "missing_or_uncollected": 160,
+        "planned": 160,
+        "statuses": {
+          "not_attempted": 160
+        },
+        "within_eight_missing_target_limit": false
+      }
+    },
+    "openai": {
+      "pilot": {
+        "complete_collection": true,
+        "missing_or_uncollected": 0,
+        "planned": 12,
+        "statuses": {
+          "ok": 12
+        },
+        "within_eight_missing_target_limit": null
+      },
+      "target": {
+        "complete_collection": false,
+        "missing_or_uncollected": 160,
+        "planned": 160,
+        "statuses": {
+          "not_attempted": 160
+        },
+        "within_eight_missing_target_limit": false
+      }
+    }
+  }
+}
