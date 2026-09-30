@@ -62,8 +62,15 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   This is a planning draft, not an executable freeze or a completed experiment.
 - [x] Owner authorizes Stage 1 diagnostic up to $200 total, including one
   separately requested GPT Pro consultation before experiment spending.
-- [ ] Complete GPT Pro consultation and record each finding's disposition;
-  no GPU or experimental judge spending before this gate.
+- [x] Complete GPT Pro consultation and record each finding's disposition.
+  Verdict: not ready to freeze; $0.86461, no GPU spending. All four blockers
+  accepted in `docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md`, which supersedes
+  conflicting Stage 1 planning provisions. No second paid review authorized.
+- [ ] Implement the revised core-first schedule: target-delivery diagnostics,
+  80 primary baseline trials, candidate plus instruction formatting control;
+  defer panels/210 other baselines and omit experience judging of formatting.
+- [ ] Separate failure mechanisms; fix encoder-path authority, generated-token
+  replay, paired behavioral gates and branch-specific stopping before launch.
 - [ ] Complete diagnostic fixtures, positive-control task, matching, gates,
   power checks, runtime and executable freeze. Test incoming-data integrity
   before bulk collection; a null is acceptable, a broken assay is not.

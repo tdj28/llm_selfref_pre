@@ -30,6 +30,13 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- `docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md` governs the newly authorized
+  $200 Stage 1 assay diagnostic. It supersedes conflicting provisions in the
+  reviewed planning draft. GPT Pro returned `NOT READY TO FREEZE`; the single
+  consultation cost $0.86461, with no GPU or experimental API dispatch yet.
+  The code in `experiments/sae_assay_diagnostic/` is tested prototype material,
+  not an executable freeze. Complete its listed integration/measurement gates
+  before spending; Stage 2 and any second paid review require new approval.
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
 - The paper-specific response is now maintained at
   `https://github.com/tdj28/berg2025-response`. This repository retains the full

@@ -1,0 +1,127 @@
+{
+  "actual_input_characters": 46961,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 24326,
+      "characters": 24326,
+      "path": "/Users/d7082791602/PROJECTS/CONSCIOUS/docs/SAE_STEERING_ASSAY_PLAN_20260929.md",
+      "role": "compact research-director plan brief",
+      "sha256": "480df9ea1e17f624859ce443f2097d72076421a33f9f5503ded85423b2e332e4"
+    },
+    {
+      "bytes": 9895,
+      "characters": 9895,
+      "path": "/Users/d7082791602/PROJECTS/CONSCIOUS/docs/SAE_ASSAY_PRO_REVIEW_CONTEXT_20260929.md",
+      "role": "synthesized context 1",
+      "sha256": "4a3e32262960d41ffab8b7ce5a3da375dbf068868d3516a9cdd6d578278aae9c"
+    },
+    {
+      "bytes": 7938,
+      "characters": 7938,
+      "path": "/Users/d7082791602/PROJECTS/CONSCIOUS/docs/SAE_ASSAY_PRO_IMPLEMENTATION_20260929.md",
+      "role": "synthesized context 2",
+      "sha256": "0ea77604a8bb7afee735377d0f53b542e080bba4ed82cc8527a7140c86e76ad6"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 5.0,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 12.5,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-09-30T06:13:55.754917Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.86461,
+  "created_at_utc": "2026-09-30T06:11:29.758167Z",
+  "estimated_budget_reserve_usd": 2.361075,
+  "estimated_input_tokens_conservative": 15654,
+  "exact_budget_reserve_usd_after_preflight": 1.7442375,
+  "global_uniqueness_attested": false,
+  "human_approval": {
+    "major_milestone": "bounded-200-usd-sae-assay-diagnostic-before-gpu",
+    "reference": "owner-request-gpt-pro-before-spend-20260929",
+    "verification": "operator_attestation_not_independent_proof"
+  },
+  "input_rate_usd_per_million": 10.0,
+  "input_tokens_preflight": 10171,
+  "input_tokens_preflight_at_utc": "2026-09-30T06:11:30.495784Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": null,
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 60000,
+  "max_input_tokens": 20000,
+  "max_output_tokens": 6000,
+  "model": "gpt-6-astra",
+  "official_latest_model": null,
+  "output_rate_usd_per_million": 50.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "provider_response_cost_exceeded_budget_authorization": false,
+  "provider_response_cost_usd_conservative": 0.86461,
+  "provider_response_recorded_at_utc": "2026-09-30T06:13:55.753697Z",
+  "provider_terminal_status": "completed",
+  "provider_usage": {
+    "input_tokens": 41081,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 9076,
+    "output_tokens_details": {
+      "reasoning_tokens": 2578
+    },
+    "total_tokens": 50157
+  },
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "47e0eb349ebba32880eb6f34b08dda60d609b29e03ac5c2d59f3f974bbeac6f2",
+  "researcher_emphasis": {
+    "present": true,
+    "sha256": "706dd67f5071a958742712e43d97e1c3c8d54f5f626369751fb4c76164bfe40e",
+    "text": "Give the smallest useful pre-spend repair, with special attention to distinguishable failure modes, known-direction versus candidate positive controls, exact dose comparisons, staged spending, and the limitations of the supplied prototype test evidence. Do not propose favorable results or a larger study to rescue a failed diagnostic. Stage 2 is not authorized."
+  },
+  "reserved_billable_input_tokens": 78270,
+  "reserved_billable_output_tokens": 12000,
+  "response_id": "resp_04c9091a99c719c1016abca812bd4087d0a024279c7fce0ab0",
+  "response_metadata": {
+    "plan_sha256": "480df9ea1e17f624859ce443f2097d72076421a33f9f5503ded85423b2e332e4",
+    "researcher_emphasis_present": "true",
+    "researcher_emphasis_sha256": "706dd67f5071a958742712e43d97e1c3c8d54f5f626369751fb4c76164bfe40e",
+    "review_input_sha256": "ca64ca7c6135d0be044f6c0a427f4cccf8e03a2ee801f7657779b8811d0b6a75",
+    "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+    "review_scope": "director_level_plan_review",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "experiment_plan_review"
+  },
+  "response_metadata_sha256": "236c986d50ba83056086e44d2e7965f3c57764905f6f512ab533866118b4379c",
+  "response_model": "gpt-6-astra",
+  "response_sha256": "7b7468204baa91e8949393fe7a5496262af83980e6948e4fea5f70c06580db84",
+  "review_input_sha256": "ca64ca7c6135d0be044f6c0a427f4cccf8e03a2ee801f7657779b8811d0b6a75",
+  "review_instructions_sha256": "bfe68700d789a83062af44eecd4e1a9f6d45cad156132ed97c4716d77d5bfb4c",
+  "review_kind": "experiment-plan",
+  "review_request_sha256": "1e887710d05f5145f79c4b893cd9c82745b286beadd3578541ebcc765ea3176b",
+  "review_scope": "director_level_plan_review",
+  "review_sha256": "c268523e1533562a5e3f47e24d42f71a3897cd10af25071a53fb9fc7902a1c20",
+  "reviewed_packet_git_head_commit": null,
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 41081,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 9076,
+    "output_tokens_details": {
+      "reasoning_tokens": 2578
+    },
+    "total_tokens": 50157
+  }
+}
