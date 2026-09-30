@@ -117,6 +117,21 @@ distinction between coordinate equality, native re-encoding and semantic
 intervention. Plot/PDF metadata may differ between rebuilds; raw release bytes
 must not change.
 
+## Offline Assay Redesign
+
+The additive saved-data redesign has a separate, CPU-only entry point:
+
+```sh
+python -m experiments.sae_assay_repair.reproduce_feasibility \
+  --run data/sae_assay_repair/coordinate_delivery_20260930 \
+  --out out/new-offline-redesign
+```
+
+It writes a fresh directory with the failure census, conditional linear
+bounds, two prototype variants and figures. It checks the original manifest
+before/after, never loads weights and does not count historical validation as
+fresh validation. See [scope and assumptions](SAE_ASSAY_OFFLINE_REDESIGN_20260930.md).
+
 ## Gemma Scope
 
 ```sh

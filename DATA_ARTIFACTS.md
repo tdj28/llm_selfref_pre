@@ -1,5 +1,13 @@
 # Data Artifacts
 
+`data/sae_assay_repair/offline_feasibility_20260930/` contains a post-outcome
+failure census, conditional inequality bounds, bounded active-support
+prototype predictions, windowed coverage diagnostics, two figure sets and
+input/source/output hashes. It reads the completed repair without modifying
+it. No model forwards, native validation, new consciousness outcome or paid
+compute is represented. Neither prototype is a qualified assay. See
+`docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md`.
+
 `data/sae_assay_repair/coordinate_delivery_20260930/` is the completed
 prospectively frozen coordinate-delivery repair: 3,897 raw rows, 544 clean BF16
 residual/token captures, all three operator calibrations, 48 context forwards,

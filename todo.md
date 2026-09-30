@@ -118,12 +118,20 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   both numeric figure tables byte-for-byte. Full tests: 1,851 passed, 5 skipped.
   Repair cost bound $14.3056761721; cumulative diagnostic plus repair
   $27.3845359753. No target-report steering branch was added.
-- [ ] If another delivery design is proposed, use the saved clean residuals
-  first for offline coordinate/norm feasibility checks instead of re-renting
-  70B. A post-outcome search is exploratory; any selected recipe needs a new
-  freeze and separate validation. Do not lower the current gates or replace
-  feature 22004 silently, and do not confuse exact linear equality with the
-  softer native-coordinate efficacy requirement.
+- [x] Complete saved-data-only coordinate/norm feasibility work before
+  re-renting 70B. `docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md` records the
+  inequality bounds, 4%-capped active-support prototype, failure census and
+  windowed variant's coverage loss. This is exploratory; native behavior is
+  not tested and neither prototype qualifies. New spending: zero.
+- [ ] Validate the capped prototype using the pinned SAE and saved states
+  before full-model generation. Record actual native re-encoding, rounding,
+  all-active and dispatched-only efficacy, neighbor changes and every skipped
+  position. Do not accept the windowed variant as a six-feature solution:
+  it dispatches zero calibration positions for feature 22004.
+- [ ] Build activation-enriched discovery and family-disjoint fresh validation
+  for all six IDs, with a frozen screening cap and separate representative
+  panel. Preserve the original 100-position/six-text minimum; do not inflate
+  exposure with duplicate texts, NF4 measurements or dropped feature IDs.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

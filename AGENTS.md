@@ -30,6 +30,16 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- `docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md` and
+  `data/sae_assay_repair/offline_feasibility_20260930/` are the later saved-data
+  engineering analysis. No new GPU/API/model outcome was produced. The
+  active-support 4% norm-cap prototype has favorable continuous coordinate
+  predictions but untested native delivery. Its 2-4% window loses all 22004
+  calibration coverage; never present conditional medians as an assay pass.
+  Dose-1 median bounds exclude 30686/41533 only in the continuous linear
+  surrogate; dose 0.5 excludes neither. Both historical splits were already
+  observed. Next validate the pinned SAE on saved states and repair rare-ID
+  calibration separately, not a new full 70B behavior run by default.
 - The completed coordinate-delivery repair is
   `data/sae_assay_repair/coordinate_delivery_20260930/`: 3,897 raw rows and
   544 clean states, frozen at `b7c4d7f5fba80dd2b067c200fdf2f322c80c3cae`.

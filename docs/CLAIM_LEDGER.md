@@ -72,6 +72,18 @@ or retroactively validate earlier steering. Its evidence is released at
 | The repaired six-coordinate assay qualifies for report steering. | Not supported | `locked-selection.json`, `figures/gates.csv` | `experiments/sae_assay_repair/release_audit.py` and frozen diagnostic analysis | "No recipe meets all exposure, norm, fidelity and encoder-consistency requirements. No recipe was selected and no steered validation was dispatched. The original failed complete audit is preserved beside a disclosed diagnostic-list-order correction." |
 | Norm failure proves damaged language or impossibility of semantic steering. | Invalid inference | `analysis/geometry_audit.json`, neutral NLL fields in `figures/gates.csv` | `geometry_audit.py` | "The saved linear equalities exceed the chosen norm allowance on almost all amplification positions. This conditional bound does not cover softer efficacy criteria, native BF16 targets or other semantic interventions; neutral-text NLL changes remain small." |
 
+### Offline Redesign
+
+The subsequent [offline redesign](SAE_ASSAY_OFFLINE_REDESIGN_20260930.md) is
+engineering development, not a new outcome experiment. Its release at
+`data/sae_assay_repair/offline_feasibility_20260930/` supports conditional
+continuous-geometry bounds and prototype predictions only. In that surrogate,
+the dose-1 median necessary bound excludes 30686/41533 in both historical
+splits; the dose-0.5 bound excludes no ID. The 4%-capped active-support
+prototype changes the intervention and is not native-validated. Its 2-4%
+window loses all 22004 calibration coverage. Do not present the conditional
+window medians as a six-feature assay pass, or historical validation as fresh.
+
 ## SAE-Through-Jacobian-Lens Evidence
 
 | Claim | Status | Direct artifact | Analysis code | Permissible wording |

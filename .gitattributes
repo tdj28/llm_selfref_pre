@@ -20,6 +20,7 @@ data/sae_assay_repair/coordinate_delivery_20260930/controller.log whitespace=-bl
 data/sae_assay_repair/coordinate_delivery_20260930/cuda_qualification/controller.log whitespace=-blank-at-eol
 data/sae_assay_repair/coordinate_delivery_20260930/figures/*.svg whitespace=-blank-at-eol
 data/sae_assay_repair/coordinate_delivery_20260930/LLAMA_3_3_LICENSE.txt whitespace=-blank-at-eol
+data/sae_assay_repair/offline_feasibility_20260930/figures/*.svg whitespace=-blank-at-eol
 
 # Preserve immutable consciousness-study provenance bytes. Markdown's two-space
 # hard breaks and the archived review diff are intentional; the two source/test

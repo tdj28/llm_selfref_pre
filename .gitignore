@@ -402,6 +402,15 @@ data/sae_assay_repair/*
 !data/sae_assay_repair/reporting_correction_20260930/*.csv
 !data/sae_assay_repair/reporting_correction_20260930/*.md
 
+# Derived saved-data redesign; no new residual captures or weights.
+!data/sae_assay_repair/offline_feasibility_20260930/
+!data/sae_assay_repair/offline_feasibility_20260930/*.json
+!data/sae_assay_repair/offline_feasibility_20260930/*.csv
+!data/sae_assay_repair/offline_feasibility_20260930/*.md
+!data/sae_assay_repair/offline_feasibility_20260930/figures/
+!data/sae_assay_repair/offline_feasibility_20260930/figures/*.png
+!data/sae_assay_repair/offline_feasibility_20260930/figures/*.svg
+!data/sae_assay_repair/offline_feasibility_20260930/figures/*.pdf
 # Exact coordinate-delivery release; residuals require a hash-pinned schema audit.
 !data/sae_assay_repair/coordinate_delivery_20260930/
 !data/sae_assay_repair/coordinate_delivery_20260930/*.json
