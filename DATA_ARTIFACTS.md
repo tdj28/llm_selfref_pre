@@ -13,6 +13,11 @@ same budget.
 RTX 4090 tiny-Llama qualification: 19 known-answer/identity/replay checks, one
 NF4 linear-layer check, exact runtime dependencies, raw logs and verified
 termination. This does not validate 70B delivery or any consciousness endpoint.
+`data/sae_assay_diagnostic/stage1_20260930/` is the accumulating main diagnostic
+release. Its immutable calibration snapshot preserves 7 qualification rows
+and 240 target-calibration rows, failed joint gates, and its receipt-chain
+prefix. Baseline/formatting work is still in progress; this is not a completed
+Stage 1 result. Never overwrite an already released raw row.
 Live controller credentials, SSH files, and temporary retrieval snapshots stay
 under ignored `out/`, never in a public result bundle.
 

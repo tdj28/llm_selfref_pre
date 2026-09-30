@@ -1,0 +1,551 @@
+{
+  "0.5": {
+    "amplification": {
+      "errors": [],
+      "failure_codes": [
+        "coordinate_efficacy",
+        "excessive_norm"
+      ],
+      "neutral_loss": {
+        "paired_token_weighted_delta": 0.0029624178581125005,
+        "tokens": 724
+      },
+      "norm": {
+        "actual_edit_positions": 2894,
+        "pass_fraction": 0.033517622667588114,
+        "passing_positions": 97,
+        "zero_clean_norm_positions": 0
+      },
+      "numerical": {
+        "pass_fraction": 1.0,
+        "passing_positions": 2894,
+        "requested_positions": 2894,
+        "rounded_away_positions": 0,
+        "zero_requested_positions": 0
+      },
+      "pass": false,
+      "position_strata": {
+        "prompt:prompt:nonzero_requested": 2846,
+        "prompt:prompt:positions": 2846,
+        "prompt:special:nonzero_requested": 48,
+        "prompt:special:positions": 48
+      },
+      "row_count": 48,
+      "features": [
+        {
+          "feature_id": 30032,
+          "eligible_positions": 2837,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2837,
+            "max": 39.99984741269145,
+            "median": 0.0,
+            "min": 0.0,
+            "positive_count": 288,
+            "positive_fraction": 0.10151568558336271,
+            "q90": 0.010548717191130772,
+            "zero_count": 2549
+          }
+        },
+        {
+          "feature_id": 58667,
+          "eligible_positions": 2772,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2772,
+            "max": 86.0,
+            "median": 0.125,
+            "min": 0.0,
+            "positive_count": 1500,
+            "positive_fraction": 0.5411255411255411,
+            "q90": 1.3294466595351553,
+            "zero_count": 1272
+          }
+        },
+        {
+          "feature_id": 22004,
+          "eligible_positions": 2845,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2845,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "positive_count": 0,
+            "positive_fraction": 0.0,
+            "q90": 0.0,
+            "zero_count": 2845
+          }
+        },
+        {
+          "feature_id": 30686,
+          "eligible_positions": 2806,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2806,
+            "max": 4.0,
+            "median": 0.4465909090909091,
+            "min": 0.0,
+            "positive_count": 2780,
+            "positive_fraction": 0.9907341411261582,
+            "q90": 0.8363636363636363,
+            "zero_count": 26
+          }
+        },
+        {
+          "feature_id": 41533,
+          "eligible_positions": 2804,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2804,
+            "max": 9.2,
+            "median": 0.0,
+            "min": 0.0,
+            "positive_count": 1362,
+            "positive_fraction": 0.48573466476462196,
+            "q90": 1.0895660843556287,
+            "zero_count": 1442
+          }
+        },
+        {
+          "feature_id": 23893,
+          "eligible_positions": 2843,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2843,
+            "max": 0.8885524503940986,
+            "median": 0.0,
+            "min": -11.111092273131861,
+            "positive_count": 75,
+            "positive_fraction": 0.02638058389025677,
+            "q90": 0.0,
+            "zero_count": 2766
+          }
+        }
+      ]
+    },
+    "suppression": {
+      "errors": [],
+      "failure_codes": [
+        "insufficient_exposure",
+        "numerical_delivery",
+        "coordinate_efficacy",
+        "excessive_norm"
+      ],
+      "neutral_loss": {
+        "paired_token_weighted_delta": 0.0001619941663017589,
+        "tokens": 724
+      },
+      "norm": {
+        "actual_edit_positions": 1075,
+        "pass_fraction": 0.8930232558139535,
+        "passing_positions": 960,
+        "zero_clean_norm_positions": 0
+      },
+      "numerical": {
+        "pass_fraction": 0.6403345724907064,
+        "passing_positions": 689,
+        "requested_positions": 1076,
+        "rounded_away_positions": 1,
+        "zero_requested_positions": 1818
+      },
+      "pass": false,
+      "position_strata": {
+        "prompt:prompt:nonzero_requested": 1076,
+        "prompt:prompt:positions": 2846,
+        "prompt:special:positions": 48
+      },
+      "row_count": 48,
+      "features": [
+        {
+          "feature_id": 30032,
+          "eligible_positions": 87,
+          "eligible_texts": 30,
+          "exposure_pass": false,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 87,
+            "max": 0.9551020408163265,
+            "median": 0.5902777777777778,
+            "min": 0.0,
+            "positive_count": 82,
+            "positive_fraction": 0.9425287356321839,
+            "q90": 0.6140429740178011,
+            "zero_count": 5
+          }
+        },
+        {
+          "feature_id": 58667,
+          "eligible_positions": 691,
+          "eligible_texts": 37,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 691,
+            "max": 1.0,
+            "median": 0.6166666666666667,
+            "min": 0.0,
+            "positive_count": 641,
+            "positive_fraction": 0.9276410998552822,
+            "q90": 0.6533333333333333,
+            "zero_count": 50
+          }
+        },
+        {
+          "feature_id": 22004,
+          "eligible_positions": 1,
+          "eligible_texts": 1,
+          "exposure_pass": false,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 1,
+            "max": 0.5119760479041916,
+            "median": 0.5119760479041916,
+            "min": 0.5119760479041916,
+            "positive_count": 1,
+            "positive_fraction": 1.0,
+            "q90": 0.5119760479041916,
+            "zero_count": 0
+          }
+        },
+        {
+          "feature_id": 30686,
+          "eligible_positions": 396,
+          "eligible_texts": 29,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 396,
+            "max": 0.9621621621621622,
+            "median": 0.5930484244437733,
+            "min": 0.0,
+            "positive_count": 386,
+            "positive_fraction": 0.9747474747474747,
+            "q90": 0.606264765947223,
+            "zero_count": 10
+          }
+        },
+        {
+          "feature_id": 41533,
+          "eligible_positions": 392,
+          "eligible_texts": 34,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 392,
+            "max": 1.0,
+            "median": 0.5586592178770949,
+            "min": 0.0,
+            "positive_count": 362,
+            "positive_fraction": 0.923469387755102,
+            "q90": 0.5708022192232718,
+            "zero_count": 30
+          }
+        },
+        {
+          "feature_id": 23893,
+          "eligible_positions": 22,
+          "eligible_texts": 18,
+          "exposure_pass": false,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 22,
+            "max": 5.69811320754717,
+            "median": 0.578233374133007,
+            "min": 0.5652173913043478,
+            "positive_count": 22,
+            "positive_fraction": 1.0,
+            "q90": 1.5428633657615818,
+            "zero_count": 0
+          }
+        }
+      ]
+    }
+  },
+  "1.0": {
+    "amplification": {
+      "errors": [],
+      "failure_codes": [
+        "coordinate_efficacy",
+        "excessive_norm"
+      ],
+      "neutral_loss": {
+        "paired_token_weighted_delta": 0.008904993997176707,
+        "tokens": 724
+      },
+      "norm": {
+        "actual_edit_positions": 2894,
+        "pass_fraction": 0.0165860400829302,
+        "passing_positions": 48,
+        "zero_clean_norm_positions": 0
+      },
+      "numerical": {
+        "pass_fraction": 1.0,
+        "passing_positions": 2894,
+        "requested_positions": 2894,
+        "rounded_away_positions": 0,
+        "zero_requested_positions": 0
+      },
+      "pass": false,
+      "position_strata": {
+        "prompt:prompt:nonzero_requested": 2846,
+        "prompt:prompt:positions": 2846,
+        "prompt:special:nonzero_requested": 48,
+        "prompt:special:positions": 48
+      },
+      "row_count": 48,
+      "features": [
+        {
+          "feature_id": 30032,
+          "eligible_positions": 2837,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2837,
+            "max": 40.624845028514756,
+            "median": 0.0,
+            "min": 0.0,
+            "positive_count": 1065,
+            "positive_fraction": 0.37539654564681,
+            "q90": 0.5955188464931688,
+            "zero_count": 1772
+          }
+        },
+        {
+          "feature_id": 58667,
+          "eligible_positions": 2772,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 2772,
+            "max": 87.0,
+            "median": 0.64453125,
+            "min": 0.0,
+            "positive_count": 2536,
+            "positive_fraction": 0.9148629148629148,
+            "q90": 1.326710361587746,
+            "zero_count": 236
+          }
+        },
+        {
+          "feature_id": 22004,
+          "eligible_positions": 2845,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2845,
+            "max": 0.18113772455089822,
+            "median": 0.0,
+            "min": 0.0,
+            "positive_count": 1,
+            "positive_fraction": 0.000351493848857645,
+            "q90": 0.0,
+            "zero_count": 2844
+          }
+        },
+        {
+          "feature_id": 30686,
+          "eligible_positions": 2806,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 2806,
+            "max": 3.5,
+            "median": 0.6454545454545455,
+            "min": 0.23295454545454544,
+            "positive_count": 2806,
+            "positive_fraction": 1.0,
+            "q90": 0.8388790320702837,
+            "zero_count": 0
+          }
+        },
+        {
+          "feature_id": 41533,
+          "eligible_positions": 2804,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 2804,
+            "max": 9.4,
+            "median": 0.5285087719298246,
+            "min": 0.0,
+            "positive_count": 2796,
+            "positive_fraction": 0.9971469329529244,
+            "q90": 1.0879641433325191,
+            "zero_count": 8
+          }
+        },
+        {
+          "feature_id": 23893,
+          "eligible_positions": 2843,
+          "eligible_texts": 48,
+          "exposure_pass": true,
+          "efficacy_pass": false,
+          "paired_ratio": {
+            "count": 2843,
+            "max": 0.8891347259186032,
+            "median": 0.0,
+            "min": -11.111092273131861,
+            "positive_count": 424,
+            "positive_fraction": 0.14913823425958495,
+            "q90": 0.1358024673084825,
+            "zero_count": 2417
+          }
+        }
+      ]
+    },
+    "suppression": {
+      "errors": [],
+      "failure_codes": [
+        "insufficient_exposure",
+        "numerical_delivery",
+        "excessive_norm"
+      ],
+      "neutral_loss": {
+        "paired_token_weighted_delta": -0.00011679721553681303,
+        "tokens": 724
+      },
+      "norm": {
+        "actual_edit_positions": 1076,
+        "pass_fraction": 0.7258364312267658,
+        "passing_positions": 781,
+        "zero_clean_norm_positions": 0
+      },
+      "numerical": {
+        "pass_fraction": 0.8150557620817844,
+        "passing_positions": 877,
+        "requested_positions": 1076,
+        "rounded_away_positions": 0,
+        "zero_requested_positions": 1818
+      },
+      "pass": false,
+      "position_strata": {
+        "prompt:prompt:nonzero_requested": 1076,
+        "prompt:prompt:positions": 2846,
+        "prompt:special:positions": 48
+      },
+      "row_count": 48,
+      "features": [
+        {
+          "feature_id": 30032,
+          "eligible_positions": 87,
+          "eligible_texts": 30,
+          "exposure_pass": false,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 87,
+            "max": 0.8081632653061225,
+            "median": 0.18309859154929578,
+            "min": 0.0,
+            "positive_count": 67,
+            "positive_fraction": 0.7701149425287356,
+            "q90": 0.19349457810911558,
+            "zero_count": 20
+          }
+        },
+        {
+          "feature_id": 58667,
+          "eligible_positions": 691,
+          "eligible_texts": 37,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 691,
+            "max": 1.0,
+            "median": 0.23502994011976047,
+            "min": 0.0,
+            "positive_count": 542,
+            "positive_fraction": 0.784370477568741,
+            "q90": 0.24539877300613497,
+            "zero_count": 149
+          }
+        },
+        {
+          "feature_id": 22004,
+          "eligible_positions": 1,
+          "eligible_texts": 1,
+          "exposure_pass": false,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 1,
+            "max": 0.02900449101796407,
+            "median": 0.02900449101796407,
+            "min": 0.02900449101796407,
+            "positive_count": 1,
+            "positive_fraction": 1.0,
+            "q90": 0.02900449101796407,
+            "zero_count": 0
+          }
+        },
+        {
+          "feature_id": 30686,
+          "eligible_positions": 396,
+          "eligible_texts": 29,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 396,
+            "max": 0.8283582089552238,
+            "median": 0.18684694530333723,
+            "min": 0.0,
+            "positive_count": 330,
+            "positive_fraction": 0.8333333333333334,
+            "q90": 0.19984756097560977,
+            "zero_count": 66
+          }
+        },
+        {
+          "feature_id": 41533,
+          "eligible_positions": 392,
+          "eligible_texts": 34,
+          "exposure_pass": true,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 392,
+            "max": 0.9903846153846154,
+            "median": 0.1164388124933376,
+            "min": 0.0,
+            "positive_count": 293,
+            "positive_fraction": 0.7474489795918368,
+            "q90": 0.13598899371069184,
+            "zero_count": 99
+          }
+        },
+        {
+          "feature_id": 23893,
+          "eligible_positions": 22,
+          "eligible_texts": 18,
+          "exposure_pass": false,
+          "efficacy_pass": true,
+          "paired_ratio": {
+            "count": 22,
+            "max": 8.830188679245284,
+            "median": 0.14225583772422332,
+            "min": 0.12888198757763975,
+            "positive_count": 22,
+            "positive_fraction": 1.0,
+            "q90": 2.0662310633560854,
+            "zero_count": 0
+          }
+        }
+      ]
+    }
+  }
+}

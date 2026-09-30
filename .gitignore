@@ -340,6 +340,13 @@ data/sae_assay_diagnostic/*
 !data/sae_assay_diagnostic/cuda_qualification_20260930/*.json
 !data/sae_assay_diagnostic/cuda_qualification_20260930/*.md
 !data/sae_assay_diagnostic/cuda_qualification_20260930/*.txt
+!data/sae_assay_diagnostic/stage1_20260930/
+!data/sae_assay_diagnostic/stage1_20260930/*.json
+!data/sae_assay_diagnostic/stage1_20260930/*.jsonl
+!data/sae_assay_diagnostic/stage1_20260930/*.md
+!data/sae_assay_diagnostic/stage1_20260930/*.txt
+!data/sae_assay_diagnostic/stage1_20260930/rows/
+!data/sae_assay_diagnostic/stage1_20260930/rows/*.json
 /blogs/
 
 # Jupyter Notebook
