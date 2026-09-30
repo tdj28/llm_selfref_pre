@@ -44,6 +44,13 @@ dispatch fencing, lock-descriptor release, retrieval integrity and deletion.
 The real Linux subprocess test and hosted public checks must pass. This is
 engineering verification, not independent scientific review.
 
+Before binding A1, 25 local amendment tests pass (one Linux-only skip), and
+the combined controller regressions pass 71 tests (two Linux-only skips).
+Read-only automated review found no remaining blocker in the protected-process,
+ownership, fencing and carried-budget changes. The stop receipt explicitly
+scopes its proof to the owned group/session or fenced dispatch inventory.
+These local results do not replace the live-platform and hosted Linux checks.
+
 Run the original worker at the amendment's public execution commit with the
 same original plan. Its loader must still verify all 53 original source
 hashes. The separate A1 manifest binds the new lifecycle source, this
