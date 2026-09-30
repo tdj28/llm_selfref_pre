@@ -1,0 +1,5 @@
+mode,pilot_status,text_count,all_positions,nonspecial_positions,nonzero_requests,zero_requests,fidelity_passing_positions,fidelity_denominator,fidelity_fraction,fidelity_pass,norm_passing_positions,norm_denominator,norm_fraction,norm_pass,component_required_fraction
+native_zero,complete,12,1260,1248,0,1248,0,0,,False,0,0,,False,0.95
+precision_sham,complete,12,1260,1248,0,1248,0,0,,False,0,0,,False,0.95
+suppression,complete,12,1260,1248,290,958,290,290,1.0,True,290,290,1.0,True,0.95
+amplification,complete,12,1260,1248,290,958,290,290,1.0,True,290,290,1.0,True,0.95

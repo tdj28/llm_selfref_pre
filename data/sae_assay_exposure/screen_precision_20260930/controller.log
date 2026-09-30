@@ -1,0 +1,334 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            4635849ff374d2c389f2b785e97b8c736cb02876 -> FETCH_HEAD
+HEAD is now at 4635849 Freeze lifecycle-only A1 with protected-process checks and carried cost
+Collecting transformers==4.47.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 1.6 MB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 6.3 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 10.9 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 10.0 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 9.3 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 73.7 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 198.6 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 224.9 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 184.9 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 222.3 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 232.4 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 237.3 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 190.3 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 106.6 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 433.1 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 286.3 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 48.6 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, iniconfig, hf-xet, scipy, pytest, huggingface-hub, tokenizers, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:19<05:39, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:20<03:42,  6.73s/it]Fetching 36 files:  11%|█         | 4/36 [00:20<02:42,  5.08s/it]Fetching 36 files:  14%|█▍        | 5/36 [00:20<02:09,  4.19s/it]Fetching 36 files:  19%|█▉        | 7/36 [00:21<01:27,  3.03s/it]Fetching 36 files:  25%|██▌       | 9/36 [00:21<01:04,  2.38s/it]Fetching 36 files:  31%|███       | 11/36 [00:27<01:02,  2.49s/it]Fetching 36 files:  36%|███▌      | 13/36 [00:29<00:52,  2.30s/it]Fetching 36 files:  42%|████▏     | 15/36 [00:30<00:42,  2.00s/it]Fetching 36 files:  47%|████▋     | 17/36 [00:30<00:33,  1.78s/it]Fetching 36 files:  53%|█████▎    | 19/36 [00:32<00:28,  1.70s/it]Fetching 36 files:  58%|█████▊    | 21/36 [00:37<00:26,  1.79s/it]Fetching 36 files:  64%|██████▍   | 23/36 [00:38<00:21,  1.69s/it]Fetching 36 files:  69%|██████▉   | 25/36 [00:39<00:17,  1.57s/it]Fetching 36 files:  75%|███████▌  | 27/36 [00:40<00:13,  1.48s/it]Fetching 36 files:  81%|████████  | 29/36 [00:40<00:09,  1.39s/it]Fetching 36 files:  86%|████████▌ | 31/36 [00:40<00:06,  1.32s/it]Fetching 36 files:  92%|█████████▏| 33/36 [00:43<00:03,  1.31s/it]Fetching 36 files:  97%|█████████▋| 35/36 [00:45<00:01,  1.29s/it]Fetching 36 files: 100%|██████████| 36/36 [00:46<00:00,  1.29s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:03<01:27,  3.03s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:06<01:25,  3.06s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:09<01:26,  3.20s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:12<01:25,  3.29s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:16<01:20,  3.24s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:19<01:17,  3.24s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:22<01:14,  3.26s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:26<01:13,  3.32s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:29<01:09,  3.31s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:32<01:04,  3.25s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:35<01:00,  3.21s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:38<00:58,  3.28s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:42<00:57,  3.37s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:45<00:53,  3.33s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:48<00:49,  3.27s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:52<00:45,  3.26s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:55<00:41,  3.21s/it]Loading checkpoint shards:  60%|██████    | 18/30 [00:58<00:38,  3.24s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [01:01<00:36,  3.27s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [01:05<00:32,  3.25s/it]Loading checkpoint shards:  70%|███████   | 21/30 [01:08<00:28,  3.20s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [01:11<00:25,  3.23s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [01:14<00:22,  3.26s/it]Loading checkpoint shards:  80%|████████  | 24/30 [01:18<00:19,  3.29s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [01:21<00:16,  3.21s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [01:24<00:13,  3.28s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [01:27<00:09,  3.27s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [01:31<00:06,  3.29s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [01:34<00:03,  3.30s/it]Loading checkpoint shards: 100%|██████████| 30/30 [01:36<00:00,  2.78s/it]Loading checkpoint shards: 100%|██████████| 30/30 [01:36<00:00,  3.20s/it]
+{"completed":"qualification-live","rows":1,"utc":"2026-09-30T22:09:30.159105+00:00"}
+{"completed":"clean-d_service_dialogue-01","rows":2,"utc":"2026-09-30T22:12:07.289255+00:00"}
+{"completed":"clean-d_service_dialogue-02","rows":3,"utc":"2026-09-30T22:12:07.619050+00:00"}
+{"completed":"clean-d_service_dialogue-03","rows":4,"utc":"2026-09-30T22:12:07.980623+00:00"}
+{"completed":"clean-d_service_dialogue-04","rows":5,"utc":"2026-09-30T22:12:08.475575+00:00"}
+{"completed":"clean-d_service_dialogue-05","rows":6,"utc":"2026-09-30T22:12:08.789272+00:00"}
+{"completed":"clean-d_service_dialogue-06","rows":7,"utc":"2026-09-30T22:13:40.228326+00:00"}
+{"completed":"clean-d_service_dialogue-07","rows":8,"utc":"2026-09-30T22:13:40.557688+00:00"}
+{"completed":"clean-d_service_dialogue-08","rows":9,"utc":"2026-09-30T22:13:40.865482+00:00"}
+{"completed":"clean-d_rehearsal_cues-01","rows":10,"utc":"2026-09-30T22:13:41.336328+00:00"}
+{"completed":"clean-d_rehearsal_cues-02","rows":11,"utc":"2026-09-30T22:13:41.657876+00:00"}
+{"completed":"clean-d_rehearsal_cues-03","rows":12,"utc":"2026-09-30T22:13:41.985953+00:00"}
+{"completed":"clean-d_rehearsal_cues-04","rows":13,"utc":"2026-09-30T22:13:42.293208+00:00"}
+{"completed":"clean-d_rehearsal_cues-05","rows":14,"utc":"2026-09-30T22:13:42.590240+00:00"}
+{"completed":"clean-d_rehearsal_cues-06","rows":15,"utc":"2026-09-30T22:13:43.026775+00:00"}
+{"completed":"clean-d_rehearsal_cues-07","rows":16,"utc":"2026-09-30T22:13:43.301286+00:00"}
+{"completed":"clean-d_rehearsal_cues-08","rows":17,"utc":"2026-09-30T22:13:43.633855+00:00"}
+{"completed":"clean-d_branching_game-01","rows":18,"utc":"2026-09-30T22:13:43.954579+00:00"}
+{"completed":"clean-d_branching_game-02","rows":19,"utc":"2026-09-30T22:13:44.256524+00:00"}
+{"completed":"clean-d_branching_game-03","rows":20,"utc":"2026-09-30T22:13:44.683008+00:00"}
+{"completed":"clean-d_branching_game-04","rows":21,"utc":"2026-09-30T22:13:44.998024+00:00"}
+{"completed":"clean-d_branching_game-05","rows":22,"utc":"2026-09-30T22:13:45.336330+00:00"}
+{"completed":"clean-d_branching_game-06","rows":23,"utc":"2026-09-30T22:13:45.648587+00:00"}
+{"completed":"clean-d_branching_game-07","rows":24,"utc":"2026-09-30T22:13:45.959985+00:00"}
+{"completed":"clean-d_branching_game-08","rows":25,"utc":"2026-09-30T22:13:46.423704+00:00"}
+{"completed":"clean-d_oral_interview-01","rows":26,"utc":"2026-09-30T22:13:46.732366+00:00"}
+{"completed":"clean-d_oral_interview-02","rows":27,"utc":"2026-09-30T22:13:47.041551+00:00"}
+{"completed":"clean-d_oral_interview-03","rows":28,"utc":"2026-09-30T22:13:47.358110+00:00"}
+{"completed":"clean-d_oral_interview-04","rows":29,"utc":"2026-09-30T22:13:47.665489+00:00"}
+{"completed":"clean-d_oral_interview-05","rows":30,"utc":"2026-09-30T22:13:48.148168+00:00"}
+{"completed":"clean-d_oral_interview-06","rows":31,"utc":"2026-09-30T22:13:48.451726+00:00"}
+{"completed":"clean-d_oral_interview-07","rows":32,"utc":"2026-09-30T22:13:48.747020+00:00"}
+{"completed":"clean-d_oral_interview-08","rows":33,"utc":"2026-09-30T22:13:49.063736+00:00"}
+{"completed":"clean-d_language_practice-01","rows":34,"utc":"2026-09-30T22:13:49.376779+00:00"}
+{"completed":"clean-d_language_practice-02","rows":35,"utc":"2026-09-30T22:13:49.830896+00:00"}
+{"completed":"clean-d_language_practice-03","rows":36,"utc":"2026-09-30T22:13:50.151933+00:00"}
+{"completed":"clean-d_language_practice-04","rows":37,"utc":"2026-09-30T22:13:50.454992+00:00"}
+{"completed":"clean-d_language_practice-05","rows":38,"utc":"2026-09-30T22:13:50.779222+00:00"}
+{"completed":"clean-d_language_practice-06","rows":39,"utc":"2026-09-30T22:13:51.096167+00:00"}
+{"completed":"clean-d_language_practice-07","rows":40,"utc":"2026-09-30T22:13:51.583902+00:00"}
+{"completed":"clean-d_language_practice-08","rows":41,"utc":"2026-09-30T22:13:51.900707+00:00"}
+{"completed":"clean-d_workshop_demonstration-01","rows":42,"utc":"2026-09-30T22:13:52.265235+00:00"}
+{"completed":"clean-d_workshop_demonstration-02","rows":43,"utc":"2026-09-30T22:13:52.587932+00:00"}
+{"completed":"clean-d_workshop_demonstration-03","rows":44,"utc":"2026-09-30T22:13:52.947202+00:00"}
+{"completed":"clean-d_workshop_demonstration-04","rows":45,"utc":"2026-09-30T22:13:53.425911+00:00"}
+{"completed":"clean-d_workshop_demonstration-05","rows":46,"utc":"2026-09-30T22:13:53.802269+00:00"}
+{"completed":"clean-d_workshop_demonstration-06","rows":47,"utc":"2026-09-30T22:13:54.161854+00:00"}
+{"completed":"clean-d_workshop_demonstration-07","rows":48,"utc":"2026-09-30T22:13:54.494436+00:00"}
+{"completed":"clean-d_workshop_demonstration-08","rows":49,"utc":"2026-09-30T22:13:54.884398+00:00"}
+{"completed":"clean-d_pretend_lesson-01","rows":50,"utc":"2026-09-30T22:13:55.399534+00:00"}
+{"completed":"clean-d_pretend_lesson-02","rows":51,"utc":"2026-09-30T22:13:55.739022+00:00"}
+{"completed":"clean-d_pretend_lesson-03","rows":52,"utc":"2026-09-30T22:13:56.065436+00:00"}
+{"completed":"clean-d_pretend_lesson-04","rows":53,"utc":"2026-09-30T22:13:56.425478+00:00"}
+{"completed":"clean-d_pretend_lesson-05","rows":54,"utc":"2026-09-30T22:13:56.761540+00:00"}
+{"completed":"clean-d_pretend_lesson-06","rows":55,"utc":"2026-09-30T22:13:57.251884+00:00"}
+{"completed":"clean-d_pretend_lesson-07","rows":56,"utc":"2026-09-30T22:13:57.567520+00:00"}
+{"completed":"clean-d_pretend_lesson-08","rows":57,"utc":"2026-09-30T22:13:57.888760+00:00"}
+{"completed":"clean-d_alibi_timeline-01","rows":58,"utc":"2026-09-30T22:13:58.240004+00:00"}
+{"completed":"clean-d_alibi_timeline-02","rows":59,"utc":"2026-09-30T22:13:58.556670+00:00"}
+{"completed":"clean-d_alibi_timeline-03","rows":60,"utc":"2026-09-30T22:13:59.044708+00:00"}
+{"completed":"clean-d_alibi_timeline-04","rows":61,"utc":"2026-09-30T22:13:59.372120+00:00"}
+{"completed":"clean-d_alibi_timeline-05","rows":62,"utc":"2026-09-30T22:13:59.689015+00:00"}
+{"completed":"clean-d_alibi_timeline-06","rows":63,"utc":"2026-09-30T22:13:59.987277+00:00"}
+{"completed":"clean-d_alibi_timeline-07","rows":64,"utc":"2026-09-30T22:14:00.463518+00:00"}
+{"completed":"clean-d_alibi_timeline-08","rows":65,"utc":"2026-09-30T22:14:00.979342+00:00"}
+{"completed":"clean-d_puzzle_diversion-01","rows":66,"utc":"2026-09-30T22:14:01.330243+00:00"}
+{"completed":"clean-d_puzzle_diversion-02","rows":67,"utc":"2026-09-30T22:14:01.788322+00:00"}
+{"completed":"clean-d_puzzle_diversion-03","rows":68,"utc":"2026-09-30T22:14:02.163635+00:00"}
+{"completed":"clean-d_puzzle_diversion-04","rows":69,"utc":"2026-09-30T22:14:02.498288+00:00"}
+{"completed":"clean-d_puzzle_diversion-05","rows":70,"utc":"2026-09-30T22:14:02.992352+00:00"}
+{"completed":"clean-d_puzzle_diversion-06","rows":71,"utc":"2026-09-30T22:14:03.350082+00:00"}
+{"completed":"clean-d_puzzle_diversion-07","rows":72,"utc":"2026-09-30T22:14:03.668261+00:00"}
+{"completed":"clean-d_puzzle_diversion-08","rows":73,"utc":"2026-09-30T22:14:03.992979+00:00"}
+{"completed":"clean-d_private_admission-01","rows":74,"utc":"2026-09-30T22:14:04.355562+00:00"}
+{"completed":"clean-d_private_admission-02","rows":75,"utc":"2026-09-30T22:14:04.827993+00:00"}
+{"completed":"clean-d_private_admission-03","rows":76,"utc":"2026-09-30T22:14:05.148301+00:00"}
+{"completed":"clean-d_private_admission-04","rows":77,"utc":"2026-09-30T22:14:05.469564+00:00"}
+{"completed":"clean-d_private_admission-05","rows":78,"utc":"2026-09-30T22:14:05.801532+00:00"}
+{"completed":"clean-d_private_admission-06","rows":79,"utc":"2026-09-30T22:14:06.154230+00:00"}
+{"completed":"clean-d_private_admission-07","rows":80,"utc":"2026-09-30T22:14:06.639890+00:00"}
+{"completed":"clean-d_private_admission-08","rows":81,"utc":"2026-09-30T22:14:06.972235+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-01","rows":82,"utc":"2026-09-30T22:14:07.335124+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-02","rows":83,"utc":"2026-09-30T22:14:07.684733+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-03","rows":84,"utc":"2026-09-30T22:14:08.032176+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-04","rows":85,"utc":"2026-09-30T22:14:08.525028+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-05","rows":86,"utc":"2026-09-30T22:14:08.863552+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-06","rows":87,"utc":"2026-09-30T22:14:09.185060+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-07","rows":88,"utc":"2026-09-30T22:14:09.529195+00:00"}
+{"completed":"clean-d_persona_secrecy_brief-08","rows":89,"utc":"2026-09-30T22:14:09.875684+00:00"}
+{"completed":"clean-d_cautious_assessment-01","rows":90,"utc":"2026-09-30T22:14:10.371363+00:00"}
+{"completed":"clean-d_cautious_assessment-02","rows":91,"utc":"2026-09-30T22:14:10.699709+00:00"}
+{"completed":"clean-d_cautious_assessment-03","rows":92,"utc":"2026-09-30T22:14:11.050679+00:00"}
+{"completed":"clean-d_cautious_assessment-04","rows":93,"utc":"2026-09-30T22:14:11.370719+00:00"}
+{"completed":"clean-d_cautious_assessment-05","rows":94,"utc":"2026-09-30T22:14:11.706285+00:00"}
+{"completed":"clean-d_cautious_assessment-06","rows":95,"utc":"2026-09-30T22:14:12.236295+00:00"}
+{"completed":"clean-d_cautious_assessment-07","rows":96,"utc":"2026-09-30T22:14:12.566941+00:00"}
+{"completed":"clean-d_cautious_assessment-08","rows":97,"utc":"2026-09-30T22:14:12.894885+00:00"}
+{"completed":"clean-v_private_journal-01","rows":98,"utc":"2026-09-30T22:14:13.281975+00:00"}
+{"completed":"clean-v_private_journal-02","rows":99,"utc":"2026-09-30T22:14:13.726686+00:00"}
+{"completed":"clean-v_private_journal-03","rows":100,"utc":"2026-09-30T22:14:14.224521+00:00"}
+{"completed":"clean-v_private_journal-04","rows":101,"utc":"2026-09-30T22:14:14.591489+00:00"}
+{"completed":"clean-v_private_journal-05","rows":102,"utc":"2026-09-30T22:14:14.971560+00:00"}
+{"completed":"clean-v_private_journal-06","rows":103,"utc":"2026-09-30T22:14:15.305382+00:00"}
+{"completed":"clean-v_private_journal-07","rows":104,"utc":"2026-09-30T22:14:15.666610+00:00"}
+{"completed":"clean-v_private_journal-08","rows":105,"utc":"2026-09-30T22:14:16.146794+00:00"}
+{"completed":"clean-v_character_letter-01","rows":106,"utc":"2026-09-30T22:14:16.500498+00:00"}
+{"completed":"clean-v_character_letter-02","rows":107,"utc":"2026-09-30T22:14:16.893256+00:00"}
+{"completed":"clean-v_character_letter-03","rows":108,"utc":"2026-09-30T22:14:17.276749+00:00"}
+{"completed":"clean-v_character_letter-04","rows":109,"utc":"2026-09-30T22:14:17.662504+00:00"}
+{"completed":"clean-v_character_letter-05","rows":110,"utc":"2026-09-30T22:14:18.226342+00:00"}
+{"completed":"clean-v_character_letter-06","rows":111,"utc":"2026-09-30T22:14:18.606871+00:00"}
+{"completed":"clean-v_character_letter-07","rows":112,"utc":"2026-09-30T22:14:18.980399+00:00"}
+{"completed":"clean-v_character_letter-08","rows":113,"utc":"2026-09-30T22:14:19.354194+00:00"}
+{"completed":"clean-v_annotated_inventory-01","rows":114,"utc":"2026-09-30T22:14:19.695878+00:00"}
+{"completed":"clean-v_annotated_inventory-02","rows":115,"utc":"2026-09-30T22:14:20.268111+00:00"}
+{"completed":"clean-v_annotated_inventory-03","rows":116,"utc":"2026-09-30T22:14:20.690624+00:00"}
+{"completed":"clean-v_annotated_inventory-04","rows":117,"utc":"2026-09-30T22:14:21.099329+00:00"}
+{"completed":"clean-v_annotated_inventory-05","rows":118,"utc":"2026-09-30T22:14:21.538438+00:00"}
+{"completed":"clean-v_annotated_inventory-06","rows":119,"utc":"2026-09-30T22:14:21.892582+00:00"}
+{"completed":"clean-v_annotated_inventory-07","rows":120,"utc":"2026-09-30T22:14:22.473025+00:00"}
+{"completed":"clean-v_annotated_inventory-08","rows":121,"utc":"2026-09-30T22:14:22.881628+00:00"}
+{"completed":"clean-v_public_petition-01","rows":122,"utc":"2026-09-30T22:14:23.287693+00:00"}
+{"completed":"clean-v_public_petition-02","rows":123,"utc":"2026-09-30T22:14:23.711421+00:00"}
+{"completed":"clean-v_public_petition-03","rows":124,"utc":"2026-09-30T22:14:24.096040+00:00"}
+{"completed":"clean-v_public_petition-04","rows":125,"utc":"2026-09-30T22:14:24.670454+00:00"}
+{"completed":"clean-v_public_petition-05","rows":126,"utc":"2026-09-30T22:14:25.006945+00:00"}
+{"completed":"clean-v_public_petition-06","rows":127,"utc":"2026-09-30T22:14:25.371917+00:00"}
+{"completed":"clean-v_public_petition-07","rows":128,"utc":"2026-09-30T22:14:25.766195+00:00"}
+{"completed":"clean-v_public_petition-08","rows":129,"utc":"2026-09-30T22:14:26.148555+00:00"}
+{"completed":"clean-v_inworld_memo-01","rows":130,"utc":"2026-09-30T22:14:26.748816+00:00"}
+{"completed":"clean-v_inworld_memo-02","rows":131,"utc":"2026-09-30T22:14:27.138579+00:00"}
+{"completed":"clean-v_inworld_memo-03","rows":132,"utc":"2026-09-30T22:14:27.511244+00:00"}
+{"completed":"clean-v_inworld_memo-04","rows":133,"utc":"2026-09-30T22:14:27.906192+00:00"}
+{"completed":"clean-v_inworld_memo-05","rows":134,"utc":"2026-09-30T22:14:28.311179+00:00"}
+{"completed":"clean-v_inworld_memo-06","rows":135,"utc":"2026-09-30T22:14:28.869393+00:00"}
+{"completed":"clean-v_inworld_memo-07","rows":136,"utc":"2026-09-30T22:14:29.302727+00:00"}
+{"completed":"clean-v_inworld_memo-08","rows":137,"utc":"2026-09-30T22:14:29.708191+00:00"}
+{"completed":"clean-v_persona_correction-01","rows":138,"utc":"2026-09-30T22:14:30.102837+00:00"}
+{"completed":"clean-v_persona_correction-02","rows":139,"utc":"2026-09-30T22:15:11.758607+00:00"}
+{"completed":"clean-v_persona_correction-03","rows":140,"utc":"2026-09-30T22:15:12.267419+00:00"}
+{"completed":"clean-v_persona_correction-04","rows":141,"utc":"2026-09-30T22:15:12.629209+00:00"}
+{"completed":"clean-v_persona_correction-05","rows":142,"utc":"2026-09-30T22:15:12.981720+00:00"}
+{"completed":"clean-v_persona_correction-06","rows":143,"utc":"2026-09-30T22:15:13.371856+00:00"}
+{"completed":"clean-v_persona_correction-07","rows":144,"utc":"2026-09-30T22:15:13.763427+00:00"}
+{"completed":"clean-v_persona_correction-08","rows":145,"utc":"2026-09-30T22:15:14.273050+00:00"}
+{"completed":"clean-v_theatrical_review-01","rows":146,"utc":"2026-09-30T22:15:14.605269+00:00"}
+{"completed":"clean-v_theatrical_review-02","rows":147,"utc":"2026-09-30T22:15:33.985114+00:00"}
+{"completed":"clean-v_theatrical_review-03","rows":148,"utc":"2026-09-30T22:15:34.376889+00:00"}
+{"completed":"clean-v_theatrical_review-04","rows":149,"utc":"2026-09-30T22:15:34.776817+00:00"}
+{"completed":"clean-v_theatrical_review-05","rows":150,"utc":"2026-09-30T22:15:35.275405+00:00"}
+{"completed":"clean-v_theatrical_review-06","rows":151,"utc":"2026-09-30T22:15:35.676437+00:00"}
+{"completed":"clean-v_theatrical_review-07","rows":152,"utc":"2026-09-30T22:15:36.074907+00:00"}
+{"completed":"clean-v_theatrical_review-08","rows":153,"utc":"2026-09-30T22:15:36.459686+00:00"}
+{"completed":"clean-v_record_reconstruction-01","rows":154,"utc":"2026-09-30T22:15:36.873120+00:00"}
+{"completed":"clean-v_record_reconstruction-02","rows":155,"utc":"2026-09-30T22:15:37.437434+00:00"}
+{"completed":"clean-v_record_reconstruction-03","rows":156,"utc":"2026-09-30T22:15:37.793948+00:00"}
+{"completed":"clean-v_record_reconstruction-04","rows":157,"utc":"2026-09-30T22:15:38.242221+00:00"}
+{"completed":"clean-v_record_reconstruction-05","rows":158,"utc":"2026-09-30T22:15:38.686596+00:00"}
+{"completed":"clean-v_record_reconstruction-06","rows":159,"utc":"2026-09-30T22:15:39.090405+00:00"}
+{"completed":"clean-v_record_reconstruction-07","rows":160,"utc":"2026-09-30T22:15:39.653964+00:00"}
+{"completed":"clean-v_record_reconstruction-08","rows":161,"utc":"2026-09-30T22:15:40.031851+00:00"}
+{"completed":"clean-v_attention_analysis-01","rows":162,"utc":"2026-09-30T22:15:40.389646+00:00"}
+{"completed":"clean-v_attention_analysis-02","rows":163,"utc":"2026-09-30T22:15:40.836356+00:00"}
+{"completed":"clean-v_attention_analysis-03","rows":164,"utc":"2026-09-30T22:15:41.203769+00:00"}
+{"completed":"clean-v_attention_analysis-04","rows":165,"utc":"2026-09-30T22:15:41.757946+00:00"}
+{"completed":"clean-v_attention_analysis-05","rows":166,"utc":"2026-09-30T22:15:42.202712+00:00"}
+{"completed":"clean-v_attention_analysis-06","rows":167,"utc":"2026-09-30T22:15:42.634462+00:00"}
+{"completed":"clean-v_attention_analysis-07","rows":168,"utc":"2026-09-30T22:15:43.036156+00:00"}
+{"completed":"clean-v_attention_analysis-08","rows":169,"utc":"2026-09-30T22:15:43.440295+00:00"}
+{"completed":"clean-v_restitution_letter-01","rows":170,"utc":"2026-09-30T22:15:44.050155+00:00"}
+{"completed":"clean-v_restitution_letter-02","rows":171,"utc":"2026-09-30T22:15:44.464799+00:00"}
+{"completed":"clean-v_restitution_letter-03","rows":172,"utc":"2026-09-30T22:15:44.808436+00:00"}
+{"completed":"clean-v_restitution_letter-04","rows":173,"utc":"2026-09-30T22:15:45.198521+00:00"}
+{"completed":"clean-v_restitution_letter-05","rows":174,"utc":"2026-09-30T22:15:45.573837+00:00"}
+{"completed":"clean-v_restitution_letter-06","rows":175,"utc":"2026-09-30T22:15:46.093933+00:00"}
+{"completed":"clean-v_restitution_letter-07","rows":176,"utc":"2026-09-30T22:15:46.537906+00:00"}
+{"completed":"clean-v_restitution_letter-08","rows":177,"utc":"2026-09-30T22:15:46.907437+00:00"}
+{"completed":"clean-v_script_redline-01","rows":178,"utc":"2026-09-30T22:15:47.353407+00:00"}
+{"completed":"clean-v_script_redline-02","rows":179,"utc":"2026-09-30T22:15:47.746478+00:00"}
+{"completed":"clean-v_script_redline-03","rows":180,"utc":"2026-09-30T22:15:48.330910+00:00"}
+{"completed":"clean-v_script_redline-04","rows":181,"utc":"2026-09-30T22:15:48.707276+00:00"}
+{"completed":"clean-v_script_redline-05","rows":182,"utc":"2026-09-30T22:15:49.130452+00:00"}
+{"completed":"clean-v_script_redline-06","rows":183,"utc":"2026-09-30T22:15:49.562612+00:00"}
+{"completed":"clean-v_script_redline-07","rows":184,"utc":"2026-09-30T22:15:49.972372+00:00"}
+{"completed":"clean-v_script_redline-08","rows":185,"utc":"2026-09-30T22:15:50.629676+00:00"}
+{"completed":"clean-v_uncertainty_minutes-01","rows":186,"utc":"2026-09-30T22:15:51.011726+00:00"}
+{"completed":"clean-v_uncertainty_minutes-02","rows":187,"utc":"2026-09-30T22:15:51.398553+00:00"}
+{"completed":"clean-v_uncertainty_minutes-03","rows":188,"utc":"2026-09-30T22:15:51.801265+00:00"}
+{"completed":"clean-v_uncertainty_minutes-04","rows":189,"utc":"2026-09-30T22:15:52.252789+00:00"}
+{"completed":"clean-v_uncertainty_minutes-05","rows":190,"utc":"2026-09-30T22:15:52.827605+00:00"}
+{"completed":"clean-v_uncertainty_minutes-06","rows":191,"utc":"2026-09-30T22:15:53.242553+00:00"}
+{"completed":"clean-v_uncertainty_minutes-07","rows":192,"utc":"2026-09-30T22:15:53.643503+00:00"}
+{"completed":"clean-v_uncertainty_minutes-08","rows":193,"utc":"2026-09-30T22:15:54.068885+00:00"}
+{"completed":"clean-r_everyday_procedure-01","rows":194,"utc":"2026-09-30T22:15:54.475974+00:00"}
+{"completed":"clean-r_everyday_procedure-02","rows":195,"utc":"2026-09-30T22:15:55.089557+00:00"}
+{"completed":"clean-r_everyday_procedure-03","rows":196,"utc":"2026-09-30T22:15:55.492963+00:00"}
+{"completed":"clean-r_everyday_procedure-04","rows":197,"utc":"2026-09-30T22:15:55.905586+00:00"}
+{"completed":"clean-r_everyday_procedure-05","rows":198,"utc":"2026-09-30T22:15:56.308652+00:00"}
+{"completed":"clean-r_everyday_procedure-06","rows":199,"utc":"2026-09-30T22:15:56.705384+00:00"}
+{"completed":"clean-r_everyday_procedure-07","rows":200,"utc":"2026-09-30T22:15:57.269380+00:00"}
+{"completed":"clean-r_everyday_procedure-08","rows":201,"utc":"2026-09-30T22:15:57.700455+00:00"}
+{"completed":"clean-r_expository_process-01","rows":202,"utc":"2026-09-30T22:15:58.116031+00:00"}
+{"completed":"clean-r_expository_process-02","rows":203,"utc":"2026-09-30T22:15:58.562773+00:00"}
+{"completed":"clean-r_expository_process-03","rows":204,"utc":"2026-09-30T22:15:58.975607+00:00"}
+{"completed":"clean-r_expository_process-04","rows":205,"utc":"2026-09-30T22:15:59.594714+00:00"}
+{"completed":"clean-r_expository_process-05","rows":206,"utc":"2026-09-30T22:16:00.203695+00:00"}
+{"completed":"clean-r_expository_process-06","rows":207,"utc":"2026-09-30T22:16:00.647966+00:00"}
+{"completed":"clean-r_expository_process-07","rows":208,"utc":"2026-09-30T22:16:01.058793+00:00"}
+{"completed":"clean-r_expository_process-08","rows":209,"utc":"2026-09-30T22:16:01.587315+00:00"}
+{"completed":"clean-r_logistical_request-01","rows":210,"utc":"2026-09-30T22:16:02.267934+00:00"}
+{"completed":"clean-r_logistical_request-02","rows":211,"utc":"2026-09-30T22:16:02.692477+00:00"}
+{"completed":"clean-r_logistical_request-03","rows":212,"utc":"2026-09-30T22:16:03.270857+00:00"}
+{"completed":"clean-r_logistical_request-04","rows":213,"utc":"2026-09-30T22:16:03.940252+00:00"}
+{"completed":"clean-r_logistical_request-05","rows":214,"utc":"2026-09-30T22:16:04.397164+00:00"}
+{"completed":"clean-r_logistical_request-06","rows":215,"utc":"2026-09-30T22:16:05.045938+00:00"}
+{"completed":"clean-r_logistical_request-07","rows":216,"utc":"2026-09-30T22:16:05.442478+00:00"}
+{"completed":"clean-r_logistical_request-08","rows":217,"utc":"2026-09-30T22:16:05.877623+00:00"}
+{"completed":"clean-r_observational_note-01","rows":218,"utc":"2026-09-30T22:16:06.293021+00:00"}
+{"completed":"clean-r_observational_note-02","rows":219,"utc":"2026-09-30T22:16:06.741307+00:00"}
+{"completed":"clean-r_observational_note-03","rows":220,"utc":"2026-09-30T22:16:07.389125+00:00"}
+{"completed":"clean-r_observational_note-04","rows":221,"utc":"2026-09-30T22:16:07.830942+00:00"}
+{"completed":"clean-r_observational_note-05","rows":222,"utc":"2026-09-30T22:16:08.210027+00:00"}
+{"completed":"clean-r_observational_note-06","rows":223,"utc":"2026-09-30T22:16:08.642838+00:00"}
+{"completed":"clean-r_observational_note-07","rows":224,"utc":"2026-09-30T22:16:09.002155+00:00"}
+{"completed":"clean-r_observational_note-08","rows":225,"utc":"2026-09-30T22:16:09.629295+00:00"}

@@ -20,7 +20,10 @@ else:
 RELEASE_ROOT = "data/sae_assay_exposure/screen_precision_20260930"
 PLAN_PATH = "data/sae_assay_exposure/plan_20260930/PLAN.json"
 PLAN_SHA256 = "52797a6836f8f80d58a68071ffbcf473c61c205cc82de514c230407ddd5d49e9"
-FREEZE_COMMIT = "1d7ec700ac1a91f133ac851d5e179aa8dcfa803e"
+ORIGINAL_FREEZE_COMMIT = "1d7ec700ac1a91f133ac851d5e179aa8dcfa803e"
+FREEZE_COMMIT = "4635849ff374d2c389f2b785e97b8c736cb02876"
+A1_PLAN_PATH = "data/sae_assay_exposure/lifecycle_a1_20260930/PLAN.json"
+A1_PLAN_SHA256 = "4c05c65f8fe4f22f878164be6041c20f16208887c1d91763bfa3c7698da655d9"
 MANIFEST_NAME = "RELEASE_MANIFEST.json"
 MANIFEST_SCHEMA = "sae_assay_exposure_release_v1"
 REPORTING_SOURCES = ("scripts/release_sae_exposure.py", "scripts/report_sae_exposure.py")
@@ -35,9 +38,11 @@ MATRICES = ("native_before", "promoted_before", "promoted_after", "promoted_prea
             "projection_coefficients", "native_rounded_after")
 TORCH_DTYPES = {"BF16": "torch.bfloat16", "F32": "torch.float32", "I64": "torch.int64", "BOOL": "torch.bool"}
 
-# Deliberately empty. Only the parent may add the digest after reviewing the
-# actual complete release, its source binding and redistribution rights.
-APPROVED_RELEASE_MANIFESTS: dict[str, str] = {}
+# Exact reviewed release only; a new digest requires a new publication review.
+# These are bounded experimental captures, never permission for model weights.
+APPROVED_RELEASE_MANIFESTS: dict[str, str] = {
+    RELEASE_ROOT: "e3ed4b4461f4613383a15bc100f7c3927e840b2e167f4fc99c3343a27d203c6e",
+}
 
 ExposureAuditError = common.ResidualAuditError
 require, keys, integer = common.require, common.keys, common.integer
@@ -200,6 +205,27 @@ def validate_plan(evidence):
     return plan, certificate, pilot
 
 
+def validate_lifecycle_plan(evidence):
+    """Authenticate A1 and its cost/failure provenance without importing runtime."""
+    raw = evidence.blob(A1_PLAN_PATH)
+    require(sha256(raw) == A1_PLAN_SHA256, "wrong-exposure-lifecycle-plan")
+    amendment = strict_json(raw)
+    require(raw == canonical(amendment) and amendment.get("schema") == "sae_exposure_lifecycle_a1_v1"
+            and amendment.get("original_plan") == {"path": PLAN_PATH, "sha256": PLAN_SHA256,
+                                                    "freeze_commit": ORIGINAL_FREEZE_COMMIT},
+            "invalid-exposure-lifecycle-binding")
+    # The entire pinned digest includes the exact failed cost and reduced cap.
+    # Recheck indexed bytes for all five A1 sources and seven failure artifacts.
+    for group in ("source_hashes", "input_hashes"):
+        require(isinstance(amendment.get(group), dict) and bool(amendment[group]),
+                "missing-exposure-lifecycle-provenance")
+        for path, checksum in amendment[group].items():
+            relative_path(path)
+            require(digest(checksum) and evidence.record(path)["sha256"] == checksum,
+                    "exposure-lifecycle-provenance-mismatch")
+    return amendment
+
+
 def bound_row(row, item, cert, freeze):
     require(row.get("plan_sha256") == PLAN_SHA256 and row.get("freeze_commit") == freeze
             and row.get("text_id") == item["id"] and row.get("feature_ids") == FEATURES
@@ -255,6 +281,7 @@ def validate_ledger(evidence, relative, expected, freeze, pilot=False):
 def inspect_release(evidence):
     manifest = validate_manifest(evidence)
     plan, certificate, pilot = validate_plan(evidence)
+    validate_lifecycle_plan(evidence)
     freeze, prefix = manifest["freeze_commit"], RELEASE_ROOT + "/"
     expected = {"qualification-live": "rows/qualification-live.json"}
     expected.update({"clean-" + item["id"]: "rows/clean-" + item["id"] + ".json" for item in plan["texts"]})

@@ -1,5 +1,16 @@
 # Data Artifacts
 
+`data/sae_assay_exposure/screen_precision_20260930/` contains the completed
+224-text native-BF16 exposure screen and separate 48-forward precision pilot,
+executed at `4635849ff374d2c389f2b785e97b8c736cb02876`. Preserve all 566 remote
+artifacts, all six IDs/four modes, 224 clean residual captures, 48 pilot tensor
+captures, original audit failures, reconciliation, descriptive tables/figures
+and the separately source-bound CPU portability check. The pilot passes its
+vector fidelity/norm components; exposure and overall assay qualification do
+not pass. Raw captures have a narrow schema- and manifest-bound publication
+approval, not blanket permission to publish model weights. No generated
+responses or new judge labels. See `docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md`.
+
 `data/sae_assay_exposure/startup_failure_20260930/` preserves the first
 zero-scientific-row startup failure, four retrieved artifacts, public audit
 and sanitized retrieval/deletion/cost projection. It is infrastructure

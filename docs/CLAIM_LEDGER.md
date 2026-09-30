@@ -35,8 +35,25 @@ efficacy checks pass and every realized edit meets the norm limit. Fidelity is
 eligible positions. Permissible wording: "Native coordinate delivery improves,
 but the assay remains unqualified." Forbidden: "consciousness suppression
 replicated," "fresh validation passed," or "the older behavioral null is now
-mechanistically validated." The 224-text exposure design has no activation
-outcomes. Preserve the failed live-snapshot audit and its reconciliation.
+mechanistically validated." Preserve the failed live-snapshot audit and its
+reconciliation.
+
+The later [224-text screen and 48-forward pilot](SAE_ASSAY_EXPOSURE_RESULTS_20260930.md)
+is complete at `data/sae_assay_exposure/screen_precision_20260930/`. Under its
+new mixed-precision path, both signs pass fidelity and norm at 290/290 nonzero
+nonspecial edits; 958 zero requests per sign are excluded, not counted as
+successes. Exposure is still insufficient: 22004 has 0 discovery/28 validation
+positive positions, and the frozen 33-text selected union leaves 30032 at 99.
+The precision-only sham KL is 0.0004727, versus 0.0003285/0.0002964 for the
+signed edits relative to sham. These are fixed-prefix descriptive comparisons,
+not additive causal shares or a fluency qualification. Permissible wording:
+"Vector delivery passes in the pilot; six-feature assay qualification remains
+open, and precision requires its own control." Preserve the original exact
+ARM re-audit failure and separate post-outcome portability check. Never call
+this a consciousness outcome, exact proprietary replication, or six-feature
+efficacy validation. Analysis: frozen exposure/precision modules plus the
+explicit offline portability adapter; independent arithmetic:
+`scripts/check_sae_exposure_arithmetic.py`.
 
 | Claim | Status | Direct artifact | Analysis code | Permissible wording |
 |---|---|---|---|---|

@@ -133,24 +133,25 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   Fidelity is only 65.8--67.4%; 22004 has 16/23 eligible positions. Neither
   unchanged gate passes. New cost $0.250534; owned pod deleted. Full results:
   `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`.
-- [ ] Repair delivery fidelity under the same thresholds before another
-  full-model intervention run; native coordinate efficacy alone is insufficient.
-  The new `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md` defines a separate
-  12-text mixed-precision transport pilot with native-zero and precision-only
-  sham controls. Preparation is not qualification; retain the BF16 failure.
-- [ ] Build activation-enriched discovery and family-disjoint fresh validation
-  for all six IDs, with a frozen screening cap and separate representative
-  panel. Preserve the original 100-position/six-text minimum; do not inflate
-  exposure with duplicate texts, NF4 measurements or dropped feature IDs.
-  The 224-text authored design and exact tokenizer certificate are complete;
-  actual activation screening and delivered-edit validation remain unrun.
-  Execution is being prepared under
-  `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md`, sharing a $25 maximum with
-  the separate precision pilot inside the existing $200 diagnostic ceiling.
-  Freeze `1d7ec700` passed all 13 hosted checks, but first startup hit a
-  protected foreign-process environment before any scientific row. Preserve
-  its $0.486496 failure and verified pod deletion. Lifecycle-only A1 is in
-  progress; no scientific thresholds, texts or precision code have changed.
+- [x] Complete the separately frozen 12-text mixed-precision pilot with
+  native-zero and precision-only sham controls. Both signs pass vector
+  fidelity and norm at 290/290 nonzero requests; 958 zeros per sign are excluded.
+  Retain the native BF16 failure and the changed precision/readout authority.
+- [x] Execute all 224 fixed discovery/validation/representative screen texts,
+  audit first-five and intermediate raw rows, retrieve/hash all 566 artifacts,
+  and delete the newly owned pod. Preserve zero-row startup failure/A1,
+  intermediate audit failure/reconciliation, and exact ARM audit failure plus
+  the separate portability check. Follow-up <=$3.354069; cumulative <=$30.989138.
+  Results: `docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md`.
+- [ ] Resolve exposure before claiming six-feature validation: 22004 has 0
+  discovery/28 validation positive positions; the selected union leaves 30032
+  at 99. Inspect saved data first. Any new discovery selection must disclose
+  observed outcomes and use fresh validation families. Keep the 100-position/
+  six-text minimum, all IDs, and the separate representative panel.
+- [ ] Validate the mixed-precision operator on adequately exposed fresh texts,
+  retaining the precision-only sham. Its output KL is comparable to the signed
+  edits, so it cannot be collapsed into an unchanged native baseline. The
+  12-text engineering component pass is not overall assay qualification.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

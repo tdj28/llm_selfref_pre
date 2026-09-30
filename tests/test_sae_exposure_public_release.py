@@ -85,6 +85,13 @@ def fixture():
             "input_hashes": {"data/synthetic-input.json": audit.sha256(files["data/synthetic-input.json"])}}
     files[audit.PLAN_PATH] = audit.canonical(plan)
     plan_hash = audit.sha256(files[audit.PLAN_PATH])
+    files["experiments/synthetic-a1-source.py"] = b"# synthetic A1 lifecycle source\n"
+    files["data/synthetic-failed-startup.json"] = b'{"synthetic":true}\n'
+    files[audit.A1_PLAN_PATH] = audit.canonical({"schema": "sae_exposure_lifecycle_a1_v1",
+        "original_plan": {"path": audit.PLAN_PATH, "sha256": plan_hash,
+                          "freeze_commit": audit.ORIGINAL_FREEZE_COMMIT},
+        "source_hashes": {"experiments/synthetic-a1-source.py": audit.sha256(files["experiments/synthetic-a1-source.py"])},
+        "input_hashes": {"data/synthetic-failed-startup.json": audit.sha256(files["data/synthetic-failed-startup.json"])}})
     raw = capture()
     for item in texts:
         name = "residuals/" + item["id"] + ".safetensors"
@@ -216,9 +223,15 @@ class ReleaseFixture(unittest.TestCase):
         cls.base, cls.plan, cls.plan_hash = fixture()
 
     def setUp(self):
+        registry = patch.dict(audit.APPROVED_RELEASE_MANIFESTS, {}, clear=True)
+        registry.start()
+        self.addCleanup(registry.stop)
         self.pin = patch.object(audit, "PLAN_SHA256", self.plan_hash)
         self.pin.start()
         self.addCleanup(self.pin.stop)
+        a1_pin = patch.object(audit, "A1_PLAN_SHA256", audit.sha256(self.base[audit.A1_PLAN_PATH]))
+        a1_pin.start()
+        self.addCleanup(a1_pin.stop)
 
     def approve(self, files, modes=None, checksum=None):
         ev = evidence(files, modes)
@@ -228,6 +241,49 @@ class ReleaseFixture(unittest.TestCase):
 
 
 class ReleaseTests(ReleaseFixture):
+    def test_a1_plan_and_source_failure_hashes_are_required(self):
+        for name in (audit.A1_PLAN_PATH, "experiments/synthetic-a1-source.py", "data/synthetic-failed-startup.json"):
+            files = dict(self.base)
+            files[name] += b"changed"
+            with self.subTest(name=name), self.assertRaises(audit.ExposureAuditError):
+                self.approve(files)
+        for name in (audit.A1_PLAN_PATH, "experiments/synthetic-a1-source.py"):
+            files = dict(self.base)
+            del files[name]
+            with self.subTest(missing=name), self.assertRaises(audit.ExposureAuditError):
+                self.approve(files)
+            with self.subTest(nonregular=name), self.assertRaises(audit.ExposureAuditError):
+                self.approve(self.base, {name: "120000"})
+
+    def test_a1_original_plan_reference_cannot_be_rebound(self):
+        for key, value in (("path", "elsewhere/PLAN.json"), ("sha256", "a" * 64),
+                           ("freeze_commit", FREEZE)):
+            files = dict(self.base)
+            amendment = json.loads(files[audit.A1_PLAN_PATH])
+            amendment["original_plan"][key] = value
+            files[audit.A1_PLAN_PATH] = audit.canonical(amendment)
+            with patch.object(audit, "A1_PLAN_SHA256", audit.sha256(files[audit.A1_PLAN_PATH])), \
+                    self.subTest(key=key), self.assertRaisesRegex(audit.ExposureAuditError, "lifecycle-binding"):
+                self.approve(files)
+
+    def test_old_execution_freeze_does_not_authorize_a1_complete_release(self):
+        files = dict(self.base)
+        name = PREFIX + audit.MANIFEST_NAME
+        manifest = json.loads(files[name])
+        manifest["freeze_commit"] = audit.ORIGINAL_FREEZE_COMMIT
+        files[name] = audit.canonical(manifest)
+        with self.assertRaisesRegex(audit.ExposureAuditError, "manifest-binding"):
+            self.approve(files)
+        files = dict(self.base)
+        name = PREFIX + "rows/clean-text-000.json"
+        row = json.loads(files[name])
+        row["freeze_commit"] = audit.ORIGINAL_FREEZE_COMMIT
+        files[name] = audit.canonical(row)
+        refresh_ledgers(files, self.plan, self.plan_hash)
+        seal(files, self.plan_hash)
+        with self.assertRaisesRegex(audit.ExposureAuditError, "row-binding"):
+            self.approve(files)
+
     def test_empty_registry_does_not_self_approve_and_complete_fixture_validates(self):
         self.assertEqual(audit.APPROVED_RELEASE_MANIFESTS, {})
         ev = evidence(self.base)
@@ -335,6 +391,34 @@ class ReleaseTests(ReleaseFixture):
         self.assertIsNone(audit.capture_size_limit("elsewhere/precision_pilot/tensors/000.safetensors"))
         self.assertIsNone(audit.capture_size_limit(PREFIX + "weights.safetensors"))
         self.assertEqual(audit.approved_residual_paths([], {}, {}, lambda *_: b""), frozenset())
+
+
+class RealPlanTests(unittest.TestCase):
+    def test_published_a1_and_original_provenance_validate_without_approval_or_runtime(self):
+        root = Path(__file__).resolve().parents[1]
+        files = {}
+        for name in (audit.PLAN_PATH, audit.A1_PLAN_PATH):
+            files[name] = (root / name).read_bytes()
+            plan = audit.strict_json(files[name])
+            for group in ("source_hashes", "input_hashes"):
+                for dependency in plan[group]:
+                    files[dependency] = (root / dependency).read_bytes()
+        ev = evidence(files)
+        original, _, _ = audit.validate_plan(ev)
+        amendment = audit.validate_lifecycle_plan(ev)
+        self.assertEqual(len(original["source_hashes"]), 53)
+        self.assertEqual(len(amendment["source_hashes"]), 5)
+        self.assertEqual(len(amendment["input_hashes"]), 7)
+        self.assertEqual(amendment["budget"]["exposure_max_usd"], "24.51350437277777777777777778")
+
+    def test_completed_release_has_one_exact_reviewed_manifest_pin(self):
+        root = Path(__file__).resolve().parents[1]
+        manifest = root / audit.RELEASE_ROOT / audit.MANIFEST_NAME
+        self.assertEqual(audit.APPROVED_RELEASE_MANIFESTS, {
+            audit.RELEASE_ROOT: "e3ed4b4461f4613383a15bc100f7c3927e840b2e167f4fc99c3343a27d203c6e",
+        })
+        self.assertEqual(audit.sha256(manifest.read_bytes()),
+                         audit.APPROVED_RELEASE_MANIFESTS[audit.RELEASE_ROOT])
 
 
 class GitIntegrationTests(ReleaseFixture):

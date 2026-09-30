@@ -30,6 +30,20 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The exposure/precision follow-up is complete at
+  `data/sae_assay_exposure/screen_precision_20260930/`; see
+  `docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md`. All 224 clean texts and 48 pilot
+  forwards completed. Mixed-precision fidelity/norm components pass 290/290
+  nonzero edits per sign; 958 zero requests are excluded. Six-feature exposure
+  still fails: 22004 has 0 discovery/28 validation positions; the fixed selected
+  union leaves 30032 at 99. Do not drop IDs, waive minima or claim overall assay
+  qualification. Precision-only sham drift is comparable to signed-edit drift;
+  keep it as a distinct control. Preserve the original exact ARM re-audit
+  failure and the separate post-outcome portability amendment, as well as the
+  in-flight snapshot failure and byte-exact final reconciliation. All 566 raw
+  artifacts were retrieved/hash-verified; owned pod gc21eirao2x4wd is deleted
+  (GET404). Follow-up including failed startup <=$3.354069; cumulative
+  diagnostics <=$30.989138. No target-response run or extra paid review added.
 - The exposure startup under `1d7ec700` failed before scientific rows because
   the lifecycle scanner required access to a protected unrelated RunPod
   process environment. Preserve
@@ -38,9 +52,9 @@ immediately public and permanently recoverable.
   `6sr9s4hprynal1` was retrieved, hash-verified and deleted (GET404).
   Its $0.486496 bound is part of the same $25 follow-up allowance;
   cumulative prior diagnostics are now bounded by $28.121565. The separate
-  A1 controller must carry this cost, preserve the original 53 sources and
-  scientific plan, and pass prelaunch checks before replacement creation.
-- The next diagnostic is defined by
+  A1 controller carried this cost, preserved the original 53 sources and
+  scientific plan, and passed all 13 hosted checks before replacement creation.
+- The completed follow-up design is defined by
   `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md` and
   `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md`. It screens the fixed 224
   clean texts, then runs a separate 12-text mixed-precision transport pilot
@@ -49,8 +63,8 @@ immediately public and permanently recoverable.
   starting from $27.6350693241315361 within the existing $200 limit.
   A precision sham is not an unchanged native baseline; promoted-FP32 SAE
   encoding is not the native BF16 readout. Preserve both distinctions and all
-  earlier gate failures. Only a new uniquely owned pod may be used. Preparation
-  is not execution, adequate exposure or behavioral qualification.
+  earlier gate failures. Any new work needs its own outcome-aware plan and
+  uniquely owned pod. This completion is not behavioral qualification.
 - Native SAE-only replay is complete at
   `data/sae_assay_replay/native_replay_20260930/`; see
   `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`. All 544 states pass structural
@@ -60,7 +74,7 @@ immediately public and permanently recoverable.
   Preserve the failed in-flight snapshot audit and its byte-exact reconciliation.
   Pod mv3qjsgn79vjos is deleted (GET404); do not reuse it. New cost bound
   $0.250534; cumulative diagnostic/repair bound $27.635070. The 224-text
-  exposure design is token-certified but not activation-screened.
+  exposure design was subsequently screened in the separate release above.
 - The owner authorized the next native SAE-only replay on 2026-09-30.
   `docs/SAE_ASSAY_REPLAY_PROTOCOL_20260930.md` and the separate
   `experiments/sae_assay_replay/` package govern it. Replay all 544 saved

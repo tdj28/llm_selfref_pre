@@ -58,6 +58,15 @@ coordinate targets in the fixed 544-state panel, within the norm limit. Vector
 fidelity still fails, as does rare-feature exposure. Full-model behavioral
 qualification remains open; the raw replay and two figure pairs are released.
 
+The [fresh screen and precision pilot](docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md)
+complete the next diagnostic: all 290 nonzero edits per sign meet vector
+fidelity and norm limits under the new mixed-precision path. Coverage still
+fails for feature 22004, and the precision-only sham changes the output
+distribution by a comparable magnitude to the edits. This identifies a usable
+delivery component and a necessary control, not a qualified six-feature assay.
+All 224 clean texts and 48 pilot forwards are retained. The follow-up cost
+at most $3.36, including its failed startup; the pod is deleted.
+
 Results and their supporting files:
 [causal analysis](docs/CLAIM_LEDGER.md),
 [Llama steering](data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json),
