@@ -1,5 +1,11 @@
 # Data Artifacts
 
+`data/sae_assay_exposure/startup_failure_20260930/` preserves the first
+zero-scientific-row startup failure, four retrieved artifacts, public audit
+and sanitized retrieval/deletion/cost projection. It is infrastructure
+evidence, not a zero-activation result. A1 carries its $0.486496 cost inside
+the same follow-up allowance; original scientific inputs remain unchanged.
+
 `data/sae_assay_exposure/plan_20260930/` is the new result-free plan for
 224 fixed clean exposure texts and a separate 12-text precision transport
 pilot. It binds the original corpus/token certificate, all six IDs, the

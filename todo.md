@@ -147,6 +147,10 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   Execution is being prepared under
   `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md`, sharing a $25 maximum with
   the separate precision pilot inside the existing $200 diagnostic ceiling.
+  Freeze `1d7ec700` passed all 13 hosted checks, but first startup hit a
+  protected foreign-process environment before any scientific row. Preserve
+  its $0.486496 failure and verified pod deletion. Lifecycle-only A1 is in
+  progress; no scientific thresholds, texts or precision code have changed.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

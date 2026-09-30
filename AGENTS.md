@@ -30,6 +30,16 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The exposure startup under `1d7ec700` failed before scientific rows because
+  the lifecycle scanner required access to a protected unrelated RunPod
+  process environment. Preserve
+  `data/sae_assay_exposure/startup_failure_20260930/` and
+  `docs/SAE_ASSAY_EXPOSURE_LIFECYCLE_A1_20260930.md`. Owned pod
+  `6sr9s4hprynal1` was retrieved, hash-verified and deleted (GET404).
+  Its $0.486496 bound is part of the same $25 follow-up allowance;
+  cumulative prior diagnostics are now bounded by $28.121565. The separate
+  A1 controller must carry this cost, preserve the original 53 sources and
+  scientific plan, and pass prelaunch checks before replacement creation.
 - The next diagnostic is defined by
   `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md` and
   `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md`. It screens the fixed 224

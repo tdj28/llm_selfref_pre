@@ -23,8 +23,10 @@ from typing import Iterable, Iterator
 
 if __package__:
     from . import audit_sae_residual_release as residual_audit
+    from . import audit_sae_exposure_release as exposure_audit
 else:
     import audit_sae_residual_release as residual_audit
+    import audit_sae_exposure_release as exposure_audit
 
 
 REQUIRED_PUBLIC_FILES = frozenset(
@@ -196,7 +198,8 @@ def residual_size_preflight(
         header = raw_header.split()
         valid = (len(header) == 3 and header[0] == sha.encode("ascii")
                  and header[1] == b"blob" and header[2].isdigit())
-        if not valid or int(header[2]) > residual_audit.MAX_CAPTURE_BYTES:
+        limit = exposure_audit.capture_size_limit(path) or residual_audit.MAX_CAPTURE_BYTES
+        if not valid or int(header[2]) > limit:
             blocked.add(path)
             findings.append(Finding(path, "residual-blob-size-limit",
                                     "safetensors is not a bounded activation-capture blob"))
@@ -522,6 +525,13 @@ def audit_repository(repo: Path) -> dict[str, object]:
     except (KeyError, TypeError, ValueError, RecursionError):
         findings.append(Finding(residual_audit.RELEASE_ROOT, "invalid-residual-release",
                                 "malformed residual release evidence"))
+    try:
+        verified_residuals |= exposure_audit.approved_residual_paths(paths, blob_records, modes, read_indexed)
+    except exposure_audit.ExposureAuditError as exc:
+        findings.append(Finding(exposure_audit.RELEASE_ROOT, "invalid-exposure-release", str(exc)))
+    except (KeyError, TypeError, ValueError, RecursionError):
+        findings.append(Finding(exposure_audit.RELEASE_ROOT, "invalid-exposure-release",
+                                "malformed exposure release evidence"))
     findings.extend(path_findings(paths, verified_residuals=verified_residuals))
     findings.extend(ignored_private_file_findings(repo))
     findings.extend(whitespace_findings(repo))

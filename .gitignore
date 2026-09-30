@@ -425,6 +425,12 @@ data/sae_assay_replay/*
 data/sae_assay_exposure/*
 !data/sae_assay_exposure/plan_20260930/
 !data/sae_assay_exposure/plan_20260930/*.json
+!data/sae_assay_exposure/startup_failure_20260930/
+!data/sae_assay_exposure/startup_failure_20260930/*.json
+!data/sae_assay_exposure/startup_failure_20260930/*.jsonl
+!data/sae_assay_exposure/startup_failure_20260930/*.txt
+!data/sae_assay_exposure/startup_failure_20260930/*.log
+!data/sae_assay_exposure/startup_failure_20260930/*.md
 !data/sae_assay_repair/reporting_correction_20260930/
 !data/sae_assay_repair/reporting_correction_20260930/*.json
 !data/sae_assay_repair/reporting_correction_20260930/*.csv
