@@ -30,6 +30,16 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The owner authorized the next native SAE-only replay on 2026-09-30.
+  `docs/SAE_ASSAY_REPLAY_PROTOCOL_20260930.md` and the separate
+  `experiments/sae_assay_replay/` package govern it. Replay all 544 saved
+  states with the pinned full-width SAE, not a new Llama generation run.
+  New compute sub-cap $4, prior cost bound $27.3845359753, same cumulative
+  $200 ceiling. Only a newly created owned pod; first-five local audit before
+  bulk. Historical split labels do not create fresh validation. Native replay
+  components cannot establish a qualified behavioral assay without the
+  separately required fresh exposure, NLL, positive-control and headroom work.
+  No second paid reviewer or target-report steering is authorized by this plan.
 - `docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md` and
   `data/sae_assay_repair/offline_feasibility_20260930/` are the later saved-data
   engineering analysis. No new GPU/API/model outcome was produced. The

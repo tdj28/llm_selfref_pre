@@ -1,5 +1,10 @@
 # Data Artifacts
 
+`data/sae_assay_replay/plan_20260930/` is the separate result-free native
+SAE-only replay plan. It binds all 544 existing clean captures and code hashes;
+it does not contain new activations or a successful validation result. The
+separate exposure plan is agent-authored design material, not measured coverage.
+
 `data/sae_assay_repair/offline_feasibility_20260930/` contains a post-outcome
 failure census, conditional inequality bounds, bounded active-support
 prototype predictions, windowed coverage diagnostics, two figure sets and
