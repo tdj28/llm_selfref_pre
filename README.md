@@ -46,6 +46,12 @@ contextually implicit-or-explicit self-attributions. Both endpoints matter.
 This does not supply a comparable target-steering test or a consciousness
 verdict. Raw data, evaluator receipts and two figures are released.
 
+The [coordinate-delivery repair](docs/SAE_ASSAY_REPAIR_RESULTS_20260930.md)
+now shows that corrected operators can hit the six coordinate targets far more
+accurately. None meets every frozen qualification rule. Its 3,897 rows, 544
+clean states, four figure sets and a disclosed audit-ordering correction are
+released; this is not another consciousness-report steering result.
+
 Results and their supporting files:
 [causal analysis](docs/CLAIM_LEDGER.md),
 [Llama steering](data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json),

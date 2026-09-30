@@ -1,0 +1,13 @@
+operator,dose,direction,status,encoder_decision_pass,failure_codes,residual_fidelity_pass_fraction,norm_pass_fraction,neutral_nll_delta
+literal,0.5,amplification,fail,True,coordinate_efficacy;excessive_norm,1.0,0.04332335756021092,-0.0026741801511905305
+literal,0.5,suppression,fail,True,insufficient_exposure;numerical_delivery;coordinate_efficacy;excessive_norm,0.653250773993808,0.8831858407079646,0.0001547912898086077
+literal,1.0,amplification,fail,True,coordinate_efficacy;excessive_norm,1.0,0.03876300413282029,0.002659248478989585
+literal,1.0,suppression,fail,True,insufficient_exposure;numerical_delivery;excessive_norm,0.8155683325961963,0.6970367094206104,-5.8273873209491764e-05
+decoder_span,0.5,amplification,fail,True,excessive_norm,1.0,0.03876300413282029,-0.007096956428909206
+decoder_span,0.5,suppression,fail,True,insufficient_exposure;numerical_delivery;coordinate_efficacy;excessive_norm,0.7116320212295445,0.8469703670942061,-4.3584192501364555e-05
+decoder_span,1.0,amplification,fail,True,excessive_norm,1.0,0.03876300413282029,0.004159396645476252
+decoder_span,1.0,suppression,fail,True,insufficient_exposure;numerical_delivery;excessive_norm,0.8456435205661211,0.6457319770013269,-0.00011147913065598865
+encoder_min_norm,0.5,amplification,fail,False,excessive_norm,1.0,0.03976058144506199,0.0017580199832613354
+encoder_min_norm,0.5,suppression,fail,False,insufficient_exposure;numerical_delivery;coordinate_efficacy,0.5550641309155241,0.9597345132743362,4.527327435635097e-05
+encoder_min_norm,1.0,amplification,fail,False,excessive_norm,1.0,0.03876300413282029,0.004240433962521684
+encoder_min_norm,1.0,suppression,fail,False,insufficient_exposure;numerical_delivery;excessive_norm,0.7461300309597523,0.8173374613003096,-0.00010871195947273379

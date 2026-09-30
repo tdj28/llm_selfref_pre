@@ -83,6 +83,40 @@ venv/bin/python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py
 Do not pool the literal and RMS-calibrated coefficient scales. The prospective
 full grid is primary; the older adaptive n=20 study is not a replacement.
 
+## Coordinate-Delivery Diagnostics
+
+The September repair is a separate engineering study, not another
+consciousness-report outcome. Rebuild its receipt audit, frozen gate
+calculations, independent NumPy coordinate arithmetic, corpus census and four
+figure sets from the released raw files:
+
+```sh
+mkdir -p out
+WORK=$(mktemp -d out/repair-reanalysis.XXXXXX)
+python -m experiments.sae_assay_repair.reproduce \
+  --run data/sae_assay_repair/coordinate_delivery_20260930 \
+  --plan data/sae_assay_repair/plan_20260930/PLAN.json \
+  --out "$WORK/result"
+```
+
+This command reads the release in place, checks its entire manifest before and
+afterward, and writes only to the new output directory. It needs the CPU
+dependencies above, but no model weights, GPU, credentials or API calls. Use
+the result-release Git revision if later source changes trigger source-drift
+checks; do not disable those checks. The runtime was separately frozen at
+`b7c4d7f5fba80dd2b067c200fdf2f322c80c3cae` before these outcomes.
+It retains the original failed complete audit and separately runs the
+[diagnostic-list ordering correction](SAE_ASSAY_REPAIR_AUDIT_AMENDMENT_20260930.md).
+The corrected comparison changes no scientific result or criterion.
+
+All 544 clean BF16 residual captures have an exact, hash-pinned schema and
+source-text inventory checked by `make public-audit`. The capture allowance
+does not permit arbitrary `.safetensors` or model weights. See the
+[result and limitations](SAE_ASSAY_REPAIR_RESULTS_20260930.md), including the
+distinction between coordinate equality, native re-encoding and semantic
+intervention. Plot/PDF metadata may differ between rebuilds; raw release bytes
+must not change.
+
 ## Gemma Scope
 
 ```sh

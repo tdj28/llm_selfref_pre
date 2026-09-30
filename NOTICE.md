@@ -48,3 +48,12 @@ labels, checkpoint-derived vectors or generated text. Resolving redistribution
 terms and an explicit original-data license is a release task for the owner.
 Do not delete or rewrite existing public evidence to conceal this unresolved
 issue; record any subsequent rights correction with its provenance.
+
+## Coordinate-Delivery Release (2026-09-30)
+
+`data/sae_assay_repair/coordinate_delivery_20260930/` contains 544 generated
+clean layer-50 residual states and token IDs, not full model or SAE weights.
+Its exact pinned Llama 3.3 license copy and `UPSTREAM_TERMS.json` document
+the Meta source and the Goodfire model card's `llama3.3` license declaration.
+The release carries the Llama attribution. This does not resolve unrelated
+historical redistribution questions above or assert a new blanket data license.

@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -58,6 +58,19 @@ branded SteeringAPI service was publicly reachable on 2026-07-11, but its
 relationship to Goodfire and the paper-time experiment remains unverified. See
 `docs/GOODFIRE_API_STATUS.md`. The deprecation is a provenance limitation, not
 evidence for or against the reported result.
+
+## Coordinate-Delivery Diagnostic (September 30)
+
+The separate engineering repair does not add a consciousness-report outcome
+or retroactively validate earlier steering. Its evidence is released at
+`data/sae_assay_repair/coordinate_delivery_20260930/`; see
+`docs/SAE_ASSAY_REPAIR_RESULTS_20260930.md` for denominators and limitations.
+
+| Claim | Status | Direct artifact | Analysis code | Permissible wording |
+|---|---|---|---|---|
+| Corrected operators deliver the requested coordinate changes. | Supported on the calibration panel; not semantic validation | `figures/coordinates.csv`, raw `rows/`, `analysis/geometry_audit.json` | `experiments/sae_assay_diagnostic/analysis.py`, `experiments/sae_assay_repair/geometry_audit.py`, `experiments/sae_assay_repair/figures.py` | "Decoder-span and encoder-minimum-norm corrections achieve near-unit amplification ratios and near-zero full-suppression ratios across the six feature medians. Feature 22004 has only sixteen eligible calibration positions." |
+| The repaired six-coordinate assay qualifies for report steering. | Not supported | `locked-selection.json`, `figures/gates.csv` | `experiments/sae_assay_repair/release_audit.py` and frozen diagnostic analysis | "No recipe meets all exposure, norm, fidelity and encoder-consistency requirements. No recipe was selected and no steered validation was dispatched. The original failed complete audit is preserved beside a disclosed diagnostic-list-order correction." |
+| Norm failure proves damaged language or impossibility of semantic steering. | Invalid inference | `analysis/geometry_audit.json`, neutral NLL fields in `figures/gates.csv` | `geometry_audit.py` | "The saved linear equalities exceed the chosen norm allowance on almost all amplification positions. This conditional bound does not cover softer efficacy criteria, native BF16 targets or other semantic interventions; neutral-text NLL changes remain small." |
 
 ## SAE-Through-Jacobian-Lens Evidence
 

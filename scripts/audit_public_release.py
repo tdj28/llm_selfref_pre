@@ -21,6 +21,11 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable, Iterator
 
+if __package__:
+    from . import audit_sae_residual_release as residual_audit
+else:
+    import audit_sae_residual_release as residual_audit
+
 
 REQUIRED_PUBLIC_FILES = frozenset(
     {
@@ -146,7 +151,9 @@ def _git(repo: Path, *args: str, check: bool = True) -> subprocess.CompletedProc
     )
 
 
-def index_entries(repo: Path) -> tuple[list[tuple[str, str]], list[Finding]]:
+def index_entries(
+    repo: Path, *, modes: dict[str, str] | None = None
+) -> tuple[list[tuple[str, str]], list[Finding]]:
     """Return stage-zero ``(path, blob_sha)`` entries and unmerged findings."""
     result = _git(repo, "ls-files", "--stage", "-z")
     entries: list[tuple[str, str]] = []
@@ -155,7 +162,7 @@ def index_entries(repo: Path) -> tuple[list[tuple[str, str]], list[Finding]]:
         if not raw_entry:
             continue
         metadata, raw_path = raw_entry.split(b"\t", 1)
-        _mode, raw_sha, raw_stage = metadata.split(b" ", 2)
+        raw_mode, raw_sha, raw_stage = metadata.split(b" ", 2)
         path = raw_path.decode("utf-8", errors="surrogateescape")
         stage = raw_stage.decode("ascii")
         if stage != "0":
@@ -164,7 +171,36 @@ def index_entries(repo: Path) -> tuple[list[tuple[str, str]], list[Finding]]:
             )
             continue
         entries.append((path, raw_sha.decode("ascii")))
+        if modes is not None:
+            modes[path] = raw_mode.decode("ascii")
     return entries, findings
+
+
+def residual_size_preflight(
+    repo: Path, entries: Iterable[tuple[str, str]]
+) -> tuple[set[str], list[Finding]]:
+    """Reject oversized safetensors without materializing model-sized blobs."""
+    candidates = [(path, sha) for path, sha in entries if path.lower().endswith(".safetensors")]
+    if not candidates:
+        return set(), []
+    result = subprocess.run(
+        ("git", "-C", str(repo), "cat-file", "--batch-check"),
+        input=b"".join(sha.encode("ascii") + b"\n" for _, sha in candidates),
+        check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+    headers = result.stdout.splitlines()
+    if len(headers) != len(candidates):
+        raise RuntimeError("Unexpected indexed object size response")
+    blocked, findings = set(), []
+    for (path, sha), raw_header in zip(candidates, headers):
+        header = raw_header.split()
+        valid = (len(header) == 3 and header[0] == sha.encode("ascii")
+                 and header[1] == b"blob" and header[2].isdigit())
+        if not valid or int(header[2]) > residual_audit.MAX_CAPTURE_BYTES:
+            blocked.add(path)
+            findings.append(Finding(path, "residual-blob-size-limit",
+                                    "safetensors is not a bounded activation-capture blob"))
+    return blocked, findings
 
 
 def iter_index_blobs(repo: Path, entries: Iterable[tuple[str, str]]) -> Iterator[tuple[str, bytes]]:
@@ -191,9 +227,12 @@ def iter_index_blobs(repo: Path, entries: Iterable[tuple[str, str]]) -> Iterator
             yield path, data
     finally:
         process.stdin.close()
+        process.stdout.close()
         return_code = process.wait()
+        stderr = process.stderr.read().decode("utf-8", errors="replace") if process.stderr else ""
+        if process.stderr:
+            process.stderr.close()
         if return_code:
-            stderr = process.stderr.read().decode("utf-8", errors="replace") if process.stderr else ""
             raise RuntimeError(f"git cat-file failed: {stderr.strip()}")
 
 
@@ -270,7 +309,9 @@ def scan_bytes(path: str, data: bytes) -> list[Finding]:
     return findings
 
 
-def path_findings(paths: Iterable[str]) -> list[Finding]:
+def path_findings(
+    paths: Iterable[str], *, verified_residuals: frozenset[str] = frozenset()
+) -> list[Finding]:
     findings: list[Finding] = []
     for path_string in paths:
         path = PurePosixPath(path_string)
@@ -315,7 +356,9 @@ def path_findings(paths: Iterable[str]) -> list[Finding]:
                     "notebook source requires explicit license and provenance review",
                 )
             )
-        if suffix in RESTRICTED_MODEL_SUFFIXES:
+        if suffix in RESTRICTED_MODEL_SUFFIXES and not (
+            suffix == ".safetensors" and path_string in verified_residuals
+        ):
             findings.append(
                 Finding(path_string, "restricted-model-artifact", "model weights cannot be tracked")
             )
@@ -385,6 +428,11 @@ def release_manifest_findings(
                     )
                 )
                 continue
+            if (not isinstance(item["path"], str) or type(item["bytes"]) is not int
+                    or item["bytes"] < 0 or not residual_audit.digest(item["sha256"])):
+                findings.append(Finding(manifest_path, "invalid-release-entry",
+                                        f"release file entry {index} has invalid path, bytes, or sha256"))
+                continue
             relative = PurePosixPath(str(item["path"]))
             if relative.is_absolute() or ".." in relative.parts:
                 findings.append(
@@ -430,9 +478,11 @@ def release_manifest_findings(
 
 def audit_repository(repo: Path) -> dict[str, object]:
     repo = repo.resolve()
-    entries, findings = index_entries(repo)
+    modes: dict[str, str] = {}
+    entries, findings = index_entries(repo, modes=modes)
     paths = [path for path, _sha in entries]
-    findings.extend(path_findings(paths))
+    blocked, size_findings = residual_size_preflight(repo, entries)
+    findings.extend(size_findings)
 
     missing = sorted(REQUIRED_PUBLIC_FILES.difference(paths))
     findings.extend(
@@ -441,9 +491,11 @@ def audit_repository(repo: Path) -> dict[str, object]:
     )
 
     scanned_bytes = 0
+    scanned_files = 0
     blob_records: dict[str, tuple[int, str]] = {}
     release_manifests: dict[str, bytes] = {}
-    for path, data in iter_index_blobs(repo, entries):
+    for path, data in iter_index_blobs(repo, (entry for entry in entries if entry[0] not in blocked)):
+        scanned_files += 1
         scanned_bytes += len(data)
         blob_records[path] = (len(data), hashlib.sha256(data).hexdigest())
         if is_release_manifest(path):
@@ -454,14 +506,33 @@ def audit_repository(repo: Path) -> dict[str, object]:
         release_manifests, blob_records
     )
     findings.extend(manifest_findings)
+    oids = dict(entries)
+
+    def read_indexed(path: str, limit: int) -> bytes:
+        record = blob_records.get(path)
+        if record is None or record[0] > limit:
+            raise residual_audit.ResidualAuditError("missing-or-oversized-indexed-evidence")
+        return _git(repo, "cat-file", "blob", oids[path]).stdout
+
+    verified_residuals: frozenset[str] = frozenset()
+    try:
+        verified_residuals = residual_audit.approved_residual_paths(paths, blob_records, modes, read_indexed)
+    except residual_audit.ResidualAuditError as exc:
+        findings.append(Finding(residual_audit.RELEASE_ROOT, "invalid-residual-release", str(exc)))
+    except (KeyError, TypeError, ValueError, RecursionError):
+        findings.append(Finding(residual_audit.RELEASE_ROOT, "invalid-residual-release",
+                                "malformed residual release evidence"))
+    findings.extend(path_findings(paths, verified_residuals=verified_residuals))
     findings.extend(ignored_private_file_findings(repo))
     findings.extend(whitespace_findings(repo))
     findings = sorted(findings, key=lambda row: (row.path, row.line or 0, row.rule))
     return {
         "status": "pass" if not findings else "fail",
         "scope": "git-index-plus-private-ignore-and-whitespace-checks",
-        "tracked_files_scanned": len(entries),
+        "tracked_files_scanned": scanned_files,
         "tracked_bytes_scanned": scanned_bytes,
+        "residual_captures_verified": len(verified_residuals),
+        "oversized_safetensors_rejected": len(blocked),
         "release_manifests_verified": len(release_manifests),
         "release_entries_verified": verified_release_entries,
         "required_public_files": sorted(REQUIRED_PUBLIC_FILES),

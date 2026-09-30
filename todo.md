@@ -97,15 +97,33 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
 - [x] Owner directs continued repair rather than pausing at scientific gates
   (2026-09-30), under the same cumulative $200 authorization. Preserve all
   Stage 1 failures and do not relabel new operators as proprietary replication.
-- [ ] Finish and freeze the separate coordinate-delivery repair in
+- [x] Finish and freeze the separate coordinate-delivery repair in
   `docs/SAE_ASSAY_REPAIR_PROTOCOL_20260930.md`: literal, decoder-span and
   encoder-minimum-norm operators; fixed expanded exposure panel; corrected
   special-token summaries; context diagnostics for 7688; independent mundane
   instruction/formatting check. New spending sub-cap $40, prior $13.0788598033
   carried forward. No paid Pro, no experience judges, no target report steering.
-- [ ] Pass exact-path cheap CUDA tests, audit live-model zero and first-five
-  rows, complete frozen repair diagnostics, retrieve/hash-verify and delete
-  newly owned pods, then publish all outcomes including failed recipes.
+- [x] Pass exact-path cheap CUDA tests (31/31), retrieve/hash-verify and delete
+  the newly owned cheap pod. Audit live-model zero, first-five clean rows,
+  and the 84-edit nonzero shard before bulk work. All checks pass; first-five
+  clean activations and NLL exactly replay Stage 1. Freeze `b7c4d7f`.
+- [x] Complete the frozen repair grid, retrieve/hash-verify and delete its
+  newly owned main pod. All 3,897 rows and 544 clean states are present. Feature
+  22004 has only 16 calibration-positive positions, so exposure alone blocks
+  joint qualification; keep that result and all original thresholds.
+- [x] Publish the full repair release, four figure sets and CPU reproduction.
+  Preserve the original failed complete audit and the dated row-ordering
+  comparator correction: all scientific values and gates reconstruct exactly.
+  The clean CPU rebuild matches both audits, the geometry/corpus reports and
+  both numeric figure tables byte-for-byte. Full tests: 1,851 passed, 5 skipped.
+  Repair cost bound $14.3056761721; cumulative diagnostic plus repair
+  $27.3845359753. No target-report steering branch was added.
+- [ ] If another delivery design is proposed, use the saved clean residuals
+  first for offline coordinate/norm feasibility checks instead of re-renting
+  70B. A post-outcome search is exploratory; any selected recipe needs a new
+  freeze and separate validation. Do not lower the current gates or replace
+  feature 22004 silently, and do not confuse exact linear equality with the
+  softer native-coordinate efficacy requirement.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

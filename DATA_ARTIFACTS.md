@@ -1,5 +1,20 @@
 # Data Artifacts
 
+`data/sae_assay_repair/coordinate_delivery_20260930/` is the completed
+prospectively frozen coordinate-delivery repair: 3,897 raw rows, 544 clean BF16
+residual/token captures, all three operator calibrations, 48 context forwards,
+40 formatting responses, four figure sets, corpus census, numerical audit,
+rights provenance and cost/deletion projection. No recipe qualifies; no
+steered validation or consciousness-response branch exists. The original
+complete auditor failed on chronological versus logical diagnostic-list
+ordering. Its failed report remains alongside the separately dated exact
+reconstruction; no scientific value or gate changes. See
+`docs/SAE_ASSAY_REPAIR_AUDIT_AMENDMENT_20260930.md`. The narrowly approved
+residual inventory SHA-256 is
+`33bf2d6cd5d87b33d66638343d8e5ff7adddb274b6b7da6f23a51c9e9f163693`.
+Both newly created pods are deleted. Repair cost bound $14.3056761721;
+original diagnostic plus repair $27.3845359753.
+
 `data/sae_assay_repair/reporting_correction_20260930/` is an additive,
 post-hoc correction to descriptive activation summaries, not to raw Stage 1
 telemetry or verdicts. It hashes all 443 input rows, retains original summary

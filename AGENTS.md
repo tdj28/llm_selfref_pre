@@ -30,6 +30,22 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The completed coordinate-delivery repair is
+  `data/sae_assay_repair/coordinate_delivery_20260930/`: 3,897 raw rows and
+  544 clean states, frozen at `b7c4d7f5fba80dd2b067c200fdf2f322c80c3cae`.
+  Decoder-span and encoder-minimum-norm corrections improve delivered
+  coordinates, but no recipe qualifies. Preserve feature 22004's sparse
+  exposure, norm/fidelity failures and the minimum-norm encoder disagreement.
+  The original complete auditor fails on diagnostic-list ordering; retain it
+  unchanged. Use the separate `release_audit.py` and dated audit amendment
+  for exact reconstruction, not an in-place frozen-auditor edit. This is not
+  a new consciousness-report outcome or a retrospective repair of NF4 work.
+  Both owned pods `1biud76crjbr3f` and `cgmly58b5xnq16` were retrieved,
+  hash-verified and deleted (GET 404). Repair bound $14.3056761721; cumulative
+  diagnostic plus repair $27.3845359753. No Stage 2 or new paid review is
+  authorized. Further coordinate feasibility work should first use saved
+  states, not re-rent 70B. Preserve the exact residual inventory and public
+  schema approval; it is not a blanket allowance for weight files.
 - `docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md` governs the newly authorized
   $200 Stage 1 assay diagnostic. It supersedes conflicting provisions in the
   reviewed planning draft. GPT Pro returned `NOT READY TO FREEZE`; the single
