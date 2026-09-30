@@ -56,14 +56,22 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   reference: report change, validated internal access and consciousness are
   distinct inferences; favorable citation of Berg is not independent replication.
   Added to the focused response discussion and references at `9e80cf1`.
+- [x] Draft the delivery-validated steering follow-up and staged cost estimate
+  in `docs/SAE_STEERING_ASSAY_PLAN_20260929.md`; incorporate appropriate SAE
+  diagnostics and consciousness-indicator references in the focused response.
+  This is a planning draft, not an executable freeze or a completed experiment.
+- [ ] Approve the diagnostic scope and proposed $200 maximum; then complete
+  its fixtures, positive-control task, matching, gates, power checks and runtime.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.
 - [ ] Freeze a behavioral-comparability window, positive control, dose curve,
   coherence check, and actual per-position/re-encoded manipulation gate before
   any new target steering outcomes. Check power at the observed baseline.
-- [ ] Only after those gates pass, run a separately frozen target-versus-many-
-  random-panel study with distinct seeds and a justified panel distribution.
+- [ ] Only after those gates pass, approve and run a separately frozen target-
+  versus-matched-panel study with distinct seeds and a justified panel design.
+  The current budget proposes three fresh panels and 2,200 trials, not an
+  empirical null over all SAE features; a larger feature survey is deferred.
   The existing calibrated control-panel result is a lead, not a selected proof.
 - [ ] For Gemma, separate the high-activity coordinate from semantic selection
   using a declared rule and validate actual ablation/amplification delivery;
