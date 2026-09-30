@@ -38,9 +38,9 @@ NAMESPACE = "replay-controller"
 PRIOR_TOTAL = Decimal("27.3845359753")
 MAX_NEW = Decimal("4")
 HARD_SECONDS, RETRIEVAL_SECONDS = 7200, 600
-HARDWARE = {"cheap": ("NVIDIA RTX A6000", Decimal("0.53"), 48)}
-PLAN_HARDWARE = {"gpu": "NVIDIA RTX A6000", "count": 1, "memory_gb": 48,
-                 "hourly_price_ceiling_usd": .53, "hard_seconds": HARD_SECONDS}
+HARDWARE = {"cheap": ("NVIDIA A40", Decimal("0.49"), 48)}
+PLAN_HARDWARE = {"gpu": "NVIDIA A40", "count": 1, "memory_gb": 48,
+                 "hourly_price_ceiling_usd": .49, "hard_seconds": HARD_SECONDS}
 IMAGE, STORAGE = frozen.IMAGE, frozen.STORAGE
 RunPodV2, ApiError = frozen.RunPodV2, frozen.ApiError
 sha, strict_json, verify_public = frozen.sha, frozen.strict_json, frozen.verify_public
@@ -73,7 +73,7 @@ def load_plan(path, freeze):
 
 def checked_budget(plan):
     if plan.get("hardware") != PLAN_HARDWARE:
-        raise ValueError("Replay plan must pin the single A6000 hardware/timer contract")
+        raise ValueError("Replay plan must pin the single A40 hardware/timer contract")
     budget = plan.get("budget", {})
     if set(budget) != {"prior_total_usd", "total_usd", "replay_max_usd",
                        "new_paid_judge_calls", "new_pro_calls"}:
@@ -88,20 +88,20 @@ def checked_budget(plan):
 
 def quote(api, kind="cheap"):
     if kind != "cheap":
-        raise ValueError("Only a single RTX A6000 replay pod is authorized")
+        raise ValueError("Only a single A40 replay pod is authorized")
     gpu, ceiling, memory = HARDWARE[kind]
     _, item = api.request("GET", "/catalog/gpus/" + urllib.parse.quote(gpu, safe="")
                          + "?include=AVAILABILITY&product=POD&cloud=SECURE&count=1&minCudaVersion=12.8")
     rate = _number(item["price"]["secure"])
     if (item["id"] != gpu or item["secure"] is not True or _number(item["memory"]) < memory
             or item.get("availability") not in {"LOW", "MEDIUM", "HIGH"} or not 0 < rate <= ceiling):
-        raise ValueError("Unknown/unavailable A6000 or quote exceeds authorization; no fallback")
+        raise ValueError("Unknown/unavailable A40 or quote exceeds authorization; no fallback")
     return {"hourly_rate_usd": str(rate), "storage_hourly_usd": str(STORAGE)}
 
 
 def create_payload(kind, name, public_key):
     if kind != "cheap" or not re.fullmatch(re.escape(PREFIX) + r"cheap-[0-9a-f]{12}", name):
-        raise ValueError("Unique replay-owned RTX A6000 name required")
+        raise ValueError("Unique replay-owned A40 name required")
     payload = frozen.create_payload(kind, frozen.PREFIX + "cheap-" + name[-12:], public_key)
     return {**payload, "name": name,
             "gpu": {"id": HARDWARE[kind][0], "count": 1, "minCudaVersion": "12.8"}}

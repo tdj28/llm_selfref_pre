@@ -14,7 +14,8 @@ def test_plan_covers_exact_saved_capture_inventory_without_weights():
                                 "modes": ["zero", "suppression", "amplification"]}
     assert plan["budget"]["prior_total_usd"] == "27.3845359753"
     assert plan["budget"]["replay_max_usd"] == 4
-    assert plan["hardware"]["gpu"] == "NVIDIA RTX A6000"
+    assert plan["hardware"]["gpu"] == "NVIDIA A40"
+    assert protocol.sha(protocol.ROOT / "data/sae_assay_replay/plan_20260930/PLAN.json") == plan["superseded_plan_sha256"]
     assert plan["first_five"] == [x["id"] for x in plan["inputs"][:5]]
     for item in plan["inputs"]:
         for key in ("row_path", "capture_path"):

@@ -401,6 +401,8 @@ data/sae_assay_repair/*
 data/sae_assay_replay/*
 !data/sae_assay_replay/plan_20260930/
 !data/sae_assay_replay/plan_20260930/*.json
+!data/sae_assay_replay/plan_20260930a/
+!data/sae_assay_replay/plan_20260930a/*.json
 !data/sae_assay_replay/exposure_plan_20260930/
 !data/sae_assay_replay/exposure_plan_20260930/*.json
 !data/sae_assay_repair/reporting_correction_20260930/

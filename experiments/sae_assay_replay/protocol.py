@@ -19,6 +19,7 @@ SOURCES += ["experiments/sae_assay_diagnostic/" + n for n in (
 SOURCES += ["experiments/sae_assay_repair/" + n for n in (
     "feasibility.py", "reproduce.py", "protocol.py", "controller.py")]
 SOURCES += ["docs/SAE_ASSAY_REPLAY_PROTOCOL_20260930.md"]
+SOURCES += ["docs/SAE_ASSAY_REPLAY_HARDWARE_AMENDMENT_20260930.md"]
 
 
 def build_plan():
@@ -38,7 +39,9 @@ def build_plan():
         raise ValueError("Expected all 544 saved states")
     prior_plan = json.loads((ROOT / "data/sae_assay_repair/plan_20260930/PLAN.json").read_text())
     sources = sorted(set(SOURCES) | set(prior_plan["source_hashes"]))
-    return {"schema": "sae_native_replay_v1", "date": "2026-09-30",
+    return {"schema": "sae_native_replay_v1_a1", "date": "2026-09-30",
+            "superseded_unexecuted_freeze": "077ce9d50d97cf8d94d90f6d0640baaeb9cffcbc",
+            "superseded_plan_sha256": "41e2f54b69f5639814431fd498b3ca475aac2e5c7099a9ad4af078da89122c9c",
             "scope": "Prospective engineering on previously observed states; not fresh validation or behavioral qualification",
             "input_release": RELEASE, "input_release_commit": "90765eab2ce1e4c6c27915a964a37868aafe4334",
             "input_manifest_sha256": sha(run / "RELEASE_MANIFEST.json"),
@@ -46,8 +49,8 @@ def build_plan():
             "inputs": inputs, "feature_ids": list(TARGET_IDS),
             "gram": qualification["geometry"]["encoder_gram"],
             "sae": {"id": SAE_ID, "revision": SAE_REVISION, "sha256": SAE_FILE_SHA256},
-            "hardware": {"gpu": "NVIDIA RTX A6000", "count": 1, "memory_gb": 48,
-                         "hourly_price_ceiling_usd": .53, "hard_seconds": 7200},
+            "hardware": {"gpu": "NVIDIA A40", "count": 1, "memory_gb": 48,
+                         "hourly_price_ceiling_usd": .49, "hard_seconds": 7200},
             "operator": {"change": .75, "norm_cap": .04, "window": False,
                          "modes": ["zero", "suppression", "amplification"]},
             "first_five": [i["id"] for i in inputs[:5]],

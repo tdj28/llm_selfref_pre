@@ -19,15 +19,15 @@ from tests import test_sae_assay_controller as lifecycle
 FREEZE, UTC, PUBLIC_KEY = lifecycle.FREEZE, lifecycle.UTC, lifecycle.PUBLIC_KEY
 BUDGET = {"prior_total_usd": "27.3845359753", "total_usd": 200, "replay_max_usd": 4,
           "new_paid_judge_calls": 0, "new_pro_calls": 0}
-HARDWARE = {"gpu": "NVIDIA RTX A6000", "count": 1, "memory_gb": 48,
-            "hourly_price_ceiling_usd": .53, "hard_seconds": 7200}
+HARDWARE = {"gpu": "NVIDIA A40", "count": 1, "memory_gb": 48,
+            "hourly_price_ceiling_usd": .49, "hard_seconds": 7200}
 
 
 class FakeAPI(lifecycle.FakeAPI):
     def __init__(self, clock=lambda: UTC):
         super().__init__()
         self.clock, self.extra = clock, []
-        self.catalog.update(id="NVIDIA RTX A6000", memory=48, price={"secure": .53})
+        self.catalog.update(id="NVIDIA A40", memory=48, price={"secure": .49})
 
     def inventory(self):
         return super().inventory() + self.extra
@@ -106,7 +106,7 @@ class ControllerTests(unittest.TestCase):
         result = json.loads(output.getvalue())
         self.assertTrue(result["preflight"])
         self.assertEqual(result["network_calls"], 0)
-        self.assertEqual(result["maximum_timer_cost_usd"], "1.26")
+        self.assertEqual(result["maximum_timer_cost_usd"], "1.18")
         self.assertEqual(result["cumulative_ceiling_usd"], "31.3845359753")
         api.assert_not_called()
         self.public.assert_not_called()
@@ -201,10 +201,10 @@ class ControllerTests(unittest.TestCase):
     def test_plan_hardware_must_match_this_freeze(self):
         for change in ({"gpu": "NVIDIA GeForce RTX 4090"}, {"count": 2}, {"memory_gb": 24},
                        {"hourly_price_ceiling_usd": .54}, {"hard_seconds": 7201}):
-            with self.subTest(change=change), self.assertRaisesRegex(ValueError, "A6000"):
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, "A40"):
                 c.checked_budget({"budget": BUDGET, "hardware": {**HARDWARE, **change}})
 
-    def test_unavailable_a6000_never_falls_back_or_creates(self):
+    def test_unavailable_a40_never_falls_back_or_creates(self):
         self.api.catalog["availability"] = "NONE"
         with self.assertRaisesRegex(ValueError, "no fallback"):
             self.ctrl.launch()
@@ -212,9 +212,9 @@ class ControllerTests(unittest.TestCase):
         self.assertFalse(any(method == "POST" for method, _, _ in self.api.calls))
         catalogs = [path for _, path, _ in self.api.calls if path.startswith("/catalog/")]
         self.assertEqual(len(catalogs), 1)
-        self.assertIn("NVIDIA%20RTX%20A6000", catalogs[0])
+        self.assertIn("NVIDIA%20A40", catalogs[0])
 
-    def test_a6000_catalog_rejects_wrong_gpu_memory_cloud_or_rate(self):
+    def test_a40_catalog_rejects_wrong_gpu_memory_cloud_or_rate(self):
         for change in ({"id": "NVIDIA GeForce RTX 4090"}, {"memory": 24}, {"secure": False},
                        {"price": {"secure": .54}}, {"price": {"secure": None}},
                        {"price": {"secure": 0}}, {"price": {"secure": "NaN"}}):
@@ -227,8 +227,8 @@ class ControllerTests(unittest.TestCase):
         self.assertEqual(payload["env"], {"PUBLIC_KEY": PUBLIC_KEY})
         self.assertEqual(payload["image"], c.frozen.IMAGE)
         self.assertEqual(payload["gpu"]["count"], 1)
-        self.assertEqual(payload["gpu"]["id"], "NVIDIA RTX A6000")
-        self.assertEqual(c.quote(self.api), {"hourly_rate_usd": "0.53", "storage_hourly_usd": "0.10"})
+        self.assertEqual(payload["gpu"]["id"], "NVIDIA A40")
+        self.assertEqual(c.quote(self.api), {"hourly_rate_usd": "0.49", "storage_hourly_usd": "0.10"})
         for kind, pod_name, key in (("main", name, PUBLIC_KEY), ("cheap", c.frozen.PREFIX + name, PUBLIC_KEY),
                                      ("cheap", name, "private key"), ("cheap", name, PUBLIC_KEY + "\nEVIL=1")):
             with self.assertRaises(ValueError):
@@ -293,10 +293,10 @@ class ControllerTests(unittest.TestCase):
     def test_clock_accounting_storage_reserve_and_restart(self):
         self.launched()
         self.ticks = 3600
-        self.assertEqual(self.ctrl.cost_check(self.api.pod), Decimal(".63"))
+        self.assertEqual(self.ctrl.cost_check(self.api.pod), Decimal(".59"))
         restarted = self.controller()
         self.ticks += 1
-        self.assertGreater(restarted.cost_check(self.api.pod), Decimal(".63"))
+        self.assertGreater(restarted.cost_check(self.api.pod), Decimal(".59"))
         self.ticks = 6540
         with self.assertRaisesRegex(ValueError, "deadline"):
             self.ctrl.cost_check(self.api.pod)
@@ -546,7 +546,7 @@ class ControllerTests(unittest.TestCase):
         closed = self.ctrl.terminate()["data"]
         self.assertFalse(closed["within_limits"])
         self.assertEqual(closed["get_status"], 404)
-        self.assertGreater(Decimal(closed["compute_upper_bound_usd"]), Decimal("1.26"))
+        self.assertGreater(Decimal(closed["compute_upper_bound_usd"]), Decimal("1.18"))
         self.assertEqual(Decimal(closed["cumulative_upper_bound_usd"]),
                          c.PRIOR_TOTAL + Decimal(closed["compute_upper_bound_usd"]))
         with self.assertRaises(ValueError):
