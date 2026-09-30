@@ -637,7 +637,15 @@ make test
 make public-audit
 make paper
 \end{verbatim}
-The public audit checks indexed files, secret exclusions, and release hashes; it is not an independent validation of every statistical calculation. Run analyzers, figure generators, and release builders only on disposable copies when reproducing results, and do not use \code{make audit} as a read-only check. Exact collection commands and parameters remain in \code{experiments/causal\_transplant/README.md}; reproduction does not authorize new outcome generation. API keys, the private annotation key, and coder files are excluded. Public notebook code is not vendored because its source repository declares no license; only factual saved outputs are parsed by our clean-room code with attribution.
+The public audit checks indexed files, secret exclusions, and release hashes;
+it is not an independent validation of every statistical calculation. The
+corrected \code{make audit} runs reanalyses on disposable copies. Do not invoke
+analyzers, figure generators, or release builders on original frozen directories.
+Collection commands are in \path{experiments/causal_transplant/README.md};
+reproduction does not authorize new outcome generation. API keys, the private
+annotation key, and coder files are excluded. Public notebook code is not
+vendored because its source repository declares no license; only factual saved
+outputs are parsed by our clean-room code with attribution.
 
 \section{Conclusion}
 

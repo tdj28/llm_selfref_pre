@@ -80,6 +80,19 @@ All new calculations in these documents are post-hoc review diagnostics.
 Frozen plans, raw outcomes and release manifests remain unchanged. No new
 model outcome, paid consult or GPU job is part of this correction.
 
+The combined source correction is published at `47ca3ed`; all 13 hosted CI
+jobs pass. The final local Python 3.12 suite passes 1,065 tests, with six
+environment-dependent skips. The final source index audit covers 2,199 files;
+the frozen `data/` and `paper/results/` trees have no changes. These checks
+establish computational and release consistency, not scientific validity.
+
+The corrected focused response is published at companion commit `71bc434`.
+Its 83 local tests, evidence verification and hosted CI pass. The 23-page PDF
+has been visually checked. Original evidence retains its earlier source pin;
+the new post-hoc diagnostics are separately pinned to `47ca3ed`. Earlier Pro
+review receipts remain authentic historical records, not approval of this
+revision. Human editorial approval and instrument validation remain pending.
+
 ## Unfinished Work
 
 The executable follow-up list is in [todo.md](../todo.md). The priority is a

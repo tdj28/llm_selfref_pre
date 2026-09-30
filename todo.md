@@ -22,8 +22,10 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
 - [x] Complete and validate local measurement, delivery, cue and CI fixes;
   correct the active companion and historical manuscript. Local Python 3.12
   checks pass 1,065 tests with six environment-dependent skips.
-- [ ] Push both corrected repositories, pin the new post-hoc audit separately
-  from the old evidence, and confirm hosted CI and final PDF checks.
+- [x] Push both corrected repositories, pin the new post-hoc audit separately
+  from the old evidence, and confirm hosted CI and final PDF checks. Source
+  correction `47ca3ed` passes all 13 hosted jobs; companion `71bc434` passes
+  verification, with 83 local tests and all 23 final PDF pages checked.
 - [ ] Obtain human editorial approval of the corrected manuscript. Existing
   automated Pro reviews did not validate these newly identified design issues.
 - [ ] Approve the instrument-validation codebook before starting human coding.
@@ -53,6 +55,8 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   or claim local commit timestamps prove a remote pre-outcome freeze.
 - [ ] Resolve SAE-vector and Neuronpedia-label redistribution terms; ask the
   owner about identifying local-path history and repository protection.
+- [ ] Rebuild and validate the older general/GPU dependency lock separately;
+  current CPU reproduction uses the verified CI requirements, not that lock.
 - [ ] Reconcile live/source article corrections without overwriting the owner's
   blog edits or touching `../praxagent`. No website changes are authorized here.
 
