@@ -46,8 +46,12 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   no retries. Explicit counts 8/14; inclusive counts 47/61. Both must be
   reported. Total usage upper bound USD 13.574284 including calibration.
   See `docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md`.
-- [ ] Publish the audited result bundle and integrate its bounded result into
-  the response manuscript. Human recruitment stays deferred.
+- [x] Publish the audited result bundle and integrate its bounded result into
+  the response manuscript. Source `fdb6d15`; companion `d23d10f`.
+  Source tests: 1,110 passed, six skipped. Companion: 100 tests on both
+  Python 3.10 and 3.12; pinned-source count verification passes. The 25-page
+  PDF builds without warnings and has been visually checked. These are
+  automated checks, not human scientific review. Recruitment stays deferred.
 - [x] Incorporate Chandaria et al., arXiv:2609.35618v1, as a versioned preprint
   reference: report change, validated internal access and consciousness are
   distinct inferences; favorable citation of Berg is not independent replication.
