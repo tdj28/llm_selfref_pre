@@ -94,6 +94,18 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   final figures and cost summary. All 184 calls validate; each modern reader
   gives 0/80 explicit but 78/80 inclusive self-attributions. Retain both.
   Full diagnostic upper bound $13.0788598033. No Stage 2 was authorized.
+- [x] Owner directs continued repair rather than pausing at scientific gates
+  (2026-09-30), under the same cumulative $200 authorization. Preserve all
+  Stage 1 failures and do not relabel new operators as proprietary replication.
+- [ ] Finish and freeze the separate coordinate-delivery repair in
+  `docs/SAE_ASSAY_REPAIR_PROTOCOL_20260930.md`: literal, decoder-span and
+  encoder-minimum-norm operators; fixed expanded exposure panel; corrected
+  special-token summaries; context diagnostics for 7688; independent mundane
+  instruction/formatting check. New spending sub-cap $40, prior $13.0788598033
+  carried forward. No paid Pro, no experience judges, no target report steering.
+- [ ] Pass exact-path cheap CUDA tests, audit live-model zero and first-five
+  rows, complete frozen repair diagnostics, retrieve/hash-verify and delete
+  newly owned pods, then publish all outcomes including failed recipes.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of

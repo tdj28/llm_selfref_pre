@@ -504,6 +504,14 @@ The steering framework can require substantial GPU memory, HuggingFace downloads
 
 ## RunPod And GPU Cost Discipline
 
+- The 2026-09-30 SAE assay repair continues the existing $200 authorization,
+  not a new budget. Prior diagnostic spending is bounded by $13.0788598033;
+  the separately frozen repair has a $40 new-spending sub-cap. See
+  `docs/SAE_ASSAY_REPAIR_PROTOCOL_20260930.md` and the ignored checkpoint for
+  actual current lifecycle/cost state. Preserve the failed Stage 1 result.
+  Decoder-span and encoder-minimum-norm repairs are new engineering operators,
+  not equivalent implementations of the historical proprietary intervention.
+
 - Only create GPU pods when the task actually needs them. Prefer dry runs and local/no-GPU analysis first.
 - Only stop, terminate, or otherwise modify pods that this agent created, unless the user explicitly identifies a different pod and asks for that action.
 - When a RunPod pod is no longer needed, terminate it, not just stop it, unless there is a concrete near-term reuse plan that justifies keeping disk state. Stopped pods can still create storage charges.

@@ -1,5 +1,14 @@
 # Data Artifacts
 
+`data/sae_assay_repair/reporting_correction_20260930/` is an additive,
+post-hoc correction to descriptive activation summaries, not to raw Stage 1
+telemetry or verdicts. It hashes all 443 input rows, retains original summary
+values, excludes specials in the corrected distributions, separates origins
+and terminal observations, and verifies five unchanged teacher calculations.
+`docs/SAE_ASSAY_REPAIR_PROTOCOL_20260930.md` defines the separate engineering
+follow-up. Its new operator diagnostics must not be described as proprietary
+replication or as a retrospective explanation of the older NF4 experiment.
+
 The new outcome-free assay plan is
 `data/sae_assay_diagnostic/stage1_plan_20260929/PLAN.json`. It binds the revised
 Stage 1 runtime and tests before GPU outcomes; it is not an outcome release.

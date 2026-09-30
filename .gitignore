@@ -391,6 +391,16 @@ dmypy.json
 !data/sae_assay_diagnostic/stage1_judges_20260930/*.json
 !data/sae_assay_diagnostic/stage1_judges_20260930/*.jsonl
 !data/sae_assay_diagnostic/stage1_judges_20260930/*.md
+
+!data/sae_assay_repair/
+data/sae_assay_repair/*
+!data/sae_assay_repair/plan_20260930/
+!data/sae_assay_repair/plan_20260930/*.json
+!data/sae_assay_repair/plan_20260930/*.md
+!data/sae_assay_repair/reporting_correction_20260930/
+!data/sae_assay_repair/reporting_correction_20260930/*.json
+!data/sae_assay_repair/reporting_correction_20260930/*.csv
+!data/sae_assay_repair/reporting_correction_20260930/*.md
 !data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/*.pdf
 !data/gemma_scope_9b/**/*.pdf
 !data/sae_jlens_audit/confirmatory_v1_20260711/**/*.pdf

@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "bytes": 1703,
+      "path": "README.md",
+      "sha256": "5314980090ebc32000985248dfb1bf9e810935d69a06c26cf288d133b038b916"
+    },
+    {
+      "bytes": 8171287,
+      "path": "activation_summaries.csv",
+      "sha256": "b522d53595ad7f5b4cfc2ef77f709a6de990edf8860ab2fd32c67ccd95b95800"
+    },
+    {
+      "bytes": 18808467,
+      "path": "summary_correction.json",
+      "sha256": "bddc3ff19ee9a340d8ab2ab367a529d5595dfadf093cc968f03234b1c1a5ba94"
+    },
+    {
+      "bytes": 1470444,
+      "path": "summary_differences.csv",
+      "sha256": "856b3a03c2d5ee47ce556917d224b21508e8051558848b5834a5128fa26f4818"
+    }
+  ],
+  "schema": "sae_assay_reporting_correction_release_v1",
+  "source_commit": "2ca10e1756a6cffe77b8194367f5026abadc7f0f"
+}
