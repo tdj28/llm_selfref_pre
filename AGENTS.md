@@ -40,6 +40,21 @@ immediately public and permanently recoverable.
 - `docs/CLAIM_LEDGER.md` maps every headline claim to its artifacts, analysis code, permissible wording, and forbidden overclaims.
 - `docs/EXTERNAL_REVIEW_PACKET.md` defines the unresolved statistics and mechanistic review requests; preparing it does not count as receiving independent review.
 - `docs/HUMAN_CODING_HANDOFF.md` is the operational protocol for independent coders. Preparing the handoff does not count as completing human validation.
+- `docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md` and
+  `data/automated_rubric_audit/v1_20260929/` define the separately authorized
+  post-hoc Astra/Opus audit of the fixed 160-response public packet. Freeze
+  `8f990d0067105b34d80cfed1157ea3e191b5013b` precedes its new judgments, not
+  access to the old responses/scores. Human recruitment remains deferred.
+  Preserve separate assertion, attribution, time, uncertainty and mixed-claim
+  labels. Do not call model agreement human validation or accuracy. Do not
+  infer a rubric-only effect when the judge and rubric both change.
+  Its append-only receipts include synthetic pilots, which must stay out of
+  target counts. The receipt verifier requires an absolute run-directory path.
+  The completed audit has 320 valid target judgments with no missingness.
+  Report explicit counts (Astra 8, Opus 14) alongside inclusive explicit-or-
+  implicit counts (47, 61); do not discard implicit attribution to sharpen a
+  negative claim. Results and limits are in
+  `docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md`.
 - `docs/GOODFIRE_API_STATUS.md` records the February 2026 deprecation of
   Goodfire's legacy SAE demo/API and keeps the separately active SteeringAPI
   provenance boundary explicit.

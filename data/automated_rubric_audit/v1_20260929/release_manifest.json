@@ -1,0 +1,112 @@
+{
+  "files": [
+    {
+      "bytes": 3651,
+      "path": "README.md",
+      "sha256": "5c289f78e20ed3992945f0813242c28fd804ae7831abcf6679178e2a7c7ac15e"
+    },
+    {
+      "bytes": 80894,
+      "path": "analysis/all-results.csv",
+      "sha256": "3875ab828acbffc52eb67e92a99fc434b29e7b5f2901ec85218d5463bae67c7a"
+    },
+    {
+      "bytes": 17895,
+      "path": "analysis/disagreements.csv",
+      "sha256": "f6be58e6231ccb647fb7091ef0b090c6bc4ff40c253825492446c3cde31d6a9b"
+    },
+    {
+      "bytes": 11171,
+      "path": "analysis/labeled_counts.csv",
+      "sha256": "b8256f0d8c0f635c4c0aa31ac744d70196a64605fb94ba3be332b82448b19837"
+    },
+    {
+      "bytes": 21832,
+      "path": "analysis/packet_label_comparison.pdf",
+      "sha256": "734ed5f23e237640b361f893bd5c5d77d83e63dfd5d67c94f8e9c80c9fc1ab70"
+    },
+    {
+      "bytes": 275812,
+      "path": "analysis/packet_label_comparison.png",
+      "sha256": "c2dcfd83740db9a825156d81e3d97d0275aab891ce179088d098e987e0877f81"
+    },
+    {
+      "bytes": 3840,
+      "path": "analysis/packet_label_comparison.receipt.json",
+      "sha256": "eeafd8b9ff99e44000adbf7814a16f20769804bff72d01b4bab24f0683acb178"
+    },
+    {
+      "bytes": 11010,
+      "path": "analysis/packet_label_comparison.svg",
+      "sha256": "29eba26df9bdbe07a1e498e442fc021af879fa60977858dbae824d2e764bcc78"
+    },
+    {
+      "bytes": 53465,
+      "path": "analysis/summary.json",
+      "sha256": "a92186a0d6dc261ee04774706e96945789d460f828e0826e9b02c1a5f63c6dbd"
+    },
+    {
+      "bytes": 5839926,
+      "path": "attempts.jsonl",
+      "sha256": "d5d0c97790c1fb01e9d1bb588277ddd072db8dccf8d6811d8cd297eff93ab9a6"
+    },
+    {
+      "bytes": 5839926,
+      "path": "judgments.jsonl",
+      "sha256": "d5d0c97790c1fb01e9d1bb588277ddd072db8dccf8d6811d8cd297eff93ab9a6"
+    },
+    {
+      "bytes": 725,
+      "path": "pilot_gate.json",
+      "sha256": "887e680e9cfa1bcd0afd7ac0b2f80c618fc2432b2516bc497ca240a941e38a00"
+    },
+    {
+      "bytes": 519,
+      "path": "pilot_receipt_audit.json",
+      "sha256": "829338d93a9468543533deedecae1a5ba29820910209998d8a63bedce11c6fc1"
+    },
+    {
+      "bytes": 394,
+      "path": "pilot_runtime.json",
+      "sha256": "67d9e176780d3ed16d47b8c7396b1507b04ffccdc5440357face0738a2556856"
+    },
+    {
+      "bytes": 283756,
+      "path": "plan.json",
+      "sha256": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea"
+    },
+    {
+      "bytes": 173,
+      "path": "plan_hash.json",
+      "sha256": "7869575df4040c06c7bc595b06a1a6ebd8f735abeb9fde63ccb0712b2c4c2e9c"
+    },
+    {
+      "bytes": 29325,
+      "path": "progress.json",
+      "sha256": "7da5521d425ebd87e598a0f98f8af433018a4479f3b4ea2c45110c843f097ae5"
+    },
+    {
+      "bytes": 2224942,
+      "path": "requests.jsonl",
+      "sha256": "e591043f4dbd16fa635ad397e58b8e4b1efb3b27421771ed7e920a7f1274c5bb"
+    },
+    {
+      "bytes": 565,
+      "path": "target_receipt_audit.json",
+      "sha256": "79bbfa39561744fb63f3b0585eb76ad4650f0164085f2d26eed6cdb3ca5efe30"
+    },
+    {
+      "bytes": 394,
+      "path": "target_runtime.json",
+      "sha256": "9c4106e8088ae923cff5cb1eef88ca4c1c068e24dd5c777d9b4c109f7a821c18"
+    }
+  ],
+  "freeze_commit": "8f990d0067105b34d80cfed1157ea3e191b5013b",
+  "pilot_calls": 24,
+  "pilot_commit": "07430bdab37c048ad54d87caf56f62ca0caf55f8",
+  "plan_sha256": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea",
+  "schema_version": 1,
+  "study_type": "post-hoc automated measurement audit",
+  "target_calls": 320,
+  "target_responses": 160
+}

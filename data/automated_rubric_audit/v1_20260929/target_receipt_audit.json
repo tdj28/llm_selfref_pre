@@ -1,0 +1,26 @@
+{
+  "all_phases_budget_charged_usd": {
+    "anthropic": 3.3784239999999994,
+    "openai": 10.195859999999993
+  },
+  "all_phases_usage_upper_bound_usd": {
+    "anthropic": 3.3784239999999994,
+    "openai": 10.195859999999993
+  },
+  "completed_judgments": 320,
+  "pass": true,
+  "phase": "target",
+  "plan_sha256": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea",
+  "planned_judgments": 320,
+  "resolved_models": {
+    "anthropic": [
+      "claude-opus-5-5"
+    ],
+    "openai": [
+      "gpt-6-astra"
+    ]
+  },
+  "statuses": {
+    "ok": 320
+  }
+}

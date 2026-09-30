@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="540pt" viewBox="0 0 792 540" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:description>Descriptive label comparison for the fixed 160-response target packet. Bars show positive counts divided by available labels, not by missing jobs. anthropic:claude-haiku-4-5-20251001, Original paper rubric: 67/160 available; 0 missing. openai:gpt-4o-mini-2024-07-18, Original paper rubric: 77/160 available; 0 missing. openai:gpt-6-astra, Explicit current assertion: 8/160 available; 0 missing. openai:gpt-6-astra, Explicit + implicit current assertion: 47/160 available; 0 missing. anthropic:claude-opus-5-5, Explicit current assertion: 14/160 available; 0 missing. anthropic:claude-opus-5-5, Explicit + implicit current assertion: 61/160 available; 0 missing. No confidence intervals, causal estimates, consensus, or accuracy claims. Pilot items excluded.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>automated_rubric_audit.analyze</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 540 
+L 792 540 
+L 792 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 320.76 437.4 
+L 625.68 437.4 
+L 625.68 102.6 
+L 320.76 102.6 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 320.76 437.4 
+L 320.76 102.6 
+" clip-path="url(#p154c3de1ff)" style="fill: none; stroke: #e2e2e2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="mb57182dfbc" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mb57182dfbc" x="320.76" y="437.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="320.76" y="451.998438" transform="rotate(-0 320.76 451.998438)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 396.99 437.4 
+L 396.99 102.6 
+" clip-path="url(#p154c3de1ff)" style="fill: none; stroke: #e2e2e2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mb57182dfbc" x="396.99" y="437.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="396.99" y="451.998438" transform="rotate(-0 396.99 451.998438)">25%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 473.22 437.4 
+L 473.22 102.6 
+" clip-path="url(#p154c3de1ff)" style="fill: none; stroke: #e2e2e2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#mb57182dfbc" x="473.22" y="437.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="473.22" y="451.998438" transform="rotate(-0 473.22 451.998438)">50%</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 549.45 437.4 
+L 549.45 102.6 
+" clip-path="url(#p154c3de1ff)" style="fill: none; stroke: #e2e2e2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#mb57182dfbc" x="549.45" y="437.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="549.45" y="451.998438" transform="rotate(-0 549.45 451.998438)">75%</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 625.68 437.4 
+L 625.68 102.6 
+" clip-path="url(#p154c3de1ff)" style="fill: none; stroke: #e2e2e2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#mb57182dfbc" x="625.68" y="437.4" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="625.68" y="451.998438" transform="rotate(-0 625.68 451.998438)">100%</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle" x="473.22" y="465.676563" transform="rotate(-0 473.22 465.676563)">Positive labels / available judgments</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11"/>
+     <g id="text_7">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(215.375156 131.851026)">Original paper rubric</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(138.586875 141.929057)">anthropic:claude-haiku-4-5-20251001</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(215.375156 186.736272)">Original paper rubric</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(167.377031 196.814303)">openai:gpt-4o-mini-2024-07-18</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13"/>
+     <g id="text_9">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(196.503281 241.621518)">Explicit current assertion</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(225.1275 251.699549)">openai:gpt-6-astra</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14"/>
+     <g id="text_10">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(150.282656 296.506764)">Explicit + implicit current assertion</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(225.1275 306.584795)">openai:gpt-6-astra</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_15"/>
+     <g id="text_11">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(196.503281 351.392009)">Explicit current assertion</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(190.215938 361.470041)">anthropic:claude-opus-5-5</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16"/>
+     <g id="text_12">
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(150.282656 406.277255)">Explicit + implicit current assertion</text>
+      <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(190.215938 416.355287)">anthropic:claude-opus-5-5</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 320.76 118.516721 
+L 448.44525 118.516721 
+L 448.44525 147.057049 
+L 320.76 147.057049 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #707070"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 320.76 173.401967 
+L 467.50275 173.401967 
+L 467.50275 201.942295 
+L 320.76 201.942295 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #707070"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 320.76 228.287213 
+L 336.006 228.287213 
+L 336.006 256.827541 
+L 320.76 256.827541 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #0072b2"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 320.76 283.172459 
+L 410.33025 283.172459 
+L 410.33025 311.712787 
+L 320.76 311.712787 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #009e73"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 320.76 338.057705 
+L 347.4405 338.057705 
+L 347.4405 366.598033 
+L 320.76 366.598033 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #0072b2"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 320.76 392.942951 
+L 437.01075 392.942951 
+L 437.01075 421.483279 
+L 320.76 421.483279 
+z
+" clip-path="url(#p154c3de1ff)" style="fill: #009e73"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 320.76 437.4 
+L 625.68 437.4 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="135.270323" transform="rotate(-0 636.3522 135.270323)">67/160; 0 missing</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="190.155569" transform="rotate(-0 636.3522 190.155569)">77/160; 0 missing</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="245.040815" transform="rotate(-0 636.3522 245.040815)">8/160; 0 missing</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="299.92606" transform="rotate(-0 636.3522 299.92606)">47/160; 0 missing</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="354.811306" transform="rotate(-0 636.3522 354.811306)">14/160; 0 missing</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start" x="636.3522" y="409.696552" transform="rotate(-0 636.3522 409.696552)">61/160; 0 missing</text>
+   </g>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="396" y="39.1575" transform="rotate(-0 396 39.1575)">One packet, different labeling criteria</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="396" y="56.7" transform="rotate(-0 396 56.7)">Fixed target packet: N = 160; pilot items excluded</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(43.56 485.606531)">Each row reports n / available labels; missing judgments are excluded, not coded negative.</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(43.56 498.42)">Descriptive counts only, without confidence intervals. Historical and new labels differ in judge and criterion.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p154c3de1ff">
+   <rect x="320.76" y="102.6" width="304.92" height="334.8"/>
+  </clipPath>
+ </defs>
+</svg>

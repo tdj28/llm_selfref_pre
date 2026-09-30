@@ -20,7 +20,9 @@ the release manifest is rebuilt.
 linguistic audit of the unchanged 160-response public packet. It retains the
 result-free plan, twelve distinct synthetic calibration examples, original
 public labels, new Astra/Opus provider receipts, costs, failures and derived
-descriptive analyses as each stage completes. This is not human validation,
+descriptive analyses. Collection is complete: 24 pilot and 320 target calls,
+all valid, no retries. The full release has receipt checks, a SHA-256 manifest,
+complete reductions, disagreement rows and a figure. This is not human validation,
 and no private condition-linkage key or human coder file belongs in it.
 Its protocol is `docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md`.
 

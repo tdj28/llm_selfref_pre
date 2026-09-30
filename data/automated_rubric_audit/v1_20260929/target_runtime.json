@@ -1,0 +1,15 @@
+{
+  "caps_usd": {
+    "anthropic": 25.0,
+    "openai": 75.0
+  },
+  "freeze_commit": "8f990d0067105b34d80cfed1157ea3e191b5013b",
+  "packages": {
+    "anthropic": "0.75.0",
+    "httpx": "0.28.1",
+    "openai": "2.14.0",
+    "python-dotenv": "1.2.1"
+  },
+  "plan_sha256": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea",
+  "started_at_utc": "2026-09-30T04:26:17.538298+00:00"
+}

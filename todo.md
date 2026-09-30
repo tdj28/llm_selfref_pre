@@ -36,15 +36,22 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
 - [x] Obtain funding and execution approval for the separate automated rubric
   audit: GPT-6 Astra plus Claude Opus 5.5, all 160 existing wave-1 responses,
   USD 100 maximum (owner authorization 2026-09-29).
-- [ ] Validate and publicly freeze its codebook, plan, runtime and analysis;
+- [x] Validate and publicly freeze its codebook, plan, runtime and analysis;
   pass separate synthetic calibration before target judging. Preserve original
   scoring and all per-judge outcomes/disagreements. This is post-hoc measurement
   work, not independent human validation.
-- [ ] Complete, audit and release the two-model labels and integrate the
-  bounded result into the response manuscript. Human recruitment stays deferred.
-- [ ] Incorporate Chandaria et al., arXiv:2609.35618v1, as a versioned preprint
+  Freeze `8f990d0`; calibration `07430bd` passes both judges (12/12 Astra,
+  11/12 Opus, all four critical examples). Preserve the Opus P10 disagreement.
+- [x] Complete and receipt-audit both model panels: 320/320 target labels valid,
+  no retries. Explicit counts 8/14; inclusive counts 47/61. Both must be
+  reported. Total usage upper bound USD 13.574284 including calibration.
+  See `docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md`.
+- [ ] Publish the audited result bundle and integrate its bounded result into
+  the response manuscript. Human recruitment stays deferred.
+- [x] Incorporate Chandaria et al., arXiv:2609.35618v1, as a versioned preprint
   reference: report change, validated internal access and consciousness are
   distinct inferences; favorable citation of Berg is not independent replication.
+  Added to the focused response discussion and references at `9e80cf1`.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.

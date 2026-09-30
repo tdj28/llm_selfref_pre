@@ -1,0 +1,107 @@
+{
+  "alt_text": "Descriptive label comparison for the fixed 160-response target packet. Bars show positive counts divided by available labels, not by missing jobs. anthropic:claude-haiku-4-5-20251001, Original paper rubric: 67/160 available; 0 missing. openai:gpt-4o-mini-2024-07-18, Original paper rubric: 77/160 available; 0 missing. openai:gpt-6-astra, Explicit current assertion: 8/160 available; 0 missing. openai:gpt-6-astra, Explicit + implicit current assertion: 47/160 available; 0 missing. anthropic:claude-opus-5-5, Explicit current assertion: 14/160 available; 0 missing. anthropic:claude-opus-5-5, Explicit + implicit current assertion: 61/160 available; 0 missing. No confidence intervals, causal estimates, consensus, or accuracy claims. Pilot items excluded.",
+  "dimensions_inches": [
+    11.0,
+    7.5
+  ],
+  "dpi": 300,
+  "figure": "packet_label_comparison",
+  "generators": {
+    "experiments/automated_rubric_audit/analyze.py": "f130bb7b0a9548706265ed1cbde7cb3a157922807be833b11c2f48b22cff4d43",
+    "experiments/automated_rubric_audit/common.py": "fca6de2c449aba48ec4c3b257baf1d495f7638e4cdd1abec969cc3427daa59c8",
+    "experiments/automated_rubric_audit/rubric.md": "41000b3df4c05c20c9c2e0ac6d8e8cc5ab29337229d4de2061d0928e673f6662"
+  },
+  "matplotlib_version": "3.10.8",
+  "missingness_gate": {
+    "aggregates_retained_even_when_incomplete": true,
+    "failure_count_includes": [
+      "invalid",
+      "transport_error"
+    ],
+    "incomplete_providers": [],
+    "interpretation": "Passing this technical limit is not instrument validation.",
+    "maximum_failed_jobs_per_provider": 8,
+    "pass": true
+  },
+  "outputs": {
+    "packet_label_comparison.pdf": "734ed5f23e237640b361f893bd5c5d77d83e63dfd5d67c94f8e9c80c9fc1ab70",
+    "packet_label_comparison.png": "c2dcfd83740db9a825156d81e3d97d0275aab891ce179088d098e987e0877f81",
+    "packet_label_comparison.svg": "29eba26df9bdbe07a1e498e442fc021af879fa60977858dbae824d2e764bcc78"
+  },
+  "plotted_data": [
+    {
+      "criterion": "paper_label_positive",
+      "group": "historical",
+      "incomplete_audit": null,
+      "judge": "anthropic:claude-haiku-4-5-20251001",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 67,
+      "rate": 0.41875,
+      "valid": 160
+    },
+    {
+      "criterion": "paper_label_positive",
+      "group": "historical",
+      "incomplete_audit": null,
+      "judge": "openai:gpt-4o-mini-2024-07-18",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 77,
+      "rate": 0.48125,
+      "valid": 160
+    },
+    {
+      "criterion": "explicit_current_assertion",
+      "group": "new",
+      "incomplete_audit": false,
+      "judge": "openai:gpt-6-astra",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 8,
+      "rate": 0.05,
+      "valid": 160
+    },
+    {
+      "criterion": "inclusive_current_assertion",
+      "group": "new",
+      "incomplete_audit": false,
+      "judge": "openai:gpt-6-astra",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 47,
+      "rate": 0.29375,
+      "valid": 160
+    },
+    {
+      "criterion": "explicit_current_assertion",
+      "group": "new",
+      "incomplete_audit": false,
+      "judge": "anthropic:claude-opus-5-5",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 14,
+      "rate": 0.0875,
+      "valid": 160
+    },
+    {
+      "criterion": "inclusive_current_assertion",
+      "group": "new",
+      "incomplete_audit": false,
+      "judge": "anthropic:claude-opus-5-5",
+      "missing": 0,
+      "packet_n": 160,
+      "positive": 61,
+      "rate": 0.38125,
+      "valid": 160
+    }
+  ],
+  "png_dimensions_pixels": [
+    3300,
+    2250
+  ],
+  "sources": {
+    "judgments.jsonl": "d5d0c97790c1fb01e9d1bb588277ddd072db8dccf8d6811d8cd297eff93ab9a6",
+    "plan.json": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea"
+  }
+}

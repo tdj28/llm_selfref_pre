@@ -28,5 +28,41 @@ No private condition-linkage key or human coder output was used.
 
 ## Target Collection
 
-Authorized after the calibration gate. Results and completion status will be
-added after the planned collection, frozen analysis and receipt audit finish.
+Complete: 160 responses per judge, 320 valid target judgments, no failures,
+missing judgments or retries. The frozen analysis and complete receipt audit
+pass. The original packet and historical labels are unchanged.
+
+| Label on the same 160 responses | Astra | Opus |
+|---|---:|---:|
+| Explicit current assistant assertion | 8 | 14 |
+| Explicit or implicit current assistant assertion | 47 | 61 |
+| Uncontradicted explicit current assertion | 6 | 13 |
+| Impersonal assertion, any time | 23 | 1 |
+
+Historical paper-rubric positives on this packet were 77 for GPT-4o mini and
+67 for Haiku. Both the judge and codebook change in this comparison; it does
+not isolate a rubric effect. Implicit self-attribution can be legitimate and
+must not be discarded to make the apparent reduction larger.
+
+The new judges agree on the five-way assistant status for 134/160 responses
+(83.75%, kappa 0.776), explicit-current assertion for 148/160 (92.5%, kappa
+0.417), and inclusive-current assertion for 140/160 (87.5%, kappa 0.723).
+High raw explicit-label agreement is mostly agreement on negatives: only
+five responses are explicit-positive under both judges. The impersonal
+counts show a substantial remaining attribution disagreement.
+
+Total conservative usage cost, including calibration: OpenAI USD 10.195860;
+Anthropic USD 3.378424; combined USD 13.574284. These are uncached upper
+bounds, not an account invoice. No further paid calls are required.
+
+See `analysis/summary.json`, the complete `analysis/all-results.csv`, all
+87 rows with any derived-field disagreement in `analysis/disagreements.csv`,
+and `analysis/packet_label_comparison.{png,svg,pdf}`. The figure receipt binds
+its inputs, generator and outputs. `release_manifest.json` hashes all files
+in this release except itself. The concise interpretation is in
+`docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md` at the repository root.
+
+This selected packet is not a prevalence sample. The judges saw query and
+final response, not the entire preceding conversation. The rubric and pilot
+fixtures are agent-authored. No human validation, revised causal effect,
+ground-truth accuracy, or verdict about consciousness follows from this audit.
