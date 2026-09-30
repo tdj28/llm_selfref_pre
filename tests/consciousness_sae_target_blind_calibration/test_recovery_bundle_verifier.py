@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.frozen_sources import calibration_provenance
+
 from experiments.consciousness_sae_target_blind_calibration import (
     audit_recovery,
     recovery_bundle_verifier as verifier,
@@ -1083,11 +1085,7 @@ def _build_bundle(tmp_path: Path, *, mutation: str | None = None) -> Path:
     bootstrap_roots, bootstrap_files = verifier._bootstrap_protected_paths(  # noqa: SLF001
         bootstrap_manifest, paths
     )
-    _plan, _provenance_paths, historical_provenance_files = (
-        audit_recovery._validate_pre_gpu_issue_inputs(  # noqa: SLF001
-            audit_recovery.REPO_ROOT / verifier.CANONICAL_PLAN_RELATIVE_PATH
-        )
-    )
+    _plan, _provenance_paths, historical_provenance_files = calibration_provenance()
     if mutation == "auth_provenance_semantic":
         historical_provenance_files = [dict(row) for row in historical_provenance_files]
         historical_provenance_files[0]["sha256"] = "0" * 64

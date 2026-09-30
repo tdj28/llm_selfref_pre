@@ -1,0 +1,2 @@
+# On Linux install from https://download.pytorch.org/whl/cpu to avoid CUDA.
+torch==2.8.0

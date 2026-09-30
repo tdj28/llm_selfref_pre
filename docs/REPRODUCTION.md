@@ -1,17 +1,24 @@
 # Reproducing The Released Results
 
-The root `requirements.lock` records the general Python environment. GPU
-runtimes have separate requirements files next to their runners. Reanalysis
-uses the saved outputs and makes no model API calls.
+Use the CPU verification requirements below for released-data reanalysis and
+tests on Python 3.10 or 3.12. The older general-purpose `requirements.lock` is
+not the environment that produced every release and contains pins incompatible
+with Python 3.10. GPU runtimes have separate requirements files next to their
+runners. Reanalysis uses saved outputs and makes no model API calls.
 
 ## Setup And Checks
 
 ```sh
 python3 -m venv venv
 source venv/bin/activate
-python -m pip install -r requirements.lock
+python -m pip install -r requirements-ci.txt
+# Linux: use the CPU wheel index. On macOS omit --index-url and its URL.
+python -m pip install -r requirements-ci-torch.txt --index-url https://download.pytorch.org/whl/cpu
+python -m pip check
 make test
+make compile
 make public-audit
+make audit
 make paper
 ```
 
@@ -19,8 +26,21 @@ make paper
 checks indexed files, secret exclusions and release hashes. It does not
 independently validate every statistical calculation.
 
-Do not use `make audit` as a read-only check: several of its commands overwrite
-derived files in the releases. Use disposable copies for reanalysis.
+`make test` collects the complete pytest suite, including the later-study
+directories and function-style tests. CPU PyTorch exercises tensor tests
+without a GPU or model download. Linux/NVIDIA-specific integration tests may
+still skip on an unsupported host. Historical recovery fixtures require the
+reachable Git history (`git fetch --unshallow` for a shallow clone); they
+verify recorded hashes against historical sources, not today's `.gitignore`.
+Live source-binding gates remain unchanged.
+
+`make compile` checks every tracked Python file without importing modules or
+writing bytecode. `make audit` now runs on disposable copies. Direct analysis,
+audit and release-builder commands can still overwrite their output directory;
+use disposable copies as below. The four CI headline output comparisons are
+byte-exact except for bounded float roundoff in the mapping JSON on Python 3.12.
+That one comparison uses absolute tolerance `1e-12` and zero relative tolerance;
+integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Prompt And Transcript Study
 
@@ -85,6 +105,7 @@ the release to its historical result commit.
 - [J-lens v2 and its failed gate](LLAMA70B_SAE_JLENS_V2_RESULTS.md)
 - [Human-coding handoff](HUMAN_CODING_HANDOFF.md)
 - [Full artifact inventory](../DATA_ARTIFACTS.md)
+- [Later-study status and evidence boundaries](STUDY_INVENTORY.md)
 
 For new collection, follow the relevant frozen protocol and the team
 experiment-integrity guide. These reproduction commands do not authorize

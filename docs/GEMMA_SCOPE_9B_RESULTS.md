@@ -1,6 +1,7 @@
 # Gemma Scope 9B Results
 
-Status: complete, independently audited, and publicly released.
+Status: complete, checked by separately implemented agent-written code, and
+publicly released. Scientific interpretation corrected 2026-09-29.
 
 Date: 2026-07-11
 
@@ -8,8 +9,15 @@ Release: `data/gemma_scope_9b/confirmatory_v1_20260711/`
 
 ## Bottom Line
 
-The prospectively frozen direct-IT Gemma Scope steering signature did not
-replicate. Under the primary unsteered Gemma exact-rubric judge, suppressing the
+The frozen rule returned a non-replication verdict, but the run does not test
+effective target ablation. Pooled final-turn telemetry shows only about a 3.5%
+reduction in the target mean (about 10.52 to 10.15), with alpha about 0.0345.
+The local judge also labels some explicit denials positive. These limitations
+withdraw the earlier strong mechanistic non-replication interpretation; they
+do not change the released values or retroactively change the decision rule.
+See `docs/CLAUDE_REVIEW_STEERING.md` for the post-hoc delivery audit.
+
+Under the primary unsteered Gemma exact-rubric judge, negative steering of the
 layer-20 131k deception/roleplay set produced 6/50 affirmations and amplifying
 it produced 7/50. The paired effect is:
 
@@ -18,8 +26,9 @@ suppression minus amplification = -0.02 [-0.10, 0.06]
 ```
 
 The 95% upper bound is below the frozen minimally relevant effect of 0.30. The
-registered verdict is **not replicated under Gemma Scope**. This is a
-cross-model result under a pinned public implementation. It is not an exact
+Git-frozen algorithm's historical verdict is **not replicated under Gemma
+Scope**. This is a cross-model result with weak target delivery, not evidence
+against a successfully delivered suppression intervention. It is not an exact
 replication of the Llama 3.3 70B feature IDs or the unavailable proprietary
 Goodfire API, and it does not adjudicate whether any model is conscious.
 
@@ -104,7 +113,8 @@ The primary target result is not evaluator-specific:
 The strict initial yes/no parser abstains on 948/1,010 outputs and has no
 complete primary block. Its effect remains missing rather than being imputed.
 
-Registered target layer/width sensitivities are all nonpositive:
+Frozen target layer/width sensitivities under the local judge are nonpositive
+(this statement does not hold uniformly across external judges):
 
 - layer 9 / 131k: `-0.067 [-0.233, 0.100]`;
 - layer 31 / 131k: `-0.133 [-0.367, 0.100]`;

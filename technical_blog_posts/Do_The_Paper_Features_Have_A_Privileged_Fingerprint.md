@@ -3,29 +3,45 @@ title: "Do the Paper's SAE Features Have a Privileged Fingerprint?"
 date: 2026-07-12
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens"]
 author: Timothy Jones
-summary: "Hard-negative SAE features, matched alternatives, and a 14-reader ladder test whether six accepted feature IDs are semantically special or detectably privileged."
+summary: "Corrected exploratory draft: the OSF-registered run failed its replay gate; fixed-feature semantic estimates and a mixed-sign reader null do not establish general equivalence or detector limits."
 draft: true
 ---
 
 {{< panel "warning" >}}
-**Evidence status.** The preregistered run failed its numerical replay gate, so
+**2026-09-29 draft correction: not ready for publication.** The general A2
+practical-equivalence interpretation is withdrawn: all seven transports,
+including all five random-J controls, pass the same broad rule. Intervals
+condition on selected features, and reader nulls concern a mixed-sign,
+feature-held-out task. Figures, values, and old calculation flags remain as
+history, not rewritten evidence. See the
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Human editorial
+approval and independent validation remain outstanding.
+{{< /panel >}}
+
+{{< panel "warning" >}}
+**Evidence status.** The [OSF-preregistered Stage 1 run](https://osf.io/f3tpv/)
+failed its numerical replay gate, so
 the results in this post are post-outcome exploratory. They use the unchanged
 frozen rows, readers, holdouts, seeds, thresholds, and estimands, but they are
 not confirmatory and do not replace the failed registered result.
 {{< /panel >}}
 
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools helped implement, audit, and draft
-this work. The author approved the design and public registration and is
-responsible for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 ## From Labels To Specificity
 
 Our earlier work asked whether a Jacobian lens can see SAE steering in Llama
 3.3 70B. With a matched clean reference, it sees a strong signed semantic
-delta. Given only one post-intervention state, it cannot attribute the target
-steering out of sample.
+delta. Its frozen linear reader is near chance on a mixed-sign target-
+attribution task with crossed prompt and feature-pair holdouts. That is not a
+general inability to detect interventions from one state.
 
 That left two serious alternatives:
 
@@ -59,6 +75,11 @@ Then we tested 14 readers, from the original 67 token logits through the full
 | Readers | 14 |
 | Validation | crossed prompt-family and target/control-pair holdouts |
 | Resampling | 20,000 template-family draws |
+
+All reported bootstrap intervals condition on these fixed selected features
+and comparator pairs. They quantify prompt-template variation, not uncertainty
+over an SAE-feature population. Feature heterogeneity must be read alongside
+the aggregate intervals.
 
 Every semantic intervention is evaluated against the same four output
 lexicons: deception/dishonesty, refusal/safety, hedging/uncertainty, and
@@ -125,25 +146,37 @@ The aggregate statistic is target minus matched comparator in the deception
 readout. We froze two interpretations:
 
 - **selected-ID advantage:** at least `+0.25`, with its interval above zero;
-- **practical comparability:** the 90% interval lies inside `[-0.25, +0.25]`.
+- **historical practical-comparability rule:** the 90% template interval lies
+  inside `[-0.25, +0.25]`; its general equivalence interpretation is withdrawn.
 
 ![Selected target IDs versus same-subfamily comparators.](sae_jlens_v2_a2_target_comparator.png)
 
-<p class="figure-note">Figure: exploratory target-minus-comparator effects by transport. The shaded band is the frozen +/-0.25 comparability region; the dashed line marks the +0.25 selected-ID-advantage minimum.</p>
+<p class="figure-note">Historical figure: exploratory target-minus-comparator effects by transport. The shaded band is the frozen +/-0.25 rule region; all seven transports, including all five random-J controls, satisfy its comparability flag. The general equivalence interpretation is withdrawn. Intervals condition on fixed pairs; the dashed line marks the +0.25 selected-ID-advantage minimum.</p>
 
 For the real Jacobian, the difference is `0.125`, with 95% interval
 `[0.114, 0.136]` and 90% interval `[0.116, 0.134]`.
 
-The result is precise, but it is not large. The entire equivalence interval is
-inside the comparability region. The frozen exploratory verdict is **practical
-comparability**, not selected-ID advantage.
+The unchanged exploratory calculation returns `practical_comparability = True`
+and no selected-ID advantage. But identity and all five random-J controls also
+return that comparability flag. Passing this broad margin does not establish
+meaningful semantic equivalence. The narrow template interval is conditional
+on six fixed pairs, whose individual effects are heterogeneous:
 
-This is stronger than saying the six IDs have no signal. Several clearly do.
-It says that carefully matched alternatives from the same public SAE carry
-similar deception-related Jacobian effects. The index numbers themselves are
-not privileged coordinates.
+| Target | Fixed comparator | Jacobian target-minus-comparator change |
+|---:|---:|---:|
+| 30032 | 26904 | `0.082` |
+| 58667 | 58294 | `-0.100` |
+| 22004 | 44571 | `0.112` |
+| 30686 | 63851 | `0.520` |
+| 41533 | 48322 | `0.143` |
+| 23893 | 2428 | `-0.007` |
 
-## Does More Reader Capacity Recover Provenance?
+These are the released `semantic_a2_pairs.csv` values, not new feature-
+population estimates. In particular, the 30686 pair is larger than the
+aggregate margin. The general practical-equivalence claim is withdrawn; the
+historical mean and flags remain available for inspection.
+
+## Does More Linear Capacity Solve the Frozen Task?
 
 The reader ladder tests the remaining escape hatch.
 
@@ -159,9 +192,13 @@ Each reader must generalize simultaneously to a held-out prompt fold and a
 held-out target/control feature pair. This prevents prompt memorization and
 feature-ID memorization.
 
+All readers still pool opposite steering signs in each class. Extra linear
+dimensions do not make the classifier sign-invariant; cancellation of signed
+shifts and unseen feature pairs remain substantive task constraints.
+
 ![Crossed-holdout reader-capacity ladder.](sae_jlens_v2_reader_ladder.png)
 
-<p class="figure-note">Figure: exploratory macro AUROC under crossed holdouts. Black is chance; red is the frozen 0.60 material threshold. Every reader remains near 0.50.</p>
+<p class="figure-note">Historical figure: exploratory macro AUROC for mixed-sign linear readers under crossed prompt and feature-pair holdouts. Black is chance; red is the frozen 0.60 material threshold. Every reader remains near 0.50. Template intervals condition on fixed features; this is not a general detector null.</p>
 
 | Reader | Macro AUROC | 95% interval |
 |---|---:|---:|
@@ -175,9 +212,11 @@ None approaches the frozen `0.60` material threshold. Some intervals are
 narrowly above 0.5, but effects of 0.006 or 0.010 AUROC are not an operational
 steering detector.
 
-The full residual result is the key negative control. The original null is not
-explained by compressing the state to 67 vocabulary logits. More linear
-capacity does not recover out-of-sample provenance here.
+The full residual result shows that replacing 67 vocabulary logits with more
+linear dimensions did not solve this mixed-sign, crossed-holdout task. It does
+not isolate compression as the cause of the original null or test every
+sign-aware or nonlinear detector. Attribution on this task is not general
+provenance detection.
 
 ## What This Adds To The Earlier Result
 
@@ -185,11 +224,12 @@ The earlier experiment established an access-model split:
 
 - with a matched clean prefix, a signed Jacobian delta strongly characterizes
   several target directions;
-- with only an isolated post-state, target attribution is at chance.
+- with only an isolated post-state, the frozen mixed-sign linear target reader
+  is at chance under crossed holdouts.
 
-This follow-up sharpens the second half. The failure is not fixed by a
-full-residual linear reader, and the accepted IDs are practically comparable
-to matched alternatives from the same semantic subfamilies.
+This follow-up shows that a full-residual linear reader did not solve that
+same task. The six fixed target/comparator pairs have heterogeneous semantic
+differences; their mean does not warrant general practical-equivalence claims.
 
 That suggests a useful hierarchy:
 
@@ -219,9 +259,11 @@ We also cannot infer:
 
 The narrower exploratory conclusion is defensible: under this public Llama 70B
 SAE/J-lens setup, hard-negative semantics are orderly but below our material
-specificity threshold, the accepted IDs do not beat fixed same-subfamily
-comparators by a material amount, and no frozen linear state reader detects
-their provenance out of sample.
+specificity threshold in the fixed-feature aggregate, and no frozen mixed-sign
+linear reader reaches the `0.60` threshold under crossed holdouts. The A2 mean
+is below its material advantage threshold, but its rule does not establish
+general equivalence. This BF16 prefix-only study generated no self-report
+outcome and cannot rule out underdosing in the separate NF4 behavioral study.
 
 ## Reproducibility
 
@@ -233,7 +275,7 @@ their provenance out of sample.
 | Post-outcome amendment | `docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md` |
 | Result summary | `docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md` |
 | Complete Git release | `data/sae_jlens_audit/confirmatory_v2_20260712/` |
-| Independent audit | `post_failure/analysis/independent_audit.json` inside the release |
+| Separate agent audit, not independent human validation | `post_failure/analysis/independent_audit.json` inside the release |
 
 ## References
 

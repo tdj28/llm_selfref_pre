@@ -7,6 +7,59 @@ models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Claude Review Corrections (2026-09-29)
+
+This section supersedes earlier publication-readiness and steering-headline
+wording. Preserve all frozen verdicts and failed gates. Full decisions:
+`docs/CLAUDE_REVIEW_RESPONSE_20260929.md`.
+
+- [x] Read the full review and distinguish valid findings from stronger,
+  unproven interpretations; preserve its hash and itemized adjudication.
+- [x] Replace the root two-system non-replication headline with the assay
+  comparability and measurement result; preserve the useful feature mapping.
+- [x] Add prospective design-validity gates and an honest AI-contribution
+  disclosure. A second agent-written script is not independent human review.
+- [x] Complete and validate local measurement, delivery, cue and CI fixes;
+  correct the active companion and historical manuscript. Local Python 3.12
+  checks pass 1,065 tests with six environment-dependent skips.
+- [ ] Push both corrected repositories, pin the new post-hoc audit separately
+  from the old evidence, and confirm hosted CI and final PDF checks.
+- [ ] Obtain human editorial approval of the corrected manuscript. Existing
+  automated Pro reviews did not validate these newly identified design issues.
+- [ ] Approve the instrument-validation codebook before starting human coding.
+  Keep initial workload at the existing 160 rows unless the owner approves a
+  different sample. Public-text masking is not secure condition blinding.
+- [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
+  versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
+  A reconstruction-only arm is a separately labeled implementation hypothesis.
+- [ ] Freeze a behavioral-comparability window, positive control, dose curve,
+  coherence check, and actual per-position/re-encoded manipulation gate before
+  any new target steering outcomes. Check power at the observed baseline.
+- [ ] Only after those gates pass, run a separately frozen target-versus-many-
+  random-panel study with distinct seeds and a justified panel distribution.
+  The existing calibrated control-panel result is a lead, not a selected proof.
+- [ ] For Gemma, separate the high-activity coordinate from semantic selection
+  using a declared rule and validate actual ablation/amplification delivery;
+  do not call the old 3.5% target reduction a full suppression test.
+- [ ] Design a prompt-component ablation starting from the paper's actual
+  induction and a transplant follow-up with sham/matched-length/ended-
+  instruction controls. Do not assume our sixteen new prompts decompose it.
+- [ ] Run a bounded 67-versus-88-row readout replay diagnostic before assigning
+  the J-lens gate's root cause. This cannot retroactively pass the old gate.
+- [ ] Obtain the owner's contact history; approve/send a concise author query
+  and offer a right of reply. Do not assume a tweet was or was not sent.
+- [ ] Audit ignored pilot artifacts and pre-squash history for private material,
+  then obtain approval for an additive archive ref/release. Do not rewrite main
+  or claim local commit timestamps prove a remote pre-outcome freeze.
+- [ ] Resolve SAE-vector and Neuronpedia-label redistribution terms; ask the
+  owner about identifying local-path history and repository protection.
+- [ ] Reconcile live/source article corrections without overwriting the owner's
+  blog edits or touching `../praxagent`. No website changes are authorized here.
+
+No new paid review, GPU job or model generation is needed to complete the
+local correction pass. Additional experiments are not already completed merely
+because a protocol or TODO exists.
+
 ### Focused Response Release (2026-09-29)
 
 - [x] Create the public paper-specific companion repository:

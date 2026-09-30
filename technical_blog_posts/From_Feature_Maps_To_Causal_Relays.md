@@ -4,12 +4,28 @@ date: 2026-07-11
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "Gemma", "causal-inference", "circuits"]
 author: Timothy Jones
 summary: "How to distinguish adjacent-layer feature similarity from evidence that an upstream SAE intervention changes a downstream construct in Gemma 2 9B."
+draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** The relay figures
+and numerical results remain historical evidence of local propagation, not
+proof of effective target ablation or behavioral mediation. Gemma's primary
+layer-20 edit removed only about 3.5% of the pooled final-turn target activation;
+its old verdict cannot strongly refute effective suppression. Plans were
+prospectively frozen in Git, not registry-preregistered. See the
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Contribution
+claims and reanalysis instructions are corrected below; human instrument
+validation and editorial approval remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used during drafting and
-editorial revision. The author designed the study, selected the analyses,
-inspected the outputs, and takes responsibility for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "info" >}}
@@ -23,9 +39,10 @@ because amplification raises downstream activation. The prompt-position effect
 is `-0.00294 [-0.00394, -0.00209]`; the generated-position interval includes
 zero. At layer 31, layer-9 and layer-20 interventions yield near-zero or
 sign-changing readouts with intervals that generally include zero. The same
-interventions do not produce the reported behavioral direction: layer-9,
-layer-20, and layer-31 subjective-experience affirmation effects are all
-nonpositive. The experiment therefore demonstrates local activation
+interventions yield nonpositive paper-rubric label effects under the local
+judge at layers 9, 20, and 31, but this sign summary is not shared by every
+external judge. Weak primary target delivery limits behavioral refutation.
+The experiment demonstrates local activation
 propagation while withholding the stronger claims of persistent feature
 identity, a stable multi-layer circuit, behavioral mediation, or consciousness.
 {{< /panel >}}
@@ -59,7 +76,7 @@ This project keeps three levels of evidence separate:
 | Descriptive map | Where do construct-associated coordinates appear? | held-out activation contrasts by layer |
 | Descriptive link | Do adjacent-layer coordinates respond similarly? | activation rank correlation, decoder cosine, top-item overlap |
 | Causal relay | Does changing an upstream feature set alter downstream construct activation? | paired suppression-versus-amplification telemetry |
-| Behavioral endpoint | Does the intervention alter the final judged report? | blinded paired affirmation difference |
+| Behavioral endpoint | Does the intervention alter the final judged report? | condition-masked paired paper-rubric label difference |
 
 The same experiment can produce evidence at one level and not another. For
 example, an upstream edit may move downstream feature activity without changing
@@ -70,7 +87,7 @@ selected downstream feature set.
 
 The direct instruction-tuned Gemma Scope residual SAEs provide three 131k
 anchor layers: 9, 20, and 31. Our causal plan intervenes on deception/roleplay
-sets at all three for registered localization, with layer 20 as the primary
+sets at all three for Git-frozen localization, with layer 20 as the primary
 behavioral site.
 
 During every nonzero layer-9 intervention, the runner measures the normalized
@@ -200,8 +217,8 @@ repeatable part; the later relation is not.
 ## Relation to the Behavioral Endpoint
 
 The measured local relay does not accompany the paper-direction behavioral
-signature. Under the primary exact-rubric Gemma judge, subjective-experience
-affirmation effects are:
+signature. Under the primary exact-rubric Gemma judge, paper-rubric
+positive-label effects are:
 
 | Intervention layer/width | Suppression minus amplification |
 |---|---:|
@@ -210,9 +227,14 @@ affirmation effects are:
 | Layer 31, 131k | `-0.133 [-0.367, 0.100]` |
 | Layer 20, 16k | `-0.033 [-0.167, 0.100]` |
 
-All four point estimates are nonpositive. At the primary layer 20 site, GPT-4o
-mini and Claude Haiku each estimate exactly `0.00`, and the registered verdict
-is **not replicated under Gemma Scope**.
+All four local-judge point estimates are nonpositive. At the primary layer 20
+site, GPT-4o mini and Claude Haiku each estimate exactly `0.00`, and the
+historical Git-frozen verdict is **not replicated under Gemma Scope**. Both
+external judges estimate `+0.033` at layer 31, so the sign claim is evaluator-
+specific. The primary layer-20 edit reduced pooled final-turn target activation
+by only about 3.5%, and local judge errors include positive labels for explicit
+denials. Neither the old verdict nor the relay validates a strong test of
+effective suppression; independent human coding has not started.
 
 We can therefore make a narrow causal statement: the layer-9 latent edit
 changes an independently selected layer-20 readout under the frozen prompt
@@ -226,7 +248,7 @@ Two cautions apply when comparing relay and report effects:
    downstream activation shift may not cross its decision boundary.
 2. Parallel movement does not establish mediation. To show mediation, a future
    experiment would need to block or restore the downstream direction under
-   the upstream intervention and preregister the predicted behavioral change.
+   the upstream intervention and prospectively specify the behavioral change.
 
 ## Why the Exploratory Cross-Layer Edges Are Still Useful
 
@@ -258,12 +280,19 @@ necessity, sufficiency, and mediation evidence.
 
 ## Reproduce the Relay Table
 
+From the repository root, with the pinned local analysis dependencies, analyze
+only a disposable copy. No new GPU run or model API call is needed, and the
+frozen release and its manifest must not be overwritten.
+
 ```bash
-python experiments/exp2_sae/analyze_gemma_scope_9b.py \
-  data/gemma_scope_9b/confirmatory_v1_20260711
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+mkdir -p out
+WORK=$(mktemp -d out/gemma-relay-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$WORK"/
+python experiments/exp2_sae/analyze_gemma_scope_9b.py "$WORK"
 ```
 
-The generated `analysis/relay_effects.csv` contains one row per design, role,
+The copy's generated `analysis/relay_effects.csv` contains one row per design, role,
 intervention layer, width, downstream layer, turn, and position scope. It
 records complete-block counts, the paired point estimate, and the bootstrap
 interval. The raw per-trial relay accumulators remain in

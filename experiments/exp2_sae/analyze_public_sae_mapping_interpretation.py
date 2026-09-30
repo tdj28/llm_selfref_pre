@@ -397,7 +397,7 @@ def write_markdown_summary(
         "",
         "## Construct-Level Target Aggregate",
         "",
-        "| Group | n | Target aggregate z mean | 95% CI | Positive item rate |",
+        "| Group | n | Target aggregate z mean | 95% CI | Standardized-positive item rate (`target_z_mean > 0`) |",
         "|---|---:|---:|---|---:|",
     ]
     for group_name in GROUPS:

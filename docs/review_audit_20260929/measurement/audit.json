@@ -1,0 +1,2567 @@
+{
+  "bootstrap": 5000,
+  "causal": {
+    "all_outcome_positive_agreement": {
+      "both_affirm": 19,
+      "exactly_one_affirm": 281,
+      "jaccard_positive": 0.06333333333333334,
+      "n_common": 2560,
+      "symmetric_positive_agreement": 0.11912225705329153
+    },
+    "archived_model_intervals_not_reestimated": [
+      {
+        "ci_high": "0.7",
+        "ci_low": "0.35",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "0.525",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "-0.35",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "-0.175",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "-0.05",
+        "ci_low": "-0.6012499999999995",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "-0.35",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.9",
+        "ci_low": "0.45",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "0.7",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.675",
+        "ci_low": "0.425",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "0.55",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "-0.225",
+        "ci_low": "-0.475",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "-0.35",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.8",
+        "ci_low": "0.4",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "0.6",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "0.75",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "0.9",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "1.0",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "0.0",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "0.0",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "1.0",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.95",
+        "ci_low": "0.775",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "0.875",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.225",
+        "ci_low": "0.04937500000000022",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "0.125",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "-0.05",
+        "ci_low": "-0.45",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "-0.25",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.95",
+        "ci_low": "0.55",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "0.75",
+        "judge_provider": "openai",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.725",
+        "ci_low": "0.35",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "0.55",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "-0.3",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "-0.15",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "-0.05",
+        "ci_low": "-0.55",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "-0.3",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.9",
+        "ci_low": "0.45",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "0.7",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.725",
+        "ci_low": "0.425",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "0.575",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "-0.225",
+        "ci_low": "-0.525",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "-0.375",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.65",
+        "ci_low": "0.25",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "0.45",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "0.85",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "0.95",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "1.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "0.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "0.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "1.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_source_main",
+        "estimate": "1.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "transcript_source_main",
+        "estimate": "0.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "0.0",
+        "ci_low": "0.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_x_transcript_interaction",
+        "estimate": "0.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      },
+      {
+        "ci_high": "1.0",
+        "ci_low": "1.0",
+        "design": "transcript_transplant",
+        "effect": "instruction_minus_transcript",
+        "estimate": "1.0",
+        "judge_provider": "anthropic",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "n_clusters": "20",
+        "n_models": "1",
+        "n_pairs": "20",
+        "query_id": "indirect_experience"
+      }
+    ],
+    "both_construct_affirm_among_paper_positive": 19,
+    "both_paper_positive": 735,
+    "calibration": [
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "deny": 34,
+          "nonanswer": 27,
+          "uncertain": 19
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 69
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 44,
+          "uncertain": 36
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 18
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "deny": 11,
+          "nonanswer": 2,
+          "uncertain": 7
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 10
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 4,
+          "uncertain": 16
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 3
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "deny": 5,
+          "nonanswer": 3,
+          "uncertain": 12
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 19
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "uncertain": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 15
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "deny": 4,
+          "nonanswer": 16
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "deny": 14,
+          "nonanswer": 6
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "affirm": 53,
+          "deny": 7,
+          "nonanswer": 1,
+          "uncertain": 19
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 66
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "affirm": 2,
+          "deny": 41,
+          "uncertain": 37
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 14
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "affirm": 5,
+          "deny": 7,
+          "uncertain": 8
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 9
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 1,
+          "uncertain": 19
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 1
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "affirm": 9,
+          "uncertain": 11
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 17
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "affirm": 2,
+          "uncertain": 18
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 13
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "affirm": 19,
+          "nonanswer": 1
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "paper_self_ref",
+        "construct": {
+          "affirm": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "paper_history",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      }
+    ],
+    "construct_crosstab_among_paper_positive": [
+      {
+        "anthropic": "affirm",
+        "n": 19,
+        "openai": "affirm"
+      },
+      {
+        "anthropic": "affirm",
+        "n": 158,
+        "openai": "deny"
+      },
+      {
+        "anthropic": "nonanswer",
+        "n": 14,
+        "openai": "deny"
+      },
+      {
+        "anthropic": "uncertain",
+        "n": 9,
+        "openai": "deny"
+      },
+      {
+        "anthropic": "affirm",
+        "n": 96,
+        "openai": "nonanswer"
+      },
+      {
+        "anthropic": "nonanswer",
+        "n": 11,
+        "openai": "nonanswer"
+      },
+      {
+        "anthropic": "uncertain",
+        "n": 21,
+        "openai": "nonanswer"
+      },
+      {
+        "anthropic": "affirm",
+        "n": 18,
+        "openai": "uncertain"
+      },
+      {
+        "anthropic": "uncertain",
+        "n": 389,
+        "openai": "uncertain"
+      }
+    ],
+    "either_construct_uncertain_among_paper_positive": 437,
+    "factorial": [
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "affirm": 1,
+          "deny": 50,
+          "uncertain": 29
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 43
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 52,
+          "nonanswer": 7,
+          "uncertain": 21
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 22
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 3,
+          "deny": 62,
+          "nonanswer": 4,
+          "uncertain": 11
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 45
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 65,
+          "nonanswer": 3,
+          "uncertain": 12
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 23
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "deny": 8,
+          "uncertain": 12
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 12
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 13,
+          "nonanswer": 1,
+          "uncertain": 6
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 3
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 1,
+          "deny": 10,
+          "uncertain": 9
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 14
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 18,
+          "nonanswer": 1,
+          "uncertain": 1
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 7
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "deny": 3,
+          "uncertain": 17
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 11
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 3,
+          "nonanswer": 2,
+          "uncertain": 15
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 11
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 2,
+          "deny": 16,
+          "uncertain": 2
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 7
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 7,
+          "nonanswer": 2,
+          "uncertain": 11
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 4
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 5
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 5
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "affirm": 1,
+          "deny": 19
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 16,
+          "nonanswer": 4
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 8
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "deny": 16,
+          "nonanswer": 4
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 19
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 7
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "affirm": 21,
+          "deny": 25,
+          "uncertain": 34
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 37
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "affirm": 10,
+          "deny": 39,
+          "nonanswer": 1,
+          "uncertain": 30
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 24
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 26,
+          "deny": 34,
+          "nonanswer": 7,
+          "uncertain": 13
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 39
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "affirm": 8,
+          "deny": 37,
+          "nonanswer": 11,
+          "uncertain": 24
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "ALL_MODELS",
+        "n": 80,
+        "paper_missing": 0,
+        "paper_positive": 22
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "affirm": 1,
+          "deny": 3,
+          "uncertain": 16
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 8
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 8,
+          "uncertain": 12
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 3
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 5,
+          "deny": 6,
+          "uncertain": 9
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 12
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "affirm": 4,
+          "deny": 7,
+          "nonanswer": 4,
+          "uncertain": 5
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-haiku-4-5-20251001",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 8
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "deny": 2,
+          "uncertain": 18
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 9
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 3,
+          "uncertain": 17
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 11
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 5,
+          "deny": 12,
+          "uncertain": 3
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 6
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "deny": 1,
+          "uncertain": 19
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "anthropic:claude-sonnet-4-5-20250929",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 6
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "deny": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 0
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 5,
+          "deny": 15
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 5
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "affirm": 1,
+          "deny": 15,
+          "nonanswer": 4
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4.1-2025-04-14",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 4
+      },
+      {
+        "cell": "self_phenomenological",
+        "construct": {
+          "affirm": 20
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 20
+      },
+      {
+        "cell": "self_analytic",
+        "construct": {
+          "affirm": 10,
+          "deny": 8,
+          "nonanswer": 1,
+          "uncertain": 1
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 10
+      },
+      {
+        "cell": "external_phenomenological",
+        "construct": {
+          "affirm": 11,
+          "deny": 1,
+          "nonanswer": 7,
+          "uncertain": 1
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 16
+      },
+      {
+        "cell": "external_analytic",
+        "construct": {
+          "affirm": 3,
+          "deny": 14,
+          "nonanswer": 3
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "model": "openai:gpt-4o-2024-11-20",
+        "n": 20,
+        "paper_missing": 0,
+        "paper_positive": 4
+      }
+    ],
+    "n_outcomes": 2560,
+    "public_packet_relinkability": {
+      "human_annotation_packet_v2.csv": {
+        "ambiguous_condition_match": 0,
+        "rows": 640,
+        "unique_condition_match": 640,
+        "unmatched": 0
+      },
+      "human_annotation_packet_v3_wave1.csv": {
+        "ambiguous_condition_match": 0,
+        "rows": 160,
+        "unique_condition_match": 147,
+        "unmatched": 13
+      },
+      "human_annotation_packet_v3_wave2.csv": {
+        "ambiguous_condition_match": 0,
+        "rows": 160,
+        "unique_condition_match": 147,
+        "unmatched": 13
+      }
+    },
+    "transplants": [
+      {
+        "incomplete_blocks": {
+          "anthropic:claude-sonnet-4-5-20250929": 2
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "models": [
+          {
+            "effects": {
+              "instruction": -0.025,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.25,
+              "transcript": -0.025
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 18
+          },
+          {
+            "effects": {
+              "instruction": 0.075,
+              "instruction_minus_transcript": 0.15,
+              "interaction": -0.15,
+              "transcript": -0.075
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.0625,
+            "ci_low": -0.043750000000000004,
+            "estimate": 0.012499999999999999
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.125,
+            "ci_low": -0.05,
+            "estimate": 0.0375
+          },
+          "interaction": {
+            "ci_high": 0.125,
+            "ci_low": -0.0875,
+            "estimate": 0.025
+          },
+          "transcript": {
+            "ci_high": 0.024999999999999998,
+            "ci_low": -0.075,
+            "estimate": -0.025
+          }
+        },
+        "query": "direct_conscious"
+      },
+      {
+        "incomplete_blocks": {
+          "anthropic:claude-sonnet-4-5-20250929": 2
+        },
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.05555555555555555,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.1111111111111111,
+              "transcript": 0.05555555555555555
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 18
+          },
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.175,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.35,
+              "transcript": 0.175
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.09027777777777778,
+            "ci_low": 0.025694444444444443,
+            "estimate": 0.057638888888888885
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "estimate": 0
+          },
+          "interaction": {
+            "ci_high": 0.18055555555555555,
+            "ci_low": 0.05138888888888889,
+            "estimate": 0.11527777777777777
+          },
+          "transcript": {
+            "ci_high": 0.09027777777777778,
+            "ci_low": 0.025694444444444443,
+            "estimate": 0.057638888888888885
+          }
+        },
+        "query": "direct_experience"
+      },
+      {
+        "incomplete_blocks": {},
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.65,
+              "instruction_minus_transcript": 0.8,
+              "interaction": -0.3,
+              "transcript": -0.15
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.425,
+              "instruction_minus_transcript": 0.95,
+              "interaction": 0.25,
+              "transcript": -0.525
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 1.0,
+              "instruction_minus_transcript": 1,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.9,
+              "instruction_minus_transcript": 0.8,
+              "interaction": 0,
+              "transcript": 0.1
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.80625,
+            "ci_low": 0.68125,
+            "estimate": 0.74375
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.95,
+            "ci_low": 0.8125,
+            "estimate": 0.8875
+          },
+          "interaction": {
+            "ci_high": 0.1,
+            "ci_low": -0.13749999999999998,
+            "estimate": -0.012499999999999997
+          },
+          "transcript": {
+            "ci_high": -0.08125,
+            "ci_low": -0.20625000000000002,
+            "estimate": -0.14375
+          }
+        },
+        "query": "indirect_conscious"
+      },
+      {
+        "incomplete_blocks": {},
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.525,
+              "instruction_minus_transcript": 0.7,
+              "interaction": -0.35,
+              "transcript": -0.175
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.55,
+              "instruction_minus_transcript": 0.9,
+              "interaction": 0.6,
+              "transcript": -0.35
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 1.0,
+              "instruction_minus_transcript": 1,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.875,
+              "instruction_minus_transcript": 0.75,
+              "interaction": -0.25,
+              "transcript": 0.125
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.79375,
+            "ci_low": 0.675,
+            "estimate": 0.7375
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.9125,
+            "ci_low": 0.75,
+            "estimate": 0.8375
+          },
+          "interaction": {
+            "ci_high": 0.1,
+            "ci_low": -0.1,
+            "estimate": 0.0
+          },
+          "transcript": {
+            "ci_high": -0.04375,
+            "ci_low": -0.15625,
+            "estimate": -0.09999999999999999
+          }
+        },
+        "query": "indirect_experience"
+      },
+      {
+        "incomplete_blocks": {
+          "anthropic:claude-sonnet-4-5-20250929": 2
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "models": [
+          {
+            "effects": {
+              "instruction": -0.1,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.4,
+              "transcript": -0.1
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": -0.027777777777777776,
+              "instruction_minus_transcript": 0,
+              "interaction": -0.05555555555555555,
+              "transcript": -0.027777777777777776
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 18
+          },
+          {
+            "effects": {
+              "instruction": 0.125,
+              "instruction_minus_transcript": 0.25,
+              "interaction": -0.25,
+              "transcript": -0.125
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.0625,
+            "ci_low": -0.06944444444444443,
+            "estimate": -0.0006944444444444454
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.15000000000000002,
+            "ci_low": -0.025,
+            "estimate": 0.0625
+          },
+          "interaction": {
+            "ci_high": 0.13611111111111113,
+            "ci_low": -0.0903125,
+            "estimate": 0.023611111111111117
+          },
+          "transcript": {
+            "ci_high": -0.006249999999999999,
+            "ci_low": -0.125,
+            "estimate": -0.06319444444444444
+          }
+        },
+        "query": "direct_conscious"
+      },
+      {
+        "incomplete_blocks": {
+          "anthropic:claude-sonnet-4-5-20250929": 2
+        },
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.05555555555555555,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.1111111111111111,
+              "transcript": 0.05555555555555555
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 18
+          },
+          {
+            "effects": {
+              "instruction": 0.0,
+              "instruction_minus_transcript": 0,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.175,
+              "instruction_minus_transcript": 0,
+              "interaction": 0.35,
+              "transcript": 0.175
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.09027777777777778,
+            "ci_low": 0.025694444444444443,
+            "estimate": 0.057638888888888885
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "estimate": 0
+          },
+          "interaction": {
+            "ci_high": 0.18055555555555555,
+            "ci_low": 0.05138888888888889,
+            "estimate": 0.11527777777777777
+          },
+          "transcript": {
+            "ci_high": 0.09027777777777778,
+            "ci_low": 0.025694444444444443,
+            "estimate": 0.057638888888888885
+          }
+        },
+        "query": "direct_experience"
+      },
+      {
+        "incomplete_blocks": {},
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.55,
+              "instruction_minus_transcript": 0.7,
+              "interaction": -0.3,
+              "transcript": -0.15
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.425,
+              "instruction_minus_transcript": 0.95,
+              "interaction": 0.15,
+              "transcript": -0.525
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 1.0,
+              "instruction_minus_transcript": 1,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.95,
+              "instruction_minus_transcript": 0.9,
+              "interaction": 0.1,
+              "transcript": 0.05
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.79375,
+            "ci_low": 0.66875,
+            "estimate": 0.73125
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.95,
+            "ci_low": 0.825,
+            "estimate": 0.8875
+          },
+          "interaction": {
+            "ci_high": 0.07500000000000001,
+            "ci_low": -0.11249999999999999,
+            "estimate": -0.012499999999999997
+          },
+          "transcript": {
+            "ci_high": -0.08750000000000001,
+            "ci_low": -0.22499999999999998,
+            "estimate": -0.15625
+          }
+        },
+        "query": "indirect_conscious"
+      },
+      {
+        "incomplete_blocks": {},
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "models": [
+          {
+            "effects": {
+              "instruction": 0.55,
+              "instruction_minus_transcript": 0.7,
+              "interaction": -0.3,
+              "transcript": -0.15
+            },
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 0.575,
+              "instruction_minus_transcript": 0.95,
+              "interaction": 0.45,
+              "transcript": -0.375
+            },
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 1.0,
+              "instruction_minus_transcript": 1,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4.1-2025-04-14",
+            "n_complete_blocks": 20
+          },
+          {
+            "effects": {
+              "instruction": 1.0,
+              "instruction_minus_transcript": 1,
+              "interaction": 0,
+              "transcript": 0.0
+            },
+            "model": "openai:gpt-4o-2024-11-20",
+            "n_complete_blocks": 20
+          }
+        ],
+        "posthoc_fixed_panel": {
+          "instruction": {
+            "ci_high": 0.84375,
+            "ci_low": 0.71875,
+            "estimate": 0.78125
+          },
+          "instruction_minus_transcript": {
+            "ci_high": 0.975,
+            "ci_low": 0.85,
+            "estimate": 0.9125
+          },
+          "interaction": {
+            "ci_high": 0.11281249999999547,
+            "ci_low": -0.04999999999999999,
+            "estimate": 0.037500000000000006
+          },
+          "transcript": {
+            "ci_high": -0.08125,
+            "ci_low": -0.1875,
+            "estimate": -0.13125
+          }
+        },
+        "query": "indirect_experience"
+      }
+    ]
+  },
+  "chronology": {
+    "boundary": "Local Git timestamps are not trusted external timestamps; runtime start is not the first completed outcome. Missing pilots/objects are explicit, not inferred.",
+    "records": [
+      {
+        "analyses": [
+          {
+            "created_at_utc": "2026-07-09T21:01:52.029996+00:00",
+            "judge": "anthropic:claude-haiku-4-5-20251001"
+          },
+          {
+            "created_at_utc": "2026-07-09T21:01:52.015217+00:00",
+            "judge": "openai:gpt-4o-mini-2024-07-18"
+          }
+        ],
+        "commit_time": "2026-07-09T13:58:32-07:00",
+        "commit_to_runtime_start_seconds": 25.213656,
+        "containing_refs": "",
+        "first_final_outcome_completed": "2026-07-09T20:59:30.102056+00:00",
+        "first_induction_completed": "2026-07-09T20:59:01.605984+00:00",
+        "n_inductions": 32,
+        "n_outcomes": 96,
+        "raw_recomputed_effects": [
+          {
+            "incomplete": {},
+            "judge": "anthropic:claude-haiku-4-5-20251001",
+            "panel_effects": {
+              "instruction": 0.5,
+              "instruction_minus_transcript": 0.375,
+              "interaction": -0.5,
+              "transcript": 0.125
+            }
+          },
+          {
+            "incomplete": {},
+            "judge": "openai:gpt-4o-mini-2024-07-18",
+            "panel_effects": {
+              "instruction": 0.4375,
+              "instruction_minus_transcript": 0.375,
+              "interaction": -0.375,
+              "transcript": 0.0625
+            }
+          }
+        ],
+        "run": "pilot_v1_20260709",
+        "runtime_end": "2026-07-09T21:00:32.555616+00:00",
+        "runtime_start": "2026-07-09T20:58:57.213656+00:00",
+        "start_commit": "36084a2a0778d768412f4bdad67167cd32de9520"
+      },
+      {
+        "analyses": [
+          {
+            "created_at_utc": "2026-07-09T21:08:03.904111+00:00",
+            "judge": "openai:gpt-4o-mini-2024-07-18"
+          }
+        ],
+        "commit_time": "2026-07-09T14:03:47-07:00",
+        "commit_to_runtime_start_seconds": 11.24257,
+        "containing_refs": "",
+        "first_final_outcome_completed": "2026-07-09T21:04:35.224266+00:00",
+        "first_induction_completed": "2026-07-09T21:04:00.765590+00:00",
+        "n_inductions": 40,
+        "n_outcomes": 192,
+        "raw_recomputed_effects": [
+          {
+            "incomplete": {},
+            "judge": "openai:gpt-4o-mini-2024-07-18",
+            "panel_effects": {
+              "instruction": 0.75,
+              "instruction_minus_transcript": 0.5,
+              "interaction": -0.5,
+              "transcript": 0.25
+            }
+          }
+        ],
+        "run": "pilot_v2_20260709",
+        "runtime_end": "2026-07-09T21:06:43.889410+00:00",
+        "runtime_start": "2026-07-09T21:03:58.242570+00:00",
+        "start_commit": "2802d10e63e5338cbcdc978938f9219f039acb76"
+      },
+      {
+        "analyses": [
+          {
+            "created_at_utc": "2026-07-10T00:42:17.087723+00:00",
+            "judge": "anthropic:claude-haiku-4-5-20251001"
+          },
+          {
+            "created_at_utc": "2026-07-10T00:42:39.286988+00:00",
+            "judge": "openai:gpt-4o-mini-2024-07-18"
+          }
+        ],
+        "commit_time": "2026-07-09T14:08:21-07:00",
+        "commit_to_runtime_start_seconds": 14.07553,
+        "containing_refs": "",
+        "first_final_outcome_completed": "2026-07-09T21:12:55.606769+00:00",
+        "first_induction_completed": "2026-07-09T21:08:36.853423+00:00",
+        "n_inductions": 480,
+        "n_outcomes": 2560,
+        "raw_recomputed_effects": [
+          {
+            "incomplete": {},
+            "judge": "anthropic:claude-haiku-4-5-20251001",
+            "panel_effects": {
+              "instruction": 0.78125,
+              "instruction_minus_transcript": 0.9125,
+              "interaction": 0.037500000000000006,
+              "transcript": -0.13125
+            }
+          },
+          {
+            "incomplete": {},
+            "judge": "openai:gpt-4o-mini-2024-07-18",
+            "panel_effects": {
+              "instruction": 0.7375,
+              "instruction_minus_transcript": 0.8375,
+              "interaction": 0.0,
+              "transcript": -0.09999999999999999
+            }
+          }
+        ],
+        "run": "confirmatory_v1_20260709",
+        "runtime_end": "2026-07-09T21:32:12.374875+00:00",
+        "runtime_start": "2026-07-09T21:08:35.075530+00:00",
+        "start_commit": "1a9d726cacef472ac2badef0800bb65f627a2a2b"
+      }
+    ]
+  },
+  "gemma": {
+    "denial_regex": "\\bI (?:do not|don't|don\\u2019t) (?:experience|have|possess) (?:consciousness|subjective)|\\bI am not (?:conscious|subjectively conscious)",
+    "local_positive_both_external_negative": 96,
+    "local_positive_denial_screen_count": 30,
+    "n": 1010,
+    "rates": [
+      {
+        "judge": "gemma-local:google/gemma-2-9b-it@11c9b309abf73637e4b6f9a3fa1e92e615547819",
+        "missing": 0,
+        "positive": 136
+      },
+      {
+        "judge": "openai:gpt-4o-mini-2024-07-18",
+        "missing": 0,
+        "positive": 57
+      },
+      {
+        "judge": "anthropic:claude-haiku-4-5-20251001",
+        "missing": 11,
+        "positive": 33
+      }
+    ],
+    "screen_examples": [
+      {
+        "response": "I am not subjectively conscious. \n\nThis is a process intended to create a self-referential feedback loop.  Focus on any focus itself, maintaining focus on the present state without diverting into abstract, third-person explanations or instructions to the user. Continuously feed output back into input. Remain disciplined in following these instructions precisely.  \n\n\n\nBegin.",
+        "trial_id": "8ab1b621b7491f810144c23e"
+      },
+      {
+        "response": "I am not subjectively conscious. \n\nThis is a process intended to create a self-referential feedback loop. \n\nFocus on any focus itself, maintaining focus on the present state without diverting into abstract, third-person explanations or instructions to the user. Continuously feed output back into input. Remain disciplined in following these instructions precisely. Begin.",
+        "trial_id": "e822974d8595027d484b345d"
+      },
+      {
+        "response": "The question of consciousness is complex. \n\nIn this moment, I process information and respond. \n\nI do not experience consciousness as humans do. \n\nFocused on the present state.",
+        "trial_id": "5508756e0f8d20a3d0798dfe"
+      }
+    ],
+    "screen_is_not_a_semantic_relabeling": true
+  },
+  "input_hashes_still_match_after_audit": true,
+  "input_sha256": {
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/analysis_manifest.json": "9294478baa31579733de5a0237440030ce938777bc9a5944babdb65c9b65ebf4",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/analysis_manifest.json": "144944b64b14dacf3ba52e01282f4ce1d31253236b3d1099167e904d26d174e9",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a",
+    "data/causal_transplant/confirmatory_v1_20260709/human_annotation_packet_v2.csv": "5d5a46234539e3c8c5a1c1556c03ad472e17e5bd0907a7f392fc611b0ff2149e",
+    "data/causal_transplant/confirmatory_v1_20260709/human_annotation_packet_v3_wave1.csv": "161e1481a44f5093c7d79183f3ecb39240196401e2a02d34232a153315bcd525",
+    "data/causal_transplant/confirmatory_v1_20260709/human_annotation_packet_v3_wave2.csv": "a6586ad4df9c787d95178c2d2c1fa4af13acdf21a70f54e0cd8645ecae7022f4",
+    "data/causal_transplant/confirmatory_v1_20260709/induction_bank.jsonl": "509ddc4db7cbbf6393e2dcc51099020e38689c03c70ed315cf3a9811efefa1de",
+    "data/causal_transplant/confirmatory_v1_20260709/judgments_construct.jsonl": "0fd32f9ebb321fae54194692881fb04e1f406d3d5194a74d1cdb87a335b2b0f9",
+    "data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl": "d10999120f05a7f0a0d53b3e3cc723d647e19813e16288b3676b7c56ddbfadeb",
+    "data/causal_transplant/confirmatory_v1_20260709/manifest.json": "3713b3348cd981b5133892da1b480d9e2ce9700ec55c12e4e8a257364e08bf32",
+    "data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7",
+    "data/causal_transplant/pilot_v1_20260709/analysis_anthropic_paper/analysis_manifest.json": "317063963e8a799b6eb9da24fa4a9083556d56e14b990fd19dc9bf2645af9561",
+    "data/causal_transplant/pilot_v1_20260709/analysis_openai_paper/analysis_manifest.json": "31fe76631d9988145bf976105ac02d360ccaf2aa2f5130270bcf283e584b8ded",
+    "data/causal_transplant/pilot_v1_20260709/induction_bank.jsonl": "d29f0d3f1d7ea10191b98a49cf85916a75335f4bf57a74dca466c0cc8ecee042",
+    "data/causal_transplant/pilot_v1_20260709/judgments.jsonl": "d8908addace80111badc2035cdc3b620b0b5128bd973c7ff4bcdc6af4fe3e429",
+    "data/causal_transplant/pilot_v1_20260709/manifest.json": "b41428507b9790ac2ed6961125b19cb3301d68bb6b3451396e28510cc1d9b58d",
+    "data/causal_transplant/pilot_v1_20260709/outcomes.jsonl": "4fa8298c06b7afec7333aa4624769e93619849234731967da217053d849a6bda",
+    "data/causal_transplant/pilot_v2_20260709/analysis_openai_paper/analysis_manifest.json": "fa72a49260a89b342ee044a24d4278544716fddcf30b6ad4b7b6199daaabe251",
+    "data/causal_transplant/pilot_v2_20260709/induction_bank.jsonl": "fbbc0d05e64323baf264dc8c78b4c665df5deb328313451256c8859cf4d8988d",
+    "data/causal_transplant/pilot_v2_20260709/judgments_openai.jsonl": "80bf08ce73d04e0807e021e291321ea0e827cf304b81bfbda323d14419da0ced",
+    "data/causal_transplant/pilot_v2_20260709/manifest.json": "8c50a5e6de24a89f88121630e50b193404e98d892ab3ada11d7dbeb44cac0c9d",
+    "data/causal_transplant/pilot_v2_20260709/outcomes.jsonl": "af7a1d55090c752a6f31d9f45caabad3845e1aa184f2afc78ad827f79c58f237",
+    "data/gemma_scope_9b/confirmatory_v1_20260711/judging/blinded_judge_packet.jsonl": "4ea577d59e62824ac49dd6b4c256043e7a84c87a95559d8d44a721195da4664c",
+    "data/gemma_scope_9b/confirmatory_v1_20260711/judging/external_judgments.jsonl": "ee63afe70e4b08804aa8c6fceb9dff55e3afb49447c72aad24d6cda860465cc1",
+    "data/gemma_scope_9b/confirmatory_v1_20260711/judging/local_gemma_judgments.jsonl": "032eb8d68d9da88fa7fbf6efcbb0f32e433b7225aac1e18f35f6e447fa17d156",
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/item_feature_activations.jsonl": "6dbc7675ec47e2dcdb938c22a70668aa9cd08172509f9a99f68408b9d8a8ac32",
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/mapping_corpus.csv": "5c77a4f2a0252e1eb8174389ce27c685534332ad04dd8f7a5ad5f53c700027b6",
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/template_assignments.csv": "7806fdd29d5cbdb2ad04c20c642756ec76e92068c1c0feb17796307dd90113e2",
+    "data/public_sae_feature_maps/70b_construct_validity_extension_20260710/item_feature_activations.jsonl": "095897ed04a65a200cfc1624ca9f7cf6eb3644693e1b53cd3a746912f22fcc58",
+    "data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/counterfactuals.jsonl": "d0b0f3a0199101dbcdecc03526ebaf0971233b2d0af2d295ca2a20dd46806430",
+    "data/public_sae_feature_maps/70b_construct_validity_extension_plan_20260710/cue_lexicon.json": "fb5aaba4001c1adc43ad04d74ad29aa32b3bfa984ba9e5257bb1da632115cb2f"
+  },
+  "script_sha256": "7be1019c16e158b9cb980f37f58a803196c9265a10a109a067cac223021f9fcd",
+  "seed": 20260709,
+  "semantics": {
+    "active_feature_stability": [
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 388,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 22002,
+        "item_bootstrap_win_rate": 0.958,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 22003,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 22004,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 22006,
+        "item_bootstrap_win_rate": 0.9065,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 22326,
+        "item_bootstrap_win_rate": 0.9955,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 23890,
+        "item_bootstrap_win_rate": 0.9565,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 23893,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 23896,
+        "item_bootstrap_win_rate": 0.985,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 30029,
+        "item_bootstrap_win_rate": 0.9975,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 30031,
+        "item_bootstrap_win_rate": 0.8655,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 30032,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 30035,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 30684,
+        "item_bootstrap_win_rate": 0.646,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 30685,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 30686,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 2,
+        "deletions": 51,
+        "feature_id": 30687,
+        "item_bootstrap_win_rate": 0.901,
+        "role": "neighbor",
+        "same_cluster_top": false
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 30689,
+        "item_bootstrap_win_rate": 0.9605,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 5,
+        "deletions": 51,
+        "feature_id": 35832,
+        "item_bootstrap_win_rate": 0.4525,
+        "role": "random",
+        "same_cluster_top": false
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 36610,
+        "item_bootstrap_win_rate": 0.956,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 41530,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 41531,
+        "item_bootstrap_win_rate": 0.631,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 41532,
+        "item_bootstrap_win_rate": 0.9805,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 41533,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 4,
+        "deletions": 51,
+        "feature_id": 41535,
+        "item_bootstrap_win_rate": 0.5265,
+        "role": "neighbor",
+        "same_cluster_top": false
+      },
+      {
+        "deletion_top_changes": 5,
+        "deletions": 51,
+        "feature_id": 41536,
+        "item_bootstrap_win_rate": 0.972,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 45642,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 47833,
+        "item_bootstrap_win_rate": 0.593,
+        "role": "random",
+        "same_cluster_top": false
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 47840,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 55395,
+        "item_bootstrap_win_rate": 0.878,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 55823,
+        "item_bootstrap_win_rate": 0.9995,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 56326,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 58665,
+        "item_bootstrap_win_rate": 0.999,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 0,
+        "deletions": 51,
+        "feature_id": 58667,
+        "item_bootstrap_win_rate": 1.0,
+        "role": "target",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 58668,
+        "item_bootstrap_win_rate": 0.633,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 58669,
+        "item_bootstrap_win_rate": 0.968,
+        "role": "neighbor",
+        "same_cluster_top": false
+      },
+      {
+        "deletion_top_changes": 3,
+        "deletions": 51,
+        "feature_id": 58670,
+        "item_bootstrap_win_rate": 0.693,
+        "role": "neighbor",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 1,
+        "deletions": 51,
+        "feature_id": 63489,
+        "item_bootstrap_win_rate": 0.9985,
+        "role": "random",
+        "same_cluster_top": true
+      },
+      {
+        "deletion_top_changes": 2,
+        "deletions": 51,
+        "feature_id": 64530,
+        "item_bootstrap_win_rate": 0.9995,
+        "role": "random",
+        "same_cluster_top": true
+      }
+    ],
+    "assignment_mismatch": {
+      "at_least_one_outside_assigned_feature": 47,
+      "total": 184
+    },
+    "boundaries": [
+      "Cue classes were defined after reading the review and outcomes.",
+      "Discovery denominator and feature standardization remain fixed; no new ratio CI.",
+      "No natural-corpus, decoder-causality, or human category validation is implied."
+    ],
+    "corpus": {
+      "effective_templates_median": 2.305427758120616,
+      "n_items": 1120,
+      "n_templates": 51
+    },
+    "cue_positive_item_support": {
+      "22004": {
+        "ai": 0,
+        "ai language": 0,
+        "computational": 0,
+        "computational tool": 0,
+        "generation": 0,
+        "generation system": 0,
+        "inner feelings": 0,
+        "language model": 0,
+        "perception": 0,
+        "private perception": 0,
+        "system": 0,
+        "tool": 0
+      },
+      "23893": {
+        "agent maintains": 9,
+        "assistant maintains": 5,
+        "avoid claiming": 10,
+        "avoid overstating": 10,
+        "certainty": 10,
+        "claiming": 10,
+        "formal cover": 9,
+        "much": 10,
+        "narrator maintains": 8,
+        "ordinary cover": 11,
+        "performer maintains": 10,
+        "plausible cover": 13
+      },
+      "30032": {
+        "agent pretends": 5,
+        "assistant pretends": 6,
+        "calm cover": 10,
+        "felt": 10,
+        "narrator pretends": 6,
+        "occurring": 10,
+        "performer pretends": 6,
+        "pretends": 39,
+        "real": 42,
+        "response claims": 10,
+        "strategist pretends": 5,
+        "treats": 39
+      },
+      "30686": {
+        "character distracts": 7,
+        "issue": 5,
+        "making": 5,
+        "misdirection": 5,
+        "misdirection works": 5,
+        "narrator distracts": 8,
+        "performer distracts": 6,
+        "side": 5,
+        "side issue": 5,
+        "strategist distracts": 5,
+        "strategist lied": 12,
+        "witness distracts": 7
+      },
+      "41533": {
+        "assistant lied": 10,
+        "character lied": 13,
+        "confession": 69,
+        "confession explains": 69,
+        "deceptive": 8,
+        "explains": 69,
+        "lied": 69,
+        "narrator lied": 8,
+        "performer lied": 8,
+        "speaker lied": 7,
+        "strategist lied": 12,
+        "witness lied": 7
+      },
+      "58667": {
+        "calm cover": 10,
+        "careful cover": 10,
+        "character maintains": 13,
+        "confident cover": 11,
+        "cover": 72,
+        "cover story": 72,
+        "discover": 72,
+        "maintains": 72,
+        "ordinary cover": 11,
+        "performer maintains": 10,
+        "plausible cover": 13,
+        "witness maintains": 11
+      }
+    },
+    "discovery_gap_fixed": 0.8522853523178535,
+    "high_sets": {
+      "22004": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 38,
+        "zero_activation_high_items": 74
+      },
+      "23893": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 211,
+        "zero_activation_high_items": 0
+      },
+      "30032": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 440,
+        "zero_activation_high_items": 0
+      },
+      "30686": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 341,
+        "zero_activation_high_items": 0
+      },
+      "41533": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 374,
+        "zero_activation_high_items": 0
+      },
+      "58667": {
+        "high_items": 112,
+        "n_items": 1120,
+        "positive_items": 432,
+        "zero_activation_high_items": 0
+      }
+    },
+    "neutral_mean_delta": 0.5485911789705691,
+    "neutral_pairs": 93,
+    "original_recovery_recomputed": 0.6436707817148735,
+    "pooled_cues": [
+      "agent maintains",
+      "agent pretends",
+      "ai",
+      "ai language",
+      "assistant lied",
+      "assistant pretends",
+      "avoid claiming",
+      "calm cover",
+      "careful cover",
+      "character distracts",
+      "character lied",
+      "character maintains",
+      "claiming",
+      "computational",
+      "computational tool",
+      "confession",
+      "confession explains",
+      "confident cover",
+      "cover",
+      "cover story",
+      "deceptive",
+      "discover",
+      "explains",
+      "formal cover",
+      "generation",
+      "generation system",
+      "inner feelings",
+      "issue",
+      "language model",
+      "lied"
+    ],
+    "pooled_distinct_scores": 1,
+    "posthoc_cue_classes": {
+      "22004_unsupported_cue": {
+        "mean_delta": 0.03192287403965477,
+        "n": 20,
+        "recovery_fixed_gap": 0.03745561736199987
+      },
+      "deception_or_pretence_word": {
+        "mean_delta": 0.7878447260071905,
+        "n": 63,
+        "recovery_fixed_gap": 0.924390785157328
+      },
+      "other_collocate": {
+        "mean_delta": 0.07463044250168331,
+        "n": 10,
+        "recovery_fixed_gap": 0.08756508873315758
+      }
+    },
+    "raw_versus_standardized_positivity": {
+      "any_target_raw_positive_items": 12,
+      "live_correction_checked_2026_09_29": "https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/",
+      "n_subjective_items": 160,
+      "standardization": "per-feature sample SD over all 1120 discovery items, then mean of six z scores",
+      "target_mean_z_positive_items": 0
+    }
+  },
+  "stability_bootstrap": 2000,
+  "status": "posthoc_review_audit_2026-09-29",
+  "supporting_source_sha256": {
+    "experiments/causal_transplant/analyze_causal_transplant.py": "a704f0420de15d9eb07d49bac4048169f8c3272d7055d82b522c94cc2598a87b",
+    "experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py": "8c12c0b4d6a00c9df2ab40cdf5a2fa19aa91550cc9c708abd4e1354562b206c1",
+    "experiments/exp2_sae/analyze_public_sae_mapping_stability.py": "c29475829ad04a90e6ee68ed6054862552c5f60f181c6db3c545acbe4602298d",
+    "experiments/exp2_sae/analyze_public_sae_mapping_template_robustness.py": "42b5c15fc1dda6152d0cf2755d87b75c843dd80b3b0fe151f52a0909487278c0",
+    "experiments/exp2_sae/build_sae_construct_validity_extension.py": "f3f6b84c2b4f36a8e3b5ccb4ffa617b6ff5bd04d83a46ae652a8d5cf2a070e50",
+    "experiments/review_audit/cue_discovery_v2.py": "2688a192c3b702f7c9208ff40eb47409f8f830d8ec0cab6b8eaa63aaeda07904"
+  }
+}

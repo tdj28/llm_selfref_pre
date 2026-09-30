@@ -2,6 +2,10 @@
 
 Date: 2026-07-12
 
+Interpretation correction: 2026-09-29. The original failure and numerical
+tables remain unchanged. Checks were agent-written, not independent human
+validation. See `docs/CLAUDE_REVIEW_STEERING.md` for the post-hoc review audit.
+
 ## Bottom Line
 
 The preregistered Stage 1 study failed its replay-equivalence gate. All 4,029
@@ -65,6 +69,13 @@ This pattern makes the registered maximum-error rule look brittle, but that is
 a design lesson, not a retroactive pass. A future study must calibrate its gate
 on repeated independent runs before freezing new criteria.
 
+The readout paths differ: v1 selects 67 unembedding rows and v2 selects a
+combined 88-row lexicon. A shape-dependent BF16 matrix-product difference is
+a concrete candidate cause even on matching hardware/software. It has not
+been established by a controlled same-state GPU test; do not call the failure
+sparse or attribute it solely to hardware. Future calibration must test the
+actual row selection, tensor shapes and dtypes, not only machine identity.
+
 ## Exploratory A1: Semantic Hard Negatives
 
 At the real Jacobian transport, every family has its intended lexicon as the
@@ -87,17 +98,18 @@ and 23893 are `0.072`, `0.027`, and `-0.010`.
 
 ## Exploratory A2: Are The Paper IDs Special?
 
-The six selected target IDs do not show a material advantage over fixed
-same-subfamily comparators. The Jacobian target-minus-comparator result is
+The Jacobian target-minus-comparator result for the six fixed pairs is
 `0.125`, with 95% interval `[0.114, 0.136]` and 90% equivalence interval
 `[0.116, 0.134]`. It lies entirely inside the frozen `+/-0.25` practical-
-comparability region, so the exploratory verdict is practical comparability,
-not selected-ID advantage.
+comparability region, so the original exploratory function returns practical
+comparability. All seven transports, including all five random controls, also
+return that flag. The rule therefore does not establish meaningful semantic
+equivalence or that the selected IDs are generally interchangeable.
 
-This is a useful specificity result: within the disclosed public SAE and
-label-defined subfamilies, the accepted paper IDs are not privileged over
-carefully matched alternatives. It does not prove that all SAE features are
-interchangeable or that a proprietary intervention would behave identically.
+The general equivalence interpretation is withdrawn. These intervals resample
+templates while conditioning on six selected feature pairs; they are not
+feature-population intervals. Pair effects are heterogeneous and must be
+reported alongside their mean. Nothing here tests proprietary behavior.
 
 ## Exploratory Reader Capacity
 

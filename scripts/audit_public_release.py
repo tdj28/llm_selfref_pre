@@ -10,10 +10,13 @@ printed; findings contain only a path, line number, and rule name.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
+import io
 import json
 import re
 import subprocess
+import zlib
 from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable, Iterator
@@ -82,6 +85,7 @@ SENSITIVE_NAME = rb"(?:" + rb"|".join(
         rb"HF_TOKEN",
         rb"HUGGINGFACE_TOKEN",
         rb"OPENAI_API_KEY",
+        rb"OSF_TOKEN",
         rb"RUNPOD_API_KEY",
         rb"STEERING_API_KEY",
         rb"[A-Z][A-Z0-9_]*(?:API_KEY|ACCESS_TOKEN|AUTH_TOKEN|PASSWORD|SECRET)",
@@ -95,7 +99,7 @@ ASSIGNMENT_RULE = re.compile(
 )
 
 QUOTED_MAPPING_RULE = re.compile(
-    rb"^[ \t]*[\"']?(?P<name>" + SENSITIVE_NAME + rb")[\"']?"
+    rb"(?:^|[\{,])[ \t]*[\"']?(?P<name>" + SENSITIVE_NAME + rb")[\"']?"
     rb"[ \t]*:[ \t]*[\"'](?P<value>[^\"'\r\n]+)[\"']",
     re.IGNORECASE | re.MULTILINE,
 )
@@ -213,10 +217,33 @@ def _line_number(data: bytes, offset: int) -> int:
     return data.count(b"\n", 0, offset) + 1
 
 
+MAX_DECOMPRESSED_BYTES = 128 * 1024 * 1024
+
+
+def is_release_manifest(path: str) -> bool:
+    name = PurePosixPath(path).name
+    # Lowercase manifest.json is also used for runtime metadata, not file hashes.
+    return name.lower() == "release_manifest.json" or name == "MANIFEST.json"
+
+
 def scan_blob(path: str, data: bytes) -> list[Finding]:
-    """Scan one text-like blob without returning or logging matched values."""
-    if b"\0" in data[:8192]:
-        return []
+    """Scan bytes and bounded gzip payloads; never echo matched secret values."""
+    if path.lower().endswith(".gz") or data.startswith(b"\x1f\x8b"):
+        try:
+            with gzip.GzipFile(fileobj=io.BytesIO(data)) as stream:
+                expanded = stream.read(MAX_DECOMPRESSED_BYTES + 1)
+        except (OSError, EOFError, zlib.error):
+            return [Finding(path, "invalid-compressed-file", "gzip content cannot be scanned")]
+        if len(expanded) > MAX_DECOMPRESSED_BYTES:
+            return [Finding(path, "compressed-scan-limit", "expanded gzip exceeds the scan limit")]
+        # Do not recurse: nested compression is outside this bounded log scan.
+        if expanded.startswith(b"\x1f\x8b"):
+            return [Finding(path, "nested-compressed-file", "nested gzip requires explicit review")]
+        return scan_bytes(path, expanded)
+    return scan_bytes(path, data)
+
+
+def scan_bytes(path: str, data: bytes) -> list[Finding]:
     findings: list[Finding] = []
     seen: set[tuple[str, int]] = set()
     for rule, pattern in DIRECT_SECRET_RULES:
@@ -264,9 +291,9 @@ def path_findings(paths: Iterable[str]) -> list[Finding]:
             ("id_dsa", "id_ecdsa", "id_ed25519", "id_rsa")
         ):
             findings.append(Finding(path_string, "private-key-file", "private key material cannot be tracked"))
-        if re.search(r"(^|/)annotation_key.*_private\.csv(?:\.sha256)?$", lowered):
+        if re.search(r"(^|/)annotation_key[^/]*\.csv(?:\.sha256)?$", lowered):
             findings.append(Finding(path_string, "private-annotation-key", "private linkage keys cannot be tracked"))
-        if re.search(r"(^|/)coder_[^/]*\.csv$", lowered):
+        if re.search(r"(^|/)(?:coder[^/]*|[^/]*_coder[^/]*)\.csv$", lowered):
             findings.append(Finding(path_string, "private-coder-file", "coder response files cannot be tracked"))
         if basename in {
             ".netrc",
@@ -297,9 +324,10 @@ def path_findings(paths: Iterable[str]) -> list[Finding]:
 
 def ignored_private_file_findings(repo: Path) -> list[Finding]:
     candidates = [repo / ".env", repo / "checkpoint.md", repo / "steering" / ".env"]
-    candidates.extend(repo.glob("data/**/annotation_key*_private.csv*"))
-    candidates.extend(repo.glob("data/**/coder_*.csv"))
-    candidates.extend(repo.glob("tmp/**/coder_*.csv"))
+    candidates.extend(repo.glob("data/**/annotation_key*.csv*"))
+    for folder in ("data", "tmp"):
+        candidates.extend(repo.glob(f"{folder}/**/coder*.csv"))
+        candidates.extend(repo.glob(f"{folder}/**/*_coder*.csv"))
 
     findings: list[Finding] = []
     for candidate in sorted({path for path in candidates if path.exists()}):
@@ -418,7 +446,7 @@ def audit_repository(repo: Path) -> dict[str, object]:
     for path, data in iter_index_blobs(repo, entries):
         scanned_bytes += len(data)
         blob_records[path] = (len(data), hashlib.sha256(data).hexdigest())
-        if path.endswith("/release_manifest.json") or path.endswith("/MANIFEST.json"):
+        if is_release_manifest(path):
             release_manifests[path] = data
         findings.extend(scan_blob(path, data))
 

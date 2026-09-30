@@ -3,19 +3,34 @@ title: "Can a Jacobian Lens Detect SAE Steering?"
 date: 2026-07-11
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing"]
 author: Timothy Jones
-summary: "A preregistered Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space."
+summary: "Corrected draft: a Git-frozen Llama 3.3 70B audit measures signed paired fingerprints and a task-specific mixed-sign, feature-held-out reader null, not behavioral steering efficacy."
 draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** This v1 study was
+prospectively frozen in Git, not registry-preregistered. Its BF16 prefix-only
+readout cannot rule out underdosing or establish behavioral efficacy in the
+separate NF4 two-turn experiment. The reader null is specific to mixed signs
+and crossed feature/prompt holdouts; intervals condition on the selected
+features. Historical values and figures are retained, with interpretation,
+contribution, and citation corrections below. See the
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Human editorial
+approval and independent validation remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used to help implement the
-experiment and draft this article. The author selected the research question,
-approved the frozen design, will inspect the artifacts, and takes
-responsibility for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "warning" >}}
-**Study status.** Complete. The protocol and machine plan were committed at
+**Historical execution status.** Complete, not publication-ready. The protocol
+and machine plan were committed at
 `b026faa` before GPU outcomes. The release contains 420 static readouts, 120
 sparse-pursuit checkpoints, 1,581 paired forwards, 20,000-replicate
 template-cluster intervals, remote and local structural audits, and
@@ -32,12 +47,14 @@ deception/roleplay SAE directions, compare them with 18 activation- and
 norm-matched SAE controls plus isotropic controls, and replay 1,581 paired
 prefix-only interventions across 51 held-out template families. Identity-lens,
 raw-norm, and five singular-spectrum-preserving random-J baselines traverse the
-same analysis. **Result:** the post-state-only J detector cannot attribute
-target steering out of sample (AUROC 0.4998), but the same J readout exposes a
-large, signed target-versus-matched fingerprint when the same clean prefix is
+same analysis. **Result:** the frozen mixed-sign, feature-held-out linear J
+detector is at chance for target attribution (AUROC 0.4998), but the same J
+readout exposes a large, signed target-versus-matched fingerprint when the same clean prefix is
 available (+0.9065 under amplification and -0.8247 under suppression). The
-access model is the result: J-space can characterize a known perturbation here,
-but it does not identify steering provenance from an isolated state. Nothing
+paired readout characterizes a known added direction, largely consistent with
+its static projection. The reader null is not a general limit on isolated-state
+detection; opposite signs and feature holdouts matter. The intervals resample
+templates with the six target features and their controls fixed. Nothing
 in this experiment establishes what the model believes or whether it is
 conscious.
 {{< /panel >}}
@@ -120,6 +137,13 @@ also holds out feature pairs, preventing a classifier from merely memorizing
 six direction-specific signatures. We report AUROC, AUPRC, calibration, and
 true-positive rate at 1% false-positive rate. The paired-clean version is a
 separate, stronger-access sensitivity analysis.
+
+The frozen linear reader pools positive and negative interventions into the
+same class. Opposite signed shifts can cancel for such a reader, especially
+when it must generalize to unseen feature pairs. Chance performance on this
+task does not establish that an intervention is undetectable by sign-aware,
+nonlinear, or differently held-out readers. All template-bootstrap intervals
+condition on the selected features; they are not feature-population intervals.
 
 ## Frozen Design
 
@@ -220,13 +244,13 @@ residual norm, and 0.5011--0.5068 across the five random-J controls. J-lens TPR
 at 1% FPR is 0.98%.
 
 The broader any-intervention task is no rescue. J-lens AUROC is 0.5092, below
-identity (0.5129) and two random-J seeds. Its AUPRC of 0.96895 is almost exactly
-the 0.96774 positive-class prevalence. A high-looking AUPRC in a 30-to-1 task
+identity (0.5129) and four of five random-J seeds. Its AUPRC of 0.96895 is almost
+exactly the 0.96774 positive-class prevalence. A high-looking AUPRC in a 30-to-1 task
 is not a useful detector.
 
 ![Out-of-sample steering detection by readout family.](sae_jlens_detection_auroc.png)
 
-<p class="figure-note">Figure: confirmatory post-state-only target attribution. Error bars are 95% template-cluster bootstrap intervals. Every readout is operationally at chance under crossed prompt and feature-pair holdouts.</p>
+<p class="figure-note">Historical figure: Git-frozen post-state-only target attribution. Error bars are 95% template-cluster bootstrap intervals conditional on the fixed selected features. Every frozen mixed-sign linear readout is near chance under crossed prompt and feature-pair holdouts; this is not a general detector impossibility result.</p>
 
 The central comparison is the real J-lens against identity, every random-J
 seed, and raw norms. The relevant question is not whether AUROC exceeds 0.5 in
@@ -242,8 +266,8 @@ suppression. Identity sees the same sign but only +0.2028 and -0.2181. Every
 random-J effect has absolute magnitude below 0.123; several rotate into the
 opposite sign.
 
-After opening the confirmatory result, I added one explicitly post hoc way to
-express that stronger access model. Take the already frozen
+After opening the Git-frozen result, the agent analysis added one explicitly
+post hoc way to express that stronger access model. Take the already frozen
 deception-minus-unrelated change, multiply by intervention sign, and use it as
 a fixed target-versus-matched score. J-lens AUROC is 0.862 [0.848, 0.876];
 identity is 0.779 [0.751, 0.807]; the five random-J AUROCs range from 0.256 to
@@ -253,9 +277,15 @@ values up to 0.645. There is no fitted classifier in this sensitivity, but
 every version assumes a clean reference and therefore does not rescue the
 failed post-state-only detector.
 
+The static projection is an essential comparator: the review found that it
+largely predicts the signed downstream change. The paired result therefore
+supports persistence of the known direction, not discovery of a new hidden
+mechanism. Its narrow intervals describe prompt variation conditional on the
+six selected targets and fixed controls, not uncertainty over SAE features.
+
 ![Paired clean-reference target attribution.](sae_jlens_paired_reference_auc.png)
 
-<p class="figure-note">Figure: fixed-score target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families. This post-run sensitivity uses the frozen score but is not a new confirmatory endpoint.</p>
+<p class="figure-note">Historical figure: fixed-score target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families with selected features fixed. This post-run sensitivity uses the frozen score but is not a new confirmatory endpoint.</p>
 
 The aggregate also hides real heterogeneity. Features 30686 and 58667 separate
 perfectly in this sample; 41533 is nearly perfect; 30032 and 22004 are strong.
@@ -277,7 +307,7 @@ attenuate them.
 
 ![Layerwise trajectory of the frozen deception-minus-unrelated score.](sae_jlens_downstream_trajectory.png)
 
-<p class="figure-note">Figure: target-minus-matched paired change in the frozen deception-minus-unrelated J score. Bands are 95% template-cluster intervals; the dashed line marks the preregistered primary layer 65.</p>
+<p class="figure-note">Historical figure: target-minus-matched paired change in the frozen deception-minus-unrelated J score. Bands are 95% template-cluster intervals conditional on fixed features; the dashed line marks the Git-frozen primary layer 65.</p>
 
 Layer 50 is diagnostic only: the intervention was inserted there. Layer 65 is
 primary because it asks whether the signature persists after 15 nonlinear
@@ -286,16 +316,18 @@ the final output.
 
 ## Could This Audit a Production Model?
 
-Not as a standalone detector, based on this experiment. The post-state-only
-result is the production-relevant failure: prompt variation overwhelms the
-small frozen lexical fingerprint, and the real J-lens does not outperform
-identity or scrambled controls. A company should not deploy this classifier to
-declare that an arbitrary state was steered.
+This experiment does not validate a standalone production detector. The
+post-state-only result is a failure of the specified mixed-sign linear task
+under crossed holdouts, not evidence that prompt variation defeats every
+possible readout. The real J-lens does not outperform identity or scrambled
+controls on that task. It does not justify deploying this classifier to declare
+that an arbitrary state was steered.
 
 The paired result is still useful. If a deployment system can retain a clean
 reference for a fixed probe, compare signed versions, or run controlled canary
 prefixes, the J-lens can amplify a semantically specific delta beyond identity.
-That can be one internal regression monitor. It is not provenance: a prompt,
+That is a candidate internal regression-monitoring use, not a validated
+production monitor. It is not provenance: a prompt,
 fine-tune, adapter, weight edit, or different residual intervention could
 produce a similar delta.
 
@@ -318,23 +350,22 @@ For a production system, the practical hierarchy is:
 
 ## What This Says About Consciousness Claims
 
-The steering was not internally inert. The full SAE edit and direct addition
-agree to relative RMSE $6.6\times10^{-8}$, and the chosen vectors create a
-large signed J-lens fingerprint across downstream layers. That matters because
-it rules out the weakest explanation for our earlier public behavioral null:
-"nothing was changed."
+The steering was not internally inert in this BF16 prefix-only audit. The full
+SAE edit and direct addition agree to relative RMSE $6.6\times10^{-8}$, and the
+chosen vectors create a signed J-lens fingerprint across downstream layers.
+No response text or self-report outcome was generated here. These observations
+do not rule out underdosing or establish effective behavioral delivery in the
+separate 1,500-trial NF4 4-bit, two-turn steering run.
 
-But what changed is a verbalization geometry associated with deception,
-roleplay, innocence, fake stories, and lies. In the separate 1,500-trial public
-replication, this internal movement did not produce the paper's claimed
-consciousness-report contrast. Neither fact implies that the model was hiding
-experience. The clean conclusion is narrower: public feature semantics,
-internal steering effects, and consciousness-report behavior are three
-different claims, and only the first two are supported here.
+That behavioral run also had an untreated baseline near the label ceiling,
+unlike the motivating paper. Its historical null and this internal readout must
+not be combined into a strong refutation of the paper's mechanism. Public
+feature semantics, internal readout movement, and paper-rubric output labels
+are different measurements; none establishes hidden experience.
 
 The six feature IDs were introduced as deception/roleplay controls in a paper
 about subjective-experience reports. Their paired vocabulary fingerprint
-establishes a causal language-disposition effect under this public
+establishes movement in the specified internal lexical readout under this BF16
 implementation. It does not show that the model was concealing an experience,
 and it does not turn the failed post-state detector into evidence of hidden
 provenance.
@@ -346,11 +377,12 @@ maps five of six target directions to recognizable vocabulary dispositions and
 tracks a large signed delta through 28 downstream blocks.
 
 Can that J-space readout audit an isolated activation and tell us the model was
-steered? **Not in this experiment.** The preregistered post-state detector is at
-chance for target attribution and no better than identity or random-J controls.
+steered? **Not with the frozen mixed-sign linear reader and crossed holdouts.**
+That Git-frozen detector is at chance for target attribution and no better than
+identity or random-J controls. This is not a general claim about other detectors.
 With a matched clean reference it becomes informative, especially when sign is
-known, but that is a controlled regression monitor rather than provenance
-forensics.
+known, but that supports controlled readout characterization rather than
+provenance forensics or behavioral efficacy.
 
 ## Reproducibility And Artifact Ledger
 
@@ -361,7 +393,7 @@ forensics.
 | Runtime source commit | `b026faac222e55d7da4f01a30a6a60a468a5f023` |
 | Result release | `data/sae_jlens_audit/confirmatory_v1_20260711/` |
 | RunPod resource | `c34tng2tpjx96h`, terminated; estimated compute $1.60 |
-| Independent audit | pass, 1,581 paired / 420 static / 120 pursuit, zero errors |
+| Separate agent audit | pass, 1,581 paired / 420 static / 120 pursuit, zero errors; not independent human validation |
 
 No Anthropic, Goodfire, Neuronpedia, or AE Studio source code is copied into the
 experiment. Their methods, public weights, and factual metadata are attributed
@@ -376,7 +408,11 @@ Praxagent code.
 - Neuronpedia (2026), [Llama 3.3 70B Jacobian-lens release](https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext).
 - Goodfire, [Llama 3.3 70B layer-50 SAE](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50).
 - Praxagent (2026), [*Opening the Jacobian Lens on Qwen3.5-397B*](https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html).
-- Lindsey et al. (2026), [*Latent Introspection*](https://arxiv.org/abs/2602.20031).
+- Pearson-Vogel et al. (2026), [*Latent Introspection: Models Can Detect Prior Concept Injections*](https://arxiv.org/abs/2602.20031v2).
 - [*Mechanisms of Introspective Awareness*](https://arxiv.org/abs/2603.21396).
 - [*Steered LLM Activations are Non-Surjective*](https://arxiv.org/abs/2604.09839).
-- [*STATEWITNESS: Auditing Deception from Internal States*](https://arxiv.org/abs/2606.17478).
+- Chen et al. (2026), [*Decoding Hidden Deception in Reasoning LLMs: Activation Explainers for Deception Auditing*](https://arxiv.org/abs/2606.17478v1).
+
+The two corrected arXiv author/title records above were checked on their
+primary abstract pages on 2026-09-29. This metadata check is not a full-paper
+validation of their findings or a completed bibliography audit.

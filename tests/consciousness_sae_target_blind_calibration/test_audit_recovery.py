@@ -12,6 +12,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.frozen_sources import calibration_provenance
+
 from experiments.consciousness_sae_realization_validation import runtime as full_runtime
 from experiments.consciousness_sae_target_blind_calibration import (
     audit,
@@ -45,12 +47,8 @@ def _install_fake_checkpoint(monkeypatch, checkpoint: dict) -> None:
 
 
 def test_pre_gpu_issue_gate_accepts_authentic_r3_plan_and_provenance() -> None:
-    """Exercise the real first authorization gate without provider/GPU mocks."""
-
-    plan_dir = audit_recovery.REPO_ROOT / protocol.CANONICAL_PLAN_RELATIVE_PATH
-    plan, paths, records = audit_recovery._validate_pre_gpu_issue_inputs(  # noqa: SLF001
-        plan_dir
-    )
+    """Exercise the real gate on hash-verified historical sources, without a GPU."""
+    plan, paths, records = calibration_provenance()
 
     assert plan["manifest"]["plan_manifest_sha256"] == (
         "aa80cef7ef36fed327fcce99547c0b3bdf92a059c1dea43abba0ba924f404636"

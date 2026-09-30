@@ -149,10 +149,12 @@ def test_syscall_numbers_are_frozen_for_supported_architectures() -> None:
 
 
 def test_device_rule_record_binds_full_character_device_identity() -> None:
-    # Darwin exposes dev_t through a signed 32-bit value for high major numbers,
-    # while os.major/os.minor require its unsigned representation.  Linux's
-    # value is already non-negative, so this preserves the same 195:7 identity.
-    device_number = os.makedev(195, 7) & 0xFFFFFFFF
+    # CPython versions differ on signed Darwin dev_t; retain the 195:7 identity.
+    device_number = os.makedev(195, 7)
+    try:
+        os.major(device_number)
+    except OverflowError:
+        device_number &= 0xFFFFFFFF
     details = SimpleNamespace(
         st_mode=stat.S_IFCHR | 0o660,
         st_dev=44,

@@ -3,15 +3,28 @@ title: "When a Preregistered Numerical Gate Fails"
 date: 2026-07-12
 tags: ["AI", "machine-learning", "interpretability", "reproducibility", "preregistration", "bfloat16"]
 author: Timothy Jones
-summary: "Our 4,029-forward Llama 70B study finished, then failed its own replay gate. Here is what failed, why BF16 matters, and why we did not move the goalposts."
+summary: "Corrected draft: the OSF-registered 4,029-forward Llama 70B run failed its replay gate. Readout-shape-dependent BF16 accumulation is a candidate explanation, not a confirmed root cause."
 draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** The registered
+failure, numerical tables, and post-outcome labels are unchanged. A 67-row
+versus 88-row readout difference is a concrete candidate for the BF16 replay
+disagreement, not an experimentally confirmed root cause. The disagreement
+must not be described as generally sparse or attributed solely to hardware.
+Contribution claims and the diagnostic interpretation are corrected below; see
+the [review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Human
+editorial approval and independent validation remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools helped implement, audit, and document
-this experiment. The author selected the research question, explicitly
-authorized the public OSF registration, and is responsible for the final text
-and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "warning" >}}
@@ -46,7 +59,8 @@ The first check passed with maximum error exactly zero. The second reached
 `0.25`. Our frozen maximum was `0.02`. The runtime wrote
 `replay_gate_failed` and stopped before confirmatory analysis.
 
-That is the preregistered result.
+That is the result of the [OSF-preregistered Stage 1 study](https://osf.io/f3tpv/).
+The earlier v1 study was prospectively frozen in Git, not registry-preregistered.
 
 ## Why Have A Gate At All?
 
@@ -106,12 +120,20 @@ That is exactly where the failures cluster:
 The largest differences are one BF16 step at large logits. They are not a
 uniform drift: mean signed error is about `-0.0000039`.
 
+The readout path also changed: v1 selected 67 unembedding rows, while v2 used
+the combined 88-row lexicon. Different matrix shapes can change BF16
+accumulation even when hardware and software version strings match. This is
+a candidate explanation, not a confirmed root cause: no controlled same-state
+test of the two readout shapes is reported here. Small tail exceedance rates
+do not mean the full set of numerical disagreements is sparse.
+
 ## Does That Mean The Gate Was "Basically A Pass"?
 
 No.
 
-It means we can explain why a maximum-error gate behaved badly. Explanation is
-not permission to edit a registered rule after seeing it fail.
+It means we can identify a scale-sensitive tolerance and a concrete numerical
+candidate for the disagreement, not certify its cause. Neither observation
+permits editing a registered rule after seeing it fail.
 
 We knew only the terminal gate summary when we committed a dated post-outcome
 amendment. That amendment fixed the diagnostic tables before we inspected any
@@ -121,8 +143,8 @@ run unchanged, but only under the label `post_outcome_exploratory`.
 The distinction matters:
 
 - **registered outcome:** replay gate failed, confirmatory endpoints blocked;
-- **post-outcome diagnostic:** the failure is sparse, magnitude-dependent, and
-  BF16-shaped; and
+- **post-outcome diagnostic:** errors are magnitude-dependent and BF16-shaped,
+  with an unconfirmed readout-width explanation; and
 - **exploratory science:** what the already frozen endpoint calculations show
   on the preserved run.
 
@@ -150,8 +172,8 @@ That check is stronger than saying "the numbers looked the same."
 A future confirmatory attempt should calibrate reproducibility on repeated
 runs before any target outcome exists. At minimum:
 
-1. repeat the same fixed calibration workload across the intended hardware and
-   software envelope;
+1. repeat the same fixed calibration workload with the actual readout row
+   selections, tensor shapes, dtypes, and intended hardware/software envelope;
 2. report absolute error, relative error, ULP distance, and downstream
    statistic stability;
 3. freeze both a distributional criterion and a maximum criterion;
@@ -177,7 +199,8 @@ The discipline around the failure is as important as the statistic:
 - 58/58 remote files retrieved and hash-matched;
 - 16/16 residual shards anonymously downloaded from the public OSF project and
   hash-matched;
-- independent raw, replay, endpoint, and label audit: pass; and
+- separately implemented agent raw, replay, endpoint, and label audit: pass,
+  not independent human validation; and
 - agent-owned B200 pod deleted, direct GET 404, inventory empty.
 
 The complete release is under

@@ -130,6 +130,50 @@ immediately public and permanently recoverable.
 
 ## Research Direction
 
+### Interpretation Correction: 2026-09-29
+
+Read `docs/CLAUDE_REVIEW_RESPONSE_20260929.md` and its linked local audits before
+using the historical headline claims below. This correction changes their
+interpretation, not the frozen records or verdict files.
+
+- Say **paper-rubric positive labels**, not validated experience reports.
+  Independent human coding has not started. The public annotation texts are
+  relinkable, so withheld key files do not guarantee condition blinding.
+- The Llama no-op has ten unique seeded outputs, all primary-judge positive;
+  the paper's Figure 2 is approximately 0.30 at zero. The suppression direction
+  has inadequate upward headroom. Amplification can still lower the rate, but
+  the null contrast is not a commensurate falsification of the paper's mechanism.
+- Gemma's target edit removes only about 3.5% of the pooled final-turn target
+  activation. Do not describe it as a successful target ablation or strong
+  negative evidence against effective suppression. Local judge errors matter.
+- Historical `not replicated` strings are outputs of frozen decision rules,
+  not proof the assays met behavioral-comparability or manipulation-validity
+  requirements. Keep both the old strings and this correction visible.
+- Transcript effects differ in sign by model. An incongruent transplant also
+  introduces an instruction/transcript mismatch. The new-prompt factorial is
+  not a validated decomposition of the paper's recursive induction.
+- Disclose analyzed pilots and post-pilot changes. A new-sample freeze is not
+  a claim of no prior knowledge. Git-only freezes are not registry deposits.
+- Cue-discovery defects and deception-bearing inserted clauses limit the
+  lexical-mechanism claim. Keep the accepted IDs and designed-corpus mapping;
+  do not infer hidden-truth detection or a failure of an output gating theory
+  from low input-side activation on consciousness text.
+- J-lens intervals condition on fixed selected features and the frozen task.
+  Withdraw general A2 practical-equivalence wording: random transports satisfy
+  the same rule. Readout-width-dependent BF16 accumulation is a candidate
+  replay-failure explanation, not an experimentally confirmed root cause.
+- Agent-written recomputation is automated verification, not independent human
+  validation. Disclose agents' protocol design, execution, analysis and writing
+  roles; do not attest to human inspection that has not been recorded.
+- Before any new outcome run, use `docs/DESIGN_VALIDITY_GATE.md`. Require a
+  comparable untreated baseline, attainable alternatives, an appropriate
+  positive control, actual manipulation checks and a stated sampling unit.
+  A valid manifest does not establish that an experiment answers its question.
+
+The current paper-specific manuscript is in `../berg2025-response`. Preserve
+this repository's older studies as an evidence archive, indexed in
+`docs/STUDY_INVENTORY.md`; do not remove them just to make the repo smaller.
+
 The project has pivoted from broad prompt-artifact exploration to a confirmatory causal-identification study.
 
 - First reproduce the published self-reference/history contrast as calibration.
@@ -140,9 +184,9 @@ The project has pivoted from broad prompt-artifact exploration to a confirmatory
 - Preserve empty/refusal outcomes as missing; never silently recode them as denials.
 - Report design-aware uncertainty: independent draws for calibration, lexical-variant clusters for the factorial, and paired source-text blocks for transplants/query contrasts.
 - Keep construct-separated model judges exploratory until blinded human annotation is complete.
-- Use `human_annotation_packet_v3_wave1.csv` for initial coding. It contains 160 complete-block rows; wave 2 is a prefrozen disjoint reserve used only if the condition-blind reliability/class-coverage gate fails. The 640-row v2 packet remains a provenance archive. Never commit any private linkage key or coder file.
+- The historical `human_annotation_packet_v3_wave1.csv` contains 160 complete-block rows; wave 2 is its prefrozen reserve and the 640-row v2 packet remains a provenance archive. The old securely blinded causal-validation handoff is paused. Obtain approval of `docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md` before starting revised coding; do not silently apply the old expansion rule to a changed instrument. Never commit any private linkage key or coder file.
 
-The strongest completed causal result is that active instruction context dominates transplanted visible transcript content. The orthogonal register-versus-self-reference contrast is directionally informative but imprecise and must not be described as decisive.
+The strongest completed causal result is that active instruction context dominates transplanted visible transcript content for the tested rubric. Transcript effects are heterogeneous, not absent. The new-prompt register-versus-self-reference contrast is imprecise and does not decompose the paper's prompt.
 
 Public SAE work is a separate evidence ladder:
 
@@ -157,7 +201,7 @@ Public SAE work is a separate evidence ladder:
   proprietary intervention semantics, so preserve that separate comparability
   boundary.
 - The balanced map uses 2--5 researcher-authored template families per category. Prefer the template-aware results in `template_robustness/` over treating 80 lexical combinations as independent natural texts: all six retain the same cluster-balanced top category, four survive every deletion, and 23893/41533 each switch once. Natural-corpus generalization remains open.
-- The prospectively frozen 2,606-text construct-validity extension is complete at `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/`. Deception-minus-subjective activation replicates separately in Anthropic and OpenAI paraphrases and survives every leave-one-target-feature-out check. Neutral cue transplant recovers 64.4% [50.3%, 78.7%] of the discovery gap, crossing the frozen lexical-entanglement threshold. Use the registered wording "lexically entangled deception/roleplay coordinates" and keep independent human category validation marked pending.
+- The 2,606-text construct-validity extension is complete at `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/`. Deception-minus-subjective activation survives both paraphraser families and every leave-one-target-feature-out check. Preserve the historical 64.4% [50.3%, 78.7%] cue-clause recovery statistic, but disclose the cue-extraction defects and fixed discovery denominator. The manipulation does not isolate words from deception-bearing meaning; do not require the old "lexically entangled" verdict as a general interpretation. Human and natural-corpus validation remain pending.
 - Their mapped semantics cover pretending, roleplay, cover stories, misdirection, dishonesty, and hedging; this does not make them validated hidden-truth detectors for subjective-experience reports.
 - Early steering smokes using a synthetic `[Induction acknowledged]` assistant turn are implementation history, not evidence about the paper's two-turn protocol.
 - Only `public_sae_two_turn_v2` or a later protocol with a real generated first turn, a true zero no-op, and intervention telemetry may support steering claims.
@@ -188,9 +232,11 @@ Public SAE work is a separate evidence ladder:
   registered replay maximum failed, so its endpoint results are not
   confirmatory. Under the dated post-outcome amendment, all 14 readers remain
   below the frozen 0.60 material threshold; A1 Jacobian global specificity is
-  `0.174 [0.167, 0.182]`, below the frozen 0.25 minimum; and A2 finds practical
-  comparability rather than selected-ID advantage at `0.125` with 90% interval
-  `[0.116, 0.134]`. Report these only as exploratory secondary evidence.
+  `0.174 [0.167, 0.182]`, below the frozen 0.25 minimum; and A2 has a fixed-pair
+  mean `0.125` with template-conditional 90% interval `[0.116, 0.134]`.
+  Withdraw general practical-equivalence wording: all seven transports pass
+  the same broad margin. Report heterogeneous pairs and the task-specific
+  linear-reader null only as exploratory secondary evidence.
 - Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
   SteeringAPI service was publicly reachable when checked, but its relationship
   to Goodfire and the paper-time experiment is unverified. Exact proprietary
@@ -206,10 +252,12 @@ Strong contributions should map to falsifiable experiments and paper figures/tab
 
 - Treat Gemma 2 9B as a cross-model mechanistic generalization, not an exact
   replication of Llama feature IDs or the proprietary Goodfire API.
-- The registered direct-IT primary effect is `-0.02 [-0.10, 0.06]` against a
+- The Git-frozen direct-IT primary effect is `-0.02 [-0.10, 0.06]` against a
   frozen 0.30 minimum, yielding `not replicated under Gemma Scope`. GPT-4o mini
   and Claude Haiku each estimate `0.00`; three-judge majority estimates
-  `0.020`. Specificity is inconclusive at `-0.013 [-0.107, 0.073]`.
+  `0.020`. Specificity is inconclusive at `-0.013 [-0.107, 0.073]`. The target
+  manipulation was weak (about 3.5% reduction in pooled final-turn activation),
+  so the historical verdict is not evidence against effective ablation.
 - The exact Gemma self-reference-minus-history baseline is small: local Gemma
   `0.12 [0.04, 0.22]`, GPT `0.06 [0.00, 0.14]`, and Claude/majority `0.020
   [0.000, 0.061]`, with every history rate at zero. Do not imply a broad
@@ -219,7 +267,7 @@ Strong contributions should map to falsifiable experiments and paper figures/tab
   SAEs. The prospectively frozen PT-to-IT gate failed on reconstruction while
   semantic profile correlation passed. Never rewrite that result or call the
   all-layer branch confirmatory.
-- Feature IDs are local to each independently trained SAE. Follow preregistered
+- Feature IDs are local to each independently trained SAE. Follow frozen
   construct scores across layers; do not imply that equal or matched IDs are a
   persistent feature identity.
 - Layer 20, direct-IT, 131k is the completed primary intervention site. Local
@@ -249,9 +297,14 @@ Root environment:
 ```bash
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.lock
+pip install -r requirements-ci.txt -r requirements-ci-torch.txt
 cp .env-example .env
 ```
+
+These are CPU analysis/test dependencies, not the historical GPU environment.
+For Linux CPU-only PyTorch wheels use the index command in
+`docs/REPRODUCTION.md`. The older general `requirements.lock` is not an exact
+lock for any released GPU run and is not the lightweight reproduction setup.
 
 Confirmatory release checks:
 

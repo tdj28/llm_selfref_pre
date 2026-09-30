@@ -4,12 +4,27 @@ date: 2026-07-11
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "Gemma", "reproducibility", "tutorials"]
 author: Timothy Jones
 summary: "A practical guide to using Gemma Scope for layerwise sparse-autoencoder research, including the crucial distinction between direct instruction-tuned SAEs and exploratory transfer from pretrained-model SAEs."
+draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** Gemma's plans were
+prospectively frozen in Git, not registry-preregistered. The failed transfer
+gate and historical evidence remain unchanged. Passing the direct-IT branch's
+technical checks did not establish an effective target ablation: the primary
+edit removed only about 3.5% of the pooled final-turn target activation. The
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md) narrows the causal
+interpretation. Contribution claims and reanalysis instructions are corrected
+below; human instrument validation and editorial approval remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used during drafting and
-editorial revision. The author designed the study, selected the analyses,
-inspected the outputs, and takes responsibility for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "info" >}}
@@ -23,8 +38,10 @@ post explains the inventory, the JumpReLU SAE, why feature IDs do not persist
 across dictionaries, and how we prospectively tested whether pretrained SAEs
 could be applied to the instruction-tuned model. Our frozen transfer gate
 failed on chat-centered reconstruction even though semantic profiles aligned
-strongly. We therefore preserve the direct instruction-tuned experiment as the
-confirmatory study and label the all-layer map as exploratory. That failure is
+strongly. We preserve the direct instruction-tuned experiment as the
+Git-frozen branch and label the all-layer map as exploratory. This status does
+not validate the direct-IT manipulation; its weak target edit limits causal
+refutation. The transfer failure is
 not an inconvenience to hide. It is exactly what a gate is for.
 {{< /panel >}}
 
@@ -143,7 +160,7 @@ that a dictionary still reconstructs the new activation distribution well.
 
 ## We Froze a Transfer Gate Before Mapping All 42 Layers
 
-Before examining any final consciousness-report outcome, we registered a gate
+Before examining any final consciousness-report outcome, we froze a gate in Git
 at layers 9, 20, and 31. At each anchor we compared the direct IT SAE against
 the corresponding pretrained-model SAE applied to the IT model. The gate asked
 two different questions:
@@ -183,7 +200,7 @@ small, repetitive chat probe. A supplementary raw-text reconstruction check
 was much more ordinary: direct-IT anchor FVU ranged from about `0.121` to
 `0.325`, while PT-on-IT anchor FVU ranged from about `0.146` to `0.329`.
 That discrepancy suggests the frozen chat-centering diagnostic is unusually
-sensitive to this prompt set. It does not make the failed registered gate pass.
+sensitive to this prompt set. It does not make the failed Git-frozen gate pass.
 
 This distinction matters:
 
@@ -195,7 +212,7 @@ This distinction matters:
   representation transfers cleanly.
 
 {{< panel "warning" >}}
-**A failed gate is part of the result.** Replacing the registered diagnostic
+**A failed gate is part of the result.** Replacing the frozen diagnostic
 with a more favorable one after seeing both would convert a prospective test
 into a post-hoc choice. We report the raw-text diagnostic as context and keep
 the original verdict unchanged.
@@ -246,31 +263,29 @@ causal circuit, a persistent feature identity, or an internal experience.
 | Where does a construct score become stronger or weaker? | That one feature literally travels between layers |
 | Does a calibrated intervention change later activations or outputs? | That the English label names the sole causal mechanism |
 | Does the effect beat matched controls and a frozen relevance threshold? | That any output change establishes consciousness or deception |
-| Does a public implementation reproduce a registered signature? | That it is byte-identical to a proprietary hosted API |
+| Does a public implementation reproduce a prospectively specified signature? | That it is byte-identical to a proprietary hosted API |
 
 The language of "microscopes" is helpful only if we retain the limitations of
 real microscopes: sample preparation matters, calibration matters, lenses have
 aberrations, and seeing a structure is not the same as understanding its role.
 
-## Reproduce the Outcome-Free Parts
+## Reanalyze the Released Summaries
 
 The protocol, source, machine plans, exact revisions, validation logs, and
-small release artifacts are public in the project repository. The central
-commands are:
+release artifacts are public. From the repository root, use a disposable copy
+with the pinned local analysis dependencies. This recomputes summaries from
+stored outputs, not model activations; it requires no new GPU run or model API
+call. Do not rebuild the frozen plan or overwrite the release manifest.
 
 ```bash
-python experiments/exp2_sae/build_gemma_scope_9b_plan.py \
-  data/gemma_scope_9b/confirmatory_v1_plan_20260711
-
-python experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
-  data/gemma_scope_9b/confirmatory_v1_plan_20260711
-
-python experiments/exp2_sae/run_gemma_scope_9b_atlas.py \
-  --plan-dir data/gemma_scope_9b/confirmatory_v1_plan_20260711 \
-  --outdir data/gemma_scope_9b/confirmatory_v1_20260711/atlas
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+mkdir -p out
+WORK=$(mktemp -d out/gemma-primer-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$WORK"/
+python experiments/exp2_sae/analyze_gemma_scope_9b.py "$WORK"
 ```
 
-The GPU path pins the Gemma model, both SAE repositories, Transformers, SAE
+The historical GPU path pinned the Gemma model, both SAE repositories, Transformers, SAE
 Lens, PyTorch, CUDA-visible runtime metadata, and every generated artifact
 hash. A custom JumpReLU implementation was checked against SAE Lens on the
 same tensors; selected activations and reconstructions matched exactly in the

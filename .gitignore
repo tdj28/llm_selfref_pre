@@ -431,9 +431,10 @@ dmypy.json
 **/secrets.yml
 **/secrets.toml
 **/token.json
-**/annotation_key*_private.csv
-**/annotation_key*_private.csv.sha256
-**/coder_*.csv
+**/annotation_key*.csv
+**/annotation_key*.csv.sha256
+**/coder*.csv
+**/*_coder*.csv
 **/*.tfstate
 **/*.tfstate.*
 **/*.tfvars

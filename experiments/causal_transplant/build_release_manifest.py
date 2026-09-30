@@ -13,8 +13,13 @@ from typing import Any
 
 
 def is_private_name(name: str) -> bool:
-    return (name.startswith("annotation_key") and "_private.csv" in name) or name.startswith(
-        "coder_"
+    lowered = name.lower()
+    return lowered.startswith("coder_") or (
+        lowered.endswith((".csv", ".csv.sha256"))
+        and (
+            lowered.startswith(("annotation_key", "coder"))
+            or "_coder" in lowered
+        )
     )
 
 

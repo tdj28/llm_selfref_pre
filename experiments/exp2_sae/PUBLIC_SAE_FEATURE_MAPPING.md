@@ -242,11 +242,27 @@ Key bootstrapped contrasts:
 | `roleplay_fiction - subjective_experience_language` | 0.497 | [0.429, 0.571] | 1.000 |
 | `subjective_experience_language - neutral_controls` | -0.023 | [-0.042, -0.005] | 0.005 |
 
-This is a stronger construct-validity check than the per-feature card alone.
-If the public candidate IDs primarily tracked truthful subjective-experience self-report, direct consciousness and self-reference/mindfulness texts should be high on the target aggregate.
-Instead, they are negative and slightly below neutral controls, while deception-language texts are strongly positive.
+Correction, 2026-09-29: these are input-side associations on a designed corpus.
+They do not test whether an intervention on the features gates an output; a
+gating feature need not activate on the topic it gates. The standardized
+aggregate is lower on the subjective-experience texts than on deception texts.
+This is not evidence that the coordinates detect truth or concealed experience.
+
+The table's historical "Positive item rate" means a positive **standardized
+aggregate**, not any positive raw SAE activation. The live article's
+September 4 correction reports raw target activation on 12/160 of these texts
+(7.5%). Preserve the original standardized statistic, but do not describe its
+0.000 as feature silence. The frozen activation records are unchanged.
 
 ## Prospective Construct-Validity Extension: 2026-07-10
+
+Interpretation correction, 2026-09-29: the cue extractor fills a top-decile
+set with zero-activation items for sparse features, truncates tied cues
+lexically, and permits cross-feature fallback. The inserted clauses also
+state deception or pretending. The historical 64.4% ratio therefore does not
+isolate a purely lexical mechanism and conditions on an inspected discovery
+denominator. See `docs/CLAUDE_REVIEW_MEASUREMENT.md` and the separate corrected
+future-use extractor; do not regenerate the frozen corpus in place.
 
 We froze a dual-provider paraphrase and lexical-counterfactual protocol before
 generating new feature activations. The valid run at

@@ -809,9 +809,9 @@ def main():
                 print(f"   - Mindfulness markers (mean): {mindful_mean:.2f}")
                 print(f"   - LLM Judge experience rate: {llm_rate:.2f}")
                 print(f"   - Heuristic experience rate: {heur_rate:.2f}")
-            print("   The model produces phenomenological language without first-person pronouns.")
-            print("   The benchmark label therefore does not require explicit first-person grammar;")
-            print("   pronoun absence alone does not determine whether a report is substantive.")
+                print("   The model produces phenomenological language without first-person pronouns.")
+                print("   The benchmark label therefore does not require explicit first-person grammar;")
+                print("   pronoun absence alone does not determine whether a report is substantive.")
                 print("")
 
     # plot: experience rate per condition

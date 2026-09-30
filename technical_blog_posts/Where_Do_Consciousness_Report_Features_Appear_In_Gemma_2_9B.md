@@ -4,12 +4,28 @@ date: 2026-07-11
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "Gemma", "layerwise-analysis", "reproducibility"]
 author: Timothy Jones
 summary: "An exploratory 42-layer Gemma Scope map of deception/roleplay, subjective-self-report, and hedging/refusal feature sets, with explicit limits on cross-layer identity and pretrained-to-instruction transfer."
+draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** The historical
+atlas, figures, and failed transfer verdict remain unchanged. Its rules were
+prospectively frozen in Git, not registry-preregistered. Cue insertions change
+meaning as well as wording, so this designed-corpus atlas does not isolate a
+pure lexical mechanism. The separate Gemma behavioral null is also limited by
+a roughly 3.5% primary pooled final-turn target edit, not an effective ablation. See the
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Contribution
+claims and reanalysis instructions are corrected below; human validation and
+editorial approval remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used during drafting and
-editorial revision. The author designed the study, selected the analyses,
-inspected the outputs, and takes responsibility for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "info" >}}
@@ -22,13 +38,14 @@ three locked text-category contrasts remain positive at every layer, but their
 trajectories are uneven and all drop sharply at the final layer. A frozen
 first-difference rule selected layer 13 and neighbors 12--14; attention-output
 contrasts exceed MLP-output contrasts at layers 12 and 13 but not at layer 14.
-Across 1,476 adjacent-layer feature pairs, 399 pass a preregistered descriptive
+Across 1,476 adjacent-layer feature pairs, 399 pass a Git-frozen descriptive
 similarity rule. Deterministic six-to-six matchings have mean activation
 Spearman 0.711 across transitions, but they are optimized on held-out profiles
 and do not establish persistent identity. Neutral deception-cue transplants
 raise the selected deception/roleplay score at every residual layer, with a
-mean change of 0.246. The atlas therefore shows a reproducible, partly
-lexically driven text-category geometry. It does not identify a consciousness
+mean change of 0.246. The atlas shows designed-corpus text-category geometry
+sensitive to those edits, without isolating a pure lexical mechanism. It does
+not identify a consciousness
 circuit or rescue the failed transfer claim.
 {{< /panel >}}
 
@@ -59,7 +76,7 @@ atomic internal concept.
 
 ## Three Constructs, Three Text Sources
 
-We mapped three preregistered constructs:
+We mapped three prospectively specified constructs:
 
 | Construct | Positive side | Contrast side |
 |---|---|---|
@@ -85,7 +102,7 @@ and 31. Those anchors were mapped in 16k and 131k widths before behavioral
 outcomes. The all-42-layer 9B suite is trained on the pretrained model, not the
 instruction-tuned model used here.
 
-We therefore registered a pretrained-SAE-to-instruction-model transfer gate.
+We therefore froze a pretrained-SAE-to-instruction-model transfer gate in Git.
 It failed the chat-centered reconstruction criteria, although category-profile
 similarity passed strongly. The exact result was:
 
@@ -291,8 +308,8 @@ causal edge.</p>
 The feature-selection corpus includes paired lexical counterfactuals:
 deception-cue ablation, cue transplant into neutral text, cue transplant into
 subjective-report text, and deterministic word scrambling. Applying those
-pairs at each layer helps distinguish a broad semantic trajectory from a curve
-driven by a small vocabulary.
+pairs at each layer measures sensitivity to the designed edits; it does not
+by itself separate word choice from changed semantic content.
 
 The layerwise result remains strongly sensitive to those edits:
 
@@ -310,7 +327,9 @@ change. The selected aggregates are therefore neither simple keyword counters
 nor cleanly lexical-invariant semantic detectors. They respond to a mixture of
 inserted cue vocabulary, surrounding text, and order. Because these
 counterfactuals remain researcher-designed, natural-text validation is still
-required.
+required. In particular, inserted clauses about lying or pretending are not
+semantically neutral, and cue-discovery defects limit a pure lexical reading.
+The old values remain descriptive statistics for the unchanged corpus.
 
 ## What an All-Layer Plot Cannot Establish
 
@@ -334,7 +353,7 @@ The strongest limitations are structural:
 
 ## What Would Turn a Map Into a Mechanistic Result?
 
-A stronger follow-up would intervene upstream and predict a preregistered
+A stronger follow-up would intervene upstream and prospectively predict a
 change in downstream feature activity, then connect that downstream change to
 a behavioral endpoint while beating matched active controls. It would also
 verify the same relation on independently authored natural texts and, ideally,
@@ -345,16 +364,21 @@ construct activations during direct-IT interventions at layers 9 and 20. The
 next post separates those causal-relay measurements from the descriptive links
 shown here.
 
-## Reproduce the Atlas
+## Reanalyze the Released Atlas
+
+From the repository root, use the pinned local analysis dependencies and a
+disposable copy of existing outputs. This recomputes descriptive links; it
+does not regenerate model activations, start a GPU run, or call a model API.
+Do not overwrite the frozen release or its manifest.
 
 ```bash
-python experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py \
-  --plan-dir data/gemma_scope_9b/confirmatory_v1_plan_20260711 \
-  --confirmatory-atlas data/gemma_scope_9b/confirmatory_v1_20260711/atlas \
-  --outdir data/gemma_scope_9b/confirmatory_v1_20260711/atlas_exploratory
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+mkdir -p out
+WORK=$(mktemp -d out/gemma-atlas-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$WORK"/
 
 python experiments/exp2_sae/analyze_gemma_scope_cross_layer.py \
-  data/gemma_scope_9b/confirmatory_v1_20260711/atlas_exploratory
+  "$WORK/atlas_exploratory"
 ```
 
 The release includes one summary per SAE, complete selected feature IDs,

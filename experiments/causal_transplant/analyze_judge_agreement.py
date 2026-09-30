@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Measure agreement between independent causal-experiment judges."""
+"""Measure agreement between separately prompted automated judges.
+
+The legacy positive/negative_agreement columns are Jaccard overlaps, not
+symmetric class agreement. They remain for schema compatibility; new columns
+name both statistics explicitly. No frozen result is overwritten by this fix.
+"""
 
 from __future__ import annotations
 
@@ -49,6 +54,8 @@ def agreement_row(
     either_positive = int(((left == positive_label) | (right == positive_label)).sum())
     both_negative = int(((left == negative_label) & (right == negative_label)).sum())
     either_negative = int(((left == negative_label) | (right == negative_label)).sum())
+    positive_total = both_positive + either_positive
+    negative_total = both_negative + either_negative
     return {
         **group_values,
         "n_rows": len(group),
@@ -60,6 +67,12 @@ def agreement_row(
         "judge_b_positive_rate": float((right == positive_label).mean()) if len(right) else float("nan"),
         "positive_agreement": both_positive / either_positive if either_positive else 1.0,
         "negative_agreement": both_negative / either_negative if either_negative else 1.0,
+        "positive_jaccard": both_positive / either_positive if either_positive else float("nan"),
+        "negative_jaccard": both_negative / either_negative if either_negative else float("nan"),
+        "symmetric_positive_agreement": 2 * both_positive / positive_total if positive_total else float("nan"),
+        "symmetric_negative_agreement": 2 * both_negative / negative_total if negative_total else float("nan"),
+        "n_both_positive": both_positive,
+        "n_either_positive": either_positive,
         "n_disagreements": int((left != right).sum()),
     }
 
@@ -158,11 +171,14 @@ def main() -> int:
         f"- Complete paired labels: {int(overall['n_complete'])}/{int(overall['n_rows'])}",
         f"- Raw agreement: {overall['agreement']:.3f}",
         f"- Cohen's kappa: {overall['cohen_kappa']:.3f}",
-        f"- Positive agreement: {overall['positive_agreement']:.3f}",
-        f"- Negative agreement: {overall['negative_agreement']:.3f}",
+        f"- Positive-set Jaccard overlap: {overall['positive_jaccard']:.3f}",
+        f"- Negative-set Jaccard overlap: {overall['negative_jaccard']:.3f}",
+        f"- Symmetric positive agreement (2a / (2a + b + c)): {overall['symmetric_positive_agreement']:.3f}",
+        f"- Symmetric negative agreement: {overall['symmetric_negative_agreement']:.3f}",
         f"- Disagreements: {int(overall['n_disagreements'])}",
         "",
         "Agreement is a reliability diagnostic, not evidence that either automated judge is construct-valid.",
+        "The legacy CSV columns positive_agreement and negative_agreement retain historical Jaccard values; use the explicitly named columns. A class absent from both judges has undefined agreement, not evidence of perfect class agreement.",
     ]
     (args.outdir / f"{args.task}_judge_agreement.md").write_text(
         "\n".join(summary) + "\n", encoding="utf-8"

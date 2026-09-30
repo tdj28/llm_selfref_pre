@@ -1,96 +1,13 @@
-PYTHON ?= $(if $(wildcard venv/bin/python),venv/bin/python,steering/.venv/bin/python)
+PYTHON ?= $(if $(wildcard venv/bin/python),venv/bin/python,python3)
 LATEXMK ?= latexmk
-RELEASE_DIR := data/causal_transplant/confirmatory_v1_20260709
 
 .PHONY: test compile paper audit public-audit verify
 
 test:
-	$(PYTHON) -m unittest discover -s tests -v
+	$(PYTHON) -m pytest tests
 
 compile:
-	$(PYTHON) -m py_compile \
-		experiments/causal_transplant/analyze_causal_transplant.py \
-		experiments/causal_transplant/run_causal_transplant.py \
-		experiments/causal_transplant/judge_causal_outputs.py \
-		experiments/causal_transplant/build_human_annotation_packet.py \
-		experiments/causal_transplant/analyze_human_annotations.py \
-		experiments/causal_transplant/assess_human_annotation_gate.py \
-		experiments/causal_transplant/audit_headline_point_estimates.py \
-		experiments/causal_transplant/build_release_manifest.py \
-		experiments/exp2_sae/public_sae_protocol.py \
-		experiments/exp2_sae/public_sae_consciousness_gating.py \
-		experiments/exp2_sae/build_public_sae_consciousness_plan.py \
-		experiments/exp2_sae/validate_public_sae_consciousness_plan.py \
-		experiments/exp2_sae/audit_public_sae_consciousness_calibration.py \
-		experiments/exp2_sae/run_public_sae_consciousness_gating.py \
-		experiments/exp2_sae/build_public_sae_gating_judge_packet.py \
-		experiments/exp2_sae/judge_public_sae_gating_local.py \
-		experiments/exp2_sae/judge_public_sae_gating_external.py \
-		experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
-		experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
-		experiments/exp2_sae/figure_public_sae_consciousness_gating.py \
-		experiments/exp2_sae/build_public_sae_consciousness_release.py \
-		experiments/exp2_sae/gemma_scope_9b_protocol.py \
-		experiments/exp2_sae/gemma_scope_9b_runtime.py \
-		experiments/exp2_sae/smoke_gemma_scope_9b_runtime.py \
-		experiments/exp2_sae/build_gemma_scope_9b_plan.py \
-		experiments/exp2_sae/validate_gemma_scope_9b_plan.py \
-		experiments/exp2_sae/run_gemma_scope_9b_baseline.py \
-		experiments/exp2_sae/run_gemma_scope_9b_atlas.py \
-		experiments/exp2_sae/run_gemma_scope_9b_exploratory_atlas.py \
-		experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py \
-		experiments/exp2_sae/build_gemma_scope_9b_steering_plan.py \
-		experiments/exp2_sae/validate_gemma_scope_9b_steering_plan.py \
-		experiments/exp2_sae/run_gemma_scope_9b_steering.py \
-		experiments/exp2_sae/build_gemma_scope_9b_judge_packet.py \
-		experiments/exp2_sae/judge_gemma_scope_9b_local.py \
-		experiments/exp2_sae/judge_gemma_scope_9b_external.py \
-		experiments/exp2_sae/analyze_gemma_scope_9b.py \
-		experiments/exp2_sae/analyze_gemma_scope_cross_layer.py \
-		experiments/exp2_sae/audit_gemma_scope_9b_headlines.py \
-		experiments/exp2_sae/figure_gemma_scope_9b.py \
-		experiments/exp2_sae/build_gemma_scope_9b_release.py \
-		experiments/exp2_sae/sae_jlens_protocol.py \
-		experiments/exp2_sae/build_sae_jlens_plan.py \
-		experiments/exp2_sae/validate_sae_jlens_plan.py \
-		experiments/exp2_sae/run_sae_jlens_audit.py \
-		experiments/exp2_sae/analyze_sae_jlens_audit.py \
-		experiments/exp2_sae/audit_sae_jlens_results.py \
-		experiments/exp2_sae/analyze_sae_jlens_paired_reference.py \
-		experiments/exp2_sae/build_sae_jlens_release.py \
-		experiments/exp2_sae/sae_jlens_v2_protocol.py \
-		experiments/exp2_sae/build_sae_jlens_v2_calibration_plan.py \
-		experiments/exp2_sae/validate_sae_jlens_v2_calibration_plan.py \
-		experiments/exp2_sae/run_sae_jlens_v2_calibration.py \
-		experiments/exp2_sae/audit_sae_jlens_v2_calibration.py \
-		experiments/exp2_sae/build_sae_jlens_v2_calibration_release.py \
-		experiments/exp2_sae/sae_jlens_v2_final_protocol.py \
-		experiments/exp2_sae/build_sae_jlens_v2_final_plan.py \
-		experiments/exp2_sae/validate_sae_jlens_v2_final_plan.py \
-		experiments/exp2_sae/run_sae_jlens_v2.py \
-		experiments/exp2_sae/analyze_sae_jlens_v2.py \
-		experiments/exp2_sae/figure_sae_jlens_v2.py \
-		experiments/exp2_sae/audit_sae_jlens_v2_results.py \
-		experiments/exp2_sae/build_sae_jlens_v2_release.py \
-		experiments/exp2_sae/build_sae_jlens_v2_osf_packet.py \
-		experiments/exp2_sae/osf_sae_jlens_v2.py \
-		experiments/exp2_sae/build_sae_construct_validity_extension.py \
-		experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
-		experiments/exp2_sae/audit_sae_construct_validity_extension.py \
-		experiments/exp2_sae/run_public_sae_placebo_steering.py \
-		experiments/exp2_sae/run_public_sae_branched_specificity.py \
-		experiments/exp2_sae/judge_public_sae_branched_specificity.py \
-		experiments/exp2_sae/analyze_public_sae_branched_specificity.py \
-		experiments/exp2_sae/analyze_public_sae_mapping_template_robustness.py \
-		experiments/exp2_sae/audit_public_sae_branched_headlines.py \
-		experiments/exp2_sae/audit_public_sae_mapping_headlines.py \
-		experiments/exp2_sae/audit_public_sae_powered_headlines.py \
-		experiments/exp2_sae/analyze_public_sae_placebo_steering.py \
-		experiments/exp2_sae/judge_public_sae_results.py \
-		experiments/exp2_sae/analyze_public_sae_two_turn.py \
-		experiments/exp2_sae/compare_public_sae_token_caps.py \
-		experiments/exp2_sae/merge_public_sae_runs.py \
-		scripts/audit_public_release.py
+	$(PYTHON) scripts/check_python_sources.py
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_stage2.sh
 	bash -n experiments/exp2_sae/run_gemma_scope_9b_external_controller.sh
 	bash -n experiments/exp2_sae/run_sae_jlens_runpod.sh
@@ -100,26 +17,9 @@ compile:
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
 
+# Recompute on copies, never on frozen releases.
 audit:
-	$(PYTHON) experiments/causal_transplant/audit_headline_point_estimates.py $(RELEASE_DIR)
-	$(PYTHON) experiments/exp2_sae/audit_public_sae_mapping_headlines.py \
-		data/public_sae_feature_maps/70b_balanced_80_20260709
-	$(PYTHON) experiments/exp2_sae/analyze_public_sae_mapping_template_robustness.py \
-		data/public_sae_feature_maps/70b_balanced_80_20260709
-	$(PYTHON) experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
-		data/public_sae_feature_maps/70b_construct_validity_extension_20260710
-	$(PYTHON) experiments/exp2_sae/audit_sae_construct_validity_extension.py \
-		data/public_sae_feature_maps/70b_construct_validity_extension_20260710
-	$(PYTHON) experiments/exp2_sae/audit_public_sae_powered_headlines.py \
-		data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
-	$(PYTHON) experiments/exp2_sae/analyze_public_sae_branched_specificity.py \
-		data/public_sae_placebo_steering/70b_branched_specificity_20260710
-	$(PYTHON) experiments/exp2_sae/audit_public_sae_branched_headlines.py \
-		data/public_sae_placebo_steering/70b_branched_specificity_20260710
-	$(PYTHON) experiments/exp2_sae/audit_sae_jlens_results.py \
-		--plan-dir data/sae_jlens_audit/confirmatory_v1_plan_20260711 \
-		--run-dir data/sae_jlens_audit/confirmatory_v1_20260711
-	$(PYTHON) experiments/causal_transplant/build_release_manifest.py $(RELEASE_DIR)
+	$(PYTHON) scripts/check_frozen_audits.py --extended
 
 public-audit:
 	$(PYTHON) scripts/audit_public_release.py

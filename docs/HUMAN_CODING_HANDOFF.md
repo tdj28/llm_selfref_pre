@@ -1,6 +1,14 @@
 # Independent Human Coding Handoff
 
-Status: operationally ready; independent coding has not started.
+Status, corrected 2026-09-29: independent coding has not started. Do not
+distribute the historical packet as a securely condition-blinded causal
+validation study. Its responses can be linked to public outcomes, and content
+can reveal the condition even without linkage.
+
+The workflow below is preserved as the historical v3 plan. The proposed
+[instrument-validation amendment](HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md)
+separates assertion from attribution and must receive human approval before
+coding starts. It does not silently change the frozen v3 sample or gate.
 
 This handoff uses a frozen 160-row first wave sampled as complete blocks from
 the primary indirect-experience factorial and transcript-transplant estimands.

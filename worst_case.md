@@ -299,13 +299,15 @@ results, prompts, raw generations, and version information.
 The absence of API access does not prevent investigation of the mechanistic
 question, but it requires a more exact claim: we audited the public artifact,
 mapped the public features, replicated their aggregate ordering across two
-paraphraser families, showed prospective lexical entanglement, and tested a
+paraphraser families, measured a cue-clause effect, and tested a
 transparent public-weight intervention with active controls. The earlier
 adaptive aggregate does not behave specifically relative to its count-matched
-active-random control. More decisively, the prospectively frozen full grid does
-not reproduce the paper-direction target signature at either registered public
-scale, while its specificity interval remains inconclusive. The causal
-prompt/transcript study and the public-SAE full grid are independently auditable
-confirmatory evidence with different estimands. Neither establishes the behavior
+active-random control. Correction, 2026-09-29: the prospectively frozen full grid
+returns a null at both public scales, but its unsteered label ceiling prevents
+a commensurate test of the upward suppression effect. Its specificity interval
+remains inconclusive. Cue extraction and the fixed-denominator ratio also limit
+the earlier lexical claim. The causal prompt/transcript study and public-SAE
+full grid have auditable records with different estimands and disclosed pilots;
+valid records do not establish valid assays. Neither establishes the behavior
 of inaccessible proprietary software or the presence or absence of
 consciousness.

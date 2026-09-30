@@ -14,6 +14,28 @@ endings. `.gitattributes` makes those endings valid for whitespace checks. Do
 not normalize a raw artifact unless the analysis explicitly regenerates it and
 the release manifest is rebuilt.
 
+## September Review Diagnostics
+
+`docs/review_audit_20260929/` contains new **post-hoc** measurement and steering
+audit JSON, input hashes, and a baseline/delivery figure. They reproduce checks
+prompted by Claude's review; they are not newly generated model outcomes or
+replacement release manifests. `experiments/review_audit/` contains their code
+and a separately versioned future-use cue extractor. The original frozen
+directories and verdict files remain byte-preserved.
+
+The measurement JSON includes aggregate local pilot dates/counts and hashes;
+pilot response files remain unpublished pending private-release review. A
+public clone can reproduce released-data checks but may not have those pilot
+inputs or pre-squash objects. No condition-linkage key or coder output is added.
+
+The six later assay-development namespaces are indexed in
+[`docs/STUDY_INVENTORY.md`](docs/STUDY_INVENTORY.md), including failed and
+unexecuted stages and the limits of externally stored raw-data availability.
+They do not supply completed consciousness-report target results. Historical
+uses of "independent audit" below describe separate automated implementations,
+not independent human validation; see the dated review response for current
+interpretation and contribution disclosures.
+
 ## Tracked Result Directories
 
 | Path | Purpose |

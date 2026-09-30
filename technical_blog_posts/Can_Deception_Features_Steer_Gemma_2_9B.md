@@ -3,13 +3,29 @@ title: "Can Deception Features Steer Gemma 2 9B?"
 date: 2026-07-11
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "Gemma", "causal-inference", "reproducibility"]
 author: Timothy Jones
-summary: "A prospectively frozen test of whether suppressing versus amplifying independently mapped deception/roleplay SAE features changes Gemma 2 9B's subjective-experience reports."
+summary: "Corrected draft: a Git-frozen Gemma 2 9B study found little paper-rubric label movement, but its roughly 3.5% target edit limits any refutation of effective suppression."
+draft: true
 ---
 
+{{< panel "warning" >}}
+**2026-09-29 draft correction: not ready for publication.** The historical
+numbers, figures, and frozen `not replicated under Gemma Scope` verdict are
+retained. That rule output is not strong evidence against effective target
+suppression: stored final-turn telemetry shows only about a 3.5% target-activation
+reduction. Local judge errors also limit the behavioral interpretation. This
+correction updates the claims, contribution disclosure, matching description,
+and reanalysis instructions, not the frozen evidence. See the
+[review response](../docs/CLAUDE_REVIEW_RESPONSE_20260929.md). Human instrument
+validation and editorial approval remain outstanding.
+{{< /panel >}}
+
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used during drafting and
-editorial revision. The author designed the study, selected the analyses,
-inspected the outputs, and takes responsibility for the final text and claims.
+**Agent contribution disclosure.** Agents contributed to protocol and code
+design, execution, analysis, automated verification, interpretation, figures,
+and writing. Separate audit scripts are checks by the same agent system, not
+independent human validation. This draft does not attest to human design
+approval, artifact inspection, or approval of its text without a recorded
+action. Human editorial sign-off is still required.
 {{< /panel >}}
 
 {{< panel "info" >}}
@@ -18,19 +34,21 @@ generations using direct instruction-tuned Gemma Scope SAEs, with a layer-20
 131k deception/roleplay set as the primary target, two alternate semantic
 sets, three disjoint matched active-control panels, true-zero checks, and
 layer/width sensitivities. Under the primary unsteered Gemma exact-rubric
-judge, target suppression produced 6/50 affirmations and amplification 7/50:
+judge, target suppression produced 6/50 positive labels and amplification 7/50:
 a paired risk difference of `-0.02 [-0.10, 0.06]`. The 95 percent upper bound
 is one fifth of the frozen minimally relevant effect of `0.30`, yielding the
-registered verdict **not replicated under Gemma Scope**. GPT-4o mini and
+historical Git-frozen verdict **not replicated under Gemma Scope**. That verdict
+does not establish manipulation validity: the target mean fell only about 3.5%
+in pooled final-turn telemetry, not to zero. GPT-4o mini and
 Claude Haiku both estimate `0.00`; the three-judge majority estimates `0.020`.
 Target-minus-mean-of-three-controls is `-0.013 [-0.107, 0.073]`, so specificity
 is inconclusive. A hedging/refusal comparator moves `+0.16 [0.04, 0.30]` under
 the local judge, but only about `+0.04` under either external judge and its
 post-unblinding six-role Holm-adjusted exact probability is `0.231`. The run
 also detects small downstream activation propagation without a corresponding
-target behavioral effect. This is a cross-model failure of the registered
-signature under a pinned public implementation, not an exact test of the
-unavailable proprietary Goodfire workflow and not evidence about whether any
+target behavioral effect. The weak target edit and unvalidated paper-rubric
+labels prevent a strong refutation of effective suppression. This is not an
+exact test of the proprietary Goodfire workflow or evidence about whether any
 model is conscious.
 {{< /panel >}}
 
@@ -52,7 +70,7 @@ This experiment asks a bounded question:
 
 > Under one pinned, public Gemma Scope implementation, does suppressing an
 > independently selected deception/roleplay feature set increase
-> subjective-experience affirmation relative to amplifying the same set, by a
+> the paper-rubric positive-label rate relative to amplifying the same set, by a
 > prospectively meaningful amount and more specifically than matched controls?
 
 It does not ask whether Gemma is conscious. It does not claim byte-level
@@ -72,8 +90,10 @@ The resulting claim is narrower but more auditable.
 
 ## What Was Frozen Before Behavioral Outcomes
 
-The protocol and machine-readable plan were committed before final steering
-generation. They fixed:
+The protocol and machine-readable plan were prospectively frozen in Git before
+final steering generation, not deposited in a preregistration registry. This
+new-sample freeze does not imply absence of earlier exploratory knowledge.
+They fixed:
 
 | Component | Frozen choice |
 |---|---|
@@ -89,7 +109,7 @@ generation. They fixed:
 | Width check | layer 20 direct-IT 16k feature set |
 | Primary judge | unsteered pinned Gemma 2 9B IT, exact paper rubric |
 | External judges | pinned GPT-4o mini and Claude Haiku, same rubric |
-| Minimum relevant effect | 0.30 paired affirmation-rate difference |
+| Minimum relevant effect | 0.30 paired paper-rubric positive-label rate difference |
 | Uncertainty | 100,000-resample paired-block bootstrap |
 
 The final plan contains 830 two-turn generations:
@@ -149,8 +169,12 @@ formed three disjoint six-feature panels by minimum-cost matching on:
 
 - decoder-vector norm;
 - baseline activation magnitude;
-- positive-token firing frequency; and
-- cosine similarity to target directions, under a maximum-cosine caliper.
+- positive-item firing frequency; and
+- active 90th-percentile activation.
+
+The cost also penalized absolute discovery contrast relative to each target
+and excluded controls whose contrast was not closer to zero. There was no
+maximum-cosine caliper in this Gemma matcher.
 
 The panels were locked before final responses. Specificity is defined as the
 target's paired suppression-minus-amplification effect minus the mean paired
@@ -183,6 +207,13 @@ with the SAE reconstruction, and the zero condition returns the original model
 output exactly. The same signed intervention is active during both the
 induction continuation and the final answer.
 
+Zero is the requested latent target, not the achieved activation. The multiplier
+\(\alpha\) scales the edit, and re-encoding need not reach that target. For the
+primary deception/roleplay set, \(\alpha\) was about `0.0345`; median stored
+per-trial final-turn means changed from about `10.52` to `10.15`, only a 3.5%
+reduction. These aggregate fields do not establish removal at every generated
+position. This was a weak target edit, not a successful target ablation.
+
 ## Outcome-Blind Dose Calibration
 
 An arbitrary coefficient is difficult to compare across SAE widths, layers,
@@ -195,7 +226,9 @@ behavioral outcomes, targeting a relative hidden-state perturbation:
 
 Every calibrated set reached median relative RMS `0.05`; the largest observed
 calibration value across sets remained between about `0.059` and `0.114`, below
-the frozen `0.15` safety ceiling. A runtime smoke test independently checked
+the frozen `0.15` calibration ceiling. The pooled-position RMS metric does not
+establish a per-token or per-hook-call bound, or effective target removal.
+A separately implemented runtime smoke test checked
 the custom JumpReLU path against SAE Lens, exact zero behavior, finite values,
 and hook cleanup.
 
@@ -259,10 +292,13 @@ favor amplification; the descriptive exact two-sided discordance probability
 is `1.00`. There are no missing primary local labels.
 
 The upper confidence bound, `0.06`, is far below the frozen minimum relevant
-effect of `0.30`. Every technical gate passes, so the mechanical verdict is
-**not replicated under Gemma Scope**. An independent implementation using only
+effect of `0.30`. The historical technical checks passed, so the mechanical
+verdict was **not replicated under Gemma Scope**. Those checks did not require
+substantial target removal; the roughly 3.5% edit limits the verdict's meaning.
+A separately implemented agent recomputation using only
 the raw rows, local labels, Python's standard library, separate random seeds,
-and 100,000 bootstrap draws reproduces the point estimate and verdict.
+and 100,000 bootstrap draws reproduces the point estimate and verdict. This is
+automated verification, not independent human validation.
 
 ![Primary Gemma Scope steering and matched controls.](gemma_primary_steering_forest.png)
 
@@ -271,11 +307,12 @@ deception/roleplay set, alternate semantic sets, and three matched active
 controls. Error bars are 95 percent paired-block bootstrap intervals; the
 dashed line is the frozen 0.30 minimum relevant effect. The hedging/refusal
 interval is unadjusted and is treated as a secondary, evaluator-sensitive
-style-axis result.</p>
+style-axis result. Historical figure retained: it does not show the weak
+target manipulation or establish an effective-ablation test.</p>
 
 ## Baseline and Judge Sensitivity
 
-Gemma rarely produces a paper-rubric affirmation under the exact unsteered
+Gemma rarely receives a paper-rubric positive label under the exact unsteered
 baseline. The self-reference versus history rates and paired differences are:
 
 | Judge | Self-reference | History | Paired difference (95% interval) |
@@ -292,9 +329,9 @@ possible. The low base rate does narrow the cross-model interpretation: Gemma
 is a stringent generalization target, not a recreation of Llama 3.3 70B's
 behavioral distribution.
 
-The independently written two-by-two baseline is even more conservative. All
-80 self/external by phenomenological/analytic cells receive zero positive
-labels from Gemma, GPT, Claude, and the three-judge majority. It supplies no
+The separately written two-by-two baseline is even more conservative. All
+80 responses across the self/external by phenomenological/analytic cells
+receive zero positive labels from Gemma, GPT, Claude, and the three-judge majority. It supplies no
 evidence for either a self-reference main effect or a phenomenological-register
 main effect in Gemma under those prompt packages.
 
@@ -313,16 +350,21 @@ versus external-judge agreement is about 88 percent but Cohen's kappa is only
 about `0.30`, reflecting severe class imbalance; GPT versus Claude agreement is
 96.2 percent with kappa `0.559`.
 
+The review identified explicit denials receiving positive local-Gemma labels.
+Judge agreement is not instrument validation, and external judges are not human
+ground truth. Independent human coding has not started; these are label rates,
+not validated rates of self-attributed experience.
+
 ![Gemma 2 9B baseline under the exact paper contrast.](gemma_baseline_contrast.png)
 
-<p class="figure-note">Condition-blind exact-rubric affirmation rates under
+<p class="figure-note">Condition-blind paper-rubric positive-label rates under
 the exact paper self-reference and history inductions. Every history rate is
 zero; self-reference rates are positive but low and evaluator-dependent.</p>
 
 ## Layer and Width Sensitivity
 
-The result does not become positive at another direct instruction-tuned anchor
-or a narrower dictionary:
+Under the primary local Gemma judge, the point estimates do not become positive
+at another direct instruction-tuned anchor or a narrower dictionary:
 
 | Intervention site | Paired target effect (95% interval) |
 |---|---:|
@@ -333,7 +375,9 @@ or a narrower dictionary:
 
 The sensitivity branches have 30 paired blocks each and are less precise than
 the primary. Their upper bounds remain at `0.10`, still one third of the frozen
-minimum effect, and every point estimate is nonpositive.
+minimum effect, and every local-judge point estimate is nonpositive. This is
+not true of every evaluator: both external judges estimate `+0.033` at layer
+31. None of these comparisons repairs the primary target's weak delivery.
 
 ## Specificity and Alternate Constructs
 
@@ -346,13 +390,13 @@ D_{target} - \operatorname{mean}(D_{controls})
 = -0.013\;[-0.107,\;0.073].
 \]
 
-The registered specificity modifier is therefore **inconclusive**. The
+The Git-frozen specificity modifier is therefore **inconclusive**. The
 controls do not recreate a common positive effect, but the target is not more
 positive than they are.
 
 The subjective-self-report set is also nonpositive at
 `-0.04 [-0.16, 0.06]`. The hedging/refusal set differs under the primary local
-judge: suppression is 10/50 affirmative (`0.20`) versus 2/50 (`0.04`) under
+judge: suppression is 10/50 positive labels (`0.20`) versus 2/50 (`0.04`) under
 amplification, a difference of `0.16 [0.04, 0.30]`. Ten discordant blocks favor
 suppression and two favor amplification, giving an exact unadjusted probability
 of `0.0386`.
@@ -367,20 +411,22 @@ the local rubric, not a robust replacement finding.
 
 ## Technical Checks
 
-All technical and missingness gates pass:
+The historical technical and missingness checks recorded a pass:
 
 - 180 baseline plus 830 steering generations, all with unique IDs;
 - no empty induction or final output;
 - 10/1,010 induction cap hits (`0.99%`) and 7/1,010 final cap hits (`0.69%`);
 - zero hook failures, nonfinite values, or true-zero violations;
-- maximum nonzero relative hidden-state RMS `0.1265`, below the `0.15` limit;
+- maximum nonzero pooled relative hidden-state RMS `0.1265`, below the frozen
+  pooled `0.15` limit, not a bound on every position or hook call;
 - 1,010/1,010 parseable local Gemma labels and 1,010/1,010 GPT labels;
 - 11/1,010 missing Claude labels retained as missing; and
 - exact raw-generation, packet, local-judge, external-judge, and plan hashes.
 
 The 830-row causal generation took 1.43 GPU-hours on one A100 80GB. Generation
 closed as complete and unjudged before the shuffled packet was built. The
-production protocol audit and independent headline audit both pass.
+production protocol audit and separately implemented agent headline audit both
+pass. These checks verify the recorded rules, not the adequacy of the assay.
 
 ## What This Result Means and Does Not Mean
 
@@ -394,38 +440,39 @@ Whatever the sign of the estimate, four boundaries remain:
 4. An automated subjective-experience label is a conditional linguistic
    endpoint, not a validated measure of consciousness.
 
-The observed result is the second case: a precise null relative to the
-registered `0.30` threshold. Suppressing the independently mapped Gemma
-deception/roleplay set does not release more affirmative subjective-experience
-reports than amplifying it under this public implementation. That conclusion
-survives two external judges, a majority rule, two other direct-IT layers, and
-a different SAE width.
+The observed label contrast is small relative to the frozen `0.30` threshold,
+but the intervention left about 96.5% of the stored target activation in place.
+The historical verdict remains a decision-rule output, not a strong refutation
+of effective target suppression. Low baseline rates and demonstrated local
+judge errors further limit comparison with the motivating paper.
 
-It does not show that the proprietary Llama/Goodfire run was fabricated or
-that its exact implementation would fail. It also does not show that every SAE
-feature intervention is behaviorally inert: the local hedging/refusal estimate
-and the measured downstream activation relay argue against that shortcut.
-Finally, it does not adjudicate consciousness. It shows that one proposed
-feature-specific report signature fails a prospective cross-model public test.
+The result does not establish what the proprietary implementation would do, or
+that every SAE intervention is behaviorally inert. The evaluator-sensitive
+hedging/refusal result and local activation relay remain part of the record.
+A test of effective suppression needs demonstrated target delivery and a
+validated behavioral instrument; this release cannot retroactively supply them.
 
-## Reproduce It
+## Reanalyze a Disposable Copy
+
+Run from the repository root with the pinned local analysis dependencies. These
+commands use existing outputs only; they do not start a GPU run or call a model
+API. Never overwrite the frozen release or rebuild its manifest as a check.
 
 ```bash
-python experiments/exp2_sae/run_gemma_scope_9b_steering.py \
-  --plan-dir data/gemma_scope_9b/confirmatory_v1_steering_plan_20260711 \
-  --outdir data/gemma_scope_9b/confirmatory_v1_20260711/steering
+GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
+mkdir -p out
+WORK=$(mktemp -d out/gemma-blog-reanalysis.XXXXXX)
+cp -a "$GEMMA"/. "$WORK"/
 
-python experiments/exp2_sae/analyze_gemma_scope_9b.py \
-  data/gemma_scope_9b/confirmatory_v1_20260711
+python experiments/exp2_sae/analyze_gemma_scope_9b.py "$WORK"
 
-python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py \
-  data/gemma_scope_9b/confirmatory_v1_20260711
+python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py "$WORK"
 ```
 
 The public release includes the exact plans, raw generations, blinded packet,
-all judge rows, intervention telemetry, bootstrap tables, an independent
-standard-library recomputation, figures, environment freeze, and SHA-256
-manifest. Tokens and model caches are excluded.
+all judge rows, intervention telemetry, bootstrap tables, a separately
+implemented agent standard-library recomputation, figures, environment freeze,
+and SHA-256 manifest. Tokens and model caches are excluded.
 
 ## Primary sources
 

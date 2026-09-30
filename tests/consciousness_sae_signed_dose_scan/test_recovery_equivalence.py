@@ -5,19 +5,16 @@ from pathlib import Path
 
 import pytest
 
+from tests.frozen_sources import signed_dose_plan_audit
+
 from experiments.consciousness_sae_signed_dose_scan import audit_recovery
 from experiments.consciousness_sae_signed_dose_scan import recovery_equivalence
-from experiments.consciousness_sae_signed_dose_scan import validate_plan
 from experiments.consciousness_sae_signed_dose_scan import (
     verify_recovery_equivalence,
 )
 
 
 FAKE_CODE_FREEZE = "f" * 40
-PLAN_DIR = (
-    recovery_equivalence.REPO_ROOT
-    / "data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716"
-)
 C3_STATUS_MAP_PATH = (
     recovery_equivalence.REPO_ROOT
     / "docs/consciousness_sae_signed_dose_scan/RECOVERY_C3_STATUS_MAP.json"
@@ -32,18 +29,28 @@ C5_STATUS_MAP_PATH = (
 )
 
 
+def _fixture_blob(commit: str, relative: str) -> bytes:
+    if commit in {
+        recovery_equivalence.ORIGINAL_FREEZE_COMMIT,
+        recovery_equivalence.ORIGINAL_PLAN_SOURCE_COMMIT,
+    }:
+        return recovery_equivalence.git_blob(commit, relative)
+    return (recovery_equivalence.REPO_ROOT / relative).read_bytes()
+
+
 def _write(path: Path, value: object) -> None:
     path.write_bytes(recovery_equivalence.canonical_json_bytes(value) + b"\n")
 
 
 def _packet_fixture(tmp_path: Path) -> tuple[Path, Path, dict[str, object]]:
-    plan_audit = validate_plan.validate(PLAN_DIR)
+    plan_audit = signed_dose_plan_audit()
     plan_audit_path = tmp_path / "PLAN_AUDIT.json"
     _write(plan_audit_path, plan_audit)
     packet = recovery_equivalence.build_packet(
         plan_audit_path=plan_audit_path,
         code_freeze_commit=FAKE_CODE_FREEZE,
         enforce_git=False,
+        blob_reader=_fixture_blob,
     )
     packet_path = tmp_path / "RECOVERY_EQUIVALENCE_PACKET.json"
     _write(packet_path, packet)
@@ -56,6 +63,7 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
         packet_path,
         plan_audit_path=plan_audit_path,
         enforce_git=False,
+        blob_reader=_fixture_blob,
     )
 
     assert verified["status"] == ("pass_outcome_blind_recovery_equivalence_verified")
@@ -114,13 +122,14 @@ def test_packet_and_independent_verifier_are_outcome_blind(tmp_path: Path) -> No
 
 
 def test_v3_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
-    plan_audit = validate_plan.validate(PLAN_DIR)
+    plan_audit = signed_dose_plan_audit()
     plan_audit_path = tmp_path / "PLAN_AUDIT.json"
     _write(plan_audit_path, plan_audit)
     packet = recovery_equivalence.build_packet(
         plan_audit_path=plan_audit_path,
         code_freeze_commit=FAKE_CODE_FREEZE,
         enforce_git=False,
+        blob_reader=_fixture_blob,
         equivalence_protocol_version=(
             recovery_equivalence.RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V3
         ),
@@ -132,6 +141,7 @@ def test_v3_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
         packet_path,
         plan_audit_path=plan_audit_path,
         enforce_git=False,
+        blob_reader=_fixture_blob,
     )
 
     assert packet["packet_type"].endswith("_v3")
@@ -140,13 +150,14 @@ def test_v3_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
 
 
 def test_v4_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
-    plan_audit = validate_plan.validate(PLAN_DIR)
+    plan_audit = signed_dose_plan_audit()
     plan_audit_path = tmp_path / "PLAN_AUDIT.json"
     _write(plan_audit_path, plan_audit)
     packet = recovery_equivalence.build_packet(
         plan_audit_path=plan_audit_path,
         code_freeze_commit=FAKE_CODE_FREEZE,
         enforce_git=False,
+        blob_reader=_fixture_blob,
         equivalence_protocol_version=(
             recovery_equivalence.RECOVERY_EQUIVALENCE_PROTOCOL_VERSION_V4
         ),
@@ -158,6 +169,7 @@ def test_v4_packet_remains_buildable_and_verifiable(tmp_path: Path) -> None:
         packet_path,
         plan_audit_path=plan_audit_path,
         enforce_git=False,
+        blob_reader=_fixture_blob,
     )
 
     assert packet["packet_type"].endswith("_v4")
@@ -245,6 +257,7 @@ def test_independent_verifier_rejects_rehashed_semantic_tamper(
             packet_path,
             plan_audit_path=plan_audit_path,
             enforce_git=False,
+            blob_reader=_fixture_blob,
         )
 
 
@@ -266,6 +279,7 @@ def test_independent_verifier_rejects_rehashed_lineage_tamper(
             packet_path,
             plan_audit_path=plan_audit_path,
             enforce_git=False,
+            blob_reader=_fixture_blob,
         )
 
 
@@ -287,6 +301,7 @@ def test_independent_verifier_rejects_rehashed_c5_authority_tamper(
             packet_path,
             plan_audit_path=plan_audit_path,
             enforce_git=False,
+            blob_reader=_fixture_blob,
         )
 
 
@@ -474,7 +489,12 @@ def test_independent_verifier_rejects_live_closure_tamper(
         destination.write_bytes((original / relative).read_bytes())
 
     # Original plan and precedent reads still come from the real repository.
-    def reader(_commit: str, relative: str) -> bytes:
+    def reader(commit: str, relative: str) -> bytes:
+        if commit in {
+            recovery_equivalence.ORIGINAL_FREEZE_COMMIT,
+            recovery_equivalence.ORIGINAL_PLAN_SOURCE_COMMIT,
+        }:
+            return _fixture_blob(commit, relative)
         candidate = alternate / relative
         return (
             candidate.read_bytes()

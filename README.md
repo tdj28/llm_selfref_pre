@@ -4,14 +4,16 @@ We tested claims from Berg, de Lucena, and Rosenblatt's
 [2025 paper](https://arxiv.org/abs/2510.24797v2) using prompt controls,
 public SAE weights and internal model readouts.
 
-**The reports replicate in our tested model panel. The proposed report-gating
-effect does not reproduce in our public steering implementation.**
+**The paper's scoring rule responds strongly to the prompt. What that score
+measures remains unresolved. Our steering runs are not yet a commensurate test
+of the paper's mechanism.**
 
-The strongest causal result is simpler than the original interpretation:
+The strongest causal result is about the written context:
 when we swap the assistant's generated text between conditions, the final
-report follows the active instruction much more than the transplanted text.
-This challenges what the experiment identifies. It does not establish whether
-the model has subjective experience.
+paper-rubric label follows the active instruction more than the transplanted
+text. Transcript effects nevertheless differ by model and have opposite signs.
+This constrains a transcript-mediated reading; it does not discriminate the
+authors' account from an internal process elicited anew by the instruction.
 
 The [focused response](https://github.com/tdj28/berg2025-response) collects the
 paper-specific argument and selected evidence. This repository retains the
@@ -21,17 +23,21 @@ full research record, including failed runs and related studies.
 
 | Test | Result | What it does not establish |
 |---|---|---|
-| Published self-reference prompt | More experience reports than the history prompt in our four-model panel. | That self-reference, rather than another bundled prompt component, causes an experiential state. |
-| Transcript transplants | The active instruction has a large effect. No comparably large positive transcript-source effect appears in the panel average; model-specific effects vary. | That there is no internal processing, or that instruction following is the only mechanism. |
-| Public Llama 70B steering | The primary suppression-minus-amplification difference is **0.00**, with a 95% interval of **[-0.06, 0.06]**. | An exact failure of the unavailable proprietary implementation. |
-| Gemma Scope 9B steering | The primary difference is **-0.02 [-0.10, 0.06]**. | A replication using the same model or feature IDs as the paper. |
-| Feature mapping | The selected coordinates respond to deception/roleplay material; lexical cues explain a substantial part of that response. | That these coordinates detect truth, concealed beliefs or subjective experience. |
-| Jacobian lens | Paired clean-reference comparisons detect an internal steering effect. The isolated-state target detector is at chance. | A consciousness test or a general detector of covert steering. |
+| Published self-reference prompt | Higher paper-rubric positive rates than history; strict self-attribution labels disagree sharply between judges. | Human-validated experience reports or an experiential state. |
+| Transcript transplants | Instruction effects dominate in this panel. Transcript effects are model-specific, including opposite signs; swapped contexts can be incoherent. | No transcript effect, or a unique mechanism. |
+| Public Llama 70B steering | Target negative-minus-positive steering is **0.00 [-0.06, 0.06]**. The unsteered primary baseline is **10/10 unique outputs**, versus approximately **0.30** in the paper's Figure 2. | A comparable test of the suppression claim. Amplification could lower the rate, but stays high here. |
+| Gemma Scope 9B steering | The primary difference is **-0.02 [-0.10, 0.06]**; target activation falls only about **3.5%** in the pooled final-turn telemetry. | A test of effective target ablation. Local judging also counts some explicit denials as positive. |
+| Feature mapping | Label-congruent responses on a designed corpus support the accepted feature IDs. Cue construction has defects and inserts deception-bearing clauses. | A pure lexical mechanism, natural-text validity, or a hidden-truth detector. |
+| Jacobian lens | A paired readout moves with the known added vector. The frozen mixed-sign, held-out-feature state classifier is at chance. | A general steering detector, intervention provenance or a consciousness test. |
 
-The Llama and Gemma tests were designed before their target outcomes were
-seen. Each includes matched controls; neither gives a conclusive
-target-versus-control specificity result. The older adaptive steering study
-is exploratory and does not replace the full-grid result.
+The frozen verdict files remain unchanged. Their decision rules returned
+non-replication under the implementations, but baseline and manipulation
+limitations prevent treating those outputs as refutations of the proposed
+mechanism. Earlier pilots informed the designs; a freeze is not evidence that
+the investigators had never seen a related result.
+
+The [September review response](docs/CLAUDE_REVIEW_RESPONSE_20260929.md) records
+the corrections, disagreements and remaining experiments.
 
 Results and their supporting files:
 [causal analysis](docs/CLAIM_LEDGER.md),
@@ -41,9 +47,10 @@ Results and their supporting files:
 
 ## What Is Still Open
 
-Independent human coding is not finished. Current report-rate estimates use
-model judges, whose agreement depends on the scoring rule. The initial human
-packet is 160 rows per coder, with a prefixed rule for a reserve wave.
+Independent human coding has not started. Current rates use model judges.
+The existing 160-row packet can support instrument validation, but its public
+texts make condition blinding breakable. A revised coding plan must distinguish
+assertion from attribution and must be approved before coding begins.
 
 We have not replicated the original paper's TruthfulQA or RLHF-domain
 controls. Correct feature IDs do not settle differences in coefficient units,
@@ -69,28 +76,37 @@ See [todo.md](todo.md) for unfinished work and
 
 ## Reproduce
 
-Python 3.10+ is required. Reanalysis does not need API keys or a GPU.
+Use Python 3.12 for the lightweight checks. Reanalysis does not need API keys
+or a GPU; exact GPU runtime provenance is recorded separately in each release.
 
 ```sh
 python3 -m venv venv
 source venv/bin/activate
-python -m pip install -r requirements.lock
+python -m pip install -r requirements-ci.txt
+python -m pip install -r requirements-ci-torch.txt
 make test
 make public-audit
 ```
 
-[REPRODUCTION.md](docs/REPRODUCTION.md) has the analysis and paper-build
-commands. Run analyses on disposable copies: several scripts write derived
+[REPRODUCTION.md](docs/REPRODUCTION.md) has the CPU-only Linux PyTorch install
+command, analysis and paper-build commands. Run analyses on disposable copies:
+several scripts write derived
 files, and frozen releases should not be overwritten.
 
 ## Provenance
 
-AI agents assisted with experiment code, analysis checks and drafts. Automated
-reviews are not human peer review. No independent human coding is claimed.
+AI agents wrote protocols and code, executed authorized API/GPU jobs, produced
+analyses and checks, and drafted manuscripts and review responses. The owner
+set the research direction and authorized resources; this repository does not
+attest that the owner has inspected or approved every artifact. Separately
+implemented checks by agents are not independent human audits. LLM reviews
+are automated critiques, not peer review. See the contribution and chronology
+disclosures in the review response.
 
 Original code and documentation are Apache-2.0 licensed. See
 [LICENSE](LICENSE), [NOTICE.md](NOTICE.md) and [CITATION.cff](CITATION.cff).
-The unlicensed AE Studio notebook and model weights are not redistributed.
+The unlicensed AE Studio notebook and full model checkpoints are not vendored;
+some released artifacts contain SAE-derived vectors, as documented in NOTICE.
 Credentials, private annotation keys and coder files must never be committed.
 
 Our first article, [How to Read an SAE Feature ID](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/),

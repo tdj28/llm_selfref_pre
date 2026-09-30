@@ -4,6 +4,15 @@ Status: **complete public-weight forensic audit**
 
 Date: 2026-07-11
 
+Interpretation correction, 2026-09-29: the null below is specific to a linear
+reader pooling opposite steering signs while holding out feature pairs and
+prompt families. The paired effect requires comparison with the static
+projection of the known added direction; it is not a discovery of hidden
+deception. All template intervals condition on the selected feature set.
+This BF16, fixed-prefix, no-generation experiment does not establish effective
+behavioral delivery in the separate NF4 two-turn study. Separately implemented
+agent checks are automated audits, not independent human validation.
+
 Frozen protocol commit:
 `b026faac222e55d7da4f01a30a6a60a468a5f023`
 
@@ -17,7 +26,7 @@ The answer depends on the auditor's access model.
 - **One post-state, no clean reference:** the frozen J-lens detector is not
   useful. Target-versus-matched-SAE attribution is AUROC `0.4998` with a 95%
   template-cluster interval of `[0.4978, 0.5016]`. Any-intervention AUROC is
-  `0.5092 [0.5077, 0.5153]`, below identity (`0.5129`) and two random-J seeds;
+  `0.5092 [0.5077, 0.5153]`, below identity (`0.5129`) and four random-J seeds;
   its AUPRC (`0.96895`) is essentially the `0.96774` class prevalence and TPR
   at 1% FPR is `0.0137`.
 - **Same prefix with a clean reference:** the real J-lens exposes a large,
@@ -28,8 +37,9 @@ The answer depends on the auditor's access model.
   (`+0.2028` and `-0.2181`); every random-J effect has absolute magnitude below
   `0.123`, often with the opposite sign.
 
-Thus J-space can characterize a known residual intervention and support a
-paired monitor. This experiment does **not** show that the frozen readout can
+Thus this readout characterizes a known residual intervention in a paired
+comparison. Its value beyond a static projection needs to be distinguished
+from carrying that direction forward. This experiment does **not** show that the frozen readout can
 discover steering from an isolated activation state, identify who caused a
 state, or prove deception, intent, belief, or consciousness.
 
