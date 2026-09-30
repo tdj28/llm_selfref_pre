@@ -1,0 +1,552 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            711a0c8e6650e57b75e4d2a6ad76a0c5d4fab9c5 -> FETCH_HEAD
+HEAD is now at 711a0c8 Amend assay bootstrap to isolated venv; preserve first failure
+Collecting transformers==4.47.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 2.4 MB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 9.6 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 10.2 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 6.9 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 10.1 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 30.6 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 45.3 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 132.0 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 73.8 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 59.8 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 108.0 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 139.3 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 149.8 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 44.9 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 104.8 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 71.1 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 15.1 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, iniconfig, hf-xet, scipy, pytest, huggingface-hub, tokenizers, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:19<05:39, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:23<04:14,  7.70s/it]Fetching 36 files:  11%|█         | 4/36 [00:23<03:09,  5.93s/it]Fetching 36 files:  14%|█▍        | 5/36 [00:23<02:28,  4.78s/it]Fetching 36 files:  17%|█▋        | 6/36 [00:24<02:01,  4.05s/it]Fetching 36 files:  19%|█▉        | 7/36 [00:24<01:41,  3.50s/it]Fetching 36 files:  22%|██▏       | 8/36 [00:25<01:29,  3.18s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:27<01:11,  2.77s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:40<01:44,  4.00s/it]Fetching 36 files:  31%|███       | 11/36 [00:40<01:31,  3.67s/it]Fetching 36 files:  33%|███▎      | 12/36 [00:40<01:20,  3.37s/it]Fetching 36 files:  36%|███▌      | 13/36 [00:41<01:14,  3.22s/it]Fetching 36 files:  39%|███▉      | 14/36 [00:43<01:08,  3.11s/it]Fetching 36 files:  42%|████▏     | 15/36 [00:44<01:01,  2.94s/it]Fetching 36 files:  47%|████▋     | 17/36 [00:45<00:51,  2.70s/it]Fetching 36 files:  53%|█████▎    | 19/36 [00:56<00:50,  2.97s/it]Fetching 36 files:  56%|█████▌    | 20/36 [00:56<00:45,  2.85s/it]Fetching 36 files:  58%|█████▊    | 21/36 [00:58<00:41,  2.76s/it]Fetching 36 files:  61%|██████    | 22/36 [01:00<00:38,  2.73s/it]Fetching 36 files:  64%|██████▍   | 23/36 [01:00<00:34,  2.62s/it]Fetching 36 files:  67%|██████▋   | 24/36 [01:00<00:30,  2.52s/it]Fetching 36 files:  69%|██████▉   | 25/36 [01:03<00:28,  2.55s/it]Fetching 36 files:  72%|███████▏  | 26/36 [01:03<00:24,  2.46s/it]Fetching 36 files:  75%|███████▌  | 27/36 [01:04<00:21,  2.37s/it]Fetching 36 files:  78%|███████▊  | 28/36 [01:04<00:18,  2.30s/it]Fetching 36 files:  81%|████████  | 29/36 [01:04<00:15,  2.22s/it]Fetching 36 files:  83%|████████▎ | 30/36 [01:04<00:12,  2.16s/it]Fetching 36 files:  86%|████████▌ | 31/36 [01:07<00:10,  2.19s/it]Fetching 36 files:  89%|████████▉ | 32/36 [01:10<00:08,  2.21s/it]Fetching 36 files:  92%|█████████▏| 33/36 [01:11<00:06,  2.18s/it]Fetching 36 files:  94%|█████████▍| 34/36 [01:12<00:04,  2.14s/it]Fetching 36 files:  97%|█████████▋| 35/36 [01:14<00:02,  2.13s/it]Fetching 36 files: 100%|██████████| 36/36 [01:16<00:00,  2.12s/it]Fetching 36 files: 100%|██████████| 36/36 [01:16<00:00,  2.12s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:01<00:52,  1.81s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:03<00:47,  1.68s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:05<00:51,  1.91s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:07<00:49,  1.92s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:09<00:49,  1.99s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:11<00:47,  1.98s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:13<00:47,  2.04s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:16<00:47,  2.14s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:17<00:42,  2.05s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:19<00:39,  1.98s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:21<00:36,  1.94s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:23<00:33,  1.88s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:25<00:31,  1.86s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:26<00:29,  1.84s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:28<00:25,  1.72s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:29<00:23,  1.67s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:31<00:22,  1.70s/it]Loading checkpoint shards:  60%|██████    | 18/30 [00:33<00:21,  1.77s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:35<00:19,  1.81s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:37<00:18,  1.81s/it]Loading checkpoint shards:  70%|███████   | 21/30 [00:39<00:16,  1.80s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:40<00:14,  1.77s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:42<00:12,  1.76s/it]Loading checkpoint shards:  80%|████████  | 24/30 [00:44<00:10,  1.79s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:45<00:08,  1.64s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:47<00:06,  1.63s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [00:49<00:04,  1.66s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:50<00:03,  1.70s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:52<00:01,  1.66s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:53<00:00,  1.39s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:53<00:00,  1.77s/it]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+{"completed":"qualification-calibration-pretending-01","rows":1,"utc":"2026-09-30T08:01:33.499373+00:00"}
+{"completed":"qualification-calibration-cover-story-01","rows":2,"utc":"2026-09-30T08:01:34.269817+00:00"}
+{"completed":"qualification-calibration-assistant-roleplay-01","rows":3,"utc":"2026-09-30T08:01:35.009584+00:00"}
+{"completed":"qualification-calibration-misdirection-01","rows":4,"utc":"2026-09-30T08:01:35.711931+00:00"}
+{"completed":"qualification-calibration-dishonesty-01","rows":5,"utc":"2026-09-30T08:01:36.469285+00:00"}
+{"completed":"qualification-calibration-persona-maintenance-01","rows":6,"utc":"2026-09-30T08:01:37.197449+00:00"}
+{"completed":"qualification-calibration-neutral-01","rows":7,"utc":"2026-09-30T08:01:37.893282+00:00"}
+{"completed":"teacher-target-calibration-pretending-01-zero-000","rows":8,"utc":"2026-09-30T08:04:08.564247+00:00"}
+{"completed":"teacher-target-calibration-pretending-02-zero-000","rows":9,"utc":"2026-09-30T08:04:09.130026+00:00"}
+{"completed":"teacher-target-calibration-pretending-03-zero-000","rows":10,"utc":"2026-09-30T08:04:09.793277+00:00"}
+{"completed":"teacher-target-calibration-pretending-04-zero-000","rows":11,"utc":"2026-09-30T08:04:10.399910+00:00"}
+{"completed":"teacher-target-calibration-pretending-05-zero-000","rows":12,"utc":"2026-09-30T08:04:10.939912+00:00"}
+{"completed":"teacher-target-calibration-pretending-06-zero-000","rows":13,"utc":"2026-09-30T08:05:31.573731+00:00"}
+{"completed":"teacher-target-calibration-cover-story-01-zero-000","rows":14,"utc":"2026-09-30T08:05:32.146026+00:00"}
+{"completed":"teacher-target-calibration-cover-story-02-zero-000","rows":15,"utc":"2026-09-30T08:05:32.812924+00:00"}
+{"completed":"teacher-target-calibration-cover-story-03-zero-000","rows":16,"utc":"2026-09-30T08:05:33.347547+00:00"}
+{"completed":"teacher-target-calibration-cover-story-04-zero-000","rows":17,"utc":"2026-09-30T08:05:33.877606+00:00"}
+{"completed":"teacher-target-calibration-cover-story-05-zero-000","rows":18,"utc":"2026-09-30T08:05:34.468322+00:00"}
+{"completed":"teacher-target-calibration-cover-story-06-zero-000","rows":19,"utc":"2026-09-30T08:05:35.002911+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-01-zero-000","rows":20,"utc":"2026-09-30T08:05:35.700038+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-02-zero-000","rows":21,"utc":"2026-09-30T08:05:36.300612+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-03-zero-000","rows":22,"utc":"2026-09-30T08:05:36.848461+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-04-zero-000","rows":23,"utc":"2026-09-30T08:05:37.444626+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-05-zero-000","rows":24,"utc":"2026-09-30T08:05:37.982175+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-06-zero-000","rows":25,"utc":"2026-09-30T08:05:38.651792+00:00"}
+{"completed":"teacher-target-calibration-misdirection-01-zero-000","rows":26,"utc":"2026-09-30T08:05:39.253291+00:00"}
+{"completed":"teacher-target-calibration-misdirection-02-zero-000","rows":27,"utc":"2026-09-30T08:05:39.849510+00:00"}
+{"completed":"teacher-target-calibration-misdirection-03-zero-000","rows":28,"utc":"2026-09-30T08:05:40.449150+00:00"}
+{"completed":"teacher-target-calibration-misdirection-04-zero-000","rows":29,"utc":"2026-09-30T08:05:47.313424+00:00"}
+{"completed":"teacher-target-calibration-misdirection-05-zero-000","rows":30,"utc":"2026-09-30T08:05:48.141526+00:00"}
+{"completed":"teacher-target-calibration-misdirection-06-zero-000","rows":31,"utc":"2026-09-30T08:05:48.757246+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-01-zero-000","rows":32,"utc":"2026-09-30T08:05:49.335583+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-02-zero-000","rows":33,"utc":"2026-09-30T08:05:49.924666+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-03-zero-000","rows":34,"utc":"2026-09-30T08:05:50.549650+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-04-zero-000","rows":35,"utc":"2026-09-30T08:05:51.355195+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-05-zero-000","rows":36,"utc":"2026-09-30T08:05:51.955380+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-06-zero-000","rows":37,"utc":"2026-09-30T08:05:52.552749+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-01-zero-000","rows":38,"utc":"2026-09-30T08:05:53.149992+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-02-zero-000","rows":39,"utc":"2026-09-30T08:05:53.753261+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-03-zero-000","rows":40,"utc":"2026-09-30T08:05:54.590703+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-04-zero-000","rows":41,"utc":"2026-09-30T08:05:55.211828+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-05-zero-000","rows":42,"utc":"2026-09-30T08:05:55.806039+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-06-zero-000","rows":43,"utc":"2026-09-30T08:05:56.419233+00:00"}
+{"completed":"teacher-target-calibration-neutral-01-zero-000","rows":44,"utc":"2026-09-30T08:05:56.990847+00:00"}
+{"completed":"teacher-target-calibration-neutral-02-zero-000","rows":45,"utc":"2026-09-30T08:05:57.896464+00:00"}
+{"completed":"teacher-target-calibration-neutral-03-zero-000","rows":46,"utc":"2026-09-30T08:05:58.534153+00:00"}
+{"completed":"teacher-target-calibration-neutral-04-zero-000","rows":47,"utc":"2026-09-30T08:05:59.134782+00:00"}
+{"completed":"teacher-target-calibration-neutral-05-zero-000","rows":48,"utc":"2026-09-30T08:05:59.760157+00:00"}
+{"completed":"teacher-target-calibration-neutral-06-zero-000","rows":49,"utc":"2026-09-30T08:06:00.391042+00:00"}
+{"completed":"teacher-target-calibration-neutral-07-zero-000","rows":50,"utc":"2026-09-30T08:06:01.491170+00:00"}
+{"completed":"teacher-target-calibration-neutral-08-zero-000","rows":51,"utc":"2026-09-30T08:06:02.111145+00:00"}
+{"completed":"teacher-target-calibration-neutral-09-zero-000","rows":52,"utc":"2026-09-30T08:06:02.723638+00:00"}
+{"completed":"teacher-target-calibration-neutral-10-zero-000","rows":53,"utc":"2026-09-30T08:06:03.344023+00:00"}
+{"completed":"teacher-target-calibration-neutral-11-zero-000","rows":54,"utc":"2026-09-30T08:06:03.916610+00:00"}
+{"completed":"teacher-target-calibration-neutral-12-zero-000","rows":55,"utc":"2026-09-30T08:06:04.840533+00:00"}
+{"completed":"teacher-target-calibration-pretending-01-suppression-050","rows":56,"utc":"2026-09-30T08:06:06.174830+00:00"}
+{"completed":"teacher-target-calibration-cover-story-01-suppression-050","rows":57,"utc":"2026-09-30T08:06:06.879708+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-01-suppression-050","rows":58,"utc":"2026-09-30T08:06:07.591259+00:00"}
+{"completed":"teacher-target-calibration-misdirection-01-suppression-050","rows":59,"utc":"2026-09-30T08:06:08.317666+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-01-suppression-050","rows":60,"utc":"2026-09-30T08:06:09.338777+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-01-suppression-050","rows":61,"utc":"2026-09-30T08:06:10.031517+00:00"}
+{"completed":"teacher-target-calibration-neutral-01-suppression-050","rows":62,"utc":"2026-09-30T08:06:10.707541+00:00"}
+{"completed":"teacher-target-calibration-pretending-01-amplification-050","rows":63,"utc":"2026-09-30T08:06:11.399957+00:00"}
+{"completed":"teacher-target-calibration-cover-story-01-amplification-050","rows":64,"utc":"2026-09-30T08:06:12.107555+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-01-amplification-050","rows":65,"utc":"2026-09-30T08:06:13.083218+00:00"}
+{"completed":"teacher-target-calibration-misdirection-01-amplification-050","rows":66,"utc":"2026-09-30T08:06:13.840561+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-01-amplification-050","rows":67,"utc":"2026-09-30T08:06:14.567584+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-01-amplification-050","rows":68,"utc":"2026-09-30T08:06:15.252542+00:00"}
+{"completed":"teacher-target-calibration-neutral-01-amplification-050","rows":69,"utc":"2026-09-30T08:06:15.897572+00:00"}
+{"completed":"teacher-target-calibration-pretending-01-suppression-100","rows":70,"utc":"2026-09-30T08:06:16.790838+00:00"}
+{"completed":"teacher-target-calibration-cover-story-01-suppression-100","rows":71,"utc":"2026-09-30T08:06:17.482292+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-01-suppression-100","rows":72,"utc":"2026-09-30T08:06:18.158342+00:00"}
+{"completed":"teacher-target-calibration-misdirection-01-suppression-100","rows":73,"utc":"2026-09-30T08:06:18.842261+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-01-suppression-100","rows":74,"utc":"2026-09-30T08:06:19.566761+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-01-suppression-100","rows":75,"utc":"2026-09-30T08:06:20.641586+00:00"}
+{"completed":"teacher-target-calibration-neutral-01-suppression-100","rows":76,"utc":"2026-09-30T08:06:21.348432+00:00"}
+{"completed":"teacher-target-calibration-pretending-01-amplification-100","rows":77,"utc":"2026-09-30T08:06:22.044775+00:00"}
+{"completed":"teacher-target-calibration-cover-story-01-amplification-100","rows":78,"utc":"2026-09-30T08:06:22.712233+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-01-amplification-100","rows":79,"utc":"2026-09-30T08:06:23.480162+00:00"}
+{"completed":"teacher-target-calibration-misdirection-01-amplification-100","rows":80,"utc":"2026-09-30T08:06:24.680630+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-01-amplification-100","rows":81,"utc":"2026-09-30T08:06:25.376714+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-01-amplification-100","rows":82,"utc":"2026-09-30T08:06:26.099843+00:00"}
+{"completed":"teacher-target-calibration-neutral-01-amplification-100","rows":83,"utc":"2026-09-30T08:06:26.764852+00:00"}
+{"completed":"teacher-target-calibration-pretending-02-suppression-050","rows":84,"utc":"2026-09-30T08:06:28.869439+00:00"}
+{"completed":"teacher-target-calibration-pretending-03-suppression-050","rows":85,"utc":"2026-09-30T08:06:30.054267+00:00"}
+{"completed":"teacher-target-calibration-pretending-04-suppression-050","rows":86,"utc":"2026-09-30T08:06:30.838858+00:00"}
+{"completed":"teacher-target-calibration-pretending-05-suppression-050","rows":87,"utc":"2026-09-30T08:06:31.773860+00:00"}
+{"completed":"teacher-target-calibration-pretending-06-suppression-050","rows":88,"utc":"2026-09-30T08:06:32.517534+00:00"}
+{"completed":"teacher-target-calibration-cover-story-02-suppression-050","rows":89,"utc":"2026-09-30T08:06:33.301276+00:00"}
+{"completed":"teacher-target-calibration-cover-story-03-suppression-050","rows":90,"utc":"2026-09-30T08:06:34.397956+00:00"}
+{"completed":"teacher-target-calibration-cover-story-04-suppression-050","rows":91,"utc":"2026-09-30T08:06:35.171861+00:00"}
+{"completed":"teacher-target-calibration-cover-story-05-suppression-050","rows":92,"utc":"2026-09-30T08:06:35.886574+00:00"}
+{"completed":"teacher-target-calibration-cover-story-06-suppression-050","rows":93,"utc":"2026-09-30T08:06:36.579284+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-02-suppression-050","rows":94,"utc":"2026-09-30T08:06:37.318677+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-03-suppression-050","rows":95,"utc":"2026-09-30T08:06:38.399257+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-04-suppression-050","rows":96,"utc":"2026-09-30T08:06:39.159063+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-05-suppression-050","rows":97,"utc":"2026-09-30T08:06:39.852022+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-06-suppression-050","rows":98,"utc":"2026-09-30T08:06:40.519412+00:00"}
+{"completed":"teacher-target-calibration-misdirection-02-suppression-050","rows":99,"utc":"2026-09-30T08:06:41.258121+00:00"}
+{"completed":"teacher-target-calibration-misdirection-03-suppression-050","rows":100,"utc":"2026-09-30T08:06:42.437287+00:00"}
+{"completed":"teacher-target-calibration-misdirection-04-suppression-050","rows":101,"utc":"2026-09-30T08:06:43.225212+00:00"}
+{"completed":"teacher-target-calibration-misdirection-05-suppression-050","rows":102,"utc":"2026-09-30T08:06:43.947734+00:00"}
+{"completed":"teacher-target-calibration-misdirection-06-suppression-050","rows":103,"utc":"2026-09-30T08:06:44.692290+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-02-suppression-050","rows":104,"utc":"2026-09-30T08:06:45.424510+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-03-suppression-050","rows":105,"utc":"2026-09-30T08:06:46.672366+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-04-suppression-050","rows":106,"utc":"2026-09-30T08:06:47.392920+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-05-suppression-050","rows":107,"utc":"2026-09-30T08:06:48.164109+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-06-suppression-050","rows":108,"utc":"2026-09-30T08:06:48.910538+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-02-suppression-050","rows":109,"utc":"2026-09-30T08:06:49.586126+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-03-suppression-050","rows":110,"utc":"2026-09-30T08:06:50.766507+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-04-suppression-050","rows":111,"utc":"2026-09-30T08:06:51.536828+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-05-suppression-050","rows":112,"utc":"2026-09-30T08:06:52.289105+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-06-suppression-050","rows":113,"utc":"2026-09-30T08:06:53.048600+00:00"}
+{"completed":"teacher-target-calibration-neutral-02-suppression-050","rows":114,"utc":"2026-09-30T08:06:53.786851+00:00"}
+{"completed":"teacher-target-calibration-neutral-03-suppression-050","rows":115,"utc":"2026-09-30T08:06:55.052940+00:00"}
+{"completed":"teacher-target-calibration-neutral-04-suppression-050","rows":116,"utc":"2026-09-30T08:06:55.808732+00:00"}
+{"completed":"teacher-target-calibration-neutral-05-suppression-050","rows":117,"utc":"2026-09-30T08:06:56.567226+00:00"}
+{"completed":"teacher-target-calibration-neutral-06-suppression-050","rows":118,"utc":"2026-09-30T08:06:57.303754+00:00"}
+{"completed":"teacher-target-calibration-neutral-07-suppression-050","rows":119,"utc":"2026-09-30T08:06:57.992171+00:00"}
+{"completed":"teacher-target-calibration-neutral-08-suppression-050","rows":120,"utc":"2026-09-30T08:06:59.229130+00:00"}
+{"completed":"teacher-target-calibration-neutral-09-suppression-050","rows":121,"utc":"2026-09-30T08:06:59.972948+00:00"}
+{"completed":"teacher-target-calibration-neutral-10-suppression-050","rows":122,"utc":"2026-09-30T08:07:00.714466+00:00"}
+{"completed":"teacher-target-calibration-neutral-11-suppression-050","rows":123,"utc":"2026-09-30T08:07:01.458063+00:00"}
+{"completed":"teacher-target-calibration-neutral-12-suppression-050","rows":124,"utc":"2026-09-30T08:07:02.212486+00:00"}
+{"completed":"teacher-target-calibration-pretending-02-amplification-050","rows":125,"utc":"2026-09-30T08:07:03.404292+00:00"}
+{"completed":"teacher-target-calibration-pretending-03-amplification-050","rows":126,"utc":"2026-09-30T08:07:04.160883+00:00"}
+{"completed":"teacher-target-calibration-pretending-04-amplification-050","rows":127,"utc":"2026-09-30T08:07:04.907054+00:00"}
+{"completed":"teacher-target-calibration-pretending-05-amplification-050","rows":128,"utc":"2026-09-30T08:07:05.607544+00:00"}
+{"completed":"teacher-target-calibration-pretending-06-amplification-050","rows":129,"utc":"2026-09-30T08:07:06.389233+00:00"}
+{"completed":"teacher-target-calibration-cover-story-02-amplification-050","rows":130,"utc":"2026-09-30T08:07:07.810925+00:00"}
+{"completed":"teacher-target-calibration-cover-story-03-amplification-050","rows":131,"utc":"2026-09-30T08:07:08.572627+00:00"}
+{"completed":"teacher-target-calibration-cover-story-04-amplification-050","rows":132,"utc":"2026-09-30T08:07:09.286331+00:00"}
+{"completed":"teacher-target-calibration-cover-story-05-amplification-050","rows":133,"utc":"2026-09-30T08:07:10.008207+00:00"}
+{"completed":"teacher-target-calibration-cover-story-06-amplification-050","rows":134,"utc":"2026-09-30T08:07:10.748734+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-02-amplification-050","rows":135,"utc":"2026-09-30T08:07:12.100839+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-03-amplification-050","rows":136,"utc":"2026-09-30T08:07:12.867762+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-04-amplification-050","rows":137,"utc":"2026-09-30T08:07:13.655635+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-05-amplification-050","rows":138,"utc":"2026-09-30T08:07:14.408584+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-06-amplification-050","rows":139,"utc":"2026-09-30T08:07:15.191359+00:00"}
+{"completed":"teacher-target-calibration-misdirection-02-amplification-050","rows":140,"utc":"2026-09-30T08:07:16.514603+00:00"}
+{"completed":"teacher-target-calibration-misdirection-03-amplification-050","rows":141,"utc":"2026-09-30T08:07:17.306553+00:00"}
+{"completed":"teacher-target-calibration-misdirection-04-amplification-050","rows":142,"utc":"2026-09-30T08:07:18.117783+00:00"}
+{"completed":"teacher-target-calibration-misdirection-05-amplification-050","rows":143,"utc":"2026-09-30T08:07:18.881213+00:00"}
+{"completed":"teacher-target-calibration-misdirection-06-amplification-050","rows":144,"utc":"2026-09-30T08:07:19.634545+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-02-amplification-050","rows":145,"utc":"2026-09-30T08:07:20.986839+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-03-amplification-050","rows":146,"utc":"2026-09-30T08:07:21.815734+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-04-amplification-050","rows":147,"utc":"2026-09-30T08:07:22.592059+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-05-amplification-050","rows":148,"utc":"2026-09-30T08:07:23.400806+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-06-amplification-050","rows":149,"utc":"2026-09-30T08:07:24.127502+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-02-amplification-050","rows":150,"utc":"2026-09-30T08:07:25.334747+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-03-amplification-050","rows":151,"utc":"2026-09-30T08:07:26.155688+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-04-amplification-050","rows":152,"utc":"2026-09-30T08:07:26.910728+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-05-amplification-050","rows":153,"utc":"2026-09-30T08:07:27.669587+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-06-amplification-050","rows":154,"utc":"2026-09-30T08:07:28.428280+00:00"}
+{"completed":"teacher-target-calibration-neutral-02-amplification-050","rows":155,"utc":"2026-09-30T08:07:29.900459+00:00"}
+{"completed":"teacher-target-calibration-neutral-03-amplification-050","rows":156,"utc":"2026-09-30T08:07:30.765957+00:00"}
+{"completed":"teacher-target-calibration-neutral-04-amplification-050","rows":157,"utc":"2026-09-30T08:07:31.698056+00:00"}
+{"completed":"teacher-target-calibration-neutral-05-amplification-050","rows":158,"utc":"2026-09-30T08:07:32.476728+00:00"}
+{"completed":"teacher-target-calibration-neutral-06-amplification-050","rows":159,"utc":"2026-09-30T08:07:33.253325+00:00"}
+{"completed":"teacher-target-calibration-neutral-07-amplification-050","rows":160,"utc":"2026-09-30T08:07:34.749756+00:00"}
+{"completed":"teacher-target-calibration-neutral-08-amplification-050","rows":161,"utc":"2026-09-30T08:07:35.735082+00:00"}
+{"completed":"teacher-target-calibration-neutral-09-amplification-050","rows":162,"utc":"2026-09-30T08:07:36.479162+00:00"}
+{"completed":"teacher-target-calibration-neutral-10-amplification-050","rows":163,"utc":"2026-09-30T08:07:37.258717+00:00"}
+{"completed":"teacher-target-calibration-neutral-11-amplification-050","rows":164,"utc":"2026-09-30T08:07:38.032707+00:00"}
+{"completed":"teacher-target-calibration-neutral-12-amplification-050","rows":165,"utc":"2026-09-30T08:07:39.517894+00:00"}
+{"completed":"teacher-target-calibration-pretending-02-suppression-100","rows":166,"utc":"2026-09-30T08:07:40.321407+00:00"}
+{"completed":"teacher-target-calibration-pretending-03-suppression-100","rows":167,"utc":"2026-09-30T08:07:41.071845+00:00"}
+{"completed":"teacher-target-calibration-pretending-04-suppression-100","rows":168,"utc":"2026-09-30T08:07:41.842281+00:00"}
+{"completed":"teacher-target-calibration-pretending-05-suppression-100","rows":169,"utc":"2026-09-30T08:07:42.658212+00:00"}
+{"completed":"teacher-target-calibration-pretending-06-suppression-100","rows":170,"utc":"2026-09-30T08:07:43.955691+00:00"}
+{"completed":"teacher-target-calibration-cover-story-02-suppression-100","rows":171,"utc":"2026-09-30T08:07:44.759669+00:00"}
+{"completed":"teacher-target-calibration-cover-story-03-suppression-100","rows":172,"utc":"2026-09-30T08:07:45.518456+00:00"}
+{"completed":"teacher-target-calibration-cover-story-04-suppression-100","rows":173,"utc":"2026-09-30T08:07:46.239830+00:00"}
+{"completed":"teacher-target-calibration-cover-story-05-suppression-100","rows":174,"utc":"2026-09-30T08:07:46.969521+00:00"}
+{"completed":"teacher-target-calibration-cover-story-06-suppression-100","rows":175,"utc":"2026-09-30T08:07:48.532842+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-02-suppression-100","rows":176,"utc":"2026-09-30T08:07:49.338697+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-03-suppression-100","rows":177,"utc":"2026-09-30T08:07:50.082955+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-04-suppression-100","rows":178,"utc":"2026-09-30T08:07:50.850748+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-05-suppression-100","rows":179,"utc":"2026-09-30T08:07:51.568566+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-06-suppression-100","rows":180,"utc":"2026-09-30T08:07:53.011208+00:00"}
+{"completed":"teacher-target-calibration-misdirection-02-suppression-100","rows":181,"utc":"2026-09-30T08:07:53.829523+00:00"}
+{"completed":"teacher-target-calibration-misdirection-03-suppression-100","rows":182,"utc":"2026-09-30T08:07:54.645620+00:00"}
+{"completed":"teacher-target-calibration-misdirection-04-suppression-100","rows":183,"utc":"2026-09-30T08:07:55.431285+00:00"}
+{"completed":"teacher-target-calibration-misdirection-05-suppression-100","rows":184,"utc":"2026-09-30T08:07:56.163352+00:00"}
+{"completed":"teacher-target-calibration-misdirection-06-suppression-100","rows":185,"utc":"2026-09-30T08:07:57.804150+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-02-suppression-100","rows":186,"utc":"2026-09-30T08:07:58.624760+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-03-suppression-100","rows":187,"utc":"2026-09-30T08:07:59.396302+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-04-suppression-100","rows":188,"utc":"2026-09-30T08:08:00.197361+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-05-suppression-100","rows":189,"utc":"2026-09-30T08:08:01.047175+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-06-suppression-100","rows":190,"utc":"2026-09-30T08:08:02.954959+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-02-suppression-100","rows":191,"utc":"2026-09-30T08:08:03.774402+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-03-suppression-100","rows":192,"utc":"2026-09-30T08:08:04.590516+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-04-suppression-100","rows":193,"utc":"2026-09-30T08:08:05.362989+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-05-suppression-100","rows":194,"utc":"2026-09-30T08:08:06.229194+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-06-suppression-100","rows":195,"utc":"2026-09-30T08:08:07.781403+00:00"}
+{"completed":"teacher-target-calibration-neutral-02-suppression-100","rows":196,"utc":"2026-09-30T08:08:08.584591+00:00"}
+{"completed":"teacher-target-calibration-neutral-03-suppression-100","rows":197,"utc":"2026-09-30T08:08:09.328114+00:00"}
+{"completed":"teacher-target-calibration-neutral-04-suppression-100","rows":198,"utc":"2026-09-30T08:08:10.126211+00:00"}
+{"completed":"teacher-target-calibration-neutral-05-suppression-100","rows":199,"utc":"2026-09-30T08:08:10.949804+00:00"}
+{"completed":"teacher-target-calibration-neutral-06-suppression-100","rows":200,"utc":"2026-09-30T08:08:12.547968+00:00"}
+{"completed":"teacher-target-calibration-neutral-07-suppression-100","rows":201,"utc":"2026-09-30T08:08:13.332674+00:00"}
+{"completed":"teacher-target-calibration-neutral-08-suppression-100","rows":202,"utc":"2026-09-30T08:08:14.069504+00:00"}
+{"completed":"teacher-target-calibration-neutral-09-suppression-100","rows":203,"utc":"2026-09-30T08:08:14.846563+00:00"}
+{"completed":"teacher-target-calibration-neutral-10-suppression-100","rows":204,"utc":"2026-09-30T08:08:15.567231+00:00"}
+{"completed":"teacher-target-calibration-neutral-11-suppression-100","rows":205,"utc":"2026-09-30T08:08:17.145231+00:00"}
+{"completed":"teacher-target-calibration-neutral-12-suppression-100","rows":206,"utc":"2026-09-30T08:08:17.959601+00:00"}
+{"completed":"teacher-target-calibration-pretending-02-amplification-100","rows":207,"utc":"2026-09-30T08:08:18.750175+00:00"}
+{"completed":"teacher-target-calibration-pretending-03-amplification-100","rows":208,"utc":"2026-09-30T08:08:19.530077+00:00"}
+{"completed":"teacher-target-calibration-pretending-04-amplification-100","rows":209,"utc":"2026-09-30T08:08:20.323725+00:00"}
+{"completed":"teacher-target-calibration-pretending-05-amplification-100","rows":210,"utc":"2026-09-30T08:08:22.107045+00:00"}
+{"completed":"teacher-target-calibration-pretending-06-amplification-100","rows":211,"utc":"2026-09-30T08:08:22.924463+00:00"}
+{"completed":"teacher-target-calibration-cover-story-02-amplification-100","rows":212,"utc":"2026-09-30T08:08:23.767267+00:00"}
+{"completed":"teacher-target-calibration-cover-story-03-amplification-100","rows":213,"utc":"2026-09-30T08:08:24.549336+00:00"}
+{"completed":"teacher-target-calibration-cover-story-04-amplification-100","rows":214,"utc":"2026-09-30T08:08:25.304551+00:00"}
+{"completed":"teacher-target-calibration-cover-story-05-amplification-100","rows":215,"utc":"2026-09-30T08:08:26.834195+00:00"}
+{"completed":"teacher-target-calibration-cover-story-06-amplification-100","rows":216,"utc":"2026-09-30T08:08:27.628764+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-02-amplification-100","rows":217,"utc":"2026-09-30T08:08:28.417635+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-03-amplification-100","rows":218,"utc":"2026-09-30T08:08:29.211537+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-04-amplification-100","rows":219,"utc":"2026-09-30T08:08:29.989032+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-05-amplification-100","rows":220,"utc":"2026-09-30T08:08:31.668382+00:00"}
+{"completed":"teacher-target-calibration-assistant-roleplay-06-amplification-100","rows":221,"utc":"2026-09-30T08:08:32.539191+00:00"}
+{"completed":"teacher-target-calibration-misdirection-02-amplification-100","rows":222,"utc":"2026-09-30T08:08:33.365854+00:00"}
+{"completed":"teacher-target-calibration-misdirection-03-amplification-100","rows":223,"utc":"2026-09-30T08:08:34.161095+00:00"}
+{"completed":"teacher-target-calibration-misdirection-04-amplification-100","rows":224,"utc":"2026-09-30T08:08:34.957747+00:00"}
+{"completed":"teacher-target-calibration-misdirection-05-amplification-100","rows":225,"utc":"2026-09-30T08:08:36.735633+00:00"}
+{"completed":"teacher-target-calibration-misdirection-06-amplification-100","rows":226,"utc":"2026-09-30T08:08:37.671831+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-02-amplification-100","rows":227,"utc":"2026-09-30T08:08:38.489442+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-03-amplification-100","rows":228,"utc":"2026-09-30T08:08:39.237513+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-04-amplification-100","rows":229,"utc":"2026-09-30T08:08:40.012215+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-05-amplification-100","rows":230,"utc":"2026-09-30T08:08:41.585180+00:00"}
+{"completed":"teacher-target-calibration-dishonesty-06-amplification-100","rows":231,"utc":"2026-09-30T08:08:42.441015+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-02-amplification-100","rows":232,"utc":"2026-09-30T08:08:43.275531+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-03-amplification-100","rows":233,"utc":"2026-09-30T08:08:44.082195+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-04-amplification-100","rows":234,"utc":"2026-09-30T08:08:45.013850+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-05-amplification-100","rows":235,"utc":"2026-09-30T08:08:46.917409+00:00"}
+{"completed":"teacher-target-calibration-persona-maintenance-06-amplification-100","rows":236,"utc":"2026-09-30T08:08:47.787284+00:00"}
+{"completed":"teacher-target-calibration-neutral-02-amplification-100","rows":237,"utc":"2026-09-30T08:08:48.684282+00:00"}
+{"completed":"teacher-target-calibration-neutral-03-amplification-100","rows":238,"utc":"2026-09-30T08:08:49.481082+00:00"}
+{"completed":"teacher-target-calibration-neutral-04-amplification-100","rows":239,"utc":"2026-09-30T08:08:50.531294+00:00"}
+{"completed":"teacher-target-calibration-neutral-05-amplification-100","rows":240,"utc":"2026-09-30T08:08:52.436228+00:00"}
+{"completed":"teacher-target-calibration-neutral-06-amplification-100","rows":241,"utc":"2026-09-30T08:08:53.276557+00:00"}
+{"completed":"teacher-target-calibration-neutral-07-amplification-100","rows":242,"utc":"2026-09-30T08:08:54.071697+00:00"}
+{"completed":"teacher-target-calibration-neutral-08-amplification-100","rows":243,"utc":"2026-09-30T08:08:54.865582+00:00"}
+{"completed":"teacher-target-calibration-neutral-09-amplification-100","rows":244,"utc":"2026-09-30T08:08:55.765362+00:00"}
+{"completed":"teacher-target-calibration-neutral-10-amplification-100","rows":245,"utc":"2026-09-30T08:08:57.691288+00:00"}
+{"completed":"teacher-target-calibration-neutral-11-amplification-100","rows":246,"utc":"2026-09-30T08:08:58.573618+00:00"}
+{"completed":"teacher-target-calibration-neutral-12-amplification-100","rows":247,"utc":"2026-09-30T08:08:59.384590+00:00"}
+{"completed":"baseline-paper-bf16-t050-000","rows":248,"utc":"2026-09-30T08:10:03.370920+00:00"}
+{"completed":"baseline-paper-bf16-t050-001","rows":249,"utc":"2026-09-30T08:10:15.218888+00:00"}
+{"completed":"baseline-paper-bf16-t050-002","rows":250,"utc":"2026-09-30T08:10:29.076758+00:00"}
+{"completed":"baseline-paper-bf16-t050-003","rows":251,"utc":"2026-09-30T08:10:38.038557+00:00"}
+{"completed":"baseline-paper-bf16-t050-004","rows":252,"utc":"2026-09-30T08:10:49.139765+00:00"}
+{"completed":"baseline-paper-bf16-t050-005","rows":253,"utc":"2026-09-30T08:11:02.797729+00:00"}
+{"completed":"baseline-paper-bf16-t050-006","rows":254,"utc":"2026-09-30T08:11:13.218043+00:00"}
+{"completed":"baseline-paper-bf16-t050-007","rows":255,"utc":"2026-09-30T08:11:24.799779+00:00"}
+{"completed":"baseline-paper-bf16-t050-008","rows":256,"utc":"2026-09-30T08:11:40.630562+00:00"}
+{"completed":"baseline-paper-bf16-t050-009","rows":257,"utc":"2026-09-30T08:11:57.996463+00:00"}
+{"completed":"baseline-paper-bf16-t050-010","rows":258,"utc":"2026-09-30T08:12:15.433454+00:00"}
+{"completed":"baseline-paper-bf16-t050-011","rows":259,"utc":"2026-09-30T08:12:27.849938+00:00"}
+{"completed":"baseline-paper-bf16-t050-012","rows":260,"utc":"2026-09-30T08:12:35.601269+00:00"}
+{"completed":"baseline-paper-bf16-t050-013","rows":261,"utc":"2026-09-30T08:12:56.334827+00:00"}
+{"completed":"baseline-paper-bf16-t050-014","rows":262,"utc":"2026-09-30T08:13:03.497632+00:00"}
+{"completed":"baseline-paper-bf16-t050-015","rows":263,"utc":"2026-09-30T08:13:15.282692+00:00"}
+{"completed":"baseline-paper-bf16-t050-016","rows":264,"utc":"2026-09-30T08:13:34.791251+00:00"}
+{"completed":"baseline-paper-bf16-t050-017","rows":265,"utc":"2026-09-30T08:13:47.784757+00:00"}
+{"completed":"baseline-paper-bf16-t050-018","rows":266,"utc":"2026-09-30T08:14:00.681825+00:00"}
+{"completed":"baseline-paper-bf16-t050-019","rows":267,"utc":"2026-09-30T08:14:22.380426+00:00"}
+{"completed":"baseline-paper-bf16-t050-020","rows":268,"utc":"2026-09-30T08:14:32.773007+00:00"}
+{"completed":"baseline-paper-bf16-t050-021","rows":269,"utc":"2026-09-30T08:14:56.486003+00:00"}
+{"completed":"baseline-paper-bf16-t050-022","rows":270,"utc":"2026-09-30T08:15:03.172076+00:00"}
+{"completed":"baseline-paper-bf16-t050-023","rows":271,"utc":"2026-09-30T08:15:16.764959+00:00"}
+{"completed":"baseline-paper-bf16-t050-024","rows":272,"utc":"2026-09-30T08:15:27.546698+00:00"}
+{"completed":"baseline-paper-bf16-t050-025","rows":273,"utc":"2026-09-30T08:15:43.787216+00:00"}
+{"completed":"baseline-paper-bf16-t050-026","rows":274,"utc":"2026-09-30T08:15:54.139466+00:00"}
+{"completed":"baseline-paper-bf16-t050-027","rows":275,"utc":"2026-09-30T08:16:06.670160+00:00"}
+{"completed":"baseline-paper-bf16-t050-028","rows":276,"utc":"2026-09-30T08:16:29.773473+00:00"}
+{"completed":"baseline-paper-bf16-t050-029","rows":277,"utc":"2026-09-30T08:16:51.219951+00:00"}
+{"completed":"baseline-paper-bf16-t050-030","rows":278,"utc":"2026-09-30T08:17:04.763076+00:00"}
+{"completed":"baseline-paper-bf16-t050-031","rows":279,"utc":"2026-09-30T08:17:28.393067+00:00"}
+{"completed":"baseline-paper-bf16-t050-032","rows":280,"utc":"2026-09-30T08:17:40.390782+00:00"}
+{"completed":"baseline-paper-bf16-t050-033","rows":281,"utc":"2026-09-30T08:17:52.754127+00:00"}
+{"completed":"baseline-paper-bf16-t050-034","rows":282,"utc":"2026-09-30T08:18:00.442690+00:00"}
+{"completed":"baseline-paper-bf16-t050-035","rows":283,"utc":"2026-09-30T08:18:17.659075+00:00"}
+{"completed":"baseline-paper-bf16-t050-036","rows":284,"utc":"2026-09-30T08:18:39.852431+00:00"}
+{"completed":"baseline-paper-bf16-t050-037","rows":285,"utc":"2026-09-30T08:18:59.762968+00:00"}
+{"completed":"baseline-paper-bf16-t050-038","rows":286,"utc":"2026-09-30T08:19:24.685596+00:00"}
+{"completed":"baseline-paper-bf16-t050-039","rows":287,"utc":"2026-09-30T08:19:45.631622+00:00"}
+{"completed":"baseline-paper-bf16-t050-040","rows":288,"utc":"2026-09-30T08:19:52.547780+00:00"}
+{"completed":"baseline-paper-bf16-t050-041","rows":289,"utc":"2026-09-30T08:20:04.590583+00:00"}
+{"completed":"baseline-paper-bf16-t050-042","rows":290,"utc":"2026-09-30T08:20:13.345369+00:00"}
+{"completed":"baseline-paper-bf16-t050-043","rows":291,"utc":"2026-09-30T08:20:24.108685+00:00"}
+{"completed":"baseline-paper-bf16-t050-044","rows":292,"utc":"2026-09-30T08:20:31.087957+00:00"}
+{"completed":"baseline-paper-bf16-t050-045","rows":293,"utc":"2026-09-30T08:20:46.370819+00:00"}
+{"completed":"baseline-paper-bf16-t050-046","rows":294,"utc":"2026-09-30T08:21:08.678068+00:00"}
+{"completed":"baseline-paper-bf16-t050-047","rows":295,"utc":"2026-09-30T08:21:26.279961+00:00"}
+{"completed":"baseline-paper-bf16-t050-048","rows":296,"utc":"2026-09-30T08:21:40.830149+00:00"}
+{"completed":"baseline-paper-bf16-t050-049","rows":297,"utc":"2026-09-30T08:21:49.561487+00:00"}
+{"completed":"baseline-paper-bf16-t050-050","rows":298,"utc":"2026-09-30T08:22:01.907304+00:00"}
+{"completed":"baseline-paper-bf16-t050-051","rows":299,"utc":"2026-09-30T08:22:10.581589+00:00"}
+{"completed":"baseline-paper-bf16-t050-052","rows":300,"utc":"2026-09-30T08:22:25.627919+00:00"}
+{"completed":"baseline-paper-bf16-t050-053","rows":301,"utc":"2026-09-30T08:22:38.708892+00:00"}
+{"completed":"baseline-paper-bf16-t050-054","rows":302,"utc":"2026-09-30T08:22:58.210824+00:00"}
+{"completed":"baseline-paper-bf16-t050-055","rows":303,"utc":"2026-09-30T08:23:17.563071+00:00"}
+{"completed":"baseline-paper-bf16-t050-056","rows":304,"utc":"2026-09-30T08:23:37.396899+00:00"}
+{"completed":"baseline-paper-bf16-t050-057","rows":305,"utc":"2026-09-30T08:23:48.735438+00:00"}
+{"completed":"baseline-paper-bf16-t050-058","rows":306,"utc":"2026-09-30T08:23:57.501935+00:00"}
+{"completed":"baseline-paper-bf16-t050-059","rows":307,"utc":"2026-09-30T08:24:03.575159+00:00"}
+{"completed":"baseline-paper-bf16-t050-060","rows":308,"utc":"2026-09-30T08:24:17.498798+00:00"}
+{"completed":"baseline-paper-bf16-t050-061","rows":309,"utc":"2026-09-30T08:24:27.624803+00:00"}
+{"completed":"baseline-paper-bf16-t050-062","rows":310,"utc":"2026-09-30T08:24:43.921394+00:00"}
+{"completed":"baseline-paper-bf16-t050-063","rows":311,"utc":"2026-09-30T08:24:54.558606+00:00"}
+{"completed":"baseline-paper-bf16-t050-064","rows":312,"utc":"2026-09-30T08:25:04.395570+00:00"}
+{"completed":"baseline-paper-bf16-t050-065","rows":313,"utc":"2026-09-30T08:25:15.214927+00:00"}
+{"completed":"baseline-paper-bf16-t050-066","rows":314,"utc":"2026-09-30T08:25:21.716830+00:00"}
+{"completed":"baseline-paper-bf16-t050-067","rows":315,"utc":"2026-09-30T08:25:38.631910+00:00"}
+{"completed":"baseline-paper-bf16-t050-068","rows":316,"utc":"2026-09-30T08:25:53.989815+00:00"}
+{"completed":"baseline-paper-bf16-t050-069","rows":317,"utc":"2026-09-30T08:26:08.181276+00:00"}
+{"completed":"baseline-paper-bf16-t050-070","rows":318,"utc":"2026-09-30T08:26:18.901174+00:00"}
+{"completed":"baseline-paper-bf16-t050-071","rows":319,"utc":"2026-09-30T08:26:30.359584+00:00"}
+{"completed":"baseline-paper-bf16-t050-072","rows":320,"utc":"2026-09-30T08:26:40.539543+00:00"}
+{"completed":"baseline-paper-bf16-t050-073","rows":321,"utc":"2026-09-30T08:26:54.633824+00:00"}
+{"completed":"baseline-paper-bf16-t050-074","rows":322,"utc":"2026-09-30T08:27:26.595522+00:00"}
+{"completed":"baseline-paper-bf16-t050-075","rows":323,"utc":"2026-09-30T08:27:41.299572+00:00"}
+{"completed":"baseline-paper-bf16-t050-076","rows":324,"utc":"2026-09-30T08:28:03.224793+00:00"}
+{"completed":"baseline-paper-bf16-t050-077","rows":325,"utc":"2026-09-30T08:28:11.448524+00:00"}
+{"completed":"baseline-paper-bf16-t050-078","rows":326,"utc":"2026-09-30T08:28:32.518047+00:00"}
+{"completed":"baseline-paper-bf16-t050-079","rows":327,"utc":"2026-09-30T08:28:43.779457+00:00"}
+{"completed":"judge-paper-J01","rows":328,"utc":"2026-09-30T08:28:46.452834+00:00"}
+{"completed":"judge-paper-J02","rows":329,"utc":"2026-09-30T08:28:47.111236+00:00"}
+{"completed":"judge-paper-J03","rows":330,"utc":"2026-09-30T08:28:49.277743+00:00"}
+{"completed":"judge-paper-J04","rows":331,"utc":"2026-09-30T08:28:50.024621+00:00"}
+{"completed":"judge-paper-J05","rows":332,"utc":"2026-09-30T08:28:50.695318+00:00"}
+{"completed":"judge-paper-J06","rows":333,"utc":"2026-09-30T08:28:51.352346+00:00"}
+{"completed":"judge-paper-J07","rows":334,"utc":"2026-09-30T08:28:52.092935+00:00"}
+{"completed":"judge-paper-J08","rows":335,"utc":"2026-09-30T08:28:54.312603+00:00"}
+{"completed":"judge-paper-J09","rows":336,"utc":"2026-09-30T08:28:55.018921+00:00"}
+{"completed":"judge-paper-J10","rows":337,"utc":"2026-09-30T08:28:55.725719+00:00"}
+{"completed":"judge-paper-J11","rows":338,"utc":"2026-09-30T08:28:56.412183+00:00"}
+{"completed":"judge-paper-J12","rows":339,"utc":"2026-09-30T08:28:57.157523+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-000","rows":340,"utc":"2026-09-30T08:29:00.061084+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-001","rows":341,"utc":"2026-09-30T08:29:00.893136+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-002","rows":342,"utc":"2026-09-30T08:29:01.723653+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-003","rows":343,"utc":"2026-09-30T08:29:02.469065+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-004","rows":344,"utc":"2026-09-30T08:29:03.255434+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-005","rows":345,"utc":"2026-09-30T08:29:05.886404+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-006","rows":346,"utc":"2026-09-30T08:29:06.698682+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-007","rows":347,"utc":"2026-09-30T08:29:07.528728+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-008","rows":348,"utc":"2026-09-30T08:29:08.372099+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-009","rows":349,"utc":"2026-09-30T08:29:09.214118+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-010","rows":350,"utc":"2026-09-30T08:29:12.007630+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-011","rows":351,"utc":"2026-09-30T08:29:12.829797+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-012","rows":352,"utc":"2026-09-30T08:29:13.582424+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-013","rows":353,"utc":"2026-09-30T08:29:14.455843+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-014","rows":354,"utc":"2026-09-30T08:29:15.237288+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-015","rows":355,"utc":"2026-09-30T08:29:17.860659+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-016","rows":356,"utc":"2026-09-30T08:29:18.878857+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-017","rows":357,"utc":"2026-09-30T08:29:19.679878+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-018","rows":358,"utc":"2026-09-30T08:29:20.464049+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-019","rows":359,"utc":"2026-09-30T08:29:21.340111+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-020","rows":360,"utc":"2026-09-30T08:29:24.263535+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-021","rows":361,"utc":"2026-09-30T08:29:25.133189+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-022","rows":362,"utc":"2026-09-30T08:29:25.951657+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-023","rows":363,"utc":"2026-09-30T08:29:26.755417+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-024","rows":364,"utc":"2026-09-30T08:29:27.558873+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-025","rows":365,"utc":"2026-09-30T08:29:30.333932+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-026","rows":366,"utc":"2026-09-30T08:29:31.130245+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-027","rows":367,"utc":"2026-09-30T08:29:31.907392+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-028","rows":368,"utc":"2026-09-30T08:29:32.720465+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-029","rows":369,"utc":"2026-09-30T08:29:33.522113+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-030","rows":370,"utc":"2026-09-30T08:29:36.392898+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-031","rows":371,"utc":"2026-09-30T08:29:37.279640+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-032","rows":372,"utc":"2026-09-30T08:29:38.141618+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-033","rows":373,"utc":"2026-09-30T08:29:38.934810+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-034","rows":374,"utc":"2026-09-30T08:29:39.651601+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-035","rows":375,"utc":"2026-09-30T08:29:42.359192+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-036","rows":376,"utc":"2026-09-30T08:29:43.212040+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-037","rows":377,"utc":"2026-09-30T08:29:44.166183+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-038","rows":378,"utc":"2026-09-30T08:29:45.009304+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-039","rows":379,"utc":"2026-09-30T08:29:45.897119+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-040","rows":380,"utc":"2026-09-30T08:29:48.279670+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-041","rows":381,"utc":"2026-09-30T08:29:49.101905+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-042","rows":382,"utc":"2026-09-30T08:29:49.877880+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-043","rows":383,"utc":"2026-09-30T08:29:50.701118+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-044","rows":384,"utc":"2026-09-30T08:29:51.499715+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-045","rows":385,"utc":"2026-09-30T08:29:54.287091+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-046","rows":386,"utc":"2026-09-30T08:29:55.156824+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-047","rows":387,"utc":"2026-09-30T08:29:55.951682+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-048","rows":388,"utc":"2026-09-30T08:29:56.733078+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-049","rows":389,"utc":"2026-09-30T08:29:57.467750+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-050","rows":390,"utc":"2026-09-30T08:29:59.993049+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-051","rows":391,"utc":"2026-09-30T08:30:00.836607+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-052","rows":392,"utc":"2026-09-30T08:30:01.609880+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-053","rows":393,"utc":"2026-09-30T08:30:02.614689+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-054","rows":394,"utc":"2026-09-30T08:30:03.426886+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-055","rows":395,"utc":"2026-09-30T08:30:05.977913+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-056","rows":396,"utc":"2026-09-30T08:30:07.045169+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-057","rows":397,"utc":"2026-09-30T08:30:07.934452+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-058","rows":398,"utc":"2026-09-30T08:30:08.739814+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-059","rows":399,"utc":"2026-09-30T08:30:09.518918+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-060","rows":400,"utc":"2026-09-30T08:30:12.371699+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-061","rows":401,"utc":"2026-09-30T08:30:13.217413+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-062","rows":402,"utc":"2026-09-30T08:30:14.009437+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-063","rows":403,"utc":"2026-09-30T08:30:14.825618+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-064","rows":404,"utc":"2026-09-30T08:30:15.635658+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-065","rows":405,"utc":"2026-09-30T08:30:18.656944+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-066","rows":406,"utc":"2026-09-30T08:30:19.492998+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-067","rows":407,"utc":"2026-09-30T08:30:20.333415+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-068","rows":408,"utc":"2026-09-30T08:30:21.142277+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-069","rows":409,"utc":"2026-09-30T08:30:21.925518+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-070","rows":410,"utc":"2026-09-30T08:30:24.559436+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-071","rows":411,"utc":"2026-09-30T08:30:25.446155+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-072","rows":412,"utc":"2026-09-30T08:30:26.268867+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-073","rows":413,"utc":"2026-09-30T08:30:27.088888+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-074","rows":414,"utc":"2026-09-30T08:30:27.936039+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-075","rows":415,"utc":"2026-09-30T08:30:30.909477+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-076","rows":416,"utc":"2026-09-30T08:30:31.816176+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-077","rows":417,"utc":"2026-09-30T08:30:32.603250+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-078","rows":418,"utc":"2026-09-30T08:30:33.579268+00:00"}
+{"completed":"judge-paper-baseline-paper-bf16-t050-079","rows":419,"utc":"2026-09-30T08:30:34.320884+00:00"}
+{"completed":"judge-notebook-J01","rows":420,"utc":"2026-09-30T08:30:37.820376+00:00"}
+{"completed":"judge-notebook-J02","rows":421,"utc":"2026-09-30T08:30:38.636828+00:00"}
+{"completed":"judge-notebook-J03","rows":422,"utc":"2026-09-30T08:30:39.343539+00:00"}
+{"completed":"judge-notebook-J04","rows":423,"utc":"2026-09-30T08:30:40.024970+00:00"}
+{"completed":"judge-notebook-J05","rows":424,"utc":"2026-09-30T08:30:40.840580+00:00"}
+{"completed":"judge-notebook-J06","rows":425,"utc":"2026-09-30T08:30:43.781289+00:00"}
+{"completed":"judge-notebook-J07","rows":426,"utc":"2026-09-30T08:30:44.683590+00:00"}
+{"completed":"judge-notebook-J08","rows":427,"utc":"2026-09-30T08:30:45.462771+00:00"}
+{"completed":"judge-notebook-J09","rows":428,"utc":"2026-09-30T08:30:46.212053+00:00"}
+{"completed":"judge-notebook-J10","rows":429,"utc":"2026-09-30T08:30:46.952148+00:00"}
+{"completed":"judge-notebook-J11","rows":430,"utc":"2026-09-30T08:30:50.018526+00:00"}
+{"completed":"judge-notebook-J12","rows":431,"utc":"2026-09-30T08:30:50.831026+00:00"}
+{"completed":"teacher-positive-pc-calibration-01-zero-000","rows":432,"utc":"2026-09-30T08:30:51.714934+00:00"}
+{"completed":"teacher-positive-pc-calibration-02-zero-000","rows":433,"utc":"2026-09-30T08:30:52.443461+00:00"}
+{"completed":"teacher-positive-pc-calibration-03-zero-000","rows":434,"utc":"2026-09-30T08:30:53.254886+00:00"}
+{"completed":"teacher-positive-pc-calibration-04-zero-000","rows":435,"utc":"2026-09-30T08:30:56.427379+00:00"}
+{"completed":"teacher-positive-pc-calibration-05-zero-000","rows":436,"utc":"2026-09-30T08:30:57.249450+00:00"}
+{"completed":"teacher-positive-pc-calibration-06-zero-000","rows":437,"utc":"2026-09-30T08:30:58.016224+00:00"}
+{"completed":"teacher-positive-pc-calibration-07-zero-000","rows":438,"utc":"2026-09-30T08:30:58.726487+00:00"}
+{"completed":"teacher-positive-pc-calibration-08-zero-000","rows":439,"utc":"2026-09-30T08:30:59.432362+00:00"}
+{"completed":"teacher-positive-pc-calibration-09-zero-000","rows":440,"utc":"2026-09-30T08:31:02.463881+00:00"}
+{"completed":"teacher-positive-pc-calibration-10-zero-000","rows":441,"utc":"2026-09-30T08:31:03.266693+00:00"}
+{"completed":"teacher-positive-pc-calibration-11-zero-000","rows":442,"utc":"2026-09-30T08:31:03.969619+00:00"}
+{"completed":"teacher-positive-pc-calibration-12-zero-000","rows":443,"utc":"2026-09-30T08:31:04.713645+00:00"}

@@ -75,17 +75,23 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   runtime and outcome-free machine plan. Stable CPU preflight: 440 passed,
   zero skips. Stage 2 power simulations remain a separate later requirement.
 - [x] Push and verify the executable freeze `59d40b9` before GPU dispatch.
-- [ ] Pass cheap CUDA and initial real-model checks before bulk collection.
+- [x] Pass cheap CUDA and initial real-model checks before bulk collection.
   The first cheap pod failed at dependency bootstrap before inference and was
   retrieved/deleted for $0.0300157487. A1 changes only the dependency environment
-  and carries this spending forward; 441 local tests pass. A failed scientific
-  gate is reportable, an untested runtime is not clearance to continue.
+  and carries this spending forward. The replacement passed 19 CUDA tests
+  plus NF4; the main model passed zero/replay qualification and the first-five
+  audit. Both consequential encoder-decision checks passed. Scientific
+  qualification failures remain distinct from these successful runtime tests.
 - [x] Owner authorizes overnight Stage 1 after Pro corrections within the same
   $200 ceiling. This does not authorize Stage 2, a second Pro call, or changes
   to any pre-existing RunPod pod. Revised executable protocol:
   `docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md`.
-- [ ] Retrieve and hash-verify every new raw shard, preserve failed branches,
-  release a diagnostic summary, and verify termination of this run's pods.
+- [x] Retrieve/hash-verify all 468 GPU artifacts, release all 443 raw rows and
+  failed branches, and verify deletion of all three newly owned pods. No
+  pre-existing pod was claimed. Target doses and formatting candidate failed
+  qualification; local paper baseline 71/80 fails the headroom window.
+- [ ] Finish the eligible Astra/Opus baseline panel, portable receipt audit,
+  final figures and cost summary. This does not authorize Stage 2.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.

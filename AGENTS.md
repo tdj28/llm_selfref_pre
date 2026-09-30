@@ -49,6 +49,15 @@ immediately public and permanently recoverable.
   venv and carries $0.0300157487 into the same budget; its separate plan is
   `data/sae_assay_diagnostic/stage1_plan_20260930a/PLAN.json`. No scientific
   design changed. Pod `sbo5v90lrebggz` was retrieved and deleted, verified 404.
+- Stage 1 GPU diagnostics are complete in
+  `data/sae_assay_diagnostic/stage1_20260930/`: 443 raw rows, 468 verified
+  retrieved artifacts. Neither target dose qualified; the local paper baseline
+  is 71/80 and fails headroom. Formatting candidate 7688 has no calibration
+  activation. Gated validation/behavioral/optional branches were not run, not
+  zero effects. Both replacement qualification pod `qgpy4gtpswy460` and main
+  B200 `oyvmqyc22wffsd` were retrieved/deleted, direct GET 404. Modern judging
+  is ongoing; see checkpoint. Do not recreate a pod or launch Stage 2 from
+  these assay failures without a new approved design.
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
 - The paper-specific response is now maintained at
   `https://github.com/tdj28/berg2025-response`. This repository retains the full

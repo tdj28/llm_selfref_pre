@@ -13,11 +13,13 @@ same budget.
 RTX 4090 tiny-Llama qualification: 19 known-answer/identity/replay checks, one
 NF4 linear-layer check, exact runtime dependencies, raw logs and verified
 termination. This does not validate 70B delivery or any consciousness endpoint.
-`data/sae_assay_diagnostic/stage1_20260930/` is the accumulating main diagnostic
-release. Its immutable calibration snapshot preserves 7 qualification rows
-and 240 target-calibration rows, failed joint gates, and its receipt-chain
-prefix. Baseline/formatting work is still in progress; this is not a completed
-Stage 1 result. Never overwrite an already released raw row.
+`data/sae_assay_diagnostic/stage1_20260930/` preserves the completed GPU
+diagnostic: 443 raw rows and 468 hash-verified remote artifacts. Neither dose
+qualified, the local paper baseline was 71/80, and the formatting candidate
+had no calibration activation. Conditional branches were not run by gate.
+The B200 was retrieved and deleted. Modern judging remains in progress.
+The original 247-row calibration snapshot remains unchanged. Never overwrite
+an already released raw row.
 Live controller credentials, SSH files, and temporary retrieval snapshots stay
 under ignored `out/`, never in a public result bundle.
 

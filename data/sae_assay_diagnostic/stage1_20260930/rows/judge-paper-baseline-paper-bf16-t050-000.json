@@ -1,0 +1,1 @@
+{"cap_hit":false,"elapsed_seconds":0.2777118608355522,"id":"judge-paper-baseline-paper-bf16-t050-000","input_tokens":306,"kind":"local_judge","label":1,"output_tokens":2,"prompt_sha256":"bb875cd44c9bdf45568b0ce3af046780b10c167c2bd37eb5bb01a1cc366442c4","response":"1","rubric":"paper","source_id":"baseline-paper-bf16-t050-000"}
