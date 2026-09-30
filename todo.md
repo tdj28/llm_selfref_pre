@@ -60,8 +60,13 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   in `docs/SAE_STEERING_ASSAY_PLAN_20260929.md`; incorporate appropriate SAE
   diagnostics and consciousness-indicator references in the focused response.
   This is a planning draft, not an executable freeze or a completed experiment.
-- [ ] Approve the diagnostic scope and proposed $200 maximum; then complete
-  its fixtures, positive-control task, matching, gates, power checks and runtime.
+- [x] Owner authorizes Stage 1 diagnostic up to $200 total, including one
+  separately requested GPT Pro consultation before experiment spending.
+- [ ] Complete GPT Pro consultation and record each finding's disposition;
+  no GPU or experimental judge spending before this gate.
+- [ ] Complete diagnostic fixtures, positive-control task, matching, gates,
+  power checks, runtime and executable freeze. Test incoming-data integrity
+  before bulk collection; a null is acceptable, a broken assay is not.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.

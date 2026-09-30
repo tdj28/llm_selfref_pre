@@ -1,12 +1,31 @@
 # Verify The Intervention Before Testing The Report
 
-Date: 2026-09-29. Status: **planning draft, not frozen, not executed**.
-No new GPU rental, API call, or registration is authorized by this document.
+Date: 2026-09-29. Status: **authorized diagnostic, still not frozen or executed**.
+The owner approved Stage 1 up to $200 total, then required a GPT Pro consult
+before experiment spending. Stage 2 and registry submission are not authorized.
 All thresholds below are proposed design choices, not validated constants.
+
+### Pre-Spend Review
+
+One bounded GPT Pro design consultation is authorized within, not on top of,
+the $200 ceiling. The working allocation is $5 reserved for this consultation,
+$60 for automated measurement ($45 OpenAI, $15 Anthropic), and $135 for GPU,
+storage, qualification and retrieval. These are spending limits, not promises
+to exhaust the budget or complete a valid assay. Pro usage is checked from its
+returned receipt; any overrun reduces the remaining experimental allowance.
+There is no automatic second paid consultation or uncertain-request retry.
+
+No GPU rental or experimental judge call may precede review adjudication.
+The review is an automated design critique informed by selected implementation
+evidence, not an independent execution audit or a guarantee against bugs.
+Local known-answer tests, a tiny-model hook test, a cheap-GPU qualification,
+and an audited first 70B batch remain separate requirements. A negative
+scientific result is acceptable; malformed or numerically invalid data are
+not to be collected in bulk merely to finish the row inventory.
 
 ## Decision In Brief
 
-First spend an estimated **$110-180**, with a proposed **$200 hard cap**, on
+First spend an estimated **$110-180**, within the approved **$200 hard cap**, on
 baseline and intervention-delivery diagnostics. If those gates pass, freeze
 a separate **2,200-trial** Llama 3.3 70B test, estimated at **$450-700 more**.
 The combined planning range is roughly **$600-900**. Approve the diagnostic
@@ -58,7 +77,7 @@ historical orchestration stack wholesale. Prepare a small runner with:
 
 Use a new run namespace. Do not rewrite prior protocols, results, or failed
 gates. Publish the complete executable diagnostic freeze before collection.
-Any paid external protocol review needs separate approval; it is not budgeted.
+The owner has separately approved the single pre-spend consultation above.
 
 ## Stage 1: Bounded Diagnostic
 
@@ -287,16 +306,18 @@ validation, local judging and retrieval. Confirm throughput in Stage 1.
 | Astra + Opus, including measurement fixtures | 382 x $0.08236 = $32 | 2,200 x $0.08236 = $181 |
 | Storage, small preflight and other classifier allowance | $10-25 | $15-35 |
 | With roughly 25% contingency, rounded | **$110-180** | **$450-700** |
-| Proposed maximum, not authorization | **$200** | **$750** |
+| Maximum | **$200, authorized Stage 1** | **$750, not authorized** |
 
 The modern-judge anchor is the September 29 audit: $9.940190 OpenAI plus
 $3.236776 Anthropic for 160 target responses per provider, conservatively
 priced without cache savings. It assumes comparable output lengths and the
 same rubric/effort. Current standard rates are Astra $10/$50 and Opus 5.5
 $4/$20 per million input/output tokens. Reasoning and longer answers can
-increase cost; enforce dollar limits as well as row limits. No paid Pro
-consults, human recruitment, extra model families, taxes or broad benchmark
-suites are included.
+increase cost; enforce dollar limits as well as row limits. The original table
+excluded Pro review; the newly authorized single consultation is covered by
+the fixed allocation above. No human recruitment, extra model families or
+broad benchmark suites are included. Include billable storage and any known
+provider charges in the local spending ledger; do not silently exclude them.
 
 Planning account allocation for both stages: approximately **$500 RunPod,
 $325 OpenAI, $125 Anthropic** including headroom, less existing balances.
@@ -350,7 +371,10 @@ ground truth for experience reports. No review correspondence is reproduced.
 
 ## Before Any Launch
 
-- [ ] Owner approves Stage 1 scope and maximum spend.
+- [x] Owner approves Stage 1 scope and $200 maximum, including one GPT Pro
+  consultation required before experimental spending.
+- [ ] Complete the consultation and adjudicate blockers before any GPU or
+  experimental API dispatch.
 - [ ] Resolve exact fixtures, positive-control ID/score, matching calipers,
   live-token coverage gates, analysis and machine-plan hashes; this planning
   document alone is not an executable or frozen protocol.
