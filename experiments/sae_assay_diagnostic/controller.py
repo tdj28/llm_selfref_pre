@@ -190,9 +190,10 @@ def ssh_args(pod, key, known_hosts):
 def worker_script(kind, plan_relative, freeze, deadline):
     if not re.fullmatch(r"[0-9a-f]{40}", freeze) or PurePosixPath(plan_relative).is_absolute() or ".." in PurePosixPath(plan_relative).parts:
         raise ValueError("Unsafe frozen source path")
-    command = ["python3", "-m", "experiments.sae_assay_diagnostic.qualify", "--out", REMOTE + "/out/cheap-qualification.json"]
+    python = REMOTE + "/venv/bin/python"
+    command = [python, "-m", "experiments.sae_assay_diagnostic.qualify", "--out", REMOTE + "/out/cheap-qualification.json"]
     if kind == "main":
-        command = ["python3", "-m", "experiments.sae_assay_diagnostic.runner", "--plan", plan_relative,
+        command = [python, "-m", "experiments.sae_assay_diagnostic.runner", "--plan", plan_relative,
                    "--freeze", freeze, "--out", REMOTE + "/out", "--stage", "all",
                    "--cache", "/workspace/cache", "--deadline-utc", deadline]
     exit_code = "import json,sys; json.dump({'exit_code':int(sys.argv[1])},open('" + REMOTE + "/out/controller-exit.json','x'))"
@@ -202,8 +203,9 @@ def worker_script(kind, plan_relative, freeze, deadline):
         "git -c credential.helper= clone --filter=blob:none --no-checkout " + REPO + " " + REMOTE + "/repo",
         "cd " + REMOTE + "/repo", "git fetch --depth=1 origin " + freeze,
         "git checkout --detach " + freeze, 'test "$(git rev-parse HEAD)" = ' + freeze,
-        "python3 -m pip install -r experiments/sae_assay_diagnostic/requirements-gpu.txt",
-        "python3 -m pip freeze --all > " + REMOTE + "/out/pip-freeze.txt",
+        "python3 -m venv --system-site-packages " + REMOTE + "/venv",
+        python + " -m pip install -r experiments/sae_assay_diagnostic/requirements-gpu.txt",
+        python + " -m pip freeze --all > " + REMOTE + "/out/pip-freeze.txt",
         ". " + REMOTE + "/hf.env", shlex.join(command),
     ])
 
@@ -323,7 +325,7 @@ class Controller:
             raise ValueError("HF_TOKEN missing/malformed before creation")
         if not KEY.expanduser().is_file():
             raise ValueError("Existing private SSH key missing")
-        prior = Decimal(0)
+        prior = _number(self.plan.get("budget", {}).get("prior_compute_usd", 0))
         if self.kind == "main":
             cheap_path = self.out / "controller/cheap/events.jsonl"
             if not cheap_path.is_file():
@@ -332,7 +334,7 @@ class Controller:
             closed = next((r for r in cheap.read() if r["id"] == "closed"), None)
             if closed is None or (self.out / "APPROVE-cheap").read_text().strip() != self.plan_hash:
                 raise ValueError("Audited cheap qualification and verified deletion required")
-            prior = _number(closed["data"]["compute_upper_bound_usd"])
+            prior += _number(closed["data"]["compute_upper_bound_usd"])
             if prior > 5:
                 raise ValueError("Cheap qualification exceeded its cap")
         verify_public(self.plan_hash, self.relative, self.freeze)
@@ -345,7 +347,7 @@ class Controller:
         payload = create_payload(self.kind, PREFIX + self.kind + "-" + uuid.uuid4().hex[:12], key)
         created = self.clock()
         rate = _number(quoted["hourly_rate_usd"]) + STORAGE
-        limit = Decimal(5) if self.kind == "cheap" else Decimal(135) - prior
+        limit = (Decimal(5) if self.kind == "cheap" else Decimal(135)) - prior
         # Leave ten dollars globally, and ten minutes locally for retrieval/shutdown.
         worker_dollars = min(limit, Decimal(125) - prior) - rate / 6
         if worker_dollars <= 0:

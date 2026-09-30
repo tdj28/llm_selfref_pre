@@ -174,11 +174,21 @@ class ControllerTests(unittest.TestCase):
             script = c.worker_script(kind, "data/plan.json", FREEZE, UTC.isoformat())
             subprocess.run(["bash", "-n"], input=script.encode(), check=True, capture_output=True)
             self.assertIn("pip freeze --all", script)
+            self.assertIn("python3 -m venv --system-site-packages", script)
+            self.assertIn("/venv/bin/python -m pip install", script)
+            self.assertNotIn("python3 -m pip install", script)
             self.assertNotIn("APPROVE", script)
             self.assertNotIn("RUNPOD_API_KEY", script)
             self.assertIn("--stage all" if kind == "main" else "--out /workspace/sae-assay/out/cheap-qualification.json", script)
         for script in (c.SIGNAL_SCRIPT, c.MANIFEST_SCRIPT, c.STATUS_SCRIPT):
             compile(script, "remote_script", "exec")
+
+    def test_bootstrap_retry_carries_prior_spending_without_new_allowance(self):
+        self.ctrl.plan = {"budget": {"prior_compute_usd": .0300157487}}
+        self.launched()
+        intent = self.ctrl.event("create-intent")["data"]
+        self.assertEqual(Decimal(intent["prior_compute_usd"]), Decimal("0.0300157487"))
+        self.assertEqual(Decimal(intent["local_cap_usd"]), Decimal("4.9699842513"))
 
     def test_exit_trap_records_bootstrap_failure(self):
         with patch.object(c, "REMOTE", str(self.root / "remote")):

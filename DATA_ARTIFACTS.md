@@ -3,6 +3,12 @@
 The new outcome-free assay plan is
 `data/sae_assay_diagnostic/stage1_plan_20260929/PLAN.json`. It binds the revised
 Stage 1 runtime and tests before GPU outcomes; it is not an outcome release.
+The first cheap-pod bootstrap failed before inference; its exact log and
+termination receipt are in `data/sae_assay_diagnostic/bootstrap_failure_20260930/`.
+Bootstrap-only amendment A1 has a separate outcome-free plan in
+`data/sae_assay_diagnostic/stage1_plan_20260930a/`. The original plan is preserved;
+the scientific design is unchanged and the failed attempt counts toward the
+same budget.
 Live controller credentials, SSH files, and temporary retrieval snapshots stay
 under ignored `out/`, never in a public result bundle.
 

@@ -74,9 +74,12 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
 - [x] Complete diagnostic fixtures, candidate-control task, matching, gates,
   runtime and outcome-free machine plan. Stable CPU preflight: 440 passed,
   zero skips. Stage 2 power simulations remain a separate later requirement.
-- [ ] Push and verify the executable freeze, then pass cheap CUDA and initial
-  real-model checks before bulk collection; a failed scientific gate is
-  reportable, an untested runtime is not clearance to continue.
+- [x] Push and verify the executable freeze `59d40b9` before GPU dispatch.
+- [ ] Pass cheap CUDA and initial real-model checks before bulk collection.
+  The first cheap pod failed at dependency bootstrap before inference and was
+  retrieved/deleted for $0.0300157487. A1 changes only the dependency environment
+  and carries this spending forward; 441 local tests pass. A failed scientific
+  gate is reportable, an untested runtime is not clearance to continue.
 - [x] Owner authorizes overnight Stage 1 after Pro corrections within the same
   $200 ceiling. This does not authorize Stage 2, a second Pro call, or changes
   to any pre-existing RunPod pod. Revised executable protocol:

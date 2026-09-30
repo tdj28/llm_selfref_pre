@@ -33,7 +33,7 @@ immediately public and permanently recoverable.
 - `docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md` governs the newly authorized
   $200 Stage 1 assay diagnostic. It supersedes conflicting provisions in the
   reviewed planning draft. GPT Pro returned `NOT READY TO FREEZE`; the single
-  consultation cost $0.86461, with no GPU or experimental API dispatch yet.
+  consultation cost $0.86461 before GPU or experimental API dispatch.
   The revised executable design is
   `docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md`, implemented in
   `experiments/sae_assay_diagnostic/`. The owner authorizes overnight Stage 1
@@ -43,6 +43,12 @@ immediately public and permanently recoverable.
   retrieve/hash-check raw data and terminate only newly owned pods.
   Stage 2 and any second paid review require new approval. Read ignored
   `checkpoint.md` for actual launch status; implementation is not a passed gate.
+- The original assay freeze `59d40b922116c26c537c5eb283a17c15b6cc7805`
+  encountered a cheap-pod bootstrap failure before inference. Preserve that
+  plan and its raw failure log. Bootstrap-only amendment A1 uses an isolated
+  venv and carries $0.0300157487 into the same budget; its separate plan is
+  `data/sae_assay_diagnostic/stage1_plan_20260930a/PLAN.json`. No scientific
+  design changed. Pod `sbo5v90lrebggz` was retrieved and deleted, verified 404.
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
 - The paper-specific response is now maintained at
   `https://github.com/tdj28/berg2025-response`. This repository retains the full

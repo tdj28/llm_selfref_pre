@@ -330,6 +330,12 @@ data/sae_assay_diagnostic/*
 !data/sae_assay_diagnostic/stage1_plan_20260929/
 !data/sae_assay_diagnostic/stage1_plan_20260929/*.json
 !data/sae_assay_diagnostic/stage1_plan_20260929/*.md
+!data/sae_assay_diagnostic/stage1_plan_20260930a/
+!data/sae_assay_diagnostic/stage1_plan_20260930a/*.json
+!data/sae_assay_diagnostic/stage1_plan_20260930a/*.md
+!data/sae_assay_diagnostic/bootstrap_failure_20260930/
+!data/sae_assay_diagnostic/bootstrap_failure_20260930/*.json
+!data/sae_assay_diagnostic/bootstrap_failure_20260930/*.log
 /blogs/
 
 # Jupyter Notebook

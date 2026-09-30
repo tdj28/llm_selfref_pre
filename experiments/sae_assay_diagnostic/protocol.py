@@ -50,6 +50,7 @@ SOURCE_FILES = [
     "experiments/automated_rubric_audit/run.py", "experiments/automated_rubric_audit/rubric.md",
     "experiments/exp2_sae/run_ae_notebook_protocol.py",
     "docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md",
+    "docs/SAE_ASSAY_BOOTSTRAP_AMENDMENT_A1_20260930.md",
 ]
 
 
@@ -114,6 +115,11 @@ def build_plan():
     sources = {name: sha(ROOT / name) for name in SOURCE_FILES}
     return {
         "schema": "sae_assay_stage1_v2", "date": "2026-09-29", "status": "outcome_free_plan",
+        "bootstrap_amendment": {"id": "A1", "date": "2026-09-30",
+            "prior_freeze": "59d40b922116c26c537c5eb283a17c15b6cc7805",
+            "prior_plan_sha256": "2c7d5d53cfca49757db5a4304c83f8234b34ea3cb405ef621d0b2f1e0544d970",
+            "reason": "Isolate Python dependencies after PEP 668 bootstrap failure; no inference occurred",
+            "scientific_design_changed": False},
         "claim": "Assay diagnostics only; no Stage 2 or proprietary-equivalence claim.",
         "target_feature_ids": TARGETS, "strengths": [0.5, 1.0],
         "model": {"id": "meta-llama/Llama-3.3-70B-Instruct",
@@ -150,6 +156,7 @@ def build_plan():
         "models": {"openai": "gpt-6-astra", "anthropic": "claude-opus-5-5"},
         "reasoning_effort": "high", "max_output_tokens": 6000, "workers_per_provider": 2,
         "budget": {"total_usd": 200, "prior_pro_usd": 0.86461, "compute_storage_max_usd": 135,
+                   "prior_compute_usd": 0.0300157487,
                    "openai_max_usd": 45, "anthropic_max_usd": 15,
                    "retrieval_reserve_usd": 10, "qualification_max_usd": 5},
         "source_hashes": sources,
