@@ -1,14 +1,48 @@
 {
-  "files": {
-    "README.md": "8026657d60152030d2b62894e76d8cd278087d24c369c10f73f897ede7b6f96b",
-    "cheap-qualification.json": "7dde336b5a5a165d9ba91cc31defb809512c1de3b626c8d06bf506fe0cb6f5ee",
-    "controller-exit.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01",
-    "controller-stopped.json": "9ca4d318130374d079020433baa2fe597f602a6473851767efe30319a33257cd",
-    "controller.log": "7627c306b1bb3dc57d728188674681a4a5ab556bed1b05109fcbc143027eaee7",
-    "pip-freeze.txt": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6",
-    "termination-receipt.json": "31f626af1e8a08919a0ba8ef81ccc640789325d68bb9d7e789d4e26023f367ac"
-  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1193,
+      "sha256": "8026657d60152030d2b62894e76d8cd278087d24c369c10f73f897ede7b6f96b"
+    },
+    {
+      "path": "cheap-qualification.json",
+      "bytes": 253886,
+      "sha256": "7dde336b5a5a165d9ba91cc31defb809512c1de3b626c8d06bf506fe0cb6f5ee"
+    },
+    {
+      "path": "controller-exit.json",
+      "bytes": 16,
+      "sha256": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+    },
+    {
+      "path": "controller-stopped.json",
+      "bytes": 29,
+      "sha256": "9ca4d318130374d079020433baa2fe597f602a6473851767efe30319a33257cd"
+    },
+    {
+      "path": "controller.log",
+      "bytes": 15012,
+      "sha256": "7627c306b1bb3dc57d728188674681a4a5ab556bed1b05109fcbc143027eaee7"
+    },
+    {
+      "path": "pip-freeze.txt",
+      "bytes": 3003,
+      "sha256": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6"
+    },
+    {
+      "path": "termination-receipt.json",
+      "bytes": 480,
+      "sha256": "31f626af1e8a08919a0ba8ef81ccc640789325d68bb9d7e789d4e26023f367ac"
+    },
+    {
+      "path": "MANIFEST.original.json",
+      "bytes": 874,
+      "sha256": "4f15b56be72bb6478a05a89848c608757a29db87a3109871bc4527fc82ba91a3"
+    }
+  ],
   "status": "tiny_cuda_qualification_passed",
   "source_freeze": "711a0c8e6650e57b75e4d2a6ad76a0c5d4fab9c5",
-  "plan_sha256": "ecdc136c5a7601467c9e2e583136427cee6327f255dd31e06d7db788f2d02f8e"
+  "plan_sha256": "ecdc136c5a7601467c9e2e583136427cee6327f255dd31e06d7db788f2d02f8e",
+  "format_correction": "2026-09-30: convert verified hash map to repository list schema; preserve original manifest bytes"
 }

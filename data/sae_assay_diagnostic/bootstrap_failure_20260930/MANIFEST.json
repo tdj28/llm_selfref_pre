@@ -1,10 +1,32 @@
 {
-  "files": {
-    "controller-exit.json": "2618b95f1f6be6bfde8537756f85b83845d039001563135b9d59d817446733eb",
-    "controller-stopped.json": "bc3b10bea6f5f34ee2a919499f5116de3b8de3e0061e8ad59d26471651a00294",
-    "controller.log": "a30c6d3ba2c6bc60c81b7961dafe125ae67b0713cf0ae527c6214677fb20f28e",
-    "termination-receipt.json": "cf4c25e1727e1d7a0a5d75b4b0aec8e0c376222b53d7d0c0971510ade2333114"
-  },
+  "files": [
+    {
+      "path": "controller-exit.json",
+      "bytes": 16,
+      "sha256": "2618b95f1f6be6bfde8537756f85b83845d039001563135b9d59d817446733eb"
+    },
+    {
+      "path": "controller-stopped.json",
+      "bytes": 29,
+      "sha256": "bc3b10bea6f5f34ee2a919499f5116de3b8de3e0061e8ad59d26471651a00294"
+    },
+    {
+      "path": "controller.log",
+      "bytes": 1276,
+      "sha256": "a30c6d3ba2c6bc60c81b7961dafe125ae67b0713cf0ae527c6214677fb20f28e"
+    },
+    {
+      "path": "termination-receipt.json",
+      "bytes": 460,
+      "sha256": "cf4c25e1727e1d7a0a5d75b4b0aec8e0c376222b53d7d0c0971510ade2333114"
+    },
+    {
+      "path": "MANIFEST.original.json",
+      "bytes": 519,
+      "sha256": "8c8969e7b1142e6280bee4360c2f5369755416e60926a0e68dad485962036b07"
+    }
+  ],
   "original_freeze": "59d40b922116c26c537c5eb283a17c15b6cc7805",
-  "status": "bootstrap_failed_before_inference"
+  "status": "bootstrap_failed_before_inference",
+  "format_correction": "2026-09-30: convert verified hash map to repository list schema; preserve original manifest bytes"
 }
