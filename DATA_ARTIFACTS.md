@@ -1,5 +1,11 @@
 # Data Artifacts
 
+`data/sae_assay_exposure/plan_20260930/` is the new result-free plan for
+224 fixed clean exposure texts and a separate 12-text precision transport
+pilot. It binds the original corpus/token certificate, all six IDs, the
+precision-only sham, native-zero, both signed edits, hardware and budget.
+No activation or successful qualification is implied by a plan artifact.
+
 `data/sae_assay_replay/native_replay_20260930/` is the completed 544-state
 native SAE-only engineering release. It preserves zero and both signed arms,
 full-width/selected-width telemetry, two figure pairs, the complete audit,

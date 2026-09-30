@@ -421,6 +421,10 @@ data/sae_assay_replay/*
 !data/sae_assay_replay/native_replay_20260930/monitoring/
 !data/sae_assay_replay/native_replay_20260930/monitoring/*.json
 !data/sae_assay_replay/native_replay_20260930/monitoring/*.jsonl
+!data/sae_assay_exposure/
+data/sae_assay_exposure/*
+!data/sae_assay_exposure/plan_20260930/
+!data/sae_assay_exposure/plan_20260930/*.json
 !data/sae_assay_repair/reporting_correction_20260930/
 !data/sae_assay_repair/reporting_correction_20260930/*.json
 !data/sae_assay_repair/reporting_correction_20260930/*.csv

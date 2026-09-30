@@ -30,6 +30,17 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The next diagnostic is defined by
+  `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md` and
+  `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md`. It screens the fixed 224
+  clean texts, then runs a separate 12-text mixed-precision transport pilot
+  with native-zero, precision-only sham and both signed edits. No response
+  generation or judge calls. Its $25 sub-cap includes all work/retrieval,
+  starting from $27.6350693241315361 within the existing $200 limit.
+  A precision sham is not an unchanged native baseline; promoted-FP32 SAE
+  encoding is not the native BF16 readout. Preserve both distinctions and all
+  earlier gate failures. Only a new uniquely owned pod may be used. Preparation
+  is not execution, adequate exposure or behavioral qualification.
 - Native SAE-only replay is complete at
   `data/sae_assay_replay/native_replay_20260930/`; see
   `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`. All 544 states pass structural

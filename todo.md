@@ -135,12 +135,18 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`.
 - [ ] Repair delivery fidelity under the same thresholds before another
   full-model intervention run; native coordinate efficacy alone is insufficient.
+  The new `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md` defines a separate
+  12-text mixed-precision transport pilot with native-zero and precision-only
+  sham controls. Preparation is not qualification; retain the BF16 failure.
 - [ ] Build activation-enriched discovery and family-disjoint fresh validation
   for all six IDs, with a frozen screening cap and separate representative
   panel. Preserve the original 100-position/six-text minimum; do not inflate
   exposure with duplicate texts, NF4 measurements or dropped feature IDs.
   The 224-text authored design and exact tokenizer certificate are complete;
   actual activation screening and delivered-edit validation remain unrun.
+  Execution is being prepared under
+  `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md`, sharing a $25 maximum with
+  the separate precision pilot inside the existing $200 diagnostic ceiling.
 - [ ] Integrate the completed diagnostic into the focused companion using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of
