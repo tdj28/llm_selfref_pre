@@ -3,6 +3,27 @@
 Date: 2026-09-29. Status: **not approved or executed**. No coder has been
 replaced by an LLM, and no human result is claimed.
 
+## Owner Decision: Recruitment Deferred
+
+On 2026-09-29 the owner approved separating what is asserted from whom it
+refers to, but reported no resources for recruiting human coders. Paid,
+high-capability LLM judging is acceptable in principle. This approves the
+conceptual distinction, not the complete human codebook or its execution.
+
+Human annotation is deferred, not completed or replaced. The owner subsequently
+funded and authorized a separate Astra/Opus automated rubric audit, with a
+USD 100 ceiling. Its executable plan and mixed-claim rules are documented in
+`AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md` and must be publicly frozen before
+new judgments. Do not run LLMs through this human protocol and count their
+labels as human validation. This human protocol itself remains unexecuted.
+
+The proposed automated follow-up should preserve the original paper-rubric
+labels, obtain separate assertion and attribution labels with quoted evidence,
+and report every judge's results and disagreements. Cross-model agreement
+does not establish human agreement or truth. Because the responses and prior
+labels have already been inspected, this is a post-hoc measurement audit,
+even if the new judging plan is frozen before execution.
+
 ## Why Change The Task
 
 The public v3 packet was intended to estimate causal effects with human

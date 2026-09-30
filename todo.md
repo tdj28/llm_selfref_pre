@@ -31,6 +31,20 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
 - [ ] Approve the instrument-validation codebook before starting human coding.
   Keep initial workload at the existing 160 rows unless the owner approves a
   different sample. Public-text masking is not secure condition blinding.
+  Human recruitment is deferred for lack of resources (owner decision,
+  2026-09-29); do not count an LLM panel as completing this item.
+- [x] Obtain funding and execution approval for the separate automated rubric
+  audit: GPT-6 Astra plus Claude Opus 5.5, all 160 existing wave-1 responses,
+  USD 100 maximum (owner authorization 2026-09-29).
+- [ ] Validate and publicly freeze its codebook, plan, runtime and analysis;
+  pass separate synthetic calibration before target judging. Preserve original
+  scoring and all per-judge outcomes/disagreements. This is post-hoc measurement
+  work, not independent human validation.
+- [ ] Complete, audit and release the two-model labels and integrate the
+  bounded result into the response manuscript. Human recruitment stays deferred.
+- [ ] Incorporate Chandaria et al., arXiv:2609.35618v1, as a versioned preprint
+  reference: report change, validated internal access and consciousness are
+  distinct inferences; favorable citation of Berg is not independent replication.
 - [ ] Prepare and human-review an unsteered baseline diagnostic crossing paper
   versus notebook prompt/judge, temperature and NF4 versus BF16 precision.
   A reconstruction-only arm is a separately labeled implementation hypothesis.

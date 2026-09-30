@@ -16,6 +16,14 @@ the release manifest is rebuilt.
 
 ## September Review Diagnostics
 
+`data/automated_rubric_audit/v1_20260929/` is the separately frozen post-hoc
+linguistic audit of the unchanged 160-response public packet. It retains the
+result-free plan, twelve distinct synthetic calibration examples, original
+public labels, new Astra/Opus provider receipts, costs, failures and derived
+descriptive analyses as each stage completes. This is not human validation,
+and no private condition-linkage key or human coder file belongs in it.
+Its protocol is `docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md`.
+
 `docs/review_audit_20260929/` contains new **post-hoc** measurement and steering
 audit JSON, input hashes, and a baseline/delivery figure. They reproduce checks
 prompted by Claude's review; they are not newly generated model outcomes or
