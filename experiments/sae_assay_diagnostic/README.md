@@ -1,10 +1,9 @@
 # SAE Assay Diagnostic
 
-Prototype components for the [Stage 1 plan](../../docs/SAE_STEERING_ASSAY_PLAN_20260929.md).
-**Not an executable freeze. No real-model results exist for this diagnostic.**
-The [Pro adjudication](../../docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md) supersedes
-the draft's inventory and control arms; the prototype judge still needs its
-370-response assumption removed before use.
+Implementation of the [revised Stage 1 protocol](../../docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md).
+The original reviewed draft and authentic Pro receipt are preserved separately.
+The machine plan binds all executable sources before GPU outcomes; completion
+of implementation is not a claim that a real-model gate has passed.
 The owner approved $200 total and required GPT Pro review before experimental
 spending. Stage 2 is not authorized.
 
@@ -20,14 +19,23 @@ spending. Stage 2 is not authorized.
   receipts, fixture gates and interruption-safe resume. It refuses unbound
   plans; it is not authorization to dispatch.
 
-Before launch, the parent workflow still needs the result-free machine plan,
-matching and analysis, pinned environment, cost/lifecycle controller, positive-
-control and failure rules, public freeze, GPU qualification and first-batch
-audit. Re-encoded selected/full discrepancies and candidate-to-panel encoding
-shapes require an explicit calibration policy. Do not improvise these at run
-time or interpret a prototype test pass as a 70B manipulation pass.
+- `protocol.py`: result-free inventories and source/commit binding.
+- `runner.py`: target-first execution, exact replay, immutable raw rows,
+  calibration-only dose selection, conditional branches and audit barriers.
+- `analysis.py` / `report.py`: separate delivery/failure gates and descriptive
+  baseline estimates, with missingness preserved.
+- `matching.py`: outcome-masked optional comparator matching and qualification.
+- `budget.py` / `controller.py`: append-only receipts, hard spending limits,
+  owned-pod lifecycle, verified retrieval and termination. The controller never
+  automatically approves a scientific audit barrier.
+- `qualify.py` / `validate.py`: known-answer tiny-model checks and independently
+  implemented structural validation. Tiny checks do not qualify 70B semantics.
 
-CPU tests use `tests/test_sae_assay_{backend,fixtures,judge}.py`. Transformers
+Order: free tests and public freeze, cheap CUDA qualification, fixed real-model
+qualification, target delivery, core baseline, eligible formatting, optional
+comparators/baselines, then retrieval and release. No Stage 2 auto-launch.
+
+CPU tests use `tests/test_sae_assay_*.py`. Transformers
 4.47.1 is required for the randomly initialized tiny Llama tests; no downloaded
 weights or API calls are used. The review packet records the exact executed
 command, results and source hashes. All experimental artifacts must use a new

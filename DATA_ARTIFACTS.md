@@ -1,5 +1,11 @@
 # Data Artifacts
 
+The new outcome-free assay plan is
+`data/sae_assay_diagnostic/stage1_plan_20260929/PLAN.json`. It binds the revised
+Stage 1 runtime and tests before GPU outcomes; it is not an outcome release.
+Live controller credentials, SSH files, and temporary retrieval snapshots stay
+under ignored `out/`, never in a public result bundle.
+
 This repository tracks selected raw result bundles used by the causal stress-test manuscript.
 The repo still ignores secrets, model caches, LaTeX build products, Python caches, and ad hoc future output directories.
 

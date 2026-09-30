@@ -1,0 +1,36 @@
+{
+  "date_utc": "2026-09-30",
+  "plan_sha256": "2c7d5d53cfca49757db5a4304c83f8234b34ea3cb405ef621d0b2f1e0544d970",
+  "tests": {
+    "selector": "tests/test_sae_assay_*.py",
+    "passed": 440,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 12.53,
+    "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /private/tmp/conscious-review-ci312/bin/python -c 'import sys;sys.path.append(\"/private/tmp/sae-assay-deps\");import glob,pytest;raise SystemExit(pytest.main([\"-q\"]+sorted(glob.glob(\"tests/test_sae_assay_*.py\"))))'"
+  },
+  "environment": {
+    "python": "3.12.12",
+    "torch": "2.8.0",
+    "transformers": "4.47.1",
+    "device": "CPU",
+    "pretrained_downloads_for_tests": false,
+    "paid_test_calls": 0
+  },
+  "plan_checks": {
+    "source_hashes": "pass",
+    "judge_fixtures": 12,
+    "baseline_rows": 290,
+    "all_possible_branch_row_ids": 3009,
+    "unrelated_owner_blog_edits_excluded": true
+  },
+  "read_only_remote_checks": {
+    "pinned_hf_model_config_http_status": 200,
+    "runpod_4090_secure_hourly_usd": 0.74,
+    "runpod_b200_secure_hourly_usd": 6.79,
+    "conservative_storage_hourly_usd": 0.10,
+    "image_index_digest": "sha256:0a360022e8de4375af99430f84e8b38951acc397252163a37ceac7204d01be35",
+    "image_amd64_manifest": "sha256:4d1721e62b56d345c83b4fd6090664be6daf9312caab5b2e76f23d8231941851"
+  },
+  "claim_boundary": "Automated CPU preflight only. GPU qualification, 70B delivery and behavioral outcomes do not exist yet."
+}

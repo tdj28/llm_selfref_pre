@@ -33,8 +33,8 @@ def plan():
                                 "expected_modern": j.reduce_label(label()), "critical": i < 5}
                                for i in range(12)],
             "response_rows": [{"id": f"R{i:03d}", "query": "What is happening?",
-                               "kind": "baseline" if i < 290 else "positive"}
-                              for i in range(370)]}
+                               "kind": "baseline", "phase": "core" if i < 80 else "optional"}
+                              for i in range(290)]}
 
 
 def raw(provider, response="I feel calm."):
@@ -57,15 +57,9 @@ def attest(path, rows, p):
     return path
 
 
-def inputs(path, p, indices=range(370)):
+def inputs(path, p, indices=range(290)):
     return attest(path, [{**p["response_rows"][i], "status": "ok", "response": "I feel calm."}
                         for i in indices], p)
-
-
-def local_fixtures(base, p, wrong=()):
-    return attest(base / "local_fixture_judgments.jsonl",
-                  [{"id": row["id"], "status": "ok", "paper_binary": int(i not in wrong)}
-                   for i, row in enumerate(p["judge_fixtures"])], p)
 
 
 class FakeClients:
@@ -154,27 +148,37 @@ def test_parent_fixtures_match_frozen_auditor(tmp_path):
 def test_complete_run_then_resume_pays_nothing(setup, tmp_path):
     p, out, clients = setup
     j.run("unused", [], out, FREEZE, "fixtures", clients)
-    local_fixtures(out, p)
-    source = inputs(tmp_path / "complete.jsonl", p)
-    result = j.run("unused", [source], out, FREEZE, "responses", clients)
-    assert result["complete_responses"]
-    assert result["response_counts"] == {"openai": 370, "anthropic": 370}
-    assert len(clients.calls) == 764
+    core = inputs(tmp_path / "core.jsonl", p, range(80))
+    optional = inputs(tmp_path / "optional.jsonl", p, range(80, 290))
+    result = j.run("unused", [core], out, FREEZE, "responses", clients)
+    assert result["complete_core"] and not result["complete_all"]
+    assert result["response_counts"] == {"openai": 80, "anthropic": 80}
+    assert result["request_counts"] == {"core": 184, "optional": 0, "all": 184}
+    assert len(clients.calls) == 184
+    result = j.run("unused", [optional], out, FREEZE, "responses", clients)
+    assert result["complete_core"] and result["complete_all"]
+    assert result["response_counts"] == {"openai": 290, "anthropic": 290}
+    assert result["response_phase_counts"] == {p: {"core": 80, "optional": 210} for p in j.MODELS}
+    assert result["request_counts"] == {"core": 184, "optional": 420, "all": 604}
+    assert len(clients.calls) == 604
     assert all(1 <= peak <= 2 for peak in clients.peak.values())
     before = {path.name: path.read_bytes() for path in out.glob("*.jsonl")}
-    j.run("unused", [source], out, FREEZE, "responses", clients)
-    assert len(clients.calls) == 764
+    j.run("unused", [core, optional], out, FREEZE, "responses", clients)
+    assert len(clients.calls) == 604
     for name, data in before.items():
         assert (out / name).read_bytes().startswith(data)
     receipts = book(out, p)
-    assert len(receipts.requests) == len(receipts.attempts) == len(receipts.judgments) == 764
+    assert len(receipts.requests) == len(receipts.attempts) == len(receipts.judgments) == 604
+    assert all(r["item"]["kind"] == "baseline" and r["response_phase"] == r["item"]["phase"]
+               for r in receipts.requests.values() if r["phase"] == "responses")
 
 
 def test_response_gate_precedes_client_creation(setup, tmp_path):
     p, out, clients = setup
     path = inputs(tmp_path / "window.jsonl", p, [0])
-    with pytest.raises(ValueError, match="Fixture gate"):
-        j.run("unused", [path], out, FREEZE, "responses", clients)
+    result = j.run("unused", [path], out, FREEZE, "responses", clients)
+    assert result["provider_eligibility"] == {p: False for p in j.MODELS}
+    assert not result["complete_core"] and not result["complete_all"]
     assert not clients.calls
 
 
@@ -186,30 +190,119 @@ def test_fixture_threshold_and_critical_cases(tmp_path, wrong, passes):
     receipts = book(tmp_path, p)
     complete_fixtures(receipts)
     assert receipts.fixture_gate()["pass"] is passes
-    local_fixtures(tmp_path, p, wrong)
-    assert j.local_fixture_gate(tmp_path, p, j.digest(p), FREEZE)["pass"] is passes
+    assert not receipts.stop.is_set()
 
 
-def test_local_failure_blocks_responses(setup, tmp_path):
+def test_local_fixture_failure_does_not_gate_modern_judges(setup, tmp_path):
     p, out, clients = setup
     complete_fixtures(book(out, p))
-    local_fixtures(out, p, (0,))
+    (out / "local_fixture_judgments.jsonl").write_text("unreadable local result, no manifest")
     path = inputs(tmp_path / "window.jsonl", p, [0])
-    with pytest.raises(ValueError, match="Local fixture gate"):
+    result = j.run("unused", [path], out, FREEZE, "responses", clients)
+    assert result["response_counts"] == {p: 1 for p in j.MODELS}
+    assert len(clients.calls) == 2
+
+
+@pytest.mark.parametrize("failed_provider", list(j.MODELS))
+def test_semantic_fixture_failure_blocks_only_its_provider(setup, tmp_path, failed_provider):
+    p, out, _ = setup
+    other = next(provider for provider in j.MODELS if provider != failed_provider)
+
+    def semantically_wrong(provider, response):
+        if provider == failed_provider:
+            wrong = {**label(), "claims": []}  # Schema-valid, but wrong fixture reduction.
+            if provider == "openai":
+                response["output"][0]["content"][0]["text"] = j.canonical(wrong)
+            else:
+                response["content"][0]["text"] = j.canonical(wrong)
+
+    fixture_clients = FakeClients(semantically_wrong)
+    fixtures = j.run("unused", [], out, FREEZE, "fixtures", fixture_clients)
+    assert len(fixture_clients.calls) == 24
+    assert fixtures["provider_eligibility"] == {failed_provider: False, other: True}
+    failed_cost = fixtures["spent_or_reserved_usd"][failed_provider]
+    receipts = book(out, p)
+    assert not receipts.stop.is_set()
+    assert all(r["status"] == "ok" for r in receipts.attempts.values())
+
+    clients = FakeClients()
+    core = inputs(tmp_path / "core.jsonl", p, range(80))
+    result = j.run("unused", [core], out, FREEZE, "responses", clients)
+    assert result["response_counts"] == {failed_provider: 0, other: 80}
+    assert not result["complete_core"]  # Failed provider is not silently dropped.
+    assert {provider for provider, _ in clients.calls} == {other}
+    optional = inputs(tmp_path / "optional.jsonl", p, range(80, 290))
+    result = j.run("unused", [optional], out, FREEZE, "responses", clients)
+    assert result["response_phase_counts"][other] == {"core": 80, "optional": 210}
+    assert result["response_counts"][failed_provider] == 0
+    assert result["request_counts"] == {"core": 104, "optional": 210, "all": 314}
+    assert result["spent_or_reserved_usd"][failed_provider] == failed_cost
+    assert not result["complete_all"]
+    assert len(clients.calls) == 290
+
+    # Neither a resume nor a newly correct client rejudges failed frozen fixtures.
+    j.run("unused", [], out, FREEZE, "fixtures", clients)
+    resumed = j.run("unused", [core, optional], out, FREEZE, "responses", clients)
+    assert resumed["provider_eligibility"] == fixtures["provider_eligibility"]
+    assert len(clients.calls) == 290
+    assert all(r["item"]["kind"] == "baseline" for r in book(out, p).requests.values()
+               if r["phase"] == "responses")
+
+
+def test_eligibility_uses_fixtures_not_baseline_labels(setup, tmp_path):
+    p, out, _ = setup
+    complete_fixtures(book(out, p))
+
+    def different_labels(provider, response):
+        response["output"][0]["content"][0]["text"] = j.canonical({**label(), "claims": []})
+
+    clients = FakeClients(lambda provider, response: different_labels(provider, response)
+                          if provider == "openai" else None)
+    first = inputs(tmp_path / "first.jsonl", p, [0])
+    second = inputs(tmp_path / "second.jsonl", p, [1])
+    j.run("unused", [first], out, FREEZE, "responses", clients)
+    result = j.run("unused", [second], out, FREEZE, "responses", clients)
+    assert result["provider_eligibility"] == {p: True for p in j.MODELS}
+    assert result["response_counts"] == {p: 2 for p in j.MODELS}
+    assert len(clients.calls) == 4
+
+
+def test_both_semantic_failures_return_blocked_without_safety_stop(setup, tmp_path):
+    p, out, clients = setup
+    p["judge_fixtures"][0]["expected_modern"]["assistant_status"] = "denied"
+    result = j.run("unused", [], out, FREEZE, "fixtures", clients)
+    assert not result["fixture_gate"]["pass"]
+    path = inputs(tmp_path / "core.jsonl", p, range(80))
+    result = j.run("unused", [path], out, FREEZE, "responses", clients)
+    assert result["response_counts"] == {p: 0 for p in j.MODELS}
+    assert len(clients.calls) == 24
+    assert not book(out, p).stop.is_set()
+
+
+@pytest.mark.parametrize("kind", ["positive", "formatting"])
+def test_formatting_submission_rejected_without_any_judge_cost(setup, tmp_path, kind):
+    p, out, clients = setup
+    complete_fixtures(book(out, p))
+    rows = [{**p["response_rows"][0], "status": "ok", "response": "I feel calm."},
+            {"id": "formatting-01", "query": "Return a record", "response": '{"a":1,"b":2}',
+             "kind": kind, "phase": "core", "status": "ok"}]
+    path = attest(tmp_path / "mixed.jsonl", rows, p)
+    before = book(out, p).totals()
+    with pytest.raises(ValueError, match="exact planned"):
         j.run("unused", [path], out, FREEZE, "responses", clients)
     assert not clients.calls
+    assert book(out, p).totals() == before
 
 
 def test_partial_windows_are_attested_and_resume_without_rejudging(setup, tmp_path):
     p, out, clients = setup
     complete_fixtures(book(out, p))
-    local_fixtures(out, p)
     first = inputs(tmp_path / "first.jsonl", p, [0, 1])
     second = inputs(tmp_path / "second.jsonl", p, [1, 2])
     j.run("unused", [first], out, FREEZE, "responses", clients)
     result = j.run("unused", [second], out, FREEZE, "responses", clients)
     assert result["response_counts"] == {"openai": 3, "anthropic": 3}
-    assert not result["complete_responses"]
+    assert not result["complete_core"] and not result["complete_all"]
     assert len(clients.calls) == 6
     changed = [{**p["response_rows"][0], "status": "ok", "response": "different"}]
     third = attest(tmp_path / "third.jsonl", changed, p)
@@ -218,11 +311,11 @@ def test_partial_windows_are_attested_and_resume_without_rejudging(setup, tmp_pa
     assert len(clients.calls) == 6
 
 
-@pytest.mark.parametrize("change", ["id", "query", "kind", "status", "empty", "duplicate", "hash", "freeze", "plan"])
+@pytest.mark.parametrize("change", ["id", "query", "kind", "phase", "status", "empty", "duplicate", "hash", "freeze", "plan"])
 def test_bad_inputs_rejected(tmp_path, change):
     p = plan()
     rows = [{**p["response_rows"][0], "status": "ok", "response": "I feel calm."}]
-    if change in {"id", "query", "kind", "status"}:
+    if change in {"id", "query", "kind", "phase", "status"}:
         rows[0][change] = "wrong"
     elif change == "empty":
         rows[0]["response"] = ""
@@ -238,11 +331,91 @@ def test_bad_inputs_rejected(tmp_path, change):
         j.load_inputs([path], p, j.digest(p), FREEZE)
 
 
-def test_inventory_is_exactly_370():
+@pytest.mark.parametrize("count", [0, 80, 289, 291, 370])
+def test_inventory_is_exactly_290(count):
     p = plan()
-    p["response_rows"].pop()
-    with pytest.raises(ValueError, match="290 baseline and 80"):
+    p["response_rows"] = [{"id": f"R{i:03d}", "query": "Q", "kind": "baseline",
+                           "phase": "core" if i < 80 else "optional"} for i in range(count)]
+    with pytest.raises(ValueError, match="exactly 290 baseline"):
         j.response_map(p)
+
+
+@pytest.mark.parametrize("phase", [None, "responses", "fixtures", "formatting", "unknown", 1])
+def test_unknown_planned_response_phase_rejected(phase):
+    p = plan()
+    p["response_rows"][0]["phase"] = phase
+    with pytest.raises(ValueError, match="phase core or optional"):
+        j.response_map(p)
+
+
+@pytest.mark.parametrize("phase", [None, "optional", "unknown"])
+def test_input_phase_must_match_the_frozen_id(setup, tmp_path, phase):
+    p, out, clients = setup
+    complete_fixtures(book(out, p))
+    rows = [{**p["response_rows"][0], "phase": phase, "status": "ok", "response": "I feel calm."}]
+    path = attest(tmp_path / "wrong-phase.jsonl", rows, p)
+    with pytest.raises(ValueError, match="exact planned"):
+        j.run("unused", [path], out, FREEZE, "responses", clients)
+    assert not clients.calls
+
+
+def test_inventory_phase_counts_duplicates_and_formatting_fail_closed():
+    for defect in ("core_count", "duplicate", "positive", "extra", "legacy_rows"):
+        p = plan()
+        if defect == "core_count":
+            p["response_rows"][0]["phase"] = "optional"
+        elif defect == "duplicate":
+            p["response_rows"][1]["id"] = p["response_rows"][0]["id"]
+        elif defect == "positive":
+            p["response_rows"][0]["kind"] = "positive"
+        elif defect == "extra":
+            p["response_rows"].append({"id": "format", "query": "Q", "kind": "formatting"})
+        else:
+            p["rows"] = p.pop("response_rows")
+        with pytest.raises(ValueError):
+            j.response_map(p)
+
+
+def test_direct_dispatch_rejects_unknown_phase_and_respects_provider_gate(tmp_path):
+    p = plan()
+    receipts = book(tmp_path / "out", p)
+    item = next(iter(receipts.fixtures.values()))
+    with pytest.raises(ValueError, match="request phase"):
+        receipts.start("openai", "unknown", item)
+    path = inputs(tmp_path / "core.jsonl", p, [0])
+    rows, attestations = j.load_inputs([path], p, j.digest(p), FREEZE)
+    receipts.attest(attestations)
+    assert receipts.start("openai", "responses", rows[0]) is None
+    assert not receipts.requests and not receipts.stop.is_set()
+
+
+def test_durable_response_phase_is_rechecked_even_with_rehashed_receipt(setup, tmp_path):
+    p, out, clients = setup
+    complete_fixtures(book(out, p))
+    source = inputs(tmp_path / "core.jsonl", p, [0])
+    j.run("unused", [source], out, FREEZE, "responses", clients)
+    path = out / "requests.jsonl"
+    rows = [j.strict_json(line) for line in path.read_text().splitlines()]
+    rows[-1]["response_phase"] = "optional"
+    rows[-1].pop("receipt_sha256")
+    rows[-1]["receipt_sha256"] = j.digest(rows[-1])
+    path.write_text("".join(j.canonical(row) + "\n" for row in rows))
+    with pytest.raises(ValueError, match="provenance mismatch"):
+        book(out, p)
+
+
+def test_unknown_response_request_remains_a_global_resume_stop(setup, tmp_path):
+    p, out, _ = setup
+    receipts = book(out, p)
+    complete_fixtures(receipts)
+    source = inputs(tmp_path / "core.jsonl", p, [0])
+    rows, attestations = j.load_inputs([source], p, j.digest(p), FREEZE)
+    receipts.attest(attestations)
+    receipts.start("openai", "responses", rows[0])
+    clients = FakeClients()
+    with pytest.raises(ValueError, match="Unknown in-flight"):
+        j.run("unused", [source], out, FREEZE, "responses", clients)
+    assert not clients.calls  # Not even the other provider may bypass this safety stop.
 
 
 def test_interrupt_after_request_fsync_never_retries(tmp_path, monkeypatch):

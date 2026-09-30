@@ -323,6 +323,13 @@ data/causal_transplant/confirmatory_v1_20260709/annotation_key*_private.csv
 data/causal_transplant/confirmatory_v1_20260709/annotation_key*_private.csv.sha256
 data/causal_transplant/confirmatory_v1_20260709/coder_*.csv
 checkpoint.md
+
+# Prospective assay diagnostic, never credentials or downloaded model weights.
+!data/sae_assay_diagnostic/
+data/sae_assay_diagnostic/*
+!data/sae_assay_diagnostic/stage1_plan_20260929/
+!data/sae_assay_diagnostic/stage1_plan_20260929/*.json
+!data/sae_assay_diagnostic/stage1_plan_20260929/*.md
 /blogs/
 
 # Jupyter Notebook

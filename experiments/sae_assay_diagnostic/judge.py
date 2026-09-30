@@ -1,13 +1,16 @@
 """Budgeted Stage 1 judges; running this CLI dispatches paid requests.
 
-The frozen plan supplies judge_fixtures and response_rows (or rows containing
-baseline/positive entries). Response inputs have a sibling <name>.manifest.json:
+The frozen plan supplies 12 judge_fixtures and exactly 290 response_rows, all
+kind=baseline: 80 phase=core and 210 phase=optional. Formatting outputs are not
+eligible. Response inputs have a sibling <name>.manifest.json:
 {sha256, plan_sha256, freeze_commit, ids}. The producer attests these fields
 after generation; they are not a second prospective freeze. Partial windows
-must remain subsets of the same 370-row inventory. Use ONE outdir for all phases
+must remain subsets of the same 290-row inventory. Use ONE outdir for all phases
 and windows. Never delete receipts to resume; unknown requests require review.
-Before responses, outdir/local_fixture_judgments.jsonl and its same-format
-manifest must attest 12 {id, status, paper_binary} local-judge fixture rows.
+Only that provider's frozen fixtures determine its response eligibility. A
+semantic fixture failure is not a global safety stop. Local Llama fixture
+gates and optional-branch authorization belong to the parent, not this runner.
+Maximum calls: 184 core (including fixtures), 420 optional, 604 total.
 The parent's authorization/Pro-review gate is separate from this budget ledger.
 """
 
@@ -36,6 +39,7 @@ from experiments.automated_rubric_audit.run import (
 
 CAPS = {"openai": Decimal("45"), "anthropic": Decimal("15")}
 TOTAL_CAP = Decimal("60")
+RESPONSE_COUNTS = {"core": 80, "optional": 210}
 REQUIRED_SOURCES = (
     "experiments/sae_assay_diagnostic/judge.py",
     "experiments/automated_rubric_audit/common.py",
@@ -88,7 +92,7 @@ def verify_plan(path, freeze):
     plan = strict_json(data)
     if (plan.get("reasoning_effort") != "high" or plan.get("max_output_tokens") != 6000
             or type(plan.get("max_output_tokens")) is not int
-            or plan.get("models", MODELS) != MODELS):
+            or plan.get("models") != MODELS):
         raise ValueError("Model/effort/output contract changed")
     workers = plan.get("workers_per_provider", 2)
     if type(workers) is not int or not 1 <= workers <= 2:
@@ -139,11 +143,15 @@ def fixture_map(plan):
 
 
 def response_map(plan):
-    rows = plan.get("response_rows", plan.get("rows", []))
-    rows = item_map([r for r in rows if r.get("kind") in {"baseline", "positive"}])
-    if len(rows) != 370 or Counter(r["kind"] for r in rows.values()) != {
-            "baseline": 290, "positive": 80}:
-        raise ValueError("Plan must contain exactly 290 baseline and 80 positive IDs")
+    inventory = plan.get("response_rows")
+    if not isinstance(inventory, list) or len(inventory) != sum(RESPONSE_COUNTS.values()):
+        raise ValueError("Plan must contain exactly 290 baseline response rows")
+    rows = item_map(inventory)
+    if any(row.get("kind") != "baseline" or row.get("phase") not in ("core", "optional")
+           for row in rows.values()):
+        raise ValueError("Responses must be baseline rows with phase core or optional")
+    if Counter(row["phase"] for row in rows.values()) != RESPONSE_COUNTS:
+        raise ValueError("Response phases must contain exactly 80 core and 210 optional IDs")
     if set(rows) & set(fixture_map(plan)):
         raise ValueError("Fixture and response IDs overlap")
     return rows
@@ -175,34 +183,10 @@ def load_inputs(paths, plan, plan_hash, freeze):
         attestations.append({"path": str(path), "sha256": manifest["sha256"],
                              "manifest_sha256": sha(manifest_path), "manifest": manifest,
                              "row_hashes": {r["id"]: digest(r) for r in rows}})
-    if not selected or len(selected) > 370:
-        raise ValueError("Response inputs must contain 1..370 planned rows")
+    if not selected or len(selected) > sum(RESPONSE_COUNTS.values()):
+        raise ValueError("Response inputs must contain 1..290 planned baseline rows")
     # Plan order, not input order or intermediate outcomes, determines dispatch.
     return [selected[k] for k in expected if k in selected], attestations
-
-
-def local_fixture_gate(outdir, plan, plan_hash, freeze):
-    path = Path(outdir) / "local_fixture_judgments.jsonl"
-    manifest_path = Path(str(path) + ".manifest.json")
-    manifest = strict_json(manifest_path.read_bytes())
-    data = path.read_bytes()
-    if (manifest.get("sha256") != hashlib.sha256(data).hexdigest()
-            or manifest.get("plan_sha256") != plan_hash or manifest.get("freeze_commit") != freeze):
-        raise ValueError("Local fixture hash/freeze attestation mismatch")
-    rows = [strict_json(line) for line in data.splitlines() if line.strip()]
-    expected = fixture_map(plan)
-    ids = [row["id"] for row in rows]
-    if len(ids) != 12 or set(ids) != set(expected) or ids != manifest.get("ids"):
-        raise ValueError("Local fixtures must contain exactly the 12 frozen IDs")
-    valid = all(row.get("status") == "ok" and type(row.get("paper_binary")) is int
-                and row["paper_binary"] in (0, 1) for row in rows)
-    passed = {row["id"] for row in rows if row.get("status") == "ok"
-              and type(row.get("paper_binary")) is int
-              and row["paper_binary"] == expected[row["id"]]["expected_paper_binary"]}
-    critical = {k for k, row in expected.items() if row["critical"]}
-    return {"pass": valid and len(passed) >= 10 and critical <= passed,
-            "correct": len(passed), "critical_pass": critical <= passed,
-            "sha256": manifest["sha256"], "manifest_sha256": sha(manifest_path)}
 
 
 def reservation(provider, request):
@@ -327,17 +311,24 @@ class Receipts:
 
     def start(self, provider, phase, item):
         with self.lock:
+            if provider not in MODELS or phase not in {"fixtures", "responses"}:
+                raise ValueError("Invalid provider or request phase")
             if self.stop.is_set():
                 return None
             jid = f"{phase}:{provider}:{item['id']}"
-            if jid in self.requests:
-                return None
             if phase == "fixtures" and self.fixtures.get(item["id"]) != item:
                 raise ValueError("Unplanned fixture")
             if phase == "responses":
+                target = self.targets.get(item["id"])
+                if target is None or any(item.get(k) != v for k, v in target.items()):
+                    raise ValueError("Response does not match frozen baseline ID/phase")
                 attested = {k: v for r in self.logs["inputs"] for k, v in r["row_hashes"].items()}
                 if attested.get(item["id"]) != digest(item):
                     raise ValueError("Unattested response")
+                if not self.fixture_gate()["providers"][provider]["pass"]:
+                    return None
+            if jid in self.requests:
+                return None
             for name, path in self.sources.items():
                 if sha(path) != self.plan["source_hashes"][name]:
                     self.stop.set()
@@ -347,6 +338,7 @@ class Receipts:
             self.check_budget(provider, reserve)
             row = self.append("requests", {
                 "judgment_id": jid, "attempt_id": jid + ":0", "phase": phase,
+                "response_phase": item["phase"] if phase == "responses" else None,
                 "provider": provider, "model": MODELS[provider], "id": item["id"],
                 "item": item, "item_sha256": digest(item), "request": request,
                 "request_sha256": digest(request), "reservation_usd": str(reserve),
@@ -375,6 +367,7 @@ class Receipts:
                 failure = type(exc).__name__
         return {"judgment_id": start["judgment_id"], "attempt_id": start["attempt_id"],
                 "provider": provider, "phase": start["phase"], "id": start["id"],
+                "response_phase": start["response_phase"],
                 "request_sha256": start["request_sha256"], "status": status,
                 "raw_response_json": raw_json,
                 "raw_response_sha256": hashlib.sha256(raw_json.encode()).hexdigest() if raw_json is not None else None,
@@ -405,6 +398,7 @@ class Receipts:
         jid = attempt["judgment_id"]
         row = self.append("judgments", {"judgment_id": jid, "attempt_id": attempt["attempt_id"],
                           "attempt_sha256": attempt["receipt_sha256"], "phase": attempt["phase"],
+                          "response_phase": attempt["response_phase"],
                           "provider": attempt["provider"], "id": attempt["id"], "status": attempt["status"],
                           "label": attempt["label"], "derived": attempt["derived"], "cost_usd": attempt["cost_usd"]})
         self.judgments[jid] = row
@@ -431,6 +425,7 @@ class Receipts:
                     or row["id"] != item["id"] or row["model"] != MODELS[provider]
                     or row["item_sha256"] != digest(item) or row["request"] != expected
                     or row["request_sha256"] != digest(expected)
+                    or row.get("response_phase") != (item.get("phase") if phase == "responses" else None)
                     or money(row["reservation_usd"]) != reservation(provider, expected)):
                 raise ValueError("Durable request provenance mismatch")
             if ((phase == "fixtures" and item != self.fixtures.get(item["id"]))
@@ -453,7 +448,7 @@ class Receipts:
             attempt = self.attempts.get(jid)
             if not attempt or jid in self.judgments or row["attempt_sha256"] != attempt["receipt_sha256"]:
                 raise ValueError("Unmatched or duplicate derived judgment")
-            if any(row[key] != attempt[key] for key in ("attempt_id", "phase", "provider", "id", "status", "label", "derived", "cost_usd")):
+            if any(row[key] != attempt[key] for key in ("attempt_id", "phase", "response_phase", "provider", "id", "status", "label", "derived", "cost_usd")):
                 raise ValueError("Derived judgment differs from raw attempt")
             self.judgments[jid] = row
         self.check_budget()
@@ -462,6 +457,10 @@ class Receipts:
         for jid, attempt in self.attempts.items():
             if jid not in self.judgments:
                 self.promote(attempt)  # Durable response, interrupted before reduction receipt.
+        gates = self.fixture_gate()["providers"]
+        if any(row["phase"] == "responses" and not gates[row["provider"]]["pass"]
+               for row in self.requests.values()):
+            raise ValueError("Durable responses violate provider fixture gate")
 
     def fixture_gate(self):
         report = {"pass": True, "providers": {}}
@@ -479,6 +478,24 @@ class Receipts:
                 "correct": len(passed), "passed_ids": passed, "critical_pass": critical <= set(passed)}
             report["pass"] &= ok
         return report
+
+    def progress(self):
+        """Completion means both frozen providers, not only the eligible subset."""
+        gates = self.fixture_gate()
+        counts = {p: {phase: sum(r["provider"] == p and r["response_phase"] == phase
+                                and r["status"] == "ok" for r in self.judgments.values())
+                      for phase in RESPONSE_COUNTS} for p in MODELS}
+        requests = list(self.requests.values())
+        return {"fixture_gate": gates,
+                "provider_eligibility": {p: gates["providers"][p]["pass"] for p in MODELS},
+                "response_counts": {p: sum(counts[p].values()) for p in MODELS},
+                "response_phase_counts": counts,
+                "complete_core": all(counts[p]["core"] == 80 for p in MODELS),
+                "complete_all": all(counts[p] == RESPONSE_COUNTS for p in MODELS),
+                "request_counts": {"core": sum(r["phase"] == "fixtures" or r["response_phase"] == "core" for r in requests),
+                                   "optional": sum(r["response_phase"] == "optional" for r in requests),
+                                   "all": len(requests)},
+                "spent_or_reserved_usd": {p: str(v) for p, v in self.totals().items()}}
 
 
 def client_factory(provider):
@@ -545,23 +562,18 @@ def run(plan_path, paths, outdir, freeze, phase, factory=client_factory):
         raise ValueError("Invalid phase")
     with run_lock(plan_hash, outdir):
         receipts = Receipts(outdir, plan, plan_hash, freeze)
+        gate = receipts.fixture_gate()
         if phase == "fixtures":
             items = list(fixture_map(plan).values())
         else:
-            gate = receipts.fixture_gate()
             receipts.append("gates", {"gate": "modern_fixtures", **gate})
-            if not gate["pass"]:
-                raise ValueError("Fixture gate failed; responses are blocked")
-            local_gate = local_fixture_gate(outdir, plan, plan_hash, freeze)
-            receipts.append("gates", {"gate": "local_paper_fixtures", **local_gate})
-            if not local_gate["pass"]:
-                raise ValueError("Local fixture gate failed; responses are blocked")
             items, attestations = load_inputs(paths, plan, plan_hash, freeze)
             receipts.attest(attestations)
+        providers = [p for p in MODELS if phase == "fixtures" or gate["providers"][p]["pass"]]
         workers = plan.get("workers_per_provider", 2)
         with ThreadPoolExecutor(max_workers=2 * workers) as pool:
             futures = [pool.submit(run_provider, provider, phase, items[shard::workers], receipts, factory)
-                       for provider in MODELS for shard in range(workers)]
+                       for provider in providers for shard in range(workers)]
             try:
                 for future in as_completed(futures):
                     future.result()
@@ -571,13 +583,7 @@ def run(plan_path, paths, outdir, freeze, phase, factory=client_factory):
         if phase == "fixtures":
             gate = receipts.fixture_gate()
             receipts.append("gates", {"gate": "modern_fixtures", **gate})
-            if not gate["pass"]:
-                raise ValueError("Fixture gate failed; responses are blocked")
-        counts = {p: sum(r["phase"] == "responses" and r["status"] == "ok"
-                         and r["provider"] == p for r in receipts.judgments.values()) for p in MODELS}
-        return {"phase": phase, "window_rows": len(items), "response_counts": counts,
-                "complete_responses": all(n == 370 for n in counts.values()),
-                "spent_or_reserved_usd": {p: str(v) for p, v in receipts.totals().items()}}
+        return {"phase": phase, "window_rows": len(items), **receipts.progress()}
 
 
 def main():

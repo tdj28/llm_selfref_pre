@@ -1,6 +1,6 @@
 # Pre-Spend Review: Decision And Revised Scope
 
-Date: 2026-09-29. **Do not launch yet.** The Pro consultation is complete;
+Date: 2026-09-29. **Original post-review status: do not launch yet.** The Pro consultation is complete;
 the executable diagnostic is not. This decision record supersedes conflicting
 Stage 1 provisions in the [reviewed planning draft](SAE_STEERING_ASSAY_PLAN_20260929.md).
 The original packet stays unchanged so the review can be verified.
@@ -150,3 +150,23 @@ The prototype's old hard-coded 370-response inventory must change before use.
 
 Do not interpret the review's completion or this accepted design revision as
 clearance to rent a pod. The remaining items are deliberately visible.
+
+## Implementation Follow-Through, 2026-09-30
+
+The owner subsequently authorized overnight Stage 1 after these corrections,
+within the same $200 total. The revised executable protocol is now
+`docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md`; the result-free plan is
+`data/sae_assay_diagnostic/stage1_plan_20260929/PLAN.json`. The reviewed draft
+and raw Pro receipt remain unchanged. No second Pro call was made.
+
+The stable preflight passes 440 CPU tests, zero skips. It includes actual tiny
+BF16/FP32 Llama forwards and cached replay, malformed/missing data, interruption
+recovery, budget reservations, branch-specific judge fixtures, and mocked
+owned-pod retrieval/deletion. Separate agent audits found and repaired stage
+bypass, barrier-resume, early encoder-check, replay-fidelity and headroom-gate
+issues. These are automated code reviews, not human validation.
+
+Implementation closes the first three open launch items above. A pushed freeze,
+cheap CUDA qualification and audited initial 70B rows are still sequential
+execution gates, never inferred from CPU success. The new protocol provides
+the current execution rules; this dated record preserves why they changed.
