@@ -1,0 +1,22 @@
+{
+  "scope": "Projection of verified private lifecycle and final retrieval; SSH material and local machine paths omitted. Artifact names are relative to cuda_qualification/.",
+  "freeze_commit": "d9b9877e8a0d68a1ed2036d1718821a2d5b73a74",
+  "plan_sha256": "15d055e80483643c5497c7a4b1ede405f4387baf4de1d1522913cc31212efbb5",
+  "artifacts": {
+    "DONE-all.json": "bdeee41e2794d5b76d98eb2d093d7ae6e4e87dd5f0ea2b696c6405496b077a8f",
+    "controller-exit.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01",
+    "controller-stopped.json": "c2db22d98aaf23dfaf6d5aec9d1078a3bfb8083eedcf84cfe4dc8d00d6bfdac9",
+    "controller.log": "1cbe1e52e173a025f5ae51f7953c8c3bf6064e1d246375cf266ec3097caaf035",
+    "pip-freeze.txt": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6",
+    "tests.xml": "a6e53690beb2fa07b7c7eaf95abf0d69507681fb98b10ef4d9bee15161a1f3f6"
+  },
+  "closure": {
+    "compute_upper_bound_usd": "0.1500016669666666666666666667",
+    "cumulative_upper_bound_usd": "72.65000166696666666666666667",
+    "elapsed_seconds": "642.864287",
+    "get_status": 404,
+    "pod_id": "905t9g8gl5rhkn",
+    "utc": "2026-10-01T07:07:27.936933+00:00",
+    "within_limits": true
+  }
+}

@@ -35,9 +35,18 @@ This supersedes the ordering below, not any frozen experiment or failed gate.
   outputs and 40 paired captures, and terminate the owned main pod. Completed
   2026-10-01, 1,148 remote artifacts, GET 404. Preserve the near-zero individual
   contrast, ten-block uncertainty and notebook-versus-paper baseline gap.
-- [ ] Complete the separately frozen 450-trial random-subset aggregate test
+- [x] Complete the separately frozen 450-trial random-subset aggregate test
   (`d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`), publish all signs/panels and
-  terminate its owned pod. Execution is active; $35 cap inside cumulative $200.
+  terminate its owned pod. All 450 trials completed 2026-10-01; 465 main-worker
+  files and six CUDA preflight files retrieved/hash-verified; both pods deleted.
+  Primary paper gap -0.04 [-0.2584,0.1855] excludes +0.30 under the public
+  operator. Notebook threshold comparison and both specificity tests remain
+  inconclusive. Cost reconciliation bounds current cumulative spend at $69.130940.
+- [x] Complete paired internal-readout collection and descriptive comparisons
+  under both source histories, identity and five random-J controls. Signed
+  downstream footprints are visible; identity also detects them. The notebook
+  behavioral sample has no corresponding large observed target contrast.
+  This is not a demonstrated behavioral mediator or a hidden-belief detector.
 - [ ] Link any reproduced behavioral contrast to fixed-prefix internal
   differences; compare static injected-vector fingerprints and random-J
   readouts. Free-running text divergence is not an internal mechanism test.

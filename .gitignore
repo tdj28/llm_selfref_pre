@@ -561,6 +561,14 @@ data/berg_ensemble_replication/*
 !data/berg_source_replication/source_aligned_v1_20261001/*.log
 !data/berg_source_replication/source_aligned_v1_20261001/receipts.jsonl
 
+# Audited random-subset outcome bundle; private controller ledgers stay in out/.
+!data/berg_ensemble_replication/random_subset_v1_20261001/
+!data/berg_ensemble_replication/random_subset_v1_20261001/**
+!data/berg_ensemble_replication/random_subset_v1_20261001/**/*.pdf
+!data/berg_ensemble_replication/random_subset_v1_20261001/*.log
+!data/berg_ensemble_replication/random_subset_v1_20261001/cuda_qualification/*.log
+!data/berg_ensemble_replication/random_subset_v1_20261001/receipts.jsonl
+
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.
 **/.env

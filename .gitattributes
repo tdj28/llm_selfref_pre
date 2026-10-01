@@ -22,6 +22,9 @@ data/sae_assay_repair/coordinate_delivery_20260930/figures/*.svg whitespace=-bla
 data/sae_assay_repair/coordinate_delivery_20260930/LLAMA_3_3_LICENSE.txt whitespace=-blank-at-eol
 data/berg_source_replication/source_aligned_v1_20261001/LLAMA_3_3_LICENSE.txt whitespace=-blank-at-eol
 data/berg_source_replication/source_aligned_v1_20261001/controller.log whitespace=-blank-at-eol
+data/berg_ensemble_replication/random_subset_v1_20261001/LLAMA_3_3_LICENSE.txt whitespace=-blank-at-eol
+data/berg_ensemble_replication/random_subset_v1_20261001/controller.log whitespace=-blank-at-eol
+data/berg_ensemble_replication/random_subset_v1_20261001/cuda_qualification/controller.log whitespace=-blank-at-eol
 data/sae_assay_repair/offline_feasibility_20260930/figures/*.svg whitespace=-blank-at-eol
 
 # Preserve immutable consciousness-study provenance bytes. Markdown's two-space

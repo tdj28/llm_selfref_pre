@@ -1,5 +1,15 @@
 # Data Artifacts
 
+`data/berg_ensemble_replication/random_subset_v1_20261001/` is the completed
+450-trial paper-induction random-subset native-BF16 study. It preserves 465
+main-worker artifacts, six cheap-CUDA qualification artifacts, both rubrics,
+all matched panels, exact per-feature weights, delivery/re-encoding telemetry,
+two figure pairs, model terms, hash manifests and deletion/cost receipts.
+Its primary conservative interval excludes the frozen +0.30 signature under
+the public operator; notebook sensitivity and specificity remain inconclusive.
+The reporting-only floating-point portability amendment is explicit and does
+not modify frozen worker results or earlier failed replay gates.
+
 `data/berg_source_replication/source_aligned_v1_20261001/` contains the complete
 source-aligned native-BF16 follow-up: 1,090 two-turn trials, 40 paired J-lens
 cases, qualification, all 1,148 unchanged retrieved worker files, source-bound

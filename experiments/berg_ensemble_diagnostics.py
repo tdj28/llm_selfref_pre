@@ -1,11 +1,44 @@
 """Offline reporting for the fixed random-subset study; no outcome selection."""
 import argparse
 import json
+import math
 from pathlib import Path
 
 import numpy as np
 
 from experiments.berg_source_diagnostics import activation_rows, delivery_rows, table
+
+
+def compare_reductions(expected, actual):
+    """Post-run reporting portability check; never changes the frozen reduction."""
+    differences = []
+
+    def visit(a, b, path):
+        if type(a) is not type(b):
+            raise ValueError("Reduction type mismatch: " + path)
+        if isinstance(a, dict):
+            if a.keys() != b.keys():
+                raise ValueError("Reduction keys mismatch: " + path)
+            for key in a:
+                visit(a[key], b[key], path + "/" + key)
+        elif isinstance(a, list):
+            if len(a) != len(b):
+                raise ValueError("Reduction length mismatch: " + path)
+            for i, (x, y) in enumerate(zip(a, b)):
+                visit(x, y, path + "/" + str(i))
+        elif isinstance(a, float):
+            if not math.isfinite(a) or not math.isfinite(b) or abs(a-b) > 1e-12:
+                raise ValueError("Reduction numerical mismatch: " + path)
+            if a != b:
+                differences.append({"path": path, "frozen": a, "local": b,
+                                    "absolute_error": abs(a-b)})
+        elif a != b:
+            raise ValueError("Reduction value mismatch: " + path)
+
+    visit(expected, actual, "")
+    return {"exact": not differences, "absolute_tolerance": 1e-12,
+            "maximum_absolute_error": max((v["absolute_error"] for v in differences), default=0.),
+            "differences": differences}
 
 
 def figures(summary, out):
@@ -44,9 +77,11 @@ def figures(summary, out):
         ax.set(title=judge.title()+" rubric",xticks=range(4),xticklabels=families,
                ylim=(0,1.05),ylabel="Positive label fraction among valid outputs")
         ax.tick_params(axis="x",labelrotation=15)
-    axes[0].legend(frameon=False,fontsize=9)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.5,.93),
+               ncol=3, frameon=False,fontsize=9)
     fig.suptitle("All target and matched-panel report rates")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0,0,1,.84))
     for ext in ("png","pdf"): fig.savefig(Path(out)/("aggregate_rates."+ext),dpi=160)
     plt.close(fig)
 
@@ -60,7 +95,7 @@ def summarize(root,out,plan_path):
     out.mkdir(parents=True)
     results = analysis.analyze(root,out/"behavior")
     original = json.loads((root/"analysis/summary.json").read_text())["results"]
-    if results != original: raise ValueError("Frozen aggregate analysis does not reproduce")
+    portability = compare_reductions(original, results)
     delivery, activations, cases = [],[],[]
     quality = {"empty_turns":0,"capped_turns":0,"generated_tokens":0,"judge_missing":{"paper":0,"notebook":0}}
     for spec in plan["rows"]:
@@ -86,11 +121,13 @@ def summarize(root,out,plan_path):
     table(out/"feature_reencoding.csv",activations)
     table(out/"case_reencoding.csv",cases)
     report = {"behavioral_rows":len(plan["rows"]),"audit":audit,"quality":quality,
-        "primary_reproduced_exactly":True,"token_level_inference":False,
+        "primary_reproduced_exactly":results["paper"]["target"] == original["paper"]["target"],
+        "reporting_portability":portability,"token_level_inference":False,
         "activation_summary":"Within-trial feature means; prompt = last prefill only; terminal-only states excluded",
         "coefficient_field":"sign only; actual per-feature weights retained in feature_reencoding.csv"}
     (out/"summary.json").write_text(protocol.canonical(report)+"\n")
-    figures(results,out)
+    # Plot the immutable worker reduction, not platform-rounded replacements.
+    figures(original,out)
     return report
 
 

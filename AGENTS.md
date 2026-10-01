@@ -30,6 +30,25 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The paper-distribution random-subset study is complete at
+  `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at
+  `d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`. All 450 trials and 50 fresh
+  subset/magnitude/seed blocks completed. Paper-rubric target 43/50 versus 45/50
+  gives -0.04 with conservative 95% bounds [-0.2584,0.1855], excluding the
+  frozen +0.30 threshold under the public operator. Notebook sensitivity is
+  -0.02[-0.3446,0.3076], threshold-inconclusive. Preserve both and all three
+  panels: specificity is inconclusive under both rubrics. Zero rates 47/50
+  paper and 29/50 notebook differ on the same responses; proprietary baseline
+  equivalence is not established. Native BF16 and delivered edits do not
+  certify semantic suppression. This phase has no new J-lens captures.
+  Owned main pod c4xjlzny728wbk and cheap pod 905t9g8gl5rhkn were retrieved,
+  hash-verified and deleted (GET 404). No reuse. Reconciled cumulative cost for
+  the current $200 authorization is bounded by $69.130940. The controller's
+  larger cumulative number includes its prior reserve, not new charges.
+  Preserve the post-run reporting portability correction: eight secondary
+  floats differ locally by at most 1.11e-16; raw worker analysis is unchanged.
+  The earlier failed J-lens replay gate remains failed.
+
 - Source-aligned public additive replication is complete under
   `docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md` and immutable plan
   `data/berg_source_replication/plan_20260930/PLAN.json`, frozen at

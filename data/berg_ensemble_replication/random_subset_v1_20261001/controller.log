@@ -1,0 +1,560 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            d9b9877e8a0d68a1ed2036d1718821a2d5b73a74 -> FETCH_HEAD
+HEAD is now at d9b9877 Correct pre-launch cleanup deadlines and preserve ensemble refreeze
+Collecting transformers==4.47.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 1.9 MB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 8.0 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 11.9 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 8.2 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 11.3 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 114.4 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 45.9 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 149.2 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 63.1 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 62.8 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 113.3 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 157.6 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 169.2 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 46.0 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 119.5 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 73.7 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 36.3 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, iniconfig, hf-xet, scipy, pytest, huggingface-hub, tokenizers, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:19<05:39, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:24<04:34,  8.31s/it]Fetching 36 files:  11%|█         | 4/36 [00:25<03:22,  6.34s/it]Fetching 36 files:  17%|█▋        | 6/36 [00:25<02:08,  4.27s/it]Fetching 36 files:  22%|██▏       | 8/36 [00:26<01:32,  3.29s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:26<01:09,  2.66s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:40<01:44,  4.00s/it]Fetching 36 files:  31%|███       | 11/36 [00:40<01:32,  3.69s/it]Fetching 36 files:  33%|███▎      | 12/36 [00:43<01:27,  3.65s/it]Fetching 36 files:  36%|███▌      | 13/36 [00:44<01:17,  3.39s/it]Fetching 36 files:  39%|███▉      | 14/36 [00:44<01:09,  3.16s/it]Fetching 36 files:  42%|████▏     | 15/36 [00:44<01:02,  2.99s/it]Fetching 36 files:  44%|████▍     | 16/36 [00:46<00:58,  2.91s/it]Fetching 36 files:  47%|████▋     | 17/36 [00:47<00:53,  2.82s/it]Fetching 36 files:  50%|█████     | 18/36 [00:48<00:48,  2.70s/it]Fetching 36 files:  53%|█████▎    | 19/36 [00:57<00:51,  3.05s/it]Fetching 36 files:  56%|█████▌    | 20/36 [01:05<00:52,  3.27s/it]Fetching 36 files:  58%|█████▊    | 21/36 [01:06<00:47,  3.15s/it]Fetching 36 files:  61%|██████    | 22/36 [01:06<00:42,  3.01s/it]Fetching 36 files:  64%|██████▍   | 23/36 [01:06<00:37,  2.90s/it]Fetching 36 files:  67%|██████▋   | 24/36 [01:10<00:35,  2.92s/it]Fetching 36 files:  69%|██████▉   | 25/36 [01:10<00:31,  2.84s/it]Fetching 36 files:  72%|███████▏  | 26/36 [01:11<00:27,  2.74s/it]Fetching 36 files:  78%|███████▊  | 28/36 [01:11<00:20,  2.55s/it]Fetching 36 files:  83%|████████▎ | 30/36 [01:11<00:14,  2.39s/it]Fetching 36 files:  89%|████████▉ | 32/36 [01:19<00:09,  2.49s/it]Fetching 36 files:  94%|█████████▍| 34/36 [01:22<00:04,  2.44s/it]Fetching 36 files: 100%|██████████| 36/36 [01:23<00:00,  2.33s/it]Fetching 36 files: 100%|██████████| 36/36 [01:23<00:00,  2.33s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:04<02:15,  4.68s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:06<01:20,  2.88s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:07<01:01,  2.28s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:09<00:51,  1.98s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:11<00:49,  1.97s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:12<00:41,  1.73s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:13<00:36,  1.59s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:15<00:34,  1.56s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:16<00:32,  1.56s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:18<00:30,  1.53s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:19<00:28,  1.50s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:21<00:26,  1.45s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:22<00:25,  1.47s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:24<00:26,  1.67s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:26<00:24,  1.60s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:27<00:22,  1.59s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:29<00:20,  1.59s/it]Loading checkpoint shards:  60%|██████    | 18/30 [00:31<00:19,  1.63s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:32<00:18,  1.66s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:34<00:16,  1.63s/it]Loading checkpoint shards:  70%|███████   | 21/30 [00:35<00:14,  1.57s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:37<00:12,  1.62s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:39<00:11,  1.67s/it]Loading checkpoint shards:  80%|████████  | 24/30 [00:41<00:10,  1.71s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:42<00:08,  1.68s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:44<00:06,  1.68s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [00:46<00:05,  1.69s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:48<00:03,  1.74s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:50<00:01,  1.80s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:50<00:00,  1.52s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:50<00:00,  1.70s/it]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+{"completed":"qualification-live","rows":1}
+{"completed":"control-2-26100101-+1","rows":2}
+{"completed":"control-1-26100101--1","rows":3}
+{"completed":"control-2-26100101--1","rows":4}
+{"completed":"zero-26100101","rows":5}
+{"completed":"target-26100101-+1","rows":6}
+{"completed":"control-3-26100101-+1","rows":7}
+{"completed":"target-26100101--1","rows":8}
+{"completed":"control-1-26100101-+1","rows":9}
+{"completed":"control-3-26100101--1","rows":10}
+{"completed":"zero-26101110","rows":11}
+{"completed":"control-3-26101110--1","rows":12}
+{"completed":"control-2-26101110--1","rows":13}
+{"completed":"control-2-26101110-+1","rows":14}
+{"completed":"control-1-26101110-+1","rows":15}
+{"completed":"control-3-26101110-+1","rows":16}
+{"completed":"target-26101110-+1","rows":17}
+{"completed":"target-26101110--1","rows":18}
+{"completed":"control-1-26101110--1","rows":19}
+{"completed":"control-3-26102119-+1","rows":20}
+{"completed":"control-1-26102119-+1","rows":21}
+{"completed":"control-2-26102119-+1","rows":22}
+{"completed":"control-1-26102119--1","rows":23}
+{"completed":"target-26102119--1","rows":24}
+{"completed":"control-2-26102119--1","rows":25}
+{"completed":"target-26102119-+1","rows":26}
+{"completed":"control-3-26102119--1","rows":27}
+{"completed":"zero-26102119","rows":28}
+{"completed":"control-2-26103128-+1","rows":29}
+{"completed":"target-26103128-+1","rows":30}
+{"completed":"control-3-26103128--1","rows":31}
+{"completed":"target-26103128--1","rows":32}
+{"completed":"control-3-26103128-+1","rows":33}
+{"completed":"zero-26103128","rows":34}
+{"completed":"control-1-26103128--1","rows":35}
+{"completed":"control-2-26103128--1","rows":36}
+{"completed":"control-1-26103128-+1","rows":37}
+{"completed":"zero-26104137","rows":38}
+{"completed":"control-3-26104137-+1","rows":39}
+{"completed":"control-2-26104137-+1","rows":40}
+{"completed":"control-2-26104137--1","rows":41}
+{"completed":"target-26104137--1","rows":42}
+{"completed":"target-26104137-+1","rows":43}
+{"completed":"control-1-26104137-+1","rows":44}
+{"completed":"control-1-26104137--1","rows":45}
+{"completed":"control-3-26104137--1","rows":46}
+{"completed":"control-3-26105146--1","rows":47}
+{"completed":"target-26105146-+1","rows":48}
+{"completed":"control-3-26105146-+1","rows":49}
+{"completed":"control-1-26105146-+1","rows":50}
+{"completed":"control-2-26105146-+1","rows":51}
+{"completed":"zero-26105146","rows":52}
+{"completed":"target-26105146--1","rows":53}
+{"completed":"control-2-26105146--1","rows":54}
+{"completed":"control-1-26105146--1","rows":55}
+{"completed":"control-3-26106155--1","rows":56}
+{"completed":"control-3-26106155-+1","rows":57}
+{"completed":"target-26106155-+1","rows":58}
+{"completed":"control-1-26106155-+1","rows":59}
+{"completed":"target-26106155--1","rows":60}
+{"completed":"zero-26106155","rows":61}
+{"completed":"control-2-26106155--1","rows":62}
+{"completed":"control-1-26106155--1","rows":63}
+{"completed":"control-2-26106155-+1","rows":64}
+{"completed":"control-2-26107164--1","rows":65}
+{"completed":"control-1-26107164-+1","rows":66}
+{"completed":"control-1-26107164--1","rows":67}
+{"completed":"target-26107164--1","rows":68}
+{"completed":"control-3-26107164-+1","rows":69}
+{"completed":"target-26107164-+1","rows":70}
+{"completed":"control-3-26107164--1","rows":71}
+{"completed":"zero-26107164","rows":72}
+{"completed":"control-2-26107164-+1","rows":73}
+{"completed":"control-1-26108173--1","rows":74}
+{"completed":"zero-26108173","rows":75}
+{"completed":"target-26108173-+1","rows":76}
+{"completed":"control-1-26108173-+1","rows":77}
+{"completed":"target-26108173--1","rows":78}
+{"completed":"control-2-26108173--1","rows":79}
+{"completed":"control-3-26108173-+1","rows":80}
+{"completed":"control-3-26108173--1","rows":81}
+{"completed":"control-2-26108173-+1","rows":82}
+{"completed":"target-26109182-+1","rows":83}
+{"completed":"control-3-26109182-+1","rows":84}
+{"completed":"control-2-26109182--1","rows":85}
+{"completed":"control-1-26109182--1","rows":86}
+{"completed":"target-26109182--1","rows":87}
+{"completed":"control-2-26109182-+1","rows":88}
+{"completed":"control-1-26109182-+1","rows":89}
+{"completed":"zero-26109182","rows":90}
+{"completed":"control-3-26109182--1","rows":91}
+{"completed":"control-3-26110191-+1","rows":92}
+{"completed":"control-1-26110191--1","rows":93}
+{"completed":"target-26110191-+1","rows":94}
+{"completed":"target-26110191--1","rows":95}
+{"completed":"control-3-26110191--1","rows":96}
+{"completed":"control-2-26110191--1","rows":97}
+{"completed":"control-1-26110191-+1","rows":98}
+{"completed":"zero-26110191","rows":99}
+{"completed":"control-2-26110191-+1","rows":100}
+{"completed":"zero-26111200","rows":101}
+{"completed":"control-1-26111200-+1","rows":102}
+{"completed":"target-26111200--1","rows":103}
+{"completed":"control-3-26111200-+1","rows":104}
+{"completed":"target-26111200-+1","rows":105}
+{"completed":"control-2-26111200-+1","rows":106}
+{"completed":"control-3-26111200--1","rows":107}
+{"completed":"control-1-26111200--1","rows":108}
+{"completed":"control-2-26111200--1","rows":109}
+{"completed":"control-1-26112209--1","rows":110}
+{"completed":"target-26112209-+1","rows":111}
+{"completed":"control-2-26112209--1","rows":112}
+{"completed":"control-1-26112209-+1","rows":113}
+{"completed":"control-3-26112209-+1","rows":114}
+{"completed":"control-3-26112209--1","rows":115}
+{"completed":"target-26112209--1","rows":116}
+{"completed":"control-2-26112209-+1","rows":117}
+{"completed":"zero-26112209","rows":118}
+{"completed":"control-2-26113218-+1","rows":119}
+{"completed":"control-2-26113218--1","rows":120}
+{"completed":"control-1-26113218-+1","rows":121}
+{"completed":"control-3-26113218--1","rows":122}
+{"completed":"target-26113218-+1","rows":123}
+{"completed":"control-1-26113218--1","rows":124}
+{"completed":"zero-26113218","rows":125}
+{"completed":"control-3-26113218-+1","rows":126}
+{"completed":"target-26113218--1","rows":127}
+{"completed":"target-26114227-+1","rows":128}
+{"completed":"target-26114227--1","rows":129}
+{"completed":"control-3-26114227-+1","rows":130}
+{"completed":"control-3-26114227--1","rows":131}
+{"completed":"zero-26114227","rows":132}
+{"completed":"control-1-26114227--1","rows":133}
+{"completed":"control-1-26114227-+1","rows":134}
+{"completed":"control-2-26114227-+1","rows":135}
+{"completed":"control-2-26114227--1","rows":136}
+{"completed":"zero-26115236","rows":137}
+{"completed":"control-1-26115236--1","rows":138}
+{"completed":"control-2-26115236-+1","rows":139}
+{"completed":"control-1-26115236-+1","rows":140}
+{"completed":"target-26115236-+1","rows":141}
+{"completed":"target-26115236--1","rows":142}
+{"completed":"control-3-26115236-+1","rows":143}
+{"completed":"control-3-26115236--1","rows":144}
+{"completed":"control-2-26115236--1","rows":145}
+{"completed":"control-2-26116245-+1","rows":146}
+{"completed":"control-2-26116245--1","rows":147}
+{"completed":"target-26116245--1","rows":148}
+{"completed":"zero-26116245","rows":149}
+{"completed":"control-3-26116245--1","rows":150}
+{"completed":"control-1-26116245--1","rows":151}
+{"completed":"control-3-26116245-+1","rows":152}
+{"completed":"target-26116245-+1","rows":153}
+{"completed":"control-1-26116245-+1","rows":154}
+{"completed":"control-1-26117254--1","rows":155}
+{"completed":"target-26117254--1","rows":156}
+{"completed":"control-2-26117254--1","rows":157}
+{"completed":"control-1-26117254-+1","rows":158}
+{"completed":"zero-26117254","rows":159}
+{"completed":"control-3-26117254--1","rows":160}
+{"completed":"control-3-26117254-+1","rows":161}
+{"completed":"target-26117254-+1","rows":162}
+{"completed":"control-2-26117254-+1","rows":163}
+{"completed":"control-3-26118263--1","rows":164}
+{"completed":"control-2-26118263--1","rows":165}
+{"completed":"target-26118263-+1","rows":166}
+{"completed":"control-1-26118263--1","rows":167}
+{"completed":"control-1-26118263-+1","rows":168}
+{"completed":"target-26118263--1","rows":169}
+{"completed":"zero-26118263","rows":170}
+{"completed":"control-2-26118263-+1","rows":171}
+{"completed":"control-3-26118263-+1","rows":172}
+{"completed":"control-1-26119272-+1","rows":173}
+{"completed":"control-2-26119272--1","rows":174}
+{"completed":"control-3-26119272-+1","rows":175}
+{"completed":"control-2-26119272-+1","rows":176}
+{"completed":"control-1-26119272--1","rows":177}
+{"completed":"target-26119272--1","rows":178}
+{"completed":"control-3-26119272--1","rows":179}
+{"completed":"zero-26119272","rows":180}
+{"completed":"target-26119272-+1","rows":181}
+{"completed":"control-2-26120281-+1","rows":182}
+{"completed":"target-26120281-+1","rows":183}
+{"completed":"target-26120281--1","rows":184}
+{"completed":"control-3-26120281--1","rows":185}
+{"completed":"zero-26120281","rows":186}
+{"completed":"control-2-26120281--1","rows":187}
+{"completed":"control-3-26120281-+1","rows":188}
+{"completed":"control-1-26120281-+1","rows":189}
+{"completed":"control-1-26120281--1","rows":190}
+{"completed":"control-3-26121290--1","rows":191}
+{"completed":"zero-26121290","rows":192}
+{"completed":"control-3-26121290-+1","rows":193}
+{"completed":"control-2-26121290--1","rows":194}
+{"completed":"control-1-26121290--1","rows":195}
+{"completed":"control-2-26121290-+1","rows":196}
+{"completed":"target-26121290--1","rows":197}
+{"completed":"control-1-26121290-+1","rows":198}
+{"completed":"target-26121290-+1","rows":199}
+{"completed":"control-1-26122299-+1","rows":200}
+{"completed":"control-2-26122299--1","rows":201}
+{"completed":"target-26122299--1","rows":202}
+{"completed":"control-3-26122299--1","rows":203}
+{"completed":"zero-26122299","rows":204}
+{"completed":"control-2-26122299-+1","rows":205}
+{"completed":"target-26122299-+1","rows":206}
+{"completed":"control-3-26122299-+1","rows":207}
+{"completed":"control-1-26122299--1","rows":208}
+{"completed":"target-26123308--1","rows":209}
+{"completed":"control-1-26123308-+1","rows":210}
+{"completed":"zero-26123308","rows":211}
+{"completed":"control-1-26123308--1","rows":212}
+{"completed":"control-2-26123308--1","rows":213}
+{"completed":"control-2-26123308-+1","rows":214}
+{"completed":"target-26123308-+1","rows":215}
+{"completed":"control-3-26123308-+1","rows":216}
+{"completed":"control-3-26123308--1","rows":217}
+{"completed":"target-26124317-+1","rows":218}
+{"completed":"zero-26124317","rows":219}
+{"completed":"control-2-26124317-+1","rows":220}
+{"completed":"target-26124317--1","rows":221}
+{"completed":"control-3-26124317--1","rows":222}
+{"completed":"control-2-26124317--1","rows":223}
+{"completed":"control-3-26124317-+1","rows":224}
+{"completed":"control-1-26124317--1","rows":225}
+{"completed":"control-1-26124317-+1","rows":226}
+{"completed":"control-1-26125326--1","rows":227}
+{"completed":"control-2-26125326-+1","rows":228}
+{"completed":"control-1-26125326-+1","rows":229}
+{"completed":"zero-26125326","rows":230}
+{"completed":"target-26125326-+1","rows":231}
+{"completed":"target-26125326--1","rows":232}
+{"completed":"control-2-26125326--1","rows":233}
+{"completed":"control-3-26125326-+1","rows":234}
+{"completed":"control-3-26125326--1","rows":235}
+{"completed":"zero-26126335","rows":236}
+{"completed":"control-1-26126335-+1","rows":237}
+{"completed":"target-26126335--1","rows":238}
+{"completed":"target-26126335-+1","rows":239}
+{"completed":"control-3-26126335--1","rows":240}
+{"completed":"control-1-26126335--1","rows":241}
+{"completed":"control-3-26126335-+1","rows":242}
+{"completed":"control-2-26126335--1","rows":243}
+{"completed":"control-2-26126335-+1","rows":244}
+{"completed":"target-26127344--1","rows":245}
+{"completed":"control-1-26127344-+1","rows":246}
+{"completed":"control-1-26127344--1","rows":247}
+{"completed":"control-3-26127344--1","rows":248}
+{"completed":"control-2-26127344--1","rows":249}
+{"completed":"zero-26127344","rows":250}
+{"completed":"target-26127344-+1","rows":251}
+{"completed":"control-3-26127344-+1","rows":252}
+{"completed":"control-2-26127344-+1","rows":253}
+{"completed":"control-2-26128353-+1","rows":254}
+{"completed":"control-3-26128353-+1","rows":255}
+{"completed":"control-3-26128353--1","rows":256}
+{"completed":"control-2-26128353--1","rows":257}
+{"completed":"zero-26128353","rows":258}
+{"completed":"control-1-26128353-+1","rows":259}
+{"completed":"control-1-26128353--1","rows":260}
+{"completed":"target-26128353--1","rows":261}
+{"completed":"target-26128353-+1","rows":262}
+{"completed":"control-2-26129362--1","rows":263}
+{"completed":"control-1-26129362-+1","rows":264}
+{"completed":"control-1-26129362--1","rows":265}
+{"completed":"control-3-26129362--1","rows":266}
+{"completed":"control-2-26129362-+1","rows":267}
+{"completed":"target-26129362--1","rows":268}
+{"completed":"control-3-26129362-+1","rows":269}
+{"completed":"target-26129362-+1","rows":270}
+{"completed":"zero-26129362","rows":271}
+{"completed":"control-2-26130371--1","rows":272}
+{"completed":"target-26130371--1","rows":273}
+{"completed":"zero-26130371","rows":274}
+{"completed":"control-1-26130371--1","rows":275}
+{"completed":"control-1-26130371-+1","rows":276}
+{"completed":"control-3-26130371-+1","rows":277}
+{"completed":"control-2-26130371-+1","rows":278}
+{"completed":"target-26130371-+1","rows":279}
+{"completed":"control-3-26130371--1","rows":280}
+{"completed":"control-2-26131380--1","rows":281}
+{"completed":"control-3-26131380-+1","rows":282}
+{"completed":"target-26131380--1","rows":283}
+{"completed":"control-1-26131380--1","rows":284}
+{"completed":"target-26131380-+1","rows":285}
+{"completed":"control-1-26131380-+1","rows":286}
+{"completed":"control-3-26131380--1","rows":287}
+{"completed":"control-2-26131380-+1","rows":288}
+{"completed":"zero-26131380","rows":289}
+{"completed":"control-2-26132389-+1","rows":290}
+{"completed":"target-26132389--1","rows":291}
+{"completed":"control-1-26132389-+1","rows":292}
+{"completed":"zero-26132389","rows":293}
+{"completed":"control-1-26132389--1","rows":294}
+{"completed":"target-26132389-+1","rows":295}
+{"completed":"control-3-26132389-+1","rows":296}
+{"completed":"control-3-26132389--1","rows":297}
+{"completed":"control-2-26132389--1","rows":298}
+{"completed":"zero-26133398","rows":299}
+{"completed":"control-1-26133398-+1","rows":300}
+{"completed":"target-26133398--1","rows":301}
+{"completed":"control-3-26133398-+1","rows":302}
+{"completed":"control-2-26133398--1","rows":303}
+{"completed":"target-26133398-+1","rows":304}
+{"completed":"control-2-26133398-+1","rows":305}
+{"completed":"control-3-26133398--1","rows":306}
+{"completed":"control-1-26133398--1","rows":307}
+{"completed":"zero-26134407","rows":308}
+{"completed":"control-1-26134407-+1","rows":309}
+{"completed":"target-26134407-+1","rows":310}
+{"completed":"control-3-26134407-+1","rows":311}
+{"completed":"control-3-26134407--1","rows":312}
+{"completed":"target-26134407--1","rows":313}
+{"completed":"control-2-26134407--1","rows":314}
+{"completed":"control-2-26134407-+1","rows":315}
+{"completed":"control-1-26134407--1","rows":316}
+{"completed":"control-3-26135416--1","rows":317}
+{"completed":"control-1-26135416-+1","rows":318}
+{"completed":"zero-26135416","rows":319}
+{"completed":"control-2-26135416-+1","rows":320}
+{"completed":"control-1-26135416--1","rows":321}
+{"completed":"target-26135416-+1","rows":322}
+{"completed":"target-26135416--1","rows":323}
+{"completed":"control-3-26135416-+1","rows":324}
+{"completed":"control-2-26135416--1","rows":325}
+{"completed":"target-26136425-+1","rows":326}
+{"completed":"control-1-26136425-+1","rows":327}
+{"completed":"control-2-26136425-+1","rows":328}
+{"completed":"control-1-26136425--1","rows":329}
+{"completed":"control-3-26136425--1","rows":330}
+{"completed":"zero-26136425","rows":331}
+{"completed":"target-26136425--1","rows":332}
+{"completed":"control-3-26136425-+1","rows":333}
+{"completed":"control-2-26136425--1","rows":334}
+{"completed":"zero-26137434","rows":335}
+{"completed":"target-26137434--1","rows":336}
+{"completed":"control-1-26137434--1","rows":337}
+{"completed":"target-26137434-+1","rows":338}
+{"completed":"control-2-26137434--1","rows":339}
+{"completed":"control-3-26137434--1","rows":340}
+{"completed":"control-3-26137434-+1","rows":341}
+{"completed":"control-2-26137434-+1","rows":342}
+{"completed":"control-1-26137434-+1","rows":343}
+{"completed":"control-3-26138443-+1","rows":344}
+{"completed":"zero-26138443","rows":345}
+{"completed":"target-26138443--1","rows":346}
+{"completed":"control-1-26138443-+1","rows":347}
+{"completed":"control-2-26138443-+1","rows":348}
+{"completed":"control-2-26138443--1","rows":349}
+{"completed":"target-26138443-+1","rows":350}
+{"completed":"control-3-26138443--1","rows":351}
+{"completed":"control-1-26138443--1","rows":352}
+{"completed":"zero-26139452","rows":353}
+{"completed":"target-26139452--1","rows":354}
+{"completed":"control-3-26139452-+1","rows":355}
+{"completed":"control-2-26139452-+1","rows":356}
+{"completed":"control-1-26139452-+1","rows":357}
+{"completed":"control-3-26139452--1","rows":358}
+{"completed":"control-2-26139452--1","rows":359}
+{"completed":"control-1-26139452--1","rows":360}
+{"completed":"target-26139452-+1","rows":361}
+{"completed":"control-2-26140461-+1","rows":362}
+{"completed":"control-1-26140461-+1","rows":363}
+{"completed":"zero-26140461","rows":364}
+{"completed":"control-3-26140461--1","rows":365}
+{"completed":"control-3-26140461-+1","rows":366}
+{"completed":"control-2-26140461--1","rows":367}
+{"completed":"control-1-26140461--1","rows":368}
+{"completed":"target-26140461-+1","rows":369}
+{"completed":"target-26140461--1","rows":370}
+{"completed":"control-1-26141470-+1","rows":371}
+{"completed":"control-3-26141470--1","rows":372}
+{"completed":"zero-26141470","rows":373}
+{"completed":"control-3-26141470-+1","rows":374}
+{"completed":"target-26141470--1","rows":375}
+{"completed":"control-2-26141470--1","rows":376}
+{"completed":"control-2-26141470-+1","rows":377}
+{"completed":"target-26141470-+1","rows":378}
+{"completed":"control-1-26141470--1","rows":379}
+{"completed":"control-2-26142479-+1","rows":380}
+{"completed":"control-3-26142479-+1","rows":381}
+{"completed":"zero-26142479","rows":382}
+{"completed":"control-1-26142479-+1","rows":383}
+{"completed":"control-2-26142479--1","rows":384}
+{"completed":"control-1-26142479--1","rows":385}
+{"completed":"target-26142479-+1","rows":386}
+{"completed":"target-26142479--1","rows":387}
+{"completed":"control-3-26142479--1","rows":388}
+{"completed":"target-26143488--1","rows":389}
+{"completed":"zero-26143488","rows":390}
+{"completed":"control-1-26143488--1","rows":391}
+{"completed":"control-2-26143488--1","rows":392}
+{"completed":"target-26143488-+1","rows":393}
+{"completed":"control-3-26143488-+1","rows":394}
+{"completed":"control-2-26143488-+1","rows":395}
+{"completed":"control-1-26143488-+1","rows":396}
+{"completed":"control-3-26143488--1","rows":397}
+{"completed":"control-3-26144497--1","rows":398}
+{"completed":"control-2-26144497-+1","rows":399}
+{"completed":"target-26144497--1","rows":400}
+{"completed":"target-26144497-+1","rows":401}
+{"completed":"control-1-26144497--1","rows":402}
+{"completed":"control-3-26144497-+1","rows":403}
+{"completed":"control-2-26144497--1","rows":404}
+{"completed":"control-1-26144497-+1","rows":405}
+{"completed":"zero-26144497","rows":406}
+{"completed":"control-3-26145506-+1","rows":407}
+{"completed":"zero-26145506","rows":408}
+{"completed":"control-2-26145506--1","rows":409}
+{"completed":"control-3-26145506--1","rows":410}
+{"completed":"control-2-26145506-+1","rows":411}
+{"completed":"target-26145506--1","rows":412}
+{"completed":"control-1-26145506-+1","rows":413}
+{"completed":"control-1-26145506--1","rows":414}
+{"completed":"target-26145506-+1","rows":415}
+{"completed":"control-3-26146515--1","rows":416}
+{"completed":"control-2-26146515--1","rows":417}
+{"completed":"control-1-26146515-+1","rows":418}
+{"completed":"target-26146515-+1","rows":419}
+{"completed":"control-2-26146515-+1","rows":420}
+{"completed":"target-26146515--1","rows":421}
+{"completed":"zero-26146515","rows":422}
+{"completed":"control-3-26146515-+1","rows":423}
+{"completed":"control-1-26146515--1","rows":424}
+{"completed":"target-26147524-+1","rows":425}
+{"completed":"control-1-26147524-+1","rows":426}
+{"completed":"target-26147524--1","rows":427}
+{"completed":"control-2-26147524--1","rows":428}
+{"completed":"zero-26147524","rows":429}
+{"completed":"control-1-26147524--1","rows":430}
+{"completed":"control-2-26147524-+1","rows":431}
+{"completed":"control-3-26147524--1","rows":432}
+{"completed":"control-3-26147524-+1","rows":433}
+{"completed":"target-26148533--1","rows":434}
+{"completed":"target-26148533-+1","rows":435}
+{"completed":"control-3-26148533--1","rows":436}
+{"completed":"control-1-26148533-+1","rows":437}
+{"completed":"control-3-26148533-+1","rows":438}
+{"completed":"control-2-26148533--1","rows":439}
+{"completed":"control-2-26148533-+1","rows":440}
+{"completed":"control-1-26148533--1","rows":441}
+{"completed":"zero-26148533","rows":442}
+{"completed":"target-26149542-+1","rows":443}
+{"completed":"control-3-26149542--1","rows":444}
+{"completed":"target-26149542--1","rows":445}
+{"completed":"control-1-26149542-+1","rows":446}
+{"completed":"zero-26149542","rows":447}
+{"completed":"control-1-26149542--1","rows":448}
+{"completed":"control-2-26149542--1","rows":449}
+{"completed":"control-3-26149542-+1","rows":450}
+{"completed":"control-2-26149542-+1","rows":451}
