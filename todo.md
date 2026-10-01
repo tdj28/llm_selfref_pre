@@ -7,6 +7,28 @@ models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Neutral-Task Causal Qualification (2026-10-01)
+
+- [x] Specify a separate Llama-first direction-selection and donor-patching
+  design, with J-lens used as a readout rather than the target-word selector.
+  See `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md`. This is an implementation
+  draft, not a frozen or executed experiment.
+- [x] Implement the Stage A runner, receipt audit and owned-pod controller,
+  with tiny actual-Llama and adversarial synthetic tests. CPU checks are not
+  CUDA qualification or scientific results.
+- [ ] Freeze and push the exact neutral-task inventory and pinned prompt-token
+  bindings before inference. No experience reports or Qwen outcomes belong
+  to Stage A. Complete the cheap native-CUDA qualification before main rental.
+- [ ] Confirm the proposed $130 inclusive remaining-budget allocation and
+  initial $15 qualification sub-cap; obtain available qualified hardware.
+  The initial read-only inventory was empty and the queried secure RTX4090,
+  B200 and eight-H200 offers were unavailable. No pod was created.
+- [ ] Execute Stage A with audited initial rows, retrieve all data, and delete
+  its owned pods. Preserve failure as failure, not a reason to tune the gate.
+- [ ] Use measured validity and throughput to freeze an affordable report
+  ablation/restoration study and a separately qualified Qwen extension.
+  Favorable Llama experience-report results are not an eligibility condition.
+
 ### Replication And Mechanism Priority (2026-09-30)
 
 Owner direction: source-aligned replication first, then perturbation/ablation

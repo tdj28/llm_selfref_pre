@@ -30,6 +30,19 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md` and
+  `experiments/jlens_causal_report/` are the new neutral-ownership-task causal
+  follow-up, currently an implementation draft, not a frozen or executed
+  experiment. Stage A fits directions on 32 discovery pairs and tests 32
+  held-out pairs plus 12 factual bridge pairs. It contains no experience-report
+  generations and no Qwen run. Preserve the distinction between known-answer
+  task qualification and an experience-report mechanism. Proposed new total
+  allowance $130 and initial $15 sub-cap await specific confirmation; no new
+  pod has been created. Require a pushed machine plan, cheap CUDA tests,
+  initial-row and throughput audits, and uniquely owned-pod cleanup. Stage B
+  and Qwen need separate outcome-aware freezes; never advance because a
+  candidate gives a preferred report result.
+
 - The paper-distribution random-subset study is complete at
   `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at
   `d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`. All 450 trials and 50 fresh
