@@ -14,12 +14,17 @@ with paired Jacobian-lens evidence. Design:
 `docs/BERG_REPLICATION_MECHANISM_ROADMAP_20260930.md`.
 This supersedes the ordering below, not any frozen experiment or failed gate.
 
-- [ ] Build the paper/notebook/public-runtime configuration comparison and
+- [x] Build the paper/notebook/public-runtime configuration comparison and
   executable dry-run checks. Retain all six IDs and source-specific scoring.
-- [ ] Prepare notebook-aligned additive steering with true zero, matched
+- [x] Prepare notebook-aligned additive steering with true zero, matched
   controls, delivery telemetry and bounded paired J-lens captures from the
   same experiment. The separate active-support operator's 100-position
   exposure threshold is not a universal gate on additive behavioral testing.
+  Implementation: `experiments/berg_source_replication/`; prospective design:
+  `docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md`. Fixed inventory is
+  1,090 two-turn trials and 40 paired-capture cases. Owner authorizes execution
+  without repeated continuation requests within the cumulative $200 budget;
+  this run reserves $50 new, carrying $30.989138 forward. No new paid Pro.
 - [ ] Freeze the sample, dose/control plan, inference, exact-path tests and
   approved spending before any new behavioral outcomes. Preserve baseline
   mismatch; do not tune prompts or scoring until the desired effect appears.

@@ -44,6 +44,10 @@ venv.bak/
 
 # Project specific
 data/*
+!data/berg_source_replication/
+data/berg_source_replication/*
+!data/berg_source_replication/plan_20260930/
+!data/berg_source_replication/plan_20260930/PLAN.json
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
