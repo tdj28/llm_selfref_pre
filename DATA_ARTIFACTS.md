@@ -1,5 +1,15 @@
 # Data Artifacts
 
+`data/instruction_state_qualification/plan_20261001/` is the result-free
+Llama crossed instruction/transcript qualification plan and pinned tokenizer
+certificate. The two-look screen permits 12 blocks (48 final answers) and
+at most 20 blocks (80 answers), under the separately authorized $25 stop-loss.
+The synthetic tokenizer fixtures are serialization tests, not model outputs.
+No internal intervention, fitted direction, SAE/J-lens result or completed
+qualification is implied. Runtime and judge receipts remain ignored until a
+separate audited release. Protocol:
+`docs/INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md`.
+
 `evidence/` contains the compact manuscript evidence package restored on
 2026-10-01 from former companion commit
 `8e079c5e21142969c63cc2204653beb14b51907b`. The 174-file import includes
