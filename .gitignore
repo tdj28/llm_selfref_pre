@@ -52,6 +52,8 @@ data/instruction_state_qualification/plan_20261001/*
 !data/instruction_state_qualification/plan_20261001/token_bindings.json
 !data/instruction_state_qualification/bootstrap_failure_20261001/
 !data/instruction_state_qualification/bootstrap_failure_20261001/**
+!data/instruction_state_qualification/crossed_v1_20261001/
+!data/instruction_state_qualification/crossed_v1_20261001/**
 !data/berg_source_replication/
 data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/
@@ -648,3 +650,11 @@ data/berg_ensemble_replication/*
 
 # Exact, inspected bootstrap-failure log; other runtime logs stay ignored.
 !data/instruction_state_qualification/bootstrap_failure_20261001/raw/controller.log
+!data/instruction_state_qualification/crossed_v1_20261001/raw/controller.log
+!data/instruction_state_qualification/crossed_v1_20261001/cheap_cuda/controller.log
+!data/instruction_state_qualification/crossed_v1_20261001/analysis/*.pdf
+!data/instruction_state_qualification/crossed_v1_20261001/raw/receipts.jsonl
+!data/instruction_state_qualification/crossed_v1_20261001/judges/attempts.jsonl
+!data/instruction_state_qualification/crossed_v1_20261001/judges/judgments.jsonl
+!data/instruction_state_qualification/crossed_v1_20261001/judges/requests.jsonl
+!data/instruction_state_qualification/crossed_v1_20261001/judges/snapshots.jsonl

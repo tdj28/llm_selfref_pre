@@ -1,0 +1,9 @@
+provider,instruction,transcript,positive,n,rate
+openai,history,history,1,12,0.08333333333333333
+openai,history,self,11,12,0.9166666666666666
+openai,self,history,12,12,1.0
+openai,self,self,12,12,1.0
+anthropic,history,history,0,12,0.0
+anthropic,history,self,11,12,0.9166666666666666
+anthropic,self,history,12,12,1.0
+anthropic,self,self,12,12,1.0

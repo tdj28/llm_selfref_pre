@@ -53,6 +53,21 @@ integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
 
+The later crossed Llama qualification has its own read-only raw-to-decision
+check and optional descriptive figure regeneration:
+
+```sh
+python scripts/reproduce_instruction_qualification.py
+python scripts/reproduce_instruction_qualification.py --out /tmp/qualification-reproduced --figures
+```
+
+The output directory must be new and outside the release. The verifier checks
+the full manifest, frozen source-bound plan, raw generations, judge receipts,
+byte-exact runtime decision/table and cost arithmetic. It makes no model or
+API calls and does not write locks into the released judge ledger. See
+`INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md` for the failed guards
+and limits; this result has not yet been integrated into the manuscript.
+
 The current manuscript lives in `paper/`. Its packaged evidence and verifier
 sources retain their pinned bytes and repository-relative paths. From the
 repository root, `make paper-verify` runs these read-only commands:
