@@ -50,6 +50,8 @@ data/instruction_state_qualification/*
 data/instruction_state_qualification/plan_20261001/*
 !data/instruction_state_qualification/plan_20261001/PLAN.json
 !data/instruction_state_qualification/plan_20261001/token_bindings.json
+!data/instruction_state_qualification/bootstrap_failure_20261001/
+!data/instruction_state_qualification/bootstrap_failure_20261001/**
 !data/berg_source_replication/
 data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/
@@ -643,3 +645,6 @@ data/berg_ensemble_replication/*
 !evidence/source_alignment/extra_figures/*.pdf
 !evidence/source_alignment/secondary/*.pdf
 !evidence/ensemble_alignment/secondary/*.pdf
+
+# Exact, inspected bootstrap-failure log; other runtime logs stay ignored.
+!data/instruction_state_qualification/bootstrap_failure_20261001/raw/controller.log

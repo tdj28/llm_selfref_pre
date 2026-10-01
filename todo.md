@@ -36,7 +36,11 @@ Qwen expansion is a publication requirement.
 - [x] Obtain the owner's approval for the $25 qualification-only stop-loss
   within the existing $200 ceiling; carry $69.130940 prior cost. Allocate
   $14 GPU, $10 judging and $1 storage/retrieval, not a new $200 budget.
-- [ ] Freeze/push its tested machine plan. No live request before that gate.
+- [x] Freeze/push its tested machine plan at `0acf165`; both hosted CI runs pass.
+- [x] Pass all 24 two-provider synthetic instrument judgments ($0.367850).
+- [x] Preserve the cheap bootstrap timeout, retrieve/hash-check its three
+  artifacts and delete owned pod hspaphgeu0ytc0; GPU cost bound $0.138886.
+- [ ] Complete the separately frozen A1 cheap retry before B200 creation.
 - [ ] Run qualification only; audit initial rows and costs, retrieve/hash-check
   artifacts and delete only its newly owned pod. Failure closes this candidate,
   not publication, and does not trigger a search for friendlier prompts.

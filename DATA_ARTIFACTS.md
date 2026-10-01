@@ -1,5 +1,11 @@
 # Data Artifacts
 
+`data/instruction_state_qualification/bootstrap_failure_20261001/` preserves
+the original incomplete cheap CUDA gate: exact log, dependency inventory and
+worker-stop proof, plus a projected owned-pod cost/deletion summary. No target
+outcomes exist in it. A1 changes only the cheap work window and carries the
+failed rental's cost; it does not replace this record or reset paid fixtures.
+
 `data/instruction_state_qualification/plan_20261001/` is the result-free
 Llama crossed instruction/transcript qualification plan and pinned tokenizer
 certificate. The two-look screen permits 12 blocks (48 final answers) and
