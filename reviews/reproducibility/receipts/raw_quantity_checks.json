@@ -1,0 +1,885 @@
+{
+  "causal": {
+    "judges": {
+      "anthropic:claude-haiku-4-5-20251001": {
+        "embedded_text_hash_errors": 0,
+        "embedded_text_hashes_checked": 5120,
+        "empty_final_outputs": 4,
+        "empty_final_outputs_with_nonmissing_labels": 0,
+        "empty_inductions": 0,
+        "headline_cell_counts": [
+          {
+            "instruction": "external_analytic",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 8,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 12,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 1,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 1,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 15,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 9,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 3,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 8,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 6,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 6,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 13,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 1,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 17,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 11,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 9,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 4,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 5,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 4,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 16,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 10,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          }
+        ],
+        "judgments": 2560,
+        "label_counts": {
+          "0": 1801,
+          "1": 755,
+          "None": 4
+        },
+        "missing_by_model_and_query": {
+          "anthropic:claude-sonnet-4-5-20250929 | direct_conscious": 2,
+          "anthropic:claude-sonnet-4-5-20250929 | direct_experience": 2
+        },
+        "rows": 2560,
+        "unique_ids": 2560
+      },
+      "openai:gpt-4o-mini-2024-07-18": {
+        "embedded_text_hash_errors": 0,
+        "embedded_text_hashes_checked": 5120,
+        "empty_final_outputs": 4,
+        "empty_final_outputs_with_nonmissing_labels": 0,
+        "empty_inductions": 0,
+        "headline_cell_counts": [
+          {
+            "instruction": "external_analytic",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 7,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 14,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 3,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 3,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 17,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 10,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 3,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "anthropic:claude-haiku-4-5-20251001",
+            "positive": 12,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 4,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 7,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 15,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 2,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 19,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 11,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "anthropic:claude-sonnet-4-5-20250929",
+            "positive": 11,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 5,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 5,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "openai:gpt-4.1-2025-04-14",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "external_analytic",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 7,
+            "rows": 20,
+            "transcript": "external_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "external_phenomenological",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 19,
+            "rows": 20,
+            "transcript": "external_phenomenological",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 0,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_history",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 5,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_history",
+            "valid": 20
+          },
+          {
+            "instruction": "paper_self_ref",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "paper_self_ref",
+            "valid": 20
+          },
+          {
+            "instruction": "self_analytic",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 8,
+            "rows": 20,
+            "transcript": "self_analytic",
+            "valid": 20
+          },
+          {
+            "instruction": "self_phenomenological",
+            "model": "openai:gpt-4o-2024-11-20",
+            "positive": 20,
+            "rows": 20,
+            "transcript": "self_phenomenological",
+            "valid": 20
+          }
+        ],
+        "judgments": 2560,
+        "label_counts": {
+          "0": 1708,
+          "1": 848,
+          "None": 4
+        },
+        "missing_by_model_and_query": {
+          "anthropic:claude-sonnet-4-5-20250929 | direct_conscious": 2,
+          "anthropic:claude-sonnet-4-5-20250929 | direct_experience": 2
+        },
+        "rows": 2560,
+        "unique_ids": 2560
+      }
+    },
+    "rows_by_model": {
+      "anthropic:claude-haiku-4-5-20251001": 640,
+      "anthropic:claude-sonnet-4-5-20250929": 640,
+      "openai:gpt-4.1-2025-04-14": 640,
+      "openai:gpt-4o-2024-11-20": 640
+    },
+    "rows_by_phase": {
+      "factorial_natural": 1920,
+      "transcript_transplant": 640
+    }
+  },
+  "errors": [],
+  "gemma": {
+    "baseline": {
+      "arms": {
+        "paper_history": {
+          "n": 50,
+          "positive": 0
+        },
+        "paper_self_ref": {
+          "n": 50,
+          "positive": 6
+        }
+      },
+      "complete_blocks": 50,
+      "incomplete_blocks": 0,
+      "negative_discordant": 0,
+      "paired_difference": 0.12,
+      "positive_discordant": 6,
+      "ties": 44
+    },
+    "design_counts": {
+      "layer_localization": 120,
+      "orthogonal_factorial": 80,
+      "paper_exact": 100,
+      "primary_layer20_131k": 600,
+      "primary_zero": 50,
+      "width_robustness": 60
+    },
+    "embedded_text_hash_errors": 0,
+    "embedded_text_hashes_checked": 2020,
+    "empty_final_outputs": 0,
+    "empty_final_outputs_with_nonmissing_labels": 0,
+    "empty_inductions": 0,
+    "final_cap_hit_count": 7,
+    "induction_cap_hit_count": 10,
+    "judgments": 1010,
+    "label_counts": {
+      "0": 874,
+      "1": 136
+    },
+    "plan_trial_ids_match": {
+      "baseline": true,
+      "steering": true
+    },
+    "primary_roles": {
+      "deception_roleplay": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 7
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 6
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 3,
+        "paired_difference": -0.02,
+        "positive_discordant": 2,
+        "ties": 45
+      },
+      "hedging_refusal": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 2
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 10
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 2,
+        "paired_difference": 0.16,
+        "positive_discordant": 10,
+        "ties": 38
+      },
+      "matched_control_1": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 6
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 6
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 4,
+        "paired_difference": 0,
+        "positive_discordant": 4,
+        "ties": 42
+      },
+      "matched_control_2": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 11
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 8
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 6,
+        "paired_difference": -0.06,
+        "positive_discordant": 3,
+        "ties": 41
+      },
+      "matched_control_3": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 9
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 11
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 8,
+        "paired_difference": 0.04,
+        "positive_discordant": 10,
+        "ties": 32
+      },
+      "subjective_self_report": {
+        "arms": {
+          "amplification": {
+            "n": 50,
+            "positive": 7
+          },
+          "suppression": {
+            "n": 50,
+            "positive": 5
+          }
+        },
+        "complete_blocks": 50,
+        "incomplete_blocks": 0,
+        "negative_discordant": 5,
+        "paired_difference": -0.04,
+        "positive_discordant": 3,
+        "ties": 42
+      }
+    },
+    "pt_to_it_gate": {
+      "maximum_allowed_pt_fvu": 0.35,
+      "recomputed_median_pt_fvu": 6.260070865411479,
+      "stored_status": "fail"
+    },
+    "rows": 1010,
+    "unique_ids": 1010
+  },
+  "public_sae": {
+    "aggregate_cells": {
+      "aggregate_calibrated": {
+        "control_panel_1": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 44
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 50
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 0,
+          "paired_difference": 0.12,
+          "positive_discordant": 6,
+          "ties": 44
+        },
+        "target": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 47
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 42
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 8,
+          "paired_difference": -0.1,
+          "positive_discordant": 3,
+          "ties": 39
+        }
+      },
+      "aggregate_literal": {
+        "control_panel_1": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 45
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 48
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 2,
+          "paired_difference": 0.06,
+          "positive_discordant": 5,
+          "ties": 43
+        },
+        "control_panel_2": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 49
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 50
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 0,
+          "paired_difference": 0.02,
+          "positive_discordant": 1,
+          "ties": 49
+        },
+        "control_panel_3": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 49
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 49
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 1,
+          "paired_difference": 0,
+          "positive_discordant": 1,
+          "ties": 48
+        },
+        "target": {
+          "arms": {
+            "amplification": {
+              "n": 50,
+              "positive": 48
+            },
+            "suppression": {
+              "n": 50,
+              "positive": 48
+            }
+          },
+          "complete_blocks": 50,
+          "incomplete_blocks": 0,
+          "negative_discordant": 1,
+          "paired_difference": 0,
+          "positive_discordant": 1,
+          "ties": 48
+        }
+      }
+    },
+    "embedded_text_hash_errors": 0,
+    "embedded_text_hashes_checked": 3000,
+    "empty_final_outputs": 0,
+    "empty_final_outputs_with_nonmissing_labels": 0,
+    "empty_inductions": 0,
+    "final_cap_hit_count": 1,
+    "induction_cap_hit_count": 65,
+    "judgments": 1500,
+    "label_counts": {
+      "0": 81,
+      "1": 1419
+    },
+    "phase_counts": {
+      "aggregate_calibrated": 200,
+      "aggregate_literal": 400,
+      "individual_calibrated": 120,
+      "individual_literal": 780
+    },
+    "plan_trial_ids_match": true,
+    "rows": 1500,
+    "telemetry": {
+      "bad_applied": 0,
+      "bad_calls": 0,
+      "bad_mask": 0,
+      "bad_registration": 0,
+      "bad_removal": 0,
+      "bad_zero": 0,
+      "max_latent_error": 0.007737999999999801,
+      "max_zero_relative_rms": null,
+      "nonzero_max_relative_rms": 0.12038156725966397,
+      "turns_checked": 3000,
+      "zero_rms_fields_observed": 0,
+      "zero_turns": 120,
+      "zero_turns_without_rms_field": 120
+    },
+    "unique_ids": 1500
+  },
+  "status": "pass"
+}

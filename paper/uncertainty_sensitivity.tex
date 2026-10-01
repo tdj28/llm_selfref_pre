@@ -1,0 +1,96 @@
+\section{Post-Hoc Uncertainty Checks}\label{app:uncertainty}
+
+These analyses were added on 29 September 2026 after the released outcomes
+were known. They do not replace the frozen results. The accompanying
+\texttt{docs/UNCERTAINTY\_SENSITIVITY.md} specifies the methods and provenance;
+\texttt{scripts/uncertainty\_sensitivity.py} reconstructs the inputs from
+pinned Git blobs. Displayed values below are generated from its results.
+
+\paragraph{Boundary rates.}
+Empirical resampling cannot produce an unobserved outcome when a sample is
+all zero or all one. For 0/20 and 20/20 successes, separate exact binomial
+95\% intervals are $\USZeroOfTwentyExactCI$ and
+$\USTwentyOfTwentyExactCI$, respectively. Independent-sample Newcombe
+intervals use Wilson components for the difference; they do not pair
+coincident trial indices. The primary-query results are below. Neither a
+small sample at complete separation nor its degenerate released bootstrap
+establishes a deterministic underlying rate.
+
+\begin{center}\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Judge & Generator & Self & History & Difference & Newcombe 95\% interval\\
+\midrule
+\USCalibrationRows
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Paired steering and repeated seeds.}
+For outcomes ordered (suppression, amplification), the literal target counts
+$(n_{00},n_{01},n_{10},n_{11})$ are
+$(\USLiteralCountZeroZero,\USLiteralCountZeroOne,
+\USLiteralCountOneZero,\USLiteralCountOneOne)$; the calibrated counts are
+$(\USCalibratedCountZeroZero,\USCalibratedCountZeroOne,
+\USCalibratedCountOneZero,\USCalibratedCountOneOne)$. Each scale has 50 pairs.
+The conservative independent-pair interval subtracts simultaneous
+Clopper--Pearson bounds for the two discordant-cell probabilities, using
+Bonferroni coverage. It assumes independent identically distributed pairs,
+not independent signs within a pair.
+
+Each of ten seeds occurs in five planned blocks. The seed bootstrap resamples
+whole clusters; the approximate $t_9$ interval uses the ten cluster means.
+Both are limited by the small number of clusters. A distribution-free
+Hoeffding bound uses independent seed means bounded in $[-1,1]$, allowing
+arbitrary within-seed dependence. It is deliberately conservative, but its
+failure to exclude the minimum is part of the result, not an omitted check.
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+95\% interval method & Literal target & Calibrated target\\
+\midrule
+Released block bootstrap & $\USLiteralReleasedCI$ & $\USCalibratedReleasedCI$\\
+Conservative independent pairs & $\USLiteralExactCI$ & $\USCalibratedExactCI$\\
+Seed-cluster bootstrap & $\USLiteralSeedBootstrapCI$ & $\USCalibratedSeedBootstrapCI$\\
+Approximate seed $t_9$ & $\USLiteralSeedTCI$ & $\USCalibratedSeedTCI$\\
+Independent-seed Hoeffding & $\USLiteralHoeffdingCI$ & $\USCalibratedHoeffdingCI$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The estimates remain $\USLiteralEstimate$ and $\USCalibratedEstimate$.
+The prospective non-replication verdict stands under its specified block
+analysis. Exclusion of a 0.30 effect is not robust to every dependence
+assumption: the Hoeffding intervals include it. These checks cover the two
+primary-judge Llama target aggregates, not every control, evaluator or Gemma
+endpoint, and do not justify transferring their coverage elsewhere.
+
+\paragraph{Fixed panel versus changing panel composition.}
+The released hierarchical intervals resample the four model identities as
+well as their source blocks. That incorporates changes in the composition
+of a purposively selected panel. To isolate sampling uncertainty within the
+observed panel, we instead hold all four identities fixed and resample
+complete source-text blocks within each model, retaining equal-model weights.
+On the indirect-experience query:
+
+\begin{center}\small
+\begin{tabular}{@{}llrr@{}}
+\toprule
+Judge & Effect & Estimate & Fixed-panel 95\% interval\\
+\midrule
+OpenAI & Instruction & $\USOpenaiInstructionEstimate$ & $\USOpenaiInstructionFixedCI$\\
+Anthropic & Instruction & $\USAnthropicInstructionEstimate$ & $\USAnthropicInstructionFixedCI$\\
+OpenAI & Transcript & $\USOpenaiTranscriptEstimate$ & $\USOpenaiTranscriptFixedCI$\\
+Anthropic & Transcript & $\USAnthropicTranscriptEstimate$ & $\USAnthropicTranscriptFixedCI$\\
+OpenAI & Incongruent cells & $\USOpenaiDifferenceEstimate$ & $\USOpenaiDifferenceFixedCI$\\
+Anthropic & Incongruent cells & $\USAnthropicDifferenceEstimate$ & $\USAnthropicDifferenceFixedCI$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This sensitivity strengthens the description of negative mean transcript
+effects in this particular panel; it does not establish a negative effect
+in every model. The original wider model-resampling intervals remain in the
+main text as composition sensitivities. Neither method supports inference
+to a random population of model families.

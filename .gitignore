@@ -630,3 +630,10 @@ data/berg_ensemble_replication/*
 **/huggingface_cache/
 **/wandb/
 **/mlruns/
+
+# Canonical manuscript's selected, provenance-bound figure inputs, not builds.
+!paper/figures/*.pdf
+!evidence/source_alignment/analysis/*.pdf
+!evidence/source_alignment/extra_figures/*.pdf
+!evidence/source_alignment/secondary/*.pdf
+!evidence/ensemble_alignment/secondary/*.pdf

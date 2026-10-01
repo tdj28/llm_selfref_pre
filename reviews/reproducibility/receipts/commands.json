@@ -1,0 +1,61 @@
+[
+  {
+    "argv": [
+      "${PYTHON}",
+      "-B",
+      "${SOURCE}/experiments/causal_transplant/audit_headline_point_estimates.py",
+      "${AUDIT_SCRATCH}/copies/data/causal_transplant/confirmatory_v1_20260709"
+    ],
+    "cwd": "${SOURCE}",
+    "exit_code": 0,
+    "name": "causal",
+    "seconds": 0.49932891700882465,
+    "started_at_utc": "2026-09-29T20:10:21.665674+00:00"
+  },
+  {
+    "argv": [
+      "${PYTHON}",
+      "-B",
+      "${SOURCE}/experiments/exp2_sae/audit_public_sae_consciousness_headlines.py",
+      "--generations",
+      "${AUDIT_SCRATCH}/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl",
+      "--local-judgments",
+      "${AUDIT_SCRATCH}/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/judging/local_llama_judgments.jsonl",
+      "--analysis-dir",
+      "${AUDIT_SCRATCH}/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis"
+    ],
+    "cwd": "${SOURCE}",
+    "exit_code": 0,
+    "name": "public_sae",
+    "seconds": 1.9173237909853924,
+    "started_at_utc": "2026-09-29T20:10:22.165416+00:00"
+  },
+  {
+    "argv": [
+      "${PYTHON}",
+      "-B",
+      "${SOURCE}/experiments/exp2_sae/audit_gemma_scope_9b_headlines.py",
+      "${AUDIT_SCRATCH}/copies/data/gemma_scope_9b/confirmatory_v1_20260711"
+    ],
+    "cwd": "${SOURCE}",
+    "exit_code": 0,
+    "name": "gemma",
+    "seconds": 7.710681416006992,
+    "started_at_utc": "2026-09-29T20:10:24.083095+00:00"
+  },
+  {
+    "argv": [
+      "${PYTHON}",
+      "-B",
+      "${SOURCE}/scripts/audit_public_release.py",
+      "--repo",
+      "${SOURCE}",
+      "--json"
+    ],
+    "cwd": "${SOURCE}",
+    "exit_code": 0,
+    "name": "public_safety",
+    "seconds": 76.54344550002133,
+    "started_at_utc": "2026-09-29T20:10:31.794123+00:00"
+  }
+]

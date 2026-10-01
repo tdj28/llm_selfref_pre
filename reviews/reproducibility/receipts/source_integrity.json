@@ -1,0 +1,11 @@
+{
+  "changed_files": [],
+  "checked_at_utc": "2026-09-29T20:18:44.090993+00:00",
+  "files_checked": 545,
+  "git_status": "## main...origin/main\n M README.md\n M technical_blog_posts/Feature_IDs_Are_Not_Explanations.md\n?? docs/REPRODUCTION.md\n?? technical_blog_posts/bootstrap-sampling-units.svg\n?? technical_blog_posts/bootstrap-with-replacement.svg\n",
+  "source_after_sha256": "a37033eb6345c48a38331a1b687f33e7d4dd2863556f2131cbf09e475c73ea44",
+  "source_before_sha256": "a37033eb6345c48a38331a1b687f33e7d4dd2863556f2131cbf09e475c73ea44",
+  "source_release_diff": "",
+  "status": "pass",
+  "tracked_release_inventory_matches": true
+}

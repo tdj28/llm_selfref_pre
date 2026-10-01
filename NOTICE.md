@@ -4,6 +4,13 @@ Copyright 2026 T. Jones and Praxagent
 
 This product includes software developed by T. Jones / Praxagent.
 
+The October 1, 2026 consolidation restores the current manuscript and its
+supporting files from the same authors' former companion repository. Original
+file hashes and its notice are preserved in `paper/history/20261001/`.
+Subsequent manuscript framing edits do not change frozen experimental data.
+This public repository, with `paper/` as the canonical manuscript, is the
+publication destination; the private companion is no longer required.
+
 Original code and documentation in this repository are licensed under the
 Apache License, Version 2.0. See the LICENSE file for the full license text.
 

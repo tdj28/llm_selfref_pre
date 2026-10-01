@@ -1,5 +1,15 @@
 # Data Artifacts
 
+`evidence/` contains the compact manuscript evidence package restored on
+2026-10-01 from former companion commit
+`8e079c5e21142969c63cc2204653beb14b51907b`. The 174-file import includes
+manuscript sources, figures, bounded verifiers/tests, documentation and review
+records. `paper/history/20261001/import_manifest.json` binds the incoming
+bytes; previous and incoming manuscript sources and the original notice are
+preserved beside it. This is consolidation of existing results, not new
+outcome collection, a new analysis freeze or independent validation. Existing
+release manifests, failure records, raw data and provenance remain unchanged.
+
 `data/berg_ensemble_replication/random_subset_v1_20261001/` is the completed
 450-trial paper-induction random-subset native-BF16 study. It preserves 465
 main-worker artifacts, six cheap-CUDA qualification artifacts, both rubrics,

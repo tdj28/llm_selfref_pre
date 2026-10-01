@@ -1,8 +1,9 @@
 # What Causes Models To Report Subjective Experience?
 
-We tested claims from Berg, de Lucena, and Rosenblatt's
-[2025 paper](https://arxiv.org/abs/2510.24797v2) using prompt controls,
-public SAE weights and internal model readouts.
+We study what changes language models' reports of subjective experience and
+what those reports measure, using prompt controls, public SAE weights and
+internal model readouts. Berg, de Lucena, and Rosenblatt's
+[2025 paper](https://arxiv.org/abs/2510.24797v2) supplied the starting protocol.
 
 **The paper's scoring rule responds strongly to the prompt. What that score
 measures remains unresolved. Our steering runs are not yet a commensurate test
@@ -15,9 +16,10 @@ text. Transcript effects nevertheless differ by model and have opposite signs.
 This constrains a transcript-mediated reading; it does not discriminate the
 authors' account from an internal process elicited anew by the instruction.
 
-The [focused response](https://github.com/tdj28/berg2025-response) collects the
-paper-specific argument and selected evidence. This repository retains the
-full research record, including failed runs and related studies.
+The latest [manuscript is in `paper/`](paper/README.md). This public repository
+is the source of truth for the paper, evidence and tooling, including failed
+runs and related studies. The former companion repository is superseded;
+no separate checkout is needed to build or verify the manuscript.
 
 The consolidated [BibTeX bibliography](references.bib) collects the paper,
 blog and artifact references; [scope and key mappings](docs/BIBLIOGRAPHY.md)
@@ -112,7 +114,8 @@ See [todo.md](todo.md) for unfinished work and
 | [experiments/exp2_sae/](experiments/exp2_sae/) | Feature maps, public steering, Gemma and J-lens experiments. |
 | [data/](data/) | Frozen plans, selected raw outputs, analyses, manifests and failure records. |
 | [DATA_ARTIFACTS.md](DATA_ARTIFACTS.md) | Data inventory and provenance. |
-| [paper/](paper/) | Full research manuscript and figures; the focused response is in the companion repo. |
+| [paper/](paper/README.md) | Canonical manuscript, bibliography, figures and preserved earlier sources. |
+| [evidence/](evidence/) | Hash-bound manuscript tables, selected inputs and figure provenance. |
 | [docs/](docs/) | Protocols, result summaries, amendments and reproduction instructions. |
 | [technical_blog_posts/](technical_blog_posts/) | Article sources and drafts, not a substitute for the result releases. |
 | [steering/](steering/) | Earlier general-purpose framework, retained for implementation history. |

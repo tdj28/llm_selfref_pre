@@ -1,0 +1,38 @@
+# Canonical Manuscript
+
+Edit `main.tex` and `references.bib` here. This public repository holds the
+latest manuscript, evidence and tooling. No companion checkout is required.
+
+The paper studies causes and measurement of subjective-experience reports.
+Berg et al. supplied the starting protocol; this is not limited to a response
+to their paper. Broader framing does not broaden what any result establishes.
+Keep instruction effects, automated labels, steering delivery and internal
+readouts distinct from consciousness or validated introspective access.
+
+From the repository root:
+
+```sh
+make paper-verify
+make paper
+```
+
+The PDF is generated at `paper/main.pdf` and remains ignored. The verification
+target checks the bounded evidence package; it does not validate every label,
+interpretation or interval. The root public-release audit is required before
+commits. Rebuild and inspect the PDF after manuscript changes.
+
+## Files
+
+- `main.tex`, `references.bib`: current manuscript and its cited literature.
+- `source_alignment.tex`, `ensemble_alignment.tex`, `factor_inventory.tex`,
+  `uncertainty_sensitivity.tex`: included experimental and methods sections.
+- `figures/`: selected figure inputs with pinned source provenance.
+- `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
+- `../reviews/`: dated automated reviews, adjudications and reference checks.
+- `results/`: earlier research figures/tables, retained rather than discarded.
+- `history/20261001/`: immutable migration snapshots and import hashes.
+
+Earlier manuscripts remain historical, not alternate working drafts.
+Human editorial approval is still required before publication or submission.
+Do not edit the Praxagent website or the private former companion as part of
+routine manuscript work.

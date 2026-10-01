@@ -1,0 +1,20 @@
+[
+  {
+    "attempt": 1,
+    "command": "steering/.venv/bin/python -B out/response_release_20260929/repro/supplement_raw_checks.py",
+    "exit_code": 1,
+    "error": "KeyError: relative_hidden_delta_rms at zero_rms.append in the supplemental checker",
+    "cause": "Supplemental checker assumed that zero-dose diagnostics contain a numeric RMS field. The original release omits that field for the no-op path and instead records steering_applied=false and zero_is_true_noop=true.",
+    "repair_scope": "Scratch checker only; count absent RMS fields separately, verify explicit no-op flags, and do not impute a numeric zero.",
+    "frozen_source_changed": false
+  },
+  {
+    "attempt": 2,
+    "command": "steering/.venv/bin/python -B out/response_release_20260929/repro/supplement_raw_checks.py",
+    "exit_code": 0,
+    "status": "pass",
+    "output": "raw_quantity_checks.json",
+    "errors": [],
+    "frozen_source_changed": false
+  }
+]

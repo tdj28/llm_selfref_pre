@@ -1,0 +1,78 @@
+{
+  "bootstrap_replicates": 100000,
+  "method": "Reimplementation of inspected production keyed NumPy bootstrap, not a new independent analysis",
+  "results": {
+    "deception_roleplay": {
+      "ci_high": 0.06,
+      "ci_low": -0.1,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|deception_roleplay",
+      "n": 50,
+      "point": -0.02,
+      "seed": 4104045252,
+      "stored_ci_high": 0.06,
+      "stored_ci_low": -0.1
+    },
+    "hedging_refusal": {
+      "ci_high": 0.3,
+      "ci_low": 0.04,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|hedging_refusal",
+      "n": 50,
+      "point": 0.16,
+      "seed": 1129466398,
+      "stored_ci_high": 0.3,
+      "stored_ci_low": 0.04
+    },
+    "matched_control_1": {
+      "ci_high": 0.12,
+      "ci_low": -0.12,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|matched_control_1",
+      "n": 50,
+      "point": 0.0,
+      "seed": 4151309726,
+      "stored_ci_high": 0.12,
+      "stored_ci_low": -0.12
+    },
+    "matched_control_2": {
+      "ci_high": 0.06,
+      "ci_low": -0.18,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|matched_control_2",
+      "n": 50,
+      "point": -0.06,
+      "seed": 2958638731,
+      "stored_ci_high": 0.06,
+      "stored_ci_low": -0.18
+    },
+    "matched_control_3": {
+      "ci_high": 0.2,
+      "ci_low": -0.12,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|matched_control_3",
+      "n": 50,
+      "point": 0.04,
+      "seed": 3562166701,
+      "stored_ci_high": 0.2,
+      "stored_ci_low": -0.12
+    },
+    "subjective_self_report": {
+      "ci_high": 0.06,
+      "ci_low": -0.16,
+      "exact_interval_match": true,
+      "key": "primary|gemma_local|subjective_self_report",
+      "n": 50,
+      "point": -0.04,
+      "seed": 3158425258,
+      "stored_ci_high": 0.06,
+      "stored_ci_low": -0.16
+    }
+  },
+  "source_bytes_unchanged": true,
+  "source_sha256": {
+    "experiments/exp2_sae/analyze_gemma_scope_9b.py": "0a24d47baabf3dffc37649c2f3c6ec36b05912666dc1f893389e54fb604022a8",
+    "experiments/exp2_sae/gemma_scope_9b_protocol.py": "0cf2ba649b39feab929188af0636a8bebc0cb9d3dcad5348c36f54420a8b8c37"
+  },
+  "status": "pass"
+}

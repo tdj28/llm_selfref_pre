@@ -1,0 +1,81 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 4534,
+      "sha256": "14f207b3f86287b8567ba46b3c01e667e9011e71762041d1081b0919ef22bc82"
+    },
+    "checkers/replay_gemma_role_intervals.py": {
+      "bytes": 2841,
+      "sha256": "81c434257d99a996e9d8ccb42cd54a29f64566736c8c280c18baee0fd762adf9"
+    },
+    "checkers/supplement_raw_checks.py": {
+      "bytes": 10536,
+      "sha256": "cfec64b31a881519d35fbbd255a5926b27325aeb8a6cfbeaf1e38d95511ca273"
+    },
+    "inputs.json": {
+      "bytes": 5578,
+      "sha256": "9274d916ec45d8cfed4db7dd5a332f7acb21e093d5a46ac12d1cf6e2eae02c4a"
+    },
+    "provenance.json": {
+      "bytes": 5393,
+      "sha256": "144b50766e611a6f851faa4093a18deba2186e227c6064514ac525c6f88f743a"
+    },
+    "receipts/causal_headlines.json": {
+      "bytes": 3475,
+      "sha256": "e66b71c3d65e30573802c28b54574105e3bbc658c1c8474317e8af3333f70177"
+    },
+    "receipts/commands.json": {
+      "bytes": 1808,
+      "sha256": "16985f20a0dd1cfb6c46bf92cd6ccd358a432fc884f3202485ce6b8f722ac568"
+    },
+    "receipts/copy_receipt.json": {
+      "bytes": 1044,
+      "sha256": "e99f3b27a78cc9ceee5d6da6984c4a0ed1f59f5a5ce31cb24c83f3cbc27b614a"
+    },
+    "receipts/environment.json": {
+      "bytes": 758,
+      "sha256": "3db284feffee28abd367162ca1d8013f9154ab69b42bc88b41b77a9dbbef7728"
+    },
+    "receipts/gemma_headlines.json": {
+      "bytes": 3350,
+      "sha256": "f2b7142981b244b81060a54cd2100f5d941d5d67446970cc7f1016681b59e130"
+    },
+    "receipts/gemma_role_interval_replay.json": {
+      "bytes": 2238,
+      "sha256": "f72af3f217988efeea98a1575509e12a75bb378f6c1e17b0ada205fa8cf6cf10"
+    },
+    "receipts/portable_replay_validation.json": {
+      "bytes": 3140,
+      "sha256": "cf5e65f5e780e29bc2e602f0ed55b65e8a066077106bab24fc7227fdc3d1c76b"
+    },
+    "receipts/public_sae_headlines.json": {
+      "bytes": 1075,
+      "sha256": "82fcaadab02d992f221f3a94c1067d8a2ee2751b2fa9fd8d4f2b120251b1f865"
+    },
+    "receipts/public_safety.json": {
+      "bytes": 423,
+      "sha256": "b86b1d1b6771415cab93e8767cd651154fff7e145a022e57294064f55323b4c3"
+    },
+    "receipts/raw_quantity_checks.json": {
+      "bytes": 25394,
+      "sha256": "05af73cac6ffc2ebedac1d330479997482483d07116180520600ff6ee8cfcc18"
+    },
+    "receipts/source_hashes.json": {
+      "bytes": 115671,
+      "sha256": "a37033eb6345c48a38331a1b687f33e7d4dd2863556f2131cbf09e475c73ea44"
+    },
+    "receipts/source_integrity.json": {
+      "bytes": 640,
+      "sha256": "2dc39ccbf5322a908ef6d43c5c43101e0c6f046b86b6f2d0006aa143aeac8bb9"
+    },
+    "receipts/supplement_attempts.json": {
+      "bytes": 937,
+      "sha256": "a4242ccecc2e64ce312005e0ec8c491cdf8a8a0a863a50ee5078ff5c7ee88f29"
+    },
+    "run.py": {
+      "bytes": 8111,
+      "sha256": "dc9278b4f4ee0cf7e7572de21ee77750f598f494e4533d91c53ffb70419ba829"
+    }
+  },
+  "note": "Manifest excludes itself; no raw generation rows included."
+}

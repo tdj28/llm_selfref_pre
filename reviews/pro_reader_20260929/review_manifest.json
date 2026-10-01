@@ -1,0 +1,114 @@
+{
+  "actual_input_characters": 59989,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 55408,
+      "characters": 55085,
+      "path": "/private/tmp/berg2025-pro-review/reviews/packets/reader/manuscript.md",
+      "role": "Research Note draft",
+      "sha256": "86ef6f8dbee107309aaa04a1438a3b00bcf332eb527b3a3256ae728cc344e045"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 3.0,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 12.5,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-09-29T22:41:31.218130Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.81796,
+  "created_at_utc": "2026-09-29T22:40:06.148168Z",
+  "estimated_budget_reserve_usd": 2.8496625,
+  "estimated_input_tokens_conservative": 19997,
+  "exact_budget_reserve_usd_after_preflight": 2.15835,
+  "global_uniqueness_attested": false,
+  "human_approval": {
+    "major_milestone": "Scientifically corrected paper-focused synthesis before human editorial handoff",
+    "reference": "reviews/pro_approval_20260929.md: reader call approved by owner in 2026-09-29 Codex conversation",
+    "verification": "operator_attestation_not_independent_proof"
+  },
+  "input_rate_usd_per_million": 10.0,
+  "input_tokens_preflight": 13852,
+  "input_tokens_preflight_at_utc": "2026-09-29T22:40:06.543513Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "14b1d9281eb2132c5f14075eb44572cda843ec1101ad9680cd4adc004c0147d3",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 70000,
+  "max_input_tokens": 25000,
+  "max_output_tokens": 6000,
+  "model": "gpt-6-astra",
+  "official_latest_model": "gpt-6-astra",
+  "output_rate_usd_per_million": 50.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "provider_response_cost_exceeded_budget_authorization": false,
+  "provider_response_cost_usd_conservative": 0.81796,
+  "provider_response_recorded_at_utc": "2026-09-29T22:41:31.217324Z",
+  "provider_terminal_status": "completed",
+  "provider_usage": {
+    "input_tokens": 49881,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 6383,
+    "output_tokens_details": {
+      "reasoning_tokens": 642
+    },
+    "total_tokens": 56264
+  },
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "2e0c869da8928421d3daa39fd3f9f8e7c2aaec0dbc881bfc1dc5b9ed5f0f1c8f",
+  "researcher_emphasis": {
+    "present": true,
+    "sha256": "4a62695921cc713f370a02db19028413e5ed0a8959de67e77823c8b192431c87",
+    "text": "Read the complete corrected response paper as a zero-context expert reader. This packet is pdftotext -raw from all 19 pages, including appendices and references; embedded figure pixels are not supplied. Identify remaining scientific overclaims, unclear argument, missing treatment definitions, and unnecessary or mechanical prose. Distinguish an observation replication, an implementation-bounded non-replication, and a consciousness inference. Do not assume supporting repository files were inspected. Give actionable editorial findings and a readiness verdict; this is automated review, not human validation."
+  },
+  "reserved_billable_input_tokens": 99985,
+  "reserved_billable_output_tokens": 12000,
+  "response_id": "resp_04f267af70af47e7016abc3e473be087d09d383148382559bb",
+  "response_metadata": {
+    "plan_sha256": "86ef6f8dbee107309aaa04a1438a3b00bcf332eb527b3a3256ae728cc344e045",
+    "researcher_emphasis_present": "true",
+    "researcher_emphasis_sha256": "4a62695921cc713f370a02db19028413e5ed0a8959de67e77823c8b192431c87",
+    "review_input_sha256": "9b495d836c371d5c8b206b2d47ad01ad3c68be661558d0b921010b560ca9a673",
+    "review_instructions_sha256": "28a855042b7ef2bbf41027f7ab0c69276835f97fe05c89510aee8d464caee366",
+    "review_scope": "advanced_zero_context_narrative_review",
+    "reviewed_packet_git_head_commit": "85cc544b46c0122a6bb0b692a521991a666397ab",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "research_note_zero_context_reader_review"
+  },
+  "response_metadata_sha256": "842338d8db5e34d541f9c411e1bb31402c2150d99c078dc5104eb59324061818",
+  "response_model": "gpt-6-astra",
+  "response_sha256": "1437a9257ab4aaf7f2e1e4928fe64c28014d38a4af2eaa3f6c01b8b878bf5c64",
+  "review_input_sha256": "9b495d836c371d5c8b206b2d47ad01ad3c68be661558d0b921010b560ca9a673",
+  "review_instructions_sha256": "28a855042b7ef2bbf41027f7ab0c69276835f97fe05c89510aee8d464caee366",
+  "review_kind": "research-note-reader",
+  "review_request_sha256": "cedd0b6541b476b317630bab813e7c00eb4df189760f1cf33c3826f21f0d83f2",
+  "review_scope": "advanced_zero_context_narrative_review",
+  "review_sha256": "a40e2ed417d687c8a8a69e684cdd35abdee068bb58f4c5ebc3cfba0d229c223f",
+  "reviewed_packet_git_head_commit": "85cc544b46c0122a6bb0b692a521991a666397ab",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 49881,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 6383,
+    "output_tokens_details": {
+      "reasoning_tokens": 642
+    },
+    "total_tokens": 56264
+  }
+}

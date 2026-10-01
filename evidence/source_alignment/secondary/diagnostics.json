@@ -1,0 +1,26 @@
+{
+  "behavioral_rows": 1090,
+  "capture_cases": 40,
+  "capture_schedule": {
+    "expected_captures": 40,
+    "validated_captures": 40,
+    "complete": true
+  },
+  "quality": {
+    "empty_turns": 0,
+    "capped_turns": 195,
+    "generated_tokens": 183864,
+    "generation_seconds": 8603.555137882475,
+    "judge_missing": {
+      "notebook": 0,
+      "paper": 0
+    }
+  },
+  "analysis_status": "descriptive_secondary_not_a_confirmatory_mechanism_test",
+  "position_rows": 117600,
+  "token_level_inference": false,
+  "statistical_intervals": null,
+  "repeated_zero_groups": 10,
+  "repeated_zero_mismatches": 0,
+  "scope": "fixed selected cases; two capture seeds; no behavioral mediation claim"
+}

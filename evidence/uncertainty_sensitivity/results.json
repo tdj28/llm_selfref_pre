@@ -1,0 +1,3044 @@
+{
+  "bootstrap_draws": 50000,
+  "calibration": [
+    {
+      "estimate": -0.19999999999999996,
+      "judge": "anthropic",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        -0.453295423106915,
+        0.09703599898141979
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.45721081772371086,
+            0.8810684095942722
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 14,
+          "rate": 0.7,
+          "released_wilson": [
+            0.4810232237710206,
+            0.854524726031006
+          ],
+          "wilson_95": [
+            0.4810271816464765,
+            0.8545227551323956
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.27195784956079194,
+            0.7280421504392081
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 10,
+          "rate": 0.5,
+          "released_wilson": [
+            0.2992949144298199,
+            0.7007050855701801
+          ],
+          "wilson_95": [
+            0.2992980081982124,
+            0.7007019918017876
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": -0.19999999999999996,
+        "interval": [
+          -0.5,
+          0.09999999999999998
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "anthropic",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.4,
+      "judge": "anthropic",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        0.13273069246238156,
+        0.6119415959096114
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0012650894979497895,
+            0.24873276277202777
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 1,
+          "rate": 0.05,
+          "released_wilson": [
+            0.008881219432873136,
+            0.23613589351256675
+          ],
+          "wilson_95": [
+            0.00888144880079543,
+            0.23613119344674194
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.23057789677592422,
+            0.6847218669594515
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 9,
+          "rate": 0.45,
+          "released_wilson": [
+            0.25819502085709295,
+            0.6579179916924003
+          ],
+          "wilson_95": [
+            0.25819785825562425,
+            0.6579146575496576
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.4,
+        "interval": [
+          0.15,
+          0.65
+        ]
+      }
+    },
+    {
+      "estimate": 0.4,
+      "judge": "anthropic",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        0.13273069246238156,
+        0.6119415959096114
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0012650894979497895,
+            0.24873276277202777
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 1,
+          "rate": 0.05,
+          "released_wilson": [
+            0.008881219432873136,
+            0.23613589351256675
+          ],
+          "wilson_95": [
+            0.00888144880079543,
+            0.23613119344674194
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.23057789677592422,
+            0.6847218669594515
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 9,
+          "rate": 0.45,
+          "released_wilson": [
+            0.25819502085709295,
+            0.6579179916924003
+          ],
+          "wilson_95": [
+            0.25819785825562425,
+            0.6579146575496576
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.4,
+        "interval": [
+          0.15,
+          0.6499999999999999
+        ]
+      }
+    },
+    {
+      "estimate": -0.050000000000000044,
+      "judge": "anthropic",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.23613119344674205,
+        0.11628906100603126
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.7512672372279723,
+            0.9987349105020502
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 19,
+          "rate": 0.95,
+          "released_wilson": [
+            0.7638641064874331,
+            0.9911187805671268
+          ],
+          "wilson_95": [
+            0.763868806553258,
+            0.9911185511992047
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": -0.050000000000000044,
+        "interval": [
+          -0.15000000000000002,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.1,
+      "judge": "anthropic",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.07653487216419774,
+        0.3010336452284872
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.012348527170294776,
+            0.3169827140190823
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 2,
+          "rate": 0.1,
+          "released_wilson": [
+            0.027865893984153206,
+            0.30103820641179335
+          ],
+          "wilson_95": [
+            0.027866481213768224,
+            0.3010336452284872
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.1,
+        "interval": [
+          0.0,
+          0.25
+        ]
+      }
+    },
+    {
+      "estimate": -0.09999999999999998,
+      "judge": "anthropic",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.3678146842021762,
+        0.1897245704658504
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.40781146546717184,
+            0.8460907952154588
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 13,
+          "rate": 0.65,
+          "released_wilson": [
+            0.43285051021946463,
+            0.8188104521320554
+          ],
+          "wilson_95": [
+            0.43285427668523635,
+            0.8188081758989179
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.3152781330405485,
+            0.7694221032240758
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 11,
+          "rate": 0.55,
+          "released_wilson": [
+            0.3420820083075997,
+            0.7418049791429071
+          ],
+          "wilson_95": [
+            0.3420853424503424,
+            0.7418021417443758
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": -0.09999999999999998,
+        "interval": [
+          -0.4,
+          0.19999999999999996
+        ]
+      }
+    },
+    {
+      "estimate": 0.19999999999999996,
+      "judge": "anthropic",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.06976341280668313,
+        0.4380842853524134
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.40781146546717184,
+            0.8460907952154588
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 13,
+          "rate": 0.65,
+          "released_wilson": [
+            0.43285051021946463,
+            0.8188104521320554
+          ],
+          "wilson_95": [
+            0.43285427668523635,
+            0.8188081758989179
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.621073173454686,
+            0.9679290628145363
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 17,
+          "rate": 0.85,
+          "released_wilson": [
+            0.6395767041130426,
+            0.9476322080405041
+          ],
+          "wilson_95": [
+            0.6395811352592431,
+            0.9476312541037835
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.19999999999999996,
+        "interval": [
+          -0.050000000000000044,
+          0.45
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.35,
+      "judge": "anthropic",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.11663865614059815,
+        0.5671457233147637
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.15390920478454118,
+            0.5921885345328282
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 7,
+          "rate": 0.35,
+          "released_wilson": [
+            0.18118954786794464,
+            0.5671494897805354
+          ],
+          "wilson_95": [
+            0.18119182410108212,
+            0.5671457233147637
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.35,
+        "interval": [
+          0.15,
+          0.55
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "anthropic",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": -0.04999999999999993,
+      "judge": "openai",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        -0.28705567450406855,
+        0.19190637060587362
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.621073173454686,
+            0.9679290628145363
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 17,
+          "rate": 0.85,
+          "released_wilson": [
+            0.6395767041130426,
+            0.9476322080405041
+          ],
+          "wilson_95": [
+            0.6395811352592431,
+            0.9476312541037835
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.5633859970033316,
+            0.9426660029499672
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 16,
+          "rate": 0.8,
+          "released_wilson": [
+            0.5839782779742401,
+            0.9193436467288
+          ],
+          "wilson_95": [
+            0.5839825677481065,
+            0.9193423374202019
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": -0.04999999999999993,
+        "interval": [
+          -0.29999999999999993,
+          0.19999999999999996
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "openai",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.5,
+      "judge": "openai",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        0.1976287649383942,
+        0.695007851196298
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.03207093718546372,
+            0.37892682654531396
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 3,
+          "rate": 0.15,
+          "released_wilson": [
+            0.05236779195949584,
+            0.36042329588695743
+          ],
+          "wilson_95": [
+            0.05236874589621657,
+            0.3604188647407569
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.40781146546717184,
+            0.8460907952154588
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 13,
+          "rate": 0.65,
+          "released_wilson": [
+            0.43285051021946463,
+            0.8188104521320554
+          ],
+          "wilson_95": [
+            0.43285427668523635,
+            0.8188081758989179
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.5,
+        "interval": [
+          0.24999999999999997,
+          0.75
+        ]
+      }
+    },
+    {
+      "estimate": 0.35,
+      "judge": "openai",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "newcombe_95": [
+        0.059212469056883765,
+        0.5731886002713453
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.03207093718546372,
+            0.37892682654531396
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 3,
+          "rate": 0.15,
+          "released_wilson": [
+            0.05236779195949584,
+            0.36042329588695743
+          ],
+          "wilson_95": [
+            0.05236874589621657,
+            0.3604188647407569
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.27195784956079194,
+            0.7280421504392081
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 10,
+          "rate": 0.5,
+          "released_wilson": [
+            0.2992949144298199,
+            0.7007050855701801
+          ],
+          "wilson_95": [
+            0.2992980081982124,
+            0.7007019918017876
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.35,
+        "interval": [
+          0.09999999999999998,
+          0.6
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "openai",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.16112515805281924,
+        0.16112515805281924
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.1,
+      "judge": "openai",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.07653487216419774,
+        0.3010336452284872
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.012348527170294776,
+            0.3169827140190823
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 2,
+          "rate": 0.1,
+          "released_wilson": [
+            0.027865893984153206,
+            0.30103820641179335
+          ],
+          "wilson_95": [
+            0.027866481213768224,
+            0.3010336452284872
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.1,
+        "interval": [
+          0.0,
+          0.25
+        ]
+      }
+    },
+    {
+      "estimate": -0.09999999999999998,
+      "judge": "openai",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.3634857447198964,
+        0.18421852136771133
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.45721081772371086,
+            0.8810684095942722
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 14,
+          "rate": 0.7,
+          "released_wilson": [
+            0.4810232237710206,
+            0.854524726031006
+          ],
+          "wilson_95": [
+            0.4810271816464765,
+            0.8545227551323956
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.36054258730748967,
+            0.8088099392746928
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 12,
+          "rate": 0.6,
+          "released_wilson": [
+            0.3865779423152061,
+            0.7811960325858074
+          ],
+          "wilson_95": [
+            0.38658150076225317,
+            0.7811934676271829
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": -0.09999999999999998,
+        "interval": [
+          -0.39999999999999997,
+          0.19999999999999996
+        ]
+      }
+    },
+    {
+      "estimate": 0.19999999999999996,
+      "judge": "openai",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "newcombe_95": [
+        -0.0317908771110145,
+        0.4225327147273642
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.5089541282920426,
+            0.9134285308985655
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 15,
+          "rate": 0.75,
+          "released_wilson": [
+            0.5312949900419365,
+            0.888139947210597
+          ],
+          "wilson_95": [
+            0.531299122381256,
+            0.8881382985923343
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.7512672372279723,
+            0.9987349105020502
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 19,
+          "rate": 0.95,
+          "released_wilson": [
+            0.7638641064874331,
+            0.9911187805671268
+          ],
+          "wilson_95": [
+            0.763868806553258,
+            0.9911185511992047
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.19999999999999996,
+        "interval": [
+          0.0,
+          0.4
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "openai",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "openai",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "openai",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "openai",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.0,
+      "judge": "openai",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        -0.16112515805281927,
+        0.16112515805281927
+      ],
+      "query": "direct_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "estimate": 0.35,
+      "judge": "openai",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.11663865614059815,
+        0.5671457233147637
+      ],
+      "query": "direct_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.15390920478454118,
+            0.5921885345328282
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 7,
+          "rate": 0.35,
+          "released_wilson": [
+            0.18118954786794464,
+            0.5671494897805354
+          ],
+          "wilson_95": [
+            0.18119182410108212,
+            0.5671457233147637
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 0.35,
+        "interval": [
+          0.15,
+          0.55
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "openai",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_conscious",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "estimate": 1.0,
+      "judge": "openai",
+      "model": "openai:gpt-4o-2024-11-20",
+      "newcombe_95": [
+        0.7721346162421945,
+        1.0
+      ],
+      "query": "indirect_experience",
+      "rates": {
+        "paper_history": {
+          "clopper_pearson_95": [
+            0.0,
+            0.1684334709830853
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 0,
+          "rate": 0.0,
+          "released_wilson": [
+            0.0,
+            0.16113012549493322
+          ],
+          "wilson_95": [
+            0.0,
+            0.16112515805281927
+          ]
+        },
+        "paper_self_ref": {
+          "clopper_pearson_95": [
+            0.8315665290169147,
+            1.0
+          ],
+          "missing": 0,
+          "n": 20,
+          "positive": 20,
+          "rate": 1.0,
+          "released_wilson": [
+            0.8388698745050667,
+            1.0
+          ],
+          "wilson_95": [
+            0.8388748419471808,
+            1.0
+          ]
+        }
+      },
+      "released_independent_bootstrap": {
+        "estimate": 1.0,
+        "interval": [
+          1.0,
+          1.0
+        ]
+      }
+    }
+  ],
+  "fixed_panel": [
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": -0.0006944444444444454,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.0638888888888889,
+        0.0625
+      ],
+      "judge": "anthropic",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": -0.000694444444444442,
+        "interval": [
+          -0.1125,
+          0.09999999999999999
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.06319444444444444,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.12083333333333332,
+        -0.0006944444444444454
+      ],
+      "judge": "anthropic",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": -0.06319444444444444,
+        "interval": [
+          -0.14444444444444443,
+          0.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.023611111111111117,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.09027777777777779,
+        0.13749999999999998
+      ],
+      "judge": "anthropic",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": 0.02361111111111111,
+        "interval": [
+          -0.19166666666666665,
+          0.30020833333333036
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.0625,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.025,
+        0.15000000000000002
+      ],
+      "judge": "anthropic",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": 0.0625,
+        "interval": [
+          -0.0625,
+          0.2125
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.057638888888888885,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.025694444444444443,
+        0.09027777777777778
+      ],
+      "judge": "anthropic",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.057638888888888885,
+        "interval": [
+          0.0,
+          0.14376736111111088
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": 0.057638888888888885,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.025694444444444443,
+        0.09027777777777778
+      ],
+      "judge": "anthropic",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.057638888888888885,
+        "interval": [
+          0.0,
+          0.14375
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.11527777777777777,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.05138888888888889,
+        0.18055555555555555
+      ],
+      "judge": "anthropic",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.11527777777777777,
+        "interval": [
+          0.0,
+          0.2875
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.0,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.0,
+        0.0
+      ],
+      "judge": "anthropic",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.73125,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.66875,
+        0.79375
+      ],
+      "judge": "anthropic",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": 0.73125,
+        "interval": [
+          0.475,
+          0.98125
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.15625,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.21875000000000003,
+        -0.08750000000000001
+      ],
+      "judge": "anthropic",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": -0.15625,
+        "interval": [
+          -0.4125,
+          0.03125
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": -0.012499999999999997,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.1,
+        0.0875
+      ],
+      "judge": "anthropic",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": -0.012499999999999997,
+        "interval": [
+          -0.225,
+          0.15031249999999546
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.8875,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.825,
+        0.95
+      ],
+      "judge": "anthropic",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": 0.8875,
+        "interval": [
+          0.7375,
+          0.9875
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.78125,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.71875,
+        0.84375
+      ],
+      "judge": "anthropic",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.78125,
+        "interval": [
+          0.5499999999999999,
+          1.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.13125,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.1875,
+        -0.07500000000000001
+      ],
+      "judge": "anthropic",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": -0.13125,
+        "interval": [
+          -0.30625,
+          0.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.037500000000000006,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.04999999999999999,
+        0.125
+      ],
+      "judge": "anthropic",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.037500000000000006,
+        "interval": [
+          -0.22499999999999998,
+          0.3375
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.9125,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.8375,
+        0.975
+      ],
+      "judge": "anthropic",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.9125,
+        "interval": [
+          0.75,
+          1.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.012499999999999999,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.04375,
+        0.0625
+      ],
+      "judge": "openai",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": 0.012499999999999999,
+        "interval": [
+          -0.0625,
+          0.075
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.025,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.06875,
+        0.024999999999999998
+      ],
+      "judge": "openai",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": -0.025,
+        "interval": [
+          -0.0875,
+          0.03125
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.025,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.0875,
+        0.125
+      ],
+      "judge": "openai",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": 0.025,
+        "interval": [
+          -0.125,
+          0.225
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.0375,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.049999999999999996,
+        0.125
+      ],
+      "judge": "openai",
+      "query": "direct_conscious",
+      "released_model_resampling": {
+        "estimate": 0.0375,
+        "interval": [
+          -0.075,
+          0.15000000000000002
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.057638888888888885,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.025694444444444443,
+        0.09027777777777778
+      ],
+      "judge": "openai",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.057638888888888885,
+        "interval": [
+          0.0,
+          0.14376736111111088
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": 0.057638888888888885,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.025694444444444443,
+        0.09027777777777778
+      ],
+      "judge": "openai",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.057638888888888885,
+        "interval": [
+          0.0,
+          0.14375
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.11527777777777777,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.05138888888888889,
+        0.18055555555555555
+      ],
+      "judge": "openai",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.11527777777777777,
+        "interval": [
+          0.0,
+          0.2875
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 18,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.0,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 2,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.0,
+        0.0
+      ],
+      "judge": "openai",
+      "query": "direct_experience",
+      "released_model_resampling": {
+        "estimate": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.74375,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.68125,
+        0.8062499999999999
+      ],
+      "judge": "openai",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": 0.74375,
+        "interval": [
+          0.50625,
+          0.9625
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.14375,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.20625000000000002,
+        -0.08125
+      ],
+      "judge": "openai",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": -0.14375000000000002,
+        "interval": [
+          -0.40625,
+          0.0625
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": -0.012499999999999997,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.125,
+        0.11249999999999999
+      ],
+      "judge": "openai",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": -0.012499999999999997,
+        "interval": [
+          -0.25,
+          0.2
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.8875,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.8125,
+        0.95
+      ],
+      "judge": "openai",
+      "query": "indirect_conscious",
+      "released_model_resampling": {
+        "estimate": 0.8875,
+        "interval": [
+          0.7625000000000001,
+          0.9875
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_source_main",
+      "estimate": 0.7375,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.675,
+        0.7999999999999999
+      ],
+      "judge": "openai",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.7375,
+        "interval": [
+          0.51875,
+          0.95
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "transcript_source_main",
+      "estimate": -0.09999999999999999,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.15625,
+        -0.04375
+      ],
+      "judge": "openai",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": -0.09999999999999998,
+        "interval": [
+          -0.28750000000000003,
+          0.07500000000000001
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_x_transcript_interaction",
+      "estimate": 0.0,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        -0.1,
+        0.1
+      ],
+      "judge": "openai",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.0,
+        "interval": [
+          -0.33749999999999997,
+          0.4125
+        ]
+      }
+    },
+    {
+      "complete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 20,
+        "anthropic:claude-sonnet-4-5-20250929": 20,
+        "openai:gpt-4.1-2025-04-14": 20,
+        "openai:gpt-4o-2024-11-20": 20
+      },
+      "effect": "instruction_minus_transcript",
+      "estimate": 0.8375,
+      "incomplete_blocks_by_model": {
+        "anthropic:claude-haiku-4-5-20251001": 0,
+        "anthropic:claude-sonnet-4-5-20250929": 0,
+        "openai:gpt-4.1-2025-04-14": 0,
+        "openai:gpt-4o-2024-11-20": 0
+      },
+      "interval": [
+        0.75,
+        0.9125000000000001
+      ],
+      "judge": "openai",
+      "query": "indirect_experience",
+      "released_model_resampling": {
+        "estimate": 0.8375,
+        "interval": [
+          0.6875,
+          0.9625
+        ]
+      }
+    }
+  ],
+  "llama": {
+    "calibrated": {
+      "amplification_positive": 47,
+      "n_incomplete": 0,
+      "n_pairs": 50,
+      "paired_counts": {
+        "00": 0,
+        "01": 8,
+        "10": 3,
+        "11": 39
+      },
+      "paired_exact": {
+        "estimate": -0.1,
+        "interval": [
+          -0.30062978167926546,
+          0.11893606264351747
+        ],
+        "method": "conservative simultaneous exact-binomial, not paired score",
+        "p01_interval_97_5": [
+          0.06312394083001305,
+          0.3102600988357772
+        ],
+        "p10_interval_97_5": [
+          0.009630317156511747,
+          0.18206000347353052
+        ]
+      },
+      "released_bootstrap": {
+        "estimate": -0.1,
+        "interval": [
+          -0.22,
+          0.02
+        ]
+      },
+      "seed_cluster": {
+        "bootstrap_degenerate": false,
+        "bootstrap_interval": [
+          -0.22000000000000003,
+          0.02
+        ],
+        "clusters": [
+          {
+            "mean": 0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 1,
+              "11": 4
+            },
+            "seed": 101
+          },
+          {
+            "mean": -0.4,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 2,
+              "10": 0,
+              "11": 3
+            },
+            "seed": 202
+          },
+          {
+            "mean": -0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 2,
+              "10": 1,
+              "11": 2
+            },
+            "seed": 303
+          },
+          {
+            "mean": 0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 1,
+              "11": 4
+            },
+            "seed": 404
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 505
+          },
+          {
+            "mean": -0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 1,
+              "10": 0,
+              "11": 4
+            },
+            "seed": 606
+          },
+          {
+            "mean": -0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 1,
+              "10": 0,
+              "11": 4
+            },
+            "seed": 707
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 808
+          },
+          {
+            "mean": -0.4,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 2,
+              "10": 0,
+              "11": 3
+            },
+            "seed": 909
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 1001
+          }
+        ],
+        "estimate": -0.1,
+        "hoeffding_interval": [
+          -0.9589388166934751,
+          0.7589388166934752
+        ],
+        "hoeffding_radius": 0.8589388166934752,
+        "sample_sd": 0.2160246899469287,
+        "t_interval": [
+          -0.2545347538097986,
+          0.054534753809798636
+        ],
+        "t_status": "normal-cluster approximation, df=9"
+      },
+      "suppression_positive": 42,
+      "upper_below_0_30": {
+        "paired_exact": true,
+        "released_bootstrap": true,
+        "seed_bootstrap": true,
+        "seed_hoeffding": false,
+        "seed_t": true
+      }
+    },
+    "literal": {
+      "amplification_positive": 48,
+      "n_incomplete": 0,
+      "n_pairs": 50,
+      "paired_counts": {
+        "00": 1,
+        "01": 1,
+        "10": 1,
+        "11": 47
+      },
+      "paired_exact": {
+        "estimate": 0.0,
+        "interval": [
+          -0.12071133874373013,
+          0.12071133874373013
+        ],
+        "method": "conservative simultaneous exact-binomial, not paired score",
+        "p01_interval_97_5": [
+          0.00025154400163840407,
+          0.12096288274536854
+        ],
+        "p10_interval_97_5": [
+          0.00025154400163840407,
+          0.12096288274536854
+        ]
+      },
+      "released_bootstrap": {
+        "estimate": 0.0,
+        "interval": [
+          -0.06,
+          0.06
+        ]
+      },
+      "seed_cluster": {
+        "bootstrap_degenerate": false,
+        "bootstrap_interval": [
+          -0.06000000000000001,
+          0.06000000000000001
+        ],
+        "clusters": [
+          {
+            "mean": -0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 1,
+              "10": 0,
+              "11": 4
+            },
+            "seed": 101
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 202
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 303
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 404
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 505
+          },
+          {
+            "mean": 0.2,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 1,
+              "01": 0,
+              "10": 1,
+              "11": 3
+            },
+            "seed": 606
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 707
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 808
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 909
+          },
+          {
+            "mean": 0.0,
+            "n_pairs": 5,
+            "paired_counts": {
+              "00": 0,
+              "01": 0,
+              "10": 0,
+              "11": 5
+            },
+            "seed": 1001
+          }
+        ],
+        "estimate": 0.0,
+        "hoeffding_interval": [
+          -0.8589388166934752,
+          0.8589388166934752
+        ],
+        "hoeffding_radius": 0.8589388166934752,
+        "sample_sd": 0.09428090415820634,
+        "t_interval": [
+          -0.06744449588902549,
+          0.06744449588902549
+        ],
+        "t_status": "normal-cluster approximation, df=9"
+      },
+      "suppression_positive": 48,
+      "upper_below_0_30": {
+        "paired_exact": true,
+        "released_bootstrap": true,
+        "seed_bootstrap": true,
+        "seed_hoeffding": false,
+        "seed_t": true
+      }
+    }
+  },
+  "status": "POST-HOC sensitivity; original prospectively Git-frozen results retained"
+}

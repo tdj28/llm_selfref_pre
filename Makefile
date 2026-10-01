@@ -1,7 +1,7 @@
 PYTHON ?= $(if $(wildcard venv/bin/python),venv/bin/python,python3)
 LATEXMK ?= latexmk
 
-.PHONY: test compile paper audit public-audit verify
+.PHONY: test compile paper paper-verify audit public-audit verify
 
 test:
 	$(PYTHON) -m pytest tests
@@ -17,6 +17,17 @@ compile:
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
 
+# Read-only checks of the current manuscript and its packaged evidence.
+paper-verify:
+	$(PYTHON) scripts/verify_evidence.py
+	$(PYTHON) scripts/verify_figure_values.py
+	$(PYTHON) scripts/verify_rubric_audit.py
+	$(PYTHON) scripts/verify_source_alignment.py
+	$(PYTHON) scripts/verify_source_jlens_table.py
+	$(PYTHON) scripts/verify_ensemble_alignment.py
+	$(PYTHON) scripts/uncertainty_sensitivity.py --check
+	$(PYTHON) -B reviews/reproducibility/run.py --verify-only
+
 # Recompute on copies, never on frozen releases.
 audit:
 	$(PYTHON) scripts/check_frozen_audits.py --extended
@@ -24,5 +35,5 @@ audit:
 public-audit:
 	$(PYTHON) scripts/audit_public_release.py
 
-verify: public-audit test compile paper
+verify: public-audit test compile paper-verify paper
 	git diff --check

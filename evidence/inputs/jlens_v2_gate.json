@@ -1,0 +1,21 @@
+{
+  "status": "fail",
+  "storage_fidelity": {
+    "maximum_absolute_error": 0.0,
+    "median_absolute_error": 0.0,
+    "p99_absolute_error": 0.0,
+    "rows": 1581,
+    "status": "pass",
+    "tolerance": 0.02,
+    "values_compared": 15571269
+  },
+  "v1_reproduction": {
+    "maximum_absolute_error": 0.25,
+    "median_absolute_error": 0.001953125,
+    "p99_absolute_error": 0.03125,
+    "rows": 1581,
+    "status": "fail",
+    "tolerance": 0.02,
+    "values_compared": 15571269
+  }
+}

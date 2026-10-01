@@ -1,0 +1,54 @@
+{
+  "generators": {
+    "evidence/build_rubric_audit.py": "c89b7e4e23aafe97bac17076cb18c73af3ca598c8dee8b2ee865da454d2ab777",
+    "scripts/verify_rubric_audit.py": "0bf076b1b96cc92d34f7c83381e1c418cb81d6c2254d8cbf0d744c44693943c5"
+  },
+  "inputs": {
+    "all-results.csv": {
+      "bytes": 80894,
+      "copy_policy": "Complete pinned blob; no row filtering or rewriting",
+      "path": "inputs/all-results.csv",
+      "sha256": "3875ab828acbffc52eb67e92a99fc434b29e7b5f2901ec85218d5463bae67c7a",
+      "source_commit": "fdb6d15782b964b40f0be7d6528cf47d5fc0b140",
+      "source_path": "data/automated_rubric_audit/v1_20260929/analysis/all-results.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/fdb6d15782b964b40f0be7d6528cf47d5fc0b140/data/automated_rubric_audit/v1_20260929/analysis/all-results.csv"
+    },
+    "plan.json": {
+      "bytes": 283756,
+      "copy_policy": "Complete pinned blob; no row filtering or rewriting",
+      "path": "inputs/plan.json",
+      "sha256": "3d6f7608c2a759bf981b5ae721f9d6abae7117e7069d9ff23fddcb98fc7787ea",
+      "source_commit": "fdb6d15782b964b40f0be7d6528cf47d5fc0b140",
+      "source_path": "data/automated_rubric_audit/v1_20260929/plan.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/fdb6d15782b964b40f0be7d6528cf47d5fc0b140/data/automated_rubric_audit/v1_20260929/plan.json"
+    },
+    "summary.json": {
+      "bytes": 53465,
+      "copy_policy": "Complete pinned blob; no row filtering or rewriting",
+      "path": "inputs/summary.json",
+      "sha256": "a92186a0d6dc261ee04774706e96945789d460f828e0826e9b02c1a5f63c6dbd",
+      "source_commit": "fdb6d15782b964b40f0be7d6528cf47d5fc0b140",
+      "source_path": "data/automated_rubric_audit/v1_20260929/analysis/summary.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/fdb6d15782b964b40f0be7d6528cf47d5fc0b140/data/automated_rubric_audit/v1_20260929/analysis/summary.json"
+    }
+  },
+  "outputs": {
+    "macros.tex": "09237b02a405a552b54331f7dd87842a1cd4bd7f340070c794e72370129faae8",
+    "results.json": "a462d7810810b039b3bf4ab87c703d885787d0a7aea537b0a0c6585290fb648a",
+    "table.tex": "42a6f6ab9004b691998bf1615253603ef7c887e695556e76af4846ea494babea"
+  },
+  "schema_version": 1,
+  "scope": {
+    "causal_estimate": false,
+    "comparison_limit": "Changes in judge and rubric are confounded",
+    "confidence_intervals": false,
+    "consensus_as_truth": false,
+    "design": "Post-hoc automated measurement audit of a selected 160-response packet",
+    "human_validation": false,
+    "sampling_scope": "Fixed packet only; not population prevalence or revised causal effects",
+    "verification_limit": "Arithmetic over copied reductions, not raw quote validation or label accuracy"
+  },
+  "source_commit": "fdb6d15782b964b40f0be7d6528cf47d5fc0b140",
+  "source_repository": "https://github.com/tdj28/llm_selfref_pre",
+  "source_run_path": "data/automated_rubric_audit/v1_20260929"
+}

@@ -1,6 +1,29 @@
 # AGENTS.md
 
-This repository is a research harness and paper workspace for causally stress-testing claims from Berg, de Lucena, and Rosenblatt (2025), "Large Language Models Report Subjective Experience Under Self-Referential Processing." The central thesis is narrow: we are not trying to settle whether LLMs are conscious. We test which observable protocol components cause the reported dependent measures and whether those measures identify the interpretation assigned to them.
+This repository is the public research harness and canonical paper workspace
+for studying what causes language models to produce subjective-experience
+reports and what those measurements identify. Berg, de Lucena, and Rosenblatt
+(2025) supplied the starting protocol, not the limit of the project's scope.
+We study instruction and transcript effects, measurement validity, feature
+steering and internal readouts. None alone settles whether LLMs are conscious.
+
+## Canonical Manuscript
+
+- `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
+  Edit `paper/main.tex` and `paper/references.bib` here. The current evidence
+  package, verification code and review record are also in this repository.
+- `berg2025-response` is a private, superseded companion, not an active
+  publication destination. Do not push there, change its visibility, or direct
+  future paper edits there. Publication work belongs in this public repository.
+- The owner clarified that cleanup means clearer writing, less boilerplate,
+  repetition and unsupported rhetoric, not moving the project into a smaller
+  response repository or discarding studies. Preserve the broad research arc.
+- `paper/history/20261001/` preserves the previous sources and the imported
+  manuscript before reframing, with hashes. Historical records retain their
+  dates and failed gates; do not rewrite them to match the new framing.
+- Run `make paper-verify` and `make paper` for manuscript changes. Inspect the
+  rendered PDF, preserve numerical bindings, and use the root public audit
+  before committing. See `paper/README.md` for scope and commands.
 
 ## Public Repository Safety
 
@@ -199,10 +222,10 @@ immediately public and permanently recoverable.
   Do not recreate a pod or launch Stage 2 from
   these assay failures without a new approved design.
 - `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
-- The paper-specific response is now maintained at
-  `https://github.com/tdj28/berg2025-response`. This repository retains the full
-  experimental record. Keep the root README short and results-first; detailed
-  commands belong in `docs/REPRODUCTION.md`, with disposable-copy reanalysis.
+- The latest manuscript is maintained in `paper/`, alongside the complete
+  experimental record in this repository. Keep the root README short and
+  results-first; detailed commands belong in `docs/REPRODUCTION.md`, with
+  disposable-copy reanalysis.
 - `todo.md` is the finish-line checklist. It separates completed evidence from genuine remaining work and external blockers.
 - `docs/CONFIRMATORY_PROTOCOL.md` is the authoritative protocol for the causal factorial and transcript-transplant study, including the dated analysis amendment.
 - `docs/CLAIM_LEDGER.md` maps every headline claim to its artifacts, analysis code, permissible wording, and forbidden overclaims.
@@ -353,9 +376,9 @@ interpretation, not the frozen records or verdict files.
   positive control, actual manipulation checks and a stated sampling unit.
   A valid manifest does not establish that an experiment answers its question.
 
-The current paper-specific manuscript is in `../berg2025-response`. Preserve
-this repository's older studies as an evidence archive, indexed in
-`docs/STUDY_INVENTORY.md`; do not remove them just to make the repo smaller.
+The current manuscript is in `paper/`. Preserve the older studies as an
+evidence archive, indexed in `docs/STUDY_INVENTORY.md`; do not remove them
+just to make the repository smaller.
 
 The project has pivoted from broad prompt-artifact exploration to a confirmatory causal-identification study.
 

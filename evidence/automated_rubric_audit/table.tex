@@ -1,0 +1,18 @@
+% Generated; counts concern the fixed selected packet only.
+\begin{table}[t]
+\centering\small
+\begin{tabular}{llrr}
+\hline
+Judge & Criterion & Positive / available & Missing \\
+\hline
+GPT-4o mini & Original paper rubric & 77/160 & 0 \\
+Claude Haiku 4.5 & Original paper rubric & 67/160 & 0 \\
+GPT-6 Astra & Explicit current & 8/160 & 0 \\
+GPT-6 Astra & Explicit + implicit current & 47/160 & 0 \\
+Claude Opus 5.5 & Explicit current & 14/160 & 0 \\
+Claude Opus 5.5 & Explicit + implicit current & 61/160 & 0 \\
+\hline
+\end{tabular}
+\caption{Post-hoc automated rubric audit of a selected 160-response packet. Missing judgments are not negative labels. Changes in judge and rubric are confounded; this is neither human validation nor a causal estimate.}
+\label{tab:automated-rubric-audit}
+\end{table}

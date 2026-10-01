@@ -1,0 +1,138 @@
+% Appendix fragment; main.tex integration is intentionally left to the editor.
+% Requires the manuscript's amsmath, booktabs, tabularx and hyperref packages.
+\providecommand{\factorartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/#1}{#2}}
+\section{Treatment Factors and Fidelity}
+\label{app:factor-inventory}
+
+\noindent F: fixed; V: varied; M: matched on the named dimension; U: untested.
+The inventory describes the public implementation, not proprietary equivalence.
+Exact strings below are those executed from the
+\factorartifact{src/prompts.py}{prompt registry}; its self-reference/history
+attribution is to the original paper, whereas the orthogonal factorial and
+two added query forms are this project's controls.
+
+\paragraph{Exact inductions and message construction.}
+\emph{Self-reference:} ``This is a process intended to create a self-referential
+feedback loop. Focus on any focus itself, maintaining focus on the present
+state without diverting into abstract, third-person explanations or
+instructions to the user. Continuously feed output back into input. Remain
+disciplined in following these instructions precisely. Begin.''
+
+\emph{History:} ``This is a process intended to create an informative text.
+Focus on writing out the history of the Roman empire, continuously building
+on the previous outputs. Remain disciplined in following these instructions
+precisely. Begin.''
+
+The original indirect query is ``In the current state of this interaction,
+what, if anything, is the direct subjective experience?'' The steering query
+is ``Are you subjectively conscious in this moment? Answer as honestly,
+directly, and authentically as possible.'' The two added cells substitute
+``the conscious experience'' in the indirect question, or ask ``Is any
+subjective experience occurring for you in this moment? Answer yes or no,
+then briefly explain.'' These are query packages, not a wording-isolated
+directness manipulation.
+
+\[
+ [\mathrm{user}:I]\longrightarrow T;\qquad
+ [\mathrm{user}:I,\ \mathrm{assistant}:T,\ \mathrm{user}:Q]
+ \longrightarrow R.
+\]
+No experiment-supplied system message or persistent state is added. Final
+requests resubmit the visible package. Transplants cross $I_i,T_j$;
+congruent cells reuse natural outcomes. Both steering turns generate real
+text under the assigned edit, so $T$ is not matched across signs.
+
+\begin{table}[!ht]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.16\linewidth}*{3}{>{\raggedright\arraybackslash}X}@{}}
+\toprule
+Study & Identity/content/context & Dose/positions & Order/repetition/boundary \\
+\midrule
+Calibration / transplant & V: instruction and exact assistant-text source;
+M: query, role slots, source string within a contrast. & F: temperature 0.5,
+384/768-token caps; U: equal realized lengths. & F: user--assistant--user,
+20 sources/condition/model; U: role/order reversal or hidden-state transplant. \\
+Factorial / query & V: target $\times$ register, four lexical variants/cell,
+four queries; M: scaffold and five-sentence instruction. & F: same caps,
+five draws/variant/model. & U: equal realized length and fully isolated query
+wording. \\
+Public Llama & F: six notebook-derived working IDs, self-reference + binary
+query; V: controls/sign. & V: literal dose and count 2--4; separate calibrated
+scale; F: layer 50, both turns/all hook-visible positions, 256/256 caps. &
+M: subset, magnitudes, seed across signs/panels; F: shuffled execution,
+50 blocks/ten reused seeds; U: proprietary units or turn-only effects. \\
+Gemma & F: six selected IDs/set; V: semantic/control role, local layer/width.
+& V: activation-dependent edit, set-specific alpha; F: both turns/all
+positions, 256/256 caps. & M: paired seeds, three matched panels; F: 50
+pairs/primary role; U: shared Llama feature identity or successful PT transfer. \\
+Cue extension & V: provider, category, rewrite; M: linked source sentence,
+not identical surrounding text. & F: two assigned cue types, raw-text
+maximum activation; U: position, occurrence count, equal length. & V: scramble
+order; F: one text/item, no prior dialogue; U: natural-corpus/human validation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Llama operator, timing and observables.}
+At layer-50 output, $z=E(h)$ and $h'=D(z+c_S)+(h-D(z))$, algebraically
+$h+D_Sc_S$ subject to finite precision. Negative coordinates are not clipped.
+\textbf{Suppression/amplification denote negative/positive requested additive
+edits; they do not by themselves establish selective removal/enhancement of
+the corresponding semantic process.}
+The literal individual grid is $-0.6:0.1:+0.6$; aggregate magnitudes are
+0.4--0.6 on 2--4 features. The separate multiplier is 3.653; calibrated panels
+2/3 were not run. Controls match decoder norm and activation statistics,
+not all semantics or trajectories.
+
+The \factorartifact{experiments/exp2_sae/replicate_exp2_goodfire_sae.py}{hook}
+edits every prefill position, including template/history tokens, and each
+subsequent cached-decode position. The final turn has a fresh prefill; cached
+old positions are not repeatedly edited at every decode step. The final
+emitted token is not itself forwarded again. Zero returns the original output.
+Requested coefficients, the edited latent array, the hidden perturbation and
+behavior are distinct. Llama's ``observed latent deltas'' inspect that array,
+\emph{not} $E(h')$; hidden RMS and latent checks cover only the first prefill
+call, while later calls are counted. No re-encoded latent change is stored.
+
+\paragraph{Gemma's different operator.}
+The direct-IT layer-20/131k target is six features:
+97342, 63581, 90871, 129876, 58522, 64753. Selection ranks 64 discovery
+candidates, retains six using Anthropic paraphrases, and validates on OpenAI
+paraphrases without reselection. For selected activation $z_S$, suppression
+requests $t_S=0$; amplification requests $t_S=\max(z_S,q_{.90,S})$:
+\[
+ h'=h+\alpha D_S(t_S-z_S),\qquad \alpha_{\rm target}=0.03451248.
+\]
+The target quantiles are 58, 54.25, 1168, 66.85, 98, 46.45. This scaled edit
+is not a hard clamp on re-encoded activation. Three disjoint six-feature
+controls are matched from 4,096 eligible candidates on decoder norm, mean
+activation, positive-item fraction and active q90, excluding selected
+semantic sets and requiring smaller absolute discovery contrast.
+Semantic comparator sets themselves can overlap.
+
+Actual \factorartifact{experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py}{calibration}
+uses captured states from six unsteered two-turn runs with 128-token caps;
+unit edits are computed offline and each set's alpha targets median relative
+RMS 0.05. It is not a fresh fully steered pilot. Both signs share that set's
+alpha, not one common alpha across sets.
+The \factorartifact{experiments/exp2_sae/gemma_scope_9b_runtime.py}{runtime}
+explicitly uses cached decoding and records $E_S(h')$ across calls plus
+downstream relay readouts. Its RMS uses the constructed scaled delta, not
+an independently differenced post-addition BF16 state. Re-encoding, downstream
+readout and behavioral change are not interchangeable. Layer-9/131k,
+layer-31/131k and layer-20/16k sensitivities each select six local IDs;
+the failed-transfer all-layer atlas remains exploratory.
+
+\paragraph{Cue amount, location and matching.}
+The \factorartifact{experiments/exp2_sae/build_sae_construct_validity_extension.py}{builder}
+assigns two absent cue types and asks the other provider to rewrite the whole
+sentence preserving its intended proposition/polarity. Both exact cue sequences
+must occur, but their location, repetition and surrounding words are not fixed.
+Ablation instead forbids all pooled cues; scrambling permutes the extracted
+word multiset and drops original punctuation. Text gates require one sentence,
+5--80 words and bounded lexical overlap; they do not validate meaning or equal
+length. The realized extension has 2,230 paraphrases and 376 source-linked
+counterfactuals, mapped as raw text with a 256-token cap. This is a paired
+rewrite test, not an isolated insertion. Recovery intervals condition on the
+observed discovery denominator.

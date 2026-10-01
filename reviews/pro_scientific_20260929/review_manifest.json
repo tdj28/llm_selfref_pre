@@ -1,0 +1,121 @@
+{
+  "actual_input_characters": 51632,
+  "api_url": "https://api.openai.com/v1/responses",
+  "artifacts": [
+    {
+      "bytes": 42767,
+      "characters": 42767,
+      "path": "/private/tmp/berg2025-pro-review/reviews/packets/scientific/manuscript.md",
+      "role": "Research Note draft",
+      "sha256": "70ec66c65f23e5b7b71521862d5f507156f01803ed2dfd9715a076cf097de85b"
+    },
+    {
+      "bytes": 2671,
+      "characters": 2671,
+      "path": "/private/tmp/berg2025-pro-review/reviews/packets/scientific/references.md",
+      "role": "synthesized context 1",
+      "sha256": "a6c6eab1b15f5e49f8133e292ac349d5743d150a7323c462f42c5f12e86432d1"
+    }
+  ],
+  "background": false,
+  "budget_authorization_usd": 3.0,
+  "budget_notice": "This is a preflight authorization guard, not a provider billing hard stop. Pro-mode aggregate model-work usage can exceed the request's max_output_tokens. A costly estimate means the director packet should be compacted, not that its budget should be raised.",
+  "cache_write_rate_usd_per_million": 12.5,
+  "chars_per_token_assumption": 3.0,
+  "completed_at_utc": "2026-09-29T22:17:34.859424Z",
+  "completed_response_cost_exceeded_budget_authorization": false,
+  "completed_response_cost_usd_conservative": 0.82963,
+  "created_at_utc": "2026-09-29T22:16:09.079666Z",
+  "estimated_budget_reserve_usd": 2.5362375,
+  "estimated_input_tokens_conservative": 17211,
+  "exact_budget_reserve_usd_after_preflight": 1.98915,
+  "global_uniqueness_attested": false,
+  "human_approval": {
+    "major_milestone": "Complete paper-focused synthesis before human editorial handoff",
+    "reference": "reviews/pro_approval_20260929.md: scientific call approved by owner in 2026-09-29 Codex conversation",
+    "verification": "operator_attestation_not_independent_proof"
+  },
+  "input_rate_usd_per_million": 10.0,
+  "input_tokens_preflight": 12348,
+  "input_tokens_preflight_at_utc": "2026-09-29T22:16:09.922353Z",
+  "input_tokens_url": "https://api.openai.com/v1/responses/input_tokens",
+  "latest_model_document_sha256": "14b1d9281eb2132c5f14075eb44572cda843ec1101ad9680cd4adc004c0147d3",
+  "latest_model_source": "https://developers.openai.com/api/docs/guides/latest-model.md",
+  "max_input_characters": 65000,
+  "max_input_tokens": 25000,
+  "max_output_tokens": 6000,
+  "model": "gpt-6-astra",
+  "official_latest_model": "gpt-6-astra",
+  "output_rate_usd_per_million": 50.0,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pro_input_reserve_multiplier": 5.0,
+  "pro_output_reserve_multiplier": 2.0,
+  "provider_response_cost_exceeded_budget_authorization": false,
+  "provider_response_cost_usd_conservative": 0.82963,
+  "provider_response_recorded_at_utc": "2026-09-29T22:17:34.858347Z",
+  "provider_terminal_status": "completed",
+  "provider_usage": {
+    "input_tokens": 46428,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 7307,
+    "output_tokens_details": {
+      "reasoning_tokens": 1532
+    },
+    "total_tokens": 53735
+  },
+  "reasoning": {
+    "effort": "medium",
+    "mode": "pro"
+  },
+  "reported_output_tokens_exceeded_requested_max_output_tokens": true,
+  "request_payload_sha256": "1a11a77c456e33b6ab457813aedf6bac230e5c187dedcfe1f9f9987d328601ab",
+  "researcher_emphasis": {
+    "present": true,
+    "sha256": "1efd9d6f11aa8dbcf138ebd26e22b5c496db32184a2b49a499e76bbf1dab42ab",
+    "text": "Audit this complete response to Berg et al. Attack construct validity and the inference from the actual comparisons, not just procedural compliance. Focus on instruction-versus-transcript identification, boundary bootstrap uncertainty, matched-control and intervention fidelity, fair treatment of the original claim, and whether any stronger conclusion is supported. Be skeptical of both the original interpretation and our critique. You have manuscript text, captions and references, not raw data, figure pixels or the original paper full text; do not claim to have verified those. Give consequential findings, exact proposed fixes, and a short inventory of every reference. This is automated editorial review, not human peer review."
+  },
+  "reserved_billable_input_tokens": 86055,
+  "reserved_billable_output_tokens": 12000,
+  "response_id": "resp_03407b9ade16ed02016abc38aa2ba087d0bb6540826106b9ed",
+  "response_metadata": {
+    "plan_sha256": "70ec66c65f23e5b7b71521862d5f507156f01803ed2dfd9715a076cf097de85b",
+    "researcher_emphasis_present": "true",
+    "researcher_emphasis_sha256": "1efd9d6f11aa8dbcf138ebd26e22b5c496db32184a2b49a499e76bbf1dab42ab",
+    "review_input_sha256": "a8f0655391c5a13562f90040b83944deac750ade9894db62489582d80a911b68",
+    "review_instructions_sha256": "d807feb77da62bc1bf56e18a58aff677e50d82fecd31d62943dac0c5995ea871",
+    "review_scope": "scientific_accuracy_honesty_reference_review",
+    "reviewed_packet_git_head_commit": "d2b5e3289e510e11188d5719dcd1cb29f30e29d9",
+    "single_call_policy": "trusted_procedural_rule",
+    "workflow": "research_note_scientific_review"
+  },
+  "response_metadata_sha256": "5b048fea784ea8e0837d360eee526f3d665c67b1d0b8e4ae9f97f24efaf1c0bd",
+  "response_model": "gpt-6-astra",
+  "response_sha256": "49cb6ece5f20801d1df43ff0fd060fde302431d53d95a30ce2125a7db0fe0853",
+  "review_input_sha256": "a8f0655391c5a13562f90040b83944deac750ade9894db62489582d80a911b68",
+  "review_instructions_sha256": "d807feb77da62bc1bf56e18a58aff677e50d82fecd31d62943dac0c5995ea871",
+  "review_kind": "research-note-scientific",
+  "review_request_sha256": "016a96b4f133376e1201a44f09e70d5f1d23f49fef265712065024c7ac04cc92",
+  "review_scope": "scientific_accuracy_honesty_reference_review",
+  "review_sha256": "fac45e3168a1b57aae03cc61a10cc8f11a254ad280b52119bc3b26be7282b6fc",
+  "reviewed_packet_git_head_commit": "d2b5e3289e510e11188d5719dcd1cb29f30e29d9",
+  "schema_version": 1,
+  "service_tier": "default",
+  "single_call_policy": "trusted_procedural_rule",
+  "status": "completed",
+  "store": false,
+  "usage": {
+    "input_tokens": 46428,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 7307,
+    "output_tokens_details": {
+      "reasoning_tokens": 1532
+    },
+    "total_tokens": 53735
+  }
+}
