@@ -161,13 +161,16 @@ they cannot be written as six uniformly decoded deception directions.
 
 ## Relation To The Consciousness Replication
 
-This forensic result rules out one weak explanation for the earlier public
-behavioral non-replication: the intervention was not simply zero or internally
-inert. The same public decoder-vector additions create a large, signed J-lens
-semantic fingerprint, especially for features 30686, 41533, and 58667.
+Correction, 2026-09-30: the previous paragraph incorrectly said this result
+ruled out an inert intervention in the earlier behavioral run. The present
+BF16 fixed-prefix experiment establishes internal movement only in its own
+execution, especially for features 30686, 41533, and 58667. It does not validate
+delivery in the separate NF4 behavioral experiment. This aligns the section
+with the September 29 interpretation correction above; no data changed.
 
-That internal movement did not reproduce the target paper's consciousness-
-report contrast in the separate 1,500-trial public implementation. A change in
+The separate 1,500-trial public implementation did not reproduce the target
+paper's report contrast. These are separate observations, not a demonstrated
+within-run dissociation between internal movement and report behavior. A change in
 deception-associated vocabulary disposition is not evidence that the model
 was concealing subjective experience. The combined result separates three
 claims that should not be collapsed:

@@ -7,6 +7,29 @@ models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Replication And Mechanism Priority (2026-09-30)
+
+Owner direction: source-aligned replication first, then perturbation/ablation
+with paired Jacobian-lens evidence. Design:
+`docs/BERG_REPLICATION_MECHANISM_ROADMAP_20260930.md`.
+This supersedes the ordering below, not any frozen experiment or failed gate.
+
+- [ ] Build the paper/notebook/public-runtime configuration comparison and
+  executable dry-run checks. Retain all six IDs and source-specific scoring.
+- [ ] Prepare notebook-aligned additive steering with true zero, matched
+  controls, delivery telemetry and bounded paired J-lens captures from the
+  same experiment. The separate active-support operator's 100-position
+  exposure threshold is not a universal gate on additive behavioral testing.
+- [ ] Freeze the sample, dose/control plan, inference, exact-path tests and
+  approved spending before any new behavioral outcomes. Preserve baseline
+  mismatch; do not tune prompts or scoring until the desired effect appears.
+- [ ] Link any reproduced behavioral contrast to fixed-prefix internal
+  differences; compare static injected-vector fingerprints and random-J
+  readouts. Free-running text divergence is not an internal mechanism test.
+- [ ] Test competing framing, register, refusal and internal-access explanations
+  with a separately frozen held-out patch/ablation follow-up. No new effect or
+  mechanism is established by this planning document.
+
 ### Claude Review Corrections (2026-09-29)
 
 This section supersedes earlier publication-readiness and steering-headline
