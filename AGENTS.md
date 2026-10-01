@@ -60,8 +60,15 @@ immediately public and permanently recoverable.
   This is not frozen or executed. The old backend is not a cached query fork.
   Preserve the rank-one control correction, donor-independence requirement,
   delivered-dose checks and receipt-based Astra/Opus cost estimate. Proposed
-  $25 qualification-only stop-loss awaits a tested machine plan and specific
-  allocation; no new pod/API work has started. No dedicated J-lens or Qwen
+  $25 qualification-only stop-loss was authorized by the owner's "execute
+  please" instruction. The executable qualification is governed by
+  `docs/INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md` and
+  `experiments/instruction_state_qualification/`: 12 blocks, extending once
+  to 20 only under the frozen rule. Allocate $14 GPU, $10 local judging and
+  $1 storage/retrieval within the existing $200 ceiling, carrying $69.130940
+  prior cost. Require a tested, pushed source-bound plan before any outcome.
+  This approval does not launch the later internal intervention study.
+  Read ignored `checkpoint.md` for actual launch/cleanup status. No J-lens or Qwen
   rental belongs to this proposal. Keep publication independent of its success.
 
 - `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md` and

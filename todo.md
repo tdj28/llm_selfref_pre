@@ -31,10 +31,12 @@ Qwen expansion is a publication requirement.
 
 - [x] Check the review's primary sources, rank-one control algebra, sampling
   assumptions, current backend and actual Astra/Opus judging receipts.
-- [ ] Implement and test the qualification-only 12/20-block crossed assay,
+- [x] Implement and test the qualification-only 12/20-block crossed assay,
   with exact prompts, judges, headroom/missingness rules and token/cost limits.
-- [ ] Freeze/push its machine plan and confirm the proposed $25 stop-loss
-  within the existing $200 ceiling. No live request before those gates pass.
+- [x] Obtain the owner's approval for the $25 qualification-only stop-loss
+  within the existing $200 ceiling; carry $69.130940 prior cost. Allocate
+  $14 GPU, $10 judging and $1 storage/retrieval, not a new $200 budget.
+- [ ] Freeze/push its tested machine plan. No live request before that gate.
 - [ ] Run qualification only; audit initial rows and costs, retrieve/hash-check
   artifacts and delete only its newly owned pod. Failure closes this candidate,
   not publication, and does not trigger a search for friendlier prompts.

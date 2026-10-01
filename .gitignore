@@ -44,6 +44,12 @@ venv.bak/
 
 # Project specific
 data/*
+!data/instruction_state_qualification/
+data/instruction_state_qualification/*
+!data/instruction_state_qualification/plan_20261001/
+data/instruction_state_qualification/plan_20261001/*
+!data/instruction_state_qualification/plan_20261001/PLAN.json
+!data/instruction_state_qualification/plan_20261001/token_bindings.json
 !data/berg_source_replication/
 data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/
