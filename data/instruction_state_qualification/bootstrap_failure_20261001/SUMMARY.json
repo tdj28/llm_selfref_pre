@@ -1,0 +1,21 @@
+{
+  "schema": "instruction-qualification-bootstrap-failure-v1",
+  "science_freeze": "0acf16548f7dfe0359ce6c19bf952725572697d5",
+  "plan_sha256": "d614da0b4398ddc021300a177a2218009a48b74c4fe5952df2852d20f0ef9d0f",
+  "status": "technical_gate_incomplete_timeout",
+  "scientific_rows": 0,
+  "pytest_progress_markers": 172,
+  "pytest_complete": false,
+  "pod_id": "hspaphgeu0ytc0",
+  "deleted_get_status": 404,
+  "deleted_utc": "2026-10-01T22:09:26.107079+00:00",
+  "billed_elapsed_seconds_upper_bound": "595.225087",
+  "gpu_cost_upper_bound_usd": "0.1388858536333333333333333333",
+  "original_private_closure_sha256": "1eb4b900b53663167fd2aa8e241b502ef5245945bd04b00cac2037ec90e928b0",
+  "projection_note": "Foreign-pod inventory and local paths are excluded from this public summary; original append-only receipts remain local.",
+  "raw_artifacts_sha256": {
+    "raw/controller-stopped.json": "f09a87f48b278f3b0dded77da572a31abc2ddcbc3c1887d1141fcd11be757f25",
+    "raw/controller.log": "7e184de781af1e131bac639a9c12caa3fd9d0f108eb667e2d8fbdbd58019e15b",
+    "raw/pip-freeze.txt": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6"
+  }
+}

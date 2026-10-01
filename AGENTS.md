@@ -68,6 +68,13 @@ immediately public and permanently recoverable.
   $1 storage/retrieval within the existing $200 ceiling, carrying $69.130940
   prior cost. Require a tested, pushed source-bound plan before any outcome.
   This approval does not launch the later internal intervention study.
+  The first cheap pod hspaphgeu0ytc0 timed out during technical testing;
+  its three raw artifacts were retrieved and it was deleted (GET 404).
+  Preserve the incomplete gate and $0.1388858536333333333333333333 cost.
+  `docs/INSTRUCTION_STATE_BOOTSTRAP_A1_20261001.md` defines a separate
+  operational retry: longer cheap work window, unchanged science/worker
+  commit, carried failure cost and the original API ledger. No B200 was
+  created in the failed attempt; synthetic judge fixtures passed for $0.367850.
   Read ignored `checkpoint.md` for actual launch/cleanup status. No J-lens or Qwen
   rental belongs to this proposal. Keep publication independent of its success.
 
