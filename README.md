@@ -19,6 +19,10 @@ The [focused response](https://github.com/tdj28/berg2025-response) collects the
 paper-specific argument and selected evidence. This repository retains the
 full research record, including failed runs and related studies.
 
+The consolidated [BibTeX bibliography](references.bib) collects the paper,
+blog and artifact references; [scope and key mappings](docs/BIBLIOGRAPHY.md)
+explain how it relates to the manuscript-specific files.
+
 ## What We Found
 
 | Test | Result | What it does not establish |
