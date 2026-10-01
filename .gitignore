@@ -546,6 +546,12 @@ data/automated_rubric_audit/*
 !data/automated_rubric_audit/v1_20260929/
 !data/automated_rubric_audit/v1_20260929/**
 
+# Result-free ensemble freeze; outcome releases require their own allowlist.
+!data/berg_ensemble_replication/
+data/berg_ensemble_replication/*
+!data/berg_ensemble_replication/plan_20261001/
+!data/berg_ensemble_replication/plan_20261001/**
+
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.
 **/.env
