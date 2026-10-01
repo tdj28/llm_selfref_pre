@@ -52,6 +52,25 @@ Metadata corrections in this new collection:
 The historical files retain their original bytes. These corrections do not
 change any frozen experimental artifact or scientific result.
 
+## Cultural-Emotion Addition (2026-10-01)
+
+The current response's measurement discussion now cites Spencer-Rodgers,
+Peng and Wang (2010), Havaldar et al. (2023), and Dudy et al. (2024). Their
+three entries are also included in this consolidated file. Verification
+used the [Sage abstract and issue record](https://journals.sagepub.com/doi/10.1177/0022022109349508),
+[ACL paper and metadata](https://aclanthology.org/2023.wassa-1.19/), and
+[author-hosted ACII paper](https://s3.sunai.uoc.edu/web/agata/papers/Analyzing_Cultural_Representations_of_Emotions_in_LLMs_Through_Mixed_Emotion_Survey.pdf).
+The Sage full text is restricted; only its abstract-supported sample comparison
+is used. The ACII venue, DOI and pages were checked against the proceedings
+PDF and [author record](https://www.shirandudy.com/projects/8_project/).
+
+These references supply cultural/linguistic measurement context, not evidence
+of a mechanism underlying the present self-reports or of absent experience.
+Dudy's language-versus-origin contrast is English/Japanese; Chinese belongs
+to its separate broader comparison. The active response records the source
+checks in `reviews/reference_checks.md`. No historical manuscript or frozen
+experiment was changed.
+
 ## Use
 
 For classic BibTeX, add `\bibliography{references}` to a document that resolves
