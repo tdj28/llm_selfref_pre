@@ -79,6 +79,19 @@ checks in `reviews/reference_checks.md`, now available in this repository.
 The original literature addition did not change a historical manuscript or
 frozen experiment; the later consolidation preserves those sources separately.
 
+## Query-Blind Design Addition (2026-10-01)
+
+The 2026-10-01 query-blind design review adds Makelov et al., Geiger et al.,
+Vaidyanathan et al., McGrath et al., Rushing and Nanda, and Hase et al. to the
+root collection. The existing Gurnee entry covers the J-lens source.
+[`QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md`](QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md)
+records the primary sources checked and their bounded uses. In particular,
+Makelov's entry follows the three-author arXiv v2 metadata, Geiger's follows
+the 2025 JMLR publication, and Vaidyanathan's is labeled a preprint. These
+methodological additions do not change the current manuscript bibliography,
+claim that every full text received a theorem-level audit, or report a new
+experiment.
+
 ## Use
 
 For classic BibTeX, add `\bibliography{references}` to a document that resolves

@@ -18,14 +18,41 @@ The project does not try to prove that language models are or are not conscious.
   manuscript's numerical bindings and inspect the rebuilt 33-page PDF.
 - [ ] Continue editorial cleanup as clearer, denser writing, not deletion of
   experimental history or relocation into another repository.
-- [ ] Evaluate the owner's forthcoming Deep Research feedback on a causal
-  test of the established instruction effect. The neutral-ownership draft
-  below is on hold, not a mandate to spend or freeze that design.
+- [x] Evaluate the owner's Deep Research feedback on a causal test of the
+  instruction effect. Record the accepted query-blind redesign and corrections
+  in `docs/QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md`; no outcomes or
+  spending resulted from that review.
+
+### Query-Blind Instruction-State Follow-Up (2026-10-01)
+
+This replaces the neutral-ownership gate below as the next proposed study.
+The current paper can proceed independently; neither a mechanism result nor
+Qwen expansion is a publication requirement.
+
+- [x] Check the review's primary sources, rank-one control algebra, sampling
+  assumptions, current backend and actual Astra/Opus judging receipts.
+- [ ] Implement and test the qualification-only 12/20-block crossed assay,
+  with exact prompts, judges, headroom/missingness rules and token/cost limits.
+- [ ] Freeze/push its machine plan and confirm the proposed $25 stop-loss
+  within the existing $200 ceiling. No live request before those gates pass.
+- [ ] Run qualification only; audit initial rows and costs, retrieve/hash-check
+  artifacts and delete only its newly owned pod. Failure closes this candidate,
+  not publication, and does not trigger a search for friendlier prompts.
+- [ ] If qualified, implement the cached pre-query fork and model-only loader;
+  test serialization, branch isolation, hook counts, zero behavior and delivery.
+- [ ] Before causal holdout, freeze discovery donors, corrected six-arm
+  operators, realized-dose matching, fixed wording mixture, block-aware
+  inference, noninferiority checks and dependence-sensitive power simulations.
+  Reprice the entire panel from calibration; do not start an unaffordable panel.
+- [ ] Keep restoration contingent on a separate complete design. No paid
+  Qwen extension or dedicated J-lens run is part of this proposal.
 
 ### Neutral-Task Causal Qualification (2026-10-01)
 
-Implementation history and contingent tasks only; awaiting the design review
-above. No GPU/API work is running.
+Superseded implementation history, not the active execution queue. The review
+above removes this task as a gate on the instruction-effect study. Unfinished
+items below record the old proposal and are not instructions to launch it.
+No GPU/API work is running.
 
 - [x] Specify a separate Llama-first direction-selection and donor-patching
   design, with J-lens used as a readout rather than the target-word selector.

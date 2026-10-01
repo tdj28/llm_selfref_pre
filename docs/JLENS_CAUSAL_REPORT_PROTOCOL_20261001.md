@@ -1,5 +1,12 @@
 # Causal Attribution And Internal Readouts
 
+**Superseded next-step proposal, 2026-10-01:**
+[`QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md`](QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md)
+replaces neutral ownership as the proposed qualification gate. Preserve this
+unfrozen implementation and its tests as design history. Do not launch its
+controller for the new query-blind experiment. No outcomes were generated
+under this draft and no budget allocation was approved through it.
+
 Date: 2026-10-01. Status: **implementation draft; not frozen; no new outcomes**.
 The owner requested execution after the Qwen-lens discussion. Allocation of
 up to $130 new spend within the existing $200 ceiling was separately requested

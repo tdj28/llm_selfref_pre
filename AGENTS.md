@@ -53,9 +53,20 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- `docs/QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md` adjudicates the
+  owner's Deep Research feedback and replaces the neutral-ownership gate as
+  the proposed next experiment. Qualify the crossed Llama behavior first;
+  only then consider a fixed L40 pre-query instruction-contrast intervention.
+  This is not frozen or executed. The old backend is not a cached query fork.
+  Preserve the rank-one control correction, donor-independence requirement,
+  delivered-dose checks and receipt-based Astra/Opus cost estimate. Proposed
+  $25 qualification-only stop-loss awaits a tested machine plan and specific
+  allocation; no new pod/API work has started. No dedicated J-lens or Qwen
+  rental belongs to this proposal. Keep publication independent of its success.
+
 - `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md` and
-  `experiments/jlens_causal_report/` are the new neutral-ownership-task causal
-  follow-up, currently an implementation draft, not a frozen or executed
+  `experiments/jlens_causal_report/` preserve the superseded neutral-ownership
+  follow-up, an implementation draft, not a frozen or executed
   experiment. Stage A fits directions on 32 discovery pairs and tests 32
   held-out pairs plus 12 factual bridge pairs. It contains no experience-report
   generations and no Qwen run. Preserve the distinction between known-answer
