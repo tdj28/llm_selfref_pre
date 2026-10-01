@@ -1,5 +1,16 @@
 # Data Artifacts
 
+`data/berg_source_replication/source_aligned_v1_20261001/` contains the complete
+source-aligned native-BF16 follow-up: 1,090 two-turn trials, 40 paired J-lens
+cases, qualification, all 1,148 unchanged retrieved worker files, source-bound
+capture checks, descriptive telemetry and eight figure pairs. The notebook
+and paper inductions produce sharply different zero-dose label baselines;
+the notebook-aligned individual steering contrast is near zero. Keep both
+judges, all controls and the conservative ten-seed uncertainty. This fixed-six
+aggregate is not the separate random-subset experiment. The main pod was
+retrieved, hash-verified and deleted. Its terms and Llama attribution are in
+the release; no upstream notebook or weight matrices are vendored.
+
 `data/sae_assay_exposure/screen_precision_20260930/` contains the completed
 224-text native-BF16 exposure screen and separate 48-forward precision pilot,
 executed at `4635849ff374d2c389f2b785e97b8c736cb02876`. Preserve all 566 remote

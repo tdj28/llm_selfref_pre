@@ -48,6 +48,8 @@ data/*
 data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/
 !data/berg_source_replication/plan_20260930/PLAN.json
+!data/berg_source_replication/source_aligned_v1_20261001/
+!data/berg_source_replication/source_aligned_v1_20261001/**
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
@@ -553,6 +555,11 @@ data/berg_ensemble_replication/*
 !data/berg_ensemble_replication/plan_20261001/**
 !data/berg_ensemble_replication/plan_20261001_r2/
 !data/berg_ensemble_replication/plan_20261001_r2/**
+
+# Preserve reviewed figures and exact worker logs in this completed release.
+!data/berg_source_replication/source_aligned_v1_20261001/**/*.pdf
+!data/berg_source_replication/source_aligned_v1_20261001/*.log
+!data/berg_source_replication/source_aligned_v1_20261001/receipts.jsonl
 
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.

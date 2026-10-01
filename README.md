@@ -25,7 +25,8 @@ full research record, including failed runs and related studies.
 |---|---|---|
 | Published self-reference prompt | Higher paper-rubric positive rates than history; strict self-attribution labels disagree sharply between judges. | Human-validated experience reports or an experiential state. |
 | Transcript transplants | Instruction effects dominate in this panel. Transcript effects are model-specific, including opposite signs; swapped contexts can be incoherent. | No transcript effect, or a unique mechanism. |
-| Public Llama 70B steering | Target negative-minus-positive steering is **0.00 [-0.06, 0.06]**. The unsteered primary baseline is **10/10 unique outputs**, versus approximately **0.30** in the paper's Figure 2. | A comparable test of the suppression claim. Amplification could lower the rate, but stays high here. |
+| July Llama 70B steering (4-bit) | Target negative-minus-positive steering is **0.00 [-0.06, 0.06]**. The unsteered primary baseline is **10/10 unique outputs**, versus approximately **0.30** in the paper's Figure 2. | A comparable test of the suppression claim. Amplification could lower the rate, but stays high here. |
+| October source-aligned Llama test (BF16) | Across 1,090 trials, the notebook-rubric individual contrast is **0.000 [-0.050, 0.050]** under the conditional bootstrap. Notebook induction gives **0/10** baseline positives in every tested setting; paper induction gives **6--9/10**, with the same final question. | Interchangeability of the paper and notebook protocols, precise ten-seed population inference, or proprietary API equivalence. |
 | Gemma Scope 9B steering | The primary difference is **-0.02 [-0.10, 0.06]**; target activation falls only about **3.5%** in the pooled final-turn telemetry. | A test of effective target ablation. Local judging also counts some explicit denials as positive. |
 | Feature mapping | Label-congruent responses on a designed corpus support the accepted feature IDs. Cue construction has defects and inserts deception-bearing clauses. | A pure lexical mechanism, natural-text validity, or a hidden-truth detector. |
 | Jacobian lens | A paired readout moves with the known added vector. The frozen mixed-sign, held-out-feature state classifier is at chance. | A general steering detector, intervention provenance or a consciousness test. |
@@ -38,6 +39,12 @@ the investigators had never seen a related result.
 
 The [September review response](docs/CLAUDE_REVIEW_RESPONSE_20260929.md) records
 the corrections, disagreements and remaining experiments.
+
+The [source-aligned release](data/berg_source_replication/source_aligned_v1_20261001/README.md)
+includes native delivery measurements, all 40 paired J-lens captures and eight
+figure pairs. Internal deception/roleplay-related readouts move under the edit;
+that does not establish that they control the report. The separate 450-trial
+random-subset aggregate test is still running.
 
 The [new assay diagnostic](docs/SAE_ASSAY_STAGE1_RESULTS_20260930.md) is complete:
 neither proposed BF16 dose passed delivery qualification. The unsteered local

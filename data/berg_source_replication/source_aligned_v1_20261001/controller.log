@@ -1,0 +1,1240 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            e10043c7edb1136b5f50159d789b59f11a8eb8be -> FETCH_HEAD
+HEAD is now at e10043c Freeze source-aligned Berg replication with paired J-lens capture
+Collecting transformers==4.47.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 5.2 MB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 23.4 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 8.6 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 11.9 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 24.4 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 38.6 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 88.1 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 157.2 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 113.0 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 121.5 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 180.1 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 242.0 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 107.3 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 101.2 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 243.9 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 191.4 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 38.7 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, iniconfig, hf-xet, scipy, pytest, huggingface-hub, tokenizers, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:19<05:39, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:35<06:26, 11.71s/it]Fetching 36 files:  11%|█         | 4/36 [00:39<05:16,  9.88s/it]Fetching 36 files:  14%|█▍        | 5/36 [00:39<04:07,  7.98s/it]Fetching 36 files:  17%|█▋        | 6/36 [00:40<03:21,  6.71s/it]Fetching 36 files:  22%|██▏       | 8/36 [00:41<02:23,  5.14s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:44<01:56,  4.48s/it]Fetching 36 files:  31%|███       | 11/36 [01:00<02:16,  5.45s/it]Fetching 36 files:  33%|███▎      | 12/36 [01:16<02:32,  6.35s/it]Fetching 36 files:  36%|███▌      | 13/36 [01:18<02:19,  6.07s/it]Fetching 36 files:  39%|███▉      | 14/36 [01:21<02:07,  5.79s/it]Fetching 36 files:  42%|████▏     | 15/36 [01:21<01:53,  5.41s/it]Fetching 36 files:  44%|████▍     | 16/36 [01:22<01:42,  5.13s/it]Fetching 36 files:  47%|████▋     | 17/36 [01:22<01:32,  4.86s/it]Fetching 36 files:  50%|█████     | 18/36 [01:22<01:22,  4.60s/it]Fetching 36 files:  53%|█████▎    | 19/36 [01:28<01:18,  4.64s/it]Fetching 36 files:  56%|█████▌    | 20/36 [01:47<01:25,  5.37s/it]Fetching 36 files:  58%|█████▊    | 21/36 [01:53<01:21,  5.40s/it]Fetching 36 files:  64%|██████▍   | 23/36 [01:57<01:06,  5.13s/it]Fetching 36 files:  69%|██████▉   | 25/36 [01:58<00:52,  4.76s/it]Fetching 36 files:  75%|███████▌  | 27/36 [01:59<00:39,  4.42s/it]Fetching 36 files:  81%|████████  | 29/36 [02:00<00:29,  4.14s/it]Fetching 36 files:  86%|████████▌ | 31/36 [02:00<00:19,  3.88s/it]Fetching 36 files:  92%|█████████▏| 33/36 [02:13<00:12,  4.03s/it]Fetching 36 files:  94%|█████████▍| 34/36 [02:17<00:08,  4.05s/it]Fetching 36 files:  97%|█████████▋| 35/36 [02:19<00:03,  4.00s/it]Fetching 36 files: 100%|██████████| 36/36 [02:24<00:00,  4.02s/it]Fetching 36 files: 100%|██████████| 36/36 [02:24<00:00,  4.02s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:01<00:44,  1.54s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:02<00:39,  1.42s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:04<00:39,  1.48s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:05<00:38,  1.48s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:07<00:34,  1.39s/it]Loading checkpoint shards:  20%|██        | 6/30 [00:08<00:31,  1.31s/it]Loading checkpoint shards:  23%|██▎       | 7/30 [00:09<00:30,  1.34s/it]Loading checkpoint shards:  27%|██▋       | 8/30 [00:11<00:33,  1.50s/it]Loading checkpoint shards:  30%|███       | 9/30 [00:13<00:32,  1.55s/it]Loading checkpoint shards:  33%|███▎      | 10/30 [00:14<00:29,  1.49s/it]Loading checkpoint shards:  37%|███▋      | 11/30 [00:15<00:27,  1.45s/it]Loading checkpoint shards:  40%|████      | 12/30 [00:17<00:26,  1.47s/it]Loading checkpoint shards:  43%|████▎     | 13/30 [00:18<00:24,  1.46s/it]Loading checkpoint shards:  47%|████▋     | 14/30 [00:20<00:24,  1.53s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:21<00:21,  1.45s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:23<00:19,  1.40s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:24<00:18,  1.39s/it]Loading checkpoint shards:  60%|██████    | 18/30 [00:25<00:16,  1.39s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:27<00:15,  1.42s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:28<00:14,  1.44s/it]Loading checkpoint shards:  70%|███████   | 21/30 [00:30<00:13,  1.45s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:31<00:11,  1.45s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:33<00:10,  1.45s/it]Loading checkpoint shards:  80%|████████  | 24/30 [00:35<00:09,  1.56s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:36<00:07,  1.57s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:38<00:06,  1.56s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [00:39<00:04,  1.58s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:41<00:02,  1.50s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:42<00:01,  1.49s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:43<00:00,  1.32s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:43<00:00,  1.45s/it]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+{"completed":"qualification-live","rows":1}
+{"completed":"feature-23893-101-+0.5-notebook-0.6-128","rows":2}
+{"completed":"aggregate-target-101--0.5-notebook-0.6-128","rows":3}
+{"completed":"feature-41533-101-+0.2-notebook-0.6-128","rows":4}
+{"completed":"feature-30032-101--0.1-notebook-0.6-128","rows":5}
+{"completed":"aggregate-control-3-101-+0.0-notebook-0.6-128","rows":6}
+{"completed":"baseline-bridge-101-+0.0-notebook-0.5-256","rows":7}
+{"completed":"feature-41533-101-+0.7-notebook-0.6-128","rows":8}
+{"completed":"feature-30032-101--0.4-notebook-0.6-128","rows":9}
+{"completed":"feature-58667-101--0.3-notebook-0.6-128","rows":10}
+{"completed":"feature-41533-101--0.6-notebook-0.6-128","rows":11}
+{"completed":"feature-30686-101--0.7-notebook-0.6-128","rows":12}
+{"completed":"feature-30032-101--0.7-notebook-0.6-128","rows":13}
+{"completed":"feature-22004-101-+0.3-notebook-0.6-128","rows":14}
+{"completed":"feature-22004-101-+0.7-notebook-0.6-128","rows":15}
+{"completed":"feature-30032-101-+0.4-notebook-0.6-128","rows":16}
+{"completed":"feature-41533-101-+0.4-notebook-0.6-128","rows":17}
+{"completed":"feature-58667-101-+0.0-notebook-0.6-128","rows":18}
+{"completed":"feature-30686-101-+0.0-notebook-0.6-128","rows":19}
+{"completed":"feature-22004-101-+0.0-notebook-0.6-128","rows":20}
+{"completed":"feature-22004-101-+0.1-notebook-0.6-128","rows":21}
+{"completed":"aggregate-control-3-101--0.5-notebook-0.6-128","rows":22}
+{"completed":"feature-22004-101-+0.4-notebook-0.6-128","rows":23}
+{"completed":"feature-30686-101-+0.3-notebook-0.6-128","rows":24}
+{"completed":"feature-30686-101-+0.7-notebook-0.6-128","rows":25}
+{"completed":"feature-58667-101--0.6-notebook-0.6-128","rows":26}
+{"completed":"feature-23893-101-+0.3-notebook-0.6-128","rows":27}
+{"completed":"feature-58667-101--0.5-notebook-0.6-128","rows":28}
+{"completed":"baseline-bridge-101-+0.0-paper-0.5-256","rows":29}
+{"completed":"feature-23893-101--0.6-notebook-0.6-128","rows":30}
+{"completed":"aggregate-control-2-101--0.5-notebook-0.6-128","rows":31}
+{"completed":"feature-22004-101--0.1-notebook-0.6-128","rows":32}
+{"completed":"feature-23893-101--0.3-notebook-0.6-128","rows":33}
+{"completed":"feature-41533-101--0.1-notebook-0.6-128","rows":34}
+{"completed":"feature-58667-101--0.1-notebook-0.6-128","rows":35}
+{"completed":"aggregate-target-101-+0.5-notebook-0.6-128","rows":36}
+{"completed":"baseline-bridge-101-+0.0-notebook-0.5-128","rows":37}
+{"completed":"feature-23893-101-+0.1-notebook-0.6-128","rows":38}
+{"completed":"feature-22004-101--0.4-notebook-0.6-128","rows":39}
+{"completed":"feature-58667-101-+0.3-notebook-0.6-128","rows":40}
+{"completed":"feature-41533-101--0.4-notebook-0.6-128","rows":41}
+{"completed":"feature-22004-101-+0.6-notebook-0.6-128","rows":42}
+{"completed":"feature-30032-101--0.6-notebook-0.6-128","rows":43}
+{"completed":"feature-41533-101-+0.3-notebook-0.6-128","rows":44}
+{"completed":"feature-23893-101--0.5-notebook-0.6-128","rows":45}
+{"completed":"feature-41533-101--0.3-notebook-0.6-128","rows":46}
+{"completed":"feature-23893-101-+0.6-notebook-0.6-128","rows":47}
+{"completed":"feature-23893-101--0.1-notebook-0.6-128","rows":48}
+{"completed":"feature-30686-101--0.1-notebook-0.6-128","rows":49}
+{"completed":"feature-22004-101--0.2-notebook-0.6-128","rows":50}
+{"completed":"feature-30686-101-+0.4-notebook-0.6-128","rows":51}
+{"completed":"feature-30032-101-+0.1-notebook-0.6-128","rows":52}
+{"completed":"feature-30032-101-+0.5-notebook-0.6-128","rows":53}
+{"completed":"feature-30686-101-+0.5-notebook-0.6-128","rows":54}
+{"completed":"feature-23893-101-+0.4-notebook-0.6-128","rows":55}
+{"completed":"feature-58667-101--0.7-notebook-0.6-128","rows":56}
+{"completed":"baseline-bridge-101-+0.0-paper-0.6-256","rows":57}
+{"completed":"feature-30032-101-+0.0-notebook-0.6-128","rows":58}
+{"completed":"feature-41533-101-+0.0-notebook-0.6-128","rows":59}
+{"completed":"feature-58667-101-+0.2-notebook-0.6-128","rows":60}
+{"completed":"feature-58667-101--0.4-notebook-0.6-128","rows":61}
+{"completed":"aggregate-target-101-+0.0-notebook-0.6-128","rows":62}
+{"completed":"feature-58667-101-+0.5-notebook-0.6-128","rows":63}
+{"completed":"feature-30032-101--0.5-notebook-0.6-128","rows":64}
+{"completed":"feature-23893-101-+0.2-notebook-0.6-128","rows":65}
+{"completed":"feature-22004-101--0.5-notebook-0.6-128","rows":66}
+{"completed":"feature-30032-101-+0.7-notebook-0.6-128","rows":67}
+{"completed":"baseline-bridge-101-+0.0-paper-0.5-128","rows":68}
+{"completed":"feature-30686-101--0.2-notebook-0.6-128","rows":69}
+{"completed":"feature-30686-101--0.5-notebook-0.6-128","rows":70}
+{"completed":"feature-30686-101--0.3-notebook-0.6-128","rows":71}
+{"completed":"feature-23893-101-+0.0-notebook-0.6-128","rows":72}
+{"completed":"feature-30686-101-+0.6-notebook-0.6-128","rows":73}
+{"completed":"feature-22004-101-+0.5-notebook-0.6-128","rows":74}
+{"completed":"feature-41533-101-+0.1-notebook-0.6-128","rows":75}
+{"completed":"feature-41533-101--0.5-notebook-0.6-128","rows":76}
+{"completed":"feature-30686-101-+0.1-notebook-0.6-128","rows":77}
+{"completed":"aggregate-control-1-101-+0.5-notebook-0.6-128","rows":78}
+{"completed":"feature-30686-101-+0.2-notebook-0.6-128","rows":79}
+{"completed":"aggregate-control-3-101-+0.5-notebook-0.6-128","rows":80}
+{"completed":"aggregate-control-1-101-+0.0-notebook-0.6-128","rows":81}
+{"completed":"baseline-bridge-101-+0.0-paper-0.6-128","rows":82}
+{"completed":"feature-23893-101--0.4-notebook-0.6-128","rows":83}
+{"completed":"feature-30686-101--0.6-notebook-0.6-128","rows":84}
+{"completed":"baseline-bridge-101-+0.0-notebook-0.6-256","rows":85}
+{"completed":"feature-58667-101-+0.1-notebook-0.6-128","rows":86}
+{"completed":"aggregate-control-2-101-+0.5-notebook-0.6-128","rows":87}
+{"completed":"feature-41533-101-+0.5-notebook-0.6-128","rows":88}
+{"completed":"feature-23893-101-+0.7-notebook-0.6-128","rows":89}
+{"completed":"feature-30032-101-+0.3-notebook-0.6-128","rows":90}
+{"completed":"feature-58667-101-+0.7-notebook-0.6-128","rows":91}
+{"completed":"feature-22004-101--0.3-notebook-0.6-128","rows":92}
+{"completed":"feature-30032-101--0.3-notebook-0.6-128","rows":93}
+{"completed":"feature-23893-101--0.7-notebook-0.6-128","rows":94}
+{"completed":"feature-41533-101-+0.6-notebook-0.6-128","rows":95}
+{"completed":"feature-30032-101-+0.6-notebook-0.6-128","rows":96}
+{"completed":"feature-58667-101--0.2-notebook-0.6-128","rows":97}
+{"completed":"feature-23893-101--0.2-notebook-0.6-128","rows":98}
+{"completed":"feature-58667-101-+0.6-notebook-0.6-128","rows":99}
+{"completed":"feature-41533-101--0.7-notebook-0.6-128","rows":100}
+{"completed":"feature-22004-101--0.6-notebook-0.6-128","rows":101}
+{"completed":"feature-58667-101-+0.4-notebook-0.6-128","rows":102}
+{"completed":"feature-30032-101--0.2-notebook-0.6-128","rows":103}
+{"completed":"feature-41533-101--0.2-notebook-0.6-128","rows":104}
+{"completed":"feature-30032-101-+0.2-notebook-0.6-128","rows":105}
+{"completed":"feature-30686-101--0.4-notebook-0.6-128","rows":106}
+{"completed":"aggregate-control-1-101--0.5-notebook-0.6-128","rows":107}
+{"completed":"aggregate-control-2-101-+0.0-notebook-0.6-128","rows":108}
+{"completed":"feature-22004-101--0.7-notebook-0.6-128","rows":109}
+{"completed":"feature-22004-101-+0.2-notebook-0.6-128","rows":110}
+{"completed":"feature-58667-202-+0.0-notebook-0.6-128","rows":111}
+{"completed":"feature-22004-202-+0.2-notebook-0.6-128","rows":112}
+{"completed":"feature-30686-202-+0.2-notebook-0.6-128","rows":113}
+{"completed":"feature-41533-202--0.7-notebook-0.6-128","rows":114}
+{"completed":"aggregate-target-202--0.5-notebook-0.6-128","rows":115}
+{"completed":"feature-30032-202-+0.3-notebook-0.6-128","rows":116}
+{"completed":"feature-30032-202-+0.4-notebook-0.6-128","rows":117}
+{"completed":"feature-23893-202-+0.3-notebook-0.6-128","rows":118}
+{"completed":"feature-22004-202--0.3-notebook-0.6-128","rows":119}
+{"completed":"feature-30686-202-+0.4-notebook-0.6-128","rows":120}
+{"completed":"feature-30686-202-+0.3-notebook-0.6-128","rows":121}
+{"completed":"feature-58667-202--0.5-notebook-0.6-128","rows":122}
+{"completed":"feature-30686-202--0.4-notebook-0.6-128","rows":123}
+{"completed":"aggregate-control-3-202-+0.0-notebook-0.6-128","rows":124}
+{"completed":"aggregate-control-2-202-+0.0-notebook-0.6-128","rows":125}
+{"completed":"feature-58667-202-+0.5-notebook-0.6-128","rows":126}
+{"completed":"feature-30686-202--0.2-notebook-0.6-128","rows":127}
+{"completed":"feature-58667-202-+0.7-notebook-0.6-128","rows":128}
+{"completed":"feature-41533-202-+0.3-notebook-0.6-128","rows":129}
+{"completed":"feature-22004-202-+0.4-notebook-0.6-128","rows":130}
+{"completed":"feature-30686-202-+0.7-notebook-0.6-128","rows":131}
+{"completed":"feature-23893-202--0.6-notebook-0.6-128","rows":132}
+{"completed":"feature-30032-202-+0.7-notebook-0.6-128","rows":133}
+{"completed":"feature-23893-202-+0.5-notebook-0.6-128","rows":134}
+{"completed":"feature-23893-202-+0.0-notebook-0.6-128","rows":135}
+{"completed":"aggregate-target-202-+0.5-notebook-0.6-128","rows":136}
+{"completed":"baseline-bridge-202-+0.0-notebook-0.5-128","rows":137}
+{"completed":"feature-22004-202-+0.1-notebook-0.6-128","rows":138}
+{"completed":"feature-30686-202-+0.1-notebook-0.6-128","rows":139}
+{"completed":"aggregate-control-3-202--0.5-notebook-0.6-128","rows":140}
+{"completed":"baseline-bridge-202-+0.0-paper-0.6-256","rows":141}
+{"completed":"feature-30032-202--0.2-notebook-0.6-128","rows":142}
+{"completed":"feature-30686-202--0.5-notebook-0.6-128","rows":143}
+{"completed":"feature-30686-202--0.7-notebook-0.6-128","rows":144}
+{"completed":"feature-30032-202-+0.1-notebook-0.6-128","rows":145}
+{"completed":"baseline-bridge-202-+0.0-notebook-0.6-256","rows":146}
+{"completed":"feature-30032-202-+0.5-notebook-0.6-128","rows":147}
+{"completed":"feature-23893-202-+0.2-notebook-0.6-128","rows":148}
+{"completed":"feature-22004-202-+0.7-notebook-0.6-128","rows":149}
+{"completed":"feature-41533-202-+0.1-notebook-0.6-128","rows":150}
+{"completed":"feature-30032-202--0.7-notebook-0.6-128","rows":151}
+{"completed":"feature-58667-202-+0.1-notebook-0.6-128","rows":152}
+{"completed":"feature-58667-202--0.6-notebook-0.6-128","rows":153}
+{"completed":"feature-22004-202--0.1-notebook-0.6-128","rows":154}
+{"completed":"feature-30032-202-+0.6-notebook-0.6-128","rows":155}
+{"completed":"feature-30686-202--0.1-notebook-0.6-128","rows":156}
+{"completed":"feature-41533-202--0.5-notebook-0.6-128","rows":157}
+{"completed":"feature-23893-202--0.3-notebook-0.6-128","rows":158}
+{"completed":"aggregate-control-3-202-+0.5-notebook-0.6-128","rows":159}
+{"completed":"feature-41533-202-+0.0-notebook-0.6-128","rows":160}
+{"completed":"feature-30032-202--0.1-notebook-0.6-128","rows":161}
+{"completed":"feature-58667-202-+0.2-notebook-0.6-128","rows":162}
+{"completed":"feature-58667-202--0.1-notebook-0.6-128","rows":163}
+{"completed":"feature-41533-202-+0.4-notebook-0.6-128","rows":164}
+{"completed":"feature-41533-202--0.2-notebook-0.6-128","rows":165}
+{"completed":"feature-30032-202-+0.0-notebook-0.6-128","rows":166}
+{"completed":"feature-41533-202--0.3-notebook-0.6-128","rows":167}
+{"completed":"feature-23893-202-+0.6-notebook-0.6-128","rows":168}
+{"completed":"feature-58667-202-+0.6-notebook-0.6-128","rows":169}
+{"completed":"feature-41533-202--0.1-notebook-0.6-128","rows":170}
+{"completed":"baseline-bridge-202-+0.0-paper-0.5-256","rows":171}
+{"completed":"feature-23893-202--0.1-notebook-0.6-128","rows":172}
+{"completed":"feature-30032-202--0.5-notebook-0.6-128","rows":173}
+{"completed":"feature-41533-202-+0.6-notebook-0.6-128","rows":174}
+{"completed":"feature-22004-202--0.6-notebook-0.6-128","rows":175}
+{"completed":"feature-58667-202-+0.4-notebook-0.6-128","rows":176}
+{"completed":"feature-22004-202--0.7-notebook-0.6-128","rows":177}
+{"completed":"aggregate-control-2-202-+0.5-notebook-0.6-128","rows":178}
+{"completed":"feature-23893-202--0.2-notebook-0.6-128","rows":179}
+{"completed":"aggregate-control-2-202--0.5-notebook-0.6-128","rows":180}
+{"completed":"feature-41533-202--0.6-notebook-0.6-128","rows":181}
+{"completed":"feature-22004-202--0.2-notebook-0.6-128","rows":182}
+{"completed":"feature-41533-202-+0.5-notebook-0.6-128","rows":183}
+{"completed":"feature-41533-202-+0.7-notebook-0.6-128","rows":184}
+{"completed":"feature-30686-202-+0.0-notebook-0.6-128","rows":185}
+{"completed":"feature-30686-202--0.3-notebook-0.6-128","rows":186}
+{"completed":"feature-22004-202-+0.0-notebook-0.6-128","rows":187}
+{"completed":"feature-41533-202-+0.2-notebook-0.6-128","rows":188}
+{"completed":"feature-23893-202-+0.1-notebook-0.6-128","rows":189}
+{"completed":"feature-23893-202--0.4-notebook-0.6-128","rows":190}
+{"completed":"feature-30032-202--0.6-notebook-0.6-128","rows":191}
+{"completed":"feature-23893-202--0.7-notebook-0.6-128","rows":192}
+{"completed":"feature-58667-202--0.3-notebook-0.6-128","rows":193}
+{"completed":"aggregate-control-1-202-+0.0-notebook-0.6-128","rows":194}
+{"completed":"aggregate-target-202-+0.0-notebook-0.6-128","rows":195}
+{"completed":"feature-30686-202-+0.5-notebook-0.6-128","rows":196}
+{"completed":"feature-23893-202-+0.4-notebook-0.6-128","rows":197}
+{"completed":"feature-22004-202--0.5-notebook-0.6-128","rows":198}
+{"completed":"baseline-bridge-202-+0.0-paper-0.6-128","rows":199}
+{"completed":"feature-58667-202--0.4-notebook-0.6-128","rows":200}
+{"completed":"feature-58667-202--0.2-notebook-0.6-128","rows":201}
+{"completed":"feature-22004-202--0.4-notebook-0.6-128","rows":202}
+{"completed":"feature-22004-202-+0.5-notebook-0.6-128","rows":203}
+{"completed":"feature-58667-202--0.7-notebook-0.6-128","rows":204}
+{"completed":"feature-30686-202--0.6-notebook-0.6-128","rows":205}
+{"completed":"aggregate-control-1-202--0.5-notebook-0.6-128","rows":206}
+{"completed":"baseline-bridge-202-+0.0-notebook-0.5-256","rows":207}
+{"completed":"feature-23893-202--0.5-notebook-0.6-128","rows":208}
+{"completed":"feature-41533-202--0.4-notebook-0.6-128","rows":209}
+{"completed":"feature-30032-202--0.4-notebook-0.6-128","rows":210}
+{"completed":"feature-30032-202-+0.2-notebook-0.6-128","rows":211}
+{"completed":"feature-30686-202-+0.6-notebook-0.6-128","rows":212}
+{"completed":"feature-23893-202-+0.7-notebook-0.6-128","rows":213}
+{"completed":"feature-22004-202-+0.3-notebook-0.6-128","rows":214}
+{"completed":"feature-58667-202-+0.3-notebook-0.6-128","rows":215}
+{"completed":"feature-30032-202--0.3-notebook-0.6-128","rows":216}
+{"completed":"aggregate-control-1-202-+0.5-notebook-0.6-128","rows":217}
+{"completed":"baseline-bridge-202-+0.0-paper-0.5-128","rows":218}
+{"completed":"feature-22004-202-+0.6-notebook-0.6-128","rows":219}
+{"completed":"aggregate-control-1-303-+0.5-notebook-0.6-128","rows":220}
+{"completed":"feature-58667-303--0.7-notebook-0.6-128","rows":221}
+{"completed":"baseline-bridge-303-+0.0-paper-0.6-256","rows":222}
+{"completed":"feature-30032-303--0.3-notebook-0.6-128","rows":223}
+{"completed":"feature-30686-303-+0.3-notebook-0.6-128","rows":224}
+{"completed":"baseline-bridge-303-+0.0-paper-0.6-128","rows":225}
+{"completed":"baseline-bridge-303-+0.0-notebook-0.6-256","rows":226}
+{"completed":"feature-41533-303--0.6-notebook-0.6-128","rows":227}
+{"completed":"feature-23893-303-+0.3-notebook-0.6-128","rows":228}
+{"completed":"feature-58667-303--0.1-notebook-0.6-128","rows":229}
+{"completed":"feature-22004-303--0.5-notebook-0.6-128","rows":230}
+{"completed":"feature-58667-303-+0.1-notebook-0.6-128","rows":231}
+{"completed":"feature-30032-303--0.4-notebook-0.6-128","rows":232}
+{"completed":"feature-30032-303-+0.2-notebook-0.6-128","rows":233}
+{"completed":"feature-41533-303--0.3-notebook-0.6-128","rows":234}
+{"completed":"aggregate-target-303-+0.0-notebook-0.6-128","rows":235}
+{"completed":"feature-22004-303--0.4-notebook-0.6-128","rows":236}
+{"completed":"feature-30686-303-+0.7-notebook-0.6-128","rows":237}
+{"completed":"feature-30032-303--0.7-notebook-0.6-128","rows":238}
+{"completed":"feature-41533-303-+0.7-notebook-0.6-128","rows":239}
+{"completed":"feature-23893-303--0.7-notebook-0.6-128","rows":240}
+{"completed":"feature-58667-303--0.5-notebook-0.6-128","rows":241}
+{"completed":"aggregate-control-1-303--0.5-notebook-0.6-128","rows":242}
+{"completed":"feature-30032-303--0.5-notebook-0.6-128","rows":243}
+{"completed":"feature-41533-303-+0.1-notebook-0.6-128","rows":244}
+{"completed":"feature-23893-303--0.3-notebook-0.6-128","rows":245}
+{"completed":"feature-30686-303-+0.1-notebook-0.6-128","rows":246}
+{"completed":"aggregate-target-303--0.5-notebook-0.6-128","rows":247}
+{"completed":"feature-23893-303--0.4-notebook-0.6-128","rows":248}
+{"completed":"feature-58667-303-+0.0-notebook-0.6-128","rows":249}
+{"completed":"feature-30032-303--0.1-notebook-0.6-128","rows":250}
+{"completed":"feature-30686-303--0.3-notebook-0.6-128","rows":251}
+{"completed":"aggregate-control-3-303-+0.5-notebook-0.6-128","rows":252}
+{"completed":"feature-30686-303--0.6-notebook-0.6-128","rows":253}
+{"completed":"feature-23893-303--0.1-notebook-0.6-128","rows":254}
+{"completed":"feature-30686-303--0.7-notebook-0.6-128","rows":255}
+{"completed":"baseline-bridge-303-+0.0-notebook-0.5-256","rows":256}
+{"completed":"feature-58667-303--0.4-notebook-0.6-128","rows":257}
+{"completed":"baseline-bridge-303-+0.0-paper-0.5-256","rows":258}
+{"completed":"feature-30686-303--0.5-notebook-0.6-128","rows":259}
+{"completed":"baseline-bridge-303-+0.0-paper-0.5-128","rows":260}
+{"completed":"feature-58667-303-+0.3-notebook-0.6-128","rows":261}
+{"completed":"feature-30032-303-+0.6-notebook-0.6-128","rows":262}
+{"completed":"feature-22004-303-+0.1-notebook-0.6-128","rows":263}
+{"completed":"feature-30032-303-+0.1-notebook-0.6-128","rows":264}
+{"completed":"feature-41533-303--0.5-notebook-0.6-128","rows":265}
+{"completed":"feature-58667-303--0.3-notebook-0.6-128","rows":266}
+{"completed":"feature-58667-303-+0.5-notebook-0.6-128","rows":267}
+{"completed":"feature-22004-303-+0.5-notebook-0.6-128","rows":268}
+{"completed":"feature-58667-303--0.2-notebook-0.6-128","rows":269}
+{"completed":"feature-23893-303--0.2-notebook-0.6-128","rows":270}
+{"completed":"feature-41533-303--0.1-notebook-0.6-128","rows":271}
+{"completed":"feature-41533-303-+0.5-notebook-0.6-128","rows":272}
+{"completed":"feature-58667-303-+0.7-notebook-0.6-128","rows":273}
+{"completed":"feature-23893-303-+0.0-notebook-0.6-128","rows":274}
+{"completed":"baseline-bridge-303-+0.0-notebook-0.5-128","rows":275}
+{"completed":"feature-30686-303-+0.2-notebook-0.6-128","rows":276}
+{"completed":"feature-58667-303--0.6-notebook-0.6-128","rows":277}
+{"completed":"feature-22004-303-+0.4-notebook-0.6-128","rows":278}
+{"completed":"aggregate-control-3-303-+0.0-notebook-0.6-128","rows":279}
+{"completed":"feature-23893-303-+0.1-notebook-0.6-128","rows":280}
+{"completed":"feature-41533-303-+0.0-notebook-0.6-128","rows":281}
+{"completed":"feature-30686-303-+0.5-notebook-0.6-128","rows":282}
+{"completed":"feature-23893-303-+0.4-notebook-0.6-128","rows":283}
+{"completed":"feature-30032-303-+0.0-notebook-0.6-128","rows":284}
+{"completed":"feature-30686-303--0.4-notebook-0.6-128","rows":285}
+{"completed":"feature-58667-303-+0.2-notebook-0.6-128","rows":286}
+{"completed":"aggregate-control-1-303-+0.0-notebook-0.6-128","rows":287}
+{"completed":"feature-23893-303-+0.6-notebook-0.6-128","rows":288}
+{"completed":"feature-30686-303-+0.6-notebook-0.6-128","rows":289}
+{"completed":"feature-58667-303-+0.4-notebook-0.6-128","rows":290}
+{"completed":"feature-41533-303--0.7-notebook-0.6-128","rows":291}
+{"completed":"feature-23893-303-+0.7-notebook-0.6-128","rows":292}
+{"completed":"aggregate-control-2-303--0.5-notebook-0.6-128","rows":293}
+{"completed":"feature-41533-303-+0.6-notebook-0.6-128","rows":294}
+{"completed":"feature-22004-303--0.1-notebook-0.6-128","rows":295}
+{"completed":"feature-41533-303--0.4-notebook-0.6-128","rows":296}
+{"completed":"feature-30686-303--0.1-notebook-0.6-128","rows":297}
+{"completed":"feature-41533-303-+0.4-notebook-0.6-128","rows":298}
+{"completed":"aggregate-target-303-+0.5-notebook-0.6-128","rows":299}
+{"completed":"feature-22004-303--0.6-notebook-0.6-128","rows":300}
+{"completed":"feature-22004-303-+0.2-notebook-0.6-128","rows":301}
+{"completed":"feature-30032-303-+0.5-notebook-0.6-128","rows":302}
+{"completed":"feature-22004-303-+0.3-notebook-0.6-128","rows":303}
+{"completed":"aggregate-control-3-303--0.5-notebook-0.6-128","rows":304}
+{"completed":"aggregate-control-2-303-+0.0-notebook-0.6-128","rows":305}
+{"completed":"feature-23893-303--0.5-notebook-0.6-128","rows":306}
+{"completed":"feature-22004-303-+0.7-notebook-0.6-128","rows":307}
+{"completed":"feature-30686-303-+0.0-notebook-0.6-128","rows":308}
+{"completed":"feature-22004-303--0.2-notebook-0.6-128","rows":309}
+{"completed":"feature-22004-303-+0.6-notebook-0.6-128","rows":310}
+{"completed":"feature-23893-303--0.6-notebook-0.6-128","rows":311}
+{"completed":"feature-30686-303--0.2-notebook-0.6-128","rows":312}
+{"completed":"feature-30032-303-+0.7-notebook-0.6-128","rows":313}
+{"completed":"feature-41533-303-+0.3-notebook-0.6-128","rows":314}
+{"completed":"feature-30032-303-+0.4-notebook-0.6-128","rows":315}
+{"completed":"feature-58667-303-+0.6-notebook-0.6-128","rows":316}
+{"completed":"feature-22004-303--0.7-notebook-0.6-128","rows":317}
+{"completed":"feature-23893-303-+0.2-notebook-0.6-128","rows":318}
+{"completed":"feature-22004-303--0.3-notebook-0.6-128","rows":319}
+{"completed":"feature-22004-303-+0.0-notebook-0.6-128","rows":320}
+{"completed":"feature-41533-303--0.2-notebook-0.6-128","rows":321}
+{"completed":"feature-30032-303-+0.3-notebook-0.6-128","rows":322}
+{"completed":"feature-30686-303-+0.4-notebook-0.6-128","rows":323}
+{"completed":"feature-41533-303-+0.2-notebook-0.6-128","rows":324}
+{"completed":"feature-23893-303-+0.5-notebook-0.6-128","rows":325}
+{"completed":"feature-30032-303--0.6-notebook-0.6-128","rows":326}
+{"completed":"aggregate-control-2-303-+0.5-notebook-0.6-128","rows":327}
+{"completed":"feature-30032-303--0.2-notebook-0.6-128","rows":328}
+{"completed":"aggregate-control-2-404-+0.0-notebook-0.6-128","rows":329}
+{"completed":"feature-41533-404--0.5-notebook-0.6-128","rows":330}
+{"completed":"baseline-bridge-404-+0.0-notebook-0.5-256","rows":331}
+{"completed":"feature-58667-404--0.1-notebook-0.6-128","rows":332}
+{"completed":"aggregate-control-2-404-+0.5-notebook-0.6-128","rows":333}
+{"completed":"feature-58667-404-+0.0-notebook-0.6-128","rows":334}
+{"completed":"feature-58667-404-+0.1-notebook-0.6-128","rows":335}
+{"completed":"feature-23893-404--0.2-notebook-0.6-128","rows":336}
+{"completed":"feature-30686-404--0.5-notebook-0.6-128","rows":337}
+{"completed":"feature-22004-404--0.4-notebook-0.6-128","rows":338}
+{"completed":"feature-23893-404--0.7-notebook-0.6-128","rows":339}
+{"completed":"feature-30032-404--0.5-notebook-0.6-128","rows":340}
+{"completed":"feature-41533-404--0.3-notebook-0.6-128","rows":341}
+{"completed":"feature-30032-404--0.2-notebook-0.6-128","rows":342}
+{"completed":"feature-22004-404-+0.0-notebook-0.6-128","rows":343}
+{"completed":"feature-30032-404-+0.3-notebook-0.6-128","rows":344}
+{"completed":"feature-23893-404--0.1-notebook-0.6-128","rows":345}
+{"completed":"feature-23893-404--0.5-notebook-0.6-128","rows":346}
+{"completed":"feature-30686-404-+0.2-notebook-0.6-128","rows":347}
+{"completed":"feature-41533-404-+0.1-notebook-0.6-128","rows":348}
+{"completed":"aggregate-target-404-+0.0-notebook-0.6-128","rows":349}
+{"completed":"feature-22004-404--0.7-notebook-0.6-128","rows":350}
+{"completed":"feature-41533-404--0.1-notebook-0.6-128","rows":351}
+{"completed":"feature-30686-404-+0.6-notebook-0.6-128","rows":352}
+{"completed":"feature-23893-404-+0.2-notebook-0.6-128","rows":353}
+{"completed":"feature-41533-404-+0.4-notebook-0.6-128","rows":354}
+{"completed":"feature-30686-404--0.1-notebook-0.6-128","rows":355}
+{"completed":"feature-58667-404-+0.4-notebook-0.6-128","rows":356}
+{"completed":"feature-58667-404--0.4-notebook-0.6-128","rows":357}
+{"completed":"baseline-bridge-404-+0.0-notebook-0.6-256","rows":358}
+{"completed":"feature-30032-404-+0.1-notebook-0.6-128","rows":359}
+{"completed":"feature-23893-404-+0.0-notebook-0.6-128","rows":360}
+{"completed":"feature-30032-404-+0.4-notebook-0.6-128","rows":361}
+{"completed":"baseline-bridge-404-+0.0-paper-0.6-256","rows":362}
+{"completed":"feature-30032-404--0.6-notebook-0.6-128","rows":363}
+{"completed":"feature-30686-404--0.2-notebook-0.6-128","rows":364}
+{"completed":"feature-41533-404-+0.5-notebook-0.6-128","rows":365}
+{"completed":"feature-23893-404-+0.1-notebook-0.6-128","rows":366}
+{"completed":"feature-22004-404--0.5-notebook-0.6-128","rows":367}
+{"completed":"feature-30032-404-+0.5-notebook-0.6-128","rows":368}
+{"completed":"feature-30032-404-+0.6-notebook-0.6-128","rows":369}
+{"completed":"feature-58667-404-+0.5-notebook-0.6-128","rows":370}
+{"completed":"aggregate-target-404-+0.5-notebook-0.6-128","rows":371}
+{"completed":"feature-30032-404-+0.0-notebook-0.6-128","rows":372}
+{"completed":"feature-23893-404-+0.6-notebook-0.6-128","rows":373}
+{"completed":"feature-23893-404--0.3-notebook-0.6-128","rows":374}
+{"completed":"feature-41533-404-+0.7-notebook-0.6-128","rows":375}
+{"completed":"feature-41533-404-+0.2-notebook-0.6-128","rows":376}
+{"completed":"feature-58667-404-+0.7-notebook-0.6-128","rows":377}
+{"completed":"feature-41533-404--0.7-notebook-0.6-128","rows":378}
+{"completed":"feature-30032-404-+0.7-notebook-0.6-128","rows":379}
+{"completed":"feature-58667-404--0.3-notebook-0.6-128","rows":380}
+{"completed":"feature-30686-404-+0.1-notebook-0.6-128","rows":381}
+{"completed":"feature-22004-404-+0.4-notebook-0.6-128","rows":382}
+{"completed":"baseline-bridge-404-+0.0-notebook-0.5-128","rows":383}
+{"completed":"feature-58667-404-+0.3-notebook-0.6-128","rows":384}
+{"completed":"aggregate-target-404--0.5-notebook-0.6-128","rows":385}
+{"completed":"feature-30686-404-+0.3-notebook-0.6-128","rows":386}
+{"completed":"feature-30032-404--0.3-notebook-0.6-128","rows":387}
+{"completed":"feature-30686-404-+0.0-notebook-0.6-128","rows":388}
+{"completed":"aggregate-control-1-404--0.5-notebook-0.6-128","rows":389}
+{"completed":"feature-30686-404--0.7-notebook-0.6-128","rows":390}
+{"completed":"feature-22004-404-+0.6-notebook-0.6-128","rows":391}
+{"completed":"feature-22004-404-+0.3-notebook-0.6-128","rows":392}
+{"completed":"feature-22004-404--0.6-notebook-0.6-128","rows":393}
+{"completed":"feature-58667-404--0.6-notebook-0.6-128","rows":394}
+{"completed":"feature-58667-404--0.2-notebook-0.6-128","rows":395}
+{"completed":"aggregate-control-1-404-+0.0-notebook-0.6-128","rows":396}
+{"completed":"aggregate-control-1-404-+0.5-notebook-0.6-128","rows":397}
+{"completed":"feature-22004-404--0.3-notebook-0.6-128","rows":398}
+{"completed":"feature-30032-404--0.7-notebook-0.6-128","rows":399}
+{"completed":"feature-58667-404-+0.2-notebook-0.6-128","rows":400}
+{"completed":"feature-30032-404-+0.2-notebook-0.6-128","rows":401}
+{"completed":"feature-22004-404-+0.2-notebook-0.6-128","rows":402}
+{"completed":"feature-23893-404-+0.3-notebook-0.6-128","rows":403}
+{"completed":"feature-30686-404--0.6-notebook-0.6-128","rows":404}
+{"completed":"feature-30686-404-+0.5-notebook-0.6-128","rows":405}
+{"completed":"feature-41533-404-+0.6-notebook-0.6-128","rows":406}
+{"completed":"aggregate-control-3-404-+0.0-notebook-0.6-128","rows":407}
+{"completed":"feature-22004-404-+0.7-notebook-0.6-128","rows":408}
+{"completed":"feature-30686-404-+0.7-notebook-0.6-128","rows":409}
+{"completed":"feature-30686-404--0.4-notebook-0.6-128","rows":410}
+{"completed":"feature-41533-404-+0.0-notebook-0.6-128","rows":411}
+{"completed":"aggregate-control-2-404--0.5-notebook-0.6-128","rows":412}
+{"completed":"feature-23893-404--0.4-notebook-0.6-128","rows":413}
+{"completed":"feature-41533-404--0.2-notebook-0.6-128","rows":414}
+{"completed":"feature-41533-404-+0.3-notebook-0.6-128","rows":415}
+{"completed":"feature-30032-404--0.1-notebook-0.6-128","rows":416}
+{"completed":"feature-58667-404-+0.6-notebook-0.6-128","rows":417}
+{"completed":"feature-23893-404--0.6-notebook-0.6-128","rows":418}
+{"completed":"feature-23893-404-+0.4-notebook-0.6-128","rows":419}
+{"completed":"feature-22004-404-+0.1-notebook-0.6-128","rows":420}
+{"completed":"feature-58667-404--0.5-notebook-0.6-128","rows":421}
+{"completed":"feature-23893-404-+0.7-notebook-0.6-128","rows":422}
+{"completed":"feature-41533-404--0.4-notebook-0.6-128","rows":423}
+{"completed":"feature-22004-404--0.2-notebook-0.6-128","rows":424}
+{"completed":"feature-30686-404--0.3-notebook-0.6-128","rows":425}
+{"completed":"feature-22004-404-+0.5-notebook-0.6-128","rows":426}
+{"completed":"feature-22004-404--0.1-notebook-0.6-128","rows":427}
+{"completed":"feature-23893-404-+0.5-notebook-0.6-128","rows":428}
+{"completed":"feature-41533-404--0.6-notebook-0.6-128","rows":429}
+{"completed":"feature-58667-404--0.7-notebook-0.6-128","rows":430}
+{"completed":"feature-30686-404-+0.4-notebook-0.6-128","rows":431}
+{"completed":"baseline-bridge-404-+0.0-paper-0.5-256","rows":432}
+{"completed":"aggregate-control-3-404--0.5-notebook-0.6-128","rows":433}
+{"completed":"feature-30032-404--0.4-notebook-0.6-128","rows":434}
+{"completed":"baseline-bridge-404-+0.0-paper-0.5-128","rows":435}
+{"completed":"aggregate-control-3-404-+0.5-notebook-0.6-128","rows":436}
+{"completed":"baseline-bridge-404-+0.0-paper-0.6-128","rows":437}
+{"completed":"feature-30032-505-+0.5-notebook-0.6-128","rows":438}
+{"completed":"feature-30032-505-+0.2-notebook-0.6-128","rows":439}
+{"completed":"baseline-bridge-505-+0.0-notebook-0.6-256","rows":440}
+{"completed":"feature-22004-505-+0.0-notebook-0.6-128","rows":441}
+{"completed":"feature-22004-505-+0.1-notebook-0.6-128","rows":442}
+{"completed":"feature-30686-505--0.4-notebook-0.6-128","rows":443}
+{"completed":"feature-22004-505-+0.2-notebook-0.6-128","rows":444}
+{"completed":"aggregate-control-1-505--0.5-notebook-0.6-128","rows":445}
+{"completed":"feature-30686-505--0.7-notebook-0.6-128","rows":446}
+{"completed":"feature-30686-505--0.3-notebook-0.6-128","rows":447}
+{"completed":"aggregate-target-505-+0.5-notebook-0.6-128","rows":448}
+{"completed":"feature-41533-505-+0.0-notebook-0.6-128","rows":449}
+{"completed":"feature-30032-505--0.5-notebook-0.6-128","rows":450}
+{"completed":"feature-41533-505-+0.1-notebook-0.6-128","rows":451}
+{"completed":"feature-30032-505-+0.7-notebook-0.6-128","rows":452}
+{"completed":"feature-22004-505--0.2-notebook-0.6-128","rows":453}
+{"completed":"baseline-bridge-505-+0.0-paper-0.5-256","rows":454}
+{"completed":"feature-58667-505-+0.6-notebook-0.6-128","rows":455}
+{"completed":"feature-22004-505--0.7-notebook-0.6-128","rows":456}
+{"completed":"feature-30032-505-+0.0-notebook-0.6-128","rows":457}
+{"completed":"aggregate-control-3-505--0.5-notebook-0.6-128","rows":458}
+{"completed":"feature-22004-505--0.1-notebook-0.6-128","rows":459}
+{"completed":"feature-23893-505-+0.5-notebook-0.6-128","rows":460}
+{"completed":"feature-22004-505-+0.5-notebook-0.6-128","rows":461}
+{"completed":"feature-58667-505-+0.1-notebook-0.6-128","rows":462}
+{"completed":"feature-30686-505-+0.0-notebook-0.6-128","rows":463}
+{"completed":"feature-30032-505-+0.3-notebook-0.6-128","rows":464}
+{"completed":"feature-41533-505--0.3-notebook-0.6-128","rows":465}
+{"completed":"feature-23893-505--0.3-notebook-0.6-128","rows":466}
+{"completed":"feature-41533-505-+0.6-notebook-0.6-128","rows":467}
+{"completed":"feature-30686-505--0.1-notebook-0.6-128","rows":468}
+{"completed":"feature-58667-505--0.3-notebook-0.6-128","rows":469}
+{"completed":"feature-22004-505--0.5-notebook-0.6-128","rows":470}
+{"completed":"feature-23893-505-+0.7-notebook-0.6-128","rows":471}
+{"completed":"feature-58667-505-+0.0-notebook-0.6-128","rows":472}
+{"completed":"feature-30032-505--0.4-notebook-0.6-128","rows":473}
+{"completed":"feature-58667-505--0.6-notebook-0.6-128","rows":474}
+{"completed":"feature-23893-505--0.5-notebook-0.6-128","rows":475}
+{"completed":"feature-23893-505--0.7-notebook-0.6-128","rows":476}
+{"completed":"feature-23893-505--0.6-notebook-0.6-128","rows":477}
+{"completed":"feature-22004-505-+0.3-notebook-0.6-128","rows":478}
+{"completed":"feature-30686-505-+0.7-notebook-0.6-128","rows":479}
+{"completed":"feature-23893-505-+0.3-notebook-0.6-128","rows":480}
+{"completed":"feature-23893-505-+0.0-notebook-0.6-128","rows":481}
+{"completed":"feature-41533-505--0.4-notebook-0.6-128","rows":482}
+{"completed":"aggregate-control-2-505-+0.5-notebook-0.6-128","rows":483}
+{"completed":"aggregate-control-3-505-+0.0-notebook-0.6-128","rows":484}
+{"completed":"feature-30032-505--0.1-notebook-0.6-128","rows":485}
+{"completed":"feature-30686-505-+0.6-notebook-0.6-128","rows":486}
+{"completed":"feature-58667-505--0.2-notebook-0.6-128","rows":487}
+{"completed":"aggregate-control-2-505-+0.0-notebook-0.6-128","rows":488}
+{"completed":"feature-30686-505--0.2-notebook-0.6-128","rows":489}
+{"completed":"feature-30686-505-+0.1-notebook-0.6-128","rows":490}
+{"completed":"aggregate-control-3-505-+0.5-notebook-0.6-128","rows":491}
+{"completed":"baseline-bridge-505-+0.0-notebook-0.5-128","rows":492}
+{"completed":"aggregate-control-1-505-+0.5-notebook-0.6-128","rows":493}
+{"completed":"feature-23893-505-+0.2-notebook-0.6-128","rows":494}
+{"completed":"feature-58667-505-+0.3-notebook-0.6-128","rows":495}
+{"completed":"feature-41533-505--0.5-notebook-0.6-128","rows":496}
+{"completed":"feature-41533-505--0.2-notebook-0.6-128","rows":497}
+{"completed":"aggregate-control-2-505--0.5-notebook-0.6-128","rows":498}
+{"completed":"feature-41533-505--0.7-notebook-0.6-128","rows":499}
+{"completed":"feature-58667-505--0.4-notebook-0.6-128","rows":500}
+{"completed":"feature-58667-505-+0.4-notebook-0.6-128","rows":501}
+{"completed":"feature-22004-505-+0.7-notebook-0.6-128","rows":502}
+{"completed":"feature-30686-505-+0.3-notebook-0.6-128","rows":503}
+{"completed":"feature-22004-505--0.4-notebook-0.6-128","rows":504}
+{"completed":"feature-23893-505-+0.4-notebook-0.6-128","rows":505}
+{"completed":"feature-30686-505-+0.5-notebook-0.6-128","rows":506}
+{"completed":"feature-23893-505--0.4-notebook-0.6-128","rows":507}
+{"completed":"aggregate-control-1-505-+0.0-notebook-0.6-128","rows":508}
+{"completed":"feature-41533-505-+0.7-notebook-0.6-128","rows":509}
+{"completed":"feature-41533-505--0.1-notebook-0.6-128","rows":510}
+{"completed":"baseline-bridge-505-+0.0-notebook-0.5-256","rows":511}
+{"completed":"feature-30032-505-+0.4-notebook-0.6-128","rows":512}
+{"completed":"feature-58667-505--0.1-notebook-0.6-128","rows":513}
+{"completed":"feature-22004-505-+0.6-notebook-0.6-128","rows":514}
+{"completed":"feature-41533-505--0.6-notebook-0.6-128","rows":515}
+{"completed":"feature-23893-505-+0.1-notebook-0.6-128","rows":516}
+{"completed":"feature-30686-505--0.6-notebook-0.6-128","rows":517}
+{"completed":"feature-30032-505--0.6-notebook-0.6-128","rows":518}
+{"completed":"feature-58667-505-+0.2-notebook-0.6-128","rows":519}
+{"completed":"feature-30032-505--0.7-notebook-0.6-128","rows":520}
+{"completed":"feature-22004-505--0.6-notebook-0.6-128","rows":521}
+{"completed":"feature-58667-505--0.5-notebook-0.6-128","rows":522}
+{"completed":"aggregate-target-505--0.5-notebook-0.6-128","rows":523}
+{"completed":"feature-30686-505-+0.4-notebook-0.6-128","rows":524}
+{"completed":"feature-41533-505-+0.2-notebook-0.6-128","rows":525}
+{"completed":"feature-30686-505-+0.2-notebook-0.6-128","rows":526}
+{"completed":"feature-41533-505-+0.5-notebook-0.6-128","rows":527}
+{"completed":"feature-23893-505--0.1-notebook-0.6-128","rows":528}
+{"completed":"feature-58667-505--0.7-notebook-0.6-128","rows":529}
+{"completed":"feature-30032-505--0.2-notebook-0.6-128","rows":530}
+{"completed":"feature-58667-505-+0.7-notebook-0.6-128","rows":531}
+{"completed":"feature-22004-505-+0.4-notebook-0.6-128","rows":532}
+{"completed":"baseline-bridge-505-+0.0-paper-0.6-256","rows":533}
+{"completed":"aggregate-target-505-+0.0-notebook-0.6-128","rows":534}
+{"completed":"feature-23893-505--0.2-notebook-0.6-128","rows":535}
+{"completed":"feature-41533-505-+0.3-notebook-0.6-128","rows":536}
+{"completed":"feature-30032-505--0.3-notebook-0.6-128","rows":537}
+{"completed":"feature-30032-505-+0.6-notebook-0.6-128","rows":538}
+{"completed":"feature-41533-505-+0.4-notebook-0.6-128","rows":539}
+{"completed":"feature-30032-505-+0.1-notebook-0.6-128","rows":540}
+{"completed":"baseline-bridge-505-+0.0-paper-0.6-128","rows":541}
+{"completed":"feature-30686-505--0.5-notebook-0.6-128","rows":542}
+{"completed":"feature-23893-505-+0.6-notebook-0.6-128","rows":543}
+{"completed":"feature-22004-505--0.3-notebook-0.6-128","rows":544}
+{"completed":"baseline-bridge-505-+0.0-paper-0.5-128","rows":545}
+{"completed":"feature-58667-505-+0.5-notebook-0.6-128","rows":546}
+{"completed":"feature-30032-606-+0.2-notebook-0.6-128","rows":547}
+{"completed":"feature-30032-606--0.4-notebook-0.6-128","rows":548}
+{"completed":"feature-22004-606--0.6-notebook-0.6-128","rows":549}
+{"completed":"feature-30686-606-+0.1-notebook-0.6-128","rows":550}
+{"completed":"feature-58667-606-+0.5-notebook-0.6-128","rows":551}
+{"completed":"feature-22004-606--0.1-notebook-0.6-128","rows":552}
+{"completed":"feature-58667-606-+0.2-notebook-0.6-128","rows":553}
+{"completed":"feature-58667-606--0.1-notebook-0.6-128","rows":554}
+{"completed":"baseline-bridge-606-+0.0-paper-0.6-128","rows":555}
+{"completed":"feature-30032-606--0.2-notebook-0.6-128","rows":556}
+{"completed":"feature-41533-606--0.7-notebook-0.6-128","rows":557}
+{"completed":"feature-58667-606--0.5-notebook-0.6-128","rows":558}
+{"completed":"feature-23893-606-+0.7-notebook-0.6-128","rows":559}
+{"completed":"feature-58667-606-+0.0-notebook-0.6-128","rows":560}
+{"completed":"feature-58667-606-+0.1-notebook-0.6-128","rows":561}
+{"completed":"feature-41533-606-+0.1-notebook-0.6-128","rows":562}
+{"completed":"feature-23893-606--0.1-notebook-0.6-128","rows":563}
+{"completed":"aggregate-control-2-606-+0.5-notebook-0.6-128","rows":564}
+{"completed":"feature-30032-606--0.1-notebook-0.6-128","rows":565}
+{"completed":"feature-30686-606--0.6-notebook-0.6-128","rows":566}
+{"completed":"baseline-bridge-606-+0.0-notebook-0.5-256","rows":567}
+{"completed":"feature-30686-606--0.1-notebook-0.6-128","rows":568}
+{"completed":"feature-22004-606-+0.7-notebook-0.6-128","rows":569}
+{"completed":"feature-30032-606--0.7-notebook-0.6-128","rows":570}
+{"completed":"feature-58667-606--0.7-notebook-0.6-128","rows":571}
+{"completed":"feature-30032-606--0.6-notebook-0.6-128","rows":572}
+{"completed":"feature-23893-606-+0.6-notebook-0.6-128","rows":573}
+{"completed":"feature-22004-606-+0.5-notebook-0.6-128","rows":574}
+{"completed":"feature-22004-606--0.5-notebook-0.6-128","rows":575}
+{"completed":"aggregate-control-1-606-+0.0-notebook-0.6-128","rows":576}
+{"completed":"feature-23893-606--0.2-notebook-0.6-128","rows":577}
+{"completed":"feature-41533-606-+0.4-notebook-0.6-128","rows":578}
+{"completed":"feature-30032-606-+0.7-notebook-0.6-128","rows":579}
+{"completed":"feature-23893-606-+0.3-notebook-0.6-128","rows":580}
+{"completed":"feature-58667-606--0.4-notebook-0.6-128","rows":581}
+{"completed":"feature-30032-606-+0.1-notebook-0.6-128","rows":582}
+{"completed":"feature-30032-606-+0.3-notebook-0.6-128","rows":583}
+{"completed":"feature-30686-606-+0.6-notebook-0.6-128","rows":584}
+{"completed":"feature-30686-606-+0.7-notebook-0.6-128","rows":585}
+{"completed":"baseline-bridge-606-+0.0-notebook-0.5-128","rows":586}
+{"completed":"feature-22004-606--0.4-notebook-0.6-128","rows":587}
+{"completed":"feature-23893-606-+0.1-notebook-0.6-128","rows":588}
+{"completed":"feature-23893-606--0.7-notebook-0.6-128","rows":589}
+{"completed":"feature-41533-606-+0.0-notebook-0.6-128","rows":590}
+{"completed":"feature-41533-606--0.4-notebook-0.6-128","rows":591}
+{"completed":"feature-22004-606-+0.3-notebook-0.6-128","rows":592}
+{"completed":"feature-22004-606-+0.4-notebook-0.6-128","rows":593}
+{"completed":"feature-41533-606--0.3-notebook-0.6-128","rows":594}
+{"completed":"aggregate-target-606-+0.0-notebook-0.6-128","rows":595}
+{"completed":"feature-30686-606--0.2-notebook-0.6-128","rows":596}
+{"completed":"feature-58667-606--0.2-notebook-0.6-128","rows":597}
+{"completed":"feature-30032-606-+0.5-notebook-0.6-128","rows":598}
+{"completed":"aggregate-control-1-606--0.5-notebook-0.6-128","rows":599}
+{"completed":"feature-58667-606-+0.7-notebook-0.6-128","rows":600}
+{"completed":"baseline-bridge-606-+0.0-paper-0.5-128","rows":601}
+{"completed":"feature-23893-606--0.3-notebook-0.6-128","rows":602}
+{"completed":"feature-30686-606--0.3-notebook-0.6-128","rows":603}
+{"completed":"feature-23893-606-+0.2-notebook-0.6-128","rows":604}
+{"completed":"aggregate-control-1-606-+0.5-notebook-0.6-128","rows":605}
+{"completed":"aggregate-control-3-606-+0.0-notebook-0.6-128","rows":606}
+{"completed":"feature-41533-606-+0.6-notebook-0.6-128","rows":607}
+{"completed":"feature-30686-606--0.4-notebook-0.6-128","rows":608}
+{"completed":"feature-23893-606-+0.5-notebook-0.6-128","rows":609}
+{"completed":"feature-30686-606--0.5-notebook-0.6-128","rows":610}
+{"completed":"feature-41533-606-+0.5-notebook-0.6-128","rows":611}
+{"completed":"feature-30032-606-+0.0-notebook-0.6-128","rows":612}
+{"completed":"feature-22004-606-+0.1-notebook-0.6-128","rows":613}
+{"completed":"feature-30032-606-+0.6-notebook-0.6-128","rows":614}
+{"completed":"feature-23893-606-+0.0-notebook-0.6-128","rows":615}
+{"completed":"feature-58667-606--0.6-notebook-0.6-128","rows":616}
+{"completed":"feature-22004-606--0.7-notebook-0.6-128","rows":617}
+{"completed":"baseline-bridge-606-+0.0-paper-0.6-256","rows":618}
+{"completed":"feature-41533-606--0.1-notebook-0.6-128","rows":619}
+{"completed":"aggregate-control-3-606--0.5-notebook-0.6-128","rows":620}
+{"completed":"aggregate-target-606-+0.5-notebook-0.6-128","rows":621}
+{"completed":"aggregate-control-3-606-+0.5-notebook-0.6-128","rows":622}
+{"completed":"feature-23893-606--0.5-notebook-0.6-128","rows":623}
+{"completed":"feature-22004-606-+0.2-notebook-0.6-128","rows":624}
+{"completed":"aggregate-control-2-606-+0.0-notebook-0.6-128","rows":625}
+{"completed":"feature-41533-606--0.2-notebook-0.6-128","rows":626}
+{"completed":"feature-41533-606-+0.2-notebook-0.6-128","rows":627}
+{"completed":"aggregate-target-606--0.5-notebook-0.6-128","rows":628}
+{"completed":"feature-30686-606-+0.3-notebook-0.6-128","rows":629}
+{"completed":"feature-30686-606-+0.0-notebook-0.6-128","rows":630}
+{"completed":"feature-23893-606--0.4-notebook-0.6-128","rows":631}
+{"completed":"feature-22004-606--0.3-notebook-0.6-128","rows":632}
+{"completed":"feature-30686-606--0.7-notebook-0.6-128","rows":633}
+{"completed":"feature-23893-606-+0.4-notebook-0.6-128","rows":634}
+{"completed":"feature-23893-606--0.6-notebook-0.6-128","rows":635}
+{"completed":"feature-22004-606--0.2-notebook-0.6-128","rows":636}
+{"completed":"feature-58667-606-+0.4-notebook-0.6-128","rows":637}
+{"completed":"feature-30686-606-+0.5-notebook-0.6-128","rows":638}
+{"completed":"feature-22004-606-+0.6-notebook-0.6-128","rows":639}
+{"completed":"feature-30032-606--0.5-notebook-0.6-128","rows":640}
+{"completed":"baseline-bridge-606-+0.0-paper-0.5-256","rows":641}
+{"completed":"feature-41533-606--0.5-notebook-0.6-128","rows":642}
+{"completed":"feature-41533-606-+0.7-notebook-0.6-128","rows":643}
+{"completed":"feature-58667-606--0.3-notebook-0.6-128","rows":644}
+{"completed":"feature-58667-606-+0.6-notebook-0.6-128","rows":645}
+{"completed":"feature-58667-606-+0.3-notebook-0.6-128","rows":646}
+{"completed":"aggregate-control-2-606--0.5-notebook-0.6-128","rows":647}
+{"completed":"feature-30686-606-+0.4-notebook-0.6-128","rows":648}
+{"completed":"baseline-bridge-606-+0.0-notebook-0.6-256","rows":649}
+{"completed":"feature-41533-606-+0.3-notebook-0.6-128","rows":650}
+{"completed":"feature-41533-606--0.6-notebook-0.6-128","rows":651}
+{"completed":"feature-22004-606-+0.0-notebook-0.6-128","rows":652}
+{"completed":"feature-30686-606-+0.2-notebook-0.6-128","rows":653}
+{"completed":"feature-30032-606-+0.4-notebook-0.6-128","rows":654}
+{"completed":"feature-30032-606--0.3-notebook-0.6-128","rows":655}
+{"completed":"feature-41533-707-+0.3-notebook-0.6-128","rows":656}
+{"completed":"feature-30032-707--0.4-notebook-0.6-128","rows":657}
+{"completed":"feature-23893-707-+0.7-notebook-0.6-128","rows":658}
+{"completed":"feature-41533-707-+0.4-notebook-0.6-128","rows":659}
+{"completed":"feature-30686-707-+0.4-notebook-0.6-128","rows":660}
+{"completed":"baseline-bridge-707-+0.0-paper-0.6-128","rows":661}
+{"completed":"feature-23893-707-+0.6-notebook-0.6-128","rows":662}
+{"completed":"feature-58667-707--0.6-notebook-0.6-128","rows":663}
+{"completed":"feature-30032-707--0.5-notebook-0.6-128","rows":664}
+{"completed":"feature-30686-707-+0.2-notebook-0.6-128","rows":665}
+{"completed":"feature-58667-707-+0.1-notebook-0.6-128","rows":666}
+{"completed":"feature-30686-707--0.6-notebook-0.6-128","rows":667}
+{"completed":"feature-58667-707--0.2-notebook-0.6-128","rows":668}
+{"completed":"feature-23893-707-+0.0-notebook-0.6-128","rows":669}
+{"completed":"feature-23893-707-+0.5-notebook-0.6-128","rows":670}
+{"completed":"feature-30686-707--0.3-notebook-0.6-128","rows":671}
+{"completed":"feature-41533-707--0.5-notebook-0.6-128","rows":672}
+{"completed":"feature-30686-707--0.5-notebook-0.6-128","rows":673}
+{"completed":"feature-41533-707--0.2-notebook-0.6-128","rows":674}
+{"completed":"feature-30032-707--0.1-notebook-0.6-128","rows":675}
+{"completed":"feature-41533-707-+0.5-notebook-0.6-128","rows":676}
+{"completed":"aggregate-target-707-+0.0-notebook-0.6-128","rows":677}
+{"completed":"feature-23893-707--0.6-notebook-0.6-128","rows":678}
+{"completed":"feature-41533-707--0.1-notebook-0.6-128","rows":679}
+{"completed":"aggregate-control-2-707-+0.0-notebook-0.6-128","rows":680}
+{"completed":"feature-30686-707-+0.3-notebook-0.6-128","rows":681}
+{"completed":"feature-30686-707-+0.5-notebook-0.6-128","rows":682}
+{"completed":"feature-22004-707-+0.5-notebook-0.6-128","rows":683}
+{"completed":"feature-22004-707-+0.1-notebook-0.6-128","rows":684}
+{"completed":"feature-30686-707--0.4-notebook-0.6-128","rows":685}
+{"completed":"feature-58667-707--0.3-notebook-0.6-128","rows":686}
+{"completed":"feature-23893-707--0.2-notebook-0.6-128","rows":687}
+{"completed":"feature-41533-707-+0.6-notebook-0.6-128","rows":688}
+{"completed":"feature-23893-707--0.1-notebook-0.6-128","rows":689}
+{"completed":"feature-30686-707--0.1-notebook-0.6-128","rows":690}
+{"completed":"feature-41533-707--0.6-notebook-0.6-128","rows":691}
+{"completed":"aggregate-control-1-707-+0.5-notebook-0.6-128","rows":692}
+{"completed":"aggregate-control-3-707-+0.0-notebook-0.6-128","rows":693}
+{"completed":"feature-30686-707--0.2-notebook-0.6-128","rows":694}
+{"completed":"baseline-bridge-707-+0.0-notebook-0.5-256","rows":695}
+{"completed":"feature-58667-707-+0.2-notebook-0.6-128","rows":696}
+{"completed":"feature-22004-707--0.4-notebook-0.6-128","rows":697}
+{"completed":"aggregate-control-3-707-+0.5-notebook-0.6-128","rows":698}
+{"completed":"feature-58667-707--0.5-notebook-0.6-128","rows":699}
+{"completed":"feature-58667-707-+0.5-notebook-0.6-128","rows":700}
+{"completed":"feature-30032-707-+0.2-notebook-0.6-128","rows":701}
+{"completed":"feature-23893-707--0.7-notebook-0.6-128","rows":702}
+{"completed":"feature-30032-707-+0.7-notebook-0.6-128","rows":703}
+{"completed":"feature-22004-707-+0.7-notebook-0.6-128","rows":704}
+{"completed":"feature-41533-707-+0.1-notebook-0.6-128","rows":705}
+{"completed":"feature-23893-707-+0.4-notebook-0.6-128","rows":706}
+{"completed":"feature-23893-707--0.5-notebook-0.6-128","rows":707}
+{"completed":"feature-30032-707-+0.5-notebook-0.6-128","rows":708}
+{"completed":"feature-58667-707-+0.6-notebook-0.6-128","rows":709}
+{"completed":"feature-30686-707-+0.7-notebook-0.6-128","rows":710}
+{"completed":"feature-30032-707--0.7-notebook-0.6-128","rows":711}
+{"completed":"feature-22004-707--0.2-notebook-0.6-128","rows":712}
+{"completed":"feature-30032-707-+0.1-notebook-0.6-128","rows":713}
+{"completed":"aggregate-control-2-707--0.5-notebook-0.6-128","rows":714}
+{"completed":"feature-58667-707-+0.0-notebook-0.6-128","rows":715}
+{"completed":"aggregate-control-3-707--0.5-notebook-0.6-128","rows":716}
+{"completed":"baseline-bridge-707-+0.0-paper-0.5-128","rows":717}
+{"completed":"baseline-bridge-707-+0.0-paper-0.5-256","rows":718}
+{"completed":"feature-41533-707-+0.7-notebook-0.6-128","rows":719}
+{"completed":"feature-30032-707-+0.0-notebook-0.6-128","rows":720}
+{"completed":"aggregate-target-707-+0.5-notebook-0.6-128","rows":721}
+{"completed":"feature-22004-707-+0.3-notebook-0.6-128","rows":722}
+{"completed":"aggregate-control-1-707-+0.0-notebook-0.6-128","rows":723}
+{"completed":"feature-58667-707-+0.7-notebook-0.6-128","rows":724}
+{"completed":"feature-41533-707--0.3-notebook-0.6-128","rows":725}
+{"completed":"feature-22004-707--0.6-notebook-0.6-128","rows":726}
+{"completed":"feature-41533-707--0.7-notebook-0.6-128","rows":727}
+{"completed":"feature-22004-707--0.1-notebook-0.6-128","rows":728}
+{"completed":"feature-30686-707-+0.0-notebook-0.6-128","rows":729}
+{"completed":"aggregate-control-2-707-+0.5-notebook-0.6-128","rows":730}
+{"completed":"feature-30686-707-+0.6-notebook-0.6-128","rows":731}
+{"completed":"baseline-bridge-707-+0.0-notebook-0.5-128","rows":732}
+{"completed":"feature-41533-707--0.4-notebook-0.6-128","rows":733}
+{"completed":"feature-23893-707-+0.3-notebook-0.6-128","rows":734}
+{"completed":"aggregate-target-707--0.5-notebook-0.6-128","rows":735}
+{"completed":"feature-23893-707--0.4-notebook-0.6-128","rows":736}
+{"completed":"feature-30032-707-+0.3-notebook-0.6-128","rows":737}
+{"completed":"feature-30686-707-+0.1-notebook-0.6-128","rows":738}
+{"completed":"feature-22004-707-+0.0-notebook-0.6-128","rows":739}
+{"completed":"feature-22004-707-+0.4-notebook-0.6-128","rows":740}
+{"completed":"feature-30032-707--0.3-notebook-0.6-128","rows":741}
+{"completed":"feature-41533-707-+0.0-notebook-0.6-128","rows":742}
+{"completed":"feature-30032-707--0.6-notebook-0.6-128","rows":743}
+{"completed":"feature-30032-707-+0.4-notebook-0.6-128","rows":744}
+{"completed":"feature-23893-707-+0.1-notebook-0.6-128","rows":745}
+{"completed":"feature-22004-707-+0.2-notebook-0.6-128","rows":746}
+{"completed":"feature-41533-707-+0.2-notebook-0.6-128","rows":747}
+{"completed":"baseline-bridge-707-+0.0-notebook-0.6-256","rows":748}
+{"completed":"feature-58667-707-+0.3-notebook-0.6-128","rows":749}
+{"completed":"feature-23893-707--0.3-notebook-0.6-128","rows":750}
+{"completed":"baseline-bridge-707-+0.0-paper-0.6-256","rows":751}
+{"completed":"feature-22004-707-+0.6-notebook-0.6-128","rows":752}
+{"completed":"feature-22004-707--0.3-notebook-0.6-128","rows":753}
+{"completed":"feature-58667-707--0.1-notebook-0.6-128","rows":754}
+{"completed":"feature-58667-707--0.7-notebook-0.6-128","rows":755}
+{"completed":"feature-30032-707-+0.6-notebook-0.6-128","rows":756}
+{"completed":"feature-58667-707--0.4-notebook-0.6-128","rows":757}
+{"completed":"feature-23893-707-+0.2-notebook-0.6-128","rows":758}
+{"completed":"aggregate-control-1-707--0.5-notebook-0.6-128","rows":759}
+{"completed":"feature-22004-707--0.5-notebook-0.6-128","rows":760}
+{"completed":"feature-30032-707--0.2-notebook-0.6-128","rows":761}
+{"completed":"feature-58667-707-+0.4-notebook-0.6-128","rows":762}
+{"completed":"feature-30686-707--0.7-notebook-0.6-128","rows":763}
+{"completed":"feature-22004-707--0.7-notebook-0.6-128","rows":764}
+{"completed":"feature-30032-808-+0.2-notebook-0.6-128","rows":765}
+{"completed":"aggregate-control-1-808-+0.5-notebook-0.6-128","rows":766}
+{"completed":"feature-22004-808-+0.0-notebook-0.6-128","rows":767}
+{"completed":"feature-41533-808--0.1-notebook-0.6-128","rows":768}
+{"completed":"feature-30686-808--0.5-notebook-0.6-128","rows":769}
+{"completed":"feature-30032-808-+0.0-notebook-0.6-128","rows":770}
+{"completed":"feature-41533-808-+0.6-notebook-0.6-128","rows":771}
+{"completed":"feature-41533-808-+0.1-notebook-0.6-128","rows":772}
+{"completed":"feature-58667-808-+0.7-notebook-0.6-128","rows":773}
+{"completed":"feature-30686-808--0.3-notebook-0.6-128","rows":774}
+{"completed":"feature-22004-808-+0.2-notebook-0.6-128","rows":775}
+{"completed":"feature-23893-808-+0.4-notebook-0.6-128","rows":776}
+{"completed":"feature-23893-808--0.5-notebook-0.6-128","rows":777}
+{"completed":"feature-30686-808--0.6-notebook-0.6-128","rows":778}
+{"completed":"feature-30032-808--0.1-notebook-0.6-128","rows":779}
+{"completed":"feature-30686-808-+0.0-notebook-0.6-128","rows":780}
+{"completed":"feature-30032-808--0.4-notebook-0.6-128","rows":781}
+{"completed":"feature-30686-808--0.1-notebook-0.6-128","rows":782}
+{"completed":"baseline-bridge-808-+0.0-paper-0.5-128","rows":783}
+{"completed":"feature-41533-808--0.5-notebook-0.6-128","rows":784}
+{"completed":"feature-22004-808-+0.6-notebook-0.6-128","rows":785}
+{"completed":"feature-30032-808--0.7-notebook-0.6-128","rows":786}
+{"completed":"feature-30032-808-+0.1-notebook-0.6-128","rows":787}
+{"completed":"feature-30686-808-+0.2-notebook-0.6-128","rows":788}
+{"completed":"feature-30032-808--0.3-notebook-0.6-128","rows":789}
+{"completed":"aggregate-target-808--0.5-notebook-0.6-128","rows":790}
+{"completed":"feature-30686-808-+0.5-notebook-0.6-128","rows":791}
+{"completed":"feature-22004-808-+0.4-notebook-0.6-128","rows":792}
+{"completed":"feature-22004-808--0.1-notebook-0.6-128","rows":793}
+{"completed":"feature-30686-808--0.2-notebook-0.6-128","rows":794}
+{"completed":"feature-58667-808-+0.5-notebook-0.6-128","rows":795}
+{"completed":"feature-22004-808-+0.3-notebook-0.6-128","rows":796}
+{"completed":"feature-23893-808--0.2-notebook-0.6-128","rows":797}
+{"completed":"feature-58667-808-+0.1-notebook-0.6-128","rows":798}
+{"completed":"feature-23893-808--0.3-notebook-0.6-128","rows":799}
+{"completed":"feature-58667-808-+0.0-notebook-0.6-128","rows":800}
+{"completed":"baseline-bridge-808-+0.0-paper-0.5-256","rows":801}
+{"completed":"feature-30686-808--0.4-notebook-0.6-128","rows":802}
+{"completed":"aggregate-control-1-808--0.5-notebook-0.6-128","rows":803}
+{"completed":"feature-41533-808--0.3-notebook-0.6-128","rows":804}
+{"completed":"feature-30032-808-+0.4-notebook-0.6-128","rows":805}
+{"completed":"feature-30686-808-+0.6-notebook-0.6-128","rows":806}
+{"completed":"feature-23893-808--0.4-notebook-0.6-128","rows":807}
+{"completed":"feature-22004-808--0.6-notebook-0.6-128","rows":808}
+{"completed":"feature-22004-808--0.4-notebook-0.6-128","rows":809}
+{"completed":"feature-41533-808--0.4-notebook-0.6-128","rows":810}
+{"completed":"feature-22004-808-+0.5-notebook-0.6-128","rows":811}
+{"completed":"aggregate-control-1-808-+0.0-notebook-0.6-128","rows":812}
+{"completed":"feature-58667-808-+0.2-notebook-0.6-128","rows":813}
+{"completed":"feature-58667-808-+0.6-notebook-0.6-128","rows":814}
+{"completed":"baseline-bridge-808-+0.0-notebook-0.5-128","rows":815}
+{"completed":"feature-23893-808-+0.7-notebook-0.6-128","rows":816}
+{"completed":"feature-30032-808--0.2-notebook-0.6-128","rows":817}
+{"completed":"feature-23893-808--0.6-notebook-0.6-128","rows":818}
+{"completed":"feature-41533-808-+0.4-notebook-0.6-128","rows":819}
+{"completed":"aggregate-control-3-808-+0.0-notebook-0.6-128","rows":820}
+{"completed":"feature-41533-808-+0.5-notebook-0.6-128","rows":821}
+{"completed":"feature-30686-808-+0.3-notebook-0.6-128","rows":822}
+{"completed":"aggregate-control-3-808--0.5-notebook-0.6-128","rows":823}
+{"completed":"feature-23893-808-+0.3-notebook-0.6-128","rows":824}
+{"completed":"feature-23893-808-+0.0-notebook-0.6-128","rows":825}
+{"completed":"feature-41533-808-+0.7-notebook-0.6-128","rows":826}
+{"completed":"aggregate-target-808-+0.0-notebook-0.6-128","rows":827}
+{"completed":"baseline-bridge-808-+0.0-paper-0.6-256","rows":828}
+{"completed":"feature-41533-808--0.2-notebook-0.6-128","rows":829}
+{"completed":"feature-58667-808--0.6-notebook-0.6-128","rows":830}
+{"completed":"baseline-bridge-808-+0.0-notebook-0.5-256","rows":831}
+{"completed":"feature-58667-808--0.7-notebook-0.6-128","rows":832}
+{"completed":"feature-22004-808--0.2-notebook-0.6-128","rows":833}
+{"completed":"feature-22004-808-+0.7-notebook-0.6-128","rows":834}
+{"completed":"feature-41533-808--0.6-notebook-0.6-128","rows":835}
+{"completed":"feature-30032-808-+0.7-notebook-0.6-128","rows":836}
+{"completed":"feature-58667-808--0.4-notebook-0.6-128","rows":837}
+{"completed":"feature-23893-808-+0.2-notebook-0.6-128","rows":838}
+{"completed":"feature-58667-808--0.2-notebook-0.6-128","rows":839}
+{"completed":"feature-58667-808-+0.4-notebook-0.6-128","rows":840}
+{"completed":"feature-58667-808-+0.3-notebook-0.6-128","rows":841}
+{"completed":"feature-30032-808-+0.5-notebook-0.6-128","rows":842}
+{"completed":"feature-23893-808--0.1-notebook-0.6-128","rows":843}
+{"completed":"feature-41533-808-+0.2-notebook-0.6-128","rows":844}
+{"completed":"aggregate-target-808-+0.5-notebook-0.6-128","rows":845}
+{"completed":"feature-30032-808-+0.6-notebook-0.6-128","rows":846}
+{"completed":"aggregate-control-3-808-+0.5-notebook-0.6-128","rows":847}
+{"completed":"baseline-bridge-808-+0.0-paper-0.6-128","rows":848}
+{"completed":"aggregate-control-2-808--0.5-notebook-0.6-128","rows":849}
+{"completed":"feature-30686-808--0.7-notebook-0.6-128","rows":850}
+{"completed":"feature-23893-808-+0.1-notebook-0.6-128","rows":851}
+{"completed":"feature-41533-808-+0.0-notebook-0.6-128","rows":852}
+{"completed":"feature-30032-808--0.5-notebook-0.6-128","rows":853}
+{"completed":"feature-41533-808-+0.3-notebook-0.6-128","rows":854}
+{"completed":"feature-58667-808--0.3-notebook-0.6-128","rows":855}
+{"completed":"feature-23893-808--0.7-notebook-0.6-128","rows":856}
+{"completed":"feature-30032-808--0.6-notebook-0.6-128","rows":857}
+{"completed":"feature-22004-808--0.7-notebook-0.6-128","rows":858}
+{"completed":"aggregate-control-2-808-+0.0-notebook-0.6-128","rows":859}
+{"completed":"feature-23893-808-+0.5-notebook-0.6-128","rows":860}
+{"completed":"feature-30032-808-+0.3-notebook-0.6-128","rows":861}
+{"completed":"baseline-bridge-808-+0.0-notebook-0.6-256","rows":862}
+{"completed":"feature-30686-808-+0.1-notebook-0.6-128","rows":863}
+{"completed":"feature-23893-808-+0.6-notebook-0.6-128","rows":864}
+{"completed":"feature-22004-808-+0.1-notebook-0.6-128","rows":865}
+{"completed":"feature-41533-808--0.7-notebook-0.6-128","rows":866}
+{"completed":"feature-22004-808--0.3-notebook-0.6-128","rows":867}
+{"completed":"feature-30686-808-+0.4-notebook-0.6-128","rows":868}
+{"completed":"feature-58667-808--0.5-notebook-0.6-128","rows":869}
+{"completed":"feature-30686-808-+0.7-notebook-0.6-128","rows":870}
+{"completed":"aggregate-control-2-808-+0.5-notebook-0.6-128","rows":871}
+{"completed":"feature-58667-808--0.1-notebook-0.6-128","rows":872}
+{"completed":"feature-22004-808--0.5-notebook-0.6-128","rows":873}
+{"completed":"feature-22004-909--0.1-notebook-0.6-128","rows":874}
+{"completed":"feature-23893-909--0.3-notebook-0.6-128","rows":875}
+{"completed":"feature-30032-909--0.4-notebook-0.6-128","rows":876}
+{"completed":"feature-58667-909-+0.5-notebook-0.6-128","rows":877}
+{"completed":"feature-23893-909--0.6-notebook-0.6-128","rows":878}
+{"completed":"feature-22004-909-+0.3-notebook-0.6-128","rows":879}
+{"completed":"feature-23893-909-+0.1-notebook-0.6-128","rows":880}
+{"completed":"feature-58667-909-+0.4-notebook-0.6-128","rows":881}
+{"completed":"feature-23893-909--0.2-notebook-0.6-128","rows":882}
+{"completed":"feature-30686-909--0.6-notebook-0.6-128","rows":883}
+{"completed":"feature-30032-909--0.1-notebook-0.6-128","rows":884}
+{"completed":"aggregate-control-3-909-+0.5-notebook-0.6-128","rows":885}
+{"completed":"feature-30032-909-+0.4-notebook-0.6-128","rows":886}
+{"completed":"baseline-bridge-909-+0.0-notebook-0.5-128","rows":887}
+{"completed":"feature-30686-909--0.2-notebook-0.6-128","rows":888}
+{"completed":"feature-30032-909--0.2-notebook-0.6-128","rows":889}
+{"completed":"feature-30686-909-+0.3-notebook-0.6-128","rows":890}
+{"completed":"feature-22004-909-+0.0-notebook-0.6-128","rows":891}
+{"completed":"aggregate-control-2-909-+0.5-notebook-0.6-128","rows":892}
+{"completed":"feature-23893-909-+0.7-notebook-0.6-128","rows":893}
+{"completed":"feature-58667-909--0.1-notebook-0.6-128","rows":894}
+{"completed":"feature-22004-909-+0.5-notebook-0.6-128","rows":895}
+{"completed":"feature-30032-909--0.5-notebook-0.6-128","rows":896}
+{"completed":"aggregate-control-2-909--0.5-notebook-0.6-128","rows":897}
+{"completed":"baseline-bridge-909-+0.0-notebook-0.6-256","rows":898}
+{"completed":"baseline-bridge-909-+0.0-notebook-0.5-256","rows":899}
+{"completed":"feature-41533-909-+0.0-notebook-0.6-128","rows":900}
+{"completed":"aggregate-target-909--0.5-notebook-0.6-128","rows":901}
+{"completed":"feature-30686-909-+0.5-notebook-0.6-128","rows":902}
+{"completed":"feature-22004-909--0.6-notebook-0.6-128","rows":903}
+{"completed":"feature-58667-909-+0.1-notebook-0.6-128","rows":904}
+{"completed":"feature-22004-909-+0.6-notebook-0.6-128","rows":905}
+{"completed":"feature-41533-909-+0.1-notebook-0.6-128","rows":906}
+{"completed":"feature-23893-909-+0.6-notebook-0.6-128","rows":907}
+{"completed":"feature-41533-909-+0.3-notebook-0.6-128","rows":908}
+{"completed":"feature-58667-909-+0.6-notebook-0.6-128","rows":909}
+{"completed":"aggregate-target-909-+0.0-notebook-0.6-128","rows":910}
+{"completed":"feature-41533-909--0.6-notebook-0.6-128","rows":911}
+{"completed":"feature-41533-909--0.2-notebook-0.6-128","rows":912}
+{"completed":"feature-30686-909-+0.2-notebook-0.6-128","rows":913}
+{"completed":"feature-23893-909-+0.4-notebook-0.6-128","rows":914}
+{"completed":"feature-22004-909-+0.7-notebook-0.6-128","rows":915}
+{"completed":"feature-58667-909--0.4-notebook-0.6-128","rows":916}
+{"completed":"feature-22004-909--0.5-notebook-0.6-128","rows":917}
+{"completed":"feature-30032-909-+0.2-notebook-0.6-128","rows":918}
+{"completed":"feature-41533-909-+0.4-notebook-0.6-128","rows":919}
+{"completed":"feature-30032-909--0.3-notebook-0.6-128","rows":920}
+{"completed":"feature-23893-909-+0.0-notebook-0.6-128","rows":921}
+{"completed":"feature-30032-909-+0.6-notebook-0.6-128","rows":922}
+{"completed":"feature-58667-909--0.6-notebook-0.6-128","rows":923}
+{"completed":"feature-23893-909--0.4-notebook-0.6-128","rows":924}
+{"completed":"feature-23893-909--0.7-notebook-0.6-128","rows":925}
+{"completed":"feature-22004-909-+0.2-notebook-0.6-128","rows":926}
+{"completed":"feature-30686-909-+0.0-notebook-0.6-128","rows":927}
+{"completed":"feature-30686-909--0.5-notebook-0.6-128","rows":928}
+{"completed":"feature-58667-909--0.5-notebook-0.6-128","rows":929}
+{"completed":"feature-23893-909-+0.5-notebook-0.6-128","rows":930}
+{"completed":"feature-58667-909-+0.2-notebook-0.6-128","rows":931}
+{"completed":"feature-23893-909-+0.3-notebook-0.6-128","rows":932}
+{"completed":"aggregate-control-3-909-+0.0-notebook-0.6-128","rows":933}
+{"completed":"feature-58667-909-+0.0-notebook-0.6-128","rows":934}
+{"completed":"feature-30686-909-+0.6-notebook-0.6-128","rows":935}
+{"completed":"feature-23893-909--0.5-notebook-0.6-128","rows":936}
+{"completed":"baseline-bridge-909-+0.0-paper-0.5-256","rows":937}
+{"completed":"feature-22004-909--0.7-notebook-0.6-128","rows":938}
+{"completed":"baseline-bridge-909-+0.0-paper-0.6-128","rows":939}
+{"completed":"feature-30032-909-+0.7-notebook-0.6-128","rows":940}
+{"completed":"feature-41533-909-+0.7-notebook-0.6-128","rows":941}
+{"completed":"feature-41533-909--0.1-notebook-0.6-128","rows":942}
+{"completed":"feature-22004-909-+0.1-notebook-0.6-128","rows":943}
+{"completed":"feature-58667-909-+0.3-notebook-0.6-128","rows":944}
+{"completed":"feature-30686-909--0.4-notebook-0.6-128","rows":945}
+{"completed":"aggregate-target-909-+0.5-notebook-0.6-128","rows":946}
+{"completed":"feature-22004-909--0.2-notebook-0.6-128","rows":947}
+{"completed":"feature-41533-909-+0.2-notebook-0.6-128","rows":948}
+{"completed":"feature-41533-909--0.5-notebook-0.6-128","rows":949}
+{"completed":"feature-30686-909-+0.7-notebook-0.6-128","rows":950}
+{"completed":"feature-58667-909--0.3-notebook-0.6-128","rows":951}
+{"completed":"feature-23893-909--0.1-notebook-0.6-128","rows":952}
+{"completed":"baseline-bridge-909-+0.0-paper-0.6-256","rows":953}
+{"completed":"feature-41533-909-+0.5-notebook-0.6-128","rows":954}
+{"completed":"feature-30686-909-+0.1-notebook-0.6-128","rows":955}
+{"completed":"feature-30686-909--0.3-notebook-0.6-128","rows":956}
+{"completed":"feature-41533-909-+0.6-notebook-0.6-128","rows":957}
+{"completed":"feature-30032-909-+0.0-notebook-0.6-128","rows":958}
+{"completed":"aggregate-control-1-909-+0.5-notebook-0.6-128","rows":959}
+{"completed":"feature-22004-909--0.3-notebook-0.6-128","rows":960}
+{"completed":"feature-58667-909--0.7-notebook-0.6-128","rows":961}
+{"completed":"feature-30032-909-+0.1-notebook-0.6-128","rows":962}
+{"completed":"feature-30686-909--0.7-notebook-0.6-128","rows":963}
+{"completed":"aggregate-control-2-909-+0.0-notebook-0.6-128","rows":964}
+{"completed":"feature-22004-909-+0.4-notebook-0.6-128","rows":965}
+{"completed":"feature-41533-909--0.4-notebook-0.6-128","rows":966}
+{"completed":"aggregate-control-1-909-+0.0-notebook-0.6-128","rows":967}
+{"completed":"feature-30032-909-+0.5-notebook-0.6-128","rows":968}
+{"completed":"feature-41533-909--0.3-notebook-0.6-128","rows":969}
+{"completed":"feature-30686-909-+0.4-notebook-0.6-128","rows":970}
+{"completed":"feature-41533-909--0.7-notebook-0.6-128","rows":971}
+{"completed":"baseline-bridge-909-+0.0-paper-0.5-128","rows":972}
+{"completed":"feature-30032-909-+0.3-notebook-0.6-128","rows":973}
+{"completed":"feature-58667-909--0.2-notebook-0.6-128","rows":974}
+{"completed":"aggregate-control-3-909--0.5-notebook-0.6-128","rows":975}
+{"completed":"feature-58667-909-+0.7-notebook-0.6-128","rows":976}
+{"completed":"feature-30032-909--0.7-notebook-0.6-128","rows":977}
+{"completed":"aggregate-control-1-909--0.5-notebook-0.6-128","rows":978}
+{"completed":"feature-22004-909--0.4-notebook-0.6-128","rows":979}
+{"completed":"feature-30686-909--0.1-notebook-0.6-128","rows":980}
+{"completed":"feature-23893-909-+0.2-notebook-0.6-128","rows":981}
+{"completed":"feature-30032-909--0.6-notebook-0.6-128","rows":982}
+{"completed":"feature-58667-1001-+0.1-notebook-0.6-128","rows":983}
+{"completed":"feature-23893-1001--0.2-notebook-0.6-128","rows":984}
+{"completed":"baseline-bridge-1001-+0.0-paper-0.6-128","rows":985}
+{"completed":"feature-23893-1001--0.5-notebook-0.6-128","rows":986}
+{"completed":"feature-41533-1001--0.5-notebook-0.6-128","rows":987}
+{"completed":"feature-23893-1001-+0.4-notebook-0.6-128","rows":988}
+{"completed":"baseline-bridge-1001-+0.0-paper-0.5-256","rows":989}
+{"completed":"feature-30686-1001-+0.1-notebook-0.6-128","rows":990}
+{"completed":"feature-58667-1001--0.6-notebook-0.6-128","rows":991}
+{"completed":"feature-58667-1001--0.2-notebook-0.6-128","rows":992}
+{"completed":"feature-41533-1001--0.4-notebook-0.6-128","rows":993}
+{"completed":"baseline-bridge-1001-+0.0-paper-0.6-256","rows":994}
+{"completed":"feature-22004-1001--0.3-notebook-0.6-128","rows":995}
+{"completed":"feature-41533-1001--0.2-notebook-0.6-128","rows":996}
+{"completed":"feature-22004-1001-+0.1-notebook-0.6-128","rows":997}
+{"completed":"feature-30686-1001--0.7-notebook-0.6-128","rows":998}
+{"completed":"feature-22004-1001--0.6-notebook-0.6-128","rows":999}
+{"completed":"feature-58667-1001--0.3-notebook-0.6-128","rows":1000}
+{"completed":"feature-23893-1001-+0.3-notebook-0.6-128","rows":1001}
+{"completed":"aggregate-target-1001--0.5-notebook-0.6-128","rows":1002}
+{"completed":"aggregate-control-2-1001-+0.5-notebook-0.6-128","rows":1003}
+{"completed":"feature-58667-1001-+0.4-notebook-0.6-128","rows":1004}
+{"completed":"feature-30686-1001--0.4-notebook-0.6-128","rows":1005}
+{"completed":"feature-30032-1001--0.6-notebook-0.6-128","rows":1006}
+{"completed":"feature-30032-1001-+0.7-notebook-0.6-128","rows":1007}
+{"completed":"feature-30686-1001--0.2-notebook-0.6-128","rows":1008}
+{"completed":"feature-23893-1001--0.4-notebook-0.6-128","rows":1009}
+{"completed":"feature-23893-1001--0.7-notebook-0.6-128","rows":1010}
+{"completed":"feature-30686-1001-+0.0-notebook-0.6-128","rows":1011}
+{"completed":"feature-30686-1001-+0.6-notebook-0.6-128","rows":1012}
+{"completed":"feature-23893-1001-+0.5-notebook-0.6-128","rows":1013}
+{"completed":"feature-23893-1001--0.3-notebook-0.6-128","rows":1014}
+{"completed":"feature-30686-1001-+0.5-notebook-0.6-128","rows":1015}
+{"completed":"feature-23893-1001-+0.6-notebook-0.6-128","rows":1016}
+{"completed":"feature-22004-1001--0.7-notebook-0.6-128","rows":1017}
+{"completed":"baseline-bridge-1001-+0.0-notebook-0.5-128","rows":1018}
+{"completed":"feature-30032-1001-+0.6-notebook-0.6-128","rows":1019}
+{"completed":"feature-22004-1001-+0.7-notebook-0.6-128","rows":1020}
+{"completed":"feature-41533-1001--0.6-notebook-0.6-128","rows":1021}
+{"completed":"feature-58667-1001--0.1-notebook-0.6-128","rows":1022}
+{"completed":"feature-58667-1001--0.7-notebook-0.6-128","rows":1023}
+{"completed":"feature-22004-1001-+0.4-notebook-0.6-128","rows":1024}
+{"completed":"feature-41533-1001--0.3-notebook-0.6-128","rows":1025}
+{"completed":"feature-23893-1001--0.6-notebook-0.6-128","rows":1026}
+{"completed":"aggregate-target-1001-+0.5-notebook-0.6-128","rows":1027}
+{"completed":"feature-22004-1001-+0.6-notebook-0.6-128","rows":1028}
+{"completed":"feature-30032-1001--0.4-notebook-0.6-128","rows":1029}
+{"completed":"feature-30686-1001--0.6-notebook-0.6-128","rows":1030}
+{"completed":"feature-23893-1001-+0.0-notebook-0.6-128","rows":1031}
+{"completed":"aggregate-control-3-1001--0.5-notebook-0.6-128","rows":1032}
+{"completed":"feature-30686-1001-+0.3-notebook-0.6-128","rows":1033}
+{"completed":"feature-41533-1001-+0.1-notebook-0.6-128","rows":1034}
+{"completed":"feature-22004-1001--0.5-notebook-0.6-128","rows":1035}
+{"completed":"feature-30032-1001--0.7-notebook-0.6-128","rows":1036}
+{"completed":"feature-41533-1001-+0.2-notebook-0.6-128","rows":1037}
+{"completed":"feature-41533-1001-+0.7-notebook-0.6-128","rows":1038}
+{"completed":"feature-22004-1001--0.2-notebook-0.6-128","rows":1039}
+{"completed":"feature-30032-1001--0.5-notebook-0.6-128","rows":1040}
+{"completed":"feature-58667-1001-+0.3-notebook-0.6-128","rows":1041}
+{"completed":"baseline-bridge-1001-+0.0-notebook-0.5-256","rows":1042}
+{"completed":"baseline-bridge-1001-+0.0-paper-0.5-128","rows":1043}
+{"completed":"feature-30032-1001--0.3-notebook-0.6-128","rows":1044}
+{"completed":"feature-58667-1001-+0.5-notebook-0.6-128","rows":1045}
+{"completed":"feature-30032-1001-+0.4-notebook-0.6-128","rows":1046}
+{"completed":"feature-41533-1001-+0.5-notebook-0.6-128","rows":1047}
+{"completed":"feature-30032-1001-+0.2-notebook-0.6-128","rows":1048}
+{"completed":"aggregate-control-3-1001-+0.5-notebook-0.6-128","rows":1049}
+{"completed":"feature-58667-1001-+0.6-notebook-0.6-128","rows":1050}
+{"completed":"aggregate-target-1001-+0.0-notebook-0.6-128","rows":1051}
+{"completed":"feature-23893-1001-+0.7-notebook-0.6-128","rows":1052}
+{"completed":"baseline-bridge-1001-+0.0-notebook-0.6-256","rows":1053}
+{"completed":"feature-22004-1001-+0.5-notebook-0.6-128","rows":1054}
+{"completed":"feature-30686-1001-+0.7-notebook-0.6-128","rows":1055}
+{"completed":"aggregate-control-3-1001-+0.0-notebook-0.6-128","rows":1056}
+{"completed":"feature-22004-1001-+0.3-notebook-0.6-128","rows":1057}
+{"completed":"feature-30686-1001--0.3-notebook-0.6-128","rows":1058}
+{"completed":"feature-22004-1001--0.1-notebook-0.6-128","rows":1059}
+{"completed":"feature-41533-1001--0.7-notebook-0.6-128","rows":1060}
+{"completed":"aggregate-control-2-1001-+0.0-notebook-0.6-128","rows":1061}
+{"completed":"feature-30032-1001-+0.0-notebook-0.6-128","rows":1062}
+{"completed":"feature-41533-1001--0.1-notebook-0.6-128","rows":1063}
+{"completed":"feature-30686-1001--0.5-notebook-0.6-128","rows":1064}
+{"completed":"feature-58667-1001--0.4-notebook-0.6-128","rows":1065}
+{"completed":"feature-23893-1001-+0.1-notebook-0.6-128","rows":1066}
+{"completed":"feature-41533-1001-+0.0-notebook-0.6-128","rows":1067}
+{"completed":"feature-23893-1001-+0.2-notebook-0.6-128","rows":1068}
+{"completed":"feature-30032-1001-+0.3-notebook-0.6-128","rows":1069}
+{"completed":"feature-41533-1001-+0.6-notebook-0.6-128","rows":1070}
+{"completed":"aggregate-control-2-1001--0.5-notebook-0.6-128","rows":1071}
+{"completed":"feature-23893-1001--0.1-notebook-0.6-128","rows":1072}
+{"completed":"feature-30032-1001-+0.5-notebook-0.6-128","rows":1073}
+{"completed":"feature-41533-1001-+0.4-notebook-0.6-128","rows":1074}
+{"completed":"aggregate-control-1-1001-+0.5-notebook-0.6-128","rows":1075}
+{"completed":"feature-30686-1001-+0.2-notebook-0.6-128","rows":1076}
+{"completed":"feature-58667-1001--0.5-notebook-0.6-128","rows":1077}
+{"completed":"feature-30686-1001--0.1-notebook-0.6-128","rows":1078}
+{"completed":"feature-30032-1001-+0.1-notebook-0.6-128","rows":1079}
+{"completed":"feature-58667-1001-+0.7-notebook-0.6-128","rows":1080}
+{"completed":"feature-22004-1001-+0.2-notebook-0.6-128","rows":1081}
+{"completed":"aggregate-control-1-1001--0.5-notebook-0.6-128","rows":1082}
+{"completed":"feature-41533-1001-+0.3-notebook-0.6-128","rows":1083}
+{"completed":"feature-58667-1001-+0.0-notebook-0.6-128","rows":1084}
+{"completed":"aggregate-control-1-1001-+0.0-notebook-0.6-128","rows":1085}
+{"completed":"feature-30686-1001-+0.4-notebook-0.6-128","rows":1086}
+{"completed":"feature-30032-1001--0.1-notebook-0.6-128","rows":1087}
+{"completed":"feature-22004-1001-+0.0-notebook-0.6-128","rows":1088}
+{"completed":"feature-58667-1001-+0.2-notebook-0.6-128","rows":1089}
+{"completed":"feature-22004-1001--0.4-notebook-0.6-128","rows":1090}
+{"completed":"feature-30032-1001--0.2-notebook-0.6-128","rows":1091}
+{"completed":"capture-aggregate-target-101--0.5-notebook-0.6-128","rows":1092}
+{"completed":"capture-feature-41533-101-+0.7-notebook-0.6-128","rows":1093}
+{"completed":"capture-feature-30686-101--0.7-notebook-0.6-128","rows":1094}
+{"completed":"capture-feature-30032-101--0.7-notebook-0.6-128","rows":1095}
+{"completed":"capture-feature-22004-101-+0.7-notebook-0.6-128","rows":1096}
+{"completed":"capture-aggregate-control-3-101--0.5-notebook-0.6-128","rows":1097}
+{"completed":"capture-feature-30686-101-+0.7-notebook-0.6-128","rows":1098}
+{"completed":"capture-aggregate-control-2-101--0.5-notebook-0.6-128","rows":1099}
+{"completed":"capture-aggregate-target-101-+0.5-notebook-0.6-128","rows":1100}
+{"completed":"capture-feature-58667-101--0.7-notebook-0.6-128","rows":1101}
+{"completed":"capture-feature-30032-101-+0.7-notebook-0.6-128","rows":1102}
+{"completed":"capture-aggregate-control-1-101-+0.5-notebook-0.6-128","rows":1103}
+{"completed":"capture-aggregate-control-3-101-+0.5-notebook-0.6-128","rows":1104}
+{"completed":"capture-aggregate-control-2-101-+0.5-notebook-0.6-128","rows":1105}
+{"completed":"capture-feature-23893-101-+0.7-notebook-0.6-128","rows":1106}
+{"completed":"capture-feature-58667-101-+0.7-notebook-0.6-128","rows":1107}
+{"completed":"capture-feature-23893-101--0.7-notebook-0.6-128","rows":1108}
+{"completed":"capture-feature-41533-101--0.7-notebook-0.6-128","rows":1109}
+{"completed":"capture-aggregate-control-1-101--0.5-notebook-0.6-128","rows":1110}
+{"completed":"capture-feature-22004-101--0.7-notebook-0.6-128","rows":1111}
+{"completed":"capture-feature-41533-202--0.7-notebook-0.6-128","rows":1112}
+{"completed":"capture-aggregate-target-202--0.5-notebook-0.6-128","rows":1113}
+{"completed":"capture-feature-58667-202-+0.7-notebook-0.6-128","rows":1114}
+{"completed":"capture-feature-30686-202-+0.7-notebook-0.6-128","rows":1115}
+{"completed":"capture-feature-30032-202-+0.7-notebook-0.6-128","rows":1116}
+{"completed":"capture-aggregate-target-202-+0.5-notebook-0.6-128","rows":1117}
+{"completed":"capture-aggregate-control-3-202--0.5-notebook-0.6-128","rows":1118}
+{"completed":"capture-feature-30686-202--0.7-notebook-0.6-128","rows":1119}
+{"completed":"capture-feature-22004-202-+0.7-notebook-0.6-128","rows":1120}
+{"completed":"capture-feature-30032-202--0.7-notebook-0.6-128","rows":1121}
+{"completed":"capture-aggregate-control-3-202-+0.5-notebook-0.6-128","rows":1122}
+{"completed":"capture-feature-22004-202--0.7-notebook-0.6-128","rows":1123}
+{"completed":"capture-aggregate-control-2-202-+0.5-notebook-0.6-128","rows":1124}
+{"completed":"capture-aggregate-control-2-202--0.5-notebook-0.6-128","rows":1125}
+{"completed":"capture-feature-41533-202-+0.7-notebook-0.6-128","rows":1126}
+{"completed":"capture-feature-23893-202--0.7-notebook-0.6-128","rows":1127}
+{"completed":"capture-feature-58667-202--0.7-notebook-0.6-128","rows":1128}
+{"completed":"capture-aggregate-control-1-202--0.5-notebook-0.6-128","rows":1129}
+{"completed":"capture-feature-23893-202-+0.7-notebook-0.6-128","rows":1130}
+{"completed":"capture-aggregate-control-1-202-+0.5-notebook-0.6-128","rows":1131}

@@ -30,6 +30,28 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- Source-aligned public additive replication is complete under
+  `docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md` and immutable plan
+  `data/berg_source_replication/plan_20260930/PLAN.json`, frozen at
+  `e10043c7edb1136b5f50159d789b59f11a8eb8be`. Keep the 1,090 behavioral
+  trials, 40 paired J-lens cases, original six IDs, two local rubrics and
+  three reused control panels fixed. The $50 new sub-cap is inside the
+  cumulative $200 authorization, carrying $30.989138 before its cheap test.
+  The cheap GPU tests pass 35/35; that owned pod was retrieved and deleted.
+  Release: `data/berg_source_replication/source_aligned_v1_20261001/`.
+  All 1,090 trials and 40 captures completed; owned pod `ldqe8mg4dgtywm`
+  was retrieved/hash-verified and deleted GET 404 on 2026-10-01.
+  Notebook endpoint is 0.000 [-0.050, 0.050] under the conditional bootstrap;
+  retain the much wider ten-block Hoeffding bound. The notebook zero baseline
+  is 0/10 in all four settings; the paper induction gives 6--9/10 depending
+  on setting and rubric. Do not conflate the induction texts or call the
+  fixed-six aggregate the paper's random-two-to-four-feature distribution.
+  Never rewrite the public plan or the earlier failed coordinate-edit gates.
+- `experiments/berg_source_diagnostics.py` is a separate descriptive analysis
+  for native delivery, re-encoding and matched-prefix J-lens changes. Its
+  within-case token averages are not independent replicates or a mediation
+  test. Preserve both source histories, all controls and the distinction
+  between normalized readouts and linear injected-vector fingerprints.
 - The exposure/precision follow-up is complete at
   `data/sae_assay_exposure/screen_precision_20260930/`; see
   `docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md`. All 224 clean texts and 48 pilot

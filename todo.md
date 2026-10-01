@@ -25,9 +25,19 @@ This supersedes the ordering below, not any frozen experiment or failed gate.
   1,090 two-turn trials and 40 paired-capture cases. Owner authorizes execution
   without repeated continuation requests within the cumulative $200 budget;
   this run reserves $50 new, carrying $30.989138 forward. No new paid Pro.
-- [ ] Freeze the sample, dose/control plan, inference, exact-path tests and
+- [x] Freeze the sample, dose/control plan, inference, exact-path tests and
   approved spending before any new behavioral outcomes. Preserve baseline
   mismatch; do not tune prompts or scoring until the desired effect appears.
+  Executable freeze `e10043c7edb1136b5f50159d789b59f11a8eb8be`; plan SHA-256
+  `d004522a4aeede40e2050b9a8a57ef6a98e86a89dc253c898815aca79d6266c1`.
+  All 13 hosted checks pass; cheap CUDA preflight passes all 35 tests.
+- [x] Finish the frozen 1,090-trial run, retrieve and hash-check its raw
+  outputs and 40 paired captures, and terminate the owned main pod. Completed
+  2026-10-01, 1,148 remote artifacts, GET 404. Preserve the near-zero individual
+  contrast, ten-block uncertainty and notebook-versus-paper baseline gap.
+- [ ] Complete the separately frozen 450-trial random-subset aggregate test
+  (`d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`), publish all signs/panels and
+  terminate its owned pod. Execution is active; $35 cap inside cumulative $200.
 - [ ] Link any reproduced behavioral contrast to fixed-prefix internal
   differences; compare static injected-vector fingerprints and random-J
   readouts. Free-running text divergence is not an internal mechanism test.
