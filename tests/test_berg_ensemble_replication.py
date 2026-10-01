@@ -140,3 +140,16 @@ def test_ownership_cost_and_no_double_launch(ctrl):
     with pytest.raises(ValueError): c.cost_check(dict(pod,id="foreign"))
     with pytest.raises(ValueError): c.cost_check(dict(pod,cost=99))
     with pytest.raises(ValueError): c.cost_check(pod,horizon=16200)
+
+
+@pytest.mark.parametrize("limit,elapsed,overdue", [(1800,2000,True),(16200,9000,False),(16200,17000,True)])
+def test_cleanup_retry_uses_instance_timer(ctrl,limit,elapsed,overdue):
+    c,_ = ctrl
+    c.launch()
+    c.hard_seconds = limit
+    c._elapsed = Mock(return_value=Decimal(elapsed))
+    c.terminate = Mock(side_effect=[RuntimeError("synthetic transient"),{"closed":True}])
+    assert c.close_until_verified() == {"closed":True}
+    retry = [e["data"] for e in c.ledger.read() if e["id"].startswith("cleanup-retry:")]
+    assert len(retry) == 1 and retry[0]["hard_deadline_exceeded"] == overdue
+    assert retry[0]["hard_seconds"] == limit

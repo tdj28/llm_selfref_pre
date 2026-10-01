@@ -551,6 +551,8 @@ data/automated_rubric_audit/*
 data/berg_ensemble_replication/*
 !data/berg_ensemble_replication/plan_20261001/
 !data/berg_ensemble_replication/plan_20261001/**
+!data/berg_ensemble_replication/plan_20261001_r2/
+!data/berg_ensemble_replication/plan_20261001_r2/**
 
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.

@@ -274,6 +274,23 @@ class Controller(transport.Controller):
                     return self.close_until_verified()
             self.sleep(60)
 
+    def close_until_verified(self):
+        if not self.api.writable:
+            raise ValueError("Explicit paid lifecycle required for cleanup")
+        self.owned()
+        while True:
+            try:
+                return self.terminate()
+            except (RuntimeError, ValueError, OSError, subprocess.TimeoutExpired) as exc:
+                elapsed = self._elapsed(self.event("create-intent")["data"])
+                overdue = elapsed >= self.hard_seconds
+                self.record("cleanup-retry", {"error_type": type(exc).__name__,
+                    "utc": _utc(self.clock()).isoformat(), "elapsed_seconds": str(elapsed),
+                    "hard_deadline_exceeded": overdue, "hard_seconds": self.hard_seconds})
+                print("ATTENTION: owned pod cleanup unresolved; evidence retained."
+                      + (" Hard deadline exceeded; user action required." if overdue else ""), flush=True)
+                self.sleep(15)
+
 
 def main():
     p = argparse.ArgumentParser()

@@ -93,7 +93,9 @@ The 70B no-op qualification and first-five audit are automatic technical
 barriers, not requests for another outcome-contingent human approval.
 
 The controller is an explicit namespace/budget/dispatch fork of the frozen
-source-study controller; its underlying audited lifecycle is unchanged.
+source-study controller. Pre-launch review corrected cleanup-retry deadline
+reporting to use the instance timer instead of an inherited two-hour constant;
+the owned-resource retrieval/deletion sequence is unchanged.
 It cannot adopt existing pods. Main is bounded to 4.5 hours, cheap to 30
 minutes, with a 10-minute retrieval reserve. Cap is $35 including conservative
 storage allowance. Prior spend is reserved at $72.50, exceeding the preceding
@@ -108,3 +110,12 @@ verify hashes, terminate only newly created owned pods and verify GET 404.
 The controller records a private ledger; publish only its sanitized cost,
 ownership, retrieval and deletion projection. No secrets or upstream notebook
 are copied into the public artifact.
+
+## Pre-Launch Revision
+
+Commit `04fea8c3b0fcb2f2fb3abe858defea11c4b1c3c6` and its original plan are
+preserved as an unexecuted first freeze. The cleanup correction above and
+three failure-path tests are rebound in `plan_20261001_r2/PLAN.json` before
+any ensemble pod creation or outcome. No scientific inventory, endpoint,
+budget or analysis rule changed. The earlier plan must not be executed with
+the revised source hashes.
