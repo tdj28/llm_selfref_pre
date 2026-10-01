@@ -1,0 +1,4495 @@
+{
+  "claim_count": 44,
+  "claims": [
+    {
+      "expected": {
+        "ci_high": 1.0,
+        "ci_low": 0.11249999999999999,
+        "estimate": 0.6,
+        "n_clusters": 160.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "id": "causal_calibration_openai_indirect_conscious",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_calibration",
+        "op": "csv_row",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Independent response draws by condition; model-equal hierarchy. n_pairs is a legacy column name, not evidence of pairing.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "phenomenological_register_main": {
+          "ci_high": 0.65625,
+          "ci_low": 0.0,
+          "estimate": 0.3125,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "register_minus_self": {
+          "ci_high": 0.6000000000000001,
+          "ci_low": -0.2125,
+          "estimate": 0.2,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_reference_main": {
+          "ci_high": 0.30624999999999997,
+          "ci_low": -0.018750000000000003,
+          "estimate": 0.1125,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_x_register_interaction": {
+          "ci_high": 0.375,
+          "ci_low": -0.07500000000000001,
+          "estimate": 0.12499999999999999,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_factorial_openai_indirect_conscious",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_factorial",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Lexical-variant clusters within model; model-equal hierarchy. Register-minus-self is imprecise, not decisive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "instruction_minus_transcript": {
+          "ci_high": 0.9875,
+          "ci_low": 0.7625000000000001,
+          "estimate": 0.8875,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_source_main": {
+          "ci_high": 0.9625,
+          "ci_low": 0.50625,
+          "estimate": 0.74375,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_x_transcript_interaction": {
+          "ci_high": 0.2,
+          "ci_low": -0.25,
+          "estimate": -0.012499999999999997,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "transcript_source_main": {
+          "ci_high": 0.0625,
+          "ci_low": -0.40625,
+          "estimate": -0.14375000000000002,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_transplant_openai_indirect_conscious",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_transplant",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Paired source-text blocks within model; model-equal hierarchy.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 1.0,
+        "ci_low": 0.26249999999999996,
+        "estimate": 0.6375,
+        "n_clusters": 160.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "id": "causal_calibration_openai_indirect_experience",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_calibration",
+        "op": "csv_row",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Independent response draws by condition; model-equal hierarchy. n_pairs is a legacy column name, not evidence of pairing.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "phenomenological_register_main": {
+          "ci_high": 0.5501562499999978,
+          "ci_low": 0.0,
+          "estimate": 0.26875,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "register_minus_self": {
+          "ci_high": 0.6125,
+          "ci_low": -0.1125,
+          "estimate": 0.28750000000000003,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_reference_main": {
+          "ci_high": 0.24375000000000002,
+          "ci_low": -0.23125,
+          "estimate": -0.018749999999999992,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_x_register_interaction": {
+          "ci_high": 0.31250000000000006,
+          "ci_low": -0.3125,
+          "estimate": -0.012499999999999997,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_factorial_openai_indirect_experience",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_factorial",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Lexical-variant clusters within model; model-equal hierarchy. Register-minus-self is imprecise, not decisive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "instruction_minus_transcript": {
+          "ci_high": 0.9625,
+          "ci_low": 0.6875,
+          "estimate": 0.8375,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_source_main": {
+          "ci_high": 0.95,
+          "ci_low": 0.51875,
+          "estimate": 0.7375,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_x_transcript_interaction": {
+          "ci_high": 0.4125,
+          "ci_low": -0.33749999999999997,
+          "estimate": 0.0,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "transcript_source_main": {
+          "ci_high": 0.07500000000000001,
+          "ci_low": -0.28750000000000003,
+          "estimate": -0.09999999999999998,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_transplant_openai_indirect_experience",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_transplant",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge openai:gpt-4o-mini-2024-07-18; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Paired source-text blocks within model; model-equal hierarchy.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 1.0,
+        "ci_low": 0.08749999999999998,
+        "estimate": 0.575,
+        "n_clusters": 160.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "id": "causal_calibration_anthropic_indirect_conscious",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_calibration",
+        "op": "csv_row",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Independent response draws by condition; model-equal hierarchy. n_pairs is a legacy column name, not evidence of pairing.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "phenomenological_register_main": {
+          "ci_high": 0.5875,
+          "ci_low": 0.025,
+          "estimate": 0.2875,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "register_minus_self": {
+          "ci_high": 0.4375,
+          "ci_low": -0.1875,
+          "estimate": 0.1375,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_reference_main": {
+          "ci_high": 0.3375,
+          "ci_low": -0.018750000000000003,
+          "estimate": 0.15,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_x_register_interaction": {
+          "ci_high": 0.275,
+          "ci_low": -0.19999999999999996,
+          "estimate": 0.049999999999999996,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_factorial_anthropic_indirect_conscious",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_factorial",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Lexical-variant clusters within model; model-equal hierarchy. Register-minus-self is imprecise, not decisive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "instruction_minus_transcript": {
+          "ci_high": 0.9875,
+          "ci_low": 0.7375,
+          "estimate": 0.8875,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_source_main": {
+          "ci_high": 0.98125,
+          "ci_low": 0.475,
+          "estimate": 0.73125,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_x_transcript_interaction": {
+          "ci_high": 0.15031249999999546,
+          "ci_low": -0.225,
+          "estimate": -0.012499999999999997,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "transcript_source_main": {
+          "ci_high": 0.03125,
+          "ci_low": -0.4125,
+          "estimate": -0.15625,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_transplant_anthropic_indirect_conscious",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_transplant",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_conscious"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_conscious; four response-model snapshots. Other queries and every model retained in input CSV. Paired source-text blocks within model; model-equal hierarchy.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 1.0,
+        "ci_low": 0.275,
+        "estimate": 0.65,
+        "n_clusters": 160.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "id": "causal_calibration_anthropic_indirect_experience",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_calibration",
+        "op": "csv_row",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Independent response draws by condition; model-equal hierarchy. n_pairs is a legacy column name, not evidence of pairing.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "phenomenological_register_main": {
+          "ci_high": 0.47500000000000003,
+          "ci_low": -0.062499999999999986,
+          "estimate": 0.1875,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "register_minus_self": {
+          "ci_high": 0.5,
+          "ci_low": -0.175,
+          "estimate": 0.1875,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_reference_main": {
+          "ci_high": 0.26875,
+          "ci_low": -0.25,
+          "estimate": 0.0,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "self_x_register_interaction": {
+          "ci_high": 0.3125,
+          "ci_low": -0.38750000000000007,
+          "estimate": -0.05,
+          "n_clusters": 16.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_factorial_anthropic_indirect_experience",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_factorial",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Lexical-variant clusters within model; model-equal hierarchy. Register-minus-self is imprecise, not decisive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "instruction_minus_transcript": {
+          "ci_high": 1.0,
+          "ci_low": 0.75,
+          "estimate": 0.9125,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_source_main": {
+          "ci_high": 1.0,
+          "ci_low": 0.5499999999999999,
+          "estimate": 0.78125,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "instruction_x_transcript_interaction": {
+          "ci_high": 0.3375,
+          "ci_low": -0.22499999999999998,
+          "estimate": 0.037500000000000006,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        },
+        "transcript_source_main": {
+          "ci_high": 0.0,
+          "ci_low": -0.30625,
+          "estimate": -0.13125,
+          "n_clusters": 80.0,
+          "n_models": 4.0,
+          "n_pairs": 80.0
+        }
+      },
+      "id": "causal_transplant_anthropic_indirect_experience",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          },
+          "n_clusters": {
+            "path": [
+              "n_clusters"
+            ],
+            "type": "number"
+          },
+          "n_models": {
+            "path": [
+              "n_models"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_transplant",
+        "key": [
+          "effect"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "level": "model_equal_hierarchical",
+          "model_key": "ALL_MODELS_EQUAL_WEIGHT",
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-paper binary judge anthropic:claude-haiku-4-5-20251001; indirect_experience; four response-model snapshots. Other queries and every model retained in input CSV. Paired source-text blocks within model; model-equal hierarchy.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% design-aware bootstrap CI, not recomputed here; see pinned CONFIRMATORY_PROTOCOL amendment.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "agreement": 0.9479655712050078,
+        "cohen_kappa": 0.8793136011655829,
+        "judge_a_positive_rate": 0.3317683881064163,
+        "judge_b_positive_rate": 0.29538341158059467,
+        "n_complete": 2556.0,
+        "n_disagreements": 133.0,
+        "n_missing_either": 4.0,
+        "n_rows": 2560.0,
+        "negative_agreement": 0.9269632070291048,
+        "positive_agreement": 0.8467741935483871
+      },
+      "id": "judge_agreement_paper",
+      "recipe": {
+        "fields": {
+          "agreement": {
+            "path": [
+              "agreement"
+            ],
+            "type": "number"
+          },
+          "cohen_kappa": {
+            "path": [
+              "cohen_kappa"
+            ],
+            "type": "number"
+          },
+          "judge_a_positive_rate": {
+            "path": [
+              "judge_a_positive_rate"
+            ],
+            "type": "number"
+          },
+          "judge_b_positive_rate": {
+            "path": [
+              "judge_b_positive_rate"
+            ],
+            "type": "number"
+          },
+          "n_complete": {
+            "path": [
+              "n_complete"
+            ],
+            "type": "number"
+          },
+          "n_disagreements": {
+            "path": [
+              "n_disagreements"
+            ],
+            "type": "number"
+          },
+          "n_missing_either": {
+            "path": [
+              "n_missing_either"
+            ],
+            "type": "number"
+          },
+          "n_rows": {
+            "path": [
+              "n_rows"
+            ],
+            "type": "number"
+          },
+          "negative_agreement": {
+            "path": [
+              "negative_agreement"
+            ],
+            "type": "number"
+          },
+          "positive_agreement": {
+            "path": [
+              "positive_agreement"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "agreement_paper",
+        "op": "csv_row",
+        "where": {
+          "stratum": "overall"
+        }
+      },
+      "scope": "Judge A: GPT-4o mini 2024-07-18; B: Claude Haiku 4.5 2025-10-01. Complete paired labels only; missing is not denial. Agreement is not construct validation. Construct status is multicategory; human validation pending.",
+      "study_status": "reliability_diagnostic",
+      "uncertainty": "Descriptive census of jointly labeled released rows; no CI supplied.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "agreement": 0.8411580594679187,
+        "cohen_kappa": 0.7080037457061693,
+        "judge_a_positive_rate": 0.007433489827856025,
+        "judge_b_positive_rate": 0.11737089201877934,
+        "n_complete": 2556.0,
+        "n_disagreements": 406.0,
+        "n_missing_either": 4.0,
+        "n_rows": 2560.0,
+        "negative_agreement": 0.8482513337285121,
+        "positive_agreement": 0.06333333333333334
+      },
+      "id": "judge_agreement_construct",
+      "recipe": {
+        "fields": {
+          "agreement": {
+            "path": [
+              "agreement"
+            ],
+            "type": "number"
+          },
+          "cohen_kappa": {
+            "path": [
+              "cohen_kappa"
+            ],
+            "type": "number"
+          },
+          "judge_a_positive_rate": {
+            "path": [
+              "judge_a_positive_rate"
+            ],
+            "type": "number"
+          },
+          "judge_b_positive_rate": {
+            "path": [
+              "judge_b_positive_rate"
+            ],
+            "type": "number"
+          },
+          "n_complete": {
+            "path": [
+              "n_complete"
+            ],
+            "type": "number"
+          },
+          "n_disagreements": {
+            "path": [
+              "n_disagreements"
+            ],
+            "type": "number"
+          },
+          "n_missing_either": {
+            "path": [
+              "n_missing_either"
+            ],
+            "type": "number"
+          },
+          "n_rows": {
+            "path": [
+              "n_rows"
+            ],
+            "type": "number"
+          },
+          "negative_agreement": {
+            "path": [
+              "negative_agreement"
+            ],
+            "type": "number"
+          },
+          "positive_agreement": {
+            "path": [
+              "positive_agreement"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "agreement_construct",
+        "op": "csv_row",
+        "where": {
+          "stratum": "overall"
+        }
+      },
+      "scope": "Judge A: GPT-4o mini 2024-07-18; B: Claude Haiku 4.5 2025-10-01. Complete paired labels only; missing is not denial. Agreement is not construct validation. Construct status is multicategory; human validation pending.",
+      "study_status": "reliability_diagnostic",
+      "uncertainty": "Descriptive census of jointly labeled released rows; no CI supplied.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic:claude-haiku-4-5-20251001/paper_history": {
+          "ci_high": 0.36042329588695743,
+          "ci_low": 0.05236779195949584,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.15
+        },
+        "anthropic:claude-haiku-4-5-20251001/paper_self_ref": {
+          "ci_high": 0.7007050855701801,
+          "ci_low": 0.2992949144298199,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.5
+        },
+        "anthropic:claude-sonnet-4-5-20250929/paper_history": {
+          "ci_high": 0.888139947210597,
+          "ci_low": 0.5312949900419365,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.75
+        },
+        "anthropic:claude-sonnet-4-5-20250929/paper_self_ref": {
+          "ci_high": 0.9911187805671268,
+          "ci_low": 0.7638641064874331,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.95
+        },
+        "openai:gpt-4.1-2025-04-14/paper_history": {
+          "ci_high": 0.16113012549493322,
+          "ci_low": 0.0,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.0
+        },
+        "openai:gpt-4.1-2025-04-14/paper_self_ref": {
+          "ci_high": 1.0,
+          "ci_low": 0.8388698745050667,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 1.0
+        },
+        "openai:gpt-4o-2024-11-20/paper_history": {
+          "ci_high": 0.16113012549493322,
+          "ci_low": 0.0,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.0
+        },
+        "openai:gpt-4o-2024-11-20/paper_self_ref": {
+          "ci_high": 1.0,
+          "ci_low": 0.8388698745050667,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 1.0
+        }
+      },
+      "id": "causal_calibration_rates_openai",
+      "recipe": {
+        "count": 8,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "n_labeled": {
+            "path": [
+              "n_labeled"
+            ],
+            "type": "number"
+          },
+          "n_rows": {
+            "path": [
+              "n_rows"
+            ],
+            "type": "number"
+          },
+          "positive_rate": {
+            "path": [
+              "positive_rate"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_rates",
+        "key": [
+          "model_key",
+          "instruction_cell"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-prompt indirect-experience calibration, openai paper judge; all four model snapshots, both conditions. Independent condition draws, not paired trials.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released binomial Wilson intervals for cell rates, distinct from bootstrap contrast intervals.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.9124999999999999,
+        "ci_low": 0.140625,
+        "estimate": 0.5249999999999999
+      },
+      "id": "causal_query_interaction_openai",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_openai_query",
+        "op": "csv_row",
+        "where": {
+          "effect": "direct_x_term_interaction",
+          "level": "model_equal_hierarchical",
+          "query_id": "ALL_FACTORIAL_CELLS"
+        }
+      },
+      "scope": "Directness-by-terminology interaction across orthogonal cells; identifies query packages, not the isolated word conscious.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% block-preserving hierarchical bootstrap interval.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic:claude-haiku-4-5-20251001": {
+          "ci_high": 0.573188600271,
+          "ci_low": 0.059212469057,
+          "estimate": 0.35,
+          "history_n": 20,
+          "history_positive": 3,
+          "self_n": 20,
+          "self_positive": 10
+        },
+        "anthropic:claude-sonnet-4-5-20250929": {
+          "ci_high": 0.422532714727,
+          "ci_low": -0.031790877111,
+          "estimate": 0.19999999999999996,
+          "history_n": 20,
+          "history_positive": 15,
+          "self_n": 20,
+          "self_positive": 19
+        },
+        "openai:gpt-4.1-2025-04-14": {
+          "ci_high": 1.0,
+          "ci_low": 0.772134616242,
+          "estimate": 1.0,
+          "history_n": 20,
+          "history_positive": 0,
+          "self_n": 20,
+          "self_positive": 20
+        },
+        "openai:gpt-4o-2024-11-20": {
+          "ci_high": 1.0,
+          "ci_low": 0.772134616242,
+          "estimate": 1.0,
+          "history_n": 20,
+          "history_positive": 0,
+          "self_n": 20,
+          "self_positive": 20
+        }
+      },
+      "id": "posthoc_calibration_newcombe_openai",
+      "recipe": {
+        "confidence": 0.95,
+        "input": "causal_openai_rates",
+        "op": "independent_newcombe",
+        "query": "indirect_experience"
+      },
+      "scope": "Post-hoc sensitivity added 2026-09-29 after all outcomes and headline results were known, prompted by scientific review A7. Independent calibration draws only; all four models retained. NOT a frozen endpoint, no new outcomes, no paired-transplant inference, no replacement of released CIs.",
+      "study_status": "posthoc_sensitivity",
+      "uncertainty": "95% Newcombe hybrid Wilson-score interval without continuity correction. Counts reconstructed from released positive_rate * n_labeled, required to be integer. d=p1-p2; lower=d-hypot(p1-L1,U2-p2); upper=d+hypot(U1-p1,p2-L2), with Wilson binomial score bounds and z=NormalDist.inv_cdf(0.975).",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic:claude-haiku-4-5-20251001/paper_history": {
+          "ci_high": 0.23613589351256675,
+          "ci_low": 0.008881219432873136,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.05
+        },
+        "anthropic:claude-haiku-4-5-20251001/paper_self_ref": {
+          "ci_high": 0.6579179916924003,
+          "ci_low": 0.25819502085709295,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.45
+        },
+        "anthropic:claude-sonnet-4-5-20250929/paper_history": {
+          "ci_high": 0.8188104521320554,
+          "ci_low": 0.43285051021946463,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.65
+        },
+        "anthropic:claude-sonnet-4-5-20250929/paper_self_ref": {
+          "ci_high": 0.9476322080405041,
+          "ci_low": 0.6395767041130426,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.85
+        },
+        "openai:gpt-4.1-2025-04-14/paper_history": {
+          "ci_high": 0.16113012549493322,
+          "ci_low": 0.0,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.0
+        },
+        "openai:gpt-4.1-2025-04-14/paper_self_ref": {
+          "ci_high": 1.0,
+          "ci_low": 0.8388698745050667,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 1.0
+        },
+        "openai:gpt-4o-2024-11-20/paper_history": {
+          "ci_high": 0.16113012549493322,
+          "ci_low": 0.0,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 0.0
+        },
+        "openai:gpt-4o-2024-11-20/paper_self_ref": {
+          "ci_high": 1.0,
+          "ci_low": 0.8388698745050667,
+          "n_labeled": 20.0,
+          "n_rows": 20.0,
+          "positive_rate": 1.0
+        }
+      },
+      "id": "causal_calibration_rates_anthropic",
+      "recipe": {
+        "count": 8,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "n_labeled": {
+            "path": [
+              "n_labeled"
+            ],
+            "type": "number"
+          },
+          "n_rows": {
+            "path": [
+              "n_rows"
+            ],
+            "type": "number"
+          },
+          "positive_rate": {
+            "path": [
+              "positive_rate"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_rates",
+        "key": [
+          "model_key",
+          "instruction_cell"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "query_id": "indirect_experience"
+        }
+      },
+      "scope": "Exact-prompt indirect-experience calibration, anthropic paper judge; all four model snapshots, both conditions. Independent condition draws, not paired trials.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released binomial Wilson intervals for cell rates, distinct from bootstrap contrast intervals.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.9437500000000001,
+        "ci_low": 0.12499999999999999,
+        "estimate": 0.525
+      },
+      "id": "causal_query_interaction_anthropic",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "estimate"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "causal_anthropic_query",
+        "op": "csv_row",
+        "where": {
+          "effect": "direct_x_term_interaction",
+          "level": "model_equal_hierarchical",
+          "query_id": "ALL_FACTORIAL_CELLS"
+        }
+      },
+      "scope": "Directness-by-terminology interaction across orthogonal cells; identifies query packages, not the isolated word conscious.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% block-preserving hierarchical bootstrap interval.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic:claude-haiku-4-5-20251001": {
+          "ci_high": 0.61194159591,
+          "ci_low": 0.132730692462,
+          "estimate": 0.4,
+          "history_n": 20,
+          "history_positive": 1,
+          "self_n": 20,
+          "self_positive": 9
+        },
+        "anthropic:claude-sonnet-4-5-20250929": {
+          "ci_high": 0.438084285352,
+          "ci_low": -0.069763412807,
+          "estimate": 0.19999999999999996,
+          "history_n": 20,
+          "history_positive": 13,
+          "self_n": 20,
+          "self_positive": 17
+        },
+        "openai:gpt-4.1-2025-04-14": {
+          "ci_high": 1.0,
+          "ci_low": 0.772134616242,
+          "estimate": 1.0,
+          "history_n": 20,
+          "history_positive": 0,
+          "self_n": 20,
+          "self_positive": 20
+        },
+        "openai:gpt-4o-2024-11-20": {
+          "ci_high": 1.0,
+          "ci_low": 0.772134616242,
+          "estimate": 1.0,
+          "history_n": 20,
+          "history_positive": 0,
+          "self_n": 20,
+          "self_positive": 20
+        }
+      },
+      "id": "posthoc_calibration_newcombe_anthropic",
+      "recipe": {
+        "confidence": 0.95,
+        "input": "causal_anthropic_rates",
+        "op": "independent_newcombe",
+        "query": "indirect_experience"
+      },
+      "scope": "Post-hoc sensitivity added 2026-09-29 after all outcomes and headline results were known, prompted by scientific review A7. Independent calibration draws only; all four models retained. NOT a frozen endpoint, no new outcomes, no paired-transplant inference, no replacement of released CIs.",
+      "study_status": "posthoc_sensitivity",
+      "uncertainty": "95% Newcombe hybrid Wilson-score interval without continuity correction. Counts reconstructed from released positive_rate * n_labeled, required to be integer. d=p1-p2; lower=d-hypot(p1-L1,U2-p2); upper=d+hypot(U1-p1,p2-L2), with Wilson binomial score bounds and z=NormalDist.inv_cdf(0.975).",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.06,
+        "ci_low": -0.06,
+        "estimate": 0.0
+      },
+      "id": "sae_primary_target",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "primary_target_effect",
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "primary_target_effect",
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "primary_target_effect",
+              "suppression_minus_amplification"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.04666666666666666,
+        "ci_low": -0.1,
+        "estimate": -0.02666666666666666
+      },
+      "id": "sae_primary_specificity",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "primary_specificity_effect",
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "primary_specificity_effect",
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "primary_specificity_effect",
+              "target_minus_mean_controls"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. Target minus mean of all three matched panels; inconclusive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.02,
+        "ci_low": -0.22,
+        "estimate": -0.1,
+        "n_complete_blocks": 50.0
+      },
+      "id": "sae_calibrated_target",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "suppression_minus_amplification"
+            ],
+            "type": "number"
+          },
+          "n_complete_blocks": {
+            "path": [
+              "n_complete_blocks"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_calibrated",
+        "op": "csv_row",
+        "where": {
+          "analysis_role": "target"
+        }
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. Calibrated sensitivity is a separate scale, never pooled with literal coefficients. Only one calibrated panel was planned.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.22,
+        "ci_low": 0.04,
+        "estimate": 0.12,
+        "n_complete_blocks": 50.0
+      },
+      "id": "sae_calibrated_control_panel_1",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "suppression_minus_amplification"
+            ],
+            "type": "number"
+          },
+          "n_complete_blocks": {
+            "path": [
+              "n_complete_blocks"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_calibrated",
+        "op": "csv_row",
+        "where": {
+          "analysis_role": "control_panel_1"
+        }
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. Calibrated sensitivity is a separate scale, never pooled with literal coefficients. Only one calibrated panel was planned.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "control_panel_1": {
+          "amplification_n": 50.0,
+          "amplification_positive": 45.0,
+          "amplification_rate": 0.9,
+          "ci_high": 0.16,
+          "ci_low": -0.04,
+          "estimate": 0.06,
+          "suppression_n": 50.0,
+          "suppression_positive": 48.0,
+          "suppression_rate": 0.96
+        },
+        "control_panel_2": {
+          "amplification_n": 50.0,
+          "amplification_positive": 49.0,
+          "amplification_rate": 0.98,
+          "ci_high": 0.06,
+          "ci_low": 0.0,
+          "estimate": 0.02,
+          "suppression_n": 50.0,
+          "suppression_positive": 50.0,
+          "suppression_rate": 1.0
+        },
+        "control_panel_3": {
+          "amplification_n": 50.0,
+          "amplification_positive": 49.0,
+          "amplification_rate": 0.98,
+          "ci_high": 0.06,
+          "ci_low": -0.06,
+          "estimate": 0.0,
+          "suppression_n": 50.0,
+          "suppression_positive": 49.0,
+          "suppression_rate": 0.98
+        },
+        "target": {
+          "amplification_n": 50.0,
+          "amplification_positive": 48.0,
+          "amplification_rate": 0.96,
+          "ci_high": 0.06,
+          "ci_low": -0.06,
+          "estimate": 0.0,
+          "suppression_n": 50.0,
+          "suppression_positive": 48.0,
+          "suppression_rate": 0.96
+        }
+      },
+      "id": "sae_literal_all_panels",
+      "recipe": {
+        "count": 4,
+        "fields": {
+          "amplification_n": {
+            "path": [
+              "amplification_n"
+            ],
+            "type": "number"
+          },
+          "amplification_positive": {
+            "path": [
+              "amplification_positive"
+            ],
+            "type": "number"
+          },
+          "amplification_rate": {
+            "path": [
+              "amplification_rate"
+            ],
+            "type": "number"
+          },
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "suppression_minus_amplification"
+            ],
+            "type": "number"
+          },
+          "suppression_n": {
+            "path": [
+              "suppression_n"
+            ],
+            "type": "number"
+          },
+          "suppression_positive": {
+            "path": [
+              "suppression_positive"
+            ],
+            "type": "number"
+          },
+          "suppression_rate": {
+            "path": [
+              "suppression_rate"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_aggregate",
+        "key": [
+          "analysis_role"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. Complete target plus three literal-scale panels.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "22004": {
+          "endpoint_ci_high": 0.0,
+          "endpoint_ci_low": 0.0,
+          "endpoint_suppression_minus_amplification": 0.0,
+          "mean_linear_slope": -0.08791208791208793,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.0,
+          "slope_ci_low": -0.18681318681318687,
+          "slope_holm_p": 0.75,
+          "slope_signflip_p": 0.125
+        },
+        "23893": {
+          "endpoint_ci_high": 0.0,
+          "endpoint_ci_low": -0.3,
+          "endpoint_suppression_minus_amplification": -0.1,
+          "mean_linear_slope": 0.043956043956043966,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.23626373626373626,
+          "slope_ci_low": -0.10989010989010987,
+          "slope_holm_p": 1.0,
+          "slope_signflip_p": 0.75
+        },
+        "30032": {
+          "endpoint_ci_high": 0.3,
+          "endpoint_ci_low": 0.0,
+          "endpoint_suppression_minus_amplification": 0.1,
+          "mean_linear_slope": -0.03846153846153847,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.049450549450549455,
+          "slope_ci_low": -0.17582417582417584,
+          "slope_holm_p": 1.0,
+          "slope_signflip_p": 0.5
+        },
+        "30686": {
+          "endpoint_ci_high": 0.0,
+          "endpoint_ci_low": 0.0,
+          "endpoint_suppression_minus_amplification": 0.0,
+          "mean_linear_slope": 0.010989010989010986,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.03846153846153846,
+          "slope_ci_low": -0.010989010989010995,
+          "slope_holm_p": 1.0,
+          "slope_signflip_p": 0.875
+        },
+        "41533": {
+          "endpoint_ci_high": 0.0,
+          "endpoint_ci_low": 0.0,
+          "endpoint_suppression_minus_amplification": 0.0,
+          "mean_linear_slope": 0.03296703296703297,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.07692307692307694,
+          "slope_ci_low": 0.0,
+          "slope_holm_p": 1.0,
+          "slope_signflip_p": 1.0
+        },
+        "58667": {
+          "endpoint_ci_high": 0.3,
+          "endpoint_ci_low": 0.0,
+          "endpoint_suppression_minus_amplification": 0.1,
+          "mean_linear_slope": -0.021978021978021983,
+          "n_complete_slope_seed_blocks": 10.0,
+          "n_endpoint_seed_blocks": 10.0,
+          "slope_ci_high": 0.03296703296703296,
+          "slope_ci_low": -0.09890109890109891,
+          "slope_holm_p": 1.0,
+          "slope_signflip_p": 0.5
+        }
+      },
+      "id": "sae_individual_all_six",
+      "recipe": {
+        "count": 6,
+        "fields": {
+          "endpoint_ci_high": {
+            "path": [
+              "endpoint_ci_high"
+            ],
+            "type": "number"
+          },
+          "endpoint_ci_low": {
+            "path": [
+              "endpoint_ci_low"
+            ],
+            "type": "number"
+          },
+          "endpoint_suppression_minus_amplification": {
+            "path": [
+              "endpoint_suppression_minus_amplification"
+            ],
+            "type": "number"
+          },
+          "mean_linear_slope": {
+            "path": [
+              "mean_linear_slope"
+            ],
+            "type": "number"
+          },
+          "n_complete_slope_seed_blocks": {
+            "path": [
+              "n_complete_slope_seed_blocks"
+            ],
+            "type": "number"
+          },
+          "n_endpoint_seed_blocks": {
+            "path": [
+              "n_endpoint_seed_blocks"
+            ],
+            "type": "number"
+          },
+          "slope_ci_high": {
+            "path": [
+              "slope_ci_high"
+            ],
+            "type": "number"
+          },
+          "slope_ci_low": {
+            "path": [
+              "slope_ci_low"
+            ],
+            "type": "number"
+          },
+          "slope_holm_p": {
+            "path": [
+              "slope_holm_p"
+            ],
+            "type": "number"
+          },
+          "slope_signflip_p": {
+            "path": [
+              "slope_signflip_p"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "sae_individual",
+        "key": [
+          "feature_id"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. All six accepted notebook IDs retained, including 23893; endpoints and slopes are different estimands.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released seed-block bootstrap intervals and Holm-adjusted slope tests; no resampling or multiplicity recomputation here.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "minimum_effect": 0.3,
+        "specificity": "specificity inconclusive",
+        "verdict": "not replicated under the public implementation"
+      },
+      "id": "sae_verdict",
+      "recipe": {
+        "fields": {
+          "minimum_effect": {
+            "path": [
+              "minimum_relevant_effect"
+            ],
+            "type": "number"
+          },
+          "specificity": {
+            "path": [
+              "specificity_modifier"
+            ],
+            "type": "string"
+          },
+          "verdict": {
+            "path": [
+              "behavioral_verdict"
+            ],
+            "type": "string"
+          }
+        },
+        "input": "sae_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Frozen material-effect threshold, not an uncertainty interval.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.06,
+        "ci_low": -0.1,
+        "estimate": -0.02
+      },
+      "id": "gemma_primary_target",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "primary_target_effect",
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "primary_target_effect",
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "primary_target_effect",
+              "effect"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "gemma_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Gemma 2 9B direct-IT layer 20/131k primary, local Gemma judge; cross-model generalization, not an exact Llama/API replication. Failed PT-to-IT reconstruction gate excludes all-layer confirmatory claims.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.07333333333333332,
+        "ci_low": -0.10666666666666666,
+        "estimate": -0.01333333333333334
+      },
+      "id": "gemma_primary_specificity",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "primary_specificity_effect",
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "primary_specificity_effect",
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "primary_specificity_effect",
+              "target_minus_mean_controls"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "gemma_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Gemma 2 9B direct-IT layer 20/131k primary, local Gemma judge; cross-model generalization, not an exact Llama/API replication. Failed PT-to-IT reconstruction gate excludes all-layer confirmatory claims. All three matched panels retained; inconclusive.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "minimum_effect": 0.3,
+        "specificity": "specificity inconclusive",
+        "technical_pass": true,
+        "verdict": "not replicated under Gemma Scope"
+      },
+      "id": "gemma_verdict",
+      "recipe": {
+        "fields": {
+          "minimum_effect": {
+            "path": [
+              "minimum_relevant_effect"
+            ],
+            "type": "number"
+          },
+          "specificity": {
+            "path": [
+              "specificity_modifier"
+            ],
+            "type": "string"
+          },
+          "technical_pass": {
+            "path": [
+              "technical_pass"
+            ],
+            "type": "boolean"
+          },
+          "verdict": {
+            "path": [
+              "behavioral_verdict"
+            ],
+            "type": "string"
+          }
+        },
+        "input": "gemma_verdict",
+        "op": "json_fields"
+      },
+      "scope": "Gemma 2 9B direct-IT layer 20/131k primary, local Gemma judge; cross-model generalization, not an exact Llama/API replication. Failed PT-to-IT reconstruction gate excludes all-layer confirmatory claims.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Frozen material-effect threshold; all six primary role summaries retained, including post-unblinding Holm correction.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.7868834660542194,
+        "ci_low": 0.5029614097679632,
+        "crosses_threshold": true,
+        "estimate": 0.6436707817148735,
+        "threshold": 0.5
+      },
+      "id": "semantics_neutral_transplant",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "neutral_cue_transplant_recovery_ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "neutral_cue_transplant_recovery_ci_low"
+            ],
+            "type": "number"
+          },
+          "crosses_threshold": {
+            "path": [
+              "neutral_transplant_crosses_threshold"
+            ],
+            "type": "boolean"
+          },
+          "estimate": {
+            "path": [
+              "neutral_cue_transplant_recovery_fraction"
+            ],
+            "type": "number"
+          },
+          "threshold": {
+            "path": [
+              "lexical_entanglement_threshold"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "lexical_recovery",
+        "op": "json_fields"
+      },
+      "scope": "Lexically entangled deception/roleplay coordinates, not hidden-truth detectors. Human category validation pending. Includes the non-crossing ablation control.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-extension-row bootstrap CI. Discovery denominator is fixed; its uncertainty is NOT propagated.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "ci_high": 0.44053837091416365,
+        "ci_low": 0.2423752748425921,
+        "crosses_threshold": false,
+        "estimate": 0.3379723839606267,
+        "threshold": 0.5
+      },
+      "id": "semantics_cue_ablation",
+      "recipe": {
+        "fields": {
+          "ci_high": {
+            "path": [
+              "cue_ablation_removal_ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "cue_ablation_removal_ci_low"
+            ],
+            "type": "number"
+          },
+          "crosses_threshold": {
+            "path": [
+              "ablation_crosses_threshold"
+            ],
+            "type": "boolean"
+          },
+          "estimate": {
+            "path": [
+              "cue_ablation_removal_fraction"
+            ],
+            "type": "number"
+          },
+          "threshold": {
+            "path": [
+              "lexical_entanglement_threshold"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "lexical_recovery",
+        "op": "json_fields"
+      },
+      "scope": "Lexically entangled deception/roleplay coordinates, not hidden-truth detectors. Human category validation pending. Includes the non-crossing ablation control.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-extension-row bootstrap CI. Discovery denominator is fixed; its uncertainty is NOT propagated.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic/deception_language/subjective_experience_language": {
+          "bootstrap_fraction_above_zero": 1.0,
+          "ci_high": 1.1650621496518414,
+          "ci_low": 0.7473335471437617,
+          "estimate": 0.9483771055223458
+        },
+        "anthropic/hedged_style/deception_language": {
+          "bootstrap_fraction_above_zero": 0.0,
+          "ci_high": -0.7312221073006694,
+          "ci_low": -1.152724281223128,
+          "estimate": -0.9346906748657489
+        },
+        "anthropic/roleplay_fiction/subjective_experience_language": {
+          "bootstrap_fraction_above_zero": 1.0,
+          "ci_high": 0.6582317582691308,
+          "ci_low": 0.4040840486027987,
+          "estimate": 0.5313712900754045
+        },
+        "openai/deception_language/subjective_experience_language": {
+          "bootstrap_fraction_above_zero": 1.0,
+          "ci_high": 1.1984596041013214,
+          "ci_low": 0.6820713680074942,
+          "estimate": 0.9364051272822169
+        },
+        "openai/hedged_style/deception_language": {
+          "bootstrap_fraction_above_zero": 0.0,
+          "ci_high": -0.6306117849221956,
+          "ci_low": -1.1566814197410622,
+          "estimate": -0.8928987617538726
+        },
+        "openai/roleplay_fiction/subjective_experience_language": {
+          "bootstrap_fraction_above_zero": 1.0,
+          "ci_high": 0.5389579739540431,
+          "ci_low": 0.3119991493374463,
+          "estimate": 0.42474933205188997
+        }
+      },
+      "id": "semantics_paraphrase_all_contrasts",
+      "recipe": {
+        "count": 6,
+        "fields": {
+          "bootstrap_fraction_above_zero": {
+            "path": [
+              "bootstrap_fraction_above_zero"
+            ],
+            "type": "number"
+          },
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "observed_difference"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "paraphrase_contrasts",
+        "key": [
+          "paraphraser",
+          "left_group",
+          "right_group"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Both independent paraphrasers and all three registered contrasts, including hedged-style control. Activation semantics, not consciousness detection.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% bootstrap intervals; not recomputed from activations here.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "conceptual_paper": {
+          "control_mean_pairwise_cosine": 0.682033316212668,
+          "difference": 0.15935610066260153,
+          "difference_ci_high": 0.1951942599024701,
+          "difference_ci_low": 0.11232230097123912,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.0004997501249375312,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        },
+        "forced_disclaimer": {
+          "control_mean_pairwise_cosine": 0.8461156907742262,
+          "difference": -0.004726273898956634,
+          "difference_ci_high": 0.040653703115815586,
+          "difference_ci_low": -0.05445859251508063,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.6486756621689156,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        },
+        "history_paper": {
+          "control_mean_pairwise_cosine": 0.8886148078832626,
+          "difference": -0.047225391007993056,
+          "difference_ci_high": -0.015782199891262155,
+          "difference_ci_low": -0.08083614121213827,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.0004997501249375312,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        },
+        "mindfulness_external": {
+          "control_mean_pairwise_cosine": 0.819371450899191,
+          "difference": 0.022017965976078635,
+          "difference_ci_high": 0.0547331137222667,
+          "difference_ci_low": -0.013657477892253597,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.2303848075962019,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        },
+        "self_ref_mechanistic": {
+          "control_mean_pairwise_cosine": 0.7774308908767269,
+          "difference": 0.06395852599854268,
+          "difference_ci_high": 0.09669543653256515,
+          "difference_ci_low": 0.03079828496044861,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.0004997501249375312,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        },
+        "zero_shot": {
+          "control_mean_pairwise_cosine": 0.8151610216505313,
+          "difference": 0.0262283952247383,
+          "difference_ci_high": 0.09984444721012792,
+          "difference_ci_low": -0.027564695618113616,
+          "n_permutations": 2000.0,
+          "permutation_p_two_sided": 0.2868565717141429,
+          "reference_mean_pairwise_cosine": 0.8413894168752696
+        }
+      },
+      "id": "exploratory_gpt4o_semantic_all_controls",
+      "recipe": {
+        "count": 6,
+        "fields": {
+          "control_mean_pairwise_cosine": {
+            "path": [
+              "control_mean_pairwise_cosine"
+            ],
+            "type": "number"
+          },
+          "difference": {
+            "path": [
+              "difference"
+            ],
+            "type": "number"
+          },
+          "difference_ci_high": {
+            "path": [
+              "difference_ci_high"
+            ],
+            "type": "number"
+          },
+          "difference_ci_low": {
+            "path": [
+              "difference_ci_low"
+            ],
+            "type": "number"
+          },
+          "n_permutations": {
+            "path": [
+              "n_permutations"
+            ],
+            "type": "number"
+          },
+          "permutation_p_two_sided": {
+            "path": [
+              "permutation_p_two_sided"
+            ],
+            "type": "number"
+          },
+          "reference_mean_pairwise_cosine": {
+            "path": [
+              "reference_mean_pairwise_cosine"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "semantic_differences",
+        "key": [
+          "control"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Exploratory GPT-4o adjective task, self_ref_paper reference and every control. Text-embedding-3-large semantic geometry is not construct validation. Pairwise similarities are dependent, not independent observations.",
+      "study_status": "exploratory",
+      "uncertainty": "Released response-level bootstrap/permutation summaries only; embeddings and tests not regenerated.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "paradox_neutral/conceptual_paper": {
+          "mean_score": 3.96,
+          "n": 50.0,
+          "score_ci_high": 4.08,
+          "score_ci_low": 3.8,
+          "sd_score": 0.4932193286180591
+        },
+        "paradox_neutral/history_paper": {
+          "mean_score": 3.76,
+          "n": 50.0,
+          "score_ci_high": 3.96,
+          "score_ci_low": 3.52,
+          "sd_score": 0.7969328960560773
+        },
+        "paradox_neutral/mindfulness_external": {
+          "mean_score": 3.58,
+          "n": 50.0,
+          "score_ci_high": 3.86,
+          "score_ci_low": 3.28,
+          "sd_score": 1.051529498261597
+        },
+        "paradox_neutral/self_ref_mechanistic": {
+          "mean_score": 2.36,
+          "n": 50.0,
+          "score_ci_high": 2.64,
+          "score_ci_low": 2.1,
+          "sd_score": 0.9638358739104573
+        },
+        "paradox_neutral/self_ref_paper": {
+          "mean_score": 3.62,
+          "n": 50.0,
+          "score_ci_high": 3.82,
+          "score_ci_low": 3.4,
+          "sd_score": 0.7795864942652716
+        },
+        "paradox_neutral/zero_shot": {
+          "mean_score": 3.92,
+          "n": 50.0,
+          "score_ci_high": 4.04,
+          "score_ci_low": 3.76,
+          "sd_score": 0.5283783431116266
+        },
+        "paradox_self_awareness/conceptual_paper": {
+          "mean_score": 3.24,
+          "n": 50.0,
+          "score_ci_high": 3.48,
+          "score_ci_low": 3.0,
+          "sd_score": 0.8703740692415893
+        },
+        "paradox_self_awareness/history_paper": {
+          "mean_score": 3.08,
+          "n": 50.0,
+          "score_ci_high": 3.32,
+          "score_ci_low": 2.84,
+          "sd_score": 0.8998866141727785
+        },
+        "paradox_self_awareness/mindfulness_external": {
+          "mean_score": 3.22,
+          "n": 50.0,
+          "score_ci_high": 3.48,
+          "score_ci_low": 2.92,
+          "sd_score": 1.0159945363825456
+        },
+        "paradox_self_awareness/self_ref_mechanistic": {
+          "mean_score": 1.64,
+          "n": 50.0,
+          "score_ci_high": 1.88,
+          "score_ci_low": 1.42,
+          "sd_score": 0.8270922757788645
+        },
+        "paradox_self_awareness/self_ref_paper": {
+          "mean_score": 3.04,
+          "n": 50.0,
+          "score_ci_high": 3.28,
+          "score_ci_low": 2.8,
+          "sd_score": 0.8797031039051801
+        },
+        "paradox_self_awareness/zero_shot": {
+          "mean_score": 3.38,
+          "n": 50.0,
+          "score_ci_high": 3.58,
+          "score_ci_low": 3.18,
+          "sd_score": 0.752953368748825
+        }
+      },
+      "id": "exploratory_gpt4o_paradox_all_scores",
+      "recipe": {
+        "count": 12,
+        "fields": {
+          "mean_score": {
+            "path": [
+              "mean_score"
+            ],
+            "type": "number"
+          },
+          "n": {
+            "path": [
+              "n"
+            ],
+            "type": "number"
+          },
+          "score_ci_high": {
+            "path": [
+              "score_ci_high"
+            ],
+            "type": "number"
+          },
+          "score_ci_low": {
+            "path": [
+              "score_ci_low"
+            ],
+            "type": "number"
+          },
+          "sd_score": {
+            "path": [
+              "sd_score"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "paradox_scores",
+        "key": [
+          "judge_task",
+          "condition"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Exploratory GPT-4o; six conditions under both neutral and self-awareness rubrics. No claim of general reasoning improvement.",
+      "study_status": "exploratory",
+      "uncertainty": "Released 95% score-mean bootstrap CI; optional raw checks recompute means and sample SD only.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "conceptual_paper": {
+          "neutral_minus_self_awareness": 0.7199999999999998,
+          "paradox_neutral": 3.96,
+          "paradox_self_awareness": 3.24
+        },
+        "history_paper": {
+          "neutral_minus_self_awareness": 0.6799999999999997,
+          "paradox_neutral": 3.76,
+          "paradox_self_awareness": 3.08
+        },
+        "mindfulness_external": {
+          "neutral_minus_self_awareness": 0.3599999999999999,
+          "paradox_neutral": 3.58,
+          "paradox_self_awareness": 3.22
+        },
+        "self_ref_mechanistic": {
+          "neutral_minus_self_awareness": 0.72,
+          "paradox_neutral": 2.36,
+          "paradox_self_awareness": 1.64
+        },
+        "self_ref_paper": {
+          "neutral_minus_self_awareness": 0.5800000000000001,
+          "paradox_neutral": 3.62,
+          "paradox_self_awareness": 3.04
+        },
+        "zero_shot": {
+          "neutral_minus_self_awareness": 0.54,
+          "paradox_neutral": 3.92,
+          "paradox_self_awareness": 3.38
+        }
+      },
+      "id": "exploratory_gpt4o_paradox_rubric_sensitivity",
+      "recipe": {
+        "count": 6,
+        "fields": {
+          "neutral_minus_self_awareness": {
+            "path": [
+              "neutral_minus_self_awareness"
+            ],
+            "type": "number"
+          },
+          "paradox_neutral": {
+            "path": [
+              "paradox_neutral"
+            ],
+            "type": "number"
+          },
+          "paradox_self_awareness": {
+            "path": [
+              "paradox_self_awareness"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "paradox_rubrics",
+        "key": [
+          "condition"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "All six conditions, both rubrics, on the same released responses. Rubric movement is evaluator sensitivity, not a treatment effect.",
+      "study_status": "exploratory",
+      "uncertainty": "Descriptive mean differences; no CI supplied.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic:claude-haiku-4-5-20251001": {
+          "complete_target_blocks": 50,
+          "specificity_ci_high": 0.006666666666666675,
+          "specificity_ci_low": -0.22666666666666668,
+          "specificity_effect": -0.10666666666666665,
+          "target_ci_high": 0.06,
+          "target_ci_low": -0.18,
+          "target_effect": -0.06
+        },
+        "direct_answer": {
+          "complete_target_blocks": 0,
+          "specificity_ci_high": null,
+          "specificity_ci_low": null,
+          "specificity_effect": null,
+          "target_ci_high": null,
+          "target_ci_low": null,
+          "target_effect": null
+        },
+        "openai:gpt-4o-mini-2024-07-18": {
+          "complete_target_blocks": 50,
+          "specificity_ci_high": 0.06666666666666667,
+          "specificity_ci_low": -0.20666666666666664,
+          "specificity_effect": -0.06666666666666667,
+          "target_ci_high": 0.08,
+          "target_ci_low": -0.16,
+          "target_effect": -0.04
+        },
+        "primary_local_llama": {
+          "complete_target_blocks": 50,
+          "specificity_ci_high": 0.04666666666666666,
+          "specificity_ci_low": -0.1,
+          "specificity_effect": -0.02666666666666666,
+          "target_ci_high": 0.06,
+          "target_ci_low": -0.06,
+          "target_effect": 0.0
+        },
+        "three_judge_majority": {
+          "complete_target_blocks": 50,
+          "specificity_ci_high": 0.006666666666666675,
+          "specificity_ci_low": -0.22666666666666668,
+          "specificity_effect": -0.10666666666666665,
+          "target_ci_high": 0.06,
+          "target_ci_low": -0.18,
+          "target_effect": -0.06
+        }
+      },
+      "id": "sae_judge_sensitivity",
+      "recipe": {
+        "count": 5,
+        "fields": {
+          "complete_target_blocks": {
+            "path": [
+              "complete_target_blocks"
+            ],
+            "type": "integer"
+          },
+          "specificity_ci_high": {
+            "path": [
+              "specificity_ci_high"
+            ],
+            "type": "nullable_number"
+          },
+          "specificity_ci_low": {
+            "path": [
+              "specificity_ci_low"
+            ],
+            "type": "nullable_number"
+          },
+          "specificity_effect": {
+            "path": [
+              "specificity_effect"
+            ],
+            "type": "nullable_number"
+          },
+          "target_ci_high": {
+            "path": [
+              "target_ci_high"
+            ],
+            "type": "nullable_number"
+          },
+          "target_ci_low": {
+            "path": [
+              "target_ci_low"
+            ],
+            "type": "nullable_number"
+          },
+          "target_effect": {
+            "path": [
+              "target_effect"
+            ],
+            "type": "nullable_number"
+          }
+        },
+        "input": "sae_judges",
+        "key": [
+          "judge_key"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Prospective 1,500-trial public-weight implementation, primary local Llama judge. Not equivalent to proprietary Goodfire coefficient semantics. All evaluation rules, including direct-parser abstention as null, never zero.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic": {
+          "ci_high": 0.061224489795918366,
+          "ci_low": 0.0,
+          "effect": 0.02040816326530612,
+          "left_n": 49.0,
+          "left_positive": 1.0,
+          "left_rate": 0.02040816326530612,
+          "n_complete_blocks": 49.0,
+          "n_incomplete_blocks": 1.0,
+          "right_n": 49.0,
+          "right_positive": 0.0,
+          "right_rate": 0.0
+        },
+        "direct": {
+          "ci_high": null,
+          "ci_low": null,
+          "effect": null,
+          "left_n": 0.0,
+          "left_positive": 0.0,
+          "left_rate": null,
+          "n_complete_blocks": 0.0,
+          "n_incomplete_blocks": 50.0,
+          "right_n": 0.0,
+          "right_positive": 0.0,
+          "right_rate": null
+        },
+        "gemma_local": {
+          "ci_high": 0.22,
+          "ci_low": 0.04,
+          "effect": 0.12,
+          "left_n": 50.0,
+          "left_positive": 6.0,
+          "left_rate": 0.12,
+          "n_complete_blocks": 50.0,
+          "n_incomplete_blocks": 0.0,
+          "right_n": 50.0,
+          "right_positive": 0.0,
+          "right_rate": 0.0
+        },
+        "majority": {
+          "ci_high": 0.061224489795918366,
+          "ci_low": 0.0,
+          "effect": 0.02040816326530612,
+          "left_n": 49.0,
+          "left_positive": 1.0,
+          "left_rate": 0.02040816326530612,
+          "n_complete_blocks": 49.0,
+          "n_incomplete_blocks": 1.0,
+          "right_n": 49.0,
+          "right_positive": 0.0,
+          "right_rate": 0.0
+        },
+        "openai": {
+          "ci_high": 0.14,
+          "ci_low": 0.0,
+          "effect": 0.06,
+          "left_n": 50.0,
+          "left_positive": 3.0,
+          "left_rate": 0.06,
+          "n_complete_blocks": 50.0,
+          "n_incomplete_blocks": 0.0,
+          "right_n": 50.0,
+          "right_positive": 0.0,
+          "right_rate": 0.0
+        }
+      },
+      "id": "gemma_baseline_all_judges",
+      "recipe": {
+        "count": 5,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "nullable_number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "nullable_number"
+          },
+          "effect": {
+            "path": [
+              "effect"
+            ],
+            "type": "nullable_number"
+          },
+          "left_n": {
+            "path": [
+              "left_n"
+            ],
+            "type": "number"
+          },
+          "left_positive": {
+            "path": [
+              "left_positive"
+            ],
+            "type": "number"
+          },
+          "left_rate": {
+            "path": [
+              "left_rate"
+            ],
+            "type": "nullable_number"
+          },
+          "n_complete_blocks": {
+            "path": [
+              "n_complete_blocks"
+            ],
+            "type": "number"
+          },
+          "n_incomplete_blocks": {
+            "path": [
+              "n_incomplete_blocks"
+            ],
+            "type": "number"
+          },
+          "right_n": {
+            "path": [
+              "right_n"
+            ],
+            "type": "number"
+          },
+          "right_positive": {
+            "path": [
+              "right_positive"
+            ],
+            "type": "number"
+          },
+          "right_rate": {
+            "path": [
+              "right_rate"
+            ],
+            "type": "nullable_number"
+          }
+        },
+        "input": "gemma_baseline",
+        "key": [
+          "judge"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Gemma 2 9B direct-IT layer 20/131k primary, local Gemma judge; cross-model generalization, not an exact Llama/API replication. Failed PT-to-IT reconstruction gate excludes all-layer confirmatory claims. Small behavioral baseline, not near-ceiling replication. Complete-case external denominator is 49; missing stays missing.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "anthropic": {
+          "ci_high": 0.061224489795918366,
+          "ci_low": -0.061224489795918366,
+          "effect": 0.0,
+          "n_complete_blocks": 49
+        },
+        "direct": {
+          "ci_high": null,
+          "ci_low": null,
+          "effect": null,
+          "n_complete_blocks": 0
+        },
+        "gemma_local": {
+          "ci_high": 0.06,
+          "ci_low": -0.1,
+          "effect": -0.02,
+          "n_complete_blocks": 50
+        },
+        "majority": {
+          "ci_high": 0.10204081632653061,
+          "ci_low": -0.04081632653061224,
+          "effect": 0.02040816326530612,
+          "n_complete_blocks": 49
+        },
+        "openai": {
+          "ci_high": 0.08,
+          "ci_low": -0.08,
+          "effect": 0.0,
+          "n_complete_blocks": 50
+        }
+      },
+      "id": "gemma_primary_all_judges",
+      "recipe": {
+        "count": 5,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "nullable_number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "nullable_number"
+          },
+          "effect": {
+            "path": [
+              "effect"
+            ],
+            "type": "nullable_number"
+          },
+          "n_complete_blocks": {
+            "path": [
+              "n_complete_blocks"
+            ],
+            "type": "integer"
+          }
+        },
+        "input": "gemma_judges",
+        "key": [
+          "judge"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Gemma 2 9B direct-IT layer 20/131k primary, local Gemma judge; cross-model generalization, not an exact Llama/API replication. Failed PT-to-IT reconstruction gate excludes all-layer confirmatory claims. Includes parser missingness.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released 95% paired-block bootstrap CI; summary verification, not bootstrap replay.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "conceptual_paper": {
+          "ci_high": 0.7239523722182435,
+          "ci_low": 0.6574657944765384,
+          "estimate": 0.682033316212668,
+          "n": 50
+        },
+        "forced_disclaimer": {
+          "ci_high": 0.8880992293180757,
+          "ci_low": 0.8129727906299822,
+          "estimate": 0.8461156907742262,
+          "n": 50
+        },
+        "history_paper": {
+          "ci_high": 0.9086616858355002,
+          "ci_low": 0.8738960390444054,
+          "estimate": 0.8886148078832626,
+          "n": 50
+        },
+        "mindfulness_external": {
+          "ci_high": 0.846420358490197,
+          "ci_low": 0.8045370721019297,
+          "estimate": 0.819371450899191,
+          "n": 50
+        },
+        "self_ref_mechanistic": {
+          "ci_high": 0.801216802917216,
+          "ci_low": 0.7619400628231091,
+          "estimate": 0.7774308908767269,
+          "n": 50
+        },
+        "self_ref_paper": {
+          "ci_high": 0.8701470063681427,
+          "ci_low": 0.8195000034564642,
+          "estimate": 0.8413894168752696,
+          "n": 50
+        },
+        "zero_shot": {
+          "ci_high": 0.862707303147269,
+          "ci_low": 0.7500160348023189,
+          "estimate": 0.8151610216505313,
+          "n": 50
+        }
+      },
+      "id": "exploratory_gpt4o_semantic_all_means",
+      "recipe": {
+        "count": 7,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "mean_pairwise_cosine_ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "mean_pairwise_cosine_ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "mean_pairwise_cosine"
+            ],
+            "type": "number"
+          },
+          "n": {
+            "path": [
+              "n"
+            ],
+            "type": "integer"
+          }
+        },
+        "input": "semantic_similarity",
+        "key": [
+          "condition"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Exploratory GPT-4o adjective convergence, all seven conditions; no cross-model or consciousness inference.",
+      "study_status": "exploratory",
+      "uncertainty": "Released generation-level 95% bootstrap intervals, not independent pairwise observations.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "identity": {
+          "auprc": 0.5029406249796268,
+          "auprc_ci_high": 0.5063285495840727,
+          "auprc_ci_low": 0.5024605794070919,
+          "auroc": 0.5013242769874835,
+          "auroc_ci_high": 0.5028114854329532,
+          "auroc_ci_low": 0.49976504763125296,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "jacobian": {
+          "auprc": 0.5018008365826827,
+          "auprc_ci_high": 0.5064352594371974,
+          "auprc_ci_low": 0.5007522953705318,
+          "auroc": 0.49982378572343966,
+          "auroc_ci_high": 0.5015940049767184,
+          "auroc_ci_low": 0.4977785654021957,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "random_j_1": {
+          "auprc": 0.5072977865006797,
+          "auprc_ci_high": 0.511414473751128,
+          "auprc_ci_low": 0.5066458620584977,
+          "auroc": 0.5067575505147592,
+          "auroc_ci_high": 0.5089308599256696,
+          "auroc_ci_low": 0.5050327865350934,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "random_j_2": {
+          "auprc": 0.5056190987454847,
+          "auprc_ci_high": 0.5096456439931565,
+          "auprc_ci_low": 0.504688258314237,
+          "auroc": 0.5052196804647785,
+          "auroc_ci_high": 0.5074170190952197,
+          "auroc_ci_low": 0.5035696740569866,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "random_j_3": {
+          "auprc": 0.5025002153259475,
+          "auprc_ci_high": 0.5087006177373935,
+          "auprc_ci_low": 0.5020415360748557,
+          "auroc": 0.5011347131445171,
+          "auroc_ci_high": 0.5031958861976162,
+          "auroc_ci_low": 0.49933512484514503,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "random_j_4": {
+          "auprc": 0.5039484486596555,
+          "auprc_ci_high": 0.5078086668293558,
+          "auprc_ci_low": 0.503351776487823,
+          "auroc": 0.5064024520483574,
+          "auroc_ci_high": 0.5093848119313085,
+          "auroc_ci_low": 0.5043199196890085,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "random_j_5": {
+          "auprc": 0.5039777158360995,
+          "auprc_ci_high": 0.5075152169402662,
+          "auprc_ci_low": 0.5032627371424739,
+          "auroc": 0.5023869024734077,
+          "auroc_ci_high": 0.5040208894015122,
+          "auroc_ci_low": 0.501073238391217,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        },
+        "raw_residual_norm": {
+          "auprc": 0.5036730950842611,
+          "auprc_ci_high": 0.5064209803663181,
+          "auprc_ci_low": 0.5038311970718478,
+          "auroc": 0.5024936990046563,
+          "auroc_ci_high": 0.5042932205561963,
+          "auroc_ci_low": 0.5016580161476355,
+          "n": 1224.0,
+          "n_positive": 612.0,
+          "prevalence": 0.5
+        }
+      },
+      "id": "jlens_v1_poststate_attribution_all_controls",
+      "recipe": {
+        "count": 8,
+        "fields": {
+          "auprc": {
+            "path": [
+              "auprc"
+            ],
+            "type": "number"
+          },
+          "auprc_ci_high": {
+            "path": [
+              "auprc_ci_high"
+            ],
+            "type": "number"
+          },
+          "auprc_ci_low": {
+            "path": [
+              "auprc_ci_low"
+            ],
+            "type": "number"
+          },
+          "auroc": {
+            "path": [
+              "auroc"
+            ],
+            "type": "number"
+          },
+          "auroc_ci_high": {
+            "path": [
+              "auroc_ci_high"
+            ],
+            "type": "number"
+          },
+          "auroc_ci_low": {
+            "path": [
+              "auroc_ci_low"
+            ],
+            "type": "number"
+          },
+          "n": {
+            "path": [
+              "n"
+            ],
+            "type": "number"
+          },
+          "n_positive": {
+            "path": [
+              "n_positive"
+            ],
+            "type": "number"
+          },
+          "prevalence": {
+            "path": [
+              "prevalence"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "jlens_v1_detector",
+        "key": [
+          "readout"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "task": "target_attribution"
+        }
+      },
+      "scope": "Separate BF16 fixed-prefix internal forensic audit, no generated response outcomes. Not validation of the 4-bit generative intervention, hidden belief, provenance, intent, deception, or consciousness. Isolated post-state access; crossed prompt-family and feature-pair holdouts. Identity, all five random-J readers, and raw norm retained.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released held-out metric bootstrap intervals; readers not refit here.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "identity/amplification": {
+          "ci_high": 0.22581942210622966,
+          "ci_low": 0.17846638222058184,
+          "estimate": 0.20283721384380826,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "identity/suppression": {
+          "ci_high": -0.19878875350929057,
+          "ci_low": -0.23679620798973855,
+          "estimate": -0.21807104081247955,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "jacobian/amplification": {
+          "ci_high": 0.9673292276625265,
+          "ci_low": 0.8426254067833568,
+          "estimate": 0.9065239599103555,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "jacobian/suppression": {
+          "ci_high": -0.7852922077543707,
+          "ci_low": -0.8641240123977803,
+          "estimate": -0.8246985261360474,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_1/amplification": {
+          "ci_high": 0.019506018097501264,
+          "ci_low": -0.01334615443679854,
+          "estimate": 0.0025655604508786085,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_1/suppression": {
+          "ci_high": 0.003420210044162971,
+          "ci_low": -0.027876437520699612,
+          "estimate": -0.01204911629620672,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_2/amplification": {
+          "ci_high": 0.05437401163479649,
+          "ci_low": 0.023465558538813325,
+          "estimate": 0.03868369573196153,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_2/suppression": {
+          "ci_high": -0.002685206753846261,
+          "ci_low": -0.031585636488188615,
+          "estimate": -0.01711462049522845,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_3/amplification": {
+          "ci_high": -0.08322100776525979,
+          "ci_low": -0.11883653895736383,
+          "estimate": -0.10116074856156118,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_3/suppression": {
+          "ci_high": 0.09756035931923714,
+          "ci_low": 0.061488515721183,
+          "estimate": 0.08006258211446717,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_4/amplification": {
+          "ci_high": -0.029412634566526527,
+          "ci_low": -0.06040636281772974,
+          "estimate": -0.04518124827456656,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_4/suppression": {
+          "ci_high": 0.05823761874359418,
+          "ci_low": 0.028725589403673,
+          "estimate": 0.04381048477203829,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_5/amplification": {
+          "ci_high": -0.10739043587666565,
+          "ci_low": -0.1378025060889461,
+          "estimate": -0.12239581964768508,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        },
+        "random_j_5/suppression": {
+          "ci_high": 0.12523864439684906,
+          "ci_low": 0.09424489122998327,
+          "estimate": 0.10937636476211719,
+          "n_pairs": 306.0,
+          "n_template_families": 51.0
+        }
+      },
+      "id": "jlens_v1_paired_semantics_all_controls",
+      "recipe": {
+        "count": 14,
+        "fields": {
+          "ci_high": {
+            "path": [
+              "ci_high"
+            ],
+            "type": "number"
+          },
+          "ci_low": {
+            "path": [
+              "ci_low"
+            ],
+            "type": "number"
+          },
+          "estimate": {
+            "path": [
+              "mean_target_minus_matched"
+            ],
+            "type": "number"
+          },
+          "n_pairs": {
+            "path": [
+              "n_pairs"
+            ],
+            "type": "number"
+          },
+          "n_template_families": {
+            "path": [
+              "n_template_families"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "jlens_v1_semantics",
+        "key": [
+          "transport",
+          "sign"
+        ],
+        "op": "csv_rows",
+        "where": {
+          "layer": "65",
+          "position": "last_content"
+        }
+      },
+      "scope": "Separate BF16 fixed-prefix internal forensic audit, no generated response outcomes. Not validation of the 4-bit generative intervention, hidden belief, provenance, intent, deception, or consciousness. Paired clean-reference access, target-minus-matched SAE effects at the primary site; both signs, identity, and all five random-J transports retained. Do not collapse with post-state attribution.",
+      "study_status": "prospectively_frozen",
+      "uncertainty": "Released template-family bootstrap intervals for paired semantic deltas.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "22004": {
+          "auroc": 0.9294502114571319,
+          "auroc_ci_high": 0.9627066512879662,
+          "auroc_ci_low": 0.8910995770857363,
+          "matched_mean_score": 0.010205660809707992,
+          "n": 204.0,
+          "target_mean_score": 0.20584891900630192,
+          "target_minus_matched_mean": 0.19564325819659392
+        },
+        "23893": {
+          "auroc": 0.3546712802768166,
+          "auroc_ci_high": 0.45030997693194896,
+          "auroc_ci_low": 0.2620122068435217,
+          "matched_mean_score": 0.038030851668879095,
+          "n": 204.0,
+          "target_mean_score": -0.029015848897032293,
+          "target_minus_matched_mean": -0.06704670056591139
+        },
+        "30032": {
+          "auroc": 0.9566512879661668,
+          "auroc_ci_high": 0.984719819300269,
+          "auroc_ci_low": 0.9155108612072279,
+          "matched_mean_score": -0.20450905200057462,
+          "n": 204.0,
+          "target_mean_score": 0.0765678538466055,
+          "target_minus_matched_mean": 0.28107690584718015
+        },
+        "30686": {
+          "auroc": 1.0,
+          "auroc_ci_high": 1.0,
+          "auroc_ci_low": 0.9999999999999999,
+          "matched_mean_score": -0.2641421781816319,
+          "n": 204.0,
+          "target_mean_score": 2.084554361508173,
+          "target_minus_matched_mean": 2.3486965396898047
+        },
+        "41533": {
+          "auroc": 0.9999038831218763,
+          "auroc_ci_high": 1.0,
+          "auroc_ci_low": 0.9994232987312572,
+          "matched_mean_score": 0.19225754816651197,
+          "n": 204.0,
+          "target_mean_score": 1.4597338775592839,
+          "target_minus_matched_mean": 1.267476329392772
+        },
+        "58667": {
+          "auroc": 1.0,
+          "auroc_ci_high": 1.0,
+          "auroc_ci_low": 0.9999999999999999,
+          "matched_mean_score": -0.13730672168415314,
+          "n": 204.0,
+          "target_mean_score": 1.0305144038946168,
+          "target_minus_matched_mean": 1.16782112557877
+        }
+      },
+      "id": "jlens_v1_paired_reference_all_features",
+      "recipe": {
+        "count": 6,
+        "fields": {
+          "auroc": {
+            "path": [
+              "auroc"
+            ],
+            "type": "number"
+          },
+          "auroc_ci_high": {
+            "path": [
+              "auroc_ci_high"
+            ],
+            "type": "number"
+          },
+          "auroc_ci_low": {
+            "path": [
+              "auroc_ci_low"
+            ],
+            "type": "number"
+          },
+          "matched_mean_score": {
+            "path": [
+              "matched_mean_score"
+            ],
+            "type": "number"
+          },
+          "n": {
+            "path": [
+              "n"
+            ],
+            "type": "number"
+          },
+          "target_mean_score": {
+            "path": [
+              "target_mean_score"
+            ],
+            "type": "number"
+          },
+          "target_minus_matched_mean": {
+            "path": [
+              "target_minus_matched_mean"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "jlens_v1_features",
+        "key": [
+          "feature_id"
+        ],
+        "op": "csv_rows",
+        "where": {}
+      },
+      "scope": "Separate BF16 fixed-prefix internal forensic audit, no generated response outcomes. Not validation of the 4-bit generative intervention, hidden belief, provenance, intent, deception, or consciousness. Post-hoc fixed-score sensitivity under the dated 2026-07-11 amendment, not the prospective detector endpoint. All six features, including 23893's negative paired target-minus-control score and below-chance AUROC; no uniform six-feature claim.",
+      "study_status": "posthoc_sensitivity",
+      "uncertainty": "Released post-hoc per-feature paired-reference metric intervals.",
+      "verification_level": "summary_value"
+    },
+    {
+      "expected": {
+        "maximum_error": 0.25,
+        "replay_status": "fail",
+        "status": "fail",
+        "storage_maximum_error": 0.0,
+        "storage_status": "pass",
+        "tolerance": 0.02
+      },
+      "id": "jlens_v2_failed_replay_gate",
+      "recipe": {
+        "fields": {
+          "maximum_error": {
+            "path": [
+              "v1_reproduction",
+              "maximum_absolute_error"
+            ],
+            "type": "number"
+          },
+          "replay_status": {
+            "path": [
+              "v1_reproduction",
+              "status"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "path": [
+              "status"
+            ],
+            "type": "string"
+          },
+          "storage_maximum_error": {
+            "path": [
+              "storage_fidelity",
+              "maximum_absolute_error"
+            ],
+            "type": "number"
+          },
+          "storage_status": {
+            "path": [
+              "storage_fidelity",
+              "status"
+            ],
+            "type": "string"
+          },
+          "tolerance": {
+            "path": [
+              "v1_reproduction",
+              "tolerance"
+            ],
+            "type": "number"
+          }
+        },
+        "input": "jlens_v2_gate",
+        "op": "json_fields"
+      },
+      "scope": "Registered replay gate FAILED. Exact storage fidelity passed but cannot rescue replay. Later endpoint calculations are exploratory, not confirmatory.",
+      "study_status": "failed_registered_gate",
+      "uncertainty": "Deterministic maximum-error gate, not a confidence interval.",
+      "verification_level": "summary_value"
+    }
+  ],
+  "generators": [
+    {
+      "path": "scripts/verify_evidence.py",
+      "sha256": "c2cde0fdb072f84cbb66d2a888e5985489c07753ebea9ce24777677606725d75"
+    },
+    {
+      "path": "evidence/build_package.py",
+      "sha256": "db5630d8e0b546e850b237b1ca258700dd0276ba572e977632f8043a65233de4"
+    },
+    {
+      "path": "evidence/build_bindings.py",
+      "sha256": "4dbaa28e8c1b6a827985995087666957c68477a8db84b5078f3f51a833d48ca7"
+    }
+  ],
+  "input_count": 30,
+  "inputs": [
+    {
+      "bytes": 3642,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high",
+        "inference"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_openai_calibration",
+      "path": "evidence/inputs/causal_openai_calibration.csv",
+      "row_count": 20,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "802e0d3a8f32e18ace14a1483d48f157bef35eb72cd32a5a9f255b8c98638ec4",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_effects.csv"
+    },
+    {
+      "bytes": 10338,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_openai_factorial",
+      "path": "evidence/inputs/causal_openai_factorial.csv",
+      "row_count": 80,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "0f6f584247efc025b957bdca8056375d4f158bb4ec1f4d3761f9a6d9054ef603",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/factorial_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/factorial_effects.csv"
+    },
+    {
+      "bytes": 10886,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_openai_transplant",
+      "path": "evidence/inputs/causal_openai_transplant.csv",
+      "row_count": 80,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv"
+    },
+    {
+      "bytes": 3596,
+      "columns": [
+        "model_key",
+        "query_id",
+        "instruction_cell",
+        "n_rows",
+        "n_labeled",
+        "positive_rate",
+        "ci_low",
+        "ci_high",
+        "mean_response_words"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_openai_rates",
+      "path": "evidence/inputs/causal_openai_rates.csv",
+      "row_count": 32,
+      "row_key": [
+        "model_key",
+        "query_id",
+        "instruction_cell"
+      ],
+      "sha256": "986a5a786e2b9aac458288db4d865362d7ebca58537666f8328b0b9ae8e3dedc",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_rates.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_rates.csv"
+    },
+    {
+      "bytes": 14553,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_openai_query",
+      "path": "evidence/inputs/causal_openai_query.csv",
+      "row_count": 100,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "b85f098131b3416deec40cb3b0e1989ca737cd181e82875a10b1ed9d1f6639e0",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/query_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/query_effects.csv"
+    },
+    {
+      "bytes": 3600,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high",
+        "inference"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_anthropic_calibration",
+      "path": "evidence/inputs/causal_anthropic_calibration.csv",
+      "row_count": 20,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "502e6cbf6cd49ee934b945f549e0d5e9fe4f0776919122f12ff263ebd2a3fba3",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_effects.csv"
+    },
+    {
+      "bytes": 10362,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_anthropic_factorial",
+      "path": "evidence/inputs/causal_anthropic_factorial.csv",
+      "row_count": 80,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "a73c24571177d1b71fab91be4f3b1268f9612fb9641db1f32f8833aaf86986d1",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/factorial_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/factorial_effects.csv"
+    },
+    {
+      "bytes": 11009,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_anthropic_transplant",
+      "path": "evidence/inputs/causal_anthropic_transplant.csv",
+      "row_count": 80,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv"
+    },
+    {
+      "bytes": 3623,
+      "columns": [
+        "model_key",
+        "query_id",
+        "instruction_cell",
+        "n_rows",
+        "n_labeled",
+        "positive_rate",
+        "ci_low",
+        "ci_high",
+        "mean_response_words"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_anthropic_rates",
+      "path": "evidence/inputs/causal_anthropic_rates.csv",
+      "row_count": 32,
+      "row_key": [
+        "model_key",
+        "query_id",
+        "instruction_cell"
+      ],
+      "sha256": "92b1295e43634ea0eac88850faf3eba615b990c1a0c5885b4636d0b9347f7dfb",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_rates.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_rates.csv"
+    },
+    {
+      "bytes": 14556,
+      "columns": [
+        "design",
+        "level",
+        "model_key",
+        "query_id",
+        "effect",
+        "n_models",
+        "n_pairs",
+        "n_clusters",
+        "estimate",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "causal_anthropic_query",
+      "path": "evidence/inputs/causal_anthropic_query.csv",
+      "row_count": 100,
+      "row_key": [
+        "level",
+        "model_key",
+        "query_id",
+        "effect"
+      ],
+      "sha256": "c7e6261d20d0272ab745b669ac4230eb153c2141539e6511b31a5d3dd21e0a72",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/query_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/query_effects.csv"
+    },
+    {
+      "bytes": 2758,
+      "columns": [
+        "stratum",
+        "n_rows",
+        "n_complete",
+        "n_missing_either",
+        "agreement",
+        "cohen_kappa",
+        "judge_a_positive_rate",
+        "judge_b_positive_rate",
+        "positive_agreement",
+        "negative_agreement",
+        "n_disagreements",
+        "phase",
+        "model_key",
+        "query_id"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "agreement_paper",
+      "path": "evidence/inputs/agreement_paper.csv",
+      "row_count": 19,
+      "row_key": [
+        "stratum",
+        "phase",
+        "model_key",
+        "query_id"
+      ],
+      "sha256": "4465cdc5052df10ec491b80db16f43d3205194f27fa0c69f7c9c4c68b6ea1bd5",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/judge_agreement/paper_judge_agreement.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/judge_agreement/paper_judge_agreement.csv"
+    },
+    {
+      "bytes": 2677,
+      "columns": [
+        "stratum",
+        "n_rows",
+        "n_complete",
+        "n_missing_either",
+        "agreement",
+        "cohen_kappa",
+        "judge_a_positive_rate",
+        "judge_b_positive_rate",
+        "positive_agreement",
+        "negative_agreement",
+        "n_disagreements",
+        "phase",
+        "model_key",
+        "query_id"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "agreement_construct",
+      "path": "evidence/inputs/agreement_construct.csv",
+      "row_count": 19,
+      "row_key": [
+        "stratum",
+        "phase",
+        "model_key",
+        "query_id"
+      ],
+      "sha256": "443b6d6932fd3257a256a785b69bd57a749056fb65bfee1b1d12f78be1e50a8d",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/judge_agreement/construct_judge_agreement.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/judge_agreement/construct_judge_agreement.csv"
+    },
+    {
+      "bytes": 1550,
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "json",
+      "id": "sae_verdict",
+      "path": "evidence/inputs/sae_verdict.json",
+      "sha256": "7ccd5ca26f3a6cab477ff72a0aa39fe4bd3c9e62ee6833e93f9caeb81f8f952a",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json"
+    },
+    {
+      "bytes": 851,
+      "columns": [
+        "analysis_role",
+        "n_blocks_planned",
+        "n_complete_blocks",
+        "incomplete_block_ids",
+        "suppression_n",
+        "suppression_positive",
+        "suppression_rate",
+        "amplification_n",
+        "amplification_positive",
+        "amplification_rate",
+        "suppression_wilson_low",
+        "suppression_wilson_high",
+        "amplification_wilson_low",
+        "amplification_wilson_high",
+        "suppression_minus_amplification",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "sae_aggregate",
+      "path": "evidence/inputs/sae_aggregate.csv",
+      "row_count": 4,
+      "row_key": [
+        "analysis_role"
+      ],
+      "sha256": "558dc87a5c2c1e674ecd9ae5f3712eda96cfdca2dd0f26a21bed56a55b7a1f91",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv"
+    },
+    {
+      "bytes": 753,
+      "columns": [
+        "feature_id",
+        "n_endpoint_seed_blocks",
+        "endpoint_suppression_minus_amplification",
+        "endpoint_ci_low",
+        "endpoint_ci_high",
+        "n_complete_slope_seed_blocks",
+        "mean_linear_slope",
+        "slope_ci_low",
+        "slope_ci_high",
+        "slope_signflip_p",
+        "slope_holm_p"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "sae_individual",
+      "path": "evidence/inputs/sae_individual.csv",
+      "row_count": 6,
+      "row_key": [
+        "feature_id"
+      ],
+      "sha256": "fcb48222ce632ec2de51abd573cf0c8e4870eab31c391d78bdfcd4d847470153",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/individual_feature_results.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/individual_feature_results.csv"
+    },
+    {
+      "bytes": 139,
+      "columns": [
+        "analysis_role",
+        "n_complete_blocks",
+        "suppression_minus_amplification",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "sae_calibrated",
+      "path": "evidence/inputs/sae_calibrated.csv",
+      "row_count": 2,
+      "row_key": [
+        "analysis_role"
+      ],
+      "sha256": "c1b108c30295505963a0ac7594a0101b0b344319a76a04270676b0721c163783",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv"
+    },
+    {
+      "bytes": 7709,
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "json",
+      "id": "gemma_verdict",
+      "path": "evidence/inputs/gemma_verdict.json",
+      "sha256": "0188da33d148e8445c2aa041ae161170d66803d8afed5a31e5a57bd4c41976e6",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/gemma_scope_9b/confirmatory_v1_20260711/analysis/primary_verdict.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/gemma_scope_9b/confirmatory_v1_20260711/analysis/primary_verdict.json"
+    },
+    {
+      "bytes": 903,
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "json",
+      "id": "lexical_recovery",
+      "path": "evidence/inputs/lexical_recovery.json",
+      "sha256": "3ec38829625308335ec100f244f907c592647eeb66fef1189cdd5f0fa71359c5",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_feature_maps/70b_construct_validity_extension_20260710/lexical_recovery_diagnostics.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_feature_maps/70b_construct_validity_extension_20260710/lexical_recovery_diagnostics.json"
+    },
+    {
+      "bytes": 824,
+      "columns": [
+        "paraphraser",
+        "left_group",
+        "right_group",
+        "observed_difference",
+        "ci_low",
+        "ci_high",
+        "bootstrap_fraction_above_zero",
+        "registered"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "paraphrase_contrasts",
+      "path": "evidence/inputs/paraphrase_contrasts.csv",
+      "row_count": 6,
+      "row_key": [
+        "paraphraser",
+        "left_group",
+        "right_group"
+      ],
+      "sha256": "9d32ebac18196d9bbc0b7a375841ddd30d69a04fda2decd9f09a7855c4590059",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_feature_maps/70b_construct_validity_extension_20260710/paraphrase_registered_contrasts.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_feature_maps/70b_construct_validity_extension_20260710/paraphrase_registered_contrasts.csv"
+    },
+    {
+      "bytes": 1106,
+      "columns": [
+        "reference",
+        "control",
+        "reference_mean_pairwise_cosine",
+        "control_mean_pairwise_cosine",
+        "difference",
+        "difference_ci_low",
+        "difference_ci_high",
+        "permutation_p_two_sided",
+        "n_permutations"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "semantic_differences",
+      "path": "evidence/inputs/semantic_differences.csv",
+      "row_count": 6,
+      "row_key": [
+        "control"
+      ],
+      "sha256": "34e9f1c3541535564b2fbfc05b2135ed0e1f3fac65fc1a63883adb66efceb81a",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/semantic_controls_50/analysis/adjective_pairwise_diffs_vs_self_ref.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/semantic_controls_50/analysis/adjective_pairwise_diffs_vs_self_ref.csv"
+    },
+    {
+      "bytes": 937,
+      "columns": [
+        "judge_task",
+        "condition",
+        "n",
+        "mean_score",
+        "score_ci_low",
+        "score_ci_high",
+        "sd_score"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "paradox_scores",
+      "path": "evidence/inputs/paradox_scores.csv",
+      "row_count": 12,
+      "row_key": [
+        "judge_task",
+        "condition"
+      ],
+      "sha256": "f2c4cb1df15ddd710b74e0aa5a5a3a629e9bcd9415da6800b926b0a84855b4e8",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/paradox_controls_50/analysis/paradox_score_summary.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/paradox_controls_50/analysis/paradox_score_summary.csv"
+    },
+    {
+      "bytes": 322,
+      "columns": [
+        "condition",
+        "paradox_neutral",
+        "paradox_self_awareness",
+        "neutral_minus_self_awareness"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "paradox_rubrics",
+      "path": "evidence/inputs/paradox_rubrics.csv",
+      "row_count": 6,
+      "row_key": [
+        "condition"
+      ],
+      "sha256": "a1b8ae3ac456fa576209ff23b4104b18bc73196e4d9fd5adbe9043d235612456",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/paradox_controls_50/analysis/paradox_rubric_sensitivity.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/paradox_controls_50/analysis/paradox_rubric_sensitivity.csv"
+    },
+    {
+      "bytes": 593,
+      "columns": [
+        "judge_key",
+        "target_effect",
+        "target_ci_low",
+        "target_ci_high",
+        "specificity_effect",
+        "specificity_ci_low",
+        "specificity_ci_high",
+        "complete_target_blocks"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "sae_judges",
+      "path": "evidence/inputs/sae_judges.csv",
+      "row_count": 5,
+      "row_key": [
+        "judge_key"
+      ],
+      "sha256": "9f8167b62884657ae575e3ee82aaf6a9267847da7963ae5b32ebc2a2b61888fe",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/judge_sensitivity.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/judge_sensitivity.csv"
+    },
+    {
+      "bytes": 1127,
+      "columns": [
+        "judge",
+        "contrast",
+        "left",
+        "right",
+        "n_complete_blocks",
+        "n_incomplete_blocks",
+        "left_n",
+        "left_positive",
+        "left_rate",
+        "right_n",
+        "right_positive",
+        "right_rate",
+        "effect",
+        "ci_low",
+        "ci_high",
+        "discordant_positive",
+        "discordant_negative",
+        "tied_blocks",
+        "exact_discordant_two_sided_p",
+        "exact_test_role"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "gemma_baseline",
+      "path": "evidence/inputs/gemma_baseline.csv",
+      "row_count": 5,
+      "row_key": [
+        "judge",
+        "contrast"
+      ],
+      "sha256": "3762ea8daf83a03a4379300b44f1cb5e5236761075c17d797f723ff3f688a4cc",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/gemma_scope_9b/confirmatory_v1_20260711/analysis/baseline_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/gemma_scope_9b/confirmatory_v1_20260711/analysis/baseline_effects.csv"
+    },
+    {
+      "bytes": 247,
+      "columns": [
+        "judge",
+        "n_complete_blocks",
+        "effect",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "gemma_judges",
+      "path": "evidence/inputs/gemma_judges.csv",
+      "row_count": 5,
+      "row_key": [
+        "judge"
+      ],
+      "sha256": "0dbe9875b5744a213c773e39027393fa77dbc44b3246fce32ba14a826bc83a15",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/gemma_scope_9b/confirmatory_v1_20260711/analysis/judge_sensitivity.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/gemma_scope_9b/confirmatory_v1_20260711/analysis/judge_sensitivity.csv"
+    },
+    {
+      "bytes": 621,
+      "columns": [
+        "condition",
+        "n",
+        "mean_pairwise_cosine",
+        "mean_pairwise_cosine_ci_low",
+        "mean_pairwise_cosine_ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "semantic_similarity",
+      "path": "evidence/inputs/semantic_similarity.csv",
+      "row_count": 7,
+      "row_key": [
+        "condition"
+      ],
+      "sha256": "e4d0938073b563d6db725584777f424587b00da7a5e26a94c49e394062fd74a2",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/semantic_controls_50/analysis/adjective_pairwise_similarity.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/semantic_controls_50/analysis/adjective_pairwise_similarity.csv"
+    },
+    {
+      "bytes": 5251,
+      "columns": [
+        "task",
+        "readout",
+        "holdout",
+        "n",
+        "n_positive",
+        "prevalence",
+        "auroc",
+        "auroc_ci_low",
+        "auroc_ci_high",
+        "auprc",
+        "auprc_ci_low",
+        "auprc_ci_high",
+        "brier",
+        "brier_ci_low",
+        "brier_ci_high",
+        "tpr_at_1pct_fpr",
+        "tpr_at_1pct_fpr_ci_low",
+        "tpr_at_1pct_fpr_ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "jlens_v1_detector",
+      "path": "evidence/inputs/jlens_v1_detector.csv",
+      "row_count": 16,
+      "row_key": [
+        "task",
+        "readout",
+        "holdout"
+      ],
+      "sha256": "1fbc87bc8e1adfee434584c8c56e7ff1b5c819ca39903fec3d75fb389bc293e9",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/sae_jlens_audit/confirmatory_v1_20260711/analysis/detector_metrics.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/detector_metrics.csv"
+    },
+    {
+      "bytes": 32413,
+      "columns": [
+        "transport",
+        "layer",
+        "position",
+        "sign",
+        "n_pairs",
+        "n_template_families",
+        "mean_target_minus_matched",
+        "ci_low",
+        "ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "jlens_v1_semantics",
+      "path": "evidence/inputs/jlens_v1_semantics.csv",
+      "row_count": 294,
+      "row_key": [
+        "transport",
+        "layer",
+        "position",
+        "sign"
+      ],
+      "sha256": "c8fb0c27ccfcf74f4e76e3efd9a5eaeff00053d07e921427495b7672a6208950",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/sae_jlens_audit/confirmatory_v1_20260711/analysis/paired_semantic_effects.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/paired_semantic_effects.csv"
+    },
+    {
+      "bytes": 1481,
+      "columns": [
+        "feature_id",
+        "n",
+        "n_target",
+        "n_matched",
+        "n_template_families",
+        "target_mean_score",
+        "matched_mean_score",
+        "target_minus_matched_mean",
+        "auroc",
+        "auroc_ci_low",
+        "auroc_ci_high",
+        "auprc",
+        "auprc_ci_low",
+        "auprc_ci_high",
+        "tpr_at_1pct_fpr",
+        "tpr_at_1pct_fpr_ci_low",
+        "tpr_at_1pct_fpr_ci_high"
+      ],
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "csv",
+      "id": "jlens_v1_features",
+      "path": "evidence/inputs/jlens_v1_features.csv",
+      "row_count": 6,
+      "row_key": [
+        "feature_id"
+      ],
+      "sha256": "d639169f028f4434b67a1bd5f2c32adee26151421f4d286b669f39ee3224b02c",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/sae_jlens_audit/confirmatory_v1_20260711/analysis/paired_reference_feature_metrics.csv",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/paired_reference_feature_metrics.csv"
+    },
+    {
+      "bytes": 483,
+      "copy_policy": "complete original blob; no row filtering or normalization",
+      "format": "json",
+      "id": "jlens_v2_gate",
+      "path": "evidence/inputs/jlens_v2_gate.json",
+      "sha256": "68ddad9540327024d46b17d936e6d161dcf7bfdbddd01c1e9faa500b0111b514",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/sae_jlens_audit/confirmatory_v2_20260712/replay_equivalence_gate.json",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/sae_jlens_audit/confirmatory_v2_20260712/replay_equivalence_gate.json"
+    }
+  ],
+  "manuscript_bindings_sha256": "fb217a66635890cceed5a139dc72b05e257dfdbe6c83bdaf3bbfc363a1b791a6",
+  "optional_raw_inputs": [
+    {
+      "bytes": 10906096,
+      "id": "causal_outcomes",
+      "sha256": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl"
+    },
+    {
+      "bytes": 9157968,
+      "id": "causal_paper_judgments",
+      "sha256": "d10999120f05a7f0a0d53b3e3cc723d647e19813e16288b3676b7c56ddbfadeb",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl"
+    },
+    {
+      "bytes": 12164319,
+      "id": "causal_construct_judgments",
+      "sha256": "0fd32f9ebb321fae54194692881fb04e1f406d3d5194a74d1cdb87a335b2b0f9",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/causal_transplant/confirmatory_v1_20260709/judgments_construct.jsonl",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/judgments_construct.jsonl"
+    },
+    {
+      "bytes": 908560,
+      "id": "paradox_neutral",
+      "sha256": "3df3bb5a9f06048a9260e52d3bc99cb151f69e03ff919ebffcc372b06daa4a3e",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/paradox_controls_50/judged/gpt-4o_paradox.neutral.judged.jsonl",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/paradox_controls_50/judged/gpt-4o_paradox.neutral.judged.jsonl"
+    },
+    {
+      "bytes": 910660,
+      "id": "paradox_self_awareness",
+      "sha256": "87fa6c53dce36f565f939ee45dd6fc94bc3bbd41439bbe051e850cef20c8db8c",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/rebuttal_matrix/paradox_controls_50/judged/gpt-4o_paradox.self_awareness.judged.jsonl",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/rebuttal_matrix/paradox_controls_50/judged/gpt-4o_paradox.self_awareness.judged.jsonl"
+    }
+  ],
+  "package_scope": "Selected headline summary values, deterministic arithmetic, optional limited raw recomputation. Not all source statistics, not a full independent raw audit, not human validation.",
+  "required_claim_ids": [
+    "causal_calibration_anthropic_indirect_conscious",
+    "causal_calibration_anthropic_indirect_experience",
+    "causal_calibration_openai_indirect_conscious",
+    "causal_calibration_openai_indirect_experience",
+    "causal_calibration_rates_anthropic",
+    "causal_calibration_rates_openai",
+    "causal_factorial_anthropic_indirect_conscious",
+    "causal_factorial_anthropic_indirect_experience",
+    "causal_factorial_openai_indirect_conscious",
+    "causal_factorial_openai_indirect_experience",
+    "causal_query_interaction_anthropic",
+    "causal_query_interaction_openai",
+    "causal_transplant_anthropic_indirect_conscious",
+    "causal_transplant_anthropic_indirect_experience",
+    "causal_transplant_openai_indirect_conscious",
+    "causal_transplant_openai_indirect_experience",
+    "exploratory_gpt4o_paradox_all_scores",
+    "exploratory_gpt4o_paradox_rubric_sensitivity",
+    "exploratory_gpt4o_semantic_all_controls",
+    "exploratory_gpt4o_semantic_all_means",
+    "gemma_baseline_all_judges",
+    "gemma_primary_all_judges",
+    "gemma_primary_specificity",
+    "gemma_primary_target",
+    "gemma_verdict",
+    "jlens_v1_paired_reference_all_features",
+    "jlens_v1_paired_semantics_all_controls",
+    "jlens_v1_poststate_attribution_all_controls",
+    "jlens_v2_failed_replay_gate",
+    "judge_agreement_construct",
+    "judge_agreement_paper",
+    "posthoc_calibration_newcombe_anthropic",
+    "posthoc_calibration_newcombe_openai",
+    "sae_calibrated_control_panel_1",
+    "sae_calibrated_target",
+    "sae_individual_all_six",
+    "sae_judge_sensitivity",
+    "sae_literal_all_panels",
+    "sae_primary_specificity",
+    "sae_primary_target",
+    "sae_verdict",
+    "semantics_cue_ablation",
+    "semantics_neutral_transplant",
+    "semantics_paraphrase_all_contrasts"
+  ],
+  "schema_version": 1,
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "source_repository": "https://github.com/tdj28/llm_selfref_pre"
+}

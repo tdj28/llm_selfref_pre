@@ -5,11 +5,12 @@ import gzip
 import json
 import subprocess
 import unittest
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from experiments.causal_transplant.build_release_manifest import is_private_name
 
 from scripts.audit_public_release import (
+    RELEASE_MANIFEST_ALIASES,
     is_allowed_placeholder,
     is_release_manifest,
     path_findings,
@@ -161,6 +162,135 @@ class PublicReleaseAuditTests(unittest.TestCase):
         )
         self.assertEqual([finding.rule for finding in findings], ["release-hash-mismatch"])
         self.assertEqual(verified, 0)
+
+
+class ReleaseManifestAliasTests(unittest.TestCase):
+    ALIASES = {
+        "evidence/source_alignment/RELEASE_MANIFEST.json":
+            "data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json",
+        "evidence/ensemble_alignment/RELEASE_MANIFEST.json":
+            "data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json",
+    }
+
+    def setUp(self) -> None:
+        content = b"public result\n"
+        self.record = (len(content), hashlib.sha256(content).hexdigest())
+        self.relative = "rows/result.json"
+        self.manifest = json.dumps({"files": [{
+            "path": self.relative, "bytes": self.record[0], "sha256": self.record[1],
+        }]}).encode()
+
+    def test_alias_allowlist_is_exact(self) -> None:
+        self.assertEqual(RELEASE_MANIFEST_ALIASES, self.ALIASES)
+        for alias, source in self.ALIASES.items():
+            self.assertTrue(is_release_manifest(alias))
+            self.assertTrue(is_release_manifest(source))
+
+    def test_valid_aliases_validate_canonical_rows_without_evidence_rows(self) -> None:
+        manifests, records = {}, {}
+        for alias, source in self.ALIASES.items():
+            manifests.update({alias: self.manifest, source: self.manifest})
+            records[str(PurePosixPath(source).parent / self.relative)] = self.record
+        findings, verified = release_manifest_findings(manifests, records)
+        self.assertEqual(findings, [])
+        self.assertEqual(verified, 4)
+
+    def test_alias_requires_source_in_indexed_manifests_map(self) -> None:
+        for alias, source in self.ALIASES.items():
+            with self.subTest(alias=alias):
+                records = {
+                    source: (len(self.manifest), hashlib.sha256(self.manifest).hexdigest()),
+                    str(PurePosixPath(source).parent / self.relative): self.record,
+                    str(PurePosixPath(alias).parent / self.relative): self.record,
+                }
+                findings, verified = release_manifest_findings({alias: self.manifest}, records)
+                self.assertEqual([(f.path, f.rule) for f in findings],
+                                 [(alias, "missing-release-alias-source")])
+                self.assertEqual(verified, 0)
+
+    def test_alias_requires_byte_equality_not_json_equivalence(self) -> None:
+        for alias, source in self.ALIASES.items():
+            for changed in (self.manifest + b"\n", b'{"files": []}'):
+                with self.subTest(alias=alias, changed=changed):
+                    findings, verified = release_manifest_findings(
+                        {alias: changed, source: self.manifest},
+                        {str(PurePosixPath(source).parent / self.relative): self.record},
+                    )
+                    self.assertEqual([(f.path, f.rule) for f in findings],
+                                     [(alias, "release-alias-mismatch")])
+                    self.assertEqual(verified, 1)
+
+    def test_alias_missing_canonical_data_cannot_use_evidence_copy(self) -> None:
+        for alias, source in self.ALIASES.items():
+            with self.subTest(alias=alias):
+                canonical = str(PurePosixPath(source).parent / self.relative)
+                findings, verified = release_manifest_findings(
+                    {alias: self.manifest, source: self.manifest},
+                    {str(PurePosixPath(alias).parent / self.relative): self.record},
+                )
+                self.assertEqual([(f.path, f.rule) for f in findings],
+                                 [(canonical, "untracked-release-file")] * 2)
+                self.assertEqual(verified, 0)
+
+    def test_alias_rejects_canonical_size_and_hash_drift(self) -> None:
+        for alias, source in self.ALIASES.items():
+            for record, rule in (
+                ((self.record[0] + 1, self.record[1]), "release-byte-mismatch"),
+                ((self.record[0], "0" * 64), "release-hash-mismatch"),
+            ):
+                with self.subTest(alias=alias, rule=rule):
+                    canonical = str(PurePosixPath(source).parent / self.relative)
+                    findings, verified = release_manifest_findings(
+                        {alias: self.manifest, source: self.manifest},
+                        {canonical: record,
+                         str(PurePosixPath(alias).parent / self.relative): self.record},
+                    )
+                    self.assertEqual([(f.path, f.rule) for f in findings], [(canonical, rule)] * 2)
+                    self.assertEqual(verified, 0)
+
+    def test_alias_still_validates_manifest_schema_and_paths(self) -> None:
+        unsafe = json.loads(self.manifest)
+        unsafe["files"][0]["path"] = "../result.json"
+        for alias, source in self.ALIASES.items():
+            for raw, rule in (
+                (b"not json", "invalid-release-manifest"),
+                (b'{"files": {}}', "invalid-release-manifest"),
+                (b'{"files": [{}]}', "invalid-release-entry"),
+                (json.dumps(unsafe).encode(), "unsafe-release-path"),
+            ):
+                with self.subTest(alias=alias, raw=raw):
+                    findings, verified = release_manifest_findings({alias: raw, source: raw}, {})
+                    self.assertEqual([f.rule for f in findings], [rule] * 2)
+                    self.assertEqual(verified, 0)
+
+    def test_unknown_copy_paths_do_not_infer_aliases_from_content(self) -> None:
+        for alias, source in self.ALIASES.items():
+            manifest = json.loads(self.manifest)
+            manifest["source_manifest"] = source
+            raw = json.dumps(manifest).encode()
+            for unknown in (
+                "evidence/other/RELEASE_MANIFEST.json",
+                alias.replace("RELEASE_MANIFEST.json", "release_manifest.json"),
+                alias.replace("RELEASE_MANIFEST.json", "archive/RELEASE_MANIFEST.json"),
+            ):
+                with self.subTest(unknown=unknown, source=source):
+                    self.assertTrue(is_release_manifest(unknown))
+                    findings, verified = release_manifest_findings(
+                        {unknown: raw, source: raw},
+                        {str(PurePosixPath(source).parent / self.relative): self.record},
+                    )
+                    self.assertEqual([(f.path, f.rule) for f in findings], [
+                        (str(PurePosixPath(unknown).parent / self.relative), "untracked-release-file"),
+                    ])
+                    self.assertEqual(verified, 1)
+
+    def test_alias_paths_do_not_bypass_secret_scanning(self) -> None:
+        token = b"sk-" + b"a" * 32
+        for alias in self.ALIASES:
+            with self.subTest(alias=alias):
+                findings = scan_blob(alias, b'{"note": "' + token + b'"}')
+                self.assertEqual([f.rule for f in findings], ["openai-key"])
+                self.assertNotIn(token.decode(), repr(findings))
 
 
 if __name__ == "__main__":

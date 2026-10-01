@@ -46,6 +46,15 @@ REQUIRED_PUBLIC_FILES = frozenset(
 # after documenting its source and license in NOTICE.md and DATA_ARTIFACTS.md.
 ALLOWED_TRACKED_NOTEBOOKS: frozenset[str] = frozenset()
 
+# These evidence copies describe the canonical data releases, not local rows.
+# Accept an alias only when its indexed bytes match the indexed source below.
+RELEASE_MANIFEST_ALIASES = {
+    "evidence/source_alignment/RELEASE_MANIFEST.json":
+        "data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json",
+    "evidence/ensemble_alignment/RELEASE_MANIFEST.json":
+        "data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json",
+}
+
 PRIVATE_SUFFIXES = frozenset(
     {
         ".jks",
@@ -407,6 +416,21 @@ def release_manifest_findings(
     findings: list[Finding] = []
     verified_entries = 0
     for manifest_path, raw_manifest in sorted(manifests.items()):
+        source_path = RELEASE_MANIFEST_ALIASES.get(manifest_path)
+        if source_path is not None:
+            source_manifest = manifests.get(source_path)
+            if source_manifest is None:
+                findings.append(Finding(
+                    manifest_path, "missing-release-alias-source",
+                    f"canonical release manifest {source_path} is absent from the Git index",
+                ))
+                continue
+            if raw_manifest != source_manifest:
+                findings.append(Finding(
+                    manifest_path, "release-alias-mismatch",
+                    f"indexed manifest bytes differ from {source_path}",
+                ))
+                continue
         try:
             manifest = json.loads(raw_manifest)
         except (UnicodeDecodeError, json.JSONDecodeError):
@@ -420,7 +444,7 @@ def release_manifest_findings(
                 Finding(manifest_path, "invalid-release-manifest", "release manifest has no files list")
             )
             continue
-        base = PurePosixPath(manifest_path).parent
+        base = PurePosixPath(source_path or manifest_path).parent
         for index, item in enumerate(files):
             if not isinstance(item, dict) or not {"path", "bytes", "sha256"}.issubset(item):
                 findings.append(

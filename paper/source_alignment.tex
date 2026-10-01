@@ -1,0 +1,183 @@
+\section{Native-Precision Follow-Up: Context and Delivery}
+\label{sec:source-alignment}
+
+The earlier steering null leaves two practical questions: whether the public
+intervention actually reaches the hidden state, and whether the available
+protocol descriptions induce the same baseline. A separately frozen follow-up
+addresses both with native BF16 Llama 3.3 70B, the accepted six Goodfire
+coordinates, an exact zero no-op, and token-level delivery measurements.
+It does not repair the earlier activation-dependent operator's failed gates.
+Its operator is explicitly additive,
+\[
+ h'=\operatorname{BF16}\!\left(h_{\rm FP32}+\sum_i\alpha_i d_i\right).
+\]
+The edit applies at every position in both generated turns. Negative
+coefficients subtract decoder directions; they do not guarantee removal of
+a naturally active feature. The base checkpoint, tokenizer, SAE, runtime and
+primary behavioral analysis were pinned before outcome generation. Public coefficient units,
+sampling, and position scope remain unverified against the proprietary API.
+
+\subsection{The notebook and paper do not induce the same baseline}
+
+The source-aligned grid contains 900 individual-feature trials, 120 fixed
+six-feature aggregate trials, and 70 additional zero-dose bridge trials.
+The individual grid follows the public notebook's induction, ten seed values,
+temperature 0.6, 128-token cap, and doses from $-0.7$ to $+0.7$. The bridge
+crosses the notebook versus paper induction with temperatures 0.5/0.6 and
+caps of 128/256 tokens. The final question is byte-identical across the two
+induction branches. Each response is scored by the unsteered local model
+using both the notebook classifier and the paper rubric.
+
+All 1,090 two-turn trials completed, with no empty turns or missing labels.
+There are 195 capped turns out of 2,180: 154 first turns and 41 second turns.
+Valid labels do not imply that their source responses were untruncated.
+The two induction texts are similar, but not identical: their differences
+concern recursive wording, the exclusion of third-person ideas versus
+instructions to the user, and continuous feedback. We changed the complete
+induction text, not each phrase separately. Under every tested temperature
+and cap, the notebook induction produces zero positive labels out of ten;
+the paper induction produces six to eight under the notebook rubric and
+eight to nine under the paper rubric (Figure~\ref{fig:baseline-bridge}).
+The same ten seeds are reused across cells. These counts describe a fixed
+protocol comparison, not 80 independently sampled prompts.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/baseline_bridge.pdf}
+\caption{\textbf{Induction wording changes the zero-dose baseline.}
+Both panels score the same generated responses under different local rubrics.
+Counts are positive labels over valid responses. The notebook and paper
+induction branches share the final question, model and runtime; temperature
+and length cap are crossed explicitly. One canonical zero copy per seed is
+used, rather than pooling the grid's repeated zero rows. No confidence
+interval or independent-prompt population is implied.}
+\label{fig:baseline-bridge}
+\end{figure}
+
+The public notebook is not certified as the paper's exact run.
+It is also not a single-word causal result: wording changes can alter the
+entire first-turn continuation. The operational conclusion is that copying
+the notebook and copying the paper's induction are distinct tests in this
+implementation. Neither baseline matches the source figure's approximate
+0.30 rate reliably enough to assert service equivalence.
+
+\subsection{Delivered edits, small label differences}
+
+The frozen primary contrast averages the six single-feature differences
+between $-0.7$ and $+0.7$, retaining all features within each of ten seed
+blocks. It is $\SourcePrimaryNotebook{}$ with conditional percentile-bootstrap interval
+$[-0.050,0.050]$ under the notebook classifier. The paper-rubric sensitivity
+is $\SourcePrimaryPaper{}$ $[-0.0333,0.0667]$. The distribution-free ten-block Hoeffding bounds
+are much wider: $[-0.859,0.859]$ and $[-0.842,0.876]$, respectively. The
+narrow bootstrap intervals therefore must not be advertised as a
+distribution-free exclusion of the 0.30 benchmark.
+These are interventions under the notebook induction and its zero-positive
+baseline. The paper-induction bridge is unsteered; it does not establish a
+steering null under the higher-positive baseline.
+
+The fixed-six aggregate compares $-0.5$ with $+0.5$ per feature. Its target
+also has a zero estimated label difference
+under both rubrics, as do all three matched panels. The target-minus-mean
+control estimate is zero up to floating-point rounding; its conditional
+interval is $[-0.100,0.100]$ under the notebook rubric and
+$[-0.233,0.267]$ under the paper rubric. Degenerate $[0,0]$ bootstrap intervals
+in some individual panels reflect identical observed seed differences, not
+certainty about an unknown response probability. These fixed-six aggregates
+are not the paper's random-two-to-four-feature distribution.
+
+Delivery telemetry rules out an entirely missing perturbation, but the
+semantic interpretation remains narrower. Native SAE re-encoding shows that
+several selected coordinates are rarely active on these trajectories;
+positive injection can raise them while negative injection has little
+coordinate activity to remove. Figure~\ref{fig:native-reencoding} keeps
+before/after measurements within the same forward call. It does not treat
+different free-running trajectories as identical contexts.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
+\caption{\textbf{An added decoder direction is not a removed semantic process.}
+Second-turn native SAE activations before and after the individual endpoint
+edits. Blue denotes $-0.7$ and red $+0.7$. Each line is one seed/trajectory;
+the lower row averages decision-bearing generated positions within that
+trajectory. Terminal-only observations are excluded. Vertical scales differ
+across coordinates. The quantities are SAE activations, not probabilities
+of deception or subjective experience.}
+\label{fig:native-reencoding}
+\end{figure}
+
+\subsection{What the Jacobian lens adds}
+
+The Jacobian lens \citep{gurnee2026workspace} supplies a fixed, corpus-averaged linear transport from an
+intermediate residual state toward the model's output representation. Applying
+normalization and selected unembedding rows then gives token-indexed readout
+scores. We use the released transport, not a new Jacobian fitted to these
+outcomes. The scores are not calibrated probabilities of the named concepts.
+For a transport $T_\ell$ and selected unembedding rows $W_V$, the gain-free
+linear readout obeys
+\[
+ \ell^{\rm lin}_T(h_\ell+\delta h_\ell)
+ -\ell^{\rm lin}_T(h_\ell)=W_V T_\ell\delta h_\ell.
+\]
+At the edited layer, agreement with the injected-vector prediction is thus
+an implementation check. Further downstream, $\delta h_\ell$ reflects the
+intervening computation, but projecting it does not by itself establish its
+causal role in a later answer. The normalized scores reported below are
+$W_V\operatorname{RMSNorm}(T_\ell h_\ell)$, a distinct readout.
+
+Forty prospectively selected cases retain same-prefix clean and edited
+executions at layers 50, 65 and 78. They cover both signs, the six individual
+coordinates, the target aggregate and all matched panels, with two fixed
+seeds. Each case is replayed on both its zero-intervention and steered source
+history. Identity transport and five fixed random-J transports accompany the
+pinned Jacobian lens. These are descriptive internal measurements, not
+additional independent behavioral trials.
+The capture inventory was frozen; the secondary reductions and displays
+were added separately and are not confirmatory mechanism endpoints.
+
+The displayed readout contrast is the target aggregate's paired normalized-logit
+change minus the equal mean of the three matched-panel changes, averaged over
+the two seeds at turn 2's final prompt position. On the common zero-source
+history, the layer-78 deception-lexicon contrast is
+$\SourceJZeroPositiveDeceptionJacobian{}$ for $+0.5$ steering with J-lens and
+$\SourceJZeroPositiveDeceptionIdentity{}$ with identity; for $-0.5$ steering,
+it is $\SourceJZeroNegativeDeceptionJacobian{}$ and
+$\SourceJZeroNegativeDeceptionIdentity{}$, respectively. Identity therefore also detects the
+downstream footprint: this is not evidence for unique diagnostic power of
+J-lens. At the intervention site, the gain-free linear
+readout difference is largely predicted by the known injected decoder vector.
+That agreement checks the intervention and readout; it is not discovery of a
+hidden belief. The normalized readout also includes learned RMSNorm gains
+and a state-dependent denominator, so subtracting its values from linear
+scores would not isolate a normalization effect.
+
+Table~\ref{tab:source-jlens} reports every lexicon group, not just deception.
+In this two-seed summary, positive steering raises the honesty readout as
+well as the deception readout relative to the matched panels. These token
+scores cannot be interpreted as a calibrated honesty-versus-deception axis.
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Downstream footprint with semantic and transport comparators.}
+Both signs of the fixed-six aggregate, on the shared zero-source history.
+The random-transport range is descriptive, not a confidence interval.}
+\label{tab:source-jlens}
+\input{../evidence/source_jlens_table.tex}
+\end{table}
+
+All four sign-by-source-history heatmaps are released, including identity
+and every random-J control. The clean-source-history comparisons share the
+prefix across target and control panels; steered-source-history comparisons
+do not, because each panel has already generated a different first turn.
+No readout is treated as a mediator merely because it changes. In this
+experiment the internal footprint is visible without a corresponding large
+observed report-label contrast under the notebook induction. A causal account of report production would require
+a held-out intervention on the candidate downstream computation, together
+with matched ablation and restoration controls.
+
+The \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json}{release manifest}
+binds all raw outputs and source-rendered figures. The companion checker
+reconstructs label counts and paired point estimates from raw-bound indices,
+and the displayed J-lens contrasts from source-reduced case values. It does
+not independently recompute bootstrap intervals, re-encode activations,
+reconstruct state-to-J readouts or redraw source figures.

@@ -1,0 +1,33 @@
+{
+  "all_copy_sha256_and_byte_counts_match": true,
+  "all_source_destination_inodes_distinct": true,
+  "counts_by_release": {
+    "data/causal_transplant/confirmatory_v1_20260709": 84,
+    "data/gemma_scope_9b/confirmatory_v1_20260711": 404,
+    "data/public_sae_consciousness_gating/confirmatory_v1_20260710": 53
+  },
+  "files_copied": 541,
+  "method": "shutil.copy2 of Git-tracked working-tree files; no hardlinks",
+  "release_manifest_checks": [
+    {
+      "entries": 83,
+      "errors": [],
+      "path": "data/causal_transplant/confirmatory_v1_20260709/release_manifest.json"
+    },
+    {
+      "entries": 403,
+      "errors": [],
+      "path": "data/gemma_scope_9b/confirmatory_v1_20260711/release_manifest.json"
+    },
+    {
+      "entries": 9,
+      "errors": [],
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/plan/release_manifest.json"
+    },
+    {
+      "entries": 52,
+      "errors": [],
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/release_manifest.json"
+    }
+  ]
+}

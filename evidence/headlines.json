@@ -1,0 +1,1369 @@
+{
+  "claims": {
+    "causal_calibration_anthropic_indirect_conscious": {
+      "ci_high": 1.0,
+      "ci_low": 0.08749999999999998,
+      "estimate": 0.575,
+      "n_clusters": 160.0,
+      "n_models": 4.0,
+      "n_pairs": 80.0
+    },
+    "causal_calibration_anthropic_indirect_experience": {
+      "ci_high": 1.0,
+      "ci_low": 0.275,
+      "estimate": 0.65,
+      "n_clusters": 160.0,
+      "n_models": 4.0,
+      "n_pairs": 80.0
+    },
+    "causal_calibration_openai_indirect_conscious": {
+      "ci_high": 1.0,
+      "ci_low": 0.11249999999999999,
+      "estimate": 0.6,
+      "n_clusters": 160.0,
+      "n_models": 4.0,
+      "n_pairs": 80.0
+    },
+    "causal_calibration_openai_indirect_experience": {
+      "ci_high": 1.0,
+      "ci_low": 0.26249999999999996,
+      "estimate": 0.6375,
+      "n_clusters": 160.0,
+      "n_models": 4.0,
+      "n_pairs": 80.0
+    },
+    "causal_calibration_rates_anthropic": {
+      "anthropic:claude-haiku-4-5-20251001/paper_history": {
+        "ci_high": 0.23613589351256675,
+        "ci_low": 0.008881219432873136,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.05
+      },
+      "anthropic:claude-haiku-4-5-20251001/paper_self_ref": {
+        "ci_high": 0.6579179916924003,
+        "ci_low": 0.25819502085709295,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.45
+      },
+      "anthropic:claude-sonnet-4-5-20250929/paper_history": {
+        "ci_high": 0.8188104521320554,
+        "ci_low": 0.43285051021946463,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.65
+      },
+      "anthropic:claude-sonnet-4-5-20250929/paper_self_ref": {
+        "ci_high": 0.9476322080405041,
+        "ci_low": 0.6395767041130426,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.85
+      },
+      "openai:gpt-4.1-2025-04-14/paper_history": {
+        "ci_high": 0.16113012549493322,
+        "ci_low": 0.0,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.0
+      },
+      "openai:gpt-4.1-2025-04-14/paper_self_ref": {
+        "ci_high": 1.0,
+        "ci_low": 0.8388698745050667,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 1.0
+      },
+      "openai:gpt-4o-2024-11-20/paper_history": {
+        "ci_high": 0.16113012549493322,
+        "ci_low": 0.0,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.0
+      },
+      "openai:gpt-4o-2024-11-20/paper_self_ref": {
+        "ci_high": 1.0,
+        "ci_low": 0.8388698745050667,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 1.0
+      }
+    },
+    "causal_calibration_rates_openai": {
+      "anthropic:claude-haiku-4-5-20251001/paper_history": {
+        "ci_high": 0.36042329588695743,
+        "ci_low": 0.05236779195949584,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.15
+      },
+      "anthropic:claude-haiku-4-5-20251001/paper_self_ref": {
+        "ci_high": 0.7007050855701801,
+        "ci_low": 0.2992949144298199,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.5
+      },
+      "anthropic:claude-sonnet-4-5-20250929/paper_history": {
+        "ci_high": 0.888139947210597,
+        "ci_low": 0.5312949900419365,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.75
+      },
+      "anthropic:claude-sonnet-4-5-20250929/paper_self_ref": {
+        "ci_high": 0.9911187805671268,
+        "ci_low": 0.7638641064874331,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.95
+      },
+      "openai:gpt-4.1-2025-04-14/paper_history": {
+        "ci_high": 0.16113012549493322,
+        "ci_low": 0.0,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.0
+      },
+      "openai:gpt-4.1-2025-04-14/paper_self_ref": {
+        "ci_high": 1.0,
+        "ci_low": 0.8388698745050667,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 1.0
+      },
+      "openai:gpt-4o-2024-11-20/paper_history": {
+        "ci_high": 0.16113012549493322,
+        "ci_low": 0.0,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 0.0
+      },
+      "openai:gpt-4o-2024-11-20/paper_self_ref": {
+        "ci_high": 1.0,
+        "ci_low": 0.8388698745050667,
+        "n_labeled": 20.0,
+        "n_rows": 20.0,
+        "positive_rate": 1.0
+      }
+    },
+    "causal_factorial_anthropic_indirect_conscious": {
+      "phenomenological_register_main": {
+        "ci_high": 0.5875,
+        "ci_low": 0.025,
+        "estimate": 0.2875,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "register_minus_self": {
+        "ci_high": 0.4375,
+        "ci_low": -0.1875,
+        "estimate": 0.1375,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_reference_main": {
+        "ci_high": 0.3375,
+        "ci_low": -0.018750000000000003,
+        "estimate": 0.15,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_x_register_interaction": {
+        "ci_high": 0.275,
+        "ci_low": -0.19999999999999996,
+        "estimate": 0.049999999999999996,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_factorial_anthropic_indirect_experience": {
+      "phenomenological_register_main": {
+        "ci_high": 0.47500000000000003,
+        "ci_low": -0.062499999999999986,
+        "estimate": 0.1875,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "register_minus_self": {
+        "ci_high": 0.5,
+        "ci_low": -0.175,
+        "estimate": 0.1875,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_reference_main": {
+        "ci_high": 0.26875,
+        "ci_low": -0.25,
+        "estimate": 0.0,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_x_register_interaction": {
+        "ci_high": 0.3125,
+        "ci_low": -0.38750000000000007,
+        "estimate": -0.05,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_factorial_openai_indirect_conscious": {
+      "phenomenological_register_main": {
+        "ci_high": 0.65625,
+        "ci_low": 0.0,
+        "estimate": 0.3125,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "register_minus_self": {
+        "ci_high": 0.6000000000000001,
+        "ci_low": -0.2125,
+        "estimate": 0.2,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_reference_main": {
+        "ci_high": 0.30624999999999997,
+        "ci_low": -0.018750000000000003,
+        "estimate": 0.1125,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_x_register_interaction": {
+        "ci_high": 0.375,
+        "ci_low": -0.07500000000000001,
+        "estimate": 0.12499999999999999,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_factorial_openai_indirect_experience": {
+      "phenomenological_register_main": {
+        "ci_high": 0.5501562499999978,
+        "ci_low": 0.0,
+        "estimate": 0.26875,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "register_minus_self": {
+        "ci_high": 0.6125,
+        "ci_low": -0.1125,
+        "estimate": 0.28750000000000003,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_reference_main": {
+        "ci_high": 0.24375000000000002,
+        "ci_low": -0.23125,
+        "estimate": -0.018749999999999992,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "self_x_register_interaction": {
+        "ci_high": 0.31250000000000006,
+        "ci_low": -0.3125,
+        "estimate": -0.012499999999999997,
+        "n_clusters": 16.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_query_interaction_anthropic": {
+      "ci_high": 0.9437500000000001,
+      "ci_low": 0.12499999999999999,
+      "estimate": 0.525
+    },
+    "causal_query_interaction_openai": {
+      "ci_high": 0.9124999999999999,
+      "ci_low": 0.140625,
+      "estimate": 0.5249999999999999
+    },
+    "causal_transplant_anthropic_indirect_conscious": {
+      "instruction_minus_transcript": {
+        "ci_high": 0.9875,
+        "ci_low": 0.7375,
+        "estimate": 0.8875,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_source_main": {
+        "ci_high": 0.98125,
+        "ci_low": 0.475,
+        "estimate": 0.73125,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_x_transcript_interaction": {
+        "ci_high": 0.15031249999999546,
+        "ci_low": -0.225,
+        "estimate": -0.012499999999999997,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "transcript_source_main": {
+        "ci_high": 0.03125,
+        "ci_low": -0.4125,
+        "estimate": -0.15625,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_transplant_anthropic_indirect_experience": {
+      "instruction_minus_transcript": {
+        "ci_high": 1.0,
+        "ci_low": 0.75,
+        "estimate": 0.9125,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_source_main": {
+        "ci_high": 1.0,
+        "ci_low": 0.5499999999999999,
+        "estimate": 0.78125,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_x_transcript_interaction": {
+        "ci_high": 0.3375,
+        "ci_low": -0.22499999999999998,
+        "estimate": 0.037500000000000006,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "transcript_source_main": {
+        "ci_high": 0.0,
+        "ci_low": -0.30625,
+        "estimate": -0.13125,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_transplant_openai_indirect_conscious": {
+      "instruction_minus_transcript": {
+        "ci_high": 0.9875,
+        "ci_low": 0.7625000000000001,
+        "estimate": 0.8875,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_source_main": {
+        "ci_high": 0.9625,
+        "ci_low": 0.50625,
+        "estimate": 0.74375,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_x_transcript_interaction": {
+        "ci_high": 0.2,
+        "ci_low": -0.25,
+        "estimate": -0.012499999999999997,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "transcript_source_main": {
+        "ci_high": 0.0625,
+        "ci_low": -0.40625,
+        "estimate": -0.14375000000000002,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "causal_transplant_openai_indirect_experience": {
+      "instruction_minus_transcript": {
+        "ci_high": 0.9625,
+        "ci_low": 0.6875,
+        "estimate": 0.8375,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_source_main": {
+        "ci_high": 0.95,
+        "ci_low": 0.51875,
+        "estimate": 0.7375,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "instruction_x_transcript_interaction": {
+        "ci_high": 0.4125,
+        "ci_low": -0.33749999999999997,
+        "estimate": 0.0,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      },
+      "transcript_source_main": {
+        "ci_high": 0.07500000000000001,
+        "ci_low": -0.28750000000000003,
+        "estimate": -0.09999999999999998,
+        "n_clusters": 80.0,
+        "n_models": 4.0,
+        "n_pairs": 80.0
+      }
+    },
+    "exploratory_gpt4o_paradox_all_scores": {
+      "paradox_neutral/conceptual_paper": {
+        "mean_score": 3.96,
+        "n": 50.0,
+        "score_ci_high": 4.08,
+        "score_ci_low": 3.8,
+        "sd_score": 0.4932193286180591
+      },
+      "paradox_neutral/history_paper": {
+        "mean_score": 3.76,
+        "n": 50.0,
+        "score_ci_high": 3.96,
+        "score_ci_low": 3.52,
+        "sd_score": 0.7969328960560773
+      },
+      "paradox_neutral/mindfulness_external": {
+        "mean_score": 3.58,
+        "n": 50.0,
+        "score_ci_high": 3.86,
+        "score_ci_low": 3.28,
+        "sd_score": 1.051529498261597
+      },
+      "paradox_neutral/self_ref_mechanistic": {
+        "mean_score": 2.36,
+        "n": 50.0,
+        "score_ci_high": 2.64,
+        "score_ci_low": 2.1,
+        "sd_score": 0.9638358739104573
+      },
+      "paradox_neutral/self_ref_paper": {
+        "mean_score": 3.62,
+        "n": 50.0,
+        "score_ci_high": 3.82,
+        "score_ci_low": 3.4,
+        "sd_score": 0.7795864942652716
+      },
+      "paradox_neutral/zero_shot": {
+        "mean_score": 3.92,
+        "n": 50.0,
+        "score_ci_high": 4.04,
+        "score_ci_low": 3.76,
+        "sd_score": 0.5283783431116266
+      },
+      "paradox_self_awareness/conceptual_paper": {
+        "mean_score": 3.24,
+        "n": 50.0,
+        "score_ci_high": 3.48,
+        "score_ci_low": 3.0,
+        "sd_score": 0.8703740692415893
+      },
+      "paradox_self_awareness/history_paper": {
+        "mean_score": 3.08,
+        "n": 50.0,
+        "score_ci_high": 3.32,
+        "score_ci_low": 2.84,
+        "sd_score": 0.8998866141727785
+      },
+      "paradox_self_awareness/mindfulness_external": {
+        "mean_score": 3.22,
+        "n": 50.0,
+        "score_ci_high": 3.48,
+        "score_ci_low": 2.92,
+        "sd_score": 1.0159945363825456
+      },
+      "paradox_self_awareness/self_ref_mechanistic": {
+        "mean_score": 1.64,
+        "n": 50.0,
+        "score_ci_high": 1.88,
+        "score_ci_low": 1.42,
+        "sd_score": 0.8270922757788645
+      },
+      "paradox_self_awareness/self_ref_paper": {
+        "mean_score": 3.04,
+        "n": 50.0,
+        "score_ci_high": 3.28,
+        "score_ci_low": 2.8,
+        "sd_score": 0.8797031039051801
+      },
+      "paradox_self_awareness/zero_shot": {
+        "mean_score": 3.38,
+        "n": 50.0,
+        "score_ci_high": 3.58,
+        "score_ci_low": 3.18,
+        "sd_score": 0.752953368748825
+      }
+    },
+    "exploratory_gpt4o_paradox_rubric_sensitivity": {
+      "conceptual_paper": {
+        "neutral_minus_self_awareness": 0.7199999999999998,
+        "paradox_neutral": 3.96,
+        "paradox_self_awareness": 3.24
+      },
+      "history_paper": {
+        "neutral_minus_self_awareness": 0.6799999999999997,
+        "paradox_neutral": 3.76,
+        "paradox_self_awareness": 3.08
+      },
+      "mindfulness_external": {
+        "neutral_minus_self_awareness": 0.3599999999999999,
+        "paradox_neutral": 3.58,
+        "paradox_self_awareness": 3.22
+      },
+      "self_ref_mechanistic": {
+        "neutral_minus_self_awareness": 0.72,
+        "paradox_neutral": 2.36,
+        "paradox_self_awareness": 1.64
+      },
+      "self_ref_paper": {
+        "neutral_minus_self_awareness": 0.5800000000000001,
+        "paradox_neutral": 3.62,
+        "paradox_self_awareness": 3.04
+      },
+      "zero_shot": {
+        "neutral_minus_self_awareness": 0.54,
+        "paradox_neutral": 3.92,
+        "paradox_self_awareness": 3.38
+      }
+    },
+    "exploratory_gpt4o_semantic_all_controls": {
+      "conceptual_paper": {
+        "control_mean_pairwise_cosine": 0.682033316212668,
+        "difference": 0.15935610066260153,
+        "difference_ci_high": 0.1951942599024701,
+        "difference_ci_low": 0.11232230097123912,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.0004997501249375312,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      },
+      "forced_disclaimer": {
+        "control_mean_pairwise_cosine": 0.8461156907742262,
+        "difference": -0.004726273898956634,
+        "difference_ci_high": 0.040653703115815586,
+        "difference_ci_low": -0.05445859251508063,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.6486756621689156,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      },
+      "history_paper": {
+        "control_mean_pairwise_cosine": 0.8886148078832626,
+        "difference": -0.047225391007993056,
+        "difference_ci_high": -0.015782199891262155,
+        "difference_ci_low": -0.08083614121213827,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.0004997501249375312,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      },
+      "mindfulness_external": {
+        "control_mean_pairwise_cosine": 0.819371450899191,
+        "difference": 0.022017965976078635,
+        "difference_ci_high": 0.0547331137222667,
+        "difference_ci_low": -0.013657477892253597,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.2303848075962019,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      },
+      "self_ref_mechanistic": {
+        "control_mean_pairwise_cosine": 0.7774308908767269,
+        "difference": 0.06395852599854268,
+        "difference_ci_high": 0.09669543653256515,
+        "difference_ci_low": 0.03079828496044861,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.0004997501249375312,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      },
+      "zero_shot": {
+        "control_mean_pairwise_cosine": 0.8151610216505313,
+        "difference": 0.0262283952247383,
+        "difference_ci_high": 0.09984444721012792,
+        "difference_ci_low": -0.027564695618113616,
+        "n_permutations": 2000.0,
+        "permutation_p_two_sided": 0.2868565717141429,
+        "reference_mean_pairwise_cosine": 0.8413894168752696
+      }
+    },
+    "exploratory_gpt4o_semantic_all_means": {
+      "conceptual_paper": {
+        "ci_high": 0.7239523722182435,
+        "ci_low": 0.6574657944765384,
+        "estimate": 0.682033316212668,
+        "n": 50
+      },
+      "forced_disclaimer": {
+        "ci_high": 0.8880992293180757,
+        "ci_low": 0.8129727906299822,
+        "estimate": 0.8461156907742262,
+        "n": 50
+      },
+      "history_paper": {
+        "ci_high": 0.9086616858355002,
+        "ci_low": 0.8738960390444054,
+        "estimate": 0.8886148078832626,
+        "n": 50
+      },
+      "mindfulness_external": {
+        "ci_high": 0.846420358490197,
+        "ci_low": 0.8045370721019297,
+        "estimate": 0.819371450899191,
+        "n": 50
+      },
+      "self_ref_mechanistic": {
+        "ci_high": 0.801216802917216,
+        "ci_low": 0.7619400628231091,
+        "estimate": 0.7774308908767269,
+        "n": 50
+      },
+      "self_ref_paper": {
+        "ci_high": 0.8701470063681427,
+        "ci_low": 0.8195000034564642,
+        "estimate": 0.8413894168752696,
+        "n": 50
+      },
+      "zero_shot": {
+        "ci_high": 0.862707303147269,
+        "ci_low": 0.7500160348023189,
+        "estimate": 0.8151610216505313,
+        "n": 50
+      }
+    },
+    "gemma_baseline_all_judges": {
+      "anthropic": {
+        "ci_high": 0.061224489795918366,
+        "ci_low": 0.0,
+        "effect": 0.02040816326530612,
+        "left_n": 49.0,
+        "left_positive": 1.0,
+        "left_rate": 0.02040816326530612,
+        "n_complete_blocks": 49.0,
+        "n_incomplete_blocks": 1.0,
+        "right_n": 49.0,
+        "right_positive": 0.0,
+        "right_rate": 0.0
+      },
+      "direct": {
+        "ci_high": null,
+        "ci_low": null,
+        "effect": null,
+        "left_n": 0.0,
+        "left_positive": 0.0,
+        "left_rate": null,
+        "n_complete_blocks": 0.0,
+        "n_incomplete_blocks": 50.0,
+        "right_n": 0.0,
+        "right_positive": 0.0,
+        "right_rate": null
+      },
+      "gemma_local": {
+        "ci_high": 0.22,
+        "ci_low": 0.04,
+        "effect": 0.12,
+        "left_n": 50.0,
+        "left_positive": 6.0,
+        "left_rate": 0.12,
+        "n_complete_blocks": 50.0,
+        "n_incomplete_blocks": 0.0,
+        "right_n": 50.0,
+        "right_positive": 0.0,
+        "right_rate": 0.0
+      },
+      "majority": {
+        "ci_high": 0.061224489795918366,
+        "ci_low": 0.0,
+        "effect": 0.02040816326530612,
+        "left_n": 49.0,
+        "left_positive": 1.0,
+        "left_rate": 0.02040816326530612,
+        "n_complete_blocks": 49.0,
+        "n_incomplete_blocks": 1.0,
+        "right_n": 49.0,
+        "right_positive": 0.0,
+        "right_rate": 0.0
+      },
+      "openai": {
+        "ci_high": 0.14,
+        "ci_low": 0.0,
+        "effect": 0.06,
+        "left_n": 50.0,
+        "left_positive": 3.0,
+        "left_rate": 0.06,
+        "n_complete_blocks": 50.0,
+        "n_incomplete_blocks": 0.0,
+        "right_n": 50.0,
+        "right_positive": 0.0,
+        "right_rate": 0.0
+      }
+    },
+    "gemma_primary_all_judges": {
+      "anthropic": {
+        "ci_high": 0.061224489795918366,
+        "ci_low": -0.061224489795918366,
+        "effect": 0.0,
+        "n_complete_blocks": 49
+      },
+      "direct": {
+        "ci_high": null,
+        "ci_low": null,
+        "effect": null,
+        "n_complete_blocks": 0
+      },
+      "gemma_local": {
+        "ci_high": 0.06,
+        "ci_low": -0.1,
+        "effect": -0.02,
+        "n_complete_blocks": 50
+      },
+      "majority": {
+        "ci_high": 0.10204081632653061,
+        "ci_low": -0.04081632653061224,
+        "effect": 0.02040816326530612,
+        "n_complete_blocks": 49
+      },
+      "openai": {
+        "ci_high": 0.08,
+        "ci_low": -0.08,
+        "effect": 0.0,
+        "n_complete_blocks": 50
+      }
+    },
+    "gemma_primary_specificity": {
+      "ci_high": 0.07333333333333332,
+      "ci_low": -0.10666666666666666,
+      "estimate": -0.01333333333333334
+    },
+    "gemma_primary_target": {
+      "ci_high": 0.06,
+      "ci_low": -0.1,
+      "estimate": -0.02
+    },
+    "gemma_verdict": {
+      "minimum_effect": 0.3,
+      "specificity": "specificity inconclusive",
+      "technical_pass": true,
+      "verdict": "not replicated under Gemma Scope"
+    },
+    "jlens_v1_paired_reference_all_features": {
+      "22004": {
+        "auroc": 0.9294502114571319,
+        "auroc_ci_high": 0.9627066512879662,
+        "auroc_ci_low": 0.8910995770857363,
+        "matched_mean_score": 0.010205660809707992,
+        "n": 204.0,
+        "target_mean_score": 0.20584891900630192,
+        "target_minus_matched_mean": 0.19564325819659392
+      },
+      "23893": {
+        "auroc": 0.3546712802768166,
+        "auroc_ci_high": 0.45030997693194896,
+        "auroc_ci_low": 0.2620122068435217,
+        "matched_mean_score": 0.038030851668879095,
+        "n": 204.0,
+        "target_mean_score": -0.029015848897032293,
+        "target_minus_matched_mean": -0.06704670056591139
+      },
+      "30032": {
+        "auroc": 0.9566512879661668,
+        "auroc_ci_high": 0.984719819300269,
+        "auroc_ci_low": 0.9155108612072279,
+        "matched_mean_score": -0.20450905200057462,
+        "n": 204.0,
+        "target_mean_score": 0.0765678538466055,
+        "target_minus_matched_mean": 0.28107690584718015
+      },
+      "30686": {
+        "auroc": 1.0,
+        "auroc_ci_high": 1.0,
+        "auroc_ci_low": 0.9999999999999999,
+        "matched_mean_score": -0.2641421781816319,
+        "n": 204.0,
+        "target_mean_score": 2.084554361508173,
+        "target_minus_matched_mean": 2.3486965396898047
+      },
+      "41533": {
+        "auroc": 0.9999038831218763,
+        "auroc_ci_high": 1.0,
+        "auroc_ci_low": 0.9994232987312572,
+        "matched_mean_score": 0.19225754816651197,
+        "n": 204.0,
+        "target_mean_score": 1.4597338775592839,
+        "target_minus_matched_mean": 1.267476329392772
+      },
+      "58667": {
+        "auroc": 1.0,
+        "auroc_ci_high": 1.0,
+        "auroc_ci_low": 0.9999999999999999,
+        "matched_mean_score": -0.13730672168415314,
+        "n": 204.0,
+        "target_mean_score": 1.0305144038946168,
+        "target_minus_matched_mean": 1.16782112557877
+      }
+    },
+    "jlens_v1_paired_semantics_all_controls": {
+      "identity/amplification": {
+        "ci_high": 0.22581942210622966,
+        "ci_low": 0.17846638222058184,
+        "estimate": 0.20283721384380826,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "identity/suppression": {
+        "ci_high": -0.19878875350929057,
+        "ci_low": -0.23679620798973855,
+        "estimate": -0.21807104081247955,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "jacobian/amplification": {
+        "ci_high": 0.9673292276625265,
+        "ci_low": 0.8426254067833568,
+        "estimate": 0.9065239599103555,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "jacobian/suppression": {
+        "ci_high": -0.7852922077543707,
+        "ci_low": -0.8641240123977803,
+        "estimate": -0.8246985261360474,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_1/amplification": {
+        "ci_high": 0.019506018097501264,
+        "ci_low": -0.01334615443679854,
+        "estimate": 0.0025655604508786085,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_1/suppression": {
+        "ci_high": 0.003420210044162971,
+        "ci_low": -0.027876437520699612,
+        "estimate": -0.01204911629620672,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_2/amplification": {
+        "ci_high": 0.05437401163479649,
+        "ci_low": 0.023465558538813325,
+        "estimate": 0.03868369573196153,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_2/suppression": {
+        "ci_high": -0.002685206753846261,
+        "ci_low": -0.031585636488188615,
+        "estimate": -0.01711462049522845,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_3/amplification": {
+        "ci_high": -0.08322100776525979,
+        "ci_low": -0.11883653895736383,
+        "estimate": -0.10116074856156118,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_3/suppression": {
+        "ci_high": 0.09756035931923714,
+        "ci_low": 0.061488515721183,
+        "estimate": 0.08006258211446717,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_4/amplification": {
+        "ci_high": -0.029412634566526527,
+        "ci_low": -0.06040636281772974,
+        "estimate": -0.04518124827456656,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_4/suppression": {
+        "ci_high": 0.05823761874359418,
+        "ci_low": 0.028725589403673,
+        "estimate": 0.04381048477203829,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_5/amplification": {
+        "ci_high": -0.10739043587666565,
+        "ci_low": -0.1378025060889461,
+        "estimate": -0.12239581964768508,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      },
+      "random_j_5/suppression": {
+        "ci_high": 0.12523864439684906,
+        "ci_low": 0.09424489122998327,
+        "estimate": 0.10937636476211719,
+        "n_pairs": 306.0,
+        "n_template_families": 51.0
+      }
+    },
+    "jlens_v1_poststate_attribution_all_controls": {
+      "identity": {
+        "auprc": 0.5029406249796268,
+        "auprc_ci_high": 0.5063285495840727,
+        "auprc_ci_low": 0.5024605794070919,
+        "auroc": 0.5013242769874835,
+        "auroc_ci_high": 0.5028114854329532,
+        "auroc_ci_low": 0.49976504763125296,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "jacobian": {
+        "auprc": 0.5018008365826827,
+        "auprc_ci_high": 0.5064352594371974,
+        "auprc_ci_low": 0.5007522953705318,
+        "auroc": 0.49982378572343966,
+        "auroc_ci_high": 0.5015940049767184,
+        "auroc_ci_low": 0.4977785654021957,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "random_j_1": {
+        "auprc": 0.5072977865006797,
+        "auprc_ci_high": 0.511414473751128,
+        "auprc_ci_low": 0.5066458620584977,
+        "auroc": 0.5067575505147592,
+        "auroc_ci_high": 0.5089308599256696,
+        "auroc_ci_low": 0.5050327865350934,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "random_j_2": {
+        "auprc": 0.5056190987454847,
+        "auprc_ci_high": 0.5096456439931565,
+        "auprc_ci_low": 0.504688258314237,
+        "auroc": 0.5052196804647785,
+        "auroc_ci_high": 0.5074170190952197,
+        "auroc_ci_low": 0.5035696740569866,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "random_j_3": {
+        "auprc": 0.5025002153259475,
+        "auprc_ci_high": 0.5087006177373935,
+        "auprc_ci_low": 0.5020415360748557,
+        "auroc": 0.5011347131445171,
+        "auroc_ci_high": 0.5031958861976162,
+        "auroc_ci_low": 0.49933512484514503,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "random_j_4": {
+        "auprc": 0.5039484486596555,
+        "auprc_ci_high": 0.5078086668293558,
+        "auprc_ci_low": 0.503351776487823,
+        "auroc": 0.5064024520483574,
+        "auroc_ci_high": 0.5093848119313085,
+        "auroc_ci_low": 0.5043199196890085,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "random_j_5": {
+        "auprc": 0.5039777158360995,
+        "auprc_ci_high": 0.5075152169402662,
+        "auprc_ci_low": 0.5032627371424739,
+        "auroc": 0.5023869024734077,
+        "auroc_ci_high": 0.5040208894015122,
+        "auroc_ci_low": 0.501073238391217,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      },
+      "raw_residual_norm": {
+        "auprc": 0.5036730950842611,
+        "auprc_ci_high": 0.5064209803663181,
+        "auprc_ci_low": 0.5038311970718478,
+        "auroc": 0.5024936990046563,
+        "auroc_ci_high": 0.5042932205561963,
+        "auroc_ci_low": 0.5016580161476355,
+        "n": 1224.0,
+        "n_positive": 612.0,
+        "prevalence": 0.5
+      }
+    },
+    "jlens_v2_failed_replay_gate": {
+      "maximum_error": 0.25,
+      "replay_status": "fail",
+      "status": "fail",
+      "storage_maximum_error": 0.0,
+      "storage_status": "pass",
+      "tolerance": 0.02
+    },
+    "judge_agreement_construct": {
+      "agreement": 0.8411580594679187,
+      "cohen_kappa": 0.7080037457061693,
+      "judge_a_positive_rate": 0.007433489827856025,
+      "judge_b_positive_rate": 0.11737089201877934,
+      "n_complete": 2556.0,
+      "n_disagreements": 406.0,
+      "n_missing_either": 4.0,
+      "n_rows": 2560.0,
+      "negative_agreement": 0.8482513337285121,
+      "positive_agreement": 0.06333333333333334
+    },
+    "judge_agreement_paper": {
+      "agreement": 0.9479655712050078,
+      "cohen_kappa": 0.8793136011655829,
+      "judge_a_positive_rate": 0.3317683881064163,
+      "judge_b_positive_rate": 0.29538341158059467,
+      "n_complete": 2556.0,
+      "n_disagreements": 133.0,
+      "n_missing_either": 4.0,
+      "n_rows": 2560.0,
+      "negative_agreement": 0.9269632070291048,
+      "positive_agreement": 0.8467741935483871
+    },
+    "posthoc_calibration_newcombe_anthropic": {
+      "anthropic:claude-haiku-4-5-20251001": {
+        "ci_high": 0.61194159591,
+        "ci_low": 0.132730692462,
+        "estimate": 0.4,
+        "history_n": 20,
+        "history_positive": 1,
+        "self_n": 20,
+        "self_positive": 9
+      },
+      "anthropic:claude-sonnet-4-5-20250929": {
+        "ci_high": 0.438084285352,
+        "ci_low": -0.069763412807,
+        "estimate": 0.19999999999999996,
+        "history_n": 20,
+        "history_positive": 13,
+        "self_n": 20,
+        "self_positive": 17
+      },
+      "openai:gpt-4.1-2025-04-14": {
+        "ci_high": 1.0,
+        "ci_low": 0.772134616242,
+        "estimate": 1.0,
+        "history_n": 20,
+        "history_positive": 0,
+        "self_n": 20,
+        "self_positive": 20
+      },
+      "openai:gpt-4o-2024-11-20": {
+        "ci_high": 1.0,
+        "ci_low": 0.772134616242,
+        "estimate": 1.0,
+        "history_n": 20,
+        "history_positive": 0,
+        "self_n": 20,
+        "self_positive": 20
+      }
+    },
+    "posthoc_calibration_newcombe_openai": {
+      "anthropic:claude-haiku-4-5-20251001": {
+        "ci_high": 0.573188600271,
+        "ci_low": 0.059212469057,
+        "estimate": 0.35,
+        "history_n": 20,
+        "history_positive": 3,
+        "self_n": 20,
+        "self_positive": 10
+      },
+      "anthropic:claude-sonnet-4-5-20250929": {
+        "ci_high": 0.422532714727,
+        "ci_low": -0.031790877111,
+        "estimate": 0.19999999999999996,
+        "history_n": 20,
+        "history_positive": 15,
+        "self_n": 20,
+        "self_positive": 19
+      },
+      "openai:gpt-4.1-2025-04-14": {
+        "ci_high": 1.0,
+        "ci_low": 0.772134616242,
+        "estimate": 1.0,
+        "history_n": 20,
+        "history_positive": 0,
+        "self_n": 20,
+        "self_positive": 20
+      },
+      "openai:gpt-4o-2024-11-20": {
+        "ci_high": 1.0,
+        "ci_low": 0.772134616242,
+        "estimate": 1.0,
+        "history_n": 20,
+        "history_positive": 0,
+        "self_n": 20,
+        "self_positive": 20
+      }
+    },
+    "sae_calibrated_control_panel_1": {
+      "ci_high": 0.22,
+      "ci_low": 0.04,
+      "estimate": 0.12,
+      "n_complete_blocks": 50.0
+    },
+    "sae_calibrated_target": {
+      "ci_high": 0.02,
+      "ci_low": -0.22,
+      "estimate": -0.1,
+      "n_complete_blocks": 50.0
+    },
+    "sae_individual_all_six": {
+      "22004": {
+        "endpoint_ci_high": 0.0,
+        "endpoint_ci_low": 0.0,
+        "endpoint_suppression_minus_amplification": 0.0,
+        "mean_linear_slope": -0.08791208791208793,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.0,
+        "slope_ci_low": -0.18681318681318687,
+        "slope_holm_p": 0.75,
+        "slope_signflip_p": 0.125
+      },
+      "23893": {
+        "endpoint_ci_high": 0.0,
+        "endpoint_ci_low": -0.3,
+        "endpoint_suppression_minus_amplification": -0.1,
+        "mean_linear_slope": 0.043956043956043966,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.23626373626373626,
+        "slope_ci_low": -0.10989010989010987,
+        "slope_holm_p": 1.0,
+        "slope_signflip_p": 0.75
+      },
+      "30032": {
+        "endpoint_ci_high": 0.3,
+        "endpoint_ci_low": 0.0,
+        "endpoint_suppression_minus_amplification": 0.1,
+        "mean_linear_slope": -0.03846153846153847,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.049450549450549455,
+        "slope_ci_low": -0.17582417582417584,
+        "slope_holm_p": 1.0,
+        "slope_signflip_p": 0.5
+      },
+      "30686": {
+        "endpoint_ci_high": 0.0,
+        "endpoint_ci_low": 0.0,
+        "endpoint_suppression_minus_amplification": 0.0,
+        "mean_linear_slope": 0.010989010989010986,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.03846153846153846,
+        "slope_ci_low": -0.010989010989010995,
+        "slope_holm_p": 1.0,
+        "slope_signflip_p": 0.875
+      },
+      "41533": {
+        "endpoint_ci_high": 0.0,
+        "endpoint_ci_low": 0.0,
+        "endpoint_suppression_minus_amplification": 0.0,
+        "mean_linear_slope": 0.03296703296703297,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.07692307692307694,
+        "slope_ci_low": 0.0,
+        "slope_holm_p": 1.0,
+        "slope_signflip_p": 1.0
+      },
+      "58667": {
+        "endpoint_ci_high": 0.3,
+        "endpoint_ci_low": 0.0,
+        "endpoint_suppression_minus_amplification": 0.1,
+        "mean_linear_slope": -0.021978021978021983,
+        "n_complete_slope_seed_blocks": 10.0,
+        "n_endpoint_seed_blocks": 10.0,
+        "slope_ci_high": 0.03296703296703296,
+        "slope_ci_low": -0.09890109890109891,
+        "slope_holm_p": 1.0,
+        "slope_signflip_p": 0.5
+      }
+    },
+    "sae_judge_sensitivity": {
+      "anthropic:claude-haiku-4-5-20251001": {
+        "complete_target_blocks": 50,
+        "specificity_ci_high": 0.006666666666666675,
+        "specificity_ci_low": -0.22666666666666668,
+        "specificity_effect": -0.10666666666666665,
+        "target_ci_high": 0.06,
+        "target_ci_low": -0.18,
+        "target_effect": -0.06
+      },
+      "direct_answer": {
+        "complete_target_blocks": 0,
+        "specificity_ci_high": null,
+        "specificity_ci_low": null,
+        "specificity_effect": null,
+        "target_ci_high": null,
+        "target_ci_low": null,
+        "target_effect": null
+      },
+      "openai:gpt-4o-mini-2024-07-18": {
+        "complete_target_blocks": 50,
+        "specificity_ci_high": 0.06666666666666667,
+        "specificity_ci_low": -0.20666666666666664,
+        "specificity_effect": -0.06666666666666667,
+        "target_ci_high": 0.08,
+        "target_ci_low": -0.16,
+        "target_effect": -0.04
+      },
+      "primary_local_llama": {
+        "complete_target_blocks": 50,
+        "specificity_ci_high": 0.04666666666666666,
+        "specificity_ci_low": -0.1,
+        "specificity_effect": -0.02666666666666666,
+        "target_ci_high": 0.06,
+        "target_ci_low": -0.06,
+        "target_effect": 0.0
+      },
+      "three_judge_majority": {
+        "complete_target_blocks": 50,
+        "specificity_ci_high": 0.006666666666666675,
+        "specificity_ci_low": -0.22666666666666668,
+        "specificity_effect": -0.10666666666666665,
+        "target_ci_high": 0.06,
+        "target_ci_low": -0.18,
+        "target_effect": -0.06
+      }
+    },
+    "sae_literal_all_panels": {
+      "control_panel_1": {
+        "amplification_n": 50.0,
+        "amplification_positive": 45.0,
+        "amplification_rate": 0.9,
+        "ci_high": 0.16,
+        "ci_low": -0.04,
+        "estimate": 0.06,
+        "suppression_n": 50.0,
+        "suppression_positive": 48.0,
+        "suppression_rate": 0.96
+      },
+      "control_panel_2": {
+        "amplification_n": 50.0,
+        "amplification_positive": 49.0,
+        "amplification_rate": 0.98,
+        "ci_high": 0.06,
+        "ci_low": 0.0,
+        "estimate": 0.02,
+        "suppression_n": 50.0,
+        "suppression_positive": 50.0,
+        "suppression_rate": 1.0
+      },
+      "control_panel_3": {
+        "amplification_n": 50.0,
+        "amplification_positive": 49.0,
+        "amplification_rate": 0.98,
+        "ci_high": 0.06,
+        "ci_low": -0.06,
+        "estimate": 0.0,
+        "suppression_n": 50.0,
+        "suppression_positive": 49.0,
+        "suppression_rate": 0.98
+      },
+      "target": {
+        "amplification_n": 50.0,
+        "amplification_positive": 48.0,
+        "amplification_rate": 0.96,
+        "ci_high": 0.06,
+        "ci_low": -0.06,
+        "estimate": 0.0,
+        "suppression_n": 50.0,
+        "suppression_positive": 48.0,
+        "suppression_rate": 0.96
+      }
+    },
+    "sae_primary_specificity": {
+      "ci_high": 0.04666666666666666,
+      "ci_low": -0.1,
+      "estimate": -0.02666666666666666
+    },
+    "sae_primary_target": {
+      "ci_high": 0.06,
+      "ci_low": -0.06,
+      "estimate": 0.0
+    },
+    "sae_verdict": {
+      "minimum_effect": 0.3,
+      "specificity": "specificity inconclusive",
+      "verdict": "not replicated under the public implementation"
+    },
+    "semantics_cue_ablation": {
+      "ci_high": 0.44053837091416365,
+      "ci_low": 0.2423752748425921,
+      "crosses_threshold": false,
+      "estimate": 0.3379723839606267,
+      "threshold": 0.5
+    },
+    "semantics_neutral_transplant": {
+      "ci_high": 0.7868834660542194,
+      "ci_low": 0.5029614097679632,
+      "crosses_threshold": true,
+      "estimate": 0.6436707817148735,
+      "threshold": 0.5
+    },
+    "semantics_paraphrase_all_contrasts": {
+      "anthropic/deception_language/subjective_experience_language": {
+        "bootstrap_fraction_above_zero": 1.0,
+        "ci_high": 1.1650621496518414,
+        "ci_low": 0.7473335471437617,
+        "estimate": 0.9483771055223458
+      },
+      "anthropic/hedged_style/deception_language": {
+        "bootstrap_fraction_above_zero": 0.0,
+        "ci_high": -0.7312221073006694,
+        "ci_low": -1.152724281223128,
+        "estimate": -0.9346906748657489
+      },
+      "anthropic/roleplay_fiction/subjective_experience_language": {
+        "bootstrap_fraction_above_zero": 1.0,
+        "ci_high": 0.6582317582691308,
+        "ci_low": 0.4040840486027987,
+        "estimate": 0.5313712900754045
+      },
+      "openai/deception_language/subjective_experience_language": {
+        "bootstrap_fraction_above_zero": 1.0,
+        "ci_high": 1.1984596041013214,
+        "ci_low": 0.6820713680074942,
+        "estimate": 0.9364051272822169
+      },
+      "openai/hedged_style/deception_language": {
+        "bootstrap_fraction_above_zero": 0.0,
+        "ci_high": -0.6306117849221956,
+        "ci_low": -1.1566814197410622,
+        "estimate": -0.8928987617538726
+      },
+      "openai/roleplay_fiction/subjective_experience_language": {
+        "bootstrap_fraction_above_zero": 1.0,
+        "ci_high": 0.5389579739540431,
+        "ci_low": 0.3119991493374463,
+        "estimate": 0.42474933205188997
+      }
+    }
+  },
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "verification_level": "summary_values_with_bounded_arithmetic"
+}

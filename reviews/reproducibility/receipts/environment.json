@@ -1,0 +1,16 @@
+{
+  "child_environment": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "git_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "git_status": "## main...origin/main\n M technical_blog_posts/Feature_IDs_Are_Not_Explanations.md\n?? technical_blog_posts/bootstrap-sampling-units.svg\n?? technical_blog_posts/bootstrap-with-replacement.svg\n",
+  "ignore_rule": ".gitignore:276:out/ (original scratch ignored)",
+  "numpy_version": "2.2.6",
+  "pandas_version": "2.3.3",
+  "python_executable": "${PYTHON}",
+  "python_version": "3.10.15 (main, Sep  7 2024, 00:20:06) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "started_at_utc": "2026-09-29T20:10:18.265444+00:00"
+}

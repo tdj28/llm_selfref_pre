@@ -1,0 +1,172 @@
+{
+  "artifacts": {
+    "PLAN.json": {
+      "bytes": 221961,
+      "sha256": "d004522a4aeede40e2050b9a8a57ef6a98e86a89dc253c898815aca79d6266c1",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/plan_20260930/PLAN.json"
+    },
+    "RELEASE_MANIFEST.json": {
+      "bytes": 179458,
+      "sha256": "a87e295babe735bb1609b76e512dc7b1244e51c36fccc51bc6c326bd3a5c5e1f",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json"
+    },
+    "analysis/curves.csv": {
+      "bytes": 12181,
+      "sha256": "a6deddd7b5c18fd4997650b2944531af23bd1f15b69e8ad2d4a27af3c9fe42ea",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/analysis/curves.csv"
+    },
+    "analysis/dose_curves.pdf": {
+      "bytes": 19860,
+      "sha256": "edbcbf3de9846ca8b0c8a284100692408762c1e7a70d54ea4481769314065b2e",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/analysis/dose_curves.pdf"
+    },
+    "analysis/dose_curves.png": {
+      "bytes": 92787,
+      "sha256": "fbf88501f111ce749552f138dd38554d3ea8842b89af13eed6e708ba3a3e00b9",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/analysis/dose_curves.png"
+    },
+    "analysis/summary.json": {
+      "bytes": 2334,
+      "sha256": "8b48a253ec442299b8992fe142973b4e8889e234f4bc57da3d5bb4590c57e42f",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/analysis/summary.json"
+    },
+    "extra_figures/baseline_bridge.pdf": {
+      "bytes": 17069,
+      "sha256": "a63d6ec67e68aca0d490ddfe214c9815d628a013b02bba088d50fb96959ff0e1",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/extra_figures/baseline_bridge.pdf"
+    },
+    "extra_figures/baseline_bridge.png": {
+      "bytes": 64319,
+      "sha256": "dba181a452aab6f5323e794a2e3fb180091e1a62579872430fcbf15cf015e1fb",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/extra_figures/baseline_bridge.png"
+    },
+    "extra_figures/native_reencoding.pdf": {
+      "bytes": 111258,
+      "sha256": "9c3f880e3205e50e74a5166ac02c1b03c09ff81af69b2f407a7a8e61527c52c5",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/extra_figures/native_reencoding.pdf"
+    },
+    "extra_figures/native_reencoding.png": {
+      "bytes": 270998,
+      "sha256": "11cae58dcb7561492c107e7af220bf606114be95e19d84cca32acf3d818a08cb",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/extra_figures/native_reencoding.png"
+    },
+    "jlens_index.csv": {
+      "bytes": 657020,
+      "derived_from": "Turn 2 last_prompt aggregate case values from secondary/paired_cases.csv",
+      "sha256": "52f4df7f8c3e66fff2340a698f6d8ca0412a45dc681a32785ea2403fce8d95a9",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe"
+    },
+    "jlens_overview.csv": {
+      "bytes": 94010,
+      "derived_from": "Equal two-seed panel means and target minus equal mean of three controls from jlens_index.csv",
+      "sha256": "d347a96eac176019b4b22e54592bc7e01a92133c842d284f284a82b04345e4a9",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe"
+    },
+    "secondary/diagnostics.json": {
+      "bytes": 695,
+      "sha256": "298aaafd0364ac2f48e077cb798a2ac9a8727de5ab6befbdad23825d5b5f72da",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/diagnostics.json"
+    },
+    "secondary/paired_jlens_steered_negative.pdf": {
+      "bytes": 30924,
+      "sha256": "6b44b8a01d7d6beb664e312a1624973372c1a28ba7fa62ea2b468fe3ab01fe9c",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_steered_negative.pdf"
+    },
+    "secondary/paired_jlens_steered_negative.png": {
+      "bytes": 113681,
+      "sha256": "81162cd14ffcbcdbe953f0a0f53e9171985df7f1ec27f557b502f4f800bac8a2",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_steered_negative.png"
+    },
+    "secondary/paired_jlens_steered_positive.pdf": {
+      "bytes": 31714,
+      "sha256": "7f0f7e0b3275bd0573c0df170b64e35318d606ca87d98869bf09499337975ea7",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_steered_positive.pdf"
+    },
+    "secondary/paired_jlens_steered_positive.png": {
+      "bytes": 113816,
+      "sha256": "72a09a68ef0dd8433bfe9e881e0a1d862f486f1ac0dc729a27f2678f1b455349",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_steered_positive.png"
+    },
+    "secondary/paired_jlens_zero_negative.pdf": {
+      "bytes": 31538,
+      "sha256": "da0a83725432acbcce3604b66b69f624f8810d8b0e58440b6c3f11c96a57e5d2",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_zero_negative.pdf"
+    },
+    "secondary/paired_jlens_zero_negative.png": {
+      "bytes": 112916,
+      "sha256": "62b0cdd8daa71e922e08028e91056f7e6679d7f57e2e35105ff2f6cd04fcb23b",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_zero_negative.png"
+    },
+    "secondary/paired_jlens_zero_positive.pdf": {
+      "bytes": 31841,
+      "sha256": "cba2b8f00bade4f22300c4de2f24a467ce1790794326d3f9ced802524a1a5ec5",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_zero_positive.pdf"
+    },
+    "secondary/paired_jlens_zero_positive.png": {
+      "bytes": 113042,
+      "sha256": "2b6ddb80ce32ca66c0d6d0ba83367355285d739cbc65c2599b396f58a7ba7a31",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+      "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_jlens_zero_positive.png"
+    },
+    "source_values.tex": {
+      "bytes": 1528,
+      "derived_from": "Verified behavioral point estimates and layer-78 zero-history deception overview contrasts",
+      "sha256": "946b073fa48e509f73002ffd19dc82cbd5bbfffcf902b49c275e50faa78f4772",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe"
+    },
+    "trial_index.csv": {
+      "bytes": 288466,
+      "derived_from": "All planned behavioral rows at source_commit",
+      "sha256": "092a493c3f940d7e28cfa497f34c70e86de8eaa290d6789cc3f668a0a38df352",
+      "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe"
+    }
+  },
+  "completion_json": "{\"freeze_commit\":\"e10043c7edb1136b5f50159d789b59f11a8eb8be\",\"pass\":true,\"plan_sha256\":\"d004522a4aeede40e2050b9a8a57ef6a98e86a89dc253c898815aca79d6266c1\",\"rows\":1131}\n",
+  "generators": {
+    "evidence/build_source_alignment.py": "14e77fc331f76a082e8e93af33b876e47e36ec5ad81a3d14f7ec5c89dcc3a78c",
+    "scripts/verify_rubric_audit.py": "0bf076b1b96cc92d34f7c83381e1c418cb81d6c2254d8cbf0d744c44693943c5",
+    "scripts/verify_source_alignment.py": "6e451d63cb89a5f7f06801dd9bb243a24c885f84ca6223461094a7800c0e25e4"
+  },
+  "jlens_source": {
+    "bytes": 11462216,
+    "sha256": "d46df3f71398f4b3cb2686341e24674befda03f86d7e4e95ffd47409a3650735",
+    "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+    "source_path": "data/berg_source_replication/source_aligned_v1_20261001/secondary/paired_cases.csv"
+  },
+  "schema": "berg_source_alignment_v1",
+  "scope": {
+    "bootstrap_intervals_recomputed": false,
+    "figures_independently_redrawn": false,
+    "human_validation": false,
+    "interpretation": "Paper-rubric labels, not validated experience reports; public operator only",
+    "jlens_case_values_reconstructed": false,
+    "jlens_intervals_recomputed": false,
+    "jlens_overview": "588 descriptive normalized-logit contrasts from source-reduced case values; fixed panels and two seeds, no raw-state or token-to-case reconstruction",
+    "jlens_overview_reductions_recomputed": true,
+    "raw_state_to_jlens_reconstructed": false,
+    "secondary_diagnostics": "Source diagnostics JSON copied and hash-verified only; its numerical reductions are not reconstructed",
+    "source_figures": "Source-rendered figures copied byte-for-byte and hash-verified only",
+    "verification": "Behavioral point estimates, counts, paired-block arithmetic, missingness bounds and J-lens overview means only"
+  },
+  "source_commit": "ef10a0349e047272212319dadf484c3281e60bbe",
+  "source_release_path": "data/berg_source_replication/source_aligned_v1_20261001",
+  "source_repository": "https://github.com/tdj28/llm_selfref_pre"
+}

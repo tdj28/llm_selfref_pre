@@ -1,0 +1,87 @@
+{
+  "checked_at_utc": "2026-09-29T20:24:31.430364+00:00",
+  "comparison_exclusions": [
+    "Gemma audit wall-clock timestamp",
+    "Gemma interval replay host source-path prefix"
+  ],
+  "input_bytes": 34058236,
+  "input_files": 27,
+  "jobs": [
+    {
+      "argv_roles": [
+        "${PYTHON}",
+        "-B",
+        "${OUT}/repo/experiments/causal_transplant/audit_headline_point_estimates.py",
+        "${OUT}/repo/out/response_release_20260929/repro/copies/data/causal_transplant/confirmatory_v1_20260709"
+      ],
+      "exit_code": 0,
+      "matches_original_receipt": true,
+      "name": "causal",
+      "seconds": 0.3483066670014523,
+      "started_at_utc": "2026-09-29T20:24:20.954703+00:00"
+    },
+    {
+      "argv_roles": [
+        "${PYTHON}",
+        "-B",
+        "${OUT}/repo/experiments/exp2_sae/audit_public_sae_consciousness_headlines.py",
+        "--generations",
+        "${OUT}/repo/out/response_release_20260929/repro/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl",
+        "--local-judgments",
+        "${OUT}/repo/out/response_release_20260929/repro/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/judging/local_llama_judgments.jsonl",
+        "--analysis-dir",
+        "${OUT}/repo/out/response_release_20260929/repro/copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis"
+      ],
+      "exit_code": 0,
+      "matches_original_receipt": true,
+      "name": "public_sae",
+      "seconds": 1.8579107919940725,
+      "started_at_utc": "2026-09-29T20:24:21.303296+00:00"
+    },
+    {
+      "argv_roles": [
+        "${PYTHON}",
+        "-B",
+        "${OUT}/repo/experiments/exp2_sae/audit_gemma_scope_9b_headlines.py",
+        "${OUT}/repo/out/response_release_20260929/repro/copies/data/gemma_scope_9b/confirmatory_v1_20260711"
+      ],
+      "exit_code": 0,
+      "matches_original_receipt": true,
+      "name": "gemma",
+      "seconds": 7.817205750005087,
+      "started_at_utc": "2026-09-29T20:24:23.161398+00:00"
+    },
+    {
+      "argv_roles": [
+        "${PYTHON}",
+        "-B",
+        "${OUT}/repo/out/response_release_20260929/repro/supplement_raw_checks.py"
+      ],
+      "exit_code": 0,
+      "matches_original_receipt": true,
+      "name": "supplement",
+      "seconds": 0.24348787500639446,
+      "started_at_utc": "2026-09-29T20:24:30.978853+00:00"
+    },
+    {
+      "argv_roles": [
+        "${PYTHON}",
+        "-B",
+        "${OUT}/repo/out/response_release_20260929/repro/replay_gemma_role_intervals.py"
+      ],
+      "exit_code": 0,
+      "matches_original_receipt": true,
+      "name": "gemma_intervals",
+      "seconds": 0.18825249999645166,
+      "started_at_utc": "2026-09-29T20:24:31.222570+00:00"
+    }
+  ],
+  "numpy_version": "2.2.6",
+  "pandas_version": "2.3.3",
+  "pinned_inputs_hash_checked_and_unchanged": true,
+  "public_safety_rerun": false,
+  "python_version": "3.10.15 (main, Sep  7 2024, 00:20:06) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "scope": "portable packaging verification; not independent human review",
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "status": "pass"
+}

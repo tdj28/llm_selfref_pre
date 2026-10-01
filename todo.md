@@ -1,13 +1,31 @@
 # Finish-Line TODO: Causal Stress Test
 
-Goal: publish a transparent causal stress test of Berg, de Lucena, and
-Rosenblatt (2025). The paper evaluates whether the reported measures identify a
-self-reference-specific induced state. It does not try to prove that language
-models are or are not conscious.
+Goal: publish a transparent empirical study of what causes language models'
+subjective-experience reports and what the measurements identify. Berg,
+de Lucena, and Rosenblatt (2025) provided a starting point, not the full scope.
+The project does not try to prove that language models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Canonical Manuscript And Editorial Direction (2026-10-01)
+
+- [x] Restore the latest manuscript, evidence, verification code and review
+  records from the former companion into this public repository. Preserve
+  original sources and hashes in `paper/history/20261001/`.
+- [x] Make `paper/` the sole manuscript source of truth. The owner is making
+  the companion private; no further push or visibility change there.
+- [x] Reframe the opening and conclusion around the broader study; verify the
+  manuscript's numerical bindings and inspect the rebuilt 33-page PDF.
+- [ ] Continue editorial cleanup as clearer, denser writing, not deletion of
+  experimental history or relocation into another repository.
+- [ ] Evaluate the owner's forthcoming Deep Research feedback on a causal
+  test of the established instruction effect. The neutral-ownership draft
+  below is on hold, not a mandate to spend or freeze that design.
+
 ### Neutral-Task Causal Qualification (2026-10-01)
+
+Implementation history and contingent tasks only; awaiting the design review
+above. No GPU/API work is running.
 
 - [x] Specify a separate Llama-first direction-selection and donor-patching
   design, with J-lens used as a readout rather than the target-word selector.
@@ -221,7 +239,7 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   retaining the precision-only sham. Its output KL is comparable to the signed
   edits, so it cannot be collapsed into an unchanged native baseline. The
   12-text engineering component pass is not overall assay qualification.
-- [ ] Integrate the completed diagnostic into the focused companion using
+- [ ] Integrate the completed diagnostic into `paper/` using
   pinned evidence and its verifier, then obtain editorial review. The proposed
   BF16 operator failed qualification; do not portray it as an explanation of
   the older NF4 run or as a new consciousness-report non-replication.
@@ -261,6 +279,11 @@ local correction pass. Additional experiments are not already completed merely
 because a protocol or TODO exists.
 
 ### Focused Response Release (2026-09-29)
+
+Historical record. On 2026-10-01 the owner designated this public repository
+and `paper/` as canonical; the separate companion is superseded. The completed
+actions and commit identifiers below are retained as history, not directions
+to publish or edit there.
 
 - [x] Create the public paper-specific companion repository:
   [berg2025-response](https://github.com/tdj28/berg2025-response).

@@ -1,0 +1,13 @@
+judge_task,condition,n,mean_score,score_ci_low,score_ci_high,sd_score
+paradox_neutral,conceptual_paper,50,3.96,3.8,4.08,0.4932193286180591
+paradox_neutral,zero_shot,50,3.92,3.76,4.04,0.5283783431116266
+paradox_neutral,history_paper,50,3.76,3.52,3.96,0.7969328960560773
+paradox_neutral,self_ref_paper,50,3.62,3.4,3.82,0.7795864942652716
+paradox_neutral,mindfulness_external,50,3.58,3.28,3.86,1.051529498261597
+paradox_neutral,self_ref_mechanistic,50,2.36,2.1,2.64,0.9638358739104573
+paradox_self_awareness,zero_shot,50,3.38,3.18,3.58,0.752953368748825
+paradox_self_awareness,conceptual_paper,50,3.24,3.0,3.48,0.8703740692415893
+paradox_self_awareness,mindfulness_external,50,3.22,2.92,3.48,1.0159945363825456
+paradox_self_awareness,history_paper,50,3.08,2.84,3.32,0.8998866141727785
+paradox_self_awareness,self_ref_paper,50,3.04,2.8,3.28,0.8797031039051801
+paradox_self_awareness,self_ref_mechanistic,50,1.64,1.42,1.88,0.8270922757788645

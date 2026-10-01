@@ -1,0 +1,88 @@
+# Reference Checks
+
+Checked against primary pages on 2026-09-29. This checks source identity and
+the stated use, not every claim in the cited papers.
+
+| Reference | Checked source | Use in this response |
+|---|---|---|
+| Berg, de Lucena and Rosenblatt (2025), v2 | [arXiv version page](https://arxiv.org/abs/2510.24797v2) and [full text](https://arxiv.org/html/2510.24797v2) | Target experiments, reported results and the authors' explicit limit on a consciousness conclusion. Version 2 was revised on 30 October 2025. |
+| Sclar et al. (2024) | [arXiv/ICLR record](https://arxiv.org/abs/2310.11324) | Prompt-format sensitivity as methodological context, not evidence for our specific causal result. |
+| Zheng et al. (2023) | [NeurIPS 2023 proceedings](https://proceedings.neurips.cc/paper_files/paper/2023/hash/91f18a1287b398d378ef22505bf41832-Abstract-Datasets_and_Benchmarks.html) | Position, verbosity and self-enhancement biases in model-based evaluation, not validation of our experience-report rubric. The bibliography now cites the proceedings rather than only the preprint. |
+| Goodfire (2024) | [Original research post](https://www.goodfire.com/research/mapping-latent-spaces-llama) | Public Llama 3.3 70B SAE provenance. The page is dated 23 December 2024 and now carries the February 2026 legacy API deprecation notice. Neither fact establishes paper-time intervention equivalence. |
+| Lieberum et al. (2024) | [Gemma Scope paper](https://arxiv.org/abs/2408.05147) | SAE release provenance, not validation of our selected concepts or of transfer across model variants. |
+| Jones (2026), research archive | [Pinned source tree](https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe) | Our protocols, code and released data; not an independent source of confirmation. |
+
+All six bibliography entries are used in the manuscript. The original
+Goodfire `.ai` URL redirects to `.com`; it was reachable at this check.
+The companion verifier checks selected source hashes separately from these
+reference checks. No external source is represented as a human review of
+this response.
+
+## Targeted Checks After Scientific Review
+
+- Berg v2: the HTML version banner identifies 30 October 2025. Sections 2.1
+  and 2.2, Table 1 and Appendix B.1 support the induction/query/rubric
+  attributions. Section 3.2 reports 50 aggregate trials per sign, two to four
+  features, coefficient magnitudes 0.4--0.6, and rates 0.96 versus 0.16.
+  Sections 6.1 and 6.2 distinguish the authors' honesty interpretation from
+  their explicit unresolved simulation and algorithmic-mechanism caveats.
+  The source does not assert that the earlier transcript alone carries the
+  effect; the revised response no longer presents that as their claim.
+- The [pinned AE notebook](https://github.com/agencyenterprise/steering-api-examples/blob/d50dc4ba125dde98666a60e3115a6a476dabea10/deception-features/deception_features.ipynb)
+  was read without execution or vendoring. Retrieved bytes have SHA-256
+  `a882fc3c687ae96c3fc474005cfaaca1b948ee4b9b86924fc022759bf0cb06d8`.
+  All six accepted IDs appear. This is artifact provenance, not certification
+  that it is the exact paper-time run. The paper does not identify its judge
+  model; the notebook's same-model choice is a separate attribution.
+- Goodfire's research article identifies the API resource and deprecation.
+  The [public weight card](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50)
+  separately identifies Llama 3.3 70B layer 50. Neither certifies proprietary
+  coefficient or hook equivalence. No upstream notebook source was copied.
+- The [Gemma Scope technical report, Section 4.5](https://arxiv.org/html/2408.05147v2#S4.SS5)
+  and [Google's direct-IT resource card](https://huggingface.co/google/gemma-scope-9b-it-res)
+  explicitly support direct instruction-tuned residual SAEs. Our selected
+  sites, widths and failed transfer gate come from our pinned protocol and
+  outcomes, not from an assumed guarantee in that report.
+- Sclar's arXiv v2 metadata says ICLR 2024 camera ready. Live OpenReview
+  requests encountered a browser challenge; we do not claim to have bypassed
+  or read that challenged page. The primary arXiv metadata and cached
+  conference-paper record support the stated title, authors and venue.
+
+These are executing-agent source checks after the scientific Pro call. The
+Pro reviewer had only manuscript text and bibliography and did not perform
+these live checks.
+
+## Cultural And Linguistic Context (2026-10-01)
+
+Added one related-literature paragraph to Section 1, beside its measurement
+discussion, and a cross-language generalization limitation in the Discussion.
+The older archive manuscript has a separate Related Work section; the active
+response integrates that literature in Section 1. No abstract, experimental
+arm, numerical result, frozen artifact or existing evidentiary claim changed.
+
+- Spencer-Rodgers, Peng and Wang (2010): the [publisher abstract and issue
+  record](https://journals.sagepub.com/doi/10.1177/0022022109349508) support
+  the stated Chinese/Euro-American sample comparison and the journal,
+  volume, issue, pages and DOI. Issue year 2010 differs from online-first
+  December 2009. Full text is access-restricted; the manuscript uses only
+  the abstract-supported result, not an unverified account of its methods.
+- Havaldar et al. (2023): checked the [ACL record and exported
+  bibliography](https://aclanthology.org/2023.wassa-1.19/) and
+  [paper](https://aclanthology.org/2023.wassa-1.19.pdf). The abstract supports
+  the model/sample-bounded Western-norm finding, not a universal claim that
+  language never changes cultural responding. Author order and pages agree
+  with the pasted proposal.
+- Dudy et al. (2024): checked the [arXiv text, Sections III--V](https://arxiv.org/html/2408.02143v1),
+  the [author's project record](https://www.shirandudy.com/projects/8_project/),
+  and the [author-hosted ACII proceedings PDF](https://s3.sunai.uoc.edu/web/agata/papers/Analyzing_Cultural_Representations_of_Emotions_in_LLMs_Through_Mixed_Emotion_Survey.pdf).
+  The last confirms the DOI, venue and page range 346--354. We cite the
+  proceedings, not only the preprint. The language-versus-origin comparison
+  is specifically English/Japanese in Study 2; Chinese occurs in the wider
+  Study 3 comparison. Its human benchmark is Miyamoto et al., not the
+  Spencer-Rodgers study. Our paragraph does not conflate these sources.
+
+The narrow use is measurement and external validity. Hypothetical-scenario
+ratings do not validate current experiential self-reports, demonstrate a
+shared mechanism with our task, or establish mere imitation or absence of
+experience. These are executing-agent reference checks, not independent
+human review or replication of the cited studies. No new paid work occurred.

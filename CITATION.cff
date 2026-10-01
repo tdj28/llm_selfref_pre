@@ -19,7 +19,7 @@ keywords:
   - mechanistic interpretability
 preferred-citation:
   type: article
-  title: "What Causes Language Models to Report Subjective Experience? A Multi-Model Causal Stress Test of Self-Referential Prompting"
+  title: "Subjective-Experience Reports: Instruction Effects and Public-Weight Steering Tests"
   authors:
     - family-names: Jones
       given-names: T.

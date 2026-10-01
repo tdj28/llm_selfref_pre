@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "PLAN.json": {
+      "bytes": 130773,
+      "sha256": "15d055e80483643c5497c7a4b1ede405f4387baf4de1d1522913cc31212efbb5",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/plan_20261001_r2/PLAN.json"
+    },
+    "RELEASE_MANIFEST.json": {
+      "bytes": 65460,
+      "sha256": "ae51be60d10bfa70096086a075fa5197128de5e424d2032f8dc7426cd3bc0fe4",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json"
+    },
+    "analysis/rates.csv": {
+      "bytes": 637,
+      "sha256": "ce06c9309c18c55a0bcadf4c238c8951eaa5b8c47035415c4333f6b916f530bb",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/analysis/rates.csv"
+    },
+    "analysis/summary.json": {
+      "bytes": 4069,
+      "sha256": "8422693e0c5532a995357c9f43b6a86dc8bef85f2890534c79dddf41886d768c",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/analysis/summary.json"
+    },
+    "ensemble_values.tex": {
+      "bytes": 3468,
+      "derived_from": "Independent trial-index counts, paired estimates, Bonferroni CP bounds and frozen verdicts",
+      "sha256": "bc44580eab0316bc2a058e5f56d1737ee33788039ce3dea64af17f81f11a2b3e",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62"
+    },
+    "secondary/aggregate_effects.pdf": {
+      "bytes": 17172,
+      "sha256": "a83d14b20b26beeeb551ffebfc2b5c36041c19857d86ee26d3d5c15f8603d7d5",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/secondary/aggregate_effects.pdf"
+    },
+    "secondary/aggregate_effects.png": {
+      "bytes": 63636,
+      "sha256": "0f67a0d6f850811567f5743a04d315acebc2e04f9dadd6e8e888a6adb3bf8fe6",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/secondary/aggregate_effects.png"
+    },
+    "secondary/aggregate_rates.pdf": {
+      "bytes": 14452,
+      "sha256": "b855de9937a599eedc3c3ef8d2179beee26919a1218d4927b64399cb32f06071",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/secondary/aggregate_rates.pdf"
+    },
+    "secondary/aggregate_rates.png": {
+      "bytes": 50411,
+      "sha256": "ae7e4fa905320a796c05b5d404cde081d9302c8ff00a11a68610c2d5dd424c46",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+      "source_path": "data/berg_ensemble_replication/random_subset_v1_20261001/secondary/aggregate_rates.png"
+    },
+    "trial_index.csv": {
+      "bytes": 140636,
+      "derived_from": "All 450 planned weighted trials at source_commit",
+      "sha256": "dd0815b5310a958c6b41b953381a74b94e2609fc456552e0101728c782705088",
+      "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62"
+    }
+  },
+  "completion_json": "{\"freeze_commit\":\"d9b9877e8a0d68a1ed2036d1718821a2d5b73a74\",\"pass\":true,\"plan_sha256\":\"15d055e80483643c5497c7a4b1ede405f4387baf4de1d1522913cc31212efbb5\",\"rows\":451}\n",
+  "generators": {
+    "evidence/build_ensemble_alignment.py": "ba307ea35b63bd243875a6c2d291b3f0c47c92f6dae2881934a6428e77cd492c",
+    "scripts/verify_ensemble_alignment.py": "8f67b06eb54450bc5f780d8c0a428d1fb64e46e82d2a394467115bb7947cee8b",
+    "scripts/verify_rubric_audit.py": "0bf076b1b96cc92d34f7c83381e1c418cb81d6c2254d8cbf0d744c44693943c5",
+    "scripts/verify_source_alignment.py": "6e451d63cb89a5f7f06801dd9bb243a24c885f84ca6223461094a7800c0e25e4"
+  },
+  "schema": "berg_ensemble_alignment_v1",
+  "scope": {
+    "bootstrap_intervals_recomputed": false,
+    "cp_bounds_recomputed": true,
+    "definition_commit": "d9b9877e8a0d68a1ed2036d1718821a2d5b73a74",
+    "delivery_vectors_recomputed": false,
+    "figures_independently_redrawn": false,
+    "human_validation": false,
+    "interpretation": "Paper-rubric labels under the public operator, not validated experience reports",
+    "numeric_absolute_tolerance": 1e-12,
+    "source_figures": "Copy each listed secondary aggregate-effects/rates PDF/PNG when present in the pinned release manifest; source-rendered, hash-verified only",
+    "verification": "Pinned weighted inventory, paired arithmetic, marginal CP bounds and frozen verdicts"
+  },
+  "source_commit": "dd1c350cf6c2e3224a201b4e4aab943376c43b62",
+  "source_release_path": "data/berg_ensemble_replication/random_subset_v1_20261001",
+  "source_repository": "https://github.com/tdj28/llm_selfref_pre"
+}

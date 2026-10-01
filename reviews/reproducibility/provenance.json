@@ -1,0 +1,103 @@
+{
+  "copied_or_derived_artifacts": [
+    {
+      "original_scratch_path": "copies/data/causal_transplant/confirmatory_v1_20260709/independent_point_estimate_audit.json",
+      "original_sha256": "e66b71c3d65e30573802c28b54574105e3bbc658c1c8474317e8af3333f70177",
+      "path": "receipts/causal_headlines.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "copies/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/independent_headline_audit.json",
+      "original_sha256": "82fcaadab02d992f221f3a94c1067d8a2ee2751b2fa9fd8d4f2b120251b1f865",
+      "path": "receipts/public_sae_headlines.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "copies/data/gemma_scope_9b/confirmatory_v1_20260711/analysis/independent_headline_audit.json",
+      "original_sha256": "f2b7142981b244b81060a54cd2100f5d941d5d67446970cc7f1016681b59e130",
+      "path": "receipts/gemma_headlines.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "public_safety.stdout.log",
+      "original_sha256": "b86b1d1b6771415cab93e8767cd651154fff7e145a022e57294064f55323b4c3",
+      "path": "receipts/public_safety.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "raw_quantity_checks.json",
+      "original_sha256": "05af73cac6ffc2ebedac1d330479997482483d07116180520600ff6ee8cfcc18",
+      "path": "receipts/raw_quantity_checks.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "copy_receipt.json",
+      "original_sha256": "e99f3b27a78cc9ceee5d6da6984c4a0ed1f59f5a5ce31cb24c83f3cbc27b614a",
+      "path": "receipts/copy_receipt.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "source_integrity.json",
+      "original_sha256": "2dc39ccbf5322a908ef6d43c5c43101e0c6f046b86b6f2d0006aa143aeac8bb9",
+      "path": "receipts/source_integrity.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "supplement_attempts.json",
+      "original_sha256": "a4242ccecc2e64ce312005e0ec8c491cdf8a8a0a863a50ee5078ff5c7ee88f29",
+      "path": "receipts/supplement_attempts.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "source_before.json",
+      "original_sha256": "a37033eb6345c48a38331a1b687f33e7d4dd2863556f2131cbf09e475c73ea44",
+      "path": "receipts/source_hashes.json",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "gemma_role_interval_replay.json",
+      "original_sha256": "eace88a32845c9397350540316be83b438a381471cce813f24e72c384e31d89b",
+      "path": "receipts/gemma_role_interval_replay.json",
+      "transformation": "source_sha256 keys changed from host-absolute to source-repository-relative; all results unchanged"
+    },
+    {
+      "original_scratch_path": "commands.json",
+      "original_sha256": "b94dcc49307c9fdc3a0469de05f7678eb5d3e8add65d165122f42338e572e17b",
+      "path": "receipts/commands.json",
+      "transformation": "argv paths and cwd replaced by named roles; redundant shell_command omitted; times, durations and exit codes unchanged"
+    },
+    {
+      "original_scratch_path": "environment.json",
+      "original_sha256": "79598cefe4477b30035d78a1950e23d7e1a043050f23eafaacbebb46e5cd3438",
+      "path": "receipts/environment.json",
+      "transformation": "host Python path and scratch ignore path replaced by portable roles; versions, timestamp and historical git status unchanged"
+    },
+    {
+      "original_scratch_path": "supplement_raw_checks.py",
+      "original_sha256": "cfec64b31a881519d35fbbd255a5926b27325aeb8a6cfbeaf1e38d95511ca273",
+      "path": "checkers/supplement_raw_checks.py",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "replay_gemma_role_intervals.py",
+      "original_sha256": "81c434257d99a996e9d8ccb42cd54a29f64566736c8c280c18baee0fd762adf9",
+      "path": "checkers/replay_gemma_role_intervals.py",
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "original_scratch_path": "portable_replay_1/run_summary.json",
+      "original_sha256": "cf5e65f5e780e29bc2e602f0ed55b65e8a066077106bab24fc7227fdc3d1c76b",
+      "path": "receipts/portable_replay_validation.json",
+      "transformation": "none; byte-identical copy of the later portable-wrapper validation, not an original audit receipt"
+    }
+  ],
+  "historical_scope_note": "Original run predates subsequent README, todo and docs work. Historical git-status receipts do not certify current worktree status.",
+  "orchestrator_note": "Historical host-specific orchestration omitted; run.py is a new portable packaging wrapper, not the script used for the original audit.",
+  "original_audit_started_at_utc": "2026-09-29T20:10:18.265444+00:00",
+  "original_final_integrity_check_at_utc": "2026-09-29T20:18:44.090993+00:00",
+  "original_orchestrator_sha256": "432caf9910ce763efcacdfb3428632de01b540fc435a570344fe32b87cd793fb",
+  "raw_data_in_bundle": false,
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "source_repository": "https://github.com/tdj28/llm_selfref_pre",
+  "status": "agent-run computational audit; not independent human review"
+}

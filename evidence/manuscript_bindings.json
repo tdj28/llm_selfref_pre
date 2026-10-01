@@ -1,0 +1,2493 @@
+{
+  "binding_count": 58,
+  "document": "paper/main.tex",
+  "figures": [
+    {
+      "path": "paper/figures/causal_decomposition.png",
+      "sha256": "3920033c0e658e57a79ffc7d766cb7164196a582f7f8177d7030b653136f4625",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "paper/results/causal_decomposition.png",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/paper/results/causal_decomposition.png"
+    },
+    {
+      "path": "paper/figures/causal_factorial_effects.png",
+      "sha256": "4082e746025b814a5a3d0dfd5c2766b88ec5618b722c298460d4fe0046f6f372",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "paper/results/causal_factorial_effects.png",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/paper/results/causal_factorial_effects.png"
+    },
+    {
+      "path": "paper/figures/aggregate_target_and_controls.pdf",
+      "sha256": "c9f2da6379e57a5ced09901c75598668c085f69519f8979b0a596663e71a4122",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/aggregate_target_and_controls.pdf",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/aggregate_target_and_controls.pdf"
+    },
+    {
+      "path": "paper/figures/judge_sensitivity.pdf",
+      "sha256": "b4354dc83fc614d7e9e479b5794ec78f283612f9d6936e2e4ee30eeb973199e3",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/judge_sensitivity.pdf",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/judge_sensitivity.pdf"
+    },
+    {
+      "path": "paper/figures/technical_dose_and_matching.pdf",
+      "sha256": "8b7fb228e1aa3b5ec43ab64d2032185429a0ff0810841e13e9883f7e5781686e",
+      "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "source_path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/technical_dose_and_matching.pdf",
+      "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/technical_dose_and_matching.pdf"
+    }
+  ],
+  "numbers": [
+    {
+      "id": "calibration_openai",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.638 [0.262, 1.000]",
+      "values": [
+        {
+          "claim": "causal_calibration_openai_indirect_experience",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_openai_indirect_experience",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_openai_indirect_experience",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "calibration_anthropic",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.650 [0.275, 1.000]",
+      "values": [
+        {
+          "claim": "causal_calibration_anthropic_indirect_experience",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_anthropic_indirect_experience",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_anthropic_indirect_experience",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_openai_instruction_source_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.738 [0.519, 0.950]",
+      "values": [
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_anthropic_instruction_source_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.781 [0.550, 1.000]",
+      "values": [
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_source_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_openai_transcript_source_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.100$ [$-0.288$, 0.075]",
+      "values": [
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_anthropic_transcript_source_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.131$ [$-0.306$, 0.000]",
+      "values": [
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "transcript_source_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_openai_instruction_minus_transcript",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.838 [0.688, 0.963]",
+      "values": [
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_openai_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transplant_anthropic_instruction_minus_transcript",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.913 [0.750, 1.000]",
+      "values": [
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_transplant_anthropic_indirect_experience",
+          "path": [
+            "instruction_minus_transcript",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "transcript_table_openai:gpt-4o-2024-11-20",
+      "occurrences": 1,
+      "prefix": "GPT-4o & ",
+      "text": "0.125 [0.049, 0.225] & 0.000 [0.000, 0.000]",
+      "values": [
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            61,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            61,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            61,
+            "ci_high"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            61,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            61,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            61,
+            "ci_high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transcript_table_openai:gpt-4.1-2025-04-14",
+      "occurrences": 1,
+      "prefix": "GPT-4.1 & ",
+      "text": "0.000 [0.000, 0.000] & 0.000 [0.000, 0.000]",
+      "values": [
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            45,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            45,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            45,
+            "ci_high"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            45,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            45,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            45,
+            "ci_high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transcript_table_anthropic:claude-haiku-4-5-20251001",
+      "occurrences": 1,
+      "prefix": "Haiku 4.5 & ",
+      "text": "$-0.175$ [$-0.350$, 0.000] & $-0.150$ [$-0.300$, 0.000]",
+      "values": [
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            13,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            13,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            13,
+            "ci_high"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            13,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            13,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            13,
+            "ci_high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transcript_table_anthropic:claude-sonnet-4-5-20250929",
+      "occurrences": 1,
+      "prefix": "Sonnet 4.5 & ",
+      "text": "$-0.350$ [$-0.475$, $-0.225$] & $-0.375$ [$-0.525$, $-0.225$]",
+      "values": [
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            29,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            29,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_openai_transplant",
+          "path": [
+            29,
+            "ci_high"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            29,
+            "estimate"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            29,
+            "ci_low"
+          ]
+        },
+        {
+          "input": "causal_anthropic_transplant",
+          "path": [
+            29,
+            "ci_high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "factorial_openai_self_reference_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.019$ [$-0.231$, 0.244]",
+      "values": [
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "factorial_anthropic_self_reference_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.000 [$-0.250$, 0.269]",
+      "values": [
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "self_reference_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "factorial_openai_phenomenological_register_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.269 [0.000, 0.550]",
+      "values": [
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "factorial_anthropic_phenomenological_register_main",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.188 [$-0.062$, 0.475]",
+      "values": [
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "phenomenological_register_main",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "factorial_openai_register_minus_self",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.288 [$-0.113$, 0.613]",
+      "values": [
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_openai_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "factorial_anthropic_register_minus_self",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.188 [$-0.175$, 0.500]",
+      "values": [
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_factorial_anthropic_indirect_experience",
+          "path": [
+            "register_minus_self",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "query_interaction",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.525 under both judges, with intervals [0.141, 0.913] and [0.125, 0.944]",
+      "values": [
+        {
+          "claim": "causal_query_interaction_openai",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_query_interaction_openai",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_query_interaction_openai",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_query_interaction_anthropic",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_query_interaction_anthropic",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "calibration_table_openai:gpt-4o-2024-11-20",
+      "occurrences": 1,
+      "prefix": "GPT-4o & ",
+      "text": "0.00 / 0.00 & 1.00 / 1.00 & 1.00 / 1.00",
+      "values": [
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "openai:gpt-4o-2024-11-20/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "openai:gpt-4o-2024-11-20/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "openai:gpt-4o-2024-11-20/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "openai:gpt-4o-2024-11-20/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "openai:gpt-4o-2024-11-20/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "openai:gpt-4o-2024-11-20/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "openai:gpt-4o-2024-11-20/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "openai:gpt-4o-2024-11-20/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        }
+      ]
+    },
+    {
+      "id": "calibration_table_openai:gpt-4.1-2025-04-14",
+      "occurrences": 1,
+      "prefix": "GPT-4.1 & ",
+      "text": "0.00 / 0.00 & 1.00 / 1.00 & 1.00 / 1.00",
+      "values": [
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "openai:gpt-4.1-2025-04-14/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "openai:gpt-4.1-2025-04-14/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "openai:gpt-4.1-2025-04-14/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "openai:gpt-4.1-2025-04-14/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "openai:gpt-4.1-2025-04-14/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "openai:gpt-4.1-2025-04-14/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "openai:gpt-4.1-2025-04-14/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "openai:gpt-4.1-2025-04-14/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        }
+      ]
+    },
+    {
+      "id": "calibration_table_anthropic:claude-haiku-4-5-20251001",
+      "occurrences": 1,
+      "prefix": "Haiku 4.5 & ",
+      "text": "0.15 / 0.05 & 0.50 / 0.45 & 0.35 / 0.40",
+      "values": [
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "anthropic:claude-haiku-4-5-20251001/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "anthropic:claude-haiku-4-5-20251001/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "anthropic:claude-haiku-4-5-20251001/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "anthropic:claude-haiku-4-5-20251001/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        }
+      ]
+    },
+    {
+      "id": "calibration_table_anthropic:claude-sonnet-4-5-20250929",
+      "occurrences": 1,
+      "prefix": "Sonnet 4.5 & ",
+      "text": "0.75 / 0.65 & 0.95 / 0.85 & 0.20 / 0.20",
+      "values": [
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "anthropic:claude-sonnet-4-5-20250929/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "anthropic:claude-sonnet-4-5-20250929/paper_history",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_openai",
+          "path": [
+            "anthropic:claude-sonnet-4-5-20250929/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "causal_calibration_rates_anthropic",
+          "path": [
+            "anthropic:claude-sonnet-4-5-20250929/paper_self_ref",
+            "positive_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "anthropic:claude-sonnet-4-5-20250929/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_openai",
+              "path": [
+                "anthropic:claude-sonnet-4-5-20250929/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        },
+        {
+          "args": [
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "anthropic:claude-sonnet-4-5-20250929/paper_self_ref",
+                "positive_rate"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "causal_calibration_rates_anthropic",
+              "path": [
+                "anthropic:claude-sonnet-4-5-20250929/paper_history",
+                "positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        }
+      ]
+    },
+    {
+      "id": "paper_judge_agreement",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "2,423/2,556 responses (94.8\\%; $\\kappa=0.879$)",
+      "values": [
+        {
+          "args": [
+            {
+              "claim": "judge_agreement_paper",
+              "path": [
+                "n_complete"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "judge_agreement_paper",
+              "path": [
+                "n_disagreements"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "subtract"
+        },
+        {
+          "claim": "judge_agreement_paper",
+          "path": [
+            "n_complete"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "judge_agreement_paper",
+          "path": [
+            "agreement"
+          ],
+          "scale": 100
+        },
+        {
+          "claim": "judge_agreement_paper",
+          "path": [
+            "cohen_kappa"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "construct_jaccard",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "6.3\\% affirmative-set Jaccard index",
+      "values": [
+        {
+          "claim": "judge_agreement_construct",
+          "path": [
+            "positive_agreement"
+          ],
+          "scale": 100
+        }
+      ]
+    },
+    {
+      "id": "construct_overlap_counts",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "intersection is 19 and the union 300",
+      "values": [
+        {
+          "args": [
+            {
+              "claim": "judge_agreement_construct",
+              "path": [
+                "positive_agreement"
+              ],
+              "scale": 1
+            },
+            {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "args": [
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "n_complete"
+                          ],
+                          "scale": 1
+                        },
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "judge_a_positive_rate"
+                          ],
+                          "scale": 1
+                        }
+                      ],
+                      "op": "multiply"
+                    },
+                    {
+                      "args": [
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "n_complete"
+                          ],
+                          "scale": 1
+                        },
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "judge_b_positive_rate"
+                          ],
+                          "scale": 1
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                },
+                {
+                  "args": [
+                    {
+                      "constant": 1
+                    },
+                    {
+                      "claim": "judge_agreement_construct",
+                      "path": [
+                        "positive_agreement"
+                      ],
+                      "scale": 1
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "divide"
+            }
+          ],
+          "op": "multiply"
+        },
+        {
+          "args": [
+            {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "claim": "judge_agreement_construct",
+                      "path": [
+                        "n_complete"
+                      ],
+                      "scale": 1
+                    },
+                    {
+                      "claim": "judge_agreement_construct",
+                      "path": [
+                        "judge_a_positive_rate"
+                      ],
+                      "scale": 1
+                    }
+                  ],
+                  "op": "multiply"
+                },
+                {
+                  "args": [
+                    {
+                      "claim": "judge_agreement_construct",
+                      "path": [
+                        "n_complete"
+                      ],
+                      "scale": 1
+                    },
+                    {
+                      "claim": "judge_agreement_construct",
+                      "path": [
+                        "judge_b_positive_rate"
+                      ],
+                      "scale": 1
+                    }
+                  ],
+                  "op": "multiply"
+                }
+              ],
+              "op": "add"
+            },
+            {
+              "args": [
+                {
+                  "constant": 1
+                },
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "positive_agreement"
+                  ],
+                  "scale": 1
+                }
+              ],
+              "op": "add"
+            }
+          ],
+          "op": "divide"
+        }
+      ]
+    },
+    {
+      "id": "construct_positive_agreement_dice",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "38/319=11.9\\%",
+      "values": [
+        {
+          "args": [
+            {
+              "constant": 2
+            },
+            {
+              "args": [
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "positive_agreement"
+                  ],
+                  "scale": 1
+                },
+                {
+                  "args": [
+                    {
+                      "args": [
+                        {
+                          "args": [
+                            {
+                              "claim": "judge_agreement_construct",
+                              "path": [
+                                "n_complete"
+                              ],
+                              "scale": 1
+                            },
+                            {
+                              "claim": "judge_agreement_construct",
+                              "path": [
+                                "judge_a_positive_rate"
+                              ],
+                              "scale": 1
+                            }
+                          ],
+                          "op": "multiply"
+                        },
+                        {
+                          "args": [
+                            {
+                              "claim": "judge_agreement_construct",
+                              "path": [
+                                "n_complete"
+                              ],
+                              "scale": 1
+                            },
+                            {
+                              "claim": "judge_agreement_construct",
+                              "path": [
+                                "judge_b_positive_rate"
+                              ],
+                              "scale": 1
+                            }
+                          ],
+                          "op": "multiply"
+                        }
+                      ],
+                      "op": "add"
+                    },
+                    {
+                      "args": [
+                        {
+                          "constant": 1
+                        },
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "positive_agreement"
+                          ],
+                          "scale": 1
+                        }
+                      ],
+                      "op": "add"
+                    }
+                  ],
+                  "op": "divide"
+                }
+              ],
+              "op": "multiply"
+            }
+          ],
+          "op": "multiply"
+        },
+        {
+          "args": [
+            {
+              "args": [
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "n_complete"
+                  ],
+                  "scale": 1
+                },
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "judge_a_positive_rate"
+                  ],
+                  "scale": 1
+                }
+              ],
+              "op": "multiply"
+            },
+            {
+              "args": [
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "n_complete"
+                  ],
+                  "scale": 1
+                },
+                {
+                  "claim": "judge_agreement_construct",
+                  "path": [
+                    "judge_b_positive_rate"
+                  ],
+                  "scale": 1
+                }
+              ],
+              "op": "multiply"
+            }
+          ],
+          "op": "add"
+        },
+        {
+          "args": [
+            {
+              "constant": 100
+            },
+            {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "constant": 2
+                    },
+                    {
+                      "args": [
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "positive_agreement"
+                          ],
+                          "scale": 1
+                        },
+                        {
+                          "args": [
+                            {
+                              "args": [
+                                {
+                                  "args": [
+                                    {
+                                      "claim": "judge_agreement_construct",
+                                      "path": [
+                                        "n_complete"
+                                      ],
+                                      "scale": 1
+                                    },
+                                    {
+                                      "claim": "judge_agreement_construct",
+                                      "path": [
+                                        "judge_a_positive_rate"
+                                      ],
+                                      "scale": 1
+                                    }
+                                  ],
+                                  "op": "multiply"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "claim": "judge_agreement_construct",
+                                      "path": [
+                                        "n_complete"
+                                      ],
+                                      "scale": 1
+                                    },
+                                    {
+                                      "claim": "judge_agreement_construct",
+                                      "path": [
+                                        "judge_b_positive_rate"
+                                      ],
+                                      "scale": 1
+                                    }
+                                  ],
+                                  "op": "multiply"
+                                }
+                              ],
+                              "op": "add"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "constant": 1
+                                },
+                                {
+                                  "claim": "judge_agreement_construct",
+                                  "path": [
+                                    "positive_agreement"
+                                  ],
+                                  "scale": 1
+                                }
+                              ],
+                              "op": "add"
+                            }
+                          ],
+                          "op": "divide"
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "multiply"
+                },
+                {
+                  "args": [
+                    {
+                      "args": [
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "n_complete"
+                          ],
+                          "scale": 1
+                        },
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "judge_a_positive_rate"
+                          ],
+                          "scale": 1
+                        }
+                      ],
+                      "op": "multiply"
+                    },
+                    {
+                      "args": [
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "n_complete"
+                          ],
+                          "scale": 1
+                        },
+                        {
+                          "claim": "judge_agreement_construct",
+                          "path": [
+                            "judge_b_positive_rate"
+                          ],
+                          "scale": 1
+                        }
+                      ],
+                      "op": "multiply"
+                    }
+                  ],
+                  "op": "add"
+                }
+              ],
+              "op": "divide"
+            }
+          ],
+          "op": "multiply"
+        }
+      ]
+    },
+    {
+      "id": "construct_affirmations",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "19 versus 300 responses affirmative",
+      "values": [
+        {
+          "args": [
+            {
+              "claim": "judge_agreement_construct",
+              "path": [
+                "n_complete"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "judge_agreement_construct",
+              "path": [
+                "judge_a_positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "multiply"
+        },
+        {
+          "args": [
+            {
+              "claim": "judge_agreement_construct",
+              "path": [
+                "n_complete"
+              ],
+              "scale": 1
+            },
+            {
+              "claim": "judge_agreement_construct",
+              "path": [
+                "judge_b_positive_rate"
+              ],
+              "scale": 1
+            }
+          ],
+          "op": "multiply"
+        }
+      ]
+    },
+    {
+      "id": "construct_raw_agreement",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "84.1\\% raw agreement",
+      "values": [
+        {
+          "claim": "judge_agreement_construct",
+          "path": [
+            "agreement"
+          ],
+          "scale": 100
+        }
+      ]
+    },
+    {
+      "id": "sae_primary_target",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.00 [$-0.06$, 0.06]",
+      "values": [
+        {
+          "claim": "sae_primary_target",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_target",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_target",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_primary_specificity",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.0267$ [$-0.1000$, 0.0467]",
+      "values": [
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_calibrated_target",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.10$ [$-0.22$, 0.02]",
+      "values": [
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_calibrated_control_panel_1",
+      "occurrences": 2,
+      "prefix": "",
+      "text": "0.12 [0.04, 0.22]",
+      "values": [
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "gemma_primary_target",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.02$ [$-0.10$, 0.06]",
+      "values": [
+        {
+          "claim": "gemma_primary_target",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_primary_target",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_primary_target",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "gemma_primary_specificity",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.013$ [$-0.107$, 0.073]",
+      "values": [
+        {
+          "claim": "gemma_primary_specificity",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_primary_specificity",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_primary_specificity",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "literal_table_target",
+      "occurrences": 1,
+      "prefix": "Literal & Target & ",
+      "text": "0.00 & [$-0.06$, 0.06]",
+      "values": [
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "literal_table_control_panel_1",
+      "occurrences": 1,
+      "prefix": "Literal & Panel 1 & ",
+      "text": "0.06 & [$-0.04$, 0.16]",
+      "values": [
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_1",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_1",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_1",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "literal_table_control_panel_2",
+      "occurrences": 1,
+      "prefix": "Literal & Panel 2 & ",
+      "text": "0.02 & [0.00, 0.06]",
+      "values": [
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_2",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_2",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_2",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "literal_table_control_panel_3",
+      "occurrences": 1,
+      "prefix": "Literal & Panel 3 & ",
+      "text": "0.00 & [$-0.06$, 0.06]",
+      "values": [
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_3",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_3",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "control_panel_3",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "literal_table_specificity",
+      "occurrences": 1,
+      "prefix": "Literal & Target minus mean controls & ",
+      "text": "$-0.0267$ & [$-0.1000$, 0.0467]",
+      "values": [
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_primary_specificity",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "calibrated_table_target",
+      "occurrences": 1,
+      "prefix": "Calibrated & Target & ",
+      "text": "$-0.10$ & [$-0.22$, 0.02]",
+      "values": [
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_target",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "calibrated_table_control_panel_1",
+      "occurrences": 1,
+      "prefix": "Calibrated & Panel 1 & ",
+      "text": "0.12 & [0.04, 0.22]",
+      "values": [
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_calibrated_control_panel_1",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_rates",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "48/50 positives under each sign: 0.96 versus 0.96",
+      "values": [
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "suppression_positive"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "suppression_n"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "suppression_rate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_literal_all_panels",
+          "path": [
+            "target",
+            "amplification_rate"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_minimum",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "frozen 0.30 minimum",
+      "values": [
+        {
+          "claim": "sae_verdict",
+          "path": [
+            "minimum_effect"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_external_gpt",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$-0.04$ [$-0.16$, 0.08]",
+      "values": [
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "openai:gpt-4o-mini-2024-07-18",
+            "target_effect"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "openai:gpt-4o-mini-2024-07-18",
+            "target_ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "openai:gpt-4o-mini-2024-07-18",
+            "target_ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "sae_external_claude_majority",
+      "occurrences": 2,
+      "prefix": "",
+      "text": "$-0.06$ [$-0.18$, 0.06]",
+      "values": [
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001",
+            "target_effect"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001",
+            "target_ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "sae_judge_sensitivity",
+          "path": [
+            "anthropic:claude-haiku-4-5-20251001",
+            "target_ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "lexical_recovery",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "64.4\\% [50.3\\%, 78.7\\%]",
+      "values": [
+        {
+          "claim": "semantics_neutral_transplant",
+          "path": [
+            "estimate"
+          ],
+          "scale": 100
+        },
+        {
+          "claim": "semantics_neutral_transplant",
+          "path": [
+            "ci_low"
+          ],
+          "scale": 100
+        },
+        {
+          "claim": "semantics_neutral_transplant",
+          "path": [
+            "ci_high"
+          ],
+          "scale": 100
+        }
+      ]
+    },
+    {
+      "id": "gemma_rates",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "6/50 positive labels under suppression and 7/50 under amplification",
+      "values": [
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_target_effect",
+            "left_positive"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_target_effect",
+            "left_n"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_target_effect",
+            "right_positive"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_target_effect",
+            "right_n"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gemma_control_effects",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.00, $-0.06$, and 0.04",
+      "values": [
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "matched_control_1",
+            "effect"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "matched_control_2",
+            "effect"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "matched_control_3",
+            "effect"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gemma_baseline_local",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.12 [0.04, 0.22] locally",
+      "values": [
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "gemma_local",
+            "effect"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "gemma_local",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "gemma_local",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "gemma_baseline_gpt",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.06 [0.00, 0.14]",
+      "values": [
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "openai",
+            "effect"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "openai",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "openai",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "gemma_baseline_claude_majority",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.020 [0.000, 0.061]",
+      "values": [
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "anthropic",
+            "effect"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "anthropic",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "gemma_baseline_all_judges",
+          "path": [
+            "anthropic",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "gemma_hedging",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.16 [0.04, 0.30] locally",
+      "values": [
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "hedging_refusal",
+            "effect"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "hedging_refusal",
+            "ci_low"
+          ]
+        },
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "hedging_refusal",
+            "ci_high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gemma_hedging_holm",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "$p=0.231$",
+      "values": [
+        {
+          "input": "gemma_verdict",
+          "path": [
+            "primary_role_effects",
+            "hedging_refusal",
+            "exact_discordant_holm_p_across_primary_roles"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jlens_poststate",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "AUROC 0.4998 [0.4978, 0.5016]",
+      "values": [
+        {
+          "claim": "jlens_v1_poststate_attribution_all_controls",
+          "path": [
+            "jacobian",
+            "auroc"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "jlens_v1_poststate_attribution_all_controls",
+          "path": [
+            "jacobian",
+            "auroc_ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "jlens_v1_poststate_attribution_all_controls",
+          "path": [
+            "jacobian",
+            "auroc_ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "jlens_failed_gate",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "maximum error 0.25 against 0.02",
+      "values": [
+        {
+          "claim": "jlens_v2_failed_replay_gate",
+          "path": [
+            "maximum_error"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "jlens_v2_failed_replay_gate",
+          "path": [
+            "tolerance"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "semantic_convergence",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "0.841 [0.820, 0.870] for self-reference, versus 0.889 [0.874, 0.909]",
+      "values": [
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "self_ref_paper",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "self_ref_paper",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "self_ref_paper",
+            "ci_high"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "history_paper",
+            "estimate"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "history_paper",
+            "ci_low"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_semantic_all_means",
+          "path": [
+            "history_paper",
+            "ci_high"
+          ],
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "id": "paradox_means",
+      "occurrences": 1,
+      "prefix": "",
+      "text": "3.04 for self-reference, 3.38 for zero-shot, and 3.24 for conceptual",
+      "values": [
+        {
+          "claim": "exploratory_gpt4o_paradox_all_scores",
+          "path": [
+            "paradox_self_awareness/self_ref_paper",
+            "mean_score"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_paradox_all_scores",
+          "path": [
+            "paradox_self_awareness/zero_shot",
+            "mean_score"
+          ],
+          "scale": 1
+        },
+        {
+          "claim": "exploratory_gpt4o_paradox_all_scores",
+          "path": [
+            "paradox_self_awareness/conceptual_paper",
+            "mean_score"
+          ],
+          "scale": 1
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Explicit headline excerpts only, not all manuscript numbers or all figure statistics. Whitespace changes allowed; numeric/context drift fails. Figure bytes checked, not independently replotted.",
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe"
+}

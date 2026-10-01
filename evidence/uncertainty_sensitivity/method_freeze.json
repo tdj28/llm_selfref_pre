@@ -1,0 +1,10 @@
+{
+  "bootstrap_draws": 50000,
+  "bootstrap_seed_namespace": "20260929",
+  "date": "2026-09-29",
+  "documentation": "docs/UNCERTAINTY_SENSITIVITY.md",
+  "frozen_prefix_sha256": "82be33d9bcb55f4b7791274d678a3232b7df562dcb1e585447ce7abe96d93a33",
+  "marker": "<!-- END FROZEN METHOD -->\n",
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "status": "POST-HOC; local method freeze before new sensitivity extraction/computation, after original outcomes and summaries were known; not preregistered"
+}

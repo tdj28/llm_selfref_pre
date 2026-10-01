@@ -19,15 +19,24 @@ make test
 make compile
 make public-audit
 make audit
+make paper-verify
 make paper
 ```
 
-`make paper` requires `latexmk` and a TeX installation. `make public-audit`
-checks indexed files, secret exclusions and release hashes. It does not
-independently validate every statistical calculation.
+`make verify` combines the public audit, full tests, source compilation,
+current-paper evidence verification, PDF build and whitespace check.
+`make audit` is a separate, extended frozen-release check. `make paper`
+requires `latexmk` and a TeX installation and builds the current
+`paper/main.tex`, not the archived sources under `paper/history/`.
+`make public-audit` runs the root `scripts/audit_public_release.py` to check
+indexed files, secret exclusions and release hashes. It remains the canonical
+public-release check; the imported `scripts/audit_public_files.py` is not run
+as a whole-repository audit. Neither scanner independently validates every
+statistical calculation.
 
-`make test` collects the complete pytest suite, including the later-study
-directories and function-style tests. CPU PyTorch exercises tensor tests
+`make test` collects the complete pytest suite, including the imported paper
+verifier unittest cases, later-study directories and function-style tests.
+CPU PyTorch exercises tensor tests
 without a GPU or model download. Linux/NVIDIA-specific integration tests may
 still skip on an unsupported host. Historical recovery fixtures require the
 reachable Git history (`git fetch --unshallow` for a shallow clone); they
@@ -41,6 +50,37 @@ use disposable copies as below. The four CI headline output comparisons are
 byte-exact except for bounded float roundoff in the mapping JSON on Python 3.12.
 That one comparison uses absolute tolerance `1e-12` and zero relative tolerance;
 integer counts, value types, keys, lists, and labels must still match exactly.
+
+## Current Paper Evidence
+
+The current manuscript lives in `paper/`. Its packaged evidence and verifier
+sources retain their pinned bytes and repository-relative paths. From the
+repository root, `make paper-verify` runs these read-only commands:
+
+```sh
+python scripts/verify_evidence.py
+python scripts/verify_figure_values.py
+python scripts/verify_rubric_audit.py
+python scripts/verify_source_alignment.py
+python scripts/verify_source_jlens_table.py
+python scripts/verify_ensemble_alignment.py
+python scripts/uncertainty_sensitivity.py --check
+python -B reviews/reproducibility/run.py --verify-only
+```
+
+These checks use the Python standard library, need no sibling checkout,
+credentials, GPU, network access or TeX installation, and fail on stale
+generated evidence or mismatched manuscript bindings. They check packaged
+hashes, arithmetic, figures, tables and uncertainty summaries; the final
+command verifies the archived reproducibility bundle rather than replaying
+its raw-data audit. They do not establish judge-label truth, independent
+human validation or a newly qualified experimental assay. Do not regenerate
+evidence or edit hash-bound verifier sources merely to make a check pass.
+
+CI runs `make paper-verify` on Python 3.10 and 3.12, checks that it leaves
+tracked paper/evidence files unchanged, and runs the imported verifier tests
+as part of the full root pytest suite. PDF compilation remains the separate
+`make paper` step included in local `make verify`.
 
 ## Prompt And Transcript Study
 

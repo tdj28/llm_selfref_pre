@@ -1,0 +1,159 @@
+{
+  "files": {
+    "inputs.json": {
+      "bytes": 290052,
+      "sha256": "8e2e6e79a26c92d44d3aa8832d72f02cbea5d271209c155c63fce35fe8919548"
+    },
+    "results.json": {
+      "bytes": 74731,
+      "sha256": "49c161408e91fea5dc21cd07371e816df8b6dd39b182f4a03a03876d7710617b"
+    },
+    "values.tex": {
+      "bytes": 3440,
+      "sha256": "1b0e9f526aa699aff7a0d109c7f80f1e70fea88d7e7b3192373236674651fa4d"
+    }
+  },
+  "generator": {
+    "path": "scripts/uncertainty_sensitivity.py",
+    "sha256": "f488e71a13c95847f8852e344aa20d1b386cdeed7f174d182c49cde7fed84bdd"
+  },
+  "input_policy": "compact public labels/counts only; no response, prompt or judge text",
+  "method_freeze": {
+    "bootstrap_draws": 50000,
+    "bootstrap_seed_namespace": "20260929",
+    "date": "2026-09-29",
+    "documentation": "docs/UNCERTAINTY_SENSITIVITY.md",
+    "frozen_prefix_sha256": "82be33d9bcb55f4b7791274d678a3232b7df562dcb1e585447ce7abe96d93a33",
+    "marker": "<!-- END FROZEN METHOD -->\n",
+    "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+    "status": "POST-HOC; local method freeze before new sensitivity extraction/computation, after original outcomes and summaries were known; not preregistered"
+  },
+  "recomputation": {
+    "absolute_float_tolerance": 1e-12,
+    "archived_hashes_and_nonfloat_values": "exact",
+    "latex_values": "byte-identical"
+  },
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+  "sources": [
+    {
+      "bytes": 3600,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "a935c375cc61f068ec52daae8c62954110ab8ef2",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_effects.csv",
+      "sha256": "502e6cbf6cd49ee934b945f549e0d5e9fe4f0776919122f12ff263ebd2a3fba3",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_effects.csv"
+    },
+    {
+      "bytes": 3623,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "cb92e0c019d10618b2ba567b33b404d4a5995ba6",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_rates.csv",
+      "sha256": "92b1295e43634ea0eac88850faf3eba615b990c1a0c5885b4636d0b9347f7dfb",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_rates.csv"
+    },
+    {
+      "bytes": 11009,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "a823d318824d37bc7ec06ccc9ec4b94e445bd59c",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv",
+      "sha256": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv"
+    },
+    {
+      "bytes": 3642,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "35881f79b70f534bb21fe98894a8eccb5ce6e5bf",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_effects.csv",
+      "sha256": "802e0d3a8f32e18ace14a1483d48f157bef35eb72cd32a5a9f255b8c98638ec4",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_effects.csv"
+    },
+    {
+      "bytes": 3596,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "a316f228d89ebe01575a42d19492ad916331dcb9",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_rates.csv",
+      "sha256": "986a5a786e2b9aac458288db4d865362d7ebca58537666f8328b0b9ae8e3dedc",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_rates.csv"
+    },
+    {
+      "bytes": 10886,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "d6d2383bb8899562734b39495b55521798d5ee23",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv",
+      "sha256": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv"
+    },
+    {
+      "bytes": 9157968,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "4935c354aabd5503369274918c6420737e69f199",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl",
+      "sha256": "d10999120f05a7f0a0d53b3e3cc723d647e19813e16288b3676b7c56ddbfadeb",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl"
+    },
+    {
+      "bytes": 10906096,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "0dd984217d74adc3324f5507450bfe0dd6b32302",
+      "path": "data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl",
+      "sha256": "5a225260fb8466f7cdcf0af0d60711cf648f3a61b3818867b03c24a99bfd60f7",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl"
+    },
+    {
+      "bytes": 851,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "81a27ab212f3bca9c549857bfa25118e7ed12205",
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv",
+      "sha256": "558dc87a5c2c1e674ecd9ae5f3712eda96cfdca2dd0f26a21bed56a55b7a1f91",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv"
+    },
+    {
+      "bytes": 139,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "9116c6b78e600af416eda99ff9896ca34c5f9495",
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv",
+      "sha256": "c1b108c30295505963a0ac7594a0101b0b344319a76a04270676b0721c163783",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv"
+    },
+    {
+      "bytes": 6014306,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "83c9a713807116f6fdd5cdfd1d39bebeb6f62d2e",
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl",
+      "sha256": "6bf4588da683061f5ec8122613096ffd01f00ea71741242e5a9f27cb8ef394bd",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl"
+    },
+    {
+      "bytes": 741000,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "69e7972e8cd211420b1864ab1345bc82b804258b",
+      "path": "data/public_sae_consciousness_gating/confirmatory_v1_20260710/judging/local_llama_judgments.jsonl",
+      "sha256": "a1de32e1abaf3374467d4ead0e0eb601bb91bd882d7abd7f7facb972b52752b6",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_consciousness_gating/confirmatory_v1_20260710/judging/local_llama_judgments.jsonl"
+    },
+    {
+      "bytes": 27649,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "db09e3512266b5226d73d97b12762e58278c92bd",
+      "path": "experiments/causal_transplant/analyze_causal_transplant.py",
+      "sha256": "a704f0420de15d9eb07d49bac4048169f8c3272d7055d82b522c94cc2598a87b",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/experiments/causal_transplant/analyze_causal_transplant.py"
+    },
+    {
+      "bytes": 29901,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "7b575bac2be3012581a705e8f902f1fcc15e6040",
+      "path": "experiments/exp2_sae/analyze_public_sae_consciousness_gating.py",
+      "sha256": "dcbd32f6a15397c016438e529ae07ae519f0b3b1e0b8e0a3a2bb77dd070c927a",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/experiments/exp2_sae/analyze_public_sae_consciousness_gating.py"
+    },
+    {
+      "bytes": 22864,
+      "commit": "f5e906e1737bc71bf20b642af1d698018eec82fe",
+      "git_blob": "226d468275a85e055ab2a28643020dc9117a1671",
+      "path": "experiments/exp2_sae/public_sae_consciousness_gating.py",
+      "sha256": "35fb1796bfef75d63758939a9d710484f86c15c7e78b7e56d43cf0276de1fd22",
+      "url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/experiments/exp2_sae/public_sae_consciousness_gating.py"
+    }
+  ]
+}

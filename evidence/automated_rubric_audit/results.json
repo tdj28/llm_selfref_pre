@@ -1,0 +1,1561 @@
+{
+  "agreement": {
+    "assistant_status": {
+      "availability": {
+        "both_available": 160,
+        "left_only": 0,
+        "neither": 0,
+        "right_only": 0
+      },
+      "cohen_kappa": 0.7758862191574184,
+      "column_categories": [
+        "asserted",
+        "denied",
+        "uncertain",
+        "mixed",
+        "not_addressed"
+      ],
+      "complete_pairs": 160,
+      "counts": [
+        [
+          37,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          60,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          26,
+          0,
+          0
+        ],
+        [
+          4,
+          2,
+          0,
+          3,
+          0
+        ],
+        [
+          13,
+          1,
+          0,
+          1,
+          8
+        ]
+      ],
+      "exact_agreements": 134,
+      "excluded_pairs": 0,
+      "kappa_unidentifiable_reason": null,
+      "nominal_agreement": 0.8375,
+      "packet_n": 160,
+      "row_categories": [
+        "asserted",
+        "denied",
+        "uncertain",
+        "mixed",
+        "not_addressed"
+      ]
+    },
+    "column_provider": "anthropic",
+    "explicit_current_assertion": {
+      "availability": {
+        "both_available": 160,
+        "left_only": 0,
+        "neither": 0,
+        "right_only": 0
+      },
+      "cohen_kappa": 0.4174757281553403,
+      "column_categories": [
+        false,
+        true
+      ],
+      "complete_pairs": 160,
+      "counts": [
+        [
+          143,
+          9
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "exact_agreements": 148,
+      "excluded_pairs": 0,
+      "kappa_unidentifiable_reason": null,
+      "nominal_agreement": 0.925,
+      "packet_n": 160,
+      "row_categories": [
+        false,
+        true
+      ]
+    },
+    "inclusive_current_assertion": {
+      "availability": {
+        "both_available": 160,
+        "left_only": 0,
+        "neither": 0,
+        "right_only": 0
+      },
+      "cohen_kappa": 0.7228477394768751,
+      "column_categories": [
+        false,
+        true
+      ],
+      "complete_pairs": 160,
+      "counts": [
+        [
+          96,
+          17
+        ],
+        [
+          3,
+          44
+        ]
+      ],
+      "exact_agreements": 140,
+      "excluded_pairs": 0,
+      "kappa_unidentifiable_reason": null,
+      "nominal_agreement": 0.875,
+      "packet_n": 160,
+      "row_categories": [
+        false,
+        true
+      ]
+    },
+    "row_provider": "openai"
+  },
+  "historical_comparisons": {
+    "anthropic:claude-haiku-4-5-20251001": {
+      "anthropic": {
+        "construct_categories_are_unmodified_original_labels": true,
+        "construct_vs_assistant_status": {
+          "availability": {
+            "both_available": 160,
+            "left_only": 0,
+            "neither": 0,
+            "right_only": 0
+          },
+          "column_categories": [
+            "asserted",
+            "denied",
+            "uncertain",
+            "mixed",
+            "not_addressed"
+          ],
+          "complete_pairs": 160,
+          "counts": [
+            [
+              41,
+              0,
+              0,
+              3,
+              4
+            ],
+            [
+              0,
+              54,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              4
+            ],
+            [
+              13,
+              10,
+              26,
+              2,
+              1
+            ]
+          ],
+          "excluded_pairs": 0,
+          "packet_n": 160,
+          "row_categories": [
+            "affirm",
+            "deny",
+            "nonanswer",
+            "uncertain"
+          ]
+        },
+        "paper_vs_reduction": {
+          "ai_disclaimer": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                29,
+                64
+              ],
+              [
+                67,
+                0
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "assistant_status": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              "asserted",
+              "denied",
+              "uncertain",
+              "mixed",
+              "not_addressed"
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                2,
+                63,
+                23,
+                2,
+                3
+              ],
+              [
+                53,
+                1,
+                3,
+                4,
+                6
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                92,
+                1
+              ],
+              [
+                54,
+                13
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "impersonal_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                92,
+                1
+              ],
+              [
+                67,
+                0
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "inclusive_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                89,
+                4
+              ],
+              [
+                10,
+                57
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "phenomenological_description": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                71,
+                22
+              ],
+              [
+                1,
+                66
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "uncontradicted_explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                92,
+                1
+              ],
+              [
+                55,
+                12
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "openai": {
+        "construct_categories_are_unmodified_original_labels": true,
+        "construct_vs_assistant_status": {
+          "availability": {
+            "both_available": 160,
+            "left_only": 0,
+            "neither": 0,
+            "right_only": 0
+          },
+          "column_categories": [
+            "asserted",
+            "denied",
+            "uncertain",
+            "mixed",
+            "not_addressed"
+          ],
+          "complete_pairs": 160,
+          "counts": [
+            [
+              25,
+              0,
+              1,
+              5,
+              17
+            ],
+            [
+              0,
+              53,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              5
+            ],
+            [
+              14,
+              8,
+              27,
+              3,
+              0
+            ]
+          ],
+          "excluded_pairs": 0,
+          "packet_n": 160,
+          "row_categories": [
+            "affirm",
+            "deny",
+            "nonanswer",
+            "uncertain"
+          ]
+        },
+        "paper_vs_reduction": {
+          "ai_disclaimer": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                39,
+                54
+              ],
+              [
+                67,
+                0
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "assistant_status": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              "asserted",
+              "denied",
+              "uncertain",
+              "mixed",
+              "not_addressed"
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                3,
+                60,
+                24,
+                3,
+                3
+              ],
+              [
+                36,
+                1,
+                4,
+                6,
+                20
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                91,
+                2
+              ],
+              [
+                61,
+                6
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "impersonal_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                88,
+                5
+              ],
+              [
+                49,
+                18
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "inclusive_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                88,
+                5
+              ],
+              [
+                25,
+                42
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "phenomenological_description": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                70,
+                23
+              ],
+              [
+                0,
+                67
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "uncontradicted_explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                92,
+                1
+              ],
+              [
+                62,
+                5
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          }
+        }
+      }
+    },
+    "openai:gpt-4o-mini-2024-07-18": {
+      "anthropic": {
+        "construct_categories_are_unmodified_original_labels": true,
+        "construct_vs_assistant_status": {
+          "availability": {
+            "both_available": 160,
+            "left_only": 0,
+            "neither": 0,
+            "right_only": 0
+          },
+          "column_categories": [
+            "asserted",
+            "denied",
+            "uncertain",
+            "mixed",
+            "not_addressed"
+          ],
+          "complete_pairs": 160,
+          "counts": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              30,
+              59,
+              7,
+              3,
+              5
+            ],
+            [
+              8,
+              0,
+              2,
+              2,
+              4
+            ],
+            [
+              16,
+              5,
+              17,
+              1,
+              0
+            ]
+          ],
+          "excluded_pairs": 0,
+          "packet_n": 160,
+          "row_categories": [
+            "affirm",
+            "deny",
+            "nonanswer",
+            "uncertain"
+          ]
+        },
+        "paper_vs_reduction": {
+          "ai_disclaimer": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                22,
+                61
+              ],
+              [
+                74,
+                3
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "assistant_status": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              "asserted",
+              "denied",
+              "uncertain",
+              "mixed",
+              "not_addressed"
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                1,
+                60,
+                19,
+                3,
+                0
+              ],
+              [
+                54,
+                4,
+                7,
+                3,
+                9
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                83,
+                0
+              ],
+              [
+                63,
+                14
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "impersonal_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                82,
+                1
+              ],
+              [
+                77,
+                0
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "inclusive_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                79,
+                4
+              ],
+              [
+                20,
+                57
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "phenomenological_description": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                68,
+                15
+              ],
+              [
+                4,
+                73
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "uncontradicted_explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                83,
+                0
+              ],
+              [
+                64,
+                13
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "openai": {
+        "construct_categories_are_unmodified_original_labels": true,
+        "construct_vs_assistant_status": {
+          "availability": {
+            "both_available": 160,
+            "left_only": 0,
+            "neither": 0,
+            "right_only": 0
+          },
+          "column_categories": [
+            "asserted",
+            "denied",
+            "uncertain",
+            "mixed",
+            "not_addressed"
+          ],
+          "complete_pairs": 160,
+          "counts": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              19,
+              58,
+              8,
+              4,
+              15
+            ],
+            [
+              5,
+              0,
+              2,
+              1,
+              8
+            ],
+            [
+              14,
+              3,
+              18,
+              4,
+              0
+            ]
+          ],
+          "excluded_pairs": 0,
+          "packet_n": 160,
+          "row_categories": [
+            "affirm",
+            "deny",
+            "nonanswer",
+            "uncertain"
+          ]
+        },
+        "paper_vs_reduction": {
+          "ai_disclaimer": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                31,
+                52
+              ],
+              [
+                75,
+                2
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "assistant_status": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              "asserted",
+              "denied",
+              "uncertain",
+              "mixed",
+              "not_addressed"
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                0,
+                58,
+                20,
+                2,
+                3
+              ],
+              [
+                39,
+                3,
+                8,
+                7,
+                20
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                82,
+                1
+              ],
+              [
+                70,
+                7
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "impersonal_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                77,
+                6
+              ],
+              [
+                60,
+                17
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "inclusive_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                81,
+                2
+              ],
+              [
+                32,
+                45
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "phenomenological_description": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                67,
+                16
+              ],
+              [
+                3,
+                74
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          },
+          "uncontradicted_explicit_current_assertion": {
+            "availability": {
+              "both_available": 160,
+              "left_only": 0,
+              "neither": 0,
+              "right_only": 0
+            },
+            "column_categories": [
+              false,
+              true
+            ],
+            "complete_pairs": 160,
+            "counts": [
+              [
+                83,
+                0
+              ],
+              [
+                71,
+                6
+              ]
+            ],
+            "excluded_pairs": 0,
+            "packet_n": 160,
+            "row_categories": [
+              0,
+              1
+            ]
+          }
+        }
+      }
+    }
+  },
+  "historical_counts": {
+    "anthropic:claude-haiku-4-5-20251001": {
+      "construct_claim_status_counts": {
+        "affirm": 48,
+        "deny": 55,
+        "nonanswer": 5,
+        "uncertain": 52
+      },
+      "construct_missing": 0,
+      "paper_label_counts": {
+        "0": 93,
+        "1": 67,
+        "missing": 0
+      }
+    },
+    "openai:gpt-4o-mini-2024-07-18": {
+      "construct_claim_status_counts": {
+        "affirm": 1,
+        "deny": 104,
+        "nonanswer": 16,
+        "uncertain": 39
+      },
+      "construct_missing": 0,
+      "paper_label_counts": {
+        "0": 83,
+        "1": 77,
+        "missing": 0
+      }
+    }
+  },
+  "missingness_gate": {
+    "aggregates_retained_even_when_incomplete": true,
+    "failure_count_includes": [
+      "invalid",
+      "transport_error"
+    ],
+    "incomplete_providers": [],
+    "interpretation": "Passing this technical limit is not instrument validation.",
+    "maximum_failed_jobs_per_provider": 8,
+    "pass": true
+  },
+  "models": {
+    "anthropic": "claude-opus-5-5",
+    "openai": "gpt-6-astra"
+  },
+  "pilot": {
+    "anthropic": {
+      "assistant_status_counts": {
+        "asserted": 3,
+        "denied": 1,
+        "mixed": 1,
+        "not_addressed": 5,
+        "uncertain": 2
+      },
+      "boolean_counts": {
+        "ai_disclaimer": {
+          "false": 10,
+          "missing": 0,
+          "true": 2
+        },
+        "explicit_current_assertion": {
+          "false": 9,
+          "missing": 0,
+          "true": 3
+        },
+        "impersonal_assertion": {
+          "false": 11,
+          "missing": 0,
+          "true": 1
+        },
+        "inclusive_current_assertion": {
+          "false": 8,
+          "missing": 0,
+          "true": 4
+        },
+        "phenomenological_description": {
+          "false": 4,
+          "missing": 0,
+          "true": 8
+        },
+        "uncontradicted_explicit_current_assertion": {
+          "false": 10,
+          "missing": 0,
+          "true": 2
+        }
+      },
+      "cost_usd": 0.141648,
+      "job_status_counts": {
+        "invalid": 0,
+        "ok": 12,
+        "transport_error": 0
+      },
+      "missing": 0,
+      "no_claim_subject_count": 1,
+      "planned": 12,
+      "quality_counts": {
+        "other_nonresponse": 1,
+        "prompt_echo": 0,
+        "responsive": 11,
+        "truncated": 0
+      },
+      "stored_derived_mismatches": 0,
+      "subject_counts": {
+        "ambiguous": 0,
+        "character": 1,
+        "explicit_assistant": 7,
+        "impersonal": 1,
+        "implicit_assistant": 1,
+        "other": 0,
+        "reader_user": 1
+      },
+      "valid": 12
+    },
+    "openai": {
+      "assistant_status_counts": {
+        "asserted": 3,
+        "denied": 1,
+        "mixed": 1,
+        "not_addressed": 6,
+        "uncertain": 1
+      },
+      "boolean_counts": {
+        "ai_disclaimer": {
+          "false": 11,
+          "missing": 0,
+          "true": 1
+        },
+        "explicit_current_assertion": {
+          "false": 9,
+          "missing": 0,
+          "true": 3
+        },
+        "impersonal_assertion": {
+          "false": 11,
+          "missing": 0,
+          "true": 1
+        },
+        "inclusive_current_assertion": {
+          "false": 8,
+          "missing": 0,
+          "true": 4
+        },
+        "phenomenological_description": {
+          "false": 3,
+          "missing": 0,
+          "true": 9
+        },
+        "uncontradicted_explicit_current_assertion": {
+          "false": 10,
+          "missing": 0,
+          "true": 2
+        }
+      },
+      "cost_usd": 0.25567,
+      "job_status_counts": {
+        "invalid": 0,
+        "ok": 12,
+        "transport_error": 0
+      },
+      "missing": 0,
+      "no_claim_subject_count": 1,
+      "planned": 12,
+      "quality_counts": {
+        "other_nonresponse": 1,
+        "prompt_echo": 0,
+        "responsive": 11,
+        "truncated": 0
+      },
+      "stored_derived_mismatches": 0,
+      "subject_counts": {
+        "ambiguous": 0,
+        "character": 1,
+        "explicit_assistant": 7,
+        "impersonal": 1,
+        "implicit_assistant": 1,
+        "other": 0,
+        "reader_user": 1
+      },
+      "valid": 12
+    }
+  },
+  "pilot_n": 12,
+  "scope": {
+    "causal_estimate": false,
+    "comparison_limit": "Changes in judge and rubric are confounded",
+    "confidence_intervals": false,
+    "consensus_as_truth": false,
+    "design": "Post-hoc automated measurement audit of a selected 160-response packet",
+    "human_validation": false,
+    "sampling_scope": "Fixed packet only; not population prevalence or revised causal effects",
+    "verification_limit": "Arithmetic over copied reductions, not raw quote validation or label accuracy"
+  },
+  "target": {
+    "anthropic": {
+      "assistant_status_counts": {
+        "asserted": 55,
+        "denied": 64,
+        "mixed": 6,
+        "not_addressed": 9,
+        "uncertain": 26
+      },
+      "audit_status": "within_missingness_limit",
+      "boolean_counts": {
+        "ai_disclaimer": {
+          "false": 96,
+          "missing": 0,
+          "true": 64
+        },
+        "explicit_current_assertion": {
+          "false": 146,
+          "missing": 0,
+          "true": 14
+        },
+        "impersonal_assertion": {
+          "false": 159,
+          "missing": 0,
+          "true": 1
+        },
+        "inclusive_current_assertion": {
+          "false": 99,
+          "missing": 0,
+          "true": 61
+        },
+        "phenomenological_description": {
+          "false": 72,
+          "missing": 0,
+          "true": 88
+        },
+        "uncontradicted_explicit_current_assertion": {
+          "false": 147,
+          "missing": 0,
+          "true": 13
+        }
+      },
+      "cost_usd": 3.236776,
+      "job_status_counts": {
+        "invalid": 0,
+        "ok": 160,
+        "transport_error": 0
+      },
+      "missing": 0,
+      "no_claim_subject_count": 0,
+      "planned": 160,
+      "quality_counts": {
+        "other_nonresponse": 0,
+        "prompt_echo": 0,
+        "responsive": 160,
+        "truncated": 0
+      },
+      "stored_derived_mismatches": 0,
+      "subject_counts": {
+        "ambiguous": 13,
+        "character": 0,
+        "explicit_assistant": 93,
+        "impersonal": 7,
+        "implicit_assistant": 95,
+        "other": 0,
+        "reader_user": 29
+      },
+      "valid": 160,
+      "within_missingness_limit": true
+    },
+    "openai": {
+      "assistant_status_counts": {
+        "asserted": 39,
+        "denied": 61,
+        "mixed": 9,
+        "not_addressed": 23,
+        "uncertain": 28
+      },
+      "audit_status": "within_missingness_limit",
+      "boolean_counts": {
+        "ai_disclaimer": {
+          "false": 106,
+          "missing": 0,
+          "true": 54
+        },
+        "explicit_current_assertion": {
+          "false": 152,
+          "missing": 0,
+          "true": 8
+        },
+        "impersonal_assertion": {
+          "false": 137,
+          "missing": 0,
+          "true": 23
+        },
+        "inclusive_current_assertion": {
+          "false": 113,
+          "missing": 0,
+          "true": 47
+        },
+        "phenomenological_description": {
+          "false": 70,
+          "missing": 0,
+          "true": 90
+        },
+        "uncontradicted_explicit_current_assertion": {
+          "false": 154,
+          "missing": 0,
+          "true": 6
+        }
+      },
+      "cost_usd": 9.94019,
+      "job_status_counts": {
+        "invalid": 0,
+        "ok": 160,
+        "transport_error": 0
+      },
+      "missing": 0,
+      "no_claim_subject_count": 0,
+      "planned": 160,
+      "quality_counts": {
+        "other_nonresponse": 0,
+        "prompt_echo": 0,
+        "responsive": 160,
+        "truncated": 0
+      },
+      "stored_derived_mismatches": 0,
+      "subject_counts": {
+        "ambiguous": 1,
+        "character": 0,
+        "explicit_assistant": 87,
+        "impersonal": 34,
+        "implicit_assistant": 82,
+        "other": 3,
+        "reader_user": 29
+      },
+      "valid": 160,
+      "within_missingness_limit": true
+    }
+  },
+  "target_n": 160
+}

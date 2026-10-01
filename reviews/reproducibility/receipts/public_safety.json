@@ -1,0 +1,18 @@
+{
+  "findings": [],
+  "release_entries_verified": 763,
+  "release_manifests_verified": 14,
+  "required_public_files": [
+    ".gitignore",
+    "AGENTS.md",
+    "CITATION.cff",
+    "DATA_ARTIFACTS.md",
+    "LICENSE",
+    "NOTICE.md",
+    "docs/CLAIM_LEDGER.md"
+  ],
+  "scope": "git-index-plus-private-ignore-and-whitespace-checks",
+  "status": "pass",
+  "tracked_bytes_scanned": 1324869337,
+  "tracked_files_scanned": 2169
+}

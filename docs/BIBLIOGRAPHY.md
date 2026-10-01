@@ -17,6 +17,13 @@ replicated. It does not inventory every operational URL in logs, dependency
 documentation, or historical automated-review transcripts. In particular,
 merely suggested citations from an ungrounded review are not silently adopted.
 
+On 2026-10-01 the owner designated public `CONSCIOUS/paper/` as the sole
+canonical manuscript and clarified the broader research scope. The latest
+manuscript bibliography is now restored there. The older source list above
+records how this collection was assembled, not a dependency on the private
+former companion. The historical key `jones2026berg_response` is retained for
+compatibility but now points to the canonical research manuscript here.
+
 ## Keys And Provenance
 
 Duplicate works have one canonical entry. Where old manuscripts used different
@@ -54,7 +61,7 @@ change any frozen experimental artifact or scientific result.
 
 ## Cultural-Emotion Addition (2026-10-01)
 
-The current response's measurement discussion now cites Spencer-Rodgers,
+The current manuscript's measurement discussion now cites Spencer-Rodgers,
 Peng and Wang (2010), Havaldar et al. (2023), and Dudy et al. (2024). Their
 three entries are also included in this consolidated file. Verification
 used the [Sage abstract and issue record](https://journals.sagepub.com/doi/10.1177/0022022109349508),
@@ -67,9 +74,10 @@ PDF and [author record](https://www.shirandudy.com/projects/8_project/).
 These references supply cultural/linguistic measurement context, not evidence
 of a mechanism underlying the present self-reports or of absent experience.
 Dudy's language-versus-origin contrast is English/Japanese; Chinese belongs
-to its separate broader comparison. The active response records the source
-checks in `reviews/reference_checks.md`. No historical manuscript or frozen
-experiment was changed.
+to its separate broader comparison. The current manuscript records the source
+checks in `reviews/reference_checks.md`, now available in this repository.
+The original literature addition did not change a historical manuscript or
+frozen experiment; the later consolidation preserves those sources separately.
 
 ## Use
 
