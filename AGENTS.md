@@ -32,6 +32,21 @@ The original $90 judge forecast also failed ($107.713079). Preserve freeze
 `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md` distinguishes assertion-field
 matches from the failed original gate. Do not silently waive or reclassify it.
 
+The owner's later "go for it, spending approved" authorizes the separate A1
+instrument amendment and frontier mini. Follow
+`docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md` and
+`experiments/bilingual_llama_a1/`: one fresh 32-item fixture panel, original
+target inventory unchanged, judging allocation raised to $120 by reducing
+contingency to $20 within the same $200 total. Carry $2.726282 prior judging
+inside that cap. A second semantic failure stops both target panels; do not
+keep recalibrating until a pass. Public source-bound freeze and hosted CI
+precede paid calls. The frontier mini has a separate $60 cap for 72 source
+continuations, 144 final answers and 576 judgments across Astra, Opus 5.5 and
+a contemporaneous GPT-4.1 anchor, in English and Simplified Chinese. Its
+execution also requires the A1 instrument/forecast pass. This expands only
+the approved scope; no temperature sweep, new Pro consultation, SAE or J-lens
+intervention is authorized. Read checkpoint for actual execution status.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
