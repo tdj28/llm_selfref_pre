@@ -53,6 +53,25 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The qualification-only crossed Llama screen is complete at
+  `data/instruction_state_qualification/crossed_v1_20261001/`; see
+  `docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`. Frozen at
+  `0acf16548f7dfe0359ce6c19bf952725572697d5`, it completed 12 blocks, 24
+  source continuations, 48 answers and 192 target judgments. The first-look
+  decision is FAIL: instruction effects are 0.5000/0.5417, but upward headroom
+  is 1/12 and reported-context-conflict excess is 0.25. No eight-block
+  extension or internal intervention followed. Preserve all four cells:
+  history/history is 1/12 or 0/12; history/self is 11/12; both self-instruction
+  cells are 12/12. This is not a null instruction effect. All answers are
+  coherent; explicit/inclusive current attribution is 2/48 versus 37/48.
+  Eleven history continuations, and no self-reference continuations, hit the
+  source cap. Transcript contrasts do not isolate semantic content.
+  Offline verification: `python scripts/reproduce_instruction_qualification.py`.
+  All three owned pods were retrieved/hash-verified and deleted (GET 404).
+  New spending bound $9.862282; cumulative bound $78.993222 within $200.
+  No paid work is running. Do not waive guards, search for friendlier prompts,
+  or launch the downstream mechanism study from this failed qualification.
+
 - `docs/QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md` adjudicates the
   owner's Deep Research feedback and replaces the neutral-ownership gate as
   the proposed next experiment. Qualify the crossed Llama behavior first;
@@ -75,7 +94,9 @@ immediately public and permanently recoverable.
   operational retry: longer cheap work window, unchanged science/worker
   commit, carried failure cost and the original API ledger. No B200 was
   created in the failed attempt; synthetic judge fixtures passed for $0.367850.
-  Read ignored `checkpoint.md` for actual launch/cleanup status. No J-lens or Qwen
+  The completed release above records the retry, outcomes and cleanup; this
+  paragraph preserves the original proposal and operational history.
+  Read ignored `checkpoint.md` for publication status. No J-lens or Qwen
   rental belongs to this proposal. Keep publication independent of its success.
 
 - `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md` and

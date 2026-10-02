@@ -1,0 +1,56 @@
+{
+  "amendment_freeze": "1f577870245ebf70bf72be0068d1f6cbc671b898",
+  "api_cost_upper_estimate_usd": "5.811552",
+  "cumulative_cap_usd": "200",
+  "cumulative_cost_upper_bound_usd": "78.99322123238055277777777778",
+  "new_cap_usd": "25",
+  "new_cost_upper_bound_usd": "9.862281232380552777777777778",
+  "owned_pods": [
+    {
+      "compute_upper_bound_usd": "0.1388858536333333333333333333",
+      "created_utc": "2026-10-01T21:59:30.881930+00:00",
+      "deleted_utc": "2026-10-01T22:09:26.107079+00:00",
+      "elapsed_seconds": "595.225087",
+      "get_status": 404,
+      "hourly_rate_usd": "0.74",
+      "pod_id": "hspaphgeu0ytc0",
+      "private_closure_sha256": "1eb4b900b53663167fd2aa8e241b502ef5245945bd04b00cac2037ec90e928b0",
+      "private_final_retrieval_sha256": "c019276efdb34343b9429e651f463cb7bcf0b945b9f26cd4af1b28753aee44c5",
+      "role": "instruction-qualification-controller/cheap",
+      "storage_hourly_usd": "0.10",
+      "within_limits": true
+    },
+    {
+      "compute_upper_bound_usd": "0.05025417996666666666666666667",
+      "created_utc": "2026-10-01T22:45:09.547749+00:00",
+      "deleted_utc": "2026-10-01T22:48:44.922950+00:00",
+      "elapsed_seconds": "215.375057",
+      "get_status": 404,
+      "hourly_rate_usd": "0.74",
+      "pod_id": "k9hl1cali1gn26",
+      "private_closure_sha256": "503a1e14a591b9df713fdc57d622048982421ffe7e2d3660516d8aafb74f9f48",
+      "private_final_retrieval_sha256": "b3fcd0ab007acec2e357fb09993335c715f707d617504d48d518c69185108d80",
+      "role": "instruction-qualification-bootstrap-a1/cheap",
+      "storage_hourly_usd": "0.10",
+      "within_limits": true
+    },
+    {
+      "compute_upper_bound_usd": "3.861589198780552777777777778",
+      "created_utc": "2026-10-01T22:49:24.179136+00:00",
+      "deleted_utc": "2026-10-01T23:23:01.815580+00:00",
+      "elapsed_seconds": "2017.666344791",
+      "get_status": 404,
+      "hourly_rate_usd": "6.79",
+      "pod_id": "2aft9ch3q6d0b3",
+      "private_closure_sha256": "f620d44b5b463fca9a1b46e24ffa2874ed4e0273bc780a7b5ec406bd1bec3a66",
+      "private_final_retrieval_sha256": "d90f9102fbb6916decf9795402de9b3a46b389501a5001f34c2443862279c2f5",
+      "role": "instruction-qualification-bootstrap-a1/main",
+      "storage_hourly_usd": "0.10",
+      "within_limits": true
+    }
+  ],
+  "prior_cost_upper_bound_usd": "69.130940",
+  "projection_note": "Selected owned-resource fields from hash-chained private lifecycle receipts. Foreign inventory, SSH details, approvals and local paths are excluded. These are conservative elapsed-time/token-cost estimates, not provider invoices.",
+  "schema": "qualification-owned-lifecycle-public-projection-v1",
+  "science_freeze": "0acf16548f7dfe0359ce6c19bf952725572697d5"
+}

@@ -40,11 +40,27 @@ Qwen expansion is a publication requirement.
 - [x] Pass all 24 two-provider synthetic instrument judgments ($0.367850).
 - [x] Preserve the cheap bootstrap timeout, retrieve/hash-check its three
   artifacts and delete owned pod hspaphgeu0ytc0; GPU cost bound $0.138886.
-- [ ] Complete the separately frozen A1 cheap retry before B200 creation.
-- [ ] Run qualification only; audit initial rows and costs, retrieve/hash-check
-  artifacts and delete only its newly owned pod. Failure closes this candidate,
-  not publication, and does not trigger a search for friendlier prompts.
-- [ ] If qualified, implement the cached pre-query fork and model-only loader;
+- [x] Complete the separately frozen A1 cheap retry before B200 creation:
+  all 176 CUDA tests passed; retrieve/hash-check and delete its owned pod.
+- [x] Complete qualification at 12 blocks, with initial-row/throughput audits,
+  48 final answers and both providers' complete labels. Retrieve/hash-check
+  all raw data and delete the owned B200 (GET 404). Decision: FAIL on headroom
+  and reported context conflict, despite instruction effects 0.5000/0.5417.
+  No extension or mechanism experiment. New cost bound $9.862282; cumulative
+  $78.993222. See `docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`.
+- [x] Release raw responses, judge receipts, the unchanged runtime decision,
+  reproducible tables and two figure pairs. Preserve the source-cap imbalance
+  and the 2/48 explicit versus 37/48 inclusive attribution distinction.
+- [ ] Integrate this qualification into the manuscript during editorial work:
+  substantial transcript effects here limit a universal instruction-dominance
+  claim. Do not treat judge/model differences or source-length imbalance as
+  controlled explanations of the contrast with the earlier API-model panel.
+
+The following causal-stage items are blocked by the failed qualification,
+not an active execution queue. Do not tune the screen or start a model/layer
+search. Publication does not depend on rescuing this candidate.
+
+- [ ] If separately justified, implement the cached pre-query fork and model-only loader;
   test serialization, branch isolation, hook counts, zero behavior and delivery.
 - [ ] Before causal holdout, freeze discovery donors, corrected six-arm
   operators, realized-dose matching, fixed wording mixture, block-aware

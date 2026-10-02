@@ -1,5 +1,17 @@
 # Data Artifacts
 
+`data/instruction_state_qualification/crossed_v1_20261001/` is the completed
+12-block crossed Llama qualification: 24 source continuations, 48 final
+answers, 192 target judge calls, 24 synthetic fixture calls, successful cheap
+CUDA receipts, runtime decisions, two figure pairs and a complete hash manifest.
+The frozen screen fails on headroom and reported context conflict despite
+large instruction effects. Preserve the substantial descriptive transcript
+effect, the history-only source-cap imbalance and both attribution criteria.
+No extension or internal experiment followed. The initial failed cheap rental
+remains in its separate archive below. Reproduce without GPU/API calls using
+`python scripts/reproduce_instruction_qualification.py`; full interpretation:
+`docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`.
+
 `data/instruction_state_qualification/bootstrap_failure_20261001/` preserves
 the original incomplete cheap CUDA gate: exact log, dependency inventory and
 worker-stop proof, plus a projected owned-pod cost/deletion summary. No target
@@ -12,8 +24,8 @@ certificate. The two-look screen permits 12 blocks (48 final answers) and
 at most 20 blocks (80 answers), under the separately authorized $25 stop-loss.
 The synthetic tokenizer fixtures are serialization tests, not model outputs.
 No internal intervention, fitted direction, SAE/J-lens result or completed
-qualification is implied. Runtime and judge receipts remain ignored until a
-separate audited release. Protocol:
+qualification is implied by that plan. The completed runtime and judge
+receipts are in the separate audited release above. Protocol:
 `docs/INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md`.
 
 `evidence/` contains the compact manuscript evidence package restored on
