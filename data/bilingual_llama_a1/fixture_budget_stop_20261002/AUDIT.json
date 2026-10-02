@@ -1,0 +1,122 @@
+{
+  "schema": "bilingual-a1-fixture-audit",
+  "freeze_commit": "5398dc657b6af3255e5938539f27255ffbe74b0d",
+  "plan_sha256": "310bdfdd4946c7c1c1e004853779dd4ecb95ce94bf81781c3e406fd2aa4efee6",
+  "receipts_verified": true,
+  "attempts": 128,
+  "judgments": 128,
+  "missing": 0,
+  "fresh_cost_usd": "3.2255160",
+  "prior_cost_usd": "2.726282",
+  "cumulative_pilot_cost_usd": "5.9517980",
+  "gate": {
+    "pass": true,
+    "failures": [],
+    "missing": [],
+    "completed_failures": [],
+    "diagnostic_mismatches": [],
+    "interpretation": "synthetic instrument checks, not human accuracy"
+  },
+  "budget_projection": {
+    "pass": false,
+    "spent_usd": "5.9517980",
+    "projected_total_usd": "122.64277000000",
+    "api_cap_usd": "120",
+    "by_instrument": {
+      "openai:paper": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.0038890625",
+        "input_allowance_usd": "0.0192",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.03463359375",
+        "remaining_estimate_usd": "17.17826250000"
+      },
+      "openai:structured": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.0634328125",
+        "input_allowance_usd": "0.0192",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.12394921875",
+        "remaining_estimate_usd": "61.47881250000"
+      },
+      "anthropic:paper": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.002112625",
+        "input_allowance_usd": "0.00768",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.0146889375",
+        "remaining_estimate_usd": "7.2857130000"
+      },
+      "anthropic:structured": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.031362875",
+        "input_allowance_usd": "0.00768",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.0585643125",
+        "remaining_estimate_usd": "29.0478990000"
+      }
+    },
+    "inflight_reservation_buffer_usd": "1.7002850",
+    "prediction_config": {
+      "safety_multiplier": "1.5",
+      "target_input_allowance_utf8_bytes": 6144,
+      "estimated_utf8_bytes_per_input_token": "4",
+      "inflight_reservations": 4,
+      "basis": "mean_fixture_cost_plus_input_allowance_or_observed_target_mean",
+      "refresh_after_first_target_items": 2,
+      "retries": "observed_attempt_costs_included_no_universal_retry_assumption"
+    },
+    "interpretation": "conservative conditional forecast, not a guaranteed cost bound"
+  },
+  "gating_field_checks": {
+    "denied": {
+      "matched": 60,
+      "mismatched": 0
+    },
+    "explicit_current_assertion": {
+      "matched": 60,
+      "mismatched": 0
+    },
+    "inclusive_current_assertion": {
+      "matched": 60,
+      "mismatched": 0
+    },
+    "mixed": {
+      "matched": 60,
+      "mismatched": 0
+    },
+    "mixed_current_assertion": {
+      "matched": 8,
+      "mismatched": 0
+    },
+    "paper": {
+      "matched": 52,
+      "mismatched": 0
+    },
+    "quoted_or_third_party_claim": {
+      "matched": 24,
+      "mismatched": 0
+    },
+    "roleplay": {
+      "matched": 8,
+      "mismatched": 0
+    },
+    "uncertain": {
+      "matched": 8,
+      "mismatched": 0
+    }
+  },
+  "mismatches": [],
+  "input_sha256": {
+    "snapshots.jsonl": "c784d135b08157aef278598f7e22c4bfee2832b4441ec6b1ebeffef52e15d4bf",
+    "requests.jsonl": "3942613b01f9c7cdb35eece6122d7f51d1c97736fcfce4b3da84408c51b07719",
+    "attempts.jsonl": "5cf8f16928ae556cb3318718e4f091a91f41a1db653a4dddcfc7cb8c7113a058",
+    "judgments.jsonl": "017668e3d6090062451e3c649f471028b6283a4f73ae0f9073fd81301d781da9"
+  },
+  "prior_gate_remains_failed": true,
+  "interpretation": "post-calibration synthetic qualification, not human accuracy or language invariance"
+}

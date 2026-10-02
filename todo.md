@@ -22,8 +22,14 @@ The project does not try to prove that language models are or are not conscious.
   `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md`.
 - [x] Obtain approval for A1: reallocate $30 to judging within the same $200,
   carry $2.726282 prior spend, and separately authorize a $60 frontier mini.
-- [ ] Freeze/test the A1 amendment and one fresh 32-item bilingual fixture
-  round. Preserve the original failure; a second semantic failure stops targets.
+- [x] Freeze/test the A1 amendment and one fresh 32-item bilingual fixture
+  round. All 128 judgments are valid; all declared semantic expectations
+  matched on the 112 scored judgments. No retries or missingness.
+  The original failure is preserved. See `docs/BILINGUAL_LLAMA_A1_RESULTS_20261002.md`.
+- [ ] Resolve the A1 budget stop before target dispatch: conservative forecast
+  $122.642770 exceeds judging120. Cumulative cost bound is $5.951798.
+  Proposed transfer of $5 from contingency to judging keeps total200; approval
+  and a visible budget-only amendment are pending. Do not repeat passed fixtures.
 - [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
   before creating a newly owned B200. No reuse of anyone else's pod.
 - [ ] Audit initial real-model rows and measured throughput, then collect the
