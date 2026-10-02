@@ -7,6 +7,31 @@ reports and what those measurements identify. Berg, de Lucena, and Rosenblatt
 We study instruction and transcript effects, measurement validity, feature
 steering and internal readouts. None alone settles whether LLMs are conscious.
 
+## Active Bilingual Pilot (2026-10-01)
+
+The owner approved the single-Llama bilingual measurement pilot under a new,
+separate $200 ceiling. Follow `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`
+and `experiments/bilingual_llama_pilot/`. Its prospective inventory is 20
+paired blocks, two fixed wording families, 280 sources and 480 final answers;
+two independent-provider judges apply separate paper and attribution rubrics.
+The primary endpoint is inclusive current attribution, with explicit and
+mixed claims always reported. Preserve the earlier failed mechanism gate.
+No frontier-model generation, temperature sweep, SAE/J-lens intervention or
+second Pro call is authorized by this pilot. Public freeze/CI, instrument
+fixtures, cheap CUDA and audited first-two-block throughput precede bulk.
+Only newly created uniquely owned pods may be used; retrieve, hash-check and
+delete them promptly after generation. The previous campaign's $79.8034612324
+bound is separate, not a charge to this pilot. Implementation is not evidence
+of a passed gate; read ignored `checkpoint.md` for live status.
+
+The first live fixture gate failed on seven denial-field expectations; all
+128 calls completed at $2.726282, with no GPU created and no target responses.
+The original $90 judge forecast also failed ($107.713079). Preserve freeze
+`2727164010647bf437e723c096e7aff4ec4c3f36` and
+`data/bilingual_llama_pilot/fixture_gate_failure_20261002/` unchanged.
+`docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md` distinguishes assertion-field
+matches from the failed original gate. Do not silently waive or reclassify it.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.

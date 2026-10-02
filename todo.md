@@ -7,6 +7,36 @@ The project does not try to prove that language models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Bilingual Measurement Pilot (2026-10-01)
+
+- [x] Obtain separate approval for the narrowed single-Llama pilot, capped at
+  $200; retain the incomplete Pro receipt and adjudicate its substantive advice.
+- [x] Define 20 paired blocks, two fixed wording families, English/Simplified
+  Chinese, eight conditions, anchor crossings and an input/output-language
+  bridge: 280 source continuations and 480 final answers.
+- [x] Finish implementation tests and publicly freeze the prompts, inventory,
+  tokenizer bindings, two separate rubrics, analysis and operational gates.
+- [x] Run and preserve all 128 synthetic judgments. Original fixture gate failed
+  on seven denial expectations; judge forecast $107.713079 exceeds its $90
+  allocation. Cost $2.726282; no GPU or Llama outcomes. See
+  `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md`.
+- [ ] Resolve the measurement/budget stop with a separate prospective amendment;
+  carry prior pilot spending and disclose inspected fixture outcomes.
+- [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
+  before creating a newly owned B200. No reuse of anyone else's pod.
+- [ ] Audit initial real-model rows and measured throughput, then collect the
+  fixed panel within its cap, retaining missing, refused and truncated outputs.
+- [ ] Complete full Astra/Opus coding plus the fixed 16-translation sensitivity
+  audit. Report inclusive, explicit, mixed and paper-style labels separately.
+- [ ] Retrieve/hash-check raw data, delete owned compute and release the
+  paired-block analysis, dense figures, costs and limitations.
+- [ ] Decide whether these measurements justify a later multilingual/model
+  expansion. No frontier generation, temperature sweep or additional Pro
+  call is included in this approval; no language-equivalence claim from a pilot.
+
+Protocol: `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`. The earlier failed
+mechanism-qualification gate remains failed. This is not a rescue attempt.
+
 ### Canonical Manuscript And Editorial Direction (2026-10-01)
 
 - [x] Restore the latest manuscript, evidence, verification code and review
