@@ -26,10 +26,12 @@ The project does not try to prove that language models are or are not conscious.
   round. All 128 judgments are valid; all declared semantic expectations
   matched on the 112 scored judgments. No retries or missingness.
   The original failure is preserved. See `docs/BILINGUAL_LLAMA_A1_RESULTS_20261002.md`.
-- [ ] Resolve the A1 budget stop before target dispatch: conservative forecast
+- [x] Resolve the A1 budget allocation: conservative forecast
   $122.642770 exceeds judging120. Cumulative cost bound is $5.951798.
-  Proposed transfer of $5 from contingency to judging keeps total200; approval
-  and a visible budget-only amendment are pending. Do not repeat passed fixtures.
+  Owner approved $5 from contingency to judging, keeping total200. B1 has
+  judging125/contingency15; preserve the old stop and do not repeat fixtures.
+- [ ] Test, push and verify the B1 budget-only plan and inherited receipt
+  proof before any target dispatch. Both model panels keep their frozen science.
 - [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
   before creating a newly owned B200. No reuse of anyone else's pod.
 - [ ] Audit initial real-model rows and measured throughput, then collect the

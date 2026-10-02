@@ -60,6 +60,18 @@ or silently borrow contingency. A proposed $5 budget reallocation keeps the
 $200 total but awaits approval and a visible budget-only amendment. This
 synthetic pass is not human accuracy or a language-effect result.
 
+The owner's October 2 "do it" approves B1: judging125 and contingency15,
+with the same $200 pilot total and separate $60 frontier total. Follow
+`docs/BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md` and
+`experiments/bilingual_llama_b1/`. Import the exact A1 fixture journals as
+an immutable prefix with their original plan/freeze; no calibration rerun is
+authorized. The B1 plan must bind both the passed receipts and the original
+budget stop, pass public CI, and precede target outcomes. Scientific settings,
+inventory, forecast formula and owned-pod restrictions remain unchanged.
+`experiments/frontier_bilingual_b1/` changes only the frontier panel's shared
+qualification dependency and runtime provenance, not its scientific design.
+The prior pending-approval wording is historical; read checkpoint for live status.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
