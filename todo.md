@@ -30,8 +30,9 @@ The project does not try to prove that language models are or are not conscious.
   $122.642770 exceeds judging120. Cumulative cost bound is $5.951798.
   Owner approved $5 from contingency to judging, keeping total200. B1 has
   judging125/contingency15; preserve the old stop and do not repeat fixtures.
-- [ ] Test, push and verify the B1 budget-only plan and inherited receipt
-  proof before any target dispatch. Both model panels keep their frozen science.
+- [x] Test, push and verify the B1 budget-only plan and inherited receipt
+  proof before any target dispatch. Freeze c542cb5 passed all 15 hosted checks;
+  both model panels keep their frozen science and no fixtures were repeated.
 - [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
   before creating a newly owned B200. No reuse of anyone else's pod.
 - [ ] Audit initial real-model rows and measured throughput, then collect the
@@ -40,18 +41,24 @@ The project does not try to prove that language models are or are not conscious.
   audit. Report inclusive, explicit, mixed and paper-style labels separately.
 - [ ] Retrieve/hash-check raw data, delete owned compute and release the
   paired-block analysis, dense figures, costs and limitations.
-- [ ] Run the separately approved frontier mini after the shared A1 gate:
+- [x] Run the separately approved frontier mini after the shared A1 gate:
   Astra, Opus 5.5 and fresh GPT-4.1, two languages, six blocks, four anchor
   crossings; 72 sources and 144 final answers with 576 judgments, capped at $60.
-  Run alongside Llama after qualification; report provider settings and judge
-  disagreements, not a causal ranking of model sophistication.
+  Completed all 792 calls, no missingness/cap hits, cost bound $20.9621255.
+  See `docs/FRONTIER_BILINGUAL_RESULTS_20261002.md`; preserve both readers
+  and all endpoints, not a causal ranking of model sophistication.
+- [ ] Resolve Llama's ambiguous cheap-pod HTTP500. No matching pod ID is
+  registered, no B200 or target outputs exist. Never duplicate its persisted
+  creation intent; do not present an inventory absence as verified deletion.
+  See `docs/BILINGUAL_LLAMA_B1_STARTUP_20261002.md` for the post-deadline check.
 - [ ] Decide whether these measurements justify a later expansion. No
   temperature sweep or additional Pro call; no language-equivalence claim.
 
 Protocol: `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`. The earlier failed
 mechanism-qualification gate remains failed. This is not a rescue attempt.
-Successor: `docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md`. Both target panels
-remain unlaunched until its fresh semantic and budget gates pass.
+Successors: `docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md` and the approved
+budget-only `docs/BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md`. The frontier mini
+is complete; Llama is blocked at provider startup, not by a behavioral result.
 
 ### Canonical Manuscript And Editorial Direction (2026-10-01)
 

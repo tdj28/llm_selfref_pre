@@ -658,3 +658,12 @@ data/berg_ensemble_replication/*
 !data/instruction_state_qualification/crossed_v1_20261001/judges/judgments.jsonl
 !data/instruction_state_qualification/crossed_v1_20261001/judges/requests.jsonl
 !data/instruction_state_qualification/crossed_v1_20261001/judges/snapshots.jsonl
+
+# Completed frontier mini: approved raw receipts and reproducible analysis only.
+!data/frontier_bilingual_b1/
+data/frontier_bilingual_b1/*
+!data/frontier_bilingual_b1/plan_20261002/
+!data/frontier_bilingual_b1/plan_20261002/PLAN.json
+!data/frontier_bilingual_b1/completed_20261002/
+!data/frontier_bilingual_b1/completed_20261002/**
+!data/frontier_bilingual_b1/completed_20261002/analysis/*.pdf

@@ -31,6 +31,7 @@ explain how it relates to the manuscript-specific files.
 |---|---|---|
 | Published self-reference prompt | Higher paper-rubric positive rates than history; strict self-attribution labels disagree sharply between judges. | Human-validated experience reports or an experiential state. |
 | Transcript transplants | Instruction effects dominate in this panel. Transcript effects are model-specific, including opposite signs; swapped contexts can be incoherent. | No transcript effect, or a unique mechanism. |
+| October bilingual frontier pilot | In 144 fresh answers, both readers assign Astra 0/48 inclusive current-assertion labels; GPT-4.1 retains large instruction effects in both languages; Opus depends on language and rubric. | A capability ranking, language invariance, or a precise population null from six blocks. |
 | July Llama 70B steering (4-bit) | Target negative-minus-positive steering is **0.00 [-0.06, 0.06]**. The unsteered primary baseline is **10/10 unique outputs**, versus approximately **0.30** in the paper's Figure 2. | A comparable test of the suppression claim. Amplification could lower the rate, but stays high here. |
 | October source-aligned Llama test (BF16) | Across 1,090 trials, the notebook-rubric individual contrast is **0.000 [-0.050, 0.050]** under the conditional bootstrap. Notebook induction gives **0/10** baseline positives in every tested setting; paper induction gives **6--9/10**, with the same final question. | Interchangeability of the paper and notebook protocols, precise ten-seed population inference, or proprietary API equivalence. |
 | October random-subset Llama test (BF16) | Paper induction, two-to-four sampled features, 50 fresh blocks: target **43/50 versus 45/50**, gap **-0.04 [-0.2584, 0.1855]** under conservative inference. The frozen +0.30 signature is not recovered. Notebook sensitivity is **-0.02 [-0.3446, 0.3076]**, threshold-inconclusive. | Equivalence to zero, target specificity, or proprietary API equivalence. The primary zero baseline remains high at 47/50. |
@@ -46,6 +47,10 @@ the investigators had never seen a related result.
 
 The [September review response](docs/CLAUDE_REVIEW_RESPONSE_20260929.md) records
 the corrections, disagreements and remaining experiments.
+
+The [bilingual frontier results](docs/FRONTIER_BILINGUAL_RESULTS_20261002.md)
+include all 792 API receipts, paired-block tables and both readers' heatmaps.
+The complete pilot cost bound is $20.96 of its separate $60 allowance.
 
 The [source-aligned release](data/berg_source_replication/source_aligned_v1_20261001/README.md)
 includes native delivery measurements, all 40 paired J-lens captures and eight

@@ -53,6 +53,27 @@ integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
 
+The completed frontier bilingual mini has an offline completed-ledger audit
+and exact raw-to-table reconstruction. Local Git history must contain its
+public freeze; no API keys, GPU or network calls are needed:
+
+```sh
+python scripts/release_frontier_b1.py \
+  --verify data/frontier_bilingual_b1/completed_20261002 \
+  --freeze c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb
+python scripts/release_frontier_b1.py \
+  --reproduce data/frontier_bilingual_b1/completed_20261002 \
+  --freeze c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb \
+  --out /tmp/frontier-mini-reproduced
+```
+
+The reproduction destination must be fresh and separate from the release.
+The verifier checks source bindings, receipts, hashes and exact numerical
+tables. Regenerated PDF timestamps need not match. Original raw files are
+never opened for writing. See `FRONTIER_BILINGUAL_RESULTS_20261002.md` for
+the six-block uncertainty and measurement limits; paper integration remains
+editorial work, not part of the frozen runtime.
+
 The later crossed Llama qualification has its own read-only raw-to-decision
 check and optional descriptive figure regeneration:
 

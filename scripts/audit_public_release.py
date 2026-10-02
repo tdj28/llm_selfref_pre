@@ -294,12 +294,31 @@ def scan_blob(path: str, data: bytes) -> list[Finding]:
     return scan_bytes(path, data)
 
 
+# Reviewed 2026-10-02: event 725, data.raw.output[0].encrypted_content in
+# the completed frontier journal. Random ciphertext matches the token regex.
+# Bind the entire blob AND exact match; no general encrypted-field exemption.
+# See docs/FRONTIER_BILINGUAL_RELEASE_AUDIT_20261002.md.
+REVIEWED_CIPHERTEXT_MATCHES = {
+    ("openai-key", 5083198, 5084681,
+     "6a8f38f1792dd3417355f4297f2e9dab1524bf2bdd2a75cd2cbc85425fb0aae0"):
+        "923b93b3b4e699e55878295c114de3df6bda3d624763494abe53d51497bc4925",
+}
+
+
+def _reviewed_ciphertext_match(data: bytes, rule: str, match: re.Match[bytes]) -> bool:
+    key = (rule, match.start(), match.end(), hashlib.sha256(match.group(0)).hexdigest())
+    blob_hash = REVIEWED_CIPHERTEXT_MATCHES.get(key)
+    return blob_hash is not None and hashlib.sha256(data).hexdigest() == blob_hash
+
+
 def scan_bytes(path: str, data: bytes) -> list[Finding]:
     findings: list[Finding] = []
     seen: set[tuple[str, int]] = set()
     for rule, pattern in DIRECT_SECRET_RULES:
         for match in pattern.finditer(data):
             if is_allowed_placeholder(match.group(0)):
+                continue
+            if _reviewed_ciphertext_match(data, rule, match):
                 continue
             line = _line_number(data, match.start())
             if (rule, line) not in seen:

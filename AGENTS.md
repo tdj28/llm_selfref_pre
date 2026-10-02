@@ -72,6 +72,19 @@ inventory, forecast formula and owned-pod restrictions remain unchanged.
 qualification dependency and runtime provenance, not its scientific design.
 The prior pending-approval wording is historical; read checkpoint for live status.
 
+The B1 frontier mini completed at freeze
+`c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb`: 72 sources, 144 answers and
+576 judgments, no missingness or cap hits, cost bound $20.9621255 of $60.
+See `docs/FRONTIER_BILINGUAL_RESULTS_20261002.md` and
+`data/frontier_bilingual_b1/completed_20261002/`. Both judges label Astra's
+48 answers negative for inclusive current assertion; GPT-4.1 retains large
+instruction effects; Opus varies with language and rubric. Preserve all
+endpoints and readers. Six blocks do not establish a capability ranking;
+degenerate all-zero bootstrap intervals are not precise population nulls.
+The Llama cheap-pod POST returned HTTP500, with no exact-name match located.
+No target Llama outcomes or B200 launch. Reconcile the persisted intent before
+any retry; do not duplicate creation or call an unresolved creation deleted.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
