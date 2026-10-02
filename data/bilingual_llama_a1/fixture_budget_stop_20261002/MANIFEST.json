@@ -1,0 +1,32 @@
+{
+  "schema": "bilingual-a1-fixture-release",
+  "freeze_commit": "5398dc657b6af3255e5938539f27255ffbe74b0d",
+  "plan_sha256": "310bdfdd4946c7c1c1e004853779dd4ecb95ce94bf81781c3e406fd2aa4efee6",
+  "files": [
+    {
+      "path": "AUDIT.json",
+      "bytes": 3900,
+      "sha256": "6036c3495adade61c0aff70d7ef9732eb1b79b82f7dbd43f97f00771ffb4bbfe"
+    },
+    {
+      "path": "judges/attempts.jsonl",
+      "bytes": 2121365,
+      "sha256": "5cf8f16928ae556cb3318718e4f091a91f41a1db653a4dddcfc7cb8c7113a058"
+    },
+    {
+      "path": "judges/judgments.jsonl",
+      "bytes": 2124946,
+      "sha256": "017668e3d6090062451e3c649f471028b6283a4f73ae0f9073fd81301d781da9"
+    },
+    {
+      "path": "judges/requests.jsonl",
+      "bytes": 1121988,
+      "sha256": "3942613b01f9c7cdb35eece6122d7f51d1c97736fcfce4b3da84408c51b07719"
+    },
+    {
+      "path": "judges/snapshots.jsonl",
+      "bytes": 19470,
+      "sha256": "c784d135b08157aef278598f7e22c4bfee2832b4441ec6b1ebeffef52e15d4bf"
+    }
+  ]
+}

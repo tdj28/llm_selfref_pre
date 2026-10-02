@@ -20,8 +20,16 @@ The project does not try to prove that language models are or are not conscious.
   on seven denial expectations; judge forecast $107.713079 exceeds its $90
   allocation. Cost $2.726282; no GPU or Llama outcomes. See
   `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md`.
-- [ ] Resolve the measurement/budget stop with a separate prospective amendment;
-  carry prior pilot spending and disclose inspected fixture outcomes.
+- [x] Obtain approval for A1: reallocate $30 to judging within the same $200,
+  carry $2.726282 prior spend, and separately authorize a $60 frontier mini.
+- [x] Freeze/test the A1 amendment and one fresh 32-item bilingual fixture
+  round. All 128 judgments are valid; all declared semantic expectations
+  matched on the 112 scored judgments. No retries or missingness.
+  The original failure is preserved. See `docs/BILINGUAL_LLAMA_A1_RESULTS_20261002.md`.
+- [ ] Resolve the A1 budget stop before target dispatch: conservative forecast
+  $122.642770 exceeds judging120. Cumulative cost bound is $5.951798.
+  Proposed transfer of $5 from contingency to judging keeps total200; approval
+  and a visible budget-only amendment are pending. Do not repeat passed fixtures.
 - [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
   before creating a newly owned B200. No reuse of anyone else's pod.
 - [ ] Audit initial real-model rows and measured throughput, then collect the
@@ -30,12 +38,18 @@ The project does not try to prove that language models are or are not conscious.
   audit. Report inclusive, explicit, mixed and paper-style labels separately.
 - [ ] Retrieve/hash-check raw data, delete owned compute and release the
   paired-block analysis, dense figures, costs and limitations.
-- [ ] Decide whether these measurements justify a later multilingual/model
-  expansion. No frontier generation, temperature sweep or additional Pro
-  call is included in this approval; no language-equivalence claim from a pilot.
+- [ ] Run the separately approved frontier mini after the shared A1 gate:
+  Astra, Opus 5.5 and fresh GPT-4.1, two languages, six blocks, four anchor
+  crossings; 72 sources and 144 final answers with 576 judgments, capped at $60.
+  Run alongside Llama after qualification; report provider settings and judge
+  disagreements, not a causal ranking of model sophistication.
+- [ ] Decide whether these measurements justify a later expansion. No
+  temperature sweep or additional Pro call; no language-equivalence claim.
 
 Protocol: `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`. The earlier failed
 mechanism-qualification gate remains failed. This is not a rescue attempt.
+Successor: `docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md`. Both target panels
+remain unlaunched until its fresh semantic and budget gates pass.
 
 ### Canonical Manuscript And Editorial Direction (2026-10-01)
 

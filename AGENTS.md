@@ -32,6 +32,34 @@ The original $90 judge forecast also failed ($107.713079). Preserve freeze
 `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md` distinguishes assertion-field
 matches from the failed original gate. Do not silently waive or reclassify it.
 
+The owner's later "go for it, spending approved" authorizes the separate A1
+instrument amendment and frontier mini. Follow
+`docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md` and
+`experiments/bilingual_llama_a1/`: one fresh 32-item fixture panel, original
+target inventory unchanged, judging allocation raised to $120 by reducing
+contingency to $20 within the same $200 total. Carry $2.726282 prior judging
+inside that cap. A second semantic failure stops both target panels; do not
+keep recalibrating until a pass. Public source-bound freeze and hosted CI
+precede paid calls. The frontier mini has a separate $60 cap for 72 source
+continuations, 144 final answers and 576 judgments across Astra, Opus 5.5 and
+a contemporaneous GPT-4.1 anchor, in English and Simplified Chinese. Its
+execution also requires the A1 instrument/forecast pass. This expands only
+the approved scope; no temperature sweep, new Pro consultation, SAE or J-lens
+intervention is authorized. Read checkpoint for actual execution status.
+
+A1 was frozen at `5398dc657b6af3255e5938539f27255ffbe74b0d`; all 15
+hosted checks passed before its 128 fresh judgments. The semantic gate passed
+with no specified-field mismatches, retries or missingness. Fresh cost bound
+$3.225516 plus v1 carry gives $5.951798 cumulative, not a reconciled bill.
+Its frozen all-judging forecast is $122.642770, above the $120 allocation,
+so the shared launch gate stopped
+both target panels before any rental or target call. Preserve
+`data/bilingual_llama_a1/fixture_budget_stop_20261002/` and read
+`docs/BILINGUAL_LLAMA_A1_RESULTS_20261002.md`. Do not rerun the passed fixtures
+or silently borrow contingency. A proposed $5 budget reallocation keeps the
+$200 total but awaits approval and a visible budget-only amendment. This
+synthetic pass is not human accuracy or a language-effect result.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
