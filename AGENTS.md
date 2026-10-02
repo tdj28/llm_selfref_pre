@@ -85,6 +85,15 @@ The Llama cheap-pod POST returned HTTP500, with no exact-name match located.
 No target Llama outcomes or B200 launch. Reconcile the persisted intent before
 any retry; do not duplicate creation or call an unresolved creation deleted.
 
+The owner subsequently authorized a technical retry on October 2. Follow
+`docs/BILINGUAL_POD_RETRY_B1_20261002.md` and the separately frozen controller
+in `experiments/bilingual_pod_retry_b1/`. Keep scientific runtime c542cb5 and
+the passed fixture ledger unchanged. One fresh cheap attempt is allowed with
+an $8 ambiguous-original reservation inside the existing $45 GPU allocation;
+no total-budget increase. Monitor the original exact name, validate original
+ownership before any late cleanup, and never claim empty inventory proves
+zero billing. Read ignored checkpoint for actual retry and cleanup status.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.

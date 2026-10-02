@@ -51,6 +51,10 @@ The project does not try to prove that language models are or are not conscious.
   registered, no B200 or target outputs exist. Never duplicate its persisted
   creation intent; do not present an inventory absence as verified deletion.
   See `docs/BILINGUAL_LLAMA_B1_STARTUP_20261002.md` for the post-deadline check.
+- [ ] Execute the owner's authorized technical retry under
+  `docs/BILINGUAL_POD_RETRY_B1_20261002.md`: unchanged c542cb5 science and
+  fixtures, separate operational freeze, original-intent monitoring, $8
+  reservation inside GPU45, one new cheap POST and verified owned cleanup.
 - [ ] Decide whether these measurements justify a later expansion. No
   temperature sweep or additional Pro call; no language-equivalence claim.
 
