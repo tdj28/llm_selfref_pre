@@ -14,9 +14,15 @@ The project does not try to prove that language models are or are not conscious.
 - [x] Define 20 paired blocks, two fixed wording families, English/Simplified
   Chinese, eight conditions, anchor crossings and an input/output-language
   bridge: 280 source continuations and 480 final answers.
-- [ ] Finish implementation tests and publicly freeze the prompts, inventory,
+- [x] Finish implementation tests and publicly freeze the prompts, inventory,
   tokenizer bindings, two separate rubrics, analysis and operational gates.
-- [ ] Pass bilingual synthetic measurement fixtures and cheap CUDA tests
+- [x] Run and preserve all 128 synthetic judgments. Original fixture gate failed
+  on seven denial expectations; judge forecast $107.713079 exceeds its $90
+  allocation. Cost $2.726282; no GPU or Llama outcomes. See
+  `docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md`.
+- [ ] Resolve the measurement/budget stop with a separate prospective amendment;
+  carry prior pilot spending and disclose inspected fixture outcomes.
+- [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
   before creating a newly owned B200. No reuse of anyone else's pod.
 - [ ] Audit initial real-model rows and measured throughput, then collect the
   fixed panel within its cap, retaining missing, refused and truncated outputs.

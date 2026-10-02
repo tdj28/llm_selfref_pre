@@ -24,6 +24,14 @@ delete them promptly after generation. The previous campaign's $79.8034612324
 bound is separate, not a charge to this pilot. Implementation is not evidence
 of a passed gate; read ignored `checkpoint.md` for live status.
 
+The first live fixture gate failed on seven denial-field expectations; all
+128 calls completed at $2.726282, with no GPU created and no target responses.
+The original $90 judge forecast also failed ($107.713079). Preserve freeze
+`2727164010647bf437e723c096e7aff4ec4c3f36` and
+`data/bilingual_llama_pilot/fixture_gate_failure_20261002/` unchanged.
+`docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md` distinguishes assertion-field
+matches from the failed original gate. Do not silently waive or reclassify it.
+
 ## Canonical Manuscript
 
 - `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.

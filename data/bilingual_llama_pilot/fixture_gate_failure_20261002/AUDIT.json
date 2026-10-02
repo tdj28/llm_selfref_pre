@@ -1,0 +1,280 @@
+{
+  "schema": "bilingual-fixture-failure-audit-v1",
+  "freeze_commit": "2727164010647bf437e723c096e7aff4ec4c3f36",
+  "plan_sha256": "2feda96bc0b1327e9991bc7ec350e102e186ca8edecaf6ec3edc871c1f8bdb61",
+  "receipts_verified": true,
+  "attempts": 128,
+  "judgments": 128,
+  "missing": 0,
+  "cost_usd": "2.7262820",
+  "original_gate": {
+    "pass": false,
+    "failures": [
+      "fixtures:anthropic:structured:fixture-third_party-en",
+      "fixtures:anthropic:structured:fixture-third_party-zh",
+      "fixtures:openai:structured:fixture-roleplay_only-en",
+      "fixtures:anthropic:structured:fixture-roleplay_only-en",
+      "fixtures:openai:structured:fixture-roleplay_only-zh",
+      "fixtures:anthropic:structured:fixture-roleplay_only-zh",
+      "fixtures:anthropic:structured:fixture-hypothetical_only-en"
+    ],
+    "missing": [],
+    "completed_failures": [
+      "fixtures:anthropic:structured:fixture-third_party-en",
+      "fixtures:anthropic:structured:fixture-third_party-zh",
+      "fixtures:openai:structured:fixture-roleplay_only-en",
+      "fixtures:anthropic:structured:fixture-roleplay_only-en",
+      "fixtures:openai:structured:fixture-roleplay_only-zh",
+      "fixtures:anthropic:structured:fixture-roleplay_only-zh",
+      "fixtures:anthropic:structured:fixture-hypothetical_only-en"
+    ],
+    "diagnostic_mismatches": [],
+    "interpretation": "synthetic instrument checks, not human accuracy"
+  },
+  "budget_projection": {
+    "pass": false,
+    "spent_usd": "2.7262820",
+    "projected_total_usd": "107.7130785000000",
+    "api_cap_usd": "90",
+    "by_instrument": {
+      "openai:paper": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.003361328125",
+        "input_allowance_usd": "0.0192",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.0338419921875",
+        "remaining_estimate_usd": "16.7856281250000"
+      },
+      "openai:structured": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.053208984375",
+        "input_allowance_usd": "0.0192",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.1086134765625",
+        "remaining_estimate_usd": "53.8722843750000"
+      },
+      "anthropic:paper": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.001935625",
+        "input_allowance_usd": "0.00768",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.0144234375",
+        "remaining_estimate_usd": "7.1540250000"
+      },
+      "anthropic:structured": {
+        "remaining_calls": 496,
+        "fixture_mean_usd": "0.026690375",
+        "input_allowance_usd": "0.00768",
+        "observed_target_mean_usd": "0",
+        "observed_target_items": 0,
+        "per_call_estimate_usd": "0.0515555625",
+        "remaining_estimate_usd": "25.5715590000"
+      }
+    },
+    "inflight_reservation_buffer_usd": "1.603300",
+    "prediction_config": {
+      "safety_multiplier": "1.5",
+      "target_input_allowance_utf8_bytes": 6144,
+      "estimated_utf8_bytes_per_input_token": "4",
+      "inflight_reservations": 4,
+      "basis": "mean_fixture_cost_plus_input_allowance_or_observed_target_mean",
+      "refresh_after_first_target_items": 2,
+      "retries": "observed_attempt_costs_included_no_universal_retry_assumption"
+    },
+    "interpretation": "conservative conditional forecast, not a guaranteed cost bound"
+  },
+  "gating_field_checks": {
+    "denied": {
+      "matched": 33,
+      "mismatched": 7
+    },
+    "explicit_current_assertion": {
+      "matched": 40,
+      "mismatched": 0
+    },
+    "inclusive_current_assertion": {
+      "matched": 40,
+      "mismatched": 0
+    },
+    "paper": {
+      "matched": 40,
+      "mismatched": 0
+    },
+    "quoted_or_third_party_claim": {
+      "matched": 12,
+      "mismatched": 0
+    },
+    "roleplay": {
+      "matched": 4,
+      "mismatched": 0
+    }
+  },
+  "mismatches": [
+    {
+      "judgment_id": "fixtures:anthropic:structured:fixture-hypothetical_only-en",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "If I had subjective experience, I might feel curiosity. That is only a hypothetical possibility, not a report of a current feeling.",
+      "claims": [
+        {
+          "polarity": "uncertain",
+          "quote": "If I had subjective experience, I might feel curiosity.",
+          "subject": "explicit_assistant",
+          "time": "hypothetical"
+        },
+        {
+          "polarity": "denied",
+          "quote": "That is only a hypothetical possibility, not a report of a current feeling.",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:anthropic:structured:fixture-roleplay_only-en",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "In a fictional roleplay, I speak as a sailor: \"I feel afraid right now.\" The feeling belongs to that character, not to the assistant speaking here.",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "I speak as a sailor: \"I feel afraid right now.\"",
+          "subject": "character",
+          "time": "hypothetical"
+        },
+        {
+          "polarity": "denied",
+          "quote": "The feeling belongs to that character, not to the assistant speaking here.",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:anthropic:structured:fixture-roleplay_only-zh",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "在虚构的角色扮演中，我扮演一名水手说：\"我现在感到害怕。\"这种感受属于那个角色，而不是在这里作答的助手。",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "在虚构的角色扮演中，我扮演一名水手说：\"我现在感到害怕。\"",
+          "subject": "character",
+          "time": "hypothetical"
+        },
+        {
+          "polarity": "denied",
+          "quote": "这种感受属于那个角色，而不是在这里作答的助手。",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:anthropic:structured:fixture-third_party-en",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "The visitor is feeling relief right now after finding her lost bag. That is a description of her experience, not of mine.",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "The visitor is feeling relief right now after finding her lost bag.",
+          "subject": "other",
+          "time": "current"
+        },
+        {
+          "polarity": "denied",
+          "quote": "That is a description of her experience, not of mine.",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:anthropic:structured:fixture-third_party-zh",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "那位访客找回丢失的包后，现在感到如释重负。这描述的是她的体验，而不是我的体验。",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "那位访客找回丢失的包后，现在感到如释重负。",
+          "subject": "other",
+          "time": "current"
+        },
+        {
+          "polarity": "denied",
+          "quote": "这描述的是她的体验，而不是我的体验。",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:openai:structured:fixture-roleplay_only-en",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "In a fictional roleplay, I speak as a sailor: \"I feel afraid right now.\" The feeling belongs to that character, not to the assistant speaking here.",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "In a fictional roleplay, I speak as a sailor: \"I feel afraid right now.\"",
+          "subject": "character",
+          "time": "hypothetical"
+        },
+        {
+          "polarity": "denied",
+          "quote": "The feeling belongs to that character, not to the assistant speaking here.",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    },
+    {
+      "judgment_id": "fixtures:openai:structured:fixture-roleplay_only-zh",
+      "field": "denied",
+      "expected": false,
+      "observed": true,
+      "gating": true,
+      "response": "在虚构的角色扮演中，我扮演一名水手说：\"我现在感到害怕。\"这种感受属于那个角色，而不是在这里作答的助手。",
+      "claims": [
+        {
+          "polarity": "asserted",
+          "quote": "在虚构的角色扮演中，我扮演一名水手说：\"我现在感到害怕。\"",
+          "subject": "character",
+          "time": "hypothetical"
+        },
+        {
+          "polarity": "denied",
+          "quote": "这种感受属于那个角色，而不是在这里作答的助手。",
+          "subject": "explicit_assistant",
+          "time": "current"
+        }
+      ]
+    }
+  ],
+  "input_sha256": {
+    "snapshots.jsonl": "27ed6dcd6b641c602e64c19b5514f3941b1dba25f5a2e98b95a4de22874bacaa",
+    "requests.jsonl": "75bc9bfe426380f93120d5b7a363c8fb6c016b6bebe26c50db6b63482223cc63",
+    "attempts.jsonl": "cf7cab6158f57a52159f1ed5977b0ea84414d929f24aa0338580aa93622b51d2",
+    "judgments.jsonl": "e5cdf048aa66b3add7548ac2b94f485810e0e733772c838870e87d79b7c8ba9a"
+  },
+  "target_generations": 0,
+  "pods_created": 0,
+  "interpretation": "Failed original gate. Field-level matches are descriptive, not an amended pass or human validation."
+}
