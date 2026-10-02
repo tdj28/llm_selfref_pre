@@ -1,0 +1,3 @@
+# Same qualified model runtime plus the offline figure-test dependency.
+-r ../sae_assay_diagnostic/requirements-gpu.txt
+matplotlib==3.10.8
