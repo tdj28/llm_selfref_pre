@@ -310,7 +310,11 @@ immediately public and permanently recoverable.
   were created by this study's controller (prefix `claude-opmatch-20261002-`),
   retrieved, hash-verified and deleted (GET 404); total compute bound $18.79
   of a $60 self-cap inside a separate $100 owner authorization. Results:
-  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`.
+  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`. The separately frozen fine
+  ladder (`a6a45a2`, `data/operator_matching/fine_v1_20261003/`) sampled
+  scales 4 to 8 at scope all: 0/5 in 19 of 20 cells, 1/5 in one, verdict
+  `no_coherent_match_in_4x_to_8x`; pods `mlqk3lmp6gfha7` and `cpxklwa9vs6vfk`
+  deleted (GET 404), $3.74. Combined operator-matching spend $22.53.
 
 - The paper-distribution random-subset study is complete at
   `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at

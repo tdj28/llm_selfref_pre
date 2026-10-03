@@ -1,5 +1,17 @@
 # Data Artifacts
 
+`data/operator_matching/fine_v1_20261003/` is the completed 4x-8x fine dose
+ladder that follows the operator-matching calibration: 105 native-BF16
+two-turn trials (scope all, additive edits, scales 4 to 8 for features 58667
+and 23893 at both signs, five fresh seeds, five zero rows), hash-chained
+receipts, frozen analysis tables, one figure pair with the parent grid's
+scales as context, worker records, cheap-pod record and a cost/lifecycle
+projection. Verdict `no_coherent_match_in_4x_to_8x`. Results:
+`docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md`; protocol:
+`docs/OPERATOR_MATCHING_FINE_LADDER_20261003.md`; plan
+`data/operator_matching/fine_plan_20261003/` (SHA-256
+`ad264e5914d6c82859e84cfce5495f390e76ff51db2acfbc9694ffb66cd0e8ef`).
+
 `data/steering_fidelity/calibration_v1_20261002/` contains the complete
 9,300-forward native-BF16 calibration, 18,600-event receipt chain, 20 JSON
 activation probes with dispatch records, environment, frozen analyses,
