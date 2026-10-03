@@ -65,6 +65,9 @@ data/operator_matching/*
 !data/operator_matching/plan_20261002/
 data/operator_matching/plan_20261002/*
 !data/operator_matching/plan_20261002/PLAN.json
+!data/operator_matching/fine_plan_20261003/
+data/operator_matching/fine_plan_20261003/*
+!data/operator_matching/fine_plan_20261003/PLAN.json
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
@@ -696,3 +699,5 @@ data/frontier_bilingual_b1/*
 # Operator-matching calibration release (allowlisted after the generic patterns so its PDFs, logs and receipts are tracked)
 !data/operator_matching/calibration_v1_20261003/
 !data/operator_matching/calibration_v1_20261003/**
+!data/operator_matching/fine_v1_20261003/
+!data/operator_matching/fine_v1_20261003/**
