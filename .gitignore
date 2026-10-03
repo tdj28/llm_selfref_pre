@@ -692,3 +692,7 @@ data/frontier_bilingual_b1/*
 !data/frontier_bilingual_b1/completed_20261002/
 !data/frontier_bilingual_b1/completed_20261002/**
 !data/frontier_bilingual_b1/completed_20261002/analysis/*.pdf
+
+# Operator-matching calibration release (allowlisted after the generic patterns so its PDFs, logs and receipts are tracked)
+!data/operator_matching/calibration_v1_20261003/
+!data/operator_matching/calibration_v1_20261003/**

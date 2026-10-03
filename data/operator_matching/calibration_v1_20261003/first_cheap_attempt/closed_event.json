@@ -1,0 +1,20 @@
+{
+ "closed_event": {
+  "data": {
+   "compute_upper_bound_usd": "0.2789238412333333333333333333",
+   "cumulative_upper_bound_usd": "0.2789238412333333333333333333",
+   "elapsed_seconds": "1195.387891",
+   "get_status": 404,
+   "pod_id": "073vkqfgnfjijr",
+   "utc": "2026-10-03T05:11:50.853116+00:00",
+   "within_limits": true
+  },
+  "freeze_commit": "4a2dfe1109eaa25bf1ab1f06f0c5c1b9e193a7ac",
+  "id": "closed",
+  "plan_sha256": "20ba08d15380dec4ec1fc332f67b042709219465a2c8e001fdd0af54b75cb825",
+  "previous_sha256": "a7ea08ac86bfe7bfbfa07707a5242e70b417c1e6614d0d67ab750ae877cc64ad",
+  "seq": 62,
+  "sha256": "c31d577b15caa5a4301877bc53e6c3bde233ca0c7fa553c4d0772375a3a59b7d"
+ },
+ "note": "First cheap CUDA attempt under freeze 4a2dfe1109eaa25bf1ab1f06f0c5c1b9e193a7ac; the worker spent its 20-minute window on a full-tree git checkout and was closed by the deadline rule before tests ran; no test or behavioral output exists. Superseded by freeze r2 (sparse checkout, longer timers)."
+}
