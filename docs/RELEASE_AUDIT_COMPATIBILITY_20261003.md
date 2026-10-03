@@ -42,3 +42,18 @@ resealed manifests, changed Git blobs and source-inventory drift fail.
 The historical manifest, tool versions, raw outcomes, cost and tables are not
 rewritten. This is a post-release verifier correction, not a new experiment
 or a relaxed numerical tolerance.
+
+## Fine-Ladder Release
+
+The second operator-matching release, `data/operator_matching/fine_v1_20261003/`,
+uses the same path-to-SHA-256 manifest format under its own schema,
+`operator_matching_fine_release_v1`, with 132 files. Public `main` at
+`2eef34c4` then failed the full audit (22,107 indexed files, 4,344,664,259
+bytes) with exactly one finding: that manifest has no files list. The manifest
+is now registered at its exact path with that schema and receives the checks
+above: declared file count and directory, and every listed hash against the
+Git index. A test requires each registered manifest to verify under its own
+schema and to reject the other's. The release itself is unchanged. Its
+upstream license needs no whitespace exemption: it is already committed, and
+the whitespace check covers only uncommitted changes. The corrected full audit
+must pass before this repair is committed.
