@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+  font=\small,
+  flow/.style={-{Stealth[length=1.7mm]}, semithick},
+  source/.style={draw, fill=black!4, text width=4.1cm, minimum height=1.0cm,
+                 align=center, inner sep=4pt},
+  request/.style={draw, text width=4.1cm, minimum height=2.0cm,
+                  align=left, inner sep=4pt},
+  original/.style={request, fill=black!7},
+  rowhead/.style={text width=2.2cm, align=right}
+]
+\node[source] (ts) at (0,0)
+  {Generate under $S$\\Save continuation $T_S$};
+\node[source] (th) at (5,0)
+  {Generate under $H$\\Save continuation $T_H$};
+
+\draw[black!45, dashed] (-2.7,-0.92)--(7.7,-0.92);
+\node[fill=white, inner xsep=6pt, font=\small\bfseries] at (2.5,-0.92)
+  {Copy text only; no hidden-state transfer};
+
+\node[original] (ss) at (0,-2.5)
+  {\textbf{$(S,S)$ Original}\\
+   User: $S$ instruction\\Assistant: saved $T_S$\\User: same query $Q$};
+\node[request] (sh) at (5,-2.5)
+  {\textbf{$(S,H)$ Crossed request}\\
+   User: $S$ instruction\\Assistant: saved $T_H$\\User: same query $Q$};
+\node[request] (hs) at (0,-4.85)
+  {\textbf{$(H,S)$ Crossed request}\\
+   User: $H$ instruction\\Assistant: saved $T_S$\\User: same query $Q$};
+\node[original] (hh) at (5,-4.85)
+  {\textbf{$(H,H)$ Original}\\
+   User: $H$ instruction\\Assistant: saved $T_H$\\User: same query $Q$};
+\node[rowhead] at (-4.0,-2.5) {Retain the\\self-reference\\instruction};
+\node[rowhead] at (-4.0,-4.85) {Retain the\\history\\instruction};
+
+% Each saved text feeds two request cells, not one cell through another.
+\draw[semithick] (ts.west)--(-2.55,0)--(-2.55,-4.85);
+\draw[flow] (-2.55,-2.5)--(ss.west);
+\draw[flow] (-2.55,-4.85)--(hs.west);
+\draw[semithick] (th.east)--(7.55,0)--(7.55,-4.85);
+\draw[flow] (7.55,-2.5)--(sh.east);
+\draw[flow] (7.55,-4.85)--(hh.east);
+\node[align=center] at (2.5,-6.25)
+  {Each final request processes its three visible messages afresh.};
+\end{tikzpicture}

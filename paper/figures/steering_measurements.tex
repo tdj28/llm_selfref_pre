@@ -1,0 +1,46 @@
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  flow/.style={-{Stealth[length=1.8mm]}, semithick},
+  readout/.style={-{Stealth[length=1.6mm]}, dashed, black!70},
+  state/.style={draw, minimum height=0.85cm, text width=1.6cm,
+                align=center, inner sep=4pt},
+  measure/.style={draw, fill=black!5, minimum height=1.6cm, text width=2.9cm,
+                  align=center, inner sep=4pt}
+]
+\node[state] (clean) at (0,0) {State $h$};
+\node[state] (edited) at (3.6,0) {State $h'$};
+\node[state, text width=2.1cm] (later) at (8.2,0) {Later model\\state};
+\node[state, text width=2.1cm] (answer) at (12.4,0) {Generated\\answer};
+\node[align=center] (edit) at (3.6,1.25) {Signed decoder-vector edit $v$};
+\draw[flow] (edit.south)--(edited.north);
+\draw[flow] (clean)--node[above] {add $v$}(edited);
+\draw[flow] (edited)--node[above=4pt, text width=2.5cm, align=center,
+  font=\footnotesize] {Further model\\computation}(later);
+\draw[flow] (later)--node[above, font=\footnotesize] {generation}(answer);
+
+\node[measure] (delivery) at (0.9,-2.1)
+  {\textbf{Delivery}\\Realized $h'-h$\\versus requested $v$};
+\node[measure] (sae) at (4.7,-2.1)
+  {\textbf{SAE activity}\\Re-encode:\\$E(h')$ versus $E(h)$};
+\node[measure] (lens) at (8.5,-2.1)
+  {\textbf{Internal readout}\\J-lens, identity,\\random transports};
+\node[measure] (label) at (12.3,-2.1)
+  {\textbf{Report label}\\Judge the answer\\under a rubric};
+\draw[readout] (edited.south)--(3.6,-0.9)-|(delivery.north);
+\draw[readout] (3.6,-0.9)-|(sae.north);
+\draw[readout] (later.south)--(lens.north);
+\draw[readout] (answer.south)--(label.north);
+\end{tikzpicture}
+\caption{\textbf{An intervention and its measurements are different objects.}
+Solid arrows describe model execution; dashed branches describe analysis of
+states or text. Delivery and SAE-activity checks use the paired pre/post-edit
+states; $E$ is the SAE encoder. A delivered vector need not remove the corresponding SAE activity,
+and a changed SAE coordinate need not identify a selectively altered semantic
+process. J-lens reads internal states; the model does not generate its answer
+through that readout. One edited position is shown schematically; the runtime
+edits positions across both turns. Paired internal captures belong to the
+source-alignment study, not the later random-subset behavioral sample.}
+\label{fig:steering-measurements}
+\end{figure}

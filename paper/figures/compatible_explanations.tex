@@ -1,0 +1,36 @@
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  possible/.style={-{Stealth[length=1.7mm]}, dashed, semithick},
+  flow/.style={-{Stealth[length=1.7mm]}, semithick},
+  observed/.style={draw, fill=black!7, minimum height=0.95cm,
+                   text width=1.85cm, align=center, inner sep=4pt},
+  candidate/.style={draw, dashed, minimum height=0.9cm,
+                    text width=3.5cm, align=center, inner sep=4pt}
+]
+\node[observed] (instruction) at (0,0) {Retained\\instruction};
+\node[candidate] (policy) at (4.6,1.08)
+  {Ordinary task state\\or answer policy};
+\node[candidate] (self) at (4.6,-1.08)
+  {Self-referential computation\\induced anew};
+\node[align=center, font=\footnotesize\itshape] at (4.6,0)
+  {These may coexist.};
+\node[observed] (response) at (9.2,0) {Generated\\response};
+\node[observed] (label) at (12.8,0) {Report\\label};
+\draw[possible] (instruction.east)--(1.8,0)|-(policy.west);
+\draw[possible] (1.8,0)|-(self.west);
+\draw[possible] (policy.east)--(7.15,1.08)|-(response.west);
+\draw[possible] (self.east)--(7.15,-1.08)|-(response.west);
+\draw[flow] (response)--node[above, font=\footnotesize] {scoring}(label);
+\end{tikzpicture}
+\caption{\textbf{An instruction effect does not choose between these explanations.}
+The experiment manipulates the retained instruction and measures response
+labels. Dashed boxes and paths are compatible internal explanations, not
+measured mediators or an exhaustive list. Ordinary task control and
+self-referential computation may overlap or occur together. The solid final
+arrow is the observed scoring operation, not validation of the report's
+truth. Transcript and query are omitted here to isolate the unresolved
+interpretation of the retained-instruction effect.}
+\label{fig:compatible-explanations}
+\end{figure}

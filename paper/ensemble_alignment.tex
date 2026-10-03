@@ -1,9 +1,10 @@
-\section{Paper-Distribution Aggregate Test}
+\subsection{Random-subset design and inference}
 \label{sec:ensemble-alignment}
 
-The fixed-six aggregate above differs from the target paper's random
-two-to-four-feature intervention. A separate public freeze therefore fixes
-50 fresh blocks. In each block, $K$ is uniform on $\{2,3,4\}$, the selected
+To match the paper's random two-to-four-feature distribution, a separate
+public freeze fixes 50 fresh blocks. This is distinct from the earlier
+fixed-six notebook aggregate (Appendix~\ref{sec:source-alignment}). In each
+block, $K$ is uniform on $\{2,3,4\}$, the selected
 $K$-subset is uniform within the six accepted coordinates, and its magnitudes
 are independent draws from $U(0.4,0.6)$. Suppression and amplification use
 opposite signs of the same sampled vector. The same ordinal subset and
@@ -117,12 +118,5 @@ every implementation or every outcome definition. No new J-lens captures
 were collected in this phase, and the preceding internal-readout results
 cannot be treated as mediation evidence for this new sample.
 
-The frozen worker summary is unchanged. Local reporting initially failed an
-exact-equality check because eight secondary interval limits differed by at
-most $1.11\times10^{-16}$. A disclosed post-run portability correction uses
-an absolute $10^{-12}$ tolerance for finite floats, with exact structure,
-counts and verdicts. Every difference is recorded; figures use the original
-worker values. This reporting check is distinct from the historical failed
-J-lens replay gate and does not amend it. The companion independently
-recounts the raw-bound labels and reconstructs the conservative intervals;
-it does not independently recompute the bootstrap summaries.
+Reporting portability and the unchanged worker values are documented in
+Appendix~\ref{app:ensemble-portability}.
