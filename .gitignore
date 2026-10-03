@@ -1,6 +1,7 @@
 # Environment variables
 .env
 
+final_paper
 # Python
 __pycache__/
 *.py[cod]
