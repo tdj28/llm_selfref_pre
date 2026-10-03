@@ -40,31 +40,30 @@
 \begin{abstract}
 What makes a language model produce text scored as a report of subjective
 experience, and what does that score identify? Starting from Berg et al.'s
-elicitation protocol, we cross the retained instruction with the source of
-the preceding continuation in four pinned API model configurations.
-The original self-reference/history contrast replicates in the congruent
-conditions, completely in both GPT configurations and more weakly in the
-two Claude configurations.
-The equal-model instruction effects on the binary report label are
-0.738 and 0.781 under two independent-provider judges; transcript effects
-are $-0.100$ and $-0.131$, with opposite signs across models.
-The crossed design identifies effects of input components, not instruction
-following versus internal self-reference. Agreement between the binary
-judges is high, but a separate audit of unchanged responses finds substantial
-sensitivity to the judge and the definition of current self-attribution.
-We also test the accepted six deception/roleplay SAE coordinates in native-BF16
-Llama 3.3 70B. A prospectively frozen, 450-trial random-subset experiment gives
-a suppression-minus-amplification effect of $\EnsemblePaperTargetGap{}$
-with conservative 95\% interval
-$[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$, excluding
-the prespecified +0.30 signature under the public operator. The alternative
-rubric and feature-specificity comparisons remain inconclusive. Untreated
-rates differ between the public pipeline and the published figure, and the
-published description omits details a replication needs; both limit
-replication claims.
-The contribution is a separation of input effects, report measurement, and
-intervention evidence. None, by itself, establishes whether a model has
-subjective experience.
+elicitation protocol, we separate three things its contrast bundles: the
+instruction in force when the question is asked, the visible transcript it
+produced, and the label a model judge assigns. In four pinned API model
+configurations the original self-reference/history contrast replicates,
+completely in both GPT configurations and more weakly in the two Claude
+configurations. Crossing the retained instruction with transplanted
+continuations shows that the instruction carries the effect: equal-model
+instruction effects on the binary label are 0.738 and 0.781 under two
+independent-provider judges, while transcript effects are $-0.100$ and
+$-0.131$ and differ in sign across models. The label is the second finding:
+the two paper-style judges agree on 94.8\% of responses, yet stricter
+instruments applied to the same responses find few explicit current
+self-attributions, because the rubric's minimal-description criterion counts
+impersonal awareness-talk as a report. Third, in native-BF16 Llama 3.3 70B
+with the six accepted deception/roleplay SAE coordinates, a prospectively
+frozen 450-trial random-subset test gives a suppression-minus-amplification
+effect of $\EnsemblePaperTargetGap{}$ with conservative 95\% interval
+$[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$, excluding the
+prespecified +0.30 signature under the public operator; the alternative
+rubric and feature-specificity comparisons are inconclusive, untreated rates
+differ from the published figure, and the published description omits
+details a replication needs. The contribution is an identification of what
+these labels respond to and of what public interventions do and do not do.
+Whether a model has subjective experience is not settled by any of it.
 \end{abstract}
 
 \section{Introduction}
@@ -952,6 +951,26 @@ delivery alone does not establish a qualified behavioral assay
 
 \section{Discussion: What Is Identified?}
 
+\paragraph{What the evidence supports.}
+Four results stand on their own. First, the published self-reference/history
+contrast reproduces in the tested configurations, and when the instruction
+and the transcript are separated, the instruction carries it. Second, the
+binary rubric that produces the contrast labels impersonal awareness-talk and
+hedged uncertainty as reports: on the responses both paper-style judges call
+positive, construct-separated judges find few explicit current
+self-attributions, so the measured quantity is register-sensitive compliance
+with the request at least as much as self-report. Third, under the public
+additive operator in native BF16, signed steering of the six accepted SAE
+coordinates at the paper's distribution of doses produces no large report
+signature, and the public pipeline's untreated rate under the paper's
+induction is far from the level the paper plots, so no public test so far has
+reproduced the conditions under which the original effect was measured.
+Fourth, the six public coordinates do carry the deception- and
+roleplay-related activation semantics their labels suggest on designed
+corpora, which closes the feature-identity question rather than the
+steering question. The paragraphs that follow state what each result does
+not establish.
+
 \paragraph{Input effects are identifiable; their internal interpretation is not.}
 The crossed design shows that the standing instruction sustains the large
 positive-label effect when its earlier continuation is replaced. It
@@ -986,8 +1005,7 @@ description reports neither an unsteered rate in the text nor a matched or
 random comparator (Section~\ref{sec:steering}). Llama's baseline
 mismatch and Gemma's weak delivered edit prevent treating the studies as a
 two-system refutation. The amplification arms retain room for downward
-movement, but that does not restore proprietary comparability. Failed gates
-and dependence-sensitive historical intervals remain part of the record.
+movement, but that does not restore proprietary comparability.
 
 \paragraph{Generalization and inferential limits.}
 The four API configurations are a purposive panel, not a random sample of
@@ -1026,16 +1044,17 @@ A moving J-lens score is a possible readout for this test, not its conclusion.
 
 \section{Conclusion and Evidence Access}
 
-In the tested message packages, the retained instruction carries the large
-positive-label effect more strongly than the source of the preceding
-continuation. Transcript effects remain heterogeneous. Agreement on a binary
-report label does not settle current self-attribution, and the
-native-BF16 random-subset steering test does not recover the prespecified
-large signature under its primary rubric. Its alternative rubric and
-specificity results remain inconclusive. Together these findings separate
-causes of report generation from the validity of the measurement and the
-interpretation of an internal intervention. They do not settle whether a
-model has subjective experience.
+Three things are established for the tested configurations. The published
+contrast reproduces, and the retained instruction carries it; transcript
+effects are smaller and heterogeneous. The binary label behind that contrast
+is reproducible across judges but does not measure explicit current
+self-attribution. And the public-weight steering test, frozen before its
+outcomes and run with matched controls, does not recover the prespecified
+large signature, while its alternative rubric and specificity results remain
+inconclusive and its untreated baseline does not match the paper's. Together
+these findings separate the causes of report generation from the validity of
+the measurement and from the interpretation of an internal intervention.
+They do not settle whether a model has subjective experience.
 
 All studies, including failed gates and post-hoc corrections, remain in the
 public research archive \citep{jones2026evidence}.
@@ -1043,19 +1062,17 @@ Appendix~\ref{app:provenance} links the frozen protocols, raw outputs,
 judgments, telemetry, analyses and release hashes.
 
 \paragraph{AI roles and review status.}
-AI agents carried out substantive protocol design and revision, implementation,
-GPU/API operations, analyses, separately implemented recomputations,
-registration and release preparation, manuscript drafting, and adjudication of
-automated reviews. These were not merely editorial aids, and separate scripts
-or agent instances can share the same blind spots. The owner supplied project
-direction and execution authorization; the available record does not establish
-human inspection or sign-off on every artifact or on this revision. Independent
-human coding has not started in the documented workflow. Human editorial
-approval remains required before publication. The original automated Pro
-verdicts and receipts remain unchanged and refer to earlier packets, not this
-corrected draft. The archive does not establish whether informal contact with
-the original authors occurred; no substantive author response is used as
-evidence here.
+AI agents carried out substantive parts of this work under the author's
+direction: protocol design and revision, implementation, GPU and API
+operations, analyses, separately implemented recomputations, release
+preparation, manuscript drafting, and adjudication of automated reviews. The
+author set the research questions, authorized each protocol and each
+expenditure before execution, reviewed the released results and this
+manuscript, and is responsible for every claim in it. Separate scripts or
+agent instances can share blind spots, so automated recomputation is internal
+consistency checking rather than independent validation, and independent
+human coding of the response labels has not been carried out. No
+correspondence with the original authors is used as evidence here.
 
 \FloatBarrier
 \clearpage
