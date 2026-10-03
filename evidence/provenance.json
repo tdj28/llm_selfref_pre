@@ -3585,7 +3585,7 @@
     },
     {
       "path": "evidence/build_bindings.py",
-      "sha256": "4dbaa28e8c1b6a827985995087666957c68477a8db84b5078f3f51a833d48ca7"
+      "sha256": "09be11c5ea5e8c3a010a9ca53b3f65a7a0ff06adcf7c36435973a6739669350e"
     }
   ],
   "input_count": 30,
@@ -4399,7 +4399,7 @@
       "source_url": "https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/sae_jlens_audit/confirmatory_v2_20260712/replay_equivalence_gate.json"
     }
   ],
-  "manuscript_bindings_sha256": "fb217a66635890cceed5a139dc72b05e257dfdbe6c83bdaf3bbfc363a1b791a6",
+  "manuscript_bindings_sha256": "8af99c05fdc2e8bdaf3b6112f76034a72b813b283453daf9385759050dd5b9c0",
   "optional_raw_inputs": [
     {
       "bytes": 10906096,

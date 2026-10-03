@@ -341,3 +341,17 @@ overfull boxes.
   `paper/ensemble_alignment.tex` (protected); the Gemma trial identifier
   `8ab1b621b7491f810144c23e` (kept as the pointer to a specific raw row); the
   second copy of the subjective-experience sentence in the abstract.
+
+## Final Precision Re-Binding And Freeze-Interval Disclosure (2026-10-03)
+
+After merge `292a86d7`, the two remaining four-decimal bound excerpts,
+`sae_primary_specificity` and `literal_table_specificity`, were re-bound at
+two decimals (`$-0.03$ [$-0.10$, 0.05]`) by editing the literals in
+`evidence/build_bindings.py` and regenerating `evidence/manuscript_bindings.json`
+and the ledger hash in `evidence/provenance.json`, the same documented path as
+the earlier reader revision. The verifier checks that each displayed token
+rounds from the evidence value; no value, selector, occurrence count or
+figure hash changed. The three freeze-to-start intervals (14 seconds, 73
+seconds, about three minutes) moved out of the result paragraphs into one
+disclosure sentence in the Data and Code Availability appendix, which the
+behavioral protocol paragraph now references.

@@ -365,10 +365,10 @@ the query and the response, without the condition or the identity of the
 response model. All effects reported below are differences in the
 probability of a positive label.
 
-The collection protocol was committed to the public repository 14 seconds
-before the runtime for this sample started, but after two same-day pilots
-had been generated, judged, and analyzed, and without outside review. The
-pilots already showed
+The collection protocol was committed to the public repository before the
+runtime for this sample started (Appendix~\ref{app:provenance} gives the
+freeze-to-start intervals), but after two same-day pilots had been generated,
+judged, and analyzed, and without outside review. The pilots already showed
 larger instruction than transcript effects, and the transplant anchors, the
 prompt wrapper, and the answer cap were changed during piloting. The original
 prediction, which the pilots contradicted, was retained. The commit fixes
@@ -1357,7 +1357,7 @@ Literal & Target & 0.00 & [$-0.06$, 0.06]\\
 Literal & Panel 1 & 0.06 & [$-0.04$, 0.16]\\
 Literal & Panel 2 & 0.02 & [0.00, 0.06]\\
 Literal & Panel 3 & 0.00 & [$-0.06$, 0.06]\\
-Literal & Target minus mean controls & $-0.0267$ & [$-0.1000$, 0.0467]\\
+Literal & Target minus mean controls & $-0.03$ & [$-0.10$, 0.05]\\
 \midrule
 Calibrated & Target & $-0.10$ & [$-0.22$, 0.02]\\
 Calibrated & Panel 1 & 0.12 & [0.04, 0.22]\\
@@ -1409,7 +1409,7 @@ notebook is a distinct saved artifact, and the protocols differ in further
 details, so these baselines are neither interchangeable nor pooled. The
 technical gates did not require behavioral baseline comparability, and the
 plan, although committed before its new outcomes, followed earlier steering
-experiments on these targets; the freeze-to-start interval was 73 seconds.
+experiments on these targets.
 This mismatch is why the grid cannot test the
 published contrast: the near-ceiling rate leaves little room for the
 suppression-driven increase visible in the source figure, while the
@@ -1421,7 +1421,7 @@ giving 0.00 [$-0.06$, 0.06]. The upper bound is below 0.30, so the
 prespecified non-replication rule applies under the planned paired-block
 analysis; amplification does not yield the lower affirmation rate than
 suppression that the proposed gating account predicts at this public scale.
-Target minus the mean of the three controls is $-0.0267$ [$-0.1000$, 0.0467]
+Target minus the mean of the three controls is $-0.03$ [$-0.10$, 0.05]
 (\Cref{tab:scales}), so specificity is inconclusive. The larger
 calibrated target dose gives $-0.10$ [$-0.22$, 0.02]
 while calibrated panel 1 gives 0.12 [0.04, 0.22]; none of the six
@@ -1461,8 +1461,8 @@ the set-specific multiplier calibrated offline to a median relative RMS of
 0.05 from six untreated captured runs. The release holds 180 baseline and
 830 steering generations with three matched control panels and prespecified
 evaluator, layer and width sensitivities (\Cref{tab:releases}); the plan was
-committed after discovery and technical calibration, about three minutes
-before the first steering outcome.
+committed after discovery and technical calibration and before the first
+steering outcome.
 
 The primary target yields 6/50 positive labels under suppression and 7/50 under
 amplification: $-0.02$ [$-0.10$, 0.06], below the same 0.30 minimum. The
@@ -1719,7 +1719,12 @@ studies. A post-run portability
 check of the random-subset release found eight secondary interval limits
 differing across platforms by at most $1.11\times10^{-16}$; the raw analysis
 is unchanged, and the disclosed correction compares finite floats at an
-absolute $10^{-12}$ tolerance with exact structure, counts and verdicts.
+absolute $10^{-12}$ tolerance with exact structure, counts and verdicts. The interval between each plan's public commit and its first
+outcome is part of the record: 14 seconds for the behavioral collection
+protocol, after two analyzed pilots; 73 seconds for the earlier NF4 grid; and
+about three minutes for the Gemma study. The native-BF16 source-alignment and
+random-subset plans were pushed to the public remote before their outcomes,
+as their releases record.
 The \reviewartifact{docs/CLAIM_LEDGER.md}{claim ledger} maps each headline
 claim to its artifacts and permitted wording. A September 2026 internal
 review audit, pinned at commit \texttt{47ca3ed}, holds the Gemma

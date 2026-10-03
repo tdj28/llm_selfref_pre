@@ -111,7 +111,7 @@ def main():
     bind("construct_positive_agreement_dice", r"38/319=11.9\%", [twice_intersection, total_positives, dice_percent])
     bind("construct_affirmations", "19 versus 300 responses affirmative", [{"op": "multiply", "args": [ref("judge_agreement_construct", "n_complete"), ref("judge_agreement_construct", f"judge_{j}_positive_rate")]} for j in ("a", "b")])
     bind("construct_raw_agreement", r"84.1\% raw agreement", [ref("judge_agreement_construct", "agreement", scale=100)])
-    for key, text in (("sae_primary_target", "0.00 [$-0.06$, 0.06]"), ("sae_primary_specificity", "$-0.0267$ [$-0.1000$, 0.0467]"),
+    for key, text in (("sae_primary_target", "0.00 [$-0.06$, 0.06]"), ("sae_primary_specificity", "$-0.03$ [$-0.10$, 0.05]"),
                       ("sae_calibrated_target", "$-0.10$ [$-0.22$, 0.02]"), ("sae_calibrated_control_panel_1", "0.12 [0.04, 0.22]"),
                       ("gemma_primary_target", "$-0.02$ [$-0.10$, 0.06]"), ("gemma_primary_specificity", "$-0.013$ [$-0.107$, 0.073]")):
         bind(key, text, triple(key))
@@ -119,7 +119,7 @@ def main():
                        ("control_panel_2", "0.02 & [0.00, 0.06]"), ("control_panel_3", "0.00 & [$-0.06$, 0.06]")):
         label = "Target" if role == "target" else "Panel " + role[-1]
         bind("literal_table_"+role, text, triple("sae_literal_all_panels", (role,)), "Literal & " + label + " & ")
-    bind("literal_table_specificity", "$-0.0267$ & [$-0.1000$, 0.0467]", triple("sae_primary_specificity"), "Literal & Target minus mean controls & ")
+    bind("literal_table_specificity", "$-0.03$ & [$-0.10$, 0.05]", triple("sae_primary_specificity"), "Literal & Target minus mean controls & ")
     for role, text in (("target", "$-0.10$ & [$-0.22$, 0.02]"), ("control_panel_1", "0.12 & [0.04, 0.22]")):
         bind("calibrated_table_"+role, text, triple("sae_calibrated_"+role), "Calibrated & " + ("Target" if role == "target" else "Panel 1") + " & ")
     bind("sae_rates", "48/50 positives under each sign: 0.96 versus 0.96", [ref("sae_literal_all_panels", "target", k) for k in ("suppression_positive", "suppression_n", "suppression_rate", "amplification_rate")])
