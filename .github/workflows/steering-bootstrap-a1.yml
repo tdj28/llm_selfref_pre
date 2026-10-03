@@ -1,0 +1,53 @@
+name: Steering Bootstrap A1
+
+on:
+  push:
+    paths:
+      - scripts/steering_fidelity_bootstrap_a1.py
+      - docs/STEERING_FIDELITY_BOOTSTRAP_A1_*.md
+      - tests/test_fidelity_bootstrap_a1.py
+      - .github/workflows/steering-bootstrap-a1.yml
+  pull_request:
+    paths:
+      - scripts/steering_fidelity_bootstrap_a1.py
+      - docs/STEERING_FIDELITY_BOOTSTRAP_A1_*.md
+      - tests/test_fidelity_bootstrap_a1.py
+      - .github/workflows/steering-bootstrap-a1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: steering-bootstrap-a1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bootstrap:
+    name: Bootstrap A1 / Python 3.12
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-ci*.txt
+      - name: Install CPU verification dependencies
+        run: |
+          python -m pip install -r requirements-ci.txt
+          python -m pip install -r requirements-ci-torch.txt --index-url https://download.pytorch.org/whl/cpu
+          python -m pip check
+      - name: Verify amendment and frozen lifecycle regressions
+        run: |
+          python -m pytest -q \
+            tests/test_fidelity_bootstrap_a1.py \
+            tests/test_steering_fidelity_controller.py \
+            tests/test_steering_fidelity_runner.py
+      - name: Confirm frozen science remains unchanged
+        run: git diff --exit-code -- experiments/steering_fidelity/ data/steering_fidelity/calibration_plan_20261002/ tests/test_steering_fidelity_*.py

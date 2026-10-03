@@ -13,8 +13,12 @@ The project does not try to prove that language models are or are not conscious.
   fix the calibration/test boundary, spending cap and opposing-claims analysis.
 - [x] Check BF16 rounding on saved states without paid inference. Synthetic
   directions establish only numerical feasibility, not actual SAE delivery.
-- [ ] Finish tests and publicly freeze the source-bound Phase C plan before
-  new outcomes; run exact-commit CI and cheap CUDA qualification.
+- [x] Finish 268 local tests and publicly freeze the source-bound Phase C plan
+  at runtime `2d9c94f`; all 15 exact-commit hosted checks passed.
+- [x] Preserve the first incomplete cheap CUDA attempt and verified deletion;
+  startup exhausted its effective work window, costing at most $0.062979.
+- [ ] Verify the narrow A1 cheap-window amendment and complete all frozen CUDA
+  tests before a B200 rental. No scientific setting or spending cap changes.
 - [ ] Run the $25 calibration with initial-row and measured-throughput audits:
   9,300 forced-choice forwards, eight fixed control panels, five dose rungs
   including a nonselectable damage probe, and bounded JSON liveness.

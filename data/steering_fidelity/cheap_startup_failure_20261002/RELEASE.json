@@ -1,0 +1,19 @@
+{
+  "status": "incomplete_cheap_qualification_before_scientific_outcomes",
+  "scientific_rows": 0,
+  "science_freeze": "2d9c94f1de59f0f59dd89636c20afece1f6d1daf",
+  "plan_sha256": "6f0a5609caabeae6907513939d0a647fbd2b99dacf9f519aeb434b001e775fb0",
+  "owned_pod_id": "cnoltv3wltphd9",
+  "get_status_after_delete": 404,
+  "deleted_utc": "2026-10-03T03:29:15.437588+00:00",
+  "compute_upper_bound_usd": "0.06297823093333333333333333333",
+  "elapsed_seconds": "269.906704",
+  "closed_event_sha256": "44b6d8dd56e26b1e81225222ff11c28469bbf7f3bb986ddb0f0d8d1c35f1507e",
+  "note": "A shell exit code of zero is not a completed CUDA qualification. Required tests.xml and DONE-all.json are absent. All four final retrieved artifacts are preserved unchanged.",
+  "artifacts": {
+    "controller-exit.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01",
+    "controller-stopped.json": "6703b339fd8b974e47d23dad25fcf30e8c5bbdb129158d36800f0715124b4262",
+    "controller.log": "9b6b9c8ec62e4a7cb517c69ffc868a16e3c0c1f32ffa58bb955104d2337c0b23",
+    "pip-freeze.txt": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6"
+  }
+}

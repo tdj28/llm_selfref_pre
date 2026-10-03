@@ -29,6 +29,17 @@ No favorable-effect prerequisite or replacement layer/model/feature search.
 Read ignored `checkpoint.md` for actual execution status. Implementation and
 passing code tests do not establish a scientific gate or a mechanism.
 
+Scientific runtime freeze `2d9c94f1de59f0f59dd89636c20afece1f6d1daf` passed
+all 15 hosted checks. Cheap attempt 1 was stopped by the too-short startup
+window before completing CUDA tests; no scientific row was produced. Preserve
+`data/steering_fidelity/cheap_startup_failure_20261002/`. Owned pod
+`cnoltv3wltphd9` is deleted (GET404), cost bound $0.06297823093333333333333333333.
+`docs/STEERING_FIDELITY_BOOTSTRAP_A1_20261002.md` defines the narrow repair:
+only cheap attempt 2 gets a 1,800-second hard lifetime. Original science,
+ledger/costs, main lifetime and caps stay fixed. Require the separate focused
+amendment CI plus the existing full scientific-runtime CI before rental.
+No third retry, gate waiver, or budget reset is authorized by this adapter.
+
 ### Bilingual Pilot History
 
 The owner approved the single-Llama bilingual measurement pilot under a new,

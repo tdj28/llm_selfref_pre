@@ -695,3 +695,12 @@ data/frontier_bilingual_b1/*
 !data/frontier_bilingual_b1/completed_20261002/
 !data/frontier_bilingual_b1/completed_20261002/**
 !data/frontier_bilingual_b1/completed_20261002/analysis/*.pdf
+
+# Exact inspected cheap-startup failure; no other runtime paths are opened.
+!data/steering_fidelity/cheap_startup_failure_20261002/
+data/steering_fidelity/cheap_startup_failure_20261002/*
+!data/steering_fidelity/cheap_startup_failure_20261002/controller-exit.json
+!data/steering_fidelity/cheap_startup_failure_20261002/controller-stopped.json
+!data/steering_fidelity/cheap_startup_failure_20261002/controller.log
+!data/steering_fidelity/cheap_startup_failure_20261002/pip-freeze.txt
+!data/steering_fidelity/cheap_startup_failure_20261002/RELEASE.json
