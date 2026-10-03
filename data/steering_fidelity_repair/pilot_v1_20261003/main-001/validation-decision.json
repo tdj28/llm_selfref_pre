@@ -1,0 +1,1 @@
+{"after_receipt_sha256":"1a95cd78ee712e1abe23ba4c71cd1ce432372c48e8513f627d44dd6fca6e928c","decision":{"pass":false,"reason":"no_discovery_candidate_passed","stage_t_authorized":false,"status":"not_run"},"freeze_commit":"afea3ec607abdeb0b3a2f87aef4529b5238725a4","plan_sha256":"d9d2c37e2187b3a53d7a97c35e4735d1dd8da5297599079d538800ac026d12ef","stage_t_authorized":false}

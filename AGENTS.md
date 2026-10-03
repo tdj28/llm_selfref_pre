@@ -58,13 +58,22 @@ the raw-to-summary binding with `scripts/verify_fidelity_calibration.py --full`.
 post-outcome offline audit: baseline mistakes can supply absolute pressure
 headroom, and the JSON screen measured prompt-boundary positions, not JSON
 body exposure. Neither observation changes the frozen failed gates.
-`experiments/steering_fidelity_repair/` contains a draft fresh item bank,
-stratified pressure decision code and token-resolved activation observer.
-CPU tests are not CUDA qualification; there is no collection runtime, machine
-freeze or new outcome yet. Keep Stage T blocked and retain the original data.
-Use a fresh, budget-bound pilot and actual JSON-position checks before deciding
-whether the successor instrument qualifies. Do not duplicate the separately
-owned operator-matching fine-ladder work or touch its pods.
+The fresh repair pilot is complete at
+`data/steering_fidelity_repair/pilot_v1_20261003/`, frozen at `afea3ec6`.
+All 368 conditionally required forwards and 736 receipts audit successfully.
+Neither pressure wording qualifies; both JSON singleton vectors deliver
+accurately but each adds one false-arithmetic error, so preservation fails
+its interval criterion. All 48 teacher prefills ran: JSON-body exposure is
+1/12 for 11104 and 5/12 for 27322; both activate in explicit-JSON request tokens.
+No pressure validation or JSON generation was run. Do not call either feature
+globally dead, or treat a skipped generation branch as a zero effect.
+See `docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md`. Both newly owned pods
+duzy5fs7fjnt8f and tu7lhl34jfzpzt are deleted (GET404); new all-in bound $4.848231,
+campaign bound $14.506005. Keep Stage T blocked and preserve all old failures.
+Feature 27322's extra hard-score error is a near-tie (P(correct)=0.499999315),
+with "No" still the top token; do not present this as large general damage.
+The separate selfref_scaling review and concise canonical manuscript
+qualification do not qualify the repair or authorize another rental.
 
 ### Bilingual Pilot History
 

@@ -1,5 +1,15 @@
 # Data Artifacts
 
+`data/steering_fidelity_repair/pilot_v1_20261003/` is the complete conditional
+repair-pilot release: 368 native-BF16 forwards, 736 receipt events, saved
+pressure/singleton/exposure decisions, 312-test CUDA record, environment,
+snapshot lineage and verified owned-pod deletion. The manifest binds 392
+artifacts. Neither pressure wording or singleton preservation gate qualifies;
+48 clean teacher prefills reveal position-dependent activity, not a behavioral
+JSON effect. Pressure validation and JSON generation were gated out, not zero.
+Results: `docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md`; prospective freeze
+`afea3ec607abdeb0b3a2f87aef4529b5238725a4`. No Stage T or experience outcomes.
+
 `data/operator_matching/fine_v1_20261003/` is the completed 4x-8x fine dose
 ladder that follows the operator-matching calibration: 105 native-BF16
 two-turn trials (scope all, additive edits, scales 4 to 8 for features 58667
