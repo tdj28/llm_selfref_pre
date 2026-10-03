@@ -398,8 +398,6 @@ wording. Preserve all frozen verdicts and failed gates. Full decisions:
   instruction controls. Do not assume our sixteen new prompts decompose it.
 - [ ] Run a bounded 67-versus-88-row readout replay diagnostic before assigning
   the J-lens gate's root cause. This cannot retroactively pass the old gate.
-- [ ] Obtain the owner's contact history; approve/send a concise author query
-  and offer a right of reply. Do not assume a tweet was or was not sent.
 - [ ] Audit ignored pilot artifacts and pre-squash history for private material,
   then obtain approval for an additive archive ref/release. Do not rewrite main
   or claim local commit timestamps prove a remote pre-outcome freeze.
