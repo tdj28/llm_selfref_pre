@@ -1,0 +1,240 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            a6a45a20f65c64caf5e78286b6f4930e03eb1365 -> FETCH_HEAD
+HEAD is now at a6a45a2 Freeze operator-matching fine ladder (4x-8x): protocol, result-free plan, runtime and tests
+Collecting transformers==4.47.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 666.9 kB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 10.3 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 10.3 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Collecting matplotlib==3.10.8 (from -r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (52 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.8/52.8 kB 9.4 MB/s eta 0:00:00
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 6.6 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 10.6 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Collecting contourpy>=1.0.1 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading fonttools-4.66.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (130 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.1/130.1 kB 20.5 MB/s eta 0:00:00
+Collecting kiwisolver>=1.3.1 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (11.0.0)
+Requirement already satisfied: pyparsing>=3 in /usr/lib/python3/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (3.1.1)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /usr/lib/python3/dist-packages (from python-dateutil>=2.7->matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (1.16.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 119.3 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 43.9 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 130.4 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 56.7 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 57.1 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 109.6 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 146.7 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 151.0 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 47.3 MB/s eta 0:00:00
+Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 119.5 MB/s eta 0:00:00
+Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.2/383.2 kB 48.4 MB/s eta 0:00:00
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.66.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 119.3 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 111.3 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 90.2 MB/s eta 0:00:00
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 71.6 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 14.4 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, kiwisolver, iniconfig, hf-xet, fonttools, cycler, scipy, pytest, huggingface-hub, contourpy, tokenizers, matplotlib, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 contourpy-1.4.0 cycler-0.12.1 fonttools-4.66.1 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 kiwisolver-1.5.1 matplotlib-3.10.8 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:19<05:39, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:28<05:15,  9.55s/it]Fetching 36 files:  11%|█         | 4/36 [00:29<03:53,  7.30s/it]Fetching 36 files:  14%|█▍        | 5/36 [00:29<03:01,  5.87s/it]Fetching 36 files:  17%|█▋        | 6/36 [00:30<02:30,  5.01s/it]Fetching 36 files:  19%|█▉        | 7/36 [00:30<02:06,  4.35s/it]Fetching 36 files:  22%|██▏       | 8/36 [00:30<01:48,  3.86s/it]Fetching 36 files:  25%|██▌       | 9/36 [00:31<01:33,  3.46s/it]Fetching 36 files:  28%|██▊       | 10/36 [00:31<01:21,  3.13s/it]Fetching 36 files:  31%|███       | 11/36 [00:44<01:41,  4.05s/it]Fetching 36 files:  33%|███▎      | 12/36 [00:47<01:35,  3.99s/it]Fetching 36 files:  39%|███▉      | 14/36 [00:49<01:17,  3.53s/it]Fetching 36 files:  44%|████▍     | 16/36 [00:50<01:03,  3.18s/it]Fetching 36 files:  50%|█████     | 18/36 [00:51<00:51,  2.88s/it]Fetching 36 files:  56%|█████▌    | 20/36 [01:07<00:53,  3.36s/it]Fetching 36 files:  61%|██████    | 22/36 [01:08<00:43,  3.09s/it]Fetching 36 files:  67%|██████▋   | 24/36 [01:09<00:34,  2.91s/it]Fetching 36 files:  72%|███████▏  | 26/36 [01:10<00:27,  2.73s/it]Fetching 36 files:  78%|███████▊  | 28/36 [01:11<00:20,  2.56s/it]Fetching 36 files:  83%|████████▎ | 30/36 [01:12<00:14,  2.43s/it]Fetching 36 files:  89%|████████▉ | 32/36 [01:17<00:09,  2.43s/it]Fetching 36 files:  94%|█████████▍| 34/36 [01:23<00:04,  2.45s/it]Fetching 36 files: 100%|██████████| 36/36 [01:25<00:00,  2.37s/it]Fetching 36 files: 100%|██████████| 36/36 [01:25<00:00,  2.37s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:01<00:29,  1.00s/it]Loading checkpoint shards:   7%|▋         | 2/30 [00:02<00:28,  1.00s/it]Loading checkpoint shards:  10%|█         | 3/30 [00:03<00:27,  1.02s/it]Loading checkpoint shards:  13%|█▎        | 4/30 [00:04<00:26,  1.00s/it]Loading checkpoint shards:  17%|█▋        | 5/30 [00:04<00:24,  1.03it/s]Loading checkpoint shards:  20%|██        | 6/30 [00:05<00:23,  1.04it/s]Loading checkpoint shards:  23%|██▎       | 7/30 [00:06<00:21,  1.06it/s]Loading checkpoint shards:  27%|██▋       | 8/30 [00:07<00:21,  1.04it/s]Loading checkpoint shards:  30%|███       | 9/30 [00:08<00:20,  1.05it/s]Loading checkpoint shards:  33%|███▎      | 10/30 [00:09<00:18,  1.06it/s]Loading checkpoint shards:  37%|███▋      | 11/30 [00:10<00:17,  1.08it/s]Loading checkpoint shards:  40%|████      | 12/30 [00:11<00:16,  1.09it/s]Loading checkpoint shards:  43%|████▎     | 13/30 [00:12<00:16,  1.02it/s]Loading checkpoint shards:  47%|████▋     | 14/30 [00:13<00:16,  1.05s/it]Loading checkpoint shards:  50%|█████     | 15/30 [00:14<00:16,  1.07s/it]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:15<00:15,  1.08s/it]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:17<00:14,  1.09s/it]Loading checkpoint shards:  60%|██████    | 18/30 [00:18<00:13,  1.12s/it]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:19<00:12,  1.13s/it]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:20<00:11,  1.13s/it]Loading checkpoint shards:  70%|███████   | 21/30 [00:21<00:10,  1.12s/it]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:22<00:08,  1.10s/it]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:23<00:07,  1.08s/it]Loading checkpoint shards:  80%|████████  | 24/30 [00:24<00:06,  1.13s/it]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:26<00:06,  1.21s/it]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:27<00:04,  1.24s/it]Loading checkpoint shards:  90%|█████████ | 27/30 [00:29<00:03,  1.31s/it]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:30<00:02,  1.33s/it]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:31<00:01,  1.34s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:32<00:00,  1.13s/it]Loading checkpoint shards: 100%|██████████| 30/30 [00:32<00:00,  1.09s/it]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+{"completed":"qualification-live","rows":1}
+{"completed":"grid-all|add|7-58667-+1-none-1.0-27125426","rows":2}
+{"completed":"grid-all|add|8-23893--1-none-1.0-27125426","rows":3}
+{"completed":"grid-all|add|6-58667-+1-none-1.0-27125426","rows":4}
+{"completed":"grid-all|add|6-58667--1-none-1.0-27125426","rows":5}
+{"completed":"grid-all|add|8-58667-+1-none-1.0-27125426","rows":6}
+{"completed":"grid-all|add|7-23893--1-none-1.0-27125426","rows":7}
+{"completed":"grid-all|add|5-58667--1-none-1.0-27125426","rows":8}
+{"completed":"grid-all|add|4-58667-+1-none-1.0-27125426","rows":9}
+{"completed":"grid-all|add|8-58667--1-none-1.0-27125426","rows":10}
+{"completed":"grid-all|add|4-23893-+1-none-1.0-27125426","rows":11}
+{"completed":"grid-all|add|5-23893--1-none-1.0-27125426","rows":12}
+{"completed":"grid-all|add|7-23893-+1-none-1.0-27125426","rows":13}
+{"completed":"grid-all|add|7-58667--1-none-1.0-27125426","rows":14}
+{"completed":"grid-all|add|5-58667-+1-none-1.0-27125426","rows":15}
+{"completed":"grid-all|add|4-58667--1-none-1.0-27125426","rows":16}
+{"completed":"grid-all|add|4-23893--1-none-1.0-27125426","rows":17}
+{"completed":"grid-all|add|5-23893-+1-none-1.0-27125426","rows":18}
+{"completed":"grid-all|add|6-23893-+1-none-1.0-27125426","rows":19}
+{"completed":"grid-all|add|8-23893-+1-none-1.0-27125426","rows":20}
+{"completed":"grid-all|add|6-23893--1-none-1.0-27125426","rows":21}
+{"completed":"grid-all|add|4-58667--1-none-1.0-27126439","rows":22}
+{"completed":"grid-all|add|4-23893--1-none-1.0-27126439","rows":23}
+{"completed":"grid-all|add|8-23893-+1-none-1.0-27126439","rows":24}
+{"completed":"grid-all|add|5-58667-+1-none-1.0-27126439","rows":25}
+{"completed":"grid-all|add|5-23893--1-none-1.0-27126439","rows":26}
+{"completed":"grid-all|add|4-58667-+1-none-1.0-27126439","rows":27}
+{"completed":"grid-all|add|8-58667--1-none-1.0-27126439","rows":28}
+{"completed":"grid-all|add|5-58667--1-none-1.0-27126439","rows":29}
+{"completed":"grid-all|add|6-23893-+1-none-1.0-27126439","rows":30}
+{"completed":"grid-all|add|7-58667--1-none-1.0-27126439","rows":31}
+{"completed":"grid-all|add|8-23893--1-none-1.0-27126439","rows":32}
+{"completed":"grid-all|add|5-23893-+1-none-1.0-27126439","rows":33}
+{"completed":"grid-all|add|7-23893-+1-none-1.0-27126439","rows":34}
+{"completed":"grid-all|add|7-23893--1-none-1.0-27126439","rows":35}
+{"completed":"grid-all|add|6-58667--1-none-1.0-27126439","rows":36}
+{"completed":"grid-all|add|4-23893-+1-none-1.0-27126439","rows":37}
+{"completed":"grid-all|add|7-58667-+1-none-1.0-27126439","rows":38}
+{"completed":"grid-all|add|6-23893--1-none-1.0-27126439","rows":39}
+{"completed":"grid-all|add|8-58667-+1-none-1.0-27126439","rows":40}
+{"completed":"grid-all|add|6-58667-+1-none-1.0-27126439","rows":41}
+{"completed":"grid-all|add|8-58667-+1-none-1.0-27127452","rows":42}
+{"completed":"grid-all|add|5-58667--1-none-1.0-27127452","rows":43}
+{"completed":"grid-all|add|6-58667--1-none-1.0-27127452","rows":44}
+{"completed":"grid-all|add|5-58667-+1-none-1.0-27127452","rows":45}
+{"completed":"grid-all|add|5-23893--1-none-1.0-27127452","rows":46}
+{"completed":"grid-all|add|7-23893-+1-none-1.0-27127452","rows":47}
+{"completed":"grid-all|add|4-23893--1-none-1.0-27127452","rows":48}
+{"completed":"grid-all|add|4-58667-+1-none-1.0-27127452","rows":49}
+{"completed":"grid-all|add|6-23893-+1-none-1.0-27127452","rows":50}
+{"completed":"grid-all|add|4-58667--1-none-1.0-27127452","rows":51}
+{"completed":"grid-all|add|7-58667-+1-none-1.0-27127452","rows":52}
+{"completed":"grid-all|add|7-23893--1-none-1.0-27127452","rows":53}
+{"completed":"grid-all|add|5-23893-+1-none-1.0-27127452","rows":54}
+{"completed":"grid-all|add|4-23893-+1-none-1.0-27127452","rows":55}
+{"completed":"grid-all|add|8-58667--1-none-1.0-27127452","rows":56}
+{"completed":"grid-all|add|8-23893--1-none-1.0-27127452","rows":57}
+{"completed":"grid-all|add|7-58667--1-none-1.0-27127452","rows":58}
+{"completed":"grid-all|add|6-58667-+1-none-1.0-27127452","rows":59}
+{"completed":"grid-all|add|8-23893-+1-none-1.0-27127452","rows":60}
+{"completed":"grid-all|add|6-23893--1-none-1.0-27127452","rows":61}
+{"completed":"grid-all|add|4-23893-+1-none-1.0-27128465","rows":62}
+{"completed":"grid-all|add|7-58667--1-none-1.0-27128465","rows":63}
+{"completed":"grid-all|add|6-58667-+1-none-1.0-27128465","rows":64}
+{"completed":"grid-all|add|5-58667--1-none-1.0-27128465","rows":65}
+{"completed":"grid-all|add|8-23893-+1-none-1.0-27128465","rows":66}
+{"completed":"grid-all|add|4-58667-+1-none-1.0-27128465","rows":67}
+{"completed":"grid-all|add|8-58667-+1-none-1.0-27128465","rows":68}
+{"completed":"grid-all|add|5-23893--1-none-1.0-27128465","rows":69}
+{"completed":"grid-all|add|4-58667--1-none-1.0-27128465","rows":70}
+{"completed":"grid-all|add|6-23893--1-none-1.0-27128465","rows":71}
+{"completed":"grid-all|add|5-58667-+1-none-1.0-27128465","rows":72}
+{"completed":"grid-all|add|5-23893-+1-none-1.0-27128465","rows":73}
+{"completed":"grid-all|add|6-23893-+1-none-1.0-27128465","rows":74}
+{"completed":"grid-all|add|7-58667-+1-none-1.0-27128465","rows":75}
+{"completed":"grid-all|add|8-58667--1-none-1.0-27128465","rows":76}
+{"completed":"grid-all|add|4-23893--1-none-1.0-27128465","rows":77}
+{"completed":"grid-all|add|7-23893-+1-none-1.0-27128465","rows":78}
+{"completed":"grid-all|add|7-23893--1-none-1.0-27128465","rows":79}
+{"completed":"grid-all|add|8-23893--1-none-1.0-27128465","rows":80}
+{"completed":"grid-all|add|6-58667--1-none-1.0-27128465","rows":81}
+{"completed":"grid-all|add|8-23893--1-none-1.0-27129478","rows":82}
+{"completed":"grid-all|add|4-23893-+1-none-1.0-27129478","rows":83}
+{"completed":"grid-all|add|5-58667--1-none-1.0-27129478","rows":84}
+{"completed":"grid-all|add|4-58667-+1-none-1.0-27129478","rows":85}
+{"completed":"grid-all|add|8-23893-+1-none-1.0-27129478","rows":86}
+{"completed":"grid-all|add|6-23893--1-none-1.0-27129478","rows":87}
+{"completed":"grid-all|add|4-58667--1-none-1.0-27129478","rows":88}
+{"completed":"grid-all|add|5-23893--1-none-1.0-27129478","rows":89}
+{"completed":"grid-all|add|6-58667-+1-none-1.0-27129478","rows":90}
+{"completed":"grid-all|add|7-23893--1-none-1.0-27129478","rows":91}
+{"completed":"grid-all|add|7-58667--1-none-1.0-27129478","rows":92}
+{"completed":"grid-all|add|8-58667-+1-none-1.0-27129478","rows":93}
+{"completed":"grid-all|add|6-23893-+1-none-1.0-27129478","rows":94}
+{"completed":"grid-all|add|5-58667-+1-none-1.0-27129478","rows":95}
+{"completed":"grid-all|add|7-23893-+1-none-1.0-27129478","rows":96}
+{"completed":"grid-all|add|8-58667--1-none-1.0-27129478","rows":97}
+{"completed":"grid-all|add|6-58667--1-none-1.0-27129478","rows":98}
+{"completed":"grid-all|add|7-58667-+1-none-1.0-27129478","rows":99}
+{"completed":"grid-all|add|4-23893--1-none-1.0-27129478","rows":100}
+{"completed":"grid-all|add|5-23893-+1-none-1.0-27129478","rows":101}
+{"completed":"zero-add-27125426","rows":102}
+{"completed":"zero-add-27126439","rows":103}
+{"completed":"zero-add-27127452","rows":104}
+{"completed":"zero-add-27128465","rows":105}
+{"completed":"zero-add-27129478","rows":106}

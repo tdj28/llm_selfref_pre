@@ -1,0 +1,38 @@
+{
+ "freeze_commit": "a6a45a20f65c64caf5e78286b6f4930e03eb1365",
+ "new_cap_usd": "15",
+ "plan_sha256": "ad264e5914d6c82859e84cfce5495f390e76ff51db2acfbc9694ffb66cd0e8ef",
+ "pods": {
+  "cheap_qualification": {
+   "approvals": [],
+   "closed_utc": "2026-10-03T10:35:48.773476+00:00",
+   "compute_upper_bound_usd": "0.03973743503333333333333333333",
+   "delete_response_status": 204,
+   "elapsed_seconds": "170.303293",
+   "get_status_after_delete": 404,
+   "monitor_retries": 0,
+   "name": "claude-opmatch-fine-20261003-cheap-c8fc8c3232f9",
+   "pod_id": "mlqk3lmp6gfha7",
+   "within_limits": true
+  },
+  "main": {
+   "approvals": [
+    "approved:qualification",
+    "approved:first-five"
+   ],
+   "closed_utc": "2026-10-03T11:08:46.537928+00:00",
+   "compute_upper_bound_usd": "3.701067429349477777777777778",
+   "delete_response_status": 204,
+   "elapsed_seconds": "1933.794302708",
+   "get_status_after_delete": 404,
+   "monitor_retries": 0,
+   "name": "claude-opmatch-fine-20261003-main-5f835095718b",
+   "pod_id": "cpxklwa9vs6vfk",
+   "within_limits": true
+  }
+ },
+ "prior_operator_matching_usd": "18.790675",
+ "schema": "operator_matching_fine_retrieval_v1",
+ "scope": "Projection of private controller ledgers; SSH material, local paths and credentials omitted",
+ "study_compute_upper_bound_usd": "3.740805"
+}
