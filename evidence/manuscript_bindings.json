@@ -1628,7 +1628,7 @@
       "id": "sae_primary_specificity",
       "occurrences": 1,
       "prefix": "",
-      "text": "$-0.0267$ [$-0.1000$, 0.0467]",
+      "text": "$-0.03$ [$-0.10$, 0.05]",
       "values": [
         {
           "claim": "sae_primary_specificity",
@@ -1901,7 +1901,7 @@
       "id": "literal_table_specificity",
       "occurrences": 1,
       "prefix": "Literal & Target minus mean controls & ",
-      "text": "$-0.0267$ & [$-0.1000$, 0.0467]",
+      "text": "$-0.03$ & [$-0.10$, 0.05]",
       "values": [
         {
           "claim": "sae_primary_specificity",

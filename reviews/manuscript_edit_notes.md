@@ -94,7 +94,7 @@ Release root:
 | Literal panel 1 | 0.06 [-0.04, 0.16] | `aggregate_effects.csv` |
 | Literal panel 2 | 0.02 [0.00, 0.06] | `aggregate_effects.csv` |
 | Literal panel 3 | 0.00 [-0.06, 0.06] | `aggregate_effects.csv` |
-| Target minus mean controls | -0.0267 [-0.1000, 0.0467] | `primary_verdict.json` |
+| Target minus mean controls | -0.0267 [-0.1000, 0.0467] (bound excerpt; kept at four decimals) | `primary_verdict.json` |
 | Calibrated target | -0.10 [-0.22, 0.02] | `calibrated_aggregate_effects.csv` |
 | Calibrated panel 1 | 0.12 [0.04, 0.22] | `calibrated_aggregate_effects.csv` |
 | GPT-4o mini target | -0.04 [-0.16, 0.08] | `judge_sensitivity.csv` |
@@ -219,3 +219,139 @@ SAE-survey, and unrelated mechanism citations were deliberately omitted.
   `a6c6eab1b15f5e49f8133e292ac349d5743d150a7323c462f42c5f12e86432d1`.
 - PDF SHA-256:
   `861ca49ad7f12eda9937ea9811a977353652a04f92217fa394d291289adaaa3b`.
+
+## Display Precision Revision (2026-10-03)
+
+Reviewer item 4 (machine-output precision on 50-block contrasts). Display
+changes only; no estimate, interval, count, verdict or evidence value changed.
+
+- Bound excerpts are unchanged. An intermediate draft re-bound
+  `sae_primary_specificity` and `literal_table_specificity` at two decimals
+  and edited `evidence/build_bindings.py`, `evidence/provenance.json` and
+  `evidence/manuscript_bindings.json` to match; the fixup pass below reverted
+  all three files to their `origin/main` bytes and restored the four-decimal
+  text `$-0.0267$ [$-0.1000$, 0.0467]` in the prose and the matching table
+  row. The frozen ledger therefore still binds the frozen display text.
+- Unbound literals in `paper/main.tex`: Gemma multiplier `$\alpha=0.03451248$`
+  -> `$\alpha\approx 0.035$`; Gemma medians `10.518`/`10.153` -> `10.52`/`10.15`
+  with the `3.47\%` reduction unchanged; maximum relative hidden-state RMS
+  `0.1204` -> `0.12` (the table above keeps the four-decimal value);
+  `approximately 0.003 positive labels` -> `one positive label in 320 responses
+  under either judge, a rate of 0.003`, with the direct-conscious comparison
+  written as `130/320 and 121/320 (0.41 and 0.38)` under the OpenAI and
+  Anthropic judges (`factorial_rates.csv`, query `direct_experience` and
+  `direct_conscious`, four models x four orthogonal cells x 20).
+- Generated macros are rounded at display time: `\usepackage{siunitx}` plus a
+  `\RoundDisplay{Name}{places}` preamble wrapper that keeps `\<Name>Raw` at
+  full precision. The eighteen `\Ensemble...` effect and interval macros print
+  at two decimals (abstract and random-subset appendix: -0.04 [-0.26, 0.19];
+  specificity -0.13 [-0.64, 0.40]) and `\FidelityResidualNorm` prints 18.2.
+  `ensemble_values.tex`, `fidelity_values.tex`, `source_values.tex` and
+  `uncertainty_sensitivity/values.tex` are byte-identical.
+- Left at their current precision: `AUROC 0.4998 [0.4978, 0.5016]` (bound,
+  1,224 states); the three-decimal Gemma contrasts `-0.013 [-0.107, 0.073]` and
+  `0.020 [0.000, 0.061]`; the `\US...` uncertainty-appendix interval macros,
+  whose interval comparison lives in the third and fourth decimals (the ten
+  `\US...Estimate` macros are rounded at display time, see below); and the
+  `\SourcePrimary...` macros, whose neighboring literal intervals sit in the
+  protected `paper/source_alignment.tex`.
+
+## Fixup After Verifier Review (2026-10-03)
+
+Three verifiers (numbers, completeness, moderator) reviewed the revised
+manuscript. This pass applied their blockers and should-fix items in
+`paper/main.tex` and this file only. No numerical value, verdict, estimate,
+interval, count, identifier or hash changed; `make paper-verify` and the
+binding check pass; `make paper` compiles with 0 undefined references and 0
+overfull boxes.
+
+- Stale base. The edit branch was cut from `6a789c5c`, five commits behind
+  `origin/main` (`99078186`). The branch itself was not merged (this pass
+  makes no commits); instead the `origin/main` manuscript content was
+  re-applied by hand: the "In the original four-API-model panel" scoping in
+  the contributions list, the "What the evidence supports" paragraph and the
+  conclusion, the sentence "That ordering is not established across all later
+  model and rubric comparisons", and the verbatim "Scope across models and
+  elicitation contexts" paragraph (Qwen3.5-397B-A17B companion study, commit
+  `7cb5c98`, `docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md`). The
+  coordinator still needs to merge `origin/main`; for `paper/main.tex` and
+  `paper/fidelity_calibration.tex` the worktree versions already contain the
+  `origin/main` additions.
+- Restored byte-identical to `origin/main`: `paper/fidelity_calibration.tex`
+  (its own appendix section again, with the "Fresh instrument-repair pilot"
+  paragraph, the repair release link at `fa92564`, the "accurate delivery of
+  an additive vector, not validated suppression" sentence and the pressure
+  figure), `paper/factor_inventory.tex` (re-`\input` before the uncertainty
+  appendix, with `\ref{app:factor-inventory}` pointers from the legacy
+  steering appendix, the Gemma subsection and the implementation
+  subsection), `paper/uncertainty_sensitivity.tex`, `evidence/build_bindings.py`,
+  `evidence/provenance.json`, `evidence/manuscript_bindings.json` and
+  `docs/EVIDENCE.md`.
+- Re-inserted numeric disclosures that had no restatement: the 14-second
+  freeze-to-runtime interval (Sec. 2.1), the 73-second Llama freeze-to-start
+  interval and the Gemma "about three minutes" commit-to-outcome interval, the
+  seeded pool of 512 control candidates, the 100,000-draw paired-block
+  bootstrap, and the absolute 1e-12 portability tolerance alongside the
+  1.11e-16 difference.
+- `\reviewartifact` (commit `47ca3eda`) re-added; the human-coding handoff and
+  the instrument-validation amendment are linked in Appendix B, and the claim
+  ledger, the September 2026 review-audit files (delivery audit, baseline and
+  delivery figure, measurement audit) and the `docs/FIGURE_VALUE_AUDIT.md` /
+  `docs/ANALYSIS_CHRONOLOGY.md` paths are named in the Data and Code
+  Availability appendix. `tab:releases` gained a "Protocol and results"
+  column (protocols, release manifests, verdict and effect tables, results
+  documents at their pinned commits) and a row for the steering-fidelity
+  repair pilot; it is now an `xltabular` so it flows after the appendix
+  paragraph instead of leaving an orphan page. The NF4 verdict sentence links
+  `primary_verdict.json`.
+- Layout and numbering: appendix floats are numbered per appendix
+  (`\numberwithin` after `\appendix`); the two coverage tables sit directly
+  under their appendix heading with `[!h]`/`[!t]` so no paragraph is split by
+  them; `\floatpagefraction` is 0.6 so the fidelity table and figure share a
+  text page; the uncertainty-appendix estimate macros (`\USLiteralEstimate`,
+  `\USCalibratedEstimate` at two decimals; the eight fixed-panel
+  `\US...Estimate` macros at three) are rounded in the preamble with
+  `\RoundDisplay`, leaving the generated file and its interval macros intact.
+- Duplication and register: the TruthfulQA derivation appendix now holds only
+  the inequality, the enumeration sentence and the rounding assumption; the
+  steering-fidelity paragraph moved from Sec. 5.5 to the end of Sec. 5.4 under
+  the head "Steering-fidelity calibration" and mentions the repair pilot; the
+  Jaccard/Dice note became a footnote in Sec. 4.1 and the audit table moved
+  into Appendix B (Appendix C removed; pointers now say "headline counts");
+  "awaits/awaiting approval" -> "proposed", "agent-authored" -> "synthetic",
+  "worker" -> "analysis" in main.tex; the multiplier-amendment sentence was
+  tightened without dropping 6.266/3.653; the Figure 1 panel-B header no
+  longer repeats the in-image title. Terminal boundary sentences removed where
+  the Discussion states the same limit: Sec. 3.2 ("does not rule out
+  self-referential processing induced anew", mismatch paragraph compressed to
+  one sentence), Sec. 3.3 ("four lexical variants and four models"), Sec. 5.5
+  ("These captures precede the random-subset study").
+- Lindsey (2025) figure verified against the cited report, which states that
+  "Opus 4.1 and 4 exhibit such behavior about 20% of the time when concepts
+  are injected in the appropriate layer and with the appropriate strength";
+  the sentence now says "about 20% of trials, and only at the appropriate
+  layer and injection strength". The related-work paragraphs and eight added
+  references stay as a content addition.
+- Deliberately not done: in-image footnotes and overlapping labels in the
+  ensemble/source figures (hash-bound or in protected `.tex` files); the
+  four-decimal values and the repeated operator display in
+  `paper/source_alignment.tex`, the `\USCalibrationRows` literals and the
+  fidelity table in `paper/fidelity_calibration.tex` (protected generated
+  files); "pushed before its outcomes" and "unchanged worker values" in
+  `paper/ensemble_alignment.tex` (protected); the Gemma trial identifier
+  `8ab1b621b7491f810144c23e` (kept as the pointer to a specific raw row); the
+  second copy of the subjective-experience sentence in the abstract.
+
+## Final Precision Re-Binding And Freeze-Interval Disclosure (2026-10-03)
+
+After merge `292a86d7`, the two remaining four-decimal bound excerpts,
+`sae_primary_specificity` and `literal_table_specificity`, were re-bound at
+two decimals (`$-0.03$ [$-0.10$, 0.05]`) by editing the literals in
+`evidence/build_bindings.py` and regenerating `evidence/manuscript_bindings.json`
+and the ledger hash in `evidence/provenance.json`, the same documented path as
+the earlier reader revision. The verifier checks that each displayed token
+rounds from the evidence value; no value, selector, occurrence count or
+figure hash changed. The three freeze-to-start intervals (14 seconds, 73
+seconds, about three minutes) moved out of the result paragraphs into one
+disclosure sentence in the Data and Code Availability appendix, which the
+behavioral protocol paragraph now references.

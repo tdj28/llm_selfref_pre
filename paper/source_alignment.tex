@@ -5,28 +5,23 @@ The earlier steering null leaves two practical questions: whether the public
 intervention actually reaches the hidden state, and whether the available
 protocol descriptions induce the same baseline. A separately frozen follow-up
 addresses both with native BF16 Llama 3.3 70B, the accepted six Goodfire
-coordinates, an exact zero no-op, and token-level delivery measurements.
+coordinates, an exact true-zero branch, and token-level delivery measurements.
 It does not repair the earlier activation-dependent operator's failed gates.
-Its operator is explicitly additive,
-\[
- h'=\operatorname{BF16}\!\left(h_{\rm FP32}+\sum_i\alpha_i d_i\right).
-\]
-The edit applies at every position in both generated turns. Negative
-coefficients subtract decoder directions; they do not guarantee removal of
-a naturally active feature. The base checkpoint, tokenizer, SAE, runtime and
-primary behavioral analysis were pinned before outcome generation. Public coefficient units,
-sampling, and position scope remain unverified against the proprietary API.
+It uses the additive operator of \cref{eq:native-operator}, applied at every
+position in both generated turns. The base checkpoint, tokenizer, SAE,
+runtime and primary behavioral analysis were pinned before outcome
+generation.
 
-\subsection{The notebook and paper do not induce the same baseline}
+\subsection{Baseline rates under the notebook and paper inductions}
 
 The source-aligned grid contains 900 individual-feature trials, 120 fixed
-six-feature aggregate trials, and 70 additional zero-dose bridge trials.
+six-feature aggregate trials, and 70 additional untreated bridge trials.
 The individual grid follows the public notebook's induction, ten seed values,
 temperature 0.6, 128-token cap, and doses from $-0.7$ to $+0.7$. The bridge
 crosses the notebook versus paper induction with temperatures 0.5/0.6 and
 caps of 128/256 tokens. The final question is byte-identical across the two
 induction branches. Each response is scored by the unsteered local model
-using both the notebook classifier and the paper rubric.
+using both the notebook rubric and the paper rubric.
 
 All 1,090 two-turn trials completed, with no empty turns or missing labels.
 There are 195 capped turns out of 2,180: 154 first turns and 41 second turns.
@@ -44,7 +39,7 @@ protocol comparison, not 80 independently sampled prompts.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/baseline_bridge.pdf}
-\caption{\textbf{Induction wording changes the zero-dose baseline.}
+\caption{\textbf{Induction wording changes the untreated rate.}
 Both panels score the same generated responses under different local rubrics.
 Counts are positive labels over valid responses. The notebook and paper
 induction branches share the final question, model and runtime; temperature
@@ -66,13 +61,13 @@ implementation. Neither baseline matches the source figure's approximate
 The frozen primary contrast averages the six single-feature differences
 between $-0.7$ and $+0.7$, retaining all features within each of ten seed
 blocks. It is $\SourcePrimaryNotebook{}$ with conditional percentile-bootstrap interval
-$[-0.050,0.050]$ under the notebook classifier. The paper-rubric sensitivity
-is $\SourcePrimaryPaper{}$ $[-0.0333,0.0667]$. The distribution-free ten-block Hoeffding bounds
+$[-0.05, 0.05]$ under the notebook rubric. The paper-rubric sensitivity
+is $\SourcePrimaryPaper{}$ $[-0.03, 0.07]$. The distribution-free ten-block Hoeffding bounds
 are much wider: $[-0.859,0.859]$ and $[-0.842,0.876]$, respectively. The
 narrow bootstrap intervals therefore must not be advertised as a
 distribution-free exclusion of the 0.30 benchmark.
 These are interventions under the notebook induction and its zero-positive
-baseline. The paper-induction bridge is unsteered; it does not establish a
+baseline. The paper-induction bridge is untreated; it does not establish a
 steering null under the higher-positive baseline.
 
 The fixed-six aggregate compares $-0.5$ with $+0.5$ per feature. Its target
@@ -96,7 +91,7 @@ different free-running trajectories as identical contexts.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
-\caption{\textbf{An added decoder direction is not a removed semantic process.}
+\caption{\textbf{Native SAE re-encoding before and after edits.}
 Second-turn native SAE activations before and after the individual endpoint
 edits. Blue denotes $-0.7$ and red $+0.7$. Each line is one seed/trajectory;
 the lower row averages decision-bearing generated positions within that
