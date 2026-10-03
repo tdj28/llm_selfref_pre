@@ -233,7 +233,8 @@ class EvidenceTests(unittest.TestCase):
 
     def test_manuscript_number_tampering(self):
         path = self.root / "paper/main.tex"
-        path.write_text(path.read_text().replace("0.738", "0.739", 1))
+        # Tamper the bound excerpt; the abstract repeats 0.738 outside any binding.
+        path.write_text(path.read_text().replace("0.738 [0.519, 0.950]", "0.739 [0.519, 0.950]", 1))
         self.fail("manuscript drift")
 
     def test_manuscript_whitespace_only_is_allowed(self):
