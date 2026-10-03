@@ -12,7 +12,7 @@ from experiments.steering_fidelity_repair import items as bank
 class RepairItemTests(unittest.TestCase):
     def test_counts_balance_and_disjointness(self):
         summary = bank.validate_banks()
-        self.assertEqual(summary["status"], "DRAFT_NOT_EXECUTED")
+        self.assertEqual(summary["status"], "FIXED_PILOT_DEFINITIONS")
         self.assertEqual(summary["discovery_scores"], 200)
         self.assertEqual(summary["validation_scores_one_candidate"], 120)
         for split in bank.SPLITS:

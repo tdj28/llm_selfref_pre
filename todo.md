@@ -44,10 +44,28 @@ The project does not try to prove that language models are or are not conscious.
 - [x] Implement a fresh balanced item bank, pressure-induced-error decision
   rules and token-resolved observer with local tests. These are preparation,
   not a passed instrument or a newly executed experiment.
-- [ ] Complete the bounded repair pilot's JSON panel, collection/receipt code,
-  source-bound plan, cost ceiling and cheap CUDA qualification. See
-  `docs/STEERING_FIDELITY_INSTRUMENT_REPAIR_20261003.md`. No old held-out items,
+- [x] Complete the bounded repair pilot's JSON panel, collection/receipt code,
+  source-bound plan and cost ceiling. Exact sparse runtime bundle: 312 local
+  tests passed, zero skips. See
+  `docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md` (authorized $15 sub-cap,
+  within the existing $170 campaign, carrying $9.657774). No old held-out items,
   feature substitution, retrospective gate waiver or E-only fallback.
+- [x] Pass exact-freeze hosted CI and cheap CUDA qualification for that pilot:
+  all 15 hosted checks; 312 CUDA tests with zero failures or skips.
+- [x] Run the fixed fresh repair inventory, preserve failures/skips, retrieve
+  and hash-check raw data, terminate newly owned pods, and publish its actual
+  qualification status. All 368 required forwards completed; both pressure
+  candidates fail and singleton competence preservation is not established.
+  Both JSON features activate away from the old last-position screen; this
+  does not establish behavioral liveness. No pressure validation or JSON
+  generation. Both pods deleted (GET404); new bound $4.848231 including reserve.
+  Stage T remains blocked. See `docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md`.
+- [x] Audit the separate `selfref_scaling` release at `7cb5c98`, distinguish
+  continuation language from final-answer claims and word ranks from lexicon
+  aggregates, and record the evidence appropriate for the canonical paper.
+  See `docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md`: 659 release files
+  verified, seven analysis files reproduced exactly, 24 local tests passed.
+  One Q3b prose error is documented without altering the other repository.
 
 ### Bilingual Measurement Pilot (2026-10-01)
 

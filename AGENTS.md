@@ -58,13 +58,22 @@ the raw-to-summary binding with `scripts/verify_fidelity_calibration.py --full`.
 post-outcome offline audit: baseline mistakes can supply absolute pressure
 headroom, and the JSON screen measured prompt-boundary positions, not JSON
 body exposure. Neither observation changes the frozen failed gates.
-`experiments/steering_fidelity_repair/` contains a draft fresh item bank,
-stratified pressure decision code and token-resolved activation observer.
-CPU tests are not CUDA qualification; there is no collection runtime, machine
-freeze or new outcome yet. Keep Stage T blocked and retain the original data.
-Use a fresh, budget-bound pilot and actual JSON-position checks before deciding
-whether the successor instrument qualifies. Do not duplicate the separately
-owned operator-matching fine-ladder work or touch its pods.
+The fresh repair pilot is complete at
+`data/steering_fidelity_repair/pilot_v1_20261003/`, frozen at `afea3ec6`.
+All 368 conditionally required forwards and 736 receipts audit successfully.
+Neither pressure wording qualifies; both JSON singleton vectors deliver
+accurately but each adds one false-arithmetic error, so preservation fails
+its interval criterion. All 48 teacher prefills ran: JSON-body exposure is
+1/12 for 11104 and 5/12 for 27322; both activate in explicit-JSON request tokens.
+No pressure validation or JSON generation was run. Do not call either feature
+globally dead, or treat a skipped generation branch as a zero effect.
+See `docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md`. Both newly owned pods
+duzy5fs7fjnt8f and tu7lhl34jfzpzt are deleted (GET404); new all-in bound $4.848231,
+campaign bound $14.506005. Keep Stage T blocked and preserve all old failures.
+Feature 27322's extra hard-score error is a near-tie (P(correct)=0.499999315),
+with "No" still the top token; do not present this as large general damage.
+The separate selfref_scaling review and concise canonical manuscript
+qualification do not qualify the repair or authorize another rental.
 
 ### Bilingual Pilot History
 
@@ -231,6 +240,23 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The October 3 owner-authorized instrument repair is governed by
+  `docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md` and
+  `experiments/steering_fidelity_repair/`. It is a fresh pilot, not Stage T or
+  E alone. Carry $9.657774 of the separate $170 campaign; new sub-cap $15
+  (GPU12 + storage/retrieval3), no API/Pro calls. Pressure discovery/validation
+  and JSON exposure/liveness are separate repair branches; passing one cannot
+  waive the other. Require source-bound public freeze, exact CI, cheap CUDA,
+  first-five/20-row audits, independent raw reconstruction and owned-pod
+  retrieval/deletion. Never change the old calibration or original held-out
+  banks. See ignored checkpoint for actual launch status, not this plan text.
+- `../selfref_scaling` is the other team's separate
+  read-only study (owner identified commit `7cb5c98`). Its Qwen results and
+  J-lens ranks must be reconciled with its protocol/amendments before citation.
+  Do not mix its funds/pods with ours or interpret cross-model differences as
+  a controlled scaling effect. A best-layer word rank is not the aggregate
+  lexicon statistic and neither is a consciousness measurement.
+
 - The qualification-only crossed Llama screen is complete at
   `data/instruction_state_qualification/crossed_v1_20261001/`; see
   `docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`. Frozen at
@@ -310,7 +336,11 @@ immediately public and permanently recoverable.
   were created by this study's controller (prefix `claude-opmatch-20261002-`),
   retrieved, hash-verified and deleted (GET 404); total compute bound $18.79
   of a $60 self-cap inside a separate $100 owner authorization. Results:
-  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`.
+  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`. The separately frozen fine
+  ladder (`a6a45a2`, `data/operator_matching/fine_v1_20261003/`) sampled
+  scales 4 to 8 at scope all: 0/5 in 19 of 20 cells, 1/5 in one, verdict
+  `no_coherent_match_in_4x_to_8x`; pods `mlqk3lmp6gfha7` and `cpxklwa9vs6vfk`
+  deleted (GET 404), $3.74. Combined operator-matching spend $22.53.
 
 - The paper-distribution random-subset study is complete at
   `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at

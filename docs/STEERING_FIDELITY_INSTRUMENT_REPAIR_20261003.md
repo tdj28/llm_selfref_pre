@@ -1,5 +1,11 @@
 # Steering-Fidelity Instrument Repair
 
+**Successor:** the owner has now authorized the bounded fresh pilot specified
+in [the separate execution protocol](STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md).
+The draft implementation/status passages below preserve the earlier offline
+diagnostic. They are not its live execution record, and neither document
+qualifies Stage T without new measured evidence.
+
 **Post-outcome offline diagnostic; prospective pilot proposal is DRAFT / NOT
 EXECUTED. Stage T remains blocked, with no E-only fallback.** This does not
 amend the frozen calibration, qualify its pressure instrument retrospectively,

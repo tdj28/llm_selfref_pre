@@ -119,6 +119,15 @@ operator or a service-side answer about `strength` units changes the picture.
 The bridge result suggests the SDK system message belongs in any such
 baseline design as a declared factor.
 
+## Follow-Up: The 4x To 8x Gap
+
+A separately frozen fine ladder
+([results](OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md)) sampled scales
+4, 5, 6, 7 and 8 at scope `all` for the same two features: 0/5 affirmations in
+19 of 20 cells and 1/5 in one, with coherence declining gradually. Across
+integer scales 1, 3, 4 to 8, 10 and 30 there is no coherent dose at which the
+saved notebook signature appears.
+
 ## Artifacts
 
 Raw rows, receipts, selection, analysis tables, figures, audit, worker

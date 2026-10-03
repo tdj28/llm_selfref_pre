@@ -63,6 +63,8 @@ PRESERVED_SOURCE_BYTES = {
 HASH_MAP_MANIFESTS = {
     "data/operator_matching/calibration_v1_20261003/RELEASE_MANIFEST.json":
         "operator_matching_release_v1",
+    "data/operator_matching/fine_v1_20261003/RELEASE_MANIFEST.json":
+        "operator_matching_fine_release_v1",
 }
 
 PRIVATE_SUFFIXES = frozenset(

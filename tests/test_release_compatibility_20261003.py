@@ -40,6 +40,18 @@ def test_invalid_hash_map_rejected(updates):
     assert n == 0 and findings[0].rule == "invalid-release-manifest"
 
 
+@pytest.mark.parametrize("path", sorted(a.HASH_MAP_MANIFESTS))
+def test_each_known_map_needs_its_own_schema(path):
+    base = path.rsplit("/", 1)[0]
+    value = {"schema": a.HASH_MAP_MANIFESTS[path], "release": base, "file_count": 1,
+             "files": {"example.txt": hashlib.sha256(b"ok").hexdigest()}}
+    findings, n = check(value, {base + "/example.txt": (2, hashlib.sha256(b"ok").hexdigest())}, path)
+    assert not findings and n == 1
+    for schema in set(a.HASH_MAP_MANIFESTS.values()) - {value["schema"]}:
+        findings, n = check({**value, "schema": schema}, path=path)
+        assert n == 0 and findings[0].rule == "invalid-release-manifest"
+
+
 def test_unknown_manifest_not_allowed_to_switch_format():
     findings, n = check(manifest(), path="data/other/RELEASE_MANIFEST.json")
     assert n == 0 and findings[0].rule == "invalid-release-manifest"

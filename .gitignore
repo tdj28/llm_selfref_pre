@@ -53,6 +53,11 @@ data/steering_fidelity/preflight_20261002/*
 !data/steering_fidelity/calibration_plan_20261002/
 data/steering_fidelity/calibration_plan_20261002/*
 !data/steering_fidelity/calibration_plan_20261002/PLAN.json
+!data/steering_fidelity_repair/
+data/steering_fidelity_repair/*
+!data/steering_fidelity_repair/pilot_plan_20261003/
+data/steering_fidelity_repair/pilot_plan_20261003/*
+!data/steering_fidelity_repair/pilot_plan_20261003/PLAN.json
 !data/instruction_state_qualification/
 data/instruction_state_qualification/*
 !data/instruction_state_qualification/plan_20261001/
@@ -74,6 +79,9 @@ data/operator_matching/*
 !data/operator_matching/plan_20261002/
 data/operator_matching/plan_20261002/*
 !data/operator_matching/plan_20261002/PLAN.json
+!data/operator_matching/fine_plan_20261003/
+data/operator_matching/fine_plan_20261003/*
+!data/operator_matching/fine_plan_20261003/PLAN.json
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
@@ -714,3 +722,5 @@ data/steering_fidelity/cheap_startup_failure_20261002/*
 # Operator-matching calibration release (allowlisted after the generic patterns so its PDFs, logs and receipts are tracked)
 !data/operator_matching/calibration_v1_20261003/
 !data/operator_matching/calibration_v1_20261003/**
+!data/operator_matching/fine_v1_20261003/
+!data/operator_matching/fine_v1_20261003/**
