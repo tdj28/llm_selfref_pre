@@ -60,6 +60,11 @@ data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/PLAN.json
 !data/berg_source_replication/source_aligned_v1_20261001/
 !data/berg_source_replication/source_aligned_v1_20261001/**
+!data/operator_matching/
+data/operator_matching/*
+!data/operator_matching/plan_20261002/
+data/operator_matching/plan_20261002/*
+!data/operator_matching/plan_20261002/PLAN.json
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
