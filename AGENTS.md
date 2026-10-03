@@ -943,6 +943,10 @@ The repo owner has explicitly said agents should feel free to push to git. The c
 - Preserve unrelated local changes. Do not revert files you did not intentionally modify.
 - Commit focused changes with clear messages.
 - Push completed work when it is useful for continuity or review; do not wait for separate permission just because the action is a push.
+- Push each coherent, tested and public-audited milestone promptly, including
+  retrieved results. Do not hold several finished milestones locally until the
+  whole study is complete. If a live run binds its checkout HEAD, publish from
+  a separate checkout without altering that runtime or other agents' work.
 - If the branch, remote, credentials, or uncommitted unrelated changes make pushing risky, explain the blocker and leave the repo in a clean, understandable state.
 
 In short: keep momentum. Implement, verify as much as practical, commit when appropriate, and push useful completed work.
