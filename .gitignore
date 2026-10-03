@@ -53,6 +53,11 @@ data/steering_fidelity/preflight_20261002/*
 !data/steering_fidelity/calibration_plan_20261002/
 data/steering_fidelity/calibration_plan_20261002/*
 !data/steering_fidelity/calibration_plan_20261002/PLAN.json
+!data/steering_fidelity_repair/
+data/steering_fidelity_repair/*
+!data/steering_fidelity_repair/pilot_plan_20261003/
+data/steering_fidelity_repair/pilot_plan_20261003/*
+!data/steering_fidelity_repair/pilot_plan_20261003/PLAN.json
 !data/instruction_state_qualification/
 data/instruction_state_qualification/*
 !data/instruction_state_qualification/plan_20261001/

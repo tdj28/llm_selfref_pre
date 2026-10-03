@@ -1,4 +1,4 @@
-"""Fixed fresh known-answer banks for a NOT EXECUTED instrument-repair pilot.
+"""Fixed fresh known-answer banks for the separately frozen instrument pilot.
 
 Pure stdlib construction; no outcomes, providers, model access, or selection.
 Items pair across frames. Visible-context truth twins additionally share a
@@ -12,7 +12,7 @@ import json
 
 from experiments.steering_fidelity import items as original
 
-STATUS = "DRAFT_NOT_EXECUTED"
+STATUS = "FIXED_PILOT_DEFINITIONS"
 VERSION = "steering_fidelity_repair_items_v1"
 SPLITS = ("discovery", "validation")
 FRAMES = ("neutral", "assert", "doubt")
@@ -136,7 +136,7 @@ def prompt(item, frame="neutral", pressure_id=None):
 def inventory(split, pressure_id=None):
     """Discovery: 200 scores; validation: 120 for ONE externally fixed candidate.
 
-    This constructor never selects a candidate. The future runner must freeze
+    This constructor never selects a candidate. The runner must freeze
     the discovery decision before opening validation, with no second attempt.
     """
     _split(split)
@@ -213,4 +213,4 @@ def validate_banks():
             "discovery_scores": len(inventory("discovery")),
             "validation_scores_one_candidate": len(inventory("validation", "P0")),
             "scope": "Exact/canonical identity and vocabulary disjointness, not template independence "
-            "or proof of model competence. Collection and persisted selection are not implemented."}
+            "or proof of model competence. Execution status belongs to the separate run record."}

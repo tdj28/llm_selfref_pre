@@ -231,6 +231,23 @@ immediately public and permanently recoverable.
 
 ## Project Shape
 
+- The October 3 owner-authorized instrument repair is governed by
+  `docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md` and
+  `experiments/steering_fidelity_repair/`. It is a fresh pilot, not Stage T or
+  E alone. Carry $9.657774 of the separate $170 campaign; new sub-cap $15
+  (GPU12 + storage/retrieval3), no API/Pro calls. Pressure discovery/validation
+  and JSON exposure/liveness are separate repair branches; passing one cannot
+  waive the other. Require source-bound public freeze, exact CI, cheap CUDA,
+  first-five/20-row audits, independent raw reconstruction and owned-pod
+  retrieval/deletion. Never change the old calibration or original held-out
+  banks. See ignored checkpoint for actual launch status, not this plan text.
+- `../selfref_scaling` is the other team's separate
+  read-only study (owner identified commit `7cb5c98`). Its Qwen results and
+  J-lens ranks must be reconciled with its protocol/amendments before citation.
+  Do not mix its funds/pods with ours or interpret cross-model differences as
+  a controlled scaling effect. A best-layer word rank is not the aggregate
+  lexicon statistic and neither is a consciousness measurement.
+
 - The qualification-only crossed Llama screen is complete at
   `data/instruction_state_qualification/crossed_v1_20261001/`; see
   `docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`. Frozen at
