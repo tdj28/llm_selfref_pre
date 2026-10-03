@@ -60,6 +60,11 @@ data/berg_source_replication/*
 !data/berg_source_replication/plan_20260930/PLAN.json
 !data/berg_source_replication/source_aligned_v1_20261001/
 !data/berg_source_replication/source_aligned_v1_20261001/**
+!data/operator_matching/
+data/operator_matching/*
+!data/operator_matching/plan_20261002/
+data/operator_matching/plan_20261002/*
+!data/operator_matching/plan_20261002/PLAN.json
 !data/exp2_goodfire_sae_8b_basic_n5/
 data/exp2_goodfire_sae_8b_basic_n5/*
 !data/exp2_goodfire_sae_8b_basic_n5/README.md
@@ -687,3 +692,7 @@ data/frontier_bilingual_b1/*
 !data/frontier_bilingual_b1/completed_20261002/
 !data/frontier_bilingual_b1/completed_20261002/**
 !data/frontier_bilingual_b1/completed_20261002/analysis/*.pdf
+
+# Operator-matching calibration release (allowlisted after the generic patterns so its PDFs, logs and receipts are tracked)
+!data/operator_matching/calibration_v1_20261003/
+!data/operator_matching/calibration_v1_20261003/**
