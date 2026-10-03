@@ -32,6 +32,34 @@ ROOT_FILES = set(("receipts.jsonl model.json qualification.json calibration-stat
 # Inherited diagnostic runner metadata uses a five-digit ledger counter; never weights.
 LOAD_FILES = {f"model-bf16-load-{i:05d}.json" for i in range(1, 10)}
 REPORT_KEYS = ("pass", "forwards", "unresolved_forward_ids", "expected_forwards", "complete", "receipt_events")
+PACKAGE_VERSIONS = {"typing-extensions": "3.7.4.3", "nvidia-cudnn-cu12": "9.10.2.21",
+    "nvidia-cublas-cu12": "12.8.4.1", "nvidia-cufft-cu12": "11.3.3.83",
+    "nvidia-curand-cu12": "10.3.9.90", "nvidia-cusolver-cu12": "11.7.3.90",
+    "nvidia-cusparse-cu12": "12.5.8.93", "nvidia-cufile-cu12": "1.13.1.3"}
+
+
+def package_version_span(name, text, match):
+    """Recognize exact environment versions, not arbitrary dotted quads in logs."""
+    start = text.rfind("\n", 0, match.start()) + 1
+    end = text.find("\n", match.end())
+    line = text[start:end if end >= 0 else len(text)]
+    for package, version in PACKAGE_VERSIONS.items():
+        if match.group() != version:
+            continue
+        if name == "pip-freeze.txt" and line == package + "==" + version:
+            return True
+        if name != "controller.log":
+            continue
+        prefix = "Requirement already satisfied: " + package
+        if not line.startswith(prefix):
+            continue
+        for marker in ("==" + version, ">=" + version):
+            pos = len(prefix)
+            if line[pos:].startswith(marker + " in ") and match.start() == start + pos + 2:
+                return True
+        if line.endswith("(" + version + ")") and match.end() == start + len(line) - 1:
+            return True
+    return False
 
 
 def safe(path):
@@ -79,10 +107,12 @@ def scan(name, path):
     _require(not any(ord(c) < 32 and c not in "\n\r\t" for c in text)
              and not re.search(r'\\u00(?:0[0-9a-f]|1[0-9a-f])', text, re.I)
              and not re.search(r"\bssh(?:\b|-)", text, re.I), "Binary or private transport content")
-    for candidate in re.findall(r"\b\d{1,3}(?:\.\d{1,3}){3}\b|[0-9a-fA-F]*:[0-9a-fA-F:]+", text):
+    for match in re.finditer(r"\b\d{1,3}(?:\.\d{1,3}){3}\b|[0-9a-fA-F]*:[0-9a-fA-F:]+", text):
         try:
-            ipaddress.ip_address(candidate)
+            ipaddress.ip_address(match.group())
         except ValueError:
+            continue
+        if package_version_span(name, text, match):
             continue
         raise ValueError("Private IP address in public artifact")
 

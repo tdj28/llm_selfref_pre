@@ -182,7 +182,7 @@ def plot(summary, out):
         ax.tick_params(axis="x", labelrotation=40, labelsize=7)
     fig.supylabel("Qualified trial fraction; dashed line = 0.95 gate")
     fig.tight_layout(rect=(.02, .06, 1, .93))
-    finish(fig, "precision", "Parent-qualified delivery")
+    finish(fig, "precision", "Native BF16 intervention delivery")
     fig, axes = plt.subplots(1, 2, figsize=(11, 5))
     for ax, truth in zip(axes, (False, True)):
         cell = summary["pressure_cells"][str(truth)]

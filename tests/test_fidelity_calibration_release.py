@@ -412,6 +412,26 @@ class ReleaseTests(unittest.TestCase):
                 with self.assertRaises((ValueError, UnicodeError)):
                     r.scan("model.json", path)
 
+    def test_exact_package_versions_are_not_network_addresses(self):
+        for package, version in r.PACKAGE_VERSIONS.items():
+            for name, value in (("pip-freeze.txt", package + "==" + version),
+                ("controller.log", "Requirement already satisfied: " + package + "==" + version
+                 + " in /usr/local/lib/python3.12/dist-packages (" + version + ")")):
+                path = self.root / name
+                path.write_text(value + "\n")
+                r.scan(name, path)
+
+    def test_package_exception_does_not_hide_other_addresses(self):
+        values = [("controller.log", "host 9.10.2.21"), ("pip-freeze.txt", "host==192.0.2.8"),
+            ("controller.log", "Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 "
+             "in /usr/local/lib from 192.0.2.8 (9.10.2.21)"),
+            ("model.json", '{"version":"9.10.2.21"}')]
+        for name, value in values:
+            path = self.root / name
+            path.write_text(value)
+            with self.assertRaises(ValueError):
+                r.scan(name, path)
+
 
 class FrozenBindingTests(unittest.TestCase):
     def test_actual_frozen_sources_offline_without_head(self):

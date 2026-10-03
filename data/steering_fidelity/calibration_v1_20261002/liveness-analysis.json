@@ -1,0 +1,1 @@
+{"activation_scope":"at_least_1_of_20_last_non_special_JSON_request_states","comparisons":[],"eligible_ids":[],"feature_ids":[11104,27322],"positive_probe_counts":{"11104":0,"27322":0},"reason":"neither_predeclared_positive_feature_active_on_JSON_probes","selected_rung":"rho300","status":"not_run"}

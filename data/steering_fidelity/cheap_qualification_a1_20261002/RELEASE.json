@@ -1,0 +1,21 @@
+{
+  "scope": "A1 cheap CUDA qualification, no scientific outcomes",
+  "freeze_commit": "2d9c94f1de59f0f59dd89636c20afece1f6d1daf",
+  "plan_sha256": "6f0a5609caabeae6907513939d0a647fbd2b99dacf9f519aeb434b001e775fb0",
+  "tests_passed": 268,
+  "closed_receipt_sha256": "9f523da0fa01a3ec2f52df04972e884bf235b3922c82b481fe354a970a8b6f06",
+  "closure": {
+    "pod_id": "d5hvhu0jfbaw47",
+    "get_status": 404,
+    "compute_upper_bound_usd": "0.03324273936666666666666666667",
+    "utc": "2026-10-03T04:06:44.346118+00:00"
+  },
+  "artifacts": {
+    "controller-exit.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01",
+    "tests.xml": "da6ec184eb3403b01a1ec0c115394f860b44a999908cfa353924887aaca9febd",
+    "controller-stopped.json": "07f84c533be2053fefecd340aee24e37a517a875843c757d874c447aa8709728",
+    "pip-freeze.txt": "3753e3476408feb6ac495897a6526129df970c2a2563cb157cfc29160f2592c6",
+    "DONE-all.json": "bdeee41e2794d5b76d98eb2d093d7ae6e4e87dd5f0ea2b696c6405496b077a8f",
+    "controller.log": "d6ee9a5ee58428350be4780042205e4b01f22bb745e6339cf6e3a1b315031bd2"
+  }
+}

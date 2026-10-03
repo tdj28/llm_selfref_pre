@@ -17,18 +17,24 @@ The project does not try to prove that language models are or are not conscious.
   at runtime `2d9c94f`; all 15 exact-commit hosted checks passed.
 - [x] Preserve the first incomplete cheap CUDA attempt and verified deletion;
   startup exhausted its effective work window, costing at most $0.062979.
-- [ ] Verify the narrow A1 cheap-window amendment and complete all frozen CUDA
+- [x] Verify the narrow A1 cheap-window amendment and complete all frozen CUDA
   tests before a B200 rental. No scientific setting or spending cap changes.
-- [ ] Run the $25 calibration with initial-row and measured-throughput audits:
+- [x] Run the $25 calibration with initial-row and measured-throughput audits:
   9,300 forced-choice forwards, eight fixed control panels, five dose rungs
   including a nonselectable damage probe, and bounded JSON liveness.
-- [ ] Retrieve and verify the complete raw release, terminate owned compute,
+- [x] Retrieve and verify the complete raw release, terminate owned compute,
   and report competence, delivered precision, pressure headroom and every
   failure separately. No report labels enter dose selection.
+  Completed: 9,300 forwards, zero unresolved receipts, three figure pairs;
+  all owned pods deleted (GET404), all-in bound $9.657774. See
+  `docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md`.
 - [ ] If qualified and affordable within the $170 campaign ceiling, bind the
   locked held-out structure to the derived dose/panels and validated scoring
   instruments. Execute accuracy-by-user-stance, visible-context fidelity and
   same-interval opposing-claims branches; preserve all outcomes and missingness.
+  **Not launched:** C selected 0.30R but both pressure levels failed; JSON
+  positive-control eligibility also failed. No E-only fallback. Any new
+  instrument requires a separate fresh-data design, not a waived C gate.
 - [ ] Integrate the resulting evidence and limitations into canonical `paper/`
   without overwriting the owner's ongoing editorial changes.
 

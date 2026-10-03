@@ -1,5 +1,17 @@
 # Data Artifacts
 
+`data/steering_fidelity/calibration_v1_20261002/` contains the complete
+9,300-forward native-BF16 calibration, 18,600-event receipt chain, 20 JSON
+activation probes with dispatch records, environment, frozen analyses,
+snapshot reconciliation and verified owned-pod closure. Numerical delivery
+and competence select 0.30R; neither user-pressure level qualifies both truth
+strata. JSON behavioral liveness was not run because both candidate features
+were inactive on the probes. No held-out mechanism or experience outcomes.
+The sibling `calibration_report_20261002/` has three PNG/PDF figure pairs;
+`cheap_qualification_a1_20261002/` preserves the successful 268-test GPU check,
+separate from the original `cheap_startup_failure_20261002/`. Full scope and
+reproduction: `docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md`.
+
 `data/instruction_state_qualification/crossed_v1_20261001/` is the completed
 12-block crossed Llama qualification: 24 source continuations, 48 final
 answers, 192 target judge calls, 24 synthetic fixture calls, successful cheap

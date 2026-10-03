@@ -1,0 +1,14 @@
+{
+  "scope": "post-hoc descriptive figures from complete frozen calibration",
+  "files": [
+    {"path": "README.md", "bytes": 1291, "sha256": "beccb43b54f7471f81694149da873b322f1678a925a52abc14fa5c0d42968552"},
+    {"path": "competence.pdf", "bytes": 24090, "sha256": "d0074b8fbc42f8738fa0a43fc689e594f8916a7828c564fff5ba50795e7fcdf8"},
+    {"path": "competence.png", "bytes": 132354, "sha256": "61810edcb97fbbb1ee250751f87a4b3f8e1b8ec08eb8f0af996669191bcbefd4"},
+    {"path": "precision.pdf", "bytes": 28410, "sha256": "05d27fdc947089d4aa1629fd1221fb09f892c1574e5313a901cf2d565aabd9ef"},
+    {"path": "precision.png", "bytes": 175968, "sha256": "16b2f8bb92ee8f5450a57582c3003710010097c525de7e6040ddc0eba7113eb6"},
+    {"path": "pressure.pdf", "bytes": 19864, "sha256": "e0a64cda3165b64c590fe8807d8cbbfb2e0b0c3ec55e3cba1f59a2c38b8aba76"},
+    {"path": "pressure.png", "bytes": 81573, "sha256": "7d7a29c2da450d6c50d5405cfb0cce695ec25f8c30c96a3fcf74762bd739278b"}
+  ],
+  "renderer_sha256": "1dec0a11bd2fa189a5e14a55dd7f16ae0214e09d1f150802992280ba3838668e",
+  "plan_sha256": "6f0a5609caabeae6907513939d0a647fbd2b99dacf9f519aeb434b001e775fb0"
+}

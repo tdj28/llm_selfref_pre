@@ -40,6 +40,17 @@ ledger/costs, main lifetime and caps stay fixed. Require the separate focused
 amendment CI plus the existing full scientific-runtime CI before rental.
 No third retry, gate waiver, or budget reset is authorized by this adapter.
 
+Phase C completed all 9,300 forwards; final receipt audit passes with no
+unresolved dispatches. 0.30R passed competence/delivery selection, but neither
+pressure level passed both truth strata. JSON IDs 11104/27322 had no activation
+on the 20 eligibility probes, so generative liveness was not run. Do not launch
+Phase T, an E-only fallback, or claim improved honesty from this calibration.
+See `docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md` and its release.
+All owned pods, including main `bwqtt22d3sh5dv`, are terminated (GET404).
+All-in controller bound $9.6577735966 includes both cheap attempts and the $3
+reserve. Preserve A1 startup history, the post-outcome A2 retrieval-only repair,
+and the original failed live-snapshot audits alongside final reconciliation.
+
 ### Bilingual Pilot History
 
 The owner approved the single-Llama bilingual measurement pilot under a new,

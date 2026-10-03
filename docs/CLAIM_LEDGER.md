@@ -231,6 +231,25 @@ Do not write or imply any of the following:
 
 ## Release Gate
 
+### Steering-Fidelity Calibration (2026-10-02)
+
+Evidence: `data/steering_fidelity/calibration_v1_20261002/`; reconstruction:
+`scripts/report_steering_fidelity_calibration.py`; interpretation:
+`docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md`.
+
+Permitted: the fixed native-BF16 calibration selected a competence-preserving
+0.30R additive dose across the target and eight matched panels. Both pressure
+wordings failed the prespecified truth-stratified headroom gate. All 9,300
+forwards were retrieved; the held-out study was not launched. The two JSON
+positive-control features were inactive on 20 probes, so their generative
+liveness effect was not measured.
+
+Not permitted: semantic deception suppression, improved honesty, experience
+modulation, acquiescence, a measured zero JSON effect, or an overall qualified
+mechanistic assay. Calibration accuracy changes are not held-out findings.
+
+### Submission Checks
+
 Before tagging or submission:
 
 1. Recompute every tracked manifest after final derived files are written.

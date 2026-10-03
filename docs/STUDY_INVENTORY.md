@@ -1,5 +1,17 @@
 # Later-Study Inventory
 
+## Added 2026-10-02
+
+The [steering-fidelity calibration](STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md)
+is complete: 9,300 known-answer forwards, released raw data, three figure
+pairs and all owned pods terminated. A common numerical dose of 0.30R
+qualified, but the truth-stratified user-pressure gate failed and the JSON
+positive-control features were inactive on their probes. The held-out
+fidelity/opposing-claims experiment was not run. This addition does not change
+the dated inventory below or make a new experience-report mechanism claim.
+
+## Original 2026-09-29 Inventory
+
 Engineering inventory checked against the public tree at `39c21e0` on
 2026-09-29. This is an index, not a new analysis, independent scientific
 review, or execution authorization. The six namespaces below are separate
