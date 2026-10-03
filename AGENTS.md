@@ -9,6 +9,28 @@ steering and internal readouts. None alone settles whether LLMs are conscious.
 
 ## Active Bilingual Pilot (2026-10-01)
 
+### New Steering-Fidelity Authorization (2026-10-02)
+
+The owner authorized the corrected Claude mechanism-discrimination proposal.
+`docs/STEERING_FIDELITY_PROTOCOL_20261002.md` and
+`experiments/steering_fidelity/` govern the new campaign, separate from the
+completed bilingual pilot below. Phase C is calibration only: 9,300 known-answer
+forwards, eight prospectively selected disjoint control panels, a fixed dose
+ladder, at most 80 JSON-liveness generations, no experience outcomes or external
+judging. Operating caps are $25 for C and $170 for the new campaign; no silent
+borrowing from other authorizations. Public source freeze, exact-commit CI,
+cheap CUDA, first-five data audit and 200-forward throughput gate precede bulk.
+Only newly owned pods; retrieve/hash-check then terminate, not merely stop.
+Dose selection uses competence and delivered precision, never report labels.
+Own-output fidelity, early report pilot C1, free-text T1 and unpinned TruthfulQA
+are deferred. The Phase T structure is locked but its execution plan must bind
+derived dose/panels, instrument fixtures and measured cost before outcomes.
+No favorable-effect prerequisite or replacement layer/model/feature search.
+Read ignored `checkpoint.md` for actual execution status. Implementation and
+passing code tests do not establish a scientific gate or a mechanism.
+
+### Bilingual Pilot History
+
 The owner approved the single-Llama bilingual measurement pilot under a new,
 separate $200 ceiling. Follow `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`
 and `experiments/bilingual_llama_pilot/`. Its prospective inventory is 20

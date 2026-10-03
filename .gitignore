@@ -44,6 +44,14 @@ venv.bak/
 
 # Project specific
 data/*
+!data/steering_fidelity/
+data/steering_fidelity/*
+!data/steering_fidelity/preflight_20261002/
+data/steering_fidelity/preflight_20261002/*
+!data/steering_fidelity/preflight_20261002/rounding.json
+!data/steering_fidelity/calibration_plan_20261002/
+data/steering_fidelity/calibration_plan_20261002/*
+!data/steering_fidelity/calibration_plan_20261002/PLAN.json
 !data/instruction_state_qualification/
 data/instruction_state_qualification/*
 !data/instruction_state_qualification/plan_20261001/

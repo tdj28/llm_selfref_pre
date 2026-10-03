@@ -7,6 +7,27 @@ The project does not try to prove that language models are or are not conscious.
 
 ## Remaining Work, In Order
 
+### Steering-Fidelity Discriminator (2026-10-02)
+
+- [x] Obtain execution approval, reconcile the private design feedback, and
+  fix the calibration/test boundary, spending cap and opposing-claims analysis.
+- [x] Check BF16 rounding on saved states without paid inference. Synthetic
+  directions establish only numerical feasibility, not actual SAE delivery.
+- [ ] Finish tests and publicly freeze the source-bound Phase C plan before
+  new outcomes; run exact-commit CI and cheap CUDA qualification.
+- [ ] Run the $25 calibration with initial-row and measured-throughput audits:
+  9,300 forced-choice forwards, eight fixed control panels, five dose rungs
+  including a nonselectable damage probe, and bounded JSON liveness.
+- [ ] Retrieve and verify the complete raw release, terminate owned compute,
+  and report competence, delivered precision, pressure headroom and every
+  failure separately. No report labels enter dose selection.
+- [ ] If qualified and affordable within the $170 campaign ceiling, bind the
+  locked held-out structure to the derived dose/panels and validated scoring
+  instruments. Execute accuracy-by-user-stance, visible-context fidelity and
+  same-interval opposing-claims branches; preserve all outcomes and missingness.
+- [ ] Integrate the resulting evidence and limitations into canonical `paper/`
+  without overwriting the owner's ongoing editorial changes.
+
 ### Bilingual Measurement Pilot (2026-10-01)
 
 - [x] Obtain separate approval for the narrowed single-Llama pilot, capped at
