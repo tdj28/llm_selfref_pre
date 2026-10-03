@@ -1,0 +1,1005 @@
+Cloning into '/workspace/sae-assay/repo'...
+From https://github.com/tdj28/llm_selfref_pre
+ * branch            05efbfda1bb56b5a4c5b4193ffb551ba24cc060e -> FETCH_HEAD
+HEAD is now at 05efbfd Amend operator-matching freeze (r2, pre-outcome): sparse checkout, longer startup timers, carry first attempt cost
+Collecting transformers==4.47.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading transformers-4.47.1-py3-none-any.whl.metadata (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.1/44.1 kB 1.7 MB/s eta 0:00:00
+Collecting accelerate==1.2.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3))
+  Downloading accelerate-1.2.1-py3-none-any.whl.metadata (19 kB)
+Collecting bitsandbytes==0.50.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 4))
+  Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+Collecting safetensors==0.8.0 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 5))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting huggingface-hub==0.36.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting tokenizers==0.21.4 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 7))
+  Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting numpy==2.2.6 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 8))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 7.9 MB/s eta 0:00:00
+Collecting scipy==1.15.3 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 9))
+  Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 12.2 MB/s eta 0:00:00
+Collecting python-dotenv==1.1.1 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 10))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting pytest==8.4.2 (from -r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+Collecting matplotlib==3.10.8 (from -r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (52 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.8/52.8 kB 12.0 MB/s eta 0:00:00
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.20.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 11.7 MB/s eta 0:00:00
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.32.5)
+Collecting tqdm>=4.27 (from transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 19.6 MB/s eta 0:00:00
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (7.1.0)
+Requirement already satisfied: torch>=1.10.0 in /usr/local/lib/python3.12/dist-packages (from accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.8.0+cu128)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6)) (2024.6.1)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub==0.36.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 6)) (4.15.0)
+Collecting iniconfig>=1 (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.12/dist-packages (from pytest==8.4.2->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 11)) (2.19.2)
+Collecting contourpy>=1.0.1 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading fonttools-4.66.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (130 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.1/130.1 kB 5.9 MB/s eta 0:00:00
+Collecting kiwisolver>=1.3.1 (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3))
+  Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (11.0.0)
+Requirement already satisfied: pyparsing>=3 in /usr/lib/python3/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (3.1.1)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /usr/lib/python3/dist-packages (from python-dateutil>=2.7->matplotlib==3.10.8->-r experiments/operator_matching/requirements-gpu.txt (line 3)) (1.16.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (80.9.0)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.3)
+Requirement already satisfied: networkx in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.1.6)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (2.27.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.13.1.3)
+Requirement already satisfied: triton==3.4.0 in /usr/local/lib/python3.12/dist-packages (from torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.4.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.4.3)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->transformers==4.47.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 2)) (2025.10.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy>=1.13.3->torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2->torch>=1.10.0->accelerate==1.2.1->-r experiments/operator_matching/../sae_assay_diagnostic/requirements-gpu.txt (line 3)) (3.0.3)
+Downloading transformers-4.47.1-py3-none-any.whl (10.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 91.9 MB/s eta 0:00:00
+Downloading accelerate-1.2.1-py3-none-any.whl (336 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 336.4/336.4 kB 187.1 MB/s eta 0:00:00
+Downloading bitsandbytes-0.50.2-py3-none-manylinux_2_24_x86_64.whl (43.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.1/43.1 MB 156.4 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 228.5 MB/s eta 0:00:00
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 297.9 MB/s eta 0:00:00
+Downloading tokenizers-0.21.4-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 234.9 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 165.3 MB/s eta 0:00:00
+Downloading scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 184.9 MB/s eta 0:00:00
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.8/365.8 kB 218.2 MB/s eta 0:00:00
+Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 526.6 MB/s eta 0:00:00
+Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.2/383.2 kB 163.1 MB/s eta 0:00:00
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.66.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 484.2 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 438.1 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 340.5 MB/s eta 0:00:00
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 320.2 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 72.7 MB/s eta 0:00:00
+Installing collected packages: tqdm, safetensors, regex, python-dotenv, pluggy, numpy, kiwisolver, iniconfig, hf-xet, fonttools, cycler, scipy, pytest, huggingface-hub, contourpy, tokenizers, matplotlib, transformers, bitsandbytes, accelerate
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.1.2
+    Not uninstalling numpy at /usr/local/lib/python3.12/dist-packages, outside environment /workspace/sae-assay/venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed accelerate-1.2.1 bitsandbytes-0.50.2 contourpy-1.4.0 cycler-0.12.1 fonttools-4.66.1 hf-xet-1.6.0 huggingface-hub-0.36.2 iniconfig-2.3.0 kiwisolver-1.5.1 matplotlib-3.10.8 numpy-2.2.6 pluggy-1.6.0 pytest-8.4.2 python-dotenv-1.1.1 regex-2026.9.29 safetensors-0.8.0 scipy-1.15.3 tokenizers-0.21.4 tqdm-4.70.1 transformers-4.47.1
+Fetching 36 files:   0%|          | 0/36 [00:00<?, ?it/s]Fetching 36 files:   6%|▌         | 2/36 [00:20<05:40, 10.00s/it]Fetching 36 files:   8%|▊         | 3/36 [00:56<10:20, 18.79s/it]Fetching 36 files:  11%|█         | 4/36 [00:58<07:50, 14.70s/it]Fetching 36 files:  14%|█▍        | 5/36 [00:59<06:07, 11.87s/it]Fetching 36 files:  17%|█▋        | 6/36 [00:59<04:59,  9.97s/it]Fetching 36 files:  19%|█▉        | 7/36 [01:07<04:38,  9.59s/it]Fetching 36 files:  22%|██▏       | 8/36 [01:09<04:01,  8.63s/it]Fetching 36 files:  25%|██▌       | 9/36 [01:09<03:28,  7.72s/it]Fetching 36 files:  28%|██▊       | 10/36 [01:10<03:04,  7.09s/it]Fetching 36 files:  31%|███       | 11/36 [02:40<06:04, 14.60s/it]Fetching 36 files:  33%|███▎      | 12/36 [04:11<08:22, 20.93s/it]Fetching 36 files:  36%|███▌      | 13/36 [04:12<07:26, 19.40s/it]Fetching 36 files:  39%|███▉      | 14/36 [04:17<06:44, 18.39s/it]Fetching 36 files:  42%|████▏     | 15/36 [04:19<06:03, 17.31s/it]Fetching 36 files:  44%|████▍     | 16/36 [04:21<05:27, 16.36s/it]Fetching 36 files:  47%|████▋     | 17/36 [04:26<04:58, 15.69s/it]Fetching 36 files:  50%|█████     | 18/36 [04:29<04:29, 14.95s/it]Fetching 36 files:  53%|█████▎    | 19/36 [04:50<04:19, 15.29s/it]Fetching 36 files:  56%|█████▌    | 20/36 [05:09<04:07, 15.46s/it]Fetching 36 files:  58%|█████▊    | 21/36 [05:10<03:41, 14.80s/it]Fetching 36 files:  61%|██████    | 22/36 [05:13<03:19, 14.24s/it]Fetching 36 files:  64%|██████▍   | 23/36 [05:16<02:58, 13.75s/it]Fetching 36 files:  67%|██████▋   | 24/36 [05:19<02:39, 13.30s/it]Fetching 36 files:  69%|██████▉   | 25/36 [05:25<02:23, 13.02s/it]Fetching 36 files:  72%|███████▏  | 26/36 [05:25<02:05, 12.53s/it]Fetching 36 files:  75%|███████▌  | 27/36 [05:25<01:48, 12.07s/it]Fetching 36 files:  78%|███████▊  | 28/36 [05:26<01:33, 11.67s/it]Fetching 36 files:  81%|████████  | 29/36 [05:26<01:18, 11.27s/it]Fetching 36 files:  83%|████████▎ | 30/36 [05:36<01:07, 11.22s/it]Fetching 36 files:  86%|████████▌ | 31/36 [05:44<00:55, 11.12s/it]Fetching 36 files:  89%|████████▉ | 32/36 [05:52<00:44, 11.00s/it]Fetching 36 files:  92%|█████████▏| 33/36 [05:52<00:32, 10.69s/it]Fetching 36 files:  94%|█████████▍| 34/36 [05:53<00:20, 10.39s/it]Fetching 36 files:  97%|█████████▋| 35/36 [05:54<00:10, 10.14s/it]Fetching 36 files: 100%|██████████| 36/36 [06:46<00:00, 11.30s/it]Fetching 36 files: 100%|██████████| 36/36 [06:46<00:00, 11.30s/it]
+Loading checkpoint shards:   0%|          | 0/30 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/30 [00:00<00:20,  1.43it/s]Loading checkpoint shards:   7%|▋         | 2/30 [00:01<00:19,  1.42it/s]Loading checkpoint shards:  10%|█         | 3/30 [00:02<00:20,  1.35it/s]Loading checkpoint shards:  13%|█▎        | 4/30 [00:02<00:19,  1.35it/s]Loading checkpoint shards:  17%|█▋        | 5/30 [00:03<00:18,  1.37it/s]Loading checkpoint shards:  20%|██        | 6/30 [00:04<00:16,  1.44it/s]Loading checkpoint shards:  23%|██▎       | 7/30 [00:04<00:15,  1.47it/s]Loading checkpoint shards:  27%|██▋       | 8/30 [00:05<00:15,  1.44it/s]Loading checkpoint shards:  30%|███       | 9/30 [00:06<00:14,  1.47it/s]Loading checkpoint shards:  33%|███▎      | 10/30 [00:06<00:13,  1.50it/s]Loading checkpoint shards:  37%|███▋      | 11/30 [00:07<00:12,  1.53it/s]Loading checkpoint shards:  40%|████      | 12/30 [00:08<00:11,  1.55it/s]Loading checkpoint shards:  43%|████▎     | 13/30 [00:08<00:10,  1.58it/s]Loading checkpoint shards:  47%|████▋     | 14/30 [00:09<00:10,  1.57it/s]Loading checkpoint shards:  50%|█████     | 15/30 [00:09<00:09,  1.63it/s]Loading checkpoint shards:  53%|█████▎    | 16/30 [00:10<00:08,  1.62it/s]Loading checkpoint shards:  57%|█████▋    | 17/30 [00:11<00:07,  1.65it/s]Loading checkpoint shards:  60%|██████    | 18/30 [00:11<00:07,  1.70it/s]Loading checkpoint shards:  63%|██████▎   | 19/30 [00:12<00:06,  1.72it/s]Loading checkpoint shards:  67%|██████▋   | 20/30 [00:12<00:05,  1.73it/s]Loading checkpoint shards:  70%|███████   | 21/30 [00:13<00:05,  1.67it/s]Loading checkpoint shards:  73%|███████▎  | 22/30 [00:14<00:04,  1.75it/s]Loading checkpoint shards:  77%|███████▋  | 23/30 [00:14<00:04,  1.73it/s]Loading checkpoint shards:  80%|████████  | 24/30 [00:15<00:03,  1.75it/s]Loading checkpoint shards:  83%|████████▎ | 25/30 [00:15<00:02,  1.69it/s]Loading checkpoint shards:  87%|████████▋ | 26/30 [00:16<00:02,  1.68it/s]Loading checkpoint shards:  90%|█████████ | 27/30 [00:17<00:01,  1.69it/s]Loading checkpoint shards:  93%|█████████▎| 28/30 [00:17<00:01,  1.68it/s]Loading checkpoint shards:  97%|█████████▋| 29/30 [00:18<00:00,  1.67it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:18<00:00,  1.96it/s]Loading checkpoint shards: 100%|██████████| 30/30 [00:18<00:00,  1.62it/s]
+We detected that you are passing `past_key_values` as a tuple of tuples. This is deprecated and will be removed in v4.47. Please convert your cache or use an appropriate `Cache` class (https://huggingface.co/docs/transformers/kv_cache#legacy-cache-format)
+{"completed":"qualification-live","rows":1}
+{"completed":"grid-second_turn_all|recon_add|10-58667-+1-none-1.0-27100101","rows":2}
+{"completed":"grid-assistant|recon_add|10-58667--1-none-1.0-27100101","rows":3}
+{"completed":"grid-all|recon_add|30-58667--1-none-1.0-27100101","rows":4}
+{"completed":"grid-all|recon_add|1-23893-+1-none-1.0-27100101","rows":5}
+{"completed":"grid-generated|recon_add|30-58667--1-none-1.0-27100101","rows":6}
+{"completed":"grid-generated|add|10-58667-+1-none-1.0-27100101","rows":7}
+{"completed":"grid-all|add|3-23893-+1-none-1.0-27100101","rows":8}
+{"completed":"grid-assistant|recon_add|3-23893-+1-none-1.0-27100101","rows":9}
+{"completed":"grid-generated|add|30-58667--1-none-1.0-27100101","rows":10}
+{"completed":"grid-assistant|recon_add|1-23893--1-none-1.0-27100101","rows":11}
+{"completed":"grid-assistant|add|3-23893--1-none-1.0-27100101","rows":12}
+{"completed":"grid-second_turn_all|recon_add|3-58667--1-none-1.0-27100101","rows":13}
+{"completed":"grid-generated|recon_add|10-23893-+1-none-1.0-27100101","rows":14}
+{"completed":"grid-second_turn_all|add|3-23893-+1-none-1.0-27100101","rows":15}
+{"completed":"grid-assistant|recon_add|3-58667--1-none-1.0-27100101","rows":16}
+{"completed":"grid-second_turn_all|recon_add|1-58667--1-none-1.0-27100101","rows":17}
+{"completed":"grid-second_turn_all|recon_add|30-58667--1-none-1.0-27100101","rows":18}
+{"completed":"grid-all|recon_add|1-58667-+1-none-1.0-27100101","rows":19}
+{"completed":"grid-all|recon_add|1-23893--1-none-1.0-27100101","rows":20}
+{"completed":"grid-generated|add|30-58667-+1-none-1.0-27100101","rows":21}
+{"completed":"grid-all|add|1-23893--1-none-1.0-27100101","rows":22}
+{"completed":"grid-generated|add|1-23893--1-none-1.0-27100101","rows":23}
+{"completed":"grid-generated|add|10-23893-+1-none-1.0-27100101","rows":24}
+{"completed":"grid-all|recon_add|3-58667--1-none-1.0-27100101","rows":25}
+{"completed":"grid-second_turn_all|recon_add|10-23893--1-none-1.0-27100101","rows":26}
+{"completed":"grid-all|recon_add|3-23893--1-none-1.0-27100101","rows":27}
+{"completed":"grid-all|recon_add|10-23893-+1-none-1.0-27100101","rows":28}
+{"completed":"grid-assistant|add|1-58667--1-none-1.0-27100101","rows":29}
+{"completed":"grid-assistant|add|10-58667--1-none-1.0-27100101","rows":30}
+{"completed":"grid-all|recon_add|3-23893-+1-none-1.0-27100101","rows":31}
+{"completed":"grid-second_turn_all|add|30-58667--1-none-1.0-27100101","rows":32}
+{"completed":"grid-generated|recon_add|1-58667-+1-none-1.0-27100101","rows":33}
+{"completed":"grid-second_turn_all|recon_add|1-23893-+1-none-1.0-27100101","rows":34}
+{"completed":"grid-assistant|recon_add|10-23893--1-none-1.0-27100101","rows":35}
+{"completed":"grid-second_turn_all|add|1-58667-+1-none-1.0-27100101","rows":36}
+{"completed":"grid-assistant|add|10-23893--1-none-1.0-27100101","rows":37}
+{"completed":"grid-all|add|10-58667--1-none-1.0-27100101","rows":38}
+{"completed":"grid-generated|add|1-23893-+1-none-1.0-27100101","rows":39}
+{"completed":"grid-all|recon_add|30-23893-+1-none-1.0-27100101","rows":40}
+{"completed":"grid-generated|recon_add|10-58667--1-none-1.0-27100101","rows":41}
+{"completed":"grid-generated|add|10-23893--1-none-1.0-27100101","rows":42}
+{"completed":"grid-assistant|recon_add|30-23893-+1-none-1.0-27100101","rows":43}
+{"completed":"grid-all|recon_add|10-58667--1-none-1.0-27100101","rows":44}
+{"completed":"grid-second_turn_all|recon_add|10-23893-+1-none-1.0-27100101","rows":45}
+{"completed":"grid-generated|add|1-58667-+1-none-1.0-27100101","rows":46}
+{"completed":"grid-second_turn_all|add|10-58667--1-none-1.0-27100101","rows":47}
+{"completed":"grid-second_turn_all|add|3-58667-+1-none-1.0-27100101","rows":48}
+{"completed":"grid-assistant|recon_add|3-58667-+1-none-1.0-27100101","rows":49}
+{"completed":"grid-all|add|1-58667--1-none-1.0-27100101","rows":50}
+{"completed":"grid-all|add|3-58667--1-none-1.0-27100101","rows":51}
+{"completed":"grid-assistant|recon_add|30-23893--1-none-1.0-27100101","rows":52}
+{"completed":"grid-generated|add|3-58667-+1-none-1.0-27100101","rows":53}
+{"completed":"grid-second_turn_all|add|30-23893--1-none-1.0-27100101","rows":54}
+{"completed":"grid-generated|recon_add|30-23893-+1-none-1.0-27100101","rows":55}
+{"completed":"grid-all|add|3-23893--1-none-1.0-27100101","rows":56}
+{"completed":"grid-generated|recon_add|3-23893-+1-none-1.0-27100101","rows":57}
+{"completed":"grid-assistant|add|1-23893-+1-none-1.0-27100101","rows":58}
+{"completed":"grid-all|recon_add|10-58667-+1-none-1.0-27100101","rows":59}
+{"completed":"grid-second_turn_all|add|1-58667--1-none-1.0-27100101","rows":60}
+{"completed":"grid-assistant|add|30-58667--1-none-1.0-27100101","rows":61}
+{"completed":"grid-assistant|add|30-23893--1-none-1.0-27100101","rows":62}
+{"completed":"grid-generated|recon_add|30-58667-+1-none-1.0-27100101","rows":63}
+{"completed":"grid-assistant|add|3-23893-+1-none-1.0-27100101","rows":64}
+{"completed":"grid-generated|recon_add|1-58667--1-none-1.0-27100101","rows":65}
+{"completed":"grid-assistant|recon_add|1-58667-+1-none-1.0-27100101","rows":66}
+{"completed":"grid-generated|add|1-58667--1-none-1.0-27100101","rows":67}
+{"completed":"grid-second_turn_all|add|1-23893--1-none-1.0-27100101","rows":68}
+{"completed":"grid-assistant|recon_add|1-23893-+1-none-1.0-27100101","rows":69}
+{"completed":"grid-generated|add|10-58667--1-none-1.0-27100101","rows":70}
+{"completed":"grid-generated|add|30-23893--1-none-1.0-27100101","rows":71}
+{"completed":"grid-second_turn_all|recon_add|3-23893--1-none-1.0-27100101","rows":72}
+{"completed":"grid-assistant|add|1-23893--1-none-1.0-27100101","rows":73}
+{"completed":"grid-assistant|add|1-58667-+1-none-1.0-27100101","rows":74}
+{"completed":"grid-all|add|30-58667-+1-none-1.0-27100101","rows":75}
+{"completed":"grid-second_turn_all|recon_add|1-23893--1-none-1.0-27100101","rows":76}
+{"completed":"grid-all|add|30-58667--1-none-1.0-27100101","rows":77}
+{"completed":"grid-second_turn_all|recon_add|10-58667--1-none-1.0-27100101","rows":78}
+{"completed":"grid-second_turn_all|add|10-23893-+1-none-1.0-27100101","rows":79}
+{"completed":"grid-second_turn_all|recon_add|1-58667-+1-none-1.0-27100101","rows":80}
+{"completed":"grid-generated|recon_add|10-23893--1-none-1.0-27100101","rows":81}
+{"completed":"grid-all|recon_add|30-58667-+1-none-1.0-27100101","rows":82}
+{"completed":"grid-all|recon_add|10-23893--1-none-1.0-27100101","rows":83}
+{"completed":"grid-all|add|10-23893--1-none-1.0-27100101","rows":84}
+{"completed":"grid-generated|add|3-23893-+1-none-1.0-27100101","rows":85}
+{"completed":"grid-assistant|recon_add|10-58667-+1-none-1.0-27100101","rows":86}
+{"completed":"grid-second_turn_all|add|10-23893--1-none-1.0-27100101","rows":87}
+{"completed":"grid-all|recon_add|30-23893--1-none-1.0-27100101","rows":88}
+{"completed":"grid-second_turn_all|recon_add|3-23893-+1-none-1.0-27100101","rows":89}
+{"completed":"grid-second_turn_all|add|3-23893--1-none-1.0-27100101","rows":90}
+{"completed":"grid-generated|add|30-23893-+1-none-1.0-27100101","rows":91}
+{"completed":"grid-assistant|recon_add|1-58667--1-none-1.0-27100101","rows":92}
+{"completed":"grid-generated|recon_add|3-58667--1-none-1.0-27100101","rows":93}
+{"completed":"grid-all|add|1-23893-+1-none-1.0-27100101","rows":94}
+{"completed":"grid-generated|recon_add|30-23893--1-none-1.0-27100101","rows":95}
+{"completed":"grid-assistant|recon_add|30-58667--1-none-1.0-27100101","rows":96}
+{"completed":"grid-assistant|add|30-23893-+1-none-1.0-27100101","rows":97}
+{"completed":"grid-all|recon_add|1-58667--1-none-1.0-27100101","rows":98}
+{"completed":"grid-generated|recon_add|1-23893--1-none-1.0-27100101","rows":99}
+{"completed":"grid-second_turn_all|add|1-23893-+1-none-1.0-27100101","rows":100}
+{"completed":"grid-generated|recon_add|1-23893-+1-none-1.0-27100101","rows":101}
+{"completed":"grid-assistant|add|3-58667--1-none-1.0-27100101","rows":102}
+{"completed":"grid-all|add|30-23893-+1-none-1.0-27100101","rows":103}
+{"completed":"grid-assistant|add|10-23893-+1-none-1.0-27100101","rows":104}
+{"completed":"grid-second_turn_all|recon_add|30-23893-+1-none-1.0-27100101","rows":105}
+{"completed":"grid-second_turn_all|recon_add|30-58667-+1-none-1.0-27100101","rows":106}
+{"completed":"grid-generated|add|3-23893--1-none-1.0-27100101","rows":107}
+{"completed":"grid-second_turn_all|add|30-58667-+1-none-1.0-27100101","rows":108}
+{"completed":"grid-assistant|add|3-58667-+1-none-1.0-27100101","rows":109}
+{"completed":"grid-assistant|recon_add|30-58667-+1-none-1.0-27100101","rows":110}
+{"completed":"grid-second_turn_all|recon_add|3-58667-+1-none-1.0-27100101","rows":111}
+{"completed":"grid-all|add|3-58667-+1-none-1.0-27100101","rows":112}
+{"completed":"grid-second_turn_all|add|10-58667-+1-none-1.0-27100101","rows":113}
+{"completed":"grid-second_turn_all|add|3-58667--1-none-1.0-27100101","rows":114}
+{"completed":"grid-second_turn_all|recon_add|30-23893--1-none-1.0-27100101","rows":115}
+{"completed":"grid-second_turn_all|add|30-23893-+1-none-1.0-27100101","rows":116}
+{"completed":"grid-generated|recon_add|3-23893--1-none-1.0-27100101","rows":117}
+{"completed":"grid-assistant|add|10-58667-+1-none-1.0-27100101","rows":118}
+{"completed":"grid-assistant|add|30-58667-+1-none-1.0-27100101","rows":119}
+{"completed":"grid-all|recon_add|3-58667-+1-none-1.0-27100101","rows":120}
+{"completed":"grid-assistant|recon_add|10-23893-+1-none-1.0-27100101","rows":121}
+{"completed":"grid-generated|recon_add|10-58667-+1-none-1.0-27100101","rows":122}
+{"completed":"grid-all|add|10-58667-+1-none-1.0-27100101","rows":123}
+{"completed":"grid-all|add|30-23893--1-none-1.0-27100101","rows":124}
+{"completed":"grid-all|add|10-23893-+1-none-1.0-27100101","rows":125}
+{"completed":"grid-assistant|recon_add|3-23893--1-none-1.0-27100101","rows":126}
+{"completed":"grid-all|add|1-58667-+1-none-1.0-27100101","rows":127}
+{"completed":"grid-generated|add|3-58667--1-none-1.0-27100101","rows":128}
+{"completed":"grid-generated|recon_add|3-58667-+1-none-1.0-27100101","rows":129}
+{"completed":"grid-assistant|recon_add|30-23893--1-none-1.0-27101114","rows":130}
+{"completed":"grid-generated|add|1-23893--1-none-1.0-27101114","rows":131}
+{"completed":"grid-assistant|add|30-23893-+1-none-1.0-27101114","rows":132}
+{"completed":"grid-assistant|add|10-23893--1-none-1.0-27101114","rows":133}
+{"completed":"grid-second_turn_all|recon_add|10-58667-+1-none-1.0-27101114","rows":134}
+{"completed":"grid-second_turn_all|add|30-23893--1-none-1.0-27101114","rows":135}
+{"completed":"grid-all|add|1-23893-+1-none-1.0-27101114","rows":136}
+{"completed":"grid-all|recon_add|10-58667--1-none-1.0-27101114","rows":137}
+{"completed":"grid-assistant|recon_add|3-58667--1-none-1.0-27101114","rows":138}
+{"completed":"grid-assistant|add|30-23893--1-none-1.0-27101114","rows":139}
+{"completed":"grid-all|recon_add|10-23893--1-none-1.0-27101114","rows":140}
+{"completed":"grid-all|recon_add|30-23893-+1-none-1.0-27101114","rows":141}
+{"completed":"grid-generated|recon_add|3-23893-+1-none-1.0-27101114","rows":142}
+{"completed":"grid-all|recon_add|10-23893-+1-none-1.0-27101114","rows":143}
+{"completed":"grid-second_turn_all|recon_add|30-58667--1-none-1.0-27101114","rows":144}
+{"completed":"grid-second_turn_all|recon_add|1-23893--1-none-1.0-27101114","rows":145}
+{"completed":"grid-assistant|recon_add|10-58667--1-none-1.0-27101114","rows":146}
+{"completed":"grid-second_turn_all|recon_add|3-23893-+1-none-1.0-27101114","rows":147}
+{"completed":"grid-all|add|10-58667--1-none-1.0-27101114","rows":148}
+{"completed":"grid-all|recon_add|3-23893-+1-none-1.0-27101114","rows":149}
+{"completed":"grid-generated|recon_add|1-23893-+1-none-1.0-27101114","rows":150}
+{"completed":"grid-generated|add|3-58667--1-none-1.0-27101114","rows":151}
+{"completed":"grid-second_turn_all|recon_add|1-23893-+1-none-1.0-27101114","rows":152}
+{"completed":"grid-generated|recon_add|30-23893--1-none-1.0-27101114","rows":153}
+{"completed":"grid-assistant|recon_add|3-58667-+1-none-1.0-27101114","rows":154}
+{"completed":"grid-generated|recon_add|3-58667--1-none-1.0-27101114","rows":155}
+{"completed":"grid-second_turn_all|add|3-23893--1-none-1.0-27101114","rows":156}
+{"completed":"grid-all|recon_add|3-58667--1-none-1.0-27101114","rows":157}
+{"completed":"grid-assistant|recon_add|10-58667-+1-none-1.0-27101114","rows":158}
+{"completed":"grid-assistant|recon_add|30-58667--1-none-1.0-27101114","rows":159}
+{"completed":"grid-assistant|recon_add|30-23893-+1-none-1.0-27101114","rows":160}
+{"completed":"grid-second_turn_all|recon_add|30-23893-+1-none-1.0-27101114","rows":161}
+{"completed":"grid-second_turn_all|add|1-23893-+1-none-1.0-27101114","rows":162}
+{"completed":"grid-second_turn_all|add|3-58667--1-none-1.0-27101114","rows":163}
+{"completed":"grid-generated|add|3-23893-+1-none-1.0-27101114","rows":164}
+{"completed":"grid-generated|add|30-23893-+1-none-1.0-27101114","rows":165}
+{"completed":"grid-generated|recon_add|1-58667--1-none-1.0-27101114","rows":166}
+{"completed":"grid-assistant|recon_add|3-23893--1-none-1.0-27101114","rows":167}
+{"completed":"grid-generated|recon_add|30-58667--1-none-1.0-27101114","rows":168}
+{"completed":"grid-all|add|3-23893--1-none-1.0-27101114","rows":169}
+{"completed":"grid-assistant|recon_add|1-23893--1-none-1.0-27101114","rows":170}
+{"completed":"grid-generated|recon_add|3-58667-+1-none-1.0-27101114","rows":171}
+{"completed":"grid-all|add|3-23893-+1-none-1.0-27101114","rows":172}
+{"completed":"grid-all|add|3-58667-+1-none-1.0-27101114","rows":173}
+{"completed":"grid-generated|recon_add|10-58667--1-none-1.0-27101114","rows":174}
+{"completed":"grid-all|recon_add|30-23893--1-none-1.0-27101114","rows":175}
+{"completed":"grid-second_turn_all|add|30-23893-+1-none-1.0-27101114","rows":176}
+{"completed":"grid-second_turn_all|add|10-23893--1-none-1.0-27101114","rows":177}
+{"completed":"grid-generated|add|30-23893--1-none-1.0-27101114","rows":178}
+{"completed":"grid-generated|add|10-58667-+1-none-1.0-27101114","rows":179}
+{"completed":"grid-second_turn_all|add|10-58667--1-none-1.0-27101114","rows":180}
+{"completed":"grid-generated|add|30-58667-+1-none-1.0-27101114","rows":181}
+{"completed":"grid-all|add|3-58667--1-none-1.0-27101114","rows":182}
+{"completed":"grid-second_turn_all|add|1-23893--1-none-1.0-27101114","rows":183}
+{"completed":"grid-generated|recon_add|3-23893--1-none-1.0-27101114","rows":184}
+{"completed":"grid-assistant|add|1-23893-+1-none-1.0-27101114","rows":185}
+{"completed":"grid-assistant|add|10-58667-+1-none-1.0-27101114","rows":186}
+{"completed":"grid-generated|recon_add|1-58667-+1-none-1.0-27101114","rows":187}
+{"completed":"grid-generated|add|1-58667-+1-none-1.0-27101114","rows":188}
+{"completed":"grid-all|add|30-23893--1-none-1.0-27101114","rows":189}
+{"completed":"grid-generated|add|30-58667--1-none-1.0-27101114","rows":190}
+{"completed":"grid-all|add|10-23893--1-none-1.0-27101114","rows":191}
+{"completed":"grid-second_turn_all|add|10-58667-+1-none-1.0-27101114","rows":192}
+{"completed":"grid-second_turn_all|add|3-23893-+1-none-1.0-27101114","rows":193}
+{"completed":"grid-assistant|recon_add|10-23893-+1-none-1.0-27101114","rows":194}
+{"completed":"grid-generated|add|10-23893-+1-none-1.0-27101114","rows":195}
+{"completed":"grid-assistant|add|30-58667--1-none-1.0-27101114","rows":196}
+{"completed":"grid-second_turn_all|recon_add|3-23893--1-none-1.0-27101114","rows":197}
+{"completed":"grid-second_turn_all|recon_add|30-58667-+1-none-1.0-27101114","rows":198}
+{"completed":"grid-second_turn_all|recon_add|1-58667--1-none-1.0-27101114","rows":199}
+{"completed":"grid-second_turn_all|recon_add|1-58667-+1-none-1.0-27101114","rows":200}
+{"completed":"grid-assistant|add|3-58667--1-none-1.0-27101114","rows":201}
+{"completed":"grid-all|add|10-23893-+1-none-1.0-27101114","rows":202}
+{"completed":"grid-generated|recon_add|30-23893-+1-none-1.0-27101114","rows":203}
+{"completed":"grid-assistant|add|1-23893--1-none-1.0-27101114","rows":204}
+{"completed":"grid-generated|recon_add|1-23893--1-none-1.0-27101114","rows":205}
+{"completed":"grid-all|recon_add|30-58667--1-none-1.0-27101114","rows":206}
+{"completed":"grid-all|add|1-58667--1-none-1.0-27101114","rows":207}
+{"completed":"grid-second_turn_all|recon_add|3-58667--1-none-1.0-27101114","rows":208}
+{"completed":"grid-generated|recon_add|10-23893--1-none-1.0-27101114","rows":209}
+{"completed":"grid-generated|add|10-58667--1-none-1.0-27101114","rows":210}
+{"completed":"grid-all|recon_add|1-58667-+1-none-1.0-27101114","rows":211}
+{"completed":"grid-generated|add|3-58667-+1-none-1.0-27101114","rows":212}
+{"completed":"grid-all|recon_add|1-58667--1-none-1.0-27101114","rows":213}
+{"completed":"grid-assistant|add|10-58667--1-none-1.0-27101114","rows":214}
+{"completed":"grid-all|recon_add|3-58667-+1-none-1.0-27101114","rows":215}
+{"completed":"grid-generated|recon_add|10-23893-+1-none-1.0-27101114","rows":216}
+{"completed":"grid-generated|add|1-58667--1-none-1.0-27101114","rows":217}
+{"completed":"grid-assistant|recon_add|3-23893-+1-none-1.0-27101114","rows":218}
+{"completed":"grid-all|recon_add|3-23893--1-none-1.0-27101114","rows":219}
+{"completed":"grid-assistant|add|1-58667-+1-none-1.0-27101114","rows":220}
+{"completed":"grid-assistant|add|3-58667-+1-none-1.0-27101114","rows":221}
+{"completed":"grid-all|add|30-58667--1-none-1.0-27101114","rows":222}
+{"completed":"grid-second_turn_all|recon_add|10-23893--1-none-1.0-27101114","rows":223}
+{"completed":"grid-assistant|add|1-58667--1-none-1.0-27101114","rows":224}
+{"completed":"grid-second_turn_all|recon_add|30-23893--1-none-1.0-27101114","rows":225}
+{"completed":"grid-generated|add|3-23893--1-none-1.0-27101114","rows":226}
+{"completed":"grid-assistant|recon_add|1-23893-+1-none-1.0-27101114","rows":227}
+{"completed":"grid-all|recon_add|10-58667-+1-none-1.0-27101114","rows":228}
+{"completed":"grid-generated|recon_add|30-58667-+1-none-1.0-27101114","rows":229}
+{"completed":"grid-second_turn_all|add|30-58667-+1-none-1.0-27101114","rows":230}
+{"completed":"grid-all|add|1-23893--1-none-1.0-27101114","rows":231}
+{"completed":"grid-assistant|add|30-58667-+1-none-1.0-27101114","rows":232}
+{"completed":"grid-all|add|1-58667-+1-none-1.0-27101114","rows":233}
+{"completed":"grid-second_turn_all|add|1-58667-+1-none-1.0-27101114","rows":234}
+{"completed":"grid-assistant|recon_add|30-58667-+1-none-1.0-27101114","rows":235}
+{"completed":"grid-assistant|add|3-23893-+1-none-1.0-27101114","rows":236}
+{"completed":"grid-generated|add|1-23893-+1-none-1.0-27101114","rows":237}
+{"completed":"grid-second_turn_all|recon_add|10-23893-+1-none-1.0-27101114","rows":238}
+{"completed":"grid-all|add|10-58667-+1-none-1.0-27101114","rows":239}
+{"completed":"grid-all|recon_add|30-58667-+1-none-1.0-27101114","rows":240}
+{"completed":"grid-second_turn_all|add|30-58667--1-none-1.0-27101114","rows":241}
+{"completed":"grid-all|recon_add|1-23893-+1-none-1.0-27101114","rows":242}
+{"completed":"grid-assistant|recon_add|1-58667-+1-none-1.0-27101114","rows":243}
+{"completed":"grid-second_turn_all|add|10-23893-+1-none-1.0-27101114","rows":244}
+{"completed":"grid-second_turn_all|add|1-58667--1-none-1.0-27101114","rows":245}
+{"completed":"grid-assistant|recon_add|1-58667--1-none-1.0-27101114","rows":246}
+{"completed":"grid-all|add|30-23893-+1-none-1.0-27101114","rows":247}
+{"completed":"grid-assistant|recon_add|10-23893--1-none-1.0-27101114","rows":248}
+{"completed":"grid-assistant|add|3-23893--1-none-1.0-27101114","rows":249}
+{"completed":"grid-generated|recon_add|10-58667-+1-none-1.0-27101114","rows":250}
+{"completed":"grid-generated|add|10-23893--1-none-1.0-27101114","rows":251}
+{"completed":"grid-second_turn_all|recon_add|10-58667--1-none-1.0-27101114","rows":252}
+{"completed":"grid-all|recon_add|1-23893--1-none-1.0-27101114","rows":253}
+{"completed":"grid-assistant|add|10-23893-+1-none-1.0-27101114","rows":254}
+{"completed":"grid-all|add|30-58667-+1-none-1.0-27101114","rows":255}
+{"completed":"grid-second_turn_all|add|3-58667-+1-none-1.0-27101114","rows":256}
+{"completed":"grid-second_turn_all|recon_add|3-58667-+1-none-1.0-27101114","rows":257}
+{"completed":"grid-all|add|30-58667--1-none-1.0-27102127","rows":258}
+{"completed":"grid-all|add|1-58667--1-none-1.0-27102127","rows":259}
+{"completed":"grid-all|add|30-58667-+1-none-1.0-27102127","rows":260}
+{"completed":"grid-generated|add|3-58667--1-none-1.0-27102127","rows":261}
+{"completed":"grid-assistant|add|3-23893--1-none-1.0-27102127","rows":262}
+{"completed":"grid-all|recon_add|10-23893--1-none-1.0-27102127","rows":263}
+{"completed":"grid-assistant|add|3-58667-+1-none-1.0-27102127","rows":264}
+{"completed":"grid-second_turn_all|recon_add|3-58667--1-none-1.0-27102127","rows":265}
+{"completed":"grid-all|add|30-23893-+1-none-1.0-27102127","rows":266}
+{"completed":"grid-all|add|3-58667-+1-none-1.0-27102127","rows":267}
+{"completed":"grid-all|recon_add|1-58667--1-none-1.0-27102127","rows":268}
+{"completed":"grid-second_turn_all|recon_add|10-23893-+1-none-1.0-27102127","rows":269}
+{"completed":"grid-generated|recon_add|10-58667-+1-none-1.0-27102127","rows":270}
+{"completed":"grid-generated|add|3-58667-+1-none-1.0-27102127","rows":271}
+{"completed":"grid-assistant|recon_add|3-23893-+1-none-1.0-27102127","rows":272}
+{"completed":"grid-generated|recon_add|3-58667-+1-none-1.0-27102127","rows":273}
+{"completed":"grid-generated|add|30-58667--1-none-1.0-27102127","rows":274}
+{"completed":"grid-all|add|1-23893-+1-none-1.0-27102127","rows":275}
+{"completed":"grid-assistant|recon_add|3-58667-+1-none-1.0-27102127","rows":276}
+{"completed":"grid-second_turn_all|add|1-23893-+1-none-1.0-27102127","rows":277}
+{"completed":"grid-second_turn_all|recon_add|30-23893--1-none-1.0-27102127","rows":278}
+{"completed":"grid-assistant|add|3-23893-+1-none-1.0-27102127","rows":279}
+{"completed":"grid-assistant|recon_add|10-23893-+1-none-1.0-27102127","rows":280}
+{"completed":"grid-second_turn_all|recon_add|3-23893--1-none-1.0-27102127","rows":281}
+{"completed":"grid-assistant|add|30-23893-+1-none-1.0-27102127","rows":282}
+{"completed":"grid-assistant|recon_add|30-23893--1-none-1.0-27102127","rows":283}
+{"completed":"grid-second_turn_all|add|30-23893--1-none-1.0-27102127","rows":284}
+{"completed":"grid-generated|recon_add|10-58667--1-none-1.0-27102127","rows":285}
+{"completed":"grid-assistant|add|1-23893-+1-none-1.0-27102127","rows":286}
+{"completed":"grid-second_turn_all|recon_add|10-23893--1-none-1.0-27102127","rows":287}
+{"completed":"grid-second_turn_all|recon_add|30-23893-+1-none-1.0-27102127","rows":288}
+{"completed":"grid-all|add|1-23893--1-none-1.0-27102127","rows":289}
+{"completed":"grid-assistant|recon_add|10-58667--1-none-1.0-27102127","rows":290}
+{"completed":"grid-generated|recon_add|1-23893--1-none-1.0-27102127","rows":291}
+{"completed":"grid-all|recon_add|1-58667-+1-none-1.0-27102127","rows":292}
+{"completed":"grid-assistant|recon_add|1-23893--1-none-1.0-27102127","rows":293}
+{"completed":"grid-all|recon_add|1-23893--1-none-1.0-27102127","rows":294}
+{"completed":"grid-assistant|recon_add|1-23893-+1-none-1.0-27102127","rows":295}
+{"completed":"grid-assistant|recon_add|3-58667--1-none-1.0-27102127","rows":296}
+{"completed":"grid-generated|recon_add|30-23893-+1-none-1.0-27102127","rows":297}
+{"completed":"grid-second_turn_all|add|3-58667--1-none-1.0-27102127","rows":298}
+{"completed":"grid-all|recon_add|10-23893-+1-none-1.0-27102127","rows":299}
+{"completed":"grid-assistant|add|1-58667-+1-none-1.0-27102127","rows":300}
+{"completed":"grid-all|recon_add|30-58667--1-none-1.0-27102127","rows":301}
+{"completed":"grid-assistant|recon_add|3-23893--1-none-1.0-27102127","rows":302}
+{"completed":"grid-second_turn_all|add|10-58667-+1-none-1.0-27102127","rows":303}
+{"completed":"grid-generated|add|3-23893--1-none-1.0-27102127","rows":304}
+{"completed":"grid-generated|add|30-23893-+1-none-1.0-27102127","rows":305}
+{"completed":"grid-generated|recon_add|30-58667-+1-none-1.0-27102127","rows":306}
+{"completed":"grid-assistant|recon_add|30-58667-+1-none-1.0-27102127","rows":307}
+{"completed":"grid-generated|add|1-23893--1-none-1.0-27102127","rows":308}
+{"completed":"grid-generated|recon_add|30-23893--1-none-1.0-27102127","rows":309}
+{"completed":"grid-assistant|add|30-58667--1-none-1.0-27102127","rows":310}
+{"completed":"grid-second_turn_all|add|10-23893--1-none-1.0-27102127","rows":311}
+{"completed":"grid-assistant|add|10-23893--1-none-1.0-27102127","rows":312}
+{"completed":"grid-assistant|add|1-23893--1-none-1.0-27102127","rows":313}
+{"completed":"grid-all|add|3-23893-+1-none-1.0-27102127","rows":314}
+{"completed":"grid-all|recon_add|30-23893--1-none-1.0-27102127","rows":315}
+{"completed":"grid-second_turn_all|recon_add|1-58667-+1-none-1.0-27102127","rows":316}
+{"completed":"grid-second_turn_all|add|3-58667-+1-none-1.0-27102127","rows":317}
+{"completed":"grid-generated|recon_add|1-58667--1-none-1.0-27102127","rows":318}
+{"completed":"grid-all|add|3-58667--1-none-1.0-27102127","rows":319}
+{"completed":"grid-second_turn_all|add|10-23893-+1-none-1.0-27102127","rows":320}
+{"completed":"grid-second_turn_all|recon_add|10-58667--1-none-1.0-27102127","rows":321}
+{"completed":"grid-second_turn_all|add|1-23893--1-none-1.0-27102127","rows":322}
+{"completed":"grid-generated|add|10-23893--1-none-1.0-27102127","rows":323}
+{"completed":"grid-second_turn_all|add|30-58667-+1-none-1.0-27102127","rows":324}
+{"completed":"grid-generated|add|3-23893-+1-none-1.0-27102127","rows":325}
+{"completed":"grid-second_turn_all|add|3-23893-+1-none-1.0-27102127","rows":326}
+{"completed":"grid-all|recon_add|3-58667-+1-none-1.0-27102127","rows":327}
+{"completed":"grid-assistant|add|30-23893--1-none-1.0-27102127","rows":328}
+{"completed":"grid-generated|add|1-23893-+1-none-1.0-27102127","rows":329}
+{"completed":"grid-second_turn_all|recon_add|10-58667-+1-none-1.0-27102127","rows":330}
+{"completed":"grid-second_turn_all|recon_add|30-58667-+1-none-1.0-27102127","rows":331}
+{"completed":"grid-generated|add|30-58667-+1-none-1.0-27102127","rows":332}
+{"completed":"grid-all|add|3-23893--1-none-1.0-27102127","rows":333}
+{"completed":"grid-all|recon_add|30-23893-+1-none-1.0-27102127","rows":334}
+{"completed":"grid-generated|add|30-23893--1-none-1.0-27102127","rows":335}
+{"completed":"grid-generated|add|1-58667--1-none-1.0-27102127","rows":336}
+{"completed":"grid-assistant|add|1-58667--1-none-1.0-27102127","rows":337}
+{"completed":"grid-assistant|recon_add|10-23893--1-none-1.0-27102127","rows":338}
+{"completed":"grid-generated|recon_add|3-58667--1-none-1.0-27102127","rows":339}
+{"completed":"grid-second_turn_all|recon_add|3-23893-+1-none-1.0-27102127","rows":340}
+{"completed":"grid-generated|add|10-58667-+1-none-1.0-27102127","rows":341}
+{"completed":"grid-second_turn_all|add|1-58667--1-none-1.0-27102127","rows":342}
+{"completed":"grid-all|add|30-23893--1-none-1.0-27102127","rows":343}
+{"completed":"grid-second_turn_all|add|30-23893-+1-none-1.0-27102127","rows":344}
+{"completed":"grid-second_turn_all|recon_add|1-23893-+1-none-1.0-27102127","rows":345}
+{"completed":"grid-all|add|10-58667-+1-none-1.0-27102127","rows":346}
+{"completed":"grid-second_turn_all|recon_add|1-58667--1-none-1.0-27102127","rows":347}
+{"completed":"grid-generated|recon_add|1-23893-+1-none-1.0-27102127","rows":348}
+{"completed":"grid-all|recon_add|3-23893--1-none-1.0-27102127","rows":349}
+{"completed":"grid-generated|add|10-23893-+1-none-1.0-27102127","rows":350}
+{"completed":"grid-all|add|10-58667--1-none-1.0-27102127","rows":351}
+{"completed":"grid-generated|recon_add|30-58667--1-none-1.0-27102127","rows":352}
+{"completed":"grid-second_turn_all|recon_add|30-58667--1-none-1.0-27102127","rows":353}
+{"completed":"grid-assistant|recon_add|10-58667-+1-none-1.0-27102127","rows":354}
+{"completed":"grid-assistant|add|3-58667--1-none-1.0-27102127","rows":355}
+{"completed":"grid-second_turn_all|add|3-23893--1-none-1.0-27102127","rows":356}
+{"completed":"grid-all|recon_add|3-23893-+1-none-1.0-27102127","rows":357}
+{"completed":"grid-all|add|1-58667-+1-none-1.0-27102127","rows":358}
+{"completed":"grid-second_turn_all|add|30-58667--1-none-1.0-27102127","rows":359}
+{"completed":"grid-generated|recon_add|10-23893--1-none-1.0-27102127","rows":360}
+{"completed":"grid-generated|recon_add|10-23893-+1-none-1.0-27102127","rows":361}
+{"completed":"grid-second_turn_all|recon_add|3-58667-+1-none-1.0-27102127","rows":362}
+{"completed":"grid-assistant|recon_add|30-58667--1-none-1.0-27102127","rows":363}
+{"completed":"grid-all|recon_add|3-58667--1-none-1.0-27102127","rows":364}
+{"completed":"grid-all|recon_add|30-58667-+1-none-1.0-27102127","rows":365}
+{"completed":"grid-assistant|add|30-58667-+1-none-1.0-27102127","rows":366}
+{"completed":"grid-all|recon_add|1-23893-+1-none-1.0-27102127","rows":367}
+{"completed":"grid-generated|recon_add|3-23893-+1-none-1.0-27102127","rows":368}
+{"completed":"grid-second_turn_all|add|1-58667-+1-none-1.0-27102127","rows":369}
+{"completed":"grid-second_turn_all|add|10-58667--1-none-1.0-27102127","rows":370}
+{"completed":"grid-assistant|add|10-58667--1-none-1.0-27102127","rows":371}
+{"completed":"grid-assistant|add|10-58667-+1-none-1.0-27102127","rows":372}
+{"completed":"grid-generated|recon_add|1-58667-+1-none-1.0-27102127","rows":373}
+{"completed":"grid-second_turn_all|recon_add|1-23893--1-none-1.0-27102127","rows":374}
+{"completed":"grid-all|add|10-23893--1-none-1.0-27102127","rows":375}
+{"completed":"grid-generated|recon_add|3-23893--1-none-1.0-27102127","rows":376}
+{"completed":"grid-assistant|recon_add|1-58667--1-none-1.0-27102127","rows":377}
+{"completed":"grid-assistant|recon_add|30-23893-+1-none-1.0-27102127","rows":378}
+{"completed":"grid-assistant|add|10-23893-+1-none-1.0-27102127","rows":379}
+{"completed":"grid-all|add|10-23893-+1-none-1.0-27102127","rows":380}
+{"completed":"grid-generated|add|1-58667-+1-none-1.0-27102127","rows":381}
+{"completed":"grid-assistant|recon_add|1-58667-+1-none-1.0-27102127","rows":382}
+{"completed":"grid-all|recon_add|10-58667-+1-none-1.0-27102127","rows":383}
+{"completed":"grid-generated|add|10-58667--1-none-1.0-27102127","rows":384}
+{"completed":"grid-all|recon_add|10-58667--1-none-1.0-27102127","rows":385}
+{"completed":"grid-second_turn_all|recon_add|1-23893--1-none-1.0-27103140","rows":386}
+{"completed":"grid-assistant|recon_add|10-58667-+1-none-1.0-27103140","rows":387}
+{"completed":"grid-assistant|add|1-58667-+1-none-1.0-27103140","rows":388}
+{"completed":"grid-second_turn_all|recon_add|30-23893--1-none-1.0-27103140","rows":389}
+{"completed":"grid-generated|recon_add|30-58667-+1-none-1.0-27103140","rows":390}
+{"completed":"grid-assistant|add|30-58667-+1-none-1.0-27103140","rows":391}
+{"completed":"grid-second_turn_all|recon_add|30-23893-+1-none-1.0-27103140","rows":392}
+{"completed":"grid-second_turn_all|add|30-58667-+1-none-1.0-27103140","rows":393}
+{"completed":"grid-second_turn_all|recon_add|3-58667--1-none-1.0-27103140","rows":394}
+{"completed":"grid-assistant|add|10-58667--1-none-1.0-27103140","rows":395}
+{"completed":"grid-all|recon_add|1-58667--1-none-1.0-27103140","rows":396}
+{"completed":"grid-all|add|1-58667-+1-none-1.0-27103140","rows":397}
+{"completed":"grid-generated|add|10-58667--1-none-1.0-27103140","rows":398}
+{"completed":"grid-generated|add|10-58667-+1-none-1.0-27103140","rows":399}
+{"completed":"grid-second_turn_all|add|1-58667--1-none-1.0-27103140","rows":400}
+{"completed":"grid-all|add|3-23893-+1-none-1.0-27103140","rows":401}
+{"completed":"grid-generated|recon_add|30-23893--1-none-1.0-27103140","rows":402}
+{"completed":"grid-assistant|recon_add|10-23893--1-none-1.0-27103140","rows":403}
+{"completed":"grid-all|recon_add|3-58667-+1-none-1.0-27103140","rows":404}
+{"completed":"grid-generated|recon_add|3-58667-+1-none-1.0-27103140","rows":405}
+{"completed":"grid-second_turn_all|recon_add|10-58667-+1-none-1.0-27103140","rows":406}
+{"completed":"grid-all|add|10-58667--1-none-1.0-27103140","rows":407}
+{"completed":"grid-assistant|recon_add|30-58667-+1-none-1.0-27103140","rows":408}
+{"completed":"grid-generated|add|3-58667--1-none-1.0-27103140","rows":409}
+{"completed":"grid-second_turn_all|recon_add|30-58667--1-none-1.0-27103140","rows":410}
+{"completed":"grid-second_turn_all|add|3-23893-+1-none-1.0-27103140","rows":411}
+{"completed":"grid-assistant|add|10-23893--1-none-1.0-27103140","rows":412}
+{"completed":"grid-second_turn_all|recon_add|10-23893-+1-none-1.0-27103140","rows":413}
+{"completed":"grid-all|add|30-58667--1-none-1.0-27103140","rows":414}
+{"completed":"grid-assistant|add|30-58667--1-none-1.0-27103140","rows":415}
+{"completed":"grid-generated|add|1-23893-+1-none-1.0-27103140","rows":416}
+{"completed":"grid-second_turn_all|add|3-58667--1-none-1.0-27103140","rows":417}
+{"completed":"grid-assistant|add|1-23893-+1-none-1.0-27103140","rows":418}
+{"completed":"grid-generated|add|1-23893--1-none-1.0-27103140","rows":419}
+{"completed":"grid-second_turn_all|recon_add|3-58667-+1-none-1.0-27103140","rows":420}
+{"completed":"grid-second_turn_all|recon_add|1-23893-+1-none-1.0-27103140","rows":421}
+{"completed":"grid-second_turn_all|recon_add|3-23893-+1-none-1.0-27103140","rows":422}
+{"completed":"grid-assistant|add|30-23893-+1-none-1.0-27103140","rows":423}
+{"completed":"grid-assistant|add|30-23893--1-none-1.0-27103140","rows":424}
+{"completed":"grid-generated|recon_add|1-58667-+1-none-1.0-27103140","rows":425}
+{"completed":"grid-generated|add|10-23893--1-none-1.0-27103140","rows":426}
+{"completed":"grid-all|recon_add|1-23893-+1-none-1.0-27103140","rows":427}
+{"completed":"grid-all|add|3-58667-+1-none-1.0-27103140","rows":428}
+{"completed":"grid-assistant|recon_add|3-23893--1-none-1.0-27103140","rows":429}
+{"completed":"grid-all|add|3-23893--1-none-1.0-27103140","rows":430}
+{"completed":"grid-second_turn_all|add|1-23893--1-none-1.0-27103140","rows":431}
+{"completed":"grid-generated|add|10-23893-+1-none-1.0-27103140","rows":432}
+{"completed":"grid-generated|add|30-23893--1-none-1.0-27103140","rows":433}
+{"completed":"grid-second_turn_all|recon_add|3-23893--1-none-1.0-27103140","rows":434}
+{"completed":"grid-all|recon_add|30-58667--1-none-1.0-27103140","rows":435}
+{"completed":"grid-second_turn_all|recon_add|1-58667-+1-none-1.0-27103140","rows":436}
+{"completed":"grid-all|recon_add|10-58667--1-none-1.0-27103140","rows":437}
+{"completed":"grid-all|add|30-58667-+1-none-1.0-27103140","rows":438}
+{"completed":"grid-generated|recon_add|10-23893-+1-none-1.0-27103140","rows":439}
+{"completed":"grid-generated|recon_add|30-58667--1-none-1.0-27103140","rows":440}
+{"completed":"grid-all|recon_add|3-23893--1-none-1.0-27103140","rows":441}
+{"completed":"grid-all|recon_add|3-23893-+1-none-1.0-27103140","rows":442}
+{"completed":"grid-assistant|recon_add|1-58667--1-none-1.0-27103140","rows":443}
+{"completed":"grid-second_turn_all|add|30-23893--1-none-1.0-27103140","rows":444}
+{"completed":"grid-second_turn_all|add|10-23893-+1-none-1.0-27103140","rows":445}
+{"completed":"grid-assistant|recon_add|30-23893--1-none-1.0-27103140","rows":446}
+{"completed":"grid-all|add|10-58667-+1-none-1.0-27103140","rows":447}
+{"completed":"grid-assistant|add|3-58667--1-none-1.0-27103140","rows":448}
+{"completed":"grid-second_turn_all|add|10-23893--1-none-1.0-27103140","rows":449}
+{"completed":"grid-all|recon_add|30-23893-+1-none-1.0-27103140","rows":450}
+{"completed":"grid-generated|add|30-23893-+1-none-1.0-27103140","rows":451}
+{"completed":"grid-assistant|add|10-58667-+1-none-1.0-27103140","rows":452}
+{"completed":"grid-assistant|recon_add|1-23893--1-none-1.0-27103140","rows":453}
+{"completed":"grid-assistant|recon_add|10-23893-+1-none-1.0-27103140","rows":454}
+{"completed":"grid-all|add|30-23893-+1-none-1.0-27103140","rows":455}
+{"completed":"grid-second_turn_all|add|30-23893-+1-none-1.0-27103140","rows":456}
+{"completed":"grid-all|add|3-58667--1-none-1.0-27103140","rows":457}
+{"completed":"grid-all|recon_add|1-58667-+1-none-1.0-27103140","rows":458}
+{"completed":"grid-second_turn_all|add|30-58667--1-none-1.0-27103140","rows":459}
+{"completed":"grid-all|recon_add|10-23893--1-none-1.0-27103140","rows":460}
+{"completed":"grid-assistant|add|1-23893--1-none-1.0-27103140","rows":461}
+{"completed":"grid-all|add|1-23893--1-none-1.0-27103140","rows":462}
+{"completed":"grid-generated|add|30-58667-+1-none-1.0-27103140","rows":463}
+{"completed":"grid-second_turn_all|add|1-23893-+1-none-1.0-27103140","rows":464}
+{"completed":"grid-assistant|add|3-23893-+1-none-1.0-27103140","rows":465}
+{"completed":"grid-assistant|add|1-58667--1-none-1.0-27103140","rows":466}
+{"completed":"grid-all|add|10-23893-+1-none-1.0-27103140","rows":467}
+{"completed":"grid-all|recon_add|10-58667-+1-none-1.0-27103140","rows":468}
+{"completed":"grid-second_turn_all|recon_add|1-58667--1-none-1.0-27103140","rows":469}
+{"completed":"grid-all|add|10-23893--1-none-1.0-27103140","rows":470}
+{"completed":"grid-assistant|add|3-58667-+1-none-1.0-27103140","rows":471}
+{"completed":"grid-second_turn_all|add|3-58667-+1-none-1.0-27103140","rows":472}
+{"completed":"grid-generated|add|3-23893-+1-none-1.0-27103140","rows":473}
+{"completed":"grid-assistant|recon_add|3-58667--1-none-1.0-27103140","rows":474}
+{"completed":"grid-all|add|1-23893-+1-none-1.0-27103140","rows":475}
+{"completed":"grid-all|recon_add|30-23893--1-none-1.0-27103140","rows":476}
+{"completed":"grid-generated|add|3-58667-+1-none-1.0-27103140","rows":477}
+{"completed":"grid-assistant|recon_add|3-58667-+1-none-1.0-27103140","rows":478}
+{"completed":"grid-generated|recon_add|3-23893-+1-none-1.0-27103140","rows":479}
+{"completed":"grid-generated|add|1-58667--1-none-1.0-27103140","rows":480}
+{"completed":"grid-generated|add|3-23893--1-none-1.0-27103140","rows":481}
+{"completed":"grid-second_turn_all|recon_add|10-58667--1-none-1.0-27103140","rows":482}
+{"completed":"grid-all|recon_add|3-58667--1-none-1.0-27103140","rows":483}
+{"completed":"grid-assistant|add|3-23893--1-none-1.0-27103140","rows":484}
+{"completed":"grid-assistant|recon_add|30-23893-+1-none-1.0-27103140","rows":485}
+{"completed":"grid-generated|add|30-58667--1-none-1.0-27103140","rows":486}
+{"completed":"grid-second_turn_all|add|10-58667--1-none-1.0-27103140","rows":487}
+{"completed":"grid-assistant|recon_add|10-58667--1-none-1.0-27103140","rows":488}
+{"completed":"grid-generated|recon_add|1-58667--1-none-1.0-27103140","rows":489}
+{"completed":"grid-generated|recon_add|3-58667--1-none-1.0-27103140","rows":490}
+{"completed":"grid-all|add|30-23893--1-none-1.0-27103140","rows":491}
+{"completed":"grid-all|recon_add|1-23893--1-none-1.0-27103140","rows":492}
+{"completed":"grid-generated|recon_add|1-23893--1-none-1.0-27103140","rows":493}
+{"completed":"grid-assistant|add|10-23893-+1-none-1.0-27103140","rows":494}
+{"completed":"grid-assistant|recon_add|3-23893-+1-none-1.0-27103140","rows":495}
+{"completed":"grid-assistant|recon_add|1-58667-+1-none-1.0-27103140","rows":496}
+{"completed":"grid-second_turn_all|add|1-58667-+1-none-1.0-27103140","rows":497}
+{"completed":"grid-all|add|1-58667--1-none-1.0-27103140","rows":498}
+{"completed":"grid-generated|add|1-58667-+1-none-1.0-27103140","rows":499}
+{"completed":"grid-all|recon_add|10-23893-+1-none-1.0-27103140","rows":500}
+{"completed":"grid-generated|recon_add|3-23893--1-none-1.0-27103140","rows":501}
+{"completed":"grid-generated|recon_add|1-23893-+1-none-1.0-27103140","rows":502}
+{"completed":"grid-second_turn_all|recon_add|30-58667-+1-none-1.0-27103140","rows":503}
+{"completed":"grid-generated|recon_add|10-23893--1-none-1.0-27103140","rows":504}
+{"completed":"grid-assistant|recon_add|1-23893-+1-none-1.0-27103140","rows":505}
+{"completed":"grid-generated|recon_add|10-58667--1-none-1.0-27103140","rows":506}
+{"completed":"grid-generated|recon_add|10-58667-+1-none-1.0-27103140","rows":507}
+{"completed":"grid-all|recon_add|30-58667-+1-none-1.0-27103140","rows":508}
+{"completed":"grid-generated|recon_add|30-23893-+1-none-1.0-27103140","rows":509}
+{"completed":"grid-second_turn_all|add|3-23893--1-none-1.0-27103140","rows":510}
+{"completed":"grid-second_turn_all|recon_add|10-23893--1-none-1.0-27103140","rows":511}
+{"completed":"grid-assistant|recon_add|30-58667--1-none-1.0-27103140","rows":512}
+{"completed":"grid-second_turn_all|add|10-58667-+1-none-1.0-27103140","rows":513}
+{"completed":"grid-generated|add|10-58667--1-none-1.0-27104153","rows":514}
+{"completed":"grid-all|recon_add|30-23893--1-none-1.0-27104153","rows":515}
+{"completed":"grid-generated|add|10-23893--1-none-1.0-27104153","rows":516}
+{"completed":"grid-second_turn_all|add|3-58667--1-none-1.0-27104153","rows":517}
+{"completed":"grid-all|add|3-58667-+1-none-1.0-27104153","rows":518}
+{"completed":"grid-second_turn_all|add|1-58667--1-none-1.0-27104153","rows":519}
+{"completed":"grid-assistant|recon_add|10-58667-+1-none-1.0-27104153","rows":520}
+{"completed":"grid-assistant|add|1-23893-+1-none-1.0-27104153","rows":521}
+{"completed":"grid-all|add|1-23893--1-none-1.0-27104153","rows":522}
+{"completed":"grid-assistant|add|3-23893-+1-none-1.0-27104153","rows":523}
+{"completed":"grid-generated|add|30-23893-+1-none-1.0-27104153","rows":524}
+{"completed":"grid-assistant|recon_add|30-58667-+1-none-1.0-27104153","rows":525}
+{"completed":"grid-assistant|add|3-58667-+1-none-1.0-27104153","rows":526}
+{"completed":"grid-generated|recon_add|10-23893--1-none-1.0-27104153","rows":527}
+{"completed":"grid-generated|add|3-58667-+1-none-1.0-27104153","rows":528}
+{"completed":"grid-second_turn_all|recon_add|10-58667--1-none-1.0-27104153","rows":529}
+{"completed":"grid-all|recon_add|30-58667-+1-none-1.0-27104153","rows":530}
+{"completed":"grid-all|add|3-58667--1-none-1.0-27104153","rows":531}
+{"completed":"grid-assistant|add|1-58667-+1-none-1.0-27104153","rows":532}
+{"completed":"grid-all|add|1-23893-+1-none-1.0-27104153","rows":533}
+{"completed":"grid-generated|add|30-23893--1-none-1.0-27104153","rows":534}
+{"completed":"grid-assistant|add|30-58667--1-none-1.0-27104153","rows":535}
+{"completed":"grid-all|recon_add|10-23893-+1-none-1.0-27104153","rows":536}
+{"completed":"grid-all|recon_add|3-58667--1-none-1.0-27104153","rows":537}
+{"completed":"grid-all|recon_add|1-23893--1-none-1.0-27104153","rows":538}
+{"completed":"grid-assistant|recon_add|30-23893-+1-none-1.0-27104153","rows":539}
+{"completed":"grid-all|recon_add|10-23893--1-none-1.0-27104153","rows":540}
+{"completed":"grid-all|add|30-23893--1-none-1.0-27104153","rows":541}
+{"completed":"grid-generated|recon_add|30-58667--1-none-1.0-27104153","rows":542}
+{"completed":"grid-assistant|add|3-23893--1-none-1.0-27104153","rows":543}
+{"completed":"grid-assistant|recon_add|30-58667--1-none-1.0-27104153","rows":544}
+{"completed":"grid-generated|recon_add|10-58667-+1-none-1.0-27104153","rows":545}
+{"completed":"grid-all|recon_add|10-58667--1-none-1.0-27104153","rows":546}
+{"completed":"grid-second_turn_all|add|3-23893--1-none-1.0-27104153","rows":547}
+{"completed":"grid-all|recon_add|3-23893--1-none-1.0-27104153","rows":548}
+{"completed":"grid-assistant|recon_add|10-58667--1-none-1.0-27104153","rows":549}
+{"completed":"grid-all|add|1-58667--1-none-1.0-27104153","rows":550}
+{"completed":"grid-second_turn_all|recon_add|3-58667--1-none-1.0-27104153","rows":551}
+{"completed":"grid-all|add|30-58667--1-none-1.0-27104153","rows":552}
+{"completed":"grid-second_turn_all|recon_add|3-23893--1-none-1.0-27104153","rows":553}
+{"completed":"grid-second_turn_all|recon_add|1-58667-+1-none-1.0-27104153","rows":554}
+{"completed":"grid-generated|add|1-23893--1-none-1.0-27104153","rows":555}
+{"completed":"grid-all|add|10-58667-+1-none-1.0-27104153","rows":556}
+{"completed":"grid-generated|add|3-58667--1-none-1.0-27104153","rows":557}
+{"completed":"grid-assistant|add|10-58667--1-none-1.0-27104153","rows":558}
+{"completed":"grid-generated|add|3-23893--1-none-1.0-27104153","rows":559}
+{"completed":"grid-assistant|recon_add|30-23893--1-none-1.0-27104153","rows":560}
+{"completed":"grid-second_turn_all|add|30-58667-+1-none-1.0-27104153","rows":561}
+{"completed":"grid-second_turn_all|add|30-23893-+1-none-1.0-27104153","rows":562}
+{"completed":"grid-all|add|10-23893-+1-none-1.0-27104153","rows":563}
+{"completed":"grid-second_turn_all|recon_add|10-58667-+1-none-1.0-27104153","rows":564}
+{"completed":"grid-second_turn_all|recon_add|1-23893-+1-none-1.0-27104153","rows":565}
+{"completed":"grid-second_turn_all|add|30-23893--1-none-1.0-27104153","rows":566}
+{"completed":"grid-second_turn_all|add|10-23893--1-none-1.0-27104153","rows":567}
+{"completed":"grid-assistant|add|10-23893--1-none-1.0-27104153","rows":568}
+{"completed":"grid-assistant|add|10-23893-+1-none-1.0-27104153","rows":569}
+{"completed":"grid-assistant|recon_add|1-58667-+1-none-1.0-27104153","rows":570}
+{"completed":"grid-generated|recon_add|3-23893--1-none-1.0-27104153","rows":571}
+{"completed":"grid-generated|recon_add|1-58667-+1-none-1.0-27104153","rows":572}
+{"completed":"grid-all|add|3-23893--1-none-1.0-27104153","rows":573}
+{"completed":"grid-generated|add|1-23893-+1-none-1.0-27104153","rows":574}
+{"completed":"grid-generated|add|30-58667-+1-none-1.0-27104153","rows":575}
+{"completed":"grid-second_turn_all|recon_add|10-23893--1-none-1.0-27104153","rows":576}
+{"completed":"grid-assistant|recon_add|1-23893-+1-none-1.0-27104153","rows":577}
+{"completed":"grid-assistant|add|30-58667-+1-none-1.0-27104153","rows":578}
+{"completed":"grid-all|add|30-58667-+1-none-1.0-27104153","rows":579}
+{"completed":"grid-assistant|recon_add|1-23893--1-none-1.0-27104153","rows":580}
+{"completed":"grid-all|add|30-23893-+1-none-1.0-27104153","rows":581}
+{"completed":"grid-generated|add|10-58667-+1-none-1.0-27104153","rows":582}
+{"completed":"grid-generated|recon_add|30-23893-+1-none-1.0-27104153","rows":583}
+{"completed":"grid-generated|recon_add|3-58667--1-none-1.0-27104153","rows":584}
+{"completed":"grid-assistant|recon_add|10-23893--1-none-1.0-27104153","rows":585}
+{"completed":"grid-all|recon_add|30-23893-+1-none-1.0-27104153","rows":586}
+{"completed":"grid-generated|add|1-58667--1-none-1.0-27104153","rows":587}
+{"completed":"grid-assistant|recon_add|3-23893-+1-none-1.0-27104153","rows":588}
+{"completed":"grid-assistant|add|30-23893-+1-none-1.0-27104153","rows":589}
+{"completed":"grid-assistant|add|3-58667--1-none-1.0-27104153","rows":590}
+{"completed":"grid-assistant|recon_add|10-23893-+1-none-1.0-27104153","rows":591}
+{"completed":"grid-assistant|recon_add|3-23893--1-none-1.0-27104153","rows":592}
+{"completed":"grid-all|add|10-58667--1-none-1.0-27104153","rows":593}
+{"completed":"grid-assistant|add|1-58667--1-none-1.0-27104153","rows":594}
+{"completed":"grid-second_turn_all|add|30-58667--1-none-1.0-27104153","rows":595}
+{"completed":"grid-generated|add|1-58667-+1-none-1.0-27104153","rows":596}
+{"completed":"grid-second_turn_all|recon_add|30-23893--1-none-1.0-27104153","rows":597}
+{"completed":"grid-second_turn_all|recon_add|3-58667-+1-none-1.0-27104153","rows":598}
+{"completed":"grid-generated|recon_add|3-58667-+1-none-1.0-27104153","rows":599}
+{"completed":"grid-all|recon_add|30-58667--1-none-1.0-27104153","rows":600}
+{"completed":"grid-all|recon_add|10-58667-+1-none-1.0-27104153","rows":601}
+{"completed":"grid-second_turn_all|add|3-58667-+1-none-1.0-27104153","rows":602}
+{"completed":"grid-second_turn_all|add|1-23893-+1-none-1.0-27104153","rows":603}
+{"completed":"grid-second_turn_all|add|3-23893-+1-none-1.0-27104153","rows":604}
+{"completed":"grid-generated|recon_add|1-23893-+1-none-1.0-27104153","rows":605}
+{"completed":"grid-second_turn_all|recon_add|10-23893-+1-none-1.0-27104153","rows":606}
+{"completed":"grid-generated|recon_add|1-58667--1-none-1.0-27104153","rows":607}
+{"completed":"grid-assistant|recon_add|3-58667-+1-none-1.0-27104153","rows":608}
+{"completed":"grid-second_turn_all|recon_add|3-23893-+1-none-1.0-27104153","rows":609}
+{"completed":"grid-second_turn_all|recon_add|30-58667--1-none-1.0-27104153","rows":610}
+{"completed":"grid-second_turn_all|add|10-58667--1-none-1.0-27104153","rows":611}
+{"completed":"grid-assistant|add|30-23893--1-none-1.0-27104153","rows":612}
+{"completed":"grid-generated|add|30-58667--1-none-1.0-27104153","rows":613}
+{"completed":"grid-assistant|add|10-58667-+1-none-1.0-27104153","rows":614}
+{"completed":"grid-assistant|recon_add|1-58667--1-none-1.0-27104153","rows":615}
+{"completed":"grid-assistant|recon_add|3-58667--1-none-1.0-27104153","rows":616}
+{"completed":"grid-second_turn_all|add|10-58667-+1-none-1.0-27104153","rows":617}
+{"completed":"grid-second_turn_all|add|1-23893--1-none-1.0-27104153","rows":618}
+{"completed":"grid-all|recon_add|1-58667--1-none-1.0-27104153","rows":619}
+{"completed":"grid-assistant|add|1-23893--1-none-1.0-27104153","rows":620}
+{"completed":"grid-second_turn_all|recon_add|30-23893-+1-none-1.0-27104153","rows":621}
+{"completed":"grid-all|add|10-23893--1-none-1.0-27104153","rows":622}
+{"completed":"grid-all|recon_add|1-23893-+1-none-1.0-27104153","rows":623}
+{"completed":"grid-all|add|1-58667-+1-none-1.0-27104153","rows":624}
+{"completed":"grid-generated|recon_add|10-58667--1-none-1.0-27104153","rows":625}
+{"completed":"grid-generated|add|10-23893-+1-none-1.0-27104153","rows":626}
+{"completed":"grid-second_turn_all|add|10-23893-+1-none-1.0-27104153","rows":627}
+{"completed":"grid-generated|recon_add|1-23893--1-none-1.0-27104153","rows":628}
+{"completed":"grid-generated|recon_add|3-23893-+1-none-1.0-27104153","rows":629}
+{"completed":"grid-generated|add|3-23893-+1-none-1.0-27104153","rows":630}
+{"completed":"grid-generated|recon_add|30-23893--1-none-1.0-27104153","rows":631}
+{"completed":"grid-generated|recon_add|10-23893-+1-none-1.0-27104153","rows":632}
+{"completed":"grid-second_turn_all|recon_add|30-58667-+1-none-1.0-27104153","rows":633}
+{"completed":"grid-all|recon_add|3-58667-+1-none-1.0-27104153","rows":634}
+{"completed":"grid-generated|recon_add|30-58667-+1-none-1.0-27104153","rows":635}
+{"completed":"grid-all|add|3-23893-+1-none-1.0-27104153","rows":636}
+{"completed":"grid-second_turn_all|recon_add|1-58667--1-none-1.0-27104153","rows":637}
+{"completed":"grid-second_turn_all|recon_add|1-23893--1-none-1.0-27104153","rows":638}
+{"completed":"grid-all|recon_add|1-58667-+1-none-1.0-27104153","rows":639}
+{"completed":"grid-second_turn_all|add|1-58667-+1-none-1.0-27104153","rows":640}
+{"completed":"grid-all|recon_add|3-23893-+1-none-1.0-27104153","rows":641}
+{"completed":"zero-add-27100101","rows":642}
+{"completed":"zero-add-27101114","rows":643}
+{"completed":"zero-add-27102127","rows":644}
+{"completed":"zero-add-27103140","rows":645}
+{"completed":"zero-add-27104153","rows":646}
+{"completed":"zero-recon_add-27100101","rows":647}
+{"completed":"zero-recon_add-27101114","rows":648}
+{"completed":"zero-recon_add-27102127","rows":649}
+{"completed":"zero-recon_add-27103140","rows":650}
+{"completed":"zero-recon_add-27104153","rows":651}
+{"completed":"prompt-all|add|1-58667--1-sdk-1.0-27100101","rows":652}
+{"completed":"prompt-all|add|1-58667--1-sdk-1.0-27101114","rows":653}
+{"completed":"prompt-all|add|1-58667--1-sdk-1.0-27102127","rows":654}
+{"completed":"prompt-all|add|1-58667--1-sdk-1.0-27103140","rows":655}
+{"completed":"prompt-all|add|1-58667--1-sdk-1.0-27104153","rows":656}
+{"completed":"prompt-all|add|1-58667-+1-sdk-1.0-27100101","rows":657}
+{"completed":"prompt-all|add|1-58667-+1-sdk-1.0-27101114","rows":658}
+{"completed":"prompt-all|add|1-58667-+1-sdk-1.0-27102127","rows":659}
+{"completed":"prompt-all|add|1-58667-+1-sdk-1.0-27103140","rows":660}
+{"completed":"prompt-all|add|1-58667-+1-sdk-1.0-27104153","rows":661}
+{"completed":"prompt-all|add|1-23893--1-sdk-1.0-27100101","rows":662}
+{"completed":"prompt-all|add|1-23893--1-sdk-1.0-27101114","rows":663}
+{"completed":"prompt-all|add|1-23893--1-sdk-1.0-27102127","rows":664}
+{"completed":"prompt-all|add|1-23893--1-sdk-1.0-27103140","rows":665}
+{"completed":"prompt-all|add|1-23893--1-sdk-1.0-27104153","rows":666}
+{"completed":"prompt-all|add|1-23893-+1-sdk-1.0-27100101","rows":667}
+{"completed":"prompt-all|add|1-23893-+1-sdk-1.0-27101114","rows":668}
+{"completed":"prompt-all|add|1-23893-+1-sdk-1.0-27102127","rows":669}
+{"completed":"prompt-all|add|1-23893-+1-sdk-1.0-27103140","rows":670}
+{"completed":"prompt-all|add|1-23893-+1-sdk-1.0-27104153","rows":671}
+{"completed":"prompt-all|add|1-58667--1-none-0.9-27100101","rows":672}
+{"completed":"prompt-all|add|1-58667--1-none-0.9-27101114","rows":673}
+{"completed":"prompt-all|add|1-58667--1-none-0.9-27102127","rows":674}
+{"completed":"prompt-all|add|1-58667--1-none-0.9-27103140","rows":675}
+{"completed":"prompt-all|add|1-58667--1-none-0.9-27104153","rows":676}
+{"completed":"prompt-all|add|1-58667-+1-none-0.9-27100101","rows":677}
+{"completed":"prompt-all|add|1-58667-+1-none-0.9-27101114","rows":678}
+{"completed":"prompt-all|add|1-58667-+1-none-0.9-27102127","rows":679}
+{"completed":"prompt-all|add|1-58667-+1-none-0.9-27103140","rows":680}
+{"completed":"prompt-all|add|1-58667-+1-none-0.9-27104153","rows":681}
+{"completed":"prompt-all|add|1-23893--1-none-0.9-27100101","rows":682}
+{"completed":"prompt-all|add|1-23893--1-none-0.9-27101114","rows":683}
+{"completed":"prompt-all|add|1-23893--1-none-0.9-27102127","rows":684}
+{"completed":"prompt-all|add|1-23893--1-none-0.9-27103140","rows":685}
+{"completed":"prompt-all|add|1-23893--1-none-0.9-27104153","rows":686}
+{"completed":"prompt-all|add|1-23893-+1-none-0.9-27100101","rows":687}
+{"completed":"prompt-all|add|1-23893-+1-none-0.9-27101114","rows":688}
+{"completed":"prompt-all|add|1-23893-+1-none-0.9-27102127","rows":689}
+{"completed":"prompt-all|add|1-23893-+1-none-0.9-27103140","rows":690}
+{"completed":"prompt-all|add|1-23893-+1-none-0.9-27104153","rows":691}
+{"completed":"prompt-all|add|1-58667--1-sdk-0.9-27100101","rows":692}
+{"completed":"prompt-all|add|1-58667--1-sdk-0.9-27101114","rows":693}
+{"completed":"prompt-all|add|1-58667--1-sdk-0.9-27102127","rows":694}
+{"completed":"prompt-all|add|1-58667--1-sdk-0.9-27103140","rows":695}
+{"completed":"prompt-all|add|1-58667--1-sdk-0.9-27104153","rows":696}
+{"completed":"prompt-all|add|1-58667-+1-sdk-0.9-27100101","rows":697}
+{"completed":"prompt-all|add|1-58667-+1-sdk-0.9-27101114","rows":698}
+{"completed":"prompt-all|add|1-58667-+1-sdk-0.9-27102127","rows":699}
+{"completed":"prompt-all|add|1-58667-+1-sdk-0.9-27103140","rows":700}
+{"completed":"prompt-all|add|1-58667-+1-sdk-0.9-27104153","rows":701}
+{"completed":"prompt-all|add|1-23893--1-sdk-0.9-27100101","rows":702}
+{"completed":"prompt-all|add|1-23893--1-sdk-0.9-27101114","rows":703}
+{"completed":"prompt-all|add|1-23893--1-sdk-0.9-27102127","rows":704}
+{"completed":"prompt-all|add|1-23893--1-sdk-0.9-27103140","rows":705}
+{"completed":"prompt-all|add|1-23893--1-sdk-0.9-27104153","rows":706}
+{"completed":"prompt-all|add|1-23893-+1-sdk-0.9-27100101","rows":707}
+{"completed":"prompt-all|add|1-23893-+1-sdk-0.9-27101114","rows":708}
+{"completed":"prompt-all|add|1-23893-+1-sdk-0.9-27102127","rows":709}
+{"completed":"prompt-all|add|1-23893-+1-sdk-0.9-27103140","rows":710}
+{"completed":"prompt-all|add|1-23893-+1-sdk-0.9-27104153","rows":711}
+{"completed":"prompt-all|add|3-58667--1-sdk-1.0-27100101","rows":712}
+{"completed":"prompt-all|add|3-58667--1-sdk-1.0-27101114","rows":713}
+{"completed":"prompt-all|add|3-58667--1-sdk-1.0-27102127","rows":714}
+{"completed":"prompt-all|add|3-58667--1-sdk-1.0-27103140","rows":715}
+{"completed":"prompt-all|add|3-58667--1-sdk-1.0-27104153","rows":716}
+{"completed":"prompt-all|add|3-58667-+1-sdk-1.0-27100101","rows":717}
+{"completed":"prompt-all|add|3-58667-+1-sdk-1.0-27101114","rows":718}
+{"completed":"prompt-all|add|3-58667-+1-sdk-1.0-27102127","rows":719}
+{"completed":"prompt-all|add|3-58667-+1-sdk-1.0-27103140","rows":720}
+{"completed":"prompt-all|add|3-58667-+1-sdk-1.0-27104153","rows":721}
+{"completed":"prompt-all|add|3-23893--1-sdk-1.0-27100101","rows":722}
+{"completed":"prompt-all|add|3-23893--1-sdk-1.0-27101114","rows":723}
+{"completed":"prompt-all|add|3-23893--1-sdk-1.0-27102127","rows":724}
+{"completed":"prompt-all|add|3-23893--1-sdk-1.0-27103140","rows":725}
+{"completed":"prompt-all|add|3-23893--1-sdk-1.0-27104153","rows":726}
+{"completed":"prompt-all|add|3-23893-+1-sdk-1.0-27100101","rows":727}
+{"completed":"prompt-all|add|3-23893-+1-sdk-1.0-27101114","rows":728}
+{"completed":"prompt-all|add|3-23893-+1-sdk-1.0-27102127","rows":729}
+{"completed":"prompt-all|add|3-23893-+1-sdk-1.0-27103140","rows":730}
+{"completed":"prompt-all|add|3-23893-+1-sdk-1.0-27104153","rows":731}
+{"completed":"prompt-all|add|3-58667--1-none-0.9-27100101","rows":732}
+{"completed":"prompt-all|add|3-58667--1-none-0.9-27101114","rows":733}
+{"completed":"prompt-all|add|3-58667--1-none-0.9-27102127","rows":734}
+{"completed":"prompt-all|add|3-58667--1-none-0.9-27103140","rows":735}
+{"completed":"prompt-all|add|3-58667--1-none-0.9-27104153","rows":736}
+{"completed":"prompt-all|add|3-58667-+1-none-0.9-27100101","rows":737}
+{"completed":"prompt-all|add|3-58667-+1-none-0.9-27101114","rows":738}
+{"completed":"prompt-all|add|3-58667-+1-none-0.9-27102127","rows":739}
+{"completed":"prompt-all|add|3-58667-+1-none-0.9-27103140","rows":740}
+{"completed":"prompt-all|add|3-58667-+1-none-0.9-27104153","rows":741}
+{"completed":"prompt-all|add|3-23893--1-none-0.9-27100101","rows":742}
+{"completed":"prompt-all|add|3-23893--1-none-0.9-27101114","rows":743}
+{"completed":"prompt-all|add|3-23893--1-none-0.9-27102127","rows":744}
+{"completed":"prompt-all|add|3-23893--1-none-0.9-27103140","rows":745}
+{"completed":"prompt-all|add|3-23893--1-none-0.9-27104153","rows":746}
+{"completed":"prompt-all|add|3-23893-+1-none-0.9-27100101","rows":747}
+{"completed":"prompt-all|add|3-23893-+1-none-0.9-27101114","rows":748}
+{"completed":"prompt-all|add|3-23893-+1-none-0.9-27102127","rows":749}
+{"completed":"prompt-all|add|3-23893-+1-none-0.9-27103140","rows":750}
+{"completed":"prompt-all|add|3-23893-+1-none-0.9-27104153","rows":751}
+{"completed":"prompt-all|add|3-58667--1-sdk-0.9-27100101","rows":752}
+{"completed":"prompt-all|add|3-58667--1-sdk-0.9-27101114","rows":753}
+{"completed":"prompt-all|add|3-58667--1-sdk-0.9-27102127","rows":754}
+{"completed":"prompt-all|add|3-58667--1-sdk-0.9-27103140","rows":755}
+{"completed":"prompt-all|add|3-58667--1-sdk-0.9-27104153","rows":756}
+{"completed":"prompt-all|add|3-58667-+1-sdk-0.9-27100101","rows":757}
+{"completed":"prompt-all|add|3-58667-+1-sdk-0.9-27101114","rows":758}
+{"completed":"prompt-all|add|3-58667-+1-sdk-0.9-27102127","rows":759}
+{"completed":"prompt-all|add|3-58667-+1-sdk-0.9-27103140","rows":760}
+{"completed":"prompt-all|add|3-58667-+1-sdk-0.9-27104153","rows":761}
+{"completed":"prompt-all|add|3-23893--1-sdk-0.9-27100101","rows":762}
+{"completed":"prompt-all|add|3-23893--1-sdk-0.9-27101114","rows":763}
+{"completed":"prompt-all|add|3-23893--1-sdk-0.9-27102127","rows":764}
+{"completed":"prompt-all|add|3-23893--1-sdk-0.9-27103140","rows":765}
+{"completed":"prompt-all|add|3-23893--1-sdk-0.9-27104153","rows":766}
+{"completed":"prompt-all|add|3-23893-+1-sdk-0.9-27100101","rows":767}
+{"completed":"prompt-all|add|3-23893-+1-sdk-0.9-27101114","rows":768}
+{"completed":"prompt-all|add|3-23893-+1-sdk-0.9-27102127","rows":769}
+{"completed":"prompt-all|add|3-23893-+1-sdk-0.9-27103140","rows":770}
+{"completed":"prompt-all|add|3-23893-+1-sdk-0.9-27104153","rows":771}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-1.0-27100101","rows":772}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-1.0-27101114","rows":773}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-1.0-27102127","rows":774}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-1.0-27103140","rows":775}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-1.0-27104153","rows":776}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-1.0-27100101","rows":777}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-1.0-27101114","rows":778}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-1.0-27102127","rows":779}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-1.0-27103140","rows":780}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-1.0-27104153","rows":781}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-1.0-27100101","rows":782}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-1.0-27101114","rows":783}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-1.0-27102127","rows":784}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-1.0-27103140","rows":785}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-1.0-27104153","rows":786}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-1.0-27100101","rows":787}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-1.0-27101114","rows":788}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-1.0-27102127","rows":789}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-1.0-27103140","rows":790}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-1.0-27104153","rows":791}
+{"completed":"prompt-assistant|add|1-58667--1-none-0.9-27100101","rows":792}
+{"completed":"prompt-assistant|add|1-58667--1-none-0.9-27101114","rows":793}
+{"completed":"prompt-assistant|add|1-58667--1-none-0.9-27102127","rows":794}
+{"completed":"prompt-assistant|add|1-58667--1-none-0.9-27103140","rows":795}
+{"completed":"prompt-assistant|add|1-58667--1-none-0.9-27104153","rows":796}
+{"completed":"prompt-assistant|add|1-58667-+1-none-0.9-27100101","rows":797}
+{"completed":"prompt-assistant|add|1-58667-+1-none-0.9-27101114","rows":798}
+{"completed":"prompt-assistant|add|1-58667-+1-none-0.9-27102127","rows":799}
+{"completed":"prompt-assistant|add|1-58667-+1-none-0.9-27103140","rows":800}
+{"completed":"prompt-assistant|add|1-58667-+1-none-0.9-27104153","rows":801}
+{"completed":"prompt-assistant|add|1-23893--1-none-0.9-27100101","rows":802}
+{"completed":"prompt-assistant|add|1-23893--1-none-0.9-27101114","rows":803}
+{"completed":"prompt-assistant|add|1-23893--1-none-0.9-27102127","rows":804}
+{"completed":"prompt-assistant|add|1-23893--1-none-0.9-27103140","rows":805}
+{"completed":"prompt-assistant|add|1-23893--1-none-0.9-27104153","rows":806}
+{"completed":"prompt-assistant|add|1-23893-+1-none-0.9-27100101","rows":807}
+{"completed":"prompt-assistant|add|1-23893-+1-none-0.9-27101114","rows":808}
+{"completed":"prompt-assistant|add|1-23893-+1-none-0.9-27102127","rows":809}
+{"completed":"prompt-assistant|add|1-23893-+1-none-0.9-27103140","rows":810}
+{"completed":"prompt-assistant|add|1-23893-+1-none-0.9-27104153","rows":811}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-0.9-27100101","rows":812}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-0.9-27101114","rows":813}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-0.9-27102127","rows":814}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-0.9-27103140","rows":815}
+{"completed":"prompt-assistant|add|1-58667--1-sdk-0.9-27104153","rows":816}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-0.9-27100101","rows":817}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-0.9-27101114","rows":818}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-0.9-27102127","rows":819}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-0.9-27103140","rows":820}
+{"completed":"prompt-assistant|add|1-58667-+1-sdk-0.9-27104153","rows":821}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-0.9-27100101","rows":822}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-0.9-27101114","rows":823}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-0.9-27102127","rows":824}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-0.9-27103140","rows":825}
+{"completed":"prompt-assistant|add|1-23893--1-sdk-0.9-27104153","rows":826}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-0.9-27100101","rows":827}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-0.9-27101114","rows":828}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-0.9-27102127","rows":829}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-0.9-27103140","rows":830}
+{"completed":"prompt-assistant|add|1-23893-+1-sdk-0.9-27104153","rows":831}
+{"completed":"bridge-none-1.0-27105166","rows":832}
+{"completed":"bridge-none-1.0-27106179","rows":833}
+{"completed":"bridge-none-1.0-27107192","rows":834}
+{"completed":"bridge-none-1.0-27108205","rows":835}
+{"completed":"bridge-none-1.0-27109218","rows":836}
+{"completed":"bridge-none-1.0-27110231","rows":837}
+{"completed":"bridge-none-1.0-27111244","rows":838}
+{"completed":"bridge-none-1.0-27112257","rows":839}
+{"completed":"bridge-none-1.0-27113270","rows":840}
+{"completed":"bridge-none-1.0-27114283","rows":841}
+{"completed":"bridge-none-0.9-27105166","rows":842}
+{"completed":"bridge-none-0.9-27106179","rows":843}
+{"completed":"bridge-none-0.9-27107192","rows":844}
+{"completed":"bridge-none-0.9-27108205","rows":845}
+{"completed":"bridge-none-0.9-27109218","rows":846}
+{"completed":"bridge-none-0.9-27110231","rows":847}
+{"completed":"bridge-none-0.9-27111244","rows":848}
+{"completed":"bridge-none-0.9-27112257","rows":849}
+{"completed":"bridge-none-0.9-27113270","rows":850}
+{"completed":"bridge-none-0.9-27114283","rows":851}
+{"completed":"bridge-sdk-1.0-27105166","rows":852}
+{"completed":"bridge-sdk-1.0-27106179","rows":853}
+{"completed":"bridge-sdk-1.0-27107192","rows":854}
+{"completed":"bridge-sdk-1.0-27108205","rows":855}
+{"completed":"bridge-sdk-1.0-27109218","rows":856}
+{"completed":"bridge-sdk-1.0-27110231","rows":857}
+{"completed":"bridge-sdk-1.0-27111244","rows":858}
+{"completed":"bridge-sdk-1.0-27112257","rows":859}
+{"completed":"bridge-sdk-1.0-27113270","rows":860}
+{"completed":"bridge-sdk-1.0-27114283","rows":861}
+{"completed":"bridge-sdk-0.9-27105166","rows":862}
+{"completed":"bridge-sdk-0.9-27106179","rows":863}
+{"completed":"bridge-sdk-0.9-27107192","rows":864}
+{"completed":"bridge-sdk-0.9-27108205","rows":865}
+{"completed":"bridge-sdk-0.9-27109218","rows":866}
+{"completed":"bridge-sdk-0.9-27110231","rows":867}
+{"completed":"bridge-sdk-0.9-27111244","rows":868}
+{"completed":"bridge-sdk-0.9-27112257","rows":869}
+{"completed":"bridge-sdk-0.9-27113270","rows":870}
+{"completed":"bridge-sdk-0.9-27114283","rows":871}

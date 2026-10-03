@@ -55,6 +55,16 @@ RELEASE_MANIFEST_ALIASES = {
         "data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json",
 }
 
+# Preserve upstream legal text verbatim; it still receives the secret scan.
+PRESERVED_SOURCE_BYTES = {
+    "data/operator_matching/calibration_v1_20261003/LLAMA_3_3_LICENSE.txt":
+        "fb58d9a630ccc1dc0d08f8c00232de56bc73309020f59c8181d0c12ef28d9f8c",
+}
+HASH_MAP_MANIFESTS = {
+    "data/operator_matching/calibration_v1_20261003/RELEASE_MANIFEST.json":
+        "operator_matching_release_v1",
+}
+
 PRIVATE_SUFFIXES = frozenset(
     {
         ".jks",
@@ -420,7 +430,17 @@ def whitespace_findings(repo: Path) -> list[Finding]:
         ("working-tree-whitespace", ("diff", "--check")),
         ("index-whitespace", ("diff", "--cached", "--check")),
     ):
-        result = _git(repo, *args, check=False)
+        excludes = []
+        for path, digest in PRESERVED_SOURCE_BYTES.items():
+            if label == "index-whitespace":
+                source = _git(repo, "show", ":" + path, check=False)
+                data = source.stdout if source.returncode == 0 else None
+            else:
+                candidate = repo / path
+                data = candidate.read_bytes() if candidate.is_file() and not candidate.is_symlink() else None
+            if data is not None and hashlib.sha256(data).hexdigest() == digest:
+                excludes.append(":(exclude)" + path)
+        result = _git(repo, *args, "--", ".", *excludes, check=False)
         if result.returncode:
             findings.append(
                 Finding("<repository>", label, "git diff --check reported whitespace errors")
@@ -458,6 +478,19 @@ def release_manifest_findings(
             )
             continue
         files = manifest.get("files") if isinstance(manifest, dict) else None
+        hash_only = manifest_path in HASH_MAP_MANIFESTS
+        if hash_only:
+            if (not isinstance(manifest, dict)
+                    or manifest.get("schema") != HASH_MAP_MANIFESTS[manifest_path]
+                    or not isinstance(files, dict) or not files
+                    or type(manifest.get("file_count")) is not int
+                    or manifest["file_count"] != len(files)
+                    or manifest.get("release") != str(PurePosixPath(manifest_path).parent)):
+                findings.append(Finding(manifest_path, "invalid-release-manifest",
+                                        "known hash-map manifest has invalid schema or inventory"))
+                continue
+            files = [{"path": path, "sha256": digest, "bytes": None}
+                     for path, digest in files.items()]
         if not isinstance(files, list):
             findings.append(
                 Finding(manifest_path, "invalid-release-manifest", "release manifest has no files list")
@@ -474,8 +507,9 @@ def release_manifest_findings(
                     )
                 )
                 continue
-            if (not isinstance(item["path"], str) or type(item["bytes"]) is not int
-                    or item["bytes"] < 0 or not residual_audit.digest(item["sha256"])):
+            if (not isinstance(item["path"], str)
+                    or (not hash_only and (type(item["bytes"]) is not int or item["bytes"] < 0))
+                    or not residual_audit.digest(item["sha256"])):
                 findings.append(Finding(manifest_path, "invalid-release-entry",
                                         f"release file entry {index} has invalid path, bytes, or sha256"))
                 continue
@@ -501,7 +535,8 @@ def release_manifest_findings(
                 )
                 continue
             actual_bytes, actual_sha = record
-            if actual_bytes != int(item["bytes"]):
+            size_matches = hash_only or actual_bytes == item["bytes"]
+            if not size_matches:
                 findings.append(
                     Finding(
                         indexed_path,
@@ -517,7 +552,7 @@ def release_manifest_findings(
                         f"indexed SHA-256 differs from {manifest_path}",
                     )
                 )
-            if actual_bytes == int(item["bytes"]) and actual_sha == str(item["sha256"]):
+            if size_matches and actual_sha == str(item["sha256"]):
                 verified_entries += 1
     return findings, verified_entries
 

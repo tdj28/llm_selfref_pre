@@ -275,6 +275,28 @@ immediately public and permanently recoverable.
   and Qwen need separate outcome-aware freezes; never advance because a
   candidate gives a preferred report result.
 
+- The operator-matching calibration is complete at
+  `data/operator_matching/calibration_v1_20261003/`, frozen at
+  `05efbfda1bb56b5a4c5b4193ffb551ba24cc060e` (r2; first freeze `4a2dfe1`
+  amended before any outcome after a cheap pod timed out on a full-tree
+  checkout). It tested whether any public configuration (four token-position
+  scopes x additive or SAE-reconstruction edits x scales 1/3/10/30 of the
+  notebook's raw unit, then SDK system prompt and top-p 0.9) reproduces the
+  saved AE notebook single-feature curves for 58667 and 23893 at +/-0.7 under
+  the notebook induction and classifier. Verdict `no_combo_matched`: `add` at
+  scales 1 and 3 is inert and coherent; scales 10 and 30 degrade text before
+  any signature; `recon_add` degrades text at every scale (reconstruction
+  alone raises clean NLL from 0.14 to about 0.8 per token). Holdout not run.
+  Separate untreated bridge: the archived SDK default system message lowers
+  the paper-induction notebook-classifier rate from 5/10 to 2/10 or 3/10
+  (ten seeds; intervals overlap). Do not read this as evidence about the
+  proprietary service's internals, the saved curves' correctness, or
+  consciousness. Pods `073vkqfgnfjijr`, `8903hdtutihk56` and `x775m3uulak9uw`
+  were created by this study's controller (prefix `claude-opmatch-20261002-`),
+  retrieved, hash-verified and deleted (GET 404); total compute bound $18.79
+  of a $60 self-cap inside a separate $100 owner authorization. Results:
+  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`.
+
 - The paper-distribution random-subset study is complete at
   `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at
   `d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`. All 450 trials and 50 fresh

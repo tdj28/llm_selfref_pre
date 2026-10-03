@@ -12,6 +12,26 @@ The sibling `calibration_report_20261002/` has three PNG/PDF figure pairs;
 separate from the original `cheap_startup_failure_20261002/`. Full scope and
 reproduction: `docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md`.
 
+`data/operator_matching/calibration_v1_20261003/` is the completed
+operator-matching calibration: 870 native-BF16 two-turn trials (640 grid over
+four token-position scopes x {additive, SAE-reconstruction} edits x four dose
+scales for features 58667 and 23893 at +/-0.7, 10 zero, 180 SDK-system-prompt
+and top-p cells, 40 untreated paper-induction bridge trials), 4,300
+rule-skipped conditional rows recorded as `not_selected`, hash-chained
+receipts, the mechanical step-one selection, frozen analysis tables and four
+figure pairs, worker records, both cheap-pod records and a cost/lifecycle
+projection. Verdict `no_combo_matched`: no public configuration reproduces
+the saved notebook curves before text degrades; the SDK default system
+message lowers the untreated paper-induction baseline. Prompts redacted;
+generated text kept. Results:
+`docs/OPERATOR_MATCHING_RESULTS_20261003.md`; protocol with its pre-outcome
+r2 amendment: `docs/OPERATOR_MATCHING_PROTOCOL_20261002.md`.
+
+`data/operator_matching/plan_20261002/` is that study's result-free machine
+plan (5,170 rows including every conditional row, exact rules and rule text,
+reference rates, source and input hashes; SHA-256
+`e90c1872894087920e5eb7a0ad0446d673a703462f71175b6ce956d030c821d5`).
+
 `data/instruction_state_qualification/crossed_v1_20261001/` is the completed
 12-block crossed Llama qualification: 24 source continuations, 48 final
 answers, 192 target judge calls, 24 synthetic fixture calls, successful cheap

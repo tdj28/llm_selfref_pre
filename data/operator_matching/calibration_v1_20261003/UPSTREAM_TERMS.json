@@ -1,0 +1,16 @@
+{
+  "license_copy": {
+    "bytes": 7909,
+    "path": "LLAMA_3_3_LICENSE.txt",
+    "sha256": "fb58d9a630ccc1dc0d08f8c00232de56bc73309020f59c8181d0c12ef28d9f8c",
+    "source": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/raw/6f6073b423013f6a7d4d9f39144961bfbfbc386b/LICENSE"
+  },
+  "released_artifacts": "Generated responses, token-level delivery and native SAE re-encoding telemetry, frozen analyses and qualification logs. No model, SAE or J-lens weight matrices; no new J-lens captures in this phase. Original upstream notebook and recoverable induction input IDs are omitted.",
+  "review_date": "2026-10-01",
+  "sae_model_card": {
+    "declared_license": "llama3.3",
+    "sha256": "dcadf1602fc337dcd538803c0e551cc93e6811b90e6fa0bb75cb8de8e0b219db",
+    "url": "https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50/raw/128ee921ecd1b8b3a87d776cbcc357c0855da134/README.md"
+  },
+  "scope": "Upstream provenance, not a blanket data relicense or legal opinion. Built with Llama."
+}
