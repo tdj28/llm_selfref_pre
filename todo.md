@@ -33,28 +33,33 @@ The project does not try to prove that language models are or are not conscious.
 - [x] Test, push and verify the B1 budget-only plan and inherited receipt
   proof before any target dispatch. Freeze c542cb5 passed all 15 hosted checks;
   both model panels keep their frozen science and no fixtures were repeated.
-- [ ] Pass valid bilingual measurement qualification and cheap CUDA tests
-  before creating a newly owned B200. No reuse of anyone else's pod.
-- [ ] Audit initial real-model rows and measured throughput, then collect the
-  fixed panel within its cap, retaining missing, refused and truncated outputs.
-- [ ] Complete full Astra/Opus coding plus the fixed 16-translation sensitivity
-  audit. Report inclusive, explicit, mixed and paper-style labels separately.
-- [ ] Retrieve/hash-check raw data, delete owned compute and release the
-  paired-block analysis, dense figures, costs and limitations.
+- [x] Pass the synthetic instrument checks and 572 cheap CUDA tests before
+  creating a newly owned B200. This is not human measurement validation.
+- [x] Audit initial real-model rows and measured throughput, then collect all
+  760 generations: 280 sources and 480 final answers, no empty or cap-hit rows.
+- [x] Complete 1,920 target judgments plus 16 translations and 64 translated
+  judgments. Preserve four format retries and every endpoint separately.
+- [x] Retrieve/hash-check raw data, delete owned compute and prepare the
+  paired-block release with three figure pairs, costs and limitations.
+  All 21 analysis files reproduce byte-for-byte on Python 3.10 and 3.12;
+  `docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md` records the findings.
 - [x] Run the separately approved frontier mini after the shared A1 gate:
   Astra, Opus 5.5 and fresh GPT-4.1, two languages, six blocks, four anchor
   crossings; 72 sources and 144 final answers with 576 judgments, capped at $60.
   Completed all 792 calls, no missingness/cap hits, cost bound $20.9621255.
   See `docs/FRONTIER_BILINGUAL_RESULTS_20261002.md`; preserve both readers
   and all endpoints, not a causal ranking of model sophistication.
-- [ ] Resolve Llama's ambiguous cheap-pod HTTP500. No matching pod ID is
-  registered, no B200 or target outputs exist. Never duplicate its persisted
-  creation intent; do not present an inventory absence as verified deletion.
+- [ ] Resolve billing for Llama's original ambiguous cheap-pod HTTP500. No
+  matching pod ID was located. The later authorized retry completed, but does
+  not resolve the original request. Keep its $8 reserve; inventory absence is
+  not verified deletion or evidence of zero billing.
   See `docs/BILINGUAL_LLAMA_B1_STARTUP_20261002.md` for the post-deadline check.
-- [ ] Execute the owner's authorized technical retry under
+- [x] Execute the owner's authorized technical retry under
   `docs/BILINGUAL_POD_RETRY_B1_20261002.md`: unchanged c542cb5 science and
   fixtures, separate operational freeze, original-intent monitoring, $8
   reservation inside GPU45, one new cheap POST and verified owned cleanup.
+  All 801 GPU artifacts retrieved/hash-checked; both new pods deleted GET404.
+  Retry compute bound $9.1586272664, no unrelated pod touched.
 - [ ] Decide whether these measurements justify a later expansion. No
   temperature sweep or additional Pro call; no language-equivalence claim.
 
@@ -62,7 +67,11 @@ Protocol: `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`. The earlier failed
 mechanism-qualification gate remains failed. This is not a rescue attempt.
 Successors: `docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md` and the approved
 budget-only `docs/BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md`. The frontier mini
-is complete; Llama is blocked at provider startup, not by a behavioral result.
+and the complete Llama measurement pilot are finished. The primary language
+interaction is inconclusive; opposite secondary endpoint contrasts are not a
+replacement primary result. Integration of both pilots into `paper/` remains
+editorial work, including Llama's substantial English transcript effect.
+See `docs/BILINGUAL_LLAMA_B1_EXECUTION_20261002.md` for the retry and cleanup.
 
 ### Canonical Manuscript And Editorial Direction (2026-10-01)
 

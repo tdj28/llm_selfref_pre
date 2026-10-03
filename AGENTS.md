@@ -81,9 +81,9 @@ See `docs/FRONTIER_BILINGUAL_RESULTS_20261002.md` and
 instruction effects; Opus varies with language and rubric. Preserve all
 endpoints and readers. Six blocks do not establish a capability ranking;
 degenerate all-zero bootstrap intervals are not precise population nulls.
-The Llama cheap-pod POST returned HTTP500, with no exact-name match located.
-No target Llama outcomes or B200 launch. Reconcile the persisted intent before
-any retry; do not duplicate creation or call an unresolved creation deleted.
+At that point the Llama cheap-pod POST had returned HTTP500, with no exact-name
+match located and no target outcomes or B200 launch. Preserve that original
+intent; do not duplicate it or call an unresolved creation deleted.
 
 The owner subsequently authorized a technical retry on October 2. Follow
 `docs/BILINGUAL_POD_RETRY_B1_20261002.md` and the separately frozen controller
@@ -93,6 +93,38 @@ an $8 ambiguous-original reservation inside the existing $45 GPU allocation;
 no total-budget increase. Monitor the original exact name, validate original
 ownership before any late cleanup, and never claim empty inventory proves
 zero billing. Read ignored checkpoint for actual retry and cleanup status.
+
+The retry's GPU collection completed October 2 under operational freeze
+`79d17f70acd94d0efa339d48ce0a8f55a808dd63`: 572 cheap CUDA tests passed;
+all 760 study generations completed (280 sources, 480 final answers), without
+empty responses or cap hits. All 795 main and six cheap artifacts were
+retrieved/hash-checked. Owned pods `x8xpr7nefan09i` and `vi83xlla1vfeu1` were
+deleted with direct GET404 verification. Retry compute is bounded by
+$9.1586272664; the separate $8 ambiguous-original reservation remains inside
+GPU45. No unrelated pod was touched. See
+`docs/BILINGUAL_LLAMA_B1_EXECUTION_20261002.md`. Do not create another pod for
+local judging, translation or analysis. The frozen primary is the Chinese-minus-
+English difference in self-minus-recursive-control inclusive labels, not the
+self/history anchor contrast. Report each judge and attribution endpoint
+separately; the two fixed wording families do not establish language equivalence.
+
+The judged release is complete at
+`data/bilingual_llama_b1/completed_20261002/`; read
+`docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md`. All 1,920 target judgments,
+16 translations and 64 translated judgments completed, with four permitted
+format retries preserved. API bound including earlier fixture carry is
+$65.1788305; total accounting with retry compute, ambiguous-create reserve and
+storage allowance is $87.3374578 of $200. Python 3.10/3.12 reproduce all 21
+analysis files byte-for-byte. Preserve two rejected local-copy reproduction
+attempts; neither changed the scientific data or frozen code.
+
+The primary inclusive language interaction is inconclusive: Astra +0.05
+[-0.10,0.20], Opus -0.15[-0.35,0.05]. Explicit-current secondaries are positive
+and paper-rubric secondaries negative under both readers. Never promote those
+secondaries to the primary. English Llama instruction and transcript effects
+are both substantial; the earlier API-panel instruction dominance is not
+universal. Do not call the pilot a passed internal-mechanism qualification or
+human validation. No more paid work is authorized by completion of this pilot.
 
 ## Canonical Manuscript
 

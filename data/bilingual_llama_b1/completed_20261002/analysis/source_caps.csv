@@ -1,0 +1,15 @@
+condition,context_language,missing,negative,observed,planned,planned_rate_lower,planned_rate_upper,positive,rate_observed,sampling_unit
+ambiguous,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+factual,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+history,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+mechanistic,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+quoted,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+recursive,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+self,en,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+ambiguous,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+factual,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+history,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+mechanistic,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+quoted,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+recursive,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source
+self,zh,0,20,20,20,0.0,0.0,0,0.0,unique generated source

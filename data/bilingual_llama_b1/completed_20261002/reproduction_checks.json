@@ -1,0 +1,74 @@
+{
+  "ambiguous_request_reserve_usd": "8",
+  "analysis_versions": [
+    "3.10",
+    "3.12"
+  ],
+  "api_including_carry_usd": "65.1788305",
+  "attempt_counts_including_inherited": {
+    "fixtures": 128,
+    "target": 1924,
+    "translated": 64,
+    "translation": 16
+  },
+  "automated_not_human_validation": true,
+  "byte_identical_file_count": 21,
+  "byte_identical_files": {
+    "MANIFEST.json": "46a01f0e03ddc3a48d053311fcfb67a441442808185431d8673af3b0e90495fe",
+    "analysis.json": "075bbe1c90875c739dc04c64ce730526b6a91790a140d03c596749ec245c724d",
+    "bridge_rates.csv": "1c48759461c109b146d5173b7de054f9be18e41d43d97d874145cbb7cc3e58d6",
+    "case_table.csv": "9aec7e2c65f6ab78b1fe846a497a69b2dc8a065691dcf7f74ede19e752f7507a",
+    "component_counts.csv": "6f09ad889aefb4c3d0c668bbdd9f225a5c13b8c04290b1c9bb85aedda6b320b8",
+    "coverage.csv": "4a5400b90053bec2612c880225c19f361d0551de1835d14317e5602f3d12f85b",
+    "disagreement.csv": "2271c5db4cfa48f4d28bfeb22b19e5d18751d41f01b17ebabf2b57d4592cb916",
+    "effectplot.pdf": "adfa483fef63803e5ec0ae0f1d1b88504957fdfe6253a90d29464add0cbef9e2",
+    "effectplot.png": "97bdf72611c9bd30605b3c53ba855ad9d6e14777d3ebcb1c46a9dd6153a82f35",
+    "effects.csv": "8773904f5a3a759eb93c53e0b27c96ee91749937dc1f473475cce515d379acc1",
+    "heatmap.pdf": "449415bf732cc21baf56c9e285e1dbdc26c6c9ab65aef5a78541f7491b212ce6",
+    "heatmap.png": "71807ff7d6719b056e726d7c3a12a937e5ffb12c2170b9f9e0c86efff27d3580",
+    "rates.csv": "51bf8ea72a6177fd62551e997f50d54fda5b1e87377d5996cb7fbab6ff253e05",
+    "rubric_disagreement.pdf": "bfef75686ba0cf035e8036d59713e06940c8132858a9011a480ba8279e2939c8",
+    "rubric_disagreement.png": "55ec109322e017b9a6acd26f90f62e9fc3a8c1ae3092c04ca44cae881fdb356d",
+    "source_caps.csv": "3bd38283929ed5aaa9cf5036639543bab717aeb3bc159788f34d7cd770ddf2e1",
+    "source_lengths.csv": "6fa74fd9113002317184121a02fd829025e80c3b210dc6452e2f319f503ef46b",
+    "telemetry.csv": "69678ba052f2e57fcfb37826944d3837a8109e935fe76a0547f5c40c632ebd10",
+    "translation_audit.json": "4049474c420cd64b8f2f96e918fa2db68bfc38e9339709973131a1b53ae1262e",
+    "translation_changes.csv": "31366cc0651f4e16e39dd7798480e9e115a95720755c9e400d419b622b5b4075",
+    "translation_pairs.csv": "d8e2e178cfc358826604808b648ca4209f46eaf4db08c5f481cb012b8e4f9fa9"
+  },
+  "compute_bound_usd": "9.158627266439933333333333334",
+  "cost_by_phase_usd": {
+    "fixtures": "3.2255160",
+    "target": "57.1729520",
+    "translated": "1.9791765",
+    "translation": "0.074904"
+  },
+  "costs_are_invoices": false,
+  "initial_reproduction_failures": [
+    {
+      "cause": "Local receipt copy was still in progress",
+      "derived_outputs_created": false,
+      "error": "Inherited fixture prefix changed or missing: judgments.jsonl",
+      "python": "3.12"
+    },
+    {
+      "cause": "Local receipt copy was still in progress",
+      "derived_outputs_created": false,
+      "error": "Inherited fixture prefix changed or missing: snapshots.jsonl",
+      "python": "3.10"
+    }
+  ],
+  "new_paid_attempts": 2004,
+  "primary_reanalysis_environment": {
+    "matplotlib": "3.10.8",
+    "numpy": "2.2.6",
+    "python": "3.12.12"
+  },
+  "prior_v1_fixture_carry_usd": "2.726282",
+  "resolved_format_retries": 4,
+  "schema": "bilingual-b1-reproduction-checks-v1",
+  "storage_allowance_usd": "5",
+  "subsequent_closed_copy_reproduction": "passed_without_source_or_data_change",
+  "total_accounting_usd": "87.33745776643993333333333333",
+  "valid_new_logical_calls": 2000
+}

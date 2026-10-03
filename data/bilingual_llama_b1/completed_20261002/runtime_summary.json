@@ -1,0 +1,54 @@
+{
+  "ambiguous_original": {
+    "deletion_verified": false,
+    "intent_sha256": "78d564cdc7c772619e2c40807570a2e6690275c285038b7aad9745993d18111e",
+    "interpretation": "No exact-name match observed; not proof of zero billing",
+    "reservation_usd": "8",
+    "returned_id": null
+  },
+  "operational_freeze": "79d17f70acd94d0efa339d48ce0a8f55a808dd63",
+  "plan_sha256": "1f06e45c703b11f6d7c02535529fa69112bcfa640886a230550c689e1b1b3886",
+  "pods": {
+    "cheap": {
+      "closure": {
+        "compute_upper_bound_usd": "0.2486995998666666666666666667",
+        "cumulative_gpu_upper_bound_usd": "8.248699599866666666666666667",
+        "elapsed_seconds": "1065.855428",
+        "get_status": 404,
+        "pod_id": "x8xpr7nefan09i",
+        "utc": "2026-10-02T21:55:20.499758+00:00",
+        "within_limits": true
+      },
+      "closure_receipt_sha256": "f6c90a7abd79b54a02eef444d5cc2b129c7b87a41aedbd32ae22f446f28632e3",
+      "creation_intent_utc": "2026-10-02T21:37:34.644295+00:00",
+      "final_retrieval_receipt_sha256": "6460dc090b7892a5f198231acb0a375f1140eeffe71d8fb13d0dc6a9766290f6",
+      "last_original_observation": {
+        "matching_ids": [],
+        "utc": "2026-10-02T21:55:10.281716+00:00"
+      },
+      "retrieved_artifact_count": 6
+    },
+    "main": {
+      "closure": {
+        "compute_upper_bound_usd": "8.909927666573266666666666667",
+        "cumulative_gpu_upper_bound_usd": "17.15862726643993333333333333",
+        "elapsed_seconds": "4655.404876584",
+        "get_status": 404,
+        "pod_id": "vi83xlla1vfeu1",
+        "utc": "2026-10-02T23:14:28.910190+00:00",
+        "within_limits": true
+      },
+      "closure_receipt_sha256": "c9047e752ca808fc573629078ad312f564b9264690475a528792ff8726559bd1",
+      "creation_intent_utc": "2026-10-02T21:56:53.516963+00:00",
+      "final_retrieval_receipt_sha256": "65f8088109866ea33325367642c9e302a608dda54e3da8a0e1e40b13d0a96f9c",
+      "last_original_observation": {
+        "matching_ids": [],
+        "utc": "2026-10-02T23:13:47.731963+00:00"
+      },
+      "retrieved_artifact_count": 795
+    }
+  },
+  "schema": "bilingual-b1-owned-runtime-summary-v1",
+  "scientific_freeze": "c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb",
+  "scope": "Allowlisted projection from private lifecycle receipts; no SSH, credentials or unrelated inventory published"
+}

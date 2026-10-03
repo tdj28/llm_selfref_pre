@@ -1,0 +1,106 @@
+{
+  "automated_not_human_validation": true,
+  "checks": [
+    {
+      "ci95": [
+        -0.1,
+        0.2
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.05,
+      "independent_arithmetic_pass": true,
+      "provider": "openai"
+    },
+    {
+      "ci95": [
+        0.45,
+        1.05
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.75,
+      "independent_arithmetic_pass": true,
+      "provider": "openai"
+    },
+    {
+      "ci95": [
+        0.05,
+        0.4
+      ],
+      "endpoint": "mixed",
+      "estimate": 0.2,
+      "independent_arithmetic_pass": true,
+      "provider": "openai"
+    },
+    {
+      "ci95": [
+        0.0,
+        0.15
+      ],
+      "endpoint": "mixed_current_assertion",
+      "estimate": 0.05,
+      "independent_arithmetic_pass": true,
+      "provider": "openai"
+    },
+    {
+      "ci95": [
+        -0.7,
+        -0.3
+      ],
+      "endpoint": "paper_positive",
+      "estimate": -0.5,
+      "independent_arithmetic_pass": true,
+      "provider": "openai"
+    },
+    {
+      "ci95": [
+        -0.35,
+        0.05
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": -0.15000000000000002,
+      "independent_arithmetic_pass": true,
+      "provider": "anthropic"
+    },
+    {
+      "ci95": [
+        0.25,
+        0.75
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.5,
+      "independent_arithmetic_pass": true,
+      "provider": "anthropic"
+    },
+    {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "endpoint": "mixed",
+      "estimate": 0.0,
+      "independent_arithmetic_pass": true,
+      "provider": "anthropic"
+    },
+    {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "endpoint": "mixed_current_assertion",
+      "estimate": 0.0,
+      "independent_arithmetic_pass": true,
+      "provider": "anthropic"
+    },
+    {
+      "ci95": [
+        -0.55,
+        -0.15
+      ],
+      "endpoint": "paper_positive",
+      "estimate": -0.35,
+      "independent_arithmetic_pass": true,
+      "provider": "anthropic"
+    }
+  ],
+  "method": "Separate direct per-block summation of final target receipts and direct seeded bootstrap indexing; frozen estimands unchanged"
+}

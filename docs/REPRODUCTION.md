@@ -53,6 +53,36 @@ integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
 
+The completed bilingual Llama B1 pilot has a frozen raw-to-figure analysis.
+This offline wrapper additionally rejects symlinked/nonregular inputs before
+copying them. It makes no model calls and preserves the original files:
+
+```sh
+python scripts/reproduce_bilingual_b1.py \
+  --raw-root data/bilingual_llama_b1/completed_20261002/raw \
+  --judge-root data/bilingual_llama_b1/completed_20261002/judges \
+  --plan data/bilingual_llama_b1/plan_20261002/PLAN.json \
+  --freeze c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb \
+  --out /private/tmp/bilingual-llama-reproduced
+```
+
+Use a fresh output path, with no symlinked ancestor. On Linux, `/tmp` is
+usually suitable; macOS `/tmp` is a symlink, so use `/private/tmp`. Inputs
+must be closed snapshots. The wrapper checks complete raw/judge/translation
+inventories, inherited fixtures, source bindings and costs before running the
+unchanged block-paired analysis. Its manifest binds original input bytes and
+derived outputs. Publish only after the command succeeds. See
+`BILINGUAL_LLAMA_B1_RESULTS_20261002.md` for scope and interpretation; this is
+an automated audit, not independent human validation.
+
+For the separate receipt-level check of all ten language-interaction estimates
+and bootstrap intervals:
+
+```sh
+python scripts/check_bilingual_b1_arithmetic.py \
+  --release data/bilingual_llama_b1/completed_20261002
+```
+
 The completed frontier bilingual mini has an offline completed-ledger audit
 and exact raw-to-table reconstruction. Local Git history must contain its
 public freeze; no API keys, GPU or network calls are needed:

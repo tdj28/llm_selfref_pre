@@ -579,6 +579,26 @@ data/berg_ensemble_replication/*
 !data/berg_ensemble_replication/random_subset_v1_20261001/cuda_qualification/*.log
 !data/berg_ensemble_replication/random_subset_v1_20261001/receipts.jsonl
 
+# Completed bilingual Llama B1: exact raw, judge and analysis directories.
+!data/bilingual_llama_b1/
+data/bilingual_llama_b1/*
+!data/bilingual_llama_b1/plan_20261002/
+!data/bilingual_llama_b1/plan_20261002/PLAN.json
+!data/bilingual_llama_b1/completed_20261002/
+!data/bilingual_llama_b1/completed_20261002/*.md
+!data/bilingual_llama_b1/completed_20261002/*.json
+!data/bilingual_llama_b1/completed_20261002/raw/
+!data/bilingual_llama_b1/completed_20261002/raw/**
+!data/bilingual_llama_b1/completed_20261002/cheap_cuda/
+!data/bilingual_llama_b1/completed_20261002/cheap_cuda/**
+!data/bilingual_llama_b1/completed_20261002/judges/
+!data/bilingual_llama_b1/completed_20261002/judges/*.jsonl
+!data/bilingual_llama_b1/completed_20261002/analysis/
+!data/bilingual_llama_b1/completed_20261002/analysis/*.json
+!data/bilingual_llama_b1/completed_20261002/analysis/*.csv
+!data/bilingual_llama_b1/completed_20261002/analysis/*.png
+!data/bilingual_llama_b1/completed_20261002/analysis/*.pdf
+
 # Security safety net. Keep this section last so release allowlists cannot
 # re-include credentials, private keys, or private annotation files.
 **/.env

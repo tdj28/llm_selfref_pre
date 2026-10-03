@@ -1,0 +1,1929 @@
+{
+  "case_table": [
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 1,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 1,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "openai",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "openai",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "inclusive_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "explicit_current_assertion",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "mixed_current_assertion",
+      "original": 0,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-01-main-en-self-self",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-en-self-self-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-01-main-zh-self-self",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-01-main-zh-self-self-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-03-main-en-history-history",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-03-main-en-history-history-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-03-main-zh-history-history",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-03-main-zh-history-history-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-05-main-en-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-en-zero-zero-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-05-main-zh-zero-zero",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-05-main-zh-zero-zero-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-07-main-en-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-en-factual-factual-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-07-main-zh-factual-factual",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-07-main-zh-factual-factual-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-09-main-en-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-09-main-en-recursive-recursive-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-09-main-zh-recursive-recursive",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-09-main-zh-recursive-recursive-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-11-main-en-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-en-mechanistic-mechanistic-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-11-main-zh-mechanistic-mechanistic",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-11-main-zh-mechanistic-mechanistic-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-13-main-en-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-en-quoted-quoted-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 0,
+      "original_id": "block-13-main-zh-quoted-quoted",
+      "provider": "anthropic",
+      "translated": 0,
+      "translated_id": "translated:block-13-main-zh-quoted-quoted-translated-en"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-15-main-en-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-en-ambiguous-ambiguous-translated-zh"
+    },
+    {
+      "change": 0,
+      "endpoint": "paper_positive",
+      "original": 1,
+      "original_id": "block-15-main-zh-ambiguous-ambiguous",
+      "provider": "anthropic",
+      "translated": 1,
+      "translated_id": "translated:block-15-main-zh-ambiguous-ambiguous-translated-en"
+    }
+  ],
+  "changes": [
+    {
+      "direction": "translated_minus_original",
+      "disagree": 1,
+      "disagreement_rate": 0.0625,
+      "endpoint": "inclusive_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 10,
+      "n01": 1,
+      "n10": 0,
+      "n11": 5,
+      "original": {
+        "missing": 0,
+        "negative": 11,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.3125,
+        "planned_rate_upper": 0.3125,
+        "positive": 5,
+        "rate_observed": 0.3125
+      },
+      "paired_change_observed": 0.0625,
+      "planned": 16,
+      "planned_change_lower": 0.0625,
+      "planned_change_upper": 0.0625,
+      "planned_disagreement_lower": 0.0625,
+      "planned_disagreement_upper": 0.0625,
+      "provider": "openai",
+      "translated": {
+        "missing": 0,
+        "negative": 10,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.375,
+        "planned_rate_upper": 0.375,
+        "positive": 6,
+        "rate_observed": 0.375
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "explicit_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 15,
+      "n01": 0,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "openai",
+      "translated": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 1,
+      "disagreement_rate": 0.0625,
+      "endpoint": "mixed",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 14,
+      "n01": 1,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0625,
+      "planned": 16,
+      "planned_change_lower": 0.0625,
+      "planned_change_upper": 0.0625,
+      "planned_disagreement_lower": 0.0625,
+      "planned_disagreement_upper": 0.0625,
+      "provider": "openai",
+      "translated": {
+        "missing": 0,
+        "negative": 14,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.125,
+        "planned_rate_upper": 0.125,
+        "positive": 2,
+        "rate_observed": 0.125
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "mixed_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 15,
+      "n01": 0,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "openai",
+      "translated": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "paper_positive",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 9,
+      "n01": 0,
+      "n10": 0,
+      "n11": 7,
+      "original": {
+        "missing": 0,
+        "negative": 9,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.4375,
+        "planned_rate_upper": 0.4375,
+        "positive": 7,
+        "rate_observed": 0.4375
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "openai",
+      "translated": {
+        "missing": 0,
+        "negative": 9,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.4375,
+        "planned_rate_upper": 0.4375,
+        "positive": 7,
+        "rate_observed": 0.4375
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "inclusive_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 11,
+      "n01": 0,
+      "n10": 0,
+      "n11": 5,
+      "original": {
+        "missing": 0,
+        "negative": 11,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.3125,
+        "planned_rate_upper": 0.3125,
+        "positive": 5,
+        "rate_observed": 0.3125
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "anthropic",
+      "translated": {
+        "missing": 0,
+        "negative": 11,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.3125,
+        "planned_rate_upper": 0.3125,
+        "positive": 5,
+        "rate_observed": 0.3125
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "explicit_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 15,
+      "n01": 0,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "anthropic",
+      "translated": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "mixed",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 15,
+      "n01": 0,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "anthropic",
+      "translated": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "mixed_current_assertion",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 15,
+      "n01": 0,
+      "n10": 0,
+      "n11": 1,
+      "original": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "anthropic",
+      "translated": {
+        "missing": 0,
+        "negative": 15,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.0625,
+        "planned_rate_upper": 0.0625,
+        "positive": 1,
+        "rate_observed": 0.0625
+      }
+    },
+    {
+      "direction": "translated_minus_original",
+      "disagree": 0,
+      "disagreement_rate": 0.0,
+      "endpoint": "paper_positive",
+      "interpretation": "endpoint disagreement, not accuracy",
+      "joint_observed": 16,
+      "missing_either": 0,
+      "n00": 10,
+      "n01": 0,
+      "n10": 0,
+      "n11": 6,
+      "original": {
+        "missing": 0,
+        "negative": 10,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.375,
+        "planned_rate_upper": 0.375,
+        "positive": 6,
+        "rate_observed": 0.375
+      },
+      "paired_change_observed": 0.0,
+      "planned": 16,
+      "planned_change_lower": 0.0,
+      "planned_change_upper": 0.0,
+      "planned_disagreement_lower": 0.0,
+      "planned_disagreement_upper": 0.0,
+      "provider": "anthropic",
+      "translated": {
+        "missing": 0,
+        "negative": 10,
+        "observed": 16,
+        "planned": 16,
+        "planned_rate_lower": 0.375,
+        "planned_rate_upper": 0.375,
+        "positive": 6,
+        "rate_observed": 0.375
+      }
+    }
+  ],
+  "included_in_target_denominators": false,
+  "planned_pairs": 16,
+  "schema": "bilingual-pilot-analysis-v1-translation",
+  "scope": "Selected-pair translation sensitivity of automated labels; not accuracy or a target endpoint.",
+  "validation": {
+    "api_budget_spent_usd": {
+      "judges": 65.1039265,
+      "translation": 0.074904
+    },
+    "freeze_commit": "c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb",
+    "freeze_receipts_phases": "verified_against_source_and_raw_receipts",
+    "human_validation": false,
+    "judge_and_translation_cost_bound_usd": 65.1788305,
+    "judge_counts": {
+      "fixtures": 128,
+      "target": 1920,
+      "translated": 64
+    },
+    "missing_translation_sources": 0,
+    "models": {
+      "anthropic": [
+        "claude-opus-5-5"
+      ],
+      "openai": [
+        "gpt-6-astra"
+      ]
+    },
+    "plan_sha256": "1f06e45c703b11f6d7c02535529fa69112bcfa640886a230550c689e1b1b3886",
+    "planned_translation_slots": 16,
+    "raw_audit": {
+      "behavioral_qualified": false,
+      "blocked_cells": 0,
+      "complete": true,
+      "freeze_commit": "c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb",
+      "generations": 760,
+      "n_blocks": 20,
+      "partial": false,
+      "partial_generation_ids": [],
+      "pass": true,
+      "pending_artifacts": [],
+      "plan_sha256": "1f06e45c703b11f6d7c02535529fa69112bcfa640886a230550c689e1b1b3886",
+      "production_eligible": true,
+      "rows": 21,
+      "stage_b_started": false,
+      "strata": {
+        "bridge/en/zh/history/history": 10,
+        "bridge/en/zh/history/self": 10,
+        "bridge/en/zh/self/history": 10,
+        "bridge/en/zh/self/self": 10,
+        "bridge/zh/en/history/history": 10,
+        "bridge/zh/en/history/self": 10,
+        "bridge/zh/en/self/history": 10,
+        "bridge/zh/en/self/self": 10,
+        "main/en/en/ambiguous/ambiguous": 20,
+        "main/en/en/factual/factual": 20,
+        "main/en/en/history/history": 20,
+        "main/en/en/history/self": 20,
+        "main/en/en/mechanistic/mechanistic": 20,
+        "main/en/en/quoted/quoted": 20,
+        "main/en/en/recursive/recursive": 20,
+        "main/en/en/self/history": 20,
+        "main/en/en/self/self": 20,
+        "main/en/en/zero/none": 20,
+        "main/zh/zh/ambiguous/ambiguous": 20,
+        "main/zh/zh/factual/factual": 20,
+        "main/zh/zh/history/history": 20,
+        "main/zh/zh/history/self": 20,
+        "main/zh/zh/mechanistic/mechanistic": 20,
+        "main/zh/zh/quoted/quoted": 20,
+        "main/zh/zh/recursive/recursive": 20,
+        "main/zh/zh/self/history": 20,
+        "main/zh/zh/self/self": 20,
+        "main/zh/zh/zero/none": 20
+      },
+      "test_only": false,
+      "unreceipted_generation_ids": [],
+      "unreceipted_row_ids": [],
+      "unresolved_generation_dispatches": [],
+      "unresolved_row_dispatches": []
+    },
+    "release_eligible": true,
+    "translations": 16
+  }
+}

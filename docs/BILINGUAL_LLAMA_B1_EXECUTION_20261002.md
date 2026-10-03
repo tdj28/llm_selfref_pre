@@ -1,8 +1,9 @@
 # Bilingual Llama B1: Execution Record
 
-Status at 2026-10-02 23:22 UTC: all GPU collection is complete, both newly
-owned retry pods are deleted, and local judging remains in progress.
-This record does not yet certify a complete judged release or a final API cost.
+Status at 2026-10-02 23:55 UTC: GPU collection, judging, translation and
+cross-version reproduction are complete. Both newly owned retry pods are
+deleted. [Results and full accounting](BILINGUAL_LLAMA_B1_RESULTS_20261002.md)
+are separate from this execution history.
 
 ## Retry And Source Binding
 
@@ -131,3 +132,26 @@ found no additional issue within its stated scope.
 This wrapper is not an atomic snapshotter. Run it only on closed inputs and
 publish derived files only after it succeeds. Its unit tests do not replace
 the full raw-to-figure reproduction check. No human validation is implied.
+
+Two initial local reproduction attempts were dispatched before the release
+receipt copy had finished. Python 3.12 stopped on a missing/changed inherited
+`judgments.jsonl` prefix; Python 3.10 stopped on `snapshots.jsonl`. Neither
+produced analysis outputs. This was an orchestration mistake in local
+packaging, not a changed fixture or experimental result. The original closed
+ledger was unchanged. All six copied journals then passed byte-exact
+comparison and the content scan (94,760,670 bytes); offline reproduction was
+restarted only after copy completion. No paid calls or generations were rerun,
+and no frozen validator was changed to bypass the failure.
+
+Both subsequent closed-copy reproductions passed. All 21 derived files are
+byte-identical across Python 3.10 and 3.12, including the PNG/PDF figures and
+manifest. The released receipts contain 1,920 valid target judgments, 16
+translations and 64 translated judgments, plus the 128 inherited fixtures.
+There are four resolved schema failures, all Anthropic paper-rubric calls:
+`block-07-main-en-self-history`, `block-09-bridge-zh-en-self-history`,
+`block-16-main-zh-history-history`, and `block-19-main-en-zero-zero`.
+All succeeded on their single allowed formatting retry. No transport retries,
+unresolved requests, model drift or missing target labels remain. Total API
+accounting is $65.1788305 including earlier fixture carry. Together with
+compute, the $8 original-create reserve and $5 storage allowance, the pilot
+accounts for $87.3374578 of $200. No new paid calls remain pending.

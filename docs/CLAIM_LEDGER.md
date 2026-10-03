@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-09-30
+Last updated: 2026-10-02
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -10,6 +10,26 @@ The [September review correction](CLAUDE_REVIEW_RESPONSE_20260929.md) supersedes
 the original steering headline. Frozen verdicts below are historical algorithm
 outputs, not a certification of assay validity. Audits by separate agent-written
 implementations are automated checks, not independent human validation.
+
+## Bilingual Llama Pilot
+
+The completed pilot is in `data/bilingual_llama_b1/completed_20261002/`;
+interpretation and denominators are in `BILINGUAL_LLAMA_B1_RESULTS_20261002.md`.
+Frozen analysis: `experiments/bilingual_llama_pilot/analysis.py`, executed
+through the source-bound B1 release adapter. These findings await editorial
+integration into the canonical manuscript; they do not overwrite earlier data.
+
+| Claim | Evidence | Permissible wording | Do not claim |
+|---|---|---|---|
+| Inclusive self-minus-recursive contrast remains large in both languages. | `analysis/effects.csv`, 20 paired blocks, separate readers | "English contrasts are +0.80/+0.95 and Chinese +0.85/+0.80. The primary language interactions are +0.05[-0.10,0.20] and -0.15[-0.35,0.05]." | Language equivalence, a resolved primary language effect, or generalization beyond the fixed families/model/readers. |
+| Different endpoints give opposite language interactions. | Same file and `analysis/rates.csv` | "Explicit-current secondaries are +0.75/+0.50; paper-rubric secondaries are -0.50/-0.35. Preserve both and the inconclusive inclusive primary." | A preferred secondary replaces the primary, judge agreement proves accuracy, or Chinese changes consciousness. |
+| Llama's transcript effects are substantial too. | Anchor contrasts in `analysis/effects.csv` | "English inclusive instruction effects are +0.50/+0.475 and transcript effects +0.45/+0.425. The earlier API-panel instruction dominance is not universal." | Transcripts never matter, or incongruent crossings uniquely identify an internal mechanism. |
+| Selected translations show limited label changes; measurement invariance remains unestablished. | `analysis/translation_audit.json`, 16 fixed pairs | "One inclusive label changes under Astra; none under Opus. No explicit-current or paper labels change on these pairs." | Human bilingual validation or invariance from a small selected sample. |
+
+All intervals are conditional block-bootstrap intervals, not population
+equivalence bounds. Four format retries, the failed original fixture gate,
+budget amendment, startup uncertainty and local-copy verification failure stay
+visible. This was a behavioral measurement pilot, not an internal intervention.
 
 ## Primary Causal Study
 

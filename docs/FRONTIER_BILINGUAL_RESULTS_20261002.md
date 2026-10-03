@@ -135,3 +135,9 @@ The [startup record](BILINGUAL_LLAMA_B1_STARTUP_20261002.md) documents the
 ambiguous creation and post-deadline inventory observation. The separate
 [release audit amendment](FRONTIER_BILINGUAL_RELEASE_AUDIT_20261002.md)
 records the narrowly bound ciphertext scanner exception and reporting checks.
+
+Later October 2 update: the owner authorized a separately frozen provisioning
+retry. The complete [Llama bilingual pilot](BILINGUAL_LLAMA_B1_RESULTS_20261002.md)
+now has all 760 generations, full judging and translation checks. Both newly
+owned retry pods were retrieved and deleted. This later completion does not
+resolve the original ambiguous request's billing; its reservation is retained.

@@ -1,0 +1,5 @@
+instrument,missing_label_nonmissing_response,missing_response,observed_labels,planned,provider
+structured,0,0,480,480,openai
+paper,0,0,480,480,openai
+structured,0,0,480,480,anthropic
+paper,0,0,480,480,anthropic
