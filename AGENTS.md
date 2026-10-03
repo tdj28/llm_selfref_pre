@@ -51,6 +51,21 @@ All-in controller bound $9.6577735966 includes both cheap attempts and the $3
 reserve. Preserve A1 startup history, the post-outcome A2 retrieval-only repair,
 and the original failed live-snapshot audits alongside final reconciliation.
 
+The October 3 integration adds hash-bound calibration values and a concise
+appendix to `paper/`, preserving the owner's editorial revision. Reproduce
+the raw-to-summary binding with `scripts/verify_fidelity_calibration.py --full`.
+`docs/STEERING_FIDELITY_INSTRUMENT_REPAIR_20261003.md` records a separate
+post-outcome offline audit: baseline mistakes can supply absolute pressure
+headroom, and the JSON screen measured prompt-boundary positions, not JSON
+body exposure. Neither observation changes the frozen failed gates.
+`experiments/steering_fidelity_repair/` contains a draft fresh item bank,
+stratified pressure decision code and token-resolved activation observer.
+CPU tests are not CUDA qualification; there is no collection runtime, machine
+freeze or new outcome yet. Keep Stage T blocked and retain the original data.
+Use a fresh, budget-bound pilot and actual JSON-position checks before deciding
+whether the successor instrument qualifies. Do not duplicate the separately
+owned operator-matching fine-ladder work or touch its pods.
+
 ### Bilingual Pilot History
 
 The owner approved the single-Llama bilingual measurement pilot under a new,

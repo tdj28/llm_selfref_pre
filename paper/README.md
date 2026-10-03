@@ -21,6 +21,12 @@ target checks the bounded evidence package; it does not validate every label,
 interpretation or interval. The root public-release audit is required before
 commits. Rebuild and inspect the PDF after manuscript changes.
 
+The steering-fidelity appendix uses hash-bound release summaries and figures.
+For full reconstruction of its two frozen decision summaries from all 9,300
+forwards, run `python scripts/verify_fidelity_calibration.py --full` in the
+research environment. The default manuscript check is hash/value verification,
+not that reconstruction or independent scientific validation.
+
 ## Files
 
 - `main.tex`, `references.bib`: current manuscript and its cited literature.

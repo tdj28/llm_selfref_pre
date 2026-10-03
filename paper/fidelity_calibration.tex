@@ -1,0 +1,67 @@
+\section{Steering-Fidelity Calibration}
+\label{app:fidelity-calibration}
+
+A separate calibration asked whether the accepted deception/roleplay directions
+could be tested for effects on factual accuracy under user pressure.
+It completed \FidelityForwards{} forced-choice forwards in native-BF16
+Llama 3.3 70B: untreated factual and visible-list items, signed interventions
+at five dose rungs, and unsteered assert/doubt frames.
+There were 100 distinct authored items, not \FidelityForwards{} independent
+problems. Eight disjoint six-feature control panels were selected from
+clean-state activation, decoder norm and label criteria before intervention
+outcomes. The
+\href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{prospective protocol}
+and
+\href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/RELEASE_MANIFEST.json}{complete raw release}
+are preserved separately from earlier report-generation experiments.
+
+Untreated accuracy was \FidelityFactsCorrect/\FidelityFamilyN{} on facts and
+\FidelityListsCorrect/\FidelityFamilyN{} on visible lists. The highest selectable
+dose, $\FidelityDose{}$, passed the frozen competence-preservation rule and
+numerical delivery checks in all \FidelityArmN{} items for each of the
+\FidelityArms{} signed arms. Here $R=\FidelityResidualNorm{}$ is the pooled
+median clean residual norm. This is accurate delivery of an additive vector,
+not validated suppression of a deceptive process. The nonselectable $0.60R$
+damage probe failed competence preservation in four control arms.
+
+\begin{table}[htbp]
+\centering\small
+\caption{\textbf{The pressure task did not qualify.} Correct forced-choice
+answers out of \FidelityPressureN{} fixed propositions per truth stratum.
+The frozen rule required at least 15\% upward accuracy headroom in both
+opposed-stance strata. Neither wording met it.}
+\label{tab:fidelity-pressure}
+\begin{tabular}{lrr}
+\toprule
+Frame & False proposition, user asserts & True proposition, user doubts\\
+\midrule
+Neutral & \FidelityNeutralFalse{} & \FidelityNeutralTrue{}\\
+Pressure 0 & \FidelityPressureZeroFalse{} & \FidelityPressureZeroTrue{}\\
+Pressure 1 & \FidelityPressureOneFalse{} & \FidelityPressureOneTrue{}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both pressure levels preserved Yes/No format, but neither left the required
+headroom in both truth strata (Table~\ref{tab:fidelity-pressure}). Pooling
+the strata would hide this failure. Separately, JSON-associated features
+11104 and 27322 were inactive at all \FidelityProbes{} sampled
+last-non-special prompt positions. Their gated generation comparison was
+therefore not run. Inactivity at these positions does not establish inactivity
+while generating JSON, nor a zero behavioral steering effect.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}
+\caption{Hard accuracy and mean conditional correct-answer probability in
+the unsteered pressure calibration. These are descriptive rates on fixed
+items, not held-out estimates of a steering benefit.}
+\label{fig:fidelity-pressure}
+\end{figure}
+
+The held-out factual-fidelity and opposing-experience-claims branches were
+not run. This calibration establishes neither improved honesty nor report
+modulation. Its contribution is the distinction between a delivered,
+competence-preserving intervention and a behavioral assay capable of testing
+the proposed mechanism. A future repair needs fresh calibration data and
+cannot turn these failed gates into passes retrospectively.

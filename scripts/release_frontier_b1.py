@@ -41,6 +41,9 @@ RELEASE_FILES = {"PLAN.json", *("raw/" + n for n in RAW_FILES),
                  *("analysis/" + n for n in (*TABLES, *FIGURES))}
 REPORTING_SOURCES = ("scripts/release_frontier_b1.py", "scripts/audit_public_release.py")
 SCHEMA = "frontier-b1-release-v1"
+ARCHIVED_REPORTING_COMMIT = "4abc13ce9ac832509e7fb4573f6c2aa4e33e0d48"
+ARCHIVED_MANIFEST_PATH = "data/frontier_bilingual_b1/completed_20261002/MANIFEST.json"
+ARCHIVED_MANIFEST_SHA256 = "da7468314f3334b93043af854a7890d528d93d8ddd93f0c5d2af76f9560f825b"
 
 
 def _require(condition, message):
@@ -200,6 +203,30 @@ def _manifest(root, plan, plan_hash, freeze, report, gate):
                       for n in sorted(RELEASE_FILES)]}
 
 
+def _verified_reporting_sources(manifest_bytes, current):
+    """Historical tool provenance is not a requirement to run old audit code.
+
+    Only the exact already-public manifest can use archived source bindings.
+    Verify its Git snapshot and each original tool blob; arbitrary resealed
+    manifests or unknown historical tool hashes remain failures.
+    """
+    manifest = json.loads(manifest_bytes)
+    recorded = manifest.get("reporting_source_hashes")
+    if recorded == current:
+        return current
+    _require(hashlib.sha256(manifest_bytes).hexdigest() == ARCHIVED_MANIFEST_SHA256,
+             "Manifest provenance/audit does not reconstruct: unknown reporting history")
+    _git("merge-base", "--is-ancestor", ARCHIVED_REPORTING_COMMIT, "HEAD")
+    archived = _git("cat-file", "blob", f"{ARCHIVED_REPORTING_COMMIT}:{ARCHIVED_MANIFEST_PATH}")
+    _require(archived == manifest_bytes, "Archived manifest differs")
+    _require(isinstance(recorded, dict) and set(recorded) == set(REPORTING_SOURCES),
+             "Archived reporting-source inventory differs")
+    for name, expected in recorded.items():
+        blob = _git("cat-file", "blob", f"{ARCHIVED_REPORTING_COMMIT}:{name}")
+        _require(hashlib.sha256(blob).hexdigest() == expected, "Archived reporting-source hash differs")
+    return recorded
+
+
 def build(run_root, plan_path, freeze, out):
     run_root, plan_path = _safe_path(run_root), _safe_path(plan_path)
     out = _new_destination(out, run_root, plan_path)
@@ -275,6 +302,8 @@ def verify(root, freeze, out=None):
             _require(_read(stage / "analysis" / name) == _read(root / "analysis" / name),
                      "Raw-to-table reproduction differs: " + name)
         expected = _manifest(root, plan, sha(root / "PLAN.json"), freeze, report, gate)
+        expected["reporting_source_hashes"] = _verified_reporting_sources(
+            manifest_bytes, expected["reporting_source_hashes"])
         _require(manifest == expected, "Manifest provenance/audit does not reconstruct")
         _require(_read(root / "MANIFEST.json") == manifest_bytes and _verify_inventory(root) == manifest,
                  "Release changed during verification")

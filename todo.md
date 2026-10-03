@@ -35,8 +35,19 @@ The project does not try to prove that language models are or are not conscious.
   **Not launched:** C selected 0.30R but both pressure levels failed; JSON
   positive-control eligibility also failed. No E-only fallback. Any new
   instrument requires a separate fresh-data design, not a waived C gate.
-- [ ] Integrate the resulting evidence and limitations into canonical `paper/`
-  without overwriting the owner's ongoing editorial changes.
+- [x] Integrate the completed calibration and limitations into canonical
+  `paper/`, preserving the owner's editorial revision. Bind its values and
+  figure to the immutable release; rebuild the PDF and inspect the appendix.
+- [x] Audit the failed pressure and JSON checks offline without new inference.
+  Preserve all failures: old mistakes can supply headroom; the JSON probes
+  did not measure activity during JSON processing.
+- [x] Implement a fresh balanced item bank, pressure-induced-error decision
+  rules and token-resolved observer with local tests. These are preparation,
+  not a passed instrument or a newly executed experiment.
+- [ ] Complete the bounded repair pilot's JSON panel, collection/receipt code,
+  source-bound plan, cost ceiling and cheap CUDA qualification. See
+  `docs/STEERING_FIDELITY_INSTRUMENT_REPAIR_20261003.md`. No old held-out items,
+  feature substitution, retrospective gate waiver or E-only fallback.
 
 ### Bilingual Measurement Pilot (2026-10-01)
 
