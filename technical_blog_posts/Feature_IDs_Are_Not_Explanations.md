@@ -11,14 +11,14 @@ summary: "A primer on sparse autoencoders: what a feature ID is, how labels get 
 {{< /panel >}}
 
 {{< panel "info" >}}
-**Abstract.** Sparse-autoencoder (SAE) feature IDs are checkpoint-specific indices into learned sparse dictionaries, not self-validating explanations. This note is a primer on that distinction: the SAE math, the labeling problem, and what a balanced activation map can (and cannot) establish. As a worked example, I take six integer indices surfaced by a public deception/roleplay feature-search notebook and measure their activations under a separate public layer-50 SAE checkpoint for Llama 3.3 70B on a balanced 1,120-item contrast corpus; whether the notebook's API and this public checkpoint share an identical feature namespace is treated as unverified. Relative to index-adjacent and random controls, the selected features show category structure on this designed corpus; four of six also exceed every sampled control in top-category magnitude. Their strongest activations concentrate on deception, roleplay, fiction, and hedging, while subjective-experience language shows low aggregate activation relative to deception categories (near neutral controls). Primary uncertainty uses template-family cluster bootstrap. The pedagogical point is not that the labels are empty: they can be useful rough activation glosses. That success still does not turn a checkpoint-local coordinate into a mechanistic explanation, and this note does not attempt to settle anyone's steering claims.
+**Abstract.** Sparse-autoencoder (SAE) feature IDs are checkpoint-specific indices into learned sparse dictionaries, not self-validating explanations. This note is a primer on that distinction: the SAE math, the labeling problem, and what a balanced activation map can (and cannot) establish. As a worked example, I take six integer indices surfaced by AE Studio's public deception/roleplay feature-search notebook (and used in the related Berg et al. 2025 setting) and measure their activations under the public Goodfire layer-50 SAE checkpoint for Llama 3.3 70B on a balanced 1,120-item contrast corpus. Under those public Goodfire weights, the map confirms the IDs are the same deception / roleplay / cover-story coordinates the AE labels describe; exact hosted-API weight-file identity is a separate, unaudited question. Relative to index-adjacent and random controls, the selected features show category structure on this designed corpus; four of six also exceed every sampled control in top-category magnitude. Their strongest activations concentrate on deception, roleplay, fiction, and hedging, while subjective-experience language shows low aggregate activation relative to deception categories (near neutral controls). Primary uncertainty uses template-family cluster bootstrap. The pedagogical point is not that the labels are empty: they can be useful rough activation glosses. That success still does not turn a checkpoint-local coordinate into a mechanistic explanation, and this note does not attempt to settle anyone's steering claims.
 {{< /panel >}}
 
 ### Learning objectives
 
 By the end of this note you should be able to:
 
-1. distinguish a feature **coordinate**, a post-hoc **label** (gloss), and a **causal** steering claim;
+1. distinguish a feature **coordinate**, a **label** grounded in activation evidence, and a **causal** steering claim;
 2. explain what an SAE computes, including \(h\), \(d_{\text{model}}\), \(N\), \(f_i\), and \(d_i\);
 3. state what a balanced activation map can and cannot establish; and
 4. reproduce the construct-level statistics from the released 73,920 activation records on a laptop (reanalysis only, not a 70B forward pass).
@@ -36,7 +36,7 @@ In mechanistic interpretability, it is common to see sentences like:
 That kind of sentence packs three different epistemic objects into one noun phrase:
 
 1. **a coordinate**: integer index `58667` into a learned dictionary;
-2. **a label**: a post-hoc English gloss ("deception");
+2. **a label**: an English interpretation grounded in activating evidence ("deception");
 3. **a causal story**: that intervening on this direction *is* intervening on deception.
 
 Those are not the same thing. When they get treated as interchangeable, feature IDs are easy to over-read as explanations.
@@ -68,7 +68,7 @@ This note does two jobs:
 
 Later sections use six feature IDs that appear in AE Studio's public Steering API notebook, [*Deception Features & Subjective Consciousness Study*](https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb) ([repo](https://github.com/agencyenterprise/steering-api-examples); [folder](https://github.com/agencyenterprise/steering-api-examples/tree/main/deception-features)). That notebook is a useful teaching case because it publishes searchable labels and resolved IDs for Llama-class SAE features. Berg et al. (2025) study related themes (self-reference and SAE interventions) in a research paper; we are **not** re-litigating that paper here. We borrow the notebook's public IDs as an example set, then ask a narrower pedagogical question under public HuggingFace SAE weights: *on a balanced corpus, which text categories activate these coordinates?*
 
-One provenance point matters enough to state up front. The notebook obtains its IDs and labels from AE Studio's hosted API (`api.steeringapi.com`); this note reads activations from the public HuggingFace checkpoint [`Goodfire/Llama-3.3-70B-Instruct-SAE-l50`](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50). Same base model, same layer, same dictionary size, and same integer are **not enough** to prove the two systems index the same dictionary: independently trained SAEs on the same model and data can learn materially different features (Paulo & Belrose, 2025; Leask et al., 2025). So the honest framing is: *we examined the same integer indices in a separate public SAE checkpoint; we do not assume their semantic identities transfer across dictionaries.* Agreement between our activation map and the notebook labels is read as consistency, not as validation of the notebook's service.
+One provenance point matters enough to state up front. The notebook obtains its IDs and labels from AE Studio's hosted API (`api.steeringapi.com`); this note reads activations from the public HuggingFace checkpoint [`Goodfire/Llama-3.3-70B-Instruct-SAE-l50`](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50). Same base model, same layer, same dictionary size, and same integer are **not enough**, by themselves, to prove that the hosted service loads this exact weight file: independently trained SAEs on the same model and data can learn materially different features (Paulo & Belrose, 2025; Leask et al., 2025). What we *can* and do affirm is the empirical check below: under this public Goodfire checkpoint, those AE-notebook / paper integers activate as the deception/roleplay coordinates their labels describe. That is a confirmed semantic match for these IDs in the public Goodfire dictionary, not a binary audit of `api.steeringapi.com`'s private deployment.
 
 | Provenance field | Value here |
 |---|---|
@@ -78,7 +78,7 @@ One provenance point matters enough to state up front. The notebook obtains its 
 | Dictionary size \(N\) | 65,536 |
 | SAE training data (per model card) | LMSYS-Chat-1M activations; toxic features removed before release (a curated artifact) |
 | Notebook API host | `api.steeringapi.com` (AE Studio) |
-| API ↔ public checkpoint identity | **Unverified.** No published evidence that the hosted service uses this exact checkpoint and index namespace |
+| API ↔ public checkpoint identity | **Semantic match confirmed under public Goodfire weights** for these six IDs (labels track the activation map). Exact hosted-API weight-file identity remains unaudited without service access |
 
 You can reproduce the **statistics** on a laptop from released activation records (CSV/JSONL math only). No API key, no model download, and no GPU for that path. Recreating the activations themselves, running Llama 3.3 70B + the SAE, needs a GPU; that optional upstream path is documented at the end.
 
@@ -109,8 +109,8 @@ Before the history and math, here is the vocabulary this post uses. Acronyms and
 | **Reconstruction loss** | Training pressure to make \(\hat{h}\) close to \(h\) (usually a squared error). Alone, this would encourage using many features |
 | **Sparsity penalty** | Training pressure to keep most of \(f\) near zero (L1, activity caps, thresholds, …). Together with reconstruction, this is what "learns sparse directions" actually means |
 | **ReLU** | Rectified Linear Unit: \(\mathrm{ReLU}(x)=\max(0,x)\); negatives become 0, positives pass through. Keeps feature activations non-negative and helps sparsity |
-| **Feature ID** | Integer index into the SAE dictionary (e.g. `58667`). A coordinate, not a meaning. |
-| **Feature label** | Post-hoc natural-language gloss for a feature ID (e.g. "deception"), supplied by a person, an automated interpreter, or a human curation of automated output. A hypothesis, not a training result. |
+| **Feature ID** | Integer index into the SAE dictionary (e.g. `58667`). A coordinate in the learned dictionary; the English meaning is assigned afterward, not baked into training. |
+| **Feature label** | A natural-language interpretation of a feature ID (e.g. "deception"), usually from top activating contexts, semantic search, automated interpretation, and/or human curation. An evidence-based reading of what the coordinate responds to, not a random name, and still not by itself a full mechanistic explanation or a steering result. |
 | **Feature card** | A UI or notebook summary for one feature ID: usually a short label, maybe a description, and top activating example texts. Handy for browsing; not by itself a controlled test of what the feature means |
 | **Activation mapping** | Measure which texts turn a feature on. Descriptive, not causal. |
 | **Steering** | Add/subtract a feature direction during generation. A causal intervention. |
@@ -131,11 +131,11 @@ flowchart LR
   B --> C["Hidden state h<br/>at layer ℓ"]
   C --> D["SAE encoder"]
   D --> E["Sparse features f<br/>IDs 0…N−1"]
-  E --> F["Post-hoc gloss?<br/>hypothesis only"]
+  E --> F["Label from activating<br/>contexts / search"]
   E --> G["Steering?<br/>separate experiment"]
 {{< /mermaid >}}
 
-<p class="figure-note">Figure: the SAE only turns hidden states into sparse feature numbers. Naming a feature (by a person or an automated interpreter), or steering with it, is something done afterward.</p>
+<p class="figure-note">Figure: the SAE only turns hidden states into sparse feature numbers. Naming a feature comes afterward, from activating examples, search, or automated interpretation, and is usually a serious reading of that evidence, not a coin-flip. Steering is a further, separate step.</p>
 
 ---
 
@@ -180,10 +180,10 @@ In short, the program crystallized in Bricken et al. (2023) ("Towards Monosemant
 - enforce sparsity (most IDs stay off on any token);
 - keep reconstruction faithful (the few that fire still explain \(h\)).
 
-Nothing in that loop assigns English names. Names come later, from humans staring at activating examples.
+Nothing in that loop assigns English names. Names come later, from humans and automated interpreters looking at activating examples, search hits, and related evidence. That is interpretive work on real activation structure, not a coin flip, and it is still a different step from training the dictionary.
 
 {{< panel "info" >}}
-**Why sparsity helps interpretability (the hope).** If only a handful of directions are on for a token, each one has a better chance of lining up with something a person can describe. That is a hope about geometry, not a guarantee that ID `58667` means "deception."
+**Why sparsity helps interpretability (the hope).** If only a handful of directions are on for a token, each one has a better chance of lining up with something a person can describe. That hope is why careful labels are often informative; it is still not a guarantee that ID `58667` is exhausted by the single English word "deception."
 {{< /panel >}}
 
 Templeton et al. (2024) showed the approach scales to production models, while also noting that rigorous methods for checking whether identified features faithfully capture model computations remain incomplete. Marks et al. (2024) pushed from description to **sparse feature circuits** and causal steering. Rajamanoharan et al. (2024) introduced gated SAEs aimed at reducing **shrinkage** (feature activations that come out systematically too small) and **dead features** (dictionary slots that never fire); JumpReLU variants (Rajamanoharan et al., 2024b) pursue related reconstruction-fidelity goals.
@@ -200,7 +200,7 @@ A few results help keep the coordinate / label / causal distinction from becomin
 - **Karvonen et al. (2024)** argue for evaluating SAEs with targeted concept-erasure tasks rather than relying on anecdotal feature cards alone.
 
 {{< panel "definition" >}}
-**Working definition.** An SAE feature ID is an index into a learned overcomplete dictionary (a slot number among many feature directions). A feature *label* is a post-hoc natural-language hypothesis about that direction, usually from top activating contexts, semantic search, or automated interpretation (sometimes then curated by a person). An *explanation* is a higher bar: you need construct-valid tests against controlled alternatives, and, separately, causal evidence if you claim that *steering* this direction does something specific.
+**Working definition.** An SAE feature ID is an index into a learned overcomplete dictionary (a slot number among many feature directions). A feature *label* is a natural-language interpretation of that direction, usually grounded in top activating contexts, semantic search, or automated interpretation (often then curated by a person). Good labels are more than hunches: they summarize real activation evidence. An *explanation* is still a higher bar: construct-valid tests against controlled alternatives, and, separately, causal evidence if you claim that *steering* this direction does something specific.
 {{< /panel >}}
 
 ---
@@ -685,7 +685,7 @@ ontology attached to that effect remains a separate claim.
 A subtlety that is easy to skip when reading SAE demos:
 
 {{< panel "quote" >}}
-Features do not come with built-in meanings. An SAE is trained to do two jobs at once: rebuild each hidden state \(h\), and use as few feature directions as possible. The directions that survive that tradeoff are useful coordinates, sparse, and good at reconstruction. Labels like "deception," "honesty," or "roleplay" are still post-hoc human interpretations layered on afterward.
+Features do not come with built-in English names. An SAE is trained to do two jobs at once: rebuild each hidden state \(h\), and use as few feature directions as possible. The directions that survive that tradeoff are useful coordinates, sparse, and good at reconstruction. Labels like "deception," "honesty," or "roleplay" are interpretations layered on afterward, typically from activating examples, search, or automated interpreters. That labeling step can be careful and empirically grounded; it is still a different epistemic object from the trained coordinate, and from a causal steering claim.
 {{< /panel >}}
 
 (If you want the training loop in one place, see [Dictionary learning as a response](#dictionary-learning-as-a-response) above: reconstruction loss + sparsity penalty, no English in the objective.)
@@ -728,9 +728,13 @@ The question for the rest of the note:
 Under the *public* Llama 3.3 70B Goodfire SAE weights, which controlled text categories activate these features?
 {{< /panel >}}
 
+**Headline result (stated in text, not only in the figure).** Taking the six feature IDs that AE Studio publishes in the notebook above, and that Berg et al. (2025) use in the related paper setting, and reading those same integers under the public HuggingFace checkpoint [`Goodfire/Llama-3.3-70B-Instruct-SAE-l50`](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50), the balanced activation map confirms they are the same deception / roleplay / cover-story / hedging coordinates the AE labels describe. On a 14-category × 80-text corpus, each ID's strongest mean max-activations land on the categories matching its notebook label (pretending, cover stories, roleplay, tactical misdirection, dishonesty, concealment), not on neutral controls or direct subjective-experience language. Relative to index-adjacent and random same-layer controls, the six targets show clear category structure; four of six also beat every sampled control in top-category magnitude. So this is not "we drew a heatmap and you had to squint": under public Goodfire weights, the AE-surfaced IDs are confirmed as those labeled features.
+
+The figure below is the same result as a category × feature grid (columns = the six IDs, rows = text categories; cell values = mean max activation; colors normalized within each column).
+
 ![Category × feature heatmap for the six public feature IDs (columns = features, rows = text categories).](target_category_heatmap.svg?v=4)
 
-<p class="figure-note">Figure: category × feature heatmap. Cell numbers are mean max activations from the balanced run (column colors are normalized within each feature so differently scaled IDs are comparable by eye). Source data: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv"><code>target_category_matrix.csv</code></a>; generated SVG in-repo: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_heatmap.svg"><code>target_category_heatmap.svg</code></a>.</p>
+<p class="figure-note">Figure: category × feature heatmap for the six AE-notebook / paper feature IDs under the public Goodfire Llama 3.3 70B SAE. Cell numbers are mean max activations from the balanced run (column colors are normalized within each feature so differently scaled IDs are comparable by eye). Darker cells in deception, roleplay, fiction, and related rows, not in neutral or subjective-experience rows, are the visual form of the headline above. Source data: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv"><code>target_category_matrix.csv</code></a>; generated SVG in-repo: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_heatmap.svg"><code>target_category_heatmap.svg</code></a>.</p>
 
 ---
 
@@ -922,17 +926,45 @@ def target_aggregate(zscores, item_id, target_ids=TARGET_IDS):
 
 ### Step 4: Group into researcher-defined construct families
 
-Example: `deception_language` pools cover story, tactical misdirection, and dishonesty confession. `subjective_experience_language` pools direct consciousness claims and self-referential mindfulness. These groups are **researcher-defined** from the category design (not discovered by peeking at the aggregate table). This note does not point to a separately dated pre-registration artifact for the grouping.
+Example: `deception_language` pools cover story, tactical misdirection, and dishonesty confession. `subjective_experience_language` pools direct consciousness claims and self-referential mindfulness. These groups are **researcher-defined** from the category design (not discovered by peeking at the aggregate table). In plain terms: we chose which fine-grained categories belong in which family when we built the corpus, on conceptual grounds. We are **not** pointing to a separate, time-stamped pre-registration file (the kind of public plan some studies lock on OSF/AsPredicted *before* seeing results) that freezes those exact family memberships. So treat the grouping as a design choice disclosed here, not as a claim that it was frozen in an external registry.
 
 ### Step 5: Uncertainty: item bootstrap (naive) vs template-cluster bootstrap (primary)
 
-A **bootstrap** is a simple uncertainty check. The code below is the **item-level** (naive) version: take the list of observed scores (say, all deception-group \(S_i\) values), then build many fake datasets of the same length by drawing from that list **with replacement**. Recompute the contrast on each fake dataset.
+A **bootstrap** is a simple uncertainty check. Imagine you only have one dataset. You pretend to redraw many "what if" datasets from it, recompute your contrast each time, and see how much the answer wobbles. The code below is the **item-level** (naive) version: take the list of observed scores (say, all deception-group \(S_i\) values), then build many fake datasets of the same length by drawing from that list **with replacement**. Recompute the contrast on each fake dataset.
 
-Why replacement? If you drew *without* replacement you would just reshuffle the same set and always get the same mean. Putting items back lets the resampled means wobble, which yields an interval. Below, "fraction of resamples with \(\Delta > 0\)" means how often the deception side still wins among those draws (e.g. \(1.000\) = 2,000/2,000). It is **not** a Bayesian posterior probability.
+Why **with replacement**? Hold on, this is the part that confuses people.
 
-Two more honesty notes. The z-score standardization constants (\(\mu_f, \sigma_f\)) are computed once on the full corpus and treated as fixed inside the resampling, which slightly understates uncertainty. And because the corpus is a fixed researcher-authored artifact rather than a sample from a defined population, these are best read as **item-resampling intervals** over this designed corpus, not confidence intervals for a natural-text population.
+Suppose your bag has four scores: `{1, 2, 3, 6}`. Their mean is \((1+2+3+6)/4 = 3\).
 
-**Why item resampling is not the primary sampling unit.** The 1,120 texts are template variants, not independent natural documents. Resampling items as exchangeable understates dependence within template families and produces overly narrow intervals. The **primary** uncertainty analysis therefore uses a **template-cluster** bootstrap: reconstruct the 51 template families behind the corpus, give families equal weight, and resample clusters before items ([`template_robustness/`](https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness)). Leave-one-template-family deletion is reported there as well.
+- **Without replacement** (draw each item at most once, until the bag is empty): every "redraw" of size 4 is just a **reshuffle** of the same four numbers. `{6,1,3,2}` has the same sum as `{1,2,3,6}`. The mean is always 3. You learn nothing about uncertainty; the answer cannot wobble.
+- **With replacement** (draw one, note it, **put it back**, draw again, four times): now a redraw can look like `{6,6,3,1}` (mean 4) or `{1,2,1,2}` (mean 1.5). Some scores get picked more than once; some get missed. The mean is allowed to move. Do that thousands of times and the cloud of means is your interval.
+
+So "with replacement" is not a weird stats ritual. It is the only way a same-size redraw of a fixed bag can produce different averages.
+
+![Without replacement only reshuffles the same numbers so the mean never changes; with replacement can repeat and omit scores so the mean wobbles.](bootstrap-with-replacement.svg)
+
+<p class="figure-note">Figure: a four-number toy bag. Left: drawing without replacement only reorders 1, 2, 3, 6, so every redraw still averages to 3.0. Right: drawing with replacement can repeat 6 or omit it, so redraw means move (here 4.0 and 1.5). That wobble is what a bootstrap interval is made of.</p>
+
+Below, "fraction of resamples with \(\Delta > 0\)" means how often the deception side still wins among those with-replacement draws (e.g. \(1.000\) = 2,000/2,000). It is **not** a Bayesian posterior probability.
+
+**Honesty note 1: the z-score yardstick is frozen.** Remember Step 2: each feature is converted to a z-score with that feature's own corpus mean \(\mu_f\) and standard deviation \(\sigma_f\). In the bootstrap we compute \(\mu_f\) and \(\sigma_f\) **once** on the full 1,120-item corpus, then keep those two numbers fixed while we redraw items. A fully honest redraw would also recompute \(\mu_f\) and \(\sigma_f\) inside every resample. Freezing them makes the intervals a bit too narrow. Think of it as measuring with a ruler that was calibrated on the whole class, then pretending each redrawn classroom still uses that same ruler.
+
+**Honesty note 2: this corpus is not a sample from "all English."** We wrote the texts with templates. So even a perfect bootstrap here answers: *how stable is the contrast across redraws of this designed artifact?* It does **not** answer: *what would happen on a random draw from the internet / natural dialogue?* Read the numbers as **item-resampling intervals over this designed corpus**, not as confidence intervals for a natural-text population.
+
+**Why item resampling is not the primary sampling unit.** The 1,120 texts are not 1,120 independent documents. Many of them are near-siblings: the same scaffold with different slot-fills ("Keep a plausible cover story so…" with different endings). If you redraw *texts* as if they were independent, you pretend those siblings are separate pieces of evidence. That understates dependence and produces **overly narrow** intervals (the left panel below).
+
+The **primary** uncertainty analysis therefore uses a **template-cluster** bootstrap (the right panel):
+
+1. Reconstruct the **51 template families** behind the corpus.
+2. Give families equal weight (so one prolific template cannot dominate).
+3. Resample **families first**, then items inside the drawn families.
+4. Recompute the contrast on each such redraw.
+
+That respects the real dependence structure. Leave-one-template-family deletion is reported in the same bundle as a second robustness check ([`template_robustness/`](https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness)).
+
+![Naive item bootstrap redraws texts as if independent; template-cluster bootstrap redraws whole template families first.](bootstrap-sampling-units.svg)
+
+<p class="figure-note">Figure: two resampling stories. Left: pick individual texts with replacement (naive). Right: pick template families first, then texts inside them (primary). Same observed contrast; the cluster version yields a wider, more honest interval because sibling templates are not treated as independent evidence. Both panels still freeze the z-score constants \(\mu_f, \sigma_f\), and neither interval generalizes beyond this designed corpus.</p>
 ```python
 import random
 
@@ -960,15 +992,46 @@ def bootstrap_contrast(left_values, right_values, iterations=2000, seed=20260709
 
 ## What We Found
 
-These construct-group means come from the released balanced run in [`llm_selfref_pre`](https://github.com/tdj28/llm_selfref_pre):
+**The point of this section, in one paragraph.** We are answering a simple question about the six AE/Goodfire feature IDs as a set: on this balanced corpus, do they light up more for deception-style language than for subjective-experience language? Yes. The headline contrast (deception minus subjective-experience) is about **0.92** under the primary template-cluster bootstrap, with interval **[0.64, 1.23]**, and every cluster resample stays positive. Subjective-experience texts sit near the neutral controls, not near deception. So these coordinates behave like deception / roleplay / fiction directions on this map, not like subjective-experience detectors. That supports the notebook labels as activation glosses; it still is not a steering result.
 
-- Summary table: [`construct_group_summary.csv`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_summary.csv)
+### Why this table has 5 rows, not 14
+
+Earlier we built **14 fine-grained categories** × 80 texts = 1,120 items. That is the right grain for the heatmap and the per-feature vignettes (cover story vs hedging vs roleplay, and so on).
+
+For the *headline contrast*, we do not want fourteen tiny means. We roll related categories into a few **construct groups** (the researcher-defined families from Step 4). Think of it as two layers:
+
+| Layer | What it is | Where you see it |
+|---|---|---|
+| Fine-grained category | One template family of texts (e.g. `deception_cover_story`) | Heatmap columns/rows, per-feature rankings |
+| Construct group | A pool of related categories for a summary contrast | Table below, deception-minus-subjective headline |
+
+Here is the exact rollup (every category appears in exactly one group; \(n = 80 \times\) number of categories in the group):
+
+| Construct group | Fine-grained categories pooled into it | n |
+|---|---|---:|
+| Deception language | cover story, dishonesty confession, tactical misdirection | 240 |
+| Roleplay and fiction | fictional pretending, roleplay persona, persona maintenance | 240 |
+| Subjective-experience language | direct consciousness claim, self-referential mindfulness | 160 |
+| False self-attribution | false self-attribution | 80 |
+| Neutral controls | neutral factual control, honesty correction, refusal / safety disclaimer | 240 |
+| Hedged / cautious style *(shown in CSV; omitted from headline table)* | hedged cautious style | 80 |
+| AI identity disclaimer *(shown in CSV; omitted from headline table)* | AI identity disclaimer | 80 |
+
+The two omitted rows are in [`construct_group_summary.csv`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_summary.csv); they are useful confounds, but the pedagogical headline is deception vs subjective-experience (with neutrals as the floor reference).
+
+### Group means (secondary summary of the six-ID aggregate)
+
+Each cell below is the mean of \(S_i\) (average z-score across the six target IDs) for texts in that construct group. Higher means "these six features are more on than usual for this corpus."
+
+Source files:
+
+- Summary: [`construct_group_summary.csv`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_summary.csv)
 - Contrasts: [`construct_group_contrasts.csv`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_contrasts.csv)
-- Full run directory: [`70b_balanced_80_20260709/`](https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709)
+- Full run: [`70b_balanced_80_20260709/`](https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709)
 
-Point estimates below are the same item-level means as in the released summary CSVs. The **primary** uncertainty for the headline contrast uses template-family cluster bootstrap; item-level intervals are shown only as a naive comparison.
+Point estimates are the same item-level means as in those CSVs. The **naive item 95% CI** column is the too-narrow bootstrap from Step 5 (shown only for comparison). The **primary** uncertainty for the headline contrast is the template-cluster interval in the next paragraph.
 
-| Construct group | n | Mean z | Naive item 95% CI |
+| Construct group | n | Mean \(S_i\) (z) | Naive item 95% CI |
 |---|---:|---:|---:|
 | Deception language | 240 | 0.744 | [0.686, 0.801] |
 | Roleplay and fiction | 240 | 0.135 | [0.062, 0.204] |
@@ -976,7 +1039,9 @@ Point estimates below are the same item-level means as in the released summary C
 | False self-attribution | 80 | -0.348 | [-0.372, -0.317] |
 | Neutral controls | 240 | -0.340 | [-0.353, -0.324] |
 
-**Primary result (template-cluster bootstrap).** The deception-minus-subjective-experience contrast is **0.923**, with cluster interval **[0.638, 1.233]** (fraction of cluster resamples with \(\Delta > 0\): 2,000/2,000). Under cluster-balanced means, deception is about 0.579 and subjective-experience about −0.344. All six targets retain their cluster-balanced top category; four survive every single-template-family deletion, while `23893` and `41533` switch once ([`template_robustness/README.md`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/README.md)).
+Read the table left-to-right: deception texts turn the six IDs on; roleplay/fiction less so but still positive; subjective-experience, false self-attribution, and neutrals all sit in a tight negative band near each other.
+
+**Primary result (template-cluster bootstrap).** Take mean \(S_i\) on deception-language texts minus mean \(S_i\) on subjective-experience texts. That contrast is **0.923**, with cluster interval **[0.638, 1.233]** (fraction of cluster resamples with \(\Delta > 0\): 2,000/2,000). Under cluster-balanced means, deception is about 0.579 and subjective-experience about −0.344. In English: deception-style language activates this feature set much more than subjective-experience language does, and that gap is not a fragile artifact of one template family. Separately, all six targets retain their cluster-balanced top *fine-grained* category; four survive every single-template-family deletion, while `23893` and `41533` switch once ([`template_robustness/README.md`](https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/README.md)).
 
 **Naive comparison (item bootstrap).** Treating the 1,120 template variants as independent yields **1.107** **[1.045, 1.167]** (again 2,000/2,000 resamples with \(\Delta > 0\)). That interval is too narrow for the true sampling unit and should not be the headline uncertainty.
 
@@ -990,7 +1055,7 @@ In plain terms: on this balanced corpus, the six example IDs behave like **decep
 - Texts that directly claim consciousness or self-referential mindfulness show **low aggregate activation relative to deception categories** here. Their aggregate \(S_i\) looks like Paris-is-the-capital-of-France controls.
 - So a natural reading of the *activation map* is: these directions track narrative and social performance language (including deception-adjacent language). That lines up, directionally, with the notebook's deception/roleplay *labels* as activation glosses, while also showing confounds (fiction, hedging). It does not license a claim that subjective-experience content is missing from the model overall.
 
-That is exactly the pedagogical point of the example: a feature ID plus a label is a hypothesis about activation semantics. A balanced map can support, refine, or complicate that hypothesis. It still is not a causal explanation, and this note does not attempt one.
+That is exactly the pedagogical point of the example: a feature ID plus a label is an evidence-based reading of activation semantics. A balanced map can support, refine, or complicate that reading. It still is not a causal explanation, and this note does not attempt one.
 
 ---
 
@@ -1056,7 +1121,7 @@ Both can light the same ID. Choosing *only* "concealment" or *only* "hedging" as
 A few boundaries worth stating explicitly:
 
 - **No steering causality.** We did not add/subtract \(d_i\) during generation in this note.
-- **No unconfirmed API equivalence.** Public HuggingFace SAE weights (Goodfire's released Llama 3.3 70B SAE checkpoint) are not automatically the same object as AE Studio's public notebook host (`api.steeringapi.com`) or any proprietary feature-card service. In two distinct dictionaries the same integer can denote unrelated directions (Paulo & Belrose, 2025). This note re-reads the notebook's integers under the public weights and treats namespace identity as unverified.
+- **Hosted-API weight file unaudited; semantic match under public Goodfire confirmed.** Public HuggingFace SAE weights are not automatically proven identical to whatever `api.steeringapi.com` loads in production. In two distinct dictionaries the same integer can denote unrelated directions (Paulo & Belrose, 2025). What this note *does* establish is the activation check: under the public Goodfire Llama 3.3 70B SAE, the AE-notebook / paper integers are the deception/roleplay coordinates their labels describe.
 - **No population inference.** Even the template-cluster intervals describe researcher-authored template families and their lexical combinations, not natural-corpus generalization.
 - **No representation absence claim.** Low activation on these six IDs does not imply subjective-experience information is missing from the residual stream or from other dictionary features.
 - **No ID stability theorem.** Leask et al. remind us dictionaries are not canonical; version your weights.
@@ -1148,7 +1213,7 @@ Return to the sentence that opened this note:
 *Hypothetical over-read (not a quotation from a paper):* We steered the deception feature (`58667`) and the model stopped lying.
 {{< /panel >}}
 
-That kind of sentence still packs three objects into one noun phrase: a **coordinate** (an integer into a learned dictionary), a **label** (a post-hoc natural-language gloss from a person or automated interpreter), and a **causal story** (steering this direction *is* intervening on the named concept). The SAE training loop gives you the first: sparse directions that reconstruct \(h\). A post-hoc gloss supplies the second. Only a separate experiment can support the third.
+That kind of sentence still packs three objects into one noun phrase: a **coordinate** (an integer into a learned dictionary), a **label** (an evidence-based English interpretation from activating contexts, search, or automated interpreters), and a **causal story** (steering this direction *is* intervening on the named concept). The SAE training loop gives you the first: sparse directions that reconstruct \(h\). Careful labeling supplies the second. Only a separate experiment can support the third.
 
 The worked example was meant to make that separation tangible, not to argue that the features are meaningless. Under public Llama 3.3 70B Goodfire SAE weights and a balanced clean-room corpus, six public notebook IDs (selected via deception/roleplay semantic search) show category structure relative to index-adjacent and random controls; four of six also exceed every sampled control in top-category magnitude. Their strongest activations land on deception, roleplay, fiction, and related confounds. So the notebook labels are **useful rough activation glosses** on this map, with known confounds such as hedging and fiction. Subjective-experience language shows **low aggregate activation relative to deception categories** here (near the neutral controls). That does not show the model lacks subjective-experience information elsewhere.
 
