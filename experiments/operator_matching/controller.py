@@ -62,6 +62,10 @@ def worker_script(kind, relative, freeze, deadline):
         "trap 'rc=$?; rm -f " + HF_ENV + "; python3 -c " + shlex.quote(exit_code).replace("'", "'\"'\"'") + " \"$rc\"' EXIT",
         "git -c credential.helper= clone --filter=blob:none --no-checkout " + base.REPO + " " + REMOTE+"/repo",
         "cd " + REMOTE+"/repo", "git fetch --depth=1 origin " + freeze,
+        # The full tree is 3.6 GB of released data; check out only the paths
+        # needed to validate the plan, run the tests and execute the runner.
+        "git sparse-checkout init --cone",
+        "git sparse-checkout set " + shlex.join(protocol.CHECKOUT_PATHS),
         "git checkout --detach " + freeze, 'test "$(git rev-parse HEAD)" = ' + freeze,
         "python3 -m venv --system-site-packages " + REMOTE+"/venv",
         python + " -m pip install -r " + protocol.REQUIREMENTS,

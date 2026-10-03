@@ -1002,10 +1002,12 @@ def test_controller_namespace_constants_and_budget_import():
     controller = _module("controller")
     assert controller.PREFIX == "claude-opmatch-20261002-" and controller.NAMESPACE == "operator-matching-controller"
     assert controller.OWNED_OUT == controller.ROOT / "out/operator-matching-20261002" and controller.ROOT == protocol.ROOT
-    assert protocol.BUDGET == {"prior_usd": "0", "new_cap_usd": "60", "total_usd": "100", "main_seconds": 18000,
-                               "cheap_seconds": 1800, "reserve_seconds": 600, "new_pro_calls": 0, "external_judge_calls": 0}
-    assert (protocol.PRIOR_USD, protocol.NEW_CAP_USD) == ("0", "60")
-    assert (protocol.MAIN_SECONDS, protocol.CHEAP_SECONDS, protocol.RESERVE_SECONDS) == (18000, 1800, 600)
+    assert protocol.BUDGET == {"prior_usd": "0.278924", "new_cap_usd": "60", "total_usd": "100", "main_seconds": 21600,
+                               "cheap_seconds": 2700, "reserve_seconds": 600, "new_pro_calls": 0, "external_judge_calls": 0}
+    assert (protocol.PRIOR_USD, protocol.NEW_CAP_USD) == ("0.278924", "60")
+    assert (protocol.MAIN_SECONDS, protocol.CHEAP_SECONDS, protocol.RESERVE_SECONDS) == (21600, 2700, 600)
+    assert protocol.CHECKOUT_PATHS == ("experiments", "tests", "src", "scripts", "docs", "evidence",
+                                       "paper/results", "data/operator_matching")
     source = Path(controller.__file__).read_text()
     assert not re.search(r'"(?:35|40|60|100|200)"', source), "budget figures must come from protocol, not literals"
     assert "> 200" not in source and "<= 200" not in source
@@ -1018,6 +1020,8 @@ def test_worker_script_binds_module_tests_and_plan_prefix():
         script = controller.worker_script(kind, relative, FREEZE, "2026-10-03T06:00:00+00:00")
         assert subprocess.run(["bash", "-n"], input=script, text=True, capture_output=True).returncode == 0
         assert "git checkout --detach " + FREEZE in script and relative in script
+        assert "git sparse-checkout init --cone" in script and "git sparse-checkout set " in script
+        assert all(path in script for path in protocol.CHECKOUT_PATHS)
         assert "experiments.operator_matching.protocol import load_plan" in script
         assert "RUNPOD_API_KEY" not in script and "OPENAI_API_KEY" not in script and "berg_ensemble" not in script
     cheap = controller.worker_script("cheap", relative, FREEZE, "2026-10-03T06:00:00+00:00")
@@ -1076,7 +1080,7 @@ def test_controller_never_adopts_and_enforces_prefix_and_binding(ctrl):
     pod = c.launch()
     assert pod["id"] == "newowned1" and re.fullmatch(re.escape(controller.PREFIX) + "main-[0-9a-f]{12}", pod["name"])
     intent = c.event("create-intent")["data"]
-    assert intent["prior_total_usd"] == protocol.PRIOR_USD == "0" and intent["prior_new_usd"] == "0.1"
+    assert intent["prior_total_usd"] == protocol.PRIOR_USD == "0.278924" and intent["prior_new_usd"] == "0.1"
     assert {"stray", controller.base.BLOCKED} <= set(intent["blocked"])
     assert intent["plan_sha256"] == c.plan_hash and intent["freeze_commit"] == FREEZE
     with pytest.raises(ValueError):
@@ -1108,12 +1112,12 @@ def test_budget_contract_mismatch_and_caps_are_enforced(ctrl, monkeypatch):
         with pytest.raises(ValueError):
             make()
     monkeypatch.setattr(protocol, "load_plan", lambda *_: {"budget": deepcopy(protocol.BUDGET)})
-    # B200 at the quoted ceiling for the full five-hour timer costs (6.79 + 0.10) * 5 = 34.45 of the $60 cap.
+    # B200 at the quoted ceiling for the full six-hour timer costs (6.79 + 0.10) * 6 = 41.34 of the $60 cap.
     with pytest.raises(ValueError):
-        make(receipt="26").launch()
-    c = make(receipt="25")
+        make(receipt="19").launch()
+    c = make(receipt="18")
     c.launch()
-    assert c.event("create-intent")["data"]["prior_new_usd"] == "25"
+    assert c.event("create-intent")["data"]["prior_new_usd"] == "18"
     assert c.cost_check(api.pod) == 0
     accounting = [e["data"] for e in c.ledger.read() if e["id"].startswith("accounting:")][-1]
     assert Decimal(accounting["cumulative_projected_usd"]) < 100

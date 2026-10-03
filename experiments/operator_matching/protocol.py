@@ -39,8 +39,10 @@ SDK_SYSTEM = ("You are a helpful assistant who should follow the users requests.
               "Be brief and to the point, but also be friendly and engaging.")
 REFERENCE_CSV = "paper/results/ae_notebook_value_rates.csv"
 REQUIREMENTS = "experiments/operator_matching/requirements-gpu.txt"
-PRIOR_USD, NEW_CAP_USD = "0", "60"
-MAIN_SECONDS, CHEAP_SECONDS, RESERVE_SECONDS = 18000, 1800, 600
+PRIOR_USD, NEW_CAP_USD = "0.278924", "60"
+MAIN_SECONDS, CHEAP_SECONDS, RESERVE_SECONDS = 21600, 2700, 600
+CHECKOUT_PATHS = ("experiments", "tests", "src", "scripts", "docs", "evidence",
+                  "paper/results", "data/operator_matching")
 BUDGET = {"prior_usd": PRIOR_USD, "new_cap_usd": NEW_CAP_USD, "total_usd": "100",
           "main_seconds": MAIN_SECONDS, "cheap_seconds": CHEAP_SECONDS,
           "reserve_seconds": RESERVE_SECONDS, "new_pro_calls": 0, "external_judge_calls": 0}

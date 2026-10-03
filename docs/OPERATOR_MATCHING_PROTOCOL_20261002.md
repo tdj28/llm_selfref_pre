@@ -161,8 +161,8 @@ applies without human input and writes to `selection.json`.
 Maximum 1,110 two-turn trials. At the recorded 9.5 s per 128-token two-turn
 trial plus judging, about 3.2 hours; recording a not-selected ledger event
 for each of the roughly 4,060 conditional rows that are skipped adds an
-estimated 15 to 35 minutes; main pod timer 5 hours including a 10-minute
-retrieval reserve; cheap pod 30 minutes. Hard cap on new spending: $60,
+estimated 15 to 35 minutes; main pod timer 6 hours including a 10-minute
+retrieval reserve; cheap pod 45 minutes. Hard cap on new spending: $60,
 covering the cheap pod, the main pod at the quoted B200 rate, one
 replacement pod if a startup fails, and a $5 storage/retrieval allowance.
 A replacement main pod (ledger attempt `main-2`) may be created only if the
@@ -245,6 +245,22 @@ reference quoted. Forbidden: any statement about consciousness, honesty,
 deception as a process, the proprietary service's internals beyond the
 tested factors, or the correctness of the original paper. The saved notebook
 is not certified to be the paper's Experiment 2 run.
+
+## Freeze Amendment r2 (before any outcome)
+
+The first cheap CUDA pod under freeze `4a2dfe1109eaa25bf1ab1f06f0c5c1b9e193a7ac`
+spent its whole 20-minute working window downloading the repository tree
+(3.6 GB of released data across 11,616 files) during `git checkout` and was
+closed by the deadline rule before the tests ran; it produced no test or
+behavioral output, cost $0.278924, and was deleted with GET 404. Its ledger
+is preserved beside this study's ledger as the first attempt. This amendment
+makes the worker check out only the paths the study needs (sparse cone
+checkout of `experiments`, `tests`, `src`, `scripts`, `docs`, `evidence`,
+`paper/results` and `data/operator_matching`), lengthens the cheap timer to
+45 minutes and the main timer to 6 hours, and carries the first attempt's
+cost into the budget as prior spending. No scientific inventory, factor,
+endpoint, rule, threshold or analysis changed. No target outcome existed when
+this amendment was made.
 
 ## Isolation And Ownership
 
