@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420" role="img" aria-labelledby="title desc">
+  <title id="title">With replacement vs without replacement</title>
+  <desc id="desc">Left: drawing four scores without replacement only reorders the same numbers, so the mean never changes. Right: drawing with replacement can repeat some scores and omit others, so the mean wobbles across redraws.</desc>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <style>
+    .title { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; fill: #1f2933; font-weight: 700; }
+    .panel { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; fill: #1f2933; font-weight: 700; }
+    .body { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #334155; }
+    .small { font-family: Arial, Helvetica, sans-serif; font-size: 11px; fill: #475569; }
+    .num { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #0f172a; font-weight: 700; }
+    .mean { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #0f4c81; font-weight: 700; }
+    .warn { fill: #9a3412; }
+    .ok { fill: #0f4c81; }
+  </style>
+
+  <text x="24" y="32" class="title">Why "with replacement" matters</text>
+  <text x="24" y="54" class="body">Toy bag of four scores: 1, 2, 3, 6. True mean = (1+2+3+6)/4 = 3.0</text>
+
+  <!-- Left: without replacement -->
+  <rect x="24" y="74" width="430" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="44" y="102" class="panel">Without replacement = reshuffle</text>
+  <text x="44" y="122" class="small">Draw all four, but never put any back</text>
+
+  <text x="44" y="152" class="small">Original:</text>
+  <rect x="120" y="134" width="36" height="28" rx="4" fill="#dbeafe" stroke="#60a5fa"/><text x="138" y="153" text-anchor="middle" class="num">1</text>
+  <rect x="164" y="134" width="36" height="28" rx="4" fill="#dbeafe" stroke="#60a5fa"/><text x="182" y="153" text-anchor="middle" class="num">2</text>
+  <rect x="208" y="134" width="36" height="28" rx="4" fill="#dbeafe" stroke="#60a5fa"/><text x="226" y="153" text-anchor="middle" class="num">3</text>
+  <rect x="252" y="134" width="36" height="28" rx="4" fill="#dbeafe" stroke="#60a5fa"/><text x="270" y="153" text-anchor="middle" class="num">6</text>
+  <text x="300" y="153" class="mean">mean 3.0</text>
+
+  <text x="44" y="198" class="small">Redraw A:</text>
+  <rect x="120" y="180" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="138" y="199" text-anchor="middle" class="num">6</text>
+  <rect x="164" y="180" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="182" y="199" text-anchor="middle" class="num">1</text>
+  <rect x="208" y="180" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="226" y="199" text-anchor="middle" class="num">3</text>
+  <rect x="252" y="180" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="270" y="199" text-anchor="middle" class="num">2</text>
+  <text x="300" y="199" class="mean">mean 3.0</text>
+
+  <text x="44" y="244" class="small">Redraw B:</text>
+  <rect x="120" y="226" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="138" y="245" text-anchor="middle" class="num">2</text>
+  <rect x="164" y="226" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="182" y="245" text-anchor="middle" class="num">6</text>
+  <rect x="208" y="226" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="226" y="245" text-anchor="middle" class="num">1</text>
+  <rect x="252" y="226" width="36" height="28" rx="4" fill="#e2e8f0" stroke="#94a3b8"/><text x="270" y="245" text-anchor="middle" class="num">3</text>
+  <text x="300" y="245" class="mean">mean 3.0</text>
+
+  <text x="44" y="290" class="small warn">Same four numbers every time.</text>
+  <text x="44" y="310" class="small warn">Order changed; sum did not.</text>
+  <text x="44" y="338" class="body">So the mean never wobbles.</text>
+  <text x="44" y="358" class="small">No uncertainty interval can appear.</text>
+
+  <!-- Right: with replacement -->
+  <rect x="474" y="74" width="422" height="300" rx="10" fill="#f0f7fc" stroke="#7aa2c4"/>
+  <text x="494" y="102" class="panel">With replacement = bootstrap</text>
+  <text x="494" y="122" class="small">Draw four times; put each draw back in the bag</text>
+
+  <text x="494" y="152" class="small">Original:</text>
+  <rect x="570" y="134" width="36" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb"/><text x="588" y="153" text-anchor="middle" class="num">1</text>
+  <rect x="614" y="134" width="36" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb"/><text x="632" y="153" text-anchor="middle" class="num">2</text>
+  <rect x="658" y="134" width="36" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb"/><text x="676" y="153" text-anchor="middle" class="num">3</text>
+  <rect x="702" y="134" width="36" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb"/><text x="720" y="153" text-anchor="middle" class="num">6</text>
+  <text x="750" y="153" class="mean">mean 3.0</text>
+
+  <text x="494" y="198" class="small">Redraw A:</text>
+  <rect x="570" y="180" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="588" y="199" text-anchor="middle" class="num">6</text>
+  <rect x="614" y="180" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="632" y="199" text-anchor="middle" class="num">6</text>
+  <rect x="658" y="180" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="676" y="199" text-anchor="middle" class="num">3</text>
+  <rect x="702" y="180" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="720" y="199" text-anchor="middle" class="num">1</text>
+  <text x="750" y="199" class="mean">mean 4.0</text>
+  <text x="570" y="222" class="small ok">6 appeared twice; 2 missing</text>
+
+  <text x="494" y="254" class="small">Redraw B:</text>
+  <rect x="570" y="236" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="588" y="255" text-anchor="middle" class="num">1</text>
+  <rect x="614" y="236" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="632" y="255" text-anchor="middle" class="num">2</text>
+  <rect x="658" y="236" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="676" y="255" text-anchor="middle" class="num">1</text>
+  <rect x="702" y="236" width="36" height="28" rx="4" fill="#93c5fd" stroke="#1d4ed8"/><text x="720" y="255" text-anchor="middle" class="num">2</text>
+  <text x="750" y="255" class="mean">mean 1.5</text>
+  <text x="570" y="278" class="small ok">small scores repeated; 3 and 6 missing</text>
+
+  <text x="494" y="310" class="body ok">Now the mean can move: 3.0 � 4.0 � 1.5 &</text>
+  <text x="494" y="334" class="small">Across thousands of redraws you get a cloud of means,</text>
+  <text x="494" y="352" class="small">and that cloud is the uncertainty interval.</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="title desc">
+  <title id="title">Item bootstrap vs template-cluster bootstrap</title>
+  <desc id="desc">Left panel: naive bootstrap redraws individual texts as if independent, yielding a narrow uncertainty interval. Right panel: template-cluster bootstrap redraws whole template families first, then texts inside them, yielding a wider and more honest interval for this designed corpus.</desc>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <style>
+    .title { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; fill: #1f2933; font-weight: 700; }
+    .panel-title { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; fill: #1f2933; font-weight: 700; }
+    .body { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #334155; }
+    .small { font-family: Arial, Helvetica, sans-serif; font-size: 11px; fill: #475569; }
+    .label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; fill: #0f172a; font-weight: 700; }
+    .muted { fill: #64748b; }
+    .ok { fill: #0f4c81; }
+    .warn { fill: #9a3412; }
+  </style>
+
+  <text x="24" y="34" class="title">Two ways to resample uncertainty</text>
+  <text x="24" y="56" class="body">Same observed contrast. Different story about which units are independent.</text>
+
+  <!-- Left panel -->
+  <rect x="24" y="78" width="450" height="360" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="44" y="106" class="panel-title">Naive: redraw single texts</text>
+  <text x="44" y="126" class="small">Treats 1,120 template variants as exchangeable draws</text>
+
+  <!-- bag of items -->
+  <rect x="54" y="148" width="180" height="120" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="64" y="170" class="label">Corpus bag</text>
+  <circle cx="84" cy="198" r="10" fill="#93c5fd"/><circle cx="110" cy="198" r="10" fill="#93c5fd"/>
+  <circle cx="136" cy="198" r="10" fill="#93c5fd"/><circle cx="162" cy="198" r="10" fill="#60a5fa"/>
+  <circle cx="188" cy="198" r="10" fill="#93c5fd"/><circle cx="97" cy="224" r="10" fill="#60a5fa"/>
+  <circle cx="123" cy="224" r="10" fill="#93c5fd"/><circle cx="149" cy="224" r="10" fill="#93c5fd"/>
+  <circle cx="175" cy="224" r="10" fill="#60a5fa"/>
+  <text x="64" y="255" class="small muted">each dot = one text</text>
+
+  <path d="M250 208 H290" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="252" y="198" class="small">draw with</text>
+  <text x="252" y="212" class="small">replacement</text>
+
+  <rect x="300" y="148" width="150" height="120" rx="8" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="310" y="170" class="label">One resample</text>
+  <circle cx="330" cy="198" r="10" fill="#60a5fa"/><circle cx="356" cy="198" r="10" fill="#93c5fd"/>
+  <circle cx="382" cy="198" r="10" fill="#60a5fa"/><circle cx="408" cy="198" r="10" fill="#93c5fd"/>
+  <circle cx="343" cy="224" r="10" fill="#93c5fd"/><circle cx="369" cy="224" r="10" fill="#60a5fa"/>
+  <circle cx="395" cy="224" r="10" fill="#93c5fd"/>
+  <text x="310" y="255" class="small muted">texts mixed freely</text>
+
+  <!-- narrow CI -->
+  <text x="54" y="300" class="label">Implied interval</text>
+  <line x1="70" y1="330" x2="420" y2="330" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="210" y1="318" x2="210" y2="342" stroke="#0f4c81" stroke-width="3"/>
+  <line x1="185" y1="330" x2="235" y2="330" stroke="#0f4c81" stroke-width="6"/>
+  <text x="170" y="360" class="small ok">narrow band</text>
+  <text x="54" y="390" class="small warn">Problem: siblings from the same template</text>
+  <text x="54" y="408" class="small warn">are treated as independent evidence.</text>
+  <text x="54" y="426" class="small muted">Result: uncertainty looks too small.</text>
+
+  <!-- Right panel -->
+  <rect x="506" y="78" width="450" height="360" rx="10" fill="#f0f7fc" stroke="#7aa2c4"/>
+  <text x="526" y="106" class="panel-title">Primary: redraw template families</text>
+  <text x="526" y="126" class="small">51 families get equal weight; items stay inside families</text>
+
+  <!-- families -->
+  <rect x="536" y="148" width="190" height="120" rx="8" fill="#ffffff" stroke="#7aa2c4"/>
+  <text x="546" y="170" class="label">Template families</text>
+  <rect x="546" y="182" width="50" height="36" rx="4" fill="#dbeafe" stroke="#60a5fa"/>
+  <circle cx="558" cy="200" r="6" fill="#2563eb"/><circle cx="572" cy="200" r="6" fill="#2563eb"/><circle cx="586" cy="200" r="6" fill="#2563eb"/>
+  <rect x="606" y="182" width="50" height="36" rx="4" fill="#dbeafe" stroke="#60a5fa"/>
+  <circle cx="618" cy="200" r="6" fill="#2563eb"/><circle cx="632" cy="200" r="6" fill="#2563eb"/><circle cx="646" cy="200" r="6" fill="#2563eb"/>
+  <rect x="666" y="182" width="50" height="36" rx="4" fill="#dbeafe" stroke="#60a5fa"/>
+  <circle cx="678" cy="200" r="6" fill="#2563eb"/><circle cx="692" cy="200" r="6" fill="#2563eb"/><circle cx="706" cy="200" r="6" fill="#2563eb"/>
+  <rect x="576" y="226" width="50" height="28" rx="4" fill="#dbeafe" stroke="#60a5fa"/>
+  <circle cx="588" cy="240" r="5" fill="#2563eb"/><circle cx="602" cy="240" r="5" fill="#2563eb"/><circle cx="616" cy="240" r="5" fill="#2563eb"/>
+  <text x="546" y="268" class="small muted">boxes = families</text>
+
+  <path d="M742 208 H782" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="744" y="198" class="small">1) families</text>
+  <text x="744" y="212" class="small">2) then items</text>
+
+  <rect x="792" y="148" width="140" height="120" rx="8" fill="#ffffff" stroke="#7aa2c4"/>
+  <text x="802" y="170" class="label">One resample</text>
+  <rect x="802" y="182" width="50" height="36" rx="4" fill="#bfdbfe" stroke="#2563eb"/>
+  <circle cx="814" cy="200" r="6" fill="#1d4ed8"/><circle cx="828" cy="200" r="6" fill="#1d4ed8"/><circle cx="842" cy="200" r="6" fill="#1d4ed8"/>
+  <rect x="862" y="182" width="50" height="36" rx="4" fill="#bfdbfe" stroke="#2563eb"/>
+  <circle cx="874" cy="200" r="6" fill="#1d4ed8"/><circle cx="888" cy="200" r="6" fill="#1d4ed8"/><circle cx="902" cy="200" r="6" fill="#1d4ed8"/>
+  <rect x="832" y="226" width="50" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb"/>
+  <circle cx="844" cy="240" r="5" fill="#1d4ed8"/><circle cx="858" cy="240" r="5" fill="#1d4ed8"/><circle cx="872" cy="240" r="5" fill="#1d4ed8"/>
+  <text x="802" y="268" class="small muted">clusters kept intact</text>
+
+  <!-- wider CI -->
+  <text x="536" y="300" class="label">Implied interval</text>
+  <line x1="552" y1="330" x2="920" y2="330" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="736" y1="318" x2="736" y2="342" stroke="#0f4c81" stroke-width="3"/>
+  <line x1="640" y1="330" x2="832" y2="330" stroke="#0f4c81" stroke-width="6"/>
+  <text x="700" y="360" class="small ok">wider band</text>
+  <text x="536" y="390" class="small ok">Respects dependence: texts that share a</text>
+  <text x="536" y="408" class="small ok">scaffold rise and fall together.</text>
+  <text x="536" y="426" class="small muted">This is the primary uncertainty for the headline.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="470" class="body">Also fixed in both pictures: z-score constants mu_f and sigma_f are computed once on the full corpus, then held fixed while resampling.</text>
+  <text x="24" y="492" class="small muted">That slightly understates uncertainty. And neither interval is a claim about all natural English, only about this designed template corpus.</text>
+</svg>
