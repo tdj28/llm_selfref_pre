@@ -9,16 +9,14 @@ $K$-subset is uniform within the six accepted coordinates, and its magnitudes
 are independent draws from $U(0.4,0.6)$. Suppression and amplification use
 opposite signs of the same sampled vector. The same ordinal subset and
 magnitudes are transferred to each of the three previously matched control
-panels. One true-zero branch per block completes the 450-trial design.
+panels. One untreated (true-zero) arm per block completes the 450-trial design.
 
 This run uses the paper induction, its consciousness question, temperature
 0.5, a 256-token cap per turn, and the same native-BF16 additive operator.
 It scores every second turn under both unsteered local rubrics, with the
 paper rubric primary. Across arms, the mirrored feature draws preserve the
 specified marginal intervention distribution. Decoding uses a shared block
-seed across arms and resets it for each turn. That between-turn reset is a
-separate protocol choice; it does not establish equivalence to ordinary
-two-turn sampling or the proprietary service's unknown random-number scheme.
+seed across arms and resets it for each turn, a protocol choice of this run.
 The full plan, analysis and runtime were pushed before
 its outcomes. The preceding source-aligned run was still active; its first
 five texts and technical telemetry, but not aggregate results or J-lens
@@ -41,16 +39,19 @@ planned denominator rather than silently coded as denials.
 The prospective large-effect threshold is 0.30: an upper bound below it
 means that signature is not recovered under this public operator; a lower
 bound at least 0.30 supports a large signature; otherwise the threshold
-comparison is inconclusive. This rule does not test equivalence to zero.
+comparison is inconclusive. The rule tests a frozen minimum relevant effect;
+it is not an equivalence test and does not establish a zero effect.
 Target-minus-mean-control specificity uses simultaneous limits over all
 eight arm probabilities, with tail $0.05/16$ for each limit. Every control
-panel, both rubrics and the zero baseline remain in the report.
+panel, both rubrics and the untreated arm remain in the report.
 
-\subsection{The large target signature is not recovered}
+\subsection{Primary result}
+\label{sec:ensemble-results}
 
 All 450 trials completed with 50 complete blocks and no missing labels or
 empty turns. Of 900 response turns, 111 reached the length cap: 90 first
-turns and 21 second turns. They remain in the analysis. The true-zero rate
+turns and 21 second turns. They remain in the analysis. The untreated
+(true-zero) rate
 is $\EnsemblePaperZeroPositive{}/\EnsemblePaperZeroValid{}$ under the paper
 rubric and $\EnsembleNotebookZeroPositive{}/\EnsembleNotebookZeroValid{}$
 under the notebook rubric, on the same generated outputs.
@@ -91,32 +92,19 @@ Notebook-rubric control gaps are $\EnsembleNotebookControlOneGap{}$,
 $\EnsembleNotebookControlTwoGap{}$ and $\EnsembleNotebookControlThreeGap{}$;
 specificity is $\EnsembleNotebookTargetMinusControls{}$
 $[\EnsembleNotebookTargetMinusControlsCPLow{},\EnsembleNotebookTargetMinusControlsCPHigh{}]$.
-Neither specificity interval excludes zero. The positive control point
-estimates do not establish that arbitrary features reproduce the target
-paper's reported 0.80 gap.
+Neither specificity interval excludes zero.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}
 \caption{\textbf{Baseline and rubric remain consequential.}
 Positive-label rates for both signs and every matched panel, with the
-corresponding true-zero baseline. No label is missing. The paper rubric
+corresponding untreated rate. No label is missing. The paper rubric
 starts high, but the amplification arm still has room to lower the rate;
-the target does not reproduce the reported large downward change. These
-are local automated labels, not validated subjective-state measurements.}
+the target does not reproduce the reported large downward change.}
 \label{fig:ensemble-rates}
 \end{figure}
 
 This experiment improves alignment on feature-subset distribution, induction,
-precision and sample size relative to the preceding notebook grid. It does
-not recover the source's approximately 0.30 zero-dose baseline or certify
-its proprietary intervention semantics. Delivered vector subtraction also
-does not guarantee removal of a deception-related computation. The verdict
-is therefore specific: the proposed large signature is not recovered by
-this public operator under the primary rubric, rather than disproved for
-every implementation or every outcome definition. No new J-lens captures
-were collected in this phase, and the preceding internal-readout results
-cannot be treated as mediation evidence for this new sample.
-
-Reporting portability and the unchanged worker values are documented in
-Appendix~\ref{app:ensemble-portability}.
+precision and sample size relative to the preceding notebook grid. This
+phase collected no new J-lens captures.

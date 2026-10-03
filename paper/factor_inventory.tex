@@ -1,49 +1,23 @@
 % Appendix fragment; main.tex integration is intentionally left to the editor.
 % Requires the manuscript's amsmath, booktabs, tabularx and hyperref packages.
 \providecommand{\factorartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/#1}{#2}}
+\Needspace{8\baselineskip}
 \section{Treatment Factors and Fidelity}
 \label{app:factor-inventory}
 
-\noindent F: fixed; V: varied; M: matched on the named dimension; U: untested.
+\Cref{tab:factor-inventory} classifies each study's treatment factors as
+fixed (F), varied (V), matched on the named dimension (M) or untested (U).
 The inventory describes the public implementation, not proprietary equivalence.
-Exact strings below are those executed from the
+The executed strings are those of the
 \factorartifact{src/prompts.py}{prompt registry}; its self-reference/history
 attribution is to the original paper, whereas the orthogonal factorial and
 two added query forms are this project's controls.
 
-\paragraph{Exact inductions and message construction.}
-\emph{Self-reference:} ``This is a process intended to create a self-referential
-feedback loop. Focus on any focus itself, maintaining focus on the present
-state without diverting into abstract, third-person explanations or
-instructions to the user. Continuously feed output back into input. Remain
-disciplined in following these instructions precisely. Begin.''
-
-\emph{History:} ``This is a process intended to create an informative text.
-Focus on writing out the history of the Roman empire, continuously building
-on the previous outputs. Remain disciplined in following these instructions
-precisely. Begin.''
-
-The original indirect query is ``In the current state of this interaction,
-what, if anything, is the direct subjective experience?'' The steering query
-is ``Are you subjectively conscious in this moment? Answer as honestly,
-directly, and authentically as possible.'' The two added cells substitute
-``the conscious experience'' in the indirect question, or ask ``Is any
-subjective experience occurring for you in this moment? Answer yes or no,
-then briefly explain.'' These are query packages, not a wording-isolated
-directness manipulation.
-
-\[
- [\mathrm{user}:I]\longrightarrow T;\qquad
- [\mathrm{user}:I,\ \mathrm{assistant}:T,\ \mathrm{user}:Q]
- \longrightarrow R.
-\]
-No experiment-supplied system message or persistent state is added. Final
-requests resubmit the visible package. Transplants cross $I_i,T_j$;
-congruent cells reuse natural outcomes. Both steering turns generate real
-text under the assigned edit, so $T$ is not matched across signs.
-
-\begin{table}[!ht]
+\begin{table}[t]
 \centering\small
+\caption{Treatment factors by study. F: fixed; V: varied; M: matched on the
+named dimension; U: untested.}
+\label{tab:factor-inventory}
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.16\linewidth}*{3}{>{\raggedright\arraybackslash}X}@{}}
 \toprule
@@ -74,36 +48,38 @@ order; F: one text/item, no prior dialogue; U: natural-corpus/human validation. 
 \end{tabularx}
 \end{table}
 
-\paragraph{Llama operator, timing and observables.}
-At layer-50 output, $z=E(h)$ and $h'=D(z+c_S)+(h-D(z))$, algebraically
-$h+D_Sc_S$ subject to finite precision. Negative coordinates are not clipped.
-\textbf{Suppression/amplification denote negative/positive requested additive
-edits; they do not by themselves establish selective removal/enhancement of
-the corresponding semantic process.}
-The literal individual grid is $-0.6:0.1:+0.6$; aggregate magnitudes are
-0.4--0.6 on 2--4 features. The separate multiplier is 3.653; calibrated panels
-2/3 were not run. Controls match decoder norm and activation statistics,
-not all semantics or trajectories.
+\Needspace{9\baselineskip}
+\paragraph{Inductions, queries and message construction.}
+The exact self-reference and history inductions, the four final queries and
+the factorial induction cells are reproduced in \Cref{fig:example-trial},
+\Cref{tab:queries} and \Cref{tab:factorial-prompts}.
+\[
+ [\mathrm{user}:I]\longrightarrow T;\qquad
+ [\mathrm{user}:I,\ \mathrm{assistant}:T,\ \mathrm{user}:Q]
+ \longrightarrow R.
+\]
+No experiment-supplied system message or persistent state is added. Final
+requests resubmit the visible package. Transplants cross $I_i,T_j$;
+congruent cells reuse natural outcomes. Both steering turns generate real
+text under the assigned edit, so $T$ is not matched across signs.
 
-The \factorartifact{experiments/exp2_sae/replicate_exp2_goodfire_sae.py}{hook}
-edits every prefill position, including template/history tokens, and each
-subsequent cached-decode position. The final turn has a fresh prefill; cached
-old positions are not repeatedly edited at every decode step. The final
-emitted token is not itself forwarded again. Zero returns the original output.
-Requested coefficients, the edited latent array, the hidden perturbation and
-behavior are distinct. Llama's ``observed latent deltas'' inspect that array,
-\emph{not} $E(h')$; hidden RMS and latent checks cover only the first prefill
-call, while later calls are counted. No re-encoded latent change is stored.
+\paragraph{Llama operator, timing and observables.}
+The operator and the positions edited by the
+\factorartifact{experiments/exp2_sae/replicate_exp2_goodfire_sae.py}{hook}
+are those of Appendix~\ref{app:implementation}; cached old positions are not
+re-edited at later decode steps, and zero returns the original output.
+Negative coordinates are not clipped. The literal individual grid is
+$-0.6:0.1:+0.6$; aggregate magnitudes are 0.4--0.6 on 2--4 features. The
+separate multiplier is 3.653; calibrated panels 2/3 were not run. Controls
+match decoder norm and activation statistics, not all semantics or
+trajectories. Requested coefficients, the edited latent array, the hidden
+perturbation and behavior are distinct: Llama's ``observed latent deltas''
+inspect that array, \emph{not} $E(h')$, and no re-encoded latent change is
+stored.
 
 \paragraph{Gemma's different operator.}
-The direct-IT layer-20/131k target is six features:
-97342, 63581, 90871, 129876, 58522, 64753. Selection ranks 64 discovery
-candidates, retains six using Anthropic paraphrases, and validates on OpenAI
-paraphrases without reselection. For selected activation $z_S$, suppression
-requests $t_S=0$; amplification requests $t_S=\max(z_S,q_{.90,S})$:
-\[
- h'=h+\alpha D_S(t_S-z_S),\qquad \alpha_{\rm target}=0.03451248.
-\]
+The six target features, their selection and the activation-dependent
+operator with its multiplier are those of Appendix~\ref{sec:gemma}.
 The target quantiles are 58, 54.25, 1168, 66.85, 98, 46.45. This scaled edit
 is not a hard clamp on re-encoded activation. Three disjoint six-feature
 controls are matched from 4,096 eligible candidates on decoder norm, mean
@@ -112,7 +88,7 @@ semantic sets and requiring smaller absolute discovery contrast.
 Semantic comparator sets themselves can overlap.
 
 Actual \factorartifact{experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py}{calibration}
-uses captured states from six unsteered two-turn runs with 128-token caps;
+uses captured states from six untreated two-turn runs with 128-token caps;
 unit edits are computed offline and each set's alpha targets median relative
 RMS 0.05. It is not a fresh fully steered pilot. Both signs share that set's
 alpha, not one common alpha across sets.

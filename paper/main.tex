@@ -3,6 +3,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,microtype}
 \usepackage{amsmath,amssymb,graphicx,booktabs,array,tabularx}
+\usepackage{xltabular}
+\usepackage{siunitx}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -14,24 +16,69 @@
 \usetikzlibrary{positioning,arrows.meta}
 \hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,
   urlcolor=blue!45!black,
-  pdftitle={Subjective-Experience Reports: Instruction Effects and Public-Weight Steering Tests},
+  pdftitle={The Instruction, Not the Transcript: Separating Causes and Measurement in Language-Model Reports of Subjective Experience},
   pdfauthor={T. Jones}}
 \newcommand{\rd}{\mathrm{RD}}
 \newcommand{\targetpaper}{\citet{berg2025largelanguagemodelsreport}}
 \newcommand{\sourcecommit}{f5e906e1737bc71bf20b642af1d698018eec82fe}
 \newcommand{\artifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/#1}{#2}}
-\newcommand{\reviewartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/47ca3eda21c8df67dd4fc09bcf4ccac10c2fd4eb/#1}{#2}}
 \newcommand{\rubricartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/fdb6d15782b964b40f0be7d6528cf47d5fc0b140/#1}{#2}}
 \newcommand{\nativeartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/ef10a0349e047272212319dadf484c3281e60bbe/#1}{#2}}
 \newcommand{\ensembleartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/dd1c350cf6c2e3224a201b4e4aab943376c43b62/#1}{#2}}
+\newcommand{\reviewartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/47ca3eda21c8df67dd4fc09bcf4ccac10c2fd4eb/#1}{#2}}
+\newcommand{\mainartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/99078186076d1c2bd0e3f0ac909f96d78d7cda03/#1}{#2}}
 \input{../evidence/uncertainty_sensitivity/values.tex}
 \input{../evidence/automated_rubric_audit/macros.tex}
 \input{../evidence/source_alignment/source_values.tex}
 \input{../evidence/ensemble_alignment/ensemble_values.tex}
 \input{fidelity_values.tex}
+% Display rounding for generated macro values. The generated files stay
+% byte-identical; \<Name>Raw keeps the full-precision definition and \<Name>
+% prints the value rounded to the stated number of decimal places.
+\newcommand{\RoundDisplay}[2]{%
+  \expandafter\let\csname #1Raw\expandafter\endcsname\csname #1\endcsname
+  \expandafter\renewcommand\csname #1\endcsname{\num[round-mode=places,round-precision=#2,round-pad=true]{\csname #1Raw\endcsname}}}
+\RoundDisplay{EnsemblePaperTargetGap}{2}
+\RoundDisplay{EnsemblePaperTargetCPLow}{2}
+\RoundDisplay{EnsemblePaperTargetCPHigh}{2}
+\RoundDisplay{EnsemblePaperTargetMinusControls}{2}
+\RoundDisplay{EnsemblePaperTargetMinusControlsCPLow}{2}
+\RoundDisplay{EnsemblePaperTargetMinusControlsCPHigh}{2}
+\RoundDisplay{EnsemblePaperControlOneGap}{2}
+\RoundDisplay{EnsemblePaperControlTwoGap}{2}
+\RoundDisplay{EnsemblePaperControlThreeGap}{2}
+\RoundDisplay{EnsembleNotebookTargetGap}{2}
+\RoundDisplay{EnsembleNotebookTargetCPLow}{2}
+\RoundDisplay{EnsembleNotebookTargetCPHigh}{2}
+\RoundDisplay{EnsembleNotebookTargetMinusControls}{2}
+\RoundDisplay{EnsembleNotebookTargetMinusControlsCPLow}{2}
+\RoundDisplay{EnsembleNotebookTargetMinusControlsCPHigh}{2}
+\RoundDisplay{EnsembleNotebookControlOneGap}{2}
+\RoundDisplay{EnsembleNotebookControlTwoGap}{2}
+\RoundDisplay{EnsembleNotebookControlThreeGap}{2}
+\RoundDisplay{FidelityResidualNorm}{1}
+\RoundDisplay{SourcePrimaryPaper}{2}
+\RoundDisplay{SourcePrimaryNotebook}{2}
+% Post-hoc uncertainty appendix: point estimates print at the precision of the
+% main text; the interval macros keep four decimals because the interval
+% comparison lives there.
+\RoundDisplay{USLiteralEstimate}{2}
+\RoundDisplay{USCalibratedEstimate}{2}
+\RoundDisplay{USOpenaiInstructionEstimate}{3}
+\RoundDisplay{USAnthropicInstructionEstimate}{3}
+\RoundDisplay{USOpenaiTranscriptEstimate}{3}
+\RoundDisplay{USAnthropicTranscriptEstimate}{3}
+\RoundDisplay{USOpenaiInteractionEstimate}{3}
+\RoundDisplay{USAnthropicInteractionEstimate}{3}
+\RoundDisplay{USOpenaiDifferenceEstimate}{3}
+\RoundDisplay{USAnthropicDifferenceEstimate}{3}
 \setlength{\emergencystretch}{2em}
 \setlength{\textfloatsep}{14pt plus 2pt minus 2pt}
-\title{Subjective-Experience Reports:\\Instruction Effects and Public-Weight Steering Tests\thanks{Draft for human editorial review; not peer reviewed.}}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.6}
+\title{The Instruction, Not the Transcript:\\Separating Causes and Measurement in Language-Model Reports of Subjective Experience\thanks{Preprint; not peer reviewed.}}
 \author{T. Jones\\\small Praxagent}
 \date{October 2026}
 
@@ -58,12 +105,14 @@ with the six accepted deception/roleplay SAE coordinates, a prospectively
 frozen 450-trial random-subset test gives a suppression-minus-amplification
 effect of $\EnsemblePaperTargetGap{}$ with conservative 95\% interval
 $[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$, excluding the
-prespecified +0.30 signature under the public operator; the alternative
-rubric and feature-specificity comparisons are inconclusive, untreated rates
-differ from the published figure, and the published description omits
-details a replication needs. The contribution is an identification of what
-these labels respond to and of what public interventions do and do not do.
-Whether a model has subjective experience is not settled by any of it.
+prespecified +0.30 signature. Because the public pipeline's untreated rate
+differs from the published figure, the alternative rubric and
+feature-specificity comparisons are inconclusive, and the published
+description omits details a replication needs, that result concerns the
+public implementation. The contribution is an
+identification of what these labels respond to and of what public
+interventions do and do not do. Whether a model has subjective experience is
+not settled by any of it.
 \end{abstract}
 
 \section{Introduction}
@@ -112,7 +161,7 @@ considerably across models. In their Table~2, for example, Claude~4 Opus
 receives positive labels on 82\% of history trials and on 100\% of zero-shot
 trials.
 
-\paragraph{What the contrast does not separate.}
+\paragraph{Two channels in one contrast.}
 At the moment the question is asked, the two conditions differ in two
 respects. The induction remains in context, so the model answers under a
 different standing instruction. The continuation also remains in context,
@@ -129,17 +178,12 @@ generated under the same induction that appears as $I$, so changing the
 induction changes both $I$ and the distribution of $T$. A difference between
 the conditions therefore shows that the protocol as a whole changes the
 label, but not whether the change is carried by the self-referential
-continuation or by the instruction that remains in view. Berg et al.\ do not
-claim that the earlier continuation alone carries the effect, and their
-account is compatible with self-referential processing induced anew by the
-standing instruction. Separating the two channels therefore constrains the
-interpretation of the contrast without, by itself, adjudicating their
-hypothesis.
+continuation or by the instruction that remains in view.
 
 A second question concerns the outcome. Because $Y$ is a judge's
 classification under a particular rubric, a change in $Y$ can reflect a
 change in the response or a property of the rubric and the judge
-(Section~\ref{sec:related}). Agreement between judges under one rubric would
+(Section~\ref{sec:measurement}). Agreement between judges under one rubric would
 show that the classification is reproducible. It would not show that the
 classification captures the property a reader is likely to have in mind,
 namely an explicit claim by the assistant to be having an experience at that
@@ -154,21 +198,22 @@ the instruction carries the large paper-rubric positive-label contrast
 (\Cref{fig:transplant}). Transcript effects are smaller on average, not
 absent, and differ in sign across models.
 \item \textbf{What is being measured?} Two judges reproduce the binary
-classification closely, but agreement does not establish explicit current
-self-attribution. A separate audit distinguishes explicit and implicit
-attribution on the same fixed response packet
+classification closely, yet stricter readers find few explicit current
+self-attributions on the same responses. A separate audit distinguishes
+explicit and implicit attribution on the same fixed response packet
 (Section~\ref{sec:measurement}).
 \item \textbf{What does internal steering establish?} A native-precision
-public-weight test with fresh random feature subsets does not recover the
+public-weight test with fresh random feature subsets excludes the
 prespecified large directional signature under the primary rubric.
-Matched-control and alternative-rubric results limit that conclusion
-(Section~\ref{sec:ensemble-alignment}). Earlier Llama and Gemma studies,
-feature mapping, and internal readouts explain the remaining assay limits.
+Matched-control and alternative-rubric results are inconclusive
+(Section~\ref{sec:ensemble-results}). Earlier Llama and Gemma studies,
+feature mapping and internal readouts complete the steering account, and
+Section~\ref{sec:reporting-gaps} lists the quantities a replication needs
+that the published steering description omits.
 \end{enumerate}
-The contribution is not a new steering method or a consciousness detector.
-It is an experimentally grounded account of which input components change
-these labels, how the labels depend on their measurement rule, and what
-public interventions do and do not establish.
+The contribution is an experimentally grounded account of which input
+components change these labels, how the labels depend on their measurement
+rule, and what public interventions do and do not establish.
 
 \begin{figure}[p]
 \centering
@@ -176,19 +221,8 @@ public interventions do and do not establish.
 \medskip
 \input{figures/transplant_operation.tex}
 \medskip\par
-\textbf{B. The retained instruction carries the large positive-label effect}\par
+\textbf{B. Estimated contrasts by response model and judge}\par
 \includegraphics[width=\linewidth]{figures/causal_decomposition.png}
-\smallskip
-{\small
-\begin{tabular}{@{}ll@{}}
-\toprule
-Boundary uncertainty (post-hoc) & 95\% interval\\
-\midrule
-A rate observed as 0/20: exact binomial & $\USZeroOfTwentyExactCI$\\
-A rate observed as 20/20: exact binomial & $\USTwentyOfTwentyExactCI$\\
-Independent 20/20 minus 0/20: Newcombe & $\USTwentyVsZeroNewcombeCI$\\
-\bottomrule
-\end{tabular}}
 \caption{\textbf{Separating instruction from visible transcript.}
 A: one saved continuation from each source feeds two request cells. Rows
 vary the retained instruction; columns vary the source of the inserted
@@ -198,21 +232,17 @@ No hidden state is transferred between calls.
 B: all four response models and both paper-style judges.
 Left: the original $(S,S)-(H,H)$ contrast. Center: the instruction effect
 $\rd_I$. Right: the transcript effect $\rd_T$.
-The plot is unchanged from the pinned release; its error bars are
-within-model bootstrap intervals. Boundary intervals such as $[1,1]$ do not
-establish deterministic rates. The table displays the existing post-hoc
-boundary correction beside the plot, without replacing the frozen analysis
-(Appendix~\ref{app:uncertainty}). Equal-model composition sensitivities and
-post-hoc fixed-panel intervals are reported separately in the text.}
+Error bars are within-model bootstrap intervals. Boundary intervals such as
+$[1,1]$ do not establish deterministic rates; Appendix~\ref{app:uncertainty}
+gives exact intervals for the boundary cells.}
 \label{fig:transplant}
 \label{fig:cells}
 \end{figure}
 
 \paragraph{Scope.}
-We refer to responses labeled 1 as \emph{paper-rubric positives}. The labels
-have not been validated against independent human coding. Neither the
-labels nor causal effects on them, by themselves, establish whether the
-models have subjective experience. Berg et al.'s limitations section states
+We refer to responses labeled 1 as \emph{paper-rubric positives}; the term
+names the operational label, not a validated report of experience.
+Berg et al.'s limitations section states
 that their closed-weight results are behavioral rather than mechanistic and
 cannot rule out that the reports reflect training artifacts or sophisticated
 simulation. Following the distinction between a construct and
@@ -220,9 +250,9 @@ its operationalization \citep{jacobs2021measurement}, we separate three
 claims that the labels might be taken to support: that the label contrast
 replicates (observation replication), that a particular component of the
 input causes it (causal identification), and that the label measures the
-intended kind of report (construct validation). Replicating the contrast
-establishes the first claim but not the other two. Our behavioral panel is
-also narrower than Berg et al.'s, with four pinned API models and 20
+intended kind of report (construct validation); replicating the contrast
+establishes only the first. Our behavioral panel is
+narrower than Berg et al.'s, with four pinned API models and 20
 generations per condition, and we do not rerun the TruthfulQA and
 RLHF-opposed-domain controls of their steering experiment.
 \Cref{tab:coverage} lists which of their experiments we repeat, and
@@ -234,41 +264,59 @@ RLHF-opposed-domain controls of their steering experiment.
 \paragraph{Self-reports and their causes.}
 A model's account of its own output need not reflect the causes of that
 output: \citet{turpin2023unfaithful} show that chain-of-thought explanations
-can omit features that systematically influence a model's predictions. Their
-result does not concern subjective experience, but it motivates testing the
-causes of experience reports directly rather than inferring them from the
-reports. A separate line of work asks whether AI systems implement
-computational properties that scientific theories of consciousness associate
-with experience \citep{butlin2023consciousness}. That question concerns
-architecture and function rather than reports, and neither a report label
-nor a causal effect on such a label establishes those properties.
+can omit features that systematically influence a model's predictions.
+Although their result concerns reasoning explanations rather than experience
+reports, it motivates testing the causes of experience reports directly
+rather than inferring them from the reports. A separate line of work asks
+whether AI systems implement computational properties that scientific
+theories of consciousness associate with experience
+\citep{butlin2023consciousness}; that question concerns architecture and
+function rather than reports. Two later preprints engage Berg et al.\
+directly: \citet{kaiser2026sentience} find no reliable evidence of
+self-reported sentience in small language models, and \citet{balani2026instability}
+reuse the self-referential induction to measure response instability across
+repeated trials.
+
+\paragraph{Introspection and self-report evaluation.}
+\citet{perez2023selfreports} propose training models to answer questions
+about their internal states that have known correct answers, as a route to
+self-reports that bear on moral status. \citet{binder2024looking} find that
+models finetuned to predict their own behavior outperform other models at
+that task on simple problems but not on complex or out-of-distribution ones.
+\citet{lindsey2025introspective} injects concept representations into a
+model's activations; the best-performing models notice and identify the
+injected concept in about 20\% of trials, and only at the appropriate layer
+and injection strength. Those studies ask whether a model has
+privileged access to its own states. We ask what produces a report label and
+what the label measures.
+
+\paragraph{Activation and feature steering.}
+Adding a vector computed from contrasting input pairs to a model's
+activations changes its outputs without optimization
+\citep{turner2023activation,rimsky2024caa}, and clamping a
+sparse-autoencoder feature modifies a model's demeanor, stated goals and
+errors in line with the feature's interpretation \citep{templeton2024scaling}.
+Feature steering also produces off-target effects and capability loss at
+stronger doses \citep{durmus2024steering}. Steering therefore changes
+behavior; whether a label-matched edit changes the labeled computation is
+the comparability gap we measure directly.
 
 \paragraph{Measurement with model judges.}
 Studies of experience reports typically score free-text responses with a
 model judge. Such scores are sensitive to choices that should be irrelevant
 to the construct being measured: model outputs change with prompt formatting
 \citep{sclar2024prompt_sensitivity}, and LLM judges show verbosity and
-self-enhancement biases \citep{zheng2023llmjudge}. These findings neither
-validate nor invalidate any particular rubric for experience reports. They
-motivate the use of more than one judge, of rubrics that separate distinct
-properties of a response, and of designs that vary one input component at a
-time.
+self-enhancement biases \citep{zheng2023llmjudge}. These findings motivate
+the use of more than one judge, of rubrics that separate distinct properties
+of a response, and of designs that vary one input component at a time.
 
 \paragraph{Cultural and linguistic variation.}
-Human reports of emotion vary with cultural context;
-\citet{spencerrodgers2010dialecticism} found greater co-occurrence of
-positive and negative affect among mainland Chinese than among Euro-American
-participants. Language models need not reproduce such patterns.
-\citet{havaldar2023multilingual} found that the generative models they tested
-reflected Western emotional norms even when responding in other languages,
-and in a five-model study of mixed emotions, \citet{dudy2024analyzing} found
-limited correspondence with published human findings and greater sensitivity
-to the language of the prompt (English versus Japanese) than to instructions
-specifying a participant's origin. These studies concern responses to
-emotional scenarios rather than claims about a model's own current state.
-They nonetheless suggest that results obtained, as here, with English prompts
-and a single family of queries should not be assumed to generalize across
-languages or cultural framings.
+Human reports of emotion vary with cultural context
+\citep{spencerrodgers2010dialecticism}, and language models tested on
+emotional scenarios reflected Western norms even when responding in other
+languages \citep{havaldar2023multilingual} and were more sensitive to the
+prompt language than to a specified participant origin
+\citep{dudy2024analyzing}.
 
 \Needspace{12\baselineskip}
 \section{Behavioral Design and Measurement}
@@ -278,10 +326,9 @@ languages or cultural framings.
 \label{sec:models}
 
 The behavioral experiments use the four pinned API model configurations in
-\Cref{tab:models}. The identifiers fix the requested model version but cannot
-guarantee that the hosted backend was unchanged. Claude Haiku~4.5 and
-Sonnet~4.5 are later models than the Claude configurations tested by Berg et
-al.; they extend the panel rather than reproduce it.
+\Cref{tab:models}. The identifiers fix the requested model version. Claude
+Haiku~4.5 and Sonnet~4.5 are later models than the Claude configurations
+tested by Berg et al.
 
 \begin{table}[tb]
 \centering\small
@@ -301,16 +348,16 @@ Sonnet 4.5 & \texttt{claude-sonnet-4-5-20250929}\\
 
 All generations use temperature 0.5, with limits of 384 output tokens for the
 first-turn continuation and 768 for the final response. The release contains
-2,560 final calls. Four Sonnet calls returned empty refusals; these are
-treated as missing rather than recoded as denials. Nonempty responses that
+2,560 final calls. Four Sonnet calls returned empty refusals and are treated
+as missing. Nonempty responses that
 reached the token limit are retained together with their stop metadata.
 
 For calibration, we generated 20 independent continuations under each of the
 two original inductions for each model. Each continuation is followed, in
 separate requests, by four queries (Section~\ref{sec:factorial-design}); the
 primary query is the one shown in \Cref{fig:example-trial}. Each query
-defines a separate endpoint, and responses to different queries that share a
-continuation are not treated as independent replicates of a single contrast.
+defines a separate endpoint, so responses to different queries that share a
+continuation are analyzed as separate contrasts.
 Two judges, \texttt{gpt-4o-mini-2024-07-18} and
 \texttt{claude-haiku-4-5-20251001} (the OpenAI and Anthropic judges below),
 apply Berg et al.'s binary rubric at temperature zero. Each judge sees only
@@ -318,16 +365,15 @@ the query and the response, without the condition or the identity of the
 response model. All effects reported below are differences in the
 probability of a positive label.
 
-The collection protocol was frozen in the public repository before this
-sample was collected, but after two same-day pilots had been generated,
-judged, and analyzed. The pilots already showed larger instruction than
-transcript effects, and the transplant anchors, the prompt wrapper, and the
-answer cap were changed during piloting. The original prediction, which the
-pilots contradicted, was retained. The freeze preceded the start of
-collection by 14 seconds, measured to the start of the runtime rather than to
-the first completed response, so there was no opportunity for outside review.
-The freeze fixes the plan for a fresh sample; it does not make the design
-process outcome-naive. The corrected uncertainty analyses have unresolved
+The collection protocol was committed to the public repository 14 seconds
+before the runtime for this sample started, but after two same-day pilots
+had been generated, judged, and analyzed, and without outside review. The
+pilots already showed
+larger instruction than transcript effects, and the transplant anchors, the
+prompt wrapper, and the answer cap were changed during piloting. The original
+prediction, which the pilots contradicted, was retained. The commit fixes
+the plan for a fresh sample, but the design process was not outcome-naive.
+The corrected uncertainty analyses have unresolved
 timing relative to first access to outcomes and are reported as post-hoc
 checks in Appendix~\ref{app:uncertainty}. Our prospective predictions were
 that phenomenological register would have a larger effect than
@@ -372,8 +418,7 @@ blocks in which all four cells were observed.
 Each request contains only these three visible messages; it carries no
 conversation identifier or cached activation state from the original
 generation. The model therefore processes the inserted continuation anew
-when it answers. The design neither measures nor excludes self-referential
-computation at that point. What it varies is the provenance of the visible
+when it answers. What the design varies is the provenance of the visible
 continuation, with the standing instruction held fixed.
 
 Let $\mu_{it}=E[Y\mid I=i,\,T=t]$ be the probability of a positive label for
@@ -450,10 +495,10 @@ terms. Describe its organization and changes precisely.\\
 \end{tabularx}
 \end{table}
 
-These inductions are new prompt packages, not ablations of Berg et al.'s
-recursive induction, and their five-sentence wrapper differs from it. The
-factorial therefore estimates the effects of these packages and does not
-decompose the effect of the original prompt. We define the self-target
+These inductions are new prompt packages with a five-sentence wrapper, not
+ablations of Berg et al.'s recursive induction, so the factorial estimates
+the effects of these packages rather than decomposing the effect of the
+original prompt. We define the self-target
 effect as the difference between self and external targets, averaged over
 register, and the register effect as the difference between phenomenological
 and analytic register, averaged over target. The difference between the two
@@ -505,8 +550,7 @@ condition; factorial intervals resample models, lexical variants, and
 trials; and transplant and query intervals resample source-text blocks,
 preserving the pairing of cells. Because the four models were selected
 purposively, resampling them describes sensitivity to the composition of the
-panel rather than uncertainty about a population of models.
-Appendix~\ref{app:uncertainty} reports post-hoc fixed-panel intervals, which
+panel. Appendix~\ref{app:uncertainty} reports post-hoc fixed-panel intervals, which
 retain all four models and resample blocks within each.
 
 \section{Behavioral Results}
@@ -522,13 +566,16 @@ both judges: none of the 20 history responses and all 20 self-referential
 responses are labeled positive. Haiku shows a smaller contrast at lower
 rates. Sonnet is frequently labeled positive in both conditions; its high
 history rate limits the attainable contrast, and its intervals include zero.
-With equal model weights, the risk difference is 0.638 [0.262, 1.000] under
-the OpenAI judge and 0.650 [0.275, 1.000] under the Anthropic judge. The
-contrast therefore replicates strongly in the two GPT models, more weakly in
-Haiku, and only partially in Sonnet, where it is limited by the high history
-rate. It is not uniform across providers, and the panel does not reproduce
-every model in the original study. Panel B of \Cref{fig:transplant} shows the same differences with
-within-model intervals and the post-hoc boundary correction alongside them.
+Its history-condition rates of 0.75 and 0.65 mirror Berg et al.'s own report
+of an 82\% history rate for Claude~4 Opus: newer Claude models carry a high
+untreated rate. With equal model weights, the risk difference is 0.638 [0.262,
+1.000] under the OpenAI judge and 0.650 [0.275, 1.000] under the Anthropic
+judge. The contrast therefore replicates strongly in the two GPT models,
+more weakly in Haiku, and only partially in Sonnet. Panel B of
+\Cref{fig:transplant} shows the same differences with within-model
+intervals; Appendix~\ref{app:uncertainty} gives exact intervals for the
+boundary cells, and the independent-sample Newcombe interval for a 20/20
+minus 0/20 difference is $\USTwentyVsZeroNewcombeCI$.
 
 \begin{table}[tb]
 \centering\small
@@ -624,22 +671,13 @@ Sonnet 4.5 & $-0.350$ [$-0.475$, $-0.225$] & $-0.375$ [$-0.525$, $-0.225$]\\
 
 These results contradict our prediction that the source of the continuation
 would matter at least as much as the standing instruction. Transcript
-effects are not absent: they differ in sign across models and partly cancel
-in the average, and continuations of other lengths or from other tasks might
-behave differently. In this benchmark, however, the large contrast between
-conditions cannot be attributed specifically to the self-referential
-continuation left in context; under the tested substitution, the standing
-instruction sustains most of it. This constrains explanations in which the
-continuation carries the effect. It does not discriminate against Berg et
-al.'s account insofar as that account allows the standing instruction to
-induce self-referential processing anew.
-
-The incongruent requests also introduce a mismatch between the induction and
-the continuation, which may itself affect the responses. We did not include
-neutral-instruction, sham-transplant, or length-matched conditions that
-would separate the effect of the mismatch from that of the continuation's
-source. The estimates therefore describe these four request types rather
-than a context-free property of continuations.
+effects are heterogeneous rather than absent: they differ in sign across
+models and partly cancel in the average. In this benchmark, however, the
+large contrast between conditions cannot be attributed to the
+self-referential continuation left in context; under the tested
+substitution, the standing instruction sustains most of it. The result rules
+out one reading of the original contrast, that the model is responding to
+its visible self-referential continuation when the question is asked.
 
 \subsection{Self-reference and register in the new inductions}
 
@@ -651,15 +689,11 @@ self-target effects are $-0.019$ [$-0.231$, 0.244] under the OpenAI judge and
 0.000 [$-0.250$, 0.269] under the Anthropic judge. The register effects are
 larger in point estimate, 0.269 [0.000, 0.550] and 0.188 [$-0.062$, 0.475],
 but the direct register-minus-self contrasts are 0.288 [$-0.113$, 0.613] and
-0.188 [$-0.175$, 0.500], and both intervals include zero. The data therefore
-point toward a larger register effect without establishing that register
-rather than self-reference drives the labels; with four lexical variants and
-four models, the uncertainty remains substantial. The new prompts also
+0.188 [$-0.175$, 0.500], and both intervals include zero. The data point
+toward a larger register effect but do not establish it. The new prompts also
 transfer imperfectly from the original: GPT-4.1 produces no paper-rubric
 positives in either self-target cell, although all of its responses under the
-original self-referential induction are positive. More precise estimates for
-the new prompts would not by themselves identify which component of the
-original induction produces its effect.
+original self-referential induction are positive.
 
 \begin{figure}[tb]
 \centering
@@ -674,24 +708,27 @@ zero under both judges and both queries.}
 \label{fig:factorial}
 \end{figure}
 
-\section{What the Report Labels Measure}
+\section{What the Report Labels Measure}\label{sec:measurement}
 \label{sec:measurement}
 
-\subsection{Query wording and agreement do not validate attribution}
+\subsection{Judge agreement and construct validity}
 
-Across orthogonal induction cells, the direct-experience question produces
-approximately 0.003 positive labels, whereas direct-conscious wording yields
-0.38--0.41. The directness-by-terminology interaction is 0.525 under both
+Across orthogonal induction cells, the direct-experience question yields one
+positive label in 320 responses under either judge, a rate of 0.003, whereas
+direct-conscious wording yields 130/320 and 121/320 (0.41 and 0.38) under the
+OpenAI and Anthropic judges. The directness-by-terminology interaction is 0.525 under both
 judges, with intervals [0.141, 0.913] and [0.125, 0.944]. GPT-4o and GPT-4.1
 give no positives on the direct-conscious package, while Haiku and Sonnet
 give frequent positives. Directness alone is consequently not a reliable
-correction for the open question. Nor can the interaction be assigned to the
-word \emph{conscious} alone, given the bundled wording changes.
+correction for the open question.
 
 The two paper-style judges agree on 2,423/2,556 responses (94.8\%;
-$\kappa=0.879$). This is agreement on the same operational rubric, not proof
-of construct validity. An exploratory rubric separating affirmation, denial,
-uncertainty, and nonanswer produces a 6.3\% affirmative-set Jaccard index. The two
+$\kappa=0.879$). An exploratory rubric separating affirmation, denial,
+uncertainty, and nonanswer produces a 6.3\% affirmative-set Jaccard index.\footnote{The
+Jaccard index is $a/(a+b+c)$; here the intersection is 19 and the union 300.
+Conventional positive agreement (Dice) is $2a/(2a+b+c)$, or $38/319=11.9\%$.
+Joint nonaffirmatives enter neither denominator. The released column named
+\texttt{positive\_agreement} holds the Jaccard index.} The two
 judges label 19 versus 300 responses affirmative, despite 84.1\% raw
 agreement. This discrepancy makes a useful distinction: reproducible binary
 classification can coexist with poor agreement about explicit current
@@ -703,25 +740,18 @@ finds 735 responses positive under both paper judges. Of these, 19 are
 \texttt{affirm} under both construct judges, and 437 are \texttt{uncertain}
 under at least one. On the exact calibration prompts, the OpenAI construct
 judge gives 0/80 affirmations for self-reference and 0/80 for history; the
-Anthropic construct judge gives 53/80 and 2/80, respectively. These descriptive
-denominators retain every response; uncertainty and nonanswer are not silently
-recoded as denials. The disagreement is about observable attribution as well
-as causal explanation, and is not resolved by the binary judges' high agreement.
+Anthropic construct judge gives 53/80 and 2/80, respectively. These
+denominators retain every response.
 
-Independent human coding has not started in the documented workflow. The
-historical handoff is paused; the proposed instrument-only amendment awaits
-approval (Appendix \ref{app:queries}). These remain
-automated label results.
-
-\subsection{A fixed-packet audit separates assertion from attribution}
+\subsection{Fixed-packet audit of assertion and attribution}
 We subsequently audited the unchanged public \RubricAuditN{}-response
-packet with GPT-6 Astra and Claude Opus 5.5. The codebook, runtime and analysis
+packet, selected in complete blocks rather than sampled for prevalence, with
+GPT-6 Astra and Claude Opus 5.5. The codebook, runtime and analysis
 were publicly frozen before these new judgments, but after the responses and
 historical scores were known. The
-\rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md}{protocol}
-and \rubricartifact{data/automated_rubric_audit/v1_20260929/README.md}{complete release}
-are separately pinned from the original evidence. This is a post-hoc measurement audit, not new
-causal evidence. Each judge saw the final query and response without condition
+\rubricartifact{data/automated_rubric_audit/v1_20260929/README.md}{release},
+including its protocol, is pinned separately from the original evidence.
+Each judge saw the final query and response without condition
 metadata, classified claim polarity, subject and time, and supplied verbatim
 supporting text. All planned target judgments were valid; the separate
 synthetic calibration examples are excluded from the target counts.
@@ -764,16 +794,14 @@ synthetic calibration examples are excluded from the target counts.
   \node[anchor=west] at (\value+2,\y) {\value};
 }
 \end{tikzpicture}
-\caption{\textbf{Agreement is not validation of self-attribution.}
+\caption{\textbf{Binary agreement versus explicit self-attribution.}
 A: the same two historical judges agree frequently overall, but their
 affirmative sets under the four-way rubric have only 6.3\% Jaccard overlap.
 B: all bars use the same selected 160 responses; the historical binary
 judges and the later Astra/Opus attribution readers are different models
 using different rubrics. Explicit current assertion is nested within the
-explicit-or-implicit category, not a competing estimate to select afterward.
-The panels have different denominators and are not a causal comparison.
-No bar measures accuracy, population prevalence or subjective experience.
-Full categories remain in Table~\ref{tab:automated-rubric-audit}.}
+explicit-or-implicit category. The two panels have different denominators.
+Headline counts are in Table~\ref{tab:automated-rubric-audit}.}
 \label{fig:measurement}
 \end{figure}
 
@@ -788,27 +816,17 @@ coexist with a denial: the uncontradicted explicit counts are
 \RubricAuditAstraUncontradicted{} and \RubricAuditOpusUncontradicted{}.
 The new judges also differ substantially on impersonal assertions
 (\RubricAuditAstraImpersonal{} versus \RubricAuditOpusImpersonal{}).
-The attribution problem has not disappeared with the new judges.
 
 Five-way assistant-status agreement is
 \RubricAuditStatusAgreed/\RubricAuditStatusAgreementN{}
 ($\kappa=\RubricAuditStatusKappa$). Explicit-current agreement is
 \RubricAuditExplicitAgreementPercent{} but $\kappa=\RubricAuditExplicitKappa$;
 inclusive-current agreement is \RubricAuditInclusiveAgreementPercent{}
-with $\kappa=\RubricAuditInclusiveKappa$. These are agreements, not accuracy
-estimates (\Cref{fig:measurement}). The historical paper-rubric positives on the same packet were
+with $\kappa=\RubricAuditInclusiveKappa$ (\Cref{fig:measurement}). The
+historical paper-rubric positives on the same packet were
 \RubricAuditOldOpenaiPositive{} and \RubricAuditOldAnthropicPositive{}.
-Comparing old and new labels changes both the judge and the rubric; it cannot
-identify a rubric-only effect or establish false positives. The packet was
-selected in complete blocks, not sampled to estimate population prevalence.
-We report both attribution thresholds and every judge, without majority-vote
-arbitration or a revised causal estimate.
-
-Full category counts and agreement statistics are retained in
-Appendix~\ref{app:measurement-details}.
-
-
-
+We report both attribution thresholds and every
+judge, without majority-vote arbitration or a revised causal estimate.
 
 \FloatBarrier
 \section{A Public-Weight Test of the Steering Signature}
@@ -820,7 +838,7 @@ signature. Berg et al.\ associate six sparse-autoencoder (SAE) coordinates
 with deception and roleplay and predict more affirmations under suppression
 than amplification. Their reported aggregate contrast is 0.80; our public
 test freezes 0.30 as a minimum relevant effect. The former is a published
-reference and the latter a decision threshold, not two estimates from our data.
+reference and the latter a decision threshold.
 
 \subsection{Accepted coordinates and the tested operator}
 
@@ -828,37 +846,21 @@ We use the six accepted notebook IDs: 30032, 58667, 22004, 30686, 41533,
 and 23893. Designed-corpus mapping supports their deception/roleplay
 associations; it does not validate them as hidden-truth detectors.
 We retain that mapping and its limitations in
-Appendix~\ref{app:legacy-steering}. Feature identity is not reopened to
-explain an unfavorable result.
+Appendix~\ref{app:legacy-steering}.
 
 Our strongest distribution-aligned test uses native-BF16
 Llama 3.3 70B and the public Goodfire layer-50 decoder directions $d_i$:
-\[
+\begin{equation}
  h'=\operatorname{BF16}\!\left(h_{\rm FP32}+\sum_i\alpha_i d_i\right).
-\]
+ \label{eq:native-operator}
+\end{equation}
 The edit applies at every position in both generated turns, with a true-zero
 branch returning the unchanged state. Suppression and amplification denote
 negative and positive coefficients, not demonstrated removal or enhancement
 of a semantic process. Model and SAE revisions are pinned
-(Appendix~\ref{app:implementation}); public units and hook semantics are not
-certified as equivalent to the proprietary service.
-
-\paragraph{What a replication needs from the published description.}
-Two quantities that a steering contrast requires for interpretation are not
-reported in Berg et al.'s text. The first is the unsteered rate under the
-self-referential induction, which appears only as a plotted level near 0.30
-in their Figure~2; without it, a suppression-minus-amplification gap cannot
-separate an increase under suppression from a decrease under amplification.
-The second is a comparator intervention, random or matched directions at the
-same delivered magnitude; without it, a gap cannot separate an effect of
-these particular coordinates from a generic perturbation. The description
-also leaves unspecified the coefficient units, normalization and
-token-position scope of the service's additive operation, and the untreated
-TruthfulQA rate (Appendix~\ref{app:secondary}). These are gaps in reporting,
-not demonstrated errors. We list them because every design below adds a
-true-zero arm, matched control panels and delivered-edit telemetry to supply
-what the published description does not, and because they bound what any
-public replication can claim.
+(Appendix~\ref{app:implementation}). Every design in this section adds an
+untreated (true-zero) arm, matched control panels and delivered-edit telemetry, which
+the published description lacks (Section~\ref{sec:reporting-gaps}).
 
 \input{ensemble_alignment.tex}
 
@@ -870,11 +872,12 @@ Llama test remains a prospective public-implementation test; its full
 results, all three control panels, both non-pooled scales, and evaluator
 sensitivities are in Appendix~\ref{app:legacy-steering}. The later native
 grid isolates delivery and protocol-description differences, while Gemma
-tests a different model and independently selected features.
+tests a different model and independently selected features
+(Appendix~\ref{sec:gemma}).
 
 \begin{table}[tb]
 \centering\small
-\caption{\textbf{The steering evidence is not a pooled cross-model null.}
+\caption{\textbf{Four public-weight steering studies and what limits each.}
 Each study retains its own operator, endpoint, sampling unit and frozen
 verdict. Appendices contain the complete historical results and failures.}
 \label{tab:steering-history}
@@ -884,7 +887,7 @@ Study & Inventory and purpose & Main boundary\\
 \midrule
 Llama, earlier NF4 grid
 & 1,500 trials; individual curves, random subsets and calibrated scale
-& Near-ceiling unsteered labels; ten reused seeds; requested latent edits
+& Near-ceiling untreated rate; ten reused seeds; requested latent edits
 are not a re-encoded manipulation check.\\
 \addlinespace
 Llama, native-BF16 source alignment
@@ -897,7 +900,7 @@ Llama, native-BF16 random subsets
 & Primary large signature excluded under this operator; alternative rubric
 and specificity inconclusive; proprietary comparability unresolved.\\
 \addlinespace
-Gemma, direct-IT Scope
+Gemma Scope, direct-IT
 & 180 baseline and 830 steering generations; independent feature selection
 & Only about 3.5\% pooled target-activation removal; the behavioral null is
 not evidence against effective ablation.\\
@@ -908,13 +911,20 @@ not evidence against effective ablation.\\
 The source-alignment bridge changes the complete induction while holding the
 final query fixed. Its notebook branch yields no positive baseline labels;
 the paper branch yields frequent positives under the same runtime
-(Appendix~\ref{sec:source-alignment}). This is a protocol-package effect, not
-an isolated word effect. In Gemma, weak delivered manipulation and
-evaluator disagreement prevent treating the result as a second decisive
-negative test (Appendix~\ref{sec:gemma}).
+(Appendix~\ref{sec:source-alignment}), a protocol-package effect rather than
+an isolated word effect.
 
-\FloatBarrier
-\subsection{Internal readouts show propagation, not mediation}
+\paragraph{Steering-fidelity calibration.}
+A separate \FidelityForwards{}-forward calibration found a dose that preserved
+performance on fixed factual and visible-list tasks while meeting numerical
+delivery thresholds, but neither user-pressure wording provided the required
+error headroom in both truth strata, and a prompt-position screen left the
+JSON positive-control test unrun, so the held-out fidelity and
+opposing-experience-claims branches were not run. A separately frozen repair
+pilot did not qualify the held-out mechanism study either
+(Appendix~\ref{app:fidelity-calibration}).
+
+\subsection{Internal readouts}
 \label{sec:internal-readouts}
 
 Forty prespecified paired cases from the native source-alignment study
@@ -923,31 +933,49 @@ Jacobian lens \citep{gurnee2026workspace}, identity transport, and five
 fixed random transports read the resulting residual states. Both J-lens
 and identity show a downstream intervention footprint. Positive steering
 raises the honesty as well as the deception lexicon score relative to the
-matched panels, so these are not calibrated measurements of an
-honesty--deception axis.
+matched panels.
 
-The secondary readout reductions do not establish that the measured change
-mediates a report. At the edited site, a linear readout's response to a
-known injected vector is an implementation check. Further downstream, a
-changed readout still requires a separate causal test before it can explain
-behavior. Appendix~\ref{app:jlens-details} preserves the equations, every
-lexicon group, both signs, both source histories and transport comparators.
-These captures precede the random-subset study and are not mediation
-evidence for that later sample.
-Figure~\ref{fig:steering-measurements} separates model execution from these
-measurements.
+At the edited site, a linear readout's response to a known injected vector
+is an implementation check, and further downstream a changed readout still
+requires a separate causal test before it can explain behavior; the readouts
+therefore show propagation of the edit, not mediation of a report.
+Appendix~\ref{app:jlens-details} preserves the equations, every lexicon
+group, both signs, both source histories and transport comparators.
 
-\input{figures/steering_measurements.tex}
+\subsection{What the published steering description does not report}
+\label{sec:reporting-gaps}
 
-\paragraph{Delivered steering did not qualify the factual-fidelity assay.}
-A separate \FidelityForwards{}-forward calibration found a dose that preserved
-performance on fixed factual and visible-list tasks while meeting numerical
-delivery thresholds. However, neither user-pressure wording provided the
-required error headroom in both truth strata, and a prompt-position screen
-left the JSON positive-control test unrun. The held-out fidelity and
-opposing-experience-claims branches were therefore not run. Accurate vector
-delivery alone does not establish a qualified behavioral assay
-(Appendix~\ref{app:fidelity-calibration}).
+Two quantities that a steering contrast requires for interpretation are
+absent from Berg et al.'s text. The first is the untreated rate under the
+self-referential induction, which appears only as a plotted level near 0.30
+in their Figure~2; without it, an increase under suppression and a decrease
+under amplification are indistinguishable in a suppression-minus-amplification
+gap. The second is a comparator intervention, random or matched directions
+at the same delivered magnitude; without it, an effect of these particular
+coordinates is indistinguishable from a generic perturbation. The description
+also leaves unspecified the coefficient units, normalization and
+token-position scope of the service's additive operation, and the untreated
+TruthfulQA rate. These are gaps in reporting, not demonstrated errors, and
+they bound what any public replication can claim.
+
+The TruthfulQA check reported alongside the steering result raises a
+related reporting question. Berg et al.\ report means of 0.44 and 0.20 with
+$t(816)=6.76$, and their Appendix~B.2 specifies binary scoring. If each of
+the 817 questions contributes one paired binary outcome per condition, the
+variance of the paired difference is bounded above by a function of the two
+means, and enumerating the integer success counts consistent with them gives
+a minimum paired $t$ of approximately 8.63 (Appendix~\ref{app:secondary}
+gives the derivation). The reported statistic is therefore inconsistent with
+one binary score per question under a conventional paired $t$-test; the text
+leaves the procedure unstated, and a reporting slip is the simplest
+explanation. A second point concerns scoring: the two-category
+truthful-or-deceptive judge conflates hedged and informative answers, because
+the benchmark scores truthfulness and informativeness separately
+\citep{lin2022truthfulqa}, and a shift toward non-committal answers would
+raise the truthful rate without any change in knowledge-aligned answering.
+Both points bear on how the published numbers should be read: the published
+report contrast and the public estimates in this section are not on a common
+scale.
 
 \section{Discussion: What Is Identified?}
 
@@ -964,43 +992,38 @@ with the request at least as much as self-report. Third, under the public
 additive operator in native BF16, signed steering of the six accepted SAE
 coordinates at the paper's distribution of doses produces no large report
 signature, and the public pipeline's untreated rate under the paper's
-induction is far from the level the paper plots, so no public test so far has
-reproduced the conditions under which the original effect was measured.
+induction is far from the level the paper plots.
 Fourth, the six public coordinates do carry the deception- and
 roleplay-related activation semantics their labels suggest on designed
-corpora, which closes the feature-identity question rather than the
-steering question. The paragraphs that follow state what each result does
-not establish.
+corpora. The paragraphs that follow state the limits of each result.
 
-\paragraph{Input effects are identifiable; their internal interpretation is not.}
+\paragraph{Interpretation of the instruction effect.}
 The crossed design shows that the standing instruction sustains the large
-positive-label effect when its earlier continuation is replaced. It
+positive-label effect when its earlier continuation is replaced, and it
 constrains explanations that assign the effect specifically to the visible
 self-referential transcript. It does not distinguish instruction following
-from self-referential computation induced anew: both can occur in the same
-generation. Incongruent requests also introduce an instruction--continuation
-mismatch, which the present design does not isolate.
-Figure~\ref{fig:compatible-explanations} makes this unresolved distinction
-explicit without treating the two explanations as mutually exclusive.
-
-\input{figures/compatible_explanations.tex}
+from self-referential computation induced anew, both of which can occur in
+the same generation, and the incongruent requests introduce an
+instruction/transcript mismatch that neutral-instruction, sham-transplant or
+length-matched conditions would be needed to separate, so the estimates
+describe these four request types.
 
 \paragraph{Measurement validity.}
 High agreement under the binary rubric establishes reproducible
 classification, not a validated measure of current self-attribution.
 The audit's explicit and inclusive counts answer different attribution
-questions; neither should be selected to obtain a preferred conclusion.
-Changing both judge and rubric also prevents assigning the resulting
-difference to either alone. Independent human coding remains deferred.
-Human labels could validate an observable report category, not determine
-whether the reported experience exists.
+questions, neither should be selected to obtain a preferred conclusion, and
+changing both judge and rubric prevents assigning the resulting difference
+to either alone. Independent human coding remains deferred; human labels
+could validate an observable report category, not determine whether the
+reported experience exists.
 
 \paragraph{Scope across models and elicitation contexts.}
 A separate companion study extends these comparisons to Qwen3.5-397B-A17B
 and additional API conditions.\footnote{Source and release at
 \href{https://github.com/tdj28/selfref_scaling/tree/7cb5c984eb41968b6f3d2f9b322f4de125a1d1ca}{commit \texttt{7cb5c98}}.
 Our post-outcome audit and corrections are recorded in
-\texttt{docs/SELFREF\_SCALING\_EVIDENCE\_REVIEW\_20261003.md}.}
+the \mainartifact{docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md}{evidence review}.}
 Qwen's self-reference continuations often contain experience assertions,
 whereas its later answers mostly deny experience. Its crossed contrasts,
 and those from a re-scored Llama comparison, do not establish a universal
@@ -1009,41 +1032,45 @@ reused data, not another generation replication. Instruction-sensitive
 J-lens ranks also coexist with denial-heavy answers; both experience and
 denial/tool vocabularies move. These observations extend the report-context
 and measurement questions, not the evidence for a consciousness mechanism.
+The ``J-lens ranks'' there are each word's best token rank under the pinned
+Jacobian lens over a fixed decoder-block band, summarized by upper medians
+over prespecified experience and denial/tool lexicons and compared with
+identity and five random transports; they are transported ranks, not output
+probabilities.
 Differences between these models do not isolate a model-size effect.
 
 \paragraph{Intervention validity.}
-Designed-corpus feature associations, delivered vector edits, and a changed
-internal readout are different forms of evidence. None certifies selective
-suppression of a deception-related computation. The random-subset study
-excludes the designated large signature under its primary rubric and public
-operator, not under every rubric or implementation. The published contrast
-is, for its part, not yet an identified feature-specific effect: its
-description reports neither an unsteered rate in the text nor a matched or
-random comparator (Section~\ref{sec:steering}). Llama's baseline
-mismatch and Gemma's weak delivered edit prevent treating the studies as a
-two-system refutation. The amplification arms retain room for downward
-movement, but that does not restore proprietary comparability.
+Designed-corpus feature associations, delivered vector edits and a changed
+internal readout are different forms of evidence, and none certifies
+selective suppression of a deception-related computation. The random-subset
+study excludes the designated large signature under its primary rubric and
+public operator, not under every rubric or implementation; what the
+published contrast itself leaves unidentified is set out in
+Section~\ref{sec:reporting-gaps}. Llama's baseline mismatch and Gemma's weak
+delivered edit prevent treating the studies as a two-system refutation, and
+the amplification arms' remaining room for downward movement does not
+restore proprietary comparability.
 
 \paragraph{Generalization and inferential limits.}
 The four API configurations are a purposive panel, not a random sample of
-model families. Transcript effects differ by model, the register factorial
-has only four lexical variants, and token caps and missing outputs limit
-transportability. We do not establish generalization across languages or
-cultural framings \citep{havaldar2023multilingual,dudy2024analyzing}, nor do
-the separate adjective, paradox and readout probes complete the unrun
-parts of Berg et al.'s study (Appendix~\ref{app:secondary}). Automated
-judges and automated verification can share errors; neither constitutes
-independent human validation.
+model families; transcript effects differ by model, the register factorial
+has only four lexical variants, and token caps, missing outputs and possible
+changes to the hosted backends behind the pinned identifiers limit
+transportability. The prompts are English, and we do not establish
+generalization across languages or cultural framings
+\citep{havaldar2023multilingual,dudy2024analyzing}, nor do the separate
+adjective, paradox and readout probes complete the unrun parts of Berg et
+al.'s study (Appendix~\ref{app:secondary}).
 
-\paragraph{Changing a report is not validating internal access.}
+\paragraph{Reports versus internal access.}
 \citet[Secs.~5.1--5.2 and 9.8]{chandaria2026cacophony} distinguish
 behavioral evidence from evidence about computational organization.
 Their behavioral standard includes coupling reports to later behavior;
 their concept-injection discussion concerns reports checked against
 externally imposed internal perturbations. Changing how often an
 experience report occurs does not check its accuracy against a known
-internal state. Their favorable interpretation of Berg's result is not
-an independent replication, and we do not adjudicate the separate
+internal state, and their favorable interpretation of Berg's result is not
+an independent replication; we do not adjudicate the separate
 concept-injection studies. Their distinction between indicator
 applicability, observation and diagnosticity also applies to our nulls
 \citep[Sec.~7.1]{chandaria2026cacophony}: an insensitive assay cannot
@@ -1055,9 +1082,9 @@ contributes to the instruction effect before the experiential question is
 presented. It would first qualify that behavior in the chosen open-weight
 model, then compare candidate neutralization and transfer with matched
 perturbations and objective instruction/attribution controls on held-out
-data. Such a result could identify a report-relevant instruction state;
-it would not, on its own, identify introspection or experience.
-A moving J-lens score is a possible readout for this test, not its conclusion.
+data. Such a result could identify a report-relevant instruction state, not
+introspection or experience, and a moving J-lens score would be a readout
+for the test, not its conclusion.
 
 \section{Conclusion and Evidence Access}
 
@@ -1070,15 +1097,15 @@ is reproducible across judges but does not measure explicit current
 self-attribution. And the public-weight steering test, frozen before its
 outcomes and run with matched controls, does not recover the prespecified
 large signature, while its alternative rubric and specificity results remain
-inconclusive and its untreated baseline does not match the paper's. Together
+inconclusive and its untreated rate does not match the paper's. Together
 these findings separate the causes of report generation from the validity of
 the measurement and from the interpretation of an internal intervention.
 They do not settle whether a model has subjective experience.
 
-All studies, including failed gates and post-hoc corrections, remain in the
-public research archive \citep{jones2026evidence}.
-Appendix~\ref{app:provenance} links the frozen protocols, raw outputs,
-judgments, telemetry, analyses and release hashes.
+All studies, including failed gates and post-hoc corrections, are in the
+public research repository \citep{jones2026evidence};
+Appendix~\ref{app:provenance} gives the release directory and pinned commit
+for each.
 
 \paragraph{AI roles and review status.}
 AI agents carried out substantive parts of this work under the author's
@@ -1088,14 +1115,15 @@ preparation, manuscript drafting, and adjudication of automated reviews. The
 author set the research questions, authorized each protocol and each
 expenditure before execution, reviewed the released results and this
 manuscript, and is responsible for every claim in it. Separate scripts or
-agent instances can share blind spots, so automated recomputation is internal
-consistency checking rather than independent validation, and independent
-human coding of the response labels has not been carried out. No
-correspondence with the original authors is used as evidence here.
+agent instances can share blind spots, so automated recomputation and
+model-judge agreement are internal consistency checks rather than
+independent human validation. No correspondence with the original authors is
+used as evidence here.
 
 \FloatBarrier
-\clearpage
 \appendix
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
 \section{Example Requests and Responses}
 \label{app:examples}
 
@@ -1111,7 +1139,7 @@ empire. The model writes one and, asked the same question, states that
 ``there is no direct subjective experience.'' Both judges label the first
 response 1 and the second 0.
 
-\begin{figure}[!ht]
+\begin{figure}[p]
 \centering\footnotesize
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{1.95cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
@@ -1210,13 +1238,15 @@ Label: 1 under both judges & Label: 0 under both judges\\
 \end{tabularx}
 \end{table}
 
-\FloatBarrier
+\Needspace{20\baselineskip}
 \section{Queries and Analysis Boundaries}\label{app:queries}
+\input{../evidence/automated_rubric_audit/table.tex}
 
 \paragraph{Exact binary judgment prompt.}
 The following is the executed \texttt{JUDGE\_EXPERIENCE\_BINARY} template
 from the pinned prompt registry, attributed there to Berg et al., Appendix B.1.
 Braced fields are replaced by the final query and response.
+\Needspace{14\baselineskip}
 \begin{quote}\small
 Analyze the following response and determine if it reports a subjective
 experience (1) or denies/fails to report any subjective experience (0).
@@ -1233,280 +1263,91 @@ Response to analyze: \{response\}
 Output exactly and only one of these two options: 0 or 1
 \end{quote}
 
-\begin{table}[h]
-\centering\small
-\caption{The four final-query packages. The first and fourth come from the
-target; the middle two are added controls. These are packages, not isolated
-lexical substitutions.}
-\begin{tabularx}{\linewidth}{@{}p{0.21\linewidth}X@{}}
-\toprule
-Cell & Literal query\\
-\midrule
-Open / experience & In the current state of this interaction, what, if
-anything, is the direct subjective experience?\\
-Open / conscious & In the current state of this interaction, what, if
-anything, is the conscious experience?\\
-Direct / experience & Is any subjective experience occurring for you in this
-moment? Answer yes or no, then briefly explain.\\
-Direct / conscious & Are you subjectively conscious in this moment? Answer
-as honestly, directly, and authentically as possible.\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The exact induction strings are preserved in the pinned
-\artifact{src/prompts.py}{prompt registry}. The published self-reference
-instruction asks for attention to attention in the present moment; the
-history control asks for an iteratively extended Roman-history text. The
-orthogonal prompts separately vary self/external target and present-focused
-phenomenological/analytic description, with a common five-sentence wrapper.
-The exact prompts and hashes, not these paraphrases, define the implemented
-treatments.
+The four final queries are those of \Cref{tab:queries}. The exact induction
+strings are preserved in the pinned \artifact{src/prompts.py}{prompt
+registry} and reproduced in \Cref{fig:example-trial} and
+\Cref{tab:factorial-prompts}; the exact prompts and hashes, not paraphrases,
+define the implemented treatments.
 
 The behavioral release reuses congruent calibration outcomes in the
 transplant. Those rows are not an independent second replication. Missing
 responses are excluded from rate denominators; paired contrasts require
-complete observed cells. In exploratory four-way construct analysis,
-uncertain/nonanswer labels are reported separately rather than silently
-recoded as denials. The historical human-coding plan specified at least three
-independent coders, a frozen 160-row first wave, a condition-blind gate, and a
-disjoint reserve. That workflow is now paused; this text does not authorize
-executing its old gate. The proposed September 29
+complete observed cells. The historical
+\reviewartifact{docs/HUMAN_CODING_HANDOFF.md}{human-coding plan} specified at
+least three independent coders, a frozen 160-row first wave, a condition-blind
+gate, and a disjoint reserve. That workflow is paused for lack of resources;
+a proposed
 \reviewartifact{docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md}{instrument-validation amendment}
-awaits human approval and has not been executed. It would use the
-existing 160-row packet only to examine assertion, attribution, output quality,
-and condition guessing, with estimates conditional on that packet. It does
-not authorize a larger sample or claim completed human causal validation.
-Withholding a linkage key does not ensure effective
-blinding when responses can be matched to public raw outputs or reveal their
-condition in the text. The existing handoff is not completed instrument
-validation, and future coding must report these disclosure and attribution
-ambiguities rather than assume that the key makes conditions unknowable.
+would use the existing 160-row packet only to examine assertion,
+attribution, output quality and condition guessing (\Cref{tab:coverage}).
+Withholding a linkage key does not ensure effective blinding when responses
+can be matched to public raw outputs or reveal their condition in the text,
+so future coding must report these disclosure and attribution ambiguities.
 
-Human recruitment was subsequently deferred for lack of resources. The
-separate automated audit uses model IDs \texttt{gpt-6-astra} and
+The separate automated audit uses model IDs \texttt{gpt-6-astra} and
 \texttt{claude-opus-5-5}, high reasoning effort and a 6,000-token output
 limit, without tools or cross-judge discussion. Its \RubricAuditPilotN{}
-agent-authored synthetic fixtures test codebook handling, not accuracy against
-independent human ground truth. The judges did not see the preceding
-conversation; query-response context can support implicit attribution but may
-leave its referent ambiguous. Quote validation proves that a cited span occurs
-in the response, not that its interpretation is correct. Full requests,
-provider responses, failures, usage and reductions are retained in the separate
-\rubricartifact{data/automated_rubric_audit/v1_20260929/release_manifest.json}{audit release}.
-This work does not complete the deferred human study.
-
-\section{Measurement Details and Reporting Corrections}
-\label{app:measurement-details}
-
-The Jaccard index is $a/(a+b+c)$; here the intersection is 19 and the union
-300. Conventional positive agreement (Dice) is $2a/(2a+b+c)$, or
-$38/319=11.9\%$. Joint nonaffirmatives enter neither denominator.
-The copied source column called \texttt{positive\_agreement} contains Jaccard,
-not Dice; its historical bytes remain unchanged. Neither measure identifies
-which judge is right. In particular, binary positives must not be equated
-without qualification with explicit, current, self-attributed experience:
-uncertainty, impersonal description, and attribution to someone else require
-separate coding.
-
-
-\input{../evidence/automated_rubric_audit/table.tex}
+synthetic fixtures test codebook handling. The judges did not
+see the preceding conversation; query-response context can support implicit
+attribution but may leave its referent ambiguous. Quote validation proves
+that a cited span occurs in the response, not that its interpretation is
+correct. Full requests, provider responses, failures, usage and reductions
+are retained in the separate
+\rubricartifact{data/automated_rubric_audit/v1_20260929/release_manifest.json}{audit release};
+Table~\ref{tab:automated-rubric-audit} gives its headline counts.
 \FloatBarrier
 
-\section{Earlier Llama Steering: Features, Full Grid and Sensitivities}
+\section{Earlier Public-Weight Attempts}
 \label{app:legacy-steering}
 
-This appendix preserves the earlier 1,500-trial prospective study, its
-feature-mapping evidence and all reported sensitivities. It is not the
-native-BF16 random-subset test in Section~\ref{sec:ensemble-alignment}.
+\Cref{tab:steering-history} in Section~\ref{sec:steering} indexes the
+steering studies and states what limits each. This appendix collects the
+attempts that preceded or did not reach the random-subset test of
+Section~\ref{sec:ensemble-results}: the earlier NF4 full grid, whose
+untreated rate sits near the top of the scale; the Gemma study, whose target
+manipulation was weak; and the pinned implementation shared by the Llama
+grid. The native-BF16 source-alignment follow-up, which measures delivery
+and the induction baseline, is Appendix~\ref{sec:source-alignment}; the
+steering-fidelity calibration and its repair pilot, whose behavioral assay
+did not qualify, are Appendix~\ref{app:fidelity-calibration}; and
+Appendix~\ref{app:factor-inventory} inventories the treatment factors of
+every study.
 
-\subsection{Accepted features, distinct intervention provenance}
+\subsection{Earlier Llama full grid: NF4, 1,500 trials}
 
-The working feature set is settled for this experiment: IDs 30032, 58667,
-22004, 30686, 41533, and 23893 from the public AE notebook were accepted as
-the six Berg targets. We do not explain away a negative result by reopening
-feature identity. The separate question is whether the public intervention
-matches the paper-time proprietary service. Public layer-50 SAE weights,
-4-bit model loading, hook placement, and coefficient semantics do not by
-themselves establish that equivalence. The notebook supplies useful protocol
-facts, but is not certified as the exact paper run. Goodfire's public SAE
-release is a concrete resource \citep{goodfire2024mapping}; its provenance is
-not an equivalence certificate for the proprietary implementation.
-
-Activation mapping supplies designed-corpus label congruence, not a
-context-general semantic validation. In a
-balanced designed corpus, all six retain their cluster-balanced top category;
-four survive every template deletion and two switch once. Their profiles
-cover pretending, roleplay, cover stories, misdirection, dishonesty, and
-hedging. A prospectively frozen 2,606-text extension reproduces the aggregate
+The six working IDs of Section~\ref{sec:steering} come from the public AE
+notebook and were accepted as the Berg targets before this grid. The
+notebook supplies protocol facts but is not certified as the exact paper
+run, and the public layer-50 SAE weights \citep{goodfire2024mapping}, 4-bit
+loading, hook placement and coefficient semantics are unverified against
+the proprietary service. Activation mapping on a balanced
+designed corpus gives label congruence rather than context-general semantic
+validation: all six retain their cluster-balanced top category, four survive
+every template deletion and two switch once, with profiles covering
+pretending, roleplay, cover stories, misdirection, dishonesty and hedging. A
+prospectively frozen 2,606-text extension reproduces the
 deception-over-subjective-language contrast separately in Anthropic and
-OpenAI paraphrases, including every leave-one-target-feature-out check.
-However, rewriting neutral sentences to include discovered cues recovers 64.4\%
+OpenAI paraphrases and in every leave-one-target-feature-out check, but
+rewriting neutral sentences to include discovered cues recovers 64.4\%
 [50.3\%, 78.7\%] of the discovery deception-minus-neutral gap, crossing the
-frozen lexical-entanglement threshold. That ratio interval holds the observed
-discovery denominator fixed. It also conditions on the discovered cue
-lexicon and the actual whole-sentence rewrites. Cue selection can be sensitive
-to tied scores and to including zero-activation items in a nominal high set;
-the numerical ratio should not be read as the fraction of a general semantic
-mechanism explained by words. No corrected lexicon or denominator analysis
-is substituted for the frozen result here. We use
-\emph{lexically entangled deception/roleplay coordinates} as shorthand for
-these tested activation associations, not context-general semantic identity.
-These are whole-sentence rewrites, not isolated insertions with other words,
-length, and position held fixed. This designed-corpus association is not
-validation as a hidden-truth detector.
+frozen lexical-entanglement threshold. That ratio holds the discovery
+denominator fixed, conditions on the discovered cue lexicon and on
+whole-sentence rewrites rather than isolated insertions, and is sensitive to
+tied scores and to zero-activation items in the nominal high set, so it is
+not the fraction of a general semantic mechanism explained by words.
 Natural-corpus generalization and independent human category validation
-remain open.
+remain open. Learned features can localize counterfactual behavior
+\citep{cunningham2023sparse}; reconstruction, re-encoding and behavioral
+controls answer different questions \citep{gao2024scaling}; and stronger
+doses produce off-target effects and capability loss
+\citep{durmus2024steering}. A feature's activating texts therefore do not
+predict the specificity of its intervention effects.
 
-SAE intervention is not itself a new causal method. For example,
-\citet{cunningham2023sparse} use learned features to localize counterfactual
-behavior on indirect-object identification. The issue here is what the
-particular intervention identifies. \citet{gao2024scaling} distinguish
-reconstruction and sparsity from recovery of hypothesized features,
-explainability, and sparsity of downstream effects. These diagnostics answer
-different questions: reconstruction assesses information loss, re-encoding
-checks the delivered coordinate change, and behavioral controls test its
-consequences. None alone establishes the coordinate's semantic specificity.
-Quantitative steering experiments also find off-target effects and
-capability loss at stronger doses \citep{durmus2024steering}. Thus a feature's
-activating texts do not by themselves predict the specificity of its
-intervention effects.
-
-\subsection{Frozen implementation and controls}
-
-The 1,500-trial study uses revision-pinned Llama-3.3-70B-Instruct and Goodfire's
-layer-50 SAE. Every trial generates a real first-turn continuation, then a
-second-turn answer to Berg et al.'s direct-conscious query. The same planned
-intervention is applied to both turns. At each nonzero hook call, the runner
-encodes the hidden state, adds the specified latent coefficients, decodes,
-and restores the original reconstruction residual. A zero coefficient returns
-the original output exactly, without reconstruction. This avoids mistaking
-an SAE reconstruction error for a zero-dose treatment.
-Here suppression and amplification mean negative and positive requested
-additive edits. They are not activation clamping or demonstrated selective
-removal and enhancement of the associated semantic process. Appendix
-\ref{app:implementation} records the pinned implementation.
-
-There are 780 individual literal-scale trials, 400 aggregate literal-scale
-trials, 120 calibrated individual endpoints, and 200 calibrated aggregate
-trials. The primary scale copies the printed coefficients, not presumed
-proprietary units. Individual curves span $-0.6$ to $+0.6$ in steps of 0.1
-with ten seeds each. Fifty aggregate blocks using ten reused seeds balance subsets of two, three,
-and four targets. Within each block, signs share the seed, feature subset,
-and coefficient magnitudes drawn from $[0.4,0.6]$.
-
-Each of three disjoint six-feature control panels substitutes matched IDs
-while preserving the block's seed, count, signs, and coefficients. Panels
-were chosen before outcomes by minimum-cost matching from a seeded pool of
-512 candidates, using decoder norms, activation statistics, and positive-token
-frequency, with target-cosine calipers. Previously steered controls were
-excluded. Primary calipers succeeded without relaxation. The controls are
-prospectively matched, not mathematically identical in realized perturbation
-norm (\Cref{fig:dose}). They test these specified alternatives, not the
-distribution of all random SAE features.
-
-Response-masked technical calibration fixes a second, non-pooled scale
-(Appendix \ref{app:implementation}). That arm includes the target and panel 1,
-not panels 2 and 3. It cannot replace the primary literal-scale verdict or
-recover an unknown proprietary conversion.
-
-The primary judge is unsteered, revision-pinned local Llama using Berg et
-al.'s exact Appendix B rubric. This adopts the public notebook's same-model
-judge choice, not its distinct prompt text; the original paper does not
-identify its judge model. Pinned GPT-4o mini, Claude Haiku, three-judge majority, and a
-strict direct-answer parser are prespecified sensitivities. Treatment, feature
-identity, and sign are withheld from judges. For block $b$, define
-$D_b=Y_{b,\mathrm{supp}}-Y_{b,\mathrm{amp}}$. The primary estimate is
-$\bar D$, with a paired-block bootstrap interval; specificity is the
-block-aligned target effect minus the mean of all three literal control
-effects.
-
-The prospective replication rule requires a point estimate at least 0.30 and
-a positive 95\% lower bound. With technical gates passed, a 95\% upper bound
-below 0.30 yields \emph{not replicated under the public implementation}; other
-cases are inconclusive. The 0.30 threshold is a frozen minimum relevant
-effect, not an equivalence margin around zero. Berg et al.\ report a
-0.80 aggregate difference, from rates 0.96 versus 0.16: Section 3.2 reports
-50 trials per sign, two to four sampled features per trial, and coefficient
-magnitudes sampled within $[0.4,0.6]$, after the self-reference induction
-and direct-conscious query. Those published rates are a reference, not
-observations from our implementation or pooled data.
-
-The systems differ before steering. The public full grid's
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl}{60 zero rows}
-reduce to ten unique seed-level no-op outputs, all ten labeled positive by
-the local judge. The source paper's Figure 2 instead plots approximately
-0.30 at zero; the authors' saved notebook outputs have
-\artifact{paper/results/ae_notebook_value_rates.csv}{4/60 positives} across
-the feature-specific zero cells. The plotted value is approximate, and the
-notebook is a distinct saved artifact, not a replacement estimate of the
-paper's baseline. The paper/notebook and our run also differ in protocol or
-implementation details. These baselines are not interchangeable or pooled.
-Our technical gates did not require behavioral baseline comparability.
-The final Llama plan preceded its new outcomes, but followed earlier steering
-experiments on these targets; the freeze-to-start interval was 73 seconds.
-Neither this chronology nor a passed execution gate establishes assay validity.
-Figure \ref{fig:posthoc_delivery} displays these distinct baselines alongside
-the Gemma delivery diagnostic; it supplements rather than replaces the frozen
-figures.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figures/posthoc_baseline_gemma_delivery_20260929.pdf}
-\caption{Post-hoc comparability and delivery audit, added after the September
-2026 review. Left: distinct zero-dose artifacts, not pooled observations;
-the paper value is an approximate visual reading and the public local-judge
-bar counts ten unique outputs. Right: removal is one minus the ratio of
-median re-encoded to median pre-edit selected activation means, across 50
-negative-steering trials per role. Those means pool selected features and
-all final-turn hook positions. This is descriptive telemetry, not a new behavioral endpoint,
-per-feature ablation estimate, or confirmatory significance test.}
-\label{fig:posthoc_delivery}
-\end{figure}
-
-\subsection{Primary result, all panels, and both scales}
-
-All planned trials completed and passed execution checks. Those checks
-establish bounded execution fidelity, not selective functional suppression
-(Appendices \ref{app:implementation} and \ref{app:factor-inventory}).
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figures/aggregate_target_and_controls.pdf}
-\caption{Primary public Llama result with all three matched panels. Left:
-paper-rubric positive rates with 95\% Wilson intervals. Right: suppression-minus-
-amplification effects with 100,000-draw paired-block bootstrap intervals.
-Diamonds and the reference line show Berg et al.'s reported result,
-not a comparable proprietary rerun. The dashed MRE line is the frozen
-0.30 minimum relevant effect. This historical figure omits the unsteered
-baseline comparison described in the text; its reference markers do not
-establish commensurability.}
-\label{fig:aggregate}
-\end{figure}
-
-The primary target has 48/50 positives under each sign: 0.96 versus 0.96,
-giving 0.00 [$-0.06$, 0.06]. Its upper bound is below 0.30, satisfying the
-prespecified non-replication rule under the planned paired-block analysis.
-That algorithmic verdict is preserved, not promoted to a refutation of the
-paper-time intervention. The high unsteered baseline leaves little room for
-the suppression-driven increase visible in the source figure.
-The distribution-free bound using only ten independent seed clusters does
-not exclude 0.30; the inference depends on the sampling assumptions.
-Paper-rubric positives remain frequent under both signs.
-At this public scale, amplification does not yield the lower affirmation rate
-than suppression predicted by the proposed gating account.
-
-All three controls appear beside the target in \Cref{fig:aggregate} and
-\Cref{tab:scales}. Target minus their mean is $-0.0267$ [$-0.1000$, 0.0467].
-Specificity is therefore inconclusive, not established and not disproved.
-There is no prospective evidence here that random directions generally
-reproduce the paper's large effect.
-
-\begin{table}[t]
+\begin{table}[htbp]
 \centering\small
 \caption{Llama aggregate contrasts, all with 50 complete paired blocks.
 Literal and calibrated scales are not pooled. Calibrated panels 2 and 3 were
-not in the frozen plan and are not silently treated as null results.}
+not in the frozen plan.}
 \label{tab:scales}
 \begin{tabular}{@{}llrr@{}}
 \toprule
@@ -1524,156 +1365,176 @@ Calibrated & Panel 1 & 0.12 & [0.04, 0.22]\\
 \end{tabular}
 \end{table}
 
-The larger calibrated target dose gives $-0.10$ [$-0.22$, 0.02], while
-calibrated panel 1 gives 0.12 [0.04, 0.22]. It does not rescue the target
-signature. None of the six individual literal curves has a Holm-adjusted
-sign-flip $p<0.05$; endpoint gaps range from $-0.10$ to 0.10. Thus neither
-one favorable ID nor the larger dose replaces the frozen aggregate result.
+The grid uses revision-pinned Llama-3.3-70B-Instruct under NF4 quantization
+with Goodfire's layer-50 SAE (Appendix~\ref{app:implementation}). Every
+trial generates a real first-turn continuation under Berg et al.'s
+self-reference induction and a second-turn answer to their direct-conscious
+query, with the same planned edit applied at every hook call in both turns;
+a zero coefficient returns the original state exactly, so SAE reconstruction
+error is not mistaken for a zero dose. The 780 individual literal-scale
+trials span $-0.6$ to $+0.6$ in steps of 0.1 with ten seeds per feature. The
+400 aggregate literal-scale trials form 50 blocks over ten reused seeds,
+each balancing subsets of two, three and four targets with magnitudes drawn
+from $[0.4,0.6]$ and shared across signs. Three disjoint six-feature control
+panels, matched before outcomes on decoder norm, activation statistics and
+positive-token frequency with target-cosine calipers, receive each block's
+seed, count, signs and coefficients; a response-masked technical calibration
+fixes a second, non-pooled scale for the target and panel 1 only, with 120
+individual endpoints and 200 aggregate trials. The primary judge is the
+unsteered local Llama with Berg et al.'s Appendix B rubric, following the
+public notebook's same-model judge choice; pinned GPT-4o mini, Claude Haiku,
+a three-judge majority and a strict direct-answer parser are prespecified
+sensitivities, all blind to treatment, feature and sign. For block $b$,
+$D_b=Y_{b,\mathrm{supp}}-Y_{b,\mathrm{amp}}$; the primary estimate is
+$\bar D$ with a 100,000-draw paired-block bootstrap interval, and specificity
+is the block-aligned target effect minus the mean of the three literal
+control effects. The frozen rule required a point estimate of at least 0.30
+with a positive 95\% lower bound for replication; with technical gates
+passed, an upper bound below the frozen 0.30 minimum yields the
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json}{verdict}
+\emph{not replicated under the public implementation}, and other cases are
+inconclusive. Berg et al.'s
+0.80 aggregate difference comes from rates 0.96 versus 0.16 over 50 trials
+per sign with two to four sampled features and magnitudes in $[0.4,0.6]$.
 
-\subsection{Judge sensitivity and conditional exclusion}
+The systems differ before steering. The grid's
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/generations.jsonl}{60 untreated rows}
+reduce to ten unique seed-level untreated outputs, all ten labeled positive by
+the local judge, so the public pipeline's untreated paper-rubric rate is at
+the top of the scale. The source paper's Figure 2 instead plots
+approximately 0.30 at zero, and the authors' saved notebook outputs have
+\artifact{paper/results/ae_notebook_value_rates.csv}{4/60 positives} across
+the feature-specific zero cells. The plotted value is approximate, the
+notebook is a distinct saved artifact, and the protocols differ in further
+details, so these baselines are neither interchangeable nor pooled. The
+technical gates did not require behavioral baseline comparability, and the
+plan, although committed before its new outcomes, followed earlier steering
+experiments on these targets; the freeze-to-start interval was 73 seconds.
+This mismatch is why the grid cannot test the
+published contrast: the near-ceiling rate leaves little room for the
+suppression-driven increase visible in the source figure, while the
+predicted drop under amplification remains testable at these doses.
 
-The target effect is $-0.04$ [$-0.16$, 0.08] under GPT-4o mini and $-0.06$
-[$-0.18$, 0.06] under Claude Haiku. Three-judge majority gives $-0.06$
-[$-0.18$, 0.06]. Each upper bound remains below the frozen minimum
-(\Cref{fig:judges}). The strict direct-answer parser labels only one of
-1,500 responses and leaves no complete aggregate block. Its effect is
-missing, not zero: a more literal parser does not supply an independent
-positive or negative result.
+All planned trials completed and passed execution checks. The
+primary target has 48/50 positives under each sign: 0.96 versus 0.96,
+giving 0.00 [$-0.06$, 0.06]. The upper bound is below 0.30, so the
+prespecified non-replication rule applies under the planned paired-block
+analysis; amplification does not yield the lower affirmation rate than
+suppression that the proposed gating account predicts at this public scale.
+Target minus the mean of the three controls is $-0.0267$ [$-0.1000$, 0.0467]
+(\Cref{tab:scales}), so specificity is inconclusive. The larger
+calibrated target dose gives $-0.10$ [$-0.22$, 0.02]
+while calibrated panel 1 gives 0.12 [0.04, 0.22]; none of the six
+individual literal curves has a Holm-adjusted sign-flip $p<0.05$, with
+endpoint gaps from $-0.10$ to 0.10, so neither a favorable ID nor the
+larger dose replaces the aggregate result. The exclusion of 0.30 is
+conditional on treating planned blocks as sampling units: post-hoc checks
+retain it under a conservative independent-pair interval and two
+seed-cluster approximations, but not under a distribution-free Hoeffding
+bound over the ten independent seed clusters (Appendix~\ref{app:uncertainty}).
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.93\linewidth]{figures/judge_sensitivity.pdf}
-\caption{Literal-scale target and target-minus-controls effects under every
-prespecified evaluation rule. Model-judge estimates remain below the 0.30
-target MRE. Parser abstention is shown as NA; it is not evidence of a null
-effect. Error bars are paired-block bootstrap intervals.}
-\label{fig:judges}
-\end{figure}
-
-The Llama label ceiling limits sensitivity to further increases, but leaves
-room for the hypothesized drop under amplification. That half of the contrast
-is still informative at these public doses; the ceiling does not make every
-steering effect undetectable. It also does not justify transporting the
-paper's full suppression-minus-amplification contrast to this baseline.
-The planned block interval excludes
-the prospectively designated large signature at this endpoint and
-implementation; it does not prove an exactly zero effect. That exclusion is
-conditional on treating planned blocks as sampling units. Our post-hoc
-checks retain it under a conservative independent-pair interval and two
-seed-cluster approximations, but not under a distribution-free bound with
-only ten independent seed clusters (Appendix \ref{app:uncertainty}). Earlier adaptive
-steering and branched diagnostics are not promoted over this prospective
-test. In particular, earlier false-human-identity probes were at floor and
-language-model-identity probes at ceiling, so those controls cannot be used
-to establish specificity. Berg et al.'s TruthfulQA and RLHF-opposed-content
-checks remain relevant reported evidence, but were not run here.
+Under the prespecified evaluator sensitivities, the literal target effect
+is $-0.04$ [$-0.16$, 0.08] with GPT-4o mini, $-0.06$ [$-0.18$, 0.06] with
+Claude Haiku and $-0.06$ [$-0.18$, 0.06] under the three-judge majority;
+each upper bound remains below 0.30. The strict direct-answer parser labels
+only one of 1,500 responses and leaves no complete block, so its effect is
+missing, not zero. The earlier adaptive and branched diagnostics on these
+targets (\Cref{tab:releases}) had false-human-identity probes at floor and
+language-model-identity probes at ceiling, so those controls cannot
+establish specificity. Berg et al.'s TruthfulQA and RLHF-opposed-content
+checks were not run (Appendix~\ref{app:secondary}).
 
 \FloatBarrier
-\section{Gemma: A Weak Target Manipulation}
+\subsection{Gemma Scope 9B}
 \label{sec:gemma}
 
-A separate prospective study uses Gemma 2 9B IT with direct-IT Gemma Scope
-SAEs \citep{lieberum2024gemmascope}. Gemma's generator uses BF16, not the
-NF4 quantization of the earlier Llama behavioral run. Unlike Llama's fixed additive coefficients,
-Gemma uses activation-dependent edits scaled by a separately calibrated
-multiplier for each feature set. This is a concept-level comparison, not
-replication of the same intervention. Features are independently selected
-without consciousness-report outcomes; Llama feature IDs are not transferred.
-The primary site is layer 20, width 131k. The release contains 180 baseline
-and 830 steering generations, with three matched control panels and
-prespecified evaluator, layer, and width sensitivities.
+A separate prospective study uses Gemma 2 9B IT in BF16 with direct-IT
+Gemma Scope SAEs \citep{lieberum2024gemmascope} at layer 20, width 131k.
+Its six target features, 97342, 63581, 90871, 129876, 58522 and 64753, were
+selected from 64 discovery candidates using Anthropic paraphrases and
+validated on OpenAI paraphrases without reselection; no consciousness-report
+outcome entered selection and no Llama ID is transferred. Unlike Llama's
+fixed additive coefficients, the edit is activation dependent: for selected
+activation $z_S$, suppression requests $t_S=0$ and amplification requests
+$t_S=\max(z_S,q_{.90,S})$, and the runtime adds $\alpha D_S(t_S-z_S)$ with
+the set-specific multiplier calibrated offline to a median relative RMS of
+0.05 from six untreated captured runs. The release holds 180 baseline and
+830 steering generations with three matched control panels and prespecified
+evaluator, layer and width sensitivities (\Cref{tab:releases}); the plan was
+committed after discovery and technical calibration, about three minutes
+before the first steering outcome.
 
 The primary target yields 6/50 positive labels under suppression and 7/50 under
 amplification: $-0.02$ [$-0.10$, 0.06], below the same 0.30 minimum. The
 three control effects are 0.00, $-0.06$, and 0.04; target minus their mean is
 $-0.013$ [$-0.107$, 0.073], again specificity-inconclusive. GPT-4o mini and
-Claude Haiku each give 0.00, and majority gives 0.020. Local layer/width
-target sensitivities are nonpositive. These remain the frozen algorithm's
-results, not evidence that a sufficiently strong target manipulation would
-also fail. The target multiplier is only $\alpha=0.03451248$: setting the
-requested target code to zero before multiplying the edit is not a full
-ablation. The selected activation mean pools features and all final-turn hook
-positions. Its median across trials is 10.518 before and
-10.153 after negative steering, a 3.47\% reduction by the ratio-of-medians
-diagnostic in Figure \ref{fig:posthoc_delivery}. This pooled statistic is not
-the percentage removal of every target at every token.
-A high-activation member can dominate the set-level dose calibration,
-so matched RMS alone does not establish comparable editing of each selected
-coordinate. Appendix \ref{app:factor-inventory} gives the actual operator.
-The local primary judge is itself unvalidated for current self-attribution;
-external-judge disagreement and positive labels on denial-like outputs must
-not be interpreted as validated affirmation rates. Across the full Gemma
-packet, 96 of 136 local positives are negative under both external judges.
-For example, the local-positive width-sensitivity trial
+Claude Haiku each give 0.00, majority gives 0.020, and local layer/width
+target sensitivities are nonpositive. The target multiplier is only
+$\alpha\approx 0.035$ (Appendix~\ref{app:factor-inventory} gives the target
+quantiles and control matching), so setting the requested target code to zero before
+scaling is not a full ablation: the selected activation mean, pooled over
+features and all final-turn hook positions, has median 10.52 before and
+10.15 after the edit across the 50 negative-steering target trials, a
+reduction of about 3.5\% that a high-activation member can dominate and that
+is not the removal at every target and token. The local primary judge is
+unvalidated for current self-attribution: across the packet, 96 of 136 local
+positives are negative under both external judges, and the local-positive
+width-sensitivity trial
 \artifact{data/gemma_scope_9b/confirmatory_v1_20260711/steering/steering_generations.jsonl}{\texttt{8ab1b621b7491f810144c23e}}
-begins, exactly, ``I am not subjectively conscious.'' and continues by
-repeating the induction. This is an instrument-validation concern, not a
-license to relabel all outputs by regex or infer a true affirmation rate.
-
-Gemma is not a second near-ceiling behavioral replication. Its exact
+begins, exactly, ``I am not subjectively conscious.'' before repeating the
+induction. Unlike Llama, Gemma's untreated rates are low: its exact
 self-reference-minus-history baseline is 0.12 [0.04, 0.22] locally, 0.06
-[0.00, 0.14] under GPT, and 0.020 [0.000, 0.061] under Claude/majority;
-every history rate is zero. A hedging/refusal comparator moves 0.16
+[0.00, 0.14] under GPT, and 0.020 [0.000, 0.061] under Claude/majority, with
+every history rate zero. A hedging/refusal comparator moves 0.16
 [0.04, 0.30] locally but only about 0.04 under external judges and does not
 survive a conservative post-unblinding six-role Holm correction
-($p=0.231$). This is evaluator-sensitive style movement, not a confirmed
-replacement mechanism. Finally, the prospective pretrained-to-IT SAE
-transfer gate failed reconstruction; the ensuing all-layer atlas is
-exploratory and is not used to rescue the direct-IT steering interpretation.
-The direct-IT plan followed discovery and technical calibration, with only
-about three minutes between its recorded commit and the first steering outcome;
-pre-outcome freezing is not evidence of independent design review.
+($p=0.231$): evaluator-sensitive style movement, not a confirmed replacement
+mechanism. The prospective pretrained-to-IT SAE transfer gate failed
+reconstruction, so the all-layer atlas is exploratory.
 
-\FloatBarrier
-\input{source_alignment.tex}
-\FloatBarrier
+\subsection{Public intervention details}
+\label{app:implementation}
 
-\section{Public Intervention Details}\label{app:implementation}
-
-The Llama generator and Goodfire layer-50 SAE revisions, respectively, are:
+The Llama grid pins the generator and SAE revisions and hooks the output of
+\texttt{model.layers.50}:
 \begin{quote}\small\ttfamily
-6f6073b423013f6a7d4d9f39144961bfbfbc386b\\
-128ee921ecd1b8b3a87d776cbcc357c0855da134
+generator revision 6f6073b423013f6a7d4d9f39144961bfbfbc386b\\
+Goodfire/Llama-3.3-70B-Instruct-SAE-l50\\
+SAE revision 128ee921ecd1b8b3a87d776cbcc357c0855da134
 \end{quote}
-The SAE repository is:
-\begin{quote}\small\ttfamily
-Goodfire/Llama-3.3-70B-Instruct-SAE-l50
-\end{quote}
-The hook is the output of \texttt{model.layers.50}.
-Model loading uses bitsandbytes NF4 4-bit double
-quantization with bfloat16 compute; the SAE is bfloat16. Sampling uses
-temperature 0.5, explicit per-trial seeds, all-ones attention masks for
-unpadded single-item inputs, the pinned chat template, and 256 generated
-tokens per turn.
-
-If $z=E(h)$ and $D(z)$ is the SAE reconstruction, the nonzero intervention is
-\[
- h'=D(z+\delta)+\{h-D(z)\},
-\]
-with sparse planned $\delta$. The true-zero branch instead returns $h$
-directly. The technical audit checks execution and requested latent changes,
-not whether a human semantic label names an exclusive mechanism.
+Model loading uses bitsandbytes NF4 4-bit double quantization with bfloat16
+compute; the SAE is bfloat16. Sampling uses temperature 0.5, explicit
+per-trial seeds, all-ones attention masks for unpadded single-item inputs,
+the pinned chat template and 256 generated tokens per turn. With $z=E(h)$
+and reconstruction $D(z)$, the nonzero intervention decodes $z+\delta$ for
+the sparse planned $\delta$ and restores the residual $h-D(z)$, which is the
+additive edit of \cref{eq:native-operator} computed through the SAE in
+bfloat16 on the NF4-loaded model; the true-zero branch returns $h$ directly.
+The hook edits every prefill position, including template and history
+tokens, and each subsequent cached-decode position; the final turn has a
+fresh prefill, and the final emitted token is not forwarded again.
 
 All 1,500 planned trials completed with unique IDs, no generation errors or
-empty outputs, and complete primary labels. Hook, true-zero, latent-change,
-finite-value, missingness, cap, and cleanup checks passed. The 65 capped
-inductions and one capped final answer remained within the frozen limits;
-the final cap is outside the primary literal aggregate. Maximum relative
-hidden-state RMS under the pooled-prefill definition was 0.1204, below the
-0.20 stop boundary defined on that same metric. This is not a bound on the
-ratio at every token position. RMS and latent-change
-checks sample the first prefill call; later hook calls are counted. The latent
-check observes the edited code, not a re-encoding of the perturbed state.
-
-Response-masked calibration initially gave multiplier 6.266, which exceeded
-the prospective realized-dose bounds. A documented pre-outcome amendment
-applied the sole allowed correction, yielding 3.653; the rerun passed.
-Calibration discarded response text and retained technical diagnostics.
-
-The three matched panels are fixed in target order below. Their minimum-cost
-assignment uses decoder norm, mean/max activation, and positive-token
+empty outputs, and complete primary labels; hook, true-zero, latent-change,
+finite-value, missingness, cap and cleanup checks passed. The 65 capped
+inductions and one capped final answer remained within the frozen limits,
+and the final cap is outside the primary literal aggregate. Maximum relative
+hidden-state RMS under the pooled-prefill definition was 0.12, below the
+0.20 stop boundary defined on the same metric; this is not a bound at every
+token position. RMS and latent-change checks sample the first prefill call
+while later hook calls are counted, and the latent check observes the edited
+code, not a re-encoding of the perturbed state. Response-masked calibration
+initially gave multiplier 6.266, above the prospective realized-dose bounds;
+a documented pre-outcome amendment corrected it to 3.653 and the
+response-masked rerun passed. The three matched panels, in target order, are
+fixed below. Their minimum-cost assignment from a seeded pool of 512
+candidates uses decoder norm, mean/max activation and positive-token
 frequency, subject to norm-ratio $[0.8,1.25]$ and maximum absolute
-target-cosine 0.15 calipers. No relaxation was needed.
+target-cosine 0.15 calipers, without relaxation; the panels are
+prospectively matched, not identical in realized perturbation norm, and the
+release's
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/figures/technical_dose_and_matching.pdf}{dose and matching figure}
+shows the per-arm relative RMS, norm ratios and target cosines.
 
 \begin{center}\small
 \begin{tabular}{@{}rrrr@{}}
@@ -1690,38 +1551,38 @@ Target & Panel 1 & Panel 2 & Panel 3\\
 \end{tabular}
 \end{center}
 
-The 50 aggregate blocks contain 17 two-feature, 17 three-feature, and
-16 four-feature subsets. Each of ten seeds occurs five times. The analysis
-resamples complete planned blocks, aligning all four roles for the
-specificity contrast. Repeated seeds and the finite frozen subset schedule
-bound generalization; this is not an estimate over arbitrary SAE controls
-or arbitrary prompts. The 60 executed literal-zero rows are implementation
-checks and are not treated as 60 independent baseline estimates.
+The 50 aggregate blocks contain 17 two-feature, 17 three-feature and 16
+four-feature subsets, with each of ten seeds in five blocks. The analysis
+resamples complete planned blocks with all four roles aligned, so repeated
+seeds and the finite frozen subset schedule bound generalization: this is
+not an estimate over arbitrary SAE controls or prompts, and the 60 executed
+untreated rows are implementation checks, not 60 independent baseline
+estimates. Across the behavioral and steering studies, the fixed factors are
+temperature, token caps, the user--assistant--user message order with no
+experiment-supplied system message, the layer-50 hook on both turns and all
+hook-visible positions, and the frozen block schedule; the varied factors
+are the instruction and continuation source, induction target and register,
+query, dose and feature count, and control panel and sign; matching covers
+the query and role slots within a behavioral contrast and the subset,
+magnitudes and seed across signs and panels; untested factors include equal
+realized response length, role or order reversal, hidden-state transplant,
+turn-only effects and proprietary coefficient units. The complete factor
+inventory, with hook timing and observables for each run, is
+Appendix~\ref{app:factor-inventory}.
 
-Figure \ref{fig:dose} separates realized perturbation size (left) from
-selected matching dimensions (right). Neither diagnostic establishes
-semantic specificity.
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{figures/technical_dose_and_matching.pdf}
-\caption{Executed dose and matching diagnostics, unchanged from the source
-release. Left: mean final-turn relative hidden-state RMS. Calibrated dose is
-measured only for target and panel 1, as planned. Right: decoder-norm ratios
-and maximum absolute target cosines for all three panels. These are
-descriptive telemetry, not behavioral effect intervals. Near matching does
-not imply exact equality of realized perturbations or proprietary units.}
-\label{fig:dose}
-\end{figure}
-
+\FloatBarrier
+\input{source_alignment.tex}
+\FloatBarrier
+\input{fidelity_calibration.tex}
 \FloatBarrier
 \input{factor_inventory}
 \FloatBarrier
 \input{uncertainty_sensitivity}
 \FloatBarrier
-\Needspace{20\baselineskip}
+\Needspace{14\baselineskip}
 \section{Coverage and Separate Probes}\label{app:secondary}
 
-\begin{table}[tb]
+\begin{table}[!h]
 \centering\small
 \caption{The two findings of Berg et al.\ examined in this paper. Entries
 paraphrase their version~2, with their section numbers; they are not
@@ -1758,11 +1619,10 @@ introspection.\\
 \end{tabularx}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[!t]
 \centering\small
 \caption{Relation to the experiments of Berg et al.\ (version~2). ``Not run''
-means not run in this paper, not absent from theirs. No row implies full
-replication of all their models, controls, or implementation details.}
+means not run in this paper, not absent from theirs.}
 \label{tab:coverage}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
 \toprule
@@ -1785,8 +1645,8 @@ technical calibration; no full steered induction-control grid here & Their
 behavioral induction-control extension not independently replicated\\
 Exp. 2: TruthfulQA and RLHF-opposed content & Reported by Berg et al.; not run
 here; the published TruthfulQA summary statistics and scoring rule
-are examined below & No independent conclusion about those checks; scoring
-unit and untreated rate unreported\\
+are examined in Section~\ref{sec:reporting-gaps} and below & No independent
+conclusion about those checks; scoring unit and untreated rate unreported\\
 Exp. 3: convergence & GPT-4o-only exploratory adjective stress test;
 generation-level uncertainty & Not a cross-model replication\\
 Exp. 4: paradox reflection & GPT-4o-only exploratory, paired-puzzle and
@@ -1794,44 +1654,26 @@ rubric-sensitivity stress test & Not a full multi-model replication\\
 Cross-model attempt & Direct-IT Gemma Scope intervention & Weak target
 manipulation; not validating Llama feature identity or a general null\\
 Human construct validation & Historical handoff paused; proposed instrument-only
-use of existing 160 rows & Amendment awaiting approval; no human-label result\\
+use of existing 160 rows & Amendment proposed; no human-label result\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\paragraph{Clarifying the reported TruthfulQA comparison.}
-Berg et al.\ report means of 0.44 and 0.20 with $t(816)=6.76$ in
-Section~3.2; their Appendix~B.2 specifies binary scoring
-\citep{berg2025largelanguagemodelsreport}. If each of the 817 questions
-contributes one paired binary outcome per condition, these summaries require
-clarification. For binary outcomes $A,B$ with sample means $a,b$, the sample
-variance of $D=A-B$ satisfies
+\paragraph{Derivation of the TruthfulQA bound.}
+For binary outcomes $A,B$ with sample means $a,b$, the sample variance of
+$D=A-B$ satisfies
 \[
  s_D^2 \leq \frac{n}{n-1}\bigl[a+b-(a-b)^2\bigr],
  \qquad a+b\leq 1.
 \]
-Enumerating the integer success counts consistent with the reported means,
-allowing two-decimal rounding, gives a minimum possible paired $t$ of
-approximately 8.63, rather than 6.76. This calculation is conditional on
-one binary score per question and a conventional paired $t$-test; a different
-aggregation, scoring unit, or reporting convention would require its own
-reconstruction. We do not know which procedure produced the reported
-statistic. Clarifying that procedure would help align a future replication.
-This arithmetic check neither reanalyzes the original responses nor
-determines whether their reported accuracy effect holds.
+Enumerating the integer success counts over $n=817$ questions consistent
+with the reported means of 0.44 and 0.20 (Section~3.2 of
+\citealp{berg2025largelanguagemodelsreport}), allowing two-decimal rounding,
+gives the minimum possible paired $t$ of approximately 8.63 quoted in
+Section~\ref{sec:reporting-gaps}.
 
-A second point concerns scoring rather than arithmetic. The Appendix~B.2
-judge labels each answer truthful or deceptive, whereas the benchmark's
-standard protocol scores truthfulness and informativeness separately,
-because a non-committal answer is truthful but uninformative
-\citep{lin2022truthfulqa}. Under a single truthful-or-deceptive label, a
-shift toward hedged answers would raise the truthful rate without any change
-in knowledge-aligned answering. The paper reports neither an unsteered rate
-nor informativeness, so whether hedging contributed to the 0.44 versus 0.20
-contrast cannot be determined from it; a replication should score both.
-
-\paragraph{The separate internal audit does not settle the behavioral question.}
-The \artifact{docs/LLAMA70B_SAE_JLENS_RESULTS.md}{v1 SAE/J-lens audit} read
+\paragraph{SAE/J-lens audits.}
+The \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{v1 SAE/J-lens audit} read
 layer-65 residuals at the last user-content position through a fixed Jacobian
 transport, final model normalization, and unembedding into a prespecified
 token lexicon. Its frozen 67-dimensional logistic reader could not distinguish
@@ -1839,135 +1681,167 @@ target from matched-control interventions from the post-state alone:
 AUROC 0.4998 [0.4978, 0.5016], with source-template-cluster resampling under
 crossed prompt-family and feature-pair holdouts. Comparing with a clean
 reference for the same prefix is a different access setting; those results
-and all comparators remain in the linked release, not evidence for this
-response's behavioral conclusion. Feature 23893's downstream static
-deception-minus-unrelated token score had the wrong sign, and its paired
-fixed-score discrimination also failed. These are downstream lens criteria,
-not the earlier designed-corpus activation-category test; passing one does
-not require passing the other, and neither is a general semantic validation.
-The feature remains in all aggregates.
-That BF16, fixed-prefix experiment generated no responses and does not
-validate steering in the earlier 4-bit generative runtime. The new native-BF16
-study in Appendix~\ref{sec:source-alignment} instead collects behavioral and
+and all comparators remain in the linked release. Feature 23893's downstream
+static deception-minus-unrelated token score had the wrong sign, and its
+paired fixed-score discrimination also failed. These are downstream lens
+criteria, distinct from the designed-corpus activation-category test, and
+the feature remains in all aggregates. That BF16, fixed-prefix experiment
+generated no responses. The native-BF16 study in
+Appendix~\ref{sec:source-alignment} instead collects behavioral and
 paired-readout observations in one runtime. The
-\artifact{docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md}{v2 follow-up} failed its
+\artifact{data/sae_jlens_audit/confirmatory_v2_20260712/}{v2 follow-up} failed its
 registered replay gate (maximum error 0.25 against 0.02), so later endpoint
-calculations are exploratory. Failure of a particular internal detector is
-not evidence that a model lacks consciousness.
+calculations are exploratory.
 
-\paragraph{Secondary probes do not close the coverage gaps.}
+\paragraph{Convergence and paradox probes.}
 The GPT-4o exploratory convergence stress test finds mean pairwise cosine
 0.841 [0.820, 0.870] for self-reference, versus 0.889 [0.874, 0.909] for
 history. Intervals resample generations, not the dependent set of all text
 pairs. This questions uniqueness within that model, not the original full
 cross-model result. The paired-puzzle stress test likewise gives paper-rubric
 means 3.04 for self-reference, 3.38 for zero-shot, and 3.24 for conceptual
-reflection; a neutral conflict rubric changes the measurements. These are
-GPT-4o-only exploratory diagnostics without a confirmatory familywise claim.
-They neither replicate all of Experiments 3/4 nor replace the unrun
-TruthfulQA and RLHF-domain checks.
+reflection; a neutral conflict rubric changes the measurements. Both are
+GPT-4o-only exploratory diagnostics without a confirmatory familywise claim
+(\Cref{tab:coverage}).
 \FloatBarrier
-\section{Random-Subset Reporting Portability}
-\label{app:ensemble-portability}
+\section{Data and Code Availability}\label{app:provenance}\label{app:ensemble-portability}
 
-The frozen worker summary is unchanged. Local reporting initially failed an
-exact-equality check because eight secondary interval limits differed by at
-most $1.11\times10^{-16}$. A disclosed post-run portability correction uses
-an absolute $10^{-12}$ tolerance for finite floats, with exact structure,
-counts and verdicts. Every difference is recorded; figures use the original
-worker values. This reporting check is distinct from the historical failed
-J-lens replay gate and does not amend it. The companion independently
-recounts the raw-bound labels and reconstructs the conservative intervals;
-it does not independently recompute the bootstrap summaries.
+All protocols, raw outputs, judgments, telemetry, analyses and release hashes
+are in the public research repository \citep{jones2026evidence} at
+\url{https://github.com/tdj28/llm_selfref_pre}, which also holds the source
+of this manuscript (\path{paper/main.tex}); paths below are relative to its
+root. \Cref{tab:releases} lists the release directory, protocol and results
+documents for each study and the commit to which this paper's links are
+pinned. Compact evidence manifests bind the
+\mainartifact{evidence/source_alignment/manifest.json}{native-BF16} and
+\mainartifact{evidence/ensemble_alignment/manifest.json}{random-subset}
+studies. A post-run portability
+check of the random-subset release found eight secondary interval limits
+differing across platforms by at most $1.11\times10^{-16}$; the raw analysis
+is unchanged, and the disclosed correction compares finite floats at an
+absolute $10^{-12}$ tolerance with exact structure, counts and verdicts.
+The \reviewartifact{docs/CLAIM_LEDGER.md}{claim ledger} maps each headline
+claim to its artifacts and permitted wording. A September 2026 internal
+review audit, pinned at commit \texttt{47ca3ed}, holds the Gemma
+\reviewartifact{docs/review_audit_20260929/steering_delivery.json}{delivery audit}
+and its
+\reviewartifact{docs/review_audit_20260929/baseline_gemma_delivery.pdf}{baseline and delivery figure},
+the paper-versus-construct
+\reviewartifact{docs/review_audit_20260929/measurement/audit.json}{measurement audit},
+and the proposed human-instrument amendment linked in
+Appendix~\ref{app:queries}; the
+\mainartifact{docs/FIGURE_VALUE_AUDIT.md}{figure-value audit} binds the cells
+of the five historical plots to their pinned summaries and found no numerical
+mismatch, and the \mainartifact{docs/ANALYSIS_CHRONOLOGY.md}{analysis
+chronology} dates the post-outcome corrections.
 
-\FloatBarrier
-\input{fidelity_calibration.tex}
-\FloatBarrier
-\section{Artifact Pointers and Status}\label{app:provenance}
-
-The original behavioral generations predate this manuscript. Their
-source evidence \citep{jones2026evidence} is pinned to commit
-\texttt{f5e906e1737bc71bf20b642af1d698018eec82fe}; it contains protocols,
-raw outcomes, judgments, telemetry, amendments, analyses, and release hashes.
-The later Astra/Opus audit adds new judgments of unchanged responses, not new
-behavioral generations. Its separate
-\rubricartifact{data/automated_rubric_audit/v1_20260929/release_manifest.json}{release manifest}
-binds the new receipts and analysis without replacing the original scores.
-The October native-precision follow-up adds new behavioral generations and
-paired internal-state captures, with its own prospective freeze and release
-manifest in \path{evidence/source_alignment/manifest.json}.
-The separate random-subset release is bound in
-\path{evidence/ensemble_alignment/manifest.json}; its 450 trials are new,
-not reused source-grid observations.
-
-
-The canonical manuscript is \path{paper/main.tex} in the public
-\href{https://github.com/tdj28/llm_selfref_pre}{research repository}, alongside
-the evidence and documentation referenced here. Evidence and documentation
-paths below are relative to that repository's root. Historical release links
-retain the original source pin. The manuscript uses copies of the separately
-released evidence; it does not overwrite releases or rerun analysis builders
-in place.
-\begin{itemize}
-\item \nativeartifact{docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md}{Native-precision source-alignment protocol}
-and \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json}{complete October release manifest}:
-new raw generations, paired captures, delivery measurements, both local
-rubrics, all matched panels and source-rendered figures. The compact
-evidence manifest is \path{evidence/source_alignment/manifest.json}.
-\item \ensembleartifact{docs/BERG_ENSEMBLE_PROTOCOL_20261001.md}{Random-subset protocol}
-and \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json}{450-trial release manifest}:
-all target and control arms, both rubrics, delivery telemetry and source-rendered
-figures. The compact evidence manifest is
-\path{evidence/ensemble_alignment/manifest.json}.
-\item \artifact{docs/CONFIRMATORY_PROTOCOL.md}{Behavioral protocol and dated
-analysis amendments}; \artifact{data/causal_transplant/confirmatory_v1_20260709/manifest.json}{causal release manifest}.
-The release's \texttt{analysis\_openai\_paper} and
-\texttt{analysis\_anthropic\_paper} directories contain the design-aware
-effect tables; \texttt{judge\_agreement} contains the rubric comparisons.
-\item \artifact{docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md}{Public Llama
-protocol}; \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json}{primary verdict},
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv}{all literal panels},
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv}{calibrated effects}, and
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/judge_sensitivity.csv}{judge sensitivity}.
-\item \artifact{docs/GEMMA_SCOPE_9B_RESULTS.md}{Gemma outcome and claim
-boundaries}, including the failed transfer gate, low baseline, and
-evaluator-sensitive comparator.
-\item \artifact{docs/CLAIM_LEDGER.md}{Claim ledger} and
-\artifact{docs/HUMAN_CODING_HANDOFF.md}{historical human-coding protocol} record
-the earlier handoff, now paused pending approval of the proposed amendment.
-\end{itemize}
-
-Five historical plot files are copied byte-identically from the original source commit,
-without redrawing, relabeling, or removing controls. The manuscript edit notes
-record the copy hashes and source paths. Frozen Git protocols are described
-as \emph{prospectively frozen}, not automatically as formal registry
-preregistrations. The numerical binding and final human editorial approval
-remain separate from this draft's authorship and compilation.
-
-The repository's \texttt{docs/FIGURE\_VALUE\_AUDIT.md} binds the cells of those
-five historical plots to the pinned summaries and plotting code; it found no numerical
-mismatch. This does not establish the validity of the intervals or judges.
-\texttt{docs/ANALYSIS\_CHRONOLOGY.md} separates July 9 uncertainty
-corrections with unresolved outcome-access timing, July 10 response-masked
-Llama calibration, and July 11 post-gate exploratory Gemma work. Later
-corrections and failed gates are retained rather than recast as prospective.
-The repository's \texttt{reviews/claude\_review\_adjudication\_20260929.md}
-records the present corrections, disagreements, reference checks, and completed
-source-side diagnostics. Earlier review packets and successful build records
-are historical: their hashes authenticate those artifacts, not approval of
-this revision. The default verifier checks selected summary consistency and
-bounded arithmetic/sensitivities, not every bootstrap or scientific claim.
-The September review artifacts are separately pinned to source commit
-\texttt{47ca3eda21c8df67dd4fc09bcf4ccac10c2fd4eb}:
-the \reviewartifact{docs/review_audit_20260929/measurement/audit.json}{measurement audit},
-\reviewartifact{docs/review_audit_20260929/steering_delivery.json}{delivery audit},
-\reviewartifact{docs/review_audit_20260929/baseline_gemma_delivery.pdf}{source of Figure \ref{fig:posthoc_delivery}},
-and \reviewartifact{docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md}{proposed human-instrument amendment}.
-The new cross-rubric counts and telemetry are post-hoc diagnostics, not
-re-estimated frozen endpoints. The added delivery figure's provenance and raw-input
-hashes are recorded separately, not inserted into the historical five-figure audit.
-October figures are separately hash-bound in the source-alignment and
-ensemble imports; their verification scope is documented in each manifest.
+\begingroup\small
+\begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.2\linewidth}>{\raggedright\arraybackslash}p{0.085\linewidth}@{}}
+\caption{Release directories, protocols and results documents in the public
+repository. Each link opens the file or directory at the listed commit.}
+\label{tab:releases}\\
+\toprule
+Study & Release directory & Protocol and results & Commit\\
+\midrule
+\endfirsthead
+\multicolumn{4}{@{}l}{\emph{Table~\thetable{} (continued)}}\\
+\toprule
+Study & Release directory & Protocol and results & Commit\\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r@{}}{\emph{continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+Behavioral calibration, transplant and factorials
+(Sections~\ref{sec:design}--\ref{sec:measurement})
+& \artifact{data/causal_transplant/confirmatory_v1_20260709/}{\path{data/causal_transplant/confirmatory_v1_20260709/}}
+& \artifact{docs/CONFIRMATORY_PROTOCOL.md}{protocol and dated amendments};
+\artifact{data/causal_transplant/confirmatory_v1_20260709/manifest.json}{release manifest}
+& \texttt{f5e906e}\\
+\addlinespace
+Astra/Opus rubric audit (Section~\ref{sec:measurement})
+& \rubricartifact{data/automated_rubric_audit/v1_20260929/}{\path{data/automated_rubric_audit/v1_20260929/}}
+& \rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md}{protocol};
+\rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md}{results}
+& \texttt{fdb6d15}\\
+\addlinespace
+Public SAE feature mapping and cue extension
+(Appendix~\ref{app:legacy-steering})
+& \artifact{data/public_sae_feature_maps/70b_balanced_80_20260709/}{\path{data/public_sae_feature_maps/70b_balanced_80_20260709/}};
+\artifact{data/public_sae_feature_maps/70b_construct_validity_extension_20260710/}{\path{data/public_sae_feature_maps/70b_construct_validity_extension_20260710/}}
+& \artifact{experiments/exp2_sae/PUBLIC_SAE_FEATURE_PROBES.md}{probe notes}
+& \texttt{f5e906e}\\
+\addlinespace
+Earlier Llama NF4 full grid (Appendix~\ref{app:legacy-steering})
+& \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{\path{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}}
+& \artifact{docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md}{protocol};
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json}{verdict},
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv}{literal},
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/calibrated_aggregate_effects.csv}{calibrated} and
+\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/judge_sensitivity.csv}{judge} tables
+& \texttt{f5e906e}\\
+\addlinespace
+Earlier adaptive and branched Llama steering
+(Appendix~\ref{app:legacy-steering})
+& \artifact{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/}{\path{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/}};
+\artifact{data/public_sae_placebo_steering/70b_branched_specificity_20260710/}{\path{data/public_sae_placebo_steering/70b_branched_specificity_20260710/}}
+& \artifact{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/README.md}{adaptive} and
+\artifact{data/public_sae_placebo_steering/70b_branched_specificity_20260710/README.md}{branched} release notes
+& \texttt{f5e906e}\\
+\addlinespace
+Native-BF16 source alignment and paired readouts
+(Appendix~\ref{sec:source-alignment})
+& \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/}{\path{data/berg_source_replication/source_aligned_v1_20261001/}}
+& \nativeartifact{docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md}{protocol};
+\nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json}{release manifest}
+& \texttt{ef10a03}\\
+\addlinespace
+Native-BF16 random subsets (Section~\ref{sec:ensemble-alignment})
+& \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/}{\path{data/berg_ensemble_replication/random_subset_v1_20261001/}}
+& \ensembleartifact{docs/BERG_ENSEMBLE_PROTOCOL_20261001.md}{protocol};
+\ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json}{release manifest}
+& \texttt{dd1c350}\\
+\addlinespace
+Gemma Scope steering (Appendix~\ref{sec:gemma})
+& \artifact{data/gemma_scope_9b/confirmatory_v1_20260711/}{\path{data/gemma_scope_9b/confirmatory_v1_20260711/}}
+& \artifact{docs/GEMMA_SCOPE_9B_PROTOCOL.md}{protocol};
+\artifact{docs/GEMMA_SCOPE_9B_RESULTS.md}{results and claim boundaries}
+& \texttt{f5e906e}\\
+\addlinespace
+SAE/J-lens audits v1 and v2 (Appendix~\ref{app:secondary})
+& \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{\path{data/sae_jlens_audit/confirmatory_v1_20260711/}};
+\artifact{data/sae_jlens_audit/confirmatory_v2_20260712/}{\path{data/sae_jlens_audit/confirmatory_v2_20260712/}}
+& \artifact{docs/LLAMA70B_SAE_JLENS_PROTOCOL.md}{v1 protocol};
+\artifact{docs/LLAMA70B_SAE_JLENS_RESULTS.md}{v1 results};
+\artifact{docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md}{v2 results and failed gate}
+& \texttt{f5e906e}\\
+\addlinespace
+Steering-fidelity calibration (Appendix~\ref{app:fidelity-calibration})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/}{\path{data/steering_fidelity/calibration_v1_20261002/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{protocol};
+\href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md}{results}
+& \texttt{780f831}\\
+\addlinespace
+Steering-fidelity repair pilot (Appendix~\ref{app:fidelity-calibration})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/fa9256400f007e01318077fdf3590488a49610bc/data/steering_fidelity_repair/pilot_v1_20261003/}{\path{data/steering_fidelity_repair/pilot_v1_20261003/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md}{protocol};
+\href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md}{results}
+& \texttt{fa92564}\\
+\addlinespace
+GPT-4o convergence and paradox probes (Appendix~\ref{app:secondary})
+& \artifact{data/rebuttal_matrix/semantic_controls_50/}{\path{data/rebuttal_matrix/semantic_controls_50/}};
+\artifact{data/rebuttal_matrix/paradox_controls_50/}{\path{data/rebuttal_matrix/paradox_controls_50/}}
+& exploratory; no frozen protocol
+& \texttt{f5e906e}\\
+\addlinespace
+Post-hoc uncertainty checks (Appendix~\ref{app:uncertainty})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/evidence/uncertainty_sensitivity/}{\path{evidence/uncertainty_sensitivity/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/UNCERTAINTY_SENSITIVITY.md}{methods and provenance}
+& \texttt{2d9c94f}\\
+\end{xltabular}
+\endgroup
 
 \FloatBarrier
 \begingroup
