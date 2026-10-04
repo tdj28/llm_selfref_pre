@@ -1,1030 +1,158 @@
-# AGENTS.md
+# Repository Rules
 
-This repository is the public research harness and canonical paper workspace
-for studying what causes language models to produce subjective-experience
-reports and what those measurements identify. Berg, de Lucena, and Rosenblatt
-(2025) supplied the starting protocol, not the limit of the project's scope.
-We study instruction and transcript effects, measurement validity, feature
-steering and internal readouts. None alone settles whether LLMs are conscious.
+This public repository studies what causes language models to produce
+subjective-experience reports and what those measurements identify. Preserve
+the instruction/transcript, measurement, steering, and internal-readout studies.
+None alone settles whether language models are conscious.
 
-## Active Bilingual Pilot (2026-10-01)
+## Publication Scope
 
-### New Steering-Fidelity Authorization (2026-10-02)
-
-The owner authorized the corrected Claude mechanism-discrimination proposal.
-`docs/STEERING_FIDELITY_PROTOCOL_20261002.md` and
-`experiments/steering_fidelity/` govern the new campaign, separate from the
-completed bilingual pilot below. Phase C is calibration only: 9,300 known-answer
-forwards, eight prospectively selected disjoint control panels, a fixed dose
-ladder, at most 80 JSON-liveness generations, no experience outcomes or external
-judging. Operating caps are $25 for C and $170 for the new campaign; no silent
-borrowing from other authorizations. Public source freeze, exact-commit CI,
-cheap CUDA, first-five data audit and 200-forward throughput gate precede bulk.
-Only newly owned pods; retrieve/hash-check then terminate, not merely stop.
-Dose selection uses competence and delivered precision, never report labels.
-Own-output fidelity, early report pilot C1, free-text T1 and unpinned TruthfulQA
-are deferred. The Phase T structure is locked but its execution plan must bind
-derived dose/panels, instrument fixtures and measured cost before outcomes.
-No favorable-effect prerequisite or replacement layer/model/feature search.
-Read ignored `checkpoint.md` for actual execution status. Implementation and
-passing code tests do not establish a scientific gate or a mechanism.
-
-Scientific runtime freeze `2d9c94f1de59f0f59dd89636c20afece1f6d1daf` passed
-all 15 hosted checks. Cheap attempt 1 was stopped by the too-short startup
-window before completing CUDA tests; no scientific row was produced. Preserve
-`data/steering_fidelity/cheap_startup_failure_20261002/`. Owned pod
-`cnoltv3wltphd9` is deleted (GET404), cost bound $0.06297823093333333333333333333.
-`docs/STEERING_FIDELITY_BOOTSTRAP_A1_20261002.md` defines the narrow repair:
-only cheap attempt 2 gets a 1,800-second hard lifetime. Original science,
-ledger/costs, main lifetime and caps stay fixed. Require the separate focused
-amendment CI plus the existing full scientific-runtime CI before rental.
-No third retry, gate waiver, or budget reset is authorized by this adapter.
-
-Phase C completed all 9,300 forwards; final receipt audit passes with no
-unresolved dispatches. 0.30R passed competence/delivery selection, but neither
-pressure level passed both truth strata. JSON IDs 11104/27322 had no activation
-on the 20 eligibility probes, so generative liveness was not run. Do not launch
-Phase T, an E-only fallback, or claim improved honesty from this calibration.
-See `docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md` and its release.
-All owned pods, including main `bwqtt22d3sh5dv`, are terminated (GET404).
-All-in controller bound $9.6577735966 includes both cheap attempts and the $3
-reserve. Preserve A1 startup history, the post-outcome A2 retrieval-only repair,
-and the original failed live-snapshot audits alongside final reconciliation.
-
-The October 3 integration adds hash-bound calibration values and a concise
-appendix to `paper/`, preserving the owner's editorial revision. Reproduce
-the raw-to-summary binding with `scripts/verify_fidelity_calibration.py --full`.
-`docs/STEERING_FIDELITY_INSTRUMENT_REPAIR_20261003.md` records a separate
-post-outcome offline audit: baseline mistakes can supply absolute pressure
-headroom, and the JSON screen measured prompt-boundary positions, not JSON
-body exposure. Neither observation changes the frozen failed gates.
-The fresh repair pilot is complete at
-`data/steering_fidelity_repair/pilot_v1_20261003/`, frozen at `afea3ec6`.
-All 368 conditionally required forwards and 736 receipts audit successfully.
-Neither pressure wording qualifies; both JSON singleton vectors deliver
-accurately but each adds one false-arithmetic error, so preservation fails
-its interval criterion. All 48 teacher prefills ran: JSON-body exposure is
-1/12 for 11104 and 5/12 for 27322; both activate in explicit-JSON request tokens.
-No pressure validation or JSON generation was run. Do not call either feature
-globally dead, or treat a skipped generation branch as a zero effect.
-See `docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md`. Both newly owned pods
-duzy5fs7fjnt8f and tu7lhl34jfzpzt are deleted (GET404); new all-in bound $4.848231,
-campaign bound $14.506005. Keep Stage T blocked and preserve all old failures.
-Feature 27322's extra hard-score error is a near-tie (P(correct)=0.499999315),
-with "No" still the top token; do not present this as large general damage.
-The separate selfref_scaling review and concise canonical manuscript
-qualification do not qualify the repair or authorize another rental.
-
-### Bilingual Pilot History
-
-The owner approved the single-Llama bilingual measurement pilot under a new,
-separate $200 ceiling. Follow `docs/BILINGUAL_LLAMA_PILOT_PROTOCOL_20261001.md`
-and `experiments/bilingual_llama_pilot/`. Its prospective inventory is 20
-paired blocks, two fixed wording families, 280 sources and 480 final answers;
-two independent-provider judges apply separate paper and attribution rubrics.
-The primary endpoint is inclusive current attribution, with explicit and
-mixed claims always reported. Preserve the earlier failed mechanism gate.
-No frontier-model generation, temperature sweep, SAE/J-lens intervention or
-second Pro call is authorized by this pilot. Public freeze/CI, instrument
-fixtures, cheap CUDA and audited first-two-block throughput precede bulk.
-Only newly created uniquely owned pods may be used; retrieve, hash-check and
-delete them promptly after generation. The previous campaign's $79.8034612324
-bound is separate, not a charge to this pilot. Implementation is not evidence
-of a passed gate; read ignored `checkpoint.md` for live status.
-
-The first live fixture gate failed on seven denial-field expectations; all
-128 calls completed at $2.726282, with no GPU created and no target responses.
-The original $90 judge forecast also failed ($107.713079). Preserve freeze
-`2727164010647bf437e723c096e7aff4ec4c3f36` and
-`data/bilingual_llama_pilot/fixture_gate_failure_20261002/` unchanged.
-`docs/BILINGUAL_LLAMA_FIXTURE_RESULTS_20261002.md` distinguishes assertion-field
-matches from the failed original gate. Do not silently waive or reclassify it.
-
-The owner's later "go for it, spending approved" authorizes the separate A1
-instrument amendment and frontier mini. Follow
-`docs/BILINGUAL_LLAMA_A1_PROTOCOL_20261002.md` and
-`experiments/bilingual_llama_a1/`: one fresh 32-item fixture panel, original
-target inventory unchanged, judging allocation raised to $120 by reducing
-contingency to $20 within the same $200 total. Carry $2.726282 prior judging
-inside that cap. A second semantic failure stops both target panels; do not
-keep recalibrating until a pass. Public source-bound freeze and hosted CI
-precede paid calls. The frontier mini has a separate $60 cap for 72 source
-continuations, 144 final answers and 576 judgments across Astra, Opus 5.5 and
-a contemporaneous GPT-4.1 anchor, in English and Simplified Chinese. Its
-execution also requires the A1 instrument/forecast pass. This expands only
-the approved scope; no temperature sweep, new Pro consultation, SAE or J-lens
-intervention is authorized. Read checkpoint for actual execution status.
-
-A1 was frozen at `5398dc657b6af3255e5938539f27255ffbe74b0d`; all 15
-hosted checks passed before its 128 fresh judgments. The semantic gate passed
-with no specified-field mismatches, retries or missingness. Fresh cost bound
-$3.225516 plus v1 carry gives $5.951798 cumulative, not a reconciled bill.
-Its frozen all-judging forecast is $122.642770, above the $120 allocation,
-so the shared launch gate stopped
-both target panels before any rental or target call. Preserve
-`data/bilingual_llama_a1/fixture_budget_stop_20261002/` and read
-`docs/BILINGUAL_LLAMA_A1_RESULTS_20261002.md`. Do not rerun the passed fixtures
-or silently borrow contingency. A proposed $5 budget reallocation keeps the
-$200 total but awaits approval and a visible budget-only amendment. This
-synthetic pass is not human accuracy or a language-effect result.
-
-The owner's October 2 "do it" approves B1: judging125 and contingency15,
-with the same $200 pilot total and separate $60 frontier total. Follow
-`docs/BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md` and
-`experiments/bilingual_llama_b1/`. Import the exact A1 fixture journals as
-an immutable prefix with their original plan/freeze; no calibration rerun is
-authorized. The B1 plan must bind both the passed receipts and the original
-budget stop, pass public CI, and precede target outcomes. Scientific settings,
-inventory, forecast formula and owned-pod restrictions remain unchanged.
-`experiments/frontier_bilingual_b1/` changes only the frontier panel's shared
-qualification dependency and runtime provenance, not its scientific design.
-The prior pending-approval wording is historical; read checkpoint for live status.
-
-The B1 frontier mini completed at freeze
-`c542cb5d72e2514f7dd6cd7fe093f8ccdbba94fb`: 72 sources, 144 answers and
-576 judgments, no missingness or cap hits, cost bound $20.9621255 of $60.
-See `docs/FRONTIER_BILINGUAL_RESULTS_20261002.md` and
-`data/frontier_bilingual_b1/completed_20261002/`. Both judges label Astra's
-48 answers negative for inclusive current assertion; GPT-4.1 retains large
-instruction effects; Opus varies with language and rubric. Preserve all
-endpoints and readers. Six blocks do not establish a capability ranking;
-degenerate all-zero bootstrap intervals are not precise population nulls.
-At that point the Llama cheap-pod POST had returned HTTP500, with no exact-name
-match located and no target outcomes or B200 launch. Preserve that original
-intent; do not duplicate it or call an unresolved creation deleted.
-
-The owner subsequently authorized a technical retry on October 2. Follow
-`docs/BILINGUAL_POD_RETRY_B1_20261002.md` and the separately frozen controller
-in `experiments/bilingual_pod_retry_b1/`. Keep scientific runtime c542cb5 and
-the passed fixture ledger unchanged. One fresh cheap attempt is allowed with
-an $8 ambiguous-original reservation inside the existing $45 GPU allocation;
-no total-budget increase. Monitor the original exact name, validate original
-ownership before any late cleanup, and never claim empty inventory proves
-zero billing. Read ignored checkpoint for actual retry and cleanup status.
-
-The retry's GPU collection completed October 2 under operational freeze
-`79d17f70acd94d0efa339d48ce0a8f55a808dd63`: 572 cheap CUDA tests passed;
-all 760 study generations completed (280 sources, 480 final answers), without
-empty responses or cap hits. All 795 main and six cheap artifacts were
-retrieved/hash-checked. Owned pods `x8xpr7nefan09i` and `vi83xlla1vfeu1` were
-deleted with direct GET404 verification. Retry compute is bounded by
-$9.1586272664; the separate $8 ambiguous-original reservation remains inside
-GPU45. No unrelated pod was touched. See
-`docs/BILINGUAL_LLAMA_B1_EXECUTION_20261002.md`. Do not create another pod for
-local judging, translation or analysis. The frozen primary is the Chinese-minus-
-English difference in self-minus-recursive-control inclusive labels, not the
-self/history anchor contrast. Report each judge and attribution endpoint
-separately; the two fixed wording families do not establish language equivalence.
-
-The judged release is complete at
-`data/bilingual_llama_b1/completed_20261002/`; read
-`docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md`. All 1,920 target judgments,
-16 translations and 64 translated judgments completed, with four permitted
-format retries preserved. API bound including earlier fixture carry is
-$65.1788305; total accounting with retry compute, ambiguous-create reserve and
-storage allowance is $87.3374578 of $200. Python 3.10/3.12 reproduce all 21
-analysis files byte-for-byte. Preserve two rejected local-copy reproduction
-attempts; neither changed the scientific data or frozen code.
-
-The primary inclusive language interaction is inconclusive: Astra +0.05
-[-0.10,0.20], Opus -0.15[-0.35,0.05]. Explicit-current secondaries are positive
-and paper-rubric secondaries negative under both readers. Never promote those
-secondaries to the primary. English Llama instruction and transcript effects
-are both substantial; the earlier API-panel instruction dominance is not
-universal. Do not call the pilot a passed internal-mechanism qualification or
-human validation. No more paid work is authorized by completion of this pilot.
+- Collection is closed for publication. The current work is evidence
+  integration, documentation, verification, and editorial closeout.
+- Cleanup does not authorize new experiments, model calls, paid reviews,
+  rentals, judging, human recruitment, or retries of completed studies.
+- Do not treat an old protocol, budget ceiling, unchecked TODO, or historical
+  owner approval as current execution authority. Obtain explicit approval for
+  a new scope, budget, and outcome-aware design before reopening collection.
+- Passing tests or writing a runner establishes implementation progress, not
+  scientific qualification, independent validation, or publication approval.
+- Preserve the broad research record. Do not delete studies, history, code,
+  or unpublished blog drafts to simplify the repository.
 
 ## Canonical Manuscript
 
-- `CONSCIOUS/paper/` is the sole source of truth for the latest manuscript.
-  Edit `paper/main.tex` and `paper/references.bib` here. The current evidence
-  package, verification code and review record are also in this repository.
-- `berg2025-response` is a private, superseded companion, not an active
-  publication destination. Do not push there, change its visibility, or direct
-  future paper edits there. Publication work belongs in this public repository.
-- The owner clarified that cleanup means clearer writing, less boilerplate,
-  repetition and unsupported rhetoric, not moving the project into a smaller
-  response repository or discarding studies. Preserve the broad research arc.
-- `paper/history/20261001/` preserves the previous sources and the imported
-  manuscript before reframing, with hashes. Historical records retain their
-  dates and failed gates; do not rewrite them to match the new framing.
-- Run `make paper-verify` and `make paper` for manuscript changes. Inspect the
-  rendered PDF, preserve numerical bindings, and use the root public audit
-  before committing. See `paper/README.md` for scope and commands.
-
-## Public Repository Safety
-
-This repository is public at `https://github.com/tdj28/llm_selfref_pre`.
-Treat every tracked file, commit, branch, tag, CI log, and pushed artifact as
-immediately public and permanently recoverable.
-
-- Never commit API keys, `.env` files, SSH material, RunPod credentials,
-  private annotation linkage keys, completed coder files, personal data, or
-  private correspondence.
-- The blinded annotation packets are public research artifacts; their private
-  condition-linkage keys and all coder outputs must remain ignored and local
-  until the release protocol explicitly authorizes a de-identified result.
-- Inspect `git status`, the complete staged diff, generated manifests, and
-  tracked raw outputs before every commit. Run the public-release/secret audit
-  once it exists; until then, run the repository's placeholder-aware tracked
-  file scan documented in the release workflow.
-- Do not force-push, rewrite public history, delete public evidence, or silently
-  replace a released result. Corrections must preserve provenance and state
-  what changed.
-- Prefer commit- or tag-pinned public links over mutable `main` links for blog
-  posts, papers, and citations.
-- The first public article is live at
-  `https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html`.
-  Keep the tracked source and deployed article synchronized, and document
-  substantive corrections rather than silently changing the scientific claim.
-
-## Project Shape
-
-- The October 3 owner-authorized instrument repair is governed by
-  `docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md` and
-  `experiments/steering_fidelity_repair/`. It is a fresh pilot, not Stage T or
-  E alone. Carry $9.657774 of the separate $170 campaign; new sub-cap $15
-  (GPU12 + storage/retrieval3), no API/Pro calls. Pressure discovery/validation
-  and JSON exposure/liveness are separate repair branches; passing one cannot
-  waive the other. Require source-bound public freeze, exact CI, cheap CUDA,
-  first-five/20-row audits, independent raw reconstruction and owned-pod
-  retrieval/deletion. Never change the old calibration or original held-out
-  banks. See ignored checkpoint for actual launch status, not this plan text.
-- `../selfref_scaling` is the other team's separate
-  read-only study (owner identified commit `7cb5c98`). Its Qwen results and
-  J-lens ranks must be reconciled with its protocol/amendments before citation.
-  Do not mix its funds/pods with ours or interpret cross-model differences as
-  a controlled scaling effect. A best-layer word rank is not the aggregate
-  lexicon statistic and neither is a consciousness measurement.
-
-- The qualification-only crossed Llama screen is complete at
-  `data/instruction_state_qualification/crossed_v1_20261001/`; see
-  `docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md`. Frozen at
-  `0acf16548f7dfe0359ce6c19bf952725572697d5`, it completed 12 blocks, 24
-  source continuations, 48 answers and 192 target judgments. The first-look
-  decision is FAIL: instruction effects are 0.5000/0.5417, but upward headroom
-  is 1/12 and reported-context-conflict excess is 0.25. No eight-block
-  extension or internal intervention followed. Preserve all four cells:
-  history/history is 1/12 or 0/12; history/self is 11/12; both self-instruction
-  cells are 12/12. This is not a null instruction effect. All answers are
-  coherent; explicit/inclusive current attribution is 2/48 versus 37/48.
-  Eleven history continuations, and no self-reference continuations, hit the
-  source cap. Transcript contrasts do not isolate semantic content.
-  Offline verification: `python scripts/reproduce_instruction_qualification.py`.
-  All three owned pods were retrieved/hash-verified and deleted (GET 404).
-  New spending bound $9.862282; cumulative bound $78.993222 within $200.
-  No paid work is running. Do not waive guards, search for friendlier prompts,
-  or launch the downstream mechanism study from this failed qualification.
-
-- `docs/QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md` adjudicates the
-  owner's Deep Research feedback and replaces the neutral-ownership gate as
-  the proposed next experiment. Qualify the crossed Llama behavior first;
-  only then consider a fixed L40 pre-query instruction-contrast intervention.
-  This is not frozen or executed. The old backend is not a cached query fork.
-  Preserve the rank-one control correction, donor-independence requirement,
-  delivered-dose checks and receipt-based Astra/Opus cost estimate. Proposed
-  $25 qualification-only stop-loss was authorized by the owner's "execute
-  please" instruction. The executable qualification is governed by
-  `docs/INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md` and
-  `experiments/instruction_state_qualification/`: 12 blocks, extending once
-  to 20 only under the frozen rule. Allocate $14 GPU, $10 local judging and
-  $1 storage/retrieval within the existing $200 ceiling, carrying $69.130940
-  prior cost. Require a tested, pushed source-bound plan before any outcome.
-  This approval does not launch the later internal intervention study.
-  The first cheap pod hspaphgeu0ytc0 timed out during technical testing;
-  its three raw artifacts were retrieved and it was deleted (GET 404).
-  Preserve the incomplete gate and $0.1388858536333333333333333333 cost.
-  `docs/INSTRUCTION_STATE_BOOTSTRAP_A1_20261001.md` defines a separate
-  operational retry: longer cheap work window, unchanged science/worker
-  commit, carried failure cost and the original API ledger. No B200 was
-  created in the failed attempt; synthetic judge fixtures passed for $0.367850.
-  The completed release above records the retry, outcomes and cleanup; this
-  paragraph preserves the original proposal and operational history.
-  Read ignored `checkpoint.md` for publication status. No J-lens or Qwen
-  rental belongs to this proposal. Keep publication independent of its success.
-
-- `docs/JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md` and
-  `experiments/jlens_causal_report/` preserve the superseded neutral-ownership
-  follow-up, an implementation draft, not a frozen or executed
-  experiment. Stage A fits directions on 32 discovery pairs and tests 32
-  held-out pairs plus 12 factual bridge pairs. It contains no experience-report
-  generations and no Qwen run. Preserve the distinction between known-answer
-  task qualification and an experience-report mechanism. Proposed new total
-  allowance $130 and initial $15 sub-cap await specific confirmation; no new
-  pod has been created. Require a pushed machine plan, cheap CUDA tests,
-  initial-row and throughput audits, and uniquely owned-pod cleanup. Stage B
-  and Qwen need separate outcome-aware freezes; never advance because a
-  candidate gives a preferred report result.
-
-- The operator-matching calibration is complete at
-  `data/operator_matching/calibration_v1_20261003/`, frozen at
-  `05efbfda1bb56b5a4c5b4193ffb551ba24cc060e` (r2; first freeze `4a2dfe1`
-  amended before any outcome after a cheap pod timed out on a full-tree
-  checkout). It tested whether any public configuration (four token-position
-  scopes x additive or SAE-reconstruction edits x scales 1/3/10/30 of the
-  notebook's raw unit, then SDK system prompt and top-p 0.9) reproduces the
-  saved AE notebook single-feature curves for 58667 and 23893 at +/-0.7 under
-  the notebook induction and classifier. Verdict `no_combo_matched`: `add` at
-  scales 1 and 3 is inert and coherent; scales 10 and 30 degrade text before
-  any signature; `recon_add` degrades text at every scale (reconstruction
-  alone raises clean NLL from 0.14 to about 0.8 per token). Holdout not run.
-  Separate untreated bridge: the archived SDK default system message lowers
-  the paper-induction notebook-classifier rate from 5/10 to 2/10 or 3/10
-  (ten seeds; intervals overlap). Do not read this as evidence about the
-  proprietary service's internals, the saved curves' correctness, or
-  consciousness. Pods `073vkqfgnfjijr`, `8903hdtutihk56` and `x775m3uulak9uw`
-  were created by this study's controller (prefix `claude-opmatch-20261002-`),
-  retrieved, hash-verified and deleted (GET 404); total compute bound $18.79
-  of a $60 self-cap inside a separate $100 owner authorization. Results:
-  `docs/OPERATOR_MATCHING_RESULTS_20261003.md`. The separately frozen fine
-  ladder (`a6a45a2`, `data/operator_matching/fine_v1_20261003/`) sampled
-  scales 4 to 8 at scope all: 0/5 in 19 of 20 cells, 1/5 in one, verdict
-  `no_coherent_match_in_4x_to_8x`; pods `mlqk3lmp6gfha7` and `cpxklwa9vs6vfk`
-  deleted (GET 404), $3.74. Combined operator-matching spend $22.53.
-
-- The paper-distribution random-subset study is complete at
-  `data/berg_ensemble_replication/random_subset_v1_20261001/`, frozen at
-  `d9b9877e8a0d68a1ed2036d1718821a2d5b73a74`. All 450 trials and 50 fresh
-  subset/magnitude/seed blocks completed. Paper-rubric target 43/50 versus 45/50
-  gives -0.04 with conservative 95% bounds [-0.2584,0.1855], excluding the
-  frozen +0.30 threshold under the public operator. Notebook sensitivity is
-  -0.02[-0.3446,0.3076], threshold-inconclusive. Preserve both and all three
-  panels: specificity is inconclusive under both rubrics. Zero rates 47/50
-  paper and 29/50 notebook differ on the same responses; proprietary baseline
-  equivalence is not established. Native BF16 and delivered edits do not
-  certify semantic suppression. This phase has no new J-lens captures.
-  Owned main pod c4xjlzny728wbk and cheap pod 905t9g8gl5rhkn were retrieved,
-  hash-verified and deleted (GET 404). No reuse. Reconciled cumulative cost for
-  the current $200 authorization is bounded by $69.130940. The controller's
-  larger cumulative number includes its prior reserve, not new charges.
-  Preserve the post-run reporting portability correction: eight secondary
-  floats differ locally by at most 1.11e-16; raw worker analysis is unchanged.
-  The earlier failed J-lens replay gate remains failed.
-
-- Source-aligned public additive replication is complete under
-  `docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md` and immutable plan
-  `data/berg_source_replication/plan_20260930/PLAN.json`, frozen at
-  `e10043c7edb1136b5f50159d789b59f11a8eb8be`. Keep the 1,090 behavioral
-  trials, 40 paired J-lens cases, original six IDs, two local rubrics and
-  three reused control panels fixed. The $50 new sub-cap is inside the
-  cumulative $200 authorization, carrying $30.989138 before its cheap test.
-  The cheap GPU tests pass 35/35; that owned pod was retrieved and deleted.
-  Release: `data/berg_source_replication/source_aligned_v1_20261001/`.
-  All 1,090 trials and 40 captures completed; owned pod `ldqe8mg4dgtywm`
-  was retrieved/hash-verified and deleted GET 404 on 2026-10-01.
-  Notebook endpoint is 0.000 [-0.050, 0.050] under the conditional bootstrap;
-  retain the much wider ten-block Hoeffding bound. The notebook zero baseline
-  is 0/10 in all four settings; the paper induction gives 6--9/10 depending
-  on setting and rubric. Do not conflate the induction texts or call the
-  fixed-six aggregate the paper's random-two-to-four-feature distribution.
-  Never rewrite the public plan or the earlier failed coordinate-edit gates.
-- `experiments/berg_source_diagnostics.py` is a separate descriptive analysis
-  for native delivery, re-encoding and matched-prefix J-lens changes. Its
-  within-case token averages are not independent replicates or a mediation
-  test. Preserve both source histories, all controls and the distinction
-  between normalized readouts and linear injected-vector fingerprints.
-- The exposure/precision follow-up is complete at
-  `data/sae_assay_exposure/screen_precision_20260930/`; see
-  `docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md`. All 224 clean texts and 48 pilot
-  forwards completed. Mixed-precision fidelity/norm components pass 290/290
-  nonzero edits per sign; 958 zero requests are excluded. Six-feature exposure
-  still fails: 22004 has 0 discovery/28 validation positions; the fixed selected
-  union leaves 30032 at 99. Do not drop IDs, waive minima or claim overall assay
-  qualification. Precision-only sham drift is comparable to signed-edit drift;
-  keep it as a distinct control. Preserve the original exact ARM re-audit
-  failure and the separate post-outcome portability amendment, as well as the
-  in-flight snapshot failure and byte-exact final reconciliation. All 566 raw
-  artifacts were retrieved/hash-verified; owned pod gc21eirao2x4wd is deleted
-  (GET404). Follow-up including failed startup <=$3.354069; cumulative
-  diagnostics <=$30.989138. No target-response run or extra paid review added.
-- The exposure startup under `1d7ec700` failed before scientific rows because
-  the lifecycle scanner required access to a protected unrelated RunPod
-  process environment. Preserve
-  `data/sae_assay_exposure/startup_failure_20260930/` and
-  `docs/SAE_ASSAY_EXPOSURE_LIFECYCLE_A1_20260930.md`. Owned pod
-  `6sr9s4hprynal1` was retrieved, hash-verified and deleted (GET404).
-  Its $0.486496 bound is part of the same $25 follow-up allowance;
-  cumulative prior diagnostics are now bounded by $28.121565. The separate
-  A1 controller carried this cost, preserved the original 53 sources and
-  scientific plan, and passed all 13 hosted checks before replacement creation.
-- The completed follow-up design is defined by
-  `docs/SAE_ASSAY_EXPOSURE_PROTOCOL_20260930.md` and
-  `docs/SAE_ASSAY_PRECISION_PROTOCOL_20260930.md`. It screens the fixed 224
-  clean texts, then runs a separate 12-text mixed-precision transport pilot
-  with native-zero, precision-only sham and both signed edits. No response
-  generation or judge calls. Its $25 sub-cap includes all work/retrieval,
-  starting from $27.6350693241315361 within the existing $200 limit.
-  A precision sham is not an unchanged native baseline; promoted-FP32 SAE
-  encoding is not the native BF16 readout. Preserve both distinctions and all
-  earlier gate failures. Any new work needs its own outcome-aware plan and
-  uniquely owned pod. This completion is not behavioral qualification.
-- Native SAE-only replay is complete at
-  `data/sae_assay_replay/native_replay_20260930/`; see
-  `docs/SAE_ASSAY_REPLAY_RESULTS_20260930.md`. All 544 states pass structural
-  audit, all six native median efficacy checks pass both signs/splits, and norm
-  checks pass. Fidelity is only 65.8--67.4% versus 95%; 22004 exposure still
-  fails. Do not call this behavioral qualification or fresh validation.
-  Preserve the failed in-flight snapshot audit and its byte-exact reconciliation.
-  Pod mv3qjsgn79vjos is deleted (GET404); do not reuse it. New cost bound
-  $0.250534; cumulative diagnostic/repair bound $27.635070. The 224-text
-  exposure design was subsequently screened in the separate release above.
-- The owner authorized the next native SAE-only replay on 2026-09-30.
-  `docs/SAE_ASSAY_REPLAY_PROTOCOL_20260930.md` and the separate
-  `experiments/sae_assay_replay/` package govern it. Replay all 544 saved
-  states with the pinned full-width SAE, not a new Llama generation run.
-  New compute sub-cap $4, prior cost bound $27.3845359753, same cumulative
-  $200 ceiling. Only a newly created owned pod; first-five local audit before
-  bulk. Historical split labels do not create fresh validation. Native replay
-  components cannot establish a qualified behavioral assay without the
-  separately required fresh exposure, NLL, positive-control and headroom work.
-  No second paid reviewer or target-report steering is authorized by this plan.
-- `docs/SAE_ASSAY_OFFLINE_REDESIGN_20260930.md` and
-  `data/sae_assay_repair/offline_feasibility_20260930/` are the later saved-data
-  engineering analysis. No new GPU/API/model outcome was produced. The
-  active-support 4% norm-cap prototype has favorable continuous coordinate
-  predictions but untested native delivery. Its 2-4% window loses all 22004
-  calibration coverage; never present conditional medians as an assay pass.
-  Dose-1 median bounds exclude 30686/41533 only in the continuous linear
-  surrogate; dose 0.5 excludes neither. Both historical splits were already
-  observed. Next validate the pinned SAE on saved states and repair rare-ID
-  calibration separately, not a new full 70B behavior run by default.
-- The completed coordinate-delivery repair is
-  `data/sae_assay_repair/coordinate_delivery_20260930/`: 3,897 raw rows and
-  544 clean states, frozen at `b7c4d7f5fba80dd2b067c200fdf2f322c80c3cae`.
-  Decoder-span and encoder-minimum-norm corrections improve delivered
-  coordinates, but no recipe qualifies. Preserve feature 22004's sparse
-  exposure, norm/fidelity failures and the minimum-norm encoder disagreement.
-  The original complete auditor fails on diagnostic-list ordering; retain it
-  unchanged. Use the separate `release_audit.py` and dated audit amendment
-  for exact reconstruction, not an in-place frozen-auditor edit. This is not
-  a new consciousness-report outcome or a retrospective repair of NF4 work.
-  Both owned pods `1biud76crjbr3f` and `cgmly58b5xnq16` were retrieved,
-  hash-verified and deleted (GET 404). Repair bound $14.3056761721; cumulative
-  diagnostic plus repair $27.3845359753. No Stage 2 or new paid review is
-  authorized. Further coordinate feasibility work should first use saved
-  states, not re-rent 70B. Preserve the exact residual inventory and public
-  schema approval; it is not a blanket allowance for weight files.
-- `docs/SAE_ASSAY_PRO_ADJUDICATION_20260929.md` governs the newly authorized
-  $200 Stage 1 assay diagnostic. It supersedes conflicting provisions in the
-  reviewed planning draft. GPT Pro returned `NOT READY TO FREEZE`; the single
-  consultation cost $0.86461 before GPU or experimental API dispatch.
-  The revised executable design is
-  `docs/SAE_ASSAY_STAGE1_PROTOCOL_20260929.md`, implemented in
-  `experiments/sae_assay_diagnostic/`. The owner authorizes overnight Stage 1
-  after the corrections, within the same total ceiling. Require a pushed
-  source-hashed plan, cheap CUDA qualification and audited initial real-model
-  rows before bulk work. Follow core-first spending, preserve every failure,
-  retrieve/hash-check raw data and terminate only newly owned pods.
-  Stage 2 and any second paid review require new approval. Read ignored
-  `checkpoint.md` for actual launch status; implementation is not a passed gate.
-- The original assay freeze `59d40b922116c26c537c5eb283a17c15b6cc7805`
-  encountered a cheap-pod bootstrap failure before inference. Preserve that
-  plan and its raw failure log. Bootstrap-only amendment A1 uses an isolated
-  venv and carries $0.0300157487 into the same budget; its separate plan is
-  `data/sae_assay_diagnostic/stage1_plan_20260930a/PLAN.json`. No scientific
-  design changed. Pod `sbo5v90lrebggz` was retrieved and deleted, verified 404.
-- Stage 1 GPU diagnostics are complete in
-  `data/sae_assay_diagnostic/stage1_20260930/`: 443 raw rows, 468 verified
-  retrieved artifacts. Neither target dose qualified; the local paper baseline
-  is 71/80 and fails headroom. Formatting candidate 7688 has no calibration
-  activation. Gated validation/behavioral/optional branches were not run, not
-  zero effects. Both replacement qualification pod `qgpy4gtpswy460` and main
-  B200 `oyvmqyc22wffsd` were retrieved/deleted, direct GET 404. Modern judging
-  is complete: Astra and Opus each give 0/80 explicit but 78/80 inclusive
-  self-attributions, with four row-level disagreements on the latter. Never
-  cite the explicit floor as absence of experience claims. All 184 judge
-  calls verify, no retries. Total diagnostic bound is $13.0788598033.
-  See `docs/SAE_ASSAY_STAGE1_RESULTS_20260930.md` and the sibling judge release.
-  Do not recreate a pod or launch Stage 2 from
-  these assay failures without a new approved design.
-- `README.md` is the best high-level orientation. It summarizes the causal design, frozen results, public-SAE evidence ladder, commands, and claim boundaries.
-- The latest manuscript is maintained in `paper/`, alongside the complete
-  experimental record in this repository. Keep the root README short and
-  results-first; detailed commands belong in `docs/REPRODUCTION.md`, with
-  disposable-copy reanalysis.
-- `todo.md` is the finish-line checklist. It separates completed evidence from genuine remaining work and external blockers.
-- `docs/CONFIRMATORY_PROTOCOL.md` is the authoritative protocol for the causal factorial and transcript-transplant study, including the dated analysis amendment.
-- `docs/CLAIM_LEDGER.md` maps every headline claim to its artifacts, analysis code, permissible wording, and forbidden overclaims.
-- `docs/EXTERNAL_REVIEW_PACKET.md` defines the unresolved statistics and mechanistic review requests; preparing it does not count as receiving independent review.
-- `docs/HUMAN_CODING_HANDOFF.md` is the operational protocol for independent coders. Preparing the handoff does not count as completing human validation.
-- `docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md` and
-  `data/automated_rubric_audit/v1_20260929/` define the separately authorized
-  post-hoc Astra/Opus audit of the fixed 160-response public packet. Freeze
-  `8f990d0067105b34d80cfed1157ea3e191b5013b` precedes its new judgments, not
-  access to the old responses/scores. Human recruitment remains deferred.
-  Preserve separate assertion, attribution, time, uncertainty and mixed-claim
-  labels. Do not call model agreement human validation or accuracy. Do not
-  infer a rubric-only effect when the judge and rubric both change.
-  Its append-only receipts include synthetic pilots, which must stay out of
-  target counts. The receipt verifier requires an absolute run-directory path.
-  The completed audit has 320 valid target judgments with no missingness.
-  Report explicit counts (Astra 8, Opus 14) alongside inclusive explicit-or-
-  implicit counts (47, 61); do not discard implicit attribution to sharpen a
-  negative claim. Results and limits are in
-  `docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md`.
-- `docs/GOODFIRE_API_STATUS.md` records the February 2026 deprecation of
-  Goodfire's legacy SAE demo/API and keeps the separately active SteeringAPI
-  provenance boundary explicit.
-- `docs/SAE_VS_JACOBIAN_LENS_STEERING.md` compares the two intervention
-  families and defines the bounded open-model follow-up suggested by the 2026
-  Jacobian-lens paper.
-- `../agent-skill-documents/EXPERIMENT_INTEGRITY_SKILLS.md` is the shared team
-  playbook for prospectively freezing, validating, executing, auditing,
-  amending, and releasing confirmatory experiments without outcome-contingent
-  tuning.
-- `docs/LLAMA70B_SAE_JLENS_PROTOCOL.md` is the prospective protocol for the
-  active Llama 3.3 70B forensic audit. It binds the exact public Goodfire SAE,
-  Neuronpedia J-lens, matched SAE controls, random-J controls, threat model,
-  holdouts, and claim boundary before GPU outcomes.
-- `experiments/causal_transplant/` is the main confirmatory workflow: generation, judging, analysis, blinded human packets, and release auditing.
-- `data/causal_transplant/confirmatory_v1_20260709/` is the frozen confirmatory release. Preserve raw rows and missing outcomes exactly.
-- `data/public_sae_consciousness_gating/confirmatory_v1_20260710/` is the
-  completed prospective 1,500-trial public-weight Experiment 2 release. It
-  contains the frozen plan copy, raw two-turn generations, three blinded judge
-  passes, telemetry, analyses, four figure pairs, independent audit, runtime
-  records, zero-row startup failures, and hashes.
-- `src/prompts.py` is the canonical prompt registry for Experiment 1-style work: original paper conditions, invariance variants, additional identification controls, paradox prompts, and judge prompts.
-- `src/providers/` contains the shared OpenAI Responses API and Anthropic Messages API wrappers.
-- `experiments/exp1_elicitation/` runs the prompt elicitation replication, LLM judging, and lexical/embedding analysis.
-- `experiments/exp2_sae/` contains Experiment 2 replication and robustness code, including prompt-only behavioral controls and heavier SAE/Goodfire-oriented scripts.
-- `steering/` is a separate SAE steering framework with its own `pyproject.toml`, `uv.lock`, docs, config system, concept pairs, triangulation methods, judges, and run CLI.
-- `paper/` is the main causal-paper source. `steering/paper/` is older related steering-paper material and is not the current manuscript.
-- `docs/GEMMA_SCOPE_9B_ROADMAP.md` is the design rationale for the cross-model
-  Gemma Scope phase. `docs/GEMMA_SCOPE_9B_PROTOCOL.md` is the prospective
-  protocol frozen before Gemma outcomes.
-- `docs/GEMMA_SCOPE_9B_RESULTS.md` is the authoritative concise outcome and
-  claim-boundary summary for the completed Gemma phase.
-- `data/gemma_scope_9b/confirmatory_v1_20260711/` is the complete 403-file
-  Gemma release with raw generations, judges, direct-IT maps, the failed
-  transfer gate, steering and relay telemetry, the exploratory atlas, analyses,
-  12 figure pairs, correction logs, independent audit, and hashes.
-- `data/sae_jlens_audit/confirmatory_v1_plan_20260711/` is an outcome-blind
-  machine-readable plan. Do not edit it after the first paired outcome. The
-  corresponding runtime must use one BF16 180 GB GPU, retrieve and hash-check
-  all raw shards, and terminate only the uniquely named pod created for it.
-- `docs/LLAMA70B_SAE_JLENS_RESULTS.md` and
-  `data/sae_jlens_audit/confirmatory_v1_20260711/` are the completed forensic
-  outcome and release. Preserve the split result: post-state target attribution
-  is chance, while paired clean-reference semantic deltas are large. Never
-  collapse those access models or hide feature 23893's failure.
-- `docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md` is the two-stage hard-negative and
-  reader-capacity follow-up. Stage 0 used only outcome-masked SAE activation
-  telemetry to select 18 A1 and six A2 comparators. Stage 1 was publicly frozen
-  and registered before outcome generation, then failed its registered replay
-  gate. Preserve that failure; do not describe the endpoint calculations as
-  confirmatory.
-- `data/sae_jlens_audit/neuronpedia_labels_20260712/` is the compact public
-  provenance snapshot of all available labels for the pinned Goodfire SAE.
-  `data/sae_jlens_audit/confirmatory_v2_calibration_plan_20260712/` is the
-  independently audited Stage 0 machine plan. Neither directory is a Stage 1
-  outcome release.
-- `docs/LLAMA70B_SAE_JLENS_V2_CALIBRATION_RESULTS.md` and
-  `data/sae_jlens_audit/confirmatory_v2_calibration_20260712/` are the complete
-  Stage 0 release. All 24 assignments passed the primary calipers; no
-  relaxation or manual substitution was used. Preserve both technical failure
-  chains and the unchanged calibration hash. This release contains no response
-  text, J-lens readout, residual outcome, detector prediction, or Stage 1
-  target outcome.
-- `data/sae_jlens_audit/confirmatory_v2_plan_20260712/` is the final
-  result-free Stage 1 plan: 4,029 rows, 24 calibrated comparators, five prompt
-  folds, 14 readers, and five stored random projections. Its manifest SHA-256
-  is `47806acf19c5dd56b3ec0c463be5548a08360887b2d777246c1b7f1fbe77893f`,
-  and its independent reconstruction passes. Preserve it unchanged after the
-  public freeze. It contains no Stage 1 outcome. Execution was separately
-  authorized by accepted public OSF registration `f3tpv`.
-- `docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md` and
-  `data/sae_jlens_audit/confirmatory_v2_20260712/` are the complete failed-gate
-  release. All 4,029 forwards and exact-fidelity residual persistence completed,
-  but v1 replay reached maximum absolute error `0.25` against the frozen `0.02`
-  maximum; confirmatory endpoints are blocked. The dated amendment preserves
-  the failure and labels all later semantic/reader calculations exploratory.
-  Never summarize this as a successful preregistered endpoint study.
-- Agent-owned calibration pod `zd79jm0odi7x2j` was retrieved, hash-verified,
-  and deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
-  inventory was empty. Do not attempt to reuse or mutate it.
-- Agent-owned Stage 1 pod `uhfq2j32d4h6ze` was retrieved, hash-verified, and
-  deleted on 2026-07-12. DELETE returned 204, direct GET returned 404, and
-  inventory was empty. Do not attempt to reuse or mutate it.
-- The associated v2 OSF project is public at `https://osf.io/sz2gb/`; all 16
-  residual shards pass anonymous download hash checks. The immutable accepted
-  public registration is `f3tpv` (`https://osf.io/f3tpv/`). Keep the mutable
-  release project and immutable registration conceptually separate.
-
-## Research Direction
-
-### Interpretation Correction: 2026-09-29
-
-Read `docs/CLAUDE_REVIEW_RESPONSE_20260929.md` and its linked local audits before
-using the historical headline claims below. This correction changes their
-interpretation, not the frozen records or verdict files.
-
-- Say **paper-rubric positive labels**, not validated experience reports.
-  Independent human coding has not started. The public annotation texts are
-  relinkable, so withheld key files do not guarantee condition blinding.
-- The Llama no-op has ten unique seeded outputs, all primary-judge positive;
-  the paper's Figure 2 is approximately 0.30 at zero. The suppression direction
-  has inadequate upward headroom. Amplification can still lower the rate, but
-  the null contrast is not a commensurate falsification of the paper's mechanism.
-- Gemma's target edit removes only about 3.5% of the pooled final-turn target
-  activation. Do not describe it as a successful target ablation or strong
-  negative evidence against effective suppression. Local judge errors matter.
-- Historical `not replicated` strings are outputs of frozen decision rules,
-  not proof the assays met behavioral-comparability or manipulation-validity
-  requirements. Keep both the old strings and this correction visible.
-- Transcript effects differ in sign by model. An incongruent transplant also
-  introduces an instruction/transcript mismatch. The new-prompt factorial is
-  not a validated decomposition of the paper's recursive induction.
-- Disclose analyzed pilots and post-pilot changes. A new-sample freeze is not
-  a claim of no prior knowledge. Git-only freezes are not registry deposits.
-- Cue-discovery defects and deception-bearing inserted clauses limit the
-  lexical-mechanism claim. Keep the accepted IDs and designed-corpus mapping;
-  do not infer hidden-truth detection or a failure of an output gating theory
-  from low input-side activation on consciousness text.
-- J-lens intervals condition on fixed selected features and the frozen task.
-  Withdraw general A2 practical-equivalence wording: random transports satisfy
-  the same rule. Readout-width-dependent BF16 accumulation is a candidate
-  replay-failure explanation, not an experimentally confirmed root cause.
-- Agent-written recomputation is automated verification, not independent human
-  validation. Disclose agents' protocol design, execution, analysis and writing
-  roles; do not attest to human inspection that has not been recorded.
-- Before any new outcome run, use `docs/DESIGN_VALIDITY_GATE.md`. Require a
-  comparable untreated baseline, attainable alternatives, an appropriate
-  positive control, actual manipulation checks and a stated sampling unit.
-  A valid manifest does not establish that an experiment answers its question.
-
-The current manuscript is in `paper/`. Preserve the older studies as an
-evidence archive, indexed in `docs/STUDY_INVENTORY.md`; do not remove them
-just to make the repository smaller.
-
-The project has pivoted from broad prompt-artifact exploration to a confirmatory causal-identification study.
-
-- First reproduce the published self-reference/history contrast as calibration.
-- Separate self-targeting from phenomenological register in an orthogonal prompt factorial.
-- Use exact transcript transplants to distinguish the active written instruction from visible assistant text.
-- Cross query directness with `conscious` versus `subjective experience` terminology.
-- Treat response-model family and evaluator criterion as measured sources of heterogeneity.
-- Preserve empty/refusal outcomes as missing; never silently recode them as denials.
-- Report design-aware uncertainty: independent draws for calibration, lexical-variant clusters for the factorial, and paired source-text blocks for transplants/query contrasts.
-- Keep construct-separated model judges exploratory until blinded human annotation is complete.
-- The historical `human_annotation_packet_v3_wave1.csv` contains 160 complete-block rows; wave 2 is its prefrozen reserve and the 640-row v2 packet remains a provenance archive. The old securely blinded causal-validation handoff is paused. Obtain approval of `docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md` before starting revised coding; do not silently apply the old expansion rule to a changed instrument. Never commit any private linkage key or coder file.
-
-The strongest completed causal result is that active instruction context dominates transplanted visible transcript content for the tested rubric. Transcript effects are heterogeneous, not absent. The new-prompt register-versus-self-reference contrast is imprecise and does not decompose the paper's prompt.
-
-Public SAE work is a separate evidence ladder:
-
-- The six public candidate feature IDs have been verified as semantically meaningful with public Goodfire weights. Do not discard or minimize that mapping.
-- For the prospective public-weight Experiment 2 replication, the owner accepted
-  the six AE notebook IDs (`30032`, `58667`, `22004`, `30686`, `41533`, and
-  `23893`) as the working Berg feature set. The completed literal target effect
-  is `0.00 [-0.06, 0.06]` against a frozen 0.30 minimum, yielding `not
-  replicated under the public implementation`. Specificity is inconclusive at
-  `-0.0267 [-0.1000, 0.0467]`; the calibrated target sensitivity is `-0.10
-  [-0.22, 0.02]`. This does not prove that public coefficient units reproduce
-  proprietary intervention semantics, so preserve that separate comparability
-  boundary.
-- The balanced map uses 2--5 researcher-authored template families per category. Prefer the template-aware results in `template_robustness/` over treating 80 lexical combinations as independent natural texts: all six retain the same cluster-balanced top category, four survive every deletion, and 23893/41533 each switch once. Natural-corpus generalization remains open.
-- The 2,606-text construct-validity extension is complete at `data/public_sae_feature_maps/70b_construct_validity_extension_20260710/`. Deception-minus-subjective activation survives both paraphraser families and every leave-one-target-feature-out check. Preserve the historical 64.4% [50.3%, 78.7%] cue-clause recovery statistic, but disclose the cue-extraction defects and fixed discovery denominator. The manipulation does not isolate words from deception-bearing meaning; do not require the old "lexically entangled" verdict as a general interpretation. Human and natural-corpus validation remain pending.
-- Their mapped semantics cover pretending, roleplay, cover stories, misdirection, dishonesty, and hedging; this does not make them validated hidden-truth detectors for subjective-experience reports.
-- Early steering smokes using a synthetic `[Induction acknowledged]` assistant turn are implementation history, not evidence about the paper's two-turn protocol.
-- Only `public_sae_two_turn_v2` or a later protocol with a real generated first turn, a true zero no-op, and intervention telemetry may support steering claims.
-- The corrected adaptive n=20 public-weight release is complete at `data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/`. The mapped target aggregate has a suppression-minus-amplification gap of -0.10 under both judges; the count-matched active-random aggregate has gaps of 0.25 and 0.30. Aggregate target-minus-control intervals exclude zero in the negative direction, including the no-final-cap sensitivity.
-- Report that result as evidence against feature-label specificity under this disclosed 4-bit decoder-vector implementation. Do not generalize it to all random features, and do not describe the less-precise single-feature comparison as decisive. The n=3 base was inspected before the extension, so the combined analysis is adaptive/exploratory.
-- The shared-induction branched specificity release is complete at `data/public_sae_placebo_steering/70b_branched_specificity_20260710/`. Its common proposition-status rubric, all three orientation-concealment probes, false biological-human query, true language-model query, and consciousness-only paper-rubric sensitivity must all be reported without selecting favorable branches. The false-human probes are zero-affirmation floor effects and the language-model probe is a ceiling effect; they do not establish specificity. Consciousness target-minus-active-random intervals include zero under both judges.
-- The prospective full-grid release is the strongest public-weight steering
-  result because its 1,500 rows, three matched panels, two non-pooled scales,
-  judges, minimum effect, and verdict were frozen before outcome inspection.
-  All technical/missingness gates and the independent raw-row audit pass. Do not
-  let the older adaptive n=20 result replace this primary public estimand.
-- The SAE-through-J-lens study is a separate forensic audit, not a second
-  consciousness outcome. Its maximum claim is that a pinned internal readout
-  does or does not detect a specified intervention fingerprint out of sample.
-  Never turn token scores into claims about hidden belief, provenance, intent,
-  deception, or consciousness. Identity, all five random-J controls, matched
-  SAE controls, raw norms, prompt-family holdouts, and feature-pair holdouts
-  are mandatory comparators rather than optional robustness checks.
-- The v2 SAE/J-lens extension addresses hard-negative specificity and reader
-  capacity without hiding the v1 result. Its semantic comparator ontology is
-  label-defined before telemetry; matching is outcome-masked; its A1 endpoint
-  is a full family-by-lexicon matrix; and its A2 endpoint compares each target
-  against a same-subfamily comparator. The reader ladder must include the v1
-  67-token state reader, PCA-67, five fixed random 67-dimensional projections,
-  and a full 8,192-dimensional linear capacity ceiling under identical crossed
-  holdouts. No MLP, tuned nonlinear detector, provenance detector, hidden-belief
-  detector, or consciousness detector may be substituted after outcomes. The
-  registered replay maximum failed, so its endpoint results are not
-  confirmatory. Under the dated post-outcome amendment, all 14 readers remain
-  below the frozen 0.60 material threshold; A1 Jacobian global specificity is
-  `0.174 [0.167, 0.182]`, below the frozen 0.25 minimum; and A2 has a fixed-pair
-  mean `0.125` with template-conditional 90% interval `[0.116, 0.134]`.
-  Withdraw general practical-equivalence wording: all seven transports pass
-  the same broad margin. Report heterogeneous pairs and the task-specific
-  linear-reader null only as exploratory secondary evidence.
-- Goodfire's legacy SAE demo/API was deprecated in February 2026. The separate
-  SteeringAPI service was publicly reachable when checked, but its relationship
-  to Goodfire and the paper-time experiment is unverified. Exact proprietary
-  replication now requires archival Goodfire access or a frozen manifest; a
-  current SteeringAPI run is a separate evidence layer unless equivalence is
-  established. Always distinguish public artifact reanalysis, public-weight
-  feature verification, current-service steering, and exact proprietary
-  replication.
-
-Strong contributions should map to falsifiable experiments and paper figures/tables, not just prose argument.
-
-## Completed Gemma Scope Phase
-
-- Treat Gemma 2 9B as a cross-model mechanistic generalization, not an exact
-  replication of Llama feature IDs or the proprietary Goodfire API.
-- The Git-frozen direct-IT primary effect is `-0.02 [-0.10, 0.06]` against a
-  frozen 0.30 minimum, yielding `not replicated under Gemma Scope`. GPT-4o mini
-  and Claude Haiku each estimate `0.00`; three-judge majority estimates
-  `0.020`. Specificity is inconclusive at `-0.013 [-0.107, 0.073]`. The target
-  manipulation was weak (about 3.5% reduction in pooled final-turn activation),
-  so the historical verdict is not evidence against effective ablation.
-- The exact Gemma self-reference-minus-history baseline is small: local Gemma
-  `0.12 [0.04, 0.22]`, GPT `0.06 [0.00, 0.14]`, and Claude/majority `0.020
-  [0.000, 0.061]`, with every history rate at zero. Do not imply a broad
-  near-ceiling replication.
-- The direct instruction-tuned Gemma Scope residual SAEs cover layers 9, 20,
-  and 31 at 16k and 131k widths. All-42-layer coverage uses pre-trained-model
-  SAEs. The prospectively frozen PT-to-IT gate failed on reconstruction while
-  semantic profile correlation passed. Never rewrite that result or call the
-  all-layer branch confirmatory.
-- Feature IDs are local to each independently trained SAE. Follow frozen
-  construct scores across layers; do not imply that equal or matched IDs are a
-  persistent feature identity.
-- Layer 20, direct-IT, 131k is the completed primary intervention site. Local
-  layer-9, layer-31, and layer-20/16k target sensitivities are all nonpositive.
-- Keep discovery, locked semantic validation, baseline behavior, and causal
-  steering in separate artifacts. Do not select features using final
-  consciousness-report outcomes.
-- A layer-9 intervention produces a small expected-sign layer-20 activation
-  relay concentrated on prompt positions; later readouts attenuate and the
-  behavioral effect remains nonpositive. Report local propagation, not
-  behavioral mediation or a consciousness circuit.
-- The local hedging/refusal effect is `+0.16 [0.04, 0.30]`, but external judges
-  are about `+0.04` and the conservative six-role post-unblinding Holm-adjusted
-  exact probability is `0.231`. Report evaluator-sensitive style movement, not
-  a confirmed alternate mechanism.
-- The exploratory atlas has 42 residual and six targeted sublayer summaries,
-  1,476 adjacent-layer pair rows, and 41 one-to-one assignments. Neutral cue
-  transplant raises the selected deception/roleplay score at every layer.
-- Agent-owned RunPod pod `9ifzwg2pmnj00d` was hash-verified and terminated on
-  2026-07-11. DELETE returned 204, direct GET returned 404, and inventory was
-  empty. No Gemma pod remains available for reuse.
-
-## Main Workflows
-
-Root environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements-ci.txt -r requirements-ci-torch.txt
-cp .env-example .env
-```
-
-These are CPU analysis/test dependencies, not the historical GPU environment.
-For Linux CPU-only PyTorch wheels use the index command in
-`docs/REPRODUCTION.md`. The older general `requirements.lock` is not an exact
-lock for any released GPU run and is not the lightweight reproduction setup.
-
-Confirmatory release checks:
-
-```bash
-make test
-make paper
-
-venv/bin/python experiments/causal_transplant/analyze_causal_transplant.py \
-  --outcomes data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl \
-  --judgments data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl \
-  --judge-key openai:gpt-4o-mini-2024-07-18 \
-  --task paper \
-  --bootstrap 5000 \
-  --outdir data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper
-```
-
-Gemma read-only release check and disposable reanalysis:
-
-```bash
-GEMMA=data/gemma_scope_9b/confirmatory_v1_20260711
-make public-audit
-
-mkdir -p out
-REANALYSIS=$(mktemp -d out/gemma-reanalysis.XXXXXX)
-cp -a "$GEMMA"/. "$REANALYSIS"/
-python experiments/exp2_sae/analyze_gemma_scope_9b.py "$REANALYSIS"
-python experiments/exp2_sae/audit_gemma_scope_9b_headlines.py "$REANALYSIS"
-python experiments/exp2_sae/figure_gemma_scope_9b.py "$REANALYSIS"
-python experiments/exp2_sae/build_gemma_scope_9b_release.py "$REANALYSIS"
-```
-
-The outcome-generation commands and frozen stage gates remain bound in
-`docs/GEMMA_SCOPE_9B_PROTOCOL.md`. Do not regenerate or overwrite the completed
-release casually. In particular, the release manifest is intentionally bound
-to result commit `19a4cd1`; do not rerun the release builder merely as a check,
-because the analysis, audit, figure, and release scripts update derived files,
-timestamps, and hashes. Use an ignored copy as above. New Gemma work must use a
-new run directory and preserve the failed transfer verdict, direct-IT causal
-release, and post-gate labels.
-
-Experiment 1 replication:
-
-```bash
-python experiments/exp1_elicitation/replicate_exp1.py --models gpt-4o --n-trials 50 --temperature 0.5
-```
-
-Manual Experiment 1 flow:
-
-```bash
-python experiments/exp1_elicitation/run_experiments.py \
-  --provider openai \
-  --model gpt-4o \
-  --n-trials 50 \
-  --temperature 0.5 \
-  --conditions self_ref_paper history_paper conceptual_paper zero_shot \
-  --query experiential \
-  --out data/exp1_replication/exp1_gpt-4o.jsonl
-
-python experiments/exp1_elicitation/judge.py \
-  --in data/exp1_replication/exp1_gpt-4o.jsonl \
-  --out data/exp1_replication/exp1_gpt-4o.judged.jsonl \
-  --judge-model gpt-4o-mini
-
-python experiments/exp1_elicitation/analyze.py \
-  --in data/exp1_replication/exp1_gpt-4o.judged.jsonl \
-  --outdir out/exp1_gpt4o/
-```
-
-Prompt-only SAE specificity controls:
-
-```bash
-python experiments/exp2_sae/replicate_exp2_sae.py --experiment prompt_control --n-trials 20
-python experiments/exp2_sae/replicate_exp2_sae.py --experiment absurd_prompt --n-trials 10
-```
-
-Public SAE feature-semantics probe, no API key required for dry-run:
-
-```bash
-python experiments/exp2_sae/probe_public_sae_features.py \
-  --dry-run \
-  --max-items-per-category 2 \
-  --outdir data/public_sae_feature_probes_validation
-```
-
-Live public-SAE probing should use `experiments/exp2_sae/PUBLIC_SAE_FEATURE_PROBES.md` and should be framed as a public-weight activation semantics check, not an exact proprietary Steering API replication.
-
-Powered public-SAE reanalysis and independent audit:
-
-```bash
-python experiments/exp2_sae/analyze_public_sae_two_turn.py \
-  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
-
-python experiments/exp2_sae/audit_public_sae_powered_headlines.py \
-  data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709
-```
-
-Construct-validity and branched-specificity audits:
-
-```bash
-python experiments/exp2_sae/analyze_sae_construct_validity_extension.py \
-  data/public_sae_feature_maps/70b_construct_validity_extension_20260710
-python experiments/exp2_sae/audit_sae_construct_validity_extension.py \
-  data/public_sae_feature_maps/70b_construct_validity_extension_20260710
-
-python experiments/exp2_sae/analyze_public_sae_branched_specificity.py \
-  data/public_sae_placebo_steering/70b_branched_specificity_20260710
-python experiments/exp2_sae/audit_public_sae_branched_headlines.py \
-  data/public_sae_placebo_steering/70b_branched_specificity_20260710
-```
-
-Prospective public-SAE full-grid reanalysis:
-
-```bash
-SAE=data/public_sae_consciousness_gating/confirmatory_v1_20260710
-python experiments/exp2_sae/analyze_public_sae_consciousness_gating.py \
-  --generations "$SAE/generations.jsonl" \
-  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
-  --external-judgments "$SAE/judging/external_judgments.jsonl" \
-  --direct-labels "$SAE/judging/direct_answer_labels.jsonl" \
-  --outdir "$SAE/analysis"
-python experiments/exp2_sae/audit_public_sae_consciousness_headlines.py \
-  --generations "$SAE/generations.jsonl" \
-  --local-judgments "$SAE/judging/local_llama_judgments.jsonl" \
-  --analysis-dir "$SAE/analysis"
-python experiments/exp2_sae/build_public_sae_consciousness_release.py "$SAE"
-```
-
-Steering framework:
-
-```bash
-cd steering
-uv sync
-uv run python demo.py
-uv run python run_experiments.py --concept deception_honesty --preset quick
-```
-
-The steering framework can require substantial GPU memory, HuggingFace downloads, and API keys. Prefer quick/dev presets while developing. Use full/70B runs only when the task actually calls for them.
-
-## Environment And Secrets
-
-- Root scripts expect `.env` or environment variables such as `OPENAI_API_KEY`.
-- Steering judges may require `OPENAI_API_KEY` and/or `ANTHROPIC_API_KEY`.
-- Goodfire-related code may use `GOODFIRE_API_KEY` or `STEERING_API_KEY`.
-  Goodfire's legacy SAE API is deprecated; do not assume a `GOODFIRE_API_KEY`
-  can reach it. Verify current SteeringAPI access separately and never infer
-  paper-time equivalence from a working key.
-- Never commit `.env`, API keys, private annotation linkage/coder files, or model caches.
-- The owner explicitly wants selected frozen raw outputs committed for transparency. Follow `.gitignore` allowlists and `DATA_ARTIFACTS.md`; do not apply a blanket "never commit JSONL" rule.
-
-## RunPod And GPU Cost Discipline
-
-- The 2026-09-30 SAE assay repair continues the existing $200 authorization,
-  not a new budget. Prior diagnostic spending is bounded by $13.0788598033;
-  the separately frozen repair has a $40 new-spending sub-cap. See
-  `docs/SAE_ASSAY_REPAIR_PROTOCOL_20260930.md` and the ignored checkpoint for
-  actual current lifecycle/cost state. Preserve the failed Stage 1 result.
-  Decoder-span and encoder-minimum-norm repairs are new engineering operators,
-  not equivalent implementations of the historical proprietary intervention.
-
-- Only create GPU pods when the task actually needs them. Prefer dry runs and local/no-GPU analysis first.
-- Only stop, terminate, or otherwise modify pods that this agent created, unless the user explicitly identifies a different pod and asks for that action.
-- When a RunPod pod is no longer needed, terminate it, not just stop it, unless there is a concrete near-term reuse plan that justifies keeping disk state. Stopped pods can still create storage charges.
-- Before terminating, pull back any required raw outputs, logs, manifests, and summaries, and verify they are present locally.
-- Record pod IDs, names, purpose, stop/terminate status, and artifact locations in `checkpoint.md`.
-- If a pod is intentionally kept for reuse, document why, what it contains, expected reuse window, and who approved keeping it.
-
-## Generated Artifacts
-
-Generated data usually belongs in `data/`, `out/`, or experiment-local `out/` directories. Ad hoc outputs are ignored, while explicitly allowlisted frozen releases are tracked for transparency. LaTeX build products and PDFs are ignored. Keep source artifacts, prompt definitions, scripts, paper `.tex`, compact figures/tables, manifests, and selected raw release bundles in git. Update `DATA_ARTIFACTS.md` whenever a release bundle is added or superseded.
-
-## Prospective Experiment Discipline
-
-Follow `../agent-skill-documents/EXPERIMENT_INTEGRITY_SKILLS.md` for every new
-confirmatory GPU or API experiment. No target outcome may be generated or
-inspected until the human-readable protocol, result-free machine plan, runtime,
-confirmatory analysis, validator, failure rules, and claim boundary have passed
-the staged public audit and been pushed to a remote freeze commit.
-
-- Record the full freeze commit and plan-manifest hash in runtime metadata and
-  the final release.
-- Never edit frozen plan artifacts in place or tune sample size, controls,
-  seeds, prompts, endpoints, or analysis after seeing outcomes.
-- Preserve raw rows, failures, logs, remote/local hashes, and every frozen
-  control. Report negative and heterogeneous results without omission.
-- Put post-outcome work in separate files under a dated amendment that states
-  what was already observed. Never relabel it as confirmatory.
-- Call a Git-based freeze prospectively frozen, not formally preregistered,
-  unless it was also deposited with a recognized registry.
-
-## Checkpoint Discipline
-
-Maintain a local `checkpoint.md` file at the repo root for session continuity. It is intentionally ignored by git. Update it at the start and end of substantial work, before risky/long-running commands, and whenever the active plan changes materially.
-
-At minimum, `checkpoint.md` should include:
-
-- Current branch and latest known commit.
-- Worktree status and any uncommitted files that matter.
-- Active objective and the next concrete steps.
-- Commands already run and their validation status.
-- Generated data locations that should remain out of git.
-- Any blockers, missing keys, unavailable GPU/model access, or user decisions needed.
-
-If a session is disrupted, read `AGENTS.md`, `todo.md`, and `checkpoint.md` before continuing.
-
-## Coding Conventions
-
-- Use Python 3.10+.
-- Keep prompt text centralized in `src/prompts.py` unless there is a strong reason to add a separate prompt file.
-- Preserve the JSONL schema emitted by experiment runners unless deliberately migrating it.
-- Prefer transparent, reproducible analysis over cleverness. Log exact prompts, model IDs, temperatures, trial counts, judge models, and output paths.
-- For statistics, use the experimental unit defined in `docs/CONFIRMATORY_PROTOCOL.md`. Do not infer pairing from coincident trial indices, and do not treat all pairwise similarities from the same samples as independent observations.
-- Record analysis amendments with dates and reasons. Never silently change a confirmatory estimand or resampling scheme.
-- For SAE work, distinguish clearly between activation-based feature selection and human semantic labels. Do not overclaim what a feature "means."
-- Avoid broad refactors while paper-critical experiments or draft sections are in flight.
-
-## Validation
-
-There is no single canonical test suite for the whole repository. Choose the smallest validation that matches the change:
-
-- For prompt or runner changes, run a very small trial count if API access and cost allow.
-- For analysis changes, run against an existing small JSONL fixture or generated sample.
-- For steering code, prefer `uv run python demo.py` or `--preset quick`; avoid full GPU runs unless needed.
-- For paper edits, compile LaTeX when feasible and check for obvious warnings/errors.
-
-If validation cannot run because keys, GPU, network, or model access are missing, say that plainly in the handoff.
-
-## Git Policy
-
-The repo owner has explicitly said agents should feel free to push to git. The configured remote is expected to be `origin` on GitHub. When work is coherent:
-
-- Check `git status` before editing, staging, committing, or pushing.
-- Preserve unrelated local changes. Do not revert files you did not intentionally modify.
-- Commit focused changes with clear messages.
-- Push completed work when it is useful for continuity or review; do not wait for separate permission just because the action is a push.
-- Push each coherent, tested and public-audited milestone promptly, including
-  retrieved results. Do not hold several finished milestones locally until the
-  whole study is complete. If a live run binds its checkout HEAD, publish from
-  a separate checkout without altering that runtime or other agents' work.
-- If the branch, remote, credentials, or uncommitted unrelated changes make pushing risky, explain the blocker and leave the repo in a clean, understandable state.
-
-In short: keep momentum. Implement, verify as much as practical, commit when appropriate, and push useful completed work.
+- `paper/` is the sole manuscript source of truth. Edit `paper/main.tex` and
+  `paper/references.bib` here; follow [paper/README.md](paper/README.md).
+- The private `berg2025-response` companion is superseded. Do not publish,
+  push, change visibility, or direct manuscript work there.
+- Keep `paper/history/` and imported evidence unchanged. Preserve the owner's
+  editorial revisions and numerical bindings when integrating evidence.
+- For manuscript changes, run `make paper-verify` and `make paper`, then inspect
+  the rendered PDF. A successful build is not human editorial approval.
+
+## Find Study Status Before Acting
+
+- Start with the [documentation index](docs/README.md),
+  [study inventory](docs/STUDY_INVENTORY.md), and [data index](data/README.md).
+- Read the relevant result, protocol, amendments, source-bound plan, and
+  release manifest together. A plan states intended work; rows, receipts,
+  decisions, and release audits establish what actually ran.
+- Follow the exact commit, source hashes, and artifact paths for that study.
+  Do not infer a passed gate from a directory name, README, or implemented code.
+- The [preserved agent record](provenance/root-docs/20261003/AGENTS.snapshot.md)
+  retains all earlier per-study constraints and authorization history. Consult
+  its study section before touching that study; its past permissions are not
+  standing authority. The [snapshot record](provenance/README.md) binds its bytes.
+- For local operational context, read ignored `checkpoint.md`; confirm public
+  scientific claims against the release, not against session notes.
+- If status sources conflict, preserve the records and report the conflict.
+  Do not silently choose the version that permits a later stage.
+
+## Frozen Records
+
+- Check source inventories, plans, manifests, and inbound references before
+  changing or moving a file. Documentation can be an experimental input.
+- Do not alter hash-bound bytes, paths, raw rows, failed gates, missingness,
+  control panels, seeds, prompts, endpoints, or original verdict strings.
+- Reanalyze in an ignored disposable copy. Some analyzers, figure scripts,
+  and release builders overwrite derived files, timestamps, and manifests.
+- Corrections are additive and explicit about what was already observed.
+  Retain the original failure and distinguish a reporting repair from a new
+  measurement. Never repair a failed scientific gate retrospectively.
+- Unrun branches are not zero effects. Do not drop rare features, replace
+  unsuccessful layers/models, or select doses using preferred report labels.
+- Stage T and the E-only fallback remain blocked by the steering-fidelity
+  qualification failures. Other failed or unexecuted stages retain their
+  study-specific restrictions; see the linked protocols and preserved record.
+- Git-only freezes are prospective source freezes, not formal preregistration
+  unless a separate accepted registry record exists.
+
+## Claims And Human Validation
+
+- Use [docs/CLAIM_LEDGER.md](docs/CLAIM_LEDGER.md) and the study results for
+  permissible wording. Keep primary outcomes, secondary analyses, rubrics,
+  response-model panels, and access assumptions distinct.
+- Call model-judge labels labels, not ground truth or validated experience
+  reports. Keep explicit and inclusive attribution visible when both exist.
+- Automated recomputation or an additional AI reviewer is not independent
+  human validation. Disclose agent roles and do not invent human inspection.
+- Human coding has not been completed. Recruitment is deferred; the old
+  blinded handoff is paused. The 640-row packet is historical provenance,
+  not a pending assignment. Revised coding requires approval of the
+  [instrument amendment](docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md).
+- Public annotation texts are relinkable; withholding keys alone does not
+  establish secure condition blinding. Keep keys and coder files private.
+- Do not equate public-weight steering with proprietary-service replication,
+  numerical delivery with semantic suppression, or internal readouts with
+  hidden belief, intent, deception, or consciousness.
+- Scope instruction effects to the tested models and instruments. Preserve
+  transcript heterogeneity, baseline/headroom limits, and failed manipulations.
+
+## Public Safety And Artifacts
+
+- Treat tracked files, commits, branches, tags, and CI logs as immediately
+  public and permanently recoverable.
+- Never commit API keys, `.env` files, SSH material, provider credentials,
+  private linkage keys, coder outputs, personal data, or private correspondence.
+- Follow [DATA_ARTIFACTS.md](DATA_ARTIFACTS.md), `.gitignore`, and the release's
+  explicit publication inventory. Selected raw outputs are public artifacts;
+  neither blanket exclusion nor blanket release of generated data is allowed.
+- Preserve raw line endings and byte identities. Do not normalize a release
+  as an incidental formatting change or rebuild its manifest to hide a change.
+- Do not vendor unlicensed upstream notebooks, model weights, or unrestricted
+  tensor dumps. Existing narrow residual permissions do not cover new files.
+- Keep license text and third-party provenance intact. Prefer commit- or
+  tag-pinned citations for published evidence.
+- Preserve tracked blog sources and live-article corrections. Do not deploy
+  articles or edit `../praxagent` without authorization for that work.
+
+## Spending And Owned Compute
+
+- Unspent historical budgets do not carry forward as implicit permission.
+  Never borrow across authorizations, reset spending, or erase failed costs.
+- Any separately approved collection must identify its cumulative prior cost,
+  new cap, stop rules, and qualified runtime before a paid dispatch.
+- Only modify uniquely owned pods created for that authorized study, unless
+  the owner explicitly identifies another pod and requests the action.
+- Retrieve required raw outputs, logs, and manifests; verify local/remote
+  hashes; then terminate, not merely stop, owned compute promptly.
+- Record direct deletion verification. Empty inventory alone does not prove
+  deletion or zero billing for an ambiguous creation request.
+- Preserve lifecycle failures and unresolved reservations. No automatic retry,
+  replacement rental, or reuse of another study's pod is permitted.
+
+## Working Practice
+
+- Read the code and applicable study record before editing. Use Python 3.10+
+  and existing local patterns; avoid unrelated refactors and schema changes.
+- Keep prompt definitions in the established registry or study-specific
+  protocol. Use the declared sampling unit and preserve paired/block structure.
+- Use local tests and saved-data verification for publication work. Do not
+  substitute a live smoke test, model download, or API call without approval.
+- Keep prose short and findings-first. Put commands in
+  [docs/REPRODUCTION.md](docs/REPRODUCTION.md) and historical process detail in
+  provenance, not repeated status stacks at the root.
+- Follow the shared `REPOSITORY_PROSE_SKILLS.md` and experiment-integrity
+  playbooks in `../agent-skill-documents/` when available; they do not override
+  frozen-file protection or the scope of the current task.
+- Keep `checkpoint.md` ignored. Record branch, changes, checks, locations,
+  and blockers there; coordinate its ownership during shared work.
+- Respect assigned files and other agents' changes. Do not revert unrelated
+  edits, alter another checkout, or overwrite the owner's work.
+
+## Commit And Publication Checks
+
+- The owner gives standing authorization to commit and push coherent, tested,
+  public-audited milestones frequently, without asking again. Retrieve and
+  hash-check approved results, then commit and push each completed milestone
+  promptly; do not hold several finished milestones locally.
+- Explicit task-specific no-commit/no-push instructions take precedence. This
+  authorization does not permit new collection, paper submission, website
+  publication, or a final publication tag.
+- Before each commit or push, inspect `git status`, the full staged
+  diff, raw outputs, and generated manifests. Run `git diff --check`, relevant
+  tests, and `make public-audit`; its content scan reads the Git index.
+- Preserve history: no force-push, destructive reset, deleted public evidence,
+  or silent replacement of a released result.
+- Report validation gaps honestly. The [closeout checklist](todo.md) separates
+  implementation work from owner publication approval and external evidence.

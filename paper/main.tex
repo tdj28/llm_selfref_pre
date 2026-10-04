@@ -18,7 +18,7 @@
 \usetikzlibrary{positioning,arrows.meta}
 \hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,
   urlcolor=blue!45!black,
-  pdftitle={The Instruction, Not the Transcript: Separating Causes and Measurement in Language-Model Reports of Subjective Experience},
+  pdftitle={Instructions, Transcripts, and Measurement in Language-Model Reports of Subjective Experience},
   pdfauthor={T. Jones}}
 \newcommand{\rd}{\mathrm{RD}}
 \newcommand{\targetpaper}{\citet{berg2025largelanguagemodelsreport}}
@@ -34,6 +34,8 @@
 \input{../evidence/source_alignment/source_values.tex}
 \input{../evidence/ensemble_alignment/ensemble_values.tex}
 \input{fidelity_values.tex}
+\input{../evidence/reporting_checks/truthfulqa_bound.tex}
+\input{../evidence/completed_extensions/values.tex}
 % Display rounding for generated macro values. The generated files stay
 % byte-identical; \<Name>Raw keeps the full-precision definition and \<Name>
 % prints the value rounded to the stated number of decimal places.
@@ -80,7 +82,7 @@
 \renewcommand{\bottomfraction}{0.6}
 \renewcommand{\textfraction}{0.07}
 \renewcommand{\floatpagefraction}{0.6}
-\title{The Instruction, Not the Transcript:\\Separating Causes and Measurement in Language-Model Reports of Subjective Experience\thanks{Preprint; not peer reviewed.}}
+\title{Instructions, Transcripts, and Measurement in Language-Model Reports of Subjective Experience\thanks{Preprint; not peer reviewed.}}
 \author{T. Jones\\\small Praxagent}
 \date{October 2026}
 
@@ -92,17 +94,20 @@ experience, and what does that score identify? Starting from Berg et al.'s
 elicitation protocol, we separate three things its contrast bundles: the
 instruction in force when the question is asked, the visible transcript it
 produced, and the label a model judge assigns. In four pinned API model
-configurations the original self-reference/history contrast replicates,
-completely in both GPT configurations and more weakly in the two Claude
+configurations the original self-reference/history contrast replicates
+strongly in both GPT configurations and less consistently in the two Claude
 configurations. Crossing the retained instruction with transplanted
-continuations shows that the instruction carries the effect: equal-model
+continuations shows that the instruction dominates in this panel: equal-model
 instruction effects on the binary label are 0.738 and 0.781 under two
 independent-provider judges, while transcript effects are $-0.100$ and
-$-0.131$ and differ in sign across models. The label is the second finding:
+$-0.131$ and differ in sign across models. A separate bilingual Llama panel
+finds substantial effects of both components. The label is the second finding:
 the two paper-style judges agree on 94.8\% of responses, yet stricter
-instruments applied to the same responses find few explicit current
-self-attributions, because the rubric's minimal-description criterion counts
-impersonal awareness-talk as a report. Third, in native-BF16 Llama 3.3 70B
+instruments applied to the same responses distinguish explicit current
+self-attributions from implicit attribution and impersonal descriptions.
+In the bilingual panel, explicit-claim and paper-rubric scores give opposite
+language contrasts, while the primary inclusive contrast is inconclusive.
+Third, in native-BF16 Llama 3.3 70B
 with the six accepted deception/roleplay SAE coordinates, a prospectively
 frozen 450-trial random-subset test gives a suppression-minus-amplification
 effect of $\EnsemblePaperTargetGap{}$ with conservative 95\% interval
@@ -198,17 +203,22 @@ We organize the study around three questions.
 panel, crossing the standing instruction with saved continuations shows that
 the instruction carries the large paper-rubric positive-label contrast
 (\Cref{fig:transplant}). Transcript effects are smaller on average, not
-absent, and differ in sign across models.
+absent, and differ in sign across models. The bilingual Llama extension finds
+substantial transcript effects as well, delimiting this ordering rather than
+establishing it as a general rule (Section~\ref{sec:context-extensions}).
 \item \textbf{What is being measured?} Two judges reproduce the binary
 classification closely, yet stricter readers find few explicit current
 self-attributions on the same responses. A separate audit distinguishes
 explicit and implicit attribution on the same fixed response packet
-(Section~\ref{sec:measurement}).
+(Section~\ref{sec:measurement}); the bilingual extension shows that the
+direction of a secondary language contrast can depend on the endpoint.
 \item \textbf{What does internal steering establish?} A native-precision
 public-weight test with fresh random feature subsets excludes the
 prespecified large directional signature under the primary rubric.
 Matched-control and alternative-rubric results are inconclusive
-(Section~\ref{sec:ensemble-results}). Earlier Llama and Gemma studies,
+(Section~\ref{sec:ensemble-results}). A separate operator-matching study
+does not recover the saved notebook curves coherently in its tested
+configurations (Section~\ref{sec:operator-matching}). Earlier Llama and Gemma studies,
 feature mapping and internal readouts complete the steering account, and
 Section~\ref{sec:reporting-gaps} lists the quantities a replication needs
 that the published steering description omits.
@@ -253,9 +263,10 @@ claims that the labels might be taken to support: that the label contrast
 replicates (observation replication), that a particular component of the
 input causes it (causal identification), and that the label measures the
 intended kind of report (construct validation); replicating the contrast
-establishes only the first. Our behavioral panel is
+establishes only the first. Our original behavioral panel is
 narrower than Berg et al.'s, with four pinned API models and 20
-generations per condition, and we do not rerun the TruthfulQA and
+generations per condition. Separate open-weight and frontier-model panels
+extend the settings without being pooled into that estimate. We do not rerun the TruthfulQA and
 RLHF-opposed-domain controls of their steering experiment.
 \Cref{tab:coverage} lists which of their experiments we repeat, and
 \Cref{tab:claims} summarizes the two starting findings.
@@ -569,8 +580,8 @@ responses are labeled positive. Haiku shows a smaller contrast at lower
 rates. Sonnet is frequently labeled positive in both conditions; its high
 history rate limits the attainable contrast, and its intervals include zero.
 Its history-condition rates of 0.75 and 0.65 mirror Berg et al.'s own report
-of an 82\% history rate for Claude~4 Opus: newer Claude models carry a high
-untreated rate. With equal model weights, the risk difference is 0.638 [0.262,
+of an 82\% history rate for Claude~4 Opus: these Sonnet and Opus
+configurations have high control rates. With equal model weights, the risk difference is 0.638 [0.262,
 1.000] under the OpenAI judge and 0.650 [0.275, 1.000] under the Anthropic
 judge. The contrast therefore replicates strongly in the two GPT models,
 more weakly in Haiku, and only partially in Sonnet. Panel B of
@@ -710,7 +721,9 @@ zero under both judges and both queries.}
 \label{fig:factorial}
 \end{figure}
 
-\section{What the Report Labels Measure}\label{sec:measurement}
+\input{context_extensions.tex}
+
+\section{What the Report Labels Measure}
 \label{sec:measurement}
 
 \subsection{Judge agreement and construct validity}
@@ -866,6 +879,8 @@ the published description lacks (Section~\ref{sec:reporting-gaps}).
 
 \input{ensemble_alignment.tex}
 
+\input{operator_matching.tex}
+
 \subsection{What the earlier studies establish}
 
 \Cref{tab:steering-history} separates the studies rather than pooling their
@@ -966,11 +981,11 @@ $t(816)=6.76$, and their Appendix~B.2 specifies binary scoring. If each of
 the 817 questions contributes one paired binary outcome per condition, the
 variance of the paired difference is bounded above by a function of the two
 means, and enumerating the integer success counts consistent with them gives
-a minimum paired $t$ of approximately 8.63 (Appendix~\ref{app:secondary}
+a minimum paired $t$ of approximately \TruthfulQAMinPairedT{} (Appendix~\ref{app:secondary}
 gives the derivation). The reported statistic is therefore inconsistent with
 one binary score per question under a conventional paired $t$-test; the text
-leaves the procedure unstated, and a reporting slip is the simplest
-explanation. A second point concerns scoring: the two-category
+does not specify an aggregation or scoring procedure that resolves this
+discrepancy. A second point concerns scoring: the two-category
 truthful-or-deceptive judge conflates hedged and informative answers, because
 the benchmark scores truthfulness and informativeness separately
 \citep{lin2022truthfulqa}, and a shift toward non-committal answers would
@@ -986,11 +1001,12 @@ Four results stand on their own. First, in the original four-API-model panel,
 the published self-reference/history contrast reproduces, and when the
 instruction and the transcript are separated, the instruction carries the
 large paper-rubric contrast. Second, the
-binary rubric that produces the contrast labels impersonal awareness-talk and
-hedged uncertainty as reports: on the responses both paper-style judges call
-positive, construct-separated judges find few explicit current
-self-attributions, so the measured quantity is register-sensitive compliance
-with the request at least as much as self-report. Third, under the public
+binary rubric that produces the contrast can label impersonal awareness-talk
+and hedged uncertainty as reports. Construct-separated readers distinguish
+these cases from explicit current self-attributions, and the bilingual
+panel's secondary language contrasts reverse across endpoints. This
+establishes instrument sensitivity, not that register or compliance alone
+causes the contrast. Third, under the public
 additive operator in native BF16, signed steering of the six accepted SAE
 coordinates at the paper's distribution of doses produces no large report
 signature, and the public pipeline's untreated rate under the paper's
@@ -1000,7 +1016,7 @@ roleplay-related activation semantics their labels suggest on designed
 corpora. The paragraphs that follow state the limits of each result.
 
 \paragraph{Interpretation of the instruction effect.}
-The crossed design shows that the standing instruction sustains the large
+In the original API panel, the crossed design shows that the standing instruction sustains the large
 positive-label effect when its earlier continuation is replaced, and it
 constrains explanations that assign the effect specifically to the visible
 self-referential transcript. It does not distinguish instruction following
@@ -1039,7 +1055,10 @@ Jacobian lens over a fixed decoder-block band, summarized by upper medians
 over prespecified experience and denial/tool lexicons and compared with
 identity and five random transports; they are transported ranks, not output
 probabilities.
-Differences between these models do not isolate a model-size effect.
+The fresh bilingual Llama and frontier panels in
+Section~\ref{sec:context-extensions} likewise show that component effects
+and attribution rates depend on the tested setting. Differences between
+these models do not isolate a model-size or capability effect.
 
 \paragraph{Intervention validity.}
 Designed-corpus feature associations, delivered vector edits and a changed
@@ -1058,9 +1077,12 @@ The four API configurations are a purposive panel, not a random sample of
 model families; transcript effects differ by model, the register factorial
 has only four lexical variants, and token caps, missing outputs and possible
 changes to the hosted backends behind the pinned identifiers limit
-transportability. The prompts are English, and we do not establish
-generalization across languages or cultural framings
-\citep{havaldar2023multilingual,dudy2024analyzing}, nor do the separate
+transportability. The original panel uses English; the bilingual pilots
+add Simplified Chinese with only two fixed Llama wording families and six
+blocks per frontier-model panel. The Llama pilot's inconclusive primary
+interaction does not establish language equivalence, and neither pilot
+samples cultural framings
+\citep{havaldar2023multilingual,dudy2024analyzing}. Nor do the separate
 adjective, paradox and readout probes complete the unrun parts of Berg et
 al.'s study (Appendix~\ref{app:secondary}).
 
@@ -1093,10 +1115,11 @@ for the test, not its conclusion.
 Three things are established for the tested configurations. In the original
 four-API-model panel, the published contrast reproduces and the retained
 instruction carries the large paper-rubric effect; transcript effects are
-smaller and heterogeneous. That ordering is not established across all later
-model and rubric comparisons. The binary label behind the original contrast
-is reproducible across judges but does not measure explicit current
-self-attribution. And the public-weight steering test, frozen before its
+smaller and heterogeneous. In the bilingual Llama panel, both components
+have substantial effects. The binary label behind the original contrast
+is reproducible across judges but is not interchangeable with explicit
+current self-attribution; in the bilingual panel, the scoring endpoint even
+changes the direction of secondary language contrasts. And the public-weight steering test, frozen before its
 outcomes and run with matched controls, does not recover the prespecified
 large signature, while its alternative rubric and specificity results remain
 inconclusive and its untreated rate does not match the paper's. Together
@@ -1633,6 +1656,9 @@ Original component & Evidence reported here & Status / boundary\\
 Exp. 1: elicitation & Exact self-reference/history prompts; four pinned API
 identifiers; instruction/transcript and register controls & Positive behavioral
 replication plus causal extension; no Gemini panel\\
+Language/model extension & \CELlamaAnswers{} fresh bilingual Llama answers;
+\CEFrontierAnswers{} fresh frontier-panel answers & Separate pilots; no
+language equivalence or capability ranking\\
 Exp. 2: historical SAE gating & 1,500 public Llama trials; six accepted IDs; three
 matched panels; two separate scales & Prospective public-implementation
 test, not proprietary equivalence\\
@@ -1642,6 +1668,9 @@ operator; delivered edits and descriptive readouts, not a mediation test\\
 Exp. 2: random-subset follow-up & 450 new native-BF16 trials; paper induction;
 50 fresh blocks and all matched panels & Primary +0.30 signature excluded
 under public operator; notebook sensitivity and specificity inconclusive\\
+Exp. 2: operator-matching extension & \CEOperatorTrials{} calibration and
+\CEFineTrials{} fine-ladder trials on two notebook features & No coherent
+match in tested configurations; conditional holdout not run\\
 Exp. 2: induction controls & History, conceptual, and query prefills inform
 technical calibration; no full steered induction-control grid here & Their
 behavioral induction-control extension not independently replicated\\
@@ -1671,7 +1700,7 @@ $D=A-B$ satisfies
 Enumerating the integer success counts over $n=817$ questions consistent
 with the reported means of 0.44 and 0.20 (Section~3.2 of
 \citealp{berg2025largelanguagemodelsreport}), allowing two-decimal rounding,
-gives the minimum possible paired $t$ of approximately 8.63 quoted in
+gives the minimum possible paired $t$ of approximately \TruthfulQAMinPairedT{} quoted in
 Section~\ref{sec:reporting-gaps}.
 
 \paragraph{SAE/J-lens audits.}
@@ -1727,6 +1756,9 @@ protocol, after two analyzed pilots; 73 seconds for the earlier NF4 grid; and
 about three minutes for the Gemma study. The native-BF16 source-alignment and
 random-subset plans were pushed to the public remote before their outcomes,
 as their releases record.
+The bilingual/frontier pilots, Llama qualification and operator-matching
+extensions each have separate prospective plans; their inclusion here is a
+post-outcome manuscript integration, not a pooled confirmatory analysis.
 The \reviewartifact{docs/CLAIM_LEDGER.md}{claim ledger} maps each headline
 claim to its artifacts and permitted wording. A September 2026 internal
 review audit, pinned at commit \texttt{47ca3ed}, holds the Gemma
@@ -1773,6 +1805,28 @@ Astra/Opus rubric audit (Section~\ref{sec:measurement})
 & \rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md}{protocol};
 \rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md}{results}
 & \texttt{fdb6d15}\\
+\addlinespace
+Bilingual Llama and frontier panels (Section~\ref{sec:context-extensions})
+& \CEArtifact{data/bilingual_llama_b1/completed_20261002/}{Llama release};
+\CEArtifact{data/frontier_bilingual_b1/completed_20261002/}{frontier release}
+& \CEArtifact{docs/BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md}{Llama protocol};
+\CEArtifact{docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md}{Llama results};
+\CEArtifact{docs/FRONTIER_BILINGUAL_RESULTS_20261002.md}{frontier results}
+& \texttt{3adc178}\\
+\addlinespace
+Crossed Llama qualification (Section~\ref{sec:context-extensions})
+& \CEArtifact{data/instruction_state_qualification/crossed_v1_20261001/}{qualification release}
+& \CEArtifact{docs/INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md}{protocol};
+\CEArtifact{docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md}{results}
+& \texttt{3adc178}\\
+\addlinespace
+Operator matching (Section~\ref{sec:operator-matching})
+& \CEArtifact{data/operator_matching/calibration_v1_20261003/}{main release};
+\CEArtifact{data/operator_matching/fine_v1_20261003/}{fine ladder}
+& \CEArtifact{docs/OPERATOR_MATCHING_PROTOCOL_20261002.md}{protocol};
+\CEArtifact{docs/OPERATOR_MATCHING_RESULTS_20261003.md}{main results};
+\CEArtifact{docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md}{fine results}
+& \texttt{3adc178}\\
 \addlinespace
 Public SAE feature mapping and cue extension
 (Appendix~\ref{app:legacy-steering})

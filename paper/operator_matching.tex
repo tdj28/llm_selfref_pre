@@ -1,0 +1,50 @@
+\subsection{Testing public operator configurations}
+\label{sec:operator-matching}
+
+A separately frozen
+\CEArtifact{docs/OPERATOR_MATCHING_RESULTS_20261003.md}{operator-matching
+study} tested whether public implementations could reproduce the saved
+notebook's single-feature curves for 58667 and 23893, rather than treating
+unspecified implementation details as an unrestricted explanation. The
+\CEOperatorTrials{} trials comprised \CEOperatorGrid{} grid trials,
+\CEOperatorZero{} zero trials, \CEOperatorDefaults{} conditional
+system-message/sampling trials and \CEOperatorBridge{} untreated
+paper-induction bridge trials. The grid crossed four edit scopes (all
+positions, generated positions, assistant positions, and all second-turn
+positions), direct decoder addition or SAE reconstruction plus addition,
+and scales 1, 3, 10 and 30 of the notebook's raw unit. It used both signs
+and five seeds per tested cell under the notebook induction and classifier;
+the scales are not demonstrated equivalents of proprietary service units.
+
+No configuration met the frozen joint match and coherence rule. Direct
+addition at scales 1 and 3 left coherent text without the saved signature;
+at 10 and 30, text degraded without recovering the joint signature. Reconstruction plus
+addition failed the coherence rule at every tested scale. Adding the archived
+SDK system message, top-$p=0.9$, or both to the three mechanically selected
+coherent configurations did not recover the signature. The conditional
+holdout was not run because no configuration qualified; it is not a second
+negative replication.
+
+A \CEArtifact{docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md}{separately
+frozen fine ladder} added \CEFineTrials{} trials: \CEFineGrid{} at scales
+4, 5, 6, 7 and 8, and \CEFineZero{} zero controls. The scaled trials were
+restricted to direct addition at all token positions, the same two features,
+and fresh seeds. Of its \CEFineCells{} signed feature/scale cells,
+\CEFineZeroCells{} had no notebook-classifier positives; the remaining
+cell had \CEFineRemainingPositive{} at scale 6, whose configuration failed
+the coherence rule.
+Scales 4, 5 and 7 passed the coherence rule but did not match, while 6 and 8
+failed coherence. No coherent match was observed at these sampled settings,
+not at every intermediate dose, scope or possible operator.
+
+The untreated bridge also exposed a baseline-comparability factor: under the
+notebook classifier, the archived SDK system message changed the
+paper-induction count from \CEBridgeNoSystem{} to \CEBridgeSDKFull{} at
+top-$p=1$, and to \CEBridgeSDKNucleus{} at top-$p=0.9$ (the no-system count
+was unchanged). The descriptive intervals overlap; this is not a demonstrated
+explanation of the historical baseline gap. The saved notebook is not
+certified as the paper's experimental run, and served-model, SAE-revision
+and feature-namespace differences remain unresolved. These bounded tests
+narrow the tested implementation alternatives without showing that public
+avenues are exhausted, that the saved curves are wrong, or that the edits
+selectively alter honesty or deception.

@@ -101,8 +101,8 @@ The reproduction destination must be fresh and separate from the release.
 The verifier checks source bindings, receipts, hashes and exact numerical
 tables. Regenerated PDF timestamps need not match. Original raw files are
 never opened for writing. See `FRONTIER_BILINGUAL_RESULTS_20261002.md` for
-the six-block uncertainty and measurement limits; paper integration remains
-editorial work, not part of the frozen runtime.
+the six-block uncertainty and measurement limits. The manuscript presents
+this panel separately from the original four-model experiment.
 
 The later crossed Llama qualification has its own read-only raw-to-decision
 check and optional descriptive figure regeneration:
@@ -117,7 +117,8 @@ the full manifest, frozen source-bound plan, raw generations, judge receipts,
 byte-exact runtime decision/table and cost arithmetic. It makes no model or
 API calls and does not write locks into the released judge ledger. See
 `INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md` for the failed guards
-and limits; this result has not yet been integrated into the manuscript.
+and limits; the manuscript retains the qualification failure, not a completed
+internal-intervention experiment.
 
 The current manuscript lives in `paper/`. Its packaged evidence and verifier
 sources retain their pinned bytes and repository-relative paths. From the
@@ -130,6 +131,9 @@ python scripts/verify_rubric_audit.py
 python scripts/verify_source_alignment.py
 python scripts/verify_source_jlens_table.py
 python scripts/verify_ensemble_alignment.py
+python scripts/verify_fidelity_calibration.py
+python scripts/verify_completed_extensions.py
+python scripts/verify_reporting_bound.py
 python scripts/uncertainty_sensitivity.py --check
 python -B reviews/reproducibility/run.py --verify-only
 ```
@@ -147,6 +151,13 @@ CI runs `make paper-verify` on Python 3.10 and 3.12, checks that it leaves
 tracked paper/evidence files unchanged, and runs the imported verifier tests
 as part of the full root pytest suite. PDF compilation remains the separate
 `make paper` step included in local `make verify`.
+
+The completed-extension check binds the bilingual, frontier, qualification and
+operator-matching summaries used in the manuscript. It does not replace the
+raw-to-summary commands for those studies. The reporting-bound check enumerates
+binary count pairs compatible with the rounded TruthfulQA means in Berg et al.;
+it is conditional on one paired binary score per question, not a reconstruction
+of their unavailable scores or test procedure.
 
 ## Prompt And Transcript Study
 

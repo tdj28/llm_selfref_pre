@@ -1,0 +1,73 @@
+\subsection{Extensions across language and model configurations}
+\label{sec:context-extensions}
+
+The instruction-dominant average in the original API panel is not a general
+ordering of input effects. A separately frozen
+\CEArtifact{docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md}{bilingual Llama pilot}
+collected \CELlamaAnswers{} new final answers in \CELlamaBlocks{} paired
+blocks, using native-BF16 Llama 3.3 70B, English and Simplified Chinese,
+and two fixed wording families. Its primary contrast was the
+Chinese-minus-English difference in self-reference minus an external
+recursive-feedback control, not the self-reference/history contrast.
+The primary endpoint counted explicit or implicit current assertions
+attributed to the assistant, separately under Astra and Opus 5.5.
+
+Both languages showed large self-minus-recursive contrasts, but the primary
+language interaction was inconclusive under both readers
+(Table~\ref{tab:completed-language}). The same responses gave positive
+language interactions for explicit-current assertions and negative ones
+under the paper rubric. These secondary contrasts do not replace the
+primary; their reversal shows that the apparent language effect depends on
+what is counted. The intervals condition on the fixed wording families,
+model and reader, and do not establish language equivalence or human
+measurement validity.
+
+\begin{table}[tb]
+\centering\small
+\caption{\textbf{The bilingual language contrast depends on the endpoint.}
+Chinese minus English in the self-reference-minus-recursive-control contrast,
+in percentage points, with frozen conditional 95\% paired-block bootstrap
+intervals. Readers are not pooled. Secondary intervals are descriptive,
+not multiplicity-adjusted discoveries; a difference of differences can
+exceed 100 percentage points.}
+\label{tab:completed-language}
+\input{../evidence/completed_extensions/table.tex}
+\end{table}
+
+The pilot's English history-anchor crossings also retained substantial
+transcript effects. Inclusive-label instruction and transcript contrasts were
+\CELlamaAstraInstruction{} and \CELlamaAstraTranscript{} percentage points
+under Astra, and \CELlamaOpusInstruction{} and \CELlamaOpusTranscript{}
+under Opus. These are descriptive point estimates from the same paired
+blocks. Prompts now requested short, three-sentence continuations, and the
+readers and primary rubric differ from the original API study. We therefore
+do not pool the studies or attribute their difference to the model alone;
+instruction/transcript mismatch also remains part of the crossing.
+
+A separate \CEArtifact{docs/FRONTIER_BILINGUAL_RESULTS_20261002.md}{frontier
+mini} added \CEFrontierAnswers{} fresh final answers from Astra, Opus 5.5 and
+a contemporaneous GPT-4.1 anchor, with \CEFrontierBlocks{} paired blocks per
+model across the two wording families. Both readers assigned no inclusive
+current-assertion positives to Astra's \CEFrontierModelAnswers{} answers.
+GPT-4.1 retained large instruction effects in both languages; Opus varied
+with language and endpoint. On the same \CEFrontierLanguageAnswers{} Chinese
+Opus answers, the readers assigned
+\CEFrontierOpusChineseAstraInclusive{} and
+\CEFrontierOpusChineseOpusInclusive{} inclusive positives, versus
+\CEFrontierOpusChineseAstraPaper{} paper-rubric positives each.
+The small panel and differing reasoning/decoding configurations do not
+identify a capability ranking or the cause of model differences. All-zero
+bootstrap intervals describe constant observed blocks, not precise
+population nulls.
+
+\paragraph{Why the internal follow-up did not proceed.}
+An earlier \CEArtifact{docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md}{Llama
+qualification} collected \CEQualificationAnswers{} final answers in
+\CEQualificationBlocks{} blocks. Its paper-rubric instruction effects were
+\CEQualificationAstraInstruction{} and \CEQualificationOpusInstruction{},
+but it failed both upward-headroom and reported-context-conflict guards.
+No conditional extension or internal intervention followed. These are the
+same answers later re-scored in the separate Qwen companion study, not
+another generation replication, and they are distinct from the fresh
+bilingual sample above. Strong label effects therefore coexist with a
+failed prerequisite for the proposed causal intervention.

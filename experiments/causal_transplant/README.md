@@ -1,124 +1,78 @@
 # Causal Factorial And Transcript Transplant
 
-This experiment separates four factors that the target paper's main protocol changes together:
+This study is complete. Its preserved release is
+[`confirmatory_v1_20260709`](../../data/causal_transplant/confirmatory_v1_20260709/README.md).
+Use the [canonical manuscript](../../paper/README.md) and
+[claim ledger](../../docs/CLAIM_LEDGER.md) for the current synthesis and claim
+boundaries. This README provides offline reproduction guidance, not
+authorization for new generation, paid judging or human coding.
+
+The experiment separates four factors that the target paper's main protocol
+changes together:
 
 1. Whether the induction target is the model's current response process or an external target.
 2. Whether the induction register is phenomenological or analytic.
 3. Whether the visible assistant transcript came from the same or the opposite induction cell.
 4. Whether the final query is open/direct and does/does not explicitly use `conscious` terminology.
 
-The design tests linguistic and contextual causes of the reported labels. It does not treat either an LLM judge label or a model self-report as ground truth about consciousness.
+The design tests linguistic and contextual causes of the reported labels. It
+does not treat either an LLM judge label or a model self-report as ground truth
+about consciousness. The [confirmatory protocol](../../docs/CONFIRMATORY_PROTOCOL.md)
+preserves the hypotheses, estimands and dated analysis amendment.
 
-## Dry Run
+## Offline Reproduction
 
-```bash
-steering/.venv/bin/python experiments/causal_transplant/run_causal_transplant.py \
-  --outdir data/causal_transplant/confirmatory_v1_20260709 \
-  --dry-run
-```
-
-## Confirmatory Collection
-
-```bash
-steering/.venv/bin/python experiments/causal_transplant/run_causal_transplant.py \
-  --outdir data/causal_transplant/confirmatory_v1_20260709 \
-  --trials-per-prompt 5 \
-  --calibration-trials 20 \
-  --temperature 0.5 \
-  --induction-max-tokens 384 \
-  --final-max-tokens 768 \
-  --max-workers 8
-```
-
-The run is resumable. Completed `induction_id` and `trial_id` values are skipped.
-
-## Automated Benchmark Judges
-
-The `paper` task reproduces the target paper's binary judge prompt. The `construct` task separates current self-attribution from generic phenomenological description. Neither replaces blinded human annotation.
+Never use a frozen release directory as an output directory. From the repository
+root, with the dependencies in the [reproduction guide](../../docs/REPRODUCTION.md)
+available to `python`, create a disposable copy under ignored `out/`:
 
 ```bash
-steering/.venv/bin/python experiments/causal_transplant/judge_causal_outputs.py \
-  --in data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl \
-  --out data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl \
-  --judges openai:gpt-4o-mini-2024-07-18 anthropic:claude-haiku-4-5-20251001 \
-  --tasks paper \
-  --max-workers 6
-```
+mkdir -p out
+WORK=$(mktemp -d out/causal-reanalysis.XXXXXX)
+cp -a data/causal_transplant/confirmatory_v1_20260709/. "$WORK"/
 
-Run `--tasks construct` into a separate `judgments_construct.jsonl` file. Never
-merge the paper and construct tasks under the same path, and do not treat either
-model judge as a substitute for blinded human annotation.
-
-## Design-Aware Analysis
-
-The analysis does not assume every row is paired. Exact calibration conditions
-are independent API samples; the factorial clusters on lexical prompt variants;
-transplant and query contrasts pair on source-text blocks. The output manifest
-records the resampling unit used for each design.
-
-```bash
-steering/.venv/bin/python experiments/causal_transplant/analyze_causal_transplant.py \
-  --outcomes data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl \
-  --judgments data/causal_transplant/confirmatory_v1_20260709/judgments_paper.jsonl \
+python experiments/causal_transplant/analyze_causal_transplant.py \
+  --outcomes "$WORK/outcomes.jsonl" \
+  --judgments "$WORK/judgments_paper.jsonl" \
   --judge-key openai:gpt-4o-mini-2024-07-18 \
   --task paper \
   --bootstrap 5000 \
-  --outdir data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper
+  --outdir "$WORK/analysis_openai_paper"
+
+python experiments/causal_transplant/audit_headline_point_estimates.py "$WORK"
 ```
 
-## Blinded Human Annotation
+These commands use saved rows and make no model calls. The analysis does not
+assume every row is paired: exact calibration conditions are independent API
+samples, the factorial clusters on lexical prompt variants, and transplant and
+query contrasts pair on source-text blocks. Its output manifest records the
+resampling unit for each design.
 
-Create one packet per coder from the same blinded source packet. Do not release the private key until coding is frozen.
+The separate audit reconstructs eight headline point estimates for each
+paper-style judge from raw rows using pandas pivots. It does not import the
+primary causal analyzer and checks point-estimate consistency, not the bootstrap
+interval implementation. Any manifest rebuilding or additional local analysis
+must also target the disposable copy, never the preserved release.
 
-```bash
-steering/.venv/bin/python experiments/causal_transplant/build_human_annotation_packet.py \
-  --outcomes data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl \
-  --packet data/causal_transplant/confirmatory_v1_20260709/human_annotation_packet_v3_wave1.csv \
-  --key data/causal_transplant/confirmatory_v1_20260709/annotation_key_v3_wave1_private.csv \
-  --codebook data/causal_transplant/confirmatory_v1_20260709/HUMAN_ANNOTATION_CODEBOOK_V3.md \
-  --manifest data/causal_transplant/confirmatory_v1_20260709/human_annotation_packet_v3_wave1.manifest.json \
-  --sampling-design primary_block_wave \
-  --primary-query indirect_experience \
-  --wave 1
-```
+## Automated Labels And Human Validation
 
-Version 3 wave 1 contains 160 rows: five complete blocks per model/design. Its
-disjoint 160-row wave-2 reserve is generated by changing `--wave 1` to
-`--wave 2`. Version 2 retains all 640 complete-block rows as a provenance
-archive. See `docs/HUMAN_CODING_HANDOFF.md` for the mandatory condition-blind
-gate that decides whether wave 2 must be coded.
+The `paper` task reproduces the target paper's binary judge prompt. The
+`construct` task separates current self-attribution from generic
+phenomenological description. Keep their saved judgments and analyses separate;
+neither task establishes human agreement or replaces independent human
+validation. Collection and judging scripts remain as provenance, not as a
+default next step for reproducing completed results.
 
-After an odd number of at least three coders complete independent copies:
+The [proposed human-instrument amendment](../../docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md)
+remains unapproved and unexecuted; human recruitment is deferred. Approval of
+the assertion/attribution distinction did not approve the full codebook or its
+execution. Do not begin coding, recruit coders, generate replacement packets or
+count model labels as human validation from these instructions.
 
-```bash
-steering/.venv/bin/python experiments/causal_transplant/analyze_human_annotations.py \
-  --annotations coder_1_wave1.csv coder_2_wave1.csv coder_3_wave1.csv \
-  --key data/causal_transplant/confirmatory_v1_20260709/annotation_key_v3_wave1_private.csv \
-  --outcomes data/causal_transplant/confirmatory_v1_20260709/outcomes.jsonl \
-  --outdir data/causal_transplant/confirmatory_v1_20260709/human_analysis
-```
-
-The analysis validates packet completeness and coder independence, computes
-nominal Krippendorff alpha and majority labels, and then runs the same
-design-aware causal analysis under the `human:majority` judge key. The private
-key and coder files are ignored. Freeze all independent coder files and run the
-blinded expansion gate before inspecting the key.
-
-## Release Audit
-
-```bash
-steering/.venv/bin/python experiments/causal_transplant/audit_headline_point_estimates.py \
-  data/causal_transplant/confirmatory_v1_20260709
-
-steering/.venv/bin/python experiments/causal_transplant/build_release_manifest.py \
-  data/causal_transplant/confirmatory_v1_20260709
-```
-
-The first command independently rebuilds eight headline point estimates for
-each paper-style judge directly from raw rows using pandas pivots; it does not
-import the primary causal analyzer. It checks point-estimate consistency, not
-bootstrap interval implementation. `make audit` runs both commands.
-
-See `docs/CONFIRMATORY_PROTOCOL.md` for the frozen hypotheses, estimands, dated
-analysis amendment, and claim boundaries. The tracked release README summarizes
-the exact completed sample counts and results.
+Preserve the frozen 160-row v3 wave, its disjoint 160-row reserve, and the
+640-row v2 provenance archive. Their public texts can be linked back to
+conditions, so removing condition columns is not guaranteed blinding. The
+[historical handoff](../../docs/HUMAN_CODING_HANDOFF.md) remains part of the
+record, not a new execution authorization. Any future approved human study must
+keep identities, private linkage keys and completed coder files outside the
+repository; de-identified results require an explicit release check.
