@@ -269,7 +269,7 @@ the release to its historical result commit.
 - [Feature probes](../experiments/exp2_sae/PUBLIC_SAE_FEATURE_PROBES.md)
 - [J-lens v1](LLAMA70B_SAE_JLENS_RESULTS.md)
 - [J-lens v2 and its failed gate](LLAMA70B_SAE_JLENS_V2_RESULTS.md)
-- [Human-coding handoff](HUMAN_CODING_HANDOFF.md)
+- [Historical human-coding handoff](../provenance/planning/HUMAN_CODING_HANDOFF.md)
 - [Full artifact inventory](../DATA_ARTIFACTS.md)
 - [Later-study status and evidence boundaries](STUDY_INVENTORY.md)
 
