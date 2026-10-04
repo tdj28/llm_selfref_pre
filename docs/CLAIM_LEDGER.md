@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-10-02
+Last updated: 2026-10-04
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -16,8 +16,8 @@ implementations are automated checks, not independent human validation.
 The completed pilot is in `data/bilingual_llama_b1/completed_20261002/`;
 interpretation and denominators are in `BILINGUAL_LLAMA_B1_RESULTS_20261002.md`.
 Frozen analysis: `experiments/bilingual_llama_pilot/analysis.py`, executed
-through the source-bound B1 release adapter. These findings await editorial
-integration into the canonical manuscript; they do not overwrite earlier data.
+through the source-bound B1 release adapter. The canonical manuscript presents
+these findings as a separate extension; they do not overwrite earlier data.
 
 | Claim | Evidence | Permissible wording | Do not claim |
 |---|---|---|---|
@@ -30,6 +30,39 @@ All intervals are conditional block-bootstrap intervals, not population
 equivalence bounds. Four format retries, the failed original fixture gate,
 budget amendment, startup uncertainty and local-copy verification failure stay
 visible. This was a behavioral measurement pilot, not an internal intervention.
+
+## Frontier And Open-Weight Extensions
+
+The [frontier mini](FRONTIER_BILINGUAL_RESULTS_20261002.md) contributes 144
+fresh answers, separate from the historical fixed-response Astra/Opus audit.
+Both readers assign Astra's 48 answers zero inclusive-current-assertion
+labels; GPT-4.1 retains instruction effects and Opus is heterogeneous. Six
+blocks do not identify a capability ranking, and an all-zero sample is not a
+precise population null. Preserve both readers and all attribution endpoints.
+
+The [crossed Llama qualification](INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md)
+has 48 final answers and fails its headroom/context-conflict requirements
+despite a large instruction contrast. No internal intervention followed.
+The [Qwen companion review](SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md)
+distinguishes fresh Qwen/API evidence from reuse of those same Llama answers.
+Do not count the re-scoring as another independent generation experiment or
+turn descriptive J-lens ranks into evidence of a semantic mechanism.
+
+## Operator Matching
+
+The [main study](OPERATOR_MATCHING_RESULTS_20261003.md) and
+[fine ladder](OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md) contribute
+870 and 105 trials, respectively. The main grid crosses four token scopes,
+two operators and scales 1/3/10/30. The fine ladder uses only the all-token
+additive operator at scales 4/5/6/7/8. Neither recovers the saved notebook's
+coherent two-feature signature; the contingent holdout was not run.
+
+Permissible: no coherent match among these tested public configurations.
+Not permissible: all public implementations are exhausted, the saved curves
+are false, or correct feature IDs establish served-model/operator equivalence.
+The ten-seed untreated system-message bridge is a baseline-comparability lead,
+not a resolved explanation of the historical baseline. The public operator
+results add evidence about implementability, not about subjective experience.
 
 ## Primary Causal Study
 

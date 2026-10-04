@@ -8,8 +8,6 @@ authors:
     affiliation: Praxagent
 repository-code: "https://github.com/tdj28/llm_selfref_pre"
 url: "https://github.com/tdj28/llm_selfref_pre"
-version: 0.1.0
-date-released: 2026-07-09
 license: Apache-2.0
 keywords:
   - language models
@@ -19,7 +17,7 @@ keywords:
   - mechanistic interpretability
 preferred-citation:
   type: article
-  title: "Subjective-Experience Reports: Instruction Effects and Public-Weight Steering Tests"
+  title: "Instructions, Transcripts, and Measurement in Language-Model Reports of Subjective Experience"
   authors:
     - family-names: Jones
       given-names: T.

@@ -173,7 +173,7 @@ Why 10? What happens with 5, 20, 50? The effect magnitude and interpretation cou
 
 #### 2.5.2 The Triangulation Solution: Intersection Across Deception Types
 
-Your intuition is exactly right: if we want robust "deception" features, we should require features to activate across *multiple types* of deception scenarios.
+If we want robust "deception" features, we should require features to activate across *multiple types* of deception scenarios.
 
 **Proposed Deception Taxonomy:**
 

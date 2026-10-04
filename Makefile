@@ -26,6 +26,8 @@ paper-verify:
 	$(PYTHON) scripts/verify_source_jlens_table.py
 	$(PYTHON) scripts/verify_ensemble_alignment.py
 	$(PYTHON) scripts/verify_fidelity_calibration.py
+	$(PYTHON) scripts/verify_reporting_bound.py
+	$(PYTHON) scripts/verify_completed_extensions.py
 	$(PYTHON) scripts/uncertainty_sensitivity.py --check
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only
 

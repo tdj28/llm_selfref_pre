@@ -9,7 +9,14 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCUMENTS = ("docs/CLAIM_LEDGER.md", "docs/REPRODUCTION.md", "docs/STUDY_INVENTORY.md")
+DOCUMENTS = (
+    "README.md", "AGENTS.md", "todo.md", "worst_case.md", "DATA_ARTIFACTS.md",
+    "docs/README.md", "docs/CLAIM_LEDGER.md", "docs/REPRODUCTION.md",
+    "docs/STUDY_INVENTORY.md", "data/README.md", "experiments/README.md",
+    "scripts/README.md", "tests/README.md", "evidence/README.md",
+    "paper/README.md", "provenance/README.md", "technical_blog_posts/README.md",
+    "experiments/causal_transplant/README.md", "reviews/README.md",
+)
 
 
 def broken_references(repo: Path, document: Path) -> list[str]:

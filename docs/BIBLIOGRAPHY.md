@@ -12,7 +12,7 @@ BibTeX collection, assembled on 2026-10-01. It includes the literature in:
   manuscript, evidence releases and OSF records.
 
 This is a reference collection, not a claim that every entry is cited by the
-current response paper or that every linked work has been independently
+current research manuscript or that every linked work has been independently
 replicated. It does not inventory every operational URL in logs, dependency
 documentation, or historical automated-review transcripts. In particular,
 merely suggested citations from an ungrounded review are not silently adopted.
@@ -22,24 +22,27 @@ canonical manuscript and clarified the broader research scope. The latest
 manuscript bibliography is now restored there. The older source list above
 records how this collection was assembled, not a dependency on the private
 former companion. The historical key `jones2026berg_response` is retained for
-compatibility but now points to the canonical research manuscript here.
+compatibility but now points to the canonical research manuscript here,
+*Instructions, Transcripts, and Measurement in Language-Model Reports of
+Subjective Experience*. It does not designate a new repository or publication.
 
 ## Keys And Provenance
 
 Duplicate works have one canonical entry. Where old manuscripts used different
 keys for the same work, comments at the top of `references.bib` map those keys
-to the retained key. The focused response's key takes precedence, then the
-research paper's, then the historical steering paper's. Existing bibliographies
+to the retained key. At initial assembly, the focused response's key took
+precedence, then the research paper's, then the historical steering paper's.
+Those retained keys remain stable. Existing bibliographies
 and manuscript citation keys were not edited. Use this standalone collection
 instead of combining it with the older files, which would duplicate keys.
 
 Artifact citations retain commit or revision pins where the research record
 provides them. An access date is not a publication date; undated repositories
 therefore omit the year rather than invent one. Mutable release projects are
-not labeled immutable registrations. Our current response is labeled a draft,
+not labeled immutable registrations. Our current manuscript is labeled a draft,
 not a peer-reviewed publication.
 
-Metadata corrections in this new collection:
+Metadata corrections recorded at the 2026-10-01 assembly:
 
 - The old steering bibliography incorrectly names the three Berg-paper
   authors. The consolidated entry uses Cameron Berg, Diogo de Lucena and
@@ -91,6 +94,26 @@ the 2025 JMLR publication, and Vaidyanathan's is labeled a preprint. These
 methodological additions do not change the current manuscript bibliography,
 claim that every full text received a theorem-level audit, or report a new
 experiment.
+
+## Current-Paper Synchronization (2026-10-04)
+
+Six missing entries were copied exactly from the current
+[`paper/references.bib`](../paper/references.bib): `binder2024looking`,
+`lindsey2025introspective`, `perez2023selfreports`, `rimsky2024caa`,
+`kaiser2026sentience`, and `balani2026instability`. This synchronization reuses
+the manuscript's already-verified metadata; it performs no new literature
+verification and makes no new claim about the cited findings.
+
+Templeton's fuller author list and report metadata now match the paper, under
+the existing root key `templeton2024scaling_monosemanticity`; the alias comment
+for `templeton2024scaling` remains. Turner's version-5 identifier and revision
+history match the paper under the existing `turner2023activation` key, retaining
+the root entry's DOI. Neither work receives a duplicate entry. The compatibility
+key `jones2026berg_response` now carries the canonical title stated above while
+retaining its public `CONSCIOUS/paper/` destination and draft status.
+
+The paper bibliography, historical bibliographies and frozen review records
+are unchanged by this synchronization.
 
 ## Use
 
