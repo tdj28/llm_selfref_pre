@@ -17,6 +17,7 @@ DOCUMENTS = (
     "paper/README.md", "provenance/README.md", "technical_blog_posts/README.md",
     "experiments/causal_transplant/README.md", "reviews/README.md",
 )
+GENERATED_PATHS = {"paper/main.pdf": ("paper/main.tex", "Makefile")}
 
 
 def broken_references(repo: Path, document: Path) -> list[str]:
@@ -31,6 +32,10 @@ def broken_references(repo: Path, document: Path) -> list[str]:
     # Abbreviated table paths such as analysis/foo.csv need human context.
     # Check only references that explicitly name a repository-root namespace.
     for target in re.findall(r"`((?:data|docs|experiments|paper|src|scripts)/[^`\n]+)`", text):
+        # A documented build output need not exist before its build runs.
+        # Actual Markdown links still require a destination above.
+        if target in GENERATED_PATHS and all((repo / path).is_file() for path in GENERATED_PATHS[target]):
+            continue
         if not any(repo.glob(target)):
             failures.append(target)
     return sorted(set(failures))

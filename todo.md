@@ -14,9 +14,9 @@ completed work, superseded proposals, and their original dates.
   study indexes, and reproduction instructions with the completed evidence.
 - [x] Finish the conservative root-document cleanup; verify the preserved
   copies, local links, and unchanged experimental source/release bindings.
-- [ ] Run the relevant tests, all manuscript value verifiers, and public-release
+- [x] Run the relevant tests, all manuscript value verifiers, and public-release
   audit on the integrated tree; build and visually inspect the PDF.
-- [ ] Verify the documented fresh-clone/disposable-copy reproduction path,
+- [x] Verify the documented fresh-clone/disposable-copy reproduction path,
   then hand the reviewed diff and validation results to the owner.
 
 ## Owner Decisions
