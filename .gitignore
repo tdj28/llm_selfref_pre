@@ -45,6 +45,11 @@ venv.bak/
 
 # Project specific
 data/*
+!data/openrouter_swap/
+data/openrouter_swap/*
+!data/openrouter_swap/plan_20261004/
+data/openrouter_swap/plan_20261004/*
+!data/openrouter_swap/plan_20261004/PLAN.json
 !data/steering_fidelity/
 data/steering_fidelity/*
 !data/steering_fidelity/preflight_20261002/
