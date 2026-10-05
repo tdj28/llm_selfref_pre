@@ -47,10 +47,13 @@ these authorizations does not reopen model search or other collection.
   metadata, study indexes and reproduction instructions with the new releases.
 - [x] Finish the conservative root-document cleanup; verify the preserved
   copies, local links, and unchanged experimental source/release bindings.
-- [ ] Rerun relevant tests, manuscript value verifiers and the index-bound
+- [x] Rerun relevant tests, manuscript value verifiers and the index-bound
   public-release audit after final integration; build and inspect the PDF.
-- [ ] Recheck the fresh-clone/disposable-copy reproduction path at the final
-  integrated commit, then hand the reviewed manuscript and checks to the owner.
+- [x] Recheck the fresh-clone/disposable-copy reproduction path at integrated
+  commit `3f9857bf`: manuscript checks and the standalone 58-page source bundle
+  pass. The manuscript is handed back for the owner's human review.
+- [ ] Resolve the Kolibri analysis replay mismatch in hosted Linux checks.
+  Preserve the released analysis and failed checks; local verification passes.
 
 ## Authorized Dose Extension
 

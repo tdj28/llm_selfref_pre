@@ -46,6 +46,10 @@ reachable Git history (`git fetch --unshallow` for a shallow clone); they
 verify recorded hashes against historical sources, not today's `.gitignore`.
 Live source-binding gates remain unchanged.
 
+HTTP transport tests start local servers on `127.0.0.1`. They need loopback
+socket permission even though they make no external model calls; a sandbox
+that forbids binding local ports cannot execute those tests.
+
 The dose exposure seed-freshness test runs unchanged against the 29 plans
 that existed before its source freeze. Later continuation records intentionally
 retain those seeds, so treating every plan in today's checkout as prior data
