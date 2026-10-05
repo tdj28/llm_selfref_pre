@@ -52,6 +52,19 @@ data/berg_dose_ladder/*
 data/berg_dose_ladder/plan_20261004/*
 !data/berg_dose_ladder/plan_20261004/PLAN.json
 !data/berg_dose_ladder/plan_20261004/POWER.json
+!data/berg_dose_ladder/calibration_v1_20261004/
+data/berg_dose_ladder/calibration_v1_20261004/**
+!data/berg_dose_ladder/calibration_v1_20261004/**/
+!data/berg_dose_ladder/calibration_v1_20261004/*.json
+!data/berg_dose_ladder/calibration_v1_20261004/provenance/*.json
+!data/berg_dose_ladder/calibration_v1_20261004/analysis/*.json
+!data/berg_dose_ladder/calibration_v1_20261004/figures/*.png
+!data/berg_dose_ladder/calibration_v1_20261004/raw/*.json
+!data/berg_dose_ladder/calibration_v1_20261004/raw/pip-freeze.txt
+!data/berg_dose_ladder/calibration_v1_20261004/raw/APPROVE-qualification
+!data/berg_dose_ladder/calibration_v1_20261004/raw/APPROVE-first-five
+!data/berg_dose_ladder/calibration_v1_20261004/raw/rows/*.json
+!data/berg_dose_ladder/calibration_v1_20261004/raw/analysis/*.json
 !data/steering_fidelity/
 data/steering_fidelity/*
 !data/steering_fidelity/preflight_20261002/
@@ -731,3 +744,8 @@ data/steering_fidelity/cheap_startup_failure_20261002/*
 !data/operator_matching/calibration_v1_20261003/**
 !data/operator_matching/fine_v1_20261003/
 !data/operator_matching/fine_v1_20261003/**
+
+# Inspected dose calibration PDFs and raw receipts, after broad suffix rules.
+!data/berg_dose_ladder/calibration_v1_20261004/figures/*.pdf
+!data/berg_dose_ladder/calibration_v1_20261004/raw/receipts.jsonl
+!data/berg_dose_ladder/calibration_v1_20261004/raw/controller.log

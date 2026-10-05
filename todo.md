@@ -22,14 +22,18 @@ completed work, superseded proposals, and their original dates.
 
 ## Authorized Dose Extension
 
-- [ ] Freeze, test and push the corrected mapping-scaled three-feature design,
+- [x] Freeze, test and push the corrected mapping-scaled three-feature design,
   including independent dose calibration, norm-matched aggregate controls and
   fresh confirmation. See the [protocol](docs/STEERING_DOSE_LADDER_PROTOCOL_20261004.md).
-- [ ] Within the fresh $50 cap, qualify on a newly owned cheap CUDA pod, then
+- [x] Within the fresh $50 cap, qualify on a newly owned cheap CUDA pod, then
   run the gated B200 inventory with first-five and live receipt audits.
-- [ ] Retrieve and hash-verify every artifact, terminate only newly owned pods,
-  publish the observed result or failed gate, and integrate without changing
-  the earlier six-feature conclusions.
+- [x] Retrieve and hash-verify every artifact, terminate only newly owned pods,
+  and release the 204-trial calibration with its failed untreated quality gate.
+  Confirmation was not run; total cost bound is $6.73.
+- [ ] Integrate the calibration stop without changing earlier six-feature
+  conclusions or treating the unrun confirmation as a null effect.
+- [ ] Assess a prospectively frozen response-window repair using fresh data;
+  do not waive the original gate or presume a larger cap will resolve it.
 
 ## Owner Decisions
 
