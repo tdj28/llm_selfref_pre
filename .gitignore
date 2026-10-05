@@ -756,3 +756,8 @@ data/berg_dose_window/*
 !data/berg_dose_window/plan_20261004/
 data/berg_dose_window/plan_20261004/*
 !data/berg_dose_window/plan_20261004/PLAN.json
+
+# Inspected longer-window early-stop release, including PDFs and raw receipts.
+!data/berg_dose_window/README.md
+!data/berg_dose_window/zero_screen_v1_20261004/
+!data/berg_dose_window/zero_screen_v1_20261004/**

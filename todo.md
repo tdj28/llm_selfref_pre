@@ -32,8 +32,14 @@ completed work, superseded proposals, and their original dates.
   Confirmation was not run; total cost bound is $6.73.
 - [ ] Integrate the calibration stop without changing earlier six-feature
   conclusions or treating the unrun confirmation as a null effect.
-- [ ] Assess a prospectively frozen response-window repair using fresh data;
-  do not waive the original gate or presume a larger cap will resolve it.
+- [x] Execute the separately frozen 512-token response-window study on fresh
+  data. Three of twelve untreated inductions reached the cap; quality failed,
+  headroom passed, and treated calibration/confirmation remained unrun. Both
+  owned pods are deleted; cumulative cost is below $8.84. See the
+  [release](data/berg_dose_window/README.md).
+- [ ] Integrate this second failed qualification alongside the earlier
+  calibration; do not present it as a test of nonzero doses or silently relax
+  the truncation rule. A cap flag is not itself a validated incoherence label.
 
 ## Owner Decisions
 

@@ -7,14 +7,14 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
-- The completed 256-token dose calibration failed its untreated quality gate;
-  preserve that release. The owner authorized separate $200 provider budgets
-  and a fresh [512-token study](docs/STEERING_DOSE_WINDOW_PROTOCOL_20261004.md).
-  It retains a $50 cumulative GPU sub-cap carrying $6.726273265975 already
-  spent, a 5.5-hour main-pod ceiling, and a twelve-untreated-trial early gate.
-  Require its pushed source-bound plan, fresh seeds, cheap CUDA qualification,
-  first-five treated audit and owned-pod deletion. No replacement rental or
-  borrowing from OpenRouter is authorized by this study.
+- Both the 256-token dose calibration and fresh
+  [512-token untreated screen](data/berg_dose_window/README.md) are complete.
+  In the latter, three of twelve inductions reached the cap, failing the
+  unchanged quality gate despite passing headroom. All 192 treated calibration
+  and 480 main trials were unrun. Preserve both failures; neither is a main
+  steering null. Both newly owned pods were retrieved and deleted (GET404).
+  Cumulative GPU cost is bounded by $8.84. No further rental or gate change is
+  authorized by the completed plan or the unspent provider balance.
 - Collection is closed for publication. The current work is evidence
   integration, documentation, verification, and editorial closeout.
 - Cleanup does not authorize new experiments, model calls, paid reviews,
