@@ -1,7 +1,7 @@
 # Publication Closeout
 
 The original publication collection is closed. This checklist covers evidence
-integration and release preparation, plus the separately authorized extension
+integration and release preparation, plus the separately authorized extensions
 below. Historical proposals are not another experiment queue.
 The [historical work ledger](provenance/root-docs/20261003/todo.md) retains
 completed work, superseded proposals, and their original dates.
@@ -33,6 +33,27 @@ $250 total/$40 screening authorization and frozen protocol.
   audit on the integrated tree; build and visually inspect the PDF.
 - [x] Verify the documented fresh-clone/disposable-copy reproduction path,
   then hand the reviewed diff and validation results to the owner.
+
+## Authorized Dose Extension
+
+- [x] Freeze, test and push the corrected mapping-scaled three-feature design,
+  including independent dose calibration, norm-matched aggregate controls and
+  fresh confirmation. See the [protocol](docs/STEERING_DOSE_LADDER_PROTOCOL_20261004.md).
+- [x] Within the fresh $50 cap, qualify on a newly owned cheap CUDA pod, then
+  run the gated B200 inventory with first-five and live receipt audits.
+- [x] Retrieve and hash-verify every artifact, terminate only newly owned pods,
+  and release the 204-trial calibration with its failed untreated quality gate.
+  Confirmation was not run; total cost bound is $6.73.
+- [ ] Integrate the calibration stop without changing earlier six-feature
+  conclusions or treating the unrun confirmation as a null effect.
+- [x] Execute the separately frozen 512-token response-window study on fresh
+  data. Three of twelve untreated inductions reached the cap; quality failed,
+  headroom passed, and treated calibration/confirmation remained unrun. Both
+  owned pods are deleted; cumulative cost is below $8.84. See the
+  [release](data/berg_dose_window/README.md).
+- [ ] Integrate this second failed qualification alongside the earlier
+  calibration; do not present it as a test of nonzero doses or silently relax
+  the truncation rule. A cap flag is not itself a validated incoherence label.
 
 ## Owner Decisions
 

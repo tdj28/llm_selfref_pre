@@ -28,6 +28,8 @@ disposable copies and [artifact inventory](../DATA_ARTIFACTS.md) for coverage.
 | [Gemma Scope](gemma_scope_9b/README.md) | Direct-IT intervention, failed transfer test and exploratory atlas. |
 | [Source-aligned additive steering](berg_source_replication/README.md) | Native-BF16 dose curves, fixed aggregates and same-prefix captures. |
 | [Random-subset steering](berg_ensemble_replication/README.md) | Paper-distribution aggregates and matched panels. |
+| [Mapping-scaled dose follow-up](berg_dose_ladder/README.md) | 204 calibration trials complete; untreated truncation failed the quality gate, so confirmation was not run. |
+| [Longer-window dose screen](berg_dose_window/README.md) | Twelve fresh untreated trials; the 512-token cap still failed quality qualification. Treated calibration and confirmation were not run. |
 | [Operator matching](operator_matching/README.md) | Completed main grid and fine ladder; neither produced a qualifying match. |
 | [Steering-fidelity calibration](steering_fidelity/README.md) | Completed calibration and startup history; qualification failed. |
 | [Steering-fidelity repair](steering_fidelity_repair/README.md) | Completed fresh instrument pilot; gated branches were not run. |
