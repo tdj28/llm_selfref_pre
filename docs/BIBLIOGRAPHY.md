@@ -23,8 +23,9 @@ manuscript bibliography is now restored there. The older source list above
 records how this collection was assembled, not a dependency on the private
 former companion. The historical key `jones2026berg_response` is retained for
 compatibility but now points to the canonical research manuscript here,
-*Instructions, Transcripts, and Measurement in Language-Model Reports of
-Subjective Experience*. It does not designate a new repository or publication.
+*What Drives a Language Model's Report of Subjective Experience?
+Instructions, Continuations, and the Labels That Count Them*. It does not
+designate a new repository or publication.
 
 ## Keys And Provenance
 

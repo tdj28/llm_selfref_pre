@@ -91,6 +91,16 @@ a generic numerical tolerance. Both failed hosted replays are preserved in
 The portable command separately reports whether the current replay was exact
 or used the measured pair; the original strict verifier is unchanged.
 
+Later Linux checks reproduced both PDFs byte-for-byte and both PNGs with exact
+decoded pixels and metadata, but different PNG encodings. The same wrapper now
+runs the original renderer and normalizes only its verifier-owned temporary
+PNGs after exact mode, dimensions, typed metadata, and RGBA-byte comparisons.
+Any pixel or metadata change fails; PDF bytes remain subject to the original
+exact check. Published assets are never rewritten. Encoding normalization is
+reported separately from numerical replay, with the failed checks and measured
+jobs preserved in
+[`provenance/repeated_png_encoding.json`](../provenance/repeated_png_encoding.json).
+
 The completed bilingual Llama B1 pilot has a frozen raw-to-figure analysis.
 This offline wrapper additionally rejects symlinked/nonregular inputs before
 copying them. It makes no model calls and preserves the original files:

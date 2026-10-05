@@ -1,0 +1,541 @@
+{
+  "schema": "repeated-png-encoding-evidence-v1",
+  "diagnostic_commit": "9701272141d66e98517c1c1abfa4254da00b4933",
+  "run_id": 37309866016,
+  "original_strict_failure": "Rendered figures do not reconstruct",
+  "scope": "Post-outcome offline PNG encoding compatibility only; no scientific, numeric, pixel or metadata tolerance. Original strict failures retained; published artifacts unchanged.",
+  "observations": [
+    {
+      "job_id": 111762888000,
+      "conclusion": "failure",
+      "diagnostic": {
+        "captured_library_output": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "exact_replay": false,
+        "figure_data_sha256": "3607db70164b53555729dac7f210038aaf0f232ba6d11a78a1ff5c149e6a580d",
+        "files": {
+          "repeated_effects.pdf": {
+            "decoded": {
+              "fonts": {
+                "exact": true,
+                "replay_bytes": 282,
+                "replay_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "saved_bytes": 282,
+                "saved_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "geometry": {
+                "exact": true,
+                "replay": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 590.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 590.40"
+                  ],
+                  "pages": 1
+                },
+                "saved": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 590.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 590.40"
+                  ],
+                  "pages": 1
+                },
+                "status": "ok"
+              },
+              "info": {
+                "exact": true,
+                "replay_bytes": 698,
+                "replay_sha256": "c6c75f6ae2b8a74d1fc3aecc5777e417e6c4c283cf7cb445101c6a8b752832e4",
+                "saved_bytes": 698,
+                "saved_sha256": "c6c75f6ae2b8a74d1fc3aecc5777e417e6c4c283cf7cb445101c6a8b752832e4",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "text": {
+                "exact": true,
+                "replay_bytes": 3263,
+                "replay_sha256": "fd2b998338557d0237586d4348b88fcd23bcd941dfde996d346d8ddee2202eaf",
+                "saved_bytes": 3263,
+                "saved_sha256": "fd2b998338557d0237586d4348b88fcd23bcd941dfde996d346d8ddee2202eaf",
+                "status": "ok",
+                "version": "24.02.0"
+              }
+            },
+            "exact": true,
+            "replay_bytes": 24316,
+            "replay_sha256": "dc9686bacb11bffa361562139233eca3bfdbbda78569515ec6a38e2bdb1008f1",
+            "saved_bytes": 24316,
+            "saved_sha256": "dc9686bacb11bffa361562139233eca3bfdbbda78569515ec6a38e2bdb1008f1"
+          },
+          "repeated_effects.png": {
+            "decoded": {
+              "changed_channels": 0,
+              "changed_pixels": 0,
+              "comparison_mode": "RGBA",
+              "max_absolute_channel_delta": 0,
+              "mean_absolute_channel_delta": 0,
+              "pixels_equal": true,
+              "replay": {
+                "dimensions": [
+                  1122,
+                  1393
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "a3a27db68d0ffbfbeed9fe308d33e7854a965c965bd5559759b0f09a0a638b7c"
+              },
+              "same_dimensions": true,
+              "saved": {
+                "dimensions": [
+                  1122,
+                  1393
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "a3a27db68d0ffbfbeed9fe308d33e7854a965c965bd5559759b0f09a0a638b7c"
+              },
+              "total_pixels": 1562946
+            },
+            "exact": false,
+            "replay_bytes": 117922,
+            "replay_sha256": "4e66b8ce6c416e54995f156ce7b195ecd28ddbcb94993d508c4c43518ea9c38c",
+            "saved_bytes": 102632,
+            "saved_sha256": "88f3f0244a1a7c9de163c89524190f21c14b549a7036f4c0ae0882c2e8547321"
+          },
+          "repeated_main.pdf": {
+            "decoded": {
+              "fonts": {
+                "exact": true,
+                "replay_bytes": 282,
+                "replay_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "saved_bytes": 282,
+                "saved_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "geometry": {
+                "exact": true,
+                "replay": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 446.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 446.40"
+                  ],
+                  "pages": 1
+                },
+                "saved": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 446.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 446.40"
+                  ],
+                  "pages": 1
+                },
+                "status": "ok"
+              },
+              "info": {
+                "exact": true,
+                "replay_bytes": 698,
+                "replay_sha256": "6ec3401e6b66908625f1a956bf2a49245a1eedc94a8f2f6abc9ec2abddc21671",
+                "saved_bytes": 698,
+                "saved_sha256": "6ec3401e6b66908625f1a956bf2a49245a1eedc94a8f2f6abc9ec2abddc21671",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "text": {
+                "exact": true,
+                "replay_bytes": 1752,
+                "replay_sha256": "2f7d54eed4d21d8bc263a536e66d19a8e247d57ce6d0dd455a99f1a662918774",
+                "saved_bytes": 1752,
+                "saved_sha256": "2f7d54eed4d21d8bc263a536e66d19a8e247d57ce6d0dd455a99f1a662918774",
+                "status": "ok",
+                "version": "24.02.0"
+              }
+            },
+            "exact": true,
+            "replay_bytes": 29934,
+            "replay_sha256": "dcf17790ffa60cf765e5019d451f788457da843735f369c537c68dcdc8e34b01",
+            "saved_bytes": 29934,
+            "saved_sha256": "dcf17790ffa60cf765e5019d451f788457da843735f369c537c68dcdc8e34b01"
+          },
+          "repeated_main.png": {
+            "decoded": {
+              "changed_channels": 0,
+              "changed_pixels": 0,
+              "comparison_mode": "RGBA",
+              "max_absolute_channel_delta": 0,
+              "mean_absolute_channel_delta": 0,
+              "pixels_equal": true,
+              "replay": {
+                "dimensions": [
+                  1122,
+                  1054
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "76acb855eb01a63cb8afb6596e2768a711f419bf83dae1dd513947f2608f7929"
+              },
+              "same_dimensions": true,
+              "saved": {
+                "dimensions": [
+                  1122,
+                  1054
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "76acb855eb01a63cb8afb6596e2768a711f419bf83dae1dd513947f2608f7929"
+              },
+              "total_pixels": 1182588
+            },
+            "exact": false,
+            "replay_bytes": 111750,
+            "replay_sha256": "e46090ec806ae34dcb43773e5fa9723120e3c6dcd445627d58abee23d5d6749b",
+            "saved_bytes": 97993,
+            "saved_sha256": "5abe61c99c86345d69e4712be1fda112f24631e1ea30b65ead6976ea1ef66098"
+          }
+        },
+        "machine": "x86_64",
+        "publication_manifest_sha256": "b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242",
+        "python": "3.10.21",
+        "release_manifest_sha256": "c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf",
+        "schema": "repeated-figure-exact-diagnostic-v1",
+        "scope": "Diagnostic only: saved figure data rendered; no numerical replay, tolerance or publication acceptance; PDF summaries are not full visual equivalence",
+        "system": "Linux",
+        "versions": {
+          "backend": "Agg",
+          "dejavu_sans_file_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+          "fonttools": "4.65.0",
+          "freetype": "2.6.1",
+          "matplotlib": "3.10.8",
+          "numpy": "2.2.6",
+          "pillow": "12.3.0",
+          "pillow_zlib": "1.3",
+          "python_zlib_runtime": "1.3"
+        }
+      }
+    },
+    {
+      "job_id": 111762888118,
+      "conclusion": "failure",
+      "diagnostic": {
+        "captured_library_output": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "exact_replay": false,
+        "figure_data_sha256": "3607db70164b53555729dac7f210038aaf0f232ba6d11a78a1ff5c149e6a580d",
+        "files": {
+          "repeated_effects.pdf": {
+            "decoded": {
+              "fonts": {
+                "exact": true,
+                "replay_bytes": 282,
+                "replay_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "saved_bytes": 282,
+                "saved_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "geometry": {
+                "exact": true,
+                "replay": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 590.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 590.40"
+                  ],
+                  "pages": 1
+                },
+                "saved": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 590.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 590.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 590.40"
+                  ],
+                  "pages": 1
+                },
+                "status": "ok"
+              },
+              "info": {
+                "exact": true,
+                "replay_bytes": 698,
+                "replay_sha256": "c6c75f6ae2b8a74d1fc3aecc5777e417e6c4c283cf7cb445101c6a8b752832e4",
+                "saved_bytes": 698,
+                "saved_sha256": "c6c75f6ae2b8a74d1fc3aecc5777e417e6c4c283cf7cb445101c6a8b752832e4",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "text": {
+                "exact": true,
+                "replay_bytes": 3263,
+                "replay_sha256": "fd2b998338557d0237586d4348b88fcd23bcd941dfde996d346d8ddee2202eaf",
+                "saved_bytes": 3263,
+                "saved_sha256": "fd2b998338557d0237586d4348b88fcd23bcd941dfde996d346d8ddee2202eaf",
+                "status": "ok",
+                "version": "24.02.0"
+              }
+            },
+            "exact": true,
+            "replay_bytes": 24316,
+            "replay_sha256": "dc9686bacb11bffa361562139233eca3bfdbbda78569515ec6a38e2bdb1008f1",
+            "saved_bytes": 24316,
+            "saved_sha256": "dc9686bacb11bffa361562139233eca3bfdbbda78569515ec6a38e2bdb1008f1"
+          },
+          "repeated_effects.png": {
+            "decoded": {
+              "changed_channels": 0,
+              "changed_pixels": 0,
+              "comparison_mode": "RGBA",
+              "max_absolute_channel_delta": 0,
+              "mean_absolute_channel_delta": 0,
+              "pixels_equal": true,
+              "replay": {
+                "dimensions": [
+                  1122,
+                  1393
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "a3a27db68d0ffbfbeed9fe308d33e7854a965c965bd5559759b0f09a0a638b7c"
+              },
+              "same_dimensions": true,
+              "saved": {
+                "dimensions": [
+                  1122,
+                  1393
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "a3a27db68d0ffbfbeed9fe308d33e7854a965c965bd5559759b0f09a0a638b7c"
+              },
+              "total_pixels": 1562946
+            },
+            "exact": false,
+            "replay_bytes": 117922,
+            "replay_sha256": "4e66b8ce6c416e54995f156ce7b195ecd28ddbcb94993d508c4c43518ea9c38c",
+            "saved_bytes": 102632,
+            "saved_sha256": "88f3f0244a1a7c9de163c89524190f21c14b549a7036f4c0ae0882c2e8547321"
+          },
+          "repeated_main.pdf": {
+            "decoded": {
+              "fonts": {
+                "exact": true,
+                "replay_bytes": 282,
+                "replay_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "saved_bytes": 282,
+                "saved_sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "geometry": {
+                "exact": true,
+                "replay": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 446.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 446.40"
+                  ],
+                  "pages": 1
+                },
+                "saved": {
+                  "page_geometry": [
+                    "Page 1 size: 475.2 x 446.4 pts",
+                    "Page 1 rot: 0",
+                    "Page 1 MediaBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 CropBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 BleedBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 TrimBox: 0.00 0.00 475.20 446.40",
+                    "Page 1 ArtBox: 0.00 0.00 475.20 446.40"
+                  ],
+                  "pages": 1
+                },
+                "status": "ok"
+              },
+              "info": {
+                "exact": true,
+                "replay_bytes": 698,
+                "replay_sha256": "6ec3401e6b66908625f1a956bf2a49245a1eedc94a8f2f6abc9ec2abddc21671",
+                "saved_bytes": 698,
+                "saved_sha256": "6ec3401e6b66908625f1a956bf2a49245a1eedc94a8f2f6abc9ec2abddc21671",
+                "status": "ok",
+                "version": "24.02.0"
+              },
+              "text": {
+                "exact": true,
+                "replay_bytes": 1752,
+                "replay_sha256": "2f7d54eed4d21d8bc263a536e66d19a8e247d57ce6d0dd455a99f1a662918774",
+                "saved_bytes": 1752,
+                "saved_sha256": "2f7d54eed4d21d8bc263a536e66d19a8e247d57ce6d0dd455a99f1a662918774",
+                "status": "ok",
+                "version": "24.02.0"
+              }
+            },
+            "exact": true,
+            "replay_bytes": 29934,
+            "replay_sha256": "dcf17790ffa60cf765e5019d451f788457da843735f369c537c68dcdc8e34b01",
+            "saved_bytes": 29934,
+            "saved_sha256": "dcf17790ffa60cf765e5019d451f788457da843735f369c537c68dcdc8e34b01"
+          },
+          "repeated_main.png": {
+            "decoded": {
+              "changed_channels": 0,
+              "changed_pixels": 0,
+              "comparison_mode": "RGBA",
+              "max_absolute_channel_delta": 0,
+              "mean_absolute_channel_delta": 0,
+              "pixels_equal": true,
+              "replay": {
+                "dimensions": [
+                  1122,
+                  1054
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "76acb855eb01a63cb8afb6596e2768a711f419bf83dae1dd513947f2608f7929"
+              },
+              "same_dimensions": true,
+              "saved": {
+                "dimensions": [
+                  1122,
+                  1054
+                ],
+                "metadata": {
+                  "Software": {
+                    "sha256": "309c96e720109a0602a02f8a0204eac05b4c3d613d7db73332f8c1db6624d2bf",
+                    "type": "str"
+                  },
+                  "dpi": {
+                    "sha256": "bb9b44f8ec5996883c436d73b9b6282c0597d00ae928728788d2315829ab765d",
+                    "type": "tuple"
+                  }
+                },
+                "mode": "RGBA",
+                "rgba_sha256": "76acb855eb01a63cb8afb6596e2768a711f419bf83dae1dd513947f2608f7929"
+              },
+              "total_pixels": 1182588
+            },
+            "exact": false,
+            "replay_bytes": 111750,
+            "replay_sha256": "e46090ec806ae34dcb43773e5fa9723120e3c6dcd445627d58abee23d5d6749b",
+            "saved_bytes": 97993,
+            "saved_sha256": "5abe61c99c86345d69e4712be1fda112f24631e1ea30b65ead6976ea1ef66098"
+          }
+        },
+        "machine": "x86_64",
+        "publication_manifest_sha256": "b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242",
+        "python": "3.12.14",
+        "release_manifest_sha256": "c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf",
+        "schema": "repeated-figure-exact-diagnostic-v1",
+        "scope": "Diagnostic only: saved figure data rendered; no numerical replay, tolerance or publication acceptance; PDF summaries are not full visual equivalence",
+        "system": "Linux",
+        "versions": {
+          "backend": "Agg",
+          "dejavu_sans_file_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+          "fonttools": "4.66.1",
+          "freetype": "2.6.1",
+          "matplotlib": "3.10.8",
+          "numpy": "2.2.6",
+          "pillow": "12.3.0",
+          "pillow_zlib": "1.3",
+          "python_zlib_runtime": "1.3"
+        }
+      }
+    }
+  ]
+}

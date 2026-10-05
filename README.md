@@ -26,8 +26,9 @@ instruction-over-transcript ordering. Error bars above are within-model
 bootstrap intervals; boundary intervals do not imply deterministic rates.*
 
 The public steering tests differ from the proprietary service in baseline and
-possibly intervention semantics. Alternative-rubric and feature-specificity
-results remain inconclusive. Accepted feature IDs, successful delivery checks,
+possibly intervention semantics. The random-subset test remains inconclusive
+at +0.30 under its second rubric; feature specificity remains unresolved.
+Accepted feature IDs, successful delivery checks,
 and changing internal readouts do not by themselves validate suppression of a
 semantic process. Failed qualification tests remain part of the record.
 

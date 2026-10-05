@@ -1,4 +1,4 @@
-"""Exact-pair, post-outcome reporting adapter; never collection or generic tolerance."""
+"""Bound numerical-pair and lossless PNG encoding adapters; no generic tolerance."""
 from __future__ import annotations
 
 import argparse
@@ -6,6 +6,7 @@ from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
 import importlib
+from io import BytesIO
 import json
 import math
 from pathlib import Path
@@ -18,6 +19,9 @@ PACKAGE = "evidence/repeated_extension"
 BINDING = "evidence/repeated_extension_row_binding.json"
 EVIDENCE = ROOT / "provenance/repeated_release_portability.json"
 EVIDENCE_SHA = "5273a316e1098db883fe77c47b07b667c81387cdfc35bb22f35134124b085518"
+PNG_EVIDENCE = ROOT / "provenance/repeated_png_encoding.json"
+PNG_EVIDENCE_SHA = "3b3b70d1672bf4432bf254b5d3574a6a531f5076ea3600a6b7e8e6fac6307532"
+PNG_NAMES = ("repeated_main.png", "repeated_effects.png")
 MANIFEST_SHA = "c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf"
 PACKAGE_SHA = "b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242"
 BINDING_SHA = "988ea040704053bd3e1291bb5fffba772d6df4ede6b0bfb69a5907a3f7dae907"
@@ -139,27 +143,87 @@ def normalize_analysis(replay):
                     "accepted_known_float_pair": observed_sha == LINUX_SHA}
 
 
+def png_observations(path=PNG_EVIDENCE):
+    raw = regular(path)
+    require(sha(raw) == PNG_EVIDENCE_SHA, "Archived PNG diagnostic sidecar changed")
+    evidence = json.loads(raw)
+    reports = [row["diagnostic"] for row in evidence["observations"]]
+    require(len(reports) == 2 and reports[0]["files"] == reports[1]["files"], "PNG CI observations disagree")
+    for report in reports:
+        require(report["publication_manifest_sha256"] == PACKAGE_SHA, "PNG observation package differs")
+        for name, row in report["files"].items():
+            require(row["exact"] if name.endswith(".pdf") else row["decoded"]["pixels_equal"],
+                    "PNG observations do not establish lossless encoding differences")
+    return evidence
+
+
+def typed_equal(a, b):
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        return (all(type(key) is str for key in (*a, *b)) and a.keys() == b.keys()
+                and all(typed_equal(a[key], b[key]) for key in a))
+    if isinstance(a, (list, tuple)):
+        return len(a) == len(b) and all(typed_equal(x, y) for x, y in zip(a, b))
+    if isinstance(a, float):
+        return math.isfinite(a) and a.hex() == b.hex()
+    return a == b
+
+
+def png_equivalence(saved, replay):
+    """Exact decoded content check, not an image-similarity threshold."""
+    from PIL import Image
+
+    def decode(raw):
+        with Image.open(BytesIO(raw)) as image:
+            require(image.format == "PNG", "PNG format changed")
+            image.verify()
+        with Image.open(BytesIO(raw)) as image:
+            require(image.n_frames == 1, "PNG frame count changed")
+            image.load()
+            return image.mode, image.size, deepcopy(image.info), image.convert("RGBA").tobytes()
+    a, b = decode(saved), decode(replay)
+    require(a[0] == b[0], "PNG mode changed")
+    require(a[1] == b[1], "PNG dimensions changed")
+    require(typed_equal(a[2], b[2]), "PNG metadata changed")
+    require(a[3] == b[3], "PNG pixels changed")
+    return {"saved_png_sha256": sha(saved), "rendered_png_sha256": sha(replay),
+            "exact_file_replay": saved == replay, "encoding_normalized": saved != replay,
+            "rgba_sha256": sha(a[3]), "mode": a[0], "dimensions": list(a[1]), "metadata_exact": True}
+
+
 @contextmanager
-def portable_replay(root=ROOT, evidence_path=EVIDENCE):
-    """Scope one in-memory analysis wrapper; all original verifier code still runs."""
+def portable_replay(root=ROOT, evidence_path=EVIDENCE, png_evidence_path=PNG_EVIDENCE):
+    """Run original verifiers with scoped numerical and temporary PNG normalization."""
     root = Path(root).resolve()
     with _LOCK:
         verify_inputs(root, evidence_path)
+        png_observations(png_evidence_path)
         sys.path.insert(0, str(root))
         try:
             analysis = importlib.import_module("experiments.repeated_swap.analysis")
             reporter = importlib.import_module("experiments.repeat_funding_release_a1")
+            publication = importlib.import_module("experiments.repeat_publication")
             require(Path(analysis.__file__).resolve() == root / "experiments/repeated_swap/analysis.py",
                     "Analysis imported from a different checkout")
             require(Path(reporter.__file__).resolve() == root / "experiments/repeat_funding_release_a1.py",
                     "Reporter imported from a different checkout")
+            require(Path(publication.__file__).resolve() == root / "experiments/repeat_publication.py",
+                    "Publication renderer imported from a different checkout")
             original = analysis.analyze
             strict_verify = reporter.verify
+            strict_publication = publication.verify
+            original_render = publication._render
+            original_temporary = publication.TemporaryDirectory
             require(not getattr(original, "_repeat_portability", False), "Nested portability context")
             enabled = True
+            png_enabled, owned_temporary = False, None
+            frozen_data = json.loads(regular(root / PACKAGE / "figure_data.json"))
             report = {"policy": "exact manifest, row inventory, float pair and whole-analysis hashes only",
                       "evidence_sha256": EVIDENCE_SHA, "manifest_sha256": MANIFEST_SHA,
-                      "original_ci_exact_replay": "FAIL", "local_replays": []}
+                      "original_ci_exact_replay": "FAIL", "local_replays": [],
+                      "png_policy": "bound figure data; exact mode, dimensions, typed metadata and RGBA bytes; PDFs stay byte-exact",
+                      "png_evidence_sha256": PNG_EVIDENCE_SHA, "png_original_ci_exact_replay": "FAIL", "png_replays": []}
             def analyze(rows, phase="main"):
                 result = original(rows, phase)
                 if enabled and phase == "main" and type(rows) is list and value_sha(rows) == ROWS_SHA:
@@ -175,15 +239,63 @@ def portable_replay(root=ROOT, evidence_path=EVIDENCE):
                     return strict_verify(destination, manifest_sha256=manifest_sha256)
                 finally:
                     enabled = previous
+            def verify_publication(source, destination, *, release_manifest_sha256, manifest_sha256):
+                nonlocal png_enabled
+                previous = png_enabled
+                png_enabled = (Path(source).resolve() == root / RELEASE
+                               and Path(destination).resolve() == root / PACKAGE
+                               and release_manifest_sha256 == MANIFEST_SHA and manifest_sha256 == PACKAGE_SHA)
+                try:
+                    return strict_publication(source, destination, release_manifest_sha256=release_manifest_sha256,
+                                              manifest_sha256=manifest_sha256)
+                finally:
+                    png_enabled = previous
+            @contextmanager
+            def temporary(*args, **kwargs):
+                nonlocal owned_temporary
+                with original_temporary(*args, **kwargs) as name:
+                    previous = owned_temporary
+                    if png_enabled and kwargs.get("prefix") == "repeat-figure-verify-":
+                        owned_temporary = Path(name).resolve()
+                    try:
+                        yield name
+                    finally:
+                        owned_temporary = previous
+            def render(data, destination):
+                destination = Path(destination).resolve()
+                if png_enabled:
+                    require(owned_temporary is not None and destination == owned_temporary,
+                            "PNG normalization requires the verifier-owned temporary directory")
+                    require(typed_equal(data, frozen_data), "Unbound PNG figure data")
+                result = original_render(data, destination)
+                if png_enabled:
+                    pending = []
+                    for name in PNG_NAMES:
+                        saved, replay = regular(root / PACKAGE / name), regular(destination / name)
+                        check = png_equivalence(saved, replay)
+                        pending.append((name, saved, check))
+                    # Both images must qualify before any temporary encoding is replaced.
+                    for name, saved, check in pending:
+                        if check["encoding_normalized"]:
+                            (destination / name).write_bytes(saved)
+                        report["png_replays"].append({"file": name, **check})
+                return result
             analyze._repeat_portability = True
             analysis.analyze = analyze
             reporter.verify = verify
+            publication.verify = verify_publication
+            publication._render = render
+            publication.TemporaryDirectory = temporary
             try:
                 yield report
             finally:
                 analysis.analyze = original
                 reporter.verify = strict_verify
+                publication.verify = strict_publication
+                publication._render = original_render
+                publication.TemporaryDirectory = original_temporary
                 verify_inputs(root, evidence_path)
+                png_observations(png_evidence_path)
         finally:
             sys.path.remove(str(root))
 

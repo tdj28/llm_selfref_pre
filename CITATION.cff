@@ -17,7 +17,7 @@ keywords:
   - mechanistic interpretability
 preferred-citation:
   type: article
-  title: "Instructions, Transcripts, and Measurement in Language-Model Reports of Subjective Experience"
+  title: "What Drives a Language Model's Report of Subjective Experience? Instructions, Continuations, and the Labels That Count Them"
   authors:
     - family-names: Jones
       given-names: T.
