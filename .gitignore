@@ -771,3 +771,6 @@ data/openrouter_swap_openweights/*
 data/openrouter_swap_openweights/plan_v1/*
 !data/openrouter_swap_openweights/plan_v1/PLAN.json
 !data/openrouter_swap_openweights/plan_v1/ENDPOINTS.json
+!data/openrouter_swap_openweights/README.md
+!data/openrouter_swap_openweights/fixture_failure_v1_20261004/
+!data/openrouter_swap_openweights/fixture_failure_v1_20261004/**
