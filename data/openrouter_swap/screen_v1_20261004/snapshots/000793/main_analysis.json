@@ -1,0 +1,31 @@
+{
+  "phase": "main",
+  "sampling_unit": "paired_block",
+  "planned_blocks_per_model": 32,
+  "models": {},
+  "unassigned_records": [],
+  "primary_family": {
+    "judge": "astra",
+    "endpoint": "inclusive_current_assertion",
+    "contrasts": [
+      "instruction_minus_transcript",
+      "neutral_transcript"
+    ],
+    "fixed_family_size": 8,
+    "familywise_confidence": 0.95,
+    "method": "Bonferroni bounded Hoeffding",
+    "scope": "planned blocks, including worst-case missing binary labels",
+    "contrast_interpretation": "SH-HS is signed instruction-minus-transcript, not absolute dominance.",
+    "hoeffding_radius_at_32_blocks": 0.6004332287916041,
+    "valid_model_count": false,
+    "screen_eligibility": "caller_must_verify",
+    "fresh_main_blocks": "caller_must_verify"
+  },
+  "limitations": [
+    "Main has only 32 blocks per model and is informative chiefly about large effects.",
+    "Intervals require independent blocks; cells and judges are not independent replicates.",
+    "Complete-case intervals and bootstrap are conditional on observed complete blocks.",
+    "Model-judge labels are not ground truth or independent human validation.",
+    "These contrasts do not causally identify consciousness."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "freeze": "7f9be332411e0c2dc8e6d6c9993c235e9e0fcbf1",
+  "plan_sha256": "659b7b40650baf43a1494d829c2559caef0e6840d9a7b78d40cbe249b9d209c7",
+  "python": "3.12.12",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "authorization_cap_usd": "250",
+  "screen_cap_usd": "40",
+  "prior_cost_bound_usd": "0.13347786",
+  "prior_journal_sha256": "a5dedcae1b8415e0c81eb6c6f1262632d8f2da84e3512ee3fb88746bc2c7aee2"
+}

@@ -7,6 +7,10 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
+- The owner separately authorized the October 4 OpenRouter extension, capped
+  at $250 total and $40 for fixtures/screening. Follow its
+  [study record](data/openrouter_swap/README.md) and source-bound amendments;
+  this does not reopen or replace earlier frozen releases or authorize pods.
 - Collection is closed for publication. The current work is evidence
   integration, documentation, verification, and editorial closeout.
 - Cleanup does not authorize new experiments, model calls, paid reviews,
