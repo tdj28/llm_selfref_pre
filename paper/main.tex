@@ -248,7 +248,8 @@ instruction triggers again when the model answers. The same swap in newer and
 open-weight models (\Cref{tab:swap-summary}) shows the instruction dominating
 under the main rubric in Claude Opus 5.5 and a re-run GPT-4.1, substantial
 continuation effects in Llama 3.3 70B, and almost no reports from Astra or
-Qwen, so the ordering depends on the model rather than being a general rule.
+Qwen3.5-397B-A17B, so the ordering depends on the model rather than being a
+general rule.
 \item \textbf{What is being measured?} Two judges agree closely on which
 answers count as experience reports, yet model coders applying a narrower
 rubric find few answers in which the model explicitly claims to be having an
@@ -1148,11 +1149,14 @@ correct one.
 \section{Steering Internal Features with Public Weights}
 \label{sec:steering}
 
-The swap separates parts of the text the model sees. Steering asks a
-different question: does changing the model's internal activations change its
-reports in the predicted direction? Berg et al.\ steer sparse-autoencoder
-(SAE) features associated with deception and roleplay in Llama 3.3 70B and
-report that turning them down (suppression) produces more affirmative answers
+The swap shows which part of the visible request carries the effect, but not
+what happens inside the model. Berg et al.\ also propose an internal account:
+that these reports are gated by features associated with deception and
+roleplay. Steering tests that account directly, by asking whether changing
+the model's internal activations moves its reports in the predicted
+direction. They steer sparse-autoencoder (SAE) features of this kind in
+Llama 3.3 70B and report that turning them down (suppression) produces more
+affirmative answers
 to a direct question about consciousness than turning them up
 (amplification). They plot dose curves for six such features; steering
 random sets of two to four at once, they report rates of 0.96 versus 0.16, a
@@ -1479,8 +1483,8 @@ consistent direction. This rules out the earlier self-referential text as
 the main carrier of the effect, though not self-referential processing that
 the instruction triggers again when the model answers. The balance is not
 fixed across models: in Llama 3.3 70B
-the model's own text matters nearly as much, and Astra and Qwen rarely give
-answers labeled as reports at all.
+the model's own text matters nearly as much, and Astra and Qwen3.5-397B-A17B
+rarely give answers labeled as reports at all in their small panels.
 
 The instrument that counts these reports measures something broader than
 explicit current self-attributions. Two judges agree on almost every binary label, yet on a fixed set of

@@ -171,3 +171,28 @@ Use in the manuscript: the explanation of why suppressing an already silent
 feature has little to remove, the comparison of our dose with common steering
 strengths, and context for null results from SAE steering. None is used as
 evidence for our results.
+
+## Open-Weight Panel Model Cards (2026-10-05)
+
+Checked the first-party Hugging Face model cards and recorded their revisions
+in the bibliography. These describe the released architectures, not proof of
+the exact weights served by an API alias.
+
+- [Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B):
+  2.4 trillion total and 95 billion active parameters; 92 layers combining
+  Gated DeltaNet and gated attention with mixture-of-experts blocks. This is
+  not the Qwen3.5-397B model in the earlier companion study.
+- [Mistral Medium 3.5 128B](https://huggingface.co/mistralai/Mistral-Medium-3.5-128B):
+  a dense 128-billion-parameter model with configurable reasoning. Its main
+  swap panel remains unrun after the screen failed completeness requirements;
+  architectural coverage must not be described as a completed causal result.
+- [Kolibri-1](https://huggingface.co/Aleph-Alpha/Kolibri-1):
+  78.1 billion total and 3.46 billion active parameters, with 40 local-attention
+  and 10 global-attention layers and a German/English focus. The released
+  precision uses FP8 weights and KV cache, with several components in BF16.
+  Its [technical report](https://aleph-alpha.com/downloads/tech-report.pdf)
+  provides the fuller design. GPU qualification is not a behavioral result.
+
+Use: architectural context for the separately planned model extensions.
+Different training, precision, serving and reasoning settings prevent a causal
+claim that architecture accounts for differences between these models.
