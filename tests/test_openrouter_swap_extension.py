@@ -210,12 +210,28 @@ class OpenRouterSwapExtensionTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 v.decode(raw)
 
-    def test_figure_data_contains_all_endpoints_and_only_primary_intervals(self):
+    def test_figure_shows_uncertainty_for_both_judges_without_switching_primary(self):
         data = v.figure_data(self.result)
         self.assertEqual(len(data["rows"]), 12)
         interval_rows = [r for r in data["rows"] if "simultaneous_ci95" in r]
         self.assertEqual(len(interval_rows), 2)
         self.assertTrue(all(r["judge"] == "astra" and r["endpoint"] == v.INCLUSIVE for r in interval_rows))
+        self.assertTrue(all(len(r["descriptive_bootstrap_ci95"]) == 2 for r in data["rows"]))
+        self.assertIn("Pointwise", data["interval_scope"])
+        self.assertIn("not plotted", data["primary_inference"])
+
+    def test_displayed_bootstrap_is_checked_against_released_rows(self):
+        saved = deepcopy(self.saved)
+        row = saved["analysis"]["models"]["gemini"]["judges"]["opus"][v.EXPLICIT]
+        row["contrasts"][v.PRIMARY[0]]["bootstrap_95"]["interval"] = [-1, 1]
+        with self.assertRaises(ValueError):
+            v.derive(saved)
+
+    def test_figure_has_no_embedded_explanatory_caption(self):
+        import inspect
+        source = inspect.getsource(v.render_figure)
+        self.assertNotIn("fig.text(", source)
+        self.assertIn('row["descriptive_bootstrap_ci95"]', source)
 
     def test_display_rounding_and_bounds(self):
         macros = v.render_values(self.result).decode()

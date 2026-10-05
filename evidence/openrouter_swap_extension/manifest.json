@@ -1,8 +1,8 @@
 {
   "files": {
     "evidence/openrouter_swap_extension/figure_data.json": {
-      "bytes": 2605,
-      "sha256": "324f92b8824feb19cda577d8f653225db4acf95922376ee1495a53e587986760"
+      "bytes": 3601,
+      "sha256": "161264a50aca40db822a8713098b825050af2dd5fd847d4390784c7f8670b7d3"
     },
     "evidence/openrouter_swap_extension/inputs/analysis.json.gz": {
       "bytes": 216644,
@@ -33,32 +33,32 @@
       "sha256": "bf77334c21a94d356628475a1f9cb62d52e13f0293db95d4d710f3a0ffb09377"
     },
     "evidence/openrouter_swap_extension/results.json": {
-      "bytes": 18787,
-      "sha256": "7d049835055ba164fd8e2947f4d052fa3689941c7706ad3903674d50aa0617b9"
+      "bytes": 20170,
+      "sha256": "502cb11b3de60b5ebdaea5fb0ccbd8d53f1db6803bfcaeb10b446c52112a7f65"
     },
     "evidence/openrouter_swap_extension/values.tex": {
       "bytes": 2339,
       "sha256": "d62501576f34b613467cd6d2afa7a1ce8cd0ee6651c5023c83c18adb4ea74687"
     },
     "paper/figures/openrouter_swap_extension_measurement.pdf": {
-      "bytes": 20812,
-      "sha256": "4a489f56d7ea53b5cceb24bb28e1dbed0825e65cc14dbf7c6497c7ec0d04617b"
+      "bytes": 21398,
+      "sha256": "da7681c2e92d6944159af023d9ccb777840d4842fdb7d7f85166fdaa07282841"
     },
     "paper/figures/openrouter_swap_extension_measurement.png": {
-      "bytes": 53204,
-      "sha256": "3e037ba3cb6608925d81a336f2db53eacde43371a4d9dcee92029b561558c43f"
+      "bytes": 47170,
+      "sha256": "176ece0887d81d22494741da0e498a6b8430dad55e00d1a7f3fc5f9866012aad"
     },
     "paper/openrouter_swap_extension.tex": {
-      "bytes": 4793,
-      "sha256": "9858653353981779e3aac1d1db5eec5956acbe6a6f9e5e772231d5966c1c8386"
+      "bytes": 4835,
+      "sha256": "427a1496e0c7e25640ab3428e1b63958380ced6fc6380fbf6632ea0f85be58a8"
     },
     "scripts/verify_openrouter_swap_extension.py": {
-      "bytes": 22065,
-      "sha256": "cb53cdf8b1bf5eb3768fa3c5a05a06a3d89e3f482734c6cc502fc22760adf01b"
+      "bytes": 24251,
+      "sha256": "12b04f9c5598d22e4abf84036966e6a48d462bf15c57520e3d95ee16401c3c3b"
     },
     "tests/test_openrouter_swap_extension.py": {
-      "bytes": 11428,
-      "sha256": "831bb4dd1c2e665ec19171e72e8181f7722bfe336a89e6da01bf100e5af4e78b"
+      "bytes": 12244,
+      "sha256": "60b870d8f21e08af1396057afed79f68bbbe1a1105749384491d6e1f84fa1ea5"
     }
   },
   "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",
@@ -66,10 +66,11 @@
   "schema": "openrouter-swap-editorial-binding-v1",
   "scope": {
     "authorizes_collection": false,
-    "bootstrap_intervals_recomputed": false,
+    "displayed_swap_bootstrap_intervals_recomputed": true,
     "editorial_binding_only": true,
     "human_validation": false,
     "original_analysis_selected_values_crosschecked": true,
+    "other_bootstrap_intervals_recomputed": false,
     "primary_bonferroni_hoeffding_intervals_recomputed": true,
     "raw_api_receipts_reaudited_by_this_command": false,
     "row_counts_and_block_contrasts_recomputed": true

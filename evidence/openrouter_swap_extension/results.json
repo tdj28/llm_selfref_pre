@@ -41,6 +41,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.09375,
+                0.34375
+              ],
               "estimate": 0.21875,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -86,6 +90,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.6875,
+                0.9375
+              ],
               "estimate": 0.8125,
               "missing_blocks": 0,
               "planned_blocks": 32,
@@ -139,6 +147,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.6875,
+                0.9375
+              ],
               "estimate": 0.8125,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -186,6 +198,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.25,
+                0.5
+              ],
               "estimate": 0.375,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -231,6 +247,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.6875,
+                0.9375
+              ],
               "estimate": 0.8125,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -276,6 +296,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.6875,
+                0.9375
+              ],
               "estimate": 0.8125,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -325,6 +349,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.0,
+                0.1875
+              ],
               "estimate": 0.09375,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -370,6 +398,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.09375,
+                0.34375
+              ],
               "estimate": 0.21875,
               "missing_blocks": 0,
               "planned_blocks": 32,
@@ -423,6 +455,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.625,
+                0.90625
+              ],
               "estimate": 0.78125,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -470,6 +506,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.0625,
+                0.3125
+              ],
               "estimate": 0.1875,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -515,6 +555,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.21875,
+                0.53125
+              ],
               "estimate": 0.375,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -560,6 +604,10 @@
               "planned_blocks": 32
             },
             "instruction_minus_transcript": {
+              "descriptive_bootstrap_ci95": [
+                0.625,
+                0.90625
+              ],
               "estimate": 0.78125,
               "missing_blocks": 0,
               "planned_blocks": 32
@@ -628,10 +676,11 @@
   "primary_family_size": 8,
   "scope": {
     "authorizes_collection": false,
-    "bootstrap_intervals_recomputed": false,
+    "displayed_swap_bootstrap_intervals_recomputed": true,
     "editorial_binding_only": true,
     "human_validation": false,
     "original_analysis_selected_values_crosschecked": true,
+    "other_bootstrap_intervals_recomputed": false,
     "primary_bonferroni_hoeffding_intervals_recomputed": true,
     "raw_api_receipts_reaudited_by_this_command": false,
     "row_counts_and_block_contrasts_recomputed": true

@@ -25,9 +25,16 @@ python -m pytest tests/test_openrouter_swap_extension.py
 The check is offline and read-only. It recomputes the displayed quantities
 from released row labels, cross-checks the original analysis, and verifies
 the manuscript, figure and source hashes. It does not re-judge responses,
-reconstruct API receipts, regenerate bootstrap intervals or supply human
+reconstruct API receipts or supply human
 validation. The full source release was separately verified with its own
 `experiments.openrouter_swap_release_a3 --verify` command before packaging.
+
+The measurement figure shows pointwise 95% paired-block bootstrap intervals
+for both readers and all three rubrics. The verifier recomputes these six
+intervals per response model from source blocks within wording family and
+checks them against the released analysis. They are descriptive: the unchanged
+eight-comparison primary Hoeffding bounds remain in the manuscript text.
+No caption or explanatory footer is embedded in the figure.
 
 `--write` regenerates only this editorial package and its figure. Importing
 from a local release additionally requires `--source-release` and checks

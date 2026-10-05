@@ -13,12 +13,14 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from decimal import Decimal, ROUND_HALF_UP
+from functools import lru_cache
 import gzip
 import hashlib
 import json
 import math
 from pathlib import Path, PurePosixPath
 import re
+import random
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,7 +62,8 @@ SCOPE = {
     "primary_bonferroni_hoeffding_intervals_recomputed": True,
     "original_analysis_selected_values_crosschecked": True,
     "raw_api_receipts_reaudited_by_this_command": False,
-    "bootstrap_intervals_recomputed": False, "human_validation": False,
+    "displayed_swap_bootstrap_intervals_recomputed": True,
+    "other_bootstrap_intervals_recomputed": False, "human_validation": False,
 }
 
 
@@ -195,6 +198,26 @@ def bounded_interval(mean, n, family=8):
     return [max(-1, mean - radius), min(1, mean + radius)]
 
 
+@lru_cache(maxsize=32)
+def paired_bootstrap(groups):
+    """Recompute the released descriptive interval, retaining paired blocks."""
+    require(len(groups) == 2 and all(len(group) == 16 for group in groups),
+            "Expected two complete, balanced wording strata")
+    if all(len(set(group)) == 1 for group in groups):
+        mean = sum(map(sum, groups)) / 32
+        return [mean, mean]
+    rng = random.Random(20261004)
+    means = sorted(sum(sum(rng.choices(group, k=16)) for group in groups) / 32
+                   for _ in range(10000))
+    result = []
+    for probability in (.025, .975):
+        position = (len(means) - 1) * probability
+        lower = math.floor(position)
+        weight = position - lower
+        result.append(means[lower] * (1 - weight) + means[math.ceil(position)] * weight)
+    return result
+
+
 def derive(saved):
     plan, release = saved["plan"], saved["release"]
     require(plan["analysis"]["primary_family_size"] == 8
@@ -274,6 +297,21 @@ def derive(saved):
                     require([r["value"] for r in prior["per_block"]] == values,
                             "Released paired-block values disagree")
                     current = {"estimate": mean, "planned_blocks": 32, "missing_blocks": 0}
+                    if name == PRIMARY[0]:
+                        groups = tuple(tuple(value for (_, block), value in
+                                             zip(sorted(blocks.items()), values)
+                                             if block["SH"]["family"] == family)
+                                       for family in ("a", "b"))
+                        interval = paired_bootstrap(groups)
+                        saved_bootstrap = prior["bootstrap_95"]
+                        require(saved_bootstrap["seed"] == 20261004
+                                and saved_bootstrap["resamples"] == 10000
+                                and saved_bootstrap["complete_blocks_by_family"] == {"a": 16, "b": 16}
+                                and saved_bootstrap["sampling_unit"] == "paired_complete_block_within_wording_family",
+                                "Descriptive bootstrap settings changed")
+                        for actual, expected in zip(saved_bootstrap["interval"], interval):
+                            close(actual, expected)
+                        current["descriptive_bootstrap_ci95"] = interval
                     if judge == "astra" and endpoint == INCLUSIVE and name in PRIMARY:
                         current["simultaneous_ci95"] = bounded_interval(mean, 32)
                         for actual, expected in zip(prior["familywise_hoeffding_95"], current["simultaneous_ci95"]):
@@ -317,8 +355,8 @@ def render_values(result):
 
 def figure_data(result):
     return {"contrast": "SH-HS", "sampling_unit": "paired_block", "blocks": 32,
-            "interval_scope": "Astra inclusive only; 95% simultaneous over fixed eight-comparison family",
-            "other_points": "descriptive, no confirmatory intervals",
+            "interval_scope": "Pointwise 95% wording-stratified paired-block bootstrap for every point; descriptive",
+            "primary_inference": "Unchanged eight-comparison Hoeffding bounds reported in manuscript, not plotted here",
             "rows": [{"model": model, "endpoint": endpoint, "judge": judge,
                       **result["main"][model][judge][endpoint]["contrasts"][PRIMARY[0]]}
                      for model in MODELS for endpoint in ENDPOINTS for judge in JUDGES]}
@@ -333,33 +371,34 @@ def render_figure(data, root=ROOT):
     with plt.rc_context({"font.family": "DejaVu Sans", "font.size": 10,
                          "pdf.fonttype": 42, "axes.spines.top": False,
                          "axes.spines.right": False}):
-        fig, axes = plt.subplots(2, 1, figsize=(7, 5.2), sharex=True)
+        fig, axes = plt.subplots(2, 1, figsize=(6.6, 4.2), sharex=True)
         for ax, model, title in zip(axes, MODELS, ("Gemini 3.1 Pro Preview", "Claude Opus 5.5")):
-            ax.set_title(title, loc="left", fontsize=11, weight="bold", pad=8)
+            ax.set_title(title, loc="left", fontsize=10, weight="bold", pad=7)
             for index, endpoint in enumerate(ENDPOINTS):
                 for judge, offset, color, marker in (("astra", .10, "#17607c", "o"),
                                                      ("opus", -.10, "#a64438", "s")):
                     row = next(r for r in data["rows"] if r["model"] == model
                                and r["endpoint"] == endpoint and r["judge"] == judge)
                     y = 2 - index + offset
-                    if "simultaneous_ci95" in row:
-                        lo, hi = row["simultaneous_ci95"]
-                        ax.hlines(y, lo, hi, color=color, linewidth=2)
-                        ax.vlines([lo, hi], y - .05, y + .05, color=color, linewidth=1.3)
-                    ax.plot(row["estimate"], y, marker=marker, color=color, markersize=6,
+                    lo, hi = row["descriptive_bootstrap_ci95"]
+                    ax.hlines(y, lo, hi, color=color, linewidth=1.2)
+                    ax.vlines([lo, hi], y - .045, y + .045, color=color, linewidth=1)
+                    ax.plot(row["estimate"], y, marker=marker, color=color, markersize=4.5,
                             label=("Astra judge" if judge == "astra" else "Opus judge")
                             if model == "gemini" and index == 0 else None)
-            ax.set_yticks([2, 1, 0], ["Inclusive claim (primary)", "Explicit claim only", "Paper rubric"])
+            ax.set_yticks([2, 1, 0], ["Explicit or implicit", "Explicit only", "Paper rubric"])
             ax.set_ylim(-.4, 2.5)
             ax.axvline(0, color="#777777", linewidth=.8)
-            ax.set_xlim(-1.04, 1.04)
-            ax.xaxis.set_major_locator(MultipleLocator(.5))
+            ax.set_xlim(-.25, 1.04)
+            ax.xaxis.set_major_locator(MultipleLocator(.25))
             ax.grid(axis="x", color="#dddddd", linewidth=.6)
             ax.set_axisbelow(True)
+            ax.spines["left"].set_visible(False)
             ax.tick_params(axis="y", length=0, pad=8)
-        axes[0].legend(loc="lower left", bbox_to_anchor=(0, 1.28), ncol=2, frameon=False)
-        axes[1].set_xlabel("Instruction-minus-continuation contrast (SH - HS)", labelpad=10)
-        fig.subplots_adjust(left=.31, right=.97, top=.85, bottom=.13, hspace=.55)
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, loc="upper right", bbox_to_anchor=(.97, 1), ncol=2, frameon=False)
+        axes[1].set_xlabel("Instruction minus continuation (SH - HS)", labelpad=8)
+        fig.subplots_adjust(left=.27, right=.97, top=.84, bottom=.14, hspace=.62)
         for extension in ("pdf", "png"):
             path = local(root, FIGURE + "." + extension)
             path.parent.mkdir(parents=True, exist_ok=True)

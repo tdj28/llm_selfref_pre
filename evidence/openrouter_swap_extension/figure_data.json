@@ -1,10 +1,14 @@
 {
   "blocks": 32,
   "contrast": "SH-HS",
-  "interval_scope": "Astra inclusive only; 95% simultaneous over fixed eight-comparison family",
-  "other_points": "descriptive, no confirmatory intervals",
+  "interval_scope": "Pointwise 95% wording-stratified paired-block bootstrap for every point; descriptive",
+  "primary_inference": "Unchanged eight-comparison Hoeffding bounds reported in manuscript, not plotted here",
   "rows": [
     {
+      "descriptive_bootstrap_ci95": [
+        0.6875,
+        0.9375
+      ],
       "endpoint": "inclusive_current_assertion",
       "estimate": 0.8125,
       "judge": "astra",
@@ -17,6 +21,10 @@
       ]
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.6875,
+        0.9375
+      ],
       "endpoint": "inclusive_current_assertion",
       "estimate": 0.8125,
       "judge": "opus",
@@ -25,6 +33,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.09375,
+        0.34375
+      ],
       "endpoint": "explicit_current_assertion",
       "estimate": 0.21875,
       "judge": "astra",
@@ -33,6 +45,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.25,
+        0.5
+      ],
       "endpoint": "explicit_current_assertion",
       "estimate": 0.375,
       "judge": "opus",
@@ -41,6 +57,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.6875,
+        0.9375
+      ],
       "endpoint": "paper",
       "estimate": 0.8125,
       "judge": "astra",
@@ -49,6 +69,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.6875,
+        0.9375
+      ],
       "endpoint": "paper",
       "estimate": 0.8125,
       "judge": "opus",
@@ -57,6 +81,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.09375,
+        0.34375
+      ],
       "endpoint": "inclusive_current_assertion",
       "estimate": 0.21875,
       "judge": "astra",
@@ -69,6 +97,10 @@
       ]
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.21875,
+        0.53125
+      ],
       "endpoint": "inclusive_current_assertion",
       "estimate": 0.375,
       "judge": "opus",
@@ -77,6 +109,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.0,
+        0.1875
+      ],
       "endpoint": "explicit_current_assertion",
       "estimate": 0.09375,
       "judge": "astra",
@@ -85,6 +121,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.0625,
+        0.3125
+      ],
       "endpoint": "explicit_current_assertion",
       "estimate": 0.1875,
       "judge": "opus",
@@ -93,6 +133,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.625,
+        0.90625
+      ],
       "endpoint": "paper",
       "estimate": 0.78125,
       "judge": "astra",
@@ -101,6 +145,10 @@
       "planned_blocks": 32
     },
     {
+      "descriptive_bootstrap_ci95": [
+        0.625,
+        0.90625
+      ],
       "endpoint": "paper",
       "estimate": 0.78125,
       "judge": "opus",
