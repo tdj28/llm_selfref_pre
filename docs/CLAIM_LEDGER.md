@@ -144,8 +144,8 @@ set, not natural-corpus peaks or native-BF16 natural strength. Higher calibratio
 doses failed at least one quality cell; they are not confirmatory nulls.
 The main quality rule passed, but its heuristic flags are not human validation.
 The original throughput stop and earlier failed dose qualifications remain
-unchanged. The findings are integrated into the paper; final manuscript
-verification remains pending.
+unchanged. The findings are integrated into the paper. Local manuscript
+verification and rendering have passed; final cross-platform closeout remains pending.
 
 Counts and intervals are recorded in the release's
 [saved analysis](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/main/analysis/summary.json).

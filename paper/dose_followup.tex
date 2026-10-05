@@ -30,8 +30,16 @@ both edit signs for the target, and both signs for one of three fixed,
 norm-matched control panels (32 blocks per panel). The technical continuation
 carried calibration and selection forward unchanged.
 
-The quality-rule amendment followed earlier calibration results. It treated
-first-turn truncation at \DoseFollowupTokenCap{} tokens as exposure metadata,
+Two earlier samples failed the quality rule because too many untreated
+inductions reached their token limits. The first completed dose calibration
+but not confirmation; the longer-window follow-up stopped at its untreated
+screen.\footnote{The separate
+\href{https://github.com/tdj28/llm_selfref_pre/tree/d90abef11a1d3776ae2417687b56aa85e8ead5f5/data/berg_dose_ladder/calibration_v1_20261004}{initial calibration}
+and
+\href{https://github.com/tdj28/llm_selfref_pre/tree/0df8cc316b073fca463912ecabb61434511ad238/data/berg_dose_window/zero_screen_v1_20261004}{longer-window screen}
+remain preserved; their unrun confirmation stages are not null effects.}
+We then changed the rule for fresh data: first-turn truncation at
+\DoseFollowupTokenCap{} tokens counted as exposure metadata,
 while final-turn truncation remained a quality failure. In confirmation,
 \DoseFollowupInductionCaps{} induction turns and \DoseFollowupFinalCaps{}
 final turns reached that cap. The selected-dose main sample passed the

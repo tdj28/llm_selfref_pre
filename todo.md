@@ -33,8 +33,8 @@ these authorizations does not reopen model search or other collection.
 - [x] Integrate the fixed-dose findings into the paper: narrow exclusion of
   +0.30 at dose 0.25, unresolved specificity, and a mapping-reference scale
   rather than natural-corpus strength. Keep earlier failed qualifications intact.
-- [ ] Complete the authorized Kolibri follow-up. A4 startup qualification is
-  in progress; full behavioral collection has not begun. Verify its scientific
+- [ ] Complete the authorized Kolibri follow-up. The behavioral screen is
+  in progress; the conditional main panel is not complete. Verify its scientific
   release before adding findings, describe official FP8 accurately, and do not
   infer an architecture effect.
 
@@ -62,14 +62,14 @@ these authorizations does not reopen model search or other collection.
 - [x] Retrieve and hash-verify every artifact, terminate only newly owned pods,
   and release the 204-trial calibration with its failed untreated quality gate.
   Confirmation was not run; total cost bound is $6.73.
-- [ ] Integrate the calibration stop without changing earlier six-feature
+- [x] Integrate the calibration stop without changing earlier six-feature
   conclusions or treating the unrun confirmation as a null effect.
 - [x] Execute the separately frozen 512-token response-window study on fresh
   data. Three of twelve untreated inductions reached the cap; quality failed,
   headroom passed, and treated calibration/confirmation remained unrun. Both
   owned pods are deleted; cumulative cost is below $8.84. See the
   [release](data/berg_dose_window/README.md).
-- [ ] Integrate this second failed qualification alongside the earlier
+- [x] Integrate this second failed qualification alongside the earlier
   calibration; do not present it as a test of nonzero doses or silently relax
   the truncation rule. A cap flag is not itself a validated incoherence label.
 
@@ -91,8 +91,8 @@ these authorizations does not reopen model search or other collection.
 
 ## Operational Follow-Up
 
-- [ ] Resolve, or explicitly retain, the original Llama ambiguous-create billing
-  reservation. This is not a publication blocker. Preserve the reservation and
+- [x] Explicitly retain the original Llama $8 ambiguous-create billing
+  reservation as unresolved. Preserve the reservation and
   [startup record](docs/BILINGUAL_LLAMA_B1_STARTUP_20261002.md); absence from pod
   inventory is not proof of zero billing.
 

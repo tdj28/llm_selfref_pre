@@ -57,8 +57,9 @@ not a second copy of its data here. It is distinct from the Qwen3.8 API panel.
 | Held-out steering-fidelity study | [Archived design notes](../provenance/planning/STEERING_FIDELITY_TEST_DESIGN_NOTES_20261002.md) and [code](../experiments/steering_fidelity_test/); not run after failed qualification. |
 | SAE switch-arc | [Unexecuted design draft](consciousness_sae_switch_arc/README.md); no target outcomes. |
 
-Dose findings are integrated into the paper; final verification is pending.
-Kolibri startup qualification is in progress, with no full behavioral trials.
+Dose findings are integrated into the paper. Local manuscript verification
+and rendering have passed; final cross-platform closeout remains pending.
+Kolibri's behavioral screen is in progress; its conditional main panel is not complete.
 Earlier failed dose qualifications retain their verdicts.
 
 ## Cross-Study References

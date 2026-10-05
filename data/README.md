@@ -53,8 +53,8 @@ disposable copies and [artifact inventory](../DATA_ARTIFACTS.md) for coverage.
 | Exposure and precision | [Completed screen](sae_assay_exposure/screen_precision_20260930/README.md); [startup failure](sae_assay_exposure/startup_failure_20260930/README.md). |
 | Changepoint, realization, target-blind calibration and signed-dose scan | [Historical inventory](../docs/STUDY_INVENTORY.md), including failed controls, partial availability and recovery records. |
 
-Kolibri startup qualification is in progress; no full behavioral trials have
-run. The earlier failed dose qualifications remain listed above. Folders holding only plans or
+Kolibri's behavioral screen is in progress; its conditional main panel is not
+complete. The earlier failed dose qualifications remain listed above. Folders holding only plans or
 implementations do not establish that a study ran. Earlier service prototypes
 and smoke tests remain in the
 [artifact inventory](../DATA_ARTIFACTS.md), separate from the paper's primary

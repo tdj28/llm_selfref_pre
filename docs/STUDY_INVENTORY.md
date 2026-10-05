@@ -1,8 +1,8 @@
 # Later-Study Inventory
 
-## Studies In The Manuscript (Added 2026-10-04)
+## Studies In The Manuscript (Updated 2026-10-05)
 
-Every study that `paper/main.tex` draws on, as of 4 October 2026, with when
+Every study that `paper/main.tex` draws on, as of 5 October 2026, with when
 its plan was committed relative to its own outcomes. A public Git commit
 freezes a plan's source; it is not a registry preregistration. Separately
 planned studies were combined in the manuscript after their outcomes, and no
@@ -20,9 +20,12 @@ the manuscript itself.
 | Frontier-model pilot | 3.4 | Before its collection | Small descriptive pilot |
 | Llama screening | 3.4 | Before its collection | Failed its preconditions; follow-up not run |
 | Gemini/Opus neutral-instruction and donor controls | 3.5 | Before its new collection; earlier panels known | Separate screened panel; Gemini instruction advantage, Opus depends on scoring rule; no equivalence claim for the neutral controls |
+| Qwen3.8 neutral-instruction and donor controls | 3.6 | Before its new collection; earlier panels known | Separate screened panel; primary simultaneous interval includes zero, contrast depends on rubric |
+| Repeated Gemini/Opus answers | 3.7 | Before its new collection; earlier panels known | Randomized requests with three answer draws; two missing structured judgments retained; fixed-panel estimates and missingness bounds reported separately |
 | Qwen companion study | 6 | Separate study | Audited after its outcomes |
 | Random-subset steering test (main) | 5.3 | Before its outcomes; earlier results known | Planned test; +0.30 excluded under the paper rubric, inconclusive under the second |
-| Operator matching and dose ladder | 5.4 | Before their outcomes | No configuration qualified; holdout not run |
+| Quality-selected mapping-scaled dose | 5.4 | Before each new sample; earlier failed quality checks disclosed | +0.30 narrowly excluded at the selected dose; target specificity unresolved; not an all-dose null |
+| Operator matching and dose ladder | 5.5 | Before their outcomes | No configuration qualified; holdout not run |
 | Native-precision follow-up | App. D | Before its outcomes; earlier results known | Planned comparison; secondary diagnostics descriptive |
 | Feature activation maps | App. C | Amended before the new activations; earlier maps known | Descriptive check of the feature labels |
 | Earlier 4-bit Llama grid | App. C | 73 s before the run | Planned test; untreated rate near the ceiling |

@@ -47,9 +47,10 @@ The [study index](docs/README.md) connects protocols, results, releases, code
 and tests, including historical and unexecuted branches. The
 [publication checklist](todo.md) separates remaining release work from future
 research. The modern API, Qwen3.8, repeated-answer and mapping-scaled dose
-studies have completed releases. Dose findings are integrated into the paper;
-final verification remains pending. Kolibri remains at startup, with no full
-behavioral trials. Other collection remains
+studies have completed releases. Local manuscript verification and rendering
+have passed; final cross-platform closeout remains pending. Kolibri's
+behavioral screen is in progress; its conditional main panel is not complete.
+Other collection remains
 closed; earlier failed dose qualifications remain unchanged.
 
 ## Reproduce
