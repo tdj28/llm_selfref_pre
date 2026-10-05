@@ -45,6 +45,11 @@ venv.bak/
 
 # Project specific
 data/*
+!data/berg_dose_exposure/
+data/berg_dose_exposure/*
+!data/berg_dose_exposure/plan_20261004/
+data/berg_dose_exposure/plan_20261004/*
+!data/berg_dose_exposure/plan_20261004/PLAN.json
 !data/berg_dose_ladder/
 data/berg_dose_ladder/*
 !data/berg_dose_ladder/README.md

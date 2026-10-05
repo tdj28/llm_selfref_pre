@@ -7,6 +7,14 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
+- The owner explicitly approved the finite-induction exposure follow-up in
+  `docs/STEERING_DOSE_EXPOSURE_PROTOCOL_20261004.md`: keep 512-token caps,
+  count induction caps as metadata, and retain all other quality rules.
+  New spending is at most $38.32 with $8.837266296602623 carried forward;
+  cumulative dose work stays below $50. Execute from its own pushed plan.
+  Reasonable technical repairs within approved scope do not need repeated
+  permission. Document changes without rewriting prior results or changing
+  endpoints to obtain a preferred outcome.
 - Both the 256-token dose calibration and fresh
   [512-token untreated screen](data/berg_dose_window/README.md) are complete.
   In the latter, three of twelve inductions reached the cap, failing the
