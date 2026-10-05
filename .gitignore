@@ -749,3 +749,10 @@ data/steering_fidelity/cheap_startup_failure_20261002/*
 !data/berg_dose_ladder/calibration_v1_20261004/figures/*.pdf
 !data/berg_dose_ladder/calibration_v1_20261004/raw/receipts.jsonl
 !data/berg_dose_ladder/calibration_v1_20261004/raw/controller.log
+
+# Longer-window dose study: public source-bound plan only.
+!data/berg_dose_window/
+data/berg_dose_window/*
+!data/berg_dose_window/plan_20261004/
+data/berg_dose_window/plan_20261004/*
+!data/berg_dose_window/plan_20261004/PLAN.json

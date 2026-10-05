@@ -7,11 +7,14 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
-- The owner separately authorized the October 4 mapping-scaled dose follow-up
-  within $50 and a 5.5-hour main-pod ceiling. Follow its
-  [protocol](docs/STEERING_DOSE_LADDER_PROTOCOL_20261004.md), source-bound plan,
-  fresh calibration/confirmation split and owned-pod rules. This does not
-  reopen earlier releases or authorize replacement rentals.
+- The completed 256-token dose calibration failed its untreated quality gate;
+  preserve that release. The owner authorized separate $200 provider budgets
+  and a fresh [512-token study](docs/STEERING_DOSE_WINDOW_PROTOCOL_20261004.md).
+  It retains a $50 cumulative GPU sub-cap carrying $6.726273265975 already
+  spent, a 5.5-hour main-pod ceiling, and a twelve-untreated-trial early gate.
+  Require its pushed source-bound plan, fresh seeds, cheap CUDA qualification,
+  first-five treated audit and owned-pod deletion. No replacement rental or
+  borrowing from OpenRouter is authorized by this study.
 - Collection is closed for publication. The current work is evidence
   integration, documentation, verification, and editorial closeout.
 - Cleanup does not authorize new experiments, model calls, paid reviews,

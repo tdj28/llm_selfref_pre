@@ -76,3 +76,10 @@ the separately authorized $50 allowance. No further rental is part of this
 release. A longer response window would change the induction exposure and
 requires its own disclosed, prospectively frozen design; it is not a
 retrospective repair of this gate.
+
+The owner subsequently authorized a separate
+[512-token follow-up](../../docs/STEERING_DOSE_WINDOW_PROTOCOL_20261004.md).
+It uses fresh seeds and the same quality thresholds, screens all twelve
+untreated trials before treated calibration, and carries this release's cost
+within its $50 study allowance. These 256-token rows remain unchanged and
+will not be pooled with the new study.
