@@ -3,8 +3,9 @@
 Edit `main.tex` and `references.bib` here. This public repository holds the
 latest manuscript, evidence and tooling. No companion checkout is required.
 
-**Instructions, Transcripts, and Measurement in Language-Model Reports of
-Subjective Experience** studies causes and measurement of report labels.
+**What Drives a Language Model's Report of Subjective Experience?
+Instructions, Continuations, and the Labels That Count Them** studies causes
+and measurement of report labels.
 Berg et al. supplied the starting protocol; this is not limited to a response
 to their paper. Broader framing does not broaden what any result establishes.
 Keep instruction effects, automated labels, steering delivery and internal
@@ -35,6 +36,8 @@ not that reconstruction or independent scientific validation.
   `uncertainty_sensitivity.tex`: included experimental and methods sections.
 - `context_extensions.tex`, `operator_matching.tex`: completed bilingual,
   frontier-model and public-operator extensions, with separate study scopes.
+- `openrouter_swap_extension.tex`: Gemini/Opus comparisons with neutral
+  instructions and same-condition donor continuations.
 - `figures/`: selected figure inputs with pinned source provenance.
 - `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
 - `../reviews/`: dated automated reviews, adjudications and reference checks.
@@ -42,8 +45,11 @@ not that reconstruction or independent scientific validation.
 - `history/20261001/`: immutable migration snapshots and import hashes.
 
 Earlier manuscripts remain historical, not alternate working drafts.
-Data collection is closed for this manuscript. Remaining work is verification,
-editorial review and release preparation, not another experimental campaign.
+The owner separately reopened collection for the October 4 model-panel and
+steering-dose follow-ups. Their plans and releases remain distinct from the
+earlier studies; this manuscript incorporates verified results, not pending
+or unrun comparisons. Other work is verification, editorial review and
+release preparation.
 Human editorial approval is still required before publication or submission.
 Do not edit the Praxagent website or the private former companion as part of
 routine manuscript work.

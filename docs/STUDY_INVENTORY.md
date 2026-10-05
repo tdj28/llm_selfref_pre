@@ -1,5 +1,41 @@
 # Later-Study Inventory
 
+## Studies In The Manuscript (Added 2026-10-04)
+
+Every study that `paper/main.tex` draws on, as of 4 October 2026, with when
+its plan was committed relative to its own outcomes. A public Git commit
+freezes a plan's source; it is not a registry preregistration. Separately
+planned studies were combined in the manuscript after their outcomes, and no
+human coding of the labels has been done. The manuscript's conclusions rest
+on the three studies marked "main". The owner chose to keep this list out of
+the manuscript itself.
+
+| Study | Manuscript section | Plan committed | Standing |
+| --- | --- | --- | --- |
+| Continuation swap, four API models (main) | 3.2 | 14 s before run start, after two analyzed pilots that already favored the instruction | Planned test; its prediction that the continuation would matter at least as much failed |
+| Induction factorial and question templates | 3.3, 4.1 | Same plan | Planned comparisons; the predicted register advantage is not established, and the templates are not a clean factorial |
+| Four-way rubric | 4.1 | Same plan | Exploratory by plan |
+| Audit of 160 answers (main) | 4.2 | Before the new judgments, after the answers and their earlier labels were known | Post-hoc audit of a fixed packet; not a prevalence estimate |
+| Bilingual Llama pilot | 3.4 | Before its collection | Pilot; language contrast inconclusive, swap estimates descriptive |
+| Frontier-model pilot | 3.4 | Before its collection | Small descriptive pilot |
+| Llama screening | 3.4 | Before its collection | Failed its preconditions; follow-up not run |
+| Gemini/Opus neutral-instruction and donor controls | 3.5 | Before its new collection; earlier panels known | Separate screened panel; Gemini instruction advantage, Opus depends on scoring rule; no equivalence claim for the neutral controls |
+| Qwen companion study | 6 | Separate study | Audited after its outcomes |
+| Random-subset steering test (main) | 5.3 | Before its outcomes; earlier results known | Planned test; +0.30 excluded under the paper rubric, inconclusive under the second |
+| Operator matching and dose ladder | 5.4 | Before their outcomes | No configuration qualified; holdout not run |
+| Native-precision follow-up | App. D | Before its outcomes; earlier results known | Planned comparison; secondary diagnostics descriptive |
+| Feature activation maps | App. C | Amended before the new activations; earlier maps known | Descriptive check of the feature labels |
+| Earlier 4-bit Llama grid | App. C | 73 s before the run | Planned test; untreated rate near the ceiling |
+| Gemma 2 9B study | App. C | About 3 min before steering outcomes | Planned test; weak target manipulation |
+| Steering-fidelity calibration | App. E | Before its outcomes | Pressure wordings did not lower accuracy enough; test not run |
+| Fixed-panel and exact intervals | App. G | After the outcomes | Post-hoc |
+| Truncation bound for the random-subset test | 5.3 | After the outcomes | Post-hoc |
+| Convergence and paradox probes | App. H | — | Exploratory, GPT-4o only |
+
+Commit timing comes from the [analysis chronology](ANALYSIS_CHRONOLOGY.md)
+and each study's protocol; the manuscript's last appendix lists every release
+directory and the commit its links point to.
+
 ## Added 2026-10-02
 
 The [steering-fidelity calibration](STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md)

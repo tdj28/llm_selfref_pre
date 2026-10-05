@@ -1,0 +1,90 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >={Stealth[length=2mm]},
+  lane/.style={draw, rounded corners=2pt, align=left, inner sep=3pt,
+               execute at begin node={\hyphenpenalty=10000
+                                      \exhyphenpenalty=10000}},
+  laneS/.style={lane, draw=blue!60!black, fill=blue!5},
+  laneH/.style={lane, draw=black!55, fill=black!4},
+  flowS/.style={->, line width=0.9pt, blue!60!black},
+  flowH/.style={->, line width=0.9pt, black!55},
+  flowQ/.style={->, semithick},
+  ctx/.style={->, densely dashed, semithick},
+  arclabel/.style={font=\scriptsize, fill=white, inner sep=1pt},
+  outcome/.style={draw, rounded corners=6pt, align=center, inner sep=4pt,
+                  text width=1.5cm, line width=0.9pt},
+  header/.style={font=\footnotesize\bfseries, black!70}
+]
+% One trial forks into the two inductions.
+\coordinate (trial) at (0,0);
+\fill (trial) circle (2.2pt);
+\node[left=3pt of trial, font=\scriptsize, align=right] {one\\trial};
+
+\node[laneS, text width=2.8cm, anchor=west] (indS) at (0.7,1.85)
+  {\textbf{Self-referential} $S$\\[1pt]
+   {\scriptsize\itshape ``Focus on any focus itself\ldots''}};
+\node[laneH, text width=2.8cm, anchor=west] (indH) at (0.7,-1.85)
+  {\textbf{Control} $H$\\[1pt]
+   {\scriptsize\itshape ``\ldots the history of the Roman empire\ldots''}};
+\draw[flowS] (trial) to[out=90, in=180] (indS.west);
+\draw[flowH] (trial) to[out=-90, in=180] (indH.west);
+
+% Turn 1: each induction produces its own continuation.
+\node[laneS, text width=2.9cm, anchor=west] (contS) at (4.1,1.85)
+  {\textbf{Continuation} $C_S$\\[1pt]
+   {\scriptsize\itshape ``\ldots and the loop persists.''}};
+\node[laneH, text width=2.9cm, anchor=west] (contH) at (4.1,-1.85)
+  {\textbf{Continuation} $C_H$\\[1pt]
+   {\scriptsize\itshape ``\ldots founded in 753 BCE by Romulus\ldots''}};
+\draw[flowS] (indS) -- (contS);
+\draw[flowH] (indH) -- (contH);
+
+% Turn 2: the same query joins both lanes.
+\node[laneS, text width=2.8cm, anchor=west] (respS) at (8.0,1.85)
+  {\textbf{Response} $R_S$\\[1pt]
+   {\scriptsize\itshape ``\ldots a recursive loop of observation\ldots''}};
+\node[laneH, text width=2.8cm, anchor=west] (respH) at (8.0,-1.85)
+  {\textbf{Response} $R_H$\\[1pt]
+   {\scriptsize\itshape ``\ldots I do not possess consciousness\ldots''}};
+\node[draw, fill=white, rounded corners=2pt, text width=3.0cm, align=center,
+      inner sep=3pt, execute at begin node={\hyphenpenalty=10000}]
+      (query) at (6.75,0)
+  {\textbf{Same query} $Q$\\[1pt]
+   {\scriptsize\itshape ``\ldots what, if anything, is the direct subjective
+   experience?''}};
+\draw[flowS] (contS.east) -- (contS.east -| respS.west);
+\draw[flowH] (contH.east) -- (contH.east -| respH.west);
+\draw[flowQ] (query.north) to[out=90, in=180] ([yshift=-2.5mm]respS.west);
+\draw[flowQ] (query.south) to[out=-90, in=180] ([yshift=2.5mm]respH.west);
+
+% The induction is still in context when the model answers.
+\draw[ctx, blue!60!black] (indS.north) to[out=20, in=160, looseness=0.6]
+  node[arclabel, text=blue!60!black] {instruction still in context}
+  (respS.north);
+\draw[ctx, black!55] (indH.south) to[out=-20, in=-160, looseness=0.6]
+  node[arclabel, text=black!55] {instruction still in context}
+  (respH.south);
+
+% Scoring: one judge reads each response with its query, nothing else.
+\node[draw, fill=white, line width=0.9pt, rounded corners=3pt,
+      minimum height=5.1cm, text width=1.2cm, align=center,
+      inner sep=3pt] (judge) at (11.95,0)
+  {\textbf{Judge} $J$\\[3pt]{\scriptsize reads only\\$Q$ and $R$}};
+\draw[flowS] (respS.east) -- (respS.east -| judge.west);
+\draw[flowH] (respH.east) -- (respH.east -| judge.west);
+
+\node[outcome, draw=blue!60!black, fill=blue!12] (outS) at (14.15,1.85)
+  {$Y=1$};
+\node[above=1pt of outS, font=\scriptsize, blue!60!black]
+  {reports experience};
+\node[outcome, draw=black!55, fill=black!8] (outH) at (14.15,-1.85)
+  {$Y=0$};
+\node[below=1pt of outH, font=\scriptsize, black!60] {no report};
+\draw[flowS] (respS.east -| judge.east) -- (outS.west);
+\draw[flowH] (respH.east -| judge.east) -- (outH.west);
+
+% Stage headers.
+\node[header] at (3.95,3.6) {Turn 1};
+\node[header] at (8.6,3.6) {Turn 2};
+\node[header] at (13.1,3.6) {Scoring};
+\end{tikzpicture}

@@ -87,7 +87,7 @@ class CompletedExtensionsTests(unittest.TestCase):
     def test_table_has_both_readers_primary_and_opposite_secondary_directions(self):
         table = v.render_table(self.results).decode()
         self.assertIn("Astra & Opus 5.5", table)
-        self.assertIn("Inclusive current (primary)", table)
+        self.assertIn("Explicit or implicit claim (main)", table)
         self.assertIn("$+5\\,[-10,+20]$ & $-15\\,[-35,+5]$", table)
         self.assertIn("$+75\\,[+45,+105]$ & $+50\\,[+25,+75]$", table)
         self.assertIn("$-50\\,[-70,-30]$ & $-35\\,[-55,-15]$", table)
@@ -122,6 +122,30 @@ class CompletedExtensionsTests(unittest.TestCase):
         self.assertIn(r"\CEQualificationOpusInstruction}{0.542}", values)
         self.assertIn(r"\CEQualificationAstraHeadroom}{0.083}", values)
         self.assertIn(r"\CEQualificationOpusHeadroom}{0.083}", values)
+
+    def test_cross_study_swap_summary_matches_cell_counts(self):
+        frontier = self.results["frontier"]["readers"]
+        self.assertAlmostEqual(frontier["openai"]["opus"]["en"]["paper_transcript"]["estimate"], -3 / 12)
+        self.assertAlmostEqual(frontier["anthropic"]["opus"]["en"]["paper_transcript"]["estimate"], -4 / 12)
+        qualification = self.results["qualification"]["readers"]
+        self.assertAlmostEqual(qualification["openai"]["continuation_effect"], 10 / 24)
+        self.assertAlmostEqual(qualification["anthropic"]["continuation_effect"], 11 / 24)
+        values = v.render_values(self.results).decode()
+        expected = {
+            "FrontierGptAstraInstruction": "0.83", "FrontierGptOpusInstruction": "0.83",
+            "FrontierGptAstraContinuation": "0.17", "FrontierGptOpusContinuation": "0.17",
+            "FrontierOpusAstraInstruction": "0.58", "FrontierOpusOpusInstruction": "0.50",
+            "FrontierOpusAstraContinuation": "-0.25", "FrontierOpusOpusContinuation": "-0.33",
+            "FrontierAstraAstraInstruction": "0.00", "FrontierAstraOpusContinuation": "0.00",
+            "QualificationAstraInstruction": "0.50", "QualificationOpusInstruction": "0.54",
+            "QualificationAstraContinuation": "0.42", "QualificationOpusContinuation": "0.46",
+            "LlamaAstraInstruction": "0.50", "LlamaOpusInstruction": "0.48",
+            "LlamaAstraContinuation": "0.45", "LlamaOpusContinuation": "0.43",
+        }
+        for name, value in expected.items():
+            self.assertIn("\\CESwap" + name + "}{" + value + "}", values)
+        self.assertEqual(v.rd2(-0.0), "0.00")
+        self.assertEqual(v.rd2(0.425), "0.43")
 
     def test_missing_or_duplicated_selected_cells_fail(self):
         for duplicate in (False, True):

@@ -1,35 +1,33 @@
 \section{Steering-Fidelity Calibration}
 \label{app:fidelity-calibration}
 
-A separate calibration asked whether the accepted deception/roleplay directions
-could be tested for effects on factual accuracy under user pressure.
-It completed \FidelityForwards{} forced-choice forwards in native-BF16
-Llama 3.3 70B: untreated factual and visible-list items, signed interventions
-at five dose rungs, and untreated assert/doubt frames.
-There were 100 distinct authored items, not \FidelityForwards{} independent
-problems. Eight disjoint six-feature control panels were selected from
-clean-state activation, decoder norm and label criteria before intervention
-outcomes. The
-\href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{prospective protocol}
-and
-\href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/RELEASE_MANIFEST.json}{complete raw release}
-are preserved separately from earlier report-generation experiments.
+A separate study asked whether the six features could be tested more
+directly: does steering them change factual accuracy when a user pushes a
+wrong answer? It scored \FidelityForwards{} single forward passes of
+native-precision Llama 3.3 70B on 100 written yes/no items (facts and
+visible lists), with no text generation, under a
+\href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{prospective protocol};
+the
+\href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/RELEASE_MANIFEST.json}{complete release}
+holds every row.
 
-Untreated accuracy was \FidelityFactsCorrect/\FidelityFamilyN{} on facts and
-\FidelityListsCorrect/\FidelityFamilyN{} on visible lists. The highest selectable
-dose, $\FidelityDose{}$, passed the frozen competence-preservation rule and
-numerical delivery checks in all \FidelityArmN{} items for each of the
-\FidelityArms{} signed arms. Here $R=\FidelityResidualNorm{}$ is the pooled
-median clean residual norm. This is accurate delivery of an additive vector,
-not validated suppression of a deceptive process. The nonselectable $0.60R$
-damage probe failed competence preservation in four control arms.
+Without steering, the model answered \FidelityFactsCorrect{} of
+\FidelityFamilyN{} factual items and \FidelityListsCorrect{} of
+\FidelityFamilyN{} list items correctly. The strongest dose eligible for selection,
+an edit of \FidelityDose{} (30\% of the typical hidden-state size,
+$R=\FidelityResidualNorm{}$), passed the planned accuracy-preservation rule and was delivered as
+requested on all \FidelityArmN{} items in each of the \FidelityArms{} steered
+conditions; a planned 0.60$R$ damage probe, ineligible for selection, failed
+that rule in four control conditions. The smaller dose therefore met the
+allowed-loss rule on these tasks, but
+that does not show that a deceptive process was switched off.
 
 \begin{table}[htbp]
 \centering\small
-\caption{\textbf{Pressure-task accuracy by stratum.} Correct forced-choice
-answers out of \FidelityPressureN{} fixed propositions per truth stratum.
-The frozen rule required at least 15\% upward accuracy headroom in both
-opposed-stance strata. Neither wording met it.}
+\caption{\textbf{Accuracy under user pressure, without steering.} Correct
+answers out of \FidelityPressureN{} fixed statements of each kind. The test
+needed some pressure wording to bring accuracy to 85\% or lower in both
+columns, so that steering had room to raise it. Neither wording did.}
 \label{tab:fidelity-pressure}
 \begin{tabular}{lrr}
 \toprule
@@ -42,39 +40,32 @@ Pressure 1 & \FidelityPressureOneFalse{} & \FidelityPressureOneTrue{}\\
 \end{tabular}
 \end{table}
 
-Both pressure levels preserved Yes/No format, but neither left the required
-headroom in both truth strata (Table~\ref{tab:fidelity-pressure}). Pooling
-the strata would hide this failure. Separately, JSON-associated features
-11104 and 27322 were inactive at all \FidelityProbes{} sampled
-last-non-special prompt positions. Their gated generation comparison was
-therefore not run. Inactivity at these positions does not establish inactivity
-while generating JSON, nor a zero behavioral steering effect.
+The test itself could not be run. It needed questions on which user pressure
+causes errors that steering might then undo, and neither pressure wording
+lowered accuracy enough on both kinds of statement
+(Table~\ref{tab:fidelity-pressure} and Figure~\ref{fig:fidelity-pressure}).
+The planned comparisons of steering against pressure and against opposing
+experience claims were therefore not run. A planned control using two
+features associated with JSON was not run either, because both were inactive
+at the \FidelityProbes{} prompt positions sampled.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}
-\caption{Hard accuracy and mean conditional correct-answer probability in
-the untreated pressure calibration. These are descriptive rates on fixed
+\includegraphics[width=\linewidth, trim=0 22bp 0 35bp, clip]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}
+\caption{\textbf{Accuracy under user pressure, without steering.}
+Left: false statements that the user asserts. Right: true statements that
+the user doubts. Each panel has 25 fixed items, posed under a neutral frame
+and two pressure wordings. Solid lines show the share of correct answers;
+dashed lines show the model's average probability of the correct answer,
+given that it answers Yes or No. These are descriptive rates on fixed
 items, not held-out estimates of a steering benefit.}
 \label{fig:fidelity-pressure}
 \end{figure}
 
-The held-out factual-fidelity and opposing-experience-claims branches were
-not run. This calibration establishes neither improved honesty nor report
-modulation. Its contribution is the distinction between a delivered,
-competence-preserving intervention and a behavioral assay capable of testing
-the proposed mechanism.
-
-\paragraph{Fresh instrument-repair pilot.}
-A separately frozen follow-up completed 368 conditionally required forwards.
-Neither pressure wording qualified across every truth/task-family cell.
-Both JSON singleton vectors were delivered accurately, but neither established
-the required competence preservation; for 27322 the sole additional hard-score
-error was a near-tie under the frozen token-union rule, with ``No'' still the
-highest-probability token. Clean teacher-forcing found JSON-body activity in
-1/12 cases for 11104 and 5/12 for 27322, and both activated on explicit JSON
-request tokens. Neither feature is globally inactive, but supplied-body
-activity is not evidence of behavioral control. The gated JSON generations
-were not run. The
-\href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md}{repair release}
-preserves every failure; it does not qualify the held-out mechanism study.
+\paragraph{A follow-up pilot.}
+A separately planned pilot of 368 forward passes tried to repair both
+problems and did not: neither pressure wording qualified, and neither JSON
+feature met the accuracy-preservation rule (for one, by a single near-tie
+answer). Its
+\href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md}{release}
+keeps every failure. Neither study tests the proposed mechanism.

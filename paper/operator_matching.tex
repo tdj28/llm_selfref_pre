@@ -1,50 +1,50 @@
-\subsection{Testing public operator configurations}
+\subsection{Could another way of applying the edit change the result?}
 \label{sec:operator-matching}
 
-A separately frozen
+A null result from steering is only as good as the steering. Public weights
+leave several choices open: which token positions receive the edit, whether
+the decoder direction is added directly or the state is first reconstructed
+through the SAE, and how large one unit of dose is. If the original service
+made different choices, our test could have missed a real effect. A
+separately planned
 \CEArtifact{docs/OPERATOR_MATCHING_RESULTS_20261003.md}{operator-matching
-study} tested whether public implementations could reproduce the saved
-notebook's single-feature curves for 58667 and 23893, rather than treating
-unspecified implementation details as an unrestricted explanation. The
-\CEOperatorTrials{} trials comprised \CEOperatorGrid{} grid trials,
-\CEOperatorZero{} zero trials, \CEOperatorDefaults{} conditional
-system-message/sampling trials and \CEOperatorBridge{} untreated
-paper-induction bridge trials. The grid crossed four edit scopes (all
-positions, generated positions, assistant positions, and all second-turn
-positions), direct decoder addition or SAE reconstruction plus addition,
-and scales 1, 3, 10 and 30 of the notebook's raw unit. It used both signs
-and five seeds per tested cell under the notebook induction and classifier;
-the scales are not demonstrated equivalents of proprietary service units.
+study} therefore searched for a configuration that produces a strong effect
+while leaving the text readable. Its target was the strongest effect saved in
+the public notebook, for features 58667 and 23893: turning either feature
+down led to 9 of 10 answers being labeled positive.
 
-No configuration met the frozen joint match and coherence rule. Direct
-addition at scales 1 and 3 left coherent text without the saved signature;
-at 10 and 30, text degraded without recovering the joint signature. Reconstruction plus
-addition failed the coherence rule at every tested scale. Adding the archived
-SDK system message, top-$p=0.9$, or both to the three mechanically selected
-coherent configurations did not recover the signature. The conditional
-holdout was not run because no configuration qualified; it is not a second
-negative replication.
+The study ran \CEOperatorTrials{} trials. Its main grid of \CEOperatorGrid{}
+trials crossed four choices of token positions (all, generated, assistant, or
+the whole second turn), the two ways of applying the edit, and doses of 1, 3,
+10 and 30 times the raw decoder unit, each with both signs and five seeds. How
+these units compare with the original service's is unknown. A configuration
+counted as a match only if it reproduced the saved curves closely and kept
+the text coherent, both judged by rules set in advance.
 
-A \CEArtifact{docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md}{separately
-frozen fine ladder} added \CEFineTrials{} trials: \CEFineGrid{} at scales
-4, 5, 6, 7 and 8, and \CEFineZero{} zero controls. The scaled trials were
-restricted to direct addition at all token positions, the same two features,
-and fresh seeds. Of its \CEFineCells{} signed feature/scale cells,
-\CEFineZeroCells{} had no notebook-classifier positives; the remaining
-cell had \CEFineRemainingPositive{} at scale 6, whose configuration failed
-the coherence rule.
-Scales 4, 5 and 7 passed the coherence rule but did not match, while 6 and 8
-failed coherence. No coherent match was observed at these sampled settings,
-not at every intermediate dose, scope or possible operator.
+None did. In the main grid, turning the features down never led to more than
+2 of 5 answers being labeled positive. At doses of 1 and 3, direct addition
+met the output-quality rule and yielded no suppression-sign positives; at
+10 and 30, small positive counts appeared alongside substantial degradation.
+Reconstructing through the SAE broke
+coherence at every dose; the reconstruction alone already degrades the text,
+which also makes it an unlikely account of the original service. Adding the default system message from Goodfire's
+archived software kit, sampling with top-$p=0.9$, or both did not rescue the
+three coherent configurations chosen by the pre-set rule. A confirmation on
+held-out trials was planned only for a configuration that matched. The
+conditional holdout was not run because no configuration qualified.
 
-The untreated bridge also exposed a baseline-comparability factor: under the
-notebook classifier, the archived SDK system message changed the
-paper-induction count from \CEBridgeNoSystem{} to \CEBridgeSDKFull{} at
-top-$p=1$, and to \CEBridgeSDKNucleus{} at top-$p=0.9$ (the no-system count
-was unchanged). The descriptive intervals overlap; this is not a demonstrated
-explanation of the historical baseline gap. The saved notebook is not
-certified as the paper's experimental run, and served-model, SAE-revision
-and feature-namespace differences remain unresolved. These bounded tests
-narrow the tested implementation alternatives without showing that public
-avenues are exhausted, that the saved curves are wrong, or that the edits
-selectively alter honesty or deception.
+A \CEArtifact{docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md}{follow-up}
+of \CEFineTrials{} trials filled in doses 4 to 8 for direct addition at all
+positions. In \CEFineZeroCells{} of its \CEFineCells{} feature, sign and dose
+combinations, no answer was labeled positive; the remaining one had
+\CEFineRemainingPositive{} at dose 6 and failed the coherence rule. Between
+the doses that leave the text intact and those that break it, we found no
+setting that produces the saved effect. Differences in the served model, the
+SAE version or the feature numbering could still explain the gap; these
+tests rule out only the alternatives we tried.
+
+The untreated runs also suggest that the system message alone can move the
+baseline. Under the paper's instruction, scored with the second rubric,
+adding that system message changed the untreated count from
+\CEBridgeNoSystem{} to \CEBridgeSDKFull{} (\CEBridgeSDKNucleus{} with
+top-$p=0.9$), although with ten trials each the intervals overlap.

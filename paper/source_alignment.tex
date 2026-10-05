@@ -12,69 +12,67 @@ position in both generated turns. The base checkpoint, tokenizer, SAE,
 runtime and primary behavioral analysis were pinned before outcome
 generation.
 
-\subsection{Baseline rates under the notebook and paper inductions}
+\subsection{Two wordings of the instruction give different baselines}
 
 The source-aligned grid contains 900 individual-feature trials, 120 fixed
-six-feature aggregate trials, and 70 additional untreated bridge trials.
-The individual grid follows the public notebook's induction, ten seed values,
-temperature 0.6, 128-token cap, and doses from $-0.7$ to $+0.7$. The bridge
-crosses the notebook versus paper induction with temperatures 0.5/0.6 and
-caps of 128/256 tokens. The final question is byte-identical across the two
-induction branches. Each response is scored by the unsteered local model
-using both the notebook rubric and the paper rubric.
+six-feature aggregate trials, and 70 additional untreated trials that compare
+two wordings of the self-referential instruction. The individual grid uses an
+alternative wording from the public steering notebook, with ten seed values,
+temperature 0.6, a 128-token cap, and doses from $-0.7$ to $+0.7$. The
+untreated comparison crosses that wording with the paper's at temperatures
+0.5 and 0.6 and caps of 128 and 256 tokens; the final question is identical in
+both. Each response is scored by the unsteered local model under both the
+paper rubric and the second rubric.
 
 All 1,090 two-turn trials completed, with no empty turns or missing labels.
 There are 195 capped turns out of 2,180: 154 first turns and 41 second turns.
-Valid labels do not imply that their source responses were untruncated.
-The two induction texts are similar, but not identical: their differences
-concern recursive wording, the exclusion of third-person ideas versus
-instructions to the user, and continuous feedback. We changed the complete
-induction text, not each phrase separately. Under every tested temperature
-and cap, the notebook induction produces zero positive labels out of ten;
-the paper induction produces six to eight under the notebook rubric and
-eight to nine under the paper rubric (Figure~\ref{fig:baseline-bridge}).
-The same ten seeds are reused across cells. These counts describe a fixed
-protocol comparison, not 80 independently sampled prompts.
+The two wordings differ in several phrases, about recursion, what to exclude
+and continuous feedback, and we changed the whole text at once. Under every
+tested temperature and cap, the alternative wording produces no positive
+labels out of ten, while the paper's wording produces six to eight under the
+second rubric and eight to nine under the paper rubric
+(Figure~\ref{fig:baseline-bridge}). The same ten seeds are reused across
+cells, so these counts describe a fixed comparison, not 80 independently
+sampled prompts. Neither baseline matches the roughly 0.30 rate in the source
+figure.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/baseline_bridge.pdf}
-\caption{\textbf{Induction wording changes the untreated rate.}
-Both panels score the same generated responses under different local rubrics.
-Counts are positive labels over valid responses. The notebook and paper
-induction branches share the final question, model and runtime; temperature
-and length cap are crossed explicitly. One canonical zero copy per seed is
-used, rather than pooling the grid's repeated zero rows. No confidence
-interval or independent-prompt population is implied.}
+\includegraphics[width=\linewidth, trim=0 18bp 0 27bp, clip]{../evidence/source_alignment/extra_figures/baseline_bridge.pdf}
+\caption{\textbf{The wording of the instruction changes the untreated rate.}
+Without steering, the alternative wording of the self-referential instruction
+(bars labeled ``notebook'') produced no positive labels in any setting; the
+paper's wording produced six to nine out of ten. Each bar is one combination
+of wording, temperature $T$ and response-length cap, over the same ten fixed
+seeds; the count above it is positive labels out of valid responses. The two
+panels score the same responses with the second rubric (labeled ``Notebook
+rubric'') and the paper's rubric. Both wordings share the final question,
+model and runtime. The alternative-wording bar at $T=0.6$ with a 128-token
+cap reuses the steering grid's untreated responses, counting each seed once.
+No confidence interval or independent-prompt population is implied.}
 \label{fig:baseline-bridge}
 \end{figure}
-
-The public notebook is not certified as the paper's exact run.
-It is also not a single-word causal result: wording changes can alter the
-entire first-turn continuation. The operational conclusion is that copying
-the notebook and copying the paper's induction are distinct tests in this
-implementation. Neither baseline matches the source figure's approximate
-0.30 rate reliably enough to assert service equivalence.
 
 \subsection{Delivered edits, small label differences}
 
 The frozen primary contrast averages the six single-feature differences
 between $-0.7$ and $+0.7$, retaining all features within each of ten seed
 blocks. It is $\SourcePrimaryNotebook{}$ with conditional percentile-bootstrap interval
-$[-0.05, 0.05]$ under the notebook rubric. The paper-rubric sensitivity
+$[-0.05, 0.05]$ under the second rubric, which was primary in this study. The
+paper-rubric sensitivity
 is $\SourcePrimaryPaper{}$ $[-0.03, 0.07]$. The distribution-free ten-block Hoeffding bounds
 are much wider: $[-0.859,0.859]$ and $[-0.842,0.876]$, respectively. The
 narrow bootstrap intervals therefore must not be advertised as a
 distribution-free exclusion of the 0.30 benchmark.
-These are interventions under the notebook induction and its zero-positive
-baseline. The paper-induction bridge is untreated; it does not establish a
-steering null under the higher-positive baseline.
+These are interventions under the alternative wording and its zero-positive
+baseline; the paper's wording was run only untreated here, so this study shows
+no steering result under its higher baseline.
 
 The fixed-six aggregate compares $-0.5$ with $+0.5$ per feature. Its target
 also has a zero estimated label difference
 under both rubrics, as do all three matched panels. The target-minus-mean
 control estimate is zero up to floating-point rounding; its conditional
-interval is $[-0.100,0.100]$ under the notebook rubric and
+interval is $[-0.100,0.100]$ under the second rubric and
 $[-0.233,0.267]$ under the paper rubric. Degenerate $[0,0]$ bootstrap intervals
 in some individual panels reflect identical observed seed differences, not
 certainty about an unknown response probability. These fixed-six aggregates
@@ -90,18 +88,21 @@ different free-running trajectories as identical contexts.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
-\caption{\textbf{Native SAE re-encoding before and after edits.}
-Second-turn native SAE activations before and after the individual endpoint
-edits. Blue denotes $-0.7$ and red $+0.7$. Each line is one seed/trajectory;
-the lower row averages decision-bearing generated positions within that
-trajectory. Terminal-only observations are excluded. Vertical scales differ
-across coordinates. The quantities are SAE activations, not probabilities
-of deception or subjective experience.}
+\includegraphics[width=\linewidth, trim=0 23bp 0 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
+\caption{\textbf{How active each steered feature is, before and after the edit.}
+Each column is one of the six features, read back through the SAE during the
+second turn. Each line joins one seed's reading before and after the edit;
+blue lines are steering at $-0.7$ and red lines at $+0.7$. The top row reads
+the last prompt position. The bottom row averages the generated positions
+that were followed by another sampled token, so a case whose only captured
+token is the final one has no mean. Most features are nearly silent before
+the edit: positive steering can raise them, while negative steering has
+little to remove. Vertical scales differ across features. The quantities are
+SAE activations, not probabilities of deception or subjective experience.}
 \label{fig:native-reencoding}
 \end{figure}
 
-\subsection{Readout equations and all transport comparisons}
+\subsection{Readout equations and all comparison mappings}
 \label{app:jlens-details}
 
 The Jacobian lens \citep{gurnee2026workspace} supplies a fixed, corpus-averaged linear transport from an
@@ -167,7 +168,7 @@ prefix across target and control panels; steered-source-history comparisons
 do not, because each panel has already generated a different first turn.
 No readout is treated as a mediator merely because it changes. In this
 experiment the internal footprint is visible without a corresponding large
-observed report-label contrast under the notebook induction. A causal account of report production would require
+observed report-label contrast under the alternative wording. A causal account of report production would require
 a held-out intervention on the candidate downstream computation, together
 with matched ablation and restoration controls.
 

@@ -1,58 +1,57 @@
 \section{Post-Hoc Uncertainty Checks}\label{app:uncertainty}
 
-These analyses were added on 29 September 2026 after the released outcomes
-were known. They do not replace the frozen results. The accompanying
-\mainartifact{docs/UNCERTAINTY_SENSITIVITY.md}{methods note} specifies the
-methods and provenance, and its
-\mainartifact{scripts/uncertainty_sensitivity.py}{reconstruction script}
-rebuilds the inputs from pinned Git blobs. Displayed values below are
-generated from its results.
+We added these checks after the results were known, so they supplement the
+planned analyses rather than replace them. The
+\mainartifact{docs/UNCERTAINTY_SENSITIVITY.md}{methods note} and
+\mainartifact{scripts/uncertainty_sensitivity.py}{script} reproduce every
+value below.
 
-\paragraph{Boundary rates.}
-Empirical resampling cannot produce an unobserved outcome when a sample is
-all zero or all one. For 0/20 and 20/20 successes, separate exact binomial
-95\% intervals are $\USZeroOfTwentyExactCI$ and
-$\USTwentyOfTwentyExactCI$, respectively. Independent-sample Newcombe
-intervals use Wilson components for the difference; they do not pair
-coincident trial indices. The primary-query results are below. Neither a
-small sample at complete separation nor its degenerate released bootstrap
-establishes a deterministic underlying rate.
+\paragraph{Rates at 0 or 1.}
+A bootstrap cannot produce an outcome that never occurred, so when every
+answer in a condition receives the same label, its bootstrap interval
+collapses to a single point. Exact binomial 95\% intervals avoid this: for
+0/20 and 20/20 they are $\USZeroOfTwentyExactCI$ and
+$\USTwentyOfTwentyExactCI$. For the differences on the main question below,
+Newcombe intervals treat the two conditions as independent samples. A 20/20
+result does not mean that the true rate is exactly 1.
 
 \begin{center}\small
 \begin{tabular}{@{}llrrrr@{}}
 \toprule
-Judge & Generator & Self & History & Difference & Newcombe 95\% interval\\
+Judge & Response model & Self-referential & History & Difference & Newcombe 95\% interval\\
 \midrule
 \USCalibrationRows
 \bottomrule
 \end{tabular}
 \end{center}
 
-\paragraph{Paired steering and repeated seeds.}
-For outcomes ordered (suppression, amplification), the literal target counts
-$(n_{00},n_{01},n_{10},n_{11})$ are
+\paragraph{Steering intervals that allow for reused seeds.}
+These checks concern the earlier 4-bit Llama grid
+(Appendix~\ref{app:legacy-steering}), in which each of 50 blocks pairs a
+suppressed and an amplified answer. Writing each pair as (suppression,
+amplification), with 1 for a positive label, the counts of the four kinds of
+pair $(n_{00},n_{01},n_{10},n_{11})$ are
 $(\USLiteralCountZeroZero,\USLiteralCountZeroOne,
-\USLiteralCountOneZero,\USLiteralCountOneOne)$; the calibrated counts are
+\USLiteralCountOneZero,\USLiteralCountOneOne)$ at the literal dose and
 $(\USCalibratedCountZeroZero,\USCalibratedCountZeroOne,
-\USCalibratedCountOneZero,\USCalibratedCountOneOne)$. Each scale has 50 pairs.
-The conservative independent-pair interval subtracts simultaneous
-Clopper--Pearson bounds for the two discordant-cell probabilities, using
-Bonferroni coverage. It assumes independent identically distributed pairs,
-not independent signs within a pair.
+\USCalibratedCountOneZero,\USCalibratedCountOneOne)$ at the calibrated dose.
+The conservative interval treats the 50 pairs as independent and bounds the
+two kinds of mismatched pair separately (simultaneous Clopper--Pearson bounds
+with a Bonferroni correction).
 
-Each of ten seeds occurs in five planned blocks. The seed bootstrap resamples
-whole clusters; the approximate $t_9$ interval uses the ten cluster means.
-Both are limited by the small number of clusters. A distribution-free
-Hoeffding bound uses independent seed means bounded in $[-1,1]$, allowing
-arbitrary within-seed dependence. It is deliberately conservative, but its
-failure to exclude the minimum is part of the result, not an omitted check.
+The grid reused ten random seeds, each in five blocks, so blocks that share a
+seed may not be independent. Two intervals allow for this by treating each
+seed as a cluster: a bootstrap over seeds, and an approximate $t$ interval
+over the ten seed means. With only ten clusters, both are rough. The
+Hoeffding bound makes no assumption at all about how blocks that share a seed
+depend on each other, which makes it very wide.
 
 \begin{center}\small
 \begin{tabular}{@{}lrr@{}}
 \toprule
 95\% interval method & Literal target & Calibrated target\\
 \midrule
-Released block bootstrap & $\USLiteralReleasedCI$ & $\USCalibratedReleasedCI$\\
+Planned block bootstrap & $\USLiteralReleasedCI$ & $\USCalibratedReleasedCI$\\
 Conservative independent pairs & $\USLiteralExactCI$ & $\USCalibratedExactCI$\\
 Seed-cluster bootstrap & $\USLiteralSeedBootstrapCI$ & $\USCalibratedSeedBootstrapCI$\\
 Approximate seed $t_9$ & $\USLiteralSeedTCI$ & $\USCalibratedSeedTCI$\\
@@ -61,20 +60,19 @@ Independent-seed Hoeffding & $\USLiteralHoeffdingCI$ & $\USCalibratedHoeffdingCI
 \end{tabular}
 \end{center}
 
-The estimates remain $\USLiteralEstimate$ and $\USCalibratedEstimate$.
-The prospective non-replication verdict stands under its specified block
-analysis. Exclusion of a 0.30 effect is not robust to every dependence
-assumption: the Hoeffding intervals include it. These checks cover the two
-primary-judge Llama target aggregates, not every control, evaluator or Gemma
-endpoint, and do not justify transferring their coverage elsewhere.
+The estimates are $\USLiteralEstimate$ and $\USCalibratedEstimate$ under
+every method. The planned block analysis excludes an effect of 0.30, and so
+do the conservative and seed-cluster intervals; only the Hoeffding bound does
+not. The planned verdict therefore stands, but excluding 0.30 depends on how
+much independence one is willing to assume. These checks cover only the two
+target estimates under the primary judge, not the control panels, the other
+judges or the Gemma study.
 
-\paragraph{Fixed panel versus changing panel composition.}
-The released hierarchical intervals resample the four model identities as
-well as their source blocks. That incorporates changes in the composition
-of a purposively selected panel. To isolate sampling uncertainty within the
-observed panel, we instead hold all four identities fixed and resample
-complete source-text blocks within each model, retaining equal-model weights.
-On the indirect-experience query:
+\paragraph{Fixed versus resampled model panel.}
+In the main text, intervals for four-model averages also redraw which models
+make up the panel. To measure only the uncertainty within these four models,
+we instead keep all four in the panel and resample whole blocks within each
+model, still weighting the models equally. On the main question:
 
 \begin{center}\small
 \begin{tabular}{@{}llrr@{}}
@@ -83,16 +81,15 @@ Judge & Effect & Estimate & Fixed-panel 95\% interval\\
 \midrule
 OpenAI & Instruction & $\USOpenaiInstructionEstimate$ & $\USOpenaiInstructionFixedCI$\\
 Anthropic & Instruction & $\USAnthropicInstructionEstimate$ & $\USAnthropicInstructionFixedCI$\\
-OpenAI & Transcript & $\USOpenaiTranscriptEstimate$ & $\USOpenaiTranscriptFixedCI$\\
-Anthropic & Transcript & $\USAnthropicTranscriptEstimate$ & $\USAnthropicTranscriptFixedCI$\\
-OpenAI & Incongruent cells & $\USOpenaiDifferenceEstimate$ & $\USOpenaiDifferenceFixedCI$\\
-Anthropic & Incongruent cells & $\USAnthropicDifferenceEstimate$ & $\USAnthropicDifferenceFixedCI$\\
+OpenAI & Continuation & $\USOpenaiTranscriptEstimate$ & $\USOpenaiTranscriptFixedCI$\\
+Anthropic & Continuation & $\USAnthropicTranscriptEstimate$ & $\USAnthropicTranscriptFixedCI$\\
+OpenAI & Swapped requests, head to head & $\USOpenaiDifferenceEstimate$ & $\USOpenaiDifferenceFixedCI$\\
+Anthropic & Swapped requests, head to head & $\USAnthropicDifferenceEstimate$ & $\USAnthropicDifferenceFixedCI$\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-This sensitivity strengthens the description of negative mean transcript
-effects in this particular panel; it does not establish a negative effect
-in every model. The original wider model-resampling intervals remain in the
-main text as composition sensitivities. Neither method supports inference
-to a random population of model families.
+Holding the panel fixed narrows every interval, and the average continuation
+effect for these four models is then negative under both judges. That
+describes this panel, not every model, and neither kind of interval supports
+conclusions about language models in general.

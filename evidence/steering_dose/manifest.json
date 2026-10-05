@@ -1,0 +1,10 @@
+{
+  "generator_sha256": "34b86c00d84f6de5683d12b6970fb905c9592631750ae4b12c86e0404cc3954d",
+  "inputs": {
+    "data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json": "ae51be60d10bfa70096086a075fa5197128de5e424d2032f8dc7426cd3bc0fe4",
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv": "79e7fc611b66fbb0c9713d5e6cbae6d3cb1a6437fb1bc99052679355ef64bc04"
+  },
+  "rows_verified": 450,
+  "schema": "steering_dose_v1",
+  "values_sha256": "907ad29df16f03e045de7bb8c3f605db5f8065360751e16fbecd46f323eef131"
+}

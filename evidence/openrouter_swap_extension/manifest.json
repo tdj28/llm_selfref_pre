@@ -1,0 +1,111 @@
+{
+  "files": {
+    "evidence/openrouter_swap_extension/figure_data.json": {
+      "bytes": 2605,
+      "sha256": "324f92b8824feb19cda577d8f653225db4acf95922376ee1495a53e587986760"
+    },
+    "evidence/openrouter_swap_extension/inputs/analysis.json.gz": {
+      "bytes": 216644,
+      "sha256": "eb904d5f844bbdfc5fd2b97d514361b3c2a6faf50e7783447d51cb6e6700f7c4"
+    },
+    "evidence/openrouter_swap_extension/inputs/main_rows.json.gz": {
+      "bytes": 159190,
+      "sha256": "ece4d5131f226766dc648d23bfe2aa2d45d033e32e24b1dd66365abc911cde66"
+    },
+    "evidence/openrouter_swap_extension/inputs/plan.json.gz": {
+      "bytes": 24211,
+      "sha256": "810e239e1140dc79aca618e0b86391be1a57dd0b31eecc223181997cc11e8207"
+    },
+    "evidence/openrouter_swap_extension/inputs/qualification.json.gz": {
+      "bytes": 54064,
+      "sha256": "10c7bbf0a2daece1d60c8723a5d8b68a1e7dad045fd354a14b9aaa5794d86ed0"
+    },
+    "evidence/openrouter_swap_extension/inputs/release.json.gz": {
+      "bytes": 8486,
+      "sha256": "e6393d3bb41b43c3a5372d683cdf30ba9ba491d96fd5e61bfc31631696a4ab38"
+    },
+    "evidence/openrouter_swap_extension/inputs/screen_rows.json.gz": {
+      "bytes": 54911,
+      "sha256": "9e4f3d1778a69b97d8a7bd75c3e42b8acefed19c9cbfe41fb060bbf42c205d11"
+    },
+    "evidence/openrouter_swap_extension/inputs/source_inventory.json": {
+      "bytes": 5117,
+      "sha256": "bf77334c21a94d356628475a1f9cb62d52e13f0293db95d4d710f3a0ffb09377"
+    },
+    "evidence/openrouter_swap_extension/results.json": {
+      "bytes": 18787,
+      "sha256": "7d049835055ba164fd8e2947f4d052fa3689941c7706ad3903674d50aa0617b9"
+    },
+    "evidence/openrouter_swap_extension/values.tex": {
+      "bytes": 2339,
+      "sha256": "d62501576f34b613467cd6d2afa7a1ce8cd0ee6651c5023c83c18adb4ea74687"
+    },
+    "paper/figures/openrouter_swap_extension_measurement.pdf": {
+      "bytes": 20812,
+      "sha256": "4a489f56d7ea53b5cceb24bb28e1dbed0825e65cc14dbf7c6497c7ec0d04617b"
+    },
+    "paper/figures/openrouter_swap_extension_measurement.png": {
+      "bytes": 53204,
+      "sha256": "3e037ba3cb6608925d81a336f2db53eacde43371a4d9dcee92029b561558c43f"
+    },
+    "paper/openrouter_swap_extension.tex": {
+      "bytes": 4793,
+      "sha256": "9858653353981779e3aac1d1db5eec5956acbe6a6f9e5e772231d5966c1c8386"
+    },
+    "scripts/verify_openrouter_swap_extension.py": {
+      "bytes": 22065,
+      "sha256": "cb53cdf8b1bf5eb3768fa3c5a05a06a3d89e3f482734c6cc502fc22760adf01b"
+    },
+    "tests/test_openrouter_swap_extension.py": {
+      "bytes": 11428,
+      "sha256": "831bb4dd1c2e665ec19171e72e8181f7722bfe336a89e6da01bf100e5af4e78b"
+    }
+  },
+  "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",
+  "release": "data/openrouter_swap/main_v1_20261004",
+  "schema": "openrouter-swap-editorial-binding-v1",
+  "scope": {
+    "authorizes_collection": false,
+    "bootstrap_intervals_recomputed": false,
+    "editorial_binding_only": true,
+    "human_validation": false,
+    "original_analysis_selected_values_crosschecked": true,
+    "primary_bonferroni_hoeffding_intervals_recomputed": true,
+    "raw_api_receipts_reaudited_by_this_command": false,
+    "row_counts_and_block_contrasts_recomputed": true
+  },
+  "source_commit": "0438e6c12e6024da7e4284ec6c396e27c6c1738a",
+  "source_inputs": {
+    "analysis": {
+      "bytes": 4699481,
+      "release_path": "snapshots/003611/main_analysis.json",
+      "sha256": "9bfd68ce6c72c2c0a4fbc01b18a65850fca1f259fb0f3a5ffd30e6e13d65f758"
+    },
+    "main_rows": {
+      "bytes": 1544883,
+      "release_path": "snapshots/003611/main_rows.json",
+      "sha256": "ca7ee942965b008e6c9f48224d3cd43f5be76ca400fd8c6c613d68489a1d5753"
+    },
+    "plan": {
+      "bytes": 642074,
+      "release_path": "PLAN.json",
+      "sha256": "9efe5c32f7148e04a64f01193673c89772de21754fa46b4dd3aa87568283874d"
+    },
+    "qualification": {
+      "bytes": 556932,
+      "release_path": "snapshots/003611/qualification.json",
+      "sha256": "4861cbc370511aa74e3901f108e8e8a8bc009045c5c9725764bc703598f7c3a9"
+    },
+    "release": {
+      "bytes": 123330,
+      "release_path": "RELEASE.json",
+      "sha256": "4bc189277026472ed3507fa7d9667db4dff03c9866fcb244327ee4c681e257c4"
+    },
+    "screen_rows": {
+      "bytes": 477669,
+      "release_path": "snapshots/003611/screen_rows.json",
+      "sha256": "d0f943f1b5f0211582c2ee1831cb8b0ea3b25dc7e91169c4cbba61068ba92b5a"
+    }
+  },
+  "source_manifest_sha256": "bf77334c21a94d356628475a1f9cb62d52e13f0293db95d4d710f3a0ffb09377"
+}

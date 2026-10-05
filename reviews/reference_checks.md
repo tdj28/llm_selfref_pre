@@ -86,3 +86,61 @@ ratings do not validate current experiential self-reports, demonstrate a
 shared mechanism with our task, or establish mere imitation or absence of
 experience. These are executing-agent reference checks, not independent
 human review or replication of the cited studies. No new paid work occurred.
+
+## Machine Self-Report Psychometrics (2026-10-04)
+
+Checked against the arXiv listing pages and full texts for authors, dates and
+stated scope.
+
+- [Plisiecki et al. (2026), The Pinocchio Dimension](https://arxiv.org/abs/2605.05080),
+  v1 of 6 May 2026: across 45 questionnaires and 50 models, the main axis of
+  between-model variation is how readily a model presents itself as a locus
+  of phenomenal experience; the authors link it to post-training.
+- [Plisiecki et al. (2026), The Two-Process Theory of Machine Self-Report](https://arxiv.org/abs/2607.20082),
+  v1 of 22 July 2026: post-training both installs a permitted inner life and
+  gates first-person claims that models still make for others (206 open-weight
+  models, 67 base/post-trained pairs). The paper states that it measures
+  self-report behavior and makes no claims about consciousness or moral status.
+- [Plisiecki (2026), The Prediction-Measurement Gap](https://arxiv.org/abs/2603.10130),
+  v1 of 10 March 2026: representations optimized for prediction are not
+  thereby suited as scientific measurement instruments; argued for text
+  embeddings.
+
+Use in the manuscript: the first two as between-model, training-focused
+accounts of self-presentation that contrast with our within-interaction
+question, and the second as one untested explanation for our cross-model
+differences; the third only as a parallel argument for the measurement point.
+None is used as evidence for our results.
+
+## References Suggested By External Reviews (2026-10-04)
+
+Checked against the arXiv listing pages or API records and the ACL Anthology
+for authors, dates, venue and the specific statement the manuscript uses.
+
+- [Singh, Linzen and Ravfogel (2026), Can LLMs Introspect? A Reality Check](https://arxiv.org/abs/2605.26242),
+  v1 of 25 May 2026, v2 accepted at COLM 2026: input-only classifiers match
+  models' predictions about their own hidden states, and models cannot
+  reliably tell an internal intervention from an input manipulation.
+- [Lindsey (2026), Emergent Introspective Awareness in Large Language Models](https://arxiv.org/abs/2601.01828),
+  v1 of 5 January 2026: the author stresses that the measured capacity is
+  highly unreliable and context-dependent.
+- [Ma et al. (2026), Do Sparse Autoencoders Identify Reasoning Features in Language Models?](https://arxiv.org/abs/2601.05679),
+  ICML 2026: 45 to 90% of contrastively selected candidates activate after
+  injecting a few associated tokens into non-reasoning text; a small steering
+  study yields minimal changes.
+- [Pattnayak and Bhatia (2026), ReproEvalCard](https://aclanthology.org/2026.acl-short.22/),
+  ACL 2026 short papers, pp. 238--249: lists prompts, judge configurations,
+  randomness controls and intermediate traces among the artifacts needed to
+  reproduce multi-stage LLM evaluations.
+- [Chen et al. (2026), A Judge Should Know What Changed](https://arxiv.org/abs/2608.24419),
+  v1 of 25 August 2026: at matched invariance, judges average 0.945
+  invariance but 0.319 sensitivity to minimal construct-changing edits, so
+  high agreement can coexist with weak construct sensitivity.
+- [Hoang et al. (2026), Sparse Autoencoders Encode Both Concepts and Functions](https://arxiv.org/abs/2607.24645),
+  v1 of 27 July 2026: consistent one-dimensional effects of removing a feature
+  are rare; a feature can be interpretable and causally relevant without
+  giving a stable steering direction.
+
+Use in the manuscript: related work and the measurement and steering sections,
+as context and parallel arguments. None is used as evidence for our results.
+These are executing-agent checks, not independent human review.

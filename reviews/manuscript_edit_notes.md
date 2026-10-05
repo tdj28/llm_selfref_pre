@@ -355,3 +355,39 @@ figure hash changed. The three freeze-to-start intervals (14 seconds, 73
 seconds, about three minutes) moved out of the result paragraphs into one
 disclosure sentence in the Data and Code Availability appendix, which the
 behavioral protocol paragraph now references.
+
+## Factual Pass After The Reader-Focused Rewrite (2026-10-04)
+
+Preserved the owner's explanatory structure and ordinary-language framing.
+This was an automated source and evidence review, not human validation.
+Corrections do not alter frozen rows, estimates, intervals or verdicts:
+
+- The dose comparison uses a designed NF4 mapping corpus, not a natural
+  activation distribution for BF16 Llama. The 4.8% edit statistic is a
+  median over measured non-special-token positions, not a mean or a
+  universal per-token bound.
+- Relabeling capped final answers cannot recover the large effect; it does
+  not test what longer inductions would do. Cue-bearing sentence rewrites
+  change meaning as well as words, so they do not isolate lexical causation.
+- Matched feature controls belong to the multifeature studies, not every
+  operator-matching cell. Small positive counts at stronger doses are
+  preserved rather than described as absent.
+- Gemma's activation-dependent operator, weak pooled delivery summary and
+  judge disagreement are distinguished from full ablation and verified
+  label errors. NF4 encode/decode arithmetic is not asserted to be
+  computationally identical to the later direct FP32 addition.
+- TruthfulQA uses separate truthfulness and informativeness evaluations.
+  The criticism concerns missing informativeness/abstention reporting in
+  Berg Appendix B.2, not the use of a binary truthfulness label. The
+  conditional paired-t discrepancy remains unchanged. Chen and Hoang
+  related-work statements were checked against their primary pages.
+- The 14- and 73-second chronology entries concern run starts, not first
+  completed outcomes. Dated identifiers do not guarantee provider immutability.
+- The 0.60R fidelity dose was a planned damage probe, not an unplanned run.
+  The selected 0.30R dose passed an allowed-loss rule; five control arms lost
+  one factual answer, so accuracy was not literally unchanged.
+
+Added the separately verified Gemini/Opus extension and its measurement
+figure without pooling it with the original panel. Re-generated only current
+editorial manifests after prose/docstring changes using the existing
+`--write` commands; numerical artifacts remain unchanged by these corrections.

@@ -30,6 +30,10 @@ completed work, superseded proposals, and their original dates.
 - [ ] Resolve the final archive and license scope described in
   [NOTICE.md](NOTICE.md) before a whole-repository archive. Third-party rights
   and original-data licensing are not yet cleared by the code license.
+- [ ] Once the new steering data return, decide whether the operator-matching,
+  earlier-steering and internal-readout sections move from Section 5 of the
+  manuscript to its appendices, as both external reviews suggested. The
+  public-weight steering non-recovery stays in the main text either way.
 
 ## Operational Follow-Up
 

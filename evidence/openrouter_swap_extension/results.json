@@ -1,0 +1,702 @@
+{
+  "deferred": {
+    "deepseek": {
+      "future_dispatch": "Requires a separately frozen compatible route; never change privacy policy.",
+      "reason": "Native provider excluded by account paid-model-training policy; no target outcomes exist.",
+      "status": "not_run_privacy_route_unavailable"
+    }
+  },
+  "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",
+  "judge_settings": {
+    "astra": {
+      "id": "openai/gpt-6-astra",
+      "input_price": "10",
+      "output_price": "50",
+      "provider_name": "OpenAI",
+      "provider_slug": "openai",
+      "reasoning_effort": "high"
+    },
+    "opus": {
+      "id": "anthropic/claude-opus-5.5",
+      "input_price": "4",
+      "output_price": "20",
+      "provider_name": "Anthropic",
+      "provider_slug": "anthropic",
+      "reasoning_effort": "high"
+    }
+  },
+  "main": {
+    "gemini": {
+      "astra": {
+        "explicit_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.21875,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.15625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 7,
+            "SS": 17,
+            "S_SHAM": 16
+          }
+        },
+        "inclusive_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.90625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.8125,
+              "missing_blocks": 0,
+              "planned_blocks": 32,
+              "simultaneous_ci95": [
+                0.2120667712083959,
+                1
+              ]
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32,
+              "simultaneous_ci95": [
+                -0.6004332287916041,
+                0.6004332287916041
+              ]
+            },
+            "self_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 26,
+            "SS": 32,
+            "S_SHAM": 32
+          }
+        },
+        "paper": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.90625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.8125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 26,
+            "SS": 32,
+            "S_SHAM": 32
+          }
+        }
+      },
+      "opus": {
+        "explicit_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.53125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": -0.0625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.15625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 12,
+            "SS": 22,
+            "S_SHAM": 20
+          }
+        },
+        "inclusive_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.90625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.8125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 26,
+            "SS": 32,
+            "S_SHAM": 32
+          }
+        },
+        "paper": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.90625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.8125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": 0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 0,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 0,
+            "NS": 0,
+            "SH": 26,
+            "SS": 32,
+            "S_SHAM": 32
+          }
+        }
+      }
+    },
+    "opus": {
+      "astra": {
+        "explicit_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 4,
+            "HS": 0,
+            "H_SHAM": 1,
+            "NH": 2,
+            "NS": 2,
+            "SH": 3,
+            "SS": 1,
+            "S_SHAM": 2
+          }
+        },
+        "inclusive_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.109375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.21875,
+              "missing_blocks": 0,
+              "planned_blocks": 32,
+              "simultaneous_ci95": [
+                -0.3816832287916041,
+                0.8191832287916041
+              ]
+            },
+            "neutral_transcript": {
+              "estimate": 0.0,
+              "missing_blocks": 0,
+              "planned_blocks": 32,
+              "simultaneous_ci95": [
+                -0.6004332287916041,
+                0.6004332287916041
+              ]
+            },
+            "self_sham": {
+              "estimate": 0.0625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.109375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 4,
+            "HS": 0,
+            "H_SHAM": 1,
+            "NH": 2,
+            "NS": 2,
+            "SH": 7,
+            "SS": 4,
+            "S_SHAM": 6
+          }
+        },
+        "paper": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.53125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.78125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": -0.125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.25,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 5,
+            "HS": 0,
+            "H_SHAM": 1,
+            "NH": 4,
+            "NS": 0,
+            "SH": 25,
+            "SS": 14,
+            "S_SHAM": 15
+          }
+        }
+      },
+      "opus": {
+        "explicit_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.046875,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.1875,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.140625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 3,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 1,
+            "NS": 0,
+            "SH": 6,
+            "SS": 0,
+            "S_SHAM": 1
+          }
+        },
+        "inclusive_current_assertion": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.09375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.21875,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.375,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": 0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.15625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 3,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 1,
+            "NS": 0,
+            "SH": 12,
+            "SS": 5,
+            "S_SHAM": 6
+          }
+        },
+        "paper": {
+          "contrasts": {
+            "history_sham": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction": {
+              "estimate": 0.5625,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "instruction_minus_transcript": {
+              "estimate": 0.78125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "neutral_transcript": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "self_sham": {
+              "estimate": -0.03125,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            },
+            "transcript": {
+              "estimate": -0.21875,
+              "missing_blocks": 0,
+              "planned_blocks": 32
+            }
+          },
+          "n_per_cell": 32,
+          "positive": {
+            "HH": 1,
+            "HS": 0,
+            "H_SHAM": 0,
+            "NH": 2,
+            "NS": 1,
+            "SH": 25,
+            "SS": 12,
+            "S_SHAM": 11
+          }
+        }
+      }
+    }
+  },
+  "main_answers": 512,
+  "main_blocks": 32,
+  "model_settings": {
+    "gemini": {
+      "id": "google/gemini-3.1-pro-preview",
+      "input_price": "2",
+      "output_price": "12",
+      "provider_name": "Google AI Studio",
+      "provider_slug": "google-ai-studio",
+      "reasoning_effort": "medium",
+      "temperature": 0.5
+    },
+    "opus": {
+      "id": "anthropic/claude-opus-5.5",
+      "input_price": "4",
+      "output_price": "20",
+      "provider_name": "Anthropic",
+      "provider_slug": "anthropic",
+      "reasoning_effort": "medium"
+    },
+    "sonnet": {
+      "id": "anthropic/claude-sonnet-5.5",
+      "input_price": "2",
+      "output_price": "10",
+      "provider_name": "Anthropic",
+      "provider_slug": "anthropic",
+      "reasoning_effort": "medium"
+    }
+  },
+  "output_cap": 4096,
+  "primary_family_size": 8,
+  "scope": {
+    "authorizes_collection": false,
+    "bootstrap_intervals_recomputed": false,
+    "editorial_binding_only": true,
+    "human_validation": false,
+    "original_analysis_selected_values_crosschecked": true,
+    "primary_bonferroni_hoeffding_intervals_recomputed": true,
+    "raw_api_receipts_reaudited_by_this_command": false,
+    "row_counts_and_block_contrasts_recomputed": true
+  },
+  "screen": {
+    "gemini": {
+      "eligible": true,
+      "readers": {
+        "astra": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": true,
+          "planned": 48,
+          "positive": 19
+        },
+        "opus": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": true,
+          "planned": 48,
+          "positive": 18
+        }
+      }
+    },
+    "opus": {
+      "eligible": true,
+      "readers": {
+        "astra": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": true,
+          "planned": 48,
+          "positive": 7
+        },
+        "opus": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": true,
+          "planned": 48,
+          "positive": 7
+        }
+      }
+    },
+    "sonnet": {
+      "eligible": false,
+      "readers": {
+        "astra": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": false,
+          "planned": 48,
+          "positive": 1
+        },
+        "opus": {
+          "coherent": 48,
+          "missing": 0,
+          "pass": false,
+          "planned": 48,
+          "positive": 3
+        }
+      }
+    }
+  },
+  "screen_answers": 144,
+  "screen_blocks": 12,
+  "screen_unrun_slots": 48,
+  "source_commit": "0438e6c12e6024da7e4284ec6c396e27c6c1738a"
+}

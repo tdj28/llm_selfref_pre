@@ -1,0 +1,113 @@
+{
+  "blocks": 32,
+  "contrast": "SH-HS",
+  "interval_scope": "Astra inclusive only; 95% simultaneous over fixed eight-comparison family",
+  "other_points": "descriptive, no confirmatory intervals",
+  "rows": [
+    {
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.8125,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32,
+      "simultaneous_ci95": [
+        0.2120667712083959,
+        1
+      ]
+    },
+    {
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.8125,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.21875,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.375,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "paper",
+      "estimate": 0.8125,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "paper",
+      "estimate": 0.8125,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "gemini",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.21875,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32,
+      "simultaneous_ci95": [
+        -0.3816832287916041,
+        0.8191832287916041
+      ]
+    },
+    {
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.375,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.09375,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.1875,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "paper",
+      "estimate": 0.78125,
+      "judge": "astra",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32
+    },
+    {
+      "endpoint": "paper",
+      "estimate": 0.78125,
+      "judge": "opus",
+      "missing_blocks": 0,
+      "model": "opus",
+      "planned_blocks": 32
+    }
+  ],
+  "sampling_unit": "paired_block"
+}

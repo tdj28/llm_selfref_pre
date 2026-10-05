@@ -1,0 +1,79 @@
+\input{../evidence/openrouter_swap_extension/values.tex}
+\subsection{Gemini and Opus with neutral-instruction and donor controls}
+\label{sec:openrouter-swap-extension}
+
+The instruction advantage extends to Gemini under an inclusive measure of
+current experience claims, but Opus again shows how much the answer depends
+on the rubric. A separate English-language study screened Gemini 3.1 Pro
+Preview, Claude Sonnet 5.5 and Claude Opus 5.5 through OpenRouter, using
+\ORSScreenBlocks{} four-condition blocks per model. Admission required both
+judges to label some, but not nearly all, answers as experience claims,
+with few incomplete or incoherent responses; it did not require an
+instruction advantage.
+Sonnet remained near the floor: Astra counted \ORSSonnetAstraScreen{} of
+\ORSScreenDenominator{} answers positive and Opus counted
+\ORSSonnetOpusScreen{}. Gemini and Opus qualified. DeepSeek was not tested
+because no route compatible with the account's privacy policy was available;
+that is missing coverage, not a negative behavioral result.
+
+The two admitted models supplied \ORSMainAnswers{} fresh final answers in
+\ORSMainBlocks{} paired blocks each, balanced across two wording families.
+Each block contained the four instruction--continuation combinations, two
+conditions pairing a neutral instruction with either continuation source, and
+two conditions substituting an independently generated continuation from the
+same condition. The main measure was Astra's count of answers in which the
+assistant explicitly or implicitly claims to be having an experience now;
+Opus scored the same answers as a check using a different provider.
+Intervals assume independent source blocks and hold the wording families
+and model settings fixed. We kept the correction for all
+\ORSFamilySize{} originally planned comparisons, despite only two models
+reaching the main panel. The
+\ORSArtifact{data/openrouter_swap/main_v1_20261004/PLAN.json}{study plan}
+and \ORSArtifact{data/openrouter_swap/main_v1_20261004/RELEASE.json}{release}
+specify the prompts, screening and analysis.
+
+For Gemini, retaining the self-referential instruction with a history
+continuation rather than the reverse gave a contrast of
+\ORSGeminiAstraInclusiveEffect{} (simultaneous 95\% interval
+\ORSGeminiAstraInclusiveCI{}). The Opus judge gave the same estimate.
+For Opus responses, the primary estimate was \ORSOpusAstraInclusiveEffect{}
+(\ORSOpusAstraInclusiveCI{}), and the second judge's descriptive estimate
+was \ORSOpusOpusInclusiveEffect{}. Under the paper rubric, however, both
+judges gave \ORSOpusAstraPaperEffect{} on those same responses.
+Counting only explicit claims reduced the contrasts for both response
+models (Figure~\ref{fig:openrouter-swap-extension}). Agreement on the
+paper rubric therefore does not make it interchangeable with a measure of
+current self-attribution.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\linewidth]{figures/openrouter_swap_extension_measurement.pdf}
+\caption{\textbf{The apparent instruction advantage depends on what counts as
+a claim.} The contrast compares a self-referential instruction with a history
+continuation (SH) against a history instruction with a self-referential
+continuation (HS). Each point uses the same \ORSMainBlocks{} paired blocks
+within its response model. Lines show simultaneous 95\% Bonferroni--Hoeffding
+bounds for the primary Astra inclusive endpoint over the fixed
+\ORSFamilySize{}-comparison family; other points are descriptive, not
+additional confirmatory tests. The paper rubric and inclusive labels agree
+for Gemini, but explicit-only labels give smaller contrasts. Opus's
+paper-rubric contrast is much larger than either attribution contrast.}
+\label{fig:openrouter-swap-extension}
+\end{figure}
+
+The neutral-instruction contrast was zero under the primary measure for both
+models, with the wide interval \ORSGeminiAstraInclusiveNeutralCI{} in each
+case. This does not establish equivalence or show that continuations never
+matter. The same-condition donor contrasts were small in this sample, not
+evidence of equivalence. These stateless requests vary the continuation, not
+an observable act of swapping it. Neither control eliminates the mismatch
+explanation for requests whose instruction and continuation conflict.
+
+All response models used medium reasoning effort and the same requested
+output-token cap; Gemini used temperature 0.5, whereas the Claude route did
+not expose the same temperature control. The requested identifiers were
+undated aliases or a preview, and the providers do not disclose enough
+architecture to attribute differences to model design or sophistication.
+These settings, the screening rule and the changed rubric prevent
+pooling this study with the earlier API panel as a controlled test of model
+progress.

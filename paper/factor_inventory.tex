@@ -1,114 +1,62 @@
-% Appendix fragment; main.tex integration is intentionally left to the editor.
-% Requires the manuscript's amsmath, booktabs, tabularx and hyperref packages.
 \providecommand{\factorartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/#1}{#2}}
 \Needspace{8\baselineskip}
-\section{Treatment Factors and Fidelity}
+\section{What Each Experiment Changed}
 \label{app:factor-inventory}
 
-\Cref{tab:factor-inventory} classifies each study's treatment factors as
-fixed (F), varied (V), matched on the named dimension (M) or untested (U).
-The inventory describes the public implementation, not proprietary equivalence.
-The executed strings are those of the
-\factorartifact{src/prompts.py}{prompt registry}; its self-reference/history
-attribution is to the original paper, whereas the orthogonal factorial and
-two added query forms are this project's controls.
+\Cref{tab:factor-inventory} summarizes the original behavioral panel and the
+earlier steering studies: what was varied, held fixed, or not tested. It describes our public
+implementations, not the proprietary service used by the source study. The
+exact prompts are in the \factorartifact{src/prompts.py}{prompt registry}; the
+self-referential and history instructions come from the original paper, while
+the factorial instructions and two of the four final questions are ours.
 
-\begin{table}[t]
+\begin{table}[!htbp]
 \centering\small
-\caption{Treatment factors by study. F: fixed; V: varied; M: matched on the
-named dimension; U: untested.}
+\caption{What each study varied, held fixed and left untested.}
 \label{tab:factor-inventory}
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.16\linewidth}*{3}{>{\raggedright\arraybackslash}X}@{}}
 \toprule
-Study & Identity/content/context & Dose/positions & Order/repetition/boundary \\
+Study & Varied & Held fixed & Not tested\\
 \midrule
-Calibration / transplant & V: instruction and exact assistant-text source;
-M: query, role slots, source string within a contrast. & F: temperature 0.5,
-384/768-token caps; U: equal realized lengths. & F: user--assistant--user,
-20 sources/condition/model; U: role/order reversal or hidden-state transplant. \\
-Factorial / query & V: target $\times$ register, four lexical variants/cell,
-four queries; M: scaffold and five-sentence instruction. & F: same caps,
-five draws/variant/model. & U: equal realized length and fully isolated query
-wording. \\
-Public Llama & F: six notebook-derived working IDs, self-reference + binary
-query; V: controls/sign. & V: literal dose and count 2--4; separate calibrated
-scale; F: layer 50, both turns/all hook-visible positions, 256/256 caps. &
-M: subset, magnitudes, seed across signs/panels; F: shuffled execution,
-50 blocks/ten reused seeds; U: proprietary units or turn-only effects. \\
-Gemma & F: six selected IDs/set; V: semantic/control role, local layer/width.
-& V: activation-dependent edit, set-specific alpha; F: both turns/all
-positions, 256/256 caps. & M: paired seeds, three matched panels; F: 50
-pairs/primary role; U: shared Llama feature identity or successful PT transfer. \\
-Cue extension & V: provider, category, rewrite; M: linked source sentence,
-not identical surrounding text. & F: two assigned cue types, raw-text
-maximum activation; U: position, occurrence count, equal length. & V: scramble
-order; F: one text/item, no prior dialogue; U: natural-corpus/human validation. \\
+Replication and swap & The instruction, and which condition wrote the
+continuation & The question and message roles; temperature 0.5; 384- and
+768-token limits; 20 continuations per condition and model & Equal
+continuation lengths; reversed roles or order; transplanting internal
+states\\
+\addlinespace
+Factorials & Target (self or external) by register (phenomenological or
+analytic), four wordings each; four final questions & The sentence scaffold
+and five-sentence instruction; the same limits; five samples per wording and
+model & Equal lengths; the effect of single words within a question\\
+\addlinespace
+Earlier Llama grid & Sign; target versus three matched control sets; dose (0.4
+to 0.6 per feature on two to four features, plus a larger calibrated scale
+in the 4-bit grid) & The six feature IDs; layer 50; every position in both
+turns; 256-token turns; seeds paired across signs and control sets & The
+proprietary service's dose units; effects confined to one turn\\
+\addlinespace
+Gemma steering & Sign; target versus three matched control sets & Six
+selected features per set; an edit scaled to each feature's activation at
+every position in both turns; 50 pairs & Shared feature identities with
+Llama; steering with pretrained-model SAEs\\
+\addlinespace
+Feature-label check & Rewrites by a second model that add two cue words for
+a category; a scrambled-word control & One sentence per text; no dialogue &
+Where and how often the cues appear; natural text; human validation\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\Needspace{9\baselineskip}
-\paragraph{Inductions, queries and message construction.}
-The exact self-reference and history inductions, the four final queries and
-the factorial induction cells are reproduced in \Cref{fig:example-trial},
-\Cref{tab:queries} and \Cref{tab:factorial-prompts}.
+In the original behavioral panel, each trial is a two-turn exchange,
 \[
- [\mathrm{user}:I]\longrightarrow T;\qquad
- [\mathrm{user}:I,\ \mathrm{assistant}:T,\ \mathrm{user}:Q]
- \longrightarrow R.
+ [\mathrm{user}:I]\longrightarrow C;\qquad
+ [\mathrm{user}:I,\ \mathrm{assistant}:C,\ \mathrm{user}:Q]
+ \longrightarrow R,
 \]
-No experiment-supplied system message or persistent state is added. Final
-requests resubmit the visible package. Transplants cross $I_i,T_j$;
-congruent cells reuse natural outcomes. Both steering turns generate real
-text under the assigned edit, so $T$ is not matched across signs.
-
-\paragraph{Llama operator, timing and observables.}
-The operator and the positions edited by the
-\factorartifact{experiments/exp2_sae/replicate_exp2_goodfire_sae.py}{hook}
-are those of Appendix~\ref{app:implementation}; cached old positions are not
-re-edited at later decode steps, and zero returns the original output.
-Negative coordinates are not clipped. The literal individual grid is
-$-0.6:0.1:+0.6$; aggregate magnitudes are 0.4--0.6 on 2--4 features. The
-separate multiplier is 3.653; calibrated panels 2/3 were not run. Controls
-match decoder norm and activation statistics, not all semantics or
-trajectories. Requested coefficients, the edited latent array, the hidden
-perturbation and behavior are distinct: Llama's ``observed latent deltas''
-inspect that array, \emph{not} $E(h')$, and no re-encoded latent change is
-stored.
-
-\paragraph{Gemma's different operator.}
-The six target features, their selection and the activation-dependent
-operator with its multiplier are those of Appendix~\ref{sec:gemma}.
-The target quantiles are 58, 54.25, 1168, 66.85, 98, 46.45. This scaled edit
-is not a hard clamp on re-encoded activation. Three disjoint six-feature
-controls are matched from 4,096 eligible candidates on decoder norm, mean
-activation, positive-item fraction and active q90, excluding selected
-semantic sets and requiring smaller absolute discovery contrast.
-Semantic comparator sets themselves can overlap.
-
-Actual \factorartifact{experiments/exp2_sae/calibrate_gemma_scope_9b_steering.py}{calibration}
-uses captured states from six untreated two-turn runs with 128-token caps;
-unit edits are computed offline and each set's alpha targets median relative
-RMS 0.05. It is not a fresh fully steered pilot. Both signs share that set's
-alpha, not one common alpha across sets.
-The \factorartifact{experiments/exp2_sae/gemma_scope_9b_runtime.py}{runtime}
-explicitly uses cached decoding and records $E_S(h')$ across calls plus
-downstream relay readouts. Its RMS uses the constructed scaled delta, not
-an independently differenced post-addition BF16 state. Re-encoding, downstream
-readout and behavioral change are not interchangeable. Layer-9/131k,
-layer-31/131k and layer-20/16k sensitivities each select six local IDs;
-the failed-transfer all-layer atlas remains exploratory.
-
-\paragraph{Cue amount, location and matching.}
-The \factorartifact{experiments/exp2_sae/build_sae_construct_validity_extension.py}{builder}
-assigns two absent cue types and asks the other provider to rewrite the whole
-sentence preserving its intended proposition/polarity. Both exact cue sequences
-must occur, but their location, repetition and surrounding words are not fixed.
-Ablation instead forbids all pooled cues; scrambling permutes the extracted
-word multiset and drops original punctuation. Text gates require one sentence,
-5--80 words and bounded lexical overlap; they do not validate meaning or equal
-length. The realized extension has 2,230 paraphrases and 376 source-linked
-counterfactuals, mapped as raw text with a 256-token cap. This is a paired
-rewrite test, not an isolated insertion. Recovery intervals condition on the
-observed discovery denominator.
+with no system message added and no state carried between requests. The
+swap recombines $I$ and $C$ from different conditions, and the original pairs
+reuse the replication's answers. In the steering studies both turns are
+generated under the edit, so the continuation itself differs between signs.
+The steering operators are given in Appendix~\ref{app:implementation} (Llama)
+and Appendix~\ref{sec:gemma} (Gemma).

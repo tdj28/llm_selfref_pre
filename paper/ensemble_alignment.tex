@@ -1,110 +1,165 @@
-\subsection{Random-subset design and inference}
+\subsection{How the main steering test works}
 \label{sec:ensemble-alignment}
 
-To match the paper's random two-to-four-feature distribution, a separate
-public freeze fixes 50 fresh blocks. This is distinct from the earlier
-fixed-six notebook aggregate (Appendix~\ref{sec:source-alignment}). In each
-block, $K$ is uniform on $\{2,3,4\}$, the selected
-$K$-subset is uniform within the six accepted coordinates, and its magnitudes
-are independent draws from $U(0.4,0.6)$. Suppression and amplification use
-opposite signs of the same sampled vector. The same ordinal subset and
-magnitudes are transferred to each of the three previously matched control
-panels. One untreated (true-zero) arm per block completes the 450-trial design.
+The source study steered random sets of two to four deception-related
+features at a time; its text does not list the pool, so we draw from the six
+features above. To match that design, a separate plan, published before the
+run, fixes 50 fresh blocks; this test is distinct from the earlier test that
+steered all six features together (Appendix~\ref{sec:source-alignment}). In each
+block, the number of features $K$ is drawn uniformly from $\{2,3,4\}$, the
+$K$ features are drawn uniformly from the six, and each feature's dose is
+drawn independently from $U(0.4,0.6)$. Suppression and amplification apply
+the same sampled edit with opposite signs. The same subset positions and doses
+are applied to each of three sets of control features matched in an earlier
+study, and one untreated condition per block completes the 450-trial design.
 
-This run uses the paper induction, its consciousness question, temperature
-0.5, a 256-token cap per turn, and the same native-BF16 additive operator.
-It scores every second turn under both unsteered local rubrics, with the
-paper rubric primary. Across arms, the mirrored feature draws preserve the
-specified marginal intervention distribution. Decoding uses a shared block
-seed across arms and resets it for each turn, a protocol choice of this run.
-The full plan, analysis and runtime were pushed before
-its outcomes. The preceding source-aligned run was still active; its first
-five texts and technical telemetry, but not aggregate results or J-lens
-outcomes, had been inspected when this design was chosen.
-The \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/README.md}{pinned release}
+The run uses the paper's induction, its consciousness question, temperature
+0.5, at most 256 tokens per turn, and the same native-precision additive edit
+as above. Every second-turn answer is scored by two local, unsteered rubrics:
+the paper's, which is the main one, and a second, shorter yes/no rubric from
+the same public notebook. Because the feature draws are mirrored
+across conditions, every condition receives the same specified mix of edits.
+Decoding uses the same random seed for all conditions in a block and resets
+it for each turn, a choice made for this run. The full plan, analysis and
+runtime were published before the results existed. An earlier source-aligned
+run was still under way when this design was chosen; we had looked at its
+first five texts and its technical records, but not at its results or its
+internal readouts. The
+\ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/README.md}{pinned release}
 contains every generated response, judge output, control, runtime record and
-artifact hash, rather than selected examples.
+file hash, not selected examples.
 
-The estimand is the positive-label probability under a negative random
-target edit minus that under its positive counterpart, conditional on the
-fixed induction, model and public operator. Each sampled
-subset/magnitude/decode-seed block is an experimental unit. The primary
-interval subtracts opposite one-sided Clopper--Pearson marginal limits, using
-tail probability $0.05/4$ for each of four limits. The union bound gives at
-least 95\% coverage under independent blocks without assuming independent
-signs within a block. A 20,000-resample paired-block percentile interval is a
-secondary summary. Missing labels, if present, are bounded over the full
-planned denominator rather than silently coded as denials.
+The quantity estimated is the probability of a positive label under a
+negative random edit to the target features minus that under the matching
+positive edit, for this induction, model and public edit method. Each block,
+defined by its sampled features, doses and decoding seed, is one experimental
+unit. The main interval combines conservative one-sided Clopper--Pearson
+limits for the two conditions, using a tail probability of $0.05/4$ for each
+of four limits; this guarantees at least 95\% coverage across independent
+blocks without assuming that the two signs within a block are independent. A
+paired-block bootstrap interval with 20,000 resamples is reported as a
+secondary summary. Missing labels, had there been any, would have been
+bounded over the full planned count rather than silently counted as denials.
 
-The prospective large-effect threshold is 0.30: an upper bound below it
-means that signature is not recovered under this public operator; a lower
-bound at least 0.30 supports a large signature; otherwise the threshold
-comparison is inconclusive. The rule tests a frozen minimum relevant effect;
-it is not an equivalence test and does not establish a zero effect.
-Target-minus-mean-control specificity uses simultaneous limits over all
-eight arm probabilities, with tail $0.05/16$ for each limit. Every control
-panel, both rubrics and the untreated arm remain in the report.
+The large-effect threshold, set before the run, is 0.30. If the interval's
+upper limit falls below it, the large effect is ruled out for this public
+edit method; if its lower limit is at least 0.30, the data support a large
+effect; otherwise the comparison is inconclusive. The rule tests a pre-set
+minimum effect worth detecting; it is not an equivalence test and does not
+show that the effect is zero. Specificity, the target minus the average of
+the control sets, uses simultaneous limits over all eight condition
+probabilities, with a tail of $0.05/16$ for each. Every control set, both
+rubrics and the untreated condition are reported.
 
-\subsection{Primary result}
+\subsection{Main steering result}
 \label{sec:ensemble-results}
 
-All 450 trials completed with 50 complete blocks and no missing labels or
-empty turns. Of 900 response turns, 111 reached the length cap: 90 first
-turns and 21 second turns. They remain in the analysis. The untreated
-(true-zero) rate
-is $\EnsemblePaperZeroPositive{}/\EnsemblePaperZeroValid{}$ under the paper
-rubric and $\EnsembleNotebookZeroPositive{}/\EnsembleNotebookZeroValid{}$
-under the notebook rubric, on the same generated outputs.
+All 450 trials completed, with 50 complete blocks and no missing labels or
+empty turns. Of the 900 turns, \SteeringTruncContinuationCapped{} first turns
+hit the length limit, spread across all nine conditions
+(\SteeringTruncContinuationArmLow{} to \SteeringTruncContinuationArmHigh{}
+each), and so did \SteeringTruncAnswerCapped{} of the scored answers:
+\SteeringTruncTargetSuppressionCapped{} under target suppression,
+\SteeringTruncTargetAmplificationCapped{} under target amplification,
+\SteeringTruncZeroCapped{} untreated and \SteeringTruncControlCapped{} in the
+control sets. All stay in the analysis. Without steering,
+$\EnsemblePaperZeroPositive{}/\EnsemblePaperZeroValid{}$ answers are labeled
+positive under the paper rubric and
+$\EnsembleNotebookZeroPositive{}/\EnsembleNotebookZeroValid{}$ under the
+second rubric, on the same outputs.
 
-The primary target gives
+Steering the target features gives
 $\EnsemblePaperTargetSuppressionPositive{}/\EnsemblePaperTargetSuppressionValid{}$
-positive labels under negative steering and
+positive labels under suppression and
 $\EnsemblePaperTargetAmplificationPositive{}/\EnsemblePaperTargetAmplificationValid{}$
-under positive steering. The gap is $\EnsemblePaperTargetGap{}$, with
+under amplification. The difference is $\EnsemblePaperTargetGap{}$, with
 conservative interval
-$[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$.
-Its upper limit is below the frozen +0.30 benchmark. The paired-block
-percentile interval is $[-0.14,0.06]$, reported as a secondary summary rather
-than the basis of that verdict. The smaller notebook-rubric gap,
-$\EnsembleNotebookTargetGap{}$ with conservative interval
-$[\EnsembleNotebookTargetCPLow{},\EnsembleNotebookTargetCPHigh{}]$,
-does not exclude +0.30: its threshold comparison remains inconclusive.
-Its paired-bootstrap interval is $[-0.20,0.16]$.
+$[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$, whose upper
+limit is below the +0.30 threshold. That threshold, kept from our first
+public-weight protocol, was chosen there as a large shift that is still less
+than half the source's 0.80, so the test asks for much less than the
+published size. Read against other sizes, the upper limit also excludes +0.20
+and the source's 0.80, but not +0.10. The paired-block bootstrap interval is
+$[-0.14,0.06]$, a secondary summary that does not enter the decision. Under
+the second rubric the difference is $\EnsembleNotebookTargetGap{}$, with
+conservative interval
+$[\EnsembleNotebookTargetCPLow{},\EnsembleNotebookTargetCPHigh{}]$, which
+excludes the source's 0.80 but not +0.30, so that comparison is
+inconclusive; its paired-bootstrap interval is $[-0.20,0.16]$.
+
+Relabeling the capped final answers does not recover a large effect. In a
+post-hoc check, we treated the
+\SteeringTruncTargetCapped{} capped target answers, all labeled positive under
+the paper rubric, as unknown and recomputed the conservative interval so that
+it holds for every possible label they could have received. Under the paper
+rubric it widens to $[\SteeringTruncPaperLow{},\SteeringTruncPaperHigh{}]$,
+which still excludes +0.30; under the second rubric its upper limit becomes
+$\SteeringTruncNotebookHigh{}$, which still excludes the source's 0.80. This
+does not test what longer inductions or answers would have produced.
+
+How hard did this push the model? The median edit was
+\SteeringDoseEditMedianPct\% of the size of the model's internal state at the
+edited layer (10th to 90th percentile across non-special-token positions
+\SteeringDoseEditLowPct--\SteeringDoseEditHighPct\%) and arrived as requested
+at every such measured position (cosine with the requested edit at least
+\SteeringDoseCosineMin). It was large enough to change the text: compared
+with the untreated run that used the same random seed, the first turn
+differed in \SteeringDoseTextChangedLow\% to \SteeringDoseTextChangedHigh\% of
+target runs. Yet those runs kept the untreated run's paper-rubric label in
+\SteeringDoseLabelSameLow\% to \SteeringDoseLabelSameHigh\% of cases. Measured
+against the features themselves, the push was gentle. A weight of 0.5 is only
+\SteeringDosePeakShareLow{} to \SteeringDosePeakShareHigh{} of the mapping-corpus
+reference activation (the typical maximum in designed feature-matching texts) of
+the three features whose activation maps best match their labels, 41533, 58667
+and 30686, although it exceeds that reference for the two weakest, 23893 and
+22004. These scales were measured with NF4 model weights, not the BF16 weights
+used here, and are not estimates of the natural activation distribution.
+This test therefore rules out a large effect at this dose, not at every
+dose; Section~\ref{sec:operator-matching} reports stronger doses for two of
+the features.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
-\caption{\textbf{Random-subset target steering lacks the proposed large signature.}
-All four fixed panels and both local rubrics are shown. Each panel contrast
-uses 50 independent draw/seed blocks, with signs paired within blocks.
-Lines are conservative marginal-limit intervals, not bootstrap intervals.
-The dotted +0.30 threshold applies prospectively to the target; comparisons
-among control panels are secondary, not multiplicity-adjusted discoveries.}
+\includegraphics[width=\linewidth, trim=0 19bp 0 25bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
+\caption{\textbf{Steering random subsets of the target features produces no
+large effect.} All four feature sets (the target and three matched control
+sets) and both local rubrics are shown; the panel labeled ``Notebook rubric''
+is the second rubric. Each difference uses 50 independent
+blocks, with the two signs paired within blocks. Lines are conservative
+intervals, not bootstrap intervals. The dotted line marks the +0.30
+threshold, which was set in advance for the target only; comparisons among
+the control sets are secondary and not corrected for multiple comparisons.}
 \label{fig:ensemble-effects}
 \end{figure}
 
-The paper-rubric control gaps are $\EnsemblePaperControlOneGap{}$,
-$\EnsemblePaperControlTwoGap{}$ and $\EnsemblePaperControlThreeGap{}$;
-target minus their mean is $\EnsemblePaperTargetMinusControls{}$ with
-simultaneous interval
+Under the paper rubric, the three control sets give differences of
+$\EnsemblePaperControlOneGap{}$, $\EnsemblePaperControlTwoGap{}$ and
+$\EnsemblePaperControlThreeGap{}$; the target minus their average is
+$\EnsemblePaperTargetMinusControls{}$, with simultaneous interval
 $[\EnsemblePaperTargetMinusControlsCPLow{},\EnsemblePaperTargetMinusControlsCPHigh{}]$.
-Notebook-rubric control gaps are $\EnsembleNotebookControlOneGap{}$,
-$\EnsembleNotebookControlTwoGap{}$ and $\EnsembleNotebookControlThreeGap{}$;
-specificity is $\EnsembleNotebookTargetMinusControls{}$
+Under the second rubric, the control differences are
+$\EnsembleNotebookControlOneGap{}$, $\EnsembleNotebookControlTwoGap{}$ and
+$\EnsembleNotebookControlThreeGap{}$, and the target minus their average is
+$\EnsembleNotebookTargetMinusControls{}$
 $[\EnsembleNotebookTargetMinusControlsCPLow{},\EnsembleNotebookTargetMinusControlsCPHigh{}]$.
-Neither specificity interval excludes zero.
+Neither interval excludes zero, so we cannot say whether the target features
+behave differently from the controls.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}
-\caption{\textbf{Baseline and rubric remain consequential.}
-Positive-label rates for both signs and every matched panel, with the
-corresponding untreated rate. No label is missing. The paper rubric
-starts high, but the amplification arm still has room to lower the rate;
-the target does not reproduce the reported large downward change.}
+\includegraphics[width=\linewidth, trim=0 0 0 24bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}
+\caption{\textbf{The untreated rate and the rubric both matter.} Share of
+answers labeled positive under each sign for every feature set; the dashed
+line (labeled ``true zero'') is the untreated rate, and the panel labeled
+``Notebook rubric'' is the second rubric. No label is missing. Under the paper rubric
+the untreated rate starts high, but amplification still had room to lower
+it; the target features do not produce the large drop reported in the source
+study.}
 \label{fig:ensemble-rates}
 \end{figure}
 
-This experiment improves alignment on feature-subset distribution, induction,
-precision and sample size relative to the preceding notebook grid. This
-phase collected no new J-lens captures.
+Compared with the earlier native-precision grid, this test is closer to the
+source study's description in how features are sampled, which induction is
+used and sample size; compared with the earlier 4-bit grid
+(Appendix~\ref{app:legacy-steering}), it runs the model at its native
+precision. It collected no new internal readouts.

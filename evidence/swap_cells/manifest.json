@@ -1,0 +1,12 @@
+{
+  "generator_sha256": "5970e78a66c86eb3f553f67542eb188e823b23cb2fbfbe0cfd49170f5e84fbaf",
+  "inputs": {
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_effects.csv": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/transplant_rates.csv": "27cf76b51e6ea3dc8a0689a4ee57b1bebc5730f9d73ad89bc12dfa598e98ce53",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_effects.csv": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/transplant_rates.csv": "8698279936e4cbd13b41dfd6c54a721df945b3e029e9ec88daac8294e5bee8e4"
+  },
+  "query": "indirect_experience",
+  "schema": "swap_cells_v1",
+  "table_sha256": "cff64b13a11bd9515453c17432fb7731bcb18ca337299480f418e9fb9bc16ebf"
+}
