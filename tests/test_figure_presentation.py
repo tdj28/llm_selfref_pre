@@ -11,8 +11,16 @@ import pytest
 from scripts import verify_figure_presentation as p
 
 
+@pytest.fixture(scope="module", autouse=True)
+def isolated_matplotlib_rc():
+    import matplotlib
+    # Include module-scoped package construction, not only individual tests.
+    with matplotlib.rc_context():
+        yield
+
+
 @pytest.fixture(scope="module")
-def package(tmp_path_factory):
+def package(tmp_path_factory, isolated_matplotlib_rc):
     out = tmp_path_factory.mktemp("figure-presentation")
     p.build(out)
     return out
@@ -27,6 +35,25 @@ def copy_package(package, tmp_path):
 
 def test_full_redraw_is_byte_identical(package):
     assert p.verify(package, check_render=True)["render_reproduced"]
+
+
+@pytest.mark.parametrize("failure", [False, True])
+def test_rc_isolation_restores_on_exit_and_error(failure):
+    import matplotlib
+    before = matplotlib.rcParams.copy()
+    context = isolated_matplotlib_rc.__wrapped__()
+    next(context)
+    matplotlib.rcParams["axes.unicode_minus"] = not before["axes.unicode_minus"]
+    if failure:
+        with pytest.raises(RuntimeError, match="fixture error"):
+            context.throw(RuntimeError("fixture error"))
+    else:
+        context.close()
+    assert matplotlib.rcParams == before
+
+
+def test_canonical_pdfs_and_generator_remain_byte_bound():
+    assert p.verify(p.PACKAGE, check_render=True)["render_reproduced"]
 
 
 def test_every_displayed_value_and_zero_is_retained():

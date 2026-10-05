@@ -33,8 +33,8 @@ these authorizations does not reopen model search or other collection.
 - [x] Integrate the fixed-dose findings into the paper: narrow exclusion of
   +0.30 at dose 0.25, unresolved specificity, and a mapping-reference scale
   rather than natural-corpus strength. Keep earlier failed qualifications intact.
-- [ ] Complete the authorized Kolibri follow-up. The behavioral screen is
-  in progress; the conditional main panel is not complete. Verify its scientific
+- [ ] Complete the authorized Kolibri follow-up. The behavioral screen passed;
+  the fixed main panel is collecting. Verify its scientific
   release before adding findings, describe official FP8 accurately, and do not
   infer an architecture effect.
 
