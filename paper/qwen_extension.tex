@@ -1,5 +1,5 @@
 \input{../evidence/qwen_extension/values.tex}
-\subsection{Qwen: a substantial label rate, a rubric-dependent contrast}
+\subsection{Qwen3.8: a substantial label rate, a rubric-dependent contrast}
 \label{sec:qwen-extension}
 
 Qwen3.8-2.4T-A95B was not at the reporting floor. Under Astra's inclusive
@@ -33,9 +33,10 @@ in the text.
 \begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{../evidence/qwen_extension/measurement.pdf}
-\caption{\textbf{Qwen's apparent instruction advantage changes with the
-measurement.} SH--HS compares the two incongruent instruction--continuation
-packages. All six points use the same \QEXBlocks{} paired blocks. Bars show
+\caption{\textbf{Qwen3.8's apparent instruction advantage changes with the
+measurement.} SH--HS compares a self-referential instruction with a history
+continuation against a history instruction with a self-referential
+continuation. All six points use the same \QEXBlocks{} paired blocks. Bars show
 pointwise 95\% descriptive paired-block bootstrap intervals, using
 \QEXBootstrapResamples{} resamples within the two wording families.
 They are not the primary confirmatory intervals: the prose retains the

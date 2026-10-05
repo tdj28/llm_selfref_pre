@@ -61,8 +61,8 @@
       "sha256": "4e2fe90f2fc939d58aa007efaa0b966062454ee5c6c9c5d7fe57bddfe1810003"
     },
     "paper/qwen_extension.tex": {
-      "bytes": 3072,
-      "sha256": "42d16bc31e17697553782507f57f6e9694921a6137b3feb969abd67c1d1a627d"
+      "bytes": 3149,
+      "sha256": "d67363d7941de70034ccb00de2d752f30a83f60457d9274e185fb4ea50b43909"
     },
     "scripts/verify_qwen_extension.py": {
       "bytes": 21645,

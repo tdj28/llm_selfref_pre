@@ -34,8 +34,8 @@ columns, so that steering had room to raise it. Neither wording did.}
 Frame & False proposition, user asserts & True proposition, user doubts\\
 \midrule
 Neutral & \FidelityNeutralFalse{} & \FidelityNeutralTrue{}\\
-Pressure 0 & \FidelityPressureZeroFalse{} & \FidelityPressureZeroTrue{}\\
-Pressure 1 & \FidelityPressureOneFalse{} & \FidelityPressureOneTrue{}\\
+Wording A & \FidelityPressureZeroFalse{} & \FidelityPressureZeroTrue{}\\
+Wording B & \FidelityPressureOneFalse{} & \FidelityPressureOneTrue{}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -49,15 +49,51 @@ experience claims were therefore not run. A planned control using two
 features associated with JSON was not run either, because both were inactive
 at the \FidelityProbes{} prompt positions sampled.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
-\includegraphics[width=\linewidth, trim=0 22bp 0 35bp, clip]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}
+{\small\bfseries False statement / user asserts}\par\smallskip
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] (pressure) at (0,0)
+  {\includegraphics[width=0.75\linewidth, trim=0 70bp 392bp 66.1bp, clip]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}};
+% Cover only the two categorical labels, below the unchanged axis ticks.
+\begin{scope}[x={(pressure.south east)},y={(pressure.north west)}]
+  \fill[white] (0.444,0.001) rectangle (0.591,0.076);
+  \fill[white] (0.843,0.001) rectangle (0.991,0.076);
+  \node[inner sep=0,font=\sffamily\footnotesize] at (0.51765,0.044) {Wording A};
+  \node[inner sep=0,font=\sffamily\footnotesize] at (0.91809,0.044) {Wording B};
+\end{scope}
+\end{tikzpicture}
+\medskip\par
+{\small\bfseries True statement / user doubts}\par\smallskip
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] (pressure) at (0,0)
+  {\includegraphics[width=0.75\linewidth, trim=390bp 70bp 0 66.1bp, clip]{../data/steering_fidelity/calibration_report_20261002/pressure.pdf}};
+\begin{scope}[x={(pressure.south east)},y={(pressure.north west)}]
+  \fill[white] (0.444,0.001) rectangle (0.591,0.076);
+  \fill[white] (0.843,0.001) rectangle (0.991,0.076);
+  \node[inner sep=0,font=\sffamily\footnotesize] at (0.51654,0.044) {Wording A};
+  \node[inner sep=0,font=\sffamily\footnotesize] at (0.91494,0.044) {Wording B};
+\end{scope}
+\end{tikzpicture}
+\smallskip\par
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+\definecolor{accuracyblue}{HTML}{087F8C}
+\definecolor{probabilityred}{HTML}{C43C52}
+\draw[accuracyblue,thick] (0,0)--(0.4,0);
+\fill[accuracyblue] (0.2,0) circle (1.8pt);
+\node[anchor=west] at (0.45,0) {Accuracy};
+\draw[probabilityred,dashed,thick] (3,0)--(3.4,0);
+\fill[probabilityred] (3.14,-0.06) rectangle (3.26,0.06);
+\node[anchor=west] at (3.45,0) {Mean correct-answer probability};
+\end{tikzpicture}
 \caption{\textbf{Accuracy under user pressure, without steering.}
-Left: false statements that the user asserts. Right: true statements that
+Top: false statements that the user asserts. Bottom: true statements that
 the user doubts. Each panel has 25 fixed items, posed under a neutral frame
-and two pressure wordings. Solid lines show the share of correct answers;
+and two user-pressure wordings, labeled Wording A and Wording B.
+Solid lines show the share of correct answers;
 dashed lines show the model's average probability of the correct answer,
-given that it answers Yes or No. These are descriptive rates on fixed
+given that it answers Yes or No. Lines join categorical conditions, not
+positions on a quantitative pressure scale. These are descriptive rates on fixed
 items, not held-out estimates of a steering benefit.}
 \label{fig:fidelity-pressure}
 \end{figure}

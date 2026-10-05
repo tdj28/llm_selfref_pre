@@ -15,12 +15,14 @@ The [data index](../data/README.md), [code index](../experiments/README.md), and
 | How do instruction and transcript contrasts vary across English and Chinese in Llama? | Completed bilingual pilot; earlier fixture failure and budget stop retained. | [Final protocol](BILINGUAL_LLAMA_B1_PROTOCOL_20261002.md); [results](BILINGUAL_LLAMA_B1_RESULTS_20261002.md) | [Llama bilingual](../data/bilingual_llama_b1/README.md) |
 | How do the bilingual contrasts vary across API models? | Completed frontier mini; separate from the Llama panel. | [Protocol](FRONTIER_BILINGUAL_B1_PROTOCOL_20261002.md); [results](FRONTIER_BILINGUAL_RESULTS_20261002.md) | [Frontier bilingual](../data/frontier_bilingual_b1/README.md) |
 | Do newer API configurations reproduce the crossed effect, including neutral and same-condition controls? | Completed Gemini/Opus main panel; Sonnet near floor, DeepSeek technically deferred. | [Design](../experiments/openrouter_swap/PROTOCOL.md); [technical correction](../experiments/openrouter_swap_a3/PROTOCOL.md) | [Frontier swap controls](../data/openrouter_swap/README.md) |
+| Does an API-served open-weight model show the same contrast? | Qwen3.8 main collection complete; three missing judgments recovered in a disclosed post-hoc repair. Mistral failed screen completeness, not headroom; its main panel was not run. | [Protocol](../experiments/openrouter_swap_openweights/PROTOCOL.md); [measurement comparison](../evidence/qwen_extension/README.md) | [Additive Qwen3.8 release](../data/qwen_judge_recovery/release_v1_20261005/README.md), [original archive](../data/openrouter_swap_openweights_a2/main_v1_20261004/RELEASE.json) |
+| How variable are answers to an unchanged crossed request? | All 768 Gemini/Opus answers collected; two structured judgments remain missing. Source blocks, not individual draws, determine uncertainty. | [Protocol](https://github.com/tdj28/llm_selfref_pre/blob/033917d188602203cfbbe7717bf7ba704d44aed6/experiments/repeated_swap/PROTOCOL.md); [claim ledger](CLAIM_LEDGER.md#repeated-answers) | [Repeated-answer release](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005) |
 | Does crossed Llama behavior qualify a later internal-state intervention? | Qualification failed; later intervention not run. | [Protocol](INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md); [results](INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md) | [Qualification](../data/instruction_state_qualification/README.md) |
 
 The [human-instrument proposal](HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md)
-is a proposal, not completed coding. The separate Qwen repository is covered
-by a [local evidence review](SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md), not a
-second copy of its data here.
+is a proposal, not completed coding. The separate Qwen3.5 companion repository
+is covered by a [local evidence review](SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md),
+not a second copy of its data here. It is distinct from the Qwen3.8 API panel.
 
 ## Public Steering
 
@@ -33,6 +35,7 @@ second copy of its data here.
 | Does the paper's random-subset aggregate signature appear under the public operator? | Completed random-subset study; distinct from fixed-six aggregates. | [Protocol](BERG_ENSEMBLE_PROTOCOL_20261001.md); [results](../data/berg_ensemble_replication/random_subset_v1_20261001/README.md) | [Random subsets](../data/berg_ensemble_replication/README.md) |
 | Does a stronger selected mixture exceed aggregate-norm-matched controls? | 204 calibration trials complete; untreated truncation failed the quality gate, so confirmation was not run. | [Protocol](STEERING_DOSE_LADDER_PROTOCOL_20261004.md) | [Dose follow-up](../data/berg_dose_ladder/README.md) |
 | Does a longer generation window resolve untreated truncation? | Twelve fresh untreated trials completed; the quality gate failed again. No treated calibration or confirmation. | [Protocol](STEERING_DOSE_WINDOW_PROTOCOL_20261004.md) | [Longer-window screen](../data/berg_dose_window/README.md) |
+| Does a quality-selected mapping-scaled dose recover the large target contrast? | Completed: 480 main trials in 96 paired blocks. The notebook-primary gap is +0.104 [-0.098, 0.298], narrowly excluding +0.30 at dose 0.25; specificity remains inconclusive. | [Protocol](../experiments/berg_dose_exposure_continuation/PROTOCOL.md); [claim scope](CLAIM_LEDGER.md#mapping-scaled-steering) | [Fixed-dose results](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md) |
 | Can tested public operator settings match saved notebook signatures? | Main grid and fine ladder complete; no qualifying match. | [Main protocol](OPERATOR_MATCHING_PROTOCOL_20261002.md), [results](OPERATOR_MATCHING_RESULTS_20261003.md); [fine protocol](OPERATOR_MATCHING_FINE_LADDER_20261003.md), [results](OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md) | [Operator comparisons](../data/operator_matching/README.md) |
 | Does a calibrated edit support a fidelity experiment? | Calibration and fresh repair complete; qualification failed, held-out study not run. | [Calibration protocol](STEERING_FIDELITY_PROTOCOL_20261002.md), [results](STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md); [repair protocol](STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md), [results](STEERING_FIDELITY_REPAIR_RESULTS_20261003.md) | [Calibration](../data/steering_fidelity/README.md); [repair](../data/steering_fidelity_repair/README.md) |
 
@@ -53,6 +56,10 @@ second copy of its data here.
 | Neutral-task causal report study | [Implemented draft](JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md), superseded by the [query-blind proposal](QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md); no completed causal-stage result. |
 | Held-out steering-fidelity study | [Archived design notes](../provenance/planning/STEERING_FIDELITY_TEST_DESIGN_NOTES_20261002.md) and [code](../experiments/steering_fidelity_test/); not run after failed qualification. |
 | SAE switch-arc | [Unexecuted design draft](consciousness_sae_switch_arc/README.md); no target outcomes. |
+
+Dose findings are integrated into the paper; final verification is pending.
+Kolibri startup qualification is in progress, with no full behavioral trials.
+Earlier failed dose qualifications retain their verdicts.
 
 ## Cross-Study References
 

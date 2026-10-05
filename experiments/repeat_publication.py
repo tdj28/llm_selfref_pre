@@ -231,9 +231,9 @@ def _editorial(data):
     tex += "\\begin{table}[t]\n\\centering\n\\footnotesize\n\\setlength{\\tabcolsep}{2pt}\n"
     tex_header = list(map(_tex, header))
     tex_header[3] = r"\shortstack{Complete SH-HS\\blocks}"
-    tex += "\\begin{tabular}{llrrll}\n\\hline\n" + " & ".join(tex_header) + " \\\\\n\\hline\n"
+    tex += "\\begin{tabular}{llrrll}\n\\toprule\n\\addlinespace[2pt]\n" + " & ".join(tex_header) + " \\\\\n\\midrule\n"
     tex += "".join(" & ".join(map(_tex, row)) + " \\\\\n" for row in rows)
-    tex += "\\hline\n\\end{tabular}\n\\caption{" + _tex(TABLE_NOTE) + "}\n\\end{table}\n\n"
+    tex += "\\bottomrule\n\\end{tabular}\n\\caption{" + _tex(TABLE_NOTE) + "}\n\\end{table}\n\n"
     tex += "\\begin{figure}[t]\n\\centering\n\\includegraphics[width=\\linewidth]{repeated_main.pdf}\n"
     tex += "\\caption{" + _tex(figure_note) + "}\n\\end{figure}\n"
     supplemental_md, supplemental_tex = [], []

@@ -840,3 +840,4 @@ data/berg_dose_exposure_continuation/*
 !data/berg_dose_exposure_continuation/fixed_main_v1_20261005/
 !data/berg_dose_exposure_continuation/fixed_main_v1_20261005/**
 !data/berg_dose_exposure_continuation/fixed_main_v1_20261005.compat.json
+!evidence/dose_followup/main_contrasts.pdf

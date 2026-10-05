@@ -1,0 +1,55 @@
+% Source release commit: 77a4eb55bce97f7ac736ac36099e70a6d5135506
+% Release manifest SHA-256: 2e0e1a28b6916d84b450eaf9218e344f1e10d9d91533ae43deed3677756820c4
+\input{../evidence/dose_followup/values.tex}
+\subsection{A quality-selected steering dose}
+\label{sec:dose-followup}
+
+The dose follow-up did not establish the predefined large, target-specific
+increase in report labels. At the selected dose, the negative-minus-positive
+target contrast was \(\DoseMainSecondTargetEstimate{}
+[\DoseMainSecondTargetLow{}, \DoseMainSecondTargetHigh{}]\) under the primary
+notebook classifier and \(\DoseMainPaperTargetEstimate{}
+[\DoseMainPaperTargetLow{}, \DoseMainPaperTargetHigh{}]\) under the secondary paper rubric
+(individual conservative 95\% intervals). The primary upper bound,
+\(\DoseMainSecondTargetHigh{}\), was only just below the predeclared 0.30
+threshold. This is a narrow exclusion at one selected dose, not robust
+exclusion across doses. The primary target-minus-mean-control contrast was
+\(\DoseMainSecondSpecificityEstimate{}
+[\DoseMainSecondSpecificityLow{}, \DoseMainSecondSpecificityHigh{}]\), leaving
+target specificity unresolved (Figure~\ref{fig:dose-followup}).
+
+A separate \DoseMainCalibrationTrials{}-trial calibration selected dose
+\DoseMainSelectedDose{} from four tested levels using heuristic quality
+criteria rather than nonzero-dose report rates. Each higher tested dose failed
+at least one target or control quality check and was not carried forward.
+The target mixture used features 41533, 58667, and 30686. Each feature's
+reference scale was the largest category mean of per-text maxima in the
+designed NF4 mapping set, not a natural-corpus peak. Confirmation comprised
+\DoseMainTrials{} trials in 96 paired seed blocks: untreated generation,
+both edit signs for the target, and both signs for one of three fixed,
+norm-matched control panels (32 blocks per panel). The technical continuation
+carried calibration and selection forward unchanged.
+
+The quality-rule amendment followed earlier calibration results. It treated
+first-turn truncation at \DoseFollowupTokenCap{} tokens as exposure metadata,
+while final-turn truncation remained a quality failure. In confirmation,
+\DoseFollowupInductionCaps{} induction turns and \DoseFollowupFinalCaps{}
+final turns reached that cap. The selected-dose main sample passed the
+specified heuristic quality rule; this is not human coherence validation.
+These results concern automated labels under this finite-exposure public
+operator, not consciousness or removal of a semantic representation.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../evidence/dose_followup/main_contrasts.pdf}
+\caption{Paired label contrasts at the quality-selected dose. ``Second rubric''
+identifies the notebook classifier used in the earlier analyses. Open circles
+show negative-minus-positive estimates, with conservative 95\% paired-discordance
+Clopper--Pearson bounds. Both rubrics, all three fixed control panels, and the
+target-minus-equal-mean-control contrast are shown. Target contrasts use 96
+paired blocks; each control panel uses 32. The dashed 0.30 line is the target
+threshold, not a specificity threshold. Intervals are individual, not
+simultaneous across contrasts or rubrics; the control-panel comparisons are
+descriptive. Calibration is separate from these main-trial estimates.}
+\label{fig:dose-followup}
+\end{figure}

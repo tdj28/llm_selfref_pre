@@ -1,6 +1,6 @@
 # Claim-To-Artifact Ledger
 
-Last updated: 2026-10-04
+Last updated: 2026-10-05
 
 This ledger is the final claim audit for the manuscript. Every quantitative
 statement should resolve to a tracked raw bundle, analysis table, and script.
@@ -47,6 +47,111 @@ The [Qwen companion review](SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md)
 distinguishes fresh Qwen/API evidence from reuse of those same Llama answers.
 Do not count the re-scoring as another independent generation experiment or
 turn descriptive J-lens ranks into evidence of a semantic mechanism.
+
+## Modern Model Panels
+
+Here SH means a self-referential instruction with a history continuation;
+HS is the reverse. The primary endpoint is Astra's inclusive-current-claim
+label. These are separate studies, not a pooled model ranking.
+
+| Response model | Primary SH-HS contrast | Simultaneous 95% interval | Evidence |
+|---|---:|---|---|
+| Gemini 3.1 Pro Preview | +0.81 | [0.21, 1.00], fixed eight-comparison family | [Released analysis](https://github.com/tdj28/llm_selfref_pre/blob/0438e6c12e6024da7e4284ec6c396e27c6c1738a/data/openrouter_swap/main_v1_20261004/snapshots/003611/main_analysis.json) |
+| Claude Opus 5.5 | +0.22 | [-0.38, 0.82], same family | Same release; 32 fresh blocks per admitted model, 512 main answers total. |
+| Qwen3.8-2.4T-A95B | +0.41 | [-0.16, 0.97], fixed four-comparison family | [Additive repaired analysis](https://github.com/tdj28/llm_selfref_pre/blob/0eb2e039ae0807dca9c9df262db18e2d863d428d/data/qwen_judge_recovery/release_v1_20261005/recovery_main_analysis.json); 32 fresh blocks, 256 answers. |
+
+These Bonferroni--Hoeffding bounds retain unrun models in their original
+comparison families. Pointwise bootstrap bars in the manuscript figures are
+descriptive, not replacements for these primary intervals. The neutral
+continuation contrast is 0.00 [-0.60, 0.60] for both Gemini and Opus, and
++0.19 [-0.38, 0.75] for Qwen3.8; none establishes equivalence.
+Same-condition donor controls do not eliminate instruction/continuation
+mismatch as an explanation of the incongruent contrast.
+
+Opus's SH-HS estimate is +0.78 under both paper-style judges, compared with
++0.22/+0.38 under their inclusive rules. Qwen3.8 gives +0.41/+0.44 inclusive,
++0.09/+0.09 explicit and +0.16/+0.22 paper-rubric estimates.
+Preserve this measurement sensitivity. Three missing Qwen Astra structured
+judgments were repaired after the original release; responses and completed
+labels were not regenerated, and the original incomplete archive remains.
+
+Sonnet 5.5 was near floor in its completed screen. DeepSeek was not run through
+a qualified privacy-compatible route. Mistral passed headroom but had eight
+missing/capped slots among 48 screen answers and failed completeness.
+These are different outcomes, not three negative replications.
+Qwen3.8 was API-served and is distinct from the local Qwen3.5 companion.
+Documented architecture broadens coverage but is confounded with training,
+reasoning settings, serving precision and other model differences.
+
+## Repeated Answers
+
+The [repeated-answer release](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005)
+contains all 768 planned answers: 32 fresh source pairs per model, four crossed
+requests per pair, three answers per exact request. Models were selected after
+the earlier panel; these are new blocks, not additional draws from that panel.
+The analysis averages wording families equally and resamples source blocks
+with all their draws, not 768 independent experimental units.
+
+| Astra inclusive endpoint | Complete blocks | SH-HS estimate and 97.5% bootstrap interval | All-planned Hoeffding sensitivity |
+|---|---:|---|---|
+| Gemini 3.1 Pro Preview | 31/32 | +0.75 [0.66, 0.84] | [0.21, 1.00] |
+| Claude Opus 5.5 | 32/32 | +0.22 [0.14, 0.31] | [-0.30, 0.74] |
+
+The two individual 97.5% bootstrap intervals provide nominal 95% family
+coverage, with approximate bootstrap coverage conditional on complete
+requests. Opus's nominal bootstrap interval excludes zero; its conservative
+all-planned bound includes zero. These are not the eight-comparison intervals
+from the earlier panel.
+
+One Gemini answer lacks Astra's structured judgment; one Opus answer lacks
+the Opus judge's structured judgment. Missing endpoints stay unknown. For
+Gemini/Astra, missing-label mean bounds are [0.73, 0.74]; these bound the
+planned sample, not sampling uncertainty. Generation is complete but endpoint
+and accounting completeness are false in the release; its status remains
+`incomplete`, with unresolved reservations retained.
+
+Across the two models and readers, within-request SH label variance is
+0.16--0.20. All four descriptive 95% intervals for the additional source-pair
+component include zero. This is neither proof of zero source variation nor a
+formal comparison of the two variance components. Both include measurement
+variation from automated judges, not pure model randomness or human validation.
+Exact values and missingness are in the release's `analysis.json` and
+`rows.json`; inference is implemented in `experiments/repeated_swap/analysis.py`.
+
+## Mapping-Scaled Steering
+
+The [fixed-dose release](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md)
+narrowly excludes the prespecified +0.30 target contrast at the selected dose;
+it does not resolve whether the target exceeds matched controls.
+All 480 main trials completed in 96 paired blocks, with no missing paired
+labels. The 204 calibration trials remain separate. Each of three fixed
+control panels contributes 32 blocks.
+
+| Endpoint and contrast | Estimate | Conservative 95% interval |
+|---|---:|---|
+| Notebook-primary target, suppression minus amplification | +0.104 | [-0.098, 0.298] |
+| Notebook-primary target minus equal mean of three control contrasts | +0.219 | [-0.448, 0.834] |
+| Paper-secondary target, suppression minus amplification | -0.052 | [-0.201, 0.101] |
+
+The primary upper bound is approximately 0.297806, only 0.0022 below +0.30.
+These are individual conservative intervals, not joint coverage for target
+effect and specificity. Smaller effects remain compatible with the data;
+the broad specificity interval does not establish a target-specific effect.
+
+Dose 0.25 was selected by calibration quality, not report labels. Its scale
+uses category-selected means of per-text maxima from the designed NF4 mapping
+set, not natural-corpus peaks or native-BF16 natural strength. Higher calibration
+doses failed at least one quality cell; they are not confirmatory nulls.
+The main quality rule passed, but its heuristic flags are not human validation.
+The original throughput stop and earlier failed dose qualifications remain
+unchanged. The findings are integrated into the paper; final manuscript
+verification remains pending.
+
+Counts and intervals are recorded in the release's
+[saved analysis](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/main/analysis/summary.json).
+Raw bytes are preserved; the [portability record](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/analysis/portability.json)
+documents eight derived floating-point differences of at most two ULPs,
+with unchanged threshold decisions.
 
 ## Operator Matching
 

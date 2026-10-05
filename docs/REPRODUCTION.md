@@ -122,7 +122,8 @@ internal-intervention experiment.
 
 The current manuscript lives in `paper/`. Its packaged evidence and verifier
 sources retain their pinned bytes and repository-relative paths. From the
-repository root, `make paper-verify` runs these read-only commands:
+repository root, `make paper-verify` runs the complete read-only check list
+in the `Makefile`, including these core checks:
 
 ```sh
 python scripts/verify_evidence.py
@@ -138,8 +139,29 @@ python scripts/uncertainty_sensitivity.py --check
 python -B reviews/reproducibility/run.py --verify-only
 ```
 
-These checks use the Python standard library, need no sibling checkout,
-credentials, GPU, network access or TeX installation, and fail on stale
+The same target checks the modern Gemini/Opus and Qwen3.8 panels against their
+released rows, including paired contrasts and the different primary interval
+families. Its repeated-answer check also replays response and judge receipts,
+the block-level analysis and the figure bindings. These checks preserve missing
+judgments; they do not establish the accuracy of an automated label. No API
+keys or model downloads are needed.
+
+The mapping-scaled steering follow-up has an additional full replay:
+
+```sh
+python scripts/verify_dose_followup.py --full --require-pinned
+```
+
+This checks the completed release against its published commit, reconstructs
+the paired analysis with the historical sources, and verifies the paper's
+values and figure. The saved worker analysis remains canonical; the release
+records the original exact-replay failure and eight floating-point differences
+of at most two ULPs, with unchanged estimates and decisions. The default
+`paper-verify` check verifies hashes and bindings without this full replay.
+
+These checks use the pinned CPU dependencies installed above and the local Git
+history. They need no sibling checkout, credentials, GPU, network access or
+TeX installation, and fail on stale
 generated evidence or mismatched manuscript bindings. They check packaged
 hashes, arithmetic, figures, tables and uncertainty summaries; the final
 command verifies the archived reproducibility bundle rather than replaying

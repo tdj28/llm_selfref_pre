@@ -12,14 +12,15 @@ Across three answers to the same SH request, within-request label variance (W) w
 \footnotesize
 \setlength{\tabcolsep}{2pt}
 \begin{tabular}{llrrll}
-\hline
+\toprule
+\addlinespace[2pt]
 Model & Reader & Available labels & \shortstack{Complete SH-HS\\blocks} & SH-HS [interval] & Missing bounds \\
-\hline
+\midrule
 Gemini 3.1 & Astra & 383/384 & 31/32 & 0.75 [0.66, 0.84] & [0.73, 0.74] \\
 Gemini 3.1 & Opus 5.5 & 384/384 & 32/32 & 0.70 [0.61, 0.77] & [0.70, 0.70] \\
 Opus 5.5 & Astra & 384/384 & 32/32 & 0.22 [0.14, 0.31] & [0.22, 0.22] \\
 Opus 5.5 & Opus 5.5 & 383/384 & 31/32 & 0.35 [0.24, 0.46] & [0.32, 0.33] \\
-\hline
+\bottomrule
 \end{tabular}
 \caption{SH-HS differences in label rates. Astra's primary intervals are individually 97.5\%, giving nominal 95\% coverage across the fixed two-model family; Opus intervals are descriptive 95\%. Intervals resample paired source blocks within wording family, retaining all three answers; coverage is approximate. The final column bounds missing labels over all planned blocks, not sampling uncertainty. Complete-block estimates exclude blocks with missing labels; missing-label bounds retain all 32 blocks and need not contain the complete-block estimate. S and H mean self-referential and history-focused; the first letter denotes the instruction and the second the continuation.}
 \end{table}

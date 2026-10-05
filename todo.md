@@ -1,38 +1,56 @@
 # Publication Closeout
 
 The original publication collection is closed. This checklist covers evidence
-integration and release preparation, plus the separately authorized extensions
+integration and release preparation, plus the separately authorized follow-ups
 below. Historical proposals are not another experiment queue.
 The [historical work ledger](provenance/root-docs/20261003/todo.md) retains
 completed work, superseded proposals, and their original dates.
 
-## Separately Authorized Extension
+## Authorized Follow-Ups
 
-The [October 4 OpenRouter study](data/openrouter_swap/README.md) has its own
-$250 total/$40 screening authorization and frozen protocol.
+Each study retains its own protocol, budget and failure records. Completing
+these authorizations does not reopen model search or other collection.
 
-- [x] Freeze and push the design and technical amendments before target data.
-- [x] Audit the first two blocks per active model against raw API receipts.
-- [x] Complete and release the fixed three-model screen. Gemini and Opus
-  qualify; Sonnet is near floor. DeepSeek remains technically deferred.
-- [x] Run fresh main blocks only for models admitted by the frozen rules.
-- [x] Release raw receipts, startup failures, analyses, plots and cost audit.
-- [ ] Present the completed extension for the owner's manuscript decision;
-  do not overwrite ongoing editorial work.
+- [x] Release the [Gemini/Opus eight-condition panel](data/openrouter_swap/README.md):
+  512 main answers; preserve Sonnet's near-floor screen and DeepSeek's
+  technical absence.
+- [x] Release the [Qwen3.8 panel and additive judgment repair](data/qwen_judge_recovery/release_v1_20261005/README.md):
+  256 main answers; preserve the original incomplete archive and Mistral's
+  completeness failure rather than describing it as a floor result.
+- [x] Release all 768 [repeated Gemini/Opus answers](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005),
+  keeping two missing structured judgments, unresolved reservations and the
+  release's incomplete status.
+- [x] Integrate the modern API and Qwen3.8 evidence into canonical `paper/`,
+  preserving their different comparison families and rubric sensitivity.
+- [x] Integrate the repeated-answer paper package and its checks; retain
+  complete-request estimates, planned-sample missingness bounds and
+  conservative uncertainty alongside the approximate bootstrap intervals.
+- [x] Retrieve all 480 raw dose-exposure continuation trial records and delete
+  the owned pod.
+- [x] Complete the [dose-exposure release](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md)
+  and external lifecycle verification, preserving raw data and the disclosed
+  numerical portability record.
+- [x] Integrate the fixed-dose findings into the paper: narrow exclusion of
+  +0.30 at dose 0.25, unresolved specificity, and a mapping-reference scale
+  rather than natural-corpus strength. Keep earlier failed qualifications intact.
+- [ ] Complete the authorized Kolibri follow-up. A4 startup qualification is
+  in progress; full behavioral collection has not begun. Verify its scientific
+  release before adding findings, describe official FP8 accurately, and do not
+  infer an architecture effect.
 
 ## Implementation
 
 - [x] Integrate the completed bilingual, frontier, operator-matching, and
   qualification results into canonical `paper/`, preserving primary endpoints,
   model/rubric scope, negative results, and failed gates.
-- [x] Synchronize the manuscript, root summary, citation/provenance metadata,
-  study indexes, and reproduction instructions with the completed evidence.
+- [ ] Synchronize the final manuscript, root summary, citation/provenance
+  metadata, study indexes and reproduction instructions with the new releases.
 - [x] Finish the conservative root-document cleanup; verify the preserved
   copies, local links, and unchanged experimental source/release bindings.
-- [x] Run the relevant tests, all manuscript value verifiers, and public-release
-  audit on the integrated tree; build and visually inspect the PDF.
-- [x] Verify the documented fresh-clone/disposable-copy reproduction path,
-  then hand the reviewed diff and validation results to the owner.
+- [ ] Rerun relevant tests, manuscript value verifiers and the index-bound
+  public-release audit after final integration; build and inspect the PDF.
+- [ ] Recheck the fresh-clone/disposable-copy reproduction path at the final
+  integrated commit, then hand the reviewed manuscript and checks to the owner.
 
 ## Authorized Dose Extension
 
@@ -66,7 +84,7 @@ $250 total/$40 screening authorization and frozen protocol.
 - [ ] Resolve the final archive and license scope described in
   [NOTICE.md](NOTICE.md) before a whole-repository archive. Third-party rights
   and original-data licensing are not yet cleared by the code license.
-- [ ] Once the new steering data return, decide whether the operator-matching,
+- [ ] With the fixed-dose results released, decide whether the operator-matching,
   earlier-steering and internal-readout sections move from Section 5 of the
   manuscript to its appendices, as both AI-generated reviews suggested. The
   public-weight steering non-recovery stays in the main text either way.

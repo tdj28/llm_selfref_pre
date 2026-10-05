@@ -83,13 +83,17 @@ activation \citep{templeton2024scaling}. At the last prompt position,
 negative steering moved the hidden state without silencing an active SAE
 feature. During the answer it had some activity to remove, but little.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
-\includegraphics[width=\linewidth, trim=0 23bp 0 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
+\includegraphics[height=340bp, trim=0 23bp 537bp 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
 \caption{\textbf{How active each steered feature is, before and after the edit.}
-Each column is one of the six features, read back through the SAE during the
+The six features are shown in two groups of three (continued on the next
+page). Each column is one feature, read back through the SAE during the
 second turn; each line joins one seed's reading just before and just after
-the edit (blue: $-0.7$; red: $+0.7$). Top row: the last prompt position,
+the edit (blue: $-0.7$; red: $+0.7$). The $n$ labels give negative/positive
+seed counts: ten of each for every panel. Coincident zero readings overlap;
+these lines are individual readings, not confidence intervals.
+In each group, the top row shows the last prompt position,
 just before the model starts its answer. All six features read zero there
 before the edit, and only 23893 crosses its threshold under $+0.7$. Bottom
 row: the average over the answer's tokens, excluding the final one. The
@@ -99,6 +103,19 @@ reads zero cannot fall further, so negative steering has little to remove.
 Vertical scales differ across features. The quantities are SAE activations,
 not probabilities of deception or subjective experience.}
 \label{fig:native-reencoding}
+\end{figure}
+
+\begin{figure}[p]
+\ContinuedFloat
+\centering
+% Repeat the row labels beside the remaining three immutable columns.
+\includegraphics[height=340bp, trim=0 23bp 1056bp 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}%
+\includegraphics[height=340bp, trim=543bp 23bp 0 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
+\caption[]{\textbf{How active each steered feature is, before and after the
+edit (continued).} Remaining three features, with the same conventions:
+blue $-0.7$, red $+0.7$; ten seeds per sign in each panel. Top: last prompt
+position. Bottom: mean over answer tokens, excluding the final token.
+Vertical scales differ across features; coincident zero readings overlap.}
 \end{figure}
 
 \subsection{Readout equations and all comparison mappings}

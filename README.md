@@ -15,8 +15,9 @@ whether a model has subjective experience.
 | Question | Finding | Evidence |
 |---|---|---|
 | Does the instruction or its generated continuation carry the effect? | In the original four-model API panel, mean instruction effects are **+0.738 and +0.781** under two paper-style judges, versus transcript effects of **-0.100 and -0.131**. In the later English Llama panel, both components have substantial positive effects. | [Causal analysis](docs/CLAIM_LEDGER.md), [Llama extension](docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md) |
+| Does the pattern extend to newer models? | Gemini retains a large instruction advantage. Opus and Qwen3.8 depend more on the scoring rule; conservative intervals leave their instruction advantage unresolved. Repeated answers also vary under identical requests. | [Modern panels and repeated answers](docs/CLAIM_LEDGER.md#modern-model-panels) |
 | Does the scoring rule matter? | Yes. Explicit-current-claim and paper-rubric scores give **opposite secondary language contrasts** in Llama. The primary inclusive-attribution interaction is inconclusive under both readers. Model-judge agreement is not human validation. | [Bilingual results](docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md), [fixed-response audit](docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md) |
-| Does public SAE steering recover the proposed large signature? | A 50-block native-BF16 random-subset test gives **-0.04 [-0.26, 0.19]**, excluding its prespecified +0.30 signature under the primary rubric. Separate operator-matching studies find no coherent match to the saved notebook curves among tested configurations. | [Random-subset test](data/berg_ensemble_replication/random_subset_v1_20261001/README.md), [operator matching](docs/OPERATOR_MATCHING_RESULTS_20261003.md), [fine ladder](docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md) |
+| Does public SAE steering recover the proposed large signature? | The 50-block random-subset test gives **-0.04 [-0.26, 0.19]**. A separate 96-block mapping-scaled test gives **+0.104 [-0.098, 0.298]**, narrowly excluding +0.30 at its quality-selected dose; target-versus-control specificity remains inconclusive. Neither establishes a null at every dose. | [Random-subset test](data/berg_ensemble_replication/random_subset_v1_20261001/README.md), [mapping-scaled test](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md), [operator matching](docs/OPERATOR_MATCHING_RESULTS_20261003.md), [fine ladder](docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md) |
 
 ![Instruction and transcript effects in the original four-model API panel](paper/figures/causal_decomposition.png)
 
@@ -36,6 +37,8 @@ semantic process. Failed qualification tests remain part of the record.
 |---|---|
 | Prompt factorials, transcript transplants and report measurement | [Claim ledger](docs/CLAIM_LEDGER.md) |
 | English/Chinese Llama and frontier-model pilots | [Llama](docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md), [frontier models](docs/FRONTIER_BILINGUAL_RESULTS_20261002.md) |
+| Newer API models, neutral instructions and same-condition donor controls | [Gemini/Opus](data/openrouter_swap/README.md), [Qwen3.8](evidence/qwen_extension/README.md) |
+| Repeated answers to identical requests | [Results and uncertainty](docs/CLAIM_LEDGER.md#repeated-answers), [released data](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005) |
 | Public steering and operator comparability | [Source-aligned test](data/berg_source_replication/source_aligned_v1_20261001/README.md), [operator matching](docs/OPERATOR_MATCHING_RESULTS_20261003.md) |
 | Intervention delivery and assay qualification | [Calibration](docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md), [repair pilot](docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md) |
 | Feature semantics, Gemma and Jacobian-lens readouts | [Study index](docs/README.md) |
@@ -43,7 +46,11 @@ semantic process. Failed qualification tests remain part of the record.
 The [study index](docs/README.md) connects protocols, results, releases, code
 and tests, including historical and unexecuted branches. The
 [publication checklist](todo.md) separates remaining release work from future
-research. No further model collection is planned for this manuscript.
+research. The modern API, Qwen3.8, repeated-answer and mapping-scaled dose
+studies have completed releases. Dose findings are integrated into the paper;
+final verification remains pending. Kolibri remains at startup, with no full
+behavioral trials. Other collection remains
+closed; earlier failed dose qualifications remain unchanged.
 
 ## Reproduce
 

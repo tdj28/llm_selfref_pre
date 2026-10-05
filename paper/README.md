@@ -41,6 +41,13 @@ not that reconstruction or independent scientific validation.
 - `qwen_extension.tex`: separate Qwen3.8 API panel. `paper-verify` runs
   `scripts/verify_qwen_extension.py` to check its pinned inputs, paired
   contrasts, primary bounds, and descriptive bootstrap intervals.
+- `repeated_extension.tex`: randomized four-cell collections with three
+  answers per request. `paper-verify` replays the raw response and judge
+  receipts, paired analyses, variance summaries and figure bindings.
+- `dose_followup.tex`: the mapping-scaled, quality-selected steering test.
+  `paper-verify` checks release hashes and manuscript bindings; use
+  `python scripts/verify_dose_followup.py --full --require-pinned` for the
+  historical-source inference replay as well.
 - `figures/`: selected figure inputs with pinned source provenance.
 - `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
 - `../reviews/`: dated automated reviews, adjudications and reference checks.
@@ -48,8 +55,8 @@ not that reconstruction or independent scientific validation.
 - `history/20261001/`: immutable migration snapshots and import hashes.
 
 Earlier manuscripts remain historical, not alternate working drafts.
-The owner separately reopened collection for the October 4 model-panel and
-steering-dose follow-ups. Their plans and releases remain distinct from the
+The owner separately reopened collection for the October 4 model-panel,
+repeated-answer and steering-dose follow-ups. Their plans and releases remain distinct from the
 earlier studies; this manuscript incorporates verified results, not pending
 or unrun comparisons. Other work is verification, editorial review and
 release preparation.

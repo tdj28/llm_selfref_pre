@@ -123,26 +123,27 @@ pushed the best-matched features lightly. It therefore rules out a large
 effect at this dose, not at every dose; Section~\ref{sec:operator-matching} reports stronger doses for two of
 the features.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
-\begin{tikzpicture}
-\node[anchor=south west, inner sep=0] (img) at (0,0)
-  {\includegraphics[width=\linewidth, trim=0 19bp 0 25bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}};
-\begin{scope}[x={(img.south east)}, y={(img.north west)}]
-  \fill[white] (0.241,0.918) rectangle (0.346,1);
-  \fill[white] (0.698,0.918) rectangle (0.832,1);
-  \node[font=\sffamily\scriptsize] at (0.2934,0.957) {Paper rubric};
-  \node[font=\sffamily\scriptsize] at (0.7651,0.957) {Second rubric};
-\end{scope}
-\end{tikzpicture}
-\caption{\textbf{Steering random subsets of the target features produces no
-large effect.} All four feature sets (the target and three matched control
-sets) are shown under the paper rubric (left) and the second rubric (right).
-Each difference uses 50 independent
-blocks, with the two signs paired within blocks. Lines are conservative
-intervals, not bootstrap intervals. The dotted line marks the +0.30
+{\small\bfseries Paper rubric}\par\smallskip
+\includegraphics[height=220bp, trim=0 16bp 383bp 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
+\medskip\par
+{\small\bfseries Second rubric}\par\smallskip
+% The shared y-axis labels are repeated without changing either panel.
+\includegraphics[height=220bp, trim=0 16bp 731bp 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}%
+\includegraphics[height=220bp, trim=432bp 16bp 0 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
+\caption{\textbf{The paper rubric excludes a large effect at this dose.}
+All four feature sets (the target and three matched control sets) are shown
+under the paper rubric (top) and the second rubric (bottom). Points are
+suppression-minus-amplification differences in positive-label probability.
+Each uses 50 independent blocks, with the two signs paired within blocks.
+Lines are conservative 95\% bounds formed from one-sided Clopper--Pearson
+limits, not bootstrap intervals. They are pointwise for each feature set,
+not simultaneous across all displayed sets. The dotted line marks the +0.30
 threshold, which was set in advance for the target only; comparisons among
-the control sets are secondary and not corrected for multiple comparisons.}
+the control sets are secondary and not corrected for multiple comparisons.
+The target's upper bound excludes +0.30 under the paper rubric; the
+second-rubric comparison is inconclusive.}
 \label{fig:ensemble-effects}
 \end{figure}
 
@@ -159,22 +160,43 @@ $[\EnsembleNotebookTargetMinusControlsCPLow{},\EnsembleNotebookTargetMinusContro
 Neither interval excludes zero, so we cannot say whether the target features
 behave differently from the controls.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
+{\small\bfseries Paper rubric}\par\smallskip
 \begin{tikzpicture}
 \node[anchor=south west, inner sep=0] (img) at (0,0)
-  {\includegraphics[width=\linewidth, trim=0 0 0 24bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
-\begin{scope}[x={(img.south east)}, y={(img.north west)}]
-  \fill[white] (0.231,0.748) rectangle (0.335,0.824);
-  \fill[white] (0.697,0.748) rectangle (0.831,0.824);
-  \node[font=\sffamily\scriptsize] at (0.2828,0.783) {Paper rubric};
-  \node[font=\sffamily\scriptsize] at (0.7638,0.783) {Second rubric};
-\end{scope}
+  {\includegraphics[height=185bp, trim=24bp 8bp 387bp 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
+\path (img.west) ++(-15pt,0)
+  node[rotate=90,font=\sffamily\footnotesize] {Positive-label fraction};
+\end{tikzpicture}
+\medskip\par
+{\small\bfseries Second rubric}\par\smallskip
+\begin{tikzpicture}
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+  {\includegraphics[height=185bp, trim=24bp 8bp 747bp 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}%
+   \includegraphics[height=185bp, trim=425bp 8bp 0 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
+\path (img.west) ++(-15pt,0)
+  node[rotate=90,font=\sffamily\footnotesize] {Positive-label fraction};
+\end{tikzpicture}
+\smallskip\par
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+\definecolor{rateblue}{HTML}{236D91}
+\definecolor{ratered}{HTML}{AE4B48}
+\definecolor{rategreen}{HTML}{397454}
+\draw[rategreen,dashed,thick] (0,0)--(0.4,0);
+\node[anchor=west] at (0.45,0) {Untreated};
+\fill[rateblue] (2.8,-0.07) rectangle (3.15,0.07);
+\node[anchor=west] at (3.2,0) {Suppression};
+\fill[ratered] (6,-0.07) rectangle (6.35,0.07);
+\node[anchor=west] at (6.4,0) {Amplification};
 \end{tikzpicture}
 \caption{\textbf{The untreated rate and the rubric both matter.} Share of
 answers labeled positive under each sign for every feature set, under the
-paper rubric (left) and the second rubric (right); the dashed line (labeled
-``true zero'') is the untreated rate. No label is missing. Under the paper rubric
+paper rubric (top) and the second rubric (bottom); the dashed line is the
+untreated rate. Bars are observed fractions, with 50 answers per sign and
+feature set; the untreated rate also uses 50 answers. No label is missing.
+Figure~\ref{fig:ensemble-effects} shows uncertainty in the paired contrasts.
+Under the paper rubric
 the untreated rate starts high, but amplification still had room to lower
 it; the target features do not produce the large drop reported in the source
 study.}

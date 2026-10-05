@@ -115,6 +115,18 @@ def test_paper_captions_distinguish_both_readers_and_all_interval_types(syntheti
         assert "\\caption{" + pub._tex(note) + "}" in editorial["supplementary_figures.tex"]
 
 
+def test_table_uses_booktabs_with_clearance_above_multiline_header(synthetic):
+    data = pub._projection(synthetic, metadata())
+    tex = pub._editorial(data)["subsection.tex"]
+    assert "\\toprule\n\\addlinespace[2pt]\n" in tex
+    assert all(tex.count(rule) == 1 for rule in (r"\toprule", r"\midrule", r"\bottomrule"))
+    assert r"\hline" not in tex
+    assert r"\shortstack{Complete SH-HS\\blocks}" in tex
+    assert "\\caption{" + pub._tex(pub.TABLE_NOTE) + "}" in tex
+    for row in pub._table(data):
+        assert " & ".join(map(pub._tex, row)) in tex
+
+
 def test_reader_specific_caption_counts_and_singular_missing_answers():
     sample = rows(lambda spec: spec["draw"] == 1)
     for model, reader, cell, block in (("gemini", "astra", "SH", 7), ("opus", "opus", "HS", 28)):

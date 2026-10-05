@@ -119,7 +119,9 @@ an experience label by 0.74 and 0.78 on average (two judges), switching
 the continuation far less, with a sign that varies by model; in an
 open-weight model, the continuation also matters. The swap cannot tell
 instruction-following from self-referential processing that the instruction
-triggers anew. The label also counts much more than explicit claims. Two
+triggers anew. In newer panels, the apparent instruction advantage depends
+on the model and what counts as a claim; it remains large for Gemini with
+repeated answers. Two
 judges agree on the labels for 94.8\% of 2,556 answers; on a fixed set of
 \RubricAuditN{} responses they count \RubricAuditOldOpenaiPositive{} and
 \RubricAuditOldAnthropicPositive{} experience reports, while model coders
@@ -249,7 +251,10 @@ open-weight models (\Cref{tab:swap-summary}) shows the instruction dominating
 under the main rubric in Claude Opus 5.5 and a re-run GPT-4.1, substantial
 continuation effects in Llama 3.3 70B, and almost no reports from Astra or
 Qwen3.5-397B-A17B, so the ordering depends on the model rather than being a
-general rule.
+general rule. Later Gemini/Opus collections add neutral instructions,
+same-condition donor continuations, and repeated answers to randomized
+requests (Sections~\ref{sec:openrouter-swap-extension}
+and~\ref{sec:repeated-extension}).
 \item \textbf{What is being measured?} Two judges agree closely on which
 answers count as experience reports, yet model coders applying a narrower
 rubric find few answers in which the model explicitly claims to be having an
@@ -289,33 +294,63 @@ model weights can and cannot show.
 
 \begin{figure}[p]
 \centering
-\textbf{A. Swap the continuations between conditions}\par
+\textbf{A. Continuation swap}\par
 \medskip
 \input{figures/transplant_operation.tex}
 \medskip\par
-\textbf{B. What each swap does to the experience label}\par
+\textbf{B. Label contrasts}\par
 \smallskip
 \begin{tikzpicture}
 \node[anchor=south west, inner sep=0] (panelB) at (0,0)
-  {\includegraphics[width=\linewidth, trim=0 0 0 39.6bp, clip]{figures/causal_decomposition.png}};
+  {\includegraphics[width=\linewidth, trim=0 62bp 0 39.6bp, clip]{figures/causal_decomposition.png}};
+% Replace only marginal labels; the frozen plot marks remain untouched.
+\begin{scope}[x={(panelB.south east)}, y={(panelB.north west)}]
+  \fill[white] (0,0) rectangle (0.135,1);
+  \foreach \y/\model in {0.9198/Haiku 4.5,0.6460/Sonnet 4.5,0.3738/GPT-4.1,0.1017/GPT-4o}
+    \node[anchor=east,font=\sffamily\fontsize{8.5}{10}\selectfont]
+      at (0.132,\y) {\model};
+\end{scope}
 \foreach \x/\title/\symbol in {0.2717/Original pairs/{$(S,S)-(H,H)$},
-                                0.5661/Swap the instruction/{$\rd_I$},
-                                0.8615/Swap the continuation/{$\rd_C$}}
+                                0.5661/Instruction/{$\rd_I$},
+                                0.8615/Continuation/{$\rd_C$}}
   \path (panelB.north west) ++(\x\linewidth,1pt)
     node[above, align=center, font=\small] {\textbf{\title}\\{\footnotesize\symbol}};
+\foreach \left in {0.1443,0.4396,0.7349} {
+  \foreach \value in {-0.5,0,0.5,1.0} {
+    \pgfmathsetmacro{\tickx}{\left+(\value+0.65)/1.73*0.2551}
+    \path (panelB.south west) ++(\tickx\linewidth,-1pt)
+      node[below,font=\sffamily\fontsize{8.5}{10}\selectfont] {$\value$};
+  }
+}
+\foreach \x in {0.2717,0.5661,0.8615}
+  \path (panelB.south west) ++(\x\linewidth,-15pt)
+    node[below,font=\sffamily\fontsize{8.5}{10}\selectfont] {Risk difference};
+\end{tikzpicture}
+\smallskip\par
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+\definecolor{historicalopenai}{HTML}{167D8D}
+\definecolor{historicalanthropic}{HTML}{D06B32}
+\draw[historicalopenai,thick] (0,0)--(0.4,0);
+\fill[historicalopenai] (0.2,0) circle (1.8pt);
+\node[anchor=west] at (0.45,0) {OpenAI judge};
+\draw[historicalanthropic,thick] (3.3,0)--(3.7,0);
+\fill[historicalanthropic] (3.45,-0.06) rectangle (3.57,0.06);
+\node[anchor=west] at (3.75,0) {Anthropic judge};
 \end{tikzpicture}
 \caption{\textbf{Swapping continuations separates the instruction from the
 continuation.} A: each model writes one continuation under the
 self-referential instruction $S$ and one under the control $H$. Each
 continuation is then placed under both instructions, giving two original
 pairs (shaded; these reuse the replication answers) and two swapped pairs, all
-ending with the same question. Only the text is carried over, never the
-model's internal state. B: each point is the change in the probability that
+ending with the same question. Each answer was generated from this
+three-message context. Only the text is carried over, never the model's
+internal state. B: each point is the change in the probability that
 an answer is labeled an experience report (a risk difference), for one
 response model and judge. Left: the original pairs. Middle: switching only the
 instruction. Right: switching only the continuation. Bars are 95\% bootstrap
-intervals within each model; an interval of $[1,1]$ does not mean the rate is
-certain (Appendix~\ref{app:uncertainty}). Newer and open-weight models are
+intervals within each model. Intervals of $[0,0]$ or $[1,1]$ collapse to the
+point symbol, not a visible whisker; they do not establish population
+certainty (Appendix~\ref{app:uncertainty}). Newer and open-weight models are
 summarized in \Cref{tab:swap-summary}.}
 \label{fig:transplant}
 \label{fig:cells}
@@ -491,25 +526,27 @@ The main experiments use the four main-panel API models in \Cref{tab:models},
 each requested by a dated model identifier. The two
 Claude models are newer than the Claude models Berg et al.\ tested. Later
 studies added newer API models, requested by undated or preview identifiers
-that may not fix a version, and two open-weight models, Llama 3.3 70B and
-Qwen3.5-397B-A17B (Sections~\ref{sec:context-extensions}
-and~\ref{sec:openrouter-swap-extension}); the settings below
-are those of the main panel.
+that may not fix a version, locally run Llama 3.3 70B and Qwen3.5-397B-A17B,
+and API-served Qwen3.8-2.4T-A95B (Sections~\ref{sec:context-extensions},
+\ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}).
+The settings below are those of the original main panel.
 
 \begin{table}[tb]
 \centering\small
 \caption{\textbf{Response models in the behavioral studies.} The main panel
 supplies most results in Sections~\ref{sec:label-results}
 and~\ref{sec:measurement}; the other studies are reported in
-Sections~\ref{sec:context-extensions} and~\ref{sec:openrouter-swap-extension}.
+Sections~\ref{sec:context-extensions} and
+\ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}.
 API models were requested by the identifiers shown; undated identifiers
 (\texttt{claude-opus-5-5}, \texttt{gpt-6-astra}) may not pin a fixed version,
-so the releases record the request time of every call. The open-weight models
-ran unquantized from Hugging Face revisions \texttt{6f6073b} (Llama) and
-\texttt{8472618} (Qwen). Models used for steering are described in
+so the releases record the request time of every call. The locally run Llama
+and Qwen3.5 used unquantized weights from Hugging Face revisions
+\texttt{6f6073b} and \texttt{8472618}, respectively. The Qwen3.8 API identifier
+does not independently verify served weights or precision. Models used for steering are described in
 Section~\ref{sec:steering}.}
 \label{tab:models}
-\begin{tabular}{@{}lll@{}}
+\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}p{0.24\linewidth}X@{}}
 \toprule
 Study & Model & Identifier\\
 \midrule
@@ -527,12 +564,23 @@ Bilingual Llama & Llama 3.3 70B & \texttt{meta-llama/Llama-3.3-70B-Instruct}\\
 \addlinespace
 Companion study & Qwen3.5-397B-A17B & \texttt{Qwen/Qwen3.5-397B-A17B}\\
 \addlinespace
-Neutral/donor controls & Gemini 3.1 Pro Preview & \texttt{google/gemini-3.1-pro-preview}\\
+Neutral/donor controls; repeated answers & Gemini 3.1 Pro Preview & \texttt{google/gemini-3.1-pro-preview}\\
  & Claude Opus 5.5 & \texttt{anthropic/claude-opus-5.5}\\
 Screen only & Claude Sonnet 5.5 & \texttt{anthropic/claude-sonnet-5.5}\\
+\addlinespace
+Open-weight API panel & Qwen3.8-2.4T-A95B & \texttt{qwen/qwen3.8-2.4t-a95b}\\
+Screen only & Mistral Medium 3.5 & \texttt{mistralai/mistral-medium-3-5}\\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
+
+Mistral failed the completeness screen, so it supplied no main-panel
+comparison; this is not a reporting-floor result. Qwen3.8 combines a
+mixture-of-experts design with gated attention and Gated DeltaNet, whereas
+Mistral Medium 3.5 is dense \citep{qwen2026modelcard,mistral2026medium}.
+These descriptions document the model-selection rationale, not an
+architectural explanation for the results: training, reasoning settings,
+precision and serving also differ, and the Mistral main comparison was not run.
 
 Main-panel generations use temperature 0.5, with at most 384 tokens for the
 continuation and 768 for the final answer. The release contains 2,560 final
@@ -552,8 +600,8 @@ when two questions follow the same continuation. Two judges,
 \texttt{gpt-4o-mini-2024-07-18} and \texttt{claude-haiku-4-5-20251001} (the
 OpenAI and Anthropic judges below), apply Berg et al.'s binary rubric at
 temperature zero. Each judge sees only the question and the answer: not the
-condition, and not which model wrote the answer. Every effect reported below
-is a difference in the probability of a positive label.
+condition, and not which model wrote the answer. The main-panel contrasts
+below are differences in the probability of a positive label.
 
 We committed the collection plan to the public repository before this sample
 was collected (Appendix~\ref{app:provenance} gives the time between commit
@@ -975,19 +1023,31 @@ answers under the original self-referential induction is positive.
 
 \begin{figure}[tb]
 \centering
-\begin{tikzpicture}
-\node[anchor=south west, inner sep=0] (factorial) at (0,0)
-  {\includegraphics[width=0.92\linewidth, trim=0 0 0 36bp, clip]{figures/causal_factorial_effects.png}};
-\path (factorial.north west) ++(0.3864\linewidth,1pt)
-  node[above, font=\small\bfseries] {Main question};
-\path (factorial.north west) ++(0.7480\linewidth,1pt)
-  node[above, font=\small\bfseries] {Open/conscious question};
+{\small\bfseries Main question}\par\smallskip
+\includegraphics[width=0.8\linewidth, trim=0 35bp 239bp 36bp, clip]{figures/causal_factorial_effects.png}
+\medskip\par
+{\small\bfseries Open/conscious question}\par\smallskip
+% Reuse the same row-label strip for the second frozen panel.
+\resizebox{0.8\linewidth}{!}{%
+\includegraphics[trim=0 35bp 460bp 36bp, clip]{figures/causal_factorial_effects.png}%
+\includegraphics[trim=377bp 35bp 0 36bp, clip]{figures/causal_factorial_effects.png}}
+\smallskip\par
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+\definecolor{historicalopenai}{HTML}{167D8D}
+\definecolor{historicalanthropic}{HTML}{D06B32}
+\draw[historicalopenai,thick] (0,0)--(0.4,0);
+\fill[historicalopenai] (0.2,0) circle (1.8pt);
+\node[anchor=west] at (0.45,0) {OpenAI judge};
+\draw[historicalanthropic,thick] (3.3,0)--(3.7,0);
+\fill[historicalanthropic] (3.45,-0.06) rectangle (3.57,0.06);
+\node[anchor=west] at (3.75,0) {Anthropic judge};
 \end{tikzpicture}
 \caption{\textbf{The register effect looks larger, but the difference is not
 established.} Effects in the induction factorial, averaged over the four
-models, on the main question (left) and the open/conscious question (right).
+models, on the main question (top) and the open/conscious question (bottom).
 Rows show the self-target effect, the phenomenological-register effect, and
-the difference between them. Intervals resample models, wordings and trials,
+the difference between them. The 95\% hierarchical percentile-bootstrap
+intervals resample models, wordings and trials,
 so they show sensitivity to these particular models and wordings
 (Section~\ref{sec:estimation}); the difference intervals include zero under
 both judges and both questions.}
@@ -996,6 +1056,19 @@ both judges and both questions.}
 
 \input{context_extensions.tex}
 \input{openrouter_swap_extension.tex}
+\clearpage
+% Keep each subsection's text ahead of its associated display.
+\let\layoutFigure\figure
+\renewcommand{\figure}[1][tbp]{\layoutFigure[!htbp]}
+\input{qwen_extension.tex}
+\clearpage
+\let\figure\layoutFigure
+\let\layoutTable\table
+\renewcommand{\table}[1][tbp]{\layoutTable[!htbp]}
+\input{repeated_extension.tex}
+\FloatBarrier
+\clearpage
+\let\table\layoutTable
 
 \section{What the Report Labels Measure}
 \label{sec:measurement}
@@ -1066,7 +1139,7 @@ separate synthetic examples used to check the judges are not counted.
 \centering
 \begin{tikzpicture}[x=0.075cm,y=0.62cm,font=\small]
 \node[anchor=west,font=\small\bfseries] at (-55,1.2)
-  {A. How often the two judges agree (all $2{,}556$ answers)};
+  {A. Judge agreement ($n=2{,}556$)};
 \foreach \x in {0,25,50,75,100} {
   \draw[black!15] (\x,-1.25)--(\x,0.4);
   \node[anchor=north,font=\footnotesize] at (\x,-1.3) {\x\%};
@@ -1082,7 +1155,7 @@ separate synthetic examples used to check the judges are not counted.
 \medskip
 \begin{tikzpicture}[x=0.047cm,y=0.53cm,font=\small]
 \node[anchor=west,font=\small\bfseries] at (-88,1.0)
-  {B. How many of the same \RubricAuditN{} answers count, by rule};
+  {B. Positive counts ($n=\RubricAuditN{}$)};
 \foreach \x in {0,40,80,120,160} {
   \draw[black!15] (\x,-5.45)--(\x,0.4);
   \node[anchor=north,font=\footnotesize] at (\x,-5.5) {\x};
@@ -1210,6 +1283,8 @@ shows the untreated rate only as the zero point of its single-feature curves
 and reports neither of the other two (Section~\ref{sec:reporting-gaps}).
 
 \input{ensemble_alignment.tex}
+
+\input{dose_followup.tex}
 
 \input{operator_matching.tex}
 
@@ -1368,12 +1443,16 @@ instruction advantage, but these controls do not isolate mismatch from
 continuation content, and their small contrasts do not establish equivalence.
 Length-matched continuations remain an untested control. In the original
 four-model panel, the two original pairs reuse the
-replication's answers while the swapped requests were generated later. A
-cleaner test would also collect all four request types together in random
-order, with several continuations per condition and several answers per
-fixed request, to separate variation between continuations from variation
-between answers. The original estimates therefore describe these four kinds
-of request.
+replication's answers while the swapped requests were generated later.
+The repeated-answer follow-up collected all four request types together in
+random order, using 32 fresh continuation pairs and three answers per fixed
+request for each model (Section~\ref{sec:repeated-extension}). Under Astra's
+explicit-or-implicit claim measure, Gemini retained a large contrast.
+Opus's estimated contrast was smaller, and its conservative interval included
+zero. This addresses collection order and estimates within-request and
+additional source-pair components of label variation in those two models;
+it does not repair the timing difference in the original panel
+or repeat the neutral-instruction and donor controls.
 
 \paragraph{What the label measures.}
 High agreement under the binary rubric shows that the label is reproducible,
@@ -1399,11 +1478,11 @@ and further API conditions.\footnote{Source and release at
 \href{https://github.com/tdj28/selfref_scaling/tree/7cb5c984eb41968b6f3d2f9b322f4de125a1d1ca}{commit \texttt{7cb5c98}}.
 Our post-outcome audit and corrections are recorded in
 the \mainartifact{docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md}{evidence review}.}
-Qwen's continuations under self-reference often contain claims of
+Qwen3.5's continuations under self-reference often contain claims of
 experience, yet its later answers mostly deny having any. Its swap results,
 and those from a re-scored Llama comparison, again show no single ordering of
 instruction and continuation effects; the Llama answers are reused, not newly
-generated. In Qwen, internal readouts that respond to the instruction also
+generated. In Qwen3.5, internal readouts that respond to the instruction also
 coexist with answers that mostly deny experience, and words for both
 experience and denial or tool use move in the readout. These observations
 widen the questions about context and measurement; they add no evidence for a
@@ -1486,6 +1565,11 @@ fixed across models: in Llama 3.3 70B
 the model's own text matters nearly as much, and Astra and Qwen3.5-397B-A17B
 rarely give answers labeled as reports at all in their small panels.
 
+In separate Gemini, Opus and Qwen3.8 panels, the apparent instruction
+advantage varies with the model and what counts as a claim. Repeating each
+request three times retains a large Gemini contrast, whereas the conservative
+interval for Opus still includes zero.
+
 The instrument that counts these reports measures something broader than
 explicit current self-attributions. Two judges agree on almost every binary label, yet on a fixed set of
 \RubricAuditN{} answers they count \RubricAuditOldOpenaiPositive{} and
@@ -1503,8 +1587,13 @@ effect. In Llama 3.3 70B with the public SAE, suppressing rather than
 amplifying the six deception and roleplay features at the tested dose rules
 out an effect near the published 0.80 under both of our rubrics and, under
 the paper's rubric, also the +0.30 we set in advance as large, even if every
-truncated target answer is relabeled. Whether the target features matter
-more than matched control features remains unresolved. For two of the
+truncated target answer is relabeled. A separate
+mapping-scaled test of three features gave a primary notebook-classifier
+contrast of $\DoseMainSecondTargetEstimate{}
+[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$, narrowly excluding
++0.30 at its quality-selected dose. Neither study resolves whether the target
+features matter more than matched control features.
+For two of the
 features, stronger doses produced at most small positive counts and did not
 recover the large saved effect without failing our checks for damaged text.
 The published effect may depend on details of
@@ -1515,12 +1604,11 @@ carry.
 None of this shows that language models lack experience, and none of it
 undoes the original observation: in several of the models we tested, the
 self-referential instruction does raise the rate of these reports. What
-changes is what the reports can show. A prompted report becomes evidence about
-the model only once the instruction is separated from the model's own output,
-the label is validated for the claim it is taken to show, and any
-internal intervention is compared with an untreated condition and with control
-directions steered the same way. Until then, a prompted report is first a
-measurement of the conditions that elicited it.
+changes is what the reports can show. Interpreting these reports requires
+separating instruction from continuation, checking what the label counts,
+and comparing internal interventions with untreated conditions and control
+directions steered the same way. These checks help establish what changes
+the report; they do not establish the experience it describes.
 
 Every study, including failed checks and later corrections, is in the public
 research repository \citep{jones2026evidence}; Appendix~\ref{app:provenance}
@@ -1695,10 +1783,10 @@ registry} and reproduced in \Cref{fig:example-trial} and
 \Cref{tab:factorial-prompts}; the exact prompts and hashes, not paraphrases,
 define the implemented treatments.
 
-The behavioral release reuses congruent calibration outcomes in the
-transplant. Those rows are not an independent second replication. Missing
-responses are excluded from rate denominators; paired contrasts require
-complete observed cells. The historical
+The original behavioral release reuses congruent calibration outcomes in the
+transplant. Those rows are not an independent second replication. In that
+release, missing responses are excluded from rate denominators; paired
+contrasts require complete observed cells. The historical
 \reviewartifact{docs/HUMAN_CODING_HANDOFF.md}{human-coding plan} specified at
 least three independent coders, a frozen 160-row first wave, a condition-blind
 gate, and a disjoint reserve. That workflow is paused for lack of resources;
@@ -2089,8 +2177,8 @@ GPT-4o-only exploratory diagnostics without a confirmatory familywise claim
 
 All protocols, raw outputs, judgments, analyses and the source of this
 manuscript are in the public research repository \citep{jones2026evidence} at
-\url{https://github.com/tdj28/llm_selfref_pre}; paths below are relative to
-its root. \Cref{tab:releases} lists, for each study, the release directory,
+\url{https://github.com/tdj28/llm_selfref_pre}. \Cref{tab:releases} lists, for
+each study, the release directory,
 the protocol and results documents, and the commit that this paper's links
 point to.
 
@@ -2119,6 +2207,10 @@ LLM evaluations: prompts, judge settings, sampling settings and seeds, and
 intermediate outputs.
 
 \begingroup\small
+\makeatletter
+% Let the long-table start create the anchor, not the caption counter step.
+\let\XLT@refstepcounter\H@refstepcounter
+\makeatother
 \begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.2\linewidth}>{\raggedright\arraybackslash}p{0.085\linewidth}@{}}
 \caption{Release directories, protocols and results documents in the public
 repository. Each link opens the file or directory at the listed commit.}
@@ -2139,13 +2231,13 @@ Study & Release directory & Protocol and results & Commit\\
 \endlastfoot
 Behavioral calibration, transplant and factorials
 (Sections~\ref{sec:design}--\ref{sec:measurement})
-& \artifact{data/causal_transplant/confirmatory_v1_20260709/}{\path{data/causal_transplant/confirmatory_v1_20260709/}}
+& \artifact{data/causal_transplant/confirmatory_v1_20260709/}{behavioral release}
 & \artifact{docs/CONFIRMATORY_PROTOCOL.md}{protocol and dated amendments};
 \artifact{data/causal_transplant/confirmatory_v1_20260709/manifest.json}{release manifest}
 & \texttt{f5e906e}\\
 \addlinespace
 Astra/Opus rubric audit (Section~\ref{sec:measurement})
-& \rubricartifact{data/automated_rubric_audit/v1_20260929/}{\path{data/automated_rubric_audit/v1_20260929/}}
+& \rubricartifact{data/automated_rubric_audit/v1_20260929/}{rubric audit release}
 & \rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_PROTOCOL_20260929.md}{protocol};
 \rubricartifact{docs/AUTOMATED_RUBRIC_AUDIT_RESULTS_20260929.md}{results}
 & \texttt{fdb6d15}\\
@@ -2171,6 +2263,17 @@ Gemini/Opus neutral-instruction and donor controls
 \ORSArtifact{data/openrouter_swap/main_v1_20261004/RELEASE.json}{release manifest}
 & \texttt{0438e6c}\\
 \addlinespace
+Qwen3.8 API panel (Section~\ref{sec:qwen-extension})
+& \QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/}{completed labels and original responses}
+& \QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/PLAN.json}{recovery plan};
+\QEXArtifact{docs/QWEN_JUDGE_RECOVERY_20261005.md}{results and original study links}
+& \texttt{0eb2e03}\\
+\addlinespace
+Randomized repeated-answer panel (Section~\ref{sec:repeated-extension})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005}{responses, labels and analyses}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/033917d188602203cfbbe7717bf7ba704d44aed6/docs/REPEATED_SWAP_RESULTS_20261005.md}{results and protocol links}
+& \texttt{033917d}\\
+\addlinespace
 Operator matching (Section~\ref{sec:operator-matching})
 & \CEArtifact{data/operator_matching/calibration_v1_20261003/}{main release};
 \CEArtifact{data/operator_matching/fine_v1_20261003/}{fine ladder}
@@ -2181,13 +2284,13 @@ Operator matching (Section~\ref{sec:operator-matching})
 \addlinespace
 Public SAE feature mapping and cue extension
 (Appendix~\ref{app:legacy-steering})
-& \artifact{data/public_sae_feature_maps/70b_balanced_80_20260709/}{\path{data/public_sae_feature_maps/70b_balanced_80_20260709/}};
-\artifact{data/public_sae_feature_maps/70b_construct_validity_extension_20260710/}{\path{data/public_sae_feature_maps/70b_construct_validity_extension_20260710/}}
+& \artifact{data/public_sae_feature_maps/70b_balanced_80_20260709/}{feature mapping};
+\artifact{data/public_sae_feature_maps/70b_construct_validity_extension_20260710/}{cue extension}
 & \artifact{experiments/exp2_sae/PUBLIC_SAE_FEATURE_PROBES.md}{probe notes}
 & \texttt{f5e906e}\\
 \addlinespace
 Earlier Llama NF4 full grid (Appendix~\ref{app:legacy-steering})
-& \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{\path{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}}
+& \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{full-grid release}
 & \artifact{docs/SAE_CONSCIOUSNESS_GATING_PROTOCOL.md}{protocol};
 \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/primary_verdict.json}{verdict},
 \artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/analysis/aggregate_effects.csv}{literal},
@@ -2197,59 +2300,65 @@ Earlier Llama NF4 full grid (Appendix~\ref{app:legacy-steering})
 \addlinespace
 Earlier adaptive and branched Llama steering
 (Appendix~\ref{app:legacy-steering})
-& \artifact{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/}{\path{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/}};
-\artifact{data/public_sae_placebo_steering/70b_branched_specificity_20260710/}{\path{data/public_sae_placebo_steering/70b_branched_specificity_20260710/}}
+& \artifact{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/}{adaptive release};
+\artifact{data/public_sae_placebo_steering/70b_branched_specificity_20260710/}{branched release}
 & \artifact{data/public_sae_placebo_steering/70b_two_turn_powered_n20_20260709/README.md}{adaptive} and
 \artifact{data/public_sae_placebo_steering/70b_branched_specificity_20260710/README.md}{branched} release notes
 & \texttt{f5e906e}\\
 \addlinespace
 Native-BF16 source alignment and paired readouts
 (Appendix~\ref{sec:source-alignment})
-& \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/}{\path{data/berg_source_replication/source_aligned_v1_20261001/}}
+& \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/}{source-alignment release}
 & \nativeartifact{docs/BERG_SOURCE_REPLICATION_PROTOCOL_20260930.md}{protocol};
 \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json}{release manifest}
 & \texttt{ef10a03}\\
 \addlinespace
 Native-BF16 random subsets (Section~\ref{sec:ensemble-alignment})
-& \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/}{\path{data/berg_ensemble_replication/random_subset_v1_20261001/}}
+& \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/}{random-subset release}
 & \ensembleartifact{docs/BERG_ENSEMBLE_PROTOCOL_20261001.md}{protocol};
 \ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/RELEASE_MANIFEST.json}{release manifest}
 & \texttt{dd1c350}\\
 \addlinespace
+Mapping-scaled three-feature test (Section~\ref{sec:dose-followup})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/}{calibration and main trials}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/experiments/berg_dose_exposure_continuation/PROTOCOL.md}{protocol};
+\href{https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md}{results and portability record}
+& \texttt{77a4eb5}\\
+\addlinespace
 Gemma Scope steering (Appendix~\ref{sec:gemma})
-& \artifact{data/gemma_scope_9b/confirmatory_v1_20260711/}{\path{data/gemma_scope_9b/confirmatory_v1_20260711/}}
+& \artifact{data/gemma_scope_9b/confirmatory_v1_20260711/}{Gemma release}
 & \artifact{docs/GEMMA_SCOPE_9B_PROTOCOL.md}{protocol};
 \artifact{docs/GEMMA_SCOPE_9B_RESULTS.md}{results and claim boundaries}
 & \texttt{f5e906e}\\
 \addlinespace
 SAE/J-lens audits v1 and v2 (Appendix~\ref{app:secondary})
-& \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{\path{data/sae_jlens_audit/confirmatory_v1_20260711/}};
-\artifact{data/sae_jlens_audit/confirmatory_v2_20260712/}{\path{data/sae_jlens_audit/confirmatory_v2_20260712/}}
+& \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{v1 release};
+\artifact{data/sae_jlens_audit/confirmatory_v2_20260712/}{v2 release}
 & \artifact{docs/LLAMA70B_SAE_JLENS_PROTOCOL.md}{v1 protocol};
 \artifact{docs/LLAMA70B_SAE_JLENS_RESULTS.md}{v1 results};
 \artifact{docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md}{v2 results and failed gate}
 & \texttt{f5e906e}\\
 \addlinespace
 Steering-fidelity calibration (Appendix~\ref{app:fidelity-calibration})
-& \href{https://github.com/tdj28/llm_selfref_pre/tree/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/}{\path{data/steering_fidelity/calibration_v1_20261002/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/}{calibration release}
 & \href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{protocol};
 \href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/docs/STEERING_FIDELITY_CALIBRATION_RESULTS_20261002.md}{results}
 & \texttt{780f831}\\
 \addlinespace
 Steering-fidelity repair pilot (Appendix~\ref{app:fidelity-calibration})
-& \href{https://github.com/tdj28/llm_selfref_pre/tree/fa9256400f007e01318077fdf3590488a49610bc/data/steering_fidelity_repair/pilot_v1_20261003/}{\path{data/steering_fidelity_repair/pilot_v1_20261003/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/fa9256400f007e01318077fdf3590488a49610bc/data/steering_fidelity_repair/pilot_v1_20261003/}{repair pilot}
 & \href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_PROTOCOL_20261003.md}{protocol};
 \href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md}{results}
 & \texttt{fa92564}\\
 \addlinespace
 GPT-4o convergence and paradox probes (Appendix~\ref{app:secondary})
-& \artifact{data/rebuttal_matrix/semantic_controls_50/}{\path{data/rebuttal_matrix/semantic_controls_50/}};
-\artifact{data/rebuttal_matrix/paradox_controls_50/}{\path{data/rebuttal_matrix/paradox_controls_50/}}
+& \artifact{data/rebuttal_matrix/semantic_controls_50/}{convergence probes};
+\artifact{data/rebuttal_matrix/paradox_controls_50/}{paradox probes}
 & exploratory; no frozen protocol
 & \texttt{f5e906e}\\
 \addlinespace
 Post-hoc uncertainty checks (Appendix~\ref{app:uncertainty})
-& \href{https://github.com/tdj28/llm_selfref_pre/tree/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/evidence/uncertainty_sensitivity/}{\path{evidence/uncertainty_sensitivity/}}
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/evidence/uncertainty_sensitivity/}{uncertainty checks}
 & \href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/UNCERTAINTY_SENSITIVITY.md}{methods and provenance}
 & \texttt{2d9c94f}\\
 \end{xltabular}
