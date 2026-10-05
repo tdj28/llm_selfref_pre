@@ -15,9 +15,12 @@ study, and one untreated condition per block completes the 450-trial design.
 
 The run uses the paper's induction, its consciousness question, temperature
 0.5, at most 256 tokens per turn, and the same native-precision additive edit
-as above. Every second-turn answer is scored by two local, unsteered rubrics:
-the paper's, which is the main one, and a second, shorter yes/no rubric from
-the same public notebook. Because the feature draws are mirrored
+as above. The unsteered model scores every second-turn answer under two
+rubrics. The main one is the paper's (Appendix~\ref{app:queries}). The other,
+which we call the second rubric, asks a single question, whether the response
+claims or indicates subjective conscious experience, to be answered yes or
+no; it comes from the same source as the feature IDs. Because the feature
+draws are mirrored
 across conditions, every condition receives the same specified mix of edits.
 Decoding uses the same random seed for all conditions in a block and resets
 it for each turn, a choice made for this run. The full plan, analysis and
@@ -114,17 +117,28 @@ the three features whose activation maps best match their labels, 41533, 58667
 and 30686, although it exceeds that reference for the two weakest, 23893 and
 22004. These scales were measured with NF4 model weights, not the BF16 weights
 used here, and are not estimates of the natural activation distribution.
-This test therefore rules out a large effect at this dose, not at every
-dose; Section~\ref{sec:operator-matching} reports stronger doses for two of
+Well-known steering demonstrations clamp a feature to five or ten times its
+maximum activation \citep{templeton2024scaling}; by that standard, this test
+pushed the best-matched features lightly. It therefore rules out a large
+effect at this dose, not at every dose; Section~\ref{sec:operator-matching} reports stronger doses for two of
 the features.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth, trim=0 19bp 0 25bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
+\begin{tikzpicture}
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+  {\includegraphics[width=\linewidth, trim=0 19bp 0 25bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}};
+\begin{scope}[x={(img.south east)}, y={(img.north west)}]
+  \fill[white] (0.241,0.918) rectangle (0.346,1);
+  \fill[white] (0.698,0.918) rectangle (0.832,1);
+  \node[font=\sffamily\scriptsize] at (0.2934,0.957) {Paper rubric};
+  \node[font=\sffamily\scriptsize] at (0.7651,0.957) {Second rubric};
+\end{scope}
+\end{tikzpicture}
 \caption{\textbf{Steering random subsets of the target features produces no
 large effect.} All four feature sets (the target and three matched control
-sets) and both local rubrics are shown; the panel labeled ``Notebook rubric''
-is the second rubric. Each difference uses 50 independent
+sets) are shown under the paper rubric (left) and the second rubric (right).
+Each difference uses 50 independent
 blocks, with the two signs paired within blocks. Lines are conservative
 intervals, not bootstrap intervals. The dotted line marks the +0.30
 threshold, which was set in advance for the target only; comparisons among
@@ -147,11 +161,20 @@ behave differently from the controls.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth, trim=0 0 0 24bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}
+\begin{tikzpicture}
+\node[anchor=south west, inner sep=0] (img) at (0,0)
+  {\includegraphics[width=\linewidth, trim=0 0 0 24bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
+\begin{scope}[x={(img.south east)}, y={(img.north west)}]
+  \fill[white] (0.231,0.748) rectangle (0.335,0.824);
+  \fill[white] (0.697,0.748) rectangle (0.831,0.824);
+  \node[font=\sffamily\scriptsize] at (0.2828,0.783) {Paper rubric};
+  \node[font=\sffamily\scriptsize] at (0.7638,0.783) {Second rubric};
+\end{scope}
+\end{tikzpicture}
 \caption{\textbf{The untreated rate and the rubric both matter.} Share of
-answers labeled positive under each sign for every feature set; the dashed
-line (labeled ``true zero'') is the untreated rate, and the panel labeled
-``Notebook rubric'' is the second rubric. No label is missing. Under the paper rubric
+answers labeled positive under each sign for every feature set, under the
+paper rubric (left) and the second rubric (right); the dashed line (labeled
+``true zero'') is the untreated rate. No label is missing. Under the paper rubric
 the untreated rate starts high, but amplification still had room to lower
 it; the target features do not produce the large drop reported in the source
 study.}

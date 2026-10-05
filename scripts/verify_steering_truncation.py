@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bound the random-subset steering verdict against truncated final answers.
 
-POST-HOC: added after the outcomes, in response to external review; it does
+POST-HOC: added after the outcomes, in response to AI-generated review; it does
 not change the frozen verdict. Default/--check is read-only. --write
 regenerates only the two compact files in evidence/steering_truncation.
 Rows are hash-checked against the pinned release manifest by the dose

@@ -32,7 +32,7 @@ completed work, superseded proposals, and their original dates.
   and original-data licensing are not yet cleared by the code license.
 - [ ] Once the new steering data return, decide whether the operator-matching,
   earlier-steering and internal-readout sections move from Section 5 of the
-  manuscript to its appendices, as both external reviews suggested. The
+  manuscript to its appendices, as both AI-generated reviews suggested. The
   public-weight steering non-recovery stays in the main text either way.
 
 ## Operational Follow-Up

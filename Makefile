@@ -31,6 +31,7 @@ paper-verify:
 	$(PYTHON) scripts/verify_ensemble_alignment.py
 	$(PYTHON) scripts/verify_steering_dose.py
 	$(PYTHON) scripts/verify_steering_truncation.py
+	$(PYTHON) scripts/verify_feature_map_table.py
 	$(PYTHON) scripts/verify_swap_cells.py
 	$(PYTHON) scripts/verify_fidelity_calibration.py
 	$(PYTHON) scripts/verify_reporting_bound.py

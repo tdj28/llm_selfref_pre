@@ -112,7 +112,7 @@ question, and the second as one untested explanation for our cross-model
 differences; the third only as a parallel argument for the measurement point.
 None is used as evidence for our results.
 
-## References Suggested By External Reviews (2026-10-04)
+## References Suggested By Two AI-Generated Reviews (2026-10-04)
 
 Checked against the arXiv listing pages or API records and the ACL Anthology
 for authors, dates, venue and the specific statement the manuscript uses.
@@ -144,3 +144,30 @@ for authors, dates, venue and the specific statement the manuscript uses.
 Use in the manuscript: related work and the measurement and steering sections,
 as context and parallel arguments. None is used as evidence for our results.
 These are executing-agent checks, not independent human review.
+
+## SAE Steering Practice (2026-10-04)
+
+Checked against the published texts for the statements used to explain the
+SAE re-encoding figure and the steering dose.
+
+- [Templeton et al. (2024), Scaling Monosemanticity](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html):
+  steering clamps a feature, for example to 5 or 10 times its maximum
+  activation, and the demonstrations intervene "in contexts in which the
+  feature is inactive."
+- [Wu et al. (2025), AxBench](https://proceedings.mlr.press/v267/wu25a.html),
+  ICML 2025: on Gemma-2 2B and 9B and 500 concepts, prompting outperforms the
+  representation-based steering methods tested and SAEs fall behind
+  difference-in-means; SAEs are not competitive for steering or concept
+  detection.
+- [Cunningham et al. (2023)](https://arxiv.org/abs/2309.08600): SAE features
+  are sparse, thresholded activations, zero on most tokens.
+- [Arad, Mueller and Belinkov (2025)](https://aclanthology.org/2025.emnlp-main.519/),
+  EMNLP 2025, pp. 10241--10259: current steering methods pick SAE features by
+  the input tokens that activate them; features with high input scores are
+  relatively ineffective for steering, and filtering out features with low
+  output scores improves SAE steering two- to threefold (Gemma-2 2B and 9B).
+
+Use in the manuscript: the explanation of why suppressing an already silent
+feature has little to remove, the comparison of our dose with common steering
+strengths, and context for null results from SAE steering. None is used as
+evidence for our results.

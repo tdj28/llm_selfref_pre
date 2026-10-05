@@ -1,0 +1,12 @@
+{
+  "generator_sha256": "6899f622e2bed6ea7bd1df7eaef621f945deaf1bb1708677d417ce034eb93fcf",
+  "inputs": {
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv": "79e7fc611b66fbb0c9713d5e6cbae6d3cb1a6437fb1bc99052679355ef64bc04",
+    "data/public_sae_feature_maps/70b_balanced_80_20260709/item_feature_activations.jsonl": "6dbc7675ec47e2dcdb938c22a70668aa9cd08172509f9a99f68408b9d8a8ac32"
+  },
+  "outputs": {
+    "table.tex": "59da1085a861c6c19122c8f367ae2150b58fb8120a038fc098157165815c00dd",
+    "values.tex": "79fcbe0ff476180b4c7de25ba0f881a91e8b944c631c2c9ad9ff97e671bc1061"
+  },
+  "schema": "feature_map_table_v1"
+}

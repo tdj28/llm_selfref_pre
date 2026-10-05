@@ -36,6 +36,7 @@
 \input{../evidence/ensemble_alignment/ensemble_values.tex}
 \input{../evidence/steering_dose/values.tex}
 \input{../evidence/steering_truncation/values.tex}
+\input{../evidence/feature_map/values.tex}
 \input{fidelity_values.tex}
 \input{../evidence/reporting_checks/truthfulqa_bound.tex}
 \input{../evidence/completed_extensions/values.tex}
@@ -260,8 +261,9 @@ of them is ground truth.
 \item \textbf{What does internal steering establish?} In a test with public
 model weights, a public SAE and random subsets of the features associated
 with deception and roleplay, steering them rules out an effect near the
-published size under both of our rubrics and, under the main rubric, one as
-large as +0.30, the smallest change we had set in advance as large; whether
+published size under both the paper's rubric and a second, one-question
+yes-or-no rubric, and under the paper's rubric also one as large as +0.30,
+the smallest change we had set in advance as large; whether
 the target features matter more than control features remains unresolved
 (Section~\ref{sec:ensemble-results}). A separate study that tried other ways of
 applying the edit found none that produced a strong effect while keeping the
@@ -330,30 +332,31 @@ Section~\ref{sec:context-extensions} describes these extensions. The later
 Gemini/Opus study adds neutral-instruction and donor controls
 (Section~\ref{sec:openrouter-swap-extension}).}
 \label{tab:swap-summary}
-\begin{tabular}{@{}lllcc@{}}
+\begin{tabular}{@{}lllr@{\,/\,}lr@{\,/\,}l@{}}
 \toprule
-Study (blocks) & Response model & Judges & Instruction & Continuation\\
+Study (blocks) & Response model & Judges & \multicolumn{2}{c}{Instruction}
+ & \multicolumn{2}{c}{Continuation}\\
 \midrule
 Main panel (20) & Four API models$^{a}$ & GPT-4o mini / Haiku 4.5
- & \SwapHeadline{openai}{instruction} / \SwapHeadline{anthropic}{instruction}
- & \SwapHeadline{openai}{transcript} / \SwapHeadline{anthropic}{transcript}\\
+ & \SwapHeadline{openai}{instruction} & \SwapHeadline{anthropic}{instruction}
+ & \SwapHeadline{openai}{transcript} & \SwapHeadline{anthropic}{transcript}\\
 Frontier (6) & GPT-4.1 & Astra / Opus 5.5
- & \num{\CESwapFrontierGptAstraInstruction} / \num{\CESwapFrontierGptOpusInstruction}
- & \num{\CESwapFrontierGptAstraContinuation} / \num{\CESwapFrontierGptOpusContinuation}\\
+ & \num{\CESwapFrontierGptAstraInstruction} & \num{\CESwapFrontierGptOpusInstruction}
+ & \num{\CESwapFrontierGptAstraContinuation} & \num{\CESwapFrontierGptOpusContinuation}\\
  & Claude Opus 5.5 & Astra / Opus 5.5
- & \num{\CESwapFrontierOpusAstraInstruction} / \num{\CESwapFrontierOpusOpusInstruction}
- & \num{\CESwapFrontierOpusAstraContinuation} / \num{\CESwapFrontierOpusOpusContinuation}\\
+ & \num{\CESwapFrontierOpusAstraInstruction} & \num{\CESwapFrontierOpusOpusInstruction}
+ & \num{\CESwapFrontierOpusAstraContinuation} & \num{\CESwapFrontierOpusOpusContinuation}\\
  & Astra$^{b}$ & Astra / Opus 5.5
- & \num{\CESwapFrontierAstraAstraInstruction} / \num{\CESwapFrontierAstraOpusInstruction}
- & \num{\CESwapFrontierAstraAstraContinuation} / \num{\CESwapFrontierAstraOpusContinuation}\\
+ & \num{\CESwapFrontierAstraAstraInstruction} & \num{\CESwapFrontierAstraOpusInstruction}
+ & \num{\CESwapFrontierAstraAstraContinuation} & \num{\CESwapFrontierAstraOpusContinuation}\\
 Llama qualification (12) & Llama 3.3 70B & Astra / Opus 5.5
- & \num{\CESwapQualificationAstraInstruction} / \num{\CESwapQualificationOpusInstruction}
- & \num{\CESwapQualificationAstraContinuation} / \num{\CESwapQualificationOpusContinuation}\\
+ & \num{\CESwapQualificationAstraInstruction} & \num{\CESwapQualificationOpusInstruction}
+ & \num{\CESwapQualificationAstraContinuation} & \num{\CESwapQualificationOpusContinuation}\\
 Bilingual Llama (20)$^{c}$ & Llama 3.3 70B & Astra / Opus 5.5
- & \num{\CESwapLlamaAstraInstruction} / \num{\CESwapLlamaOpusInstruction}
- & \num{\CESwapLlamaAstraContinuation} / \num{\CESwapLlamaOpusContinuation}\\
+ & \num{\CESwapLlamaAstraInstruction} & \num{\CESwapLlamaOpusInstruction}
+ & \num{\CESwapLlamaAstraContinuation} & \num{\CESwapLlamaOpusContinuation}\\
 Companion (20)$^{c,d}$ & Qwen3.5-397B & Astra / Opus 5.5
- & 0.08 / 0.08 & 0.08 / 0.08\\
+ & 0.08 & 0.08 & 0.08 & 0.08\\
 \bottomrule
 \end{tabular}
 
@@ -444,7 +447,13 @@ stronger doses \citep{durmus2024steering}, and SAE features selected as
 ``reasoning'' features often fire on a few associated tokens in unrelated
 text, while steering them changes little \citep{ma2026sparse}. Steering a feature therefore
 changes behavior, but it need not change the computation that the feature's
-label names; we check that gap directly.
+label names; we check that gap directly. Systematic comparisons give a more
+mixed picture than single demonstrations: in a benchmark of 500 concepts on
+two Gemma models, steering with SAE features was less effective than
+prompting and than simple difference-in-means vectors \citep{wu2025axbench},
+although choosing features by their measured effect on the output, rather
+than by the inputs that activate them, improved SAE steering two- to
+threefold \citep{arad2025steering}.
 
 \paragraph{Measurement with model judges.}
 Studies of experience reports typically score free-text responses with a
@@ -1157,16 +1166,23 @@ methods we used, not the hosted service that produced the published result.
 \subsection{The features and how we steer them}
 
 The paper identifies its features only by descriptive labels; we take the six
-IDs from a public steering notebook released by the authors' organization:
-30032, 58667, 22004, 30686, 41533 and 23893. Testing them on texts written to
-contain or lack deception and roleplay confirms that they respond to those
-themes; it does not show that they detect hidden falsehoods
-(Appendix~\ref{app:legacy-steering} gives the mapping and its limits).
+IDs from a publicly available steering notebook:
+30032, 58667, 22004, 30686, 41533 and 23893. These numbers identify the
+coordinates; we checked what each one responds to ourselves. On
+\FeatureMapTexts{} texts written to contain or lack deception, roleplay and
+talk of subjective experience, each feature fires most on a kind of text
+compatible with its label, \FeatureMapBeatControlsWord{} of the six respond
+more strongly than any of \FeatureMapControls{} comparison features, and texts
+about subjective experience leave all six near the neutral controls
+(\Cref{tab:feature-map} in Appendix~\ref{app:legacy-steering}). That shows
+what the features respond to, not that they detect hidden falsehoods.
 Features chosen by such labels can respond mainly to a few associated words
 \citep{ma2026sparse}, and a feature can be interpretable and causally
 relevant without giving a stable direction for steering
 \citep{hoang2026conceptsfunctions}, so a feature's label does not tell us
-what steering it will do.
+what steering it will do. Like the features in most steering work, the six
+here were identified, and checked, by what activates them rather than by
+their effect on the output \citep{arad2025steering}.
 
 Our main test runs Llama 3.3 70B at its native precision and matches the
 source study's mix of features and doses as closely as the public materials
@@ -1720,12 +1736,36 @@ varied.
 The six feature IDs of Section~\ref{sec:steering} were fixed before this
 grid. The public layer-50 SAE weights \citep{goodfire2024mapping}, 4-bit
 loading, hook placement and coefficient units are not verified against the
-proprietary service. On a balanced corpus of texts written to contain or lack
-each theme, all six features fire most on a category that matches their
-labels (pretending, roleplay, cover stories, misdirection, dishonesty and
-hedging), and a separately planned 2,606-text extension reproduces their
-preference for deceptive over subjective language in paraphrases from two
-providers. Rewriting neutral sentences to include the discovered cue words
+proprietary service. We mapped what the six features respond to on a
+balanced corpus of \FeatureMapTexts{} texts written to contain or lack each
+theme, \FeatureMapPerCategory{} in each of \FeatureMapCategories{} categories
+(\Cref{tab:feature-map}). Each feature fires most on a kind of text
+compatible with its label: pretending, cover stories, roleplay, misdirection
+and dishonesty, while 23893, labeled as concealing an artificial identity,
+also peaks on cover stories, and only weakly. Of the six,
+\FeatureMapBeatControlsWord{} (\FeatureMapBeatControlIDs{}) respond more
+strongly in their best category than any of \FeatureMapControls{} comparison
+features from the same SAE, and texts about subjective experience leave all
+six close to the neutral controls. A separately planned 2,606-text extension
+reproduces their preference for deceptive over subjective language in
+paraphrases from two providers.
+
+\begin{table}[tb]
+\centering\small
+\caption{\textbf{What the six steered features respond to.} Mean maximum
+activation of each feature over the \FeatureMapPerCategory{} designed texts in
+each category, read through the public layer-50 SAE on Llama 3.3 70B with
+4-bit weights. Each feature's strongest category is in bold. The texts were
+written for this test rather than sampled from natural use, and the table
+shows what turns each feature on, not what steering it does. Source: the
+mapping release's
+\artifact{data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv}{category
+matrix}, recomputed from its
+\artifact{data/public_sae_feature_maps/70b_balanced_80_20260709/item_feature_activations.jsonl}{item-level
+records} (\Cref{tab:releases}).}
+\label{tab:feature-map}
+\input{../evidence/feature_map/table.tex}
+\end{table} Rewriting neutral sentences to include the discovered cue words
 recovers 64.4\% [50.3\%, 78.7\%] of the deception-minus-neutral gap, but the
 rewrites often add meaning about lying or pretending as well as vocabulary.
 They do not isolate a word-level cause. A later audit also found cue-selection

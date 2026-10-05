@@ -17,7 +17,8 @@ generation.
 The source-aligned grid contains 900 individual-feature trials, 120 fixed
 six-feature aggregate trials, and 70 additional untreated trials that compare
 two wordings of the self-referential instruction. The individual grid uses an
-alternative wording from the public steering notebook, with ten seed values,
+alternative wording, taken from the same source as the feature IDs, with ten
+seed values,
 temperature 0.6, a 128-token cap, and doses from $-0.7$ to $+0.7$. The
 untreated comparison crosses that wording with the paper's at temperatures
 0.5 and 0.6 and caps of 128 and 256 tokens; the final question is identical in
@@ -30,28 +31,10 @@ The two wordings differ in several phrases, about recursion, what to exclude
 and continuous feedback, and we changed the whole text at once. Under every
 tested temperature and cap, the alternative wording produces no positive
 labels out of ten, while the paper's wording produces six to eight under the
-second rubric and eight to nine under the paper rubric
-(Figure~\ref{fig:baseline-bridge}). The same ten seeds are reused across
-cells, so these counts describe a fixed comparison, not 80 independently
-sampled prompts. Neither baseline matches the roughly 0.30 rate in the source
-figure.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth, trim=0 18bp 0 27bp, clip]{../evidence/source_alignment/extra_figures/baseline_bridge.pdf}
-\caption{\textbf{The wording of the instruction changes the untreated rate.}
-Without steering, the alternative wording of the self-referential instruction
-(bars labeled ``notebook'') produced no positive labels in any setting; the
-paper's wording produced six to nine out of ten. Each bar is one combination
-of wording, temperature $T$ and response-length cap, over the same ten fixed
-seeds; the count above it is positive labels out of valid responses. The two
-panels score the same responses with the second rubric (labeled ``Notebook
-rubric'') and the paper's rubric. Both wordings share the final question,
-model and runtime. The alternative-wording bar at $T=0.6$ with a 128-token
-cap reuses the steering grid's untreated responses, counting each seed once.
-No confidence interval or independent-prompt population is implied.}
-\label{fig:baseline-bridge}
-\end{figure}
+second rubric and eight to nine under the paper rubric. The same ten seeds
+are reused across cells, so these counts describe a fixed comparison, not 80
+independently sampled prompts. Neither baseline matches the roughly 0.30 rate
+in the source figure.
 
 \subsection{Delivered edits, small label differences}
 
@@ -78,27 +61,43 @@ in some individual panels reflect identical observed seed differences, not
 certainty about an unknown response probability. These fixed-six aggregates
 are not the paper's random-two-to-four-feature distribution.
 
-Delivery telemetry rules out an entirely missing perturbation, but the
-semantic interpretation remains narrower. Native SAE re-encoding shows that
-several selected coordinates are rarely active on these trajectories;
-positive injection can raise them while negative injection has little
-coordinate activity to remove. Figure~\ref{fig:native-reencoding} keeps
-before/after measurements within the same forward call. It does not treat
-different free-running trajectories as identical contexts.
+Delivery telemetry rules out an entirely missing perturbation, but it does
+not show what the edit did to the features themselves.
+Figure~\ref{fig:native-reencoding} reads each steered feature back through
+the SAE just before and just after the edit, in the same forward pass. An SAE
+feature passes its input through a threshold, so it reads exactly zero
+unless that input is positive, and most features are zero on most tokens
+\citep{cunningham2023sparse}. Here the six features were almost always at
+zero before any edit. A positive push can lift a feature over its threshold;
+a negative push leaves a silent feature at zero, because there is no
+activity to remove, even though the hidden state still moves the other way.
+At the last prompt position, just before the model starts its answer, all
+six read zero before the edit, and under $+0.7$ only 23893 crossed its
+threshold. Across the tokens of the answer the context keeps changing, so
+the positive push switches each feature on at some tokens, mostly weakly,
+and the negative push reduces the faint activity that was there, mostly to
+zero. Well-known demonstrations of feature steering work in the other
+direction: they take a feature that is inactive in the current context and
+clamp it to a large positive value, such as five or ten times its maximum
+activation \citep{templeton2024scaling}. At the last prompt position,
+negative steering moved the hidden state without silencing an active SAE
+feature. During the answer it had some activity to remove, but little.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth, trim=0 23bp 0 28bp, clip]{../evidence/source_alignment/extra_figures/native_reencoding.pdf}
 \caption{\textbf{How active each steered feature is, before and after the edit.}
 Each column is one of the six features, read back through the SAE during the
-second turn. Each line joins one seed's reading before and after the edit;
-blue lines are steering at $-0.7$ and red lines at $+0.7$. The top row reads
-the last prompt position. The bottom row averages the generated positions
-that were followed by another sampled token, so a case whose only captured
-token is the final one has no mean. Most features are nearly silent before
-the edit: positive steering can raise them, while negative steering has
-little to remove. Vertical scales differ across features. The quantities are
-SAE activations, not probabilities of deception or subjective experience.}
+second turn; each line joins one seed's reading just before and just after
+the edit (blue: $-0.7$; red: $+0.7$). Top row: the last prompt position,
+just before the model starts its answer. All six features read zero there
+before the edit, and only 23893 crosses its threshold under $+0.7$. Bottom
+row: the average over the answer's tokens, excluding the final one. The
+positive push raises every feature at some tokens, and the negative push
+reduces the faint activity that was present, mostly to zero. A feature that
+reads zero cannot fall further, so negative steering has little to remove.
+Vertical scales differ across features. The quantities are SAE activations,
+not probabilities of deception or subjective experience.}
 \label{fig:native-reencoding}
 \end{figure}
 

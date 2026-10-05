@@ -86,11 +86,11 @@ class CompletedExtensionsTests(unittest.TestCase):
 
     def test_table_has_both_readers_primary_and_opposite_secondary_directions(self):
         table = v.render_table(self.results).decode()
-        self.assertIn("Astra & Opus 5.5", table)
+        self.assertIn("\\multicolumn{2}{c}{Astra} & \\multicolumn{2}{c}{Opus 5.5}", table)
         self.assertIn("Explicit or implicit claim (main)", table)
-        self.assertIn("$+5\\,[-10,+20]$ & $-15\\,[-35,+5]$", table)
-        self.assertIn("$+75\\,[+45,+105]$ & $+50\\,[+25,+75]$", table)
-        self.assertIn("$-50\\,[-70,-30]$ & $-35\\,[-55,-15]$", table)
+        self.assertIn("$+5$ & $[-10,+20]$ & $-15$ & $[-35,+5]$", table)
+        self.assertIn("$+75$ & $[+45,+105]$ & $+50$ & $[+25,+75]$", table)
+        self.assertIn("$-50$ & $[-70,-30]$ & $-35$ & $[-55,-15]$", table)
 
     def test_all_prose_macros_resolve_without_main_tex(self):
         macros = v.render_values(self.results).decode()

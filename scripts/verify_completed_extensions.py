@@ -361,8 +361,8 @@ def pp(value):
     return "0" if value == 0 else f"{value:+g}"
 
 
-def estimate_tex(value):
-    return pp(value["estimate"]) + r"\,[" + ",".join(pp(v) for v in value["ci95"]) + "]"
+def estimate_cells(value):
+    return ["$" + pp(value["estimate"]) + "$", "$[" + ",".join(pp(v) for v in value["ci95"]) + "]$"]
 
 
 def rd2(value):
@@ -421,11 +421,12 @@ def render_values(results):
 
 def render_table(results):
     lines = ["% Generated from the two separate readers; units are percentage points.",
-             r"\begin{tabular}{@{}lcc@{}}", r"\toprule", r"What is counted & Astra & Opus 5.5\\", r"\midrule"]
+             r"\begin{tabular}{@{}lr@{\,}lr@{\,}l@{}}", r"\toprule",
+             r"What is counted & \multicolumn{2}{c}{Astra} & \multicolumn{2}{c}{Opus 5.5}\\", r"\midrule"]
     for endpoint, label in ((INCLUSIVE, "Explicit or implicit claim (main)"),
                             ("explicit_current_assertion", "Explicit claim only (secondary)"),
                             ("paper_positive", "Paper rubric (secondary)")):
-        cells = ["$" + estimate_tex(results["bilingual"]["readers"][p][endpoint]["zh_minus_en"]) + "$" for p in READERS]
+        cells = [c for p in READERS for c in estimate_cells(results["bilingual"]["readers"][p][endpoint]["zh_minus_en"])]
         lines.append(label + " & " + " & ".join(cells) + r"\\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     return ("\n".join(lines) + "\n").encode("ascii")
