@@ -1,0 +1,9 @@
+{
+  "physical_spent_and_reserved_usd": "11.40252755",
+  "completed_logical_spend_usd": "10.92052955",
+  "transport_overhead_or_unresolved_usd": "0.48199800",
+  "remaining_forecast_usd": "109.5925157000000000000000000",
+  "forecast_total_usd": "120.9950432500000000000000000",
+  "funded_limit_usd": "123.125663453",
+  "pass": true
+}

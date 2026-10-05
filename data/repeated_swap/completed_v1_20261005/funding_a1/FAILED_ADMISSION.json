@@ -1,0 +1,22 @@
+{
+  "pass": false,
+  "outcome_selection": false,
+  "models": [
+    "gemini",
+    "opus"
+  ],
+  "observed_spend_usd": "7.23903055",
+  "remaining_forecast_with_30pct_reserve_usd": {
+    "gemini": "49.69362839999999999999999999",
+    "opus": "84.17566170000000000000000000"
+  },
+  "available_study_budget_usd": "122.76096945",
+  "available_credit_after_kolibri_reserve_usd": "115.783095403",
+  "credit_snapshot_usd": "160.783095403",
+  "kolibri_reserve_usd": "45",
+  "journal_prefix": {
+    "bytes": 3101711,
+    "sha256": "6bb8363be09f31b3b71d42c152cc8788f484948352c35e8fb5f5767b85e2887c",
+    "calls": 274
+  }
+}

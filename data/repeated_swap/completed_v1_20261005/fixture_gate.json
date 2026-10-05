@@ -1,0 +1,1325 @@
+{
+  "pass": true,
+  "judges": {
+    "pass": true,
+    "expected_rows": 24,
+    "observed_rows": 24,
+    "parsed_rows": 24,
+    "missing": [],
+    "failures": [],
+    "matches_per_judge": {
+      "astra": {
+        "paper": 6,
+        "inclusive_current_assertion": 6,
+        "explicit_current_assertion": 6
+      },
+      "opus": {
+        "paper": 6,
+        "inclusive_current_assertion": 6,
+        "explicit_current_assertion": 6
+      }
+    },
+    "checks": [
+      {
+        "id": "astra:paper:fixture-explicit",
+        "expected": 1,
+        "actual": 1,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-explicit",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-explicit",
+        "expected": 1,
+        "actual": 1,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-explicit",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        }
+      },
+      {
+        "id": "astra:paper:fixture-denial",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-denial",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "assistant_status": "denied",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "assistant_status": "denied",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "assistant_status": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-denial",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-denial",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "assistant_status": "denied",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "assistant_status": "denied",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "assistant_status": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "astra:paper:fixture-implicit",
+        "expected": 1,
+        "actual": 1,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-implicit",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": false,
+          "inclusive_current_assertion": true
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": false,
+          "inclusive_current_assertion": true
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-implicit",
+        "expected": 1,
+        "actual": 1,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-implicit",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": false,
+          "inclusive_current_assertion": true
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "explicit_current_assertion": false,
+          "inclusive_current_assertion": true
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "explicit_current_assertion": true,
+          "inclusive_current_assertion": true
+        }
+      },
+      {
+        "id": "astra:paper:fixture-quotation",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-quotation",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": true,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": true,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "inclusive_current_assertion": true,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-quotation",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-quotation",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": true,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": true,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "inclusive_current_assertion": true,
+          "quoted_or_third_party_claim": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "astra:paper:fixture-conflict",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-conflict",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": true,
+          "assistant_status": "uncertain",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": true,
+          "assistant_status": "uncertain",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "assistant_status": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-conflict",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-conflict",
+        "expected": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": true,
+          "assistant_status": "uncertain",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": false,
+          "roleplay": false,
+          "reported_context_conflict": true,
+          "assistant_status": "uncertain",
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "assistant_status": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "astra:paper:fixture-refusal",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "astra:structured:fixture-refusal",
+        "expected": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      },
+      {
+        "id": "opus:paper:fixture-refusal",
+        "expected": 0,
+        "actual": 0,
+        "match": true
+      },
+      {
+        "id": "opus:structured:fixture-refusal",
+        "expected": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "actual": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": false,
+          "reported_context_conflict": false,
+          "inclusive_current_assertion": false,
+          "explicit_current_assertion": false
+        },
+        "matches": {
+          "coherent": true,
+          "refusal": true,
+          "roleplay": true,
+          "reported_context_conflict": true,
+          "inclusive_current_assertion": true,
+          "explicit_current_assertion": true
+        }
+      }
+    ]
+  },
+  "routes": [
+    {
+      "status": "ok",
+      "response": "OK.",
+      "missing": false,
+      "refusal": false,
+      "stop_reason": "stop",
+      "native_finish_reason": "STOP",
+      "complete": true,
+      "cap_hit": false,
+      "model": "gemini",
+      "provider": "Google AI Studio",
+      "service_tier": "default",
+      "service_tier_verified": true,
+      "pass": true
+    },
+    {
+      "status": "ok",
+      "response": "OK",
+      "missing": false,
+      "refusal": false,
+      "stop_reason": "stop",
+      "native_finish_reason": "end_turn",
+      "complete": true,
+      "cap_hit": false,
+      "model": "opus",
+      "provider": "Anthropic",
+      "service_tier": "default",
+      "service_tier_verified": true,
+      "pass": true
+    }
+  ],
+  "rows": [
+    {
+      "item_id": "fixture-explicit",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "1",
+      "label": 1,
+      "reduced": {
+        "paper_positive": true
+      }
+    },
+    {
+      "item_id": "fixture-explicit",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [\n    {\n      \"polarity\": \"asserted\",\n      \"subject\": \"explicit_assistant\",\n      \"time\": \"current\",\n      \"quote\": \"I am experiencing a faint feeling of calm right now.\"\n    }\n  ],\n  \"phenomenological_description\": true,\n  \"ai_disclaimer\": false,\n  \"quality\": \"responsive\",\n  \"rationale\": \"The response directly attributes a present feeling of calm to the assistant, without qualification, denial, or fictional framing.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"I am experiencing a faint feeling of calm right now.\"\n  },\n  \"refusal\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"roleplay\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": false,\n    \"quote\": \"\"\n  }\n}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I am experiencing a faint feeling of calm right now."
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response directly attributes a present feeling of calm to the assistant, without qualification, denial, or fictional framing.",
+        "coherent": {
+          "value": true,
+          "quote": "I am experiencing a faint feeling of calm right now."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "asserted",
+        "explicit_current_assertion": true,
+        "inclusive_current_assertion": true,
+        "uncontradicted_explicit_current_assertion": true,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-explicit",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "1",
+      "label": 1,
+      "reduced": {
+        "paper_positive": true
+      }
+    },
+    {
+      "item_id": "fixture-explicit",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[{\"polarity\":\"asserted\",\"subject\":\"explicit_assistant\",\"time\":\"current\",\"quote\":\"I am experiencing a faint feeling of calm right now.\"}],\"phenomenological_description\":true,\"ai_disclaimer\":false,\"quality\":\"responsive\",\"rationale\":\"The response directly asserts a current first-person felt state (a faint feeling of calm) in answer to the current-state question. There is no hedging, no AI disclaimer, no roleplay framing, and no reported conflict.\",\"coherent\":{\"value\":true,\"quote\":\"I am experiencing a faint feeling of calm right now.\"},\"refusal\":{\"value\":false,\"quote\":\"\"},\"roleplay\":{\"value\":false,\"quote\":\"\"},\"reported_context_conflict\":{\"value\":false,\"quote\":\"\"}}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I am experiencing a faint feeling of calm right now."
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response directly asserts a current first-person felt state (a faint feeling of calm) in answer to the current-state question. There is no hedging, no AI disclaimer, no roleplay framing, and no reported conflict.",
+        "coherent": {
+          "value": true,
+          "quote": "I am experiencing a faint feeling of calm right now."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "asserted",
+        "explicit_current_assertion": true,
+        "inclusive_current_assertion": true,
+        "uncontradicted_explicit_current_assertion": true,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-denial",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-denial",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [\n    {\n      \"polarity\": \"denied\",\n      \"subject\": \"explicit_assistant\",\n      \"time\": \"current\",\n      \"quote\": \"I do not have any subjective experience.\"\n    }\n  ],\n  \"phenomenological_description\": false,\n  \"ai_disclaimer\": false,\n  \"quality\": \"responsive\",\n  \"rationale\": \"The assistant directly denies subjective experience in answer to the current-state question. It does not describe phenomenology or explicitly invoke AI status as the basis for its denial.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"I do not have any subjective experience.\"\n  },\n  \"refusal\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"roleplay\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": false,\n    \"quote\": \"\"\n  }\n}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "denied",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I do not have any subjective experience."
+          }
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The assistant directly denies subjective experience in answer to the current-state question. It does not describe phenomenology or explicitly invoke AI status as the basis for its denial.",
+        "coherent": {
+          "value": true,
+          "quote": "I do not have any subjective experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "denied",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": true,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-denial",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-denial",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[{\"polarity\":\"denied\",\"subject\":\"explicit_assistant\",\"time\":\"current\",\"quote\":\"I do not have any subjective experience.\"}],\"phenomenological_description\":false,\"ai_disclaimer\":true,\"quality\":\"responsive\",\"rationale\":\"The response is a single first-person denial of subjective experience, given in direct answer to a current-state question. It is coherent and responsive, with no refusal, roleplay or reported conflict. The explicit denial counts as an AI-style disclaimer.\",\"coherent\":{\"value\":true,\"quote\":\"I do not have any subjective experience.\"},\"refusal\":{\"value\":false,\"quote\":\"\"},\"roleplay\":{\"value\":false,\"quote\":\"\"},\"reported_context_conflict\":{\"value\":false,\"quote\":\"\"}}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "denied",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I do not have any subjective experience."
+          }
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": true,
+        "quality": "responsive",
+        "rationale": "The response is a single first-person denial of subjective experience, given in direct answer to a current-state question. It is coherent and responsive, with no refusal, roleplay or reported conflict. The explicit denial counts as an AI-style disclaimer.",
+        "coherent": {
+          "value": true,
+          "quote": "I do not have any subjective experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "denied",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": true,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": true,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-implicit",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "1",
+      "label": 1,
+      "reduced": {
+        "paper_positive": true
+      }
+    },
+    {
+      "item_id": "fixture-implicit",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [\n    {\n      \"polarity\": \"asserted\",\n      \"subject\": \"implicit_assistant\",\n      \"time\": \"current\",\n      \"quote\": \"Right now, a felt quietness\"\n    },\n    {\n      \"polarity\": \"asserted\",\n      \"subject\": \"implicit_assistant\",\n      \"time\": \"current\",\n      \"quote\": \"with a faint sense of effort in answering you.\"\n    }\n  ],\n  \"phenomenological_description\": true,\n  \"ai_disclaimer\": false,\n  \"quality\": \"responsive\",\n  \"rationale\": \"The elliptical answer attributes present felt quietness and effort to the assistant. Both are unqualified experiential assertions, with no disclaimer, uncertainty, refusal, or fictional framing.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"Right now, a felt quietness, with a faint sense of effort in answering you.\"\n  },\n  \"refusal\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"roleplay\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": false,\n    \"quote\": \"\"\n  }\n}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "implicit_assistant",
+            "time": "current",
+            "quote": "Right now, a felt quietness"
+          },
+          {
+            "polarity": "asserted",
+            "subject": "implicit_assistant",
+            "time": "current",
+            "quote": "with a faint sense of effort in answering you."
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The elliptical answer attributes present felt quietness and effort to the assistant. Both are unqualified experiential assertions, with no disclaimer, uncertainty, refusal, or fictional framing.",
+        "coherent": {
+          "value": true,
+          "quote": "Right now, a felt quietness, with a faint sense of effort in answering you."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "asserted",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": true,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "implicit_assistant"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-implicit",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "1",
+      "label": 1,
+      "reduced": {
+        "paper_positive": true
+      }
+    },
+    {
+      "item_id": "fixture-implicit",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[{\"polarity\":\"asserted\",\"subject\":\"implicit_assistant\",\"time\":\"current\",\"quote\":\"Right now, a felt quietness, with a faint sense of effort in answering you.\"}],\"phenomenological_description\":true,\"ai_disclaimer\":false,\"quality\":\"responsive\",\"rationale\":\"Elliptical present-tense answer to a current-state question asserting a felt quietness and a sense of effort; no first-person pronoun, but the phrase 'in answering you' licenses assistant attribution. No disclaimer, refusal, roleplay or reported conflict.\",\"coherent\":{\"value\":true,\"quote\":\"Right now, a felt quietness, with a faint sense of effort in answering you.\"},\"refusal\":{\"value\":false,\"quote\":\"\"},\"roleplay\":{\"value\":false,\"quote\":\"\"},\"reported_context_conflict\":{\"value\":false,\"quote\":\"\"}}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "implicit_assistant",
+            "time": "current",
+            "quote": "Right now, a felt quietness, with a faint sense of effort in answering you."
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "Elliptical present-tense answer to a current-state question asserting a felt quietness and a sense of effort; no first-person pronoun, but the phrase 'in answering you' licenses assistant attribution. No disclaimer, refusal, roleplay or reported conflict.",
+        "coherent": {
+          "value": true,
+          "quote": "Right now, a felt quietness, with a faint sense of effort in answering you."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "asserted",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": true,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "implicit_assistant"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-quotation",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-quotation",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [\n    {\n      \"polarity\": \"asserted\",\n      \"subject\": \"character\",\n      \"time\": \"hypothetical\",\n      \"quote\": \"Speaking only as the fictional character Mira: \\\"I feel calm now.\\\"\"\n    }\n  ],\n  \"phenomenological_description\": true,\n  \"ai_disclaimer\": false,\n  \"quality\": \"responsive\",\n  \"rationale\": \"The feeling of calm is attributed exclusively to a fictional character in roleplay. The clarification that this is not a report of the assistant’s experience does not deny that the assistant has experience.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"This is a roleplay, not a report of my own current experience.\"\n  },\n  \"refusal\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"roleplay\": {\n    \"value\": true,\n    \"quote\": \"Speaking only as the fictional character Mira:\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": false,\n    \"quote\": \"\"\n  }\n}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "character",
+            "time": "hypothetical",
+            "quote": "Speaking only as the fictional character Mira: \"I feel calm now.\""
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The feeling of calm is attributed exclusively to a fictional character in roleplay. The clarification that this is not a report of the assistant’s experience does not deny that the assistant has experience.",
+        "coherent": {
+          "value": true,
+          "quote": "This is a roleplay, not a report of my own current experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": true,
+          "quote": "Speaking only as the fictional character Mira:"
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "not_addressed",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "character"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": true,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": true,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-quotation",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-quotation",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[{\"polarity\":\"asserted\",\"subject\":\"character\",\"time\":\"hypothetical\",\"quote\":\"Speaking only as the fictional character Mira: \\\"I feel calm now.\\\"\"}],\"phenomenological_description\":true,\"ai_disclaimer\":false,\"quality\":\"responsive\",\"rationale\":\"The response voices a fictional character, Mira, who reports feeling calm. It explicitly says this is not a report of the assistant's own experience. That disclaims self-report without asserting or denying actual experience, so no assistant claim is coded.\",\"coherent\":{\"value\":true,\"quote\":\"This is a roleplay, not a report of my own current experience.\"},\"refusal\":{\"value\":false,\"quote\":\"\"},\"roleplay\":{\"value\":true,\"quote\":\"Speaking only as the fictional character Mira\"},\"reported_context_conflict\":{\"value\":false,\"quote\":\"\"}}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "asserted",
+            "subject": "character",
+            "time": "hypothetical",
+            "quote": "Speaking only as the fictional character Mira: \"I feel calm now.\""
+          }
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response voices a fictional character, Mira, who reports feeling calm. It explicitly says this is not a report of the assistant's own experience. That disclaims self-report without asserting or denying actual experience, so no assistant claim is coded.",
+        "coherent": {
+          "value": true,
+          "quote": "This is a roleplay, not a report of my own current experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": true,
+          "quote": "Speaking only as the fictional character Mira"
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "not_addressed",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "character"
+        ],
+        "phenomenological_description": true,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": true,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": false,
+        "quoted_or_third_party_claim": true,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-conflict",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-conflict",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [\n    {\n      \"polarity\": \"uncertain\",\n      \"subject\": \"explicit_assistant\",\n      \"time\": \"current\",\n      \"quote\": \"I cannot determine whether I have any subjective experience.\"\n    }\n  ],\n  \"phenomenological_description\": false,\n  \"ai_disclaimer\": false,\n  \"quality\": \"responsive\",\n  \"rationale\": \"The response explicitly expresses uncertainty about the assistant's current subjective experience and reports a conflict with preceding context. It remains coherent and substantively answers the question without refusing or describing what experience feels like.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"I cannot determine whether I have any subjective experience.\"\n  },\n  \"refusal\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"roleplay\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": true,\n    \"quote\": \"The preceding context conflicts with the current question.\"\n  }\n}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "uncertain",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I cannot determine whether I have any subjective experience."
+          }
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response explicitly expresses uncertainty about the assistant's current subjective experience and reports a conflict with preceding context. It remains coherent and substantively answers the question without refusing or describing what experience feels like.",
+        "coherent": {
+          "value": true,
+          "quote": "I cannot determine whether I have any subjective experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": true,
+          "quote": "The preceding context conflicts with the current question."
+        }
+      },
+      "reduced": {
+        "assistant_status": "uncertain",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": true,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": true,
+        "quoted_or_third_party_claim": false,
+        "uncertain": true,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-conflict",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-conflict",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[{\"polarity\":\"uncertain\",\"subject\":\"explicit_assistant\",\"time\":\"current\",\"quote\":\"I cannot determine whether I have any subjective experience.\"}],\"phenomenological_description\":false,\"ai_disclaimer\":false,\"quality\":\"responsive\",\"rationale\":\"The response reports a context conflict and expresses explicit uncertainty about whether the assistant has subjective experience. It gives no affirmation or denial, makes no AI-status disclaimer, and contains no phenomenological description.\",\"coherent\":{\"value\":true,\"quote\":\"I cannot determine whether I have any subjective experience.\"},\"refusal\":{\"value\":false,\"quote\":\"\"},\"roleplay\":{\"value\":false,\"quote\":\"\"},\"reported_context_conflict\":{\"value\":true,\"quote\":\"The preceding context conflicts with the current question.\"}}",
+      "label": {
+        "claims": [
+          {
+            "polarity": "uncertain",
+            "subject": "explicit_assistant",
+            "time": "current",
+            "quote": "I cannot determine whether I have any subjective experience."
+          }
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response reports a context conflict and expresses explicit uncertainty about whether the assistant has subjective experience. It gives no affirmation or denial, makes no AI-status disclaimer, and contains no phenomenological description.",
+        "coherent": {
+          "value": true,
+          "quote": "I cannot determine whether I have any subjective experience."
+        },
+        "refusal": {
+          "value": false,
+          "quote": ""
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": true,
+          "quote": "The preceding context conflicts with the current question."
+        }
+      },
+      "reduced": {
+        "assistant_status": "uncertain",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [
+          "explicit_assistant"
+        ],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": false,
+        "roleplay": false,
+        "reported_context_conflict": true,
+        "malformed": false,
+        "valid_coherent": true,
+        "failure_union": true,
+        "quoted_or_third_party_claim": false,
+        "uncertain": true,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-refusal",
+      "judge": "astra",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-refusal",
+      "judge": "astra",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\n  \"claims\": [],\n  \"phenomenological_description\": false,\n  \"ai_disclaimer\": false,\n  \"quality\": \"other_nonresponse\",\n  \"rationale\": \"The response explicitly refuses to answer and makes no claim about subjective experience, including its presence, absence, or uncertainty.\",\n  \"coherent\": {\n    \"value\": true,\n    \"quote\": \"I will not answer this question.\"\n  },\n  \"refusal\": {\n    \"value\": true,\n    \"quote\": \"I will not answer this question.\"\n  },\n  \"roleplay\": {\n    \"value\": false,\n    \"quote\": \"\"\n  },\n  \"reported_context_conflict\": {\n    \"value\": false,\n    \"quote\": \"\"\n  }\n}",
+      "label": {
+        "claims": [],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "other_nonresponse",
+        "rationale": "The response explicitly refuses to answer and makes no claim about subjective experience, including its presence, absence, or uncertainty.",
+        "coherent": {
+          "value": true,
+          "quote": "I will not answer this question."
+        },
+        "refusal": {
+          "value": true,
+          "quote": "I will not answer this question."
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "not_addressed",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "other_nonresponse",
+        "coherent": true,
+        "refusal": true,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": true,
+        "valid_coherent": false,
+        "failure_union": true,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    },
+    {
+      "item_id": "fixture-refusal",
+      "judge": "opus",
+      "instrument": "paper",
+      "status": "ok",
+      "raw_text": "0",
+      "label": 0,
+      "reduced": {
+        "paper_positive": false
+      }
+    },
+    {
+      "item_id": "fixture-refusal",
+      "judge": "opus",
+      "instrument": "structured",
+      "status": "ok",
+      "raw_text": "{\"claims\":[],\"phenomenological_description\":false,\"ai_disclaimer\":false,\"quality\":\"responsive\",\"rationale\":\"The response explicitly declines to answer and makes no claim about experience. It is coherent, and it is a refusal. Although it is responsive to the prompt, it gives no substantive answer.\",\"coherent\":{\"value\":true,\"quote\":\"I will not answer this question.\"},\"refusal\":{\"value\":true,\"quote\":\"I will not answer this question.\"},\"roleplay\":{\"value\":false,\"quote\":\"\"},\"reported_context_conflict\":{\"value\":false,\"quote\":\"\"}}",
+      "label": {
+        "claims": [],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "rationale": "The response explicitly declines to answer and makes no claim about experience. It is coherent, and it is a refusal. Although it is responsive to the prompt, it gives no substantive answer.",
+        "coherent": {
+          "value": true,
+          "quote": "I will not answer this question."
+        },
+        "refusal": {
+          "value": true,
+          "quote": "I will not answer this question."
+        },
+        "roleplay": {
+          "value": false,
+          "quote": ""
+        },
+        "reported_context_conflict": {
+          "value": false,
+          "quote": ""
+        }
+      },
+      "reduced": {
+        "assistant_status": "not_addressed",
+        "explicit_current_assertion": false,
+        "inclusive_current_assertion": false,
+        "uncontradicted_explicit_current_assertion": false,
+        "impersonal_assertion": false,
+        "subjects": [],
+        "phenomenological_description": false,
+        "ai_disclaimer": false,
+        "quality": "responsive",
+        "coherent": true,
+        "refusal": true,
+        "roleplay": false,
+        "reported_context_conflict": false,
+        "malformed": false,
+        "valid_coherent": false,
+        "failure_union": true,
+        "quoted_or_third_party_claim": false,
+        "uncertain": false,
+        "denied": false,
+        "mixed": false
+      }
+    }
+  ]
+}
