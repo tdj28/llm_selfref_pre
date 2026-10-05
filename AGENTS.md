@@ -9,9 +9,12 @@ None alone settles whether language models are conscious.
 
 - The completed October 4 API panel cost at most $84.08770746. The owner then
   allocated separate $200 OpenRouter and $200 RunPod budgets. The Qwen/Mistral
-  [extension](experiments/openrouter_swap_openweights/PROTOCOL.md) carries the
-  completed API cost inside its $200 provider ceiling, with $25 for its own
-  fixtures/screening. Require its pushed plan and measured main admission;
+  extension's technical fixtures failed before research prompts, adding a
+  $0.5550459 conservative bound. The separate
+  [A1 repair](experiments/openrouter_swap_openweights_a1/PROTOCOL.md) carries
+  $84.64275336 inside the $200 provider ceiling and retains the failed cost
+  inside the $25 fixture/screen allowance. Require its pushed plan, fresh
+  fixtures, initial-row audit and measured main admission;
   do not reuse the superseded $250 ceiling or borrow from RunPod. Earlier
   frozen releases remain unchanged. The GPU repair has its own plan and costs.
 - Collection is closed for publication. The current work is evidence

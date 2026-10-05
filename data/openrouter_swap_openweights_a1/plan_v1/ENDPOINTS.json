@@ -1,0 +1,464 @@
+{
+  "qwen/qwen3.8-2.4t-a95b": {
+    "checked_at_utc": "2026-10-05T03:30:05.005914+00:00",
+    "url": "https://openrouter.ai/api/v1/models/qwen/qwen3.8-2.4t-a95b/endpoints",
+    "endpoint": {
+      "name": "Together | qwen/qwen3.8-2.4t-a95b-20260812",
+      "model_id": "qwen/qwen3.8-2.4t-a95b",
+      "model_name": "Qwen: Qwen3.8 2.4T A95B",
+      "context_length": 1010000,
+      "pricing": {
+        "prompt": "0.000002",
+        "completion": "0.000006",
+        "input_cache_read": "0.00000025",
+        "discount": 0
+      },
+      "provider_name": "Together",
+      "tag": "together",
+      "quantization": "unknown",
+      "max_completion_tokens": 909000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "top_k",
+        "repetition_penalty",
+        "logit_bias",
+        "min_p",
+        "response_format",
+        "structured_outputs",
+        "tools",
+        "tool_choice",
+        "logprobs",
+        "top_logprobs",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": 99.95784148397976,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 99.93097533937126,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    },
+    "zdr_catalog_url": "https://openrouter.ai/api/v1/endpoints/zdr",
+    "zdr_endpoint": {
+      "name": "Together | qwen/qwen3.8-2.4t-a95b-20260812",
+      "model_id": "qwen/qwen3.8-2.4t-a95b",
+      "model_name": "Qwen: Qwen3.8 2.4T A95B",
+      "context_length": 1010000,
+      "pricing": {
+        "prompt": "0.000002",
+        "completion": "0.000006",
+        "input_cache_read": "0.00000025",
+        "discount": 0
+      },
+      "provider_name": "Together",
+      "tag": "together",
+      "quantization": "unknown",
+      "max_completion_tokens": 909000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "top_k",
+        "repetition_penalty",
+        "logit_bias",
+        "min_p",
+        "response_format",
+        "structured_outputs",
+        "tools",
+        "tool_choice",
+        "logprobs",
+        "top_logprobs",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": 99.95784148397976,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 99.93097533937126,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    }
+  },
+  "mistralai/mistral-medium-3-5": {
+    "checked_at_utc": "2026-10-05T03:30:05.005914+00:00",
+    "url": "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3-5/endpoints",
+    "endpoint": {
+      "name": "Mistral | mistralai/mistral-medium-3.5-20260430",
+      "model_id": "mistralai/mistral-medium-3-5",
+      "model_name": "Mistral: Mistral Medium 3.5",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": "0.0000015",
+        "completion": "0.0000075",
+        "discount": 0
+      },
+      "provider_name": "Mistral",
+      "tag": "mistral/zdr",
+      "quantization": "unknown",
+      "max_completion_tokens": 209715,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed",
+        "response_format",
+        "structured_outputs",
+        "tools",
+        "tool_choice",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": true,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": 99.77443609022556,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 99.94493082637477,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    },
+    "zdr_catalog_url": "https://openrouter.ai/api/v1/endpoints/zdr",
+    "zdr_endpoint": {
+      "name": "Mistral | mistralai/mistral-medium-3.5-20260430",
+      "model_id": "mistralai/mistral-medium-3-5",
+      "model_name": "Mistral: Mistral Medium 3.5",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": "0.0000015",
+        "completion": "0.0000075",
+        "discount": 0
+      },
+      "provider_name": "Mistral",
+      "tag": "mistral/zdr",
+      "quantization": "unknown",
+      "max_completion_tokens": 209715,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed",
+        "response_format",
+        "structured_outputs",
+        "tools",
+        "tool_choice",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": true,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": 99.77443609022556,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 99.94493082637477,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    }
+  },
+  "openai/gpt-6-astra": {
+    "checked_at_utc": "2026-10-05T03:30:05.005914+00:00",
+    "url": "https://openrouter.ai/api/v1/models/openai/gpt-6-astra/endpoints",
+    "endpoint": {
+      "name": "Azure | openai/gpt-6-astra-20260903",
+      "model_id": "openai/gpt-6-astra",
+      "model_name": "OpenAI: GPT-6 Astra",
+      "context_length": 1050000,
+      "pricing": {
+        "prompt": "0.000011",
+        "completion": "0.000055",
+        "web_search": "0.01",
+        "input_cache_read": "0.0000011",
+        "input_cache_write": "0.00001375",
+        "discount": 0,
+        "overrides": [
+          {
+            "min_prompt_tokens": 272000,
+            "prompt": "0.000022",
+            "completion": "0.0000825",
+            "input_cache_read": "0.0000022",
+            "input_cache_write": "0.0000275"
+          }
+        ]
+      },
+      "provider_name": "Azure",
+      "tag": "azure/us",
+      "quantization": "unknown",
+      "max_completion_tokens": 128000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_completion_tokens",
+        "tools",
+        "tool_choice",
+        "seed",
+        "response_format",
+        "structured_outputs",
+        "verbosity",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": true,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": null,
+      "uptime_last_5m": null,
+      "uptime_last_1d": 100,
+      "supports_implicit_caching": false,
+      "native_tools": {
+        "openrouter:web_search": {
+          "type": "web_search"
+        },
+        "openrouter:apply_patch": {
+          "type": "apply_patch"
+        }
+      },
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    },
+    "zdr_catalog_url": "https://openrouter.ai/api/v1/endpoints/zdr",
+    "zdr_endpoint": {
+      "name": "Azure | openai/gpt-6-astra-20260903",
+      "model_id": "openai/gpt-6-astra",
+      "model_name": "OpenAI: GPT-6 Astra",
+      "context_length": 1050000,
+      "pricing": {
+        "prompt": "0.000011",
+        "completion": "0.000055",
+        "web_search": "0.01",
+        "input_cache_read": "0.0000011",
+        "input_cache_write": "0.00001375",
+        "discount": 0,
+        "overrides": [
+          {
+            "min_prompt_tokens": 272000,
+            "prompt": "0.000022",
+            "completion": "0.0000825",
+            "input_cache_read": "0.0000022",
+            "input_cache_write": "0.0000275"
+          }
+        ]
+      },
+      "provider_name": "Azure",
+      "tag": "azure/us",
+      "quantization": "unknown",
+      "max_completion_tokens": 128000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_completion_tokens",
+        "tools",
+        "tool_choice",
+        "seed",
+        "response_format",
+        "structured_outputs",
+        "verbosity",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": true,
+        "function": true
+      },
+      "status": 0,
+      "uptime_last_30m": null,
+      "uptime_last_5m": null,
+      "uptime_last_1d": 100,
+      "supports_implicit_caching": false,
+      "native_tools": {
+        "openrouter:web_search": {
+          "type": "web_search"
+        },
+        "openrouter:apply_patch": {
+          "type": "apply_patch"
+        }
+      },
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    }
+  },
+  "anthropic/claude-opus-5.5": {
+    "checked_at_utc": "2026-10-05T03:30:05.005914+00:00",
+    "url": "https://openrouter.ai/api/v1/models/anthropic/claude-opus-5.5/endpoints",
+    "endpoint": {
+      "name": "Google | anthropic/claude-opus-5.5-20260921",
+      "model_id": "anthropic/claude-opus-5.5",
+      "model_name": "Anthropic: Claude Opus 5.5",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": "0.0000044",
+        "completion": "0.000022",
+        "web_search": "0.01",
+        "input_cache_read": "0.00000022",
+        "input_cache_write": "0.0000055",
+        "input_cache_write_1h": "0.0000088",
+        "discount": 0
+      },
+      "provider_name": "Google",
+      "tag": "google-vertex/us",
+      "quantization": "unknown",
+      "max_completion_tokens": 128000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "response_format",
+        "tool_choice",
+        "tools",
+        "verbosity",
+        "structured_outputs",
+        "stop",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": false
+      },
+      "status": 0,
+      "uptime_last_30m": null,
+      "uptime_last_5m": null,
+      "uptime_last_1d": 100,
+      "supports_implicit_caching": false,
+      "native_tools": {
+        "openrouter:bash": {
+          "type": "bash_20250124"
+        }
+      },
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    },
+    "zdr_catalog_url": "https://openrouter.ai/api/v1/endpoints/zdr",
+    "zdr_endpoint": {
+      "name": "Google | anthropic/claude-opus-5.5-20260921",
+      "model_id": "anthropic/claude-opus-5.5",
+      "model_name": "Anthropic: Claude Opus 5.5",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": "0.0000044",
+        "completion": "0.000022",
+        "web_search": "0.01",
+        "input_cache_read": "0.00000022",
+        "input_cache_write": "0.0000055",
+        "input_cache_write_1h": "0.0000088",
+        "discount": 0
+      },
+      "provider_name": "Google",
+      "tag": "google-vertex/us",
+      "quantization": "unknown",
+      "max_completion_tokens": 128000,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "response_format",
+        "tool_choice",
+        "tools",
+        "verbosity",
+        "structured_outputs",
+        "stop",
+        "reasoning_effort"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": false
+      },
+      "status": 0,
+      "uptime_last_30m": null,
+      "uptime_last_5m": null,
+      "uptime_last_1d": 100,
+      "supports_implicit_caching": false,
+      "native_tools": {
+        "openrouter:bash": {
+          "type": "bash_20250124"
+        }
+      },
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "latency_last_30m": null,
+      "throughput_last_30m": null
+    }
+  }
+}

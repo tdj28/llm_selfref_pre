@@ -19,9 +19,11 @@ make inconsistent billing metadata valid.
 
 No model screen or main panel was run. These failures are provider/interface
 qualification results, not evidence about either model's report behavior.
-A separately frozen repair is being prepared with structured-output capability
-checks and an explicit conservative accounting rule. It must carry every prior
-charge, retain the same scientific design, and pass fresh technical fixtures.
+The [A1 repair](../../experiments/openrouter_swap_openweights_a1/PROTOCOL.md)
+adds structured-output capability checks and an explicit conservative
+accounting rule. Its [plan](../openrouter_swap_openweights_a1/plan_v1/PLAN.json)
+carries every prior charge, retains the same scientific design, and requires
+fresh technical fixtures before any research prompt.
 
 The release verifies without network access:
 

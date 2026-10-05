@@ -774,3 +774,11 @@ data/openrouter_swap_openweights/plan_v1/*
 !data/openrouter_swap_openweights/README.md
 !data/openrouter_swap_openweights/fixture_failure_v1_20261004/
 !data/openrouter_swap_openweights/fixture_failure_v1_20261004/**
+
+# Technical-only API repair: plan and public endpoint evidence.
+!data/openrouter_swap_openweights_a1/
+data/openrouter_swap_openweights_a1/*
+!data/openrouter_swap_openweights_a1/plan_v1/
+data/openrouter_swap_openweights_a1/plan_v1/*
+!data/openrouter_swap_openweights_a1/plan_v1/PLAN.json
+!data/openrouter_swap_openweights_a1/plan_v1/ENDPOINTS.json
