@@ -7,8 +7,10 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
-- Collection is closed for publication. The current work is evidence
-  integration, documentation, verification, and editorial closeout.
+- Earlier collections are closed. The owner has separately authorized the
+  current model-panel, repeated-answer and steering-dose follow-ups. Read
+  their current plans and budgets before acting; publication work proceeds
+  alongside them.
 - Cleanup does not authorize new experiments, model calls, paid reviews,
   rentals, judging, human recruitment, or retries of completed studies.
 - Do not treat an old protocol, budget ceiling, unchecked TODO, or historical
@@ -118,8 +120,14 @@ None alone settles whether language models are conscious.
   hashes; then terminate, not merely stop, owned compute promptly.
 - Record direct deletion verification. Empty inventory alone does not prove
   deletion or zero billing for an ambiguous creation request.
-- Preserve lifecycle failures and unresolved reservations. No automatic retry,
-  replacement rental, or reuse of another study's pod is permitted.
+- Preserve lifecycle failures and unresolved reservations. The owner's
+  2026-10-04 instruction authorizes bounded recovery from transient API and
+  startup faults within each study's existing budget. Keep requests identical,
+  record every physical attempt and its cost, and use a disclosed technical
+  amendment where an older frozen runner forbids retries. Never retry a valid
+  result because of its label, silently replace an outcome, or reuse another
+  study's pod. Persistent faults, identity failures and budget failures still
+  require a stop and diagnosis.
 
 ## Working Practice
 
