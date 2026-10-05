@@ -55,6 +55,12 @@ hash-bound continuation and release copies are permitted. The same check runs
 standalone with `python -m experiments.exposure_seed_history`; it does not
 fetch history, change data, or skip the original assertion.
 
+The mapping-release tests also run unchanged in that study's historical source
+view, with the current approved public-content scanner. The suite requires an
+execution record for all 62 original tests; changed inputs, filtered tests,
+skips and failures cannot count as a pass. Run this check separately with
+`python -m experiments.mapping_release_history`.
+
 `make compile` checks every tracked Python file without importing modules or
 writing bytecode. `make audit` now runs on disposable copies. Direct analysis,
 audit and release-builder commands can still overwrite their output directory;
