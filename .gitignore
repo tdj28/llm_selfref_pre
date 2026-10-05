@@ -45,6 +45,11 @@ venv.bak/
 
 # Project specific
 data/*
+!data/openrouter_swap_openweights_a2/
+data/openrouter_swap_openweights_a2/*
+!data/openrouter_swap_openweights_a2/plan_v1/
+data/openrouter_swap_openweights_a2/plan_v1/*
+!data/openrouter_swap_openweights_a2/plan_v1/PLAN.json
 !data/openrouter_swap/
 data/openrouter_swap/*
 !data/openrouter_swap/plan_20261004/

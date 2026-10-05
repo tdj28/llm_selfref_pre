@@ -7,6 +7,12 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
+- The owner authorizes completing the Qwen/Mistral extension with reasonable
+  technical repairs within its approved scope and budget, without repeated
+  permission. The A2 continuation preserves every A1 call and acknowledges
+  its accounting exception; it does not restart screening or replace missing
+  outputs. Follow its separately pushed plan and retain the $200 cumulative
+  OpenRouter ceiling and $25 fixture/screen allowance, including failures.
 - The completed October 4 API panel cost at most $84.08770746. The owner then
   allocated separate $200 OpenRouter and $200 RunPod budgets. The Qwen/Mistral
   extension's technical fixtures failed before research prompts, adding a
