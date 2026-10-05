@@ -164,8 +164,12 @@ The findings-first manuscript presentation (2026-10-05) leads with this
 completed study, not the earlier 450-trial random-subset test. That is an
 editorial choice after outcomes, not a change to any study's prespecified
 primary endpoint. The source-style and operator-matching results remain
-separate supporting appendices. The abstract leads with inclusive rubric-audit
-counts and retains explicit counts; it does not treat either as ground truth.
+separate supporting appendices. Following human editorial feedback, the
+abstract names Berg et al. and the replication scope, then presents prompting
+and context effects, the inclusive rubric audit, and the bounded steering
+result. Explicit-only counts and the +0.30 decision threshold remain in the
+body. Neither audit measure is treated as ground truth, and the abstract
+states that both judges and rubric changed.
 
 The [fixed-dose release](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md)
 narrowly excludes the prespecified +0.30 target contrast at the selected dose;

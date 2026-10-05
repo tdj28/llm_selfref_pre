@@ -201,7 +201,15 @@ class CompletedExtensionsTests(unittest.TestCase):
     def test_steering_presentation_is_findings_first_without_changing_bound_inputs(self):
         main = (v.ROOT / "paper/main.tex").read_text()
         abstract = main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
-        self.assertLess(abstract.index("RubricAuditAstraInclusive"), abstract.index("RubricAuditAstraExplicit"))
+        self.assertIn("Berg et al.", abstract)
+        self.assertLess(abstract.index("We recover the prompting effect"), abstract.index("RubricAuditAstraInclusive"))
+        self.assertLess(abstract.index("RubricAuditAstraInclusive"), abstract.index("DoseMainSecondTargetEstimate"))
+        for reader in ("Astra", "Opus"):
+            self.assertIn("RubricAudit" + reader + "Inclusive", abstract)
+            self.assertNotIn("RubricAudit" + reader + "Explicit", abstract)
+            self.assertIn("RubricAudit" + reader + "Explicit", main.split(r"\end{abstract}", 1)[1])
+        self.assertNotIn("+0.30", abstract)
+        self.assertIn("Judges and rubric both change", " ".join(abstract.split()))
         self.assertIn("DoseMainSecondTargetEstimate", abstract)
         self.assertNotIn("EnsemblePaperTargetGap", abstract)
         self.assertEqual(main.count(r"\input{../evidence/dose_followup/values.tex}"), 1)

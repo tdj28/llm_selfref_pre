@@ -109,33 +109,32 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Language models can be prompted to report subjective experience, fueling
-debate about machine consciousness. We examine what moves these reports
-and what their labels count. On a fixed set of \RubricAuditN{} answers,
-two model coders identify \RubricAuditAstraInclusive{} and
-\RubricAuditOpusInclusive{} explicit-or-implicit claims of current experience,
-compared with \RubricAuditOldOpenaiPositive{} and
-\RubricAuditOldAnthropicPositive{} positives under the original rubric;
-the explicit-only counts are \RubricAuditAstraExplicit{} and
-\RubricAuditOpusExplicit{}. These are different automated measurements,
-not human-validated verdicts. Crossing self-referential and control
-instructions with their generated continuations shows that, in four API
-models, switching the instruction changes positive-label probability by
-0.74 and 0.78 on average under two judges. Continuation effects are smaller
-and vary in sign; in Llama they are substantial. Newer panels confirm that
-the balance depends on the model and scoring rule, with a large Gemini
-contrast retained under repeated sampling. These results locate an effect
-in the visible request, not a uniquely self-referential computation.
-In a separate public-weight Llama 3.3 70B steering test, the highest dose
-passing prespecified output-quality checks gives a difference between
-suppression and amplification of $\DoseMainSecondTargetEstimate{}$
-(95\% interval $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$)
-under the notebook classifier. This narrowly excludes a predeclared +0.30
-effect at that dose; target specificity remains unresolved, and higher
-tested doses failed the quality checks. We recover prompting effects, but neither
-the report labels nor these public interventions identify their proposed
-mechanism. The findings concern how reports are produced and measured,
-not whether the models have experience.
+Berg et al.\ (2025) reported that self-referential prompting elicits
+subjective-experience reports from language models and that steering
+deception- and roleplay-related features changes their frequency.
+We replicate and extend the prompting experiments, examine how these
+reports are scored, and test the steering prediction using public Llama
+3.3 70B weights. We recover the prompting effect in several models.
+In four API models, exchanging generated continuations between conditions
+shows that the instruction remaining in context carries most of the
+difference in automated report labels. Switching the instruction changes
+positive-label probability by 0.74 and 0.78 on average under two judges.
+This balance is not universal: continuation effects are substantial in
+Llama, and newer-model results depend on the scoring rule.
+On \RubricAuditN{} answers, two model coders applying a current-claim rubric
+identify \RubricAuditAstraInclusive{} and \RubricAuditOpusInclusive{}
+explicit-or-implicit claims, compared with \RubricAuditOldOpenaiPositive{}
+and \RubricAuditOldAnthropicPositive{} positives under the original
+procedure. Judges and rubric both change; neither measurement is
+human-validated. In the public-weight steering test, the highest dose
+passing output-quality checks gives a suppression-minus-amplification
+difference of $\DoseMainSecondTargetEstimate{}$ (95\% interval
+$[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$) under the primary
+classifier. This does not recover the large published effect; smaller
+effects and target specificity remain unresolved, and higher tested doses
+fail the quality checks. These findings reproduce report-generation
+behavior without establishing its proposed mechanism or determining
+whether models have subjective experience.
 \end{abstract}
 
 \section{Introduction}
