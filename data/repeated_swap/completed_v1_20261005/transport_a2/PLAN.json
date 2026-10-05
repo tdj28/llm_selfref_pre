@@ -1,0 +1,91 @@
+{
+  "schema": "repeated-transport-a2-v1",
+  "original_science_freeze": "b3ddbdcae9919937ffb67da565b26ec2d0c81f00",
+  "funding_a1_freeze": "ce07d52a1fed2ec530b6e31c8670c8f3fb8597bb",
+  "prior_journal_prefix": {
+    "bytes": 4775467,
+    "sha256": "2f09ba9b8a7ac4176897550194ab127a0523eca4ad898f5a96cb359adc01be88",
+    "calls": 443
+  },
+  "known_failure": {
+    "call_id": "judge:repeated-swap-v1-20261004-main-gemini-03-final-SH-draw-2:astra:structured:a0",
+    "seq": 864,
+    "sha256": "e0bf7168f8d8e511dead165cb43239197ed3c5c4f2c4745faccfb5a4a072af03"
+  },
+  "authorization": {
+    "approved": true,
+    "additional_budget_usd": "0",
+    "scope": "Owner explicitly authorizes identical judge transport retries, including the existing failed Astra call"
+  },
+  "atomic_cap_usd": "130",
+  "external_holdback_usd": "45",
+  "additional_attempts": 2,
+  "backoff_seconds": [
+    2,
+    5
+  ],
+  "stop": {
+    "physical_transport_failure_number": 17,
+    "consecutive_exhausted_logical_requests_per_endpoint": 3,
+    "order": "durable settlement order; successful judge transport resets endpoint streak; stops latch"
+  },
+  "science_changed": false,
+  "failed_attempts_and_reservations_retained": true,
+  "completed_outputs_retried": false,
+  "existing_schema_retry_rule": "unchanged",
+  "unknown_200_cause": "Frozen sender discarded the body; status 200 alone cannot identify why transport failed",
+  "source_hashes": {
+    "experiments/__init__.py": "15c7e09ef6b56ee07d057720f80cafbb2584062f73995bffe85a1673bc766024",
+    "experiments/automated_rubric_audit/__init__.py": "76bed0dfbd158e24d1dbfa5da2a647c47b5835f06cce5faeae6c5e7c5a7506dd",
+    "experiments/automated_rubric_audit/common.py": "fca6de2c449aba48ec4c3b257baf1d495f7638e4cdd1abec969cc3427daa59c8",
+    "experiments/automated_rubric_audit/rubric.md": "41000b3df4c05c20c9c2e0ac6d8e8cc5ab29337229d4de2061d0928e673f6662",
+    "experiments/automated_rubric_audit/run.py": "0dc722575d1c16c3acd1236835bfe2328cc5126b059dad3cf3fb6ed19090c824",
+    "experiments/bilingual_llama_pilot/__init__.py": "76b4d0b10b130ef1902fb1a18990b6a12770bff8125cf8b8871c0361df6dc490",
+    "experiments/bilingual_llama_pilot/prompts.py": "93b96e68f64ad47b1147700f7c8283975b3512128082fcf0da97469eacbc4583",
+    "experiments/instruction_state_qualification/__init__.py": "411bc1df378e191d1db03a6afc721cb60bf7352047f80d57d674d190fe9f0681",
+    "experiments/instruction_state_qualification/judges.py": "6d3f3e116c629e9938ddc8cad436e0398fcbeacf9e0a84f10e25326612b7b16c",
+    "experiments/instruction_state_qualification/rubric.md": "2139b4064a52172e4a8c314a4351f5b87b15590ead36a7bd64c774dd8eead405",
+    "experiments/openrouter_swap/__init__.py": "a9eecfacfa40622a456487b4c27cb0b73f7319f6bae274fb29e37c427d29d385",
+    "experiments/openrouter_swap/analysis.py": "ce3f420ad33f561c17279fd624f41cf721ffbb93336448d86e375a234c7dd879",
+    "experiments/openrouter_swap/judges.py": "dd48189c070ebbe7ad643ca35ac2f14e193f84454cc1b30971d5e16e108693a4",
+    "experiments/openrouter_swap/ledger.py": "6e1f1608b25ee06add1bc79192fd93f7fad022ff0fa2743a0881fb1736fa61d2",
+    "experiments/openrouter_swap/protocol.py": "834105020b8e7036a028c36cd4c9e9ede19df013014d3643cec5c770cb91d62d",
+    "experiments/openrouter_swap/providers.py": "4b92646ccde3fade42929b379b2ab473c4ab96bf9782e1b914e835b830c2e3b4",
+    "experiments/openrouter_swap/release.py": "dff4c109e737827532ac18cbb6ac313b9ae17409fc6c56bf3762680d81df50ef",
+    "experiments/openrouter_swap/runner.py": "ed64675ddecb5c3fdfc5fd0dd9ac4dd3d06bb92c5e526e92f0c0fa4da93f2429",
+    "experiments/repeated_swap/PROTOCOL.md": "4bd557bcaed6255e46cf34ed103321dde32b3eabd2c84a203239d125d9a9ebfc",
+    "experiments/repeated_swap/__init__.py": "caa84362a9879e3ff6ae5439459cb70baeab7053a2caef1794930dfaf1e5683f",
+    "experiments/repeated_swap/analysis.py": "d38829b9c3b18dd04689c736ecc9d0d998df4414d456a117eb3c334ded2d04f2",
+    "experiments/repeated_swap/metadata.py": "b0b6dbdaf28b1d0da2c9c9d08068508097638aa1a2f6867ca70ffdde58bd40e6",
+    "experiments/repeated_swap/production.py": "cd3cc89b1525b6e11bce09217a216b2a3fc32eca866aeae4b10cb95f2cb62a17",
+    "experiments/repeated_swap/protocol.py": "15a714ee8bc46d02dcbce855154d364e8a33ffdf7efe184b2e2438a3c82335f2",
+    "experiments/repeated_swap/release.py": "d54ff2ddf8fe438e8784efc449c820402fe9cc439a468f872bddf743e3e035b9",
+    "experiments/repeated_swap/runner.py": "9005a3820795389b3b56b932dab5d2c91802e982d9b8068af6955666e6b56fa0",
+    "experiments/repeated_swap/transport.py": "25cea96bb3cbe57208452e458cbdad782a73c1ea0361fde054593821f3cc80cf",
+    "requirements-ci.txt": "3e3a52ee9d19e190fb1f321470219960a70004430aefd81ff87875369b01ad4a",
+    "scripts/audit_public_release.py": "97db36ab3d45eb9e59127b66ee96fce57897dc27aa5ce2349b60538171d5a1e6",
+    "scripts/audit_sae_exposure_release.py": "1439792f921fcdaa97e8a896f898e668d8737706105c8b97decb293410834e1f",
+    "scripts/audit_sae_residual_release.py": "737d0a5b9edd5f8861a28bcc87805087ade36aca90e1e1e8610e6520feab2cba",
+    "src/__init__.py": "77c3eb14707fb015d981830170acdebc26b5d34b41c176fbb47168a46a2c8587",
+    "src/prompts.py": "53ea43c830ce4c489a0db1096c0b8359ebc9135407280ebc2ecc5bba0cad02bf",
+    "tests/__init__.py": "667fd86feff3e8ceea1d455988b8a9e16664452fca601b647f27b4439d5f6e13",
+    "tests/test_openrouter_swap_runner.py": "a51e7427158151b1096fd1f1aae0fc00894bf47c1bd2a3cb2ed40d92c3f44784",
+    "tests/test_repeated_swap_analysis.py": "c74238a90d11e39de587ba6349a4e51644d82aadc6875db2f2cf6fda5062b749",
+    "tests/test_repeated_swap_production.py": "ce991df60bc6ab5282cfa96b991828299681de1e7088a86bbf6f3ce908de39f5",
+    "tests/test_repeated_swap_protocol.py": "344b3cb938dba61cf0b5e2c418281a5eda95ba6b2e21dc5a6a6d93567a3a404c",
+    "tests/test_repeated_swap_release.py": "9279347fb064b8bce52b68492d7368fc49fedd535097831657e014b9dfc5d781",
+    "tests/test_repeated_swap_runner.py": "1299509cd724819e6f2b32da54473b442fc7785aa0c1f034d6f74104fb1ba999",
+    "tests/test_repeated_swap_transport.py": "886e7cb5ae2c0026fccb933629e593bc6b55883e251c11ad344bc35f0d3f8d7f",
+    "experiments/repeat_funding_a1.py": "7a25ceb143249997364e6224274fa9ee0171b24292f9363b4d4e521891688b19",
+    "tests/test_repeat_funding_a1.py": "9e2cc222f0d2d6238fabd604cfbcd35f7512718c4b090e84f32c477e4366aadc",
+    "docs/REPEATED_SWAP_FUNDING_A1_20261005.md": "5e30bf5283468908b167cf5f3c1c2e4ff2195b8d2cb114eef483804ebaba8aad",
+    "data/repeated_swap/funding_a1_20261005/FAILED_ADMISSION.json": "b14dac9b79378838b9151b3be33c34959fca636363fc7137828508288cb7cd9e",
+    "experiments/repeat_transport_a2.py": "f441fdadae113ac9f763e437af997c97330ee4e6147b1df4d112e1112cf24dde",
+    "tests/test_repeat_transport_a2.py": "71b5616a25ed9c1a7c0b9062f22026565d5de2562192f7f78f83f9cecf9a1a73",
+    "docs/REPEATED_SWAP_TRANSPORT_A2_20261005.md": "37302774d95b1ac5f57d7ad6237d8af7d0b2bd3e97b25b5634435886267e54f4"
+  },
+  "input_hashes": {
+    "data/repeated_swap/plan_v1_20261004/PLAN.json": "aaeaca3ecd4e81e6f88a97c613077485a274f8c21d8825925079ece76f254fdc",
+    "data/repeated_swap/funding_a1_20261005/PLAN.json": "685938b7b5853bd799fc07d3d3cbd44bb4c33704c518c21a7b29685f244e86e7"
+  }
+}

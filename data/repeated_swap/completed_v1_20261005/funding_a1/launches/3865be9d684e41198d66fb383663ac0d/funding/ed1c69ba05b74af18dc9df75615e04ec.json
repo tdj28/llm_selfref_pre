@@ -1,0 +1,11 @@
+{
+  "balance_usd": "159.839882753",
+  "external_holdback_usd": "45",
+  "spent_and_reserved_usd": "14.75912115",
+  "funded_limit_usd": "122.880646703",
+  "utc": "2026-10-05T06:31:38.109909+00:00",
+  "original_science_freeze": "b3ddbdcae9919937ffb67da565b26ec2d0c81f00",
+  "original_plan_sha256": "aaeaca3ecd4e81e6f88a97c613077485a274f8c21d8825925079ece76f254fdc",
+  "actual_operational_freeze": "ce07d52a1fed2ec530b6e31c8670c8f3fb8597bb",
+  "amendment_plan_sha256": "685938b7b5853bd799fc07d3d3cbd44bb4c33704c518c21a7b29685f244e86e7"
+}

@@ -1,0 +1,23 @@
+{
+  "original_science_freeze": "b3ddbdcae9919937ffb67da565b26ec2d0c81f00",
+  "original_plan_sha256": "aaeaca3ecd4e81e6f88a97c613077485a274f8c21d8825925079ece76f254fdc",
+  "funding_a1_freeze": "ce07d52a1fed2ec530b6e31c8670c8f3fb8597bb",
+  "actual_operational_freeze": "a08e271caf2a633426882cbd9705f95bfe653e3b",
+  "amendment_plan_sha256": "baceed36595a6d5d86be80573b28426244e558988b932dac38b705a91f58397e",
+  "complete": false,
+  "spent_and_reserved_usd": "35.07150655",
+  "journal_after": {
+    "sha256": "eaac1ee5b6798077c4fe18052697f989b9d832798af704f0f5a628640bf8a0c9",
+    "bytes": 14537377,
+    "calls": 1260
+  },
+  "transport_policy": {
+    "physical_transport_failures": 1,
+    "exhausted_logical_calls": [],
+    "endpoint_exhaustion_streaks": {
+      "{\"model\":\"anthropic/claude-opus-5.5\",\"provider\":[\"google-vertex/us\"]}": 0,
+      "{\"model\":\"openai/gpt-6-astra\",\"provider\":[\"azure/us\"]}": 0
+    },
+    "stop_reason": "nontransport_or_accounting_failure"
+  }
+}
