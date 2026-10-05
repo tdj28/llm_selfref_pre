@@ -45,6 +45,13 @@ venv.bak/
 
 # Project specific
 data/*
+!data/berg_dose_ladder/
+data/berg_dose_ladder/*
+!data/berg_dose_ladder/README.md
+!data/berg_dose_ladder/plan_20261004/
+data/berg_dose_ladder/plan_20261004/*
+!data/berg_dose_ladder/plan_20261004/PLAN.json
+!data/berg_dose_ladder/plan_20261004/POWER.json
 !data/steering_fidelity/
 data/steering_fidelity/*
 !data/steering_fidelity/preflight_20261002/

@@ -1,7 +1,8 @@
 # Publication Closeout
 
-Collection is closed for this publication. This checklist covers integration
-of completed evidence and release preparation, not another experiment queue.
+The original collection is closed. The owner separately authorized the
+October 4 dose-ladder extension below; it does not reopen historical studies.
+This checklist otherwise covers evidence integration and release preparation.
 The [historical work ledger](provenance/root-docs/20261003/todo.md) retains
 completed work, superseded proposals, and their original dates.
 
@@ -18,6 +19,17 @@ completed work, superseded proposals, and their original dates.
   audit on the integrated tree; build and visually inspect the PDF.
 - [x] Verify the documented fresh-clone/disposable-copy reproduction path,
   then hand the reviewed diff and validation results to the owner.
+
+## Authorized Dose Extension
+
+- [ ] Freeze, test and push the corrected mapping-scaled three-feature design,
+  including independent dose calibration, norm-matched aggregate controls and
+  fresh confirmation. See the [protocol](docs/STEERING_DOSE_LADDER_PROTOCOL_20261004.md).
+- [ ] Within the fresh $50 cap, qualify on a newly owned cheap CUDA pod, then
+  run the gated B200 inventory with first-five and live receipt audits.
+- [ ] Retrieve and hash-verify every artifact, terminate only newly owned pods,
+  publish the observed result or failed gate, and integrate without changing
+  the earlier six-feature conclusions.
 
 ## Owner Decisions
 

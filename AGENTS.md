@@ -7,6 +7,11 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
+- The owner separately authorized the October 4 mapping-scaled dose follow-up
+  within $50 and a 5.5-hour main-pod ceiling. Follow its
+  [protocol](docs/STEERING_DOSE_LADDER_PROTOCOL_20261004.md), source-bound plan,
+  fresh calibration/confirmation split and owned-pod rules. This does not
+  reopen earlier releases or authorize replacement rentals.
 - Collection is closed for publication. The current work is evidence
   integration, documentation, verification, and editorial closeout.
 - Cleanup does not authorize new experiments, model calls, paid reviews,
