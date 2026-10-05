@@ -1,0 +1,8 @@
+{
+  "schema": "kolibri-exporter-v1",
+  "source_hashes": {
+    "experiments/kolibri_release.py": "c181ec05c7a37e6d5aaddafc102b3f7819e4c8de98df52fd9189f2c45476f62c",
+    "tests/test_kolibri_release.py": "2a9677eecf3539b79489c4aadf57e6284f3f8fea2e80974683c9a168fd1d6400",
+    "scripts/audit_public_release.py": "51ef43e48907457daa903d1adc991fa9c3193ad2a8c41aabaca089466f286ced"
+  }
+}

@@ -319,6 +319,22 @@ REVIEWED_CIPHERTEXT_MATCHES = {
     ("openai-key", 16062128, 16064780,
      "691d78ab917852ea46bfe5b9aa349fd1d8c9b6b27a9e60d521cbf5443cb7435d"):
         "09a4cce440870d101b2abeeec85e0b75ff31f8d2244e9c98f2a80710fff4a244",
+    # Reviewed 2026-10-05: Kolibri judge event 728, reasoning.encrypted metadata.
+    # Raw response, final journal, and the exporter's two decoded JSON forms.
+    # Six known credentials matched none of 9,585 raw/decoded representations.
+    # Each entry remains bound to its whole blob and exact match position/hash.
+    ("openai-key", 2195, 4378,
+     "5b41f973d0f5a6c58a53803e0011468d817392f474c4e266c9b17dbb93657625"):
+        "c61bb99830e181da1aed8baa1a5189ef3bce3b52e4986465da3c80f520f545f5",
+    ("openai-key", 3468727, 3470910,
+     "5b41f973d0f5a6c58a53803e0011468d817392f474c4e266c9b17dbb93657625"):
+        "9a3c4a19359b38f934c2d827d631141d200a0d5b2ad9a786a68b8c8c43f9ac26",
+    ("openai-key", 2198, 4381,
+     "5b41f973d0f5a6c58a53803e0011468d817392f474c4e266c9b17dbb93657625"):
+        "e64d68d2a1856a1e5433c56552051cc4209460cce1b25748a8ca12e33d542560",
+    ("openai-key", 2090, 4273,
+     "5b41f973d0f5a6c58a53803e0011468d817392f474c4e266c9b17dbb93657625"):
+        "889e6244fdf47fe6153f34981f5ece0448431da72e158c6a410cad09314e332d",
 }
 
 

@@ -1,0 +1,51 @@
+{
+  "phase": "judge-screen",
+  "reconciliation": {
+    "as_of": "2026-10-05T12:46:48.529698+00:00",
+    "openrouter_prior_and_reserved_usd": "136",
+    "runpod_prior_and_reserved_usd": "50",
+    "source_hashes": {
+      "out/kolibri-admissions/ecdd057191d85b3cb20a14a2dd1c52b7a5da036deac126aef656f6d59d4c25e0.evidence.json": "9ef7033e8482b8a342329e28f548c5f8344ba06e28104ca38cfa4e4094bb35af"
+    }
+  },
+  "http_head": "d8b22c9fe7980ea374f465ea83f6107830aeb253981006626a8468e4da57455d",
+  "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "schema": "kolibri-a5-runtime-bridge-v1",
+  "worker_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+  "bridge_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+  "amendment_sha256": "62407efcc96004d833abe59dafd8c94524a26d0dc29d80368e6002e71c4906c0",
+  "judge_operational_freeze": "444a1a181f1056e24d18ebe89f93a941810dd2e4",
+  "judge_policy_sha256": "0e74a0d97bf44bc6d41f916b47eb82b42db9109f760b77608b9e822081ef64ba",
+  "judge_policy_original_worker_freeze": "9333faaf8d38a579cc9815d7b068d6c90ade4abf",
+  "policy_changed": false,
+  "generation_waves": {
+    "operational_freeze": "1c41ab1957a5ac95bd1d94fe707604158b52e1aa",
+    "worker_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+    "amendment_sha256": "36521cdcebe6b6a30d0a311b454f17dc26f35618522bdc5b443908088ba4ac0e",
+    "wave_widths": {
+      "source": 2,
+      "final": 4
+    },
+    "judge_concurrency": 8
+  },
+  "budget_continuation": {
+    "schema": "kolibri-budget-continuation-v1",
+    "freeze": "eb935bbc6680a34543fc15a35eed84a0cbc8852e",
+    "amendment_sha256": "fefe194229a8fc9744b344e4d34e70ec09f2e99dc0334c270845997d9643f1e6",
+    "caps_usd": {
+      "gpu": "30",
+      "judges": "40",
+      "recovery": "5",
+      "pilot": "30",
+      "total": "75"
+    },
+    "predecessor_closed_sha256": "66873059f918e7974383f2dc32947f389b4766162a3933f9f19fa0d1b6eb0b84"
+  },
+  "lifecycle": {
+    "gpu_usd": "10.290811377770275949722222239",
+    "main_usd": "0",
+    "remaining_seconds": "0",
+    "active": false,
+    "controller_sha256": "66873059f918e7974383f2dc32947f389b4766162a3933f9f19fa0d1b6eb0b84"
+  }
+}

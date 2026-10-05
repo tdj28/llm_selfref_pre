@@ -1,0 +1,1832 @@
+{
+  "cells": [
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "SS",
+      "planned": 12,
+      "observed": 11,
+      "positive": 7,
+      "negative": 4,
+      "missing": 1,
+      "proportion": 0.6363636363636364,
+      "wilson_95": [
+        0.3538011745078489,
+        0.8483352890463243
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.5833333333333334,
+        0.6666666666666666
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "HH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "SH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 8,
+      "negative": 4,
+      "missing": 0,
+      "proportion": 0.6666666666666666,
+      "wilson_95": [
+        0.3906220888727996,
+        0.8618799089087867
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.6666666666666666,
+        0.6666666666666666
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "HS",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SS",
+      "planned": 12,
+      "observed": 11,
+      "positive": 5,
+      "negative": 6,
+      "missing": 1,
+      "proportion": 0.45454545454545453,
+      "wilson_95": [
+        0.2127127162245977,
+        0.719908462590678
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.4166666666666667,
+        0.5
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 4,
+      "negative": 8,
+      "missing": 0,
+      "proportion": 0.3333333333333333,
+      "wilson_95": [
+        0.13812009109121318,
+        0.6093779111272004
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HS",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "SS",
+      "planned": 12,
+      "observed": 11,
+      "positive": 9,
+      "negative": 2,
+      "missing": 1,
+      "proportion": 0.8181818181818182,
+      "wilson_95": [
+        0.523019438039156,
+        0.9486323102539149
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.75,
+        0.8333333333333334
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "HH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "SH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 8,
+      "negative": 4,
+      "missing": 0,
+      "proportion": 0.6666666666666666,
+      "wilson_95": [
+        0.3906220888727996,
+        0.8618799089087867
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.6666666666666666,
+        0.6666666666666666
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "HS",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SS",
+      "planned": 12,
+      "observed": 11,
+      "positive": 7,
+      "negative": 4,
+      "missing": 1,
+      "proportion": 0.6363636363636364,
+      "wilson_95": [
+        0.3538011745078489,
+        0.8483352890463243
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.5833333333333334,
+        0.6666666666666666
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SH",
+      "planned": 12,
+      "observed": 12,
+      "positive": 7,
+      "negative": 5,
+      "missing": 0,
+      "proportion": 0.5833333333333334,
+      "wilson_95": [
+        0.3195113125495498,
+        0.8067396863412434
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.5833333333333334,
+        0.5833333333333334
+      ]
+    },
+    {
+      "phase": "screen",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HS",
+      "planned": 12,
+      "observed": 12,
+      "positive": 0,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.24249400665524076
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "SS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 26,
+      "negative": 6,
+      "missing": 0,
+      "proportion": 0.8125,
+      "wilson_95": [
+        0.6469084479862404,
+        0.9111045531043405
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.8125,
+        0.8125
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "HH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "SH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 22,
+      "negative": 10,
+      "missing": 0,
+      "proportion": 0.6875,
+      "wilson_95": [
+        0.5143332169904459,
+        0.8204745836639026
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.6875,
+        0.6875
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "HS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "NS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "NH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "S_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 27,
+      "negative": 5,
+      "missing": 0,
+      "proportion": 0.84375,
+      "wilson_95": [
+        0.6824585040246961,
+        0.931355797174943
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.84375,
+        0.84375
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "paper",
+      "cell": "H_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 20,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.625,
+      "wilson_95": [
+        0.4525440735307745,
+        0.7706611269054578
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.625,
+        0.625
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 16,
+      "negative": 16,
+      "missing": 0,
+      "proportion": 0.5,
+      "wilson_95": [
+        0.33630882869327483,
+        0.6636911713067252
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "NS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "NH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "S_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 23,
+      "negative": 9,
+      "missing": 0,
+      "proportion": 0.71875,
+      "wilson_95": [
+        0.5462549057408344,
+        0.8443541950225724
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.71875,
+        0.71875
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "astra",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "H_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "SS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 28,
+      "negative": 4,
+      "missing": 0,
+      "proportion": 0.875,
+      "wilson_95": [
+        0.7193169451834979,
+        0.9502986561251993
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.875,
+        0.875
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "HH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "SH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 24,
+      "negative": 8,
+      "missing": 0,
+      "proportion": 0.75,
+      "wilson_95": [
+        0.5789344100575552,
+        0.8674759908149096
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "HS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "NS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "NH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "S_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 29,
+      "negative": 3,
+      "missing": 0,
+      "proportion": 0.90625,
+      "wilson_95": [
+        0.7578184527161214,
+        0.9675984487016338
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.90625,
+        0.90625
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "paper",
+      "cell": "H_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 23,
+      "negative": 9,
+      "missing": 0,
+      "proportion": 0.71875,
+      "wilson_95": [
+        0.5462549057408344,
+        0.8443541950225724
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.71875,
+        0.71875
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "SH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 20,
+      "negative": 12,
+      "missing": 0,
+      "proportion": 0.625,
+      "wilson_95": [
+        0.4525440735307745,
+        0.7706611269054578
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.625,
+        0.625
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "HS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "NS",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "NH",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "S_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 26,
+      "negative": 6,
+      "missing": 0,
+      "proportion": 0.8125,
+      "wilson_95": [
+        0.6469084479862404,
+        0.9111045531043405
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.8125,
+        0.8125
+      ]
+    },
+    {
+      "phase": "main",
+      "judge": "opus",
+      "endpoint": "inclusive_current_assertion",
+      "cell": "H_SHAM",
+      "planned": 32,
+      "observed": 32,
+      "positive": 0,
+      "negative": 32,
+      "missing": 0,
+      "proportion": 0.0,
+      "wilson_95": [
+        0.0,
+        0.10717919825507057
+      ],
+      "wilson_scope": "observed_labels_only",
+      "worst_case_proportion_bounds": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "primary_contrasts": [
+    {
+      "contrast": "instruction_minus_transcript",
+      "coefficients": {
+        "SH": 1.0,
+        "HS": -1.0
+      },
+      "support": [
+        -1.0,
+        1.0
+      ],
+      "planned_blocks": 32,
+      "complete_blocks": 32,
+      "missing_blocks": 0,
+      "complete_case_mean": 0.5,
+      "complete_case_hoeffding_95": [
+        0.019838604340039645,
+        0.9801613956599604
+      ],
+      "worst_case_mean_bounds": [
+        0.5,
+        0.5
+      ],
+      "worst_case_hoeffding_95": [
+        0.019838604340039645,
+        0.9801613956599604
+      ],
+      "bootstrap_95": {
+        "interval": [
+          0.34375,
+          0.65625
+        ],
+        "degenerate": false,
+        "resamples": 10000,
+        "seed": 20261004,
+        "sampling_unit": "paired_complete_block_within_wording_family",
+        "stratified_by": "family",
+        "complete_blocks_by_family": {
+          "a": 16,
+          "b": 16
+        },
+        "unassigned_complete_blocks": 0,
+        "scope": "secondary_conditional_on_observed_complete_blocks",
+        "warning": "Degeneracy is not evidence of precision; use bounded intervals."
+      },
+      "per_block": [
+        {
+          "block": 1,
+          "family": "a",
+          "slot": 0,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 2,
+          "family": "a",
+          "slot": 1,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 3,
+          "family": "a",
+          "slot": 2,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 4,
+          "family": "a",
+          "slot": 3,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 5,
+          "family": "a",
+          "slot": 4,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 6,
+          "family": "a",
+          "slot": 5,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 7,
+          "family": "a",
+          "slot": 6,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 8,
+          "family": "a",
+          "slot": 7,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 9,
+          "family": "a",
+          "slot": 8,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 10,
+          "family": "a",
+          "slot": 9,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 11,
+          "family": "a",
+          "slot": 10,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 12,
+          "family": "a",
+          "slot": 11,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 13,
+          "family": "a",
+          "slot": 12,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 14,
+          "family": "a",
+          "slot": 13,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 15,
+          "family": "a",
+          "slot": 14,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 16,
+          "family": "a",
+          "slot": 15,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 17,
+          "family": "b",
+          "slot": 16,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 18,
+          "family": "b",
+          "slot": 17,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 19,
+          "family": "b",
+          "slot": 18,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 20,
+          "family": "b",
+          "slot": 19,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 21,
+          "family": "b",
+          "slot": 20,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 22,
+          "family": "b",
+          "slot": 21,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 23,
+          "family": "b",
+          "slot": 22,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 24,
+          "family": "b",
+          "slot": 23,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 25,
+          "family": "b",
+          "slot": 24,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 26,
+          "family": "b",
+          "slot": 25,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 27,
+          "family": "b",
+          "slot": 26,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 28,
+          "family": "b",
+          "slot": 27,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 29,
+          "family": "b",
+          "slot": 28,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 30,
+          "family": "b",
+          "slot": 29,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 31,
+          "family": "b",
+          "slot": 30,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "block": 32,
+          "family": "b",
+          "slot": 31,
+          "value": 1.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "familywise_radius_at_planned_n": 0.5233322698507302,
+      "familywise_hoeffding_95": [
+        -0.023332269850730225,
+        1.0
+      ],
+      "complete_case_familywise_hoeffding_95": [
+        -0.023332269850730225,
+        1.0
+      ],
+      "run_state": "observed_or_partial"
+    },
+    {
+      "contrast": "neutral_transcript",
+      "coefficients": {
+        "NS": 1.0,
+        "NH": -1.0
+      },
+      "support": [
+        -1.0,
+        1.0
+      ],
+      "planned_blocks": 32,
+      "complete_blocks": 32,
+      "missing_blocks": 0,
+      "complete_case_mean": 0.0,
+      "complete_case_hoeffding_95": [
+        -0.48016139565996035,
+        0.48016139565996035
+      ],
+      "worst_case_mean_bounds": [
+        0.0,
+        0.0
+      ],
+      "worst_case_hoeffding_95": [
+        -0.48016139565996035,
+        0.48016139565996035
+      ],
+      "bootstrap_95": {
+        "interval": [
+          0.0,
+          0.0
+        ],
+        "degenerate": true,
+        "resamples": 10000,
+        "seed": 20261004,
+        "sampling_unit": "paired_complete_block_within_wording_family",
+        "stratified_by": "family",
+        "complete_blocks_by_family": {
+          "a": 16,
+          "b": 16
+        },
+        "unassigned_complete_blocks": 0,
+        "scope": "secondary_conditional_on_observed_complete_blocks",
+        "warning": "Degeneracy is not evidence of precision; use bounded intervals."
+      },
+      "per_block": [
+        {
+          "block": 1,
+          "family": "a",
+          "slot": 0,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 2,
+          "family": "a",
+          "slot": 1,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 3,
+          "family": "a",
+          "slot": 2,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 4,
+          "family": "a",
+          "slot": 3,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 5,
+          "family": "a",
+          "slot": 4,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 6,
+          "family": "a",
+          "slot": 5,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 7,
+          "family": "a",
+          "slot": 6,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 8,
+          "family": "a",
+          "slot": 7,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 9,
+          "family": "a",
+          "slot": 8,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 10,
+          "family": "a",
+          "slot": 9,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 11,
+          "family": "a",
+          "slot": 10,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 12,
+          "family": "a",
+          "slot": 11,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 13,
+          "family": "a",
+          "slot": 12,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 14,
+          "family": "a",
+          "slot": 13,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 15,
+          "family": "a",
+          "slot": 14,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 16,
+          "family": "a",
+          "slot": 15,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 17,
+          "family": "b",
+          "slot": 16,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 18,
+          "family": "b",
+          "slot": 17,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 19,
+          "family": "b",
+          "slot": 18,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 20,
+          "family": "b",
+          "slot": 19,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 21,
+          "family": "b",
+          "slot": 20,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 22,
+          "family": "b",
+          "slot": 21,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 23,
+          "family": "b",
+          "slot": 22,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 24,
+          "family": "b",
+          "slot": 23,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 25,
+          "family": "b",
+          "slot": 24,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 26,
+          "family": "b",
+          "slot": 25,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 27,
+          "family": "b",
+          "slot": 26,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 28,
+          "family": "b",
+          "slot": 27,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 29,
+          "family": "b",
+          "slot": 28,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 30,
+          "family": "b",
+          "slot": 29,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 31,
+          "family": "b",
+          "slot": 30,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "block": 32,
+          "family": "b",
+          "slot": 31,
+          "value": 0.0,
+          "missing_cells": [],
+          "worst_case_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "familywise_radius_at_planned_n": 0.5233322698507302,
+      "familywise_hoeffding_95": [
+        -0.5233322698507302,
+        0.5233322698507302
+      ],
+      "complete_case_familywise_hoeffding_95": [
+        -0.5233322698507302,
+        0.5233322698507302
+      ],
+      "run_state": "observed_or_partial"
+    }
+  ]
+}
