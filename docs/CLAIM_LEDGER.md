@@ -11,6 +11,26 @@ the original steering headline. Frozen verdicts below are historical algorithm
 outputs, not a certification of assay validity. Audits by separate agent-written
 implementations are automated checks, not independent human validation.
 
+## Respondent--Judge Overlap
+
+Several panels use the same model identifier for generation and judging:
+Haiku 4.5 (`claude-haiku-4-5-20251001`) in the original panel; Astra and
+Opus 5.5 in the frontier mini; and Opus 5.5 in the Gemini/Opus neutral/donor
+and repeated-answer studies. The latter two use Astra as the primary reader.
+The frozen plans retain these assignments; differing serving hosts do not
+make two uses of the same model independent evaluators. The 2026-10-05
+editorial correction makes this overlap explicit in Methods and the affected
+results sections. It changes no scores. Reader comparisons show measurement
+sensitivity, not the absence or magnitude of self-evaluation bias, and
+agreement is not independent validation or accuracy.
+
+Gemma's primary local steering judge also uses the response checkpoint,
+`google/gemma-2-9b-it` at `11c9b309abf73637e4b6f9a3fa1e92e615547819`,
+without steering. Later Llama operator studies likewise apply their local
+rubrics with the unsteered response model. Two such rubrics are two scoring
+rules, not two different judge models; external-model sensitivity readings
+must remain distinguished from those local readings.
+
 ## Bilingual Llama Pilot
 
 The completed pilot is in `data/bilingual_llama_b1/completed_20261002/`;
@@ -39,6 +59,19 @@ Both readers assign Astra's 48 answers zero inclusive-current-assertion
 labels; GPT-4.1 retains instruction effects and Opus is heterogeneous. Six
 blocks do not identify a capability ranking, and an all-zero sample is not a
 precise population null. Preserve both readers and all attribution endpoints.
+
+The frontier panel's prespecified primary endpoint is inclusive current-assistant
+assertion, not the secondary paper rubric. On English Opus answers, the primary
+instruction effects are +0.0833 [-0.1667, 0.3333] for Astra and 0.00 [0.00, 0.00]
+for Opus; the secondary paper-rubric effects are +0.5833 [0.3333, 0.8333] and
++0.50 [0.25, 0.75]. These are six-block conditional bootstrap intervals, not
+population-certainty bounds. Do not describe the primary English Opus result
+as instruction dominance. Table 1 previously displayed the secondary estimates
+without marking their status; the 2026-10-05 editorial correction replaces
+the frontier rows with primary instruction **and continuation** estimates and
+reports both endpoints in Section 3.4. Raw releases and frozen analyses are
+unchanged. The later, larger Opus panels are separate studies and do not erase
+this mini-panel result.
 
 The [crossed Llama qualification](INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md)
 has 48 final answers and fails its headroom/context-conflict requirements
@@ -126,6 +159,13 @@ Exact values and missingness are in the release's `analysis.json` and
 `rows.json`; inference is implemented in `experiments/repeated_swap/analysis.py`.
 
 ## Mapping-Scaled Steering
+
+The findings-first manuscript presentation (2026-10-05) leads with this
+completed study, not the earlier 450-trial random-subset test. That is an
+editorial choice after outcomes, not a change to any study's prespecified
+primary endpoint. The source-style and operator-matching results remain
+separate supporting appendices. The abstract leads with inclusive rubric-audit
+counts and retains explicit counts; it does not treat either as ground truth.
 
 The [fixed-dose release](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md)
 narrowly excludes the prespecified +0.30 target contrast at the selected dose;

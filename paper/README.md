@@ -48,8 +48,12 @@ not that reconstruction or independent scientific validation.
   Its check replays the released receipts and reconstructs counts, paired
   effects and both readers' figure inputs. Primary simultaneous bounds remain
   separate from pointwise and descriptive intervals.
-- `dose_followup.tex`: the mapping-scaled, quality-selected steering test.
-  `paper-verify` checks release hashes and manuscript bindings; use
+- `main.tex` presents the mapping-scaled, quality-selected steering finding;
+  the source-style subset and operator studies are supporting appendices.
+  `dose_followup.tex` preserves the original hash-bound exposition, no longer
+  compiled into the manuscript. The current narrative uses its same verified
+  numerical macros and figure without changing the release or its binding.
+  `paper-verify` checks those release hashes and bindings; use
   `python scripts/verify_dose_followup.py --full --require-pinned` for the
   historical-source inference replay as well.
 - `figures/`: selected figure inputs with pinned source provenance.

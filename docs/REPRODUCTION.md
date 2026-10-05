@@ -75,6 +75,20 @@ integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
 
+Kolibri verification uses `scripts/verify_kolibri_portable.py` to supply the
+original Wilson confidence-interval constant during replay of the completed
+release. Python 3.10 and 3.12 on Linux computed that constant one ULP higher,
+changing 622 cell-level interval bounds by less than `2.3e-16` and one derived
+table hash. Eight lower bounds moved from zero to `2^-55`; the primary
+contrasts, qualification decisions, rows and written summary remained exact.
+Both failed checks and their complete diagnostic records are preserved in
+[`provenance/kolibri_wilson/`](../provenance/kolibri_wilson/OBSERVATIONS.json).
+The wrapper accepts only these measured constants, authenticates the entire
+input and difference inventories, and runs the original verifiers with all
+exact comparisons intact. It changes neither released artifacts nor frozen
+source files and applies no numerical tolerance. Unrelated calculations keep
+their native constant; unknown differences still fail.
+
 The repeated-study check uses `scripts/verify_repeated_portable.py` with the
 same read-only arguments as `scripts/verify_repeated_extension.py`. The wrapper
 runs that original verifier, including raw-receipt replay and figure checks,

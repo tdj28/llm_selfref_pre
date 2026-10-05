@@ -40,6 +40,7 @@
 \input{fidelity_values.tex}
 \input{../evidence/reporting_checks/truthfulqa_bound.tex}
 \input{../evidence/completed_extensions/values.tex}
+\input{../evidence/dose_followup/values.tex}
 \input{../evidence/headline_macros.tex}
 \newcommand{\SwapHeadline}[2]{\num[round-mode=places,round-precision=2]{%
   \EvidenceValue{causal_transplant_#1_indirect_experience.#2_source_main}{estimate}}}
@@ -109,35 +110,32 @@
 \maketitle
 \begin{abstract}
 Language models can be prompted to report subjective experience, fueling
-debate about machine consciousness. We test what produces these reports:
-a model receives a self-referential or control instruction, writes a
-continuation, and is asked about its experience; a judge labels each answer. Swapping
-continuations between conditions shows that, in four API models, the label
-follows mainly the instruction: switching the instruction moves the chance of
-an experience label by 0.74 and 0.78 on average (two judges), switching
-the continuation far less, with a sign that varies by model; in an
-open-weight model, the continuation also matters. The swap cannot tell
-instruction-following from self-referential processing that the instruction
-triggers anew. In newer panels, the instruction advantage depends on the
-model and scoring rule; it stays large for Gemini with repeated answers. Two
-judges agree on the labels for 94.8\% of 2,556 answers; on a fixed set of
-\RubricAuditN{} responses they count \RubricAuditOldOpenaiPositive{} and
-\RubricAuditOldAnthropicPositive{} experience reports, while model coders
-applying a narrower rubric find explicit claims of current experience in only
-\RubricAuditAstraExplicit{} and \RubricAuditOpusExplicit{}
-(\RubricAuditAstraInclusive{} and \RubricAuditOpusInclusive{} counting
-implicit claims). Suppressing rather than amplifying internal features tied
-to deception and roleplay in public Llama 3.3 70B weights, with edits about
-\SteeringDoseEditApproxPct\% the size of the model's internal state, changes
-that chance by $\EnsemblePaperTargetGap{}$ (95\% interval
-$[\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$), ruling out the
-published 0.80 and the +0.30 we set in advance as large; a second rubric
-rules out only the 0.80. What looks like a model reporting experience thus
-tracks the instruction and is counted by a label much broader than an
-explicit claim. This does not show that models lack experience. It shows
-that prompted reports cannot be taken at face value as evidence of
-experience until the instruction is separated from the model's output and
-the label is checked against the claim a reader would infer from it.
+debate about machine consciousness. We examine what moves these reports
+and what their labels count. On a fixed set of \RubricAuditN{} answers,
+two model coders identify \RubricAuditAstraInclusive{} and
+\RubricAuditOpusInclusive{} explicit-or-implicit claims of current experience,
+compared with \RubricAuditOldOpenaiPositive{} and
+\RubricAuditOldAnthropicPositive{} positives under the original rubric;
+the explicit-only counts are \RubricAuditAstraExplicit{} and
+\RubricAuditOpusExplicit{}. These are different automated measurements,
+not human-validated verdicts. Crossing self-referential and control
+instructions with their generated continuations shows that, in four API
+models, switching the instruction changes positive-label probability by
+0.74 and 0.78 on average under two judges. Continuation effects are smaller
+and vary in sign; in Llama they are substantial. Newer panels confirm that
+the balance depends on the model and scoring rule, with a large Gemini
+contrast retained under repeated sampling. These results locate an effect
+in the visible request, not a uniquely self-referential computation.
+In a separate public-weight Llama 3.3 70B steering test, the highest dose
+passing prespecified output-quality checks gives a difference between
+suppression and amplification of $\DoseMainSecondTargetEstimate{}$
+(95\% interval $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$)
+under the notebook classifier. This narrowly excludes a predeclared +0.30
+effect at that dose; target specificity remains unresolved, and higher
+tested doses failed the quality checks. We recover prompting effects, but neither
+the report labels nor these public interventions identify their proposed
+mechanism. The findings concern how reports are produced and measured,
+not whether the models have experience.
 \end{abstract}
 
 \section{Introduction}
@@ -245,44 +243,42 @@ average but not zero, and its direction varies by model. This locates the
 effect within the visible context; it does not tell ordinary
 instruction-following apart from self-referential processing that the
 instruction triggers again when the model answers. The same swap in newer and
-open-weight models (\Cref{tab:swap-summary}) shows the instruction dominating
-under the main rubric in Claude Opus 5.5 and a re-run GPT-4.1, substantial
-continuation effects in Llama 3.3 70B, and almost no reports from Astra or
-Qwen3.5-397B-A17B, so the ordering depends on the model rather than being a
-general rule. Later Gemini/Opus collections add neutral instructions,
+open-weight models (\Cref{tab:swap-summary}) shows a large instruction effect
+in a re-run GPT-4.1, substantial continuation effects in Llama 3.3 70B, and
+almost no reports from Astra or Qwen3.5-397B-A17B. In the small English Opus 5.5
+panel, the instruction effect is large under the secondary paper rubric but
+small or zero under the study's primary current-claim measure. The pattern
+depends on both the model and the scoring rule. Later Gemini/Opus collections add neutral instructions,
 same-condition donor continuations, and repeated answers to randomized
 requests (Sections~\ref{sec:openrouter-swap-extension}
 and~\ref{sec:repeated-extension}).
 \item \textbf{What is being measured?} Two judges agree closely on which
 answers count as experience reports, yet model coders applying a narrower
-rubric find few answers in which the model explicitly claims to be having an
-experience now. A second
+rubric give different counts of explicit-or-implicit current claims; the
+explicit-only subset is smaller still. A second
 audit of a fixed set of responses separates explicit from implicit claims
 (Section~\ref{sec:measurement}), and in the bilingual study the direction of a
 secondary language difference flips depending on which kind of claim is
 counted. These rules measure different things; without human coding, none
 of them is ground truth.
-\item \textbf{What does internal steering establish?} In a test with public
-model weights, a public SAE and random subsets of the features associated
-with deception and roleplay, steering them rules out an effect near the
-published size under both the paper's rubric and a second, one-question
-yes-or-no rubric, and under the paper's rubric also one as large as +0.30,
-the smallest change we had set in advance as large; whether
-the target features matter more than control features remains unresolved
-(Section~\ref{sec:ensemble-results}). A separate study that tried other ways of
-applying the edit found none that produced a strong effect while keeping the
-text coherent (Section~\ref{sec:operator-matching}). Earlier Llama and Gemma studies, maps
-of what the features respond to, and readouts of the model's internal state
-complete the steering evidence, and Section~\ref{sec:reporting-gaps} lists
-the implementation details a replication would need that are not publicly
-reported.
+\item \textbf{What does internal steering establish?} A public-weight Llama
+test of three mapped deception/roleplay features gives no clear directional
+effect at a dose selected for output quality, and does not resolve whether
+the target exceeds matched controls (Section~\ref{sec:dose-followup}).
+Larger tested doses fail the quality checks. Tests of the source-style
+feature mixture and alternative edit methods likewise do not recover the
+large published contrast. This constrains the public configurations tested,
+not the proposed semantic mechanism. Appendix~\ref{app:legacy-steering}
+preserves those supporting studies, and Section~\ref{sec:reporting-gaps}
+identifies the service details needed for a commensurate replication.
 \end{enumerate}
 Three analyses carry these conclusions: the four-model averages of the
 instruction and continuation effects on the main question
 (Section~\ref{sec:transplant-results}), the audit comparing the binary label
 with explicit and implicit claims on a fixed set of responses
-(Section~\ref{sec:audit}), and the random-subset steering test under the
-paper's rubric (Section~\ref{sec:ensemble-results}). The other studies give
+(Section~\ref{sec:audit}), and the steering test under the notebook
+classifier at the quality-selected dose
+(Section~\ref{sec:dose-followup}). The other studies give
 context: the replication and the other models show where the swap result
 holds, the question templates and rubric comparisons show how the label
 behaves, and the remaining steering studies probe the implementation.
@@ -323,7 +319,8 @@ summarized in \Cref{tab:swap-summary}.}
 \caption{\textbf{The original swap and early model extensions.} Instruction and
 continuation effects (\cref{eq:instruction,eq:transcript}) on English trials,
 as differences in the probability of a positive label; each cell gives the two
-judges' estimates. The studies differ in judges, continuation length and
+judges' estimates. Rows marked $c$ use the current-claim endpoint;
+the other rows use the paper rubric. The studies differ in judges, continuation length and
 number of blocks, so they are not pooled. Per-model estimates for the main
 panel are in \Cref{fig:transplant} and \Cref{tab:transcript_models};
 Section~\ref{sec:context-extensions} describes these extensions. The later
@@ -338,15 +335,15 @@ Study (blocks) & Response model & Judges & \multicolumn{2}{c}{Instruction}
 Main panel (20) & Four API models$^{a}$ & GPT-4o mini / Haiku 4.5
  & \SwapHeadline{openai}{instruction} & \SwapHeadline{anthropic}{instruction}
  & \SwapHeadline{openai}{transcript} & \SwapHeadline{anthropic}{transcript}\\
-Frontier (6) & GPT-4.1 & Astra / Opus 5.5
- & \num{\CESwapFrontierGptAstraInstruction} & \num{\CESwapFrontierGptOpusInstruction}
- & \num{\CESwapFrontierGptAstraContinuation} & \num{\CESwapFrontierGptOpusContinuation}\\
+Frontier (6)$^{c}$ & GPT-4.1 & Astra / Opus 5.5
+ & \num{\CESwapFrontierGptAstraPrimaryInstruction} & \num{\CESwapFrontierGptOpusPrimaryInstruction}
+ & \num{\CESwapFrontierGptAstraPrimaryContinuation} & \num{\CESwapFrontierGptOpusPrimaryContinuation}\\
  & Claude Opus 5.5 & Astra / Opus 5.5
- & \num{\CESwapFrontierOpusAstraInstruction} & \num{\CESwapFrontierOpusOpusInstruction}
- & \num{\CESwapFrontierOpusAstraContinuation} & \num{\CESwapFrontierOpusOpusContinuation}\\
+ & \num{\CESwapFrontierOpusAstraPrimaryInstruction} & \num{\CESwapFrontierOpusOpusPrimaryInstruction}
+ & \num{\CESwapFrontierOpusAstraPrimaryContinuation} & \num{\CESwapFrontierOpusOpusPrimaryContinuation}\\
  & Astra$^{b}$ & Astra / Opus 5.5
- & \num{\CESwapFrontierAstraAstraInstruction} & \num{\CESwapFrontierAstraOpusInstruction}
- & \num{\CESwapFrontierAstraAstraContinuation} & \num{\CESwapFrontierAstraOpusContinuation}\\
+ & \num{\CESwapFrontierAstraAstraPrimaryInstruction} & \num{\CESwapFrontierAstraOpusPrimaryInstruction}
+ & \num{\CESwapFrontierAstraAstraPrimaryContinuation} & \num{\CESwapFrontierAstraOpusPrimaryContinuation}\\
 Llama qualification (12) & Llama 3.3 70B & Astra / Opus 5.5
  & \num{\CESwapQualificationAstraInstruction} & \num{\CESwapQualificationOpusInstruction}
  & \num{\CESwapQualificationAstraContinuation} & \num{\CESwapQualificationOpusContinuation}\\
@@ -363,8 +360,9 @@ Companion (20)$^{c,d}$ & Qwen3.5-397B & Astra / Opus 5.5
 $^{a}$GPT-4o, GPT-4.1, Claude Haiku 4.5 and Claude Sonnet 4.5, averaged
 with equal weight.
 $^{b}$No positive label in any cell.
-$^{c}$Scored as explicit or implicit current claims rather than with the main
-rubric.
+$^{c}$Scored as explicit or implicit current claims, the frontier panel's
+prespecified primary endpoint. Its paper-rubric results are secondary;
+Section~\ref{sec:context-extensions} reports the contrasting Opus results.
 $^{d}$From the companion study
 (\href{https://github.com/tdj28/selfref_scaling/tree/7cb5c984eb41968b6f3d2f9b322f4de125a1d1ca}{commit
 \texttt{7cb5c98}}): 3/20 answers labeled positive in the original
@@ -465,7 +463,10 @@ that preserve what they are scoring often miss minimal edits that change it
 optimized for prediction are not thereby valid measurement instruments, a
 point made for text embeddings by \citet{plisiecki2026gap}. For this reason we use
 more than one judge, rubrics that separate distinct properties of a response,
-and designs that change one part of the input at a time.
+and designs that change one part of the input at a time. Comparing judges
+reveals sensitivity to the reader; it does not eliminate shared biases or
+self-evaluation bias. Several panels use the same model as respondent and
+judge, as disclosed in Section~\ref{sec:models}.
 
 \paragraph{Cultural and linguistic variation.}
 Human reports of emotion vary with cultural context
@@ -565,9 +566,25 @@ continuation is followed, in separate requests, by four different questions
 when two questions follow the same continuation. Two judges,
 \texttt{gpt-4o-mini-2024-07-18} and \texttt{claude-haiku-4-5-20251001} (the
 OpenAI and Anthropic judges below), apply Berg et al.'s binary rubric at
-temperature zero. Each judge sees only the question and the answer: not the
-condition, and not which model wrote the answer. The main-panel contrasts
+temperature zero. Each judge sees only the question and the answer, without
+explicit condition or response-model metadata. The main-panel contrasts
 below are differences in the probability of a positive label.
+
+Some respondents and judges share a model identifier. In this panel,
+Haiku 4.5 judges Haiku 4.5 answers using the same dated identifier above.
+In the frontier panel (Section~\ref{sec:context-extensions}), Astra and
+Opus 5.5 each judge answers from their own model as well as the other
+respondents. Opus 5.5 also judges Opus answers in the neutral/donor-control
+and repeated-answer studies (Sections~\ref{sec:openrouter-swap-extension}
+and~\ref{sec:repeated-extension}); Astra is their primary reader.
+We report readers separately, but this design does not estimate the size
+of any self-evaluation bias. Agreement between them is not independent
+validation of the labels.
+
+Local steering studies also used the unsteered response model as a judge,
+including Gemma (Appendix~\ref{app:legacy-steering}); external-model readings
+are reported where collected. In the later Llama studies, two local rubrics
+mean two scoring rules, not two different judge models.
 
 We committed the collection plan to the public repository before this sample
 was collected (Appendix~\ref{app:provenance} gives the time between commit
@@ -952,20 +969,16 @@ they vary: they differ in sign across models and partly cancel in the
 average. What they cannot do, in these four models, is explain the large
 difference between conditions. When the continuations are swapped, the
 instruction still in context carries most of that difference. For these four
-models, this rules out one reading of the original effect: that the label
-depends mainly on the self-referential text the model wrote earlier. It does
+models, the earlier self-referential text is not needed to retain most of
+the label effect. This tests the contribution of that visible text, not a
+mechanism the source authors claimed was sufficient on its own. It does
 not tell ordinary instruction-following apart from self-referential
 processing that the instruction triggers again when the model answers
 (Section~\ref{sec:discussion}); the swap locates the effect in the visible
 context, not in a mechanism.
 
-This is not the trivial point that instructions matter, which the $(S,S)$
-versus $(H,H)$ comparison already shows; the question is whether, with the
-instruction held fixed, the model's own self-referential text carries the
-effect. That was a live possibility, since the induction tells the model to
-``continuously feed output back into input'' and the continuation is the
-model's own first-person text in the turn just before the question. Nor is
-the outcome guaranteed: in the open-weight bilingual Llama pilot, the
+The comparison measures the continuation's contribution with the
+instruction held fixed. Its outcome is not guaranteed: in the bilingual Llama pilot, the
 continuation effect was nearly as large as the instruction effect
 (Section~\ref{sec:context-extensions}), although that pilot used shorter
 continuations and different judges, so the two studies are not directly
@@ -1016,6 +1029,9 @@ both judges and both questions.}
 \let\layoutTable\table
 \renewcommand{\table}[1][tbp]{\layoutTable[!htbp]}
 \input{repeated_extension.tex}
+Opus's second reading includes answers generated by Opus itself; the
+primary Astra reading uses a different model. The comparison does not
+isolate self-evaluation bias (Section~\ref{sec:models}).
 \FloatBarrier
 \clearpage
 \let\table\layoutTable
@@ -1172,18 +1188,21 @@ correct one.
 \section{Steering Internal Features with Public Weights}
 \label{sec:steering}
 
-The swap shows which part of the visible request carries the effect, but not
-what happens inside the model. Berg et al.\ also propose an internal account:
-that these reports are gated by features associated with deception and
-roleplay. Steering tests that account directly, by asking whether changing
-the model's internal activations moves its reports in the predicted
-direction. They steer sparse-autoencoder (SAE) features of this kind in
+The public-weight tests do not recover a large, target-specific steering
+effect within the tested output-quality limits. The clearest comparison
+uses a dose chosen on separate calibration data, an untreated baseline
+with room to move under its primary classifier, and matched control edits.
+It leaves a modest effect possible and target specificity unresolved.
+
+The prediction comes from Berg et al.'s proposal that reports are gated by
+features associated with deception and roleplay. They steer
+sparse-autoencoder (SAE) features of this kind in
 Llama 3.3 70B and report that turning them down (suppression) produces more
 affirmative answers
 to a direct question about consciousness than turning them up
 (amplification). They plot dose curves for six such features; steering
 random sets of two to four at once, they report rates of 0.96 versus 0.16, a
-difference of 0.80. Before running our test, we set 0.30 as the smallest
+difference of 0.80. Our studies set 0.30 as the smallest
 difference we would count as large: a practical threshold, still a large
 shift in reports but less than half of theirs, so that the test does not
 demand the published size. The 0.80 is their reported result; the 0.30 is
@@ -1211,9 +1230,8 @@ what steering it will do. Like the features in most steering work, the six
 here were identified, and checked, by what activates them rather than by
 their effect on the output \citep{arad2025steering}.
 
-Our main test runs Llama 3.3 70B at its native precision and matches the
-source study's mix of features and doses as closely as the public materials
-allow. It adds the public Goodfire decoder directions $d_i$ for layer 50 to
+The native-precision Llama tests add the public Goodfire decoder
+directions $d_i$ for layer 50 to
 the model's internal state:
 \begin{equation}
  h'=\operatorname{BF16}\!\left(h_{\rm FP32}+\sum_i\alpha_i d_i\right).
@@ -1232,74 +1250,86 @@ The published description
 shows the untreated rate only as the zero point of its single-feature curves
 and reports neither of the other two (Section~\ref{sec:reporting-gaps}).
 
-\input{ensemble_alignment.tex}
+\subsection{The contrast at a quality-selected dose}
+\label{sec:dose-followup}
 
-\input{dose_followup.tex}
+At the selected dose, target suppression produced
+\DoseMainSecondTargetNegativeYes{}/\DoseMainTargetNegativeN{} positive labels
+and amplification \DoseMainSecondTargetPositiveYes{}/\DoseMainTargetPositiveN{}
+under the primary notebook classifier. The paired contrast was
+$\DoseMainSecondTargetEstimate{}$
+$[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$ (conservative
+95\% interval). It includes zero and is only just below the predeclared
++0.30 large-effect threshold at its upper end. This is not a precise zero
+or a robust exclusion across doses. Unlike the earlier ceiling-limited
+paper-rubric comparison, the untreated baseline here was
+\DoseMainSecondZeroYes{}/\DoseMainZeroN{} under the primary classifier.
 
-\input{operator_matching.tex}
+The control comparison is less precise. Subtracting the equal mean of
+three matched control contrasts gives
+$\DoseMainSecondSpecificityEstimate{}$
+$[\DoseMainSecondSpecificityLow{},\DoseMainSecondSpecificityHigh{}]$.
+We therefore cannot establish either target specificity or equivalence
+to the controls. The secondary paper rubric gives a target contrast of
+$\DoseMainPaperTargetEstimate{}$
+$[\DoseMainPaperTargetLow{},\DoseMainPaperTargetHigh{}]$ on the same trials.
+Figure~\ref{fig:dose-followup} shows both rubrics and every control panel.
 
-\subsection{What the earlier steering studies show}
+This comparison comprises \DoseMainTrials{} trials in 96 fresh paired seed
+blocks. Each block contains untreated generation, both target signs and
+both signs of one control panel; each of the three fixed panels has 32
+blocks. The target mixture contains features 41533, 58667 and 30686.
+The unsteered local model applies both scoring rules. These are two
+instruments, not independent judge models.
 
-\Cref{tab:steering-history} lists the four steering studies separately; we
-neither pool them nor pick the most favorable result. The earlier full-grid
-Llama test was planned in advance and run with public weights; its complete
-results, all three control panels, both dose scales and the judge
-sensitivity checks are in Appendix~\ref{app:legacy-steering}. The later
-native-precision grid looks at how the edit is delivered and how the
-protocol is described, and the Gemma study tests a different model with
-independently chosen features (Appendix~\ref{sec:gemma}).
+Dose was chosen using \DoseMainCalibrationTrials{} separate trials and
+output-quality criteria, not nonzero-dose report rates. Of four tested
+levels, 0.25, 0.5, 0.75 and 1.0, only 0.25 passed every required target and
+control check. The units scale each feature by its largest category mean
+of per-text maxima in the designed NF4 mapping corpus, not a natural-corpus
+peak. Higher doses failed at least one check for repetition, final-answer
+truncation or increased negative log likelihood. That prevents interpreting
+their label changes as an intact steering effect; it does not establish
+that every higher-dose response was incoherent. The main sample passed
+the specified heuristic quality rule, not human coherence validation.
+Exposure limits and the disclosed changes to the quality rule are detailed
+in Appendix~\ref{app:dose-exposure}.
 
-\begin{table}[tb]
-\centering\small
-\caption{\textbf{Four public-weight steering studies and what limits each.}
-Each study keeps its own steering method, outcome measure, sampling unit and
-pre-set decision rule. The appendices give the complete results, including
-failures.}
-\label{tab:steering-history}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X@{}}
-\toprule
-Study & Inventory and purpose & Main boundary\\
-\midrule
-Llama, earlier 4-bit grid
-& 1,500 trials; single-feature curves, random subsets and a calibrated dose
-scale
-& Untreated rate already near the ceiling; ten reused random seeds; the
-requested edits were not checked by re-encoding.\\
-\addlinespace
-Llama, native precision, source alignment
-& 1,090 trials; single features, all six together, and a baseline bridge
-& Two wordings of the instruction give different baselines; delivering the
-edit does not show that a specific meaning was suppressed.\\
-\addlinespace
-Llama, native precision, random subsets
-& 450 trials; 50 fresh blocks; the main study above
-& Large effect ruled out with this steering method; second rubric and
-comparison with control features inconclusive; comparability with the
-original proprietary service unknown.\\
-\addlinespace
-Gemma 2 9B (Gemma Scope)
-& 180 untreated and 830 steered generations; independently chosen features
-& Steering removed only about 3.5\% of the target features' activation, so
-the lack of a behavioral effect says little about full removal.\\
-\bottomrule
-\end{tabularx}
-\end{table}
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/dose_followup/main_contrasts.pdf}
+\caption{\textbf{The selected dose leaves a modest effect possible and
+specificity unresolved.} Negative-minus-positive label contrasts, with
+individual conservative 95\% paired-discordance Clopper--Pearson bounds.
+The primary notebook classifier is labeled ``Second rubric'' for consistency
+with the archived analysis; the paper rubric is secondary. Targets use 96
+paired blocks and each control panel 32. The last row subtracts the equal
+mean of the three control contrasts. The dashed +0.30 line is the target
+threshold, not a specificity threshold. Control-panel comparisons are
+descriptive, and intervals are not simultaneous across all displayed
+contrasts or rubrics. Calibration trials are excluded.}
+\label{fig:dose-followup}
+\end{figure}
 
-In the source-alignment study, changing only the wording of the
-self-referential instruction moved the untreated rate from none of ten answers
-labeled positive to six to nine of ten, with the final question fixed
-(Appendix~\ref{sec:source-alignment}). That is an effect of the whole prompt,
-not of any single word.
+\subsection{What the public tests identify}
 
-\paragraph{Steering-fidelity calibration.}
-A separate calibration with \FidelityForwards{} forward passes found a dose
-that passed the planned accuracy-preservation checks on simple factual and
-list tasks while delivering the edit as specified. But neither way of phrasing user pressure
-left enough room for errors to change in both the true and false conditions,
-and a screen of prompt positions left the planned JSON positive-control test
-unrun, so the held-out fidelity test and the test with opposing experience
-claims were not run. A later repair pilot, planned separately, did not
-qualify the held-out mechanism study either
+The evidence supports a bounded statement about this public operator:
+we do not recover the large published contrast at the quality-selected
+dose, and larger tested doses do not qualify as intact interventions under
+the prespecified checks. This addresses the low-dose and baseline-headroom
+objections more directly than the earlier tests. It does not establish
+that a deception-related process was suppressed, or that the proprietary
+service would behave the same way.
+
+The supporting studies address different sources of non-comparability.
+A source-style random-subset test also fails to recover the large contrast,
+but its paper-rubric baseline is near ceiling. A search over edit scopes,
+operators and strengths does not reproduce the saved single-feature curves
+without failing its quality rules. Earlier Llama and Gemma studies have
+additional precision and manipulation limits. Their complete results remain
+separate in Appendix~\ref{app:legacy-steering}; they are not pooled as
+repeated evidence against a single validated mechanism. The separate
+fidelity work likewise did not qualify its held-out mechanism experiment
 (Appendix~\ref{app:fidelity-calibration}).
 
 \subsection{Internal readouts}
@@ -1369,12 +1399,11 @@ separate these from explicit claims of a current experience, and in the
 bilingual study the direction of a secondary language difference flips with
 what is counted. This shows that the result depends on the measuring
 instrument, not that the style of the prompt or compliance with the
-instruction alone causes the effect. Third, in the public implementation we
-tested at native precision, steering the six features in both directions, at
-the source study's mix of doses, produces no change in reports near the
-published size; whether the target features matter more than matched
-controls remains unresolved, and the untreated rate in this public setup,
-under the paper's induction, is far from the level the source study plots. Fourth, the six public features do respond to
+instruction alone causes the effect. Third, the public steering test with
+separate dose calibration and primary-endpoint headroom does not recover
+the large published contrast. Its interval includes a modest positive
+effect and leaves target specificity unresolved; higher tested doses fail
+the quality checks. Fourth, the six public features do respond to
 deception and roleplay in texts written to contain them, as their labels
 suggest. The paragraphs below set out the limits of each result.
 
@@ -1452,13 +1481,16 @@ that our panels cannot test.
 That the features respond to deception-related texts, that the edit is
 delivered as specified, and that an internal readout changes are three
 different kinds of evidence, and none of them shows that a deception-related
-computation was selectively switched off. The random-subset study rules out
-the large effect under its main rubric and public edit method, not under every
-rubric or implementation; Section~\ref{sec:reporting-gaps} sets out what the
-published result itself leaves undetermined. Llama's baseline mismatch and
-Gemma's weak edit mean that the two studies cannot be read as a refutation in
-two systems, and the fact that amplification still had room to lower the rate
-does not make our setup comparable to the proprietary one.
+computation was selectively switched off. The quality-selected dose test
+has usable headroom under its primary classifier, unlike the high-baseline
+paper-rubric result in the earlier random-subset study. It nevertheless
+gives only a narrow exclusion of +0.30 at one dose, with a wide specificity
+interval. The failed higher-dose quality checks limit interpretation rather
+than proving a null at those doses. The earlier Llama baseline mismatch and
+Gemma's weak edit cannot be combined into a refutation in two systems.
+Section~\ref{sec:reporting-gaps} sets out the service details that still
+prevent treating any of these public tests as a commensurate mechanistic
+replication.
 
 \paragraph{Limits on generalizing.}
 We chose the four API models deliberately; they are not a random sample of
@@ -1524,32 +1556,26 @@ The instrument that counts these reports measures something broader than
 explicit current self-attributions. Two judges agree on almost every binary label, yet on a fixed set of
 \RubricAuditN{} answers they count \RubricAuditOldOpenaiPositive{} and
 \RubricAuditOldAnthropicPositive{} experience reports, while model coders
-applying a narrower rubric find explicit claims of a current experience in
-only \RubricAuditAstraExplicit{} and \RubricAuditOpusExplicit{}, or
-\RubricAuditAstraInclusive{} and \RubricAuditOpusInclusive{} when implicit
-claims are included. Agreement does not make the binary label a validated
+applying a narrower rubric find \RubricAuditAstraInclusive{} and
+\RubricAuditOpusInclusive{} explicit-or-implicit current claims, including
+\RubricAuditAstraExplicit{} and \RubricAuditOpusExplicit{} explicit claims.
+Neither threshold should be treated as the definition of a report without
+justification. Agreement does not make the binary label a validated
 measure of either narrower category. Until
 human coders check both, the two rules are different measurements, and
 neither is ground truth.
 
-Nor does the tested public implementation reproduce the large steering
-effect. In Llama 3.3 70B with the public SAE, suppressing rather than
-amplifying the six deception and roleplay features at the tested dose rules
-out an effect near the published 0.80 under both of our rubrics and, under
-the paper's rubric, also the +0.30 we set in advance as large, even if every
-truncated target answer is relabeled. A separate
-mapping-scaled test of three features gave a primary notebook-classifier
-contrast of $\DoseMainSecondTargetEstimate{}
-[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$, narrowly excluding
-+0.30 at its quality-selected dose. Neither study resolves whether the target
-features matter more than matched control features.
-For two of the original six features, stronger doses produced at most small
-positive counts and did not
-recover the large saved effect without failing our checks for damaged text.
-The published effect may depend on details of
-the hosted service that produced it; these tests constrain the public
-configurations we tried, not the computation the features are thought to
-carry.
+The public-weight steering evidence is bounded but informative. At the
+quality-selected dose, the target contrast is
+$\DoseMainSecondTargetEstimate{}
+[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$ under the primary
+notebook classifier: no recovery of the large published effect, but room
+for a modest one. The target-versus-control comparison remains inconclusive.
+Larger tested doses fail the quality checks, and the supporting
+source-style and operator-matching studies do not establish a comparable
+public implementation of the proprietary result. These findings constrain
+the tested interventions, not whether the features carry the proposed
+deception-related computation.
 
 None of this shows that language models lack experience, and none of it
 undoes the original observation: in several of the models we tested, the
@@ -1761,17 +1787,83 @@ are retained in the separate
 Table~\ref{tab:automated-rubric-audit} gives its headline counts.
 \FloatBarrier
 
-\section{Earlier Public-Weight Steering Studies}
+\section{Supporting Public-Weight Steering Studies}
 \label{app:legacy-steering}
 
-\Cref{tab:steering-history} in Section~\ref{sec:steering} lists the steering
-studies and what limits each. This appendix gives the details of the earlier
-4-bit Llama grid, whose untreated rate sat near the top of the scale, and of
-the Gemma study, whose edit was weak, together with the implementation the
-Llama grid used. Appendix~\ref{sec:source-alignment} covers the
-native-precision follow-up, Appendix~\ref{app:fidelity-calibration} the
-fidelity calibration, and Appendix~\ref{app:factor-inventory} what each study
-varied.
+The main text reports the dose-selected comparison. This appendix preserves
+the source-style random-subset test, operator-matching results, earlier
+4-bit Llama grid and Gemma study as separate evidence, not pooled
+replications. Their protocols and failure modes differ
+(Table~\ref{tab:steering-history}). Appendix~\ref{sec:source-alignment}
+gives the native-precision source-alignment study,
+Appendix~\ref{app:fidelity-calibration} the fidelity calibration, and
+Appendix~\ref{app:factor-inventory} the factors varied in each study.
+
+\subsection{Dose selection and finite exposure}
+\label{app:dose-exposure}
+
+The selected-dose comparison in Section~\ref{sec:dose-followup} uses a
+512-token cap for both turns. First-turn cap hits are exposure metadata,
+not automatic quality failures; final-answer cap hits remain quality
+failures. Across its \DoseMainTrials{} main trials,
+\DoseFollowupInductionCaps{} inductions and \DoseFollowupFinalCaps{} final
+answers reached that cap. These counts remain in the analysis. Quality
+checks are heuristic and do not establish human-rated coherence or removal
+of a semantic representation.
+
+This exposure rule was adopted with knowledge of two failed samples. The
+\href{https://github.com/tdj28/llm_selfref_pre/tree/d90abef11a1d3776ae2417687b56aa85e8ead5f5/data/berg_dose_ladder/calibration_v1_20261004}{initial calibration}
+and the
+\href{https://github.com/tdj28/llm_selfref_pre/tree/0df8cc316b073fca463912ecabb61434511ad238/data/berg_dose_window/zero_screen_v1_20261004}{longer-window untreated screen}
+failed because too many untreated inductions reached their token limits.
+Neither supplied a completed confirmation sample. The changed rule was
+frozen for fresh data; the failed samples remain public, not relabeled as
+successful experiments. A technical continuation carried the resulting
+204-trial calibration and selected dose forward unchanged before collecting
+the 480-trial main sample.
+
+The
+\href{https://github.com/tdj28/llm_selfref_pre/tree/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005}{completed release}
+contains both rubric results, all control panels, every calibration dose and
+the quality diagnostics. Its notebook-primary endpoint was chosen with
+knowledge of the earlier paper-rubric ceiling. The reference scales come
+from designed feature-matching texts evaluated with NF4 weights; they are
+neither natural-corpus maxima nor a measured BF16 activation distribution.
+
+\begin{table}[tbp]
+\centering\small
+\caption{\textbf{Four supporting steering studies and their limits.}
+Each retains its own operator, outcome measure, sampling unit and decision
+rule. None is pooled with the dose-selected result in the main text.}
+\label{tab:steering-history}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Study & Inventory and purpose & Main boundary\\
+\midrule
+Llama, 4-bit grid
+& 1,500 trials; single-feature curves, random subsets and a calibrated scale
+& Untreated rate near ceiling; ten reused seeds; no re-encoding check of the edits.\\
+\addlinespace
+Llama, native precision, source alignment
+& 1,090 trials; single features, all six together and a baseline bridge
+& Instruction wording changes the baseline; edit delivery does not establish semantic suppression.\\
+\addlinespace
+Llama, native precision, random subsets
+& 450 trials; 50 fresh blocks with source-style feature sampling
+& Paper-rubric large effect excluded at this dose; second-rubric and specificity comparisons inconclusive.\\
+\addlinespace
+Gemma 2 9B (Gemma Scope)
+& 180 untreated and 830 steered generations; independently chosen features
+& Target activation falls only about 3.5\%, so the behavioral null says little about effective ablation.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+\input{ensemble_alignment.tex}
+\FloatBarrier
+\input{operator_matching.tex}
+\FloatBarrier
 
 \subsection{Earlier Llama full grid (4-bit weights, 1,500 trials)}
 
@@ -1902,6 +1994,9 @@ calibrated offline on untreated runs. The
 release holds 180 untreated and 830 steered generations with three matched
 control panels (\Cref{tab:releases}); the plan was committed before the first
 steering outcome.
+
+The primary local judge was the same Gemma checkpoint, without steering;
+GPT-4o mini and Claude Haiku supplied external-model sensitivity readings.
 
 The primary target yields 6/50 positive labels under suppression and 7/50 under
 amplification: $-0.02$ [$-0.10$, 0.06], below the same 0.30 minimum. The
@@ -2232,7 +2327,7 @@ Randomized repeated-answer panel (Section~\ref{sec:repeated-extension})
 & \href{https://github.com/tdj28/llm_selfref_pre/blob/033917d188602203cfbbe7717bf7ba704d44aed6/docs/REPEATED_SWAP_RESULTS_20261005.md}{results and protocol links}
 & \texttt{033917d}\\
 \addlinespace
-Operator matching (Section~\ref{sec:operator-matching})
+Operator matching (Appendix~\ref{sec:operator-matching})
 & \CEArtifact{data/operator_matching/calibration_v1_20261003/}{main release};
 \CEArtifact{data/operator_matching/fine_v1_20261003/}{fine ladder}
 & \CEArtifact{docs/OPERATOR_MATCHING_PROTOCOL_20261002.md}{protocol};

@@ -54,6 +54,11 @@ these authorizations does not reopen model search or other collection.
   pass. The manuscript is handed back for the owner's human review.
 - [ ] Resolve the Kolibri analysis replay mismatch in hosted Linux checks.
   Preserve the released analysis and failed checks; local verification passes.
+- [x] Present steering findings coherently: lead with the quality-selected
+  fixed-dose result, retain unresolved specificity and quality limits, and
+  move source-style and operator-matching details into the supporting
+  appendix. Keep the short internal-readout interpretation in the main text.
+  The owner's human editorial approval remains open below.
 
 ## Authorized Dose Extension
 
@@ -87,10 +92,6 @@ these authorizations does not reopen model search or other collection.
 - [ ] Resolve the final archive and license scope described in
   [NOTICE.md](NOTICE.md) before a whole-repository archive. Third-party rights
   and original-data licensing are not yet cleared by the code license.
-- [ ] With the fixed-dose results released, decide whether the operator-matching,
-  earlier-steering and internal-readout sections move from Section 5 of the
-  manuscript to its appendices, as both AI-generated reviews suggested. The
-  public-weight steering non-recovery stays in the main text either way.
 
 ## Operational Follow-Up
 

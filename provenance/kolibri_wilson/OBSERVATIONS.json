@@ -1,0 +1,43 @@
+{
+  "schema": "kolibri-wilson-portability-observations-v1",
+  "diagnostic_commit": "4b3d2df1cc3515ca3ec9258d1559fca003f5f35e",
+  "run_id": 37351683800,
+  "release_commit": "3900a5ede5e6c003320960159e69811530f5346c",
+  "release_manifest_sha256": "78529659edb09af027e008e3d0513440933e8a560d4fe82c37718034e45e9ddf",
+  "publication_binding_sha256": "5f9e3d6eb923c02cb73d2a853ed778783c5988e0d05437f796b4fe65fb94adb8",
+  "original_strict_failure": "Derived publication data does not reconstruct",
+  "reference_z_hex": "0x1.f5c0331eeff81p+0",
+  "observed_linux_z_hex": "0x1.f5c0331eeff82p+0",
+  "files_canonical_sha256": "4a56060437135aaf95ad6e67be8dd410c56fbf669d62bf22754967b71a10f7ce",
+  "differences_canonical_sha256": "6240b12f961bd4e67efc3a557a3f3f4bab0307cf387019f722f07fb16ae8e3fa",
+  "observations": [
+    {
+      "python": "3.10.21",
+      "job_id": 111904166261,
+      "conclusion": "failure",
+      "diagnostic_path": "py310.json",
+      "diagnostic_sha256": "1d8bcb4fd6f5d49bc6fb4aa31ab46c7b164c31b799472a4a914d12ae61972025",
+      "raw_log_sha256": "6b43d4cf6cb8fa91f06340c67ebad06f2a65cbef314605439f7c46bd7a16d69b",
+      "job_url": "https://github.com/tdj28/llm_selfref_pre/actions/runs/37351683800/job/111904166261"
+    },
+    {
+      "python": "3.12.14",
+      "job_id": 111904166234,
+      "conclusion": "failure",
+      "diagnostic_path": "py312.json",
+      "diagnostic_sha256": "555b4bba0a35a127d69658900c9f9d4f27cbd815894e7d4b232e71318c7817f9",
+      "raw_log_sha256": "5fc16763fb952cdf1d4b298c5e53463ffc495a5a6d1315ccd3f42bfc9589ae0e",
+      "job_url": "https://github.com/tdj28/llm_selfref_pre/actions/runs/37351683800/job/111904166234"
+    }
+  ],
+  "measurement": {
+    "scalar_differences": 623,
+    "wilson_bound_float_differences": 622,
+    "derived_table_hash_differences": 1,
+    "maximum_absolute_float_error": 2.220446049250313e-16,
+    "zero_to_positive_wilson_lower_bounds": 8,
+    "zero_boundary_replay_hex": "0x1.0000000000000p-55",
+    "caution": "The z quantile differs by one ULP; endpoint ULP distances are not uniformly small and zero boundaries are not all preserved."
+  },
+  "scope": "Post-outcome offline reporting repair only. Original failed checks and diagnostic JSON bytes are preserved. Raw releases, saved summaries, manifests, numerical bindings and figures are unchanged. Only the frozen Wilson formula's reference z is supplied during hash-matched Kolibri analysis; all original exact verification comparisons remain required. No tolerance or new scientific measurement."
+}

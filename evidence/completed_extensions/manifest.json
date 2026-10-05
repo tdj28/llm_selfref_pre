@@ -1,23 +1,23 @@
 {
   "artifacts": {
     "results.json": {
-      "bytes": 116821,
-      "sha256": "0bd21ae95d1101e800eb38af0650510cbc12b76cec2793ad542510a23f9ad180"
+      "bytes": 119304,
+      "sha256": "f575b385e93fb900c497a66ed3b8a5c5e71075bdaf71fa9552051cc2d210ae55"
     },
     "table.tex": {
       "bytes": 460,
       "sha256": "c564fe925762ba90b9ef5c6d3f3af53e1d1771be1b8c8549e7a52bbe215ce4f2"
     },
     "values.tex": {
-      "bytes": 2840,
-      "sha256": "391b4214bf2ac7fea6ee64b0d047f9955c8dd0b10910e56c35637d7ee314eea2"
+      "bytes": 4210,
+      "sha256": "f3b118bd2cc420f6d73a1b4cdfd49358c616a885fd87fe9cabcc7248e18b0245"
     }
   },
   "generators_and_prose": {
-    "paper/context_extensions.tex": "97fcd079a6d16fc98d837d3b941b5d1185619df6dbb98119d5b8a493b3831ba2",
+    "paper/context_extensions.tex": "c239ae95f969bc2411bbd096adceef45219c1cd4278e3ac84483671b79cc0eec",
     "paper/operator_matching.tex": "fdce0e7c5d1702cf464e5c74ba1fbfe666f20903d95529ecea495d65d3f6f62f",
-    "scripts/verify_completed_extensions.py": "06e2be57232a4fbd9a550bbc7bb8caf1490f53916df2e26c2f75640d2113f757",
-    "tests/test_completed_extensions.py": "bde968665df033393acb1e60b4be3183364b09dbfd8d0d6d3bb1d949b62aaa26"
+    "scripts/verify_completed_extensions.py": "751deaea8a6c07fb363901ab2225893b1cf2b10b9368fab88be7da0e0f7344dc",
+    "tests/test_completed_extensions.py": "204f64d2a8f3698575273022e3d849370589df2cc2a272922accededd4730a18"
   },
   "schema": "completed-extensions-evidence-v1",
   "scope": {

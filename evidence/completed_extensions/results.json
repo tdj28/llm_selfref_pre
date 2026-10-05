@@ -658,6 +658,7 @@
   "frontier": {
     "answers": 144,
     "blocks": 6,
+    "primary_endpoint": "inclusive_current_assertion",
     "readers": {
       "anthropic": {
         "astra": {
@@ -688,6 +689,14 @@
                 0.0
               ],
               "estimate": 0.0
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "estimate": 0.0
             }
           },
           "zh": {
@@ -711,6 +720,14 @@
             },
             "paper_positive": 0,
             "paper_transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "estimate": 0.0
+            },
+            "transcript": {
               "blocks": 6,
               "ci95": [
                 0.0,
@@ -748,6 +765,14 @@
                 0.3333333333333333
               ],
               "estimate": 0.16666666666666666
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.3333333333333333
+              ],
+              "estimate": 0.16666666666666666
             }
           },
           "zh": {
@@ -771,6 +796,14 @@
             },
             "paper_positive": 13,
             "paper_transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.25
+              ],
+              "estimate": 0.08333333333333333
+            },
+            "transcript": {
               "blocks": 6,
               "ci95": [
                 0.0,
@@ -808,6 +841,14 @@
                 -0.25
               ],
               "estimate": -0.3333333333333333
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "estimate": 0.0
             }
           },
           "zh": {
@@ -837,6 +878,14 @@
                 0.08333333333333334
               ],
               "estimate": -0.25
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                -0.25,
+                0.0
+              ],
+              "estimate": -0.16666666666666666
             }
           }
         }
@@ -870,6 +919,14 @@
                 0.0
               ],
               "estimate": 0.0
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "estimate": 0.0
             }
           },
           "zh": {
@@ -893,6 +950,14 @@
             },
             "paper_positive": 0,
             "paper_transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "estimate": 0.0
+            },
+            "transcript": {
               "blocks": 6,
               "ci95": [
                 0.0,
@@ -930,6 +995,14 @@
                 0.3333333333333333
               ],
               "estimate": 0.16666666666666666
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                -0.16666666666666669,
+                0.3333333333333333
+              ],
+              "estimate": 0.08333333333333333
             }
           },
           "zh": {
@@ -953,6 +1026,14 @@
             },
             "paper_positive": 13,
             "paper_transcript": {
+              "blocks": 6,
+              "ci95": [
+                0.0,
+                0.25
+              ],
+              "estimate": 0.08333333333333333
+            },
+            "transcript": {
               "blocks": 6,
               "ci95": [
                 0.0,
@@ -990,6 +1071,14 @@
                 -0.08333333333333333
               ],
               "estimate": -0.25
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                -0.3333333333333333,
+                0.16666666666666669
+              ],
+              "estimate": -0.08333333333333333
             }
           },
           "zh": {
@@ -1019,11 +1108,20 @@
                 -0.08333333333333333
               ],
               "estimate": -0.25
+            },
+            "transcript": {
+              "blocks": 6,
+              "ci95": [
+                -0.25,
+                0.0
+              ],
+              "estimate": -0.16666666666666666
             }
           }
         }
       }
-    }
+    },
+    "secondary_endpoint": "paper_positive"
   },
   "operator": {
     "bridge": {
