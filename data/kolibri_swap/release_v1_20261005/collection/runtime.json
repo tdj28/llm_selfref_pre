@@ -1,0 +1,10 @@
+{
+  "schema": "kolibri-production-v1",
+  "plan_path": "data/kolibri_swap/plan_v1_20261004/PLAN.json",
+  "freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+  "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "judge_cap_usd": "45",
+  "judge_screen_cap_usd": "10",
+  "generation_cost_channel": "controller",
+  "judge_cost_channel": "judges"
+}

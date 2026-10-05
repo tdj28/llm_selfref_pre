@@ -489,7 +489,8 @@ each requested by a dated model identifier. The two
 Claude models are newer than the Claude models Berg et al.\ tested. Later
 studies added newer API models, requested by undated or preview identifiers
 that may not fix a version, locally run Llama 3.3 70B and Qwen3.5-397B-A17B,
-and API-served Qwen3.8-2.4T-A95B (Sections~\ref{sec:context-extensions},
+API-served Qwen3.8-2.4T-A95B and locally run Kolibri-1
+(Sections~\ref{sec:context-extensions},
 \ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}).
 The settings below are those of the original main panel.
 
@@ -505,7 +506,9 @@ API models were requested by the identifiers shown; undated identifiers
 so the releases record the request time of every call. The locally run Llama
 and Qwen3.5 used unquantized weights from Hugging Face revisions
 \texttt{6f6073b} and \texttt{8472618}, respectively. The Qwen3.8 API identifier
-does not independently verify served weights or precision. Models used for steering are described in
+does not independently verify served weights or precision. Kolibri used
+official FP8 weights and an FP8 key--value cache at revision
+\texttt{e52eb46}. Models used for steering are described in
 Section~\ref{sec:steering}.}
 \label{tab:models}
 \begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}p{0.24\linewidth}X@{}}
@@ -532,6 +535,7 @@ Screen only & Claude Sonnet 5.5 & \texttt{anthropic/claude-sonnet-5.5}\\
 \addlinespace
 Open-weight API panel & Qwen3.8-2.4T-A95B & \texttt{qwen/qwen3.8-2.4t-a95b}\\
 Screen only & Mistral Medium 3.5 & \texttt{mistralai/mistral-medium-3-5}\\
+Local open-weight panel & Kolibri-1 & \texttt{Aleph-Alpha/Kolibri-1}\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -1007,6 +1011,8 @@ both judges and both questions.}
 \input{qwen_extension.tex}
 \clearpage
 \let\figure\layoutFigure
+\input{kolibri_extension.tex}
+\FloatBarrier
 \let\layoutTable\table
 \renewcommand{\table}[1][tbp]{\layoutTable[!htbp]}
 \input{repeated_extension.tex}
@@ -1509,7 +1515,7 @@ fixed across models: in Llama 3.3 70B
 the model's own text matters nearly as much, and Astra and Qwen3.5-397B-A17B
 rarely give answers labeled as reports at all in their small panels.
 
-In separate Gemini, Opus and Qwen3.8 panels, the apparent instruction
+In separate Gemini, Opus, Qwen3.8 and Kolibri panels, the apparent instruction
 advantage varies with the model and what counts as a claim. Repeating each
 request three times retains a large Gemini contrast, whereas the conservative
 interval for Opus still includes zero.
@@ -2134,7 +2140,9 @@ grid; the Gemma commit preceded its first steering outcome by about three
 minutes. The native-precision
 source-alignment and random-subset plans were also pushed before their
 outcomes. The bilingual, frontier, Llama-qualification and operator-matching
-studies each had their own plan; combining them in this paper happened after
+studies each had their own plan. Kolibri's scientific plan also preceded
+collection; its outcome-aware amendments changed execution and recovery,
+not the planned comparisons or scoring rules. Combining these studies in this paper happened after
 their outcomes and is not a pooled confirmatory analysis. The repository also
 holds a \reviewartifact{docs/CLAIM_LEDGER.md}{claim ledger} that maps each
 headline claim to its evidence, the internal audits, and a
@@ -2212,6 +2220,12 @@ Qwen3.8 API panel (Section~\ref{sec:qwen-extension})
 & \QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/PLAN.json}{recovery plan};
 \QEXArtifact{docs/QWEN_JUDGE_RECOVERY_20261005.md}{results and original study links}
 & \texttt{0eb2e03}\\
+\addlinespace
+Kolibri local panel (Section~\ref{sec:kolibri-extension})
+& \href{https://github.com/tdj28/llm_selfref_pre/tree/3900a5ede5e6c003320960159e69811530f5346c/data/kolibri_swap/release_v1_20261005/}{responses, labels and analyses}
+& \href{https://github.com/tdj28/llm_selfref_pre/blob/3900a5ede5e6c003320960159e69811530f5346c/data/kolibri_swap/release_v1_20261005/provenance/PLAN.json}{plan};
+\href{https://github.com/tdj28/llm_selfref_pre/blob/3900a5ede5e6c003320960159e69811530f5346c/data/kolibri_swap/release_v1_20261005/SUMMARY.md}{release summary}
+& \texttt{3900a5e}\\
 \addlinespace
 Randomized repeated-answer panel (Section~\ref{sec:repeated-extension})
 & \href{https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005}{responses, labels and analyses}

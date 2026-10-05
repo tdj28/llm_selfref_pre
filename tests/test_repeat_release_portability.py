@@ -146,8 +146,11 @@ def test_original_strict_still_fails_for_measured_linux_output_and_restores(monk
             return deepcopy(linux)
         return original(rows, phase)
     monkeypatch.setattr(analysis, "analyze", measured)
-    with pytest.raises(reporter.base.Halted, match="Derived funding release does not reconstruct"):
-        reporter.verify(ROOT / c.RELEASE, manifest_sha256=c.MANIFEST_SHA)
+    # Restore only historical tool provenance, leaving the original strict
+    # numerical comparison active so the measured Linux failure is preserved.
+    with c.reporting_source_replay(ROOT):
+        with pytest.raises(reporter.base.Halted, match="Derived funding release does not reconstruct"):
+            reporter.verify(ROOT / c.RELEASE, manifest_sha256=c.MANIFEST_SHA)
     with c.portable_replay(ROOT) as report:
         assert reporter.verify(ROOT / c.RELEASE, manifest_sha256=c.MANIFEST_SHA)["pass"]
     assert report["local_replays"][0]["accepted_known_float_pair"]

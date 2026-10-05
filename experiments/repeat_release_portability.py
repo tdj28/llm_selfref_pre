@@ -9,7 +9,9 @@ import importlib
 from io import BytesIO
 import json
 import math
+import os
 from pathlib import Path
+import subprocess
 import sys
 from threading import RLock
 
@@ -31,6 +33,10 @@ ROWS_SHA = "60f81e4ff77042035eb8d6a2ce702832cd6f0c9965272ff45f7a358b26337f07"
 SAVED_HEX = "-0x1.f86a314dbf868p-6"
 LINUX_HEX = "-0x1.f86a314dbf867p-6"
 FIELD = ("models", "gemini", "judges", "opus", "paper", "variance", "SH", "bootstrap", "B_interval")
+AUDITOR = "scripts/audit_public_release.py"
+HISTORICAL_COMMIT = "033917d188602203cfbbe7717bf7ba704d44aed6"
+HISTORICAL_AUDITOR_SHA = "97db36ab3d45eb9e59127b66ee96fce57897dc27aa5ce2349b60538171d5a1e6"
+REVIEWED_AUDITOR_SHA = "51ef43e48907457daa903d1adc991fa9c3193ad2a8c41aabaca089466f286ced"
 _LOCK = RLock()
 
 
@@ -91,7 +97,7 @@ def _manifest(root, expected):
     require(actual == names, "Portability inventory changed")
 
 
-def verify_inputs(root=ROOT, evidence_path=EVIDENCE):
+def verify_inputs(root=ROOT, evidence_path=EVIDENCE, *, historical_reporting=True):
     root = Path(root).resolve()
     evidence, files = observations(evidence_path)
     _manifest(root / RELEASE, MANIFEST_SHA)
@@ -101,11 +107,20 @@ def verify_inputs(root=ROOT, evidence_path=EVIDENCE):
     records = [json.loads(regular(root / RELEASE / "PLAN.json")),
                json.loads(regular(root / RELEASE / "RELEASE.json")),
                json.loads(regular(root / PACKAGE / "binding.json")), json.loads(binding_raw)]
+    records.extend(json.loads(regular(root / RELEASE / phase / "PLAN.json"))
+                   for phase in ("funding_a1", "transport_a2", "refusal_a3"))
     hashes = {}
+    history_checked = False
     for record in records:
-        for name, expected in record["source_hashes"].items():
+        for name, expected in {**record["source_hashes"], **record.get("input_hashes", {})}.items():
             require(name not in hashes or hashes[name] == expected, "Conflicting original source hashes")
-            require(sha(regular(root / name)) == expected, "Bound scientific/reporting source changed: " + name)
+            actual = sha(regular(root / name))
+            if historical_reporting and (name, expected, actual) == (AUDITOR, HISTORICAL_AUDITOR_SHA, REVIEWED_AUDITOR_SHA):
+                if not history_checked:
+                    historical_auditor(root)
+                    history_checked = True
+            else:
+                require(actual == expected, "Bound scientific/reporting source changed: " + name)
             hashes[name] = expected
     for name, entry in files.items():
         raw = regular(root / RELEASE / name)
@@ -113,6 +128,76 @@ def verify_inputs(root=ROOT, evidence_path=EVIDENCE):
                 and value_sha(json.loads(raw)) == entry["saved_canonical_sha256"],
                 "Archived derived-file anchor changed: " + name)
     return evidence
+
+
+def _historical_blob(root, name):
+    # Local objects only; ignore ambient Git overrides and replacement objects.
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    env.update(GIT_NO_LAZY_FETCH="1", GIT_TERMINAL_PROMPT="0", GIT_OPTIONAL_LOCKS="0")
+    result = subprocess.run(["git", "--no-replace-objects", "cat-file", "blob",
+                             HISTORICAL_COMMIT + ":" + name], cwd=root, env=env,
+                            capture_output=True, timeout=30, check=False)
+    require(result.returncode == 0, "Required local historical reporting object unavailable; no fetch attempted")
+    return result.stdout
+
+
+def historical_auditor(root):
+    """Authenticate one historical reporting input, never an arbitrary source override."""
+    root = Path(root).resolve()
+    current_sha = sha(regular(root / AUDITOR))
+    require(current_sha in (HISTORICAL_AUDITOR_SHA, REVIEWED_AUDITOR_SHA),
+            "Unapproved current public auditor")
+    manifest = _historical_blob(root, RELEASE + "/MANIFEST.json")
+    require(sha(manifest) == MANIFEST_SHA and manifest == regular(root / RELEASE / "MANIFEST.json"),
+            "Historical release manifest changed")
+    archived = _historical_blob(root, AUDITOR)
+    require(sha(archived) == HISTORICAL_AUDITOR_SHA, "Historical public auditor changed")
+    plan = regular(root / RELEASE / "PLAN.json")
+    entries = json.loads(manifest)["files"]
+    require(any(row["path"] == "PLAN.json" and row["sha256"] == sha(plan)
+                and row["bytes"] == len(plan) for row in entries)
+            and json.loads(plan)["source_hashes"].get(AUDITOR) == HISTORICAL_AUDITOR_SHA,
+            "Historical plan auditor binding changed")
+    return archived, {"scope": "offline reporting provenance only; current scanner remains active",
+                      "release_commit": HISTORICAL_COMMIT, "manifest_sha256": MANIFEST_SHA,
+                      "historical_auditor_sha256": HISTORICAL_AUDITOR_SHA,
+                      "current_auditor_sha256": current_sha,
+                      "original_exact_source_check": "PASS" if current_sha == HISTORICAL_AUDITOR_SHA else "FAIL",
+                      "original_failure": "Bound scientific/reporting source changed: " + AUDITOR,
+                      "historical_source_hash_reads": 0}
+
+
+@contextmanager
+def reporting_source_replay(root=ROOT, evidence_path=EVIDENCE):
+    """Hash the verified Git blob for one provenance input; do not load old audit code."""
+    root = Path(root).resolve()
+    with _LOCK:
+        verify_inputs(root, evidence_path)
+        archived, record = historical_auditor(root)
+        sys.path.insert(0, str(root))
+        try:
+            protocol = importlib.import_module("experiments.repeated_swap.protocol")
+        finally:
+            sys.path.remove(str(root))
+        require(Path(protocol.__file__).resolve() == root / "experiments/repeated_swap/protocol.py",
+                "Protocol imported from a different checkout")
+        original = protocol.sha
+        require(not getattr(original, "_repeat_reporting_history", False), "Nested reporting source context")
+        def historical_sha(path):
+            if Path(path).absolute() == root / AUDITOR:
+                require(sha(regular(root / AUDITOR)) == record["current_auditor_sha256"],
+                        "Public auditor changed during replay")
+                record["historical_source_hash_reads"] += 1
+                return sha(archived)
+            return original(path)
+        historical_sha._repeat_reporting_history = True
+        protocol.sha = historical_sha
+        try:
+            yield record
+        finally:
+            protocol.sha = original
+            require(sha(regular(root / AUDITOR)) == record["current_auditor_sha256"],
+                    "Public auditor changed during replay")
 
 
 def _interval(analysis):
@@ -196,7 +281,7 @@ def png_equivalence(saved, replay):
 def portable_replay(root=ROOT, evidence_path=EVIDENCE, png_evidence_path=PNG_EVIDENCE):
     """Run original verifiers with scoped numerical and temporary PNG normalization."""
     root = Path(root).resolve()
-    with _LOCK:
+    with _LOCK, reporting_source_replay(root, evidence_path) as source_history:
         verify_inputs(root, evidence_path)
         png_observations(png_evidence_path)
         sys.path.insert(0, str(root))
@@ -220,6 +305,7 @@ def portable_replay(root=ROOT, evidence_path=EVIDENCE, png_evidence_path=PNG_EVI
             png_enabled, owned_temporary = False, None
             frozen_data = json.loads(regular(root / PACKAGE / "figure_data.json"))
             report = {"policy": "exact manifest, row inventory, float pair and whole-analysis hashes only",
+                      "reporting_source_history": source_history,
                       "evidence_sha256": EVIDENCE_SHA, "manifest_sha256": MANIFEST_SHA,
                       "original_ci_exact_replay": "FAIL", "local_replays": [],
                       "png_policy": "bound figure data; exact mode, dimensions, typed metadata and RGBA bytes; PDFs stay byte-exact",

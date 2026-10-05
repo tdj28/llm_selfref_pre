@@ -1,0 +1,42 @@
+{
+  "schema": "kolibri-controller-projection-v1",
+  "role": "a4-main",
+  "kind": "main",
+  "freeze": "9b05876f0c68d31ee85de851bd8e0fd40acb6bb1",
+  "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "owned_pod_id": "9j9m3kgnhct2m3",
+  "owned_pod_name": "codex-kolibri-20261004-main-bd3afad7b269",
+  "cost_usd": "0.7732840781093264375",
+  "ledger_sha256": "1a261cfa4730800c96c71c0d890e0c41d991a5b9710d19a5cf797e6b4f91f717",
+  "retrieval_sha256": "1da31a257c4c973f9535969ffb1a214a2b146d0b2b92461ea5aa233d092857aa",
+  "closed_sha256": "1a261cfa4730800c96c71c0d890e0c41d991a5b9710d19a5cf797e6b4f91f717",
+  "events_file_sha256": "9a23fbb61a9ff7108afc4051574bb968ea13b4c29d402b4e25e46c889175e819",
+  "retrieval_file_sha256": "7a231da07d8d13fcf5fc1c8afee555a2e91c6df9f2c48b42c560510326ce9bee",
+  "delete_event_sha256": "ed4db8bb2a97104c42cba04c4eb8785395bba97546a6d1cdc304ee68bde26a84",
+  "get_status": 404,
+  "created_utc": "2026-10-05T10:06:51.439230+00:00",
+  "closed_utc": "2026-10-05T10:16:45.004294+00:00",
+  "elapsed_seconds": "593.5656036660075",
+  "hourly_rate_usd": "4.59",
+  "storage_hourly_usd": "0.10",
+  "worker_intent_sha256": "82a6977379a2557fa2e14603991dc673b0d9f2f568d9fa224073cc1ee2ac99a2",
+  "server_ready_utc": null,
+  "server_ready_sha256": null,
+  "amendment_sha256": "6ef65a8de7f33cadd9510200bee54eeb7e35689597aa83f1f83c0833f8c1e6b3",
+  "prior_cheap_usd": "1.02856524106372729000000001",
+  "artifacts": {
+    "exit.json": "d26b0745a1a2f3d452def2624b3b0bcc425124b18690dbf694f4de0ff91cb07e",
+    "model-files.json": "dc918d12ad62ed4664bf154f3a586d28944935f1416db68dc3de3394d0106b55",
+    "pip-freeze.txt": "d3f4f6405ccb0a2f84699f268644d4e215f24f0eb8274063a72d5c0cf122ac03",
+    "runtime.json": "b904e7660315af199de26d111833e2b0a21e0bd888c58327be2f9f86ba83f31e",
+    "worker.log": "984bda80d82f62933e1230030c32151e822e6ea0fbf597b9edc463e634cdace7"
+  },
+  "public_artifacts": [
+    "exit.json",
+    "model-files.json",
+    "pip-freeze.txt",
+    "runtime.json"
+  ],
+  "full_controller_records_public": false,
+  "worker_log_public": false
+}

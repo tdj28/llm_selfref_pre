@@ -16,6 +16,7 @@ Collection and lifecycle commands are not required for reproduction.
 | Bilingual Llama contrasts; complete | [Final panel](bilingual_llama_b1/); [base runtime](bilingual_llama_pilot/); [instrument amendment](bilingual_llama_a1/); [technical retry](bilingual_pod_retry_b1/) | [Analysis](../tests/test_bilingual_analysis.py), [release integration](../tests/test_bilingual_release_integration.py) |
 | Frontier bilingual contrasts; complete | [Final panel](frontier_bilingual_b1/); [base runtime](frontier_bilingual_mini/) | [Inventory](../tests/test_frontier_mini.py), [release](../tests/test_frontier_release_b1.py) |
 | Crossed Llama qualification; failed, causal follow-up not run | [Qualification](instruction_state_qualification/); [startup adapter](instruction_qualification_bootstrap_a1/) | [Protocol](../tests/test_instruction_state_protocol.py), [release](../tests/test_instruction_qualification_release.py) |
+| Kolibri instruction/continuation panel; complete | [Study protocol and runtime](kolibri_swap/README.md); [saved-data exporter](kolibri_release.py) | [Analysis](../tests/test_kolibri_swap_analysis.py), [release](../tests/test_kolibri_release.py), [paper binding](../tests/test_kolibri_extension.py) |
 
 ## Public Steering
 

@@ -1,0 +1,31 @@
+{
+  "phase": "judge-screen",
+  "reconciliation": {
+    "as_of": "2026-10-05T12:10:12.771558+00:00",
+    "openrouter_prior_and_reserved_usd": "136",
+    "runpod_prior_and_reserved_usd": "50",
+    "source_hashes": {
+      "out/kolibri-admissions/bc69fc1a9ea80f7768b17da9937b655854101adbfec2ca718e279573ec3efcb5.evidence.json": "4cc67b79a9ee54d43a3eba2d70b9a38962f7f69049b37d551bc02eac2468bc09"
+    }
+  },
+  "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "http_head": "f1e932fe3d23032d39b9731f0134e3b186363c407c93d9d418ef511bef18d9ca",
+  "schema": "kolibri-a5-runtime-bridge-v1",
+  "worker_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+  "bridge_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+  "amendment_sha256": "62407efcc96004d833abe59dafd8c94524a26d0dc29d80368e6002e71c4906c0",
+  "judge_operational_freeze": "444a1a181f1056e24d18ebe89f93a941810dd2e4",
+  "judge_policy_sha256": "0e74a0d97bf44bc6d41f916b47eb82b42db9109f760b77608b9e822081ef64ba",
+  "judge_policy_original_worker_freeze": "9333faaf8d38a579cc9815d7b068d6c90ade4abf",
+  "policy_changed": false,
+  "generation_waves": {
+    "operational_freeze": "1c41ab1957a5ac95bd1d94fe707604158b52e1aa",
+    "worker_freeze": "13f3ed1277a86e6aca2fcf111547a32e677988f3",
+    "amendment_sha256": "36521cdcebe6b6a30d0a311b454f17dc26f35618522bdc5b443908088ba4ac0e",
+    "wave_widths": {
+      "source": 2,
+      "final": 4
+    },
+    "judge_concurrency": 8
+  }
+}

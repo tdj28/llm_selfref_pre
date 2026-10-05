@@ -1,0 +1,2 @@
+# Preserve exact provider HTTP whitespace; content scans and manifest hashes still apply.
+release_v1_20261005/collection/http/raw/*.bin whitespace=-blank-at-eol

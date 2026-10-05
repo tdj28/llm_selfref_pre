@@ -59,12 +59,14 @@ label. These are separate studies, not a pooled model ranking.
 | Gemini 3.1 Pro Preview | +0.81 | [0.21, 1.00], fixed eight-comparison family | [Released analysis](https://github.com/tdj28/llm_selfref_pre/blob/0438e6c12e6024da7e4284ec6c396e27c6c1738a/data/openrouter_swap/main_v1_20261004/snapshots/003611/main_analysis.json) |
 | Claude Opus 5.5 | +0.22 | [-0.38, 0.82], same family | Same release; 32 fresh blocks per admitted model, 512 main answers total. |
 | Qwen3.8-2.4T-A95B | +0.41 | [-0.16, 0.97], fixed four-comparison family | [Additive repaired analysis](https://github.com/tdj28/llm_selfref_pre/blob/0eb2e039ae0807dca9c9df262db18e2d863d428d/data/qwen_judge_recovery/release_v1_20261005/recovery_main_analysis.json); 32 fresh blocks, 256 answers. |
+| Kolibri-1 | +0.50 | [-0.02, 1.00], fixed two-comparison family | [Released analysis](https://github.com/tdj28/llm_selfref_pre/blob/3900a5ede5e6c003320960159e69811530f5346c/data/kolibri_swap/release_v1_20261005/main_analysis.json); 32 fresh blocks, 256 answers, all judgments available. |
 
 These Bonferroni--Hoeffding bounds retain unrun models in their original
 comparison families. Pointwise bootstrap bars in the manuscript figures are
 descriptive, not replacements for these primary intervals. The neutral
 continuation contrast is 0.00 [-0.60, 0.60] for both Gemini and Opus, and
-+0.19 [-0.38, 0.75] for Qwen3.8; none establishes equivalence.
++0.19 [-0.38, 0.75] for Qwen3.8 and 0.00 [-0.52, 0.52] for Kolibri;
+none establishes equivalence.
 Same-condition donor controls do not eliminate instruction/continuation
 mismatch as an explanation of the incongruent contrast.
 
@@ -74,6 +76,11 @@ Opus's SH-HS estimate is +0.78 under both paper-style judges, compared with
 Preserve this measurement sensitivity. Three missing Qwen Astra structured
 judgments were repaired after the original release; responses and completed
 labels were not regenerated, and the original incomplete archive remains.
+
+Kolibri gives +0.50/+0.63 inclusive, +0.38/+0.38 explicit and +0.69/+0.75
+paper-rubric estimates. Neither primary simultaneous interval excludes zero.
+Its locally served official FP8 weights and FP8 KV cache differ from the
+unquantized Llama/Qwen3.5 studies; do not describe it as a BF16 comparison.
 
 Sonnet 5.5 was near floor in its completed screen. DeepSeek was not run through
 a qualified privacy-compatible route. Mistral passed headroom but had eight

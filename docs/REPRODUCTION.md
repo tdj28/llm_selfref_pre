@@ -78,6 +78,16 @@ inside the narrowly scoped `experiments/repeat_release_portability.py` context.
 The original tests remain collected; an additional test verifies the actual
 completed release. No workflow, frozen reporter, release, or figure is rewritten.
 
+The release also records the public scanner version used at collection. A
+later scanner update added four exact exceptions for reviewed opaque provider
+metadata in the Kolibri receipts. The wrapper authenticates the original
+scanner from the release's Git commit when reconstructing that provenance;
+the current scanner still performs every content check. Only this exact pair
+of scanner hashes is accepted. Scientific sources and release bytes must
+still match, and the original strict source check remains reproducibly failed.
+The root test suite runs five unchanged historical closure assertions inside
+this same context; it does not skip them or replace their outcomes.
+
 On Linux, Python 3.10.21 and 3.12.14 both reproduced one descriptive variance
 interval endpoint one ULP from its saved value. The adapter accepts only the
 manifest-bound saved analysis or that measured entire Linux analysis hash,
@@ -188,12 +198,15 @@ python scripts/uncertainty_sensitivity.py --check
 python -B reviews/reproducibility/run.py --verify-only
 ```
 
-The same target checks the modern Gemini/Opus and Qwen3.8 panels against their
+The same target checks the modern Gemini/Opus, Qwen3.8 and Kolibri panels against their
 released rows, including paired contrasts and the different primary interval
 families. Its repeated-answer check also replays response and judge receipts,
 the block-level analysis and the figure bindings. These checks preserve missing
 judgments; they do not establish the accuracy of an automated label. No API
-keys or model downloads are needed.
+keys or model downloads are needed. Kolibri's check also reconstructs its
+screening decision and main results from the released receipts. Its vector
+figures and numerical inputs are checked against an external package hash;
+platform-dependent rendering bytes are not used as a scientific test.
 
 The mapping-scaled steering follow-up has an additional full replay:
 

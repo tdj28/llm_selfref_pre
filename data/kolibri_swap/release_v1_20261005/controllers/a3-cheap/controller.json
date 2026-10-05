@@ -1,0 +1,36 @@
+{
+  "schema": "kolibri-controller-projection-v1",
+  "role": "a3-cheap",
+  "kind": "cheap",
+  "freeze": "bbfa8d1c02cb7d675f464a05cd0d817dcc56b188",
+  "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "owned_pod_id": "5690kc571cn40g",
+  "owned_pod_name": "codex-kolibri-20261004-cheap-a429bd7554da",
+  "cost_usd": "0.4844722072845518966666666667",
+  "ledger_sha256": "518d09b9cebcd579068dba84920448f70d35f84c3e38e27dfa69608c551965b5",
+  "retrieval_sha256": "707a299ff89ce0d56bf875f7d3012db8f424eeae70eb49692e786e80d26cb60e",
+  "closed_sha256": "518d09b9cebcd579068dba84920448f70d35f84c3e38e27dfa69608c551965b5",
+  "events_file_sha256": "956bb2564160a14376b19e98f64694397f0d4bece27cd4b0bd9a3445c82fa210",
+  "retrieval_file_sha256": "a7b771d386b132dcdd95db8a35ae1bf0b7ee8f7ae308b0d5789af130d411c90e",
+  "delete_event_sha256": "6a7bdbe6af51606cc9efe44f2ad0e587ad428bc32f40fa7c7a02f16e75e9c0cc",
+  "get_status": 404,
+  "created_utc": "2026-10-05T08:50:08.792199+00:00",
+  "closed_utc": "2026-10-05T09:24:45.092907+00:00",
+  "elapsed_seconds": "2076.3094597909367",
+  "hourly_rate_usd": "0.74",
+  "storage_hourly_usd": "0.10",
+  "worker_intent_sha256": "82714c628214902d1d2bff9068e763770a4329d4cfa478faa795a285dcb8d964",
+  "server_ready_utc": null,
+  "server_ready_sha256": null,
+  "amendment_sha256": "ebccc307ac500cb1dabe39b8dcfc331ad33289df1eae081accd7c7c67fd8189e",
+  "prior_cheap_usd": "0.54409303377917539333333334",
+  "artifacts": {
+    "exit.json": "740bf32873aff584cd2a31465ac9e85a683b4e97273bc1ac6b6a3606a43c8a5f",
+    "worker.log": "175be7ac9cc1f22ff96c49f042ea1fd81caf8a9a4bf10d66df0091da5822865e"
+  },
+  "public_artifacts": [
+    "exit.json"
+  ],
+  "full_controller_records_public": false,
+  "worker_log_public": false
+}

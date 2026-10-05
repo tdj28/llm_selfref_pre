@@ -21,7 +21,8 @@ the manuscript itself.
 | Llama screening | 3.4 | Before its collection | Failed its preconditions; follow-up not run |
 | Gemini/Opus neutral-instruction and donor controls | 3.5 | Before its new collection; earlier panels known | Separate screened panel; Gemini instruction advantage, Opus depends on scoring rule; no equivalence claim for the neutral controls |
 | Qwen3.8 neutral-instruction and donor controls | 3.6 | Before its new collection; earlier panels known | Separate screened panel; primary simultaneous interval includes zero, contrast depends on rubric |
-| Repeated Gemini/Opus answers | 3.7 | Before its new collection; earlier panels known | Randomized requests with three answer draws; two missing structured judgments retained; fixed-panel estimates and missingness bounds reported separately |
+| Kolibri neutral-instruction and donor controls | 3.7 | Before its new collection; outcome-aware operational amendments disclosed | Separate screened panel; primary simultaneous intervals include zero; official FP8 runtime, no architecture-causal claim |
+| Repeated Gemini/Opus answers | 3.8 | Before its new collection; earlier panels known | Randomized requests with three answer draws; two missing structured judgments retained; fixed-panel estimates and missingness bounds reported separately |
 | Qwen companion study | 6 | Separate study | Audited after its outcomes |
 | Random-subset steering test (main) | 5.3 | Before its outcomes; earlier results known | Planned test; +0.30 excluded under the paper rubric, inconclusive under the second |
 | Quality-selected mapping-scaled dose | 5.4 | Before each new sample; earlier failed quality checks disclosed | +0.30 narrowly excluded at the selected dose; target specificity unresolved; not an all-dose null |

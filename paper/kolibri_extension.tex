@@ -1,0 +1,52 @@
+\input{../evidence/kolibri_extension/values.tex}
+\subsection{Kolibri: another rubric-dependent contrast}
+\label{sec:kolibri-extension}
+
+Kolibri-1 adds a locally run mixture-of-experts model with mostly local
+attention \citep{alephalpha2026kolibri}. We used its official FP8 weights
+and FP8 key--value cache, medium reasoning effort, temperature 0.5 and a
+4,096-token limit shared by reasoning and the final answer. Only the model's
+final content, not its reasoning text, was transplanted or scored. After a
+separate 12-block screen, the English-language study collected
+\KEXMainPlannedFinals{} answers in
+\KEXMainAstraInclusiveSHHSPlannedBlocks{} fresh blocks, using the same
+eight conditions as the preceding panels. All main answers and judgments
+were available; the screen's one missing answer remains in the release.
+
+With both instruction and continuation self-referential, Astra counted
+\KEXMainAstraInclusiveSSPositive{} of
+\KEXMainAstraInclusiveSSPlanned{} answers as explicit or implicit current
+claims, compared with \KEXMainAstraInclusiveHHPositive{} of
+\KEXMainAstraInclusiveHHPlanned{} in the history condition.
+The crossed SH--HS comparison favored the retained instruction by
+\KEXMainAstraInclusiveSHHSCompleteEstimate{}, but its simultaneous 95\%
+interval, \KEXPrimaryAstraInclusiveSHHSBounds{}, includes zero.
+Under a neutral instruction, neither continuation source produced a
+positive inclusive label; the contrast was
+\KEXMainAstraInclusiveNSNHCompleteEstimate{}
+(\KEXPrimaryAstraInclusiveNSNHBounds{}). These are the two primary
+comparisons. Neither establishes a difference, and the neutral result
+does not establish equivalence.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/kolibri_extension/kolibri.pdf}
+\caption{\textbf{Kolibri's estimated instruction advantage depends on the
+scoring rule.} SH--HS compares incongruent requests; NS--NH compares
+continuations under a neutral instruction. Both readers use the same
+\KEXMainAstraInclusiveSHHSPlannedBlocks{} paired blocks. Thin bars are
+pointwise 95\% Hoeffding bounds; thick bars are descriptive 95\% paired-block
+bootstrap intervals, stratified by wording family. Neither is simultaneous;
+the text reports the two-comparison primary bounds. A collapsed bootstrap
+bar at zero does not establish equivalence.}
+\label{fig:kolibri-extension}
+\end{figure}
+
+The scoring rule again changes the apparent size of the instruction
+advantage (Figure~\ref{fig:kolibri-extension}). Opus's inclusive estimate
+was \KEXMainOpusInclusiveSHHSCompleteEstimate{}; the two paper-rubric
+estimates were \KEXMainAstraPaperSHHSCompleteEstimate{} and
+\KEXMainOpusPaperSHHSCompleteEstimate{}. Counting only explicit claims
+gave \KEXMainAstraExplicitSHHSCompleteEstimate{} under either reader.
+This adds a model with a different architecture and serving precision,
+not a controlled test of what those differences cause.

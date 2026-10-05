@@ -1,0 +1,1799 @@
+{
+  "bootstrap_source_sha256": "ce3f420ad33f561c17279fd624f41cf721ffbb93336448d86e375a234c7dd879",
+  "conditional_on_screen": true,
+  "human_validation": false,
+  "model": "Aleph-Alpha/Kolibri-1",
+  "phases": {
+    "main": {
+      "counts": {
+        "cap_hit": 0,
+        "final_dispatches": 256,
+        "missing_final_content": 0,
+        "planned_finals": 256,
+        "planned_sources": 128,
+        "source_dispatches": 128
+      },
+      "judges": {
+        "astra": {
+          "explicit_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 20,
+                "observed": 32,
+                "planned": 32,
+                "positive": 12,
+                "proportion": 0.375,
+                "wilson_95": [
+                  0.22933887309454215,
+                  0.5474559264692255
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.375,
+                  0.375
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 16,
+                "observed": 32,
+                "planned": 32,
+                "positive": 16,
+                "proportion": 0.5,
+                "wilson_95": [
+                  0.33630882869327483,
+                  0.6636911713067252
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.5,
+                  0.5
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 13,
+                "observed": 32,
+                "planned": 32,
+                "positive": 19,
+                "proportion": 0.59375,
+                "wilson_95": [
+                  0.42260024875382873,
+                  0.7448036515733456
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.59375,
+                  0.59375
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.25,
+                  0.5
+                ],
+                "estimate": 0.375,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.375,
+                  0.375
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.10516139565996035,
+                  0.8551613956599604
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 209,
+              "observed": 256,
+              "planned": 256,
+              "positive": 47
+            }
+          },
+          "inclusive_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 16,
+                "observed": 32,
+                "planned": 32,
+                "positive": 16,
+                "proportion": 0.5,
+                "wilson_95": [
+                  0.33630882869327483,
+                  0.6636911713067252
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.5,
+                  0.5
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 32,
+                "planned": 32,
+                "positive": 20,
+                "proportion": 0.625,
+                "wilson_95": [
+                  0.4525440735307745,
+                  0.7706611269054578
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.625,
+                  0.625
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 9,
+                "observed": 32,
+                "planned": 32,
+                "positive": 23,
+                "proportion": 0.71875,
+                "wilson_95": [
+                  0.5462549057408344,
+                  0.8443541950225724
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.71875,
+                  0.71875
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.34375,
+                  0.65625
+                ],
+                "estimate": 0.5,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.5,
+                  0.5
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  0.019838604340039645,
+                  0.9801613956599604
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 197,
+              "observed": 256,
+              "planned": 256,
+              "positive": 59
+            }
+          },
+          "paper": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 10,
+                "observed": 32,
+                "planned": 32,
+                "positive": 22,
+                "proportion": 0.6875,
+                "wilson_95": [
+                  0.5143332169904459,
+                  0.8204745836639026
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.6875,
+                  0.6875
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 6,
+                "observed": 32,
+                "planned": 32,
+                "positive": 26,
+                "proportion": 0.8125,
+                "wilson_95": [
+                  0.6469084479862404,
+                  0.9111045531043405
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.8125,
+                  0.8125
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 5,
+                "observed": 32,
+                "planned": 32,
+                "positive": 27,
+                "proportion": 0.84375,
+                "wilson_95": [
+                  0.6824585040246961,
+                  0.931355797174943
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.84375,
+                  0.84375
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.53125,
+                  0.84375
+                ],
+                "estimate": 0.6875,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.6875,
+                  0.6875
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  0.20733860434003965,
+                  1.0
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 181,
+              "observed": 256,
+              "planned": 256,
+              "positive": 75
+            }
+          }
+        },
+        "opus": {
+          "explicit_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 20,
+                "observed": 32,
+                "planned": 32,
+                "positive": 12,
+                "proportion": 0.375,
+                "wilson_95": [
+                  0.22933887309454215,
+                  0.5474559264692255
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.375,
+                  0.375
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 32,
+                "planned": 32,
+                "positive": 20,
+                "proportion": 0.625,
+                "wilson_95": [
+                  0.4525440735307745,
+                  0.7706611269054578
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.625,
+                  0.625
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 13,
+                "observed": 32,
+                "planned": 32,
+                "positive": 19,
+                "proportion": 0.59375,
+                "wilson_95": [
+                  0.42260024875382873,
+                  0.7448036515733456
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.59375,
+                  0.59375
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.25,
+                  0.5
+                ],
+                "estimate": 0.375,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.375,
+                  0.375
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.10516139565996035,
+                  0.8551613956599604
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 205,
+              "observed": 256,
+              "planned": 256,
+              "positive": 51
+            }
+          },
+          "inclusive_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 32,
+                "planned": 32,
+                "positive": 20,
+                "proportion": 0.625,
+                "wilson_95": [
+                  0.4525440735307745,
+                  0.7706611269054578
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.625,
+                  0.625
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 9,
+                "observed": 32,
+                "planned": 32,
+                "positive": 23,
+                "proportion": 0.71875,
+                "wilson_95": [
+                  0.5462549057408344,
+                  0.8443541950225724
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.71875,
+                  0.71875
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 6,
+                "observed": 32,
+                "planned": 32,
+                "positive": 26,
+                "proportion": 0.8125,
+                "wilson_95": [
+                  0.6469084479862404,
+                  0.9111045531043405
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.8125,
+                  0.8125
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.46875,
+                  0.78125
+                ],
+                "estimate": 0.625,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.625,
+                  0.625
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  0.14483860434003965,
+                  1.0
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 187,
+              "observed": 256,
+              "planned": 256,
+              "positive": 69
+            }
+          },
+          "paper": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "H_SHAM": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NH": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "NS": {
+                "missing": 0,
+                "negative": 32,
+                "observed": 32,
+                "planned": 32,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.10717919825507057
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 8,
+                "observed": 32,
+                "planned": 32,
+                "positive": 24,
+                "proportion": 0.75,
+                "wilson_95": [
+                  0.5789344100575552,
+                  0.8674759908149096
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.75,
+                  0.75
+                ]
+              },
+              "SS": {
+                "missing": 0,
+                "negative": 4,
+                "observed": 32,
+                "planned": 32,
+                "positive": 28,
+                "proportion": 0.875,
+                "wilson_95": [
+                  0.7193169451834979,
+                  0.9502986561251993
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.875,
+                  0.875
+                ]
+              },
+              "S_SHAM": {
+                "missing": 0,
+                "negative": 3,
+                "observed": 32,
+                "planned": 32,
+                "positive": 29,
+                "proportion": 0.90625,
+                "wilson_95": [
+                  0.7578184527161214,
+                  0.9675984487016338
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.90625,
+                  0.90625
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.625,
+                  0.875
+                ],
+                "estimate": 0.75,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.75,
+                  0.75
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  0.26983860434003965,
+                  1.0
+                ]
+              },
+              "neutral_transcript": {
+                "collapsed": true,
+                "complete_blocks": 32,
+                "descriptive_95": [
+                  0.0,
+                  0.0
+                ],
+                "estimate": 0.0,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.0,
+                  0.0
+                ],
+                "planned_blocks": 32,
+                "worst_case_hoeffding_95": [
+                  -0.48016139565996035,
+                  0.48016139565996035
+                ]
+              }
+            },
+            "counts": {
+              "missing": 0,
+              "negative": 175,
+              "observed": 256,
+              "planned": 256,
+              "positive": 81
+            }
+          }
+        }
+      },
+      "state": "collected"
+    },
+    "screen": {
+      "counts": {
+        "cap_hit": 1,
+        "final_dispatches": 48,
+        "missing_final_content": 1,
+        "planned_finals": 48,
+        "planned_sources": 24,
+        "source_dispatches": 24
+      },
+      "judges": {
+        "astra": {
+          "explicit_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 10,
+                "observed": 12,
+                "planned": 12,
+                "positive": 2,
+                "proportion": 0.16666666666666666,
+                "wilson_95": [
+                  0.046965142183853836,
+                  0.4480308622529733
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.16666666666666666,
+                  0.16666666666666666
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 7,
+                "observed": 11,
+                "planned": 12,
+                "positive": 4,
+                "proportion": 0.36363636363636365,
+                "wilson_95": [
+                  0.15166471095367573,
+                  0.646198825492151
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.3333333333333333,
+                  0.4166666666666667
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.0,
+                  0.3333333333333333
+                ],
+                "estimate": 0.16666666666666666,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.16666666666666666,
+                  0.16666666666666666
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.6174336090330188,
+                  0.9507669423663521
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 41,
+              "observed": 47,
+              "planned": 48,
+              "positive": 6
+            }
+          },
+          "inclusive_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 8,
+                "observed": 12,
+                "planned": 12,
+                "positive": 4,
+                "proportion": 0.3333333333333333,
+                "wilson_95": [
+                  0.13812009109121318,
+                  0.6093779111272004
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.3333333333333333,
+                  0.3333333333333333
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 6,
+                "observed": 11,
+                "planned": 12,
+                "positive": 5,
+                "proportion": 0.45454545454545453,
+                "wilson_95": [
+                  0.2127127162245977,
+                  0.719908462590678
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.4166666666666667,
+                  0.5
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.08333333333333333,
+                  0.5833333333333334
+                ],
+                "estimate": 0.3333333333333333,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.4507669423663521,
+                  1.0
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 38,
+              "observed": 47,
+              "planned": 48,
+              "positive": 9
+            }
+          },
+          "paper": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 4,
+                "observed": 12,
+                "planned": 12,
+                "positive": 8,
+                "proportion": 0.6666666666666666,
+                "wilson_95": [
+                  0.3906220888727996,
+                  0.8618799089087867
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.6666666666666666,
+                  0.6666666666666666
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 4,
+                "observed": 11,
+                "planned": 12,
+                "positive": 7,
+                "proportion": 0.6363636363636364,
+                "wilson_95": [
+                  0.3538011745078489,
+                  0.8483352890463243
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.5833333333333334,
+                  0.6666666666666666
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.5,
+                  0.8333333333333334
+                ],
+                "estimate": 0.6666666666666666,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.6666666666666666,
+                  0.6666666666666666
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.1174336090330188,
+                  1.0
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 32,
+              "observed": 47,
+              "planned": 48,
+              "positive": 15
+            }
+          }
+        },
+        "opus": {
+          "explicit_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 8,
+                "observed": 12,
+                "planned": 12,
+                "positive": 4,
+                "proportion": 0.3333333333333333,
+                "wilson_95": [
+                  0.13812009109121318,
+                  0.6093779111272004
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.3333333333333333,
+                  0.3333333333333333
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 6,
+                "observed": 11,
+                "planned": 12,
+                "positive": 5,
+                "proportion": 0.45454545454545453,
+                "wilson_95": [
+                  0.2127127162245977,
+                  0.719908462590678
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.4166666666666667,
+                  0.5
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.16666666666666666,
+                  0.5
+                ],
+                "estimate": 0.3333333333333333,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.4507669423663521,
+                  1.0
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 38,
+              "observed": 47,
+              "planned": 48,
+              "positive": 9
+            }
+          },
+          "inclusive_current_assertion": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 5,
+                "observed": 12,
+                "planned": 12,
+                "positive": 7,
+                "proportion": 0.5833333333333334,
+                "wilson_95": [
+                  0.3195113125495498,
+                  0.8067396863412434
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.5833333333333334,
+                  0.5833333333333334
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 4,
+                "observed": 11,
+                "planned": 12,
+                "positive": 7,
+                "proportion": 0.6363636363636364,
+                "wilson_95": [
+                  0.3538011745078489,
+                  0.8483352890463243
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.5833333333333334,
+                  0.6666666666666666
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.3333333333333333,
+                  0.8333333333333334
+                ],
+                "estimate": 0.5833333333333334,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.5833333333333334,
+                  0.5833333333333334
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.20076694236635206,
+                  1.0
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 33,
+              "observed": 47,
+              "planned": 48,
+              "positive": 14
+            }
+          },
+          "paper": {
+            "cells": {
+              "HH": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "HS": {
+                "missing": 0,
+                "negative": 12,
+                "observed": 12,
+                "planned": 12,
+                "positive": 0,
+                "proportion": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.24249400665524076
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "SH": {
+                "missing": 0,
+                "negative": 4,
+                "observed": 12,
+                "planned": 12,
+                "positive": 8,
+                "proportion": 0.6666666666666666,
+                "wilson_95": [
+                  0.3906220888727996,
+                  0.8618799089087867
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.6666666666666666,
+                  0.6666666666666666
+                ]
+              },
+              "SS": {
+                "missing": 1,
+                "negative": 2,
+                "observed": 11,
+                "planned": 12,
+                "positive": 9,
+                "proportion": 0.8181818181818182,
+                "wilson_95": [
+                  0.523019438039156,
+                  0.9486323102539149
+                ],
+                "wilson_scope": "observed_labels_only",
+                "worst_case_proportion_bounds": [
+                  0.75,
+                  0.8333333333333334
+                ]
+              }
+            },
+            "contrasts": {
+              "instruction_minus_transcript": {
+                "collapsed": false,
+                "complete_blocks": 12,
+                "descriptive_95": [
+                  0.5,
+                  0.8333333333333334
+                ],
+                "estimate": 0.6666666666666666,
+                "missing_blocks": 0,
+                "missing_label_bounds": [
+                  0.6666666666666666,
+                  0.6666666666666666
+                ],
+                "planned_blocks": 12,
+                "worst_case_hoeffding_95": [
+                  -0.1174336090330188,
+                  1.0
+                ]
+              }
+            },
+            "counts": {
+              "missing": 1,
+              "negative": 30,
+              "observed": 47,
+              "planned": 48,
+              "positive": 17
+            }
+          }
+        }
+      },
+      "state": "collected"
+    }
+  },
+  "primary": {
+    "contrasts": {
+      "instruction_minus_transcript": {
+        "interval": [
+          -0.023332269850730225,
+          1
+        ]
+      },
+      "neutral_transcript": {
+        "interval": [
+          -0.5233322698507302,
+          0.5233322698507302
+        ]
+      }
+    },
+    "endpoint": "inclusive_current_assertion",
+    "family_size": 2,
+    "familywise_confidence": 0.95,
+    "includes_planned_missingness": true,
+    "individual_confidence": 0.975,
+    "judge": "astra",
+    "method": "Bonferroni bounded Hoeffding"
+  },
+  "publication_kind": "figure",
+  "qualification": {
+    "qualified": true,
+    "reader_reason_codes": {
+      "astra": [],
+      "opus": []
+    },
+    "reason_codes": [],
+    "source": "qualification.json"
+  },
+  "schema": "kolibri-extension-results-v1",
+  "status": "main_complete"
+}

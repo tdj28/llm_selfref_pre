@@ -33,17 +33,17 @@ these authorizations does not reopen model search or other collection.
 - [x] Integrate the fixed-dose findings into the paper: narrow exclusion of
   +0.30 at dose 0.25, unresolved specificity, and a mapping-reference scale
   rather than natural-corpus strength. Keep earlier failed qualifications intact.
-- [ ] Complete the authorized Kolibri follow-up. The behavioral screen passed;
-  the fixed main panel is collecting. Verify its scientific
-  release before adding findings, describe official FP8 accurately, and do not
-  infer an architecture effect.
+- [x] Complete and release the authorized [Kolibri follow-up](data/kolibri_swap/README.md):
+  256 main answers and all 1,024 judgments; verified receipts and terminated
+  owned compute. Its primary intervals include zero. Preserve the separate
+  screen, official FP8 runtime and observational architecture comparison.
 
 ## Implementation
 
 - [x] Integrate the completed bilingual, frontier, operator-matching, and
   qualification results into canonical `paper/`, preserving primary endpoints,
   model/rubric scope, negative results, and failed gates.
-- [ ] Synchronize the final manuscript, root summary, citation/provenance
+- [x] Synchronize the final manuscript, root summary, citation/provenance
   metadata, study indexes and reproduction instructions with the new releases.
 - [x] Finish the conservative root-document cleanup; verify the preserved
   copies, local links, and unchanged experimental source/release bindings.

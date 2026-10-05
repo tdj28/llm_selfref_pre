@@ -40,6 +40,7 @@ paper-verify:
 	$(PYTHON) scripts/verify_completed_extensions.py
 	$(PYTHON) scripts/verify_model_panel_extension.py --check
 	$(PYTHON) scripts/verify_qwen_extension.py --check --require-pinned
+	$(PYTHON) scripts/verify_kolibri_extension.py --release data/kolibri_swap/release_v1_20261005 --manifest-sha256 78529659edb09af027e008e3d0513440933e8a560d4fe82c37718034e45e9ddf --source-commit 3900a5ede5e6c003320960159e69811530f5346c --package evidence/kolibri_extension --binding-sha256 5f9e3d6eb923c02cb73d2a853ed778783c5988e0d05437f796b4fe65fb94adb8
 	$(PYTHON) scripts/verify_repeated_portable.py --release data/repeated_swap/completed_v1_20261005 --publication evidence/repeated_extension --release-manifest-sha256 c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf --publication-manifest-sha256 b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242 --binding evidence/repeated_extension_row_binding.json --paper --require-pinned || { rc=$$?; $(PYTHON) -B scripts/diagnose_repeat_release.py || :; $(PYTHON) -B scripts/diagnose_repeat_figures.py || :; exit $$rc; }
 	$(PYTHON) scripts/uncertainty_sensitivity.py --check
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only

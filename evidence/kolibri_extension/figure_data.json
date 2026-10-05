@@ -1,0 +1,199 @@
+{
+  "caption": "Conditional held-out main after qualification. Open circles show Astra; open triangles show Opus. Thin bars are conservative pointwise 95% Hoeffding bounds over planned blocks, including worst-case missing labels. Thick bars are descriptive 95% bootstrap intervals, resampling complete paired source blocks within wording families. Neither set of plotted bars is simultaneous across comparisons. The first letter identifies the instruction and the second the supplied continuation's source: S is self-referential; H is Roman history. SS and HH match instruction and continuation source; SH combines a self-referential instruction with a history continuation, and HS a history instruction with a self-referential continuation. SH-HS compares these two crossed cells. NS-NH holds the neutral instruction fixed and compares self-referential versus history continuation sources. Complete-block estimates exclude missing labels; planned-sample missing-label bounds need not contain those estimates. Collapsed bootstrap intervals do not establish certainty or equivalence. The separate primary Astra inclusive bounds cover the two planned comparisons jointly at 95%; they are not the plotted bars. Opus and paper-rubric results are secondary.",
+  "conservative_interval": {
+    "confidence": 0.95,
+    "familywise": false,
+    "field": "worst_case_hoeffding_95",
+    "primary": false,
+    "scope": "pointwise_planned_blocks_including_worst_case_missing_labels"
+  },
+  "interval": "pointwise_descriptive_paired_block_bootstrap_95",
+  "minimum_font_pt": 9,
+  "panels": [
+    {
+      "endpoint": "inclusive_current_assertion",
+      "label": "Explicit or implicit claims",
+      "points": [
+        {
+          "collapsed": false,
+          "complete_blocks": 32,
+          "contrast": "instruction_minus_transcript",
+          "descriptive_95": [
+            0.34375,
+            0.65625
+          ],
+          "estimate": 0.5,
+          "judge": "astra",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.5,
+            0.5
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            0.019838604340039645,
+            0.9801613956599604
+          ]
+        },
+        {
+          "collapsed": true,
+          "complete_blocks": 32,
+          "contrast": "neutral_transcript",
+          "descriptive_95": [
+            0.0,
+            0.0
+          ],
+          "estimate": 0.0,
+          "judge": "astra",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.0,
+            0.0
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            -0.48016139565996035,
+            0.48016139565996035
+          ]
+        },
+        {
+          "collapsed": false,
+          "complete_blocks": 32,
+          "contrast": "instruction_minus_transcript",
+          "descriptive_95": [
+            0.46875,
+            0.78125
+          ],
+          "estimate": 0.625,
+          "judge": "opus",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.625,
+            0.625
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            0.14483860434003965,
+            1.0
+          ]
+        },
+        {
+          "collapsed": true,
+          "complete_blocks": 32,
+          "contrast": "neutral_transcript",
+          "descriptive_95": [
+            0.0,
+            0.0
+          ],
+          "estimate": 0.0,
+          "judge": "opus",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.0,
+            0.0
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            -0.48016139565996035,
+            0.48016139565996035
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "paper",
+      "label": "Paper rubric",
+      "points": [
+        {
+          "collapsed": false,
+          "complete_blocks": 32,
+          "contrast": "instruction_minus_transcript",
+          "descriptive_95": [
+            0.53125,
+            0.84375
+          ],
+          "estimate": 0.6875,
+          "judge": "astra",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.6875,
+            0.6875
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            0.20733860434003965,
+            1.0
+          ]
+        },
+        {
+          "collapsed": true,
+          "complete_blocks": 32,
+          "contrast": "neutral_transcript",
+          "descriptive_95": [
+            0.0,
+            0.0
+          ],
+          "estimate": 0.0,
+          "judge": "astra",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.0,
+            0.0
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            -0.48016139565996035,
+            0.48016139565996035
+          ]
+        },
+        {
+          "collapsed": false,
+          "complete_blocks": 32,
+          "contrast": "instruction_minus_transcript",
+          "descriptive_95": [
+            0.625,
+            0.875
+          ],
+          "estimate": 0.75,
+          "judge": "opus",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.75,
+            0.75
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            0.26983860434003965,
+            1.0
+          ]
+        },
+        {
+          "collapsed": true,
+          "complete_blocks": 32,
+          "contrast": "neutral_transcript",
+          "descriptive_95": [
+            0.0,
+            0.0
+          ],
+          "estimate": 0.0,
+          "judge": "opus",
+          "missing_blocks": 0,
+          "missing_label_bounds": [
+            0.0,
+            0.0
+          ],
+          "planned_blocks": 32,
+          "worst_case_hoeffding_95": [
+            -0.48016139565996035,
+            0.48016139565996035
+          ]
+        }
+      ]
+    }
+  ],
+  "phase": "main",
+  "resamples": 10000,
+  "schema": "kolibri-extension-figure-v1",
+  "seed": 20261004,
+  "width_inches": 6.5
+}

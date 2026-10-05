@@ -1,0 +1,81 @@
+{
+  "inputs": {
+    "main_analysis": {
+      "bytes": 2174750,
+      "path": "main_analysis.json",
+      "sha256": "ea2cf2ba1140aee735aff40dccf562db92a1b41369c4901a67aead1386e0b718"
+    },
+    "main_rows": {
+      "bytes": 587692,
+      "path": "main_rows.json",
+      "sha256": "0a03e071323e7925f0774efcb0bbc5a86897b926ba3ac75381fdcfb315983ff1"
+    },
+    "model": {
+      "bytes": 22535057,
+      "path": "MODEL_PROVENANCE.json",
+      "sha256": "99f3c4a726c1f8953bb3aa5fed62ab2edceb43eb985eab8c30545347f9f0564c"
+    },
+    "plan": {
+      "bytes": 11822855,
+      "path": "provenance/PLAN.json",
+      "sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609"
+    },
+    "qualification": {
+      "bytes": 131976,
+      "path": "qualification.json",
+      "sha256": "363975f7c7008cb669790d1851dc98d93878da4591339f8b78f28f121898205e"
+    },
+    "release": {
+      "bytes": 306379,
+      "path": "RELEASE.json",
+      "sha256": "c1536c3d5a6dc5d89f4bff961fffde0ab0697748a743259d241a0dc30a0e53f7"
+    },
+    "screen_analysis": {
+      "bytes": 759812,
+      "path": "screen_analysis.json",
+      "sha256": "e311f6533c521ad83b84da286e9d20df7756005b0e3b21b16767d0a6e77fbff6"
+    },
+    "screen_rows": {
+      "bytes": 108533,
+      "path": "screen_rows.json",
+      "sha256": "2c62997e2e903d8d19c9889b29d843af37e669f3e2aaf955c6d94f4d42daaa43"
+    }
+  },
+  "outputs": [
+    {
+      "bytes": 54271,
+      "path": "results.json",
+      "sha256": "bbfbe8e6e3c2e4255d6d64baa7068d7023231cee174f62c082de925bcf6889a8"
+    },
+    {
+      "bytes": 37637,
+      "path": "values.tex",
+      "sha256": "04fb26f5e0578950e0887d44fab55c1c7e8f74beb21bf933e03a20985be9f167"
+    },
+    {
+      "bytes": 6134,
+      "path": "figure_data.json",
+      "sha256": "e02fbc210bee8cb7d91ebd548b4d4396bcbac75cdaf5802cb52fd8a46c02b4b1"
+    },
+    {
+      "bytes": 14149,
+      "path": "kolibri.pdf",
+      "sha256": "2853870e2a3072c6aa604647587f1fb1f3ec80bc4abf86cbdbdad91e7e68c672"
+    },
+    {
+      "bytes": 25121,
+      "path": "kolibri.svg",
+      "sha256": "fdb15933e1185c5a30017ed497df2ab4c0bb9357e28d94678e7a8c29b0534958"
+    }
+  ],
+  "publication_kind": "figure",
+  "release_manifest_sha256": "78529659edb09af027e008e3d0513440933e8a560d4fe82c37718034e45e9ddf",
+  "release_path": "data/kolibri_swap/release_v1_20261005",
+  "schema": "kolibri-extension-binding-v2",
+  "source_commit": "3900a5ede5e6c003320960159e69811530f5346c",
+  "source_hashes": {
+    "scripts/verify_kolibri_extension.py": "703ee2e48ea689ba4d28397e10d638185f1c98f37a36a4b70cd6c42a38ebf213",
+    "tests/test_kolibri_extension.py": "d3134f801fa43bea8c0af9330de5162cb00b0fa93b62f7a25b41d22a448ed1d1"
+  },
+  "verification": "externally_pinned_assets_and_exact_data_replay"
+}

@@ -31,6 +31,7 @@ not a substitute for the root public-release audit.
 | Bilingual Llama | [Reproduction](reproduce_bilingual_b1.py) writes to a fresh destination; [arithmetic check](check_bilingual_b1_arithmetic.py) reads the release. | [Release integration](../tests/test_bilingual_release_integration.py) |
 | Frontier bilingual | [Release verifier and reproducer](release_frontier_b1.py); use the documented `--verify` or `--reproduce` mode. | [Release tests](../tests/test_frontier_release_b1.py) |
 | Instruction-state qualification | [Reproduction](reproduce_instruction_qualification.py); figure output is optional. | [Release tests](../tests/test_instruction_qualification_release.py) |
+| Kolibri panel | [Paper binding](verify_kolibri_extension.py); `make paper-verify` supplies the reviewed release and figure hashes. | [Binding and tamper tests](../tests/test_kolibri_extension.py) |
 
 ## Public Steering And Internal Readouts
 

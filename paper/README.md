@@ -44,6 +44,10 @@ not that reconstruction or independent scientific validation.
 - `repeated_extension.tex`: randomized four-cell collections with three
   answers per request. `paper-verify` replays the raw response and judge
   receipts, paired analyses, variance summaries and figure bindings.
+- `kolibri_extension.tex`: locally served Kolibri's eight-condition panel.
+  Its check replays the released receipts and reconstructs counts, paired
+  effects and both readers' figure inputs. Primary simultaneous bounds remain
+  separate from pointwise and descriptive intervals.
 - `dose_followup.tex`: the mapping-scaled, quality-selected steering test.
   `paper-verify` checks release hashes and manuscript bindings; use
   `python scripts/verify_dose_followup.py --full --require-pinned` for the

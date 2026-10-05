@@ -19,6 +19,7 @@ raw-data archive. Start with the [paper](../paper/README.md), use the
 | Bilingual panels, crossed qualification and operator comparisons | [Completed extensions](completed_extensions/) | [verify_completed_extensions.py](../scripts/verify_completed_extensions.py); selected summary bindings, not raw-receipt or bootstrap reconstruction. |
 | Uncertainty sensitivity | [Sensitivity package](uncertainty_sensitivity/), [methods](../docs/UNCERTAINTY_SENSITIVITY.md) | [uncertainty_sensitivity.py](../scripts/uncertainty_sensitivity.py) with `--check` |
 | Conditional paired-binary reporting bound | [Display macro](reporting_checks/truthfulqa_bound.tex) | [verify_reporting_bound.py](../scripts/verify_reporting_bound.py); arithmetic under stated assumptions, not reconstruction of unobserved source scores. |
+| Kolibri panel | [Results, values and vector figure](kolibri_extension/BINDING.json) | [verify_kolibri_extension.py](../scripts/verify_kolibri_extension.py); raw-receipt replay and row-level reconstruction, with separate primary and descriptive uncertainty. |
 
 Steering-fidelity appendix checks read its
 [calibration release](../data/steering_fidelity/README.md) directly through

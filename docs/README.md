@@ -16,6 +16,7 @@ The [data index](../data/README.md), [code index](../experiments/README.md), and
 | How do the bilingual contrasts vary across API models? | Completed frontier mini; separate from the Llama panel. | [Protocol](FRONTIER_BILINGUAL_B1_PROTOCOL_20261002.md); [results](FRONTIER_BILINGUAL_RESULTS_20261002.md) | [Frontier bilingual](../data/frontier_bilingual_b1/README.md) |
 | Do newer API configurations reproduce the crossed effect, including neutral and same-condition controls? | Completed Gemini/Opus main panel; Sonnet near floor, DeepSeek technically deferred. | [Design](../experiments/openrouter_swap/PROTOCOL.md); [technical correction](../experiments/openrouter_swap_a3/PROTOCOL.md) | [Frontier swap controls](../data/openrouter_swap/README.md) |
 | Does an API-served open-weight model show the same contrast? | Qwen3.8 main collection complete; three missing judgments recovered in a disclosed post-hoc repair. Mistral failed screen completeness, not headroom; its main panel was not run. | [Protocol](../experiments/openrouter_swap_openweights/PROTOCOL.md); [measurement comparison](../evidence/qwen_extension/README.md) | [Additive Qwen3.8 release](../data/qwen_judge_recovery/release_v1_20261005/README.md), [original archive](../data/openrouter_swap_openweights_a2/main_v1_20261004/RELEASE.json) |
+| Does the contrast extend to locally served Kolibri? | All 256 main answers and 1,024 judgments complete; the primary simultaneous intervals include zero. | [Protocol](../experiments/kolibri_swap/README.md); [results](../data/kolibri_swap/README.md) | [Completed release](../data/kolibri_swap/release_v1_20261005/SUMMARY.md) |
 | How variable are answers to an unchanged crossed request? | All 768 Gemini/Opus answers collected; two structured judgments remain missing. Source blocks, not individual draws, determine uncertainty. | [Protocol](https://github.com/tdj28/llm_selfref_pre/blob/033917d188602203cfbbe7717bf7ba704d44aed6/experiments/repeated_swap/PROTOCOL.md); [claim ledger](CLAIM_LEDGER.md#repeated-answers) | [Repeated-answer release](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005) |
 | Does crossed Llama behavior qualify a later internal-state intervention? | Qualification failed; later intervention not run. | [Protocol](INSTRUCTION_STATE_QUALIFICATION_PROTOCOL_20261001.md); [results](INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md) | [Qualification](../data/instruction_state_qualification/README.md) |
 
@@ -57,10 +58,8 @@ not a second copy of its data here. It is distinct from the Qwen3.8 API panel.
 | Held-out steering-fidelity study | [Archived design notes](../provenance/planning/STEERING_FIDELITY_TEST_DESIGN_NOTES_20261002.md) and [code](../experiments/steering_fidelity_test/); not run after failed qualification. |
 | SAE switch-arc | [Unexecuted design draft](consciousness_sae_switch_arc/README.md); no target outcomes. |
 
-Dose findings are integrated into the paper. Local manuscript verification
-and rendering have passed; final cross-platform closeout remains pending.
-Kolibri's behavioral screen is in progress; its conditional main panel is not complete.
-Earlier failed dose qualifications retain their verdicts.
+The authorized model-panel, repeated-answer and dose collections are complete.
+Earlier failed qualifications and missing judgments retain their original status.
 
 ## Cross-Study References
 

@@ -16,6 +16,7 @@ disposable copies and [artifact inventory](../DATA_ARTIFACTS.md) for coverage.
 | [Frontier bilingual](frontier_bilingual_b1/README.md) | Completed separate API-model mini and its plan. |
 | [Frontier swap controls](openrouter_swap/README.md) | Completed October 4 screen and fresh Gemini/Opus neutral/same-condition panel; Sonnet near floor, DeepSeek technically deferred. |
 | [Qwen3.8 swap panel](qwen_judge_recovery/release_v1_20261005/README.md) | 256 main answers with a separate post-hoc repair of three missing Astra structured judgments. [Original incomplete archive](openrouter_swap_openweights_a2/main_v1_20261004/RELEASE.json) and [earlier accounting stop](openrouter_swap_openweights_a1/README.md) remain preserved. Mistral failed screen completeness, not headroom; its main panel was not run. |
+| [Kolibri swap panel](kolibri_swap/README.md) | Completed screen and 256 fresh main answers with neutral/donor controls; all judgments available. Primary simultaneous intervals include zero. Official FP8 weights and KV cache, not an architecture-isolating comparison. |
 | [Repeated Gemini/Opus answers](https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005) | All 768 final answers collected in 32 fresh source-pair blocks per model, with three draws per request. Two structured judgments remain missing; the release retains its incomplete status and unresolved cost reservations. |
 | [Instruction-state qualification](instruction_state_qualification/README.md) | Completed failed qualification and preserved startup failure; no later intervention. |
 
@@ -53,8 +54,7 @@ disposable copies and [artifact inventory](../DATA_ARTIFACTS.md) for coverage.
 | Exposure and precision | [Completed screen](sae_assay_exposure/screen_precision_20260930/README.md); [startup failure](sae_assay_exposure/startup_failure_20260930/README.md). |
 | Changepoint, realization, target-blind calibration and signed-dose scan | [Historical inventory](../docs/STUDY_INVENTORY.md), including failed controls, partial availability and recovery records. |
 
-Kolibri's behavioral screen is in progress; its conditional main panel is not
-complete. The earlier failed dose qualifications remain listed above. Folders holding only plans or
+The earlier failed dose qualifications remain listed above. Folders holding only plans or
 implementations do not establish that a study ran. Earlier service prototypes
 and smoke tests remain in the
 [artifact inventory](../DATA_ARTIFACTS.md), separate from the paper's primary
