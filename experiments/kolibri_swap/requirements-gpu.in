@@ -1,0 +1,4 @@
+# Exact top-level versions; the generated lock binds transitive dependencies.
+aleph-alpha-inference==1.0.0
+vllm==0.29.0
+pytest==8.4.2

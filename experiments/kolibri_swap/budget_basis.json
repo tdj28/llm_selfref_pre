@@ -1,0 +1,19 @@
+{
+  "as_of_utc": "2026-10-05T06:10:48Z",
+  "scope": "Kolibri admission accounting; no credentials or account identifiers",
+  "kolibri_new_authorization_usd": "75",
+  "kolibri_gpu_allowance_usd": "25",
+  "kolibri_judging_allowance_usd": "45",
+  "kolibri_storage_recovery_allowance_usd": "5",
+  "openrouter_prior_recorded_upper_bound_usd": "125.75920446",
+  "openrouter_prior_reserved_upper_bound_usd": "136",
+  "openrouter_prior_journal_sha256": "492c84aa5c58ec4d58a1e25ecded94b726dd613a98e785edce10f791381bbb75",
+  "openrouter_prior_note": "A2 includes two unresolved transport reservations totaling 0.965228, not zero-cost assumptions.",
+  "openrouter_separate_repeated_answer_authorization_usd": "130",
+  "openrouter_separate_repeated_answer_freeze": "b3ddbdcae9919937ffb67da565b26ec2d0c81f00",
+  "openrouter_scoped_authorization_total_usd": "330",
+  "runpod_dose_recorded_upper_bound_usd": "16.565997654316512",
+  "runpod_dose_reserved_total_usd": "50",
+  "runpod_scoped_authorization_total_usd": "200",
+  "accounting_note": "Prior recorded costs exclude this Kolibri study and the newly authorized repeated-answer study. Reserved totals cover pending completion. Live balances and current receipts are checked again before paid dispatch; authorization is not an account-balance claim."
+}
