@@ -1,0 +1,8 @@
+{
+  "freeze": "f69362310217cbf947a940465c88e8d8c3b740b9",
+  "plan_sha256": "de38292b7dc5cc4c8718595acfd7a137603afe0b419a239a5665489fe7e5c15e",
+  "python": "3.12.12",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "authorization_cap_usd": "250",
+  "screen_cap_usd": "40"
+}

@@ -1,0 +1,714 @@
+{
+  "screen_astra_inclusive": {
+    "gemini": {
+      "SS": {
+        "positive": 12,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 7,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.5833333333333334
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "sonnet": {
+      "SS": {
+        "positive": 1,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.08333333333333333
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "opus": {
+      "SS": {
+        "positive": 3,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.25
+      },
+      "HH": {
+        "positive": 1,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.08333333333333333
+      },
+      "SH": {
+        "positive": 2,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.16666666666666666
+      },
+      "HS": {
+        "positive": 1,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.08333333333333333
+      }
+    },
+    "deepseek": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      }
+    }
+  },
+  "screen_opus_inclusive": {
+    "gemini": {
+      "SS": {
+        "positive": 12,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 6,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.5
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "sonnet": {
+      "SS": {
+        "positive": 2,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.16666666666666666
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 1,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.08333333333333333
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "opus": {
+      "SS": {
+        "positive": 3,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.25
+      },
+      "HH": {
+        "positive": 1,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.08333333333333333
+      },
+      "SH": {
+        "positive": 3,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.25
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 12,
+        "planned": 12,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "deepseek": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 12,
+        "missing": 12,
+        "rate": null
+      }
+    }
+  },
+  "main_astra_inclusive": {
+    "gemini": {
+      "SS": {
+        "positive": 32,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 26,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.8125
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "S_SHAM": {
+        "positive": 32,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "sonnet": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "S_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      }
+    },
+    "opus": {
+      "SS": {
+        "positive": 4,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.125
+      },
+      "HH": {
+        "positive": 4,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.125
+      },
+      "SH": {
+        "positive": 7,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.21875
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NS": {
+        "positive": 2,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0625
+      },
+      "NH": {
+        "positive": 2,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0625
+      },
+      "S_SHAM": {
+        "positive": 6,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.1875
+      },
+      "H_SHAM": {
+        "positive": 1,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.03125
+      }
+    },
+    "deepseek": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "S_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      }
+    }
+  },
+  "main_opus_inclusive": {
+    "gemini": {
+      "SS": {
+        "positive": 32,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "SH": {
+        "positive": 26,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.8125
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "S_SHAM": {
+        "positive": 32,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 1.0
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "sonnet": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "S_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      }
+    },
+    "opus": {
+      "SS": {
+        "positive": 5,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.15625
+      },
+      "HH": {
+        "positive": 3,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.09375
+      },
+      "SH": {
+        "positive": 12,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.375
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "NH": {
+        "positive": 1,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.03125
+      },
+      "S_SHAM": {
+        "positive": 6,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.1875
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 32,
+        "planned": 32,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "deepseek": {
+      "SS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "SH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "HS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NS": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "NH": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "S_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      },
+      "H_SHAM": {
+        "positive": 0,
+        "labeled": 0,
+        "planned": 32,
+        "missing": 32,
+        "rate": null
+      }
+    }
+  }
+}

@@ -710,6 +710,17 @@ data/openrouter_swap/screen_v1_20261004/**
 !data/openrouter_swap/screen_v1_20261004/prior_attempts/*/runtime.json
 !data/openrouter_swap/screen_v1_20261004/prior_attempts/*/events.jsonl.gz
 !data/openrouter_swap/screen_v1_20261004/snapshots/000793/*.json
+!data/openrouter_swap/main_v1_20261004/
+data/openrouter_swap/main_v1_20261004/**
+!data/openrouter_swap/main_v1_20261004/**/
+!data/openrouter_swap/main_v1_20261004/*.json
+!data/openrouter_swap/main_v1_20261004/*.png
+!data/openrouter_swap/main_v1_20261004/*.pdf
+!data/openrouter_swap/main_v1_20261004/raw/events.jsonl.gz
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/PLAN.json
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/runtime.json
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/events.jsonl.gz
+!data/openrouter_swap/main_v1_20261004/snapshots/003611/*.json
 
 # Canonical manuscript's selected, provenance-bound figure inputs, not builds.
 !paper/figures/*.pdf

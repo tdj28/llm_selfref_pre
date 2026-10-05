@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "calls": 3611,
+  "cost_bound_usd": "83.467222",
+  "unresolved": 0,
+  "unknown_charges_are_reserved": true,
+  "prior_cost_bound_usd": "0.62048546",
+  "cumulative_cost_bound_usd": "84.08770746",
+  "deferred_models": {
+    "deepseek": {
+      "status": "not_run_privacy_route_unavailable",
+      "reason": "Native provider excluded by account paid-model-training policy; no target outcomes exist.",
+      "future_dispatch": "Requires a separately frozen compatible route; never change privacy policy."
+    }
+  }
+}

@@ -15,8 +15,8 @@ $250 total/$40 screening authorization and frozen protocol.
 - [x] Audit the first two blocks per active model against raw API receipts.
 - [x] Complete and release the fixed three-model screen. Gemini and Opus
   qualify; Sonnet is near floor. DeepSeek remains technically deferred.
-- [ ] Run fresh main blocks only for models admitted by the frozen rules.
-- [ ] Release raw receipts, startup failures, analyses, plots and cost audit.
+- [x] Run fresh main blocks only for models admitted by the frozen rules.
+- [x] Release raw receipts, startup failures, analyses, plots and cost audit.
 - [ ] Present the completed extension for the owner's manuscript decision;
   do not overwrite ongoing editorial work.
 

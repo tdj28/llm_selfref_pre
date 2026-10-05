@@ -1,0 +1,45 @@
+{
+  "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",
+  "plan_sha256": "9efe5c32f7148e04a64f01193673c89772de21754fa46b4dd3aa87568283874d",
+  "python": "3.12.12",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "authorization_cap_usd": "250",
+  "screen_cap_usd": "40",
+  "prior_cost_bound_usd": "0.62048546",
+  "prior_attempts": [
+    {
+      "label": "original",
+      "path": ".",
+      "freeze": "f69362310217cbf947a940465c88e8d8c3b740b9",
+      "plan_path": "data/openrouter_swap/plan_20261004/PLAN.json",
+      "plan_sha256": "de38292b7dc5cc4c8718595acfd7a137603afe0b419a239a5665489fe7e5c15e",
+      "journal_sha256": "a5dedcae1b8415e0c81eb6c6f1262632d8f2da84e3512ee3fb88746bc2c7aee2",
+      "cost_bound_usd": "0.13347786",
+      "calls": 12,
+      "target_calls": 0
+    },
+    {
+      "label": "a1",
+      "path": "a1",
+      "freeze": "7f9be332411e0c2dc8e6d6c9993c235e9e0fcbf1",
+      "plan_path": "data/openrouter_swap/plan_a1_20261004/PLAN.json",
+      "plan_sha256": "659b7b40650baf43a1494d829c2559caef0e6840d9a7b78d40cbe249b9d209c7",
+      "journal_sha256": "403d28a36167b874edab2eeae8fd0cb361e148474d258ea8cd4855553b17712b",
+      "cost_bound_usd": "0.1290626",
+      "calls": 12,
+      "target_calls": 0
+    },
+    {
+      "label": "a2",
+      "path": "a2",
+      "freeze": "bae7b50d6e2eb2213ea7a4518904ef268c600042",
+      "plan_path": "data/openrouter_swap/plan_a2_20261004/PLAN.json",
+      "plan_sha256": "7205ff349219b71bfbc8f83656e547acecd58767e60d07024a061793eb87a56e",
+      "journal_sha256": "bd5dafe93b1d03822daf24f43f2b0d56e07caa5499a6e9462877fdb1daf61640",
+      "cost_bound_usd": "0.357945",
+      "calls": 27,
+      "target_calls": 0,
+      "unresolved": 0
+    }
+  ]
+}

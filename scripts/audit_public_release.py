@@ -314,6 +314,11 @@ REVIEWED_CIPHERTEXT_MATCHES = {
     ("openai-key", 5083198, 5084681,
      "6a8f38f1792dd3417355f4297f2e9dab1524bf2bdd2a75cd2cbc85425fb0aae0"):
         "923b93b3b4e699e55878295c114de3df6bda3d624763494abe53d51497bc4925",
+    # Reviewed 2026-10-04: OpenRouter event 2879, reasoning.encrypted metadata.
+    # Exact binding and credential comparison: data/openrouter_swap/README.md.
+    ("openai-key", 16062128, 16064780,
+     "691d78ab917852ea46bfe5b9aa349fd1d8c9b6b27a9e60d521cbf5443cb7435d"):
+        "09a4cce440870d101b2abeeec85e0b75ff31f8d2244e9c98f2a80710fff4a244",
 }
 
 

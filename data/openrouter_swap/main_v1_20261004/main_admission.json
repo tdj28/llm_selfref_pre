@@ -1,0 +1,30 @@
+{
+  "eligible_models": [
+    "gemini",
+    "opus"
+  ],
+  "admitted_models": [
+    "gemini",
+    "opus"
+  ],
+  "projections": {
+    "gemini": {
+      "status": "admitted",
+      "projected_cost_with_reserve_usd": "34.28133973333333333333333333"
+    },
+    "sonnet": {
+      "status": "not_qualified"
+    },
+    "opus": {
+      "status": "admitted",
+      "projected_cost_with_reserve_usd": "54.42547413333333333333333336"
+    },
+    "deepseek": {
+      "status": "not_run_privacy_route_unavailable",
+      "reason": "Native provider excluded by account paid-model-training policy; no target outcomes exist.",
+      "future_dispatch": "Requires a separately frozen compatible route; never change privacy policy."
+    }
+  },
+  "remaining_unallocated_usd": "140.8092866733333333333333333",
+  "cost_at_admission_usd": "19.863414"
+}
