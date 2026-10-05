@@ -31,7 +31,9 @@ not that reconstruction or independent scientific validation.
 
 ## arXiv Upload
 
-From the repository root, run `make arxiv`. It runs the manuscript evidence
+Use the Python environment and system dependencies in the
+[reproduction guide](../docs/REPRODUCTION.md#setup-and-checks). From the
+repository root, run `make arxiv`. It runs the manuscript evidence
 checks, builds the paper, and creates `build/arxiv.tar.gz`. Upload that source
 archive, not `paper/main.pdf` and not the repository. The separate
 `build/arxiv_abstract.txt` is for the submission form; the builder rejects
@@ -94,6 +96,9 @@ classification or license selection is performed by `make arxiv`.
   `python scripts/verify_dose_followup.py --full --require-pinned` for the
   historical-source inference replay as well.
 - `figures/`: selected figure inputs with pinned source provenance.
+  `causal_decomposition_readme.png` is a display-only raster of the caption-free
+  vector plot, not the historical figure. Regenerate it from the repository
+  root with `pdftoppm -singlefile -scale-to 1950 -png evidence/figure_presentation/causal_decomposition.pdf paper/figures/causal_decomposition_readme`.
 - `../evidence/figure_presentation/`: readable vector exports of historical
   plots, bound to their original values. `paper-verify` checks the inputs,
   displayed values, embedded fonts and absence of embedded captions.
