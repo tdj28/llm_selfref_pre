@@ -3,6 +3,7 @@ from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 import json
+import math
 from pathlib import Path
 import socket
 
@@ -114,6 +115,8 @@ def raw_fixture(root, fixture, *, n=480, change=None, qualification=True, pendin
         write(root / "failed.json", {"plan_sha256": digest, "error_type": "SyntheticFailure", "completed": n+1})
     write_chain(root / "receipts.jsonl", chain(events, digest, ["qualification-live"] + [s["id"] for s in plan["rows"]]))
     (root / "controller.log").write_bytes(b"Synthetic worker log\r\nPreserve exact bytes\r\n")
+    if n == 480:
+        r.analysis.analyze(root, root / "analysis")
     return root
 
 
@@ -173,6 +176,12 @@ def test_complete_export_preserves_two_journals_and_paired_inference(tmp_path, f
     assert (dest / "main/receipts.jsonl").read_bytes() == (raw / "receipts.jsonl").read_bytes()
     assert (dest / "calibration/raw/receipts.jsonl").read_bytes() == (fixture[2] / "raw/receipts.jsonl").read_bytes()
     assert (dest / "main/controller.log").read_bytes().endswith(b"\r\n")
+    assert (dest / "analysis/summary.json").read_bytes() == (raw / "analysis/summary.json").read_bytes()
+    assert result["retrieval_hashes_unchanged"]
+    assert result["local_summary_replay"]["exact_replay"] == "PASS"
+    portability = r._json(dest / "analysis/portability.json")
+    assert r._json(dest / "MANIFEST.json")["analysis_portability"] == portability
+    assert portability["archived_check"]["differences"] == []
     data = r._json(dest / "FIGURE_DATA.json")
     assert data["display_names"]["notebook"] == "Second rubric"
     for judge in r.JUDGES:
@@ -389,4 +398,168 @@ def test_closed_cost_and_direct_deletion_claims_checked(tmp_path, fixture, field
         next(data for name, data in events if name == "closed")[field] = value
     receipt, ledger = controller_fixture(raw, fixture[1], transform=mutate)
     with pytest.raises(ValueError):
+        r.build(receipt, tmp_path / "release", plan_path=fixture[1], controller_ledger=ledger)
+
+
+def summary_bytes(value):
+    return (r.p.canonical(value) + "\n").encode()
+
+
+def portability_example():
+    def result(low, high, point):
+        return {"target": {"bounds": [low, high], "lower": low, "upper": high,
+                           "estimate_complete_pairs": point, "counts": {"n_planned": 96},
+                           "missing_pairs": 0, "event_probability_bounds": {}},
+                "specificity": {"bounds": [-.448, .834]}, "main_quality_pass": True,
+                "verdict": "positive_0.30_signature_excluded_at_selected_dose"}
+    saved = {"results": {"notebook": result(-.098, .2978063242719731, .10416666666666667),
+                         "paper": result(-.20086298091664842, .1, -.052083333333333336)}}
+    saved["results"]["notebook"]["target"]["event_probability_bounds"] = {
+        "positive": {"upper": .3964895128979826}}
+    saved["results"]["paper"]["target"]["event_probability_bounds"] = {
+        "negative": {"upper": .23307140847144794}, "positive": {"lower": .03220842755479952}}
+    saved["results"]["paper"]["specificity"]["target"] = {
+        "event_probability_bounds": {"positive": {"lower": .02534229968792358}}}
+    replay = deepcopy(saved)
+    for path, value in zip(r.PORTABILITY_PATHS, (
+            .29780632427197323, .39648951289798273, .29780632427197323,
+            .02534229968792359, -.2008629809166484, .23307140847144792,
+            .03220842755479953, -.2008629809166484)):
+        set_leaf(replay, path, value)
+    return saved, replay
+
+
+def set_leaf(value, path, replacement):
+    parts = path.removeprefix("$.").replace("[", ".").replace("]", "").split(".")
+    for part in parts[:-1]:
+        value = value[int(part) if isinstance(value, list) else part]
+    value[int(parts[-1]) if isinstance(value, list) else parts[-1]] = replacement
+
+
+def test_exactly_eight_observed_paths_and_two_ulp_policy():
+    saved, replay = portability_example()
+    check = r._compare_summaries(summary_bytes(saved), summary_bytes(replay))
+    assert len(set(r.PORTABILITY_PATHS)) == 8
+    assert tuple(d["path"] for d in check["differences"]) == r.PORTABILITY_PATHS
+    assert check["maximum_ulps"] == 2 and check["maximum_absolute_error"] == 2**-53
+    assert check["exact_replay"] == "FAIL" and check["portability_check"] == "PASS"
+    zero = r._compare_summaries(summary_bytes(saved), summary_bytes(saved))
+    assert zero["exact_replay"] == "PASS" and zero["differences"] == []
+    assert zero["threshold_decisions"] == check["threshold_decisions"]
+
+
+@pytest.mark.parametrize("path,value", [
+    ("$.results.notebook.target.event_probability_bounds.positive.upper", .5),
+    ("$.results.notebook.target.estimate_complete_pairs", .2),
+    ("$.results.notebook.target.counts.n_planned", 95),
+    ("$.results.notebook.target.counts.n_planned", 96.0),
+    ("$.results.notebook.target.missing_pairs", 1),
+    ("$.results.notebook.main_quality_pass", False),
+    ("$.results.notebook.main_quality_pass", 1),
+    ("$.results.notebook.verdict", "inconclusive"),
+    ("$.results.paper.specificity.bounds[0]", math.nextafter(-.448, 0)),
+])
+def test_portability_rejects_other_values_and_types(path, value):
+    saved, replay = portability_example()
+    set_leaf(replay, path, value)
+    with pytest.raises(ValueError, match="drift|2 ULP"):
+        r._compare_summaries(summary_bytes(saved), summary_bytes(replay))
+
+
+def test_portability_rejects_three_ulp_and_changed_threshold():
+    saved, replay = portability_example()
+    value = saved["results"]["notebook"]["target"]["event_probability_bounds"]["positive"]["upper"]
+    for _ in range(3):
+        value = math.nextafter(value, math.inf)
+    set_leaf(replay, r.PORTABILITY_PATHS[1], value)
+    with pytest.raises(ValueError, match="2 ULP"):
+        r._compare_summaries(summary_bytes(saved), summary_bytes(replay))
+    replay = deepcopy(saved)
+    for path in (r.PORTABILITY_PATHS[0], r.PORTABILITY_PATHS[2]):
+        set_leaf(saved, path, math.nextafter(.30, -math.inf))
+        set_leaf(replay, path, .30)
+    with pytest.raises(ValueError, match="threshold decision"):
+        r._compare_summaries(summary_bytes(saved), summary_bytes(replay))
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+def test_portability_rejects_nonfinite_even_when_identical(value):
+    saved, _ = portability_example()
+    set_leaf(saved, r.PORTABILITY_PATHS[1], value)
+    with pytest.raises(ValueError):
+        raw = summary_bytes(saved)
+        r._compare_summaries(raw, raw)
+
+
+def test_portability_rejects_format_structure_and_bound_alias_changes():
+    saved, replay = portability_example()
+    raw = summary_bytes(saved)
+    with pytest.raises(ValueError, match="serialization"):
+        r._compare_summaries(raw, raw + b" ")
+    replay["extra"] = False
+    with pytest.raises(ValueError, match="keys"):
+        r._compare_summaries(raw, summary_bytes(replay))
+    replay = deepcopy(saved)
+    set_leaf(replay, r.PORTABILITY_PATHS[0], math.nextafter(.2978063242719731, math.inf))
+    with pytest.raises(ValueError, match="aliases"):
+        r._compare_summaries(raw, summary_bytes(replay))
+
+
+def test_original_failure_requires_bound_snapshot_not_todays_replay(monkeypatch):
+    saved, replay = map(summary_bytes, portability_example())
+    monkeypatch.setattr(r, "OBSERVED_WORKER_SHA", r.prior._digest(saved))
+    monkeypatch.setattr(r, "OBSERVED_REPLAY_SHA", r.prior._digest(replay))
+    record = r._portability_record(saved, replay)
+    assert record["original_exact_replay"]["observed_public_failure"]
+    assert record["original_exact_replay"]["status"] == "FAIL"
+    assert record["original_exact_replay"]["reporter_commit"] == r.ORIGINAL_REPORTER
+    assert record["policy"]["allowed_paths"] == list(r.PORTABILITY_PATHS)
+    assert "Post-outcome" in record["scope"]
+    with pytest.raises(ValueError, match="Original failed local replay"):
+        r._portability_record(saved, saved)
+    assert r._compare_summaries(saved, saved)["exact_replay"] == "PASS"
+
+
+def test_archived_failure_survives_zero_diff_local_verification(tmp_path, fixture, fast_plots, monkeypatch):
+    raw = raw_fixture(tmp_path / "retrieved", fixture)
+    saved = (raw / "analysis/summary.json").read_bytes()
+    replay = json.loads(saved)
+    path = r.PORTABILITY_PATHS[1]
+    value = replay["results"]["notebook"]["target"]["event_probability_bounds"]["positive"]["upper"]
+    set_leaf(replay, path, math.nextafter(value, math.inf))
+    archived = tmp_path / "archived.json"
+    archived.write_bytes(summary_bytes(replay))
+    receipt, ledger = controller_fixture(raw, fixture[1])
+    before = {name: r.p.sha(path) for name, path in r._files(raw).items()}
+    dest = tmp_path / "release"
+    result = r.build(receipt, dest, plan_path=fixture[1], controller_ledger=ledger, portability_replay=archived)
+    proof = r._json(dest / "analysis/portability.json")
+    assert proof["archived_check"]["exact_replay"] == "FAIL"
+    assert result["local_summary_replay"]["exact_replay"] == "PASS"
+    assert (dest / "analysis/summary.json").read_bytes() == saved
+    assert (dest / "analysis/replay-summary.json").read_bytes() == archived.read_bytes()
+    assert before == {name: r.p.sha(path) for name, path in r._files(raw).items()}
+    def replay_on_other_host(root, out):
+        out.mkdir(exist_ok=True)
+        (out / "summary.json").write_bytes(archived.read_bytes())
+    monkeypatch.setattr(r.analysis, "analyze", replay_on_other_host)
+    result = r.verify(dest)
+    assert result["local_summary_replay"]["exact_replay"] == "FAIL"
+    assert r._json(dest / "analysis/portability.json") == proof
+    assert (dest / "analysis/summary.json").read_bytes() == saved
+    proof["archived_check"]["differences"] = []
+    write(dest / "analysis/portability.json", proof)
+    manifest = r._json(dest / "MANIFEST.json")
+    manifest["analysis_portability"] = proof
+    write(dest / "MANIFEST.json", manifest)
+    rehash(dest)
+    with pytest.raises(ValueError, match="Archived portability"):
+        r.verify(dest)
+
+
+def test_complete_export_cannot_invent_a_missing_worker_summary(tmp_path, fixture, fast_plots):
+    raw = raw_fixture(tmp_path / "retrieved", fixture)
+    (raw / "analysis/summary.json").unlink()
+    receipt, ledger = controller_fixture(raw, fixture[1])
+    with pytest.raises(ValueError, match="saved worker summary"):
         r.build(receipt, tmp_path / "release", plan_path=fixture[1], controller_ledger=ledger)

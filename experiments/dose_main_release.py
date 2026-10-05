@@ -10,6 +10,7 @@ from collections import defaultdict
 from contextlib import nullcontext
 from decimal import Decimal
 import json
+import math
 from pathlib import Path
 import re
 import shutil
@@ -28,6 +29,20 @@ FREEZE = "686efa2491a2334fcd2aff835627b24346d1dbb4"
 JUDGES = {"notebook": "Second rubric", "paper": "Paper rubric"}
 FIGURES = ("main_contrasts", "main_rates", "calibration_rates", "calibration_quality", "main_quality")
 FIGURE_FILES = {f"figures/{name}.{ext}" for name in FIGURES for ext in ("png", "pdf")}
+PORTABILITY_FILES = {"analysis/summary.json", "analysis/replay-summary.json", "analysis/portability.json"}
+PORTABILITY_PATHS = (
+    "$.results.notebook.target.bounds[1]",
+    "$.results.notebook.target.event_probability_bounds.positive.upper",
+    "$.results.notebook.target.upper",
+    "$.results.paper.specificity.target.event_probability_bounds.positive.lower",
+    "$.results.paper.target.bounds[0]",
+    "$.results.paper.target.event_probability_bounds.negative.upper",
+    "$.results.paper.target.event_probability_bounds.positive.lower",
+    "$.results.paper.target.lower",
+)
+OBSERVED_WORKER_SHA = "53ec7ecb8d9cfa4f74098fd7bf6851043cd2ee869dedca6741306108ba331985"
+OBSERVED_REPLAY_SHA = "86eff987cf9bc791b2b1f83bef3ef36dd65d0340adcc9f3c3b17cc2ec9b262c1"
+ORIGINAL_REPORTER = "97c547d6f338fe085f0a1052ef7c8609f3c74ac9"
 GENERATED = {"provenance/PLAN.json", "provenance/source.json", "provenance/controller.json",
              "REPORT.json", "FIGURE_DATA.json", "RESULTS.md", "values.tex"}
 GROUPS = ("zero", "target", "control-1", "control-2", "control-3")
@@ -223,15 +238,97 @@ def _audit(root, plan, reference, mode, controller):
                   "Calibration and main journals remain separate; unrun trials are not negative labels."}
 
 
+def _summary_value(raw):
+    value = json.loads(raw)
+    _require(raw == (p.canonical(value) + "\n").encode(), "Summary serialization differs")
+    return value
+
+
+def _thresholds(summary):
+    return {judge: {"target_lower_ge_0.30": result["target"]["bounds"][0] >= .30,
+                   "target_upper_lt_0.30": result["target"]["bounds"][1] < .30,
+                   "specificity_lower_gt_zero": result["specificity"]["bounds"][0] > 0}
+            for judge, result in summary["results"].items()}
+
+
+def _compare_summaries(saved_bytes, replay_bytes):
+    """Eight observed CP-bound leaves only; no general numerical tolerance."""
+    saved, replay = map(_summary_value, (saved_bytes, replay_bytes))
+    differences = []
+
+    def compare(a, b, path):
+        _require(type(a) is type(b), "Summary type drift: " + path)
+        if isinstance(a, dict):
+            _require(a.keys() == b.keys(), "Summary keys drift: " + path)
+            for key in sorted(a):
+                compare(a[key], b[key], path + "." + key)
+            if {"bounds", "lower", "upper"} <= a.keys():
+                _require(a["bounds"] == [a["lower"], a["upper"]]
+                         and b["bounds"] == [b["lower"], b["upper"]], "Summary bound aliases differ: " + path)
+        elif isinstance(a, list):
+            _require(len(a) == len(b), "Summary length drift: " + path)
+            for index, (left, right) in enumerate(zip(a, b)):
+                compare(left, right, f"{path}[{index}]")
+        elif type(a) is float:
+            _require(math.isfinite(a) and math.isfinite(b), "Nonfinite summary: " + path)
+            if a.hex() == b.hex():
+                return
+            _require(path in PORTABILITY_PATHS and a != b, "Unallowed summary drift: " + path)
+            adjacent = math.nextafter(a, b)
+            ulps = 1 if adjacent == b else 2 if math.nextafter(adjacent, b) == b else None
+            _require(ulps is not None, "Summary exceeds 2 ULP: " + path)
+            differences.append({"path": path, "saved": a, "replayed": b,
+                                "absolute_error": abs(a-b), "ulps": ulps})
+        else:
+            _require(a == b, "Unallowed summary drift: " + path)
+
+    compare(saved, replay, "$")
+    decisions = _thresholds(saved)
+    _require(decisions == _thresholds(replay), "Summary threshold decision changed")
+    return {"saved_summary_sha256": prior._digest(saved_bytes),
+            "replay_summary_sha256": prior._digest(replay_bytes),
+            "exact_replay": "PASS" if saved_bytes == replay_bytes else "FAIL",
+            "differences": differences, "maximum_absolute_error": max(
+                (d["absolute_error"] for d in differences), default=0.0),
+            "maximum_ulps": max((d["ulps"] for d in differences), default=0),
+            "threshold_decisions": decisions, "threshold_decisions_unchanged": True,
+            "portability_check": "PASS"}
+
+
+def _portability_record(saved_bytes, replay_bytes):
+    check = _compare_summaries(saved_bytes, replay_bytes)
+    observed = check["saved_summary_sha256"] == OBSERVED_WORKER_SHA
+    if observed:
+        _require(check["replay_summary_sha256"] == OBSERVED_REPLAY_SHA,
+                 "Original failed local replay snapshot required; supply portability_replay")
+    return {"schema": "dose_summary_portability_v1", "policy": {
+        "allowed_paths": list(PORTABILITY_PATHS), "maximum_ulps": 2,
+        "finite_floats_only": True, "all_other_bytes_values_and_types": "exact",
+        "threshold_decision_changes": "reject"},
+        "scope": "Post-outcome reporting portability only; frozen inference, science, raw bytes, "
+                 "estimates, counts, missingness, quality and verdicts unchanged. "
+                 "Canonical analysis is the exact saved worker summary, not a recomputed replacement.",
+        "original_exact_replay": {"status": check["exact_replay"],
+            "failure": "Saved analysis differs from frozen inference" if check["exact_replay"] == "FAIL" else None,
+            "reporter_commit": ORIGINAL_REPORTER if observed else None,
+            "observed_public_failure": observed},
+        "archived_check": check,
+        "verification": "Recheck this archived snapshot/diff record exactly; independently compare each "
+                        "host's fresh replay to the saved worker under the same policy. "
+                        "Fresh differences need not equal archived differences; zero differences are allowed."}
+
+
 def _summary(root, mode):
     if mode != "completed":
-        return None
+        return None, None, None
+    saved = root / "analysis/summary.json"
+    _require(saved.is_file(), "Complete export requires saved worker summary")
+    saved_bytes = saved.read_bytes()
     with tempfile.TemporaryDirectory(prefix="dose-main-analysis-") as tmp:
-        summary = analysis.analyze(root, Path(tmp))
-        saved = root / "analysis/summary.json"
-        _require(not saved.exists() or saved.read_bytes() == (Path(tmp) / "summary.json").read_bytes(),
-                 "Saved analysis differs from frozen inference")
-        return summary
+        analysis.analyze(root, Path(tmp))
+        replay_bytes = (Path(tmp) / "summary.json").read_bytes()
+    check = _compare_summaries(saved_bytes, replay_bytes)
+    return _summary_value(saved_bytes), replay_bytes, check
 
 
 def _group(spec):
@@ -479,7 +576,8 @@ def _reporting_hashes():
     return {name: p.sha(p.ROOT / name) for name in names}
 
 
-def build(source, destination, *, freeze=FREEZE, plan_path=None, mode="completed", controller_ledger=None):
+def build(source, destination, *, freeze=FREEZE, plan_path=None, mode="completed", controller_ledger=None,
+          portability_replay=None):
     source, destination = Path(source), Path(destination)
     _require(not destination.exists() and not destination.is_symlink(), "Destination must be new")
     plan_path = Path(plan_path) if plan_path else p.ROOT / p.PLAN
@@ -497,9 +595,18 @@ def build(source, destination, *, freeze=FREEZE, plan_path=None, mode="completed
         root = Path(raw)
         _require(not destination.resolve().is_relative_to(root.resolve()), "Destination cannot be inside retrieval")
         raw_files = _raw_inventory(root, plan)
-        controller = _controller(receipt, controller_ledger, reference, {n: p.sha(f) for n, f in raw_files.items()})
+        raw_hashes = {n: p.sha(f) for n, f in raw_files.items()}
+        controller = _controller(receipt, controller_ledger, reference, raw_hashes)
         report = _audit(root, plan, reference, mode, controller)
-        summary = _summary(root, mode)
+        summary, replay_bytes, _ = _summary(root, mode)
+        portability = None
+        if summary:
+            saved_bytes = (root / "analysis/summary.json").read_bytes()
+            if portability_replay is not None:
+                replay_bytes = Path(portability_replay).read_bytes()
+            portability = _portability_record(saved_bytes, replay_bytes)
+        else:
+            _require(portability_replay is None, "Partial export cannot have a completed replay")
         data = _figure_data(root, p.ROOT / p.RELEASE, plan, report, summary)
         destination.mkdir(parents=True)
         for folder, files in (("main", raw_files), ("calibration", prefix)):
@@ -516,15 +623,21 @@ def build(source, destination, *, freeze=FREEZE, plan_path=None, mode="completed
         _write(destination / "REPORT.json", report)
         _write(destination / "FIGURE_DATA.json", data)
         if summary:
-            _write(destination / "analysis/summary.json", summary)
+            (destination / "analysis").mkdir()
+            (destination / "analysis/summary.json").write_bytes(saved_bytes)
+            (destination / "analysis/replay-summary.json").write_bytes(replay_bytes)
+            _write(destination / "analysis/portability.json", portability)
         text, tex = _text_products(report, data, summary, controller)
         (destination / "RESULTS.md").write_bytes(text)
         (destination / "values.tex").write_bytes(tex)
         _plots(data, destination / "figures")
         files = _files(destination)
         _scan(files)
+        _require(raw_hashes == {n: p.sha(f) for n, f in _raw_inventory(root, plan).items()},
+                 "Retrieval hashes changed during reporting")
         _write(destination / "MANIFEST.json", {"schema": SCHEMA, "mode": mode, "freeze_commit": freeze,
             "plan_sha256": reference["plan_sha256"], "calibration_manifest_sha256": p.MANIFEST_SHA,
+            "analysis_portability": portability,
             "reporting_source_hashes": _reporting_hashes(), "files": _entries(files)})
     return verify(destination, controller_receipt=receipt, controller_ledger=controller_ledger)
 
@@ -553,7 +666,7 @@ def verify(root, *, expected_manifest_sha256=None, controller_receipt=None, cont
         _require(p.sha(root / "calibration" / name) == p.sha(path), "Copied immutable calibration changed")
     expected = GENERATED | FIGURE_FILES | {"main/" + n for n in raw} | {"calibration/" + n for n in prefix}
     if manifest["mode"] == "completed":
-        expected.add("analysis/summary.json")
+        expected |= PORTABILITY_FILES
     _require(set(files) == expected, "Unexpected/missing public artifact")
     _scan(files)
     controller = _canonical(root / "provenance/controller.json")
@@ -566,9 +679,16 @@ def verify(root, *, expected_manifest_sha256=None, controller_receipt=None, cont
         _require(controller == _controller(controller_receipt, controller_ledger, reference, artifacts), "External lifecycle mismatch")
     report = _audit(root / "main", plan, reference, manifest["mode"], controller)
     _require(_canonical(root / "REPORT.json") == report, "Report differs from raw audit")
-    summary = _summary(root / "main", manifest["mode"])
+    summary, _, local_check = _summary(root / "main", manifest["mode"])
+    portability = None
     if summary:
-        _require(_canonical(root / "analysis/summary.json") == summary, "Frozen inference differs")
+        saved_bytes = (root / "main/analysis/summary.json").read_bytes()
+        _require((root / "analysis/summary.json").read_bytes() == saved_bytes, "Saved worker summary bytes differ")
+        portability = _portability_record(saved_bytes, (root / "analysis/replay-summary.json").read_bytes())
+        _require((root / "analysis/portability.json").read_bytes() == (p.canonical(portability) + "\n").encode(),
+                 "Archived portability record differs")
+    _require(p.canonical(manifest["analysis_portability"]) == p.canonical(portability),
+             "Manifest portability binding differs")
     data = _figure_data(root / "main", root / "calibration", plan, report, summary)
     _require(_canonical(root / "FIGURE_DATA.json") == data, "Figure data differs")
     text, tex = _text_products(report, data, summary, controller)
@@ -578,9 +698,12 @@ def verify(root, *, expected_manifest_sha256=None, controller_receipt=None, cont
         _plots(data, Path(tmp) / "figures")
         for name in FIGURE_FILES:
             _require((root / name).read_bytes() == (Path(tmp) / name).read_bytes(), "Figure rendering differs: " + name)
+    _require(artifacts == {n: p.sha(f) for n, f in _raw_inventory(root / "main", plan).items()},
+             "Retrieval hashes changed during verification")
     return {"pass": True, "mode": manifest["mode"], "main_status": report["main_status"], "manifest_sha256": digest,
         "external_manifest_bound": expected_manifest_sha256 is not None, "external_controller_bound": external,
-        "lifecycle_verified_this_check": external and controller_ledger is not None}
+        "lifecycle_verified_this_check": external and controller_ledger is not None,
+        "retrieval_hashes_unchanged": True, "local_summary_replay": local_check}
 
 
 def main(argv=None):
@@ -593,6 +716,8 @@ def main(argv=None):
     create.add_argument("--plan", type=Path)
     create.add_argument("--mode", required=True, choices=prior.MODES)
     create.add_argument("--controller-ledger", type=Path)
+    create.add_argument("--portability-replay", type=Path,
+                        help="Archived original local summary replay, required if this host cannot reproduce its bytes")
     check = commands.add_parser("verify")
     check.add_argument("--root", required=True, type=Path)
     check.add_argument("--manifest-sha256")
@@ -600,7 +725,8 @@ def main(argv=None):
     check.add_argument("--controller-ledger", type=Path)
     args = parser.parse_args(argv)
     result = (build(args.source, args.destination, freeze=args.freeze, plan_path=args.plan,
-                    mode=args.mode, controller_ledger=args.controller_ledger) if args.command == "build" else
+                    mode=args.mode, controller_ledger=args.controller_ledger,
+                    portability_replay=args.portability_replay) if args.command == "build" else
               verify(args.root, expected_manifest_sha256=args.manifest_sha256,
                      controller_receipt=args.controller_receipt, controller_ledger=args.controller_ledger))
     print(p.canonical(result))

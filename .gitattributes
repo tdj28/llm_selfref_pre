@@ -45,3 +45,6 @@ experiments/consciousness_readout_validation/tokenizer_audit.py whitespace=-blan
 experiments/consciousness_sae_switch_arc/__init__.py whitespace=-blank-at-eof
 experiments/consciousness_sae_switch_arc/protocol.py whitespace=-blank-at-eof
 tests/consciousness_readout_validation/__init__.py whitespace=-blank-at-eof
+
+# Keep this manifest-bound generated report identical to its verified export.
+data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md whitespace=-blank-at-eof

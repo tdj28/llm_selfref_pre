@@ -833,3 +833,10 @@ data/berg_dose_window/plan_20261004/*
 !data/berg_dose_window/README.md
 !data/berg_dose_window/zero_screen_v1_20261004/
 !data/berg_dose_window/zero_screen_v1_20261004/**
+
+# Completed fixed-dose follow-up: inspected raw rows, figures and provenance.
+!data/berg_dose_exposure_continuation/
+data/berg_dose_exposure_continuation/*
+!data/berg_dose_exposure_continuation/fixed_main_v1_20261005/
+!data/berg_dose_exposure_continuation/fixed_main_v1_20261005/**
+!data/berg_dose_exposure_continuation/fixed_main_v1_20261005.compat.json
