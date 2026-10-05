@@ -695,6 +695,9 @@ data/bilingual_llama_b1/*
 !data/openrouter_swap/plan_a2_20261004/
 data/openrouter_swap/plan_a2_20261004/*
 !data/openrouter_swap/plan_a2_20261004/PLAN.json
+!data/openrouter_swap/plan_a3_20261004/
+data/openrouter_swap/plan_a3_20261004/*
+!data/openrouter_swap/plan_a3_20261004/PLAN.json
 
 # Canonical manuscript's selected, provenance-bound figure inputs, not builds.
 !paper/figures/*.pdf
