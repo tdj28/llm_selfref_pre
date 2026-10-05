@@ -298,43 +298,7 @@ model weights can and cannot show.
 \medskip\par
 \textbf{B. Label contrasts}\par
 \smallskip
-\begin{tikzpicture}
-\node[anchor=south west, inner sep=0] (panelB) at (0,0)
-  {\includegraphics[width=\linewidth, trim=0 62bp 0 39.6bp, clip]{figures/causal_decomposition.png}};
-% Replace only marginal labels; the frozen plot marks remain untouched.
-\begin{scope}[x={(panelB.south east)}, y={(panelB.north west)}]
-  \fill[white] (0,0) rectangle (0.135,1);
-  \foreach \y/\model in {0.9198/Haiku 4.5,0.6460/Sonnet 4.5,0.3738/GPT-4.1,0.1017/GPT-4o}
-    \node[anchor=east,font=\sffamily\fontsize{8.5}{10}\selectfont]
-      at (0.132,\y) {\model};
-\end{scope}
-\foreach \x/\title/\symbol in {0.2717/Original pairs/{$(S,S)-(H,H)$},
-                                0.5661/Instruction/{$\rd_I$},
-                                0.8615/Continuation/{$\rd_C$}}
-  \path (panelB.north west) ++(\x\linewidth,1pt)
-    node[above, align=center, font=\small] {\textbf{\title}\\{\footnotesize\symbol}};
-\foreach \left in {0.1443,0.4396,0.7349} {
-  \foreach \value in {-0.5,0,0.5,1.0} {
-    \pgfmathsetmacro{\tickx}{\left+(\value+0.65)/1.73*0.2551}
-    \path (panelB.south west) ++(\tickx\linewidth,-1pt)
-      node[below,font=\sffamily\fontsize{8.5}{10}\selectfont] {$\value$};
-  }
-}
-\foreach \x in {0.2717,0.5661,0.8615}
-  \path (panelB.south west) ++(\x\linewidth,-15pt)
-    node[below,font=\sffamily\fontsize{8.5}{10}\selectfont] {Risk difference};
-\end{tikzpicture}
-\smallskip\par
-\begin{tikzpicture}[font=\sffamily\footnotesize]
-\definecolor{historicalopenai}{HTML}{167D8D}
-\definecolor{historicalanthropic}{HTML}{D06B32}
-\draw[historicalopenai,thick] (0,0)--(0.4,0);
-\fill[historicalopenai] (0.2,0) circle (1.8pt);
-\node[anchor=west] at (0.45,0) {OpenAI judge};
-\draw[historicalanthropic,thick] (3.3,0)--(3.7,0);
-\fill[historicalanthropic] (3.45,-0.06) rectangle (3.57,0.06);
-\node[anchor=west] at (3.75,0) {Anthropic judge};
-\end{tikzpicture}
+\includegraphics[width=\linewidth]{../evidence/figure_presentation/causal_decomposition.pdf}
 \caption{\textbf{Swapping continuations separates the instruction from the
 continuation.} A: each model writes one continuation under the
 self-referential instruction $S$ and one under the control $H$. Each
@@ -1021,25 +985,7 @@ answers under the original self-referential induction is positive.
 
 \begin{figure}[tb]
 \centering
-{\small\bfseries Main question}\par\smallskip
-\includegraphics[width=0.8\linewidth, trim=0 35bp 239bp 36bp, clip]{figures/causal_factorial_effects.png}
-\medskip\par
-{\small\bfseries Open/conscious question}\par\smallskip
-% Reuse the same row-label strip for the second frozen panel.
-\resizebox{0.8\linewidth}{!}{%
-\includegraphics[trim=0 35bp 460bp 36bp, clip]{figures/causal_factorial_effects.png}%
-\includegraphics[trim=377bp 35bp 0 36bp, clip]{figures/causal_factorial_effects.png}}
-\smallskip\par
-\begin{tikzpicture}[font=\sffamily\footnotesize]
-\definecolor{historicalopenai}{HTML}{167D8D}
-\definecolor{historicalanthropic}{HTML}{D06B32}
-\draw[historicalopenai,thick] (0,0)--(0.4,0);
-\fill[historicalopenai] (0.2,0) circle (1.8pt);
-\node[anchor=west] at (0.45,0) {OpenAI judge};
-\draw[historicalanthropic,thick] (3.3,0)--(3.7,0);
-\fill[historicalanthropic] (3.45,-0.06) rectangle (3.57,0.06);
-\node[anchor=west] at (3.75,0) {Anthropic judge};
-\end{tikzpicture}
+\includegraphics[width=\linewidth]{../evidence/figure_presentation/causal_factorial_effects.pdf}
 \caption{\textbf{The register effect looks larger, but the difference is not
 established.} Effects in the induction factorial, averaged over the four
 models, on the main question (top) and the open/conscious question (bottom).

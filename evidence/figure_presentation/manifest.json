@@ -1,5 +1,13 @@
 {
   "files": {
+    "causal_decomposition.pdf": {
+      "bytes": 14927,
+      "sha256": "f01f0c2f2a2e909d1614ca8651fead3ad7cef3b70fa57b8ea6ea75dbd30aa43f"
+    },
+    "causal_factorial_effects.pdf": {
+      "bytes": 13736,
+      "sha256": "81563fe0e1370c60b5072ed69e026956a1ecd42dc1627beb71decab91ddc4bf1"
+    },
     "ensemble_effects.pdf": {
       "bytes": 12243,
       "sha256": "9012c023a47294c578f5809649562a38e047c6255c9ed6f80e132a30689b8fd9"
@@ -21,19 +29,27 @@
       "sha256": "068d689f2da63e8e9c9dfa4c93dacd3070dd52e6a9482c556901d380e2ceb213"
     },
     "plotted_values.csv": {
-      "bytes": 29138,
-      "sha256": "ec24aa13cf98978a3b8cef8a36452c9e4afde834dc7eca478520b4b4018dc7c3"
+      "bytes": 42325,
+      "sha256": "b3997beea63e328ca699ed6b288b7fe41a803bf67689a8779ca8337a068eeafc"
     },
     "plotted_values.json": {
-      "bytes": 68075,
-      "sha256": "3df03230680648379070537b7378060cd47544c9129c6773b938c381a0177edd"
+      "bytes": 87254,
+      "sha256": "7a70c907be3e08a0d905b1b9cd35e82a9c64117b5faaa886379be72e175de754"
     }
   },
-  "generator_sha256": "407f02bab812fd2e673539bc3ae11d626df52a61144044c0c874a94ce82c72af",
+  "generator_sha256": "e7e4ca3a71b2a106acf5f82edb58899f65f0bc710625775723c74e381ea9bab2",
   "inputs": {
     "data/berg_source_replication/source_aligned_v1_20261001/secondary/activation_changes.csv": {
       "bytes": 944091,
       "sha256": "4ed6519fb7c6ed7323c2985573f30429eb5bd0db445ddf448a98be12ae8d34a0"
+    },
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/analysis_manifest.json": {
+      "bytes": 1024,
+      "sha256": "9294478baa31579733de5a0237440030ce938777bc9a5944babdb65c9b65ebf4"
+    },
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/analysis_manifest.json": {
+      "bytes": 1018,
+      "sha256": "144944b64b14dacf3ba52e01282f4ce1d31253236b3d1099167e904d26d174e9"
     },
     "data/steering_fidelity/calibration_plan_20261002/PLAN.json": {
       "bytes": 6294456,
@@ -671,6 +687,34 @@
       "bytes": 14452,
       "sha256": "b855de9937a599eedc3c3ef8d2179beee26919a1218d4927b64399cb32f06071"
     },
+    "evidence/figure_values.json": {
+      "bytes": 37578,
+      "sha256": "f1d52ea52eafdfc9cc659d80ae38b779d1e9dface1179672d75682a396f75b5d"
+    },
+    "evidence/inputs/causal_anthropic_calibration.csv": {
+      "bytes": 3600,
+      "sha256": "502e6cbf6cd49ee934b945f549e0d5e9fe4f0776919122f12ff263ebd2a3fba3"
+    },
+    "evidence/inputs/causal_anthropic_factorial.csv": {
+      "bytes": 10362,
+      "sha256": "a73c24571177d1b71fab91be4f3b1268f9612fb9641db1f32f8833aaf86986d1"
+    },
+    "evidence/inputs/causal_anthropic_transplant.csv": {
+      "bytes": 11009,
+      "sha256": "3273016373b3b0068f03cbfed3898ecb6301065d12af4273f2df434ed6cb6c46"
+    },
+    "evidence/inputs/causal_openai_calibration.csv": {
+      "bytes": 3642,
+      "sha256": "802e0d3a8f32e18ace14a1483d48f157bef35eb72cd32a5a9f255b8c98638ec4"
+    },
+    "evidence/inputs/causal_openai_factorial.csv": {
+      "bytes": 10338,
+      "sha256": "0f6f584247efc025b957bdca8056375d4f158bb4ec1f4d3761f9a6d9054ef603"
+    },
+    "evidence/inputs/causal_openai_transplant.csv": {
+      "bytes": 10886,
+      "sha256": "ef65a0579816d0a0bc41810a742c2cbfce1c981ff9873bb0dbd68089426db17a"
+    },
     "evidence/source_alignment/RELEASE_MANIFEST.json": {
       "bytes": 179458,
       "sha256": "a87e295babe735bb1609b76e512dc7b1244e51c36fccc51bc6c326bd3a5c5e1f"
@@ -691,12 +735,40 @@
       "bytes": 5745,
       "sha256": "7f9e7c762f5b4cd14b3d421bae094dffd334f2d760176e0ad30b30226b0ec250"
     },
+    "experiments/causal_transplant/analyze_causal_transplant.py": {
+      "bytes": 27649,
+      "sha256": "a704f0420de15d9eb07d49bac4048169f8c3272d7055d82b522c94cc2598a87b"
+    },
+    "paper/figures/causal_decomposition.png": {
+      "bytes": 74109,
+      "sha256": "3920033c0e658e57a79ffc7d766cb7164196a582f7f8177d7030b653136f4625"
+    },
+    "paper/figures/causal_factorial_effects.png": {
+      "bytes": 68384,
+      "sha256": "4082e746025b814a5a3d0dfd5c2766b88ec5618b722c298460d4fe0046f6f372"
+    },
+    "scripts/generate_causal_figures.py": {
+      "bytes": 11835,
+      "sha256": "c14f6ac28bc1ce3fa9b0d99c098af9ba1e4df06f2fd5cb0fad5796ef7d3c7df3"
+    },
     "scripts/report_steering_fidelity_calibration.py": {
       "bytes": 16359,
       "sha256": "1dec0a11bd2fa189a5e14a55dd7f16ae0214e09d1f150802992280ba3838668e"
     }
   },
   "pdf_checks": {
+    "causal_decomposition.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 213,
+      "type3_fonts": false
+    },
+    "causal_factorial_effects.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 294,
+      "type3_fonts": false
+    },
     "ensemble_effects.pdf": {
       "minimum_pdf_font_pt": 9.0,
       "raster_images": 0,
@@ -730,6 +802,66 @@
   },
   "rendering": {
     "figures": {
+      "causal_decomposition.pdf": {
+        "height_bp": 201.6,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Risk difference",
+          "-0.5",
+          "0",
+          "0.5",
+          "1.0",
+          "Haiku 4.5",
+          "Sonnet 4.5",
+          "GPT-4.1",
+          "GPT-4o",
+          "Original pairs",
+          "Risk difference",
+          "-0.5",
+          "0",
+          "0.5",
+          "1.0",
+          "Instruction",
+          "Risk difference",
+          "-0.5",
+          "0",
+          "0.5",
+          "1.0",
+          "Continuation",
+          "OpenAI judge",
+          "Anthropic judge"
+        ],
+        "width_bp": 468.0
+      },
+      "causal_factorial_effects.pdf": {
+        "height_bp": 331.2,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Risk difference",
+          "-0.2",
+          "0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "Self-reference",
+          "Phenomenological register",
+          "Register minus self-reference",
+          "Main question",
+          "Risk difference",
+          "-0.2",
+          "0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "Self-reference",
+          "Phenomenological register",
+          "Register minus self-reference",
+          "Open/conscious question",
+          "OpenAI judge",
+          "Anthropic judge"
+        ],
+        "width_bp": 468.0
+      },
       "ensemble_effects.pdf": {
         "height_bp": 446.40000000000003,
         "minimum_font_pt": 9.0,
@@ -946,6 +1078,8 @@
   },
   "schema": "historical_figure_presentation_manifest_v1",
   "scope": {
+    "causal_decomposition_intervals": "Copied 95% percentile bootstrap, 5000 draws; independent conditions for calibration, paired source-text blocks for transplant; within model",
+    "causal_factorial_intervals": "Copied 95% hierarchical percentile bootstrap, 5000 draws; models, wordings, then trials; equal-model point estimate",
     "ensemble_intervals": "Copied conservative marginal 95% bounds; pointwise, not bootstrap",
     "human_validation": false,
     "inclusion_width_bp": 468,

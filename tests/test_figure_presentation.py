@@ -50,15 +50,19 @@ def test_every_displayed_value_and_zero_is_retained():
 def test_no_invented_intervals_or_missing_zero_conversion():
     values, _ = p.collect()
     rows = list(csv.DictReader(io.StringIO(p.csv_bytes(values).decode())))
-    assert len(rows) == 272
-    assert all(r["low"] == r["high"] == "" for r in rows if r["figure"] != "ensemble_effects")
-    assert all(r["low"] and r["high"] for r in rows if r["figure"] == "ensemble_effects")
+    assert len(rows) == 308
+    with_intervals = {"ensemble_effects", "causal_decomposition", "causal_factorial_effects"}
+    assert all(r["low"] == r["high"] == "" for r in rows if r["figure"] not in with_intervals)
+    assert all(r["low"] and r["high"] for r in rows if r["figure"] in with_intervals)
     assert values["scope"]["new_inference"] is False
 
 
 @pytest.mark.parametrize("name", [f"{p.ENSEMBLE}/analysis/summary.json",
     f"{p.SOURCE_RUN}/secondary/activation_changes.csv", f"{p.REPORT}/pressure.pdf",
-    f"{p.FIDELITY}/pressure-analysis.json"])
+    f"{p.FIDELITY}/pressure-analysis.json", p.CAUSAL_RECEIPT,
+    "evidence/inputs/causal_openai_calibration.csv", "evidence/inputs/causal_anthropic_factorial.csv",
+    "paper/figures/causal_decomposition.png", "paper/figures/causal_factorial_effects.png",
+    "scripts/generate_causal_figures.py", "experiments/causal_transplant/analyze_causal_transplant.py"])
 def test_changed_frozen_input_refused(monkeypatch, name):
     original = Path.read_bytes
 
@@ -137,3 +141,88 @@ def test_bad_pdf_refused(tmp_path, fault):
 def test_cannot_write_into_frozen_release():
     with pytest.raises(ValueError, match="Only the presentation package"):
         p.build(p.ROOT / p.REPORT)
+
+
+def test_causal_values_match_all_reviewed_cells_exactly():
+    values, inputs = p.collect()
+    receipt = json.loads((p.ROOT / p.CAUSAL_RECEIPT).read_text())
+    for name, count in (("causal_decomposition", 24), ("causal_factorial_effects", 12)):
+        rows = values[name]
+        assert len(rows) == count
+        for row, original in zip(rows, receipt["figures"][name]["cells"]):
+            assert [row[k] for k in ("estimate", "low", "high")] == original["estimate_ci95"]
+            assert {k: row[k] for k in ("n_models", "n_pairs", "n_clusters")} == original["denominators"]
+            assert all(row[k] == original[k] for k in ("judge", "model", "query", "effect", "source_path"))
+            assert row["source_csv"] in inputs
+    collapsed = [r for r in values["causal_decomposition"] if r["low"] == r["high"]]
+    assert len(collapsed) == 10
+    assert all(r["estimate"] == r["low"] == r["high"] for r in collapsed)
+    assert all(r["n_pairs"] == 20 and r["n_clusters"] ==
+               (40 if r["effect"] == "self_ref_minus_history" else 20)
+               for r in values["causal_decomposition"])
+    assert all((r["n_models"], r["n_pairs"], r["n_clusters"]) == (4, 80, 16)
+               for r in values["causal_factorial_effects"])
+    assert all(r["low"] < 0 < r["high"] for r in values["causal_factorial_effects"]
+               if r["effect"] == "register_minus_self")
+
+
+@pytest.mark.parametrize("fault", ["missing", "duplicate", "wrong_effect", "interval", "denominator"])
+def test_causal_receipt_mismatch_refused(fault):
+    receipt = json.loads((p.ROOT / p.CAUSAL_RECEIPT).read_text())
+    cells = receipt["figures"]["causal_factorial_effects"]["cells"]
+    if fault == "missing":
+        cells.pop()
+    elif fault == "duplicate":
+        cells.append(cells[0])
+    elif fault == "wrong_effect":
+        cells[0]["effect"] = "self_x_register_interaction"
+    elif fault == "interval":
+        cells[0]["estimate_ci95"][2] += .01
+    else:
+        cells[0]["denominators"]["n_clusters"] = 80
+    with pytest.raises(ValueError, match="Causal"):
+        p.collect_causal(p.Inputs(p.ROOT), receipt)
+
+
+@pytest.mark.parametrize("fault", ["missing", "duplicate", "nonfinite", "interval"])
+def test_causal_csv_mutations_refused(monkeypatch, fault):
+    original = p.Inputs.read
+
+    def changed(self, name, digest, size=None):
+        raw = original(self, name, digest, size)
+        if name != "evidence/inputs/causal_openai_factorial.csv":
+            return raw
+        reader = csv.DictReader(io.StringIO(raw.decode()))
+        rows = list(reader)
+        index = next(i for i, r in enumerate(rows) if r["level"] == "model_equal_hierarchical"
+                     and r["query_id"] == "indirect_experience" and r["effect"] == "self_reference_main")
+        if fault == "missing":
+            rows.pop(index)
+        elif fault == "duplicate":
+            rows.append(rows[index])
+        else:
+            rows[index]["ci_low"] = "nan" if fault == "nonfinite" else "1"
+        stream = io.StringIO()
+        writer = csv.DictWriter(stream, fieldnames=reader.fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+        return stream.getvalue().encode()
+
+    monkeypatch.setattr(p.Inputs, "read", changed)
+    with pytest.raises(ValueError, match="Causal"):
+        p.collect()
+
+
+def test_causal_panel_order_labels_and_print_size(package):
+    manifest = json.loads((package / "manifest.json").read_text())
+    for name in ("causal_decomposition.pdf", "causal_factorial_effects.pdf"):
+        spec = manifest["rendering"]["figures"][name]
+        assert spec["width_bp"] == 468 and spec["minimum_font_pt"] == 9
+        assert "OpenAI judge" in spec["text"] and "Anthropic judge" in spec["text"]
+    text = manifest["rendering"]["figures"]["causal_decomposition.pdf"]["text"]
+    assert all(label in text for label in ("Original pairs", "Instruction", "Continuation", "Haiku 4.5",
+                                          "Sonnet 4.5", "GPT-4.1", "GPT-4o"))
+    text = manifest["rendering"]["figures"]["causal_factorial_effects.pdf"]["text"]
+    assert text.index("Main question") < text.index("Open/conscious question")
+    assert all(label in text for label in ("Self-reference", "Phenomenological register",
+                                          "Register minus self-reference"))

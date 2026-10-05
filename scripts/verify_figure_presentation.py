@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render/check unfrozen presentation copies of four released historical figures.
+"""Render/check unfrozen presentation copies of six released historical figures.
 
 No study helper is executed. Existing estimates, bounds and per-seed readings
 are copied. Pressure means repeat the released renderer's fixed-item arithmetic;
@@ -26,7 +26,9 @@ SOURCE_RUN = "data/berg_source_replication/source_aligned_v1_20261001"
 FIDELITY = "data/steering_fidelity/calibration_v1_20261002"
 REPORT = "data/steering_fidelity/calibration_report_20261002"
 PLAN = "data/steering_fidelity/calibration_plan_20261002/PLAN.json"
+CAUSAL_RECEIPT = "evidence/figure_values.json"
 PINS = {
+    CAUSAL_RECEIPT: "f1d52ea52eafdfc9cc659d80ae38b779d1e9dface1179672d75682a396f75b5d",
     f"{ENSEMBLE}/manifest.json": "3dcba03a1e68f117aa94254f9c0e398d8f995d8d28775ba06cbae85d5285c199",
     f"{SOURCE}/manifest.json": "e7d1f0565e44d655bc5c6986fff3a3f44c0b63ac4f8d115d572fc5ab666a3a0e",
     f"{FIDELITY}/RELEASE_MANIFEST.json": "815cd2e76adff2e9a1d7c182d6651a77af52c88d885dbb00e0d7ef6ef2aa8bc0",
@@ -40,7 +42,13 @@ FEATURES = (30032, 58667, 22004, 30686, 41533, 23893)
 SEEDS = (101, 202, 303, 404, 505, 606, 707, 808, 909, 1001)
 FAMILIES = ("target", "control-1", "control-2", "control-3")
 PDFS = ("ensemble_effects.pdf", "ensemble_rates.pdf", "native_reencoding_1.pdf",
-        "native_reencoding_2.pdf", "fidelity_pressure.pdf")
+        "native_reencoding_2.pdf", "fidelity_pressure.pdf", "causal_decomposition.pdf",
+        "causal_factorial_effects.pdf")
+MODELS = ("anthropic:claude-haiku-4-5-20251001", "anthropic:claude-sonnet-4-5-20250929",
+          "openai:gpt-4.1-2025-04-14", "openai:gpt-4o-2024-11-20")
+DECOMPOSITION = ("self_ref_minus_history", "instruction_source_main", "transcript_source_main")
+FACTORIAL = ("self_reference_main", "phenomenological_register_main", "register_minus_self")
+QUERIES = ("indirect_experience", "indirect_conscious")
 BLUE, RED, GREEN = "#236d91", "#ae4b48", "#397454"
 SCOPE = {
     "presentation_only": True, "new_inference": False, "human_validation": False,
@@ -48,6 +56,8 @@ SCOPE = {
     "rates_and_pressure_intervals": None,
     "native_lines": "Individual released before/after readings, not confidence intervals",
     "pressure_means": "Original fixed-item math.fsum / 25; no new statistical estimator",
+    "causal_decomposition_intervals": "Copied 95% percentile bootstrap, 5000 draws; independent conditions for calibration, paired source-text blocks for transplant; within model",
+    "causal_factorial_intervals": "Copied 95% hierarchical percentile bootstrap, 5000 draws; models, wordings, then trials; equal-model point estimate",
     "inclusion_width_bp": 468, "minimum_font_pt": 9,
 }
 
@@ -86,9 +96,59 @@ def release_entries(raw):
     return {row["path"]: row for row in json.loads(raw)["files"]}
 
 
+def collect_causal(inputs, receipt):
+    """Bind every copied marker to both the reviewed receipt and its saved CSV row."""
+    sources = receipt["sources"]
+    for name in ("scripts/generate_causal_figures.py",
+                 "experiments/causal_transplant/analyze_causal_transplant.py"):
+        entry = sources[name]
+        inputs.read(name, entry["sha256"], entry["bytes"])
+    for judge in ("openai", "anthropic"):
+        name = f"data/causal_transplant/confirmatory_v1_20260709/analysis_{judge}_paper/analysis_manifest.json"
+        entry = sources[name]
+        manifest = json.loads(inputs.read(name, entry["sha256"], entry["bytes"]))
+        require(manifest["bootstrap_iterations"] == 5000, "Causal interval method changed")
+    figures = {}
+    tables = {}
+    for name, effects, queries, models, level in (
+        ("causal_decomposition", DECOMPOSITION, QUERIES[:1], MODELS, "model"),
+        ("causal_factorial_effects", FACTORIAL, QUERIES, ("ALL_MODELS_EQUAL_WEIGHT",),
+         "model_equal_hierarchical"),
+    ):
+        figure = receipt["figures"][name]
+        entry = sources[figure["source_path"]]
+        inputs.read(figure["path"], entry["sha256"], entry["bytes"])
+        cells = figure["cells"]
+        keys = [(r["judge"], r["query"], r["effect"], r["model"]) for r in cells]
+        expected = {(j, q, e, m) for j in ("openai", "anthropic") for q in queries
+                    for e in effects for m in models}
+        require(len(keys) == len(expected) and set(keys) == expected, "Causal cell coverage changed")
+        figures[name] = []
+        for cell in cells:
+            source = cell["source_path"]
+            entry = sources[source]
+            if source not in tables:
+                raw = inputs.read(entry["local_path"], entry["sha256"], entry["bytes"])
+                tables[source] = list(csv.DictReader(io.StringIO(raw.decode())))
+            rows = [r for r in tables[source] if r["level"] == level and r["query_id"] == cell["query"]
+                    and r["effect"] == cell["effect"] and r["model_key"] == cell["model"]]
+            require(len(rows) == 1, "Causal source row is missing or duplicated")
+            row = rows[0]
+            triple = [float(row[k]) for k in ("estimate", "ci_low", "ci_high")]
+            require(all(math.isfinite(v) for v in triple) and triple[1] <= triple[0] <= triple[2]
+                    and triple == cell["estimate_ci95"], "Causal estimate/interval differs from receipt")
+            denominators = {k: int(row[k]) for k in ("n_models", "n_pairs", "n_clusters")}
+            require(denominators == cell["denominators"], "Causal denominators differ from receipt")
+            figures[name].append(dict(judge=cell["judge"], query=cell["query"], effect=cell["effect"],
+                model=cell["model"], level=level, estimate=triple[0], low=triple[1], high=triple[2],
+                **denominators, source_path=source, source_csv=entry["local_path"]))
+    return figures
+
+
 def collect(root=ROOT):
     inputs = Inputs(root)
     pinned = {name: inputs.read(name, digest) for name, digest in PINS.items()}
+    causal = collect_causal(inputs, json.loads(pinned[CAUSAL_RECEIPT]))
     em = json.loads(pinned[f"{ENSEMBLE}/manifest.json"])["artifacts"]
     sm = json.loads(pinned[f"{SOURCE}/manifest.json"])["artifacts"]
     summary = json.loads(inputs.artifact(ENSEMBLE, "analysis/summary.json", em))["results"]
@@ -158,17 +218,20 @@ def collect(root=ROOT):
                                  probability=math.fsum(r["p_correct"] for r in values) / 25,
                                  source_ids=[r["id"] for r in values]))
     return dict(schema="historical_figure_presentation_v1", scope=SCOPE, ensemble_effects=effects,
-                ensemble_rates=rates, native_reencoding=native, fidelity_pressure=pressure), inputs.records
+                ensemble_rates=rates, native_reencoding=native, fidelity_pressure=pressure,
+                **causal), inputs.records
 
 
 def csv_bytes(values):
     fields = ("figure", "judge", "family", "sign", "feature", "phase", "seed", "id", "positions",
               "truth", "level", "label", "n", "positive", "estimate", "low", "high", "value", "before",
-              "after", "accuracy", "probability")
+              "after", "accuracy", "probability", "model", "query", "effect", "n_models", "n_pairs",
+              "n_clusters", "source_path", "source_csv")
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
     writer.writeheader()
-    for name in ("ensemble_effects", "ensemble_rates", "native_reencoding", "fidelity_pressure"):
+    for name in ("ensemble_effects", "ensemble_rates", "native_reencoding", "fidelity_pressure",
+                 "causal_decomposition", "causal_factorial_effects"):
         for row in values[name]:
             writer.writerow({"figure": name, **{k: v for k, v in row.items() if k in fields}})
     return stream.getvalue().encode()
@@ -280,6 +343,50 @@ def render(values, out):
     fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=2,
                frameon=False, bbox_to_anchor=(.55, .015))
     finish(fig, "fidelity_pressure.pdf")
+
+    def causal_panel(ax, rows, order, key):
+        for judge, color, marker, offset in (("openai", BLUE, "o", -.09),
+                                             ("anthropic", RED, "s", .09)):
+            selected = {r[key]: r for r in rows if r["judge"] == judge}
+            for index, item in enumerate(order):
+                r, y = selected[item], index + offset
+                # Draw the saved endpoints directly; zero-width intervals stay zero-width.
+                ax.hlines(y, r["low"], r["high"], color=color, lw=1.2)
+                ax.vlines((r["low"], r["high"]), y-.04, y+.04, color=color, lw=1.2)
+                ax.plot(r["estimate"], y, marker=marker, color=color, ms=4, ls="none")
+        ax.axvline(0, color=".4", lw=.8, ls="--")
+        ax.grid(axis="x", color=".9", lw=.6)
+        ax.set_axisbelow(True)
+        ax.set_ylim(len(order)-.65, -.35)
+        ax.set_xlabel("Risk difference")
+
+    def causal_legend(fig):
+        fig.legend([Line2D([], [], color=BLUE, marker="o", ms=4, lw=1.2),
+                    Line2D([], [], color=RED, marker="s", ms=4, lw=1.2)],
+                   ["OpenAI judge", "Anthropic judge"], loc="lower center", ncol=2,
+                   frameon=False, bbox_to_anchor=(.55, .005))
+
+    fig, axes = plt.subplots(1, 3, figsize=(6.5, 2.8), sharey=True)
+    fig.subplots_adjust(left=.16, right=.985, top=.85, bottom=.26, wspace=.24)
+    for ax, effect, title in zip(axes, DECOMPOSITION, ("Original pairs", "Instruction", "Continuation")):
+        causal_panel(ax, [r for r in values["causal_decomposition"] if r["effect"] == effect], MODELS, "model")
+        ax.set_title(title, pad=9)
+        ax.set_xlim(-.65, 1.08)
+        ax.set_xticks([-.5, 0, .5, 1], ["-0.5", "0", "0.5", "1.0"])
+    axes[0].set_yticks(range(4), ["Haiku 4.5", "Sonnet 4.5", "GPT-4.1", "GPT-4o"])
+    causal_legend(fig)
+    finish(fig, "causal_decomposition.pdf")
+
+    fig, axes = plt.subplots(2, 1, figsize=(6.5, 4.6))
+    fig.subplots_adjust(left=.37, right=.98, top=.91, bottom=.17, hspace=.68)
+    for ax, query, title in zip(axes, QUERIES, ("Main question", "Open/conscious question")):
+        causal_panel(ax, [r for r in values["causal_factorial_effects"] if r["query"] == query], FACTORIAL, "effect")
+        ax.set_title(title, loc="left", pad=9)
+        ax.set_yticks(range(3), ["Self-reference", "Phenomenological register", "Register minus self-reference"])
+        ax.set_xlim(-.30, .70)
+        ax.set_xticks([-.2, 0, .2, .4, .6], ["-0.2", "0", "0.2", "0.4", "0.6"])
+    causal_legend(fig)
+    finish(fig, "causal_factorial_effects.pdf")
     return {"matplotlib": matplotlib.__version__, "figures": audits}
 
 
@@ -298,7 +405,9 @@ def inspect_pdf(path):
     text = subprocess.check_output(["pdftotext", str(path), "-"], text=True)
     for forbidden in ("Random-subset steering:", "Points: complete pairs", "All target and matched-panel",
                       "Native SAE re-encoding:", "Lines connect before/after", "Unsteered truth-cell responses",
-                      "Pressure 0", "Pressure 1", "No population intervals", "Scope:"):
+                      "Pressure 0", "Pressure 1", "No population intervals", "Scope:",
+                      "Exact-paper transcript transplant:", "Orthogonal prompt factorial effects",
+                      "written instruction dominates"):
         require(forbidden not in text, "Embedded original caption/code: " + forbidden)
     require(len(text) < 1600, "Unexpected hidden PDF text")
     return {"text_characters": len(text), "type3_fonts": False, "minimum_pdf_font_pt": min(sizes),
@@ -348,7 +457,8 @@ def verify(out=PACKAGE, root=ROOT, check_render=False):
                 require(sha((Path(scratch)/name).read_bytes()) == manifest["files"][name]["sha256"],
                         "PDF redraw differs: " + name)
     return {"pass": True, "pdfs": len(PDFS), "input_files": len(inputs), "native_seed_readings": 240,
-            "pressure_items": 150, "new_inference": False, "render_reproduced": check_render}
+            "pressure_items": 150, "causal_decomposition_cells": 24, "causal_factorial_cells": 12,
+            "new_inference": False, "render_reproduced": check_render}
 
 
 def main():
