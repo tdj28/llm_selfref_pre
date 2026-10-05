@@ -96,14 +96,31 @@ methodological additions do not change the current manuscript bibliography,
 claim that every full text received a theorem-level audit, or report a new
 experiment.
 
-## Current-Paper Synchronization (2026-10-04)
+## Current-Paper Synchronization (2026-10-05)
 
-Six missing entries were copied exactly from the current
+Every work in the current paper bibliography is represented in the root
+collection, using the existing canonical keys where they differ. This is
+work-level coverage, not identical metadata across existing entries.
+
+On 2026-10-04, six missing entries were copied exactly from
 [`paper/references.bib`](../paper/references.bib): `binder2024looking`,
 `lindsey2025introspective`, `perez2023selfreports`, `rimsky2024caa`,
-`kaiser2026sentience`, and `balani2026instability`. This synchronization reuses
-the manuscript's already-verified metadata; it performs no new literature
-verification and makes no new claim about the cited findings.
+`kaiser2026sentience`, and `balani2026instability`.
+
+The 2026-10-05 synchronization adds eleven entries exactly as they appear in
+the current paper: `singh2026introspect`, `arad2025steering`,
+`hoang2026conceptsfunctions`, `chen2026judgeconstruct`,
+`pattnayak2026reproevalcard`, `plisiecki2026pinocchio`,
+`plisiecki2026twoprocess`, `plisiecki2026gap`, `qwen2026modelcard`,
+`mistral2026medium`, and `alephalpha2026kolibri`. It copies existing manuscript
+metadata; it performs no new web or literature verification and makes no new
+claim about the cited findings.
+
+Title, author and arXiv metadata identify `ma2026sparse` as the existing
+`ma2026reasoning` work (arXiv 2601.05679). Its root key and version-7 record
+are retained, with an alias comment rather than a duplicate entry. Existing
+entries are otherwise unchanged, including their version or venue metadata
+where it differs from the paper.
 
 Templeton's fuller author list and report metadata now match the paper, under
 the existing root key `templeton2024scaling_monosemanticity`; the alias comment
