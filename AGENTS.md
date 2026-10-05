@@ -11,10 +11,14 @@ None alone settles whether language models are conscious.
   allocated separate $200 OpenRouter and $200 RunPod budgets. The Qwen/Mistral
   extension's technical fixtures failed before research prompts, adding a
   $0.5550459 conservative bound. The separate
-  [A1 repair](experiments/openrouter_swap_openweights_a1/PROTOCOL.md) carries
-  $84.64275336 inside the $200 provider ceiling and retains the failed cost
-  inside the $25 fixture/screen allowance. Require its pushed plan, fresh
-  fixtures, initial-row audit and measured main admission;
+  [A1 repair](data/openrouter_swap_openweights_a1/README.md) passed its 26
+  fixtures, then stopped during the initial screen on conservative Mistral
+  over-reservation. Preserve all 92 settled calls, including two empty capped
+  answers; neither screen nor main completed. Cumulative cost is bounded by
+  $86.49042896, including every failure. Any technical continuation needs its
+  own pushed plan and immutable-prefix audit, without regenerating existing
+  calls or changing scientific settings. Retain the $25 fixture/screen cap
+  and measured whole-main admission;
   do not reuse the superseded $250 ceiling or borrow from RunPod. Earlier
   frozen releases remain unchanged. The GPU repair has its own plan and costs.
 - Collection is closed for publication. The current work is evidence

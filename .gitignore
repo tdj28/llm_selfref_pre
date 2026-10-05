@@ -782,3 +782,8 @@ data/openrouter_swap_openweights_a1/*
 data/openrouter_swap_openweights_a1/plan_v1/*
 !data/openrouter_swap_openweights_a1/plan_v1/PLAN.json
 !data/openrouter_swap_openweights_a1/plan_v1/ENDPOINTS.json
+
+# Interrupted initial screen: exact receipts and prefix-reconstructed fixtures.
+!data/openrouter_swap_openweights_a1/README.md
+!data/openrouter_swap_openweights_a1/initial_failure_v1_20261004/
+!data/openrouter_swap_openweights_a1/initial_failure_v1_20261004/**
