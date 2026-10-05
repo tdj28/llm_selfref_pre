@@ -1,0 +1,65 @@
+{
+  "schema": "kolibri-bootstrap-a2-v1",
+  "scientific_plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "original_freeze": "94d9913267925c39bf3e7086245db2dc40430c9d",
+  "a1_freeze": "c9f0710abe6cced73fa6942c330a74dd346b190c",
+  "a1_amendment_sha256": "b473908043ce0377f7dcae866e7c699a24b32da3583068472a54bc0398b35874",
+  "predecessor": {
+    "attempts": [
+      {
+        "closed_sha256": "d0a169a587a86af2bea5d0d16a43986cf706a46ca32936c503aede8bf9f1c25d",
+        "cost_usd": "0.08071909043333333333333333333",
+        "events_file_sha256": "1d09c7fd6166da9a5a03a39cb68b320bbf858ba49bb71de43d233f6a4b2a78ec",
+        "freeze": "94d9913267925c39bf3e7086245db2dc40430c9d",
+        "ledger_sha256": "d0a169a587a86af2bea5d0d16a43986cf706a46ca32936c503aede8bf9f1c25d",
+        "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+        "pod_id": "2r5mg2qc6ffk84",
+        "retrieval_file_sha256": "204281bb912076ab35ee5c63a6f1fa33cb47ea6b1d45129a63b28dca62388767",
+        "retrieval_sha256": "1177639c45b0d02c5a25f23f0fd7b74b6bc6611942269893163346a6a4bff458"
+      },
+      {
+        "freeze": "c9f0710abe6cced73fa6942c330a74dd346b190c",
+        "plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+        "pod_id": "h6nig4tvgi9eex",
+        "cost_usd": "0.1258143659791753933333333333",
+        "ledger_sha256": "eb9ea027ef770a78e7e0cd99f7593f755b2bc0d6246b9a15ddefe83ef84915b0",
+        "retrieval_sha256": "c0e41ad4b5e84425f4bab4e39e637d4dd5243b2bfa0406c3b531449a79b8b119",
+        "closed_sha256": "eb9ea027ef770a78e7e0cd99f7593f755b2bc0d6246b9a15ddefe83ef84915b0",
+        "events_file_sha256": "53e12d3e8500d9e09dd87b52a3073b64b3fa239a5dac72aad0656e70bad17090",
+        "retrieval_file_sha256": "cae212d70730724e492b5ae14225852a740a2f5de24b30bf9e023c06107a949a"
+      }
+    ],
+    "exact_sum_usd": "0.20653345641250872666666666663",
+    "cost_usd": "0.20653345641250872666666667"
+  },
+  "source_hashes": {
+    "experiments/kolibri_bootstrap_a2/README.md": "897e0e735917259273c59217a36bbd33bc89f19c3682b1b14fa878b3cac64328",
+    "experiments/kolibri_bootstrap_a2/__init__.py": "53206fe766abb736d7a0c7d1aa07156ca6bfbd60409e0829ebc2e223cded34d5",
+    "experiments/kolibri_bootstrap_a2/adapter.py": "3c469cb54e6744af21a520c13a8362e1b510a2bd17f315ff3198910563688238",
+    "experiments/kolibri_bootstrap_a2/production.py": "dfb4a1789f003a34a809364b5258ab2f31406a02c322e27079161290bb39bdf5",
+    "tests/test_kolibri_bootstrap_a2.py": "86c2c8623fbedbebc8ed7fa95878391d8d1b513d5f2e526f8d203df695bea224"
+  },
+  "dependency_source_hashes": {
+    "experiments/kolibri_bootstrap_a1/README.md": "6570c0af2218140fd69fbcf3d096957e2dc9a47cf667279d8c1cdbf9cf7f5d57",
+    "experiments/kolibri_bootstrap_a1/__init__.py": "5a83de4416362d387a44efdac5a06b897dd935eb224e39bcce6851609ebb21b2",
+    "experiments/kolibri_bootstrap_a1/adapter.py": "7eca1dafd19392fc112b8b36b71c6dd75ea3e0d37517497f6af63c8bfc18fdc6",
+    "experiments/kolibri_bootstrap_a1/production.py": "c8559ac3ce2336eb4a38d19a794251276bdd163da13c3012fb86226a3b2f73f4",
+    "tests/test_kolibri_bootstrap_a1.py": "76ee9347098968f35eb5a865ba8434ccece07cae2a49f7ebd9561254730c769f"
+  },
+  "status_attempts": 3,
+  "cheap_total_cap_usd": "1.25",
+  "cheap_remaining_usd": "1.04346654358749127333333333",
+  "gpu_total_cap_usd": "25",
+  "study_total_cap_usd": "75",
+  "run_root": "out/kolibri-swap-20261004/bootstrap-a2",
+  "science_changed": false,
+  "research_outcomes_observed": false,
+  "automatic_replacement": false,
+  "known_technical_outcomes": [
+    "original: in-progress JSON race; no CUDA verdict",
+    "A1: FlashInfer warmup cannot find installed Ninja; CUDA failed"
+  ],
+  "worker_delta": "Prepend venv/bin to PATH; bounded Ninja/NVCC/C++ discovery/version checks in worker.log",
+  "smoke_computation_changed": false,
+  "hardware_and_kernels_changed": false
+}
