@@ -1,0 +1,37 @@
+{
+  "a2_amendment_sha256": "1cd27192fe05d8c9e7b7c35e1880d040d851e3dad40dd0d01f3a58cdcdd2e9af",
+  "additional_attempts": 2,
+  "all_physical_costs_in_forecast": true,
+  "backoff_seconds": [
+    2,
+    5
+  ],
+  "deadline_seconds_per_attempt": 600,
+  "exhaustion": "halt; retain missing label and all charges",
+  "generation_retries": 0,
+  "input_hashes": {
+    "data/kolibri_bootstrap_a2/plan_v1_20261005/AMENDMENT.json": "1cd27192fe05d8c9e7b7c35e1880d040d851e3dad40dd0d01f3a58cdcdd2e9af",
+    "data/kolibri_swap/plan_v1_20261004/PLAN.json": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609"
+  },
+  "judges_only": true,
+  "new_budget_usd": "0",
+  "original_worker_runtime_binding_retained": true,
+  "phases": [
+    "fixtures",
+    "screen",
+    "main"
+  ],
+  "prior_cheap_usd": "0.20653345641250872666666667",
+  "refusal_is_missing_not_negative": true,
+  "refusal_policy_basis": "Known sibling-study receipt shape; activate before first Kolibri judgment",
+  "refusal_retry": false,
+  "schema": "kolibri-judge-transport-v1",
+  "scientific_plan_sha256": "b3bf5539e89b20752073c68aee4045d2662c282264724d774b97b40263908609",
+  "source_hashes": {
+    "experiments/kolibri_judge_transport.py": "efa5ce775055f507a18aa7c8c93f3b22079f2b4a43e14fffac5399683dee025d",
+    "tests/test_kolibri_judge_transport.py": "2d024c291315fa0becc5b8a381f9a489a897cec34164803794dcad389dc6b218"
+  },
+  "terminal_refusal": "Azure auto-tier content_filter; exact identity; zero tokens/cost; preserve full reservation",
+  "unknown_charges_retained": true,
+  "worker_freeze": "9333faaf8d38a579cc9815d7b068d6c90ade4abf"
+}
