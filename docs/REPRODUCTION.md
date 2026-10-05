@@ -71,6 +71,26 @@ integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
 
+The repeated-study check uses `scripts/verify_repeated_portable.py` with the
+same read-only arguments as `scripts/verify_repeated_extension.py`. The wrapper
+runs that original verifier, including raw-receipt replay and figure checks,
+inside the narrowly scoped `experiments/repeat_release_portability.py` context.
+The original tests remain collected; an additional test verifies the actual
+completed release. No workflow, frozen reporter, release, or figure is rewritten.
+
+On Linux, Python 3.10.21 and 3.12.14 both reproduced one descriptive variance
+interval endpoint one ULP from its saved value. The adapter accepts only the
+manifest-bound saved analysis or that measured entire Linux analysis hash,
+and only the exact float pair at
+`models/gemini/judges/opus/paper/variance/SH/bootstrap/B_interval/0`.
+It requires unchanged interval ordering and zero crossing; all other fields
+and derived files remain exact. The saved analysis stays canonical for paper
+bindings. This is a post-outcome reporting repair, not a changed analysis or
+a generic numerical tolerance. Both failed hosted replays are preserved in
+[`provenance/repeated_release_portability.json`](../provenance/repeated_release_portability.json).
+The portable command separately reports whether the current replay was exact
+or used the measured pair; the original strict verifier is unchanged.
+
 The completed bilingual Llama B1 pilot has a frozen raw-to-figure analysis.
 This offline wrapper additionally rejects symlinked/nonregular inputs before
 copying them. It makes no model calls and preserves the original files:
