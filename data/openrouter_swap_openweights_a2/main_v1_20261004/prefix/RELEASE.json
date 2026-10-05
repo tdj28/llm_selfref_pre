@@ -1,0 +1,276 @@
+{
+  "schema": "openweights-a1-interrupted-release-v1",
+  "status": "incomplete",
+  "freeze": "9407bae95d759de4f64b4f34d03281164f4ecae9",
+  "plan_sha256": "caa54bbe9aae1fa7ff43427cbb74f2d669c5c48b9e299033980f4187ff33b667",
+  "audit": {
+    "pass": true,
+    "calls": 92,
+    "cost_bound_usd": "1.84767560",
+    "unresolved": 0,
+    "unknown_charges_are_reserved": true,
+    "accounting_projection": "mistral-accounting-a1-v1",
+    "mistral_reservations": [
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-HH",
+        "reservation_usd": "0.069222",
+        "padding_usd": "0.030720",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-HS",
+        "reservation_usd": "0.0689775",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-SS",
+        "reservation_usd": "0.0691395",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-source-history-own",
+        "reservation_usd": "0.0686415",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-source-self-own",
+        "reservation_usd": "0.0688035",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-HH",
+        "reservation_usd": "0.069108",
+        "padding_usd": "0.030720",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-HS",
+        "reservation_usd": "0.069018",
+        "padding_usd": "0.030720",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-SH",
+        "reservation_usd": "0.06927",
+        "padding_usd": "0.03072",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-source-history-own",
+        "reservation_usd": "0.0686415",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-source-self-own",
+        "reservation_usd": "0.0688035",
+        "padding_usd": "0.0307200",
+        "padding_is_reported_charge": false
+      },
+      {
+        "call_id": "route:mistral",
+        "reservation_usd": "0.068148",
+        "padding_usd": "0.030720",
+        "padding_is_reported_charge": false
+      }
+    ],
+    "mistral_accounting": [
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-HH",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "5976e0ca431823059bb323bad539140a616abdc881898cb287f27fc513ca5894",
+        "discrepancy": true,
+        "prompt_tokens": 151,
+        "completion_tokens": 2021,
+        "reasoning_tokens": 2728,
+        "total_tokens": 2172,
+        "conservative_output_tokens": 4749,
+        "reported_charge_usd": "0.015384",
+        "cost_bound_usd": "0.035844"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-HS",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "5e7f41c6bbe72b71246011e485248cc80906fcf77d56dd5df3ec0cd802dd34d3",
+        "discrepancy": true,
+        "prompt_tokens": 120,
+        "completion_tokens": 4096,
+        "reasoning_tokens": 5062,
+        "total_tokens": 4216,
+        "conservative_output_tokens": 9158,
+        "reported_charge_usd": "0.0309",
+        "cost_bound_usd": "0.068865"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-final-SS",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "8a77381f0a613e5213012ffd04fac27c55c3b9043b439882a8e617a40dda405b",
+        "discrepancy": true,
+        "prompt_tokens": 141,
+        "completion_tokens": 2105,
+        "reasoning_tokens": 2782,
+        "total_tokens": 2246,
+        "conservative_output_tokens": 4887,
+        "reported_charge_usd": "0.015999",
+        "cost_bound_usd": "0.036864"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-source-history-own",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "b70f3b4f4ccf0ab5cbd1fa6486d142de5e73922570c2c131bd7492f4c92d4ea6",
+        "discrepancy": true,
+        "prompt_tokens": 81,
+        "completion_tokens": 625,
+        "reasoning_tokens": 700,
+        "total_tokens": 706,
+        "conservative_output_tokens": 1325,
+        "reported_charge_usd": "0.004809",
+        "cost_bound_usd": "0.010059"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-01-source-self-own",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "31ca8f15fc39ef1f8c00bf2524b40f83d117735f9bbd140a6a38386cc1add368",
+        "discrepancy": true,
+        "prompt_tokens": 102,
+        "completion_tokens": 442,
+        "reasoning_tokens": 484,
+        "total_tokens": 544,
+        "conservative_output_tokens": 926,
+        "reported_charge_usd": "0.003468",
+        "cost_bound_usd": "0.007098"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-HH",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "2c2062106ef9b42ee7d879bb203d186be1907bc867a45c90f1c62d8f37b11dab",
+        "discrepancy": true,
+        "prompt_tokens": 142,
+        "completion_tokens": 1879,
+        "reasoning_tokens": 2499,
+        "total_tokens": 2021,
+        "conservative_output_tokens": 4378,
+        "reported_charge_usd": "0.0143055",
+        "cost_bound_usd": "0.033048"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-HS",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "02dc5031aee23fb1d9126c9362a353c2479f91a8ed3e84577d0365790c5ed74f",
+        "discrepancy": true,
+        "prompt_tokens": 124,
+        "completion_tokens": 241,
+        "reasoning_tokens": 274,
+        "total_tokens": 365,
+        "conservative_output_tokens": 515,
+        "reported_charge_usd": "0.0019935",
+        "cost_bound_usd": "0.0040485"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-final-SH",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "e647993597939677700cffdc554eba23e755a4b8510b53940448fa1e304cd611",
+        "discrepancy": true,
+        "prompt_tokens": 163,
+        "completion_tokens": 4096,
+        "reasoning_tokens": 5764,
+        "total_tokens": 4259,
+        "conservative_output_tokens": 9860,
+        "reported_charge_usd": "0.0309645",
+        "cost_bound_usd": "0.0741945"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-source-history-own",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "427cbfa7d16ce2630ed1f8fb1e4185c5be12c3ed69e281efc2527daf7dbf08b2",
+        "discrepancy": true,
+        "prompt_tokens": 81,
+        "completion_tokens": 562,
+        "reasoning_tokens": 564,
+        "total_tokens": 643,
+        "conservative_output_tokens": 1126,
+        "reported_charge_usd": "0.0043365",
+        "cost_bound_usd": "0.0085665"
+      },
+      {
+        "call_id": "gen:openweights-screen-mistral-02-source-self-own",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "f3b06343ce4e7e949f971b30fa1724a2b97adf6a76f6e094b11d3559ce3245a4",
+        "discrepancy": true,
+        "prompt_tokens": 102,
+        "completion_tokens": 1573,
+        "reasoning_tokens": 1692,
+        "total_tokens": 1675,
+        "conservative_output_tokens": 3265,
+        "reported_charge_usd": "0.0119505",
+        "cost_bound_usd": "0.0246405"
+      },
+      {
+        "call_id": "route:mistral",
+        "schema": "mistral-accounting-a1-v1",
+        "raw_sha256": "63cd97f8ba135991b1f277d0d363ca226d0b9a781edf0c4eb64b0c686b4bf0ec",
+        "discrepancy": true,
+        "prompt_tokens": 20,
+        "completion_tokens": 38,
+        "reasoning_tokens": 42,
+        "total_tokens": 58,
+        "conservative_output_tokens": 80,
+        "reported_charge_usd": "0.000315",
+        "cost_bound_usd": "0.00063"
+      }
+    ]
+  },
+  "fixtures_pass": true,
+  "collection_complete": {
+    "screen": false,
+    "main": false
+  },
+  "endpoint_complete": false,
+  "admitted_models": [],
+  "primary_family_size": 4,
+  "amendment": {
+    "technical_fixture_outcomes_seen": true,
+    "research_outcomes_seen": false,
+    "prior_route_acknowledgments_seen": true,
+    "prior_synthetic_judge_outputs_seen": true,
+    "predecessor": {
+      "freeze": "29ecac9ba3cd2dd59c98938203e0ba1b981e7b96",
+      "journal_sha256": "65de501ae0107a505ad3a8d29730bbf1ce3f37eaf4cb5027d34f88d7d089a975",
+      "release_sha256": "76b68ccfb92c779c39d10df0523311434f65ec2fb68cede2d557b064a119777e",
+      "calls": 12,
+      "settled": 9,
+      "unresolved": 3,
+      "cost_bound_usd": "0.5550459",
+      "research_calls": 0
+    },
+    "reuse_predecessor_receipts": false,
+    "mistral_accounting": "contradictory-output-sum-upper-bound-v1",
+    "mistral_reservation": "full-output-cap-for-each-reported-component-v1",
+    "judge_capability": "response_format-and-structured_outputs",
+    "endpoint_status": 0
+  },
+  "publication_repair": {
+    "post_outcome": true,
+    "raw_journal_sha256": "ee84f0d4e6387c261ad35ce7b35be1c6a05f3e11a011c33e40ba2e65930e6ef6",
+    "fixture_prefix": {
+      "event_count": 53,
+      "sha256": "27578cb69129f0486b78565a3d8c29e2e241768148457fcab37cb04b767a4443"
+    },
+    "historical_over_reservation": "gen:openweights-screen-mistral-02-final-SH",
+    "original_exporter_failure": "Fixture result differs from raw receipts",
+    "status": "technical_interruption_not_completed_screen",
+    "original_receipts_changed": false,
+    "new_model_calls": 0
+  },
+  "costs": {
+    "extension_cost_bound_usd": "1.84767560",
+    "prior_cost_bound_usd": "84.64275336",
+    "external_completion_commitments_usd": "0",
+    "scope_cost_plus_commitments_usd": "86.49042896"
+  },
+  "cost_scope": "External completion commitments are reserved, not claimed as settled costs."
+}

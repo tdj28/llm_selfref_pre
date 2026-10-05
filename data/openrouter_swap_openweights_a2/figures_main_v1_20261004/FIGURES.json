@@ -1,0 +1,84 @@
+{
+  "schema": "openweights-a2-figures-v1",
+  "title": "Open-weight A2 continuation: model-judge labels",
+  "release_manifest_sha256": "24b97a49f40965a8002440442e6843016d64d0fde9e5204cbb90b0014cd7f041",
+  "release_sha256": "938732fd3020ad43e5ea122f6cb498e1bc7b1562f41b71dfc27f3805133d35b7",
+  "freeze": "3beec3b62de032dc7ee38f6e5a055fea4e1c83ff",
+  "plan_sha256": "327bd43496a0911a682bc0a76d2acc18dd4a0a0be89f6f80e5a0fc80202d0cff",
+  "release_status": "incomplete",
+  "collection_complete": {
+    "main": false,
+    "screen": false
+  },
+  "main_status": "incomplete",
+  "completion_flag_note": "The frozen screening-completion flag is false because its check requires the entire journal to be settled. Verified main admission reconstructs the completed screening prefix; later main failures do not revoke that screening decision. Original flags remain unchanged.",
+  "failure_evidence": {
+    "manifest_sha256": "e56b1663c7ae523dd88eeef98c261c83242677d820a799e83e0669c21af8921d",
+    "path": "data/openrouter_swap_openweights_a1/initial_failure_v1_20261004",
+    "prefix": {
+      "calls": 92,
+      "cost_bound_usd": "1.84767560",
+      "events": 185,
+      "fixture_events": 53,
+      "fixture_prefix_sha256": "27578cb69129f0486b78565a3d8c29e2e241768148457fcab37cb04b767a4443",
+      "freeze": "9407bae95d759de4f64b4f34d03281164f4ecae9",
+      "head": "ecc017b5e18318a521a0bdba3fe9191917eb4e99dc444e719146bfa19613dc4a",
+      "journal_bytes": 1000434,
+      "journal_sha256": "ee84f0d4e6387c261ad35ce7b35be1c6a05f3e11a011c33e40ba2e65930e6ef6",
+      "plan_sha256": "caa54bbe9aae1fa7ff43427cbb74f2d669c5c48b9e299033980f4187ff33b667"
+    },
+    "release_sha256": "08b863d58f469e8001bba66f61b242bc34f54e998cd9668391049e247965b167"
+  },
+  "fixture_evidence": {
+    "epoch": "A1",
+    "event_count": 53,
+    "sha256": "27578cb69129f0486b78565a3d8c29e2e241768148457fcab37cb04b767a4443"
+  },
+  "release_verified": true,
+  "source_sha256": "cc3c0e9f57be5f58e449ef868c4fba52b7b62c5934b3c52fa515af2b0cbac5bb",
+  "primary_family_size": 4,
+  "interval_note": "Main only: saved 95% familywise Bonferroni-Hoeffding bounds for planned blocks, including worst-case missing labels. Dots are complete-case means, not bound midpoints.",
+  "scope": "Same four-comparison open-weight family across A1 and A2; no pooling with earlier studies. Model-judge labels are not ground truth. Architecture comparisons are observational.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2073,
+      "sha256": "6aa17b8cdd55b9c1643e5123831405ae8568862c6bf2f68c4ef8649f536861de"
+    },
+    {
+      "path": "cell_rates.csv",
+      "bytes": 12535,
+      "sha256": "fe2c9a9a85d43e3568a22ab5003de9ae51cad01876fd92671e0278b2fb33f5c0"
+    },
+    {
+      "path": "cell_rates.pdf",
+      "bytes": 46495,
+      "sha256": "05cef38ff7637ec236b185b9deccb310ca21feda95d500bd0d9a3e205cb7e9b2"
+    },
+    {
+      "path": "cell_rates.png",
+      "bytes": 500447,
+      "sha256": "2e4c8713c92911d1e97d90750a0983e8e637ac5268c03763bf6e584402c50671"
+    },
+    {
+      "path": "figure_data.json",
+      "bytes": 51620,
+      "sha256": "cb705f480e79358723a2472c917d3d6e89366733013be19a34d033ce82b89492"
+    },
+    {
+      "path": "primary_contrasts.csv",
+      "bytes": 878,
+      "sha256": "a8ff533f36a3050775404217be02c7eb24bc7dd81eec3c102c190e35aa65bab6"
+    },
+    {
+      "path": "primary_contrasts.pdf",
+      "bytes": 27719,
+      "sha256": "db1a116cca24c6ad3d487291071319f4bfe682d64055c232751f023a4bf827b9"
+    },
+    {
+      "path": "primary_contrasts.png",
+      "bytes": 121819,
+      "sha256": "17f5abc792b0be1f7305ec34d779f707d77c4f7f40c78bc806c43a46424344fc"
+    }
+  ]
+}

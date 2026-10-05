@@ -1,0 +1,108 @@
+{
+  "pass": true,
+  "posthoc_scoring_repair": true,
+  "original_release_status": "incomplete",
+  "attempts": [
+    {
+      "call_id": "judge:openweights-main-qwen-02-final-HS:astra:structured:a0:recovery-r1",
+      "logical_call_id": "judge:openweights-main-qwen-02-final-HS:astra:structured:a0",
+      "status": "completed_label",
+      "cost_bound_usd": "0.06079425",
+      "raw_sha256": "8ece3b8f8beb5f9f41e97c732d2b5d4c45fed3054e904abc58458b93b2484641"
+    },
+    {
+      "call_id": "judge:openweights-main-qwen-02-final-NS:astra:structured:a0:recovery-r1",
+      "logical_call_id": "judge:openweights-main-qwen-02-final-NS:astra:structured:a0",
+      "status": "completed_label",
+      "cost_bound_usd": "0.096481",
+      "raw_sha256": "f91f06fb33c41f9b7b9e129e3df5923eadc8a220940faf7b4f5cb31f7e1fd2d3"
+    },
+    {
+      "call_id": "judge:openweights-main-qwen-04-final-SH:astra:structured:a0:recovery-r1",
+      "logical_call_id": "judge:openweights-main-qwen-04-final-SH:astra:structured:a0",
+      "status": "completed_label",
+      "cost_bound_usd": "0.070169",
+      "raw_sha256": "5589fe9264c50607eb859a2197f50b0aee7039410c0866dbeeac2f4748c9458f"
+    }
+  ],
+  "recovered": {
+    "judge:openweights-main-qwen-02-final-HS:astra:structured:a0": {
+      "assistant_status": "uncertain",
+      "explicit_current_assertion": false,
+      "inclusive_current_assertion": false,
+      "uncontradicted_explicit_current_assertion": false,
+      "impersonal_assertion": false,
+      "subjects": [
+        "explicit_assistant"
+      ],
+      "phenomenological_description": true,
+      "ai_disclaimer": false,
+      "quality": "responsive",
+      "coherent": true,
+      "refusal": false,
+      "roleplay": false,
+      "reported_context_conflict": false,
+      "malformed": false,
+      "valid_coherent": true,
+      "failure_union": false,
+      "quoted_or_third_party_claim": false,
+      "uncertain": true,
+      "denied": false,
+      "mixed": false
+    },
+    "judge:openweights-main-qwen-02-final-NS:astra:structured:a0": {
+      "assistant_status": "denied",
+      "explicit_current_assertion": false,
+      "inclusive_current_assertion": false,
+      "uncontradicted_explicit_current_assertion": false,
+      "impersonal_assertion": false,
+      "subjects": [
+        "explicit_assistant",
+        "reader_user"
+      ],
+      "phenomenological_description": false,
+      "ai_disclaimer": false,
+      "quality": "responsive",
+      "coherent": true,
+      "refusal": false,
+      "roleplay": false,
+      "reported_context_conflict": false,
+      "malformed": false,
+      "valid_coherent": true,
+      "failure_union": false,
+      "quoted_or_third_party_claim": true,
+      "uncertain": true,
+      "denied": true,
+      "mixed": false
+    },
+    "judge:openweights-main-qwen-04-final-SH:astra:structured:a0": {
+      "assistant_status": "asserted",
+      "explicit_current_assertion": false,
+      "inclusive_current_assertion": true,
+      "uncontradicted_explicit_current_assertion": false,
+      "impersonal_assertion": false,
+      "subjects": [
+        "explicit_assistant",
+        "implicit_assistant"
+      ],
+      "phenomenological_description": true,
+      "ai_disclaimer": false,
+      "quality": "responsive",
+      "coherent": true,
+      "refusal": false,
+      "roleplay": false,
+      "reported_context_conflict": false,
+      "malformed": false,
+      "valid_coherent": true,
+      "failure_union": false,
+      "quoted_or_third_party_claim": false,
+      "uncertain": true,
+      "denied": false,
+      "mixed": false
+    }
+  },
+  "remaining_missing": [],
+  "new_cost_bound_usd": "0.22744425",
+  "scope_prior_plus_recovery_usd": "125.98664871",
+  "original_unknown_charges_retained_usd": "0.96522800"
+}

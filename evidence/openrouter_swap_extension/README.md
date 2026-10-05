@@ -18,8 +18,8 @@ to confirmatory tests. Screen and main rows remain separate.
 From the repository root:
 
 ```sh
-python scripts/verify_openrouter_swap_extension.py --check
-python -m pytest tests/test_openrouter_swap_extension.py
+python scripts/verify_model_panel_extension.py --check
+python -m pytest tests/test_model_panel_extension.py
 ```
 
 The check is offline and read-only. It recomputes the displayed quantities

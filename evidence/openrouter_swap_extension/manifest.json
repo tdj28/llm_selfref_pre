@@ -52,13 +52,13 @@
       "bytes": 4835,
       "sha256": "427a1496e0c7e25640ab3428e1b63958380ced6fc6380fbf6632ea0f85be58a8"
     },
-    "scripts/verify_openrouter_swap_extension.py": {
-      "bytes": 24251,
-      "sha256": "12b04f9c5598d22e4abf84036966e6a48d462bf15c57520e3d95ee16401c3c3b"
+    "scripts/verify_model_panel_extension.py": {
+      "bytes": 24243,
+      "sha256": "c425d44af17311c7e421bf520455d92fca607366f698d298451c6239954d4508"
     },
-    "tests/test_openrouter_swap_extension.py": {
-      "bytes": 12244,
-      "sha256": "60b870d8f21e08af1396057afed79f68bbbe1a1105749384491d6e1f84fa1ea5"
+    "tests/test_model_panel_extension.py": {
+      "bytes": 12768,
+      "sha256": "d21f4c195912935408e5a32b98c05912a5aea04c29d36051d70149b448b906f6"
     }
   },
   "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",

@@ -1,0 +1,5 @@
+phase,model,judge,endpoint,contrast,state,planned_blocks,complete_blocks,missing_blocks,complete_case_mean,saved_familywise_hoeffding_95,interval_low,interval_high,interval_method,family_size
+main,qwen,astra,inclusive_current_assertion,SH-HS,partial collection,32,30,2,0.4,"[-0.21945366072328942, 0.9694536607232894]",-0.21945366072328942,0.9694536607232894,Bonferroni bounded Hoeffding,4
+main,qwen,astra,inclusive_current_assertion,NS-NH,partial collection,32,31,1,0.1935483870967742,"[-0.3757036607232894, 0.7819536607232894]",-0.3757036607232894,0.7819536607232894,Bonferroni bounded Hoeffding,4
+main,mistral,astra,inclusive_current_assertion,SH-HS,unrun: screen not qualified,32,0,32,,"[-1.0, 1.0]",,,Bonferroni bounded Hoeffding,4
+main,mistral,astra,inclusive_current_assertion,NS-NH,unrun: screen not qualified,32,0,32,,"[-1.0, 1.0]",,,Bonferroni bounded Hoeffding,4

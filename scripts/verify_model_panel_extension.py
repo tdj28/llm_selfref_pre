@@ -53,8 +53,8 @@ CONTRASTS = {
 }
 PRIMARY = ("instruction_minus_transcript", "neutral_transcript")
 FIGURE = "paper/figures/openrouter_swap_extension_measurement"
-OWN = ("scripts/verify_openrouter_swap_extension.py",
-       "tests/test_openrouter_swap_extension.py", "paper/openrouter_swap_extension.tex")
+OWN = ("scripts/verify_model_panel_extension.py",
+       "tests/test_model_panel_extension.py", "paper/openrouter_swap_extension.tex")
 DERIVED = ("results.json", "values.tex", "figure_data.json")
 SCOPE = {
     "editorial_binding_only": True, "authorizes_collection": False,

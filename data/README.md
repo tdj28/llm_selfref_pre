@@ -14,6 +14,8 @@ disposable copies and [artifact inventory](../DATA_ARTIFACTS.md) for coverage.
 | [Automated rubric audit](automated_rubric_audit/README.md) | Completed rubric comparisons and measurement checks, not human validation. |
 | [Bilingual Llama](bilingual_llama_b1/README.md) | Completed Llama panel, with links to preceding fixture failures and amendments. |
 | [Frontier bilingual](frontier_bilingual_b1/README.md) | Completed separate API-model mini and its plan. |
+| [Frontier swap controls](openrouter_swap/README.md) | Completed October 4 screen and fresh Gemini/Opus neutral/same-condition panel; Sonnet near floor, DeepSeek technically deferred. |
+| [Open-weight swap extension](openrouter_swap_openweights_a1/README.md) | Qwen/Mistral technical fixtures passed; initial screen interrupted by accounting guard. Existing outputs and missingness preserved; full screening and main incomplete. |
 | [Instruction-state qualification](instruction_state_qualification/README.md) | Completed failed qualification and preserved startup failure; no later intervention. |
 
 ## Public Steering

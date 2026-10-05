@@ -38,6 +38,9 @@ not that reconstruction or independent scientific validation.
   frontier-model and public-operator extensions, with separate study scopes.
 - `openrouter_swap_extension.tex`: Gemini/Opus comparisons with neutral
   instructions and same-condition donor continuations.
+- `qwen_extension.tex`: separate Qwen3.8 API panel. `paper-verify` runs
+  `scripts/verify_qwen_extension.py` to check its pinned inputs, paired
+  contrasts, primary bounds, and descriptive bootstrap intervals.
 - `figures/`: selected figure inputs with pinned source provenance.
 - `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
 - `../reviews/`: dated automated reviews, adjudications and reference checks.

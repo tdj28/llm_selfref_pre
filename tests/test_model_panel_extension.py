@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import verify_openrouter_swap_extension as v
+from scripts import verify_model_panel_extension as v
 
 
 class OpenRouterSwapExtensionTests(unittest.TestCase):
@@ -40,6 +40,15 @@ class OpenRouterSwapExtensionTests(unittest.TestCase):
         self.assertEqual(report["screen_answers"], 144)
         self.assertFalse(report["scope"]["human_validation"])
         self.assertFalse(report["scope"]["raw_api_receipts_reaudited_by_this_command"])
+
+    def test_editorial_files_stay_outside_original_scientific_source_inventory(self):
+        from experiments.openrouter_swap import protocol
+        sources = set(protocol.source_paths())
+        plan = protocol.verify(protocol.ROOT / protocol.PLAN)
+        self.assertEqual(sources, set(plan["source_hashes"]))
+        self.assertTrue(set(v.OWN[:2]).isdisjoint(sources))
+        self.assertTrue(all(protocol.sha(protocol.ROOT / name) == digest
+                            for name, digest in plan["source_hashes"].items()))
 
     def test_primary_contrasts_from_individual_paired_rows(self):
         for model, mean in (("gemini", 26 / 32), ("opus", 7 / 32)):

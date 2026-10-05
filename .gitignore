@@ -45,6 +45,19 @@ venv.bak/
 
 # Project specific
 data/*
+!data/openrouter_swap_openweights_a2/
+data/openrouter_swap_openweights_a2/*
+!data/openrouter_swap_openweights_a2/plan_v1/
+data/openrouter_swap_openweights_a2/plan_v1/*
+!data/openrouter_swap_openweights_a2/plan_v1/PLAN.json
+!data/openrouter_swap/
+data/openrouter_swap/*
+!data/openrouter_swap/plan_20261004/
+data/openrouter_swap/plan_20261004/*
+!data/openrouter_swap/plan_20261004/PLAN.json
+!data/openrouter_swap/plan_a1_20261004/
+data/openrouter_swap/plan_a1_20261004/*
+!data/openrouter_swap/plan_a1_20261004/PLAN.json
 !data/steering_fidelity/
 data/steering_fidelity/*
 !data/steering_fidelity/preflight_20261002/
@@ -683,6 +696,37 @@ data/bilingual_llama_b1/*
 **/wandb/
 **/mlruns/
 
+# Separately frozen three-route continuation; original inventories are retained.
+!data/openrouter_swap/plan_a2_20261004/
+data/openrouter_swap/plan_a2_20261004/*
+!data/openrouter_swap/plan_a2_20261004/PLAN.json
+!data/openrouter_swap/plan_a3_20261004/
+data/openrouter_swap/plan_a3_20261004/*
+!data/openrouter_swap/plan_a3_20261004/PLAN.json
+!data/openrouter_swap/README.md
+!data/openrouter_swap/screen_v1_20261004/
+data/openrouter_swap/screen_v1_20261004/**
+!data/openrouter_swap/screen_v1_20261004/**/
+!data/openrouter_swap/screen_v1_20261004/*.json
+!data/openrouter_swap/screen_v1_20261004/*.png
+!data/openrouter_swap/screen_v1_20261004/*.pdf
+!data/openrouter_swap/screen_v1_20261004/raw/events.jsonl.gz
+!data/openrouter_swap/screen_v1_20261004/prior_attempts/*/PLAN.json
+!data/openrouter_swap/screen_v1_20261004/prior_attempts/*/runtime.json
+!data/openrouter_swap/screen_v1_20261004/prior_attempts/*/events.jsonl.gz
+!data/openrouter_swap/screen_v1_20261004/snapshots/000793/*.json
+!data/openrouter_swap/main_v1_20261004/
+data/openrouter_swap/main_v1_20261004/**
+!data/openrouter_swap/main_v1_20261004/**/
+!data/openrouter_swap/main_v1_20261004/*.json
+!data/openrouter_swap/main_v1_20261004/*.png
+!data/openrouter_swap/main_v1_20261004/*.pdf
+!data/openrouter_swap/main_v1_20261004/raw/events.jsonl.gz
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/PLAN.json
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/runtime.json
+!data/openrouter_swap/main_v1_20261004/prior_attempts/*/events.jsonl.gz
+!data/openrouter_swap/main_v1_20261004/snapshots/003611/*.json
+
 # Canonical manuscript's selected, provenance-bound figure inputs, not builds.
 !paper/figures/*.pdf
 !evidence/source_alignment/analysis/*.pdf
@@ -724,3 +768,27 @@ data/steering_fidelity/cheap_startup_failure_20261002/*
 !data/operator_matching/calibration_v1_20261003/**
 !data/operator_matching/fine_v1_20261003/
 !data/operator_matching/fine_v1_20261003/**
+
+# Authorized open-weight API extension: public plan and catalog only.
+!data/openrouter_swap_openweights/
+data/openrouter_swap_openweights/*
+!data/openrouter_swap_openweights/plan_v1/
+data/openrouter_swap_openweights/plan_v1/*
+!data/openrouter_swap_openweights/plan_v1/PLAN.json
+!data/openrouter_swap_openweights/plan_v1/ENDPOINTS.json
+!data/openrouter_swap_openweights/README.md
+!data/openrouter_swap_openweights/fixture_failure_v1_20261004/
+!data/openrouter_swap_openweights/fixture_failure_v1_20261004/**
+
+# Technical-only API repair: plan and public endpoint evidence.
+!data/openrouter_swap_openweights_a1/
+data/openrouter_swap_openweights_a1/*
+!data/openrouter_swap_openweights_a1/plan_v1/
+data/openrouter_swap_openweights_a1/plan_v1/*
+!data/openrouter_swap_openweights_a1/plan_v1/PLAN.json
+!data/openrouter_swap_openweights_a1/plan_v1/ENDPOINTS.json
+
+# Interrupted initial screen: exact receipts and prefix-reconstructed fixtures.
+!data/openrouter_swap_openweights_a1/README.md
+!data/openrouter_swap_openweights_a1/initial_failure_v1_20261004/
+!data/openrouter_swap_openweights_a1/initial_failure_v1_20261004/**

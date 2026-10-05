@@ -1,0 +1,24 @@
+{
+  "phase": "fixtures",
+  "proof": {
+    "freeze": "29ecac9ba3cd2dd59c98938203e0ba1b981e7b96",
+    "branch": "refs/heads/codex/openrouter-swap-panel",
+    "remote_head": "29ecac9ba3cd2dd59c98938203e0ba1b981e7b96"
+  },
+  "reconciliation": {
+    "scope": "OpenRouter October4 swap panels including completed A3 and openweights extension",
+    "confirmed": true,
+    "as_of_utc": "2026-10-05T03:05:45.318334+00:00",
+    "prior_costs": [
+      {
+        "id": "completed-swap-a3-including-prior-attempts",
+        "cost_bound_usd": "84.08770746",
+        "evidence_sha256": "4bc189277026472ed3507fa7d9667db4dff03c9866fcb244327ee4c681e257c4"
+      }
+    ],
+    "external_commitments": []
+  },
+  "plan_sha256": "ef2d1dbc05bcb2727e87fa0ab3162fc44ad52fbb3549dffa27d3b597811c0038",
+  "checked_at_utc": "2026-10-05T03:17:00.196256+00:00",
+  "event_count_before": 1
+}

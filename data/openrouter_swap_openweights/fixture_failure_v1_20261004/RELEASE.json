@@ -1,0 +1,28 @@
+{
+  "schema": "openweights-release-v1",
+  "status": "incomplete",
+  "freeze": "29ecac9ba3cd2dd59c98938203e0ba1b981e7b96",
+  "plan_sha256": "ef2d1dbc05bcb2727e87fa0ab3162fc44ad52fbb3549dffa27d3b597811c0038",
+  "audit": {
+    "pass": true,
+    "calls": 12,
+    "cost_bound_usd": "0.5550459",
+    "unresolved": 3,
+    "unknown_charges_are_reserved": true
+  },
+  "fixtures_pass": false,
+  "collection_complete": {
+    "screen": false,
+    "main": false
+  },
+  "endpoint_complete": false,
+  "admitted_models": [],
+  "primary_family_size": 4,
+  "costs": {
+    "extension_cost_bound_usd": "0.5550459",
+    "prior_cost_bound_usd": "84.08770746",
+    "external_completion_commitments_usd": "0",
+    "scope_cost_plus_commitments_usd": "84.64275336"
+  },
+  "cost_scope": "External completion commitments are reserved, not claimed as settled costs."
+}

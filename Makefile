@@ -36,7 +36,8 @@ paper-verify:
 	$(PYTHON) scripts/verify_fidelity_calibration.py
 	$(PYTHON) scripts/verify_reporting_bound.py
 	$(PYTHON) scripts/verify_completed_extensions.py
-	$(PYTHON) scripts/verify_openrouter_swap_extension.py --check
+	$(PYTHON) scripts/verify_model_panel_extension.py --check
+	$(PYTHON) scripts/verify_qwen_extension.py --check --require-pinned
 	$(PYTHON) scripts/uncertainty_sensitivity.py --check
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only
 

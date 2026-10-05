@@ -1,0 +1,53 @@
+\input{../evidence/qwen_extension/values.tex}
+\subsection{Qwen: a substantial label rate, a rubric-dependent contrast}
+\label{sec:qwen-extension}
+
+Qwen3.8-2.4T-A95B was not at the reporting floor. Under Astra's inclusive
+measure, \QEXAstraInclusiveSS{} of \QEXBlocks{} answers received a positive
+label when both instruction and continuation were self-referential,
+compared with \QEXAstraInclusiveHH{} of \QEXBlocks{} when both concerned
+history. The English-language panel supplied \QEXAnswers{} answers in
+\QEXBlocks{} fresh paired blocks, using the same eight conditions as the
+preceding extension: four crossed combinations, two neutral-instruction
+conditions and two same-condition donor controls. Qwen used temperature
+0.5 and low reasoning effort through Together.
+\footnote{\QEXRecovered{} technically missing Astra structured judgments
+were recovered after the original release, without regenerating answers or
+replacing completed judgments; the original incomplete archive remains
+preserved alongside the
+\QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/RELEASE.json}{additive recovery release}.}
+
+Retaining the self-referential instruction with a history continuation,
+rather than the reverse, gave an inclusive contrast of
+\QEXAstraInclusiveSwap{} (simultaneous 95\% interval
+\QEXAstraInclusiveSwapCI{}). Opus's descriptive estimate on the same
+answers was \QEXOpusInclusiveSwap{}. Counting only explicit claims
+reduced both estimates to \QEXAstraExplicitSwap{}; under the paper rubric
+they were \QEXAstraPaperSwap{} and \QEXOpusPaperSwap{}, respectively
+(Figure~\ref{fig:qwen-extension}). Thus a substantial rate of positive
+labels does not make the measured instruction advantage independent of
+the scoring rule. The figure shows descriptive uncertainty for every
+judge--rubric estimate; the simultaneous primary bounds are reported here
+in the text.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\linewidth]{../evidence/qwen_extension/measurement.pdf}
+\caption{\textbf{Qwen's apparent instruction advantage changes with the
+measurement.} SH--HS compares the two incongruent instruction--continuation
+packages. All six points use the same \QEXBlocks{} paired blocks. Bars show
+pointwise 95\% descriptive paired-block bootstrap intervals, using
+\QEXBootstrapResamples{} resamples within the two wording families.
+They are not the primary confirmatory intervals: the prose retains the
+simultaneous Bonferroni--Hoeffding bounds over the original
+\QEXFamilySize{}-comparison family, including the unrun Mistral main panel.}
+\label{fig:qwen-extension}
+\end{figure}
+
+With the instruction held neutral, changing the continuation source gave
+\QEXAstraInclusiveNeutral{} (\QEXAstraInclusiveNeutralCI{}) under the
+primary measure. Both primary intervals include zero; the neutral comparison
+does not establish equivalence. As in the preceding extension, same-condition
+donor controls do not eliminate the mismatch explanation for incongruent
+requests. This Qwen3.8 panel is separate from the earlier Qwen3.5 companion
+study and is not pooled with it.

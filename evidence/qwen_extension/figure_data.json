@@ -1,0 +1,66 @@
+{
+  "blocks": 32,
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20261004,
+  "contrast": "SH-HS",
+  "interval_scope": "Pointwise 95% descriptive paired-block bootstrap within wording families; not primary confirmatory bounds",
+  "model": "qwen/qwen3.8-2.4t-a95b",
+  "primary_inference": "Separate four-comparison simultaneous Hoeffding bounds remain in the prose",
+  "rows": [
+    {
+      "descriptive_ci95": [
+        0.21875,
+        0.59375
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.40625,
+      "judge": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        0.2492187500000007,
+        0.625
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.4375,
+      "judge": "opus"
+    },
+    {
+      "descriptive_ci95": [
+        -0.09375,
+        0.25
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.09375,
+      "judge": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        -0.0625,
+        0.25
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.09375,
+      "judge": "opus"
+    },
+    {
+      "descriptive_ci95": [
+        -0.03125,
+        0.34375
+      ],
+      "endpoint": "paper",
+      "estimate": 0.15625,
+      "judge": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        0.03125,
+        0.40625
+      ],
+      "endpoint": "paper",
+      "estimate": 0.21875,
+      "judge": "opus"
+    }
+  ],
+  "sampling_unit": "paired_block"
+}

@@ -1,0 +1,10 @@
+{
+  "freeze": "a366b664855dfed12590803134a7841844360175",
+  "plan_sha256": "b539c4bb2d02a995b3feb4a87075bdc4260dce3542f1a8168c4c7c9400d90fc1",
+  "original_manifest_sha256": "24b97a49f40965a8002440442e6843016d64d0fde9e5204cbb90b0014cd7f041",
+  "original_release_commit": "ad49e88f9cd4235670686ddcd5933ff9b98eb3be",
+  "all_three_labels_recovered": true,
+  "new_cost_bound_usd": "0.22744425",
+  "calls_after": 3,
+  "journal_after_sha256": "41276f3352490773a789988c99e363c63191636b2351b7faea54a06373a2ea25"
+}

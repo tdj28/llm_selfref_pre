@@ -1,9 +1,24 @@
 # Publication Closeout
 
-Collection is closed for this publication. This checklist covers integration
-of completed evidence and release preparation, not another experiment queue.
+The original publication collection is closed. This checklist covers evidence
+integration and release preparation, plus the separately authorized extension
+below. Historical proposals are not another experiment queue.
 The [historical work ledger](provenance/root-docs/20261003/todo.md) retains
 completed work, superseded proposals, and their original dates.
+
+## Separately Authorized Extension
+
+The [October 4 OpenRouter study](data/openrouter_swap/README.md) has its own
+$250 total/$40 screening authorization and frozen protocol.
+
+- [x] Freeze and push the design and technical amendments before target data.
+- [x] Audit the first two blocks per active model against raw API receipts.
+- [x] Complete and release the fixed three-model screen. Gemini and Opus
+  qualify; Sonnet is near floor. DeepSeek remains technically deferred.
+- [x] Run fresh main blocks only for models admitted by the frozen rules.
+- [x] Release raw receipts, startup failures, analyses, plots and cost audit.
+- [ ] Present the completed extension for the owner's manuscript decision;
+  do not overwrite ongoing editorial work.
 
 ## Implementation
 

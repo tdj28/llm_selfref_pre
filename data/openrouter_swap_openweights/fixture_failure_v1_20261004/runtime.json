@@ -1,0 +1,13 @@
+{
+  "freeze": "29ecac9ba3cd2dd59c98938203e0ba1b981e7b96",
+  "plan_sha256": "ef2d1dbc05bcb2727e87fa0ab3162fc44ad52fbb3549dffa27d3b597811c0038",
+  "plan_path": "data/openrouter_swap_openweights/plan_v1/PLAN.json",
+  "budget": {
+    "scope": "OpenRouter October4 swap panels including completed A3 and openweights extension",
+    "working_cap_usd": "200",
+    "hard_cap_usd": "200",
+    "prior_spend_usd": "84.08770746",
+    "external_commitments_usd": "0",
+    "screening_allowance_usd": "25"
+  }
+}
