@@ -53,3 +53,17 @@ public-audit:
 
 verify: public-audit test compile paper-verify paper
 	git diff --check
+
+# verify.yml is a frozen frontier-study input. Prepare its current jobs here
+# without rewriting that workflow or adding network actions to local checks.
+ifeq ($(GITHUB_ACTIONS),true)
+.PHONY: ci-test-environment ci-paper-environment
+test: | ci-test-environment
+paper-verify: | ci-paper-environment
+
+ci-test-environment:
+	$(PYTHON) scripts/prepare_ci_verification.py tests
+
+ci-paper-environment:
+	$(PYTHON) scripts/prepare_ci_verification.py paper
+endif

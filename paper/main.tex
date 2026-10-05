@@ -108,20 +108,18 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Language models can be prompted to report subjective experience, and such
-reports now figure in debates about machine consciousness. We take apart the
-conditions that produce them in a recent protocol: a model receives a
-self-referential or a control instruction, writes a continuation, and is
-asked about its experience; a judge model labels each answer. Swapping
+Language models can be prompted to report subjective experience, fueling
+debate about machine consciousness. We test what produces these reports:
+a model receives a self-referential or control instruction, writes a
+continuation, and is asked about its experience; a judge labels each answer. Swapping
 continuations between conditions shows that, in four API models, the label
 follows mainly the instruction: switching the instruction moves the chance of
 an experience label by 0.74 and 0.78 on average (two judges), switching
 the continuation far less, with a sign that varies by model; in an
 open-weight model, the continuation also matters. The swap cannot tell
 instruction-following from self-referential processing that the instruction
-triggers anew. In newer panels, the apparent instruction advantage depends
-on the model and what counts as a claim; it remains large for Gemini with
-repeated answers. Two
+triggers anew. In newer panels, the instruction advantage depends on the
+model and scoring rule; it stays large for Gemini with repeated answers. Two
 judges agree on the labels for 94.8\% of 2,556 answers; on a fixed set of
 \RubricAuditN{} responses they count \RubricAuditOldOpenaiPositive{} and
 \RubricAuditOldAnthropicPositive{} experience reports, while model coders

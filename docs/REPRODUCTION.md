@@ -46,6 +46,15 @@ reachable Git history (`git fetch --unshallow` for a shallow clone); they
 verify recorded hashes against historical sources, not today's `.gitignore`.
 Live source-binding gates remain unchanged.
 
+The dose exposure seed-freshness test runs unchanged against the 29 plans
+that existed before its source freeze. Later continuation records intentionally
+retain those seeds, so treating every plan in today's checkout as prior data
+would give a false failure. The test suite reports the historical execution
+and separately rejects unknown seed reuse in the current corpus. Only exact,
+hash-bound continuation and release copies are permitted. The same check runs
+standalone with `python -m experiments.exposure_seed_history`; it does not
+fetch history, change data, or skip the original assertion.
+
 `make compile` checks every tracked Python file without importing modules or
 writing bytecode. `make audit` now runs on disposable copies. Direct analysis,
 audit and release-builder commands can still overwrite their output directory;
@@ -177,6 +186,11 @@ CI runs `make paper-verify` on Python 3.10 and 3.12, checks that it leaves
 tracked paper/evidence files unchanged, and runs the imported verifier tests
 as part of the full root pytest suite. PDF compilation remains the separate
 `make paper` step included in local `make verify`.
+The historical workflow is itself a bound study input. When
+`GITHUB_ACTIONS=true`, Make first prepares the CI environment: it installs
+Poppler, and for the paper job fetches full Git history and installs the
+pinned CPU dependencies. The verification then runs offline. This preparation
+does not run during ordinary local checks or change the checked-out revision.
 
 The completed-extension check binds the bilingual, frontier, qualification and
 operator-matching summaries used in the manuscript. It does not replace the
