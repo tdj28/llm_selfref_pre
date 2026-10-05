@@ -1,0 +1,65 @@
+{
+  "schema": "openweights-a1-interrupted-manifest-v1",
+  "files": [
+    {
+      "path": "PLAN.json",
+      "bytes": 358885,
+      "sha256": "caa54bbe9aae1fa7ff43427cbb74f2d669c5c48b9e299033980f4187ff33b667"
+    },
+    {
+      "path": "RELEASE.json",
+      "bytes": 10131,
+      "sha256": "08b863d58f469e8001bba66f61b242bc34f54e998cd9668391049e247965b167"
+    },
+    {
+      "path": "fixture_gate.json",
+      "bytes": 50300,
+      "sha256": "17a1b04d3d12a64300c5ac9e546c30ab35c3c7ea02fbfc7bfacc93eb3c1c0af2"
+    },
+    {
+      "path": "launches/096866751f1dcc880f5eca4bf10cb294e64ca4c67ad16be09d62abc8c82f25c6.json",
+      "bytes": 842,
+      "sha256": "710b241e7ee833939706893ce4dce9ff8a7392c07b879ea43ba42d0badfcfc3d"
+    },
+    {
+      "path": "launches/e2014893603b4eca177a3d27b69262337613f843c486afd48f5dafc23cfc3edf.json",
+      "bytes": 835,
+      "sha256": "9a8d14b7378a1ca27272de1dc436a37c95fa97e6ac8605b887a9046852190551"
+    },
+    {
+      "path": "main_analysis.json",
+      "bytes": 4869664,
+      "sha256": "b9609b0c66cfbc2c49b8e09a5e4f7ca456a3371d627314ce29223ba02ad9e41e"
+    },
+    {
+      "path": "main_rows.json",
+      "bytes": 199859,
+      "sha256": "a529cb01625084d2bad099ef1c1b9aa702d7631f7900ed843dbc7dd10703b296"
+    },
+    {
+      "path": "qualification.json",
+      "bytes": 80760,
+      "sha256": "e12d2a2a5afa398f0e444b5e1f69731d4bf9084a458e2e923d55941d14635c21"
+    },
+    {
+      "path": "raw/events.jsonl.gz",
+      "bytes": 217179,
+      "sha256": "a790a4d2da3db16478589ebf19505d30aa571e369d8eb08bf71fa0f642f19f87"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 497,
+      "sha256": "692dc3fa735f6ea72d8a11cce4577e33a35fad3ae64fd368c93c5ab460c07f6b"
+    },
+    {
+      "path": "screen_analysis.json",
+      "bytes": 1431484,
+      "sha256": "e1e359b58592e1b2ee691e7879d5a3aec72adb6ad66cdedb3beabcd5510691cf"
+    },
+    {
+      "path": "screen_rows.json",
+      "bytes": 60750,
+      "sha256": "662d0d3cd4dcde99a7f3c862a9c5bbab9eb1fbcbb844320d5fbf43665b587693"
+    }
+  ]
+}
