@@ -132,6 +132,14 @@ None alone settles whether language models are conscious.
 - Keep prose short and findings-first. Put commands in
   [docs/REPRODUCTION.md](docs/REPRODUCTION.md) and historical process detail in
   provenance, not repeated status stacks at the root.
+- Keep active docs for current guidance and study entry points. Update the
+  existing document rather than adding session-end roadmaps or handoffs; keep
+  transient coordination in ignored `checkpoint.md` or `out/`.
+- Archive obsolete, unfrozen planning only after checking source inventories,
+  manifests, tests and inbound links. Use the single
+  [planning relocation map](provenance/planning/README.md); repair active links,
+  preserve historical snapshots, and retain bound files at their original
+  paths. Use a compatibility pointer only for an uneditable active citation.
 - Follow the shared `REPOSITORY_PROSE_SKILLS.md` and experiment-integrity
   playbooks in `../agent-skill-documents/` when available; they do not override
   frozen-file protection or the scope of the current task.

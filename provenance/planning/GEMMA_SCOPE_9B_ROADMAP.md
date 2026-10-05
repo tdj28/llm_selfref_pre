@@ -1,9 +1,9 @@
 # Gemma Scope 9B Cross-Model Roadmap
 
 Status: historical design rationale. Execution completed on 2026-07-11 under
-the separately frozen [`GEMMA_SCOPE_9B_PROTOCOL.md`](GEMMA_SCOPE_9B_PROTOCOL.md).
+the separately frozen [`GEMMA_SCOPE_9B_PROTOCOL.md`](../../docs/GEMMA_SCOPE_9B_PROTOCOL.md).
 The authoritative outcome summary is
-[`GEMMA_SCOPE_9B_RESULTS.md`](GEMMA_SCOPE_9B_RESULTS.md), and the 403-file
+[`GEMMA_SCOPE_9B_RESULTS.md`](../../docs/GEMMA_SCOPE_9B_RESULTS.md), and the 403-file
 release is `data/gemma_scope_9b/confirmatory_v1_20260711/`. The registered
 direct-IT verdict is `not replicated under Gemma Scope`. The prospective
 PT-to-IT transfer gate failed, so all 42-layer PT-on-IT work is exploratory.
