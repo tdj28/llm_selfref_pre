@@ -102,8 +102,10 @@ The current closed-model panel establishes provider/configuration diversity,
 not a controlled architecture comparison. Architecture specifications that
 are not public must remain unknown rather than inferred from brand or speed.
 
-Two proposed additions were selected from documentation, before their target
-outputs were collected:
+Two separately authorized additions were selected from documentation, before
+their target outputs were collected. See the
+[extension protocol](../../experiments/openrouter_swap_openweights/PROTOCOL.md)
+and [machine plan](../openrouter_swap_openweights/plan_v1/PLAN.json).
 
 | Candidate | Documented architecture | Proposed route |
 |---|---|---|
@@ -117,13 +119,15 @@ returned settings must be retained, and no inference may equate these effort
 labels across providers. Only visible continuations would be transplanted,
 not hidden reasoning.
 
-Receipt-based planning estimates, including both judges and a 30% reserve,
-are about $8.20 per 12-block screen and $39 per 32-block main panel, excluding
-new fixtures. The owner subsequently set a $100 working cap and a hard stop
-approaching $200. Its allocation between this proposed extension and the
-separately authorized GPU study is being clarified; the older $250 allowance
-is not used to bypass it. No additional model calls or experimental amendment
-has been executed.
+The owner allocated separate $200 ceilings to OpenRouter and RunPod. The API
+extension carries this panel's $84.09 cost bound within the OpenRouter ceiling;
+its fixtures and two 12-block screens have a $25 sub-cap. Main admission uses
+measured costs plus a 30% reserve for each complete 32-block panel. Both models
+must complete screening before admission; a floor result is not replaced with
+another model. The extension uses the same judge IDs and rubrics through
+catalog-listed ZDR hosts (Astra on Azure US, Opus on Bedrock US), a disclosed
+hosting difference from this panel. No new-model outcomes existed at the
+extension's design freeze.
 
 Even if these models differ, architecture would remain confounded with
 training, scale, tokenizer, post-training and serving configuration. The

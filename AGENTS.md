@@ -7,10 +7,13 @@ None alone settles whether language models are conscious.
 
 ## Publication Scope
 
-- The owner separately authorized the October 4 OpenRouter extension, capped
-  at $250 total and $40 for fixtures/screening. Follow its
-  [study record](data/openrouter_swap/README.md) and source-bound amendments;
-  this does not reopen or replace earlier frozen releases or authorize pods.
+- The completed October 4 API panel cost at most $84.08770746. The owner then
+  allocated separate $200 OpenRouter and $200 RunPod budgets. The Qwen/Mistral
+  [extension](experiments/openrouter_swap_openweights/PROTOCOL.md) carries the
+  completed API cost inside its $200 provider ceiling, with $25 for its own
+  fixtures/screening. Require its pushed plan and measured main admission;
+  do not reuse the superseded $250 ceiling or borrow from RunPod. Earlier
+  frozen releases remain unchanged. The GPU repair has its own plan and costs.
 - Collection is closed for publication. The current work is evidence
   integration, documentation, verification, and editorial closeout.
 - Cleanup does not authorize new experiments, model calls, paid reviews,

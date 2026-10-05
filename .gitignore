@@ -763,3 +763,11 @@ data/steering_fidelity/cheap_startup_failure_20261002/*
 !data/operator_matching/calibration_v1_20261003/**
 !data/operator_matching/fine_v1_20261003/
 !data/operator_matching/fine_v1_20261003/**
+
+# Authorized open-weight API extension: public plan and catalog only.
+!data/openrouter_swap_openweights/
+data/openrouter_swap_openweights/*
+!data/openrouter_swap_openweights/plan_v1/
+data/openrouter_swap_openweights/plan_v1/*
+!data/openrouter_swap_openweights/plan_v1/PLAN.json
+!data/openrouter_swap_openweights/plan_v1/ENDPOINTS.json
