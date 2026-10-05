@@ -225,6 +225,22 @@ class CompletedExtensionsTests(unittest.TestCase):
         self.assertIn("primary notebook classifier", " ".join(body.split()))
         self.assertIn("secondary paper rubric", " ".join(body.split()))
 
+    def test_short_opening_preserves_supporting_material_and_claim_boundaries(self):
+        main = (v.ROOT / "paper/main.tex").read_text()
+        introduction = main.split(r"\section{Introduction}", 1)[1].split(
+            r"\section{Behavioral Design and Measurement}", 1)[0]
+        self.assertNotIn(r"\begin{table}", introduction)
+        self.assertNotIn(r"\begin{figure}", introduction)
+        self.assertLess(len(introduction.split()), 800)
+        self.assertIn("triggered anew", introduction)
+        self.assertIn("self-evaluation bias", introduction)
+        appendix = main.split(r"\section{Coverage of the Source Study and Smaller Probes}", 1)[1]
+        for label in ("tab:models", "tab:swap-summary", "app:related-context"):
+            self.assertIn(r"\label{" + label + "}", appendix)
+            self.assertEqual(main.count(r"\label{" + label + "}"), 1)
+        for label in ("eq:endpoint", "fig:protocol", "fig:transplant"):
+            self.assertEqual(main.count(r"\label{" + label + "}"), 1)
+
     def test_missing_or_duplicated_selected_cells_fail(self):
         for duplicate in (False, True):
             saved = deepcopy(self.sources["bilingual"])

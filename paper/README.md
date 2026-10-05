@@ -29,6 +29,43 @@ forwards, run `python scripts/verify_fidelity_calibration.py --full` in the
 research environment. The default manuscript check is hash/value verification,
 not that reconstruction or independent scientific validation.
 
+## arXiv Upload
+
+From the repository root, run `make arxiv`. It runs the manuscript evidence
+checks, builds the paper, and creates `build/arxiv.tar.gz`. Upload that source
+archive, not `paper/main.pdf` and not the repository. The separate
+`build/arxiv_abstract.txt` is for the submission form; the builder rejects
+abstracts above arXiv's 1,920-character limit.
+`build/arxiv_manifest.json` records the upload inventory, hashes and local
+compiler version. `build/arxiv_preview.pdf` is the archive's rebuilt preview;
+neither file belongs inside the source upload.
+
+The bundle contains the manuscript's required TeX inputs, figures and compiled
+`main.bbl`. Source comments are sanitized in the bundle only; the canonical
+and frozen files are not rewritten. Local notes, history, data releases,
+credentials, build logs and the compiled manuscript PDF do not belong in the
+upload. Referenced evidence tables and figures are included individually;
+the unused source bibliography database is omitted in favor of `main.bbl`.
+
+Validation must rebuild the extracted archive outside the repository, with
+shell escape disabled and no local TeX search-path overrides, then check
+citations, references and rendered-text agreement with the manuscript.
+Successful local validation does not certify arXiv's compiler or moderation.
+Choose `main.tex` and `pdflatex` during submission and inspect arXiv's generated
+PDF, especially tables, equations, cross-references and the bibliography.
+
+Checked against arXiv's [TeX submission instructions](https://info.arxiv.org/help/submit_tex.html),
+[source requirement](https://info.arxiv.org/help/faq/whytex.html),
+[common mistakes](https://info.arxiv.org/help/faq/mistakes.html), and
+[abstract metadata rules](https://info.arxiv.org/help/prep.html#abstract-required)
+on 2026-10-05. Its [supported environments](https://info.arxiv.org/help/faq/texlive.html)
+are TeX Live 2023 and 2025; this workstation has 2024, so exact server-version
+compatibility is not established by the local build. The older author
+checklists supplied for this review remain useful for source hygiene, but
+their claims that arXiv cannot run BibTeX or that every directory must be
+flattened are not current submission requirements. No submission, subject
+classification or license selection is performed by `make arxiv`.
+
 ## Files
 
 - `main.tex`, `references.bib`: current manuscript and its cited literature.

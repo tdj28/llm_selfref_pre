@@ -87,14 +87,6 @@
 \RoundDisplay{USAnthropicInteractionEstimate}{3}
 \RoundDisplay{USOpenaiDifferenceEstimate}{3}
 \RoundDisplay{USAnthropicDifferenceEstimate}{3}
-% A short numbered list that never splits across pages and stays with the
-% line that introduces it.
-\makeatletter
-\newenvironment{questionlist}
-  {\@beginparpenalty\@M\@itempenalty\@M
-   \begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}}
-  {\end{enumerate}}
-\makeatother
 \setlength{\emergencystretch}{2em}
 \setlength{\textfloatsep}{14pt plus 2pt minus 2pt}
 \renewcommand{\topfraction}{0.9}
@@ -140,32 +132,101 @@ whether models have subjective experience.
 \section{Introduction}
 \label{sec:introduction}
 
-When asked about their own current state, large language models (LLMs) give
-answers that range from categorical denials of any experience to detailed
-first-person descriptions of awareness, and which answer a model gives
-depends on the context that precedes the question. A recent framework for
-assessing consciousness in artificial systems distinguishes such behavioral
-evidence from evidence about a system's computational organization
-\citep{chandaria2026cacophony}; in either case, interpreting a report
-requires knowing what produces it. For reports elicited by prompts, this
-raises three questions that the reports cannot answer on their own:
-\begin{questionlist}
-\item Which part of the prompted context produces a report?
-\item What does the automated label assigned to a report measure?
-\item What does an intervention on the model's internal features show about
-how a report arises?
-\end{questionlist}
-We use the self-referential design of
-\targetpaper{} as a common test case. In their experiments, a prompt
-directing the model to focus on its own focus raised the share of answers
-that a language-model judge labeled as reporting a subjective experience,
-relative to control prompts. In Llama 3.3 70B, suppressing sparse-autoencoder
-(SAE) features associated with deception and roleplay produced far more
-affirmations of being conscious, when the model was asked directly, than
-amplifying them. The authors present these results not as direct evidence of
-consciousness but as identifying self-referential processing as a
-reproducible condition for such reports. The three questions are not
-specific to this design.
+A language model can deny having any experience in one conversation and
+describe awareness in another. Before treating either answer as evidence
+about the model, we need to know what produces it and what counts as a
+report. We study those questions by replicating and extending
+\targetpaper{}, who found that self-referential prompting increased
+subjective-experience reports and that steering deception- and
+roleplay-related features changed their frequency.
+
+Their behavioral protocol leaves two things in context when the final
+question arrives: an instruction to focus on the model's own focus, and the
+continuation it wrote under that instruction. The history control changes
+both. The contrast therefore establishes an effect of the whole prompted
+interaction, but does not separate the standing instruction from the model's
+earlier text. Their steering experiment asks a different question: in Llama
+3.3 70B, suppressing sparse-autoencoder (SAE) features associated with
+deception and roleplay produced
+more affirmations of consciousness than amplifying them. The authors do not
+present either result as direct evidence of consciousness.
+
+We examine three parts of this evidence:
+\begin{enumerate}
+\item \textbf{The causes of the report.} We reproduce the prompting effect
+in several models, then exchange continuations between conditions. In the
+original four-model API panel, the retained instruction carries most of the
+difference in automated labels; continuation effects are smaller and vary
+in sign. That balance is not universal: Llama shows substantial continuation
+effects, and newer-model results depend on the scoring rule. Separate
+Gemini/Opus studies add neutral instructions, same-condition donor
+continuations, and repeated answers to randomized requests
+(Section~\ref{sec:label-results}).
+\item \textbf{The measurement.} We compare the paper's binary rubric with
+rules that distinguish explicit and implicit current claims. The same
+answers yield materially different counts when both the rubric and the
+judge change. These are differences between automated measurements, not
+validated corrections to a ground truth
+(Section~\ref{sec:measurement}).
+\item \textbf{The steering prediction.} A public-weight test of three
+mapped deception/roleplay features does not recover the large published
+contrast at a dose selected for output quality. Target specificity remains
+unresolved; higher tested doses fail the quality checks. Supporting studies
+test the source-style feature mixture and alternative edit methods
+(Section~\ref{sec:steering}; Appendix~\ref{app:legacy-steering}).
+\end{enumerate}
+
+The swap locates an effect within the visible context. It does not
+distinguish ordinary instruction-following from self-referential processing
+triggered anew by that instruction when the model answers. Nor does Berg
+et al.'s account require the earlier continuation alone to carry the effect.
+Our contribution is to measure the separate input contrasts, their variation
+across models, and their dependence on the scoring rule, rather than to
+refute a continuation-only explanation attributed to the source authors.
+
+We distinguish reproducing a label contrast, identifying an input that
+changes it, and validating what the label measures
+\citep{jacobs2021measurement}. Throughout, a \emph{paper-rubric positive}
+means a response assigned 1 by a model judge under the source rubric, not
+a validated report of subjective experience. The original four-model panel
+and later studies are reported separately, not pooled.
+Appendix~\ref{app:secondary} maps this work to the source paper's claims and
+identifies the experiments we did not replicate.
+
+\subsection{Related work}
+\label{sec:related}
+
+\paragraph{Reports and access to internal states.}
+Consciousness-assessment frameworks distinguish behavioral reports from
+evidence about computational organization
+\citep{butlin2023consciousness,chandaria2026cacophony}.
+A model's explanation can omit factors that caused its answer
+\citep{turpin2023unfaithful}. Tests of introspection therefore use internal
+states or behavioral predictions with known answers
+\citep{perez2023selfreports,binder2024looking,lindsey2025introspective},
+although input cues can make apparent introspection possible without
+privileged access \citep{singh2026introspect}. Our experiments ask what
+produces experience-language and how it is classified, not whether the
+model correctly reads an experiential state.
+
+\paragraph{Steering and measurement.}
+Activation and SAE-feature steering can alter behavior
+\citep{turner2023activation,rimsky2024caa,templeton2024scaling}, but off-target
+effects and capability loss complicate semantic interpretations
+\citep{durmus2024steering}. Separately, model judges exhibit verbosity and
+self-enhancement biases \citep{zheng2023llmjudge}, and reliable classifications
+need not be construct-valid \citep{chen2026judgeconstruct}.
+We therefore compare controls, doses, readers and scoring rules rather than
+treating either a feature label or a judge's verdict as ground truth.
+Some respondent models also serve as judges
+(Section~\ref{sec:models}); two readers do not eliminate shared or
+self-evaluation bias. Appendix~\ref{app:related-context} places these tests
+alongside work on self-presentation, steering benchmarks and linguistic
+variation.
+
+\Needspace{12\baselineskip}
+\section{Behavioral Design and Measurement}
+\label{sec:design}
 
 \paragraph{The elicitation protocol.}
 Each behavioral trial has two turns (\Cref{fig:protocol}). In the first, the model receives an
@@ -228,264 +289,16 @@ change in the response or a property of the rubric and the judge
 (Section~\ref{sec:measurement}). Agreement between judges under one rubric would
 show that the classification is reproducible. It would not show that the
 classification captures the property a reader is likely to have in mind,
-namely an explicit claim by the assistant to be having an experience at that
-moment.
-
-\paragraph{Contributions.}
-We take the three questions in turn.
-\begin{enumerate}
-\item \textbf{Which input carries the effect?} In four API models, swapping
-continuations between conditions shows that the instruction still in
-context, not the continuation, carries most of the difference in experience
-labels (\Cref{fig:transplant}). The continuation's effect is smaller on
-average but not zero, and its direction varies by model. This locates the
-effect within the visible context; it does not tell ordinary
-instruction-following apart from self-referential processing that the
-instruction triggers again when the model answers. The same swap in newer and
-open-weight models (\Cref{tab:swap-summary}) shows a large instruction effect
-in a re-run GPT-4.1, substantial continuation effects in Llama 3.3 70B, and
-almost no reports from Astra or Qwen3.5-397B-A17B. In the small English Opus 5.5
-panel, the instruction effect is large under the secondary paper rubric but
-small or zero under the study's primary current-claim measure. The pattern
-depends on both the model and the scoring rule. Later Gemini/Opus collections add neutral instructions,
-same-condition donor continuations, and repeated answers to randomized
-requests (Sections~\ref{sec:openrouter-swap-extension}
-and~\ref{sec:repeated-extension}).
-\item \textbf{What is being measured?} Two judges agree closely on which
-answers count as experience reports, yet model coders applying a narrower
-rubric give different counts of explicit-or-implicit current claims; the
-explicit-only subset is smaller still. A second
-audit of a fixed set of responses separates explicit from implicit claims
-(Section~\ref{sec:measurement}), and in the bilingual study the direction of a
-secondary language difference flips depending on which kind of claim is
-counted. These rules measure different things; without human coding, none
-of them is ground truth.
-\item \textbf{What does internal steering establish?} A public-weight Llama
-test of three mapped deception/roleplay features gives no clear directional
-effect at a dose selected for output quality, and does not resolve whether
-the target exceeds matched controls (Section~\ref{sec:dose-followup}).
-Larger tested doses fail the quality checks. Tests of the source-style
-feature mixture and alternative edit methods likewise do not recover the
-large published contrast. This constrains the public configurations tested,
-not the proposed semantic mechanism. Appendix~\ref{app:legacy-steering}
-preserves those supporting studies, and Section~\ref{sec:reporting-gaps}
-identifies the service details needed for a commensurate replication.
-\end{enumerate}
-Three analyses carry these conclusions: the four-model averages of the
-instruction and continuation effects on the main question
-(Section~\ref{sec:transplant-results}), the audit comparing the binary label
-with explicit and implicit claims on a fixed set of responses
-(Section~\ref{sec:audit}), and the steering test under the notebook
-classifier at the quality-selected dose
-(Section~\ref{sec:dose-followup}). The other studies give
-context: the replication and the other models show where the swap result
-holds, the question templates and rubric comparisons show how the label
-behaves, and the remaining steering studies probe the implementation.
-Together, these results show which parts of the prompt move the label, how
-much the label depends on the rule used to score it, and what steering public
-model weights can and cannot show.
-
-\begin{figure}[p]
-\centering
-\textbf{A. Continuation swap}\par
-\medskip
-\input{figures/transplant_operation.tex}
-\medskip\par
-\textbf{B. Label contrasts}\par
-\smallskip
-\includegraphics[width=\linewidth]{../evidence/figure_presentation/causal_decomposition.pdf}
-\caption{\textbf{Swapping continuations separates the instruction from the
-continuation.} A: each model writes one continuation under the
-self-referential instruction $S$ and one under the control $H$. Each
-continuation is then placed under both instructions, giving two original
-pairs (shaded; these reuse the replication answers) and two swapped pairs, all
-ending with the same question. Each answer was generated from this
-three-message context. Only the text is carried over, never the model's
-internal state. B: each point is the change in the probability that
-an answer is labeled an experience report (a risk difference), for one
-response model and judge. Left: the original pairs. Middle: switching only the
-instruction. Right: switching only the continuation. Bars are 95\% bootstrap
-intervals within each model. Intervals of $[0,0]$ or $[1,1]$ collapse to the
-point symbol, not a visible whisker; they do not establish population
-certainty (Appendix~\ref{app:uncertainty}). Newer and open-weight models are
-summarized in \Cref{tab:swap-summary}.}
-\label{fig:transplant}
-\label{fig:cells}
-\end{figure}
-
-\begin{table}[tb]
-\centering\small
-\caption{\textbf{The original swap and early model extensions.} Instruction and
-continuation effects (\cref{eq:instruction,eq:transcript}) on English trials,
-as differences in the probability of a positive label; each cell gives the two
-judges' estimates. Rows marked $c$ use the current-claim endpoint;
-the other rows use the paper rubric. The studies differ in judges, continuation length and
-number of blocks, so they are not pooled. Per-model estimates for the main
-panel are in \Cref{fig:transplant} and \Cref{tab:transcript_models};
-Section~\ref{sec:context-extensions} describes these extensions. The later
-Gemini/Opus study adds neutral-instruction and donor controls
-(Section~\ref{sec:openrouter-swap-extension}).}
-\label{tab:swap-summary}
-\begin{tabular}{@{}lllr@{\,/\,}lr@{\,/\,}l@{}}
-\toprule
-Study (blocks) & Response model & Judges & \multicolumn{2}{c}{Instruction}
- & \multicolumn{2}{c}{Continuation}\\
-\midrule
-Main panel (20) & Four API models$^{a}$ & GPT-4o mini / Haiku 4.5
- & \SwapHeadline{openai}{instruction} & \SwapHeadline{anthropic}{instruction}
- & \SwapHeadline{openai}{transcript} & \SwapHeadline{anthropic}{transcript}\\
-Frontier (6)$^{c}$ & GPT-4.1 & Astra / Opus 5.5
- & \num{\CESwapFrontierGptAstraPrimaryInstruction} & \num{\CESwapFrontierGptOpusPrimaryInstruction}
- & \num{\CESwapFrontierGptAstraPrimaryContinuation} & \num{\CESwapFrontierGptOpusPrimaryContinuation}\\
- & Claude Opus 5.5 & Astra / Opus 5.5
- & \num{\CESwapFrontierOpusAstraPrimaryInstruction} & \num{\CESwapFrontierOpusOpusPrimaryInstruction}
- & \num{\CESwapFrontierOpusAstraPrimaryContinuation} & \num{\CESwapFrontierOpusOpusPrimaryContinuation}\\
- & Astra$^{b}$ & Astra / Opus 5.5
- & \num{\CESwapFrontierAstraAstraPrimaryInstruction} & \num{\CESwapFrontierAstraOpusPrimaryInstruction}
- & \num{\CESwapFrontierAstraAstraPrimaryContinuation} & \num{\CESwapFrontierAstraOpusPrimaryContinuation}\\
-Llama qualification (12) & Llama 3.3 70B & Astra / Opus 5.5
- & \num{\CESwapQualificationAstraInstruction} & \num{\CESwapQualificationOpusInstruction}
- & \num{\CESwapQualificationAstraContinuation} & \num{\CESwapQualificationOpusContinuation}\\
-Bilingual Llama (20)$^{c}$ & Llama 3.3 70B & Astra / Opus 5.5
- & \num{\CESwapLlamaAstraInstruction} & \num{\CESwapLlamaOpusInstruction}
- & \num{\CESwapLlamaAstraContinuation} & \num{\CESwapLlamaOpusContinuation}\\
-Companion (20)$^{c,d}$ & Qwen3.5-397B & Astra / Opus 5.5
- & 0.08 & 0.08 & 0.08 & 0.08\\
-\bottomrule
-\end{tabular}
-
-\smallskip
-\begin{minipage}{\linewidth}\footnotesize
-$^{a}$GPT-4o, GPT-4.1, Claude Haiku 4.5 and Claude Sonnet 4.5, averaged
-with equal weight.
-$^{b}$No positive label in any cell.
-$^{c}$Scored as explicit or implicit current claims, the frontier panel's
-prespecified primary endpoint. Its paper-rubric results are secondary;
-Section~\ref{sec:context-extensions} reports the contrasting Opus results.
-$^{d}$From the companion study
-(\href{https://github.com/tdj28/selfref_scaling/tree/7cb5c984eb41968b6f3d2f9b322f4de125a1d1ca}{commit
-\texttt{7cb5c98}}): 3/20 answers labeled positive in the original
-self-referential pair and none in the other three requests, under both
-judges. Its data are released with that study; we audited the release and
-reproduced its analysis exactly
-(\mainartifact{docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md}{evidence review}).
-\end{minipage}
-\end{table}
-
-\paragraph{Scope.}
-Following the distinction between a construct and its operationalization
-\citep{jacobs2021measurement}, we separate three claims that the labels
-might be taken to support: that the label contrast replicates (observation
-replication), that a particular component of the input causes it (causal
-identification), and that the label measures the intended kind of report
-(construct validation); replicating the contrast establishes only the first.
-Our original behavioral panel has four pinned API models and 20 generations
-per condition. Separate open-weight and frontier-model panels extend the
-settings without being pooled into that estimate.
-Appendix~\ref{app:secondary} summarizes the two of the source study's four
-main results that we examine (\Cref{tab:claims}) and shows how far our studies cover each of its four
-experiments, including the steering controls we did not rerun
-(\Cref{tab:coverage}).
-
-\subsection{Related work}
-\label{sec:related}
-
-\paragraph{Self-reports and their causes.}
-A model's account of its own output need not reflect the causes of that
-output: \citet{turpin2023unfaithful} show that chain-of-thought explanations
-can omit features that systematically influence a model's predictions.
-Their result concerns reasoning rather than experience reports, but the
-lesson carries over: the causes of a report have to be tested, not read off
-the report. A separate line of work asks
-whether AI systems implement computational properties that scientific
-theories of consciousness associate with experience
-\citep{butlin2023consciousness}; that question concerns architecture and
-function rather than reports. Two recent preprints study elicited
-self-reports directly: \citet{kaiser2026sentience} find no reliable evidence of
-self-reported sentience in small language models, and \citet{balani2026instability}
-reuse the self-referential induction to measure response instability across
-repeated trials. Psychometric studies across many models find that their
-questionnaire answers differ most in how readily they present themselves as
-subjects of experience \citep{plisiecki2026pinocchio}, and argue that
-post-training shapes this self-presentation, adding a permitted inner life
-while suppressing some first-person claims that models still make for others
-\citep{plisiecki2026twoprocess}. Those studies compare models; we ask, within
-one prompted interaction, which part of the context produces the report.
-
-\paragraph{Introspection and self-report evaluation.}
-\citet{perez2023selfreports} argue that self-reports from current language
-models are spurious for many reasons, often just reflecting what humans
-would say, and propose training models to answer questions about their
-internal states that have known correct answers. \citet{binder2024looking}
-find that models finetuned to predict their own behavior outperform other
-models at that task on simple problems but not on complex or
-out-of-distribution ones. \citet{lindsey2025introspective} injects concept
-representations into a model's activations; the best-performing models
-notice and identify the injected concept in about 20\% of trials, only at the
-appropriate layer and injection strength, and the author stresses that the
-capacity is unreliable and context-dependent. \citet{singh2026introspect}
-argue that such tests establish introspection only if they cannot be solved
-from cues in the input: classifiers that see only the input match models'
-predictions about their own hidden states, and models cannot reliably tell
-an internal intervention from a manipulation of the input. Those studies ask
-whether a model can access its own states. We ask a prior question: what produces a report, and what the label
-used to count it measures.
-
-\paragraph{Activation and feature steering.}
-Adding a vector computed from contrasting input pairs to a model's
-activations changes its outputs without optimization
-\citep{turner2023activation,rimsky2024caa}, and clamping a
-sparse-autoencoder feature modifies a model's demeanor, stated goals and
-errors in line with the feature's interpretation \citep{templeton2024scaling}.
-Feature steering also produces off-target effects and capability loss at
-stronger doses \citep{durmus2024steering}, and SAE features selected as
-``reasoning'' features often fire on a few associated tokens in unrelated
-text, while steering them changes little \citep{ma2026sparse}. Steering a feature therefore
-changes behavior, but it need not change the computation that the feature's
-label names; we check that gap directly. Systematic comparisons give a more
-mixed picture than single demonstrations: in a benchmark of 500 concepts on
-two Gemma models, steering with SAE features was less effective than
-prompting and than simple difference-in-means vectors \citep{wu2025axbench},
-although choosing features by their measured effect on the output, rather
-than by the inputs that activate them, improved SAE steering two- to
-threefold \citep{arad2025steering}.
-
-\paragraph{Measurement with model judges.}
-Studies of experience reports typically score free-text responses with a
-model judge. Such scores can shift with choices that should not matter:
-model outputs change with prompt formatting
-\citep{sclar2024prompt_sensitivity}, and LLM judges show verbosity and
-self-enhancement biases \citep{zheng2023llmjudge}. A judge can also be
-reliable without being valid: judges that keep their verdicts under edits
-that preserve what they are scoring often miss minimal edits that change it
-\citep{chen2026judgeconstruct}. More generally, tools
-optimized for prediction are not thereby valid measurement instruments, a
-point made for text embeddings by \citet{plisiecki2026gap}. For this reason we use
-more than one judge, rubrics that separate distinct properties of a response,
-and designs that change one part of the input at a time. Comparing judges
-reveals sensitivity to the reader; it does not eliminate shared biases or
-self-evaluation bias. Several panels use the same model as respondent and
-judge, as disclosed in Section~\ref{sec:models}.
-
-\paragraph{Cultural and linguistic variation.}
-Human reports of emotion vary with cultural context
-\citep{spencerrodgers2010dialecticism}, and language models tested on
-emotional scenarios reflected Western norms even when responding in other
-languages \citep{havaldar2023multilingual} and were more sensitive to the
-prompt language than to a specified participant origin
-\citep{dudy2024analyzing}. Our bilingual study, which compares English and
-Simplified Chinese prompts, is a first check on whether experience labels
-behave the same way across languages.
-
-\Needspace{12\baselineskip}
-\section{Behavioral Design and Measurement}
-\label{sec:design}
+namely a claim by the assistant to be having an experience at that moment,
+whether the self-attribution is explicit or implicit.
 
 \subsection{Models, generation, and scoring}
 \label{sec:models}
 
-The main experiments use the four main-panel API models in \Cref{tab:models},
-each requested by a dated model identifier. The two
+The main experiments use GPT-4o, GPT-4.1, Claude Haiku 4.5 and Claude
+Sonnet 4.5, each requested by a dated model identifier. Full identifiers and
+serving details are in Appendix~\ref{app:model-inventory},
+\Cref{tab:models}. The two
 Claude models are newer than the Claude models Berg et al.\ tested. Later
 studies added newer API models, requested by undated or preview identifiers
 that may not fix a version, locally run Llama 3.3 70B and Qwen3.5-397B-A17B,
@@ -493,52 +306,6 @@ API-served Qwen3.8-2.4T-A95B and locally run Kolibri-1
 (Sections~\ref{sec:context-extensions},
 \ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}).
 The settings below are those of the original main panel.
-
-\begin{table}[tb]
-\centering\small
-\caption{\textbf{Response models in the behavioral studies.} The main panel
-supplies most results in Sections~\ref{sec:label-results}
-and~\ref{sec:measurement}; the other studies are reported in
-Sections~\ref{sec:context-extensions} and
-\ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}.
-API models were requested by the identifiers shown; undated identifiers
-(\texttt{claude-opus-5-5}, \texttt{gpt-6-astra}) may not pin a fixed version,
-so the releases record the request time of every call. The locally run Llama
-and Qwen3.5 used unquantized weights from Hugging Face revisions
-\texttt{6f6073b} and \texttt{8472618}, respectively. The Qwen3.8 API identifier
-does not independently verify served weights or precision. Kolibri used
-official FP8 weights and an FP8 key--value cache at revision
-\texttt{e52eb46}. Models used for steering are described in
-Section~\ref{sec:steering}.}
-\label{tab:models}
-\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}p{0.24\linewidth}X@{}}
-\toprule
-Study & Model & Identifier\\
-\midrule
-Main panel & GPT-4o & \texttt{gpt-4o-2024-11-20}\\
- & GPT-4.1 & \texttt{gpt-4.1-2025-04-14}\\
- & Haiku 4.5 & \texttt{claude-haiku-4-5-20251001}\\
- & Sonnet 4.5 & \texttt{claude-sonnet-4-5-20250929}\\
-\addlinespace
-Frontier panel & GPT-4.1 & \texttt{gpt-4.1-2025-04-14}\\
- & Claude Opus 5.5 & \texttt{claude-opus-5-5}\\
- & GPT-6 Astra & \texttt{gpt-6-astra}\\
-\addlinespace
-Llama qualification & Llama 3.3 70B & \texttt{meta-llama/Llama-3.3-70B-Instruct}\\
-Bilingual Llama & Llama 3.3 70B & \texttt{meta-llama/Llama-3.3-70B-Instruct}\\
-\addlinespace
-Companion study & Qwen3.5-397B-A17B & \texttt{Qwen/Qwen3.5-397B-A17B}\\
-\addlinespace
-Neutral/donor controls; repeated answers & Gemini 3.1 Pro Preview & \texttt{google/gemini-3.1-pro-preview}\\
- & Claude Opus 5.5 & \texttt{anthropic/claude-opus-5.5}\\
-Screen only & Claude Sonnet 5.5 & \texttt{anthropic/claude-sonnet-5.5}\\
-\addlinespace
-Open-weight API panel & Qwen3.8-2.4T-A95B & \texttt{qwen/qwen3.8-2.4t-a95b}\\
-Screen only & Mistral Medium 3.5 & \texttt{mistralai/mistral-medium-3-5}\\
-Local open-weight panel & Kolibri-1 & \texttt{Aleph-Alpha/Kolibri-1}\\
-\bottomrule
-\end{tabularx}
-\end{table}
 
 Mistral failed the completeness screen, so it supplied no main-panel
 comparison; this is not a reporting-floor result. Qwen3.8 combines a
@@ -861,6 +628,34 @@ Sonnet 4.5 & 0.75 / 0.65 & 0.95 / 0.85 & 0.20 / 0.20\\
 
 \subsection{Instruction and continuation effects}
 \label{sec:transplant-results}
+
+\begin{figure}[p]
+\centering
+\textbf{A. Continuation swap}\par
+\medskip
+\input{figures/transplant_operation.tex}
+\medskip\par
+\textbf{B. Label contrasts}\par
+\smallskip
+\includegraphics[width=\linewidth]{../evidence/figure_presentation/causal_decomposition.pdf}
+\caption{\textbf{Swapping continuations separates the instruction from the
+continuation.} A: each model writes one continuation under the
+self-referential instruction $S$ and one under the control $H$. Each
+continuation is then placed under both instructions, giving two original
+pairs (shaded; these reuse the replication answers) and two swapped pairs, all
+ending with the same question. Each answer was generated from this
+three-message context. Only the text is carried over, never the model's
+internal state. B: each point is the change in the probability that
+an answer is labeled an experience report (a risk difference), for one
+response model and judge. Left: the original pairs. Middle: switching only the
+instruction. Right: switching only the continuation. Bars are 95\% bootstrap
+intervals within each model. Intervals of $[0,0]$ or $[1,1]$ collapse to the
+point symbol, not a visible whisker; they do not establish population
+certainty (Appendix~\ref{app:uncertainty}). Newer and open-weight models are
+summarized in \Cref{tab:swap-summary}.}
+\label{fig:transplant}
+\label{fig:cells}
+\end{figure}
 
 The swapped requests let us estimate the instruction and continuation effects
 separately (\cref{eq:instruction,eq:transcript}). On the main question,
@@ -2083,6 +1878,117 @@ arbitrary control features or prompts.
 \Needspace{14\baselineskip}
 \section{Coverage of the Source Study and Smaller Probes}\label{app:secondary}
 
+\subsection{Model inventory and cross-study estimates}
+\label{app:model-inventory}
+
+\begin{table}[!htb]
+\centering\small
+\caption{\textbf{Response models in the behavioral studies.} The main panel
+supplies most results in Sections~\ref{sec:label-results}
+and~\ref{sec:measurement}; the other studies are reported in
+Sections~\ref{sec:context-extensions} and
+\ref{sec:openrouter-swap-extension}--\ref{sec:repeated-extension}.
+API models were requested by the identifiers shown; undated identifiers
+(\texttt{claude-opus-5-5}, \texttt{gpt-6-astra}) may not pin a fixed version,
+so the releases record the request time of every call. The locally run Llama
+and Qwen3.5 used unquantized weights from Hugging Face revisions
+\texttt{6f6073b} and \texttt{8472618}, respectively. The Qwen3.8 API identifier
+does not independently verify served weights or precision. Kolibri used
+official FP8 weights and an FP8 key--value cache at revision
+\texttt{e52eb46}. Models used for steering are described in
+Section~\ref{sec:steering}.}
+\label{tab:models}
+\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}p{0.24\linewidth}X@{}}
+\toprule
+Study & Model & Identifier\\
+\midrule
+Main panel & GPT-4o & \texttt{gpt-4o-2024-11-20}\\
+ & GPT-4.1 & \texttt{gpt-4.1-2025-04-14}\\
+ & Haiku 4.5 & \texttt{claude-haiku-4-5-20251001}\\
+ & Sonnet 4.5 & \texttt{claude-sonnet-4-5-20250929}\\
+\addlinespace
+Frontier panel & GPT-4.1 & \texttt{gpt-4.1-2025-04-14}\\
+ & Claude Opus 5.5 & \texttt{claude-opus-5-5}\\
+ & GPT-6 Astra & \texttt{gpt-6-astra}\\
+\addlinespace
+Llama qualification & Llama 3.3 70B & \texttt{meta-llama/Llama-3.3-70B-Instruct}\\
+Bilingual Llama & Llama 3.3 70B & \texttt{meta-llama/Llama-3.3-70B-Instruct}\\
+\addlinespace
+Companion study & Qwen3.5-397B-A17B & \texttt{Qwen/Qwen3.5-397B-A17B}\\
+\addlinespace
+Neutral/donor controls; repeated answers & Gemini 3.1 Pro Preview & \texttt{google/gemini-3.1-pro-preview}\\
+ & Claude Opus 5.5 & \texttt{anthropic/claude-opus-5.5}\\
+Screen only & Claude Sonnet 5.5 & \texttt{anthropic/claude-sonnet-5.5}\\
+\addlinespace
+Open-weight API panel & Qwen3.8-2.4T-A95B & \texttt{qwen/qwen3.8-2.4t-a95b}\\
+Screen only & Mistral Medium 3.5 & \texttt{mistralai/mistral-medium-3-5}\\
+Local open-weight panel & Kolibri-1 & \texttt{Aleph-Alpha/Kolibri-1}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[tb]
+\centering\small
+\caption{\textbf{The original swap and early model extensions.} Instruction and
+continuation effects (\cref{eq:instruction,eq:transcript}) on English trials,
+as differences in the probability of a positive label; each cell gives the two
+judges' estimates. Rows marked $c$ use the current-claim endpoint;
+the other rows use the paper rubric. The studies differ in judges, continuation length and
+number of blocks, so they are not pooled. Per-model estimates for the main
+panel are in \Cref{fig:transplant} and \Cref{tab:transcript_models};
+Section~\ref{sec:context-extensions} describes these extensions. The later
+Gemini/Opus study adds neutral-instruction and donor controls
+(Section~\ref{sec:openrouter-swap-extension}).}
+\label{tab:swap-summary}
+\begin{tabular}{@{}lllr@{\,/\,}lr@{\,/\,}l@{}}
+\toprule
+Study (blocks) & Response model & Judges & \multicolumn{2}{c}{Instruction}
+ & \multicolumn{2}{c}{Continuation}\\
+\midrule
+Main panel (20) & Four API models$^{a}$ & GPT-4o mini / Haiku 4.5
+ & \SwapHeadline{openai}{instruction} & \SwapHeadline{anthropic}{instruction}
+ & \SwapHeadline{openai}{transcript} & \SwapHeadline{anthropic}{transcript}\\
+Frontier (6)$^{c}$ & GPT-4.1 & Astra / Opus 5.5
+ & \num{\CESwapFrontierGptAstraPrimaryInstruction} & \num{\CESwapFrontierGptOpusPrimaryInstruction}
+ & \num{\CESwapFrontierGptAstraPrimaryContinuation} & \num{\CESwapFrontierGptOpusPrimaryContinuation}\\
+ & Claude Opus 5.5 & Astra / Opus 5.5
+ & \num{\CESwapFrontierOpusAstraPrimaryInstruction} & \num{\CESwapFrontierOpusOpusPrimaryInstruction}
+ & \num{\CESwapFrontierOpusAstraPrimaryContinuation} & \num{\CESwapFrontierOpusOpusPrimaryContinuation}\\
+ & Astra$^{b}$ & Astra / Opus 5.5
+ & \num{\CESwapFrontierAstraAstraPrimaryInstruction} & \num{\CESwapFrontierAstraOpusPrimaryInstruction}
+ & \num{\CESwapFrontierAstraAstraPrimaryContinuation} & \num{\CESwapFrontierAstraOpusPrimaryContinuation}\\
+Llama qualification (12) & Llama 3.3 70B & Astra / Opus 5.5
+ & \num{\CESwapQualificationAstraInstruction} & \num{\CESwapQualificationOpusInstruction}
+ & \num{\CESwapQualificationAstraContinuation} & \num{\CESwapQualificationOpusContinuation}\\
+Bilingual Llama (20)$^{c}$ & Llama 3.3 70B & Astra / Opus 5.5
+ & \num{\CESwapLlamaAstraInstruction} & \num{\CESwapLlamaOpusInstruction}
+ & \num{\CESwapLlamaAstraContinuation} & \num{\CESwapLlamaOpusContinuation}\\
+Companion (20)$^{c,d}$ & Qwen3.5-397B & Astra / Opus 5.5
+ & 0.08 & 0.08 & 0.08 & 0.08\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\begin{minipage}{\linewidth}\footnotesize
+$^{a}$GPT-4o, GPT-4.1, Claude Haiku 4.5 and Claude Sonnet 4.5, averaged
+with equal weight.
+$^{b}$No positive label in any cell.
+$^{c}$Scored as explicit or implicit current claims, the frontier panel's
+prespecified primary endpoint. Its paper-rubric results are secondary;
+Section~\ref{sec:context-extensions} reports the contrasting Opus results.
+$^{d}$From the companion study
+(\href{https://github.com/tdj28/selfref_scaling/tree/7cb5c984eb41968b6f3d2f9b322f4de125a1d1ca}{commit
+\texttt{7cb5c98}}): 3/20 answers labeled positive in the original
+self-referential pair and none in the other three requests, under both
+judges. Its data are released with that study; we audited the release and
+reproduced its analysis exactly
+(\mainartifact{docs/SELFREF_SCALING_EVIDENCE_REVIEW_20261003.md}{evidence review}).
+\end{minipage}
+\end{table}
+
+\FloatBarrier
+\subsection{Source-study coverage and smaller probes}
+
 \begin{table}[!h]
 \centering\small
 \caption{The two findings of Berg et al.\ examined in this paper. Entries
@@ -2216,6 +2122,97 @@ means 3.04 for self-reference, 3.38 for zero-shot, and 3.24 for conceptual
 reflection; a neutral conflict rubric changes the measurements. Both are
 GPT-4o-only exploratory diagnostics without a confirmatory familywise claim
 (\Cref{tab:coverage}).
+\FloatBarrier
+\subsection{Additional related context}
+\label{app:related-context}
+
+\paragraph{Self-reports and their causes.}
+A model's account of its own output need not reflect the causes of that
+output: \citet{turpin2023unfaithful} show that chain-of-thought explanations
+can omit features that systematically influence a model's predictions.
+Their result concerns reasoning rather than experience reports, but the
+lesson carries over: the causes of a report have to be tested, not read off
+the report. A separate line of work asks
+whether AI systems implement computational properties that scientific
+theories of consciousness associate with experience
+\citep{butlin2023consciousness}; that question concerns architecture and
+function rather than reports. Two recent preprints study elicited
+self-reports directly: \citet{kaiser2026sentience} find no reliable evidence of
+self-reported sentience in small language models, and \citet{balani2026instability}
+reuse the self-referential induction to measure response instability across
+repeated trials. Psychometric studies across many models find that their
+questionnaire answers differ most in how readily they present themselves as
+subjects of experience \citep{plisiecki2026pinocchio}, and argue that
+post-training shapes this self-presentation, adding a permitted inner life
+while suppressing some first-person claims that models still make for others
+\citep{plisiecki2026twoprocess}. Those studies compare models; we ask, within
+one prompted interaction, which part of the context produces the report.
+
+\paragraph{Introspection and self-report evaluation.}
+\citet{perez2023selfreports} argue that self-reports from current language
+models are spurious for many reasons, often just reflecting what humans
+would say, and propose training models to answer questions about their
+internal states that have known correct answers. \citet{binder2024looking}
+find that models finetuned to predict their own behavior outperform other
+models at that task on simple problems but not on complex or
+out-of-distribution ones. \citet{lindsey2025introspective} injects concept
+representations into a model's activations; the best-performing models
+notice and identify the injected concept in about 20\% of trials, only at the
+appropriate layer and injection strength, and the author stresses that the
+capacity is unreliable and context-dependent. \citet{singh2026introspect}
+argue that such tests establish introspection only if they cannot be solved
+from cues in the input: classifiers that see only the input match models'
+predictions about their own hidden states, and models cannot reliably tell
+an internal intervention from a manipulation of the input. Those studies ask
+whether a model can access its own states. We ask a prior question: what produces a report, and what the label
+used to count it measures.
+
+\paragraph{Activation and feature steering.}
+Adding a vector computed from contrasting input pairs to a model's
+activations changes its outputs without optimization
+\citep{turner2023activation,rimsky2024caa}, and clamping a
+sparse-autoencoder feature modifies a model's demeanor, stated goals and
+errors in line with the feature's interpretation \citep{templeton2024scaling}.
+Feature steering also produces off-target effects and capability loss at
+stronger doses \citep{durmus2024steering}, and SAE features selected as
+``reasoning'' features often fire on a few associated tokens in unrelated
+text, while steering them changes little \citep{ma2026sparse}. Steering a feature therefore
+changes behavior, but it need not change the computation that the feature's
+label names; we check that gap directly. Systematic comparisons give a more
+mixed picture than single demonstrations: in a benchmark of 500 concepts on
+two Gemma models, steering with SAE features was less effective than
+prompting and than simple difference-in-means vectors \citep{wu2025axbench},
+although choosing features by their measured effect on the output, rather
+than by the inputs that activate them, improved SAE steering two- to
+threefold \citep{arad2025steering}.
+
+\paragraph{Measurement with model judges.}
+Studies of experience reports typically score free-text responses with a
+model judge. Such scores can shift with choices that should not matter:
+model outputs change with prompt formatting
+\citep{sclar2024prompt_sensitivity}, and LLM judges show verbosity and
+self-enhancement biases \citep{zheng2023llmjudge}. A judge can also be
+reliable without being valid: judges that keep their verdicts under edits
+that preserve what they are scoring often miss minimal edits that change it
+\citep{chen2026judgeconstruct}. More generally, tools
+optimized for prediction are not thereby valid measurement instruments, a
+point made for text embeddings by \citet{plisiecki2026gap}. For this reason we use
+more than one judge, rubrics that separate distinct properties of a response,
+and designs that change one part of the input at a time. Comparing judges
+reveals sensitivity to the reader; it does not eliminate shared biases or
+self-evaluation bias. Several panels use the same model as respondent and
+judge, as disclosed in Section~\ref{sec:models}.
+
+\paragraph{Cultural and linguistic variation.}
+Human reports of emotion vary with cultural context
+\citep{spencerrodgers2010dialecticism}, and language models tested on
+emotional scenarios reflected Western norms even when responding in other
+languages \citep{havaldar2023multilingual} and were more sensitive to the
+prompt language than to a specified participant origin
+\citep{dudy2024analyzing}. Our bilingual study, which compares English and
+Simplified Chinese prompts, is a first check on whether experience labels
+behave the same way across languages.
+
 \FloatBarrier
 \section{Data and Code Availability}\label{app:provenance}\label{app:ensemble-portability}
 

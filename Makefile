@@ -17,8 +17,8 @@ compile:
 paper:
 	cd paper && $(LATEXMK) -pdf -halt-on-error -interaction=nonstopmode main.tex
 
-# Self-contained arXiv source bundle, plain-text abstract and standalone build.
-arxiv: paper
+# Verified source bundle, submission abstract and isolated archive rebuild.
+arxiv: paper-verify paper
 	$(PYTHON) scripts/build_arxiv_bundle.py
 
 # Read-only checks of the current manuscript and its packaged evidence.

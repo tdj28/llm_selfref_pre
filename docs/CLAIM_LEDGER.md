@@ -171,6 +171,13 @@ result. Explicit-only counts and the +0.30 decision threshold remain in the
 body. Neither audit measure is treated as ground truth, and the abstract
 states that both judges and rubric changed.
 
+The shortened opening retains these distinctions. Protocol detail belongs in
+Methods; full model identifiers, the early cross-study summary and extended
+related context are in Appendix H. These are editorial relocations, not
+changes to endpoints, evidence or the set of studies reported. The body still
+compares Opus's primary and secondary endpoints and discloses respondent/judge
+overlap.
+
 The [fixed-dose release](https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/RESULTS.md)
 narrowly excludes the prespecified +0.30 target contrast at the selected dose;
 it does not resolve whether the target exceeds matched controls.

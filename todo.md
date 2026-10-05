@@ -89,6 +89,9 @@ these authorizations does not reopen model search or other collection.
 - [ ] Confirm publication destination, timing, and the audited commit to tag
   or submit. Cleanup approval does not authorize website deployment or paper
   submission; preserve unpublished blog drafts.
+- [ ] After an authorized arXiv upload, inspect its file inventory and generated
+  PDF. The local `make arxiv` checks do not certify arXiv's TeX Live version or
+  moderation; see [the upload workflow](paper/README.md#arxiv-upload).
 - [ ] Resolve the final archive and license scope described in
   [NOTICE.md](NOTICE.md) before a whole-repository archive. Third-party rights
   and original-data licensing are not yet cleared by the code license.
