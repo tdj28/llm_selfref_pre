@@ -49,6 +49,9 @@ not that reconstruction or independent scientific validation.
   `python scripts/verify_dose_followup.py --full --require-pinned` for the
   historical-source inference replay as well.
 - `figures/`: selected figure inputs with pinned source provenance.
+- `../evidence/figure_presentation/`: readable vector exports of historical
+  plots, bound to their original values. `paper-verify` checks the inputs,
+  displayed values, embedded fonts and absence of embedded captions.
 - `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
 - `../reviews/`: dated automated reviews, adjudications and reference checks.
 - `results/`: earlier research figures/tables, retained rather than discarded.

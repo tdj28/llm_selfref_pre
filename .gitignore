@@ -841,3 +841,8 @@ data/berg_dose_exposure_continuation/*
 !data/berg_dose_exposure_continuation/fixed_main_v1_20261005/**
 !data/berg_dose_exposure_continuation/fixed_main_v1_20261005.compat.json
 !evidence/dose_followup/main_contrasts.pdf
+!evidence/figure_presentation/ensemble_effects.pdf
+!evidence/figure_presentation/ensemble_rates.pdf
+!evidence/figure_presentation/native_reencoding_1.pdf
+!evidence/figure_presentation/native_reencoding_2.pdf
+!evidence/figure_presentation/fidelity_pressure.pdf

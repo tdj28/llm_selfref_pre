@@ -125,13 +125,7 @@ the features.
 
 \begin{figure}[p]
 \centering
-{\small\bfseries Paper rubric}\par\smallskip
-\includegraphics[height=220bp, trim=0 16bp 383bp 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
-\medskip\par
-{\small\bfseries Second rubric}\par\smallskip
-% The shared y-axis labels are repeated without changing either panel.
-\includegraphics[height=220bp, trim=0 16bp 731bp 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}%
-\includegraphics[height=220bp, trim=432bp 16bp 0 50.2bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_effects.pdf}
+\includegraphics[width=\linewidth]{../evidence/figure_presentation/ensemble_effects.pdf}
 \caption{\textbf{The paper rubric excludes a large effect at this dose.}
 All four feature sets (the target and three matched control sets) are shown
 under the paper rubric (top) and the second rubric (bottom). Points are
@@ -162,34 +156,7 @@ behave differently from the controls.
 
 \begin{figure}[p]
 \centering
-{\small\bfseries Paper rubric}\par\smallskip
-\begin{tikzpicture}
-\node[anchor=south west, inner sep=0] (img) at (0,0)
-  {\includegraphics[height=185bp, trim=24bp 8bp 387bp 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
-\path (img.west) ++(-15pt,0)
-  node[rotate=90,font=\sffamily\footnotesize] {Positive-label fraction};
-\end{tikzpicture}
-\medskip\par
-{\small\bfseries Second rubric}\par\smallskip
-\begin{tikzpicture}
-\node[anchor=south west, inner sep=0] (img) at (0,0)
-  {\includegraphics[height=185bp, trim=24bp 8bp 747bp 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}%
-   \includegraphics[height=185bp, trim=425bp 8bp 0 102.1bp, clip]{../evidence/ensemble_alignment/secondary/aggregate_rates.pdf}};
-\path (img.west) ++(-15pt,0)
-  node[rotate=90,font=\sffamily\footnotesize] {Positive-label fraction};
-\end{tikzpicture}
-\smallskip\par
-\begin{tikzpicture}[font=\sffamily\footnotesize]
-\definecolor{rateblue}{HTML}{236D91}
-\definecolor{ratered}{HTML}{AE4B48}
-\definecolor{rategreen}{HTML}{397454}
-\draw[rategreen,dashed,thick] (0,0)--(0.4,0);
-\node[anchor=west] at (0.45,0) {Untreated};
-\fill[rateblue] (2.8,-0.07) rectangle (3.15,0.07);
-\node[anchor=west] at (3.2,0) {Suppression};
-\fill[ratered] (6,-0.07) rectangle (6.35,0.07);
-\node[anchor=west] at (6.4,0) {Amplification};
-\end{tikzpicture}
+\includegraphics[width=\linewidth]{../evidence/figure_presentation/ensemble_rates.pdf}
 \caption{\textbf{The untreated rate and the rubric both matter.} Share of
 answers labeled positive under each sign for every feature set, under the
 paper rubric (top) and the second rubric (bottom); the dashed line is the

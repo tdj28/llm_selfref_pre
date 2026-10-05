@@ -8,6 +8,9 @@ runners. Reanalysis uses saved outputs and makes no model API calls.
 
 ## Setup And Checks
 
+Install Poppler's command-line tools (`pdffonts`, `pdftotext`, `pdftohtml`,
+and `pdfimages`) for figure checks, alongside the Python environment below.
+
 ```sh
 python3 -m venv venv
 source venv/bin/activate
@@ -128,6 +131,7 @@ in the `Makefile`, including these core checks:
 ```sh
 python scripts/verify_evidence.py
 python scripts/verify_figure_values.py
+python scripts/verify_figure_presentation.py
 python scripts/verify_rubric_audit.py
 python scripts/verify_source_alignment.py
 python scripts/verify_source_jlens_table.py
@@ -159,7 +163,7 @@ records the original exact-replay failure and eight floating-point differences
 of at most two ULPs, with unchanged estimates and decisions. The default
 `paper-verify` check verifies hashes and bindings without this full replay.
 
-These checks use the pinned CPU dependencies installed above and the local Git
+These checks use the pinned CPU dependencies, Poppler tools and local Git
 history. They need no sibling checkout, credentials, GPU, network access or
 TeX installation, and fail on stale
 generated evidence or mismatched manuscript bindings. They check packaged

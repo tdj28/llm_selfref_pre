@@ -25,6 +25,7 @@ arxiv: paper
 paper-verify:
 	$(PYTHON) scripts/verify_evidence.py
 	$(PYTHON) scripts/verify_figure_values.py
+	$(PYTHON) scripts/verify_figure_presentation.py
 	$(PYTHON) scripts/verify_rubric_audit.py
 	$(PYTHON) scripts/verify_source_alignment.py
 	$(PYTHON) scripts/verify_source_jlens_table.py

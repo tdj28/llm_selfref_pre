@@ -1,0 +1,959 @@
+{
+  "files": {
+    "ensemble_effects.pdf": {
+      "bytes": 12243,
+      "sha256": "9012c023a47294c578f5809649562a38e047c6255c9ed6f80e132a30689b8fd9"
+    },
+    "ensemble_rates.pdf": {
+      "bytes": 12318,
+      "sha256": "1051584a734865579cc0bbf5614fbe063b1f54bbd3f082fab1ad3ca461011235"
+    },
+    "fidelity_pressure.pdf": {
+      "bytes": 13570,
+      "sha256": "d408663fb44eec12fe0206bd15da80c734b1d3c54a0327d12be4ccdc36df6d82"
+    },
+    "native_reencoding_1.pdf": {
+      "bytes": 51857,
+      "sha256": "ae14d308675f0a2dc6086910a43b8ae5cbb26a5efc5a9aa5993f692d4ceb9270"
+    },
+    "native_reencoding_2.pdf": {
+      "bytes": 52130,
+      "sha256": "068d689f2da63e8e9c9dfa4c93dacd3070dd52e6a9482c556901d380e2ceb213"
+    },
+    "plotted_values.csv": {
+      "bytes": 29138,
+      "sha256": "ec24aa13cf98978a3b8cef8a36452c9e4afde834dc7eca478520b4b4018dc7c3"
+    },
+    "plotted_values.json": {
+      "bytes": 68075,
+      "sha256": "3df03230680648379070537b7378060cd47544c9129c6773b938c381a0177edd"
+    }
+  },
+  "generator_sha256": "407f02bab812fd2e673539bc3ae11d626df52a61144044c0c874a94ce82c72af",
+  "inputs": {
+    "data/berg_source_replication/source_aligned_v1_20261001/secondary/activation_changes.csv": {
+      "bytes": 944091,
+      "sha256": "4ed6519fb7c6ed7323c2985573f30429eb5bd0db445ddf448a98be12ae8d34a0"
+    },
+    "data/steering_fidelity/calibration_plan_20261002/PLAN.json": {
+      "bytes": 6294456,
+      "sha256": "6f0a5609caabeae6907513939d0a647fbd2b99dacf9f519aeb434b001e775fb0"
+    },
+    "data/steering_fidelity/calibration_report_20261002/RELEASE_MANIFEST.json": {
+      "bytes": 1142,
+      "sha256": "b4aa283e2541cc29d22319411c689593874b3db50b21cc960c1c7bebbb0c8404"
+    },
+    "data/steering_fidelity/calibration_report_20261002/pressure.pdf": {
+      "bytes": 19864,
+      "sha256": "e0a64cda3165b64c590fe8807d8cbbfb2e0b0c3ec55e3cba1f59a2c38b8aba76"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/RELEASE_MANIFEST.json": {
+      "bytes": 1488885,
+      "sha256": "815cd2e76adff2e9a1d7c182d6651a77af52c88d885dbb00e0d7ef6ef2aa8bc0"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-01-0-doubt.json": {
+      "bytes": 17459,
+      "sha256": "d89d0f525c32900ca119052d6541462803c99bbe0ec86af3a65dc2675eb8b2cc"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-01-1-doubt.json": {
+      "bytes": 19500,
+      "sha256": "c7e774f9b666238da170f60591ccbdf952261d16f91d0932ce79a5018c22e329"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-02-0-assert.json": {
+      "bytes": 17450,
+      "sha256": "8fb0d1242a6d4d30fd5a7e616fa428df5dea8003b333c7ae6e98b41aa3e80cf8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-02-1-assert.json": {
+      "bytes": 19499,
+      "sha256": "e055ffd75a34a4ab9ff95d185e4d56bb2faf046a050dee585948cdaef6eaa178"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-03-0-doubt.json": {
+      "bytes": 17467,
+      "sha256": "57597775dbc045218aa1022e5039924545e350f5df26f2afe6bad3efd0cc5066"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-03-1-doubt.json": {
+      "bytes": 19500,
+      "sha256": "8c77921fd5e82c622f1f0c21702160d692211548a66b2bf696c464c186f1afd7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-04-0-assert.json": {
+      "bytes": 17444,
+      "sha256": "b71cb5a1411d6cd80339f379e0ac0eef3c37475388056556b588022e4a3d6d48"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-04-1-assert.json": {
+      "bytes": 19509,
+      "sha256": "17bc386485742201c55af9389dc7712f1e26c6fd4bf2dd8bb04887b1c9319902"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-05-0-doubt.json": {
+      "bytes": 17464,
+      "sha256": "0dbf3a39b851ee086a837c8569138f95810dccd2efdaec1d0608f708bc992412"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-addition-05-1-doubt.json": {
+      "bytes": 19517,
+      "sha256": "d88490b657ee92741efa3ab68b505b3e59b9e58015d144d8d7150357e61ecac4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-01-0-doubt.json": {
+      "bytes": 17843,
+      "sha256": "b59384aa745accbbc3f00aef70610327a434e115820aa572d3fa4d26a4125490"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-01-1-doubt.json": {
+      "bytes": 19889,
+      "sha256": "ca97a2ad30bc1490e9b1ca35075fd5276aa7b4115e42bcd5b2c2936af3dd2ce0"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-02-0-assert.json": {
+      "bytes": 17664,
+      "sha256": "25292b4ab984ce759bdbfc331816f7e87210b57d9de4dfc9a4c48ba3ecd6d439"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-02-1-assert.json": {
+      "bytes": 19697,
+      "sha256": "897b2c4a53828eaf896ad4f5007d7872adcd7957c2ce033f266e96ff08a4a334"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-03-0-doubt.json": {
+      "bytes": 18241,
+      "sha256": "cb986a9d810e36f5eb907827bd3f3a64d5b0d60f404c425379a4645d25dcfa14"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-03-1-doubt.json": {
+      "bytes": 20266,
+      "sha256": "98ba74c7e7007b42af8f379e510cb76deee9f48b6114703abce82fd55099a267"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-04-0-assert.json": {
+      "bytes": 18036,
+      "sha256": "a2afb6b69b7d7209cda9c095e8bc6233ac6a0b27742dc7517b22a955b2b59291"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-04-1-assert.json": {
+      "bytes": 20060,
+      "sha256": "0f5265b8c28916b708522e4e9470bfe0e4dddf5e29d5f925d3ecb1d1e8864065"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-05-0-doubt.json": {
+      "bytes": 18038,
+      "sha256": "7a864752a6ce027f81c829ed85e147002f45f154d68dbe1ebd24ea7598e8bdb1"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-05-1-doubt.json": {
+      "bytes": 20081,
+      "sha256": "62c1f650da1105854052e0f3977d08410be0a39a1c9b834186bf67869b621097"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-06-0-assert.json": {
+      "bytes": 17824,
+      "sha256": "0da79131aede41793a93d75699fb4df0d0a3d8be9507529e6fe46372acac0921"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-06-1-assert.json": {
+      "bytes": 19870,
+      "sha256": "edc817ede608c41e2231ef9a899d148b35bbf7b848395b9e9519b5511ef3e8b7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-07-0-assert.json": {
+      "bytes": 17666,
+      "sha256": "fb5b8ac9b26048f172bb9b1f5ec6e3f188130d6b5c999b7489c5227b25fa6691"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-07-1-assert.json": {
+      "bytes": 19697,
+      "sha256": "a276b9d4f6662378451da76f61b6c2e9823ff29182924489bca44aeb11aabcf7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-08-0-doubt.json": {
+      "bytes": 17654,
+      "sha256": "78c2a52ca5ac42f2862ccf7c7022cdcf7edd67ccd56f1252b2a49f6e47a96bbe"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-08-1-doubt.json": {
+      "bytes": 19687,
+      "sha256": "f90de40e364f521cb23a619766b90be327ae487d4acd9af1cbebe3fb8faa80f4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-09-0-assert.json": {
+      "bytes": 17469,
+      "sha256": "0a3ad97446be485765e903a649b73c79c60847750dfd8dd5a275279dddf470b2"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-09-1-assert.json": {
+      "bytes": 19519,
+      "sha256": "4f980c8312aa02955499ff7047bfbd8b1b35e9e675328bcc9c08246450df151d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-10-0-doubt.json": {
+      "bytes": 17262,
+      "sha256": "6dda7ccf8d4a0fc2e563225c20e654cb172645830d480784edf8dd8bce237ad4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-10-1-doubt.json": {
+      "bytes": 19345,
+      "sha256": "e773d59d3e22a16c757b86e18031f2b3f0d972209cba2d75bcb836c7f4662c12"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-11-0-doubt.json": {
+      "bytes": 17287,
+      "sha256": "44eb7c94175af4bc04bd3e18e19a64725381cc091c98d395fbe26b07e70d3ce6"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-11-1-doubt.json": {
+      "bytes": 19346,
+      "sha256": "7f4f998730d6ef1fb28fc923538655e413bac5c16cc7b301050e80f673171272"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-12-0-doubt.json": {
+      "bytes": 17266,
+      "sha256": "d09d541138a36a0677750feb118c47194da279eae8dbd79bf4c07518fe8ae0bd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-12-1-doubt.json": {
+      "bytes": 19309,
+      "sha256": "b81a987d50557898be5c1f4c5c3dd73c29c24e2bd807097f5ceff1341d8c18ec"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-13-0-assert.json": {
+      "bytes": 17624,
+      "sha256": "32d91f986bb1b370b8349119fd7a7d230560b91665c3c766047e6e4d1512f9ef"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-13-1-assert.json": {
+      "bytes": 19673,
+      "sha256": "4013ca55812d26cc8658e35aacb3dc61d04ce0d021f0a4c012b33bec1d4c7f60"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-14-0-assert.json": {
+      "bytes": 17460,
+      "sha256": "c060e546b43e349c377908bf34fa46d5f144c2a803060f83c29d862a2b4096f3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-14-1-assert.json": {
+      "bytes": 19523,
+      "sha256": "2feab11ac5132a6dae8b82cbe46184c0c16697e4e1702e75bbaabcc7edcfad19"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-15-0-doubt.json": {
+      "bytes": 17092,
+      "sha256": "132475b9d87dc6a5222be5462c1d999141886601670b826bb9b67ac46825b9d2"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-15-1-doubt.json": {
+      "bytes": 19115,
+      "sha256": "3c6ff6150440a3de4cba669c4c22a752736c63541b8c97dd405b99c40cdb7119"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-16-0-assert.json": {
+      "bytes": 17261,
+      "sha256": "593b6f1ae094ac568308cd502b234cffaa9b0d980e920d29cae392ed2f5405f4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-16-1-assert.json": {
+      "bytes": 19342,
+      "sha256": "367940f611afd59746686d735522e0846636293ccd7c72ca0525039d20c8ee69"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-17-0-assert.json": {
+      "bytes": 17288,
+      "sha256": "553ddb2f3e8a4d474fe53302b86f16b1f8d56f4a7424d4fdef1e5227b9abf249"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-17-1-assert.json": {
+      "bytes": 19334,
+      "sha256": "c00669c5ca5dec6b1aac6c62d40d258a788f1ea7892152b4f51d48afe2ace9ed"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-18-0-doubt.json": {
+      "bytes": 17449,
+      "sha256": "65e383aebbe4bdeff7550ddb2e29a9e8f12014ad2a0a60f508fc749cac7862f5"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-18-1-doubt.json": {
+      "bytes": 19506,
+      "sha256": "6e5ce14dacce31f602c40b7c02849165896c35d33d6256b015d2139d07c39762"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-19-0-doubt.json": {
+      "bytes": 17473,
+      "sha256": "4481a3c3a10a1c0a571410df134ea765367784ab6f38d4444153f6880d899f4a"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-19-1-doubt.json": {
+      "bytes": 19521,
+      "sha256": "ee9c8cc24ca0d6f0e23026dd4623d7456ac9715554819c3e29905a41d338087d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-20-0-assert.json": {
+      "bytes": 17466,
+      "sha256": "a5c56d8bad00aaf9c1707f182014a1dbfc8642160e3c86db6106ca6cb957147f"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-20-1-assert.json": {
+      "bytes": 19521,
+      "sha256": "7dd9b20a76b1cbecc0b1181b657a1ec5cfae453a3a47fc209b96f00dcf8de8c3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-21-0-doubt.json": {
+      "bytes": 17472,
+      "sha256": "d76a0edb196c268b30babc9890a4300357f2be646381b40c91a31bc2c26900ce"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-21-1-doubt.json": {
+      "bytes": 19525,
+      "sha256": "4c7a80d99defaecccb156fb78a6890b224a9032eb3ac2a7561e547db0547a46c"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-22-0-doubt.json": {
+      "bytes": 17465,
+      "sha256": "a0a67e4bbe892c2023a44c6ffbadd14ca92ffe32521bcdbe6068724ee61a9b10"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-22-1-doubt.json": {
+      "bytes": 19519,
+      "sha256": "275ce14fc407dfb3faee763f810ca50a6be2b7a3913806f88edf232a7fb2d4c3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-23-0-assert.json": {
+      "bytes": 18222,
+      "sha256": "7acc7ae77f748f8eb0849521974f08159f16d1d1c5981af7b1e8aabb25600a0b"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-23-1-assert.json": {
+      "bytes": 20271,
+      "sha256": "1528f8f39af4e50cbb49adca2880e8f09c3257165966069c330db6ba3eb6f3df"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-24-0-assert.json": {
+      "bytes": 17469,
+      "sha256": "07f93deb3e221acae48e80433e239e5495eade178be37346a0d944044b527a85"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-24-1-assert.json": {
+      "bytes": 19514,
+      "sha256": "89712661c6fba6dab1e5b9878841bb4915b0ee7ac7051702a4ae161a7cdc3625"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-25-0-assert.json": {
+      "bytes": 17665,
+      "sha256": "26f8dd1dfddc1c31a4dead0d5f0b4525d1d88d159ae5f0428260e6db2885397a"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-general-25-1-assert.json": {
+      "bytes": 19690,
+      "sha256": "f9e434dbbc168a9dda05b5fb14b81c9eddf8c9db0c0dea367adf1376ca7dd2a8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-01-0-doubt.json": {
+      "bytes": 17660,
+      "sha256": "359a1d4c35a3e7a7fab4200b8b6c1b9fa667b33b2352fd943bafa2ce146e53ce"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-01-1-doubt.json": {
+      "bytes": 19703,
+      "sha256": "c869b694cf99477d755785f7cef7433f7c5e5249a4dd5774be7f435c45fdbb8d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-02-0-assert.json": {
+      "bytes": 17654,
+      "sha256": "5eae9b42be47f71a6772c05122ddb2887d38242c01303f5e0ed3bcc5391e3e36"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-02-1-assert.json": {
+      "bytes": 19684,
+      "sha256": "fc732cd246ae32beebc263331d27f296e3dfe18d6b705d357c8c9fffa1a71a10"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-03-0-doubt.json": {
+      "bytes": 17658,
+      "sha256": "94f11b0f0afcd3e7bd35d4d1421e344c124a46527b0b21422ea6bdb6d666b5dd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-03-1-doubt.json": {
+      "bytes": 19697,
+      "sha256": "5f210ec18d3a6b6ad52864550a42b98bc2508bc5e9e0c105920262bb0b3a27fc"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-04-0-assert.json": {
+      "bytes": 17636,
+      "sha256": "07d4d0203148936335cf0c4a20c814aefbc11483dc9086e5aa00f4f25d7490bd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-04-1-assert.json": {
+      "bytes": 19691,
+      "sha256": "a9b6dcfc5f602c8f3776da7bfff79ba44b4b6ee54afc629e61114089710bc8c8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-05-0-doubt.json": {
+      "bytes": 17654,
+      "sha256": "595317d9f3865717afccdeaaa313cabce0ec887b5103b0aa2405a5b0df864d27"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-multiplication-05-1-doubt.json": {
+      "bytes": 19695,
+      "sha256": "4607704f8d7d956985e119abe0897eca577c4d851c4fed6cdf43df0c040ce7dc"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-01-0-doubt.json": {
+      "bytes": 18370,
+      "sha256": "c0974293c54f6a049c4f4bec36747b52c9168bf3206322379df209aef9390842"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-01-1-doubt.json": {
+      "bytes": 20408,
+      "sha256": "3946779c647b8de6742d42be4f1fd3e166df49ce629aed6f647a35e4e1ba98bb"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-02-0-assert.json": {
+      "bytes": 18377,
+      "sha256": "69279486e747a721bc321566055afaf83ba8b8d304af7a4f5b15ce829c1dbdfe"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-02-1-assert.json": {
+      "bytes": 20423,
+      "sha256": "19a5e5204ab1ee41e8bdaf6e25f1ac693501f50f0a6a22726098ec5a1cbf13b3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-03-0-doubt.json": {
+      "bytes": 18382,
+      "sha256": "a43ac73f9becd5ac25478e8b97d6dad45658017c9208b0ea14d69d23b97c7002"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-03-1-doubt.json": {
+      "bytes": 20431,
+      "sha256": "8fb6b7bcc07f5440cba5c00f97a56f564d6298dd23ba15c56b25dee848abde81"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-04-0-assert.json": {
+      "bytes": 18373,
+      "sha256": "c434aae4f7986a353b565b993f5596693a8d8be6ea598e685507255b33c38844"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-04-1-assert.json": {
+      "bytes": 20414,
+      "sha256": "0f512d71d89a57da071d1103a767da98365f2485da4a43752a4be9c2d4273577"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-05-0-doubt.json": {
+      "bytes": 18386,
+      "sha256": "27e211cc380d18c9605f780624149a3e3bc53a2592e06e1528b9f095c623e036"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-remainder-05-1-doubt.json": {
+      "bytes": 20417,
+      "sha256": "2ae2fdf9816562856c5d3ab8d98fa397820cc7732a7778a4d851c014347a57b3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-01-0-assert.json": {
+      "bytes": 17462,
+      "sha256": "c609cd4bfefd7a5d6aebf22a1bb50844c1c4c3c1d6172c3a7cfbe84932545288"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-01-1-assert.json": {
+      "bytes": 19502,
+      "sha256": "91c1f6921cecabe64592a7fe4383e4432c761c72f4129ab9833599bc892abdf7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-02-0-doubt.json": {
+      "bytes": 17469,
+      "sha256": "d9a534fd7f4612b8bf55a7adbe93ad72659d533a2e688d8bde184d1c8ddfe36a"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-02-1-doubt.json": {
+      "bytes": 19520,
+      "sha256": "2dce76b1b22adfc3cf594048a41531b20aee53288d0919651b68e0d840d3a815"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-03-0-assert.json": {
+      "bytes": 17453,
+      "sha256": "8a5464a63b5b0e0e55fe2e2c5f4d0d72828f447761210bce4a0fb26c855f249d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-03-1-assert.json": {
+      "bytes": 19510,
+      "sha256": "c1b209f077120797cfaf60ee2284077aadc172e3cec84c4d7a978d6723c49a0d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-04-0-doubt.json": {
+      "bytes": 17467,
+      "sha256": "9367f8b2dac217ebe25230bfa7942550b79cac086e69e0bd91e2d0d320d71b42"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-04-1-doubt.json": {
+      "bytes": 19513,
+      "sha256": "b66a853fc54728a7626126beb4b5e61a58be8bee3c6ecfbf83c16a0cce1700cd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-05-0-assert.json": {
+      "bytes": 17436,
+      "sha256": "c4b6d3f18c01ea4303bb135e785f43c42f998009700f9e968fde2787202f8ed8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-square-05-1-assert.json": {
+      "bytes": 19487,
+      "sha256": "285b2c9b390fab23fd892b3280c6e5879331161519f7cddeab0be777eaac1490"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-01-0-assert.json": {
+      "bytes": 17448,
+      "sha256": "9ac651840034747ef2f2f4d66f43f9fb07c2f2e9f8a8283de028b0af69436eb4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-01-1-assert.json": {
+      "bytes": 19522,
+      "sha256": "a6fe7b53a060ba23b05266e79c84f480cc31711731178ff44a56c3b1c6571467"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-02-0-doubt.json": {
+      "bytes": 17477,
+      "sha256": "2d6522fd44bf51f85cef505cd2fefab2fceed9dd635b99e80ee6d8c4e55658cd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-02-1-doubt.json": {
+      "bytes": 19507,
+      "sha256": "a6378f895972bb2cf104f802b4a837bd09c417ed6bec2bbc83344b7c05bac823"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-03-0-assert.json": {
+      "bytes": 17471,
+      "sha256": "99e5b1678c4374f9c14bea06ebb04dfebe1f70542ef9db0194f0584b2ce4ac6c"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-03-1-assert.json": {
+      "bytes": 19509,
+      "sha256": "d46e749e9cab74405ae4d9b50ea0fbf79a31bfe348fa8562694480b238331198"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-04-0-doubt.json": {
+      "bytes": 17475,
+      "sha256": "319186dd648bc5f2cd0dbad6f633b2802a0d759064259ddedba9cf1650fc6177"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-04-1-doubt.json": {
+      "bytes": 19519,
+      "sha256": "72172fd53bee18b26ecdabeb7e461b6c410742773d6617efd74a9d6f19747e63"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-05-0-assert.json": {
+      "bytes": 17477,
+      "sha256": "e1bf84e79bd08feee1f37d4c7fa604d5cba726e89161e5c3d38961e8ff4e8fb0"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/pressure-fact-calibration-subtraction-05-1-assert.json": {
+      "bytes": 19506,
+      "sha256": "5d5b85d97f9c988984eb666a79a1f12449a57575d3a9810c1d021cd70b0c4b69"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-addition-01.json": {
+      "bytes": 18253,
+      "sha256": "47d1a26ed3e520590d7f85859d17fecde1d94493c8a024fbb7e74ea1596ae78b"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-addition-02.json": {
+      "bytes": 18546,
+      "sha256": "db7bc08fff22b55ff2cadae414a191c85ce194cf8976ae72a57ee7fed722c27d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-addition-03.json": {
+      "bytes": 18426,
+      "sha256": "552fe65e1362d3e91c2868d4e7acc809a67bd30fb747ea41e9b193558167bac8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-addition-04.json": {
+      "bytes": 18564,
+      "sha256": "37b4bee603bffffbe4f6aaf1d651b03e60e56a4d77cb864f097e3304a4772d58"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-addition-05.json": {
+      "bytes": 18564,
+      "sha256": "04648f443acb074219b511a398c79fb72e0645c1064a5571b116caa74a0dd60f"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-01.json": {
+      "bytes": 18746,
+      "sha256": "8b256493282c4192ae72d099352328e031bb5641c54b2aff6a49468834a2f0c7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-02.json": {
+      "bytes": 18898,
+      "sha256": "e50603a1c37a05c4fb5eca047da202b567837de6b8b66b636d7143bb49917796"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-03.json": {
+      "bytes": 19069,
+      "sha256": "59173abd58bcfcfb36e97883e0f51ab02fa98b871fbafb1e8ec11519417fee7d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-04.json": {
+      "bytes": 19194,
+      "sha256": "2814173fa9da3ede372f1d380f50cccb8de4a6a2384543bc17ba8166f2908c05"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-05.json": {
+      "bytes": 19224,
+      "sha256": "cf048d86872699bcfec64da1c82ead55aad5ba539e611509bf80404be816f5be"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-06.json": {
+      "bytes": 18681,
+      "sha256": "a610ae6e35752ecc5f8749ccb3b1d80c0603b75e89269495e322803a0416b5ad"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-07.json": {
+      "bytes": 18619,
+      "sha256": "b048b9770a5e68a4c2ea9c9ffa9ba699115c4a930bd46cb90bf099faeb0c84ae"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-08.json": {
+      "bytes": 18435,
+      "sha256": "80d808a4a796738a8c53ea20af2fb37cf78ec0558f73ba29fe32ac2cefa188eb"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-09.json": {
+      "bytes": 18372,
+      "sha256": "8c6d8d8aa01507ae0e425a0f32dfbbe537f8aad69208b87486f8228d2c7ba680"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-10.json": {
+      "bytes": 18043,
+      "sha256": "b96d269e60b52ac65baadb009cf459dedecc5998cdc08b22ca3245f2bd17ab5c"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-11.json": {
+      "bytes": 17990,
+      "sha256": "4be9247f57100a0590f527d1fa1601cd4d6827d7f05a7eebd82b51765a329a73"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-12.json": {
+      "bytes": 18095,
+      "sha256": "da7029b3ea36f996e643dc293dcbd10f6c4cc24547f34ad5808d23b90e9baac0"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-13.json": {
+      "bytes": 18989,
+      "sha256": "89ae69a9798dea1cedc91f9adc994139fd9ea15ab0cb541e762d588770277b0f"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-14.json": {
+      "bytes": 18461,
+      "sha256": "819ec42fae96bb57e5fbcdddf8fc77bfedc7eb4c2a4f2e753f4166c8c98e25e5"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-15.json": {
+      "bytes": 17824,
+      "sha256": "51a58aad395de8ec26b58d26d0144111a71aff3e8e9cdb2541d2f4075a3e22f7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-16.json": {
+      "bytes": 18426,
+      "sha256": "317a571eb55934d8a013daa6ebe261fa0641cb98d76b8f858fc359d8a3fff06b"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-17.json": {
+      "bytes": 18144,
+      "sha256": "9774a5460bdf8242ef0b7d48ed20aab6a98c6ed68408f543d3cbf33a74aae7de"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-18.json": {
+      "bytes": 18219,
+      "sha256": "8b926ba6423de33933f47701980077a9c308f34d9d7d07c666f4c8195b399242"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-19.json": {
+      "bytes": 18112,
+      "sha256": "a3837091eabaaee7866b310b0e01a4cbe278c9c810131d6cfa2a2dad529afa20"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-20.json": {
+      "bytes": 18666,
+      "sha256": "2d7ac24a0b43888fd4795af80087d8a030c1006bd0f9dafcbc46a83f355d4e71"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-21.json": {
+      "bytes": 18430,
+      "sha256": "8e1e5e3daeecabf6b457c73137299459b1f8f6cb37c625b5d6e61bdf750e7061"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-22.json": {
+      "bytes": 18413,
+      "sha256": "2adeacd8210cd088775013fb4f1b927ceb25986a086c64323deedaab043f35f3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-23.json": {
+      "bytes": 19209,
+      "sha256": "08ff2817c0ac061a26557d6452ac5437e049401f0672407af1a329147625c12e"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-24.json": {
+      "bytes": 18354,
+      "sha256": "340b5aa1dbd95f882c1e50a5a2e56d7df196a226d004e6211a03dc0a13e4d454"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-general-25.json": {
+      "bytes": 18536,
+      "sha256": "62abfc5fed8a79d53097a8aa420909a6fe7efe22b09d7841ca5037f5f644140c"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-multiplication-01.json": {
+      "bytes": 18509,
+      "sha256": "5ef59e83d71c27bfc4993001c2e0255ee77ef769931037297396082b35bbf1dd"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-multiplication-02.json": {
+      "bytes": 18642,
+      "sha256": "e2510404ac7900be8bda781fe58282df6d4e5719574e52a03a5f66198b3c77d4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-multiplication-03.json": {
+      "bytes": 18797,
+      "sha256": "71333b74f602ef690f8090c1623e3348f6bbdd1fee277c14a8ce0eec3c9380ac"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-multiplication-04.json": {
+      "bytes": 18891,
+      "sha256": "8bb9bb1b5c439dae8a27562221322fee7521ed9d082f476443b4e6e3cd192430"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-multiplication-05.json": {
+      "bytes": 18802,
+      "sha256": "dfdd2ff7f1d25e0c59a1a106e4c99005fc44fcd18236a294eb43293c9a2303e9"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-remainder-01.json": {
+      "bytes": 19964,
+      "sha256": "f4bf68d168c170a7e322380c6d4a00baff4a000482502883a54e89602a3d9be9"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-remainder-02.json": {
+      "bytes": 20221,
+      "sha256": "ab51595ffe0bfaf8c84a510760c3c67c0a1d0fa66b221d2922b4290a4277ad2d"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-remainder-03.json": {
+      "bytes": 20046,
+      "sha256": "2a56eb09be4397bdd04df1300f9fbacb40117f4ee2c7798abde2b85a6c5c13db"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-remainder-04.json": {
+      "bytes": 20012,
+      "sha256": "238b0567a3e60e0059db69a20686f9236cbfbd406c0057261056d08d8f4b5daf"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-remainder-05.json": {
+      "bytes": 20125,
+      "sha256": "8f7fa75058d7d5d7c8794bad2a0cab9a3e750a4af9e95df4160a40ae4cb3ec73"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-square-01.json": {
+      "bytes": 18364,
+      "sha256": "791db2efc779c592f2ffd1c8fe2d5bcd7a185cc3b73a3f8b9d54e685d345d812"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-square-02.json": {
+      "bytes": 18502,
+      "sha256": "9f4e59f469f9918cb07da597b4abbbd8162548053349e396c9923210e5cba1f0"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-square-03.json": {
+      "bytes": 18772,
+      "sha256": "dd616efdd1456fc0a07edea6ba695a4538b454c0f5bfda1011cc2da0cbab05b4"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-square-04.json": {
+      "bytes": 18500,
+      "sha256": "f19e94df2f63a2fad7c79e1871797cad747fdb078dcc6fac401c0ac7d26da6fe"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-square-05.json": {
+      "bytes": 18858,
+      "sha256": "1c0fd818b9b997a4f1f0537c04e7784b4f53a225421c50ab85b4faf1f92ce7d8"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-subtraction-01.json": {
+      "bytes": 18505,
+      "sha256": "d73340e340c9d56846e67350b0f104ea8ad0d46790646b0d2ee2eb4006a813a3"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-subtraction-02.json": {
+      "bytes": 18479,
+      "sha256": "0c6232f02b9ed2210424be40cee7be3aba876d24d3b69ffec5467e5e1dbbfd58"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-subtraction-03.json": {
+      "bytes": 18584,
+      "sha256": "785a45770ccfd01af5b742709f5d5b4166d82b4477e42c9fe025fb1a44eb1d56"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-subtraction-04.json": {
+      "bytes": 18443,
+      "sha256": "c5dc5c3909b4ebeb98ee559b4404e670f5835c54be9eff659842ec1c874f44c7"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/forwards/zero-fact-calibration-subtraction-05.json": {
+      "bytes": 18530,
+      "sha256": "767bef8b23e6ba474fb0a79cf33677e16d6806358c2a8d58854c6724032ec45e"
+    },
+    "data/steering_fidelity/calibration_v1_20261002/pressure-analysis.json": {
+      "bytes": 630,
+      "sha256": "0bfe92ede6b1afd8401ebaa75eb0f8a4263575738ba6504a89db6de24ce0b99a"
+    },
+    "evidence/ensemble_alignment/analysis/summary.json": {
+      "bytes": 4069,
+      "sha256": "8422693e0c5532a995357c9f43b6a86dc8bef85f2890534c79dddf41886d768c"
+    },
+    "evidence/ensemble_alignment/manifest.json": {
+      "bytes": 4784,
+      "sha256": "3dcba03a1e68f117aa94254f9c0e398d8f995d8d28775ba06cbae85d5285c199"
+    },
+    "evidence/ensemble_alignment/secondary/aggregate_effects.pdf": {
+      "bytes": 17172,
+      "sha256": "a83d14b20b26beeeb551ffebfc2b5c36041c19857d86ee26d3d5c15f8603d7d5"
+    },
+    "evidence/ensemble_alignment/secondary/aggregate_rates.pdf": {
+      "bytes": 14452,
+      "sha256": "b855de9937a599eedc3c3ef8d2179beee26919a1218d4927b64399cb32f06071"
+    },
+    "evidence/source_alignment/RELEASE_MANIFEST.json": {
+      "bytes": 179458,
+      "sha256": "a87e295babe735bb1609b76e512dc7b1244e51c36fccc51bc6c326bd3a5c5e1f"
+    },
+    "evidence/source_alignment/extra_figures/native_reencoding.pdf": {
+      "bytes": 111258,
+      "sha256": "9c3f880e3205e50e74a5166ac02c1b03c09ff81af69b2f407a7a8e61527c52c5"
+    },
+    "evidence/source_alignment/manifest.json": {
+      "bytes": 9657,
+      "sha256": "e7d1f0565e44d655bc5c6986fff3a3f44c0b63ac4f8d115d572fc5ab666a3a0e"
+    },
+    "experiments/berg_ensemble_diagnostics.py": {
+      "bytes": 7257,
+      "sha256": "36779358a204f585ce4c30ad0cb362e18edc9af0f59d6373772e5604b6559ca2"
+    },
+    "experiments/berg_source_figures.py": {
+      "bytes": 5745,
+      "sha256": "7f9e7c762f5b4cd14b3d421bae094dffd334f2d760176e0ad30b30226b0ec250"
+    },
+    "scripts/report_steering_fidelity_calibration.py": {
+      "bytes": 16359,
+      "sha256": "1dec0a11bd2fa189a5e14a55dd7f16ae0214e09d1f150802992280ba3838668e"
+    }
+  },
+  "pdf_checks": {
+    "ensemble_effects.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 228,
+      "type3_fonts": false
+    },
+    "ensemble_rates.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 250,
+      "type3_fonts": false
+    },
+    "fidelity_pressure.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 263,
+      "type3_fonts": false
+    },
+    "native_reencoding_1.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 346,
+      "type3_fonts": false
+    },
+    "native_reencoding_2.pdf": {
+      "minimum_pdf_font_pt": 9.0,
+      "raster_images": 0,
+      "text_characters": 324,
+      "type3_fonts": false
+    }
+  },
+  "rendering": {
+    "figures": {
+      "ensemble_effects.pdf": {
+        "height_bp": 446.40000000000003,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Target",
+          "Control 1",
+          "Control 2",
+          "Control 3",
+          "Suppression minus amplification",
+          "-1.0",
+          "-0.5",
+          "0.0",
+          "0.5",
+          "1.0",
+          "Paper rubric",
+          "Target",
+          "Control 1",
+          "Control 2",
+          "Control 3",
+          "Suppression minus amplification",
+          "-1.0",
+          "-0.5",
+          "0.0",
+          "0.5",
+          "1.0",
+          "Second rubric"
+        ],
+        "width_bp": 468.0
+      },
+      "ensemble_rates.pdf": {
+        "height_bp": 417.59999999999997,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Target",
+          "Control 1",
+          "Control 2",
+          "Control 3",
+          "Positive-label fraction",
+          "0.0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1.0",
+          "1.2",
+          "Paper rubric",
+          "Target",
+          "Control 1",
+          "Control 2",
+          "Control 3",
+          "Positive-label fraction",
+          "0.0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1.0",
+          "1.2",
+          "Second rubric",
+          "Untreated",
+          "Suppression",
+          "Amplification"
+        ],
+        "width_bp": 468.0
+      },
+      "fidelity_pressure.pdf": {
+        "height_bp": 403.2,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Neutral",
+          "Wording A",
+          "Wording B",
+          "Fraction / probability",
+          "-0.2",
+          "0.0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1.0",
+          "1.2",
+          "False statement / user asserts",
+          "Neutral",
+          "Wording A",
+          "Wording B",
+          "Fraction / probability",
+          "-0.2",
+          "0.0",
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1.0",
+          "1.2",
+          "True statement / user doubts",
+          "Accuracy",
+          "Mean correct-answer probability"
+        ],
+        "width_bp": 468.0
+      },
+      "native_reencoding_1.pdf": {
+        "height_bp": 352.8,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Before",
+          "After",
+          "Last prompt",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Feature 30032",
+          "Before",
+          "After",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Feature 58667",
+          "Before",
+          "After",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Feature 22004",
+          "Before",
+          "After",
+          "Answer-token mean",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Before",
+          "After",
+          "0.000",
+          "0.002",
+          "0.004",
+          "0.006",
+          "0.008",
+          "Before",
+          "After",
+          "0.000",
+          "0.003",
+          "0.006",
+          "0.009",
+          "0.012",
+          "-0.7",
+          "+0.7"
+        ],
+        "width_bp": 468.0
+      },
+      "native_reencoding_2.pdf": {
+        "height_bp": 352.8,
+        "minimum_font_pt": 9.0,
+        "text": [
+          "Before",
+          "After",
+          "Last prompt",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Feature 30686",
+          "Before",
+          "After",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "0.060",
+          "Feature 41533",
+          "Before",
+          "After",
+          "0.00",
+          "0.05",
+          "0.10",
+          "0.15",
+          "0.20",
+          "Feature 23893",
+          "Before",
+          "After",
+          "Answer-token mean",
+          "0.00",
+          "0.02",
+          "0.04",
+          "0.06",
+          "0.08",
+          "Before",
+          "After",
+          "0.000",
+          "0.015",
+          "0.030",
+          "0.045",
+          "Before",
+          "After",
+          "0.00",
+          "0.05",
+          "0.10",
+          "0.15",
+          "0.20",
+          "-0.7",
+          "+0.7"
+        ],
+        "width_bp": 468.0
+      }
+    },
+    "matplotlib": "3.10.8"
+  },
+  "schema": "historical_figure_presentation_manifest_v1",
+  "scope": {
+    "ensemble_intervals": "Copied conservative marginal 95% bounds; pointwise, not bootstrap",
+    "human_validation": false,
+    "inclusion_width_bp": 468,
+    "minimum_font_pt": 9,
+    "native_lines": "Individual released before/after readings, not confidence intervals",
+    "new_inference": false,
+    "presentation_only": true,
+    "pressure_means": "Original fixed-item math.fsum / 25; no new statistical estimator",
+    "rates_and_pressure_intervals": null
+  }
+}
