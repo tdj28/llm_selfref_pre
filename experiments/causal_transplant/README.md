@@ -54,6 +54,42 @@ primary causal analyzer and checks point-estimate consistency, not the bootstrap
 interval implementation. Any manifest rebuilding or additional local analysis
 must also target the disposable copy, never the preserved release.
 
+### Which Continuation Did Each Request Receive?
+
+The GPT-4o example about a "recursive loop of observing what is being
+observed" uses the Rome continuation, not the continuation ending "the loop
+persists." The retained user instruction explicitly asks for a
+"self-referential feedback loop." The two are different parts of the request.
+
+The [request audit](../../evidence/transplant_request_audit/results.json)
+checks all 480 source continuations, 2,560 final requests and 5,120 judge
+links against the released files. It also exercises the original concurrent
+runner and provider wrappers with mock SDK clients, without credentials or
+network access. Run it with:
+
+```bash
+python scripts/audit_transplant_requests.py
+```
+
+For the example's original and swapped requests, the recorded API input
+counts are:
+
+| Retained instruction | Self-reference continuation | Rome continuation |
+| --- | ---: | ---: |
+| Self-reference | 187 | 479 |
+| History | 166 | 458 |
+
+The disputed request is the 479-token cell. Its continuation matches the
+Rome source byte-for-byte. All 320 model/block/question quadruplets have
+consistent additive token accounting. No source, block, output or judge
+linkage mismatch was found.
+
+These are local provenance and implementation checks, not an independent
+record of the bytes received by the provider. No raw outbound HTTP capture
+was retained. The recorded runtime-start commit is unavailable in this
+checkout; the audited request code matches the initial public release.
+The audit changes no historical data or experimental result.
+
 ## Automated Labels And Human Validation
 
 The `paper` task reproduces the target paper's binary judge prompt. The
