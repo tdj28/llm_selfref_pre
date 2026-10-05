@@ -14,7 +14,8 @@ DOCUMENTS = (
     "docs/README.md", "docs/CLAIM_LEDGER.md", "docs/REPRODUCTION.md",
     "docs/STUDY_INVENTORY.md", "data/README.md", "experiments/README.md",
     "scripts/README.md", "tests/README.md", "evidence/README.md",
-    "paper/README.md", "provenance/README.md", "technical_blog_posts/README.md",
+    "paper/README.md", "provenance/README.md", "provenance/planning/README.md",
+    "technical_blog_posts/README.md",
     "experiments/causal_transplant/README.md", "reviews/README.md",
 )
 GENERATED_PATHS = {"paper/main.pdf": ("paper/main.tex", "Makefile")}

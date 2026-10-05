@@ -48,7 +48,7 @@ second copy of its data here.
 | SAE assay, coordinate repair, native replay, exposure and precision | Completed diagnostics with failed overall qualification. Follow [assay](SAE_ASSAY_STAGE1_RESULTS_20260930.md), [repair](SAE_ASSAY_REPAIR_RESULTS_20260930.md), [replay](SAE_ASSAY_REPLAY_RESULTS_20260930.md), and [exposure](SAE_ASSAY_EXPOSURE_RESULTS_20260930.md) results for their separate protocols and releases. |
 | Changepoint, realization, target-blind calibration and signed-dose studies | Failed controls or engineering-only outcomes. The [historical inventory](STUDY_INVENTORY.md) resolves stale execution wording and links recovery records. |
 | Neutral-task causal report study | [Implemented draft](JLENS_CAUSAL_REPORT_PROTOCOL_20261001.md), superseded by the [query-blind proposal](QUERY_BLIND_INSTRUCTION_STATE_REVIEW_20261001.md); no completed causal-stage result. |
-| Held-out steering-fidelity study | [Design notes](STEERING_FIDELITY_TEST_DESIGN_NOTES_20261002.md) and [code](../experiments/steering_fidelity_test/); not run after failed qualification. |
+| Held-out steering-fidelity study | [Archived design notes](../provenance/planning/STEERING_FIDELITY_TEST_DESIGN_NOTES_20261002.md) and [code](../experiments/steering_fidelity_test/); not run after failed qualification. |
 | SAE switch-arc | [Unexecuted design draft](consciousness_sae_switch_arc/README.md); no target outcomes. |
 
 ## Cross-Study References
@@ -59,6 +59,8 @@ second copy of its data here.
 - [Figure-value audit](FIGURE_VALUE_AUDIT.md) and [uncertainty sensitivity](UNCERTAINTY_SENSITIVITY.md): manuscript checks.
 - [Artifact inventory](../DATA_ARTIFACTS.md) and [NOTICE](../NOTICE.md): availability and rights scope.
 
-Dated protocols, amendments and release paths remain in place because plans,
-tests and manifests refer to them. Use these links rather than moving or
-rewriting the underlying record.
+Obsolete, unfrozen roadmaps, handoffs and process notes are separated in the
+[planning archive and relocation map](../provenance/planning/README.md).
+Historical snapshots retain their original references; the map resolves moved
+paths without rewriting those records. Bound protocols, amendments and release
+paths remain in place because plans, tests and manifests depend on them.

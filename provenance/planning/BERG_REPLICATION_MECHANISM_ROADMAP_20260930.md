@@ -138,8 +138,8 @@ stop for broken delivery or corrupted data, not for an unfavorable effect.
 - [Berg et al., version 2](https://arxiv.org/html/2510.24797v2).
 - [Pinned AE notebook](https://github.com/agencyenterprise/steering-api-examples/blob/d50dc4ba125dde98666a60e3115a6a476dabea10/deception-features/deception_features.ipynb).
 - [Gurnee et al., Jacobian lens](https://transformer-circuits.pub/2026/workspace/index.html).
-- [Existing J-lens protocol](LLAMA70B_SAE_JLENS_PROTOCOL.md),
-  [v1 results](LLAMA70B_SAE_JLENS_RESULTS.md), and
-  [v2 failed-gate results](LLAMA70B_SAE_JLENS_V2_RESULTS.md).
-- [Stage 1 baseline/measurement results](SAE_ASSAY_STAGE1_RESULTS_20260930.md)
-  and [separate precision/exposure results](SAE_ASSAY_EXPOSURE_RESULTS_20260930.md).
+- [Existing J-lens protocol](../../docs/LLAMA70B_SAE_JLENS_PROTOCOL.md),
+  [v1 results](../../docs/LLAMA70B_SAE_JLENS_RESULTS.md), and
+  [v2 failed-gate results](../../docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md).
+- [Stage 1 baseline/measurement results](../../docs/SAE_ASSAY_STAGE1_RESULTS_20260930.md)
+  and [separate precision/exposure results](../../docs/SAE_ASSAY_EXPOSURE_RESULTS_20260930.md).

@@ -4,6 +4,10 @@ These snapshots preserve the root guidance and ledgers replaced during the
 owner-approved publication closeout. They are historical records, not current
 execution instructions, spending authority, or a queue of experiments.
 
+The separate [planning archive](planning/README.md) holds obsolete, unfrozen
+roadmaps, handoffs and process notes. Its relocation map resolves their old
+paths in these unchanged snapshots and other historical records.
+
 ## Source Snapshot
 
 The [October 3 root snapshot](root-docs/20261003/) is copied byte-for-byte from
