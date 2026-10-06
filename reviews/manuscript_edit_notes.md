@@ -376,6 +376,11 @@ no regenerated answers or replaced completed judgments, and preservation of
 the incomplete release. Regression tests cover these three disclosures.
 No released number or experimental artifact changed.
 
+The final review item corrected the data-availability description to match
+the grouped, two-column table of commit-pinned links. The repository citation
+and all table links are unchanged. The merged controls/repeated-answer section
+is now cited once in the self-evaluation disclosure, not as "3.5 and 3.5".
+
 At the owner's request, consolidated the separate model-extension narratives
 into one comparison and shortened historical steering exposition. Kept the
 plain-language equations, claim examples, actual swapped responses, bilingual

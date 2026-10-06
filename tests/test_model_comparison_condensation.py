@@ -73,6 +73,21 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("not recovered at the reported size", abstract)
         self.assertIn("smaller effects and target specificity remain unresolved", abstract)
 
+    def test_availability_description_matches_grouped_link_table(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        availability = main.split(r"\label{app:ensemble-portability}", 1)[1]
+        opening = " ".join(availability.split("The prospective collection plans", 1)[0].split())
+        self.assertIn("commit-pinned links to the principal releases and result summaries", opening)
+        self.assertIn("grouped by evidence type", opening)
+        self.assertNotIn("lists, for each study", opening)
+        self.assertIn("Evidence & Release or result index", availability)
+
+    def test_self_evaluation_disclosure_cites_merged_section_once(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        disclosure = main.split("Opus 5.5 also judges", 1)[1].split("We report readers separately", 1)[0]
+        self.assertEqual(disclosure.count(r"\ref{"), 1)
+        self.assertIn(r"Section~\ref{sec:repeated-extension}", disclosure)
+
     def test_frontier_keeps_primary_and_secondary_distinct(self):
         expected = {
             "CESwapFrontierOpusAstraPrimaryInstruction": "0.08",
