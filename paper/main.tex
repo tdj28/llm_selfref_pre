@@ -127,9 +127,8 @@ classifier, against 0.80 reported; smaller effects and target specificity
 remain unresolved, and higher tested doses fail the quality checks. These
 findings reproduce and refine the prompting result, separating the
 instruction's contribution from the continuation's and showing how much the
-measured effect depends on the rubric; they give no support for the
-proposed steering mechanism in public weights and do not determine whether
-models have subjective experience.
+measured effect depends on the rubric. They do not determine whether models
+have subjective experience.
 \end{abstract}
 
 \section{Introduction}
@@ -1809,6 +1808,16 @@ Sonnet 4.5 & 0.75 / 0.65 & 0.95 / 0.85 & 0.20 / 0.20\\
 
 \subsection{Model inventory and cross-study estimates}
 \label{app:model-inventory}
+
+The \emph{Llama qualification} in Tables~\ref{tab:models}
+and~\ref{tab:swap-summary} was a separate \CEQualificationBlocks{}-block
+screen for a planned internal-state intervention. It
+\CEArtifact{docs/INSTRUCTION_STATE_QUALIFICATION_RESULTS_20261001.md}{failed
+both preconditions}: enough room for positive-label rates to increase
+(headroom), and few responses flagging an instruction--continuation conflict.
+Neither the planned extension nor the internal intervention ran. The
+Qwen3.5 companion study later re-scored these same Llama answers, without
+collecting new Llama generations.
 
 \begin{table}[!htb]
 \centering\small

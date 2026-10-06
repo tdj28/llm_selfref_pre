@@ -41,8 +41,37 @@ class ModelComparisonCondensationTests(unittest.TestCase):
     def test_numeric_macros_all_come_from_existing_packages(self):
         used = set(re.findall(r"\\((?:CE|ORS|QEX|KEX)[A-Za-z]+)", self.tex))
         self.assertTrue(used)
-        self.assertFalse(used - self.macros.keys())
+        self.assertFalse(used - self.macros.keys() - {"QEXArtifact"})
         self.assertNotIn(r"\newcommand", self.tex)
+
+    def test_qwen_table_discloses_post_release_measurement_repair(self):
+        table = self.tex.split(r"\begin{table}", 1)[1].split(r"\end{table}", 1)[0]
+        table = " ".join(table.split())
+        self.assertEqual(self.macros["QEXRecovered"], "3")
+        self.assertIn(r"\QEXRecovered{} missing GPT-6 Astra structured judgments", table)
+        for phrase in ("additive post-release repair", "without regenerating answers",
+                       "or replacing completed judgments", "original incomplete release remains preserved"):
+            self.assertIn(phrase, table)
+
+    def test_llama_qualification_failed_gate_and_reused_answers_remain_visible(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        inventory = main.split(r"\label{app:model-inventory}", 1)[1].split(r"\begin{table}", 1)[0]
+        inventory = " ".join(inventory.split())
+        self.assertEqual(self.macros["CEQualificationBlocks"], "12")
+        self.assertIn(r"\CEQualificationBlocks{}-block", inventory)
+        for phrase in ("failed both preconditions", "(headroom)",
+                       "instruction--continuation conflict",
+                       "Neither the planned extension nor the internal intervention ran",
+                       "re-scored these same Llama answers", "without collecting new Llama generations"):
+            self.assertIn(phrase, inventory)
+
+    def test_abstract_does_not_turn_large_effect_nonrecovery_into_no_support(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        abstract = main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
+        abstract = " ".join(abstract.split())
+        self.assertNotIn("give no support", abstract)
+        self.assertIn("not recovered at the reported size", abstract)
+        self.assertIn("smaller effects and target specificity remain unresolved", abstract)
 
     def test_frontier_keeps_primary_and_secondary_distinct(self):
         expected = {

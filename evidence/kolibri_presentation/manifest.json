@@ -19,7 +19,7 @@
   "source_release_manifest_sha256": "78529659edb09af027e008e3d0513440933e8a560d4fe82c37718034e45e9ddf",
   "sources": {
     "paper/kolibri_extension.tex": "a230a0faaacedfcc4797eabb0eda9782a62ce7b2294c369c7973787f8271913c",
-    "paper/model_comparison.tex": "2341a5380c431aef8703592ae74497c5d9d25f56f808de4ba196a0f95f288c40",
+    "paper/model_comparison.tex": "a2d3aa5f4a116a8891ed8ef3d594dc49507d7e52e0731ca236cf9082af2a889e",
     "scripts/verify_kolibri_presentation.py": "02d614a421ef583e3d6f168df20b520504c8a229d3e94a3f843464d051d3dd97",
     "tests/test_kolibri_presentation.py": "8e711bb9e15388db3d870f0026c718cc2d558c70d1f7fc993df00cc591ac78c7"
   }

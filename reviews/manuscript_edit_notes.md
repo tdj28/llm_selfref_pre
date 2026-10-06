@@ -365,6 +365,17 @@ The interval-tampering test was updated to the new column syntax.
 
 ## Condensation And Chinese Display Check (2026-10-05)
 
+Follow-up review corrected two condensation regressions. The abstract no
+longer says the public steering result gives "no support"; it retains the
+large-effect non-recovery and unresolved smaller effects/specificity. The
+model-inventory appendix again identifies Llama qualification as a failed
+screen, with no subsequent internal intervention and only later re-scoring
+of the same Llama answers by the companion study. The main comparison-table
+caption now discloses Qwen3.8's three post-release recovered Astra judgments,
+no regenerated answers or replaced completed judgments, and preservation of
+the incomplete release. Regression tests cover these three disclosures.
+No released number or experimental artifact changed.
+
 At the owner's request, consolidated the separate model-extension narratives
 into one comparison and shortened historical steering exposition. Kept the
 plain-language equations, claim examples, actual swapped responses, bilingual

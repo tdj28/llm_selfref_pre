@@ -96,7 +96,11 @@ Brackets give the primary simultaneous 95\% bounds within each study's
 planned comparison family (eight, four and two comparisons for Gemini/Opus,
 Qwen and Kolibri, respectively). The other estimates are secondary;
 complete reader/rubric intervals remain in the pinned releases
-(Table~\ref{tab:releases}).}
+(Table~\ref{tab:releases}). Qwen3.8 uses an
+\QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/RELEASE.json}{additive post-release repair}:
+\QEXRecovered{} missing GPT-6 Astra structured judgments were recovered
+without regenerating answers or replacing completed judgments. The original
+incomplete release remains preserved.}
 \label{tab:model-comparison}
 \begin{tabularx}{\linewidth}{@{}Xccc@{}}
 \toprule
