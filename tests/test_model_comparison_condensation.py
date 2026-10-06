@@ -109,6 +109,11 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("Not reported for this aggregate comparison", table)
         self.assertIn(r"\steeringrate{48}{50}", table)
         self.assertIn(r"\steeringrate{8}{50}", table)
+        self.assertLess(table.index("Suppression &"), table.index("Design differences"))
+        self.assertIn(r"\addlinespace[5pt]", table)
+        self.assertIn(r"@{\hspace{14pt}}", table)
+        self.assertIn("all tested levels above", table)
+        self.assertIn("failed at least one quality check", " ".join(table.split()))
         for name in ("DoseMainSelectedDose", "DoseMainSecondTargetNegativeYes", "DoseMainTargetNegativeN",
                      "DoseMainSecondTargetPositiveYes", "DoseMainTargetPositiveN", "DoseMainSecondZeroYes",
                      "DoseMainZeroN", "DoseMainSecondTargetEstimate", "DoseMainSecondTargetLow", "DoseMainSecondTargetHigh"):

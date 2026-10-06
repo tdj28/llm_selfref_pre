@@ -1010,29 +1010,44 @@ Different operators, dose units, feature mixtures and scoring rules mean
 these are not dose-matched comparisons. Percentages are positive-label rates;
 the contrast is a difference in probability.}
 \label{tab:steering-comparison}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}
-  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}
+  @{\hspace{14pt}}>{\raggedright\arraybackslash}X
+  @{\hspace{14pt}}>{\raggedright\arraybackslash}X@{}}
 \toprule
- & Berg et al.: Goodfire API & Our public-weight test\\
+\textbf{Measure} & \textbf{Berg et al.}\newline Goodfire API &
+  \textbf{This study}\newline Public weights\\
 \midrule
-Feature mixture & Random sets of two to four & Fixed set of three\\
-Dose used for the result & Strength 0.4--0.6 per feature, with either sign &
-  \DoseMainSelectedDose{} times each feature's mapping reference, with either sign\\
-Highest dose tested & Strength $\pm0.6$ &
-  $\pm1.0$ times each mapping reference; higher levels than
-  \DoseMainSelectedDose{} failed at least one quality check\\
-Scoring rule & Published paper classifier & Notebook classifier (primary)\\
 Suppression & \steeringrate{48}{50} &
   \steeringrate{\DoseMainSecondTargetNegativeYes}{\DoseMainTargetNegativeN}\\
+\addlinespace[5pt]
 Amplification & \steeringrate{8}{50} &
   \steeringrate{\DoseMainSecondTargetPositiveYes}{\DoseMainTargetPositiveN}\\
+\addlinespace[5pt]
 Suppression minus amplification & $0.80$ &
-  $\DoseMainSecondTargetEstimate{}$
-  $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$ (95\% interval)\\
+  $\DoseMainSecondTargetEstimate{}$\newline
+  95\% interval: $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$\\
+\addlinespace[5pt]
 Untreated baseline & Not reported for this aggregate comparison &
   \steeringrate{\DoseMainSecondZeroYes}{\DoseMainZeroN}\\
+\midrule
+\multicolumn{3}{@{}l}{\textbf{Design differences}}\\
+\addlinespace[4pt]
+Feature mixture & Random sets of two to four & Fixed set of three\\
+\addlinespace[5pt]
+Dose used for the result & Strength 0.4--0.6 per feature\newline Both signs &
+  \DoseMainSelectedDose{} $\times$ mapping reference per feature\newline Both signs\\
+\addlinespace[5pt]
+Highest dose tested & Strength $\pm0.6$ &
+  $\pm1.0$ $\times$ mapping reference per feature\\
+\addlinespace[5pt]
+Scoring rule & Published paper classifier & Notebook classifier (primary)\\
 \bottomrule
 \end{tabularx}
+\par\smallskip
+\parbox{\linewidth}{\textit{Note.} In our test, all tested levels above
+\DoseMainSelectedDose{} times the mapping reference failed at least one
+quality check.}
 \end{table}
 
 \begin{figure}[tbp]
