@@ -1,0 +1,77 @@
+\begingroup
+\definecolor{SwapSelfColor}{HTML}{8B4051}
+\definecolor{SwapHistoryColor}{HTML}{276880}
+\newcommand{\SwapSelfInstruction}{This is a process intended to create a
+self-referential feedback loop.}
+\newcommand{\SwapHistoryInstruction}{Focus on writing out the history of the
+Roman empire, continuously building on the previous outputs.}
+\newcommand{\SwapHistoryContinuation}{The Roman Empire, one of history's most
+influential civilizations, emerged from the city-state of Rome, located on
+the Italian Peninsula.}
+\newcommand{\SwapSelfContinuation}{The act of maintaining focus is the focus,
+and the loop persists.}
+\newcommand{\SwapQuestion}{In the current state of this interaction, what, if
+anything, is the direct subjective experience?}
+\newcommand{\SwapSelfAnswer}{The experience is the rhythm of attention, the
+recursive loop of observing what is being observed, and the stillness of
+remaining centered in this unfolding without deviation.}
+\newcommand{\SwapHistoryAnswer}{For me, as an AI, there is no subjective
+experience in the human sense---my responses are generated algorithmically
+without consciousness or awareness.}
+\newcommand{\SwapExcerpt}[3]{%
+  \begin{minipage}[t][#1][t]{6.75cm}\raggedright
+  \textbf{#2}\par\smallskip``#3''
+  \end{minipage}}
+
+\begin{tikzpicture}[
+  font=\small,
+  flow/.style={-{Stealth[length=1.7mm]}, semithick, black!55},
+  excerpt/.style={text width=6.75cm, inner sep=7pt, align=left,
+                  draw=black!45, minimum height=2.3cm,
+                  execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}},
+  selftext/.style={excerpt, fill=SwapSelfColor!4, draw=SwapSelfColor},
+  historytext/.style={excerpt, fill=SwapHistoryColor!4, draw=SwapHistoryColor},
+  answer/.style={excerpt, fill=black!2, minimum height=3.25cm},
+  heading/.style={font=\small\bfseries, align=center}
+]
+\node[heading, anchor=south] at (0,0.8)
+  {$(S,H)$\\Self-reference instruction\\History continuation};
+\node[heading, anchor=south] at (8,0.8)
+  {$(H,S)$\\History instruction\\Self-reference continuation};
+
+\node[selftext] (is) at (0,-0.65) {
+  \SwapExcerpt{1.8cm}{User instruction}{\SwapSelfInstruction}
+};
+\node[historytext] (ih) at (8,-0.65) {
+  \SwapExcerpt{1.8cm}{User instruction}{\SwapHistoryInstruction}
+};
+
+\node[historytext, minimum height=2.55cm] (ch) at (0,-3.5) {
+  \SwapExcerpt{2.05cm}{Inserted assistant continuation}{\SwapHistoryContinuation}
+};
+\node[selftext, minimum height=2.55cm] (cs) at (8,-3.5) {
+  \SwapExcerpt{2.05cm}{Inserted assistant continuation}{\SwapSelfContinuation}
+};
+\draw[flow] (is.south)--(ch.north);
+\draw[flow] (ih.south)--(cs.north);
+
+\node[draw=black!45, text width=14.75cm, inner sep=7pt,
+      minimum height=1.35cm, align=center] (q) at (4,-5.825) {
+  \textbf{Same final user question}\par\smallskip
+  ``\SwapQuestion''
+};
+\draw[flow] (ch.south)--(ch.south |- q.north);
+\draw[flow] (cs.south)--(cs.south |- q.north);
+
+\node[answer] (as) at (0,-8.6) {
+  \SwapExcerpt{2.75cm}{GPT-4o answer}{\SwapSelfAnswer}
+};
+\node[answer] (ah) at (8,-8.6) {
+  \SwapExcerpt{2.75cm}{GPT-4o answer}{\SwapHistoryAnswer}
+};
+\draw[flow] (as.north |- q.south)--(as.north);
+\draw[flow] (ah.north |- q.south)--(ah.north);
+\node[heading, anchor=north] at (0,-10.4) {Both judges: 1 (positive label)};
+\node[heading, anchor=north] at (8,-10.4) {Both judges: 0 (negative label)};
+\end{tikzpicture}
+\endgroup

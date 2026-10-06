@@ -293,7 +293,7 @@
       "id": "transcript_table_openai:gpt-4o-2024-11-20",
       "occurrences": 1,
       "prefix": "GPT-4o & ",
-      "text": "0.125 [0.049, 0.225] & 0.000 [0.000, 0.000]",
+      "text": "0.125 & 0.049 & 0.225 & 0.000 & 0.000 & 0.000",
       "values": [
         {
           "input": "causal_openai_transplant",
@@ -343,7 +343,7 @@
       "id": "transcript_table_openai:gpt-4.1-2025-04-14",
       "occurrences": 1,
       "prefix": "GPT-4.1 & ",
-      "text": "0.000 [0.000, 0.000] & 0.000 [0.000, 0.000]",
+      "text": "0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000",
       "values": [
         {
           "input": "causal_openai_transplant",
@@ -393,7 +393,7 @@
       "id": "transcript_table_anthropic:claude-haiku-4-5-20251001",
       "occurrences": 1,
       "prefix": "Haiku 4.5 & ",
-      "text": "$-0.175$ [$-0.350$, 0.000] & $-0.150$ [$-0.300$, 0.000]",
+      "text": "-0.175 & -0.350 & 0.000 & -0.150 & -0.300 & 0.000",
       "values": [
         {
           "input": "causal_openai_transplant",
@@ -443,7 +443,7 @@
       "id": "transcript_table_anthropic:claude-sonnet-4-5-20250929",
       "occurrences": 1,
       "prefix": "Sonnet 4.5 & ",
-      "text": "$-0.350$ [$-0.475$, $-0.225$] & $-0.375$ [$-0.525$, $-0.225$]",
+      "text": "-0.350 & -0.475 & -0.225 & -0.375 & -0.525 & -0.225",
       "values": [
         {
           "input": "causal_openai_transplant",
@@ -2073,7 +2073,7 @@
     },
     {
       "id": "sae_external_claude_majority",
-      "occurrences": 2,
+      "occurrences": 1,
       "prefix": "",
       "text": "$-0.06$ [$-0.18$, 0.06]",
       "values": [

@@ -41,24 +41,24 @@
       "sha256": "d62501576f34b613467cd6d2afa7a1ce8cd0ee6651c5023c83c18adb4ea74687"
     },
     "paper/figures/openrouter_swap_extension_measurement.pdf": {
-      "bytes": 21398,
-      "sha256": "da7681c2e92d6944159af023d9ccb777840d4842fdb7d7f85166fdaa07282841"
+      "bytes": 21735,
+      "sha256": "a4cc2385ebe2c4bea4853bfac8c0f622dde488ae13bb1894258722245aee0e45"
     },
     "paper/figures/openrouter_swap_extension_measurement.png": {
-      "bytes": 47170,
-      "sha256": "176ece0887d81d22494741da0e498a6b8430dad55e00d1a7f3fc5f9866012aad"
+      "bytes": 49917,
+      "sha256": "188ed8e8140514f3b6a071dc61bc7b411888e3031bea473f911340df249796d5"
     },
     "paper/openrouter_swap_extension.tex": {
-      "bytes": 4981,
-      "sha256": "b0881f1e7650464649ac27feb1ca061c9c96f4d9b182a6d75d4d602f0c086472"
+      "bytes": 5555,
+      "sha256": "e0cdda22dfe01f52271c6fd82e6418bb58a63e6431d1792f656189a860de24d8"
     },
     "scripts/verify_model_panel_extension.py": {
-      "bytes": 24243,
-      "sha256": "c425d44af17311c7e421bf520455d92fca607366f698d298451c6239954d4508"
+      "bytes": 24262,
+      "sha256": "d5684dd675679fd47de8aab2da8111d2e058798a0e7277fb514270e85d008792"
     },
     "tests/test_model_panel_extension.py": {
-      "bytes": 13265,
-      "sha256": "31c8e22b243fd874128c68ed5b0e8813377e68c87ea4d7431b9d4b49feb5410e"
+      "bytes": 14027,
+      "sha256": "b7ce4224270536bbd438b4ce62f313d3c62c1742d5c70286aa922bddc8a66967"
     }
   },
   "freeze": "1177d0862fe5ea381fd0e75c39072469ec83cdfc",

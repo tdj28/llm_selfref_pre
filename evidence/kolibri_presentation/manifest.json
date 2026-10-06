@@ -1,0 +1,26 @@
+{
+  "outputs": {
+    "figure_data.json": {
+      "bytes": 2805,
+      "sha256": "3ceffef0722c177a234f38204dfda85c16ec81bfa60e5434c31b16bf472361b6"
+    },
+    "measurement.pdf": {
+      "bytes": 13557,
+      "sha256": "c186c3bcea1e467a495f6a99ccda14d943a7395eb8df635a48cdbdeebb83b013"
+    },
+    "measurement.png": {
+      "bytes": 25845,
+      "sha256": "254f6e918d2435aedfdc29326b47495ec50990b57325b7a64da0673cf6052a74"
+    }
+  },
+  "schema": "kolibri-presentation-manifest-v1",
+  "source_binding_sha256": "5f9e3d6eb923c02cb73d2a853ed778783c5988e0d05437f796b4fe65fb94adb8",
+  "source_commit": "3900a5ede5e6c003320960159e69811530f5346c",
+  "source_release_manifest_sha256": "78529659edb09af027e008e3d0513440933e8a560d4fe82c37718034e45e9ddf",
+  "sources": {
+    "paper/kolibri_extension.tex": "a230a0faaacedfcc4797eabb0eda9782a62ce7b2294c369c7973787f8271913c",
+    "paper/model_comparison.tex": "2341a5380c431aef8703592ae74497c5d9d25f56f808de4ba196a0f95f288c40",
+    "scripts/verify_kolibri_presentation.py": "02d614a421ef583e3d6f168df20b520504c8a229d3e94a3f843464d051d3dd97",
+    "tests/test_kolibri_presentation.py": "8e711bb9e15388db3d870f0026c718cc2d558c70d1f7fc993df00cc591ac78c7"
+  }
+}

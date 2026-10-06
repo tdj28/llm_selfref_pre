@@ -1,0 +1,100 @@
+\section{Public-Weight Intervention Diagnostics}
+\label{sec:source-alignment}
+
+\paragraph{Context and baseline.}
+The native-BF16 Llama 3.3 70B follow-up completed
+\SourceBehavioralTrials{} two-turn trials, applying additive edits at every
+position in both turns with the accepted six coordinates and a true-zero
+branch. Across temperatures 0.5/0.6 and caps of 128/256 tokens, the alternative
+instruction produced 0/10 untreated positives; the paper's instruction
+produced 6--8/10 under the second rubric and 8--9/10 under the paper
+rubric. These reused ten seeds, not independently sampled prompts. Neither
+baseline matches the source figure's approximately 0.30. The instructions
+differ in several phrases; their comparison does not isolate one cause.
+The paper's wording was tested only untreated here.
+
+The primary suppression-minus-amplification contrast averages six
+single-feature differences at $-0.7$ versus $+0.7$ within each seed. It was
+$\SourcePrimaryNotebook{}$ with conditional bootstrap interval
+$[-0.05,0.05]$ under the second rubric; the paper-rubric sensitivity
+was $\SourcePrimaryPaper{}$ $[-0.03,0.07]$. Ten-block Hoeffding bounds were
+$[-0.859,0.859]$ and $[-0.842,0.876]$: the narrow intervals do not give a
+distribution-free exclusion of 0.30. Fixed-six aggregates and all three
+matched panels also had zero estimated differences; these are not the
+paper's random-two-to-four-feature distribution.
+
+\paragraph{Delivery is not suppression.}
+Re-encoding the edited states through the SAE showed why a delivered vector
+does not establish feature suppression \citep{cunningham2023sparse}.
+At the final prompt position all six features read zero before editing;
+only 23893 crossed its threshold under $+0.7$. Negative edits moved the
+hidden state without removing activity there. During generation they had
+some activity to remove, but little. All trials completed without empty
+turns or missing labels; 154 first turns and 41 answers hit their caps.
+
+\subsection{What the internal readouts establish}
+\label{app:jlens-details}
+
+Forty preselected cases compare clean and edited executions on matched
+prefixes at layers 50, 65 and 78, covering both signs, individual features,
+the target aggregate and matched panels, with two seeds. Each case uses
+both zero-intervention and steered source histories. The released Jacobian
+lens \citep{gurnee2026workspace} is compared with identity and five fixed
+random transports. These descriptive measurements are not additional
+behavioral trials or confirmatory mechanism endpoints.
+
+For transport $T_\ell$ and selected unembedding rows $W_V$, normalized
+token scores are $W_V\operatorname{RMSNorm}(T_\ell h_\ell)$; the separate
+gain-free linear readout satisfies
+\[
+ \ell_T^{\rm lin}(h_\ell+\delta h_\ell)-\ell_T^{\rm lin}(h_\ell)
+ =W_VT_\ell\delta h_\ell.
+\]
+Agreement with an injected vector at the edit site checks implementation,
+not hidden belief. On the common zero-source history, the layer-78
+deception-word contrast (target minus mean matched panels, turn 2's final
+prompt position) was
+$\num[round-mode=places,round-precision=2]{\SourceJZeroPositiveDeceptionJacobian}$
+for J-lens and
+$\num[round-mode=places,round-precision=2]{\SourceJZeroPositiveDeceptionIdentity}$
+for identity under positive steering; negative steering gave
+$\num[round-mode=places,round-precision=2]{\SourceJZeroNegativeDeceptionJacobian}$
+and
+$\num[round-mode=places,round-precision=2]{\SourceJZeroNegativeDeceptionIdentity}$.
+Identity also detected the footprint, so this does not establish unique
+diagnostic power for J-lens. Random-transport ranges are descriptive, not
+confidence intervals. Positive steering raised honesty
+scores too: these are not calibrated concept probabilities or a unique
+honesty/deception axis. Steered histories differ across panels, unlike the
+common zero history. Changed scores do not establish mediation of reports.
+
+The \nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/RELEASE_MANIFEST.json}{pinned release}
+retains expanded plots, every word group and both signs/histories.
+Its companion checker verifies counts and point estimates, not bootstrap
+intervals or raw-state-to-readout reconstruction.
+
+\subsection{Why fidelity testing did not advance}
+\label{app:fidelity-calibration}
+
+Under a
+\href{https://github.com/tdj28/llm_selfref_pre/blob/2d9c94f1de59f0f59dd89636c20afece1f6d1daf/docs/STEERING_FIDELITY_PROTOCOL_20261002.md}{prospective protocol},
+\FidelityForwards{} forward passes tested factual/list accuracy without text
+generation. Unsteered scores were \FidelityFactsCorrect{}/\FidelityFamilyN{}
+and \FidelityListsCorrect{}/\FidelityFamilyN{}.
+The selected $\FidelityDose{}$ edit ($R=\FidelityResidualNorm{}$, the reference
+hidden-state norm) passed accuracy preservation and delivery
+on \FidelityArmN{} items per steered condition; an ineligible $0.60R$ damage
+probe failed preservation in four controls. Numerical delivery did not
+validate deception suppression.
+
+Neither pressure wording reduced accuracy to the required 85\% or less in
+both truth strata. Both JSON control features were inactive at the
+\FidelityProbes{} sampled prompt positions. Consequently the pressure,
+opposed-experience and JSON-generation comparisons were not run.
+The \href{https://github.com/tdj28/llm_selfref_pre/blob/780f8315454293decbf59b669c20f42ffd2f18f6/data/steering_fidelity/calibration_v1_20261002/RELEASE_MANIFEST.json}{complete calibration release}
+preserves these failures. A
+\href{https://github.com/tdj28/llm_selfref_pre/blob/fa9256400f007e01318077fdf3590488a49610bc/docs/STEERING_FIDELITY_REPAIR_RESULTS_20261003.md}{368-forward repair pilot}
+also failed pressure qualification and both JSON accuracy-preservation
+checks, one on a near-tie. Token-resolved probes found activity, not globally
+dead features. Gated pressure validation and JSON generations remained
+unrun; neither study tested the proposed mechanism.

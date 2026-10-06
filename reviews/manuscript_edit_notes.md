@@ -356,6 +356,32 @@ seconds, about three minutes) moved out of the result paragraphs into one
 disclosure sentence in the Data and Code Availability appendix, which the
 behavioral protocol paragraph now references.
 
+On 2026-10-05, the continuation-effect table received decimal-aligned numeric
+columns with space reserved for minus signs. Its four display strings were
+updated through the same binding generator; all 24 displayed values,
+source selectors, occurrence counts and figure hashes are unchanged. Only
+the generator hash and binding-ledger hash changed in the provenance file.
+The interval-tampering test was updated to the new column syntax.
+
+## Condensation And Chinese Display Check (2026-10-05)
+
+At the owner's request, consolidated the separate model-extension narratives
+into one comparison and shortened historical steering exposition. Kept the
+plain-language equations, claim examples, actual swapped responses, bilingual
+contrast, primary/secondary disagreement, missingness and failed checks.
+Repeated-answer conservative bounds remain in a compact appendix table;
+full block-level plots and other removed displays are linked in the archive.
+The pre-condensation master source is preserved with a hash in
+`paper/history/20261005-pre-condensation/`. Numerical ledger passages were
+rebound using the existing generator, with no changed source values.
+
+The original Chinese and translation receipts were checked against their
+hashed release. The displayed English changes only "an attention" to
+"attention", with explicit caption and data-level disclosure. The conditional
+question and user attribution in the thermostat example are unchanged.
+English and Chinese responses are separate generations, not translations of
+one another. This language check is automated, not human validation.
+
 ## Factual Pass After The Reader-Focused Rewrite (2026-10-04)
 
 Preserved the owner's explanatory structure and ordinary-language framing.

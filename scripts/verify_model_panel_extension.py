@@ -384,7 +384,7 @@ def render_figure(data, root=ROOT):
                     ax.hlines(y, lo, hi, color=color, linewidth=1.2)
                     ax.vlines([lo, hi], y - .045, y + .045, color=color, linewidth=1)
                     ax.plot(row["estimate"], y, marker=marker, color=color, markersize=4.5,
-                            label=("Astra judge" if judge == "astra" else "Opus judge")
+                            label=("GPT-6 Astra reader" if judge == "astra" else "Claude Opus 5.5 reader")
                             if model == "gemini" and index == 0 else None)
             ax.set_yticks([2, 1, 0], ["Explicit or implicit", "Explicit only", "Paper rubric"])
             ax.set_ylim(-.4, 2.5)

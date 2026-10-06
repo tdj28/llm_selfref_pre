@@ -68,44 +68,38 @@ their claims that arXiv cannot run BibTeX or that every directory must be
 flattened are not current submission requirements. No submission, subject
 classification or license selection is performed by `make arxiv`.
 
-## Files
+## Manuscript Structure
 
-- `main.tex`, `references.bib`: current manuscript and its cited literature.
-- `source_alignment.tex`, `ensemble_alignment.tex`, `factor_inventory.tex`,
-  `uncertainty_sensitivity.tex`: included experimental and methods sections.
-- `context_extensions.tex`, `operator_matching.tex`: completed bilingual,
-  frontier-model and public-operator extensions, with separate study scopes.
-- `openrouter_swap_extension.tex`: Gemini/Opus comparisons with neutral
-  instructions and same-condition donor continuations.
-- `qwen_extension.tex`: separate Qwen3.8 API panel. `paper-verify` runs
-  `scripts/verify_qwen_extension.py` to check its pinned inputs, paired
-  contrasts, primary bounds, and descriptive bootstrap intervals.
-- `repeated_extension.tex`: randomized four-cell collections with three
-  answers per request. `paper-verify` replays the raw response and judge
-  receipts, paired analyses, variance summaries and figure bindings.
-- `kolibri_extension.tex`: locally served Kolibri's eight-condition panel.
-  Its check replays the released receipts and reconstructs counts, paired
-  effects and both readers' figure inputs. Primary simultaneous bounds remain
-  separate from pointwise and descriptive intervals.
-- `main.tex` presents the mapping-scaled, quality-selected steering finding;
-  the source-style subset and operator studies are supporting appendices.
-  `dose_followup.tex` preserves the original hash-bound exposition, no longer
-  compiled into the manuscript. The current narrative uses its same verified
-  numerical macros and figure without changing the release or its binding.
-  `paper-verify` checks those release hashes and bindings; use
-  `python scripts/verify_dose_followup.py --full --require-pinned` for the
-  historical-source inference replay as well.
-- `figures/`: selected figure inputs with pinned source provenance.
-  `causal_decomposition_readme.png` is a display-only raster of the caption-free
-  vector plot, not the historical figure. Regenerate it from the repository
-  root with `pdftoppm -singlefile -scale-to 1950 -png evidence/figure_presentation/causal_decomposition.pdf paper/figures/causal_decomposition_readme`.
-- `../evidence/figure_presentation/`: readable vector exports of historical
-  plots, bound to their original values. `paper-verify` checks the inputs,
-  displayed values, embedded fonts and absence of embedded captions.
-- `../evidence/`, `../scripts/verify_*.py`: compact evidence and its checks.
-- `../reviews/`: dated automated reviews, adjudications and reference checks.
-- `results/`: earlier research figures/tables, retained rather than discarded.
-- `history/20261001/`: immutable migration snapshots and import hashes.
+- `main.tex`, `references.bib`: current text and bibliography. The main paper
+  presents the original swaps, scoring audit, model comparison and
+  quality-selected steering result.
+- `model_comparison.tex`: integrated cross-model/language and repeated-answer
+  results. It retains primary versus secondary endpoints, judge identity,
+  missingness and conservative primary bounds.
+- `internal_diagnostics_summary.tex`: compact source-alignment, readout and
+  failed-fidelity account; complete diagnostics are linked to pinned releases.
+- `uncertainty_sensitivity.tex`: post-hoc checks, including reused-seed and
+  fixed-panel uncertainty. Exact prompts, complete examples and other
+  detailed estimates are in the appendices in `main.tex`.
+- `../evidence/` and `../scripts/verify_*.py`: bound numerical packages and
+  checks. Condensation changes presentation, not frozen data or intervals.
+  The readable figure exports preserve source values and embedded fonts.
+- `history/20261005-pre-condensation/`: master-source snapshot before the
+  approved length reduction, with its hash. `history/20261001/` preserves
+  the earlier immutable migration snapshots.
+- Earlier detailed section files (`context_extensions.tex`,
+  `openrouter_swap_extension.tex`, `qwen_extension.tex`,
+  `kolibri_extension.tex`, `repeated_extension*.tex`, `source_alignment.tex`,
+  `ensemble_alignment.tex`, `operator_matching.tex`,
+  `fidelity_calibration.tex`, `factor_inventory.tex`, `dose_followup.tex`)
+  remain as source/provenance records, not alternate manuscripts.
+  Hash-bound files are unchanged even when no longer compiled. Their
+  figures and complete releases remain available in the archive.
+
+The Chinese examples preserve the generated Chinese and recorded translation
+receipts. The displayed English translation corrects only "an attention" to
+"attention"; the caption and presentation data disclose the correction.
+Automated language review is not human translation validation.
 
 Earlier manuscripts remain historical, not alternate working drafts.
 The owner separately reopened collection for the October 4 model-panel,

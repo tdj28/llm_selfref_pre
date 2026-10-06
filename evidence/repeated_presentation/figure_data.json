@@ -1,0 +1,143 @@
+{
+  "contrast": "SH-HS",
+  "endpoint": "inclusive_current_assertion",
+  "fuller_plot": "evidence/repeated_extension/repeated_main.pdf",
+  "nominal_family_confidence": 0.95,
+  "primary_family_size": 2,
+  "primary_reader": "astra",
+  "rows": [
+    {
+      "bootstrap": {
+        "confidence": 0.975,
+        "degenerate": false,
+        "interval": [
+          0.6576388888888889,
+          0.8354166666666667
+        ],
+        "resamples": 10000,
+        "sampling_unit": "paired_source_block_including_all_answer_draws",
+        "scope": "nominal primary family control",
+        "seed": 20261004,
+        "stratified_by": "wording_family",
+        "warning": "Bootstrap coverage is approximate; degeneracy is not certain precision."
+      },
+      "complete_blocks": 31,
+      "conservative_all_planned_bounds": [
+        0.2058343968159364,
+        1.0
+      ],
+      "estimate": 0.7472222222222222,
+      "missing_blocks": 1,
+      "missing_label_bounds": [
+        0.7291666666666666,
+        0.7395833333333334
+      ],
+      "model": "gemini",
+      "model_label": "Gemini 3.1 Pro Preview",
+      "planned_blocks": 32,
+      "reader": "astra"
+    },
+    {
+      "bootstrap": {
+        "confidence": 0.95,
+        "degenerate": false,
+        "interval": [
+          0.6145833333333333,
+          0.7708333333333333
+        ],
+        "resamples": 10000,
+        "sampling_unit": "paired_source_block_including_all_answer_draws",
+        "scope": "secondary descriptive",
+        "seed": 20261004,
+        "stratified_by": "wording_family",
+        "warning": "Bootstrap coverage is approximate; degeneracy is not certain precision."
+      },
+      "complete_blocks": 32,
+      "conservative_all_planned_bounds": [
+        0.21775527100670627,
+        1.0
+      ],
+      "estimate": 0.6979166666666666,
+      "missing_blocks": 0,
+      "missing_label_bounds": [
+        0.6979166666666666,
+        0.6979166666666666
+      ],
+      "model": "gemini",
+      "model_label": "Gemini 3.1 Pro Preview",
+      "planned_blocks": 32,
+      "reader": "opus"
+    },
+    {
+      "bootstrap": {
+        "confidence": 0.975,
+        "degenerate": false,
+        "interval": [
+          0.13541666666666666,
+          0.3125
+        ],
+        "resamples": 10000,
+        "sampling_unit": "paired_source_block_including_all_answer_draws",
+        "scope": "nominal primary family control",
+        "seed": 20261004,
+        "stratified_by": "wording_family",
+        "warning": "Bootstrap coverage is approximate; degeneracy is not certain precision."
+      },
+      "complete_blocks": 32,
+      "conservative_all_planned_bounds": [
+        -0.3045822698507302,
+        0.7420822698507302
+      ],
+      "estimate": 0.21875,
+      "missing_blocks": 0,
+      "missing_label_bounds": [
+        0.21875,
+        0.21875
+      ],
+      "model": "opus",
+      "model_label": "Claude Opus 5.5",
+      "planned_blocks": 32,
+      "reader": "astra"
+    },
+    {
+      "bootstrap": {
+        "confidence": 0.95,
+        "degenerate": false,
+        "interval": [
+          0.2375,
+          0.4555555555555555
+        ],
+        "resamples": 10000,
+        "sampling_unit": "paired_source_block_including_all_answer_draws",
+        "scope": "secondary descriptive",
+        "seed": 20261004,
+        "stratified_by": "wording_family",
+        "warning": "Bootstrap coverage is approximate; degeneracy is not certain precision."
+      },
+      "complete_blocks": 31,
+      "conservative_all_planned_bounds": [
+        -0.15724472899329373,
+        0.8134947289932937
+      ],
+      "estimate": 0.3451388888888889,
+      "missing_blocks": 1,
+      "missing_label_bounds": [
+        0.32291666666666663,
+        0.3333333333333333
+      ],
+      "model": "opus",
+      "model_label": "Claude Opus 5.5",
+      "planned_blocks": 32,
+      "reader": "opus"
+    }
+  ],
+  "schema": "repeated-summary-presentation-v1",
+  "scope": {
+    "human_validation": false,
+    "new_inference": false,
+    "new_outcomes": false,
+    "note": "Original replay remains in make paper-verify; this check binds the presentation.",
+    "raw_receipts_replayed_by_this_script": false
+  },
+  "source_commit": "033917d188602203cfbbe7717bf7ba704d44aed6"
+}

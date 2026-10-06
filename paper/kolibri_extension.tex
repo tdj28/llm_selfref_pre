@@ -30,15 +30,17 @@ does not establish equivalence.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth]{../evidence/kolibri_extension/kolibri.pdf}
+\includegraphics[width=\linewidth]{../evidence/kolibri_presentation/measurement.pdf}
 \caption{\textbf{Kolibri's estimated instruction advantage depends on the
-scoring rule.} SH--HS compares incongruent requests; NS--NH compares
-continuations under a neutral instruction. Both readers use the same
-\KEXMainAstraInclusiveSHHSPlannedBlocks{} paired blocks. Thin bars are
-pointwise 95\% Hoeffding bounds; thick bars are descriptive 95\% paired-block
-bootstrap intervals, stratified by wording family. Neither is simultaneous;
-the text reports the two-comparison primary bounds. A collapsed bootstrap
-bar at zero does not establish equivalence.}
+scoring rule.} As in Figure~\ref{fig:qwen-extension}, SH--HS compares a
+self-referential instruction with a history continuation against the
+reverse pairing. GPT-6 Astra and Claude Opus 5.5 score the same
+\KEXMainAstraInclusiveSHHSPlannedBlocks{} paired blocks under three rules.
+Bars show pointwise 95\% descriptive paired-block bootstrap intervals,
+using 10,000 resamples within wording families. These are not the primary
+confirmatory intervals: the text retains the simultaneous bounds for the
+two planned comparisons. Figure~\ref{fig:kolibri-uncertainty} also shows the
+neutral-instruction contrast and the conservative pointwise bounds.}
 \label{fig:kolibri-extension}
 \end{figure}
 

@@ -117,7 +117,17 @@ def verify(root=ROOT, full=False):
     published = (root / FIGURES / "RELEASE_MANIFEST.json").read_bytes()
     require(sha(published) == FIGURE_MANIFEST_SHA, "Figure manifest changed")
     checked(root / FIGURES, files(decode(published)), "pressure.pdf")
-    require("\\input{fidelity_calibration.tex}" in (root / "paper/main.tex").read_text(), "Calibration appendix not included")
+    main = (root / "paper/main.tex").read_text()
+    section = "internal_diagnostics_summary.tex"
+    require("\\input{" + section + "}" in main, "Calibration summary not included")
+    summary = (root / "paper" / section).read_text()
+    require(r"\label{app:fidelity-calibration}" in summary,
+            "Calibration summary anchor missing")
+    for macro in ("FidelityForwards", "FidelityFactsCorrect", "FidelityListsCorrect",
+                  "FidelityDose", "FidelityProbes"):
+        require("\\" + macro in summary, "Calibration quantity omitted: " + macro)
+    require("neither study tested the proposed mechanism" in summary,
+            "Failed qualification boundary omitted")
     if full:
         from scripts.report_steering_fidelity_calibration import load_complete
         load_complete(root / RUN, root / PLAN)

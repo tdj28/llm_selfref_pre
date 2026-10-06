@@ -1,5 +1,7 @@
 """Numerical manuscript bindings, not scientific validation."""
 import json
+from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -57,3 +59,23 @@ def test_unsafe_manifest_path_rejected(name):
 def test_nonfinite_rejected():
     with pytest.raises(ValueError, match="Nonfinite"):
         v.decode('{"x": NaN}')
+
+
+def test_compiled_diagnostic_summary_keeps_failed_gate_boundary():
+    assert v.verify()["pass"]
+
+
+@pytest.mark.parametrize("path,old,new,error", [
+    ("paper/main.tex", r"\input{internal_diagnostics_summary.tex}", "", "not included"),
+    ("paper/internal_diagnostics_summary.tex", "neither study tested the proposed mechanism",
+     "the mechanism was confirmed", "boundary omitted"),
+])
+def test_removed_summary_or_reversed_gate_fails(path, old, new, error):
+    original = Path.read_text
+
+    def changed(file, *args, **kwargs):
+        text = original(file, *args, **kwargs)
+        return text.replace(old, new) if file == v.ROOT / path else text
+
+    with patch.object(Path, "read_text", changed), pytest.raises(ValueError, match=error):
+        v.verify()

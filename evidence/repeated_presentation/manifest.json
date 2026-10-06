@@ -1,0 +1,27 @@
+{
+  "outputs": {
+    "figure_data.json": {
+      "bytes": 4207,
+      "sha256": "cbd3907e07197dcb7b2c9b7bc04398cdfee869817abe5d63db5895951a3ec46b"
+    },
+    "summary.pdf": {
+      "bytes": 13399,
+      "sha256": "2607f638de70923775fbf4aaeff349905a2ffe812a1382dfbd0a7fa1ee9b0f93"
+    },
+    "summary.png": {
+      "bytes": 24799,
+      "sha256": "9f4ca62c5fed3f0a60237399ac002d45b4435fa8446735cff417c2d3417a0b95"
+    }
+  },
+  "schema": "repeated-presentation-manifest-v1",
+  "source_commit": "033917d188602203cfbbe7717bf7ba704d44aed6",
+  "source_manifest_sha256": "b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242",
+  "source_release_manifest_sha256": "c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf",
+  "sources": {
+    "paper/model_comparison.tex": "2341a5380c431aef8703592ae74497c5d9d25f56f808de4ba196a0f95f288c40",
+    "paper/repeated_extension_editorial.tex": "aa1d459e3ffa83ae4f19829eaed94ba6f2fff52bcb7caa51039d2f6ea9b0d446",
+    "scripts/verify_repeated_presentation.py": "df141ee6a908f79a39a4487fc88c61a1d1e1e3caa3dfcb3f094e513042b5cbd5",
+    "tests/test_repeated_editorial.py": "e03dd02d3592836830f8c22f88faafeb23af0a860af61ab94d89c85a90f2065a",
+    "tests/test_repeated_presentation.py": "30877136b265c77dc44b43b1fa90c83751dd58cb3ff4a7f94bb5395cfe4ded14"
+  }
+}

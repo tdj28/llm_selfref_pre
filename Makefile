@@ -35,14 +35,20 @@ paper-verify:
 	$(PYTHON) scripts/verify_dose_followup.py --require-pinned
 	$(PYTHON) scripts/verify_feature_map_table.py
 	$(PYTHON) scripts/verify_swap_cells.py
+	$(PYTHON) scripts/verify_calibration_rates.py
 	$(PYTHON) scripts/verify_fidelity_calibration.py
 	$(PYTHON) scripts/verify_reporting_bound.py
 	$(PYTHON) scripts/verify_completed_extensions.py
+	$(PYTHON) scripts/verify_bilingual_presentation.py
 	$(PYTHON) scripts/verify_model_panel_extension.py --check
 	$(PYTHON) scripts/verify_qwen_extension.py --check --require-pinned
 	$(PYTHON) -B scripts/verify_kolibri_portable.py || { rc=$$?; $(PYTHON) -B scripts/diagnose_kolibri_release.py || :; exit $$rc; }
 	$(PYTHON) scripts/verify_repeated_portable.py --release data/repeated_swap/completed_v1_20261005 --publication evidence/repeated_extension --release-manifest-sha256 c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf --publication-manifest-sha256 b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242 --binding evidence/repeated_extension_row_binding.json --paper --require-pinned || { rc=$$?; $(PYTHON) -B scripts/diagnose_repeat_release.py || :; $(PYTHON) -B scripts/diagnose_repeat_figures.py || :; exit $$rc; }
 	$(PYTHON) scripts/uncertainty_sensitivity.py --check
+	$(PYTHON) -m unittest tests.test_repeated_editorial
+	$(PYTHON) -m unittest tests.test_model_comparison_condensation
+	$(PYTHON) scripts/verify_kolibri_presentation.py
+	$(PYTHON) scripts/verify_repeated_presentation.py
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only
 
 # Recompute on copies, never on frozen releases.

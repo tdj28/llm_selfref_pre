@@ -14,10 +14,10 @@
     }
   },
   "generators_and_prose": {
-    "paper/context_extensions.tex": "c239ae95f969bc2411bbd096adceef45219c1cd4278e3ac84483671b79cc0eec",
+    "paper/context_extensions.tex": "a770de17f5d079e67a35a919d407806f5838acf3c047138020d33a9307c74fe6",
     "paper/operator_matching.tex": "fdce0e7c5d1702cf464e5c74ba1fbfe666f20903d95529ecea495d65d3f6f62f",
     "scripts/verify_completed_extensions.py": "751deaea8a6c07fb363901ab2225893b1cf2b10b9368fab88be7da0e0f7344dc",
-    "tests/test_completed_extensions.py": "2f10ff5aeac09b7b6ee5565bcf0d51ecf3a86226b0b4e11b8392c64165e196e2"
+    "tests/test_completed_extensions.py": "4f467b2b90e981f8f83276e8baa4204cd69087ac6bb8df3d6b4d81745e6f0acb"
   },
   "schema": "completed-extensions-evidence-v1",
   "scope": {

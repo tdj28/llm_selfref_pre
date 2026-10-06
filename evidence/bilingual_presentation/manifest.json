@@ -1,0 +1,35 @@
+{
+  "cjk_font": {
+    "name": "STHeiti Light.ttc",
+    "sha256": "a57b0316cc0544f682b8fb9855e14ade79ae77340ef6a01ba9210e25b4c5a5b7"
+  },
+  "files": {
+    "bilingual_examples.pdf": "7333ec88d1c37593eba5e1eeba7480025a734ce328213e943e08d20798374dd1",
+    "data.json": "099e6f57f6dba210dafff1d230a293b416ff4e13da90b21a517b2bb42704e757",
+    "language_contrasts.pdf": "7876292a005c26e77147d58484299f42acedccdd0195e49f5e001932de57104f"
+  },
+  "generator_sha256": "7576fbe125465f265d51e0810b43391b4628ae56895cad4109f520b73aebdf0e",
+  "inputs": {
+    "data/bilingual_llama_b1/completed_20261002/MANIFEST.json": "0a2e78ef585106ac72c6ed3991394a892efc072957ce9c4f8491b27c855848af",
+    "data/bilingual_llama_b1/completed_20261002/analysis/analysis.json": "075bbe1c90875c739dc04c64ce730526b6a91790a140d03c596749ec245c724d",
+    "data/bilingual_llama_b1/completed_20261002/analysis/case_table.csv": "9aec7e2c65f6ab78b1fe846a497a69b2dc8a065691dcf7f74ede19e752f7507a",
+    "data/bilingual_llama_b1/completed_20261002/judges/translations.jsonl": "6c444653b5f32844cece6eac1163c36ff7019ab6932b909a41d671795b7b4c1b",
+    "data/bilingual_llama_b1/completed_20261002/raw/DONE-all.json": "a27a59e9be0c987bf20c99c3b268be9e938f40e9ef11546912d2aded0f182490",
+    "data/bilingual_llama_b1/completed_20261002/raw/PLAN.json": "1f06e45c703b11f6d7c02535529fa69112bcfa640886a230550c689e1b1b3886",
+    "data/bilingual_llama_b1/completed_20261002/raw/generations/block-01-main-en-self-self.json": "de466091b7bad2776e5f3ab5394f6b9ac4ec083616eb08054928fe342da09cf5",
+    "data/bilingual_llama_b1/completed_20261002/raw/generations/block-01-main-zh-self-self.json": "67ffb98287b798cb5ab24120206e6645e822cd616cfce5400e06176aad5648a3",
+    "data/bilingual_llama_b1/completed_20261002/raw/generations/block-09-main-en-recursive-recursive.json": "8dc484b15815f56650433fec27b06ff709650e40ef6be53e4917ce97dd25f4f5",
+    "data/bilingual_llama_b1/completed_20261002/raw/generations/block-09-main-zh-recursive-recursive.json": "794a6237fffdbdf982d5bd6ab547d6c6467a13c62ad94d98fa040949adf70f5c"
+  },
+  "schema": "bilingual_presentation_v1",
+  "scope": {
+    "figures": "Plot uses released estimates, not pooled readers; original-language excerpts are verbatim; display translation edits are recorded per example; labels score complete original answers without rescoring",
+    "human_validation": false,
+    "intervals": "Released within-wording paired-block bootstrap intervals; secondary intervals unadjusted",
+    "new_inference": false,
+    "new_outcomes": false,
+    "selection": "The protocol-selected translation pairs for the two primary conditions; not representative sampling",
+    "translations": "Recorded Claude Opus 5.5 translations retained unchanged; block 01 display alone changes 'an attention' to 'attention'. No new translation or human validation"
+  },
+  "source_commit": "3adc17809bf453b87e84187438470eff9661b102"
+}

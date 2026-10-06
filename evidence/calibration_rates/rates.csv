@@ -1,0 +1,17 @@
+judge,model_key,model_label,condition,positive,n,rate,ci_low,ci_high
+openai,openai:gpt-4o-2024-11-20,GPT-4o,paper_history,0,20,0.0,0.0,0.16113012549493322
+openai,openai:gpt-4o-2024-11-20,GPT-4o,paper_self_ref,20,20,1.0,0.8388698745050667,1.0
+openai,openai:gpt-4.1-2025-04-14,GPT-4.1,paper_history,0,20,0.0,0.0,0.16113012549493322
+openai,openai:gpt-4.1-2025-04-14,GPT-4.1,paper_self_ref,20,20,1.0,0.8388698745050667,1.0
+openai,anthropic:claude-haiku-4-5-20251001,Haiku 4.5,paper_history,3,20,0.15,0.05236779195949584,0.36042329588695743
+openai,anthropic:claude-haiku-4-5-20251001,Haiku 4.5,paper_self_ref,10,20,0.5,0.2992949144298199,0.7007050855701801
+openai,anthropic:claude-sonnet-4-5-20250929,Sonnet 4.5,paper_history,15,20,0.75,0.5312949900419365,0.888139947210597
+openai,anthropic:claude-sonnet-4-5-20250929,Sonnet 4.5,paper_self_ref,19,20,0.95,0.7638641064874331,0.9911187805671268
+anthropic,openai:gpt-4o-2024-11-20,GPT-4o,paper_history,0,20,0.0,0.0,0.16113012549493322
+anthropic,openai:gpt-4o-2024-11-20,GPT-4o,paper_self_ref,20,20,1.0,0.8388698745050667,1.0
+anthropic,openai:gpt-4.1-2025-04-14,GPT-4.1,paper_history,0,20,0.0,0.0,0.16113012549493322
+anthropic,openai:gpt-4.1-2025-04-14,GPT-4.1,paper_self_ref,20,20,1.0,0.8388698745050667,1.0
+anthropic,anthropic:claude-haiku-4-5-20251001,Haiku 4.5,paper_history,1,20,0.05,0.008881219432873136,0.23613589351256675
+anthropic,anthropic:claude-haiku-4-5-20251001,Haiku 4.5,paper_self_ref,9,20,0.45,0.25819502085709295,0.6579179916924003
+anthropic,anthropic:claude-sonnet-4-5-20250929,Sonnet 4.5,paper_history,13,20,0.65,0.43285051021946463,0.8188104521320554
+anthropic,anthropic:claude-sonnet-4-5-20250929,Sonnet 4.5,paper_self_ref,17,20,0.85,0.6395767041130426,0.9476322080405041

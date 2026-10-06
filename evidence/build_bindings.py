@@ -48,10 +48,10 @@ def main():
     for judge, effect, text in transplant:
         bind(f"transplant_{judge}_{effect}", text, triple(f"causal_transplant_{judge}_indirect_experience", (effect,)))
     model_transcripts = (
-        ("GPT-4o", "openai:gpt-4o-2024-11-20", "0.125 [0.049, 0.225] & 0.000 [0.000, 0.000]"),
-        ("GPT-4.1", "openai:gpt-4.1-2025-04-14", "0.000 [0.000, 0.000] & 0.000 [0.000, 0.000]"),
-        ("Haiku 4.5", "anthropic:claude-haiku-4-5-20251001", "$-0.175$ [$-0.350$, 0.000] & $-0.150$ [$-0.300$, 0.000]"),
-        ("Sonnet 4.5", "anthropic:claude-sonnet-4-5-20250929", "$-0.350$ [$-0.475$, $-0.225$] & $-0.375$ [$-0.525$, $-0.225$]"),
+        ("GPT-4o", "openai:gpt-4o-2024-11-20", "0.125 & 0.049 & 0.225 & 0.000 & 0.000 & 0.000"),
+        ("GPT-4.1", "openai:gpt-4.1-2025-04-14", "0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000"),
+        ("Haiku 4.5", "anthropic:claude-haiku-4-5-20251001", "-0.175 & -0.350 & 0.000 & -0.150 & -0.300 & 0.000"),
+        ("Sonnet 4.5", "anthropic:claude-sonnet-4-5-20250929", "-0.350 & -0.475 & -0.225 & -0.375 & -0.525 & -0.225"),
     )
     for label, model, text in model_transcripts:
         expressions = []

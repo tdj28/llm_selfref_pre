@@ -1,0 +1,36 @@
+{
+  "analysis_source": {
+    "path": "experiments/causal_transplant/analyze_causal_transplant.py",
+    "sha256": "a704f0420de15d9eb07d49bac4048169f8c3272d7055d82b522c94cc2598a87b"
+  },
+  "files": {
+    "calibration_rates.pdf": {
+      "bytes": 16468,
+      "sha256": "71bad857d04e5a62e3ee298c59bf7f5b7944a4240a50a6de577cf20584772e5a"
+    },
+    "rates.csv": {
+      "bytes": 1735,
+      "sha256": "ae9ffe117855a514b46a8e3d1f078c4b29b5169c30bfe0e81ce6716d2a72a2cf"
+    },
+    "table.tex": {
+      "bytes": 472,
+      "sha256": "0dd3d02282bbd63115e7bc82cd4ecdd98cbfaeada9dca8f4b5517e6baa15ebb4"
+    }
+  },
+  "generator_sha256": "26de8266c210d6464eca48ad860e88e04861a0ec0fc53039b0da4ae0f4167319",
+  "inputs": {
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_anthropic_paper/paper_calibration_rates.csv": "92b1295e43634ea0eac88850faf3eba615b990c1a0c5885b4636d0b9347f7dfb",
+    "data/causal_transplant/confirmatory_v1_20260709/analysis_openai_paper/paper_calibration_rates.csv": "986a5a786e2b9aac458288db4d865362d7ebca58537666f8328b0b9ae8e3dedc"
+  },
+  "schema": "calibration_rate_presentation_v1",
+  "scope": {
+    "human_validation": false,
+    "interval": "Released pointwise 95% Wilson rate intervals, z=1.96",
+    "new_inference": false,
+    "new_outcomes": false,
+    "query": "indirect_experience",
+    "sampling": "Independent condition draws; lines connect rates, not paired responses",
+    "verification": "Hash-pinned summary CSVs, complete cells, integer counts, plotted artists and output hashes"
+  },
+  "source_commit": "f5e906e1737bc71bf20b642af1d698018eec82fe"
+}

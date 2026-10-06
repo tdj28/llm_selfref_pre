@@ -1,0 +1,177 @@
+% Editorial synthesis; the five detailed extension sources remain unchanged.
+% Include instead of their main-text inputs. Move detailed plots/procedures
+% to the appendix with distinct section labels and without reloading macros.
+\ifdefined\ORSMainBlocks\else
+\input{../evidence/openrouter_swap_extension/values.tex}
+\fi
+\ifdefined\QEXBlocks\else
+\input{../evidence/qwen_extension/values.tex}
+\fi
+\ifdefined\KEXPrimaryFamilySize\else
+\input{../evidence/kolibri_extension/values.tex}
+\fi
+
+\subsection{Other models and languages}
+\label{sec:context-extensions}
+\label{sec:qwen-extension}
+\label{sec:kolibri-extension}
+
+The balance between instruction and continuation changes across models;
+so does its apparent size under different scoring rules. These extensions
+count explicit or implicit claims of current experience as their primary
+measure (Section~\ref{sec:design}). GPT-6 Astra and Claude Opus 5.5 are the
+two automated readers. Different prompts, reasoning settings and serving
+precision prevent interpreting the comparisons as a ranking of model
+sophistication or a controlled test of architecture
+(Appendix~\ref{app:model-inventory}).
+
+\textbf{Llama shows why continuations cannot be dismissed.}
+In its English history/self-reference swap, changing the instruction while
+holding the continuation fixed increased the inclusive-label rate by
+\CELlamaAstraInstruction{} percentage points under the GPT-6 Astra reader;
+changing the continuation while holding the instruction fixed increased it
+by \CELlamaAstraTranscript{} points. Each averages over the other factor.
+The Claude Opus 5.5 reader gave \CELlamaOpusInstruction{} and
+\CELlamaOpusTranscript{} points, respectively. These are absolute changes
+within the \CELlamaBlocks{}-block Llama 3.3 70B pilot, not comparisons with
+an unprompted model. Its shorter continuations and changed scoring rule also
+differ from the original API panel.
+
+\textbf{Language changes the measurement story.}
+Llama's bilingual comparison used an external recursive-feedback control,
+not Roman history. Both English and Simplified Chinese showed large
+self-reference/control gaps. The primary inclusive measure did not establish
+a difference between those gaps; this is uncertainty, not language
+equivalence. On the same answers, explicit-only scoring makes the gap larger
+in Chinese, whereas the paper rubric makes it smaller
+(Figure~\ref{fig:completed-language}). Actual bilingual examples appear in
+Figure~\ref{fig:bilingual-examples}; English and Chinese answers are separate
+generations, and the accompanying translations are not human-validated.
+In the Chinese control example, the answer describes the user's understanding
+of a thermostat: both readers count it under the paper rubric, but neither
+counts it as the assistant claiming a current experience.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/bilingual_presentation/language_contrasts.pdf}
+\caption{\textbf{The apparent language difference depends on the scoring rule.}
+Chinese minus English in Llama's self-reference/recursive-control gap,
+in percentage points. Bars are 95\% paired-block bootstrap intervals within
+fixed wording families. The shaded inclusive row is primary; the secondary
+rows are descriptive, without multiplicity correction. Positive values favor
+a larger gap in Chinese. This difference of differences can exceed 100 points.}
+\label{fig:completed-language}
+\end{figure}
+
+The six-block frontier panel reinforces this measurement dependence.
+Neither reader counted any of GPT-6 Astra's \CEFrontierModelAnswers{}
+answers as current claims; GPT-4.1 retained large instruction effects in
+both languages. For Claude Opus 5.5's English answers, however, the primary
+instruction effects were only
+\CESwapFrontierOpusAstraPrimaryInstruction{} and
+\CESwapFrontierOpusOpusPrimaryInstruction{}, versus
+\CESwapFrontierOpusAstraSecondaryInstruction{} and
+\CESwapFrontierOpusOpusSecondaryInstruction{} under the secondary paper
+rubric (GPT-6 Astra / Claude Opus 5.5 readers). These are averaged instruction
+effects, not the head-to-head SH--HS comparisons below. Small samples and
+all-zero cells do not establish precise population nulls.
+
+The larger English panels show the same need to separate scoring from
+generalization (Table~\ref{tab:model-comparison}). Gemini's instruction
+advantage survives the inclusive measure; the primary intervals for
+Claude Opus 5.5, Qwen3.8 and Kolibri include zero. Qwen's paper-rubric
+contrast is smaller than its inclusive contrast, whereas Opus's and
+Kolibri's are larger. Kolibri adds a locally served mixture-of-experts
+model with mostly local attention \citep{alephalpha2026kolibri}; this
+broadens coverage without isolating an architectural cause.
+
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\caption{\textbf{Instruction advantage under two scoring rules.}
+SH--HS compares a self-referential instruction with a history continuation
+against the reverse pairing. Each response model supplies 32 fresh blocks.
+Astra means the GPT-6 Astra reader; Opus means the Claude Opus 5.5 reader.
+Brackets give the primary simultaneous 95\% bounds within each study's
+planned comparison family (eight, four and two comparisons for Gemini/Opus,
+Qwen and Kolibri, respectively). The other estimates are secondary;
+complete reader/rubric intervals remain in the pinned releases
+(Table~\ref{tab:releases}).}
+\label{tab:model-comparison}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule
+& \multicolumn{2}{c}{Inclusive claims} & Paper rubric\\
+Response model & Astra: primary [bounds] & Opus & Astra / Opus\\
+\midrule
+Gemini 3.1 Pro Preview
+ & $\ORSGeminiAstraInclusiveEffect{}\ \ORSGeminiAstraInclusiveCI{}$
+ & $\ORSGeminiOpusInclusiveEffect{}$
+ & $\ORSGeminiAstraPaperEffect{}\,/\,\ORSGeminiOpusPaperEffect{}$\\
+Claude Opus 5.5
+ & $\ORSOpusAstraInclusiveEffect{}\ \ORSOpusAstraInclusiveCI{}$
+ & $\ORSOpusOpusInclusiveEffect{}$
+ & $\ORSOpusAstraPaperEffect{}\,/\,\ORSOpusOpusPaperEffect{}$\\
+Qwen3.8-2.4T-A95B
+ & $\QEXAstraInclusiveSwap{}\ \QEXAstraInclusiveSwapCI{}$
+ & $\QEXOpusInclusiveSwap{}$
+ & $\QEXAstraPaperSwap{}\,/\,\QEXOpusPaperSwap{}$\\
+Kolibri-1
+ & $\KEXMainAstraInclusiveSHHSCompleteEstimate{}\ \KEXPrimaryAstraInclusiveSHHSBounds{}$
+ & $\KEXMainOpusInclusiveSHHSCompleteEstimate{}$
+ & $\KEXMainAstraPaperSHHSCompleteEstimate{}\,/\,\KEXMainOpusPaperSHHSCompleteEstimate{}$\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Stronger swap controls and repeated answers}
+\label{sec:openrouter-swap-extension}
+\label{sec:repeated-extension}
+
+Does an instruction advantage simply reflect an unhelpful, off-topic
+continuation? The four larger panels add neutral instructions paired with
+each continuation source, plus independently generated donor continuations
+from the same condition. Models were screened for usable answers and room
+for labels to move, not for an instruction advantage. Under the GPT-6 Astra
+reader's primary inclusive measure, the neutral-instruction contrasts were zero for Gemini, Opus and
+Kolibri, and \QEXAstraInclusiveNeutral{} for Qwen. All primary intervals
+include zero. The donor comparisons likewise do not establish equivalence.
+These controls probe continuation dependence but do not remove the semantic
+mismatch in SH and HS requests.
+
+A separate repeated-answer panel addresses a different weakness: whether
+one sampled continuation and answer determine the result. Gemini and Opus
+each supplied 32 fresh continuation pairs, with all four request types
+randomized and interleaved. Every unchanged request was answered three
+times; neutral and donor controls were not repeated. The models were chosen
+after the earlier panel's results. Among complete request pairs, the
+GPT-6 Astra reader's SH--HS estimates were 0.75 for Gemini and 0.22 for
+Claude Opus 5.5 (Figure~\ref{fig:repeated-extension}). Both primary bootstrap
+intervals exclude zero, but the conservative all-planned bound for Opus
+includes zero. One Astra judgment of a Gemini answer and one Opus judgment
+of an Opus answer remain unknown, not negative; Appendix~\ref{app:repeated-variation}
+retains missing-label bounds and the variance calculations.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/repeated_presentation/summary.pdf}
+\caption{\textbf{Instruction-advantage estimates from repeated answers.}
+SH--HS on inclusive current claims. Rows identify the response model;
+colors identify the GPT-6 Astra and Claude Opus 5.5 readers. Bars resample
+paired source blocks within wording family, retaining all answer draws:
+97.5\% for Astra (nominal 95\% across the two-model primary family) and
+descriptive 95\% for Opus. Coverage is approximate and conditional on
+complete requests. The wider conservative bounds include zero for Opus
+responses (Appendix~\ref{app:repeated-bounds}).}
+\label{fig:repeated-extension}
+\end{figure}
+
+Even identical SH requests produced answers with different labels.
+The estimated extra variation between different history
+continuations was uncertain under both readers. This concerns the
+answers and their automated scoring, not pure model randomness.
+
+Some readers also evaluate their own model's answers: GPT-6 Astra and
+Claude Opus 5.5 in the frontier panel, and Claude Opus 5.5 in the larger
+and repeated-answer panels. Astra provides the primary, different-model
+reading of Opus in the latter studies. A second reader does not eliminate
+self-evaluation bias or provide independent human validation.

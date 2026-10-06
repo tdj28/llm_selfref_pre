@@ -73,7 +73,7 @@ class EvidenceTests(unittest.TestCase):
 
     def test_model_transcript_interval_drift_rejected(self):
         path = self.root / "paper/main.tex"
-        path.write_text(path.read_text().replace("0.125 [0.049, 0.225]", "0.125 [0.050, 0.225]"))
+        path.write_text(path.read_text().replace("0.125 & 0.049 & 0.225", "0.125 & 0.050 & 0.225"))
         self.fail("manuscript drift")
 
     def test_input_byte_tampering(self):

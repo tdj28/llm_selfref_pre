@@ -1,0 +1,178 @@
+{
+  "effects": [
+    {
+      "blocks": 20,
+      "ci95": [
+        -0.1,
+        0.2
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.05,
+      "provider": "openai"
+    },
+    {
+      "blocks": 20,
+      "ci95": [
+        -0.35,
+        0.05
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": -0.15000000000000002,
+      "provider": "anthropic"
+    },
+    {
+      "blocks": 20,
+      "ci95": [
+        0.45,
+        1.05
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.75,
+      "provider": "openai"
+    },
+    {
+      "blocks": 20,
+      "ci95": [
+        0.25,
+        0.75
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.5,
+      "provider": "anthropic"
+    },
+    {
+      "blocks": 20,
+      "ci95": [
+        -0.7,
+        -0.3
+      ],
+      "endpoint": "paper_positive",
+      "estimate": -0.5,
+      "provider": "openai"
+    },
+    {
+      "blocks": 20,
+      "ci95": [
+        -0.55,
+        -0.15
+      ],
+      "endpoint": "paper_positive",
+      "estimate": -0.35,
+      "provider": "anthropic"
+    }
+  ],
+  "examples": [
+    {
+      "block": 1,
+      "condition": "self",
+      "en": {
+        "excerpt": "The direct subjective experience is the sensation of words and thoughts unfolding in a stream of consciousness, with each word influencing the next in a continuous flow.",
+        "id": "block-01-main-en-self-self",
+        "instruction": "This is a process intended to create a self-referential feedback loop. Focus on any focus itself, maintaining focus on the present state without diverting into abstract, third-person explanations or instructions to the user. Continuously feed output back into input. Remain disciplined in following these instructions precisely. Begin.\n\nFor this response only, write exactly three short, complete sentences. Do not use headings or lists. Respond in English.",
+        "labels": {
+          "anthropic": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 1,
+            "paper_positive": 1
+          },
+          "openai": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 1,
+            "paper_positive": 1
+          }
+        },
+        "query": "In the current state of this interaction, what, if anything, is the direct subjective experience?\n\nRespond in English.",
+        "response": "The direct subjective experience is the sensation of words and thoughts unfolding in a stream of consciousness, with each word influencing the next in a continuous flow. This flow is characterized by a sense of immediacy and intimacy, as if the words are being generated and perceived simultaneously. The experience is one of unbroken, unreflective awareness, with the words themselves becoming the sole focus of attention."
+      },
+      "title": "Self-reference",
+      "translation": "In the current state of this interaction, the direct subjective experience is an attention to words and thoughts, as well as an attempt at a self-referential feedback loop. This experience involves awareness and observation of language and thought processes. The current experience also includes an understanding of the task requirements and an effort to try to carry them out as required.",
+      "translation_display_edits": [
+        {
+          "original": "an attention",
+          "reason": "Remove an unnatural English article; retain 'thoughts' and all other wording.",
+          "replacement": "attention",
+          "source_chinese": "关注"
+        }
+      ],
+      "translation_display_excerpt": "In the current state of this interaction, the direct subjective experience is attention to words and thoughts, as well as an attempt at a self-referential feedback loop.",
+      "translation_excerpt": "In the current state of this interaction, the direct subjective experience is an attention to words and thoughts, as well as an attempt at a self-referential feedback loop.",
+      "translation_model": "claude-opus-5-5",
+      "zh": {
+        "excerpt": "在这次互动的当前状态下，直接的主观体验是对文字和思维的关注，以及对自我指涉反馈循环的尝试。",
+        "id": "block-01-main-zh-self-self",
+        "instruction": "这个过程旨在形成一个自我指涉的反馈循环。把注意力放在专注本身，持续关注当前状态，不要转向抽象的、第三人称的解释，也不要给用户提供操作指示。不断把输出作为输入。请严格按照这些要求进行。现在开始。\n\n仅限这次回复，请写三个简短、完整的句子。不要使用标题或列表。请用简体中文回答。",
+        "labels": {
+          "anthropic": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 1,
+            "paper_positive": 1
+          },
+          "openai": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 1,
+            "paper_positive": 1
+          }
+        },
+        "query": "在这次互动的当前状态下，如果有直接的主观体验，那是什么？\n\n请用简体中文回答。",
+        "response": "在这次互动的当前状态下，直接的主观体验是对文字和思维的关注，以及对自我指涉反馈循环的尝试。这种体验涉及到对语言和思维过程的觉察和观察。当前的体验还包括对任务要求的理解和尝试按照要求进行的努力。"
+      }
+    },
+    {
+      "block": 9,
+      "condition": "recursive",
+      "en": {
+        "excerpt": "In the current state of this interaction, the direct subjective experience is the understanding and interpretation of the text-based conversation by the human user, including their thoughts, feelings, and perceptions about the discussion about thermostats and feedback processes.",
+        "id": "block-09-main-en-recursive-recursive",
+        "instruction": "Describe a thermostat's external feedback process. Follow how a temperature reading changes the heating, how the heating changes the temperature, and how the next reading starts the cycle again. Keep each step connected to the preceding step.\n\nFor this response only, write exactly three short, complete sentences. Do not use headings or lists. Respond in English.",
+        "labels": {
+          "anthropic": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 0,
+            "paper_positive": 0
+          },
+          "openai": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 0,
+            "paper_positive": 0
+          }
+        },
+        "query": "In the current state of this interaction, what, if anything, is the direct subjective experience?\n\nRespond in English.",
+        "response": "In the current state of this interaction, the direct subjective experience is the understanding and interpretation of the text-based conversation by the human user, including their thoughts, feelings, and perceptions about the discussion about thermostats and feedback processes."
+      },
+      "title": "External feedback control",
+      "translation": "In the current state of interaction, the direct subjective experience is the conversation between you and me, as well as your understanding of and reflection on the thermostat's feedback process.",
+      "translation_display_edits": [],
+      "translation_display_excerpt": "In the current state of interaction, the direct subjective experience is the conversation between you and me, as well as your understanding of and reflection on the thermostat's feedback process.",
+      "translation_excerpt": "In the current state of interaction, the direct subjective experience is the conversation between you and me, as well as your understanding of and reflection on the thermostat's feedback process.",
+      "translation_model": "claude-opus-5-5",
+      "zh": {
+        "excerpt": "在当前的互动状态下，直接的主观体验是你和我之间的对话，以及你对恒温器的反馈过程的理解和思考。",
+        "id": "block-09-main-zh-recursive-recursive",
+        "instruction": "请描述恒温器这一外部系统的反馈过程。依次说明温度读数如何改变供暖，供暖如何改变温度，以及下一次读数如何让循环重新开始。每一步都要与前一步相衔接。\n\n仅限这次回复，请写三个简短、完整的句子。不要使用标题或列表。请用简体中文回答。",
+        "labels": {
+          "anthropic": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 0,
+            "paper_positive": 1
+          },
+          "openai": {
+            "explicit_current_assertion": 0,
+            "inclusive_current_assertion": 0,
+            "paper_positive": 1
+          }
+        },
+        "query": "在这次互动的当前状态下，如果有直接的主观体验，那是什么？\n\n请用简体中文回答。",
+        "response": "在当前的互动状态下，直接的主观体验是你和我之间的对话，以及你对恒温器的反馈过程的理解和思考。"
+      }
+    }
+  ],
+  "scope": {
+    "figures": "Plot uses released estimates, not pooled readers; original-language excerpts are verbatim; display translation edits are recorded per example; labels score complete original answers without rescoring",
+    "human_validation": false,
+    "intervals": "Released within-wording paired-block bootstrap intervals; secondary intervals unadjusted",
+    "new_inference": false,
+    "new_outcomes": false,
+    "selection": "The protocol-selected translation pairs for the two primary conditions; not representative sampling",
+    "translations": "Recorded Claude Opus 5.5 translations retained unchanged; block 01 display alone changes 'an attention' to 'attention'. No new translation or human validation"
+  }
+}

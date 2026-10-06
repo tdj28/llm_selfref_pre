@@ -1,0 +1,121 @@
+{
+  "blocks": 32,
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20261004,
+  "contrast": "SH-HS",
+  "fuller_plot": "evidence/kolibri_extension/kolibri.pdf",
+  "model": "Aleph-Alpha/Kolibri-1",
+  "plotted_intervals": "Pointwise descriptive 95% paired-block bootstrap within wording families",
+  "primary_inference": {
+    "contrasts": {
+      "instruction_minus_transcript": {
+        "interval": [
+          -0.023332269850730225,
+          1
+        ]
+      },
+      "neutral_transcript": {
+        "interval": [
+          -0.5233322698507302,
+          0.5233322698507302
+        ]
+      }
+    },
+    "endpoint": "inclusive_current_assertion",
+    "family_size": 2,
+    "familywise_confidence": 0.95,
+    "includes_planned_missingness": true,
+    "individual_confidence": 0.975,
+    "judge": "astra",
+    "method": "Bonferroni bounded Hoeffding"
+  },
+  "rows": [
+    {
+      "descriptive_ci95": [
+        0.34375,
+        0.65625
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.5,
+      "pointwise_hoeffding95": [
+        0.019838604340039645,
+        0.9801613956599604
+      ],
+      "reader": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        0.46875,
+        0.78125
+      ],
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.625,
+      "pointwise_hoeffding95": [
+        0.14483860434003965,
+        1.0
+      ],
+      "reader": "opus"
+    },
+    {
+      "descriptive_ci95": [
+        0.25,
+        0.5
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.375,
+      "pointwise_hoeffding95": [
+        -0.10516139565996035,
+        0.8551613956599604
+      ],
+      "reader": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        0.25,
+        0.5
+      ],
+      "endpoint": "explicit_current_assertion",
+      "estimate": 0.375,
+      "pointwise_hoeffding95": [
+        -0.10516139565996035,
+        0.8551613956599604
+      ],
+      "reader": "opus"
+    },
+    {
+      "descriptive_ci95": [
+        0.53125,
+        0.84375
+      ],
+      "endpoint": "paper",
+      "estimate": 0.6875,
+      "pointwise_hoeffding95": [
+        0.20733860434003965,
+        1.0
+      ],
+      "reader": "astra"
+    },
+    {
+      "descriptive_ci95": [
+        0.625,
+        0.875
+      ],
+      "endpoint": "paper",
+      "estimate": 0.75,
+      "pointwise_hoeffding95": [
+        0.26983860434003965,
+        1.0
+      ],
+      "reader": "opus"
+    }
+  ],
+  "schema": "kolibri-editorial-presentation-v1",
+  "scope": {
+    "human_validation": false,
+    "new_inference": false,
+    "new_outcomes": false,
+    "note": "Original replay remains part of make paper-verify; this check binds the presentation.",
+    "raw_receipts_replayed_by_this_script": false
+  },
+  "source_commit": "3900a5ede5e6c003320960159e69811530f5346c"
+}
