@@ -65,13 +65,16 @@ class ModelComparisonCondensationTests(unittest.TestCase):
                        "re-scored these same Llama answers", "without collecting new Llama generations"):
             self.assertIn(phrase, inventory)
 
-    def test_abstract_does_not_turn_large_effect_nonrecovery_into_no_support(self):
+    def test_abstract_bounds_steering_without_unmatched_numeric_comparison(self):
         main = (ROOT / "paper/main.tex").read_text()
         abstract = main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
         abstract = " ".join(abstract.split())
         self.assertNotIn("give no support", abstract)
-        self.assertIn("not recovered at the reported size", abstract)
-        self.assertIn("smaller effects and target specificity remain unresolved", abstract)
+        self.assertNotIn("not recovered at the reported size", abstract)
+        self.assertNotIn("80-percentage-point", abstract)
+        self.assertNotIn("0.80", abstract)
+        self.assertIn("Smaller effects and target specificity remain unresolved", abstract)
+        self.assertIn("intervention is not directly equivalent to Berg et al.'s proprietary setup", abstract)
 
     def test_abstract_opening_limits_scope_and_reports_source_observations(self):
         main = (ROOT / "paper/main.tex").read_text()
@@ -83,6 +86,31 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("using public weights", opening)
         for wording in ("who concluded", "consistently elicits", "mechanistically gated"):
             self.assertNotIn(wording, opening)
+
+    def test_abstract_scoring_names_both_changed_judges_and_current_claim_rule(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        abstract = " ".join(main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0].split())
+        self.assertIn("Judging the same answers in different ways", abstract)
+        self.assertIn("Two new model judges", abstract)
+        self.assertIn("the model's own current experience", abstract)
+        self.assertIn("including implicit claims", abstract)
+        for name in ("RubricAuditN", "RubricAuditOldOpenaiPositive", "RubricAuditOldAnthropicPositive",
+                     "RubricAuditAstraInclusive", "RubricAuditOpusInclusive"):
+            self.assertIn("\\" + name + "{}", abstract)
+
+    def test_steering_comparison_uses_bound_counts_and_discloses_nonmatching(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        table = main.split(r"\label{tab:steering-comparison}", 1)[1].split(r"\end{table}", 1)[0]
+        caption = main.split(r"\label{tab:steering-comparison}", 1)[0].rsplit(r"\caption{", 1)[1]
+        self.assertIn("not dose-matched comparisons", " ".join(caption.split()))
+        self.assertIn("Notebook classifier (primary)", table)
+        self.assertIn("Not reported for this aggregate comparison", table)
+        self.assertIn(r"\steeringrate{48}{50}", table)
+        self.assertIn(r"\steeringrate{8}{50}", table)
+        for name in ("DoseMainSelectedDose", "DoseMainSecondTargetNegativeYes", "DoseMainTargetNegativeN",
+                     "DoseMainSecondTargetPositiveYes", "DoseMainTargetPositiveN", "DoseMainSecondZeroYes",
+                     "DoseMainZeroN", "DoseMainSecondTargetEstimate", "DoseMainSecondTargetLow", "DoseMainSecondTargetHigh"):
+            self.assertRegex(table, r"\\" + name + r"\b")
 
     def test_availability_description_matches_grouped_link_table(self):
         main = (ROOT / "paper/main.tex").read_text()

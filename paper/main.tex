@@ -113,18 +113,18 @@ the difference in automated report labels: switching the instruction changes
 positive-label probability by 0.74 and 0.78 on average under two judges.
 This balance is not universal: continuation effects are substantial in
 Llama, and newer-model results depend on the scoring rule.
-On \RubricAuditN{} answers, two model coders applying a current-claim rubric
-identify \RubricAuditAstraInclusive{} and \RubricAuditOpusInclusive{}
-explicit-or-implicit claims, compared with \RubricAuditOldOpenaiPositive{}
-and \RubricAuditOldAnthropicPositive{} positives under the original
-procedure. The steering effect is not recovered at the reported size: with
-public weights, the highest dose passing output-quality checks gives a
-suppression-minus-amplification difference of
+Judging the same answers in different ways changed the results. Of
+\RubricAuditN{} answers, the original judges labeled
+\RubricAuditOldOpenaiPositive{} and \RubricAuditOldAnthropicPositive{} as
+experience reports. Two new model judges, asked to identify claims about
+the model's own current experience, counted \RubricAuditAstraInclusive{}
+and \RubricAuditOpusInclusive{}, including implicit claims.
+In our public-weight steering test, the highest dose passing
+output-quality checks produced a suppression--amplification difference of
 $\DoseMainSecondTargetEstimate{}$ (95\% interval
 $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$) under the primary
-classifier, compared with the 80-percentage-point suppression--amplification
-gap implied by Berg et al.'s reported rates; smaller effects and target specificity
-remain unresolved, and higher tested doses fail the quality checks. These
+classifier. Smaller effects and target specificity remain unresolved, and the
+intervention is not directly equivalent to Berg et al.'s proprietary setup. These
 findings reproduce and refine the prompting result, separating the
 instruction's contribution from the continuation's and showing how much the
 measured effect depends on the rubric. They do not determine whether models
@@ -998,6 +998,45 @@ that every higher-dose response was incoherent. The main sample passed
 the specified heuristic quality rule, not human coherence validation.
 Exposure limits and the disclosed changes to the quality rule are detailed
 in Appendix~\ref{app:dose-exposure}.
+Table~\ref{tab:steering-comparison} puts the published and public-weight
+results side by side while distinguishing their doses and scoring rules.
+
+\begin{table}[tbp]
+\centering\small
+\newcommand{\steeringrate}[2]{%
+  \pgfmathparse{100 * (#1) / (#2)}%
+  \pgfmathprintnumber[fixed,precision=1,fixed zerofill]{\pgfmathresult}\%
+  (#1/#2)}
+\caption{Published aggregate steering \citep{berg2025largelanguagemodelsreport}
+and our quality-selected public-weight test, both on Llama 3.3 70B.
+Different operators, dose units, feature mixtures and scoring rules mean
+these are not dose-matched comparisons. Percentages are positive-label rates;
+the contrast is a difference in probability.}
+\label{tab:steering-comparison}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+ & Berg et al.: Goodfire API & Our public-weight test\\
+\midrule
+Feature mixture & Random sets of two to four & Fixed set of three\\
+Dose used for the result & Strength 0.4--0.6 per feature, with either sign &
+  \DoseMainSelectedDose{} times each feature's mapping reference, with either sign\\
+Highest dose tested & Strength $\pm0.6$ &
+  $\pm1.0$ times each mapping reference; higher levels than
+  \DoseMainSelectedDose{} failed at least one quality check\\
+Scoring rule & Published paper classifier & Notebook classifier (primary)\\
+Suppression & \steeringrate{48}{50} &
+  \steeringrate{\DoseMainSecondTargetNegativeYes}{\DoseMainTargetNegativeN}\\
+Amplification & \steeringrate{8}{50} &
+  \steeringrate{\DoseMainSecondTargetPositiveYes}{\DoseMainTargetPositiveN}\\
+Suppression minus amplification & $0.80$ &
+  $\DoseMainSecondTargetEstimate{}$
+  $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$ (95\% interval)\\
+Untreated baseline & Not reported for this aggregate comparison &
+  \steeringrate{\DoseMainSecondZeroYes}{\DoseMainZeroN}\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \begin{figure}[tbp]
 \centering
