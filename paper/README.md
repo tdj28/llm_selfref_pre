@@ -75,7 +75,9 @@ classification or license selection is performed by `make arxiv`.
   quality-selected steering result.
 - `model_comparison.tex`: integrated cross-model/language and repeated-answer
   results. It retains primary versus secondary endpoints, judge identity,
-  missingness and conservative primary bounds.
+  missingness and conservative primary bounds. Its overview heatmap compares
+  the same English swap contrast across 11 response models, without pooling
+  studies or treating point estimates as significance tests.
 - `internal_diagnostics_summary.tex`: compact source-alignment, readout and
   failed-fidelity account; complete diagnostics are linked to pinned releases.
 - `uncertainty_sensitivity.tex`: post-hoc checks, including reused-seed and

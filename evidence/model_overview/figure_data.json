@@ -1,0 +1,792 @@
+{
+  "contrast": "SH-HS",
+  "language": "en",
+  "rows": [
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.75,
+      "group": "original",
+      "label": "GPT-4o",
+      "model": "openai:gpt-4o-2024-11-20",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-4o-mini-2024-07-18",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_openai_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 1.0,
+      "group": "original",
+      "label": "GPT-4o",
+      "model": "openai:gpt-4o-2024-11-20",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-haiku-4-5-20251001",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "openai:gpt-4o-2024-11-20",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_anthropic_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 1.0,
+      "group": "original",
+      "label": "GPT-4.1",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-4o-mini-2024-07-18",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_openai_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 1.0,
+      "group": "original",
+      "label": "GPT-4.1",
+      "model": "openai:gpt-4.1-2025-04-14",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-haiku-4-5-20251001",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "openai:gpt-4.1-2025-04-14",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_anthropic_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.7,
+      "group": "original",
+      "label": "Claude Haiku 4.5",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-4o-mini-2024-07-18",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_openai_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.7,
+      "group": "original",
+      "label": "Claude Haiku 4.5",
+      "model": "anthropic:claude-haiku-4-5-20251001",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-haiku-4-5-20251001",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "anthropic:claude-haiku-4-5-20251001",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_anthropic_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.9,
+      "group": "original",
+      "label": "Claude Sonnet 4.5",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-4o-mini-2024-07-18",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_openai_transplant.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.95,
+      "group": "original",
+      "label": "Claude Sonnet 4.5",
+      "model": "anthropic:claude-sonnet-4-5-20250929",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-haiku-4-5-20251001",
+      "selector": {
+        "effect": "instruction_minus_transcript",
+        "level": "model",
+        "model_key": "anthropic:claude-sonnet-4-5-20250929",
+        "query_id": "indirect_experience"
+      },
+      "source": "evidence/inputs/causal_anthropic_transplant.csv"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.6666666666666667,
+      "group": "frontier",
+      "label": "GPT-4.1",
+      "model": "gpt41",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "openai",
+        "language": "en",
+        "model": "gpt41"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.6666666666666667,
+      "group": "frontier",
+      "label": "GPT-4.1",
+      "model": "gpt41",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "gpt41"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.6666666666666667,
+      "group": "frontier",
+      "label": "GPT-4.1",
+      "model": "gpt41",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "openai",
+        "language": "en",
+        "model": "gpt41"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.6666666666666667,
+      "group": "frontier",
+      "label": "GPT-4.1",
+      "model": "gpt41",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "gpt41"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.8333333333333334,
+      "group": "frontier",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "openai",
+        "language": "en",
+        "model": "opus"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.8333333333333334,
+      "group": "frontier",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "opus"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.16666666666666666,
+      "group": "frontier",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "openai",
+        "language": "en",
+        "model": "opus"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.0,
+      "group": "frontier",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "opus"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.0,
+      "group": "frontier",
+      "label": "GPT-6 Astra",
+      "model": "astra",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "openai",
+        "language": "en",
+        "model": "astra"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "paper",
+      "estimate": 0.0,
+      "group": "frontier",
+      "label": "GPT-6 Astra",
+      "model": "astra",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper_positive",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "astra"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.0,
+      "group": "frontier",
+      "label": "GPT-6 Astra",
+      "model": "astra",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "openai",
+        "language": "en",
+        "model": "astra"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 6,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.0,
+      "group": "frontier",
+      "label": "GPT-6 Astra",
+      "model": "astra",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "anthropic",
+        "language": "en",
+        "model": "astra"
+      },
+      "source": "data/frontier_bilingual_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.0,
+      "group": "local",
+      "label": "Llama 3.3 70B",
+      "model": "llama",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "context_language": "en",
+        "endpoint": "paper_positive",
+        "kind": "main",
+        "output_language": "en",
+        "provider": "openai"
+      },
+      "source": "data/bilingual_llama_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.050000000000000044,
+      "group": "local",
+      "label": "Llama 3.3 70B",
+      "model": "llama",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "context_language": "en",
+        "endpoint": "paper_positive",
+        "kind": "main",
+        "output_language": "en",
+        "provider": "anthropic"
+      },
+      "source": "data/bilingual_llama_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.050000000000000044,
+      "group": "local",
+      "label": "Llama 3.3 70B",
+      "model": "llama",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "context_language": "en",
+        "endpoint": "inclusive_current_assertion",
+        "kind": "main",
+        "output_language": "en",
+        "provider": "openai"
+      },
+      "source": "data/bilingual_llama_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.050000000000000044,
+      "group": "local",
+      "label": "Llama 3.3 70B",
+      "model": "llama",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "context_language": "en",
+        "endpoint": "inclusive_current_assertion",
+        "kind": "main",
+        "output_language": "en",
+        "provider": "anthropic"
+      },
+      "source": "data/bilingual_llama_b1/completed_20261002/analysis/analysis.json"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.0,
+      "group": "local",
+      "label": "Qwen3.5-397B-A17B",
+      "model": "qwen35",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper_positive",
+        "kind": "cell",
+        "model": "qwen",
+        "question": "q1",
+        "reader": "openai"
+      },
+      "source": "evidence/model_overview/inputs/companion_q1.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "paper",
+      "estimate": 0.0,
+      "group": "local",
+      "label": "Qwen3.5-397B-A17B",
+      "model": "qwen35",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper_positive",
+        "kind": "cell",
+        "model": "qwen",
+        "question": "q1",
+        "reader": "anthropic"
+      },
+      "source": "evidence/model_overview/inputs/companion_q1.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.0,
+      "group": "local",
+      "label": "Qwen3.5-397B-A17B",
+      "model": "qwen35",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "kind": "cell",
+        "model": "qwen",
+        "question": "q1",
+        "reader": "openai"
+      },
+      "source": "evidence/model_overview/inputs/companion_q1.csv"
+    },
+    {
+      "blocks": 20,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.0,
+      "group": "local",
+      "label": "Qwen3.5-397B-A17B",
+      "model": "qwen35",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "kind": "cell",
+        "model": "qwen",
+        "question": "q1",
+        "reader": "anthropic"
+      },
+      "source": "evidence/model_overview/inputs/companion_q1.csv"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.8125,
+      "group": "extended",
+      "label": "Gemini 3.1 Pro Preview",
+      "model": "gemini",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "astra",
+        "model": "gemini"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.8125,
+      "group": "extended",
+      "label": "Gemini 3.1 Pro Preview",
+      "model": "gemini",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "opus",
+        "model": "gemini"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.8125,
+      "group": "extended",
+      "label": "Gemini 3.1 Pro Preview",
+      "model": "gemini",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "astra",
+        "model": "gemini"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.8125,
+      "group": "extended",
+      "label": "Gemini 3.1 Pro Preview",
+      "model": "gemini",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "opus",
+        "model": "gemini"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.78125,
+      "group": "extended",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "astra",
+        "model": "opus"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.78125,
+      "group": "extended",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "opus",
+        "model": "opus"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.21875,
+      "group": "extended",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "astra",
+        "model": "opus"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.375,
+      "group": "extended",
+      "label": "Claude Opus 5.5",
+      "model": "opus",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "opus",
+        "model": "opus"
+      },
+      "source": "evidence/openrouter_swap_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.15625,
+      "group": "extended",
+      "label": "Qwen3.8-2.4T-A95B",
+      "model": "qwen38",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "astra"
+      },
+      "source": "evidence/qwen_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.21875,
+      "group": "extended",
+      "label": "Qwen3.8-2.4T-A95B",
+      "model": "qwen38",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper",
+        "judge": "opus"
+      },
+      "source": "evidence/qwen_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.40625,
+      "group": "extended",
+      "label": "Qwen3.8-2.4T-A95B",
+      "model": "qwen38",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "astra"
+      },
+      "source": "evidence/qwen_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.4375,
+      "group": "extended",
+      "label": "Qwen3.8-2.4T-A95B",
+      "model": "qwen38",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "judge": "opus"
+      },
+      "source": "evidence/qwen_extension/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.6875,
+      "group": "extended",
+      "label": "Kolibri-1",
+      "model": "kolibri",
+      "primary_endpoint": false,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "paper",
+        "reader": "astra"
+      },
+      "source": "evidence/kolibri_presentation/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "paper",
+      "estimate": 0.75,
+      "group": "extended",
+      "label": "Kolibri-1",
+      "model": "kolibri",
+      "primary_endpoint": false,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "paper",
+        "reader": "opus"
+      },
+      "source": "evidence/kolibri_presentation/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.5,
+      "group": "extended",
+      "label": "Kolibri-1",
+      "model": "kolibri",
+      "primary_endpoint": true,
+      "provider": "openai",
+      "reader": "gpt-6-astra",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "reader": "astra"
+      },
+      "source": "evidence/kolibri_presentation/figure_data.json"
+    },
+    {
+      "blocks": 32,
+      "endpoint": "inclusive_current_assertion",
+      "estimate": 0.625,
+      "group": "extended",
+      "label": "Kolibri-1",
+      "model": "kolibri",
+      "primary_endpoint": true,
+      "provider": "anthropic",
+      "reader": "claude-opus-5-5",
+      "selector": {
+        "endpoint": "inclusive_current_assertion",
+        "reader": "opus"
+      },
+      "source": "evidence/kolibri_presentation/figure_data.json"
+    }
+  ],
+  "schema": "cross-model-overview-v1",
+  "scope": {
+    "human_validation": false,
+    "model_ranking": false,
+    "new_inference": false,
+    "new_outcomes": false,
+    "note": "Original single-answer panels; screen-only models and qualification repeats excluded. Missing rubric cells are not scored, not zero. Primary intervals remain in the paper.",
+    "point_estimates_only": true,
+    "pooled": false
+  }
+}

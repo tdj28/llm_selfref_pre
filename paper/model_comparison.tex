@@ -24,6 +24,28 @@ two automated readers. Different prompts, reasoning settings and serving
 precision prevent interpreting the comparisons as a ranking of model
 sophistication or a controlled test of architecture
 (Appendix~\ref{app:model-inventory}).
+Figure~\ref{fig:model-overview} brings the completed English swap panels
+together. Read across a row to see how the scoring rule changes the apparent
+instruction advantage; read down within a panel to compare response models.
+
+\begin{figure}[!tbp]
+\centering
+\includegraphics[width=\linewidth]{../evidence/model_overview/overview.pdf}
+\caption{\textbf{The instruction advantage varies across models and scoring rules.}
+Cells give SH--HS in percentage points: positive values favor the
+self-referential instruction with a history continuation over the reverse
+pairing. These are point estimates, not confidence intervals or a ranking of
+model capability. All 11 response models with completed English swap panels
+are represented; repeat appearances retain their separate studies. Columns
+identify reader providers; each group names the reader models. Gray cells
+have no full-panel score under that rubric. The paper rubric is primary in the original
+panel; inclusive current claims are primary in the later panels. The studies
+differ in prompts and serving settings. Zero contrasts can arise when both
+swapped conditions are at floor or ceiling. Table~\ref{tab:model-comparison}
+retains the larger panels' primary uncertainty bounds;
+Appendix~\ref{app:model-inventory} records study details.}
+\label{fig:model-overview}
+\end{figure}
 
 \textbf{Llama shows why continuations cannot be dismissed.}
 In its English history/self-reference swap, changing the instruction while

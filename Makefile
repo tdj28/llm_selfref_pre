@@ -49,6 +49,8 @@ paper-verify:
 	$(PYTHON) -m unittest tests.test_model_comparison_condensation
 	$(PYTHON) scripts/verify_kolibri_presentation.py
 	$(PYTHON) scripts/verify_repeated_presentation.py
+	$(PYTHON) scripts/verify_model_overview.py
+	$(PYTHON) -m unittest tests.test_model_overview
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only
 
 # Recompute on copies, never on frozen releases.

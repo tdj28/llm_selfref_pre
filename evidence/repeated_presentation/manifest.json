@@ -18,7 +18,7 @@
   "source_manifest_sha256": "b2cd569022042097cf574f2dd7038cad20489a6b43992eeb01f631357ff5e242",
   "source_release_manifest_sha256": "c0d44ab369739425645475ef1e62281c7615982c5288b6d0cc4a0b2ba36c75cf",
   "sources": {
-    "paper/model_comparison.tex": "8bdedbd1832449325b232c81853269bbf4ecebfdc6a343f22d288549490eca47",
+    "paper/model_comparison.tex": "008024abffaf5e547e5510f23450b3e3e7e03c3ba5bc9b6fb1dd3b44a2df5753",
     "paper/repeated_extension_editorial.tex": "aa1d459e3ffa83ae4f19829eaed94ba6f2fff52bcb7caa51039d2f6ea9b0d446",
     "scripts/verify_repeated_presentation.py": "df141ee6a908f79a39a4487fc88c61a1d1e1e3caa3dfcb3f094e513042b5cbd5",
     "tests/test_repeated_editorial.py": "e03dd02d3592836830f8c22f88faafeb23af0a860af61ab94d89c85a90f2065a",

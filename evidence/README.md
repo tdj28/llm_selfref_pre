@@ -24,6 +24,7 @@ raw-data archive. Start with the [paper](../paper/README.md), use the
 | Kolibri panel | [Results, values and vector figure](kolibri_extension/BINDING.json) | [verify_kolibri_extension.py](../scripts/verify_kolibri_extension.py); raw-receipt replay and row-level reconstruction, with separate primary and descriptive uncertainty. |
 | Kolibri figure styling | [Three-rubric presentation](kolibri_presentation/README.md) | [verify_kolibri_presentation.py](../scripts/verify_kolibri_presentation.py); unchanged estimates and descriptive intervals, styled like Qwen. The condensed paper uses a comparison table and links the original fuller plot. |
 | Repeated-answer summary figure | [Four-point presentation](repeated_presentation/README.md) | [verify_repeated_presentation.py](../scripts/verify_repeated_presentation.py); unchanged conditional estimates and reader-specific bootstrap intervals. Conservative bounds remain in an appendix table; the original block/variance plot is linked. |
+| Cross-model swap overview | [Eleven-model matrix and plotted values](model_overview/README.md) | [verify_model_overview.py](../scripts/verify_model_overview.py); common SH-HS point estimates, separate studies/readers/rubrics, with missing rubric cells explicitly unscored. No pooled estimate or new inference. |
 
 Steering-fidelity appendix checks read its
 [calibration release](../data/steering_fidelity/README.md) directly through

@@ -33,7 +33,7 @@ class ModelComparisonCondensationTests(unittest.TestCase):
                         "openrouter-swap-extension", "repeated-extension"):
             self.assertEqual(self.tex.count(r"\label{sec:" + section + "}"), 1)
         self.assertEqual(self.tex.count(r"\begin{table}"), 1)
-        self.assertEqual(self.tex.count(r"\begin{figure}"), 2)
+        self.assertEqual(self.tex.count(r"\begin{figure}"), 3)
         for label in ("app:model-inventory", "app:repeated-variation",
                       "fig:bilingual-examples", "app:repeated-bounds"):
             self.assertIn(r"\ref{" + label + "}", self.tex)
