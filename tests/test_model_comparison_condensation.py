@@ -65,16 +65,18 @@ class ModelComparisonCondensationTests(unittest.TestCase):
                        "re-scored these same Llama answers", "without collecting new Llama generations"):
             self.assertIn(phrase, inventory)
 
-    def test_abstract_bounds_steering_without_unmatched_numeric_comparison(self):
+    def test_abstract_steering_comparison_names_distinct_implementations(self):
         main = (ROOT / "paper/main.tex").read_text()
         abstract = main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
         abstract = " ".join(abstract.split())
         self.assertNotIn("give no support", abstract)
         self.assertNotIn("not recovered at the reported size", abstract)
-        self.assertNotIn("80-percentage-point", abstract)
-        self.assertNotIn("0.80", abstract)
-        self.assertIn("Smaller effects and target specificity remain unresolved", abstract)
-        self.assertIn("intervention is not directly equivalent to Berg et al.'s proprietary setup", abstract)
+        self.assertIn("In our public-weight steering test", abstract)
+        self.assertIn("0.80 difference", abstract)
+        self.assertIn("different steering implementation through Goodfire's proprietary API", abstract)
+        self.assertTrue(abstract.endswith("Goodfire's proprietary API."))
+        body = " ".join(main.split(r"\end{abstract}", 1)[1].split())
+        self.assertIn("It leaves a modest effect possible and target specificity unresolved", body)
 
     def test_abstract_opening_limits_scope_and_reports_source_observations(self):
         main = (ROOT / "paper/main.tex").read_text()
