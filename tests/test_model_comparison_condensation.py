@@ -75,7 +75,7 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("0.80 difference", abstract)
         self.assertIn("different steering implementation through Goodfire's proprietary API", abstract)
         availability = (
-            "Protocols, code, raw outputs and judgments are publicly available for "
+            "This study's protocols, code, raw outputs and judgments are publicly available for "
             "inspection, reanalysis and replication."
         )
         self.assertTrue(abstract.endswith(availability))
