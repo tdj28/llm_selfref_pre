@@ -99,7 +99,9 @@ classification or license selection is performed by `make arxiv`.
 The Chinese examples preserve the generated Chinese and recorded translation
 receipts. The displayed English translation corrects only "an attention" to
 "attention"; the caption and presentation data disclose the correction.
-Automated language review is not human translation validation.
+On 2026-10-05, the author reported that a Chinese speaker had checked Figure
+B.3's displayed translations. The manuscript discloses this figure-specific
+check, not human validation of the full dataset or the automated labels.
 
 Earlier manuscripts remain historical, not alternate working drafts.
 The owner separately reopened collection for the October 4 model-panel,

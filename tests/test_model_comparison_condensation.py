@@ -169,8 +169,21 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         for phrase in ("holding the continuation fixed", "holding the instruction fixed",
                        "external recursive-feedback control, not Roman history",
                        "uncertainty, not language equivalence", "gap larger in Chinese",
-                       "paper rubric makes it smaller", "translations are not human-validated"):
+                       "paper rubric makes it smaller"):
             self.assertIn(phrase, self.prose)
+
+    def test_human_translation_check_is_limited_to_displayed_examples(self):
+        self.assertIn("A Chinese speaker checked the translations displayed in that figure", self.prose)
+        self.assertIn("does not extend to the full dataset or the automated labels", self.prose)
+        self.assertNotIn("translations are not human-validated", self.prose)
+        main = (ROOT / "paper/main.tex").read_text()
+        caption = main.split(r"\textbf{Actual English and Chinese answers", 1)[1].split(
+            r"\label{fig:bilingual-examples}", 1)[0]
+        caption = " ".join(caption.split())
+        self.assertIn("A Chinese speaker checked the displayed translations", caption)
+        self.assertIn("does not validate the automated labels or the full dataset", caption)
+        self.assertIn("recorded Claude Opus 5.5 translations", caption)
+        self.assertIn("display-only correction", caption)
 
     def test_repeated_result_keeps_missingness_and_conservative_uncertainty(self):
         original, binding = verify_repeated_presentation.load()

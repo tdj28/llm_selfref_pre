@@ -42,6 +42,14 @@ the display correction rather than call the whole translation verbatim.
 
 ## Verification
 
+On 2026-10-05, the author reported that a Chinese speaker had checked the
+displayed translations in Figure B.3 (`bilingual_examples.pdf`). This later
+check is limited to those examples, not the full dataset or automated labels.
+No translation text, label or asset changed. The package's original
+`human_validation: false` metadata and verifier output describe its automated
+construction and verification; they are preserved, not retroactively rewritten
+as a record of human review.
+
 Run `python scripts/verify_bilingual_presentation.py` from the repository root.
 The check binds inputs to the original release manifest and checks the
 presentation data and asset hashes. It performs no new statistical inference,
