@@ -119,6 +119,20 @@ class ModelComparisonCondensationTests(unittest.TestCase):
                      "DoseMainZeroN", "DoseMainSecondTargetEstimate", "DoseMainSecondTargetLow", "DoseMainSecondTargetHigh"):
             self.assertRegex(table, r"\\" + name + r"\b")
 
+    def test_reporting_details_are_in_appendix_with_main_text_pointer(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        body, appendix = main.split(r"\appendix", 1)
+        self.assertIn(r"Appendix~\ref{sec:reporting-gaps}", body)
+        self.assertNotIn(r"\label{sec:reporting-gaps}", body)
+        self.assertNotIn(r"\TruthfulQAMinPairedT{}", body)
+        self.assertIn(r"\subsection{Published steering: reporting details}", appendix)
+        self.assertEqual(appendix.count(r"\label{sec:reporting-gaps}"), 1)
+        self.assertEqual(appendix.count(r"\TruthfulQAMinPairedT{}"), 2)
+        for phrase in ("one binary score per condition", "two-decimal rounding",
+                       "an undescribed unit of analysis", "single-feature curves",
+                       "truthful/deceptive label"):
+            self.assertIn(phrase, " ".join(appendix.split()))
+
     def test_availability_description_matches_grouped_link_table(self):
         main = (ROOT / "paper/main.tex").read_text()
         availability = main.split(r"\label{app:ensemble-portability}", 1)[1]

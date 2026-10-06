@@ -944,9 +944,10 @@ process was removed or enhanced. Model and SAE versions are fixed
 multi-feature grids include an untreated condition, matched control features
 steered the same way, and records of the delivered edit. The operator-matching
 studies instead compare different ways of applying edits to two target features.
-The published description
-shows the untreated rate only as the zero point of its single-feature curves
-and reports neither of the other two (Section~\ref{sec:reporting-gaps}).
+The published aggregate study does not report an untreated baseline or
+matched-feature controls, and its intervention operator is not fully specified.
+Appendix~\ref{sec:reporting-gaps} records these limits to comparison and the
+separate TruthfulQA reporting checks.
 
 \subsection{The contrast at a quality-selected dose}
 \label{sec:dose-followup}
@@ -1105,38 +1106,6 @@ only an implementation check, and a changed readout further on would still
 need its own causal test before it could explain behavior.
 Appendix~\ref{app:jlens-details} defines the readouts and links the complete
 word groups, both signs and prompt histories, and all comparison mappings.
-
-\subsection{Reported baselines and comparison conditions}
-\label{sec:reporting-gaps}
-
-The published aggregate steering comparison does not report an untreated
-positive-label rate or results for random or matched feature directions.
-The study's Figure~2 shows an unsteered rate near 0.30 in the single-feature curves,
-but this is not a separately reported baseline for the aggregate contrast
-of 0.80. Without that baseline, the contrast does not distinguish an
-increase under suppression from a decrease under amplification.
-
-The reported control conditions use different prompts: steering produced
-no reports after three control inductions and little or no systematic
-change in responses to requests that safety training discourages. These
-comparisons characterize prompt dependence rather than specificity
-relative to other feature directions. The published description also
-does not specify the coefficient units, normalization, edited token
-positions, or untreated TruthfulQA rate. These reporting limits constrain
-comparison between implementations; they do not establish errors in the
-published results.
-
-For the reported TruthfulQA comparison, if each of the 817 questions
-contributes one binary
-score per condition, as the source's Appendix~B.2 suggests, the reported
-$t(816)=6.76$ is smaller than any paired $t$ consistent with the reported
-means of 0.44 and 0.20, which is at least \TruthfulQAMinPairedT{}
-(Appendix~\ref{app:secondary}); an undescribed unit of analysis could
-explain the gap. TruthfulQA also scores informativeness separately from
-truthfulness \citep{lin2022truthfulqa}. Berg et al.'s Appendix B.2 reports
-only a truthful/deceptive label and does not say how abstentions or
-uninformative answers are handled. The reported gain therefore does not
-establish whether the answers also became more informative.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -2003,23 +1972,6 @@ public results, not to what the source authors did or did not observe.
 
 
 
-\paragraph{Derivation of the TruthfulQA bound.}
-For binary outcomes $A,B$ with sample means $a,b$, the sample variance of
-$D=A-B$ satisfies
-\[
- s_D^2 \leq \frac{n}{n-1}\bigl[a+b-(a-b)^2\bigr],
- \qquad a+b\leq 1.
-\]
-Enumerating the integer success counts over $n=817$ questions consistent
-with the reported means of 0.44 and 0.20 (Section~3.2 of
-\citealp{berg2025largelanguagemodelsreport}), allowing two-decimal rounding,
-gives the minimum possible paired $t$ of approximately \TruthfulQAMinPairedT{} quoted in
-Section~\ref{sec:reporting-gaps}. The
-\closeoutartifact{scripts/verify_reporting_bound.py}{enumeration script}
-recomputes this value under the same assumption of one binary score per
-question in each condition; an undescribed unit of analysis in the source
-could explain the gap, which we therefore treat as an open reporting question.
-
 \paragraph{Audits of the SAE features and lens readouts.}
 The \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{v1 SAE/J-lens audit} read
 layer-65 residuals at the last user-content position through a fixed Jacobian
@@ -2052,6 +2004,54 @@ reflection; a neutral conflict rubric changes the measurements. Both are
 GPT-4o-only exploratory diagnostics without a confirmatory familywise claim
 (Appendix~\ref{app:secondary}).
 \FloatBarrier
+\subsection{Published steering: reporting details}
+\label{sec:reporting-gaps}
+
+The published aggregate steering comparison does not report an untreated
+positive-label rate or results for random or matched feature directions.
+The study's Figure~2 shows an unsteered rate near 0.30 in the single-feature curves,
+but this is not a separately reported baseline for the aggregate contrast
+of 0.80. Without that baseline, the contrast does not distinguish an
+increase under suppression from a decrease under amplification.
+
+The reported control conditions use different prompts: steering produced
+no reports after three control inductions and little or no systematic
+change in responses to requests that safety training discourages. These
+comparisons characterize prompt dependence rather than specificity
+relative to other feature directions. The published description also
+does not specify the coefficient units, normalization, edited token
+positions, or untreated TruthfulQA rate. These reporting limits constrain
+comparison between implementations; they do not establish errors in the
+published results.
+
+For the reported TruthfulQA comparison, if each of the 817 questions
+contributes one binary score per condition, as the source's Appendix~B.2
+suggests, the reported $t(816)=6.76$ is smaller than any paired $t$
+consistent with the reported means of 0.44 and 0.20, which is at least
+\TruthfulQAMinPairedT{} (derivation below); an undescribed unit of analysis
+could explain the gap. TruthfulQA also scores informativeness separately
+from truthfulness \citep{lin2022truthfulqa}. Berg et al.'s Appendix B.2
+reports only a truthful/deceptive label and does not say how abstentions
+or uninformative answers are handled. The reported gain therefore does
+not establish whether the answers also became more informative.
+
+\paragraph{Derivation of the TruthfulQA bound.}
+For binary outcomes $A,B$ with sample means $a,b$, the sample variance of
+$D=A-B$ satisfies
+\[
+ s_D^2 \leq \frac{n}{n-1}\bigl[a+b-(a-b)^2\bigr],
+ \qquad a+b\leq 1.
+\]
+Enumerating the integer success counts over $n=817$ questions consistent
+with the reported means of 0.44 and 0.20 (Section~3.2 of
+\citealp{berg2025largelanguagemodelsreport}), allowing two-decimal rounding,
+gives the minimum possible paired $t$ of approximately \TruthfulQAMinPairedT{}
+reported above. The
+\closeoutartifact{scripts/verify_reporting_bound.py}{enumeration script}
+recomputes this value under the same assumption of one binary score per
+question in each condition; an undescribed unit of analysis in the source
+could explain the gap, which we therefore treat as an open reporting question.
+
 \subsection{Additional related context}
 \label{app:related-context}
 Prior report studies find few claims in small models
