@@ -75,11 +75,12 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("0.80 difference", abstract)
         self.assertIn("different steering implementation through Goodfire's proprietary API", abstract)
         availability = (
-            "Protocols, code, raw outputs and judgments are available for "
-            "inspection, reanalysis and replication at "
-            r"\url{https://github.com/tdj28/llm_selfref_pre}."
+            "Protocols, code, raw outputs and judgments are publicly available for "
+            "inspection, reanalysis and replication."
         )
         self.assertTrue(abstract.endswith(availability))
+        for command in (r"\url", r"\href", r"\cite"):
+            self.assertNotIn(command, abstract)
         self.assertLess(abstract.index("Goodfire's proprietary API."),
                         abstract.index(availability))
         body = " ".join(main.split(r"\end{abstract}", 1)[1].split())
