@@ -91,9 +91,9 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         main = (ROOT / "paper/main.tex").read_text()
         abstract = " ".join(main.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0].split())
         self.assertIn("Judging the same answers in different ways", abstract)
-        self.assertIn("Two new model judges", abstract)
-        self.assertIn("the model's own current experience", abstract)
-        self.assertIn("including implicit claims", abstract)
+        self.assertIn("two different model judges", abstract)
+        self.assertIn("the responding model's current experience", abstract)
+        self.assertIn("explicit or implicit claims", abstract)
         for name in ("RubricAuditN", "RubricAuditOldOpenaiPositive", "RubricAuditOldAnthropicPositive",
                      "RubricAuditAstraInclusive", "RubricAuditOpusInclusive"):
             self.assertIn("\\" + name + "{}", abstract)
