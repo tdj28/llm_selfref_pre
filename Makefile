@@ -33,6 +33,8 @@ paper-verify:
 	$(PYTHON) scripts/verify_steering_dose.py
 	$(PYTHON) scripts/verify_steering_truncation.py
 	$(PYTHON) scripts/verify_dose_followup.py --require-pinned
+	$(PYTHON) scripts/verify_dose_quality_details.py
+	$(PYTHON) -m unittest tests.test_dose_quality_details
 	$(PYTHON) scripts/verify_feature_map_table.py
 	$(PYTHON) scripts/verify_swap_cells.py
 	$(PYTHON) scripts/verify_calibration_rates.py
@@ -48,7 +50,7 @@ paper-verify:
 	$(PYTHON) -m unittest tests.test_repeated_editorial
 	$(PYTHON) -m unittest tests.test_model_comparison_condensation
 	$(PYTHON) scripts/verify_kolibri_presentation.py
-	$(PYTHON) scripts/verify_repeated_presentation.py
+	$(PYTHON) scripts/verify_repeated_presentation_portable.py
 	$(PYTHON) scripts/verify_model_overview.py
 	$(PYTHON) -m unittest tests.test_model_overview
 	$(PYTHON) -B reviews/reproducibility/run.py --verify-only

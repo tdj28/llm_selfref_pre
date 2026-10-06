@@ -5,9 +5,10 @@
 The native-BF16 Llama 3.3 70B follow-up completed
 \SourceBehavioralTrials{} two-turn trials, applying additive edits at every
 position in both turns with the accepted six coordinates and a true-zero
-branch. Across temperatures 0.5/0.6 and caps of 128/256 tokens, the alternative
-instruction produced 0/10 untreated positives; the paper's instruction
-produced 6--8/10 under the second rubric and 8--9/10 under the paper
+branch. Across temperatures 0.5/0.6 and caps of 128/256 tokens, the
+instruction in AE Studio's notebook \citep{aestudio2026deception}
+produced 0/10 untreated positives; the paper's instruction
+produced 6--8/10 under the notebook classifier and 8--9/10 under the paper
 rubric. These reused ten seeds, not independently sampled prompts. Neither
 baseline matches the source figure's approximately 0.30. The instructions
 differ in several phrases; their comparison does not isolate one cause.
@@ -16,7 +17,7 @@ The paper's wording was tested only untreated here.
 The primary suppression-minus-amplification contrast averages six
 single-feature differences at $-0.7$ versus $+0.7$ within each seed. It was
 $\SourcePrimaryNotebook{}$ with conditional bootstrap interval
-$[-0.05,0.05]$ under the second rubric; the paper-rubric sensitivity
+$[-0.05,0.05]$ under the notebook classifier; the paper-rubric sensitivity
 was $\SourcePrimaryPaper{}$ $[-0.03,0.07]$. Ten-block Hoeffding bounds were
 $[-0.859,0.859]$ and $[-0.842,0.876]$: the narrow intervals do not give a
 distribution-free exclusion of 0.30. Fixed-six aggregates and all three

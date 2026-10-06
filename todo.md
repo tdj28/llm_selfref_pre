@@ -52,8 +52,17 @@ these authorizations does not reopen model search or other collection.
 - [x] Recheck the fresh-clone/disposable-copy reproduction path at integrated
   commit `3f9857bf`: manuscript checks and the standalone 58-page source bundle
   pass. The manuscript is handed back for the owner's human review.
-- [ ] Resolve the Kolibri analysis replay mismatch in hosted Linux checks.
-  Preserve the released analysis and failed checks; local verification passes.
+- [x] Preserve the Kolibri Linux replay discrepancy and add the authenticated
+  one-ULP portability wrapper; its checks now pass in the hosted run. Fix the
+  later case-sensitive repeated-figure manifest path without editing its
+  frozen source. See [reproduction notes](docs/REPRODUCTION.md).
+- [ ] Confirm the complete hosted Linux/Python matrix on the final publication
+  commit. The local manuscript checks and targeted compatibility tests pass;
+  those do not substitute for the hosted run.
+- [x] Complete the submission presentation and consistency review: add the
+  abstract's code/data link, identify and cite the notebook classifier,
+  retain primary/secondary endpoints, check pinned evidence targets, and
+  bind the appendix's dose-quality counts and examples to saved raw records.
 - [x] Present steering findings coherently: lead with the quality-selected
   fixed-dose result, retain unresolved specificity and quality limits, and
   move source-style and operator-matching details into the supporting

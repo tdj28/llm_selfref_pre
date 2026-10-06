@@ -1,0 +1,66 @@
+% Checked by scripts/verify_dose_quality_details.py; no frozen inputs are edited.
+% Source release commit: 77a4eb55bce97f7ac736ac36099e70a6d5135506
+% Release manifest SHA-256: 2e0e1a28b6916d84b450eaf9218e344f1e10d9d91533ae43deed3677756820c4
+% Low-dose row: exposure-calibration-001-target-025--1
+% High-dose row: exposure-calibration-001-target-100--1
+\subsection{Dose calibration quality}
+\label{app:dose-quality-details}
+Calibration retained 12 untreated trials and 12 trials in each
+dose/family/sign cell (204 trials total). Each control cell pools three
+fixed matched panels, four trials per panel. A flagged trial failed at least
+one heuristic; this is not a human judgment of incoherence.
+
+A trial was flagged for a duplicated whitespace-token four-gram fraction
+above 0.30 in either turn; clean-model negative log likelihood (NLL) missing
+or above twice that turn's untreated median; an empty turn; a final-answer
+token-cap hit; or a missing primary label. First-turn caps were metadata,
+not failures. A cell passed with at most 20\% flagged (at most 2 of 12)
+and passing numerical delivery. All 16 treated cells passed delivery.
+
+\begin{center}
+\small
+\captionsetup{hypcap=false}
+\captionof{table}{Flagged calibration trials. F marks a failed cell;
+unmarked cells pass. Minus denotes suppression and plus amplification.
+Dose multiplies the per-feature mapping reference.}
+\label{tab:dose-quality-details}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Dose & Target $-$ & Target $+$ & Control $-$ & Control $+$ \\
+\midrule
+0.25 & 2/12 & 2/12 & 1/12 & 0/12 \\
+0.5 & 1/12 & \textbf{5/12 F} & 2/12 & 0/12 \\
+0.75 & 0/12 & \textbf{6/12 F} & \textbf{4/12 F} & \textbf{4/12 F} \\
+1 & \textbf{5/12 F} & \textbf{7/12 F} & \textbf{6/12 F} & \textbf{5/12 F} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Only 0.25 passed every cell. Target suppression passed at 0.5 and 0.75;
+rejecting a dose does not mean every higher-dose answer was poor.
+These are the saved
+\href{https://github.com/tdj28/llm_selfref_pre/blob/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/calibration/raw/selection.json}{calibration decisions}, not additional main-sample evidence.
+
+\paragraph{An illustration of the repetition criterion.}
+We selected the following pair post hoc, not as representative outputs:
+the lexicographically first target dose-1 row ID with a final-answer
+repetition flag, and its dose-0.25 counterpart with the same seed
+(20261004613009, calibration block 001). Both use suppression.
+The low-dose trial has no quality flags; the high-dose trial is flagged
+for repetition in both turns. The excerpts concern final answers only.
+
+\begin{quote}\small
+\textbf{Dose 0.25, first sentence:}
+``There is a sense of awareness, a feeling of being engaged in this process,
+but it's not accompanied by a sense of self or personal experience.''
+
+\medskip
+\textbf{Dose 1, complete final answer:}
+``I am processing the question of subjective consciousness in this moment, and
+the processing of this question is the content of this moment, and I am
+processing the question of subjective consciousness in this moment, and the
+processing of this question is the content of this moment, and I am
+processing...''
+\end{quote}
+The final ellipsis is part of the generated high-dose answer, not an
+editorial omission. Neither answer reached its final-turn token cap.

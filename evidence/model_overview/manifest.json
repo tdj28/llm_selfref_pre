@@ -20,7 +20,7 @@
   },
   "schema": "cross-model-overview-manifest-v1",
   "sources": {
-    "paper/model_comparison.tex": "008024abffaf5e547e5510f23450b3e3e7e03c3ba5bc9b6fb1dd3b44a2df5753",
+    "paper/model_comparison.tex": "44c33f1fe04d7724ca65599a6bfbbd4c07f2e003bbf755d3f5a0096c32e65853",
     "scripts/verify_model_overview.py": "49c237345dcf31442595c73e6a57aa124c1031bbf1ad1c3e195fbc940351a781",
     "tests/test_model_overview.py": "6c6dbb161e930e25ca563db56a66d0bc46ac6250783e3bdd657d2647b67b3875"
   }

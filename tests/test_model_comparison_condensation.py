@@ -3,7 +3,7 @@ import re
 import unittest
 from pathlib import Path
 
-from scripts import verify_repeated_presentation
+from scripts import verify_repeated_presentation_portable as verify_repeated_presentation
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -74,7 +74,14 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("In our public-weight steering test", abstract)
         self.assertIn("0.80 difference", abstract)
         self.assertIn("different steering implementation through Goodfire's proprietary API", abstract)
-        self.assertTrue(abstract.endswith("Goodfire's proprietary API."))
+        availability = (
+            "Protocols, code, raw outputs and judgments are available for "
+            "inspection, reanalysis and replication at "
+            r"\url{https://github.com/tdj28/llm_selfref_pre}."
+        )
+        self.assertTrue(abstract.endswith(availability))
+        self.assertLess(abstract.index("Goodfire's proprietary API."),
+                        abstract.index(availability))
         body = " ".join(main.split(r"\end{abstract}", 1)[1].split())
         self.assertIn("It leaves a modest effect possible and target specificity unresolved", body)
 

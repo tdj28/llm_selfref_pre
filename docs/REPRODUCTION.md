@@ -65,6 +65,28 @@ execution record for all 62 original tests; changed inputs, filtered tests,
 skips and failures cannot count as a pass. Run this check separately with
 `python -m experiments.mapping_release_history`.
 
+Hosted run `37426018829` exposed five publication-check incompatibilities:
+manifest filename case, later files entering a historical source glob, a
+reviewed scanner update, workstation-only test fixtures, and stale editorial
+wording. `tests/test_publication_ci_compat.py` registers exact test contexts
+from `scripts/publication_test_compat.py`; no tests are removed or skipped.
+The normal `make test` invocation discovers that module under `pytest tests`
+and loads its `pytest_plugins` declaration before test execution.
+For a focused invocation, include that test module or pass
+`-p scripts.publication_test_compat` to pytest. Direct historical commands
+remain strict and can still report the original source-inventory failures.
+
+The bilingual context permits only the three identified, hash-checked later
+editorial files outside the original inventory. The open-weight/Qwen context
+authenticates historical scanner bytes for provenance while current content
+scanning remains active. The dose/mapping context propagates the exact reviewed
+October 5 scanner into the existing disposable replay, retaining the original
+mapping node-inventory and execution checks. Two Kolibri candidate tests use
+authenticated saved amendments instead of an ignored local controller ledger;
+those fixtures reject runtime-freeze arguments. No live collection gate is
+changed. Four editorial assertions are adapted to approved wording and a
+classifier-source citation; scientific values, ordering and scope checks remain.
+
 `make compile` checks every tracked Python file without importing modules or
 writing bytecode. `make audit` now runs on disposable copies. Direct analysis,
 audit and release-builder commands can still overwrite their output directory;
@@ -74,6 +96,14 @@ That one comparison uses absolute tolerance `1e-12` and zero relative tolerance;
 integer counts, value types, keys, lists, and labels must still match exactly.
 
 ## Current Paper Evidence
+
+The repeated-answer presentation uses
+`python scripts/verify_repeated_presentation_portable.py`. This read-only
+wrapper uses the tracked `evidence/repeated_extension/MANIFEST.json` spelling
+on case-sensitive filesystems and authenticates the unchanged original
+verifier. It preserves every manifest, output-hash and manuscript check;
+`--write` is not supported. The original script's lowercase path remains
+unchanged because its source is bound by the editorial package.
 
 Kolibri verification uses `scripts/verify_kolibri_portable.py` to supply the
 original Wilson confidence-interval constant during replay of the completed

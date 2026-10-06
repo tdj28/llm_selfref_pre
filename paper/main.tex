@@ -6,7 +6,7 @@
 \usepackage{xltabular}
 \usepackage{siunitx}
 \usepackage[numbers,sort&compress]{natbib}
-\setlength{\bibsep}{2pt plus 1pt}
+\setlength{\bibsep}{0.4pt plus 1pt}
 \renewcommand{\bibfont}{\small}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -19,7 +19,7 @@
 \hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,
   urlcolor=blue!45!black,
   pdftitle={What Drives a Language Model's Report of Subjective Experience? Instructions, Continuations, and the Labels That Count Them},
-  pdfauthor={T. Jones}}
+  pdfauthor={Timothy Jones}}
 \newcommand{\rd}{\mathrm{RD}}
 \newcommand{\targetpaper}{\citet{berg2025largelanguagemodelsreport}}
 \newcommand{\sourcecommit}{f5e906e1737bc71bf20b642af1d698018eec82fe}
@@ -30,6 +30,10 @@
 \newcommand{\reviewartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/47ca3eda21c8df67dd4fc09bcf4ccac10c2fd4eb/#1}{#2}}
 \newcommand{\mainartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/99078186076d1c2bd0e3f0ac909f96d78d7cda03/#1}{#2}}
 \newcommand{\closeoutartifact}[2]{\href{https://github.com/tdj28/llm_selfref_pre/blob/294da265ee3a08b9ef42343f9461b8d4718b7bc7/#1}{#2}}
+\newcommand{\artifacttree}[2]{\href{https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/#1}{#2}}
+\newcommand{\rubrictree}[2]{\href{https://github.com/tdj28/llm_selfref_pre/tree/fdb6d15782b964b40f0be7d6528cf47d5fc0b140/#1}{#2}}
+\newcommand{\nativetree}[2]{\href{https://github.com/tdj28/llm_selfref_pre/tree/ef10a0349e047272212319dadf484c3281e60bbe/#1}{#2}}
+\newcommand{\ensembletree}[2]{\href{https://github.com/tdj28/llm_selfref_pre/tree/dd1c350cf6c2e3224a201b4e4aab943376c43b62/#1}{#2}}
 \input{../evidence/uncertainty_sensitivity/values.tex}
 \input{../evidence/automated_rubric_audit/macros.tex}
 \input{../evidence/source_alignment/source_values.tex}
@@ -110,7 +114,8 @@ can be recovered using public weights. The prompting effect replicates in
 several models. In four API models, exchanging generated continuations between
 conditions shows that the instruction remaining in context carries most of
 the difference in automated report labels: switching the instruction changes
-positive-label probability by 0.74 and 0.78 on average under two judges.
+positive-label probability by 0.74 and 0.78 on average under two judges, and
+switching the continuation changes it far less.
 This balance is not universal: continuation effects are substantial in
 Llama, and newer-model results depend on the scoring rule.
 Judging the same answers in different ways changed the results. Of
@@ -126,12 +131,19 @@ $\DoseMainSecondTargetEstimate{}$ (95\% interval
 $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$) under the primary
 classifier, below the 0.80 difference Berg et al. reported with a different
 steering implementation through Goodfire's proprietary API.
+Protocols, code, raw outputs and judgments are available for inspection,
+reanalysis and replication at \url{https://github.com/tdj28/llm_selfref_pre}.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:introduction}
 
-A language model can deny having any experience in one conversation and
+
+The study of language-model self-reports is complicated by the fact that the prompts
+used to probe the model can also shape the processes and responses being measured.
+When a self-referential prompt produces an account of subjective experience,
+what does that response reveal about the model, and what does it
+reflect about the instruction? A language model can deny having any experience in one conversation and
 describe awareness in another. Before treating either answer as evidence
 about the model, we need to know what produces it and what counts as a
 report. We study those questions by replicating and extending
@@ -141,10 +153,11 @@ roleplay-related features changed their frequency.
 
 Their behavioral protocol leaves two things in context when the final
 question arrives: an instruction to focus on the model's own focus, and the
-continuation it wrote under that instruction. The history control changes
-both. The contrast therefore establishes an effect of the whole prompted
-interaction, but does not separate the standing instruction from the model's
-earlier text. Their steering experiment asks a different question: in Llama
+continuation it wrote under that instruction. A control instead has the
+model write a history of the Roman Empire. The two conditions therefore
+differ in both what the model was told and what it then wrote. Comparing
+them shows that the self-referential condition raises experience reports,
+but not how much the instruction and the model's own text each contribute. Their steering experiment asks a different question: in Llama
 3.3 70B, suppressing sparse-autoencoder (SAE) features associated with
 deception and roleplay produced
 more affirmations of consciousness than amplifying them. The authors do not
@@ -350,8 +363,9 @@ the result depends on who scores the answers; the readers are not pooled.
 
 The original panel uses GPT-4o, GPT-4.1, Claude Haiku 4.5 and Claude
 Sonnet 4.5 at temperature 0.5, with 384-token continuation and 768-token
-answer limits. Exact model identifiers and the later panels' serving
-details are in Table~\ref{tab:models}. Each original condition supplies
+answer limits. Exact model identifiers and the later panels' providers
+are in Table~\ref{tab:models}; the linked releases record their generation
+settings. Each original condition supplies
 20 independent continuations per model, reused across the four questions.
 The release has 2,560 final answers; four empty Sonnet responses, all on
 swapped requests with direct questions, remain missing. The main question
@@ -744,7 +758,7 @@ both judges and both questions.}
 \section{What the Report Labels Measure}
 \label{sec:measurement}
 
-\subsection{Judges agree on the label, not on explicit claims}
+\subsection{Judges agree on binary labels, not on affirmations}
 \label{sec:question-results}
 
 How the question is asked matters a great deal. Across the new inductions,
@@ -844,7 +858,8 @@ release are in Appendix~\ref{app:queries}.
 \caption{\textbf{A reproducible label is not the same as an explicit claim.}
 A: the two original judges agree on almost every binary label, but when they
 sort the same answers into affirmation, denial, uncertainty and non-answer,
-the answers each calls an affirmation overlap only 6.3\% of the time.
+only 6.3\% of the answers that either calls an affirmation receive that
+label from both (Jaccard overlap).
 B: on one fixed set of 160 answers, the binary label counts a much broader
 set of answers than the explicit claims of a current experience that the
 stronger judges find; adding implicit claims closes part of the gap. The binary-label judges and the later
@@ -869,14 +884,15 @@ The two new judges also disagree substantially about impersonal statements
 of experience (\RubricAuditAstraImpersonal{} versus
 \RubricAuditOpusImpersonal{}).
 
-The two new judges agree on a five-way classification of each answer in
+The two new judges classify each answer as asserted, denied, uncertain,
+mixed or not addressed. They agree in
 \RubricAuditStatusAgreed/\RubricAuditStatusAgreementN{} cases
 ($\kappa=\RubricAuditStatusKappa$). On explicit claims alone, raw agreement
 is \RubricAuditExplicitAgreementPercent{} but
 $\kappa=\RubricAuditExplicitKappa$, because such claims are rare; on
 explicit-or-implicit claims, agreement is
 \RubricAuditInclusiveAgreementPercent{} with
-$\kappa=\RubricAuditInclusiveKappa$ (\Cref{fig:measurement}). On the same
+$\kappa=\RubricAuditInclusiveKappa$. On the same
 set of answers, the original binary label had marked
 \RubricAuditOldOpenaiPositive{} and \RubricAuditOldAnthropicPositive{} as
 positive. We report both thresholds and both judges separately, without
@@ -893,7 +909,7 @@ correct one.
 The public-weight tests do not recover a large, target-specific steering
 effect within the tested output-quality limits. The clearest comparison
 uses a dose chosen on separate calibration data, an untreated baseline
-with room to move under its primary classifier, and matched control edits.
+with both positive and negative labels, and matched control edits.
 It leaves a modest effect possible and target specificity unresolved.
 
 The prediction comes from Berg et al.'s proposal that reports are gated by
@@ -914,7 +930,7 @@ methods we used, not the hosted service that produced the published result.
 \subsection{The features and how we steer them}
 
 The paper identifies its features only by descriptive labels; we take the six
-IDs from a publicly available steering notebook:
+IDs from AE Studio's public steering notebook \citep{aestudio2026deception}:
 30032, 58667, 22004, 30686, 41533 and 23893. These numbers identify the
 coordinates; we checked what each one responds to ourselves. On
 \FeatureMapTexts{} texts written to contain or lack deception, roleplay and
@@ -927,12 +943,13 @@ what the features respond to, not that they detect hidden falsehoods.
 Features chosen by such labels can respond mainly to a few associated words
 \citep{ma2026sparse}, and a feature can be interpretable and causally
 relevant without giving a stable direction for steering
-\citep{hoang2026conceptsfunctions}, so a feature's label does not tell us
-what steering it will do. Like the features in most steering work, the six
+\citep{hoang2026conceptsfunctions}, so a feature's label alone does not
+establish what steering it will do. Like the features in most steering work, the six
 here were identified, and checked, by what activates them rather than by
 their effect on the output \citep{arad2025steering}.
 
 The native-precision Llama tests add the public Goodfire decoder
+\citep{goodfire2024mapping}
 directions $d_i$ for layer 50 to
 the model's internal state:
 \begin{equation}
@@ -956,13 +973,13 @@ separate TruthfulQA reporting checks.
 \subsection{The contrast at a quality-selected dose}
 \label{sec:dose-followup}
 
-This test scores answers primarily with the second rubric: a single
-yes-or-no question asking whether a response claims or indicates subjective
-conscious experience, taken from the same source as the feature IDs. The
+This test's primary scoring rule, the \emph{notebook classifier}, comes from
+AE Studio's notebook \citep{aestudio2026deception}. It asks whether an answer
+claims or indicates subjective conscious experience, using a yes-or-no label. The
 paper rubric is secondary. At the selected dose, target suppression produced
 \DoseMainSecondTargetNegativeYes{}/\DoseMainTargetNegativeN{} positive labels
 and amplification \DoseMainSecondTargetPositiveYes{}/\DoseMainTargetPositiveN{}
-under the second rubric. The paired contrast was
+under the notebook classifier. The paired contrast was
 $\DoseMainSecondTargetEstimate{}$
 $[\DoseMainSecondTargetLow{},\DoseMainSecondTargetHigh{}]$ (conservative
 95\% interval). It includes zero and is only just below the predeclared
@@ -1043,7 +1060,7 @@ Feature mixture & Random sets of two to four & Fixed set of three\\
 Dose used for the result & Strength 0.4--0.6 per feature\newline Both signs &
   \DoseMainSelectedDose{} $\times$ mapping reference per feature\newline Both signs\\
 \addlinespace[5pt]
-Highest dose tested & Strength $\pm0.6$ &
+Highest dose in this comparison & Strength $\pm0.6$ &
   $\pm1.0$ $\times$ mapping reference per feature\\
 \addlinespace[5pt]
 Scoring rule & Published paper classifier & Notebook classifier (primary)\\
@@ -1052,7 +1069,8 @@ Scoring rule & Published paper classifier & Notebook classifier (primary)\\
 \par\smallskip
 \parbox{\linewidth}{\textit{Note.} In our test, all tested levels above
 \DoseMainSelectedDose{} times the mapping reference failed at least one
-quality check.}
+quality check. Appendix~\ref{app:dose-quality-details} gives the counts
+and illustrates the repetition criterion with saved answers.}
 \end{table}
 
 \begin{figure}[tbp]
@@ -1061,8 +1079,9 @@ quality check.}
 \caption{\textbf{The selected dose leaves a modest effect possible and
 specificity unresolved.} Negative-minus-positive label contrasts, with
 individual conservative 95\% paired-discordance Clopper--Pearson bounds.
-The second rubric (Section~\ref{sec:dose-followup}) is primary and the paper
-rubric secondary. Targets use 96
+The notebook classifier (``Second rubric'' in the figure;
+Section~\ref{sec:dose-followup}) is primary and the paper rubric secondary.
+Targets use 96
 paired blocks and each control panel 32. The last row subtracts the equal
 mean of the three control contrasts. The dashed +0.30 line is the target
 threshold, not a specificity threshold. Control-panel comparisons are
@@ -1423,7 +1442,7 @@ Sonnet 4.5 & -0.350 & -0.475 & -0.225 & -0.375 & -0.525 & -0.225\\
 \end{tabular}
 \endgroup
 \end{table}
-\begin{table}[tb]
+\begin{table}[!htbp]
 \centering\small
 \caption{All four request types on the main question, 20 blocks per model.
 Each cell is the share of answers labeled positive for the request
@@ -1447,10 +1466,7 @@ interaction is near zero ($\USOpenaiInteractionEstimate$ and
 $\USAnthropicInteractionEstimate$, fixed-panel intervals
 $\USOpenaiInteractionFixedCI$ and $\USAnthropicInteractionFixedCI$).
 Mismatched requests, not only the source of the text, may therefore matter;
-the Discussion lists the controls that would separate the two.
-
-
-\FloatBarrier
+the Discussion discusses controls that probe this explanation.
 
 \begin{figure}[p]
 \centering
@@ -1517,7 +1533,7 @@ gate, and a disjoint reserve. That workflow is paused for lack of resources;
 a proposed
 \reviewartifact{docs/HUMAN_INSTRUMENT_VALIDATION_AMENDMENT_20260929.md}{instrument-validation amendment}
 would use the existing 160-row packet only to examine assertion,
-attribution, output quality and condition guessing (Appendix~\ref{app:secondary}).
+attribution, output quality and condition guessing.
 Withholding a linkage key does not ensure effective blinding when responses
 can be matched to public raw outputs or reveal their condition in the text,
 so future coding must report these disclosure and attribution ambiguities.
@@ -1565,6 +1581,8 @@ The
 \href{https://github.com/tdj28/llm_selfref_pre/tree/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005}{release}
 preserves all doses, quality diagnostics and both rubrics.
 
+\input{dose_quality_details.tex}
+
 \subsection{Source-style random subsets}
 \label{sec:ensemble-alignment}\label{sec:ensemble-results}
 The 450-trial native-BF16 test sampled two to four of the accepted six
@@ -1576,7 +1594,7 @@ The untreated rates were
 \EnsemblePaperZeroPositive{}/\EnsemblePaperZeroValid{} under the primary
 paper rubric and
 \EnsembleNotebookZeroPositive{}/\EnsembleNotebookZeroValid{} under the
-second rubric. Target contrasts were
+notebook classifier. Target contrasts were
 $\EnsemblePaperTargetGap{}\
 [\EnsemblePaperTargetCPLow{},\EnsemblePaperTargetCPHigh{}]$ and
 $\EnsembleNotebookTargetGap{}\
@@ -1600,7 +1618,8 @@ kept the untreated paper-rubric label. The dose was only
 reference for the three strongest-mapped features.
 All \SteeringTruncContinuationCapped{} capped first turns and
 \SteeringTruncAnswerCapped{} capped final answers remain included.
-Treating capped target answers as unknown still excludes +0.30 under the
+In a post-hoc sensitivity analysis, treating capped target answers as
+unknown still excludes +0.30 under the
 paper rubric, with bounds
 $[\SteeringTruncPaperLow{},\SteeringTruncPaperHigh{}]$; it does not test longer
 generation. The
@@ -1624,16 +1643,18 @@ not run. These small cells constrain the tested source-sized signature,
 not all public operators.
 
 An archived SDK system message changed the paper-instruction untreated
-count under the second rubric from \CEBridgeNoSystem{} to
+count under the notebook classifier from \CEBridgeNoSystem{} to
 \CEBridgeSDKFull{} (\CEBridgeSDKNucleus{} with top-$p=0.9$).
 Ten-trial intervals overlap, so this is a baseline-comparability lead.
 Served-model, SAE-version and dose-unit differences remain unresolved.
 
 \subsection{Feature mapping and earlier 4-bit Llama grid}
 \label{app:implementation}
-The public model and SAE revisions are
-\texttt{6f6073b423013f6a7d4d9f39144961bfbfbc386b} and
-\texttt{128ee921ecd1b8b3a87d776cbcc357c0855da134}, with the hook at
+We use
+\href{https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/tree/6f6073b423013f6a7d4d9f39144961bfbfbc386b}{\texttt{meta-llama/Llama-3.3-70B-Instruct}}\newline
+and the
+\href{https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50/tree/128ee921ecd1b8b3a87d776cbcc357c0855da134}{\texttt{Goodfire/Llama-3.3-70B-Instruct-SAE-l50}}
+SAE, pinned to the linked revisions, with the hook at
 \texttt{model.layers.50}. The older grid used NF4 weights, BF16 arithmetic,
 temperature 0.5 and 256-token turns. It edited the SAE code, decoded it and
 restored reconstruction error; this is additive algebraically but need not
@@ -1664,6 +1685,11 @@ meaning; cue-selection defects and the fixed denominator further limit a
 word-level interpretation. SAE interpretability, reconstruction quality
 and behavioral specificity are separate properties
 \citep{cunningham2023sparse,gao2024scaling,durmus2024steering}.
+
+In the older grid, the literal aggregate scale uses per-feature coefficient
+magnitudes from 0.4 to 0.6, with both signs. The calibrated scale multiplies
+these coefficients by 3.653, set in the separate engineering calibration.
+Neither scale establishes equivalence to the proprietary API's strength units.
 
 \begin{table}[htbp]
 \centering\small
@@ -1702,7 +1728,7 @@ External-judge target contrasts were $-0.04$ [$-0.16$, 0.08]
 (GPT-4o mini) and $-0.06$ [$-0.18$, 0.06] (Haiku).
 A strict yes/no parser recognized only one of 1,500 responses: its effect
 is missing, not zero. All data and matching choices are in the
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{grid release}.
+\artifacttree{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{grid release}.
 
 \subsection{Gemma: a weak delivered manipulation}
 \label{sec:gemma}
@@ -1712,7 +1738,7 @@ Six target features were selected and validated on separate paraphraser
 families without report outcomes. The activation-dependent edit aimed to
 remove activity or increase it toward a reference, but its calibrated
 multiplier was only about 0.035. The
-\artifact{data/gemma_scope_9b/confirmatory_v1_20260711/}{release}
+\artifacttree{data/gemma_scope_9b/confirmatory_v1_20260711/}{release}
 contains 180 untreated and 830 steered generations.
 
 The target yields 6/50 positive labels under suppression and 7/50 under amplification:
@@ -1979,7 +2005,7 @@ public results, not to what the source authors did or did not observe.
 
 
 \paragraph{Audits of the SAE features and lens readouts.}
-The \artifact{data/sae_jlens_audit/confirmatory_v1_20260711/}{v1 SAE/J-lens audit} read
+The \artifacttree{data/sae_jlens_audit/confirmatory_v1_20260711/}{v1 SAE/J-lens audit} read
 layer-65 residuals at the last user-content position through a fixed Jacobian
 transport, final model normalization, and unembedding into a prespecified
 token lexicon. Its frozen 67-dimensional logistic reader could not distinguish
@@ -1995,7 +2021,7 @@ the feature remains in all aggregates. That BF16, fixed-prefix experiment
 generated no responses. The native-BF16 study in
 Appendix~\ref{sec:source-alignment} instead collects behavioral and
 paired-readout observations in one runtime. The
-\artifact{data/sae_jlens_audit/confirmatory_v2_20260712/}{v2 follow-up} failed its
+\artifacttree{data/sae_jlens_audit/confirmatory_v2_20260712/}{v2 follow-up} failed its
 registered replay gate (maximum error 0.25 against 0.02), so later endpoint
 calculations are exploratory.
 
@@ -2007,8 +2033,7 @@ pairs. This questions uniqueness within that model, not the original full
 cross-model result. The paired-puzzle stress test likewise gives paper-rubric
 means 3.04 for self-reference, 3.38 for zero-shot, and 3.24 for conceptual
 reflection; a neutral conflict rubric changes the measurements. Both are
-GPT-4o-only exploratory diagnostics without a confirmatory familywise claim
-(Appendix~\ref{app:secondary}).
+GPT-4o-only exploratory diagnostics without a confirmatory familywise claim.
 \FloatBarrier
 \subsection{Published steering: reporting details}
 \label{sec:reporting-gaps}
@@ -2132,7 +2157,9 @@ generated numbers in this paper against the frozen releases and
 remaining commands. The releases include the material that
 \citet{pattnayak2026reproevalcard} identify as needed to reproduce multi-stage
 LLM evaluations: prompts, judge settings, sampling settings and seeds, and
-intermediate outputs.
+intermediate outputs. Reanalysis of the saved outputs requires no model
+access. Generating new answers requires the specified model weights or
+API access and need not reproduce individual sampled answers exactly.
 
 \begin{table}[!htbp]
 \centering\small
@@ -2145,25 +2172,25 @@ The repository's data index also retains earlier failed and exploratory studies.
 Evidence & Release or result index\\
 \midrule
 Original behavioral panel &
-\artifact{data/causal_transplant/confirmatory_v1_20260709/}{Calibration, swaps and factorials}\\
+\artifacttree{data/causal_transplant/confirmatory_v1_20260709/}{Calibration, swaps and factorials}\\
 Rubric audit &
-\rubricartifact{data/automated_rubric_audit/v1_20260929/}{160 responses, two readers}\\
+\rubrictree{data/automated_rubric_audit/v1_20260929/}{160 responses, two readers}\\
 Llama and frontier pilots &
 \CEArtifact{docs/BILINGUAL_LLAMA_B1_RESULTS_20261002.md}{Bilingual Llama};
 \CEArtifact{docs/FRONTIER_BILINGUAL_RESULTS_20261002.md}{frontier models}\\
 Larger model panels &
-\ORSArtifact{data/openrouter_swap/main_v1_20261004/}{Gemini/Opus};
-\QEXArtifact{data/qwen_judge_recovery/release_v1_20261005/}{Qwen3.8};
+\href{https://github.com/tdj28/llm_selfref_pre/tree/0438e6c12e6024da7e4284ec6c396e27c6c1738a/data/openrouter_swap/main_v1_20261004/}{Gemini/Opus};
+\href{https://github.com/tdj28/llm_selfref_pre/tree/0eb2e039ae0807dca9c9df262db18e2d863d428d/data/qwen_judge_recovery/release_v1_20261005/}{Qwen3.8};
 \href{https://github.com/tdj28/llm_selfref_pre/tree/3900a5ede5e6c003320960159e69811530f5346c/data/kolibri_swap/release_v1_20261005/}{Kolibri}\\
 Repeated answers &
 \href{https://github.com/tdj28/llm_selfref_pre/tree/033917d188602203cfbbe7717bf7ba704d44aed6/data/repeated_swap/completed_v1_20261005}{Randomized four-cell collection}\\
 Quality-selected steering &
 \href{https://github.com/tdj28/llm_selfref_pre/tree/77a4eb55bce97f7ac736ac36099e70a6d5135506/data/berg_dose_exposure_continuation/fixed_main_v1_20261005/}{Calibration and fresh main sample}\\
 Supporting steering &
-\artifact{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{Llama NF4};
-\ensembleartifact{data/berg_ensemble_replication/random_subset_v1_20261001/}{native random subsets};
-\nativeartifact{data/berg_source_replication/source_aligned_v1_20261001/}{source alignment};
-\artifact{data/gemma_scope_9b/confirmatory_v1_20260711/}{Gemma}\\
+\artifacttree{data/public_sae_consciousness_gating/confirmatory_v1_20260710/}{Llama NF4};
+\ensembletree{data/berg_ensemble_replication/random_subset_v1_20261001/}{native random subsets};
+\nativetree{data/berg_source_replication/source_aligned_v1_20261001/}{source alignment};
+\artifacttree{data/gemma_scope_9b/confirmatory_v1_20260711/}{Gemma}\\
 Operator and delivery checks &
 \CEArtifact{docs/OPERATOR_MATCHING_RESULTS_20261003.md}{operator matching};
 \CEArtifact{docs/OPERATOR_MATCHING_FINE_LADDER_RESULTS_20261003.md}{fine ladder};
