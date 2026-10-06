@@ -1106,31 +1106,28 @@ need its own causal test before it could explain behavior.
 Appendix~\ref{app:jlens-details} defines the readouts and links the complete
 word groups, both signs and prompt histories, and all comparison mappings.
 
-\subsection{What the published steering description leaves out}
+\subsection{Reported baselines and comparison conditions}
 \label{sec:reporting-gaps}
 
-Interpreting a steering result needs two numbers that Berg et al.'s text does
-not give. The first is the untreated rate: how often answers are labeled
-positive under the self-referential induction with no steering. A gap
-between suppression and amplification cannot by itself tell an increase
-under suppression from a decrease under amplification. The rate appears only
-as a plotted level near 0.30 at the zero point of the single-feature curves
-in their Figure~2; the aggregate comparison behind the 0.80 has no untreated
-condition of its own. The second is a comparison intervention, such as
-random or matched directions steered by the same amount; without it, an
-effect of these particular features cannot be told apart from the effect of
-disturbing the model at all. Their controls vary the prompt instead: the same
-steering produced no reports after the three control inductions and little
-or no systematic change in responses to requests that safety training
-discourages. Those checks show where the effect appears, not whether these
-features differ from other directions. The description also
-leaves out the units of the coefficients, how they are normalized, which
-token positions the service's edit touches, and the untreated TruthfulQA
-rate. These are gaps in reporting, not demonstrated errors, but they limit
-what any public replication can claim.
+The published aggregate steering comparison does not report an untreated
+positive-label rate or results for random or matched feature directions.
+The study's Figure~2 shows an unsteered rate near 0.30 in the single-feature curves,
+but this is not a separately reported baseline for the aggregate contrast
+of 0.80. Without that baseline, the contrast does not distinguish an
+increase under suppression from a decrease under amplification.
 
-The TruthfulQA check reported alongside the steering result raises two
-narrower questions. If each of the 817 questions contributes one binary
+The reported control conditions use different prompts: steering produced
+no reports after three control inductions and little or no systematic
+change in responses to requests that safety training discourages. These
+comparisons characterize prompt dependence rather than specificity
+relative to other feature directions. The published description also
+does not specify the coefficient units, normalization, edited token
+positions, or untreated TruthfulQA rate. These reporting limits constrain
+comparison between implementations; they do not establish errors in the
+published results.
+
+For the reported TruthfulQA comparison, if each of the 817 questions
+contributes one binary
 score per condition, as the source's Appendix~B.2 suggests, the reported
 $t(816)=6.76$ is smaller than any paired $t$ consistent with the reported
 means of 0.44 and 0.20, which is at least \TruthfulQAMinPairedT{}
