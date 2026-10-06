@@ -73,6 +73,17 @@ class ModelComparisonCondensationTests(unittest.TestCase):
         self.assertIn("not recovered at the reported size", abstract)
         self.assertIn("smaller effects and target specificity remain unresolved", abstract)
 
+    def test_abstract_opening_limits_scope_and_reports_source_observations(self):
+        main = (ROOT / "paper/main.tex").read_text()
+        opening = main.split(r"\begin{abstract}", 1)[1].split("The prompting effect replicates", 1)[0]
+        opening = " ".join(opening.split())
+        self.assertIn("partial replication and extension", opening)
+        self.assertIn("who reported that", opening)
+        self.assertIn("changed claim rates in Llama 3.3 70B", opening)
+        self.assertIn("using public weights", opening)
+        for wording in ("who concluded", "consistently elicits", "mechanistically gated"):
+            self.assertNotIn(wording, opening)
+
     def test_availability_description_matches_grouped_link_table(self):
         main = (ROOT / "paper/main.tex").read_text()
         availability = main.split(r"\label{app:ensemble-portability}", 1)[1]

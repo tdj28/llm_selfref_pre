@@ -101,14 +101,13 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We report a replication of Berg et al.\ (2025), who concluded that
-self-referential prompting consistently elicits structured
-subjective-experience reports from language models and that these reports
-are mechanistically gated by sparse-autoencoder features associated with
-deception and roleplay. We repeat and extend their prompting experiments,
-examine how the reports are scored, and test the steering result with
-public Llama 3.3 70B weights. The prompting effect replicates in several
-models. In four API models, exchanging generated continuations between
+We report a partial replication and extension of Berg et al.\ (2025), who
+reported that self-referential prompting elicited subjective-experience
+claims and that steering deception- and roleplay-related sparse-autoencoder
+features changed claim rates in Llama 3.3 70B. We examine what drives the
+prompting effect, how the claims are scored, and whether the steering result
+can be recovered using public weights. The prompting effect replicates in
+several models. In four API models, exchanging generated continuations between
 conditions shows that the instruction remaining in context carries most of
 the difference in automated report labels: switching the instruction changes
 positive-label probability by 0.74 and 0.78 on average under two judges.

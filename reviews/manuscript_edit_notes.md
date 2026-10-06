@@ -381,6 +381,14 @@ the grouped, two-column table of commit-pinned links. The repository citation
 and all table links are unchanged. The merged controls/repeated-answer section
 is now cited once in the self-evaluation disclosure, not as "3.5 and 3.5".
 
+At the owner's request, the abstract now says "partial replication and
+extension" and summarizes the source's reported prompting and Llama steering
+observations rather than its mechanistic interpretation. Checked against
+[Berg et al. v2](https://arxiv.org/abs/2510.24797v2) on 2026-10-05: their
+abstract does use the earlier strong wording and explicitly disclaims direct
+evidence of consciousness. This is a choice of framing, not a correction
+claiming the source authors never used those terms. No results changed.
+
 At the owner's request, consolidated the separate model-extension narratives
 into one comparison and shortened historical steering exposition. Kept the
 plain-language equations, claim examples, actual swapped responses, bilingual
